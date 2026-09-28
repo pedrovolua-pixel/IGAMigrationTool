@@ -13,16 +13,15 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - Product discovery for assessment scope, rules, findings, scoring, desired outcomes, AI, recommendations, ROI, reports, collaboration, reassessment, quality, permissions, MCP, and phased delivery.
 - Draft product specification created with stable `FR-HAS-N` and `AC-HAS-N` identifiers.
 - Phase 1 through Phase 4 boundaries recorded.
+- Platform restore, recommendation guidance, and executed rollback concerns separated into distinct NFRs.
 
 ## In progress
 
 - Product-owner review of the draft product specification.
-- Reconciliation with approved production-readiness requirements.
 
 ## Blocked
 
-- Blocker: Verified restore/recovery is deferred to Phase 2, while approved `NFR-COM-2` requires verified restore before production readiness.
-- Owner/decision needed: Product owner, security owner, and operations owner must reconcile whether Phase 1 is non-production/pilot-only or must include restore verification.
+- None recorded for product-scope discovery. Product approval and later technical gates remain outstanding.
 
 ## Decisions made
 
@@ -47,14 +46,13 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 |---|---|---|
 | Product discovery captured | PASS | `product-spec.md` |
 | Product specification approved | NOT VERIFIED | Approval section is blank and status remains Draft |
-| Production restore/recovery gate | FAIL | Conflict with `product/non-functional-requirements.md` NFR-COM-2 |
+| Recovery concerns separated | PASS | Platform restore: NFR-REL-3/4; recommendation guidance: NFR-SAF-16; executed rollback: NFR-SAF-6 |
 | Rule catalog and AI quality validated | NOT VERIFIED | Technical and test design have not started |
 | Implementation and tests | NOT VERIFIED | Not authorized or started |
 
 ## Remaining work and verification
 
 - Obtain product-owner review and approval or requested revisions.
-- Resolve Phase 1 restore/recovery and production-readiness conflict.
 - Update product-wide documents through normal change review.
 - Define source/version/module rule catalogs and exact scoring formula.
 - Create technical specification, implementation plan, test plan, security review, accessibility plan, and evaluation plan after product approval.
@@ -63,5 +61,5 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 ## Next transition
 
 - Target state: PRODUCT APPROVED
-- Entry conditions: Product owner approves scope and phased delivery; production-readiness conflict is resolved.
-- Required human approval: Product owner, security owner, and operations owner for the restore/recovery decision.
+- Entry conditions: Product owner approves scope and phased delivery.
+- Required human approval: Product owner.

@@ -12,7 +12,7 @@ Last updated: 2026-09-28
 
 Provide standalone, recurring health assessment for SailPoint Identity Security Cloud and One Identity Manager. The product evaluates every supported in-scope object or records an explicit gap, combines deterministic and automatic AI analysis, measures adherence to customer-approved desired outcomes, and produces interactive technical and executive results from one canonical assessment.
 
-Phase 1 delivers core assessment, automatic general AI, scoring and maturity, desired outcomes, recurring comparisons, projected ROI, interactive dashboards, governed reports, MCP access, and recommendations. Phase 2 adds on-demand AI deep analysis, realized-benefit tracking, fix packages and task conversion, and verified restore/recovery. Phase 3 adds custom-rule management and anonymous peer benchmarking. Phase 4 adds direct remediation and production migration execution. Licensing analysis and licensing ROI are excluded.
+Phase 1 delivers core assessment, automatic general AI, scoring and maturity, desired outcomes, recurring comparisons, projected ROI, interactive dashboards, governed reports, MCP access, and recommendations. Phase 2 adds on-demand AI deep analysis, realized-benefit tracking, and fix packages with task conversion and recovery guidance. Phase 3 adds custom-rule management and anonymous peer benchmarking. Phase 4 adds direct remediation and production migration execution with operation-specific rollback and recovery. Licensing analysis and licensing ROI are excluded.
 
 ## Problem
 
@@ -212,7 +212,7 @@ Phase 2 adds consultant-initiated, scoped deep analysis with previewed scope, da
 
 ### FR-HAS-35: Recommendations
 
-Phase 1 findings may include multiple remediation options with outcome, affected scope, prerequisites, proposed changes, roles and approvals, risks, validation, rollback, effort, and authoritative references. Recommendations prefer supported out-of-the-box behavior when it meets the desired outcome.
+Phase 1 findings may include multiple remediation options with outcome, affected scope, prerequisites, proposed changes, roles and approvals, risks, validation, recovery considerations, effort, and authoritative references. This guidance does not represent an executed or verified customer-system restore. Recommendations prefer supported out-of-the-box behavior when it meets the desired outcome.
 
 ### FR-HAS-36: Prioritization and effort
 
@@ -220,7 +220,7 @@ Recommendations are prioritized using severity, exposure, affected-object count,
 
 ### FR-HAS-37: Fix-package phase boundary
 
-Phase 2 adds grouped fix packages, quick wins, prerequisites, compensating controls, redesign options, generated review-only artifacts, and configurable conversion to in-product, Jira, GitHub, ServiceNow, CSV, or MCP tasks. A finding becomes remediated only after validation; accepted-risk findings retain their recommendations.
+Phase 2 adds grouped fix packages, quick wins, prerequisites, compensating controls, redesign options, detailed rollback and recovery guidance, generated review-only artifacts, and configurable conversion to in-product, Jira, GitHub, ServiceNow, CSV, or MCP tasks. Fix packages do not execute or verify customer-system restoration. A finding becomes remediated only after validation; accepted-risk findings retain their recommendations.
 
 ### FR-HAS-38: ROI
 
@@ -296,7 +296,7 @@ MCP uses the established named-user/service-identity, read-only-default, granula
 
 ### FR-HAS-56: Phase 4 boundary
 
-Direct remediation execution and production migration execution are Phase 4 capabilities requiring separate approved specifications, security review, execution controls, validation, and recovery.
+Direct remediation execution and production migration execution are Phase 4 capabilities requiring separate approved specifications, security review, execution controls, validation, and tested operation-specific rollback or compensating recovery.
 
 ## Permissions
 
@@ -498,13 +498,13 @@ Then only capabilities enabled for the deployed phase are available and deferred
 - Automatic AI analysis with prompt-injection resistance, budget enforcement, provenance, redaction, and model/version recording.
 - Interactive dashboard, graph, side-panel, export, controlled sharing, and accessibility capability.
 - MCP identity and granular authorization model.
-- Phase 2 deep-analysis, task integration, and restore/recovery designs.
+- Phase 2 deep-analysis, task integration, and recommendation/fix-package recovery-guidance designs.
 - Phase 3 rule-authoring and benchmark privacy/statistical designs.
 - Separate Phase 4 remediation and production-migration specifications.
 
 ## Open questions and assumptions
 
-- **Blocking production-readiness conflict:** approved `NFR-COM-2` requires a verified restore procedure before production readiness, while discovery defers verified restore/recovery to Phase 2. Phase 1 cannot be declared production-ready unless this is reconciled.
+- Platform/service backup and restoration are governed by `NFR-REL-3` and `NFR-REL-4` and are not a health-assessment feature phase. Recommendation-only recovery guidance is governed by `NFR-SAF-16`; executed remediation and migration rollback are Phase 4 concerns governed by `NFR-SAF-6`.
 - Displaying accuracy after one review without a low-sample warning can imply unsupported statistical confidence; this remains an accepted product decision requiring report-language review.
 - Confidence affects score while severity remains separately visible; the exact formula belongs to technical/scoring design and must avoid concealing severe findings.
 - Cohort metadata is hidden even though benchmark quality depends on cohort context; Phase 3 requires privacy and statistical review before approval.
