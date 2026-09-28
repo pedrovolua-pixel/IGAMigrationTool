@@ -1,12 +1,12 @@
 # Feature: Multi-source data ingestion
 
-Status: Draft
+Status: Approved
 
 Owner: Product owner
 
 Created: 2026-09-27
 
-Last updated: 2026-09-27
+Last updated: 2026-09-28
 
 ## Summary
 
@@ -58,7 +58,7 @@ The product must acquire enough evidence to document and assess the source while
 2. The product shows supported versions, acquisition methods, authentication mechanisms, evidence categories, and known limitations.
 3. The user configures one or more endpoints for that logical source, scope, exclusions, redaction, raw-evidence handling, retention, and schedule.
 4. The product previews requested object types and relationships, estimated volume, permissions, included and excluded fields, redaction and retention rules, expected API usage, expected duration, and unsupported or inaccessible categories.
-5. The product validates connectivity and reports excessive permissions as a warning. The unresolved least-privilege conflict in this specification must be resolved before approval.
+5. The product validates connectivity and reports excessive read permissions as a prominent warning and audit event. Collection may proceed for the health pilot when the account remains technically read-only; detected write, DDL, ownership, or administrative capability blocks collection.
 6. The collection runs without modifying the source, adapting to rate-limit feedback and saving resumable checkpoints.
 7. Evidence from multiple endpoints is merged into one immutable baseline while retaining value-level provenance and visible conflicts.
 8. The product activates a complete or partial baseline. Partial baselines activate with prominent warnings and explicit gap states.
@@ -102,7 +102,7 @@ SailPoint connections must support OAuth client credentials, interactive OAuth, 
 
 ### FR-ING-7: Permission validation
 
-The product must test source connectivity and detected permissions before collection. It must warn when permissions exceed the documented read-only minimum and must not use source-write operations. Whether warned overprivileged credentials may proceed remains blocked by the conflict with approved `NFR-SEC-1`.
+The product must test source connectivity and detected permissions before collection. It must warn and audit when read permissions exceed the documented minimum. Health-pilot collection may proceed only while the account remains technically read-only. Detected write, DDL, ownership, or administrative capability must block collection, and the product must never use source-write operations.
 
 ### FR-ING-8: Snapshot and incremental collection
 
@@ -298,7 +298,7 @@ Errors must identify the project, environment, endpoint, collection, evidence ca
 - Database access uses a dedicated read-only account, approved queries, and production-safe execution.
 - Customer-side queues and retained extractions are encrypted and bounded by configured storage and retention.
 - Temporary hosted raw retention of up to 30 days must be presented clearly even when permanent raw retention is disabled.
-- The decision to warn and proceed with overprivileged credentials conflicts with the approved least-privilege requirement and blocks approval until reconciled.
+- Proceeding with excess read-only permission is an approved, pilot-only exception to `NFR-SEC-1`; write, DDL, ownership, and administrative capability remain blocking.
 
 ## Acceptance criteria
 
@@ -422,6 +422,14 @@ When a user attempts migration
 
 Then migration is blocked, while reduced-trust upload-based health assessment may remain available with warnings.
 
+### AC-ING-16: Excess database permission boundary
+
+Given a configured One Identity database account whose permissions exceed the approved minimum
+
+When permission validation completes
+
+Then excess read-only permission produces a prominent warning and audit event without blocking the health pilot, while any write, DDL, ownership, or administrative capability blocks collection.
+
 ## Dependencies
 
 - Approved customer/partner authorization and tenancy model.
@@ -436,7 +444,7 @@ Then migration is blocked, while reduced-trust upload-based health assessment ma
 
 ## Open questions and assumptions
 
-- **Blocking conflict:** approved `NFR-SEC-1` requires minimum privileges, while discovery currently allows warned overprivileged credentials to proceed. Product and security owners must reconcile this before approval.
+- **Approved exception:** the repository owner acting as product and security owner approved warned excess read-only permissions for the pilot while write, DDL, ownership, and administrative capability remain blocking.
 - One Identity versions 8.x through 10.x are intended to be supported, but the exact tested combinations of releases, patches, modules, databases, and authentication mechanisms must be enumerated in the capability matrix.
 - The authentication mechanism described as “SQL” is assumed to mean supported database authentication for the dedicated read-only account.
 - Temporary hosted raw evidence is retained for up to 30 days even when permanent central raw retention is disabled; customer-facing policy and consent language require approval.
@@ -446,8 +454,8 @@ Then migration is blocked, while reduced-trust upload-based health assessment ma
 
 ## Approval
 
-Approved by:
+Approved by: Product owner (repository owner)
 
-Date:
+Date: 2026-09-28
 
 Only the product owner may change `Status` to `Approved`.
