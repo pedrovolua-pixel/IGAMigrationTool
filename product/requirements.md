@@ -2,8 +2,8 @@
 
 Status: Approved
 Approved by: Product owner
-Approved: 2026-09-28
-Last updated: 2026-09-28
+Approved: 2026-09-29
+Last updated: 2026-09-29
 
 These requirements express observable product behavior at discovery level. Feature specifications will refine them into detailed acceptance criteria. Priority and release assignment remain subject to product-owner approval.
 
@@ -247,6 +247,10 @@ Proposed AI findings affect only a provisional score. Published scores use revie
 ### FR-HLT-23 — Pilot evaluation
 
 Pilot acceptance requires at least two independent eligible One Identity Manager 10.x environments, an initial assessment and reassessment, review of every Critical and High AI finding, and a module/category/severity-stratified sample totaling at least 100 reviewed AI findings or all findings when fewer exist. More than 80% of reviewed non-indeterminate AI findings must be confirmed.
+
+### FR-HLT-24 — Post-pilot vendor health portfolio
+
+The first post-pilot health release must provide a vendor-agnostic, customer-opt-in, read-only portfolio dashboard. Authorized dashboard users may see named customers, the latest completed health score, assessed modules, and all finding titles with severity and review status, but no descriptions, evidence, configurations, recommendations, comments, reports, protected references, customer actions, downloads, or exports. An in-progress reassessment may expose progress state but must not replace the last completed score. Customer-scoped grants apply only to the granting customer's entry; portfolio-wide grants require platform administration. Opt-out stops updates, retained visibility follows the customer's retention policy, and every access is attributable and visible to the customer.
 
 ## Mapping and migration
 

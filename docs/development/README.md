@@ -1,5 +1,23 @@
 # Development documentation
 
-This directory will explain how contributors set up, run, test, debug, migrate, and safely change the implemented system.
+The first implementation slice uses the SDK pinned in `global.json`. Install .NET SDK `10.0.401` and confirm `dotnet --version` reports that version from the repository root before running:
 
-Add documentation when the engineering foundation exists. Commands must be executable and verified; do not document a hypothetical stack or workflow.
+```sh
+dotnet restore IgaMigrationTool.slnx --locked-mode
+dotnet format IgaMigrationTool.slnx --verify-no-changes --no-restore
+dotnet build IgaMigrationTool.slnx --configuration Release --no-restore
+dotnet run --project tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj --configuration Release --no-build
+dotnet run --project tests/architecture/BoundaryChecks/BoundaryChecks.csproj --configuration Release --no-build
+```
+
+The synthetic checks exercise the internal digest/signature verifier and the [gate-check bundle writer, verifier, local trust registry and promotion machine-evidence preflight](gate-check-bundles.md), plus [signed reviewer decisions and role coverage](reviewer-decisions.md) and [pilot-owner override evidence](pilot-owner-overrides.md). The caller must load trusted public keys from an approved source. A valid result does not authorize a gate or artifact activation or satisfy SEC-PILOT-007. The partial `bootstrap-checks.yml` workflow runs these initial .NET checks, Bicep checks and a pinned Gitleaks directory scan of the checkout. The full change/merge, milestone and pilot-readiness gates in `specs/003-health-assessment/implementation-plan.md` remain unimplemented and unverified.
+
+The local Gitleaks `8.30.1` directory scan completed with no findings on 2026-09-29. The workflow verifies the Linux x64 release archive SHA-256 before scanning and redacts any findings in its log. A directory scan covers the current checkout; it is not a history, provider-secret-store, or deployed-resource scan. Tool source: [Gitleaks release](https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1) and [scan modes](https://github.com/gitleaks/gitleaks/blob/master/README.md#commands).
+
+The repository explicitly enables NuGet Audit for direct and transitive packages at the low-severity threshold. With `TreatWarningsAsErrors`, a known package advisory or unavailable audit source fails restore rather than appearing as a passing dependency check. This covers the .NET projects only; other ecosystems and OCI images need their own scanners when introduced. See [NuGet Audit](https://learn.microsoft.com/en-us/nuget/concepts/auditing-packages).
+
+The architecture check scans declared `.csproj` references under `src/`. It rejects collector references into the server, renderer references into the server or collector, module references into hosts or collector, and host references into the collector. It also rejects missing/out-of-repository project targets and unsafe project XML. It does not inspect source-level imports, runtime service calls, browser code or Azure permissions; those boundaries need separate checks.
+
+The partial engineering evidence-store Bicep module and its compile/lint/policy commands are documented in [`infra/bicep/README.md`](../../infra/bicep/README.md). No infrastructure deployment has been run.
+
+Add setup, migration and operational commands here only after they have been executed and verified.

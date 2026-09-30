@@ -1,15 +1,16 @@
 # Feature Status: IGA health assessment
 
-State: PRODUCT APPROVED
+State: IMPLEMENTING
 
 Owner: Product owner
 
-Last updated: 2026-09-28
+Last updated: 2026-09-29
 
 Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICAL DESIGN`, `TECHNICAL APPROVED`, `PLANNED`, `IMPLEMENTING`, `CODE REVIEW`, `VERIFICATION`, `STAGING`, `ACCEPTANCE`, `RELEASE READY`, `RELEASED`, `OBSERVED`, `BLOCKED`.
 
 ## Completed
 
+- Milestone 0 implementation began on 2026-09-29 with a pinned .NET SDK, internal artifact-integrity and signed gate-check bundle verification bound to an expected decision time, a deterministic metadata-only bundle writer, local public-key trust registries for gate and reviewer decisions, combined normal-path promotion evidence preflight, signed reviewer decisions and role-coverage checks, default evidence retention-clock checks, project-reference architecture checks, closed-by-default engineering evidence-store and container-scoped role Bicep drafts, synthetic negative checks and a partial bootstrap workflow with a pinned checkout secret scan. No execution gate is claimed complete.
 - Product discovery for assessment scope, rules, findings, scoring, desired outcomes, AI, recommendations, ROI, reports, collaboration, reassessment, quality, permissions, MCP, and phased delivery.
 - Draft product specification created with stable `FR-HAS-N` and `AC-HAS-N` identifiers.
 - Phase 1 through Phase 4 boundaries recorded.
@@ -18,14 +19,30 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - Pilot sub-phases 1A through 1D, validated modules, reassessment, evaluation sampling, report delivery, fix packages, consultant tasks, and read-only MCP boundaries recorded.
 - Pilot operational, accessibility, performance, scale, retention, recovery, and support targets recorded in the draft specification.
 - Product specification and reconciled pilot scope approved by the repository owner acting as product and security owner on 2026-09-28.
+- Technical specification approved and ADR-0001 through ADR-0003 accepted by the repository owner on 2026-09-28.
+- Technical-approval package created and approved by the repository owner on 2026-09-28: capability matrix, SQL Server evidence contract, security review/threat model, authorization matrix, AI data controls, operations/recovery plan, accessibility plan, pilot evaluation plan, and test plan.
+- ADR-0004 accepted and the complete Entra application-registration, workload and session design approved by the repository owner on 2026-09-29. The accepted platform uses ASP.NET Core/.NET LTS, React/TypeScript, Azure Container Apps/Jobs, non-HA PostgreSQL Flexible Server, Service Bus Standard, Blob Storage, Key Vault/managed identities, Azure Container Registry, Bicep and OpenTelemetry/Azure Monitor.
+- Four architecture views were created and visually verified on 2026-09-29 using official Microsoft Azure and Entra iconography: system context, Azure deployment/network, assessment processing, and identity/tenant isolation.
+- The One Identity pilot collector boundary was clarified on 2026-09-29: it is a One Identity-specific customer-side component using outbound-only delivery or an encrypted offline package. Future product integrations use separately designed hosted SaaS-to-SaaS connectors rather than this onsite collector.
+- Post-pilot vendor health-portfolio product discovery was completed on 2026-09-29 and recorded in FR-HAS-57/AC-HAS-21: customer-opt-in, read-only named summaries with latest completed score, modules, finding titles, severity/status, retention-bound visibility and customer-visible audit.
+- Feature advanced to `TECHNICAL APPROVED` on 2026-09-29.
+- Repository owner approved the canonical implementation plan with technical approval and security/operations review on 2026-09-29; G0 passed and the feature advanced to `PLANNED`. Product-code implementation is authorized within the approved scope, while G1–G9 remain unverified.
+- Repository owner accepted ADR-0005's RSA-PSS/SHA-256 gate-evidence signing profile and trusted-caller boundary on 2026-09-29. Production key/reviewer trust and store integration remain unverified.
 
 ## In progress
 
-- Technical specification, architecture, capability matrix, scoring design, rule-catalog design, and evaluation design.
+- Milestone 1 Azure substrate drafts: the Service Bus Standard namespace pins East US 2, disables local/SAS auth, requires TLS 1.2 and derives its single allowed IP from an existing public IP resource. A separate module drafts queue-scoped sender/receiver managed-identity role assignments. A VNet/subnet/static-IP/NAT module drafts the app's controlled egress path, and a reusable module creates one workload identity at a time without grants. A partial non-production spike entry point composes network and broker in dependency order. Local compiled-template checks reject thirty-two drifts across the network/broker modules and wiring. CIDR allocation, actual identity separation/grants, the queue, Container Apps, diagnostics, Azure deployment and live tests remain unverified.
+- Milestone 0 production signing-key and identity-backed owner/reviewer trust, full change/merge CI gates, remote passing evidence, protected evidence store, owner override execution, compatibility and supply-chain promotion tests. Local checks do not close SEC-PILOT-007; ADR-0005's production key lifecycle and the draft gate-check/reviewer/override schemas remain open for milestone review. ADR-0006's store access/purge identity draft awaits Azure integration evidence and Milestone 0 review before any role grant or deployment. ADR-0007/0008 decision drafts await identity/store integration and milestone review.
+- Resolution and verification planning for SEC-PILOT-001 through SEC-PILOT-010.
+- Population of exact One Identity build/module capability rows from two independent eligible pilot environments.
+- Provisioning planning for Entra application registrations and the OpenAI API project; concrete resource identifiers and verification evidence are intentionally deferred until environment setup.
+- Technical and security design for the first post-pilot vendor health-portfolio slice; this does not change or block the approved pilot implementation plan.
 
 ## Blocked
 
-- No unresolved product-scope or security-owner decision is recorded. Technical design and later gates remain outstanding.
+- Pilot execution is blocked until two independent eligible One Identity 10.x SQL Server environments have exact build, module, query-pack, mapping, rule, and SME validation evidence.
+- Pilot execution remains blocked until PILOT-ENV-A and PILOT-ENV-B have protected identifiers/evidence owners and independence evidence, and until the Entra and OpenAI resources are provisioned and verified against the approved designs.
+- Pilot execution is blocked until the selected identity, AI, rendering, storage, queue and hosting controls are implemented and verified; Critical/High security findings are closed or validly accepted; backup/restore and accessibility gates pass; and the pilot evaluation succeeds.
 
 ## Decisions made
 
@@ -35,6 +52,36 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - Phase 1 automatic AI and Phase 2 deep analysis: `product-spec.md` FR-HAS-30 through FR-HAS-34.
 - Pilot recommendations, grouped fix packages, in-product consultant tasks, CSV export, and ROI exclusion: `product-spec.md` FR-HAS-35 through FR-HAS-39.
 - Interactive reporting, reassessment, accuracy sampling, benchmarking boundary, read-only MCP sub-phase, and Phase 4: `product-spec.md` FR-HAS-40 through FR-HAS-56.
+- Pilot backups use rolling retention no longer than 35 days unless an approved contractual or legal hold applies; restore must replay deletion tombstones and revoked access before use.
+- Platform support has no protected-evidence access in the pilot. Any future time-bounded customer-authorized elevation requires a separate approved design.
+- The repository owner will create two distinct pilot environments, PILOT-ENV-A and PILOT-ENV-B; exact identities, builds, modules and independence evidence remain pending.
+- Microsoft Entra ID is the selected human and workload identity provider; the application-registration, BFF/session and workload pattern is approved, while concrete provider configuration remains subject to verification.
+- OpenAI API model `gpt-6-sol` through the Responses API is the selected pilot AI model; US regional processing and required ZDR are approved, while project/account configuration remains subject to verification.
+- Microsoft Entra uses a single-tenant app with explicitly onboarded B2B guests and required MFA/Conditional Access for privileged roles.
+- OpenAI Zero Data Retention is required; AI remains disabled unless the selected US-region API project is approved for and configured with ZDR.
+- Audit records are payload-free and retained for 12 months, followed by soft deletion and active-system purge within 30 additional days unless an approved hold applies.
+- Provider resource IDs and secrets may be supplied later through environment-specific configuration. Local `.env.local` files are development-only and ignored; shared/pilot secrets use a managed secret store and workload identity.
+- Azure Service Bus Standard is selected for the pilot work broker. PostgreSQL remains the work-state source of truth; queue messages are payload-free opaque delivery signals. The lack of Private Link is an explicit pilot boundary requiring Entra-only broker authorization, restricted static egress, TLS, outbox/reconciliation and network/configuration tests.
+- PostgreSQL high availability is not required for the pilot. The selected topology is one single-primary Flexible Server with automated backups and point-in-time recovery; pilot readiness still requires recovery drills meeting the approved 24-hour RPO and one-business-day RTO.
+- East US 2 is the only pilot Azure region. The pilot has no recovery region, cross-region standby or geo-redundant database backup. The approved RPO/RTO applies to recoverable incidents within East US 2; a region-wide Azure outage follows the manual best-effort business disaster plan without a pilot regional RPO/RTO.
+- The customer-side collector is limited to the One Identity Manager pilot acquisition path. Future SaaS products use platform-hosted SaaS-to-SaaS connectors with product-specific authentication, permission, rate-limit, residency, retention, redaction and failure controls.
+- The pilot collector is a signed self-contained .NET 10 `win-x64` MSI for Windows Server 2022/2025, installing a Windows Service with one-shot offline CLI mode. It prefers dedicated Windows Integrated SQL authentication, permits a locally DPAPI/ACL-protected dedicated SQL account fallback, uses outbound device-certificate enrollment or an authenticated encrypted offline package, and has no inbound listener or self-update channel.
+- The first post-pilot Phase 2 slice is a vendor-agnostic, customer-opt-in, read-only health-portfolio dashboard. Platform administrators control portfolio-wide roles; customer administrators may grant access only to their own entry. The dashboard shows the latest completed score, modules, and all finding titles with severity/status, shows a newer run only as in progress, prohibits detail/actions/download/export, follows customer retention after opt-out, and exposes its audit history to the customer.
+
+## Approved technology platform
+
+- Accepted ADR-0004 selects ASP.NET Core/.NET LTS, React/TypeScript, Azure Container Apps and Jobs, Azure Database for PostgreSQL Flexible Server, Azure Service Bus Standard, customer-scoped Azure Blob Storage, Azure Key Vault and managed identities, Azure Container Registry, Bicep, and OpenTelemetry to Azure Monitor.
+- The approved browser pattern is a backend for frontend with a server-managed session so Entra access and refresh tokens are not exposed to ordinary browser JavaScript.
+- The approved pilot data pattern is a separate control-plane database and database-per-customer on a pooled, non-HA PostgreSQL server, with an isolated-restore procedure and an upgrade path to a dedicated or high-availability customer server.
+- Kubernetes, Redis, an external search engine, graph database, workflow engine and service mesh are deliberately omitted until evidence establishes a need.
+- Prince 17 is selected as the pilot PDF/UA renderer with a commercial-license prerequisite and a network/database/platform-credential-free Container Apps Job boundary. PDF remains disabled until accessibility, sandbox and deterministic-output evidence passes; the read-only vendor license file is the sole narrow credential-like exception.
+- The pilot accessibility support matrix is managed, fully patched Windows 11 Enterprise with current Edge Stable, Chrome Stable and Firefox ESR. Full workflow verification uses NVDA/Edge, with NVDA/Firefox and Narrator/Edge compatibility checks, keyboard and zoom/reflow coverage across all three browsers, contrast-theme checks in Edge/Firefox, and Acrobat Reader/NVDA PDF verification. Mobile/tablet, Safari/macOS, ChromeOS, Linux desktop and preview/obsolete browser channels are excluded.
+- The confidential Entra BFF uses a dedicated user-assigned managed identity federated to its single-tenant app registration. Entra sign-in remains disabled until the deployed authorization-code/session flow, renewal, negative trust and leakage tests pass.
+- The approved repository structure uses one modular .NET codebase with separate BFF and worker deployments, an isolated renderer, a separate Windows collector, versioned contracts, generated frontend API types and independently tracked control/customer database migrations. Exact public operation shapes require technical approval before implementation.
+- The approved CI structure has change/merge, milestone and pilot-readiness gates. Required checks need executed passing evidence; failed, skipped, unavailable and unexecuted checks remain `NOT VERIFIED`. Pipeline implementation and its first passing run remain pending.
+- A metadata-only feature evidence index links to sanitized, digest-bound bundles in a restricted East US 2 engineering artifact store. Frozen gate bundles are retained 12 months from decision and purged from active storage within 30 additional days; expired evidence must be rerun. Store implementation and verification remain pending.
+- Normal promotion uses signed/digested artifacts, mandatory reviewer roles and compatibility checks; security/operations can suspend a suspect version immediately without rewriting historical results. During the pilot, the repository owner can explicitly override every internal artifact-promotion review/evidence gate for an exact artifact and scope. The exception remains visibly unverified and cannot grant customer source access, bypass runtime safety, satisfy acceptance or authorize production release.
+- The approved synthetic fixture taxonomy spans build/module, source safety, five rule classes, coverage/scoring, authorization, AI, rendering/export, work/recovery and independent 100,000-record scale cases; fixture generation and execution remain pending.
 
 ## Discoveries
 
@@ -52,19 +99,34 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 | Product discovery captured | PASS | `product-spec.md` |
 | Product specification approved | PASS | Product owner approval recorded in `product-spec.md` on 2026-09-28 |
 | Pilot scope decisions captured | PASS | `product-spec.md` Phase 1 pilot boundary; FR-HAS-1 through FR-HAS-56; AC-HAS-15 through AC-HAS-20 |
+| Post-pilot vendor health portfolio | PRODUCT APPROVED / TECHNICAL NOT DESIGNED | `product-spec.md` FR-HAS-57 and AC-HAS-21; excluded from pilot implementation scope |
 | Product-wide reconciliation | PASS | Vision, journeys, requirements, feature map, roadmap, open questions, and NFRs distinguish pilot scope from later product scope |
 | Recovery concerns separated | PASS | Platform restore: NFR-REL-3/4; recommendation guidance: NFR-SAF-16; executed rollback: NFR-SAF-6 |
-| Rule catalog and AI quality validated | NOT VERIFIED | Technical and test design have not started |
-| Implementation and tests | NOT VERIFIED | Not authorized or started |
+| Rule catalog and AI quality validated | NOT VERIFIED | Approved test plan exists; catalog fixtures and evaluation evidence have not been executed |
+| Implementation and tests | IN PROGRESS / GATES NOT VERIFIED | Integrity, gate-check, reviewer and owner-override synthetic cases; architecture cases; compiled evidence-store, Service Bus, network and spike-wiring policies; address-plan cases; format/build/Bicep/Gitleaks and .NET vulnerability checks executed locally on 2026-09-29. The partial bootstrap workflow has not run remotely, no Azure deployment was run and no gate bundle exists. |
+| Implementation plan / G0 | PASS | Repository owner approved `implementation-plan.md` on 2026-09-29 with technical approval and security/operations review; G1–G9 remain `NOT VERIFIED` |
+| Technical specification | PASS | Repository owner approved `technical-spec.md` on 2026-09-28 with FR-HAS-1 through FR-HAS-56 and AC-HAS-1 through AC-HAS-20 traceability |
+| Consequential architecture decisions | PASS | Repository owner accepted ADR-0001, ADR-0002, and ADR-0003 on 2026-09-28 and ADR-0004 on 2026-09-29 |
+| Capability/evidence design | APPROVED / NOT VERIFIED | Repository owner approved `capability-matrix.md` and `database-evidence-contract.md` on 2026-09-28; exact builds, queries and two environments remain unavailable |
+| Security design review | DESIGN APPROVED / NOT VERIFIED | Repository owner approved the design review on 2026-09-28 and the revised platform on 2026-09-29; the Service Bus Standard addendum records SEC-PILOT-010, and SEC-PILOT-001 through SEC-PILOT-010 still require implementation evidence |
+| Authorization and AI controls | APPROVED / NOT VERIFIED | Entra single-tenant/B2B/MFA, BFF/session/workload policy, OpenAI `gpt-6-sol` with required ZDR, and 12-month payload-free audit retention are approved; provider configuration and implementation evidence remain unavailable |
+| Operations and recovery design | APPROVED / NOT VERIFIED | Repository owner approved `health-assessment-pilot-operations-plan.md`, including the pilot backup-expiration policy, on 2026-09-28; restore evidence remains unavailable |
+| Accessibility and evaluation design | APPROVED / NOT VERIFIED | Repository owner approved `accessibility-plan.md` and `evaluation-plan.md` on 2026-09-28; execution evidence remains unavailable |
+| Test plan | APPROVED / NOT EXECUTED | Repository owner approved `test-plan.md` on 2026-09-28; it maps AC-HAS-1 through AC-HAS-20. Local primitive checks do not execute the approved feature plan. |
+| Exact pilot capability rows | NOT VERIFIED | Requires evidence from two independent eligible customer environments |
 
 ## Remaining work and verification
 
-- Define the One Identity 10.x SQL Server capability matrix, database evidence contract, source/version/module rule catalogs, maturity rubric, and exact scoring formula.
-- Create technical specification, implementation plan, test plan, security review, accessibility plan, and evaluation plan after product approval.
+- Complete Milestone 0 bootstrap and record executed CI and supply-chain evidence before claiming that milestone complete.
+- Populate the One Identity 10.x SQL Server capability matrix and database evidence contract from exact pilot builds without collecting database topology.
+- Create and approve source/version/module rule catalogs with the required fixture classes and reviewer evidence.
+- Provision Entra registrations, identities, Conditional Access and runtime settings from the approved pattern; exact identifiers and credentials are deployment configuration.
+- Provision and verify the OpenAI API project and ZDR before enabling AI; the actual project ID and credential are deployment configuration, not an architecture decision.
+- Verify East US 2 service/SKU availability and subscription capacity during the platform spike and define non-secret environment-specific deployment parameters.
 - Specify Phase 2, Phase 3, and Phase 4 capabilities separately before implementation.
 
 ## Next transition
 
-- Target state: TECHNICAL DESIGN
-- Entry conditions: Approved product specification and reconciled product-wide requirements.
-- Required human approval: Technical owner approval after technical specification, architecture, security, accessibility, evaluation, and test design are complete.
+- Target state: CODE REVIEW after scoped implementation milestones are ready for review.
+- Entry conditions: Complete the affected implementation work and checks, then record execution evidence without treating local primitive checks as a gate pass.
+- Required human approval: G0 approval is recorded; later pilot execution and production release remain separately gated.

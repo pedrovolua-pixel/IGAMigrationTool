@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1000" viewBox="0 0 1700 1000" role="img" aria-labelledby="title desc">
+  <title id="title">IGA health-assessment pilot Azure deployment and network architecture</title>
+  <desc id="desc">A public HTTPS backend for frontend runs in Azure Container Apps with separately scaled workers and jobs. Protected PostgreSQL, Blob Storage, and Key Vault use private endpoints. Service Bus Standard uses a controlled public endpoint with Entra-only authorization. OpenAI uses a controlled external United States regional endpoint.</desc>
+  <defs>
+    <style>
+      .title{font:600 30px 'Segoe UI',Arial,sans-serif;fill:#172033}.subtitle{font:400 16px 'Segoe UI',Arial,sans-serif;fill:#526174}.section{font:600 17px 'Segoe UI',Arial,sans-serif;fill:#172033}.label{font:600 15px 'Segoe UI',Arial,sans-serif;fill:#172033}.small{font:400 13px 'Segoe UI',Arial,sans-serif;fill:#526174}.tiny{font:400 12px 'Segoe UI',Arial,sans-serif;fill:#526174}.azurebox{fill:#f3f8fd;stroke:#0078d4;stroke-width:1.7}.service{fill:#fff;stroke:#9aacbd;stroke-width:1.4}.private{fill:#f2faf6;stroke:#29845d;stroke-width:1.6}.public{fill:#fff6f4;stroke:#bd554b;stroke-width:1.7}.boundary{fill:#fbfdff;stroke:#0078d4;stroke-width:2}.vnet{fill:#f5fbff;stroke:#4d95cb;stroke-width:2;stroke-dasharray:8 6}.subnet{fill:#fff;stroke:#8abce1;stroke-width:1.4}.flow{fill:none;stroke:#2476b8;stroke-width:2.4;marker-end:url(#arrow)}.identity{fill:none;stroke:#7451a6;stroke-width:2.4;stroke-dasharray:7 6;marker-end:url(#arrow-purple)}.publicflow{fill:none;stroke:#b3544b;stroke-width:2.5;stroke-dasharray:8 6;marker-end:url(#arrow-red)}.telemetry{fill:none;stroke:#607d8b;stroke-width:2;stroke-dasharray:3 6;marker-end:url(#arrow-gray)}.deploy{fill:none;stroke:#246a35;stroke-width:2;stroke-dasharray:10 5;marker-end:url(#arrow-green)}.note{fill:#fffaf0;stroke:#d7a73b;stroke-width:1.2}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2476b8"/></marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#7451a6"/></marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#b3544b"/></marker>
+    <marker id="arrow-gray" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#607d8b"/></marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#246a35"/></marker>
+  </defs>
+
+  <rect width="1700" height="1000" fill="#ffffff"/>
+  <text class="title" x="48" y="55">IGA health-assessment pilot — Azure deployment and network view</text>
+  <text class="subtitle" x="48" y="84">Accepted ADR-0004 topology: consumption-based compute, Service Bus Standard, private protected-data services, non-HA PostgreSQL</text>
+
+  <rect class="service" x="42" y="145" width="250" height="110" rx="12"/>
+  <text class="section" x="68" y="178">Named users</text>
+  <text class="small" x="68" y="204">Consultants and customer roles</text>
+  <text class="small" x="68" y="228">Modern browser • HTTPS</text>
+
+  <rect class="azurebox" x="42" y="315" width="250" height="115" rx="12"/>
+  <image href="icons/microsoft-entra-id.svg" x="64" y="344" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="130" y="348">Microsoft Entra ID</text>
+  <text class="small" x="130" y="372">OIDC authorization code + PKCE</text>
+  <text class="small" x="130" y="395">MFA • CA • app roles • B2B</text>
+
+  <rect class="boundary" x="350" y="118" width="1295" height="780" rx="18"/>
+  <text class="section" x="378" y="151">Azure subscription — pilot environment — approved United States region</text>
+
+  <rect class="vnet" x="390" y="190" width="800" height="650" rx="16"/>
+  <image href="icons/azure-virtual-network.svg" x="414" y="210" width="42" height="42" preserveAspectRatio="xMidYMid meet"/>
+  <text class="section" x="472" y="232">Azure Virtual Network</text>
+
+  <rect class="subnet" x="425" y="275" width="370" height="470" rx="12"/>
+  <text class="label" x="449" y="306">Container Apps environment</text>
+  <text class="tiny" x="449" y="327">VNet integration • workload identities • scale-to-zero workers</text>
+
+  <rect class="azurebox" x="458" y="355" width="304" height="112" rx="12"/>
+  <image href="icons/azure-container-apps.svg" x="480" y="385" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="546" y="384">Web / BFF / API</text>
+  <text class="small" x="546" y="408">Public HTTPS ingress</text>
+  <text class="small" x="546" y="430">0.5 vCPU / 1 GiB starting profile</text>
+  <text class="tiny" x="546" y="451">Server session; tokens stay off browser JS</text>
+
+  <rect class="azurebox" x="458" y="505" width="304" height="112" rx="12"/>
+  <image href="icons/azure-container-apps.svg" x="480" y="535" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="546" y="534">Assessment workers</text>
+  <text class="small" x="546" y="558">Rules • AI gateway • scoring</text>
+  <text class="small" x="546" y="580">Continuous consumers; scale to zero</text>
+  <text class="tiny" x="546" y="601">One customer / project / run / job scope</text>
+
+  <rect class="azurebox" x="458" y="650" width="304" height="70" rx="12"/>
+  <text class="label" x="480" y="680">Container Apps Jobs</text>
+  <text class="small" x="480" y="702">Sandboxed PDF, exports, purge, maintenance</text>
+
+  <rect class="subnet" x="835" y="275" width="320" height="470" rx="12"/>
+  <text class="label" x="859" y="306">Protected-data private endpoints</text>
+  <text class="tiny" x="859" y="327">No public data-plane access</text>
+
+  <rect class="private" x="862" y="355" width="266" height="105" rx="12"/>
+  <image href="icons/azure-postgresql.svg" x="882" y="382" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="948" y="380">PostgreSQL Flexible Server</text>
+  <text class="small" x="948" y="404">Single primary • non-HA</text>
+  <text class="small" x="948" y="427">Control DB + database/customer</text>
+  <text class="tiny" x="948" y="447">PITR and restore drill required</text>
+
+  <rect class="private" x="862" y="490" width="266" height="105" rx="12"/>
+  <image href="icons/azure-storage.svg" x="882" y="518" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="948" y="518">Azure Blob Storage</text>
+  <text class="small" x="948" y="542">Container/customer • versioned</text>
+  <text class="small" x="948" y="565">Evidence and publication artifacts</text>
+
+  <rect class="private" x="862" y="625" width="266" height="95" rx="12"/>
+  <image href="icons/azure-key-vault.svg" x="882" y="649" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="948" y="651">Azure Key Vault</text>
+  <text class="small" x="948" y="675">Keys, certificates, secret references</text>
+  <text class="tiny" x="948" y="698">Managed-identity access only</text>
+
+  <rect class="public" x="1235" y="225" width="360" height="145" rx="12"/>
+  <image href="icons/azure-service-bus.svg" x="1260" y="263" width="52" height="52" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="1330" y="258">Azure Service Bus Standard</text>
+  <text class="small" x="1330" y="282">Public Azure service endpoint</text>
+  <text class="small" x="1330" y="305">Entra-only roles • local/SAS off</text>
+  <text class="small" x="1330" y="328">Opaque IDs only • outbox + reconcile</text>
+  <text class="tiny" x="1330" y="351">Static egress allowlist where supported</text>
+
+  <rect class="service" x="1235" y="420" width="360" height="120" rx="12"/>
+  <text class="label" x="1260" y="452">OpenAI API — US regional endpoint</text>
+  <text class="small" x="1260" y="478">GPT-6 Sol • Responses API • ZDR required</text>
+  <text class="small" x="1260" y="502">No tools • store:false • redacted packets</text>
+  <text class="tiny" x="1260" y="524">External provider over controlled HTTPS egress</text>
+
+  <rect class="azurebox" x="1235" y="590" width="360" height="105" rx="12"/>
+  <image href="icons/azure-monitor.svg" x="1260" y="618" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="1328" y="618">Azure Monitor</text>
+  <text class="small" x="1328" y="642">Application Insights + Log Analytics</text>
+  <text class="small" x="1328" y="665">Payload-redacted telemetry and alerts</text>
+
+  <rect class="azurebox" x="1235" y="740" width="360" height="105" rx="12"/>
+  <image href="icons/azure-container-registry.svg" x="1260" y="768" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="1328" y="769">Azure Container Registry</text>
+  <text class="small" x="1328" y="793">Signed/versioned application images</text>
+  <text class="small" x="1328" y="816">Managed-identity pull during deployment</text>
+
+  <rect class="note" x="390" y="865" width="1205" height="70" rx="10"/>
+  <text class="label" x="416" y="894">Pilot availability posture</text>
+  <text class="small" x="416" y="918">PostgreSQL HA is intentionally disabled. Safe failure, automated backups, point-in-time recovery, tombstone replay and the approved 24-hour RPO / one-business-day RTO remain mandatory.</text>
+
+  <g aria-label="Connections">
+    <path class="flow" d="M292 198 H410 V410 H458"/>
+    <text class="tiny" x="316" y="188">HTTPS</text>
+    <path class="identity" d="M292 364 H380 V375 H458"/>
+    <text class="tiny" x="314" y="352">OIDC / claims</text>
+
+    <path class="flow" d="M610 467 V505"/>
+    <path class="flow" d="M762 555 H810 V296 H1235"/>
+    <path class="flow" d="M1235 333 H1175 V610 H780 V580 H762"/>
+    <text class="tiny" x="1065" y="284">controlled static egress</text>
+
+    <path class="flow" d="M762 403 H862"/>
+    <path class="flow" d="M762 555 H825 V542 H862"/>
+    <path class="identity" d="M762 590 H820 V674 H862"/>
+    <path class="flow" d="M762 685 H835 V572 H862"/>
+
+    <path class="publicflow" d="M762 535 H800 V260 H1210 V480 H1235"/>
+    <text class="tiny" x="850" y="251">controlled HTTPS egress</text>
+
+    <path class="telemetry" d="M762 435 H805 V340 H1175 V625 H1235"/>
+    <path class="telemetry" d="M762 605 H815 V335 H1188 V650 H1235"/>
+    <path class="telemetry" d="M1128 420 H1195 V650 H1235"/>
+
+    <path class="deploy" d="M1235 792 H1205 V820 H800 V685 H762"/>
+    <text class="tiny" x="1008" y="812">image pull</text>
+  </g>
+
+  <g transform="translate(48 956)">
+    <line x1="0" y1="0" x2="48" y2="0" class="flow"/><text class="tiny" x="62" y="5">runtime flow</text>
+    <line x1="190" y1="0" x2="238" y2="0" class="identity"/><text class="tiny" x="252" y="5">identity / policy</text>
+    <line x1="405" y1="0" x2="453" y2="0" class="publicflow"/><text class="tiny" x="467" y="5">public / external boundary</text>
+    <line x1="690" y1="0" x2="738" y2="0" class="telemetry"/><text class="tiny" x="752" y="5">redacted telemetry</text>
+    <line x1="935" y1="0" x2="983" y2="0" class="deploy"/><text class="tiny" x="997" y="5">deployment</text>
+  </g>
+</svg>

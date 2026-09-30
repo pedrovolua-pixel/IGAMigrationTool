@@ -6,13 +6,13 @@ Owner: Product owner
 
 Created: 2026-09-28
 
-Last updated: 2026-09-28
+Last updated: 2026-09-29
 
 ## Summary
 
 Provide standalone, recurring health assessment for SailPoint Identity Security Cloud and One Identity Manager. The pilot focuses on consultant-operated assessment of One Identity Manager 10.x on SQL Server through a dedicated read-only database account. The product evaluates every supported in-scope object or records an explicit gap, combines deterministic and automatic AI analysis, measures adherence to customer-approved desired outcomes when available, and produces interactive technical and executive results from one canonical assessment.
 
-Phase 1 delivers the pilot through sub-phases: Phase 1A establishes One Identity evidence ingestion and immutable baselines; Phase 1B adds deterministic and automatic AI assessment, findings, scoring, maturity, desired outcomes, recommendations, grouped fix packages, and consultant tasks; Phase 1C adds review, reassessment, governed publication, dashboards, PDF, Markdown, and pilot evaluation; and Phase 1D adds read-only MCP access. ROI is excluded from the pilot. Phase 2 adds on-demand AI deep analysis and broader task integrations. Phase 3 adds custom-rule management and anonymous peer benchmarking. Phase 4 adds direct remediation and production migration execution with operation-specific rollback and recovery.
+Phase 1 delivers the pilot through sub-phases: Phase 1A establishes One Identity evidence ingestion and immutable baselines; Phase 1B adds deterministic and automatic AI assessment, findings, scoring, maturity, desired outcomes, recommendations, grouped fix packages, and consultant tasks; Phase 1C adds review, reassessment, governed publication, dashboards, PDF, Markdown, and pilot evaluation; and Phase 1D adds read-only MCP access. ROI is excluded from the pilot. The first post-pilot Phase 2 slice adds the vendor health-portfolio dashboard in FR-HAS-57; Phase 2 also adds on-demand AI deep analysis and broader task integrations. Phase 3 adds custom-rule management and anonymous peer benchmarking. Phase 4 adds direct remediation and production migration execution with operation-specific rollback and recovery.
 
 ## Phase 1 pilot boundary
 
@@ -82,6 +82,7 @@ Customers and consultants need an assessment that is technically deep, understan
 - A consultant initiates Phase 2 deep analysis for selected objects or categories after previewing scope, data classes, duration, and usage. Protected raw evidence requires separate customer authorization.
 - A customer accepts residual risk with an owner, rationale, review date, compensating controls, and authorization.
 - In Phase 1, findings become grouped fix packages and in-product consultant tasks with CSV export.
+- In the first post-pilot Phase 2 slice, an authorized vendor-dashboard user reviews the latest opted-in customer health summaries without opening a customer assessment or taking action.
 - In Phase 3, opted-in customers contribute aggregated metrics to a benchmark cohort containing at least five contributors.
 
 ## Functional requirements
@@ -187,6 +188,8 @@ Customers may disable or override vendor rules only with reason, authorization, 
 ### FR-HAS-25: Rule quality
 
 Every vendor rule requires positive, negative, insufficient-evidence, exclusion, and version-compatibility tests. Each pilot rule requires One Identity subject-matter-expert review; security rules additionally require security-owner review. The product owner approves the rule catalog and AI-analysis quality for release. Every applicable assessment domain and selected module must have approved rules or an explicit unsupported/gap declaration; no arbitrary minimum rule count applies.
+
+During the pilot only, the repository owner may explicitly override any internal artifact-promotion reviewer or evidence gate for a named rule/catalog, query pack, prompt/model policy or application build. An override is scoped, attributed, expiring and visibly marked as unverified wherever the artifact affects pilot results. It does not turn missing or failed tests into passing evidence, establish source-database access authority, waive runtime safety/isolation/data-protection controls, or satisfy pilot acceptance or production release.
 
 ### FR-HAS-26: Custom-rule phase boundary
 
@@ -312,6 +315,14 @@ The pilot MCP sub-phase is read-only and exposes authorized assessment status, c
 
 Direct remediation execution and production migration execution are Phase 4 capabilities requiring separate approved specifications, security review, execution controls, validation, and tested operation-specific rollback or compensating recovery.
 
+### FR-HAS-57: Read-only vendor health-portfolio dashboard
+
+The first post-pilot Phase 2 slice must provide a vendor-agnostic, read-only portfolio dashboard for authenticated identities from configured identity-provider domains that hold an authorized dashboard role. A customer appears by name only after an authorized customer administrator explicitly opts that customer in. A platform administrator may grant or revoke portfolio-wide dashboard access; a customer administrator may grant or revoke access only to that administrator's own customer entry. The initial capability does not partition the portfolio by vendor organization.
+
+For each visible customer, the dashboard shows the latest assessment that reached `completed` or `completed_with_gaps`: overall health score, assessment timestamp and completion state, installed or assessed modules, and every finding title with severity and current review status. If a newer assessment is running, the dashboard shows its in-progress state and start time but continues to display the last completed assessment's score and findings until the newer run completes. It must not expose finding descriptions, evidence, affected-object identifiers, exact configurations, recommendations, comments, reports, protected references, or links into the customer assessment.
+
+The dashboard is observational only. It cannot start or change an assessment, open customer detail, disposition a finding, accept risk, publish, contact a customer, create a support case or task, invoke MCP, or download or export cross-customer data. Customer opt-out stops future dashboard updates; the last authorized snapshot remains visible only for the duration permitted by that customer's retention policy and is then removed. Every dashboard access is attributable and auditable, and each customer can view who accessed its summary and when.
+
 ## Permissions
 
 | Actor | Allowed action | Constraints |
@@ -324,6 +335,7 @@ Direct remediation execution and production migration execution are Phase 4 capa
 | Executive | View summaries and authorized excerpts | No implicit raw-evidence access |
 | Auditor | Read approved reports, rules, provenance, dispositions, risk decisions, and audit history | Read-only |
 | MCP identity | Read authorized pilot health results | Phase 1D only; no raw evidence or consequential actions |
+| Vendor-dashboard user | Read opted-in customer summaries | Post-pilot only; portfolio-wide role granted by platform administrator or customer-scoped role granted by that customer's administrator; no assessment detail, actions, downloads or exports |
 
 All consequential permissions are scoped by customer, project, environment, assessment, action, and evidence category.
 
@@ -337,6 +349,7 @@ All consequential permissions are scoped by customer, project, environment, asse
 - Critical/High proposed findings remain visibly unreviewed; publication is allowed only with explicit warnings, and proposed AI findings do not affect the published score.
 - Published reports and scores remain immutable.
 - A benchmark query that would produce fewer than five contributors is denied.
+- A vendor-dashboard request omits customers without active or retained opt-in visibility, rejects assessment-detail and export routes, and preserves the last completed score while a newer run is in progress.
 - Remediation does not change health until validated in a subsequent run or approved test.
 - Large lists lazy-load and preserve navigation and filters.
 
@@ -391,6 +404,7 @@ All consequential permissions are scoped by customer, project, environment, asse
 - Expiring-link exports and MCP responses apply field-level authorization and redaction at generation time.
 - Customer data is not used for shared-model training without explicit approved opt-in.
 - Benchmarking requires opt-in, aggregation, a minimum cohort of five, filter enforcement, and prohibition of customer-specific payloads.
+- Vendor portfolio visibility requires customer opt-in, field minimization, role-scoped access, customer-visible audit, no exports, and retention-policy enforcement. It is distinct from anonymous benchmarking.
 - All source content remains untrusted for AI and tool execution.
 
 ## Acceptance criteria
@@ -555,6 +569,14 @@ When users consume it through the dashboard, PDF, Markdown, an expiring link, or
 
 Then all surfaces identify the same canonical assessment version; the expiring link enforces the pilot controls; and MCP remains read-only without raw-evidence or consequential actions.
 
+### AC-HAS-21: Vendor health-portfolio boundary
+
+Given an opted-in customer with a completed assessment, a newer assessment in progress, and an authenticated user holding the applicable vendor-dashboard role
+
+When the user opens the post-pilot portfolio dashboard
+
+Then the customer is identified by name; the last completed assessment supplies the overall score, modules and complete set of finding titles with severity and review status; the newer run is labeled in progress without contributing a partial score; no deeper assessment data, navigation, action, download or export is available; access is recorded for customer review; and opt-out stops future updates while retained visibility expires under the customer's retention policy.
+
 ## Dependencies
 
 - Approved One Identity Manager 10.x SQL Server ingestion capability and immutable evidence baselines for the pilot; broader multi-source ingestion does not block this slice.
@@ -564,7 +586,7 @@ Then all surfaces identify the same canonical assessment version; the expiring l
 - Automatic AI analysis with prompt-injection resistance, budget enforcement, provenance, redaction, and model/version recording.
 - Interactive dashboard, graph, side-panel, export, controlled sharing, and accessibility capability.
 - MCP identity and granular authorization model before Phase 1D only.
-- Phase 2 deep-analysis and broader task integration, Phase 3 rule-authoring and benchmarking, and Phase 4 remediation and migration are downstream and do not block the pilot.
+- The post-pilot vendor health-portfolio dashboard, Phase 2 deep-analysis and broader task integration, Phase 3 rule-authoring and benchmarking, and Phase 4 remediation and migration are downstream and do not block the pilot.
 
 ## Open questions and assumptions
 
@@ -576,7 +598,7 @@ Then all surfaces identify the same canonical assessment version; the expiring l
 - ROI is excluded from the pilot; product-wide documents retain it as a later health capability.
 - Phase 1 includes grouped fix packages, in-product consultant tasks, and CSV export but not direct execution or external task creation.
 - Pilot support hours are 9:00 a.m. to 5:00 p.m. Eastern Time on United States business days. Initial response targets are four business hours for critical incidents, one business day for high-priority issues, and three business days for normal issues.
-- Product-managed pilot data uses a 24-hour recovery-point objective and one-business-day recovery-time objective; restoration must be verified before pilot execution.
+- Product-managed pilot data uses a 24-hour recovery-point objective and one-business-day recovery-time objective for recoverable incidents within the selected single pilot Azure region; restoration must be verified before pilot execution. A region-wide Azure outage has no pilot RTO and follows the manual best-effort business disaster plan.
 - Pilot data is soft-deleted at retention expiry and permanently purged from active systems within 30 additional days. Backup expiration is documented separately.
 - Common dashboard and filter interactions target two seconds at p95, detailed evidence views target three seconds, and asynchronous assessments expose progress and checkpoints and target completion within eight hours at approved scale.
 - Scale is measured independently at 100,000 identities, accounts, entitlements, roles, workflows, and records within the 90-day operational-evidence window; a pilot customer need not contain every category at that volume.
@@ -586,6 +608,6 @@ Then all surfaces identify the same canonical assessment version; the expiring l
 
 Approved by: Product owner (repository owner)
 
-Date: 2026-09-28
+Date: 2026-09-29
 
 Only the product owner may change `Status` to `Approved`.

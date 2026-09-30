@@ -184,6 +184,8 @@ The collector must support unattended schedules, outbound-only delivery, encrypt
 
 One Identity Manager collection must support customer-managed on-premises, private-cloud, and hosted deployments. Private or on-premises deployments default to the customer-side collector; hosted access is optional when the customer exposes an approved endpoint. Direct database access requires a dedicated read-only account and an approved query set, and queries must avoid locks or material production impact even when that reduces depth.
 
+For the pilot, the customer-side collector is a One Identity Manager-specific acquisition component inside the customer-controlled network. Future SaaS-to-SaaS acquisition for other products uses hosted product connectors that call approved vendor APIs from the platform; it does not require installation of this One Identity collector. Each hosted connector requires its own version/deployment capability, authentication, permission, rate-limit, residency, retention, redaction and failure controls.
+
 ### FR-ING-28: One Identity discovery
 
 Before evidence collection, the product must discover product version, patch or hotfix level, installed modules, enabled features, database staging level where available, schema extensions, custom tables and columns, and applicable acquisition capabilities.
@@ -448,7 +450,7 @@ Then excess read-only permission produces a prominent warning and audit event wi
 - One Identity versions 8.x through 10.x are intended to be supported, but the exact tested combinations of releases, patches, modules, databases, and authentication mechanisms must be enumerated in the capability matrix.
 - The authentication mechanism described as “SQL” is assumed to mean supported database authentication for the dedicated read-only account.
 - Temporary hosted raw evidence is retained for up to 30 days even when permanent central raw retention is disabled; customer-facing policy and consent language require approval.
-- Customer-side collector platform packaging, operating-system support, resource limits, and upgrade transport belong to technical design.
+- For the One Identity health pilot, IMP-DEC-003 selects a signed self-contained .NET 10 Windows Service/CLI collector on Windows Server 2022/2025 with outbound-only enrolled delivery or an authenticated encrypted offline package and manual signed updates. Resource limits and exact environment evidence remain technical validation work. Other product collectors still require their own approved technical design.
 - Exact source endpoint contracts and field dictionaries belong to technical specifications but must conform to the metadata and data-minimization boundaries in this specification.
 - Relative delivery order between SailPoint to One Identity Manager and One Identity Manager to Veza remains unspecified; both follow SailPoint to Veza. One Identity Manager to SailPoint follows later.
 

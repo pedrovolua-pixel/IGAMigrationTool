@@ -2,8 +2,8 @@
 
 Status: Approved
 Approved by: Product owner
-Approved: 2026-09-28
-Last updated: 2026-09-28
+Approved: 2026-09-29
+Last updated: 2026-09-29
 
 The phases reflect the sequence supplied by the product owner. Veza is the first destination. Initial end-to-end use-case delivery proceeds through roles, access profiles, certifications, then Joiner/Mover/Leaver workflows. Release boundaries and dates remain undecided.
 
@@ -46,6 +46,13 @@ Pilot delivery sub-phases:
 - 1D — read-only MCP access to authorized assessment results and protected evidence references.
 
 The pilot is consultant-operated. ROI, direct remediation, production migration, custom-rule authoring, anonymous benchmarking, authenticated report download, and external task creation are not pilot exit requirements.
+
+First post-pilot delivery slice:
+
+- a vendor-agnostic, customer-opt-in, read-only health-portfolio dashboard shows named customers, each latest completed health score, assessed modules, and all finding titles with severity and review status;
+- a newer active assessment shows progress without replacing the last completed score;
+- no assessment detail, customer action, support-case creation, download, or export is available;
+- customer-scoped access grants cannot reveal other customers, portfolio-wide grants require platform administration, opt-out stops future updates, retained visibility follows customer retention, and access is customer-visible and audited.
 
 Exit outcome:
 

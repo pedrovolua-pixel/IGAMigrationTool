@@ -2,8 +2,8 @@
 
 Status: Approved
 Approved by: Product owner
-Approved: 2026-09-28
-Last updated: 2026-09-28
+Approved: 2026-09-29
+Last updated: 2026-09-29
 
 This map organizes intended capabilities by the five phases named by the product owner. It is not a delivery commitment or technical decomposition.
 
@@ -65,6 +65,7 @@ This map organizes intended capabilities by the five phases named by the product
 - Pilot sub-phase 1C: review, reassessment, governed publication, dashboard, PDF, Markdown, accessibility, and accuracy evaluation
 - Pilot sub-phase 1D: read-only MCP access to authorized assessment results and protected evidence references
 - Pilot exclusions: ROI, direct remediation, production migration, custom-rule authoring, benchmarking, and external task creation
+- First post-pilot slice: customer-opt-in, vendor-agnostic, read-only health-portfolio dashboard showing named customers, latest completed scores, modules, and finding titles with severity/status but no underlying assessment detail, actions, downloads, or exports
 - Customer-operated standalone health-assessment workflow
 - Assessment of every collected object and supported evidence category regardless of migration selection
 - Findings retained for excluded, deferred, and non-migrated objects

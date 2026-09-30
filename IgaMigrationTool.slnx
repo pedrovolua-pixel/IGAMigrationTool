@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/server/" />
+  <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/EvidenceGovernance/EvidenceGovernance.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+  <Folder Name="/tests/architecture/">
+    <Project Path="tests/architecture/BoundaryChecks/BoundaryChecks.csproj" />
+  </Folder>
+  <Folder Name="/tests/infrastructure/">
+    <Project Path="tests/infrastructure/EvidenceStorePolicy/EvidenceStorePolicy.csproj" />
+    <Project Path="tests/infrastructure/NetworkEgressPolicy/NetworkEgressPolicy.csproj" />
+    <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
+  </Folder>
+  <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj" />
+  </Folder>
+</Solution>

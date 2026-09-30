@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1000" viewBox="0 0 1700 1000" role="img" aria-labelledby="title desc">
+  <title id="title">IGA health-assessment pilot identity and tenant isolation</title>
+  <desc id="desc">Microsoft Entra ID authenticates named users, the backend for frontend creates an opaque server session, and a product policy engine authorizes every action using customer assignment, role, resource, evidence category, state, and policy. Workload identities are separated by job class. Pilot A and Pilot B use separate PostgreSQL databases, database roles, and Blob containers.</desc>
+  <defs>
+    <style>
+      .title{font:600 30px 'Segoe UI',Arial,sans-serif;fill:#172033}.subtitle{font:400 16px 'Segoe UI',Arial,sans-serif;fill:#526174}.section{font:600 18px 'Segoe UI',Arial,sans-serif;fill:#172033}.label{font:600 15px 'Segoe UI',Arial,sans-serif;fill:#172033}.small{font:400 13px 'Segoe UI',Arial,sans-serif;fill:#526174}.tiny{font:400 12px 'Segoe UI',Arial,sans-serif;fill:#526174}.human{fill:#f7f4fb;stroke:#7451a6;stroke-width:1.5}.azure{fill:#f3f8fd;stroke:#0078d4;stroke-width:1.7}.policy{fill:#fffaf0;stroke:#c78a19;stroke-width:1.6}.workload{fill:#f4f8ff;stroke:#477bb9;stroke-width:1.5}.dataA{fill:#eef7ff;stroke:#2476b8;stroke-width:2}.dataB{fill:#f4f0fa;stroke:#7451a6;stroke-width:2}.deny{fill:#fff4f3;stroke:#b3544b;stroke-width:1.4}.boundary{fill:#fbfdff;stroke:#93a8bc;stroke-width:1.5}.flow{fill:none;stroke:#2476b8;stroke-width:2.5;marker-end:url(#arrow)}.identity{fill:none;stroke:#7451a6;stroke-width:2.5;stroke-dasharray:7 6;marker-end:url(#arrow-purple)}.policyflow{fill:none;stroke:#c78a19;stroke-width:2.5;stroke-dasharray:5 5;marker-end:url(#arrow-gold)}.denyflow{fill:none;stroke:#b3544b;stroke-width:2.4;stroke-dasharray:8 5;marker-end:url(#arrow-red)}.note{fill:#eef6fc;stroke:#8abce1;stroke-width:1.2}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2476b8"/></marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#7451a6"/></marker>
+    <marker id="arrow-gold" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#c78a19"/></marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#b3544b"/></marker>
+  </defs>
+
+  <rect width="1700" height="1000" fill="#ffffff"/>
+  <text class="title" x="48" y="55">IGA health-assessment pilot — identity and tenant isolation</text>
+  <text class="subtitle" x="48" y="84">Authentication proves identity; product policy and data-plane routing decide what that identity may access</text>
+
+  <text class="section" x="52" y="140">1. Human authentication</text>
+  <rect class="human" x="52" y="165" width="280" height="165" rx="12"/>
+  <text class="label" x="78" y="198">Named user</text>
+  <text class="small" x="78" y="226">Consultant or explicit customer role</text>
+  <text class="small" x="78" y="250">No shared account</text>
+  <text class="small" x="78" y="274">Guest has sponsor + expiry + review</text>
+  <text class="tiny" x="78" y="303">Platform support has no protected-evidence access</text>
+
+  <rect class="azure" x="382" y="165" width="300" height="165" rx="12"/>
+  <image href="icons/microsoft-entra-id.svg" x="406" y="205" width="54" height="54" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="482" y="198">Microsoft Entra ID</text>
+  <text class="small" x="482" y="226">Single tenant + explicit B2B</text>
+  <text class="small" x="482" y="250">MFA / Conditional Access</text>
+  <text class="small" x="482" y="274">Coarse application role</text>
+  <text class="tiny" x="482" y="303">Immutable key: tenant ID + object ID</text>
+
+  <rect class="azure" x="732" y="165" width="320" height="165" rx="12"/>
+  <text class="label" x="758" y="198">ASP.NET Core BFF session</text>
+  <text class="small" x="758" y="226">Opaque Secure + HttpOnly cookie</text>
+  <text class="small" x="758" y="250">30-minute idle • 8-hour absolute</text>
+  <text class="small" x="758" y="274">≤15-minute recent auth for sensitive actions</text>
+  <text class="tiny" x="758" y="303">Entra access/refresh tokens stay off browser JS</text>
+
+  <path class="identity" d="M332 247 H382"/>
+  <path class="identity" d="M682 247 H732"/>
+
+  <text class="section" x="1105" y="140">2. Server-side authorization</text>
+  <rect class="policy" x="1105" y="165" width="540" height="265" rx="12"/>
+  <text class="label" x="1134" y="198">Every request must satisfy all policy dimensions</text>
+  <g transform="translate(1135 225)">
+    <circle cx="8" cy="8" r="8" fill="#c78a19"/><text class="small" x="28" y="13">Active named-user or workload identity</text>
+    <circle cx="8" cy="43" r="8" fill="#c78a19"/><text class="small" x="28" y="48">Current customer + project + environment assignment</text>
+    <circle cx="8" cy="78" r="8" fill="#c78a19"/><text class="small" x="28" y="83">Role permits the requested action</text>
+    <circle cx="8" cy="113" r="8" fill="#c78a19"/><text class="small" x="28" y="118">Resource state + evidence category permit access</text>
+    <circle cx="8" cy="148" r="8" fill="#c78a19"/><text class="small" x="28" y="153">Customer policy permits AI, export, sharing or MCP</text>
+    <circle cx="8" cy="183" r="8" fill="#c78a19"/><text class="small" x="28" y="188">No revocation, deletion, hold or capability denial blocks it</text>
+  </g>
+  <path class="policyflow" d="M1052 247 H1105"/>
+
+  <text class="section" x="52" y="485">3. Workload authorization</text>
+  <rect class="boundary" x="52" y="510" width="1000" height="335" rx="14"/>
+  <rect class="workload" x="85" y="550" width="270" height="115" rx="12"/>
+  <image href="icons/azure-managed-identity.svg" x="106" y="581" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="172" y="579">Assessment identity</text>
+  <text class="small" x="172" y="603">Rules + normalized evidence</text>
+  <text class="tiny" x="172" y="627">No AI, render or publication authority</text>
+
+  <rect class="workload" x="390" y="550" width="270" height="115" rx="12"/>
+  <image href="icons/azure-managed-identity.svg" x="411" y="581" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="477" y="579">AI gateway identity</text>
+  <text class="small" x="477" y="603">Approved packet + provider call</text>
+  <text class="tiny" x="477" y="627">No raw evidence or arbitrary tools</text>
+
+  <rect class="workload" x="695" y="550" width="270" height="115" rx="12"/>
+  <image href="icons/azure-managed-identity.svg" x="716" y="581" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="782" y="579">Renderer identity</text>
+  <text class="small" x="782" y="603">One signed frozen manifest</text>
+  <text class="tiny" x="782" y="627">No network, database or secret store</text>
+
+  <rect class="azure" x="245" y="710" width="615" height="90" rx="12"/>
+  <image href="icons/azure-service-bus.svg" x="270" y="731" width="46" height="46" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="338" y="735">Azure Service Bus Standard — delivery signal only</text>
+  <text class="small" x="338" y="759">Opaque customer/project/run/job IDs • schema version • attempt/correlation</text>
+  <text class="tiny" x="338" y="781">Every worker reloads canonical work state and re-evaluates scope before acting</text>
+
+  <path class="identity" d="M220 665 V710"/>
+  <path class="identity" d="M525 665 V690 H500 V710"/>
+  <path class="identity" d="M830 665 V690 H780 V710"/>
+
+  <text class="section" x="1105" y="485">4. Isolated customer data planes</text>
+  <rect class="dataA" x="1105" y="510" width="540" height="145" rx="12"/>
+  <text class="label" x="1132" y="542">PILOT A data plane</text>
+  <image href="icons/azure-postgresql.svg" x="1132" y="562" width="46" height="46" preserveAspectRatio="xMidYMid meet"/>
+  <text class="small" x="1194" y="577">Customer A PostgreSQL database + dedicated DB role</text>
+  <image href="icons/azure-storage.svg" x="1132" y="611" width="34" height="34" preserveAspectRatio="xMidYMid meet"/>
+  <text class="small" x="1194" y="631">Customer A Blob container + authorization scope</text>
+
+  <rect class="dataB" x="1105" y="700" width="540" height="145" rx="12"/>
+  <text class="label" x="1132" y="732">PILOT B data plane</text>
+  <image href="icons/azure-postgresql.svg" x="1132" y="752" width="46" height="46" preserveAspectRatio="xMidYMid meet"/>
+  <text class="small" x="1194" y="767">Customer B PostgreSQL database + dedicated DB role</text>
+  <image href="icons/azure-storage.svg" x="1132" y="801" width="34" height="34" preserveAspectRatio="xMidYMid meet"/>
+  <text class="small" x="1194" y="821">Customer B Blob container + authorization scope</text>
+
+  <path class="policyflow" d="M1375 430 V452 H1030 V600 H965"/>
+  <text class="tiny" x="1060" y="444">short-lived one-customer / one-job scope</text>
+  <path class="flow" d="M860 755 H1035 V583 H1105"/>
+  <path class="flow" d="M860 755 H1035 V773 H1105"/>
+
+  <rect class="deny" x="1105" y="875" width="540" height="65" rx="10"/>
+  <text class="label" x="1132" y="902">Cross-customer route: deny before data query</text>
+  <text class="small" x="1132" y="924">Direct identifiers, stale sessions and wrong worker scope cannot select another data plane.</text>
+  <path class="denyflow" d="M1375 845 V875"/>
+
+  <rect class="note" x="52" y="875" width="1000" height="65" rx="10"/>
+  <text class="label" x="78" y="902">Immediate revocation</text>
+  <text class="small" x="78" y="924">Product security version invalidates sessions; assignment and resource state are checked on every request and queued job.</text>
+
+  <g transform="translate(52 970)">
+    <line x1="0" y1="0" x2="48" y2="0" class="flow"/><text class="tiny" x="62" y="5">authorized data route</text>
+    <line x1="245" y1="0" x2="293" y2="0" class="identity"/><text class="tiny" x="307" y="5">identity / scoped workload</text>
+    <line x1="535" y1="0" x2="583" y2="0" class="policyflow"/><text class="tiny" x="597" y="5">policy decision</text>
+    <line x1="790" y1="0" x2="838" y2="0" class="denyflow"/><text class="tiny" x="852" y="5">denied path</text>
+  </g>
+</svg>
