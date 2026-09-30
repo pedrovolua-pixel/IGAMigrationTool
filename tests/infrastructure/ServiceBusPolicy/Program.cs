@@ -125,6 +125,14 @@ var spikeChanges = new (string Name, Action<JsonNode> Mutate)[]
     ("queue deploys before namespace", node => Deployment(node, "pilot-service-bus-work-queue")["dependsOn"] = new JsonArray()),
     ("queue uses another namespace", node => Deployment(node, "pilot-service-bus-work-queue")["properties"]!["parameters"]!["namespaceName"]!["value"] = "other-namespace"),
     ("queue uses another name", node => Deployment(node, "pilot-service-bus-work-queue")["properties"]!["parameters"]!["workQueueName"]!["value"] = "other-queue"),
+    ("sender and receiver share identity", node => Deployment(node, "pilot-work-receiver-identity")["properties"]!["parameters"]!["identityName"]!["value"] =
+        "[format('{0}-sb-sender', parameters('workloadIdentityPrefix'))]"),
+    ("role grant before queue", node => Deployment(node, "pilot-service-bus-work-roles")["dependsOn"] = new JsonArray()),
+    ("sender role binds receiver identity", node => Deployment(node, "pilot-service-bus-work-roles")["properties"]!["parameters"]!["senderPrincipalId"]!["value"] =
+        "[reference(resourceId('Microsoft.Resources/deployments', 'pilot-work-receiver-identity'), '2025-04-01').outputs.principalId.value]"),
+    ("receiver role binds sender identity", node => Deployment(node, "pilot-service-bus-work-roles")["properties"]!["parameters"]!["receiverPrincipalId"]!["value"] =
+        "[reference(resourceId('Microsoft.Resources/deployments', 'pilot-work-sender-identity'), '2025-04-01').outputs.principalId.value]"),
+    ("role grant targets other queue", node => Deployment(node, "pilot-service-bus-work-roles")["properties"]!["parameters"]!["workQueueName"]!["value"] = "other-queue"),
     ("extra deployed resource", node => ((JsonArray)node["resources"]!).Add(new JsonObject { ["type"] = "Microsoft.Resources/deployments" }))
 };
 
@@ -293,9 +301,11 @@ static bool IsClosedSpike(JsonNode? template)
 {
     try
     {
-        if (template?["resources"] is not JsonArray resources || resources.Count != 3 ||
-            template["parameters"] is not JsonObject parameters || parameters.Count != 10 ||
-            template["outputs"] is not JsonObject outputs || outputs.Count != 4)
+        if (template?["resources"] is not JsonArray resources || resources.Count != 6 ||
+            template["parameters"] is not JsonObject parameters || parameters.Count != 11 ||
+            template["outputs"] is not JsonObject outputs || outputs.Count != 6 ||
+            Value<int>(parameters["workloadIdentityPrefix"]?["minLength"]) != 1 ||
+            Value<int>(parameters["workloadIdentityPrefix"]?["maxLength"]) != 100)
         {
             return false;
         }
@@ -304,7 +314,7 @@ static bool IsClosedSpike(JsonNode? template)
                  { "virtualNetworkName", "virtualNetworkAddressPrefix", "containerAppsSubnetName",
                      "containerAppsSubnetAddressPrefix", "privateEndpointSubnetName",
                      "privateEndpointSubnetAddressPrefix", "staticEgressPublicIpName", "natGatewayName",
-                     "serviceBusNamespaceName", "workQueueName" })
+                     "serviceBusNamespaceName", "workQueueName", "workloadIdentityPrefix" })
         {
             if (Value<string>(parameters[name]?["type"]) != "string")
             {
@@ -315,6 +325,9 @@ static bool IsClosedSpike(JsonNode? template)
         var network = Deployment(template, "pilot-network-egress");
         var broker = Deployment(template, "pilot-service-bus-namespace");
         var queue = Deployment(template, "pilot-service-bus-work-queue");
+        var sender = Deployment(template, "pilot-work-sender-identity");
+        var receiver = Deployment(template, "pilot-work-receiver-identity");
+        var roles = Deployment(template, "pilot-service-bus-work-roles");
         if (resources.Any(resource => Value<string>(resource?["type"]) != "Microsoft.Resources/deployments" ||
             Value<string>(resource?["apiVersion"]) != "2025-04-01") ||
             network["properties"]?["parameters"] is not JsonObject networkParameters ||
@@ -338,7 +351,31 @@ static bool IsClosedSpike(JsonNode? template)
             Value<string>(queueParameters["namespaceName"]?["value"]) !=
                 "[parameters('serviceBusNamespaceName')]" ||
             Value<string>(queueParameters["workQueueName"]?["value"]) !=
-                "[parameters('workQueueName')]")
+                "[parameters('workQueueName')]" ||
+            sender["properties"]?["parameters"] is not JsonObject senderParameters ||
+            senderParameters.Count != 1 ||
+            receiver["properties"]?["parameters"] is not JsonObject receiverParameters ||
+            receiverParameters.Count != 1 ||
+            Value<string>(senderParameters["identityName"]?["value"]) !=
+                "[format('{0}-sb-sender', parameters('workloadIdentityPrefix'))]" ||
+            Value<string>(receiverParameters["identityName"]?["value"]) !=
+                "[format('{0}-sb-receiver', parameters('workloadIdentityPrefix'))]" ||
+            roles["properties"]?["parameters"] is not JsonObject roleParameters ||
+            roleParameters.Count != 4 ||
+            Value<string>(roleParameters["namespaceName"]?["value"]) !=
+                "[parameters('serviceBusNamespaceName')]" ||
+            Value<string>(roleParameters["workQueueName"]?["value"]) !=
+                "[parameters('workQueueName')]" ||
+            Value<string>(roleParameters["senderPrincipalId"]?["value"]) !=
+                "[reference(resourceId('Microsoft.Resources/deployments', 'pilot-work-sender-identity'), '2025-04-01').outputs.principalId.value]" ||
+            Value<string>(roleParameters["receiverPrincipalId"]?["value"]) !=
+                "[reference(resourceId('Microsoft.Resources/deployments', 'pilot-work-receiver-identity'), '2025-04-01').outputs.principalId.value]" ||
+            roles["dependsOn"] is not JsonArray { Count: 3 } roleDependencies ||
+            !new[]
+            {
+                "pilot-work-sender-identity", "pilot-work-receiver-identity", "pilot-service-bus-work-queue"
+            }.All(name => roleDependencies.Any(dependency => Value<string>(dependency) ==
+                $"[resourceId('Microsoft.Resources/deployments', '{name}')]")))
         {
             return false;
         }
@@ -357,7 +394,9 @@ static bool IsClosedSpike(JsonNode? template)
         return outputs.ContainsKey("containerAppsSubnetId") &&
                outputs.ContainsKey("privateEndpointSubnetId") &&
                outputs.ContainsKey("namespaceResourceId") &&
-               outputs.ContainsKey("workQueueResourceId");
+               outputs.ContainsKey("workQueueResourceId") &&
+               outputs.ContainsKey("senderIdentityResourceId") &&
+               outputs.ContainsKey("receiverIdentityResourceId");
     }
     catch (Exception exception) when (exception is InvalidOperationException or KeyNotFoundException or ArgumentException)
     {

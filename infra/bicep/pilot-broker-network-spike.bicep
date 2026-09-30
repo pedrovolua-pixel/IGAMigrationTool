@@ -1,5 +1,6 @@
 // Partial G1 spike entry point. It provisions only network/static egress and
-// the Service Bus namespace and work queue. Identities, roles and apps come later.
+// the Service Bus namespace, queue and isolated sender/receiver identities.
+// Workloads and diagnostics come later.
 @minLength(1)
 param virtualNetworkName string
 
@@ -30,6 +31,10 @@ param serviceBusNamespaceName string
 
 @minLength(1)
 param workQueueName string
+
+@minLength(1)
+@maxLength(100)
+param workloadIdentityPrefix string
 
 module network 'modules/pilot-network-egress.bicep' = {
   name: 'pilot-network-egress'
@@ -63,7 +68,34 @@ module workQueue 'modules/pilot-service-bus-work-queue.bicep' = {
   dependsOn: [serviceBus]
 }
 
+module senderIdentity 'modules/pilot-workload-identity.bicep' = {
+  name: 'pilot-work-sender-identity'
+  params: {
+    identityName: '${workloadIdentityPrefix}-sb-sender'
+  }
+}
+
+module receiverIdentity 'modules/pilot-workload-identity.bicep' = {
+  name: 'pilot-work-receiver-identity'
+  params: {
+    identityName: '${workloadIdentityPrefix}-sb-receiver'
+  }
+}
+
+module workRoles 'modules/pilot-service-bus-work-roles.bicep' = {
+  name: 'pilot-service-bus-work-roles'
+  params: {
+    namespaceName: serviceBusNamespaceName
+    workQueueName: workQueueName
+    senderPrincipalId: senderIdentity.outputs.principalId
+    receiverPrincipalId: receiverIdentity.outputs.principalId
+  }
+  dependsOn: [workQueue]
+}
+
 output containerAppsSubnetId string = network.outputs.containerAppsSubnetId
 output privateEndpointSubnetId string = network.outputs.privateEndpointSubnetId
 output namespaceResourceId string = serviceBus.outputs.namespaceResourceId
 output workQueueResourceId string = workQueue.outputs.queueResourceId
+output senderIdentityResourceId string = senderIdentity.outputs.identityResourceId
+output receiverIdentityResourceId string = receiverIdentity.outputs.identityResourceId
