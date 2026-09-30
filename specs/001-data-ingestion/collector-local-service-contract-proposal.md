@@ -51,6 +51,10 @@ The shell emits one of the following payload-free codes. `status` exits `0` with
 
 The Windows reader rejects reparse points and disallowed write-capable ACL entries on the config file and its immediate directory, and disallowed replacement-capable entries on ancestors. An invalid ACL stops the service. Windows Server 2022/2025 ACL and service-identity behavior still require controlled host tests; this local build alone does not prove installability.
 
+## Pilot-local checkpoint ledger, version 1
+
+The internal checkpoint file begins with ASCII `IGC1`, a 12-byte random AES-GCM nonce, a 16-byte tag and ciphertext. Plaintext is versioned JSON containing the exact query/build/scope/policy/order context and an ordered array of completed page boundaries and SHA-256 digests. The exact context is authenticated as associated data. The 32-byte local key must come from a separately protected Windows key store; the current ledger API accepts that key but does not provision it. A wrong key/context, malformed file, duplicate page or changed completed-page prefix blocks recovery. A save writes and flushes a same-directory temporary file before replacing the ledger. The plaintext ceiling is 1 MiB and page ceiling 4,096. The calling service/CLI must hold the protected local run lease while reading or writing; that integration and crash/Windows durability tests remain open.
+
 ## Security and test evidence before enablement
 
 - Validate config schema, ACL, source/build/pack/policy locks and protected secret references before any evidence query.
@@ -60,7 +64,7 @@ The Windows reader rejects reparse points and disallowed write-capable ACL entri
 
 ## Remaining implementation and external gates
 
-- Cross-process lease/store, durable encrypted checkpoint, output directory ACL/space/overwrite enforcement, and signed policy/pack verification must precede source collection or package creation.
+- The local file-sharing lease and encrypted checkpoint ledger must be wired into both service and CLI with a protected key provider before collection. Output directory ACL/space/overwrite enforcement and signed policy/pack verification must also precede source collection or package creation.
 - Customer-administrator provisioning, service identity, protected configuration location and MSI signing/install procedure require Windows evidence and reviewed operations steps before customer installation.
 - The exact query pack, source permissions and impact plan require One Identity SME and customer database-owner evidence. Offline envelope and receiving import remain separate reviewed contracts.
 

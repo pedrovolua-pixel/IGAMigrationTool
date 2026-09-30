@@ -38,6 +38,8 @@ Only the local synthetic cases recorded in the feature status are claimed execut
 - Checkpoints bind pack/build/scope/policy/order/boundary/digest; replay same digest is idempotent, changed digest is conflict, incompatible checkpoint stops.
 - Package vectors cover AES-256-GCM authentication, RSA-OAEP-SHA256 wrap/unwrap, wrong key, altered nonce/tag/ciphertext/manifest, expiry, wrong scope and duplicate chunk. Exact serialized vectors await envelope approval.
 - Collector-host contract cases reject unknown/duplicate/future configuration fields, bad digests and limits, unapproved CLI switches, UNC/device/traversal/alternate-stream paths, and exercise spring gap, fall ambiguity and missed-run schedule behavior. The one-shot command must remain blocked without an approved query pack and offline envelope.
+- The local run-lease primitive must reject an overlapping scope, allow a different scope and permit reacquisition after release. Windows service/CLI contention and crash recovery require controlled host tests before collection.
+- The local encrypted checkpoint ledger must authenticate exact context, reject wrong keys, ciphertext tampering, duplicate pages, removal or rewriting of completed pages, and enforce file/page bounds. Protected key provisioning and crash recovery require Windows integration tests.
 
 ## Integration and end-to-end tests
 

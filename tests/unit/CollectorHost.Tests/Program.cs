@@ -60,7 +60,31 @@ Expect("fall later occurrence", fall == new DateTimeOffset(2026, 11, 1, 1, 30, 0
 var missed = DailySchedule.Next(new DateTimeOffset(2026, 11, 1, 3, 0, 0, TimeSpan.FromHours(-5)), zone, new TimeOnly(1, 30));
 Expect("missed occurrence not replayed", missed == new DateTimeOffset(2026, 11, 2, 1, 30, 0, TimeSpan.FromHours(-5)));
 
+var leaseDirectory = Path.Combine(Path.GetTempPath(), "iga-lease-" + Guid.NewGuid().ToString("N"));
+Directory.CreateDirectory(leaseDirectory);
+try
+{
+    var leaseConfig = Path.Combine(leaseDirectory, "collector.json");
+    var scope = Guid.NewGuid();
+    using (var first = CrossProcessRunLease.TryAcquire(leaseConfig, scope))
+    {
+        Expect("first run lease", first is not null);
+        using var second = CrossProcessRunLease.TryAcquire(leaseConfig, scope);
+        Expect("overlap rejected", second is null);
+        using var other = CrossProcessRunLease.TryAcquire(leaseConfig, Guid.NewGuid());
+        Expect("different scope independent", other is not null);
+    }
+
+    using var resumed = CrossProcessRunLease.TryAcquire(leaseConfig, scope);
+    Expect("released lease reacquired", resumed is not null);
+}
+finally
+{
+    Directory.Delete(leaseDirectory, true);
+}
+
 Console.WriteLine($"{count} collector host contract cases passed.");
+Console.WriteLine($"{CheckpointStoreChecks.Run()} encrypted checkpoint-store cases passed.");
 
 void Check(string name, string[] args, bool expected)
 {
