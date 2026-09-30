@@ -41,6 +41,7 @@ Only the local synthetic cases recorded in the feature status are claimed execut
 - The local run-lease primitive must reject an overlapping scope, allow a different scope and permit reacquisition after release. Windows service/CLI contention and crash recovery require controlled host tests before collection.
 - The local encrypted checkpoint ledger must authenticate exact context, reject wrong keys, ciphertext tampering, duplicate pages, removal or rewriting of completed pages, and enforce file/page bounds. Protected key provisioning and crash recovery require Windows integration tests.
 - Windows 2022/2025 CI cases must reload the same DPAPI-protected key, reject a wrong scope and tampered blob, and reject a key file with a write-capable broad ACL. These checks do not substitute for customer service-identity, Server Core, installer or crash-recovery validation.
+- Ephemeral Windows 2022/2025 runners must start and stop the self-contained collector under Service Control Manager with a synthetic protected config, observe payload-free disabled status, and confirm one-shot collection exits blocked without a package. This smoke check does not validate a signed MSI or customer service identity.
 
 ## Integration and end-to-end tests
 

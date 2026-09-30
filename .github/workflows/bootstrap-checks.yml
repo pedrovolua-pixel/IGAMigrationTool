@@ -92,3 +92,7 @@ jobs:
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
       - name: Check Windows collector host and protected key behavior
         run: dotnet run --project tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-build
+      - name: Publish self-contained collector
+        run: dotnet publish src/collector/CollectorHost/CollectorHost.csproj --configuration Release --runtime win-x64 --self-contained true --no-restore --output "$env:RUNNER_TEMP\collector-win-x64"
+      - name: Smoke test Windows Service and one-shot CLI
+        run: ./tests/windows/collector-service-smoke.ps1 -ExecutablePath "$env:RUNNER_TEMP\collector-win-x64\collector.exe"
