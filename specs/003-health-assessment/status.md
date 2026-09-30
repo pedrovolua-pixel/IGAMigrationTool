@@ -28,6 +28,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - Feature advanced to `TECHNICAL APPROVED` on 2026-09-29.
 - Repository owner approved the canonical implementation plan with technical approval and security/operations review on 2026-09-29; G0 passed and the feature advanced to `PLANNED`. Product-code implementation is authorized within the approved scope, while G1–G9 remain unverified.
 - Repository owner accepted ADR-0005's RSA-PSS/SHA-256 gate-evidence signing profile and trusted-caller boundary on 2026-09-29. Production key/reviewer trust and store integration remain unverified.
+- Repository owner approved feature-001's bounded pilot collector technical specification, implementation plan and test plan for local development on 2026-09-29. Exact source and delivery contracts, customer database-owner authority and G2 remain separate gates.
 
 ## In progress
 

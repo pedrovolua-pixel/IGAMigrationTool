@@ -1,12 +1,12 @@
 # Test Plan: One Identity pilot ingestion slice
 
-Status: Draft — technical/plan approval and executable fixtures pending  
+Status: Approved for local pilot implementation — executable source fixtures pending  
 Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)  
-Technical spec: `specs/001-data-ingestion/technical-spec.md` (Draft)  
+Technical spec: `specs/001-data-ingestion/technical-spec.md` (Approved for local pilot implementation)  
 Owner: Quality owner  
 Last updated: 2026-09-29
 
-No case below is claimed executed. CI fixtures must be synthetic and payload-free. Exact SQL, modules, field dictionaries, scale data and production-impact plans are approved separately for each eligible build/environment.
+Only the local synthetic cases recorded in the feature status are claimed executed. CI fixtures must be synthetic and payload-free. Exact SQL, modules, field dictionaries, scale data and production-impact plans are approved separately for each eligible build/environment.
 
 ## Acceptance-criteria mapping
 
@@ -71,3 +71,10 @@ Security testing includes static SQL adversarial inputs; effective permission de
 - PILOT-ENV-A and PILOT-ENV-B must be independent exact One Identity 10.x/SQL Server environments with protected identifiers and customer database-owner authorization. Build/module/query/mapping/permission/impact/SME records are not available locally.
 - Enrollment/upload, hosted baseline activation, customer data-plane isolation and lifecycle checks need approved cloud resources. Offline package serialization and API operation shapes still need technical/security review.
 - AC-ING-7/8 and the broader multi-source paths remain later feature-001 design, not a pass/fail claim for this pilot slice.
+
+## Approval
+
+Approved for local pilot implementation by: Repository owner  
+Date: 2026-09-29
+
+The exact query pack, customer source tests, offline exchange format, hosted operations and production release require their separate gates.

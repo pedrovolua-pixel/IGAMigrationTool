@@ -1,16 +1,16 @@
 # Technical Specification: One Identity pilot ingestion slice
 
-Status: Draft — technical, security, One Identity SME, and customer database-owner review pending  
+Status: Approved for local pilot implementation — exact source and delivery contracts remain gated  
 Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)  
-Author: Codex, for technical-owner review  
+Author: Codex  
 Reviewers: Technical owner, security owner, One Identity SME, customer database owner, operations owner  
 Last updated: 2026-09-29
 
 ## Overview and scope
 
-This draft covers the One Identity Manager 10.x on SQL Server acquisition path required by the approved health-assessment pilot. A customer-operated, signed .NET 10 Windows Service/CLI collector reads only through a reviewed query pack, applies customer field/category controls, and delivers an immutable, versioned baseline through outbound HTTPS or an authenticated encrypted offline package. Feature 003 consumes that baseline; it never connects to SQL Server. The product-wide SailPoint, generic upload, hosted connector, migration, and One Identity 8.x paths remain in feature 001 scope but are not designed or authorized for implementation by this pilot slice.
+This specification covers the One Identity Manager 10.x on SQL Server acquisition path required by the approved health-assessment pilot. A customer-operated, signed .NET 10 Windows Service/CLI collector reads only through a reviewed query pack, applies customer field/category controls, and delivers an immutable, versioned baseline through outbound HTTPS or an authenticated encrypted offline package. Feature 003 consumes that baseline; it never connects to SQL Server. The product-wide SailPoint, generic upload, hosted connector, migration, and One Identity 8.x paths remain in feature 001 scope but are not designed or authorized for implementation by this pilot slice.
 
-The pilot collector profile is already selected by accepted ADR-0004 and `specs/003-health-assessment/implementation-plan.md` IMP-DEC-003. This draft does not select exact SQL text, field dictionary, enrollment protocol, upload API, offline envelope serialization, MSI toolchain, or source-environment identifiers. Those are approval or evidence gates below.
+The pilot collector profile is already selected by accepted ADR-0004 and `specs/003-health-assessment/implementation-plan.md` IMP-DEC-003. This specification does not select exact SQL text, field dictionary, enrollment protocol, upload API, offline envelope serialization, MSI toolchain, or source-environment identifiers. Those are approval or evidence gates below.
 
 ## Relevant architecture and decisions
 
@@ -109,14 +109,14 @@ Synthetic tests must cover SQL static rejection, permission categories, build/mo
 
 ## Risks, open questions and required decisions
 
-- Exact build/module rows, query text, columns, field dictionary, minimum permission set, impact budgets and production-safe execution plans require pilot-environment/SME/database-owner evidence. No query pack can be promoted from this draft alone.
+- Exact build/module rows, query text, columns, field dictionary, minimum permission set, impact budgets and production-safe execution plans require pilot-environment/SME/database-owner evidence. No query pack can be promoted from this specification alone.
 - The enrollment/upload protocol, offline package envelope serialization and test vectors, local configuration/CLI contract, MSI toolchain and signature/provenance process require a concrete reviewed proposal before their implementation.
 - Feature 001's full multi-source technical design, implementation plan and test plan remain separate work. This pilot slice cannot be used to infer hosted SailPoint, generic upload or migration behavior.
-- Technical, security, operations and customer database-owner reviews are pending. This document does not authorize collector product-code implementation or a G2 claim.
+- The repository owner approved local pilot implementation against this specification on 2026-09-29. Exact query-pack/source access still needs One Identity SME and customer database-owner review; unresolved delivery, CLI, envelope and MSI contracts need technical/security/operations review before those surfaces are enabled. This approval does not establish G2.
 
 ## Approval
 
-Approved by: Pending  
-Date: Pending
+Approved for local pilot implementation by: Repository owner  
+Date: 2026-09-29
 
-Only an authorized human reviewer may change `Status` to `Approved`.
+This approval does not approve exact environment rows, query packs, delivery operations or production release.

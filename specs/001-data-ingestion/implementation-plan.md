@@ -1,9 +1,9 @@
 # Implementation Plan: One Identity pilot ingestion slice
 
-Status: Draft — contingent on technical, security, operations, SME and customer database-owner approval  
+Status: Approved for local pilot implementation — external source and delivery gates remain open  
 Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)  
-Technical spec: `specs/001-data-ingestion/technical-spec.md` (Draft)  
-Test plan: `specs/001-data-ingestion/test-plan.md` (Draft)  
+Technical spec: `specs/001-data-ingestion/technical-spec.md` (Approved for local pilot implementation)  
+Test plan: `specs/001-data-ingestion/test-plan.md` (Approved for local pilot implementation)  
 Owner: Technical owner  
 Last updated: 2026-09-29
 
@@ -11,9 +11,9 @@ Last updated: 2026-09-29
 
 This plan covers only the One Identity Manager 10.x SQL Server collector and immutable baseline acquisition needed by the approved health-assessment pilot. It follows the approved Windows Service/CLI profile in IMP-DEC-003 and accepted ADR-0004. SailPoint, generic uploads, hosted SaaS connectors, migration mappings, One Identity 8.x, and version 11+ remain outside this implementation slice. Feature 003 has no direct source-SQL path.
 
-**Code gate:** `technical-spec.md`, this plan and `test-plan.md` must be approved before substantial collector product behavior is implemented. The exact query pack, field dictionary, environment build/module rows, customer database-owner execution plans, enrollment/upload operations, offline envelope and MSI signing procedure each have their own later evidence/approval gate. The repository-owner pilot artifact-promotion exception cannot authorize source access, unsafe SQL, write/admin permissions or G2 acceptance.
+**Code gate:** The repository owner approved `technical-spec.md`, this plan and `test-plan.md` for local pilot implementation on 2026-09-29. The exact query pack, field dictionary, environment build/module rows, customer database-owner execution plans, enrollment/upload operations, offline envelope and MSI signing procedure each have their own later evidence/approval gate. The repository-owner pilot artifact-promotion exception cannot authorize source access, unsafe SQL, write/admin permissions or G2 acceptance.
 
-Local design and synthetic fixtures can proceed while cloud and pilot environments are unavailable. No collector download, install, enrollment, SQL connection, online upload, offline import, baseline activation or production release is authorized by this draft.
+Local implementation and synthetic fixtures can proceed while cloud and pilot environments are unavailable. No customer collector download, install, enrollment, SQL connection, online upload, offline import, baseline activation or production release is authorized by this approval alone.
 
 ## Requirement traceability
 
@@ -31,7 +31,7 @@ AC-ING-7–8 require the separately designed generic-upload slice. AC-ING-11 req
 
 ### C0 — Approve the executable collector boundary
 
-- [ ] Review and approve the pilot technical spec, this plan and test plan, including the explicit deferred product paths.
+- [x] Repository owner approved the pilot technical spec, this plan and test plan for local development, including the explicit deferred product paths.
 - [ ] Resolve exact local configuration/CLI, enrollment/upload and offline envelope contracts with security and operations review.
 - [ ] Record query-pack/field-dictionary and package-signing approval authorities and evidence locations.
 
@@ -106,3 +106,7 @@ Verification:
 | 2026-09-29 | Product approval exists but feature-001 technical/test/implementation approval does not. | Drafted a bounded pilot plan; collector behavior remains behind C0. |
 | 2026-09-29 | A side-effect-free permission-decision prototype was added under the approved health-pilot source-safety contract. | No SQL probe, connection, credential or collection capability exists. This local check cannot satisfy C0, G2 or customer database-owner approval. |
 | 2026-09-29 | A pure page-checkpoint verifier was added for the approved query/build/scope/policy/order/boundary/digest contract. | It distinguishes new, idempotent, conflicting and incompatible pages without storage or source access. Encrypted durable storage and atomic resume remain open. |
+| 2026-09-29 | Repository owner approved the technical specification, implementation plan and test plan for local pilot development. | C1 implementation may proceed. Exact query pack, environment/DB-owner evidence, delivery and installer contracts, and G2 remain gated. |
+| 2026-09-29 | Added a pure exact-build/module applicability decision with fourteen synthetic cases. | Metadata matching cannot approve a pack or enable SQL; source discovery provenance and actual build rows remain unavailable. |
+| 2026-09-29 | Added a pure next-page budget decision with twelve synthetic cases. | The eventual executor must still bind paging parameters and enforce command timeout, cancellation, impact and gap reporting during SQL execution. |
+| 2026-09-29 | Pinned Microsoft's T-SQL ScriptDom parser and added a conservative single-table/static-page shape check with synthetic adversarial cases. | Parser preflight is necessary but insufficient; exact SQL, approved fields, pack promotion and customer database-owner execution plans remain unavailable. |

@@ -1,6 +1,6 @@
 # Feature Status: Multi-source data ingestion
 
-State: PRODUCT APPROVED
+State: IMPLEMENTING
 
 Owner: Product owner
 
@@ -15,16 +15,17 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - SailPoint and One Identity Manager established as health-assessment sources, one logical source per project.
 - Migration sequencing recorded with SailPoint to Veza first.
 - Product specification and the excess-read-only pilot exception approved by the repository owner acting as product and security owner on 2026-09-28.
+- Repository owner approved the pilot-slice technical specification, implementation plan and test plan for local development on 2026-09-29. Exact query-pack, customer source and delivery gates remain separate.
 
 ## In progress
 
-- A local, side-effect-free `CollectorSafety` prototype classifies typed permission-probe outcomes and checks page checkpoint context/digest replay versus conflict. It has no SQL probe, credential, Windows Service/CLI, query execution, encrypted checkpoint store, enrollment, package or upload path; it cannot authorize collection. Feature-001 C0 and G2 remain open.
-- A pilot-slice technical specification, implementation plan and test plan for the One Identity Manager 10.x Windows collector and immutable baseline boundary are drafted in `technical-spec.md`, `implementation-plan.md` and `test-plan.md`. They trace the approved feature-001 requirements, accepted ADRs, IMP-DEC-003 and the approved health-pilot evidence contract. Exact query packs, environment evidence, enrollment/upload operations, offline envelope serialization and MSI provenance remain open; technical, security, operations, SME and database-owner review is pending.
+- A local `CollectorSafety` module classifies typed permission-probe outcomes, checks page replay versus conflict, compares trusted exact-build/module claims against query metadata, bounds the next page by row/time limits and rejects unsafe T-SQL structures with a pinned parser. It has no SQL probe, credential, Windows Service/CLI, query execution, encrypted checkpoint store, enrollment, package or upload path; it cannot authorize collection. C0's exact-contract decisions and G2 remain open.
+- The approved pilot-slice technical specification, implementation plan and test plan for the One Identity Manager 10.x Windows collector and immutable baseline boundary trace the approved feature-001 requirements, accepted ADRs, IMP-DEC-003 and the health-pilot evidence contract. Exact query packs, environment evidence, enrollment/upload operations, offline envelope serialization and MSI provenance remain open; technical/security/operations review of those contracts, SME and database-owner review are pending.
 - The broader SailPoint, hosted connector, generic upload and migration ingestion technical design remains open.
 
 ## Blocked
 
-- None recorded. The repository owner acting as product and security owner approved the narrowly scoped excess-read-only pilot exception; broader product and technical approval gates remain outstanding.
+- None recorded for local C1 work. The unresolved exact source and delivery contracts block their corresponding integration paths.
 
 ## Decisions made
 
@@ -51,18 +52,18 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 | Product-owner discovery input captured | PASS | `product-spec.md` |
 | Product specification approved | PASS | Product owner approval recorded in `product-spec.md` on 2026-09-28 |
 | Least-privilege consistency | PASS WITH APPROVED EXCEPTION | NFR-SEC-1, FR-ING-7, and AC-ING-16 allow warned excess read-only scope for the pilot and block write, DDL, ownership, or administrative capability |
-| Technical design | DRAFT / NOT APPROVED | Pilot collector slice in `technical-spec.md`; full feature design and required review remain open |
-| Implementation/test plans | DRAFT / NOT APPROVED | Pilot collector slice in `implementation-plan.md` and `test-plan.md`; C0 code gate remains open |
-| Implementation and tests | LOCAL PROTOTYPE / NOT VERIFIED | Side-effect-free `CollectorSafety` permission and page-checkpoint checks have 17 and 12 synthetic cases, respectively; the [partial remote bootstrap run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36657204155) passed on `44915de`. No source interaction, service, package, delivery or G2 execution evidence exists. |
+| Technical design | APPROVED FOR LOCAL PILOT IMPLEMENTATION | Repository owner approved the pilot collector slice in `technical-spec.md` on 2026-09-29; exact source/delivery contracts and full feature design remain open |
+| Implementation/test plans | APPROVED FOR LOCAL PILOT IMPLEMENTATION | Repository owner approved `implementation-plan.md` and `test-plan.md` on 2026-09-29; C0 exact-contract decisions remain open |
+| Implementation and tests | LOCAL FOUNDATION / G2 NOT VERIFIED | Side-effect-free `CollectorSafety` permission, checkpoint, query-applicability, page-budget and static T-SQL shape checks have 17, 12, 14, 12 and 28 synthetic cases locally. The earlier [partial remote bootstrap run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36657204155) passed on `44915de`; the new cases await remote verification. No source interaction, service, package, delivery or G2 execution evidence exists. |
 
 ## Remaining work and verification
 
 - Enumerate supported source versions, modules, patches, endpoints, authentication mechanisms, and exact field contracts during technical design.
 - Conduct separate destination-mapping discovery for SailPoint to One Identity Manager, One Identity Manager to Veza, and later One Identity Manager to SailPoint.
-- Obtain technical, security, operations, One Identity SME and customer database-owner review of the draft pilot collector technical specification, implementation plan and test plan. Product approval was recorded on 2026-09-28; C0 remains open.
+- Resolve and review exact local CLI/configuration, enrollment/upload, offline envelope and MSI contracts. Obtain One Identity SME and customer database-owner approval for exact query packs and source execution plans. C0 and G2 remain open beyond the local-plan approval.
 
 ## Next transition
 
-- Target state: TECHNICAL DESIGN
-- Entry conditions: Approved product specification and reconciled product-wide requirements.
-- Required human approval: Technical owner approval after technical specification, architecture, security, and test design are complete.
+- Target state: CODE REVIEW for the bounded pilot slice.
+- Entry conditions: Finish an implementation slice and its applicable checks without treating local synthetic results as G2 evidence.
+- Required human approval: Exact source, delivery and release decisions retain their separate gates.
