@@ -7,27 +7,34 @@ Last updated: 2026-09-30
 
 ## How to complete this template
 
-For every prefilled row, enter **Confirm**, **Correct**, **Not applicable**, or **Unknown** and explain corrections. Add rows for anything this template misses. A public guide identifies possible product features; it does not prove that a module, table, column, permission, or behavior exists in the exact pilot build. Use protected artifact IDs and SHA-256 digests for evidence. Do not put credentials, customer records, raw SQL, host names, network topology, permission dumps, or unredacted exports in Git. Put detailed source artifacts in the approved protected review location and record only their references here.
+No field in this template blocks local development with synthetic data. Complete the **source-identification minimum** below when an actual pilot environment is available. Sections 5–8 are needed only when proposing an exact query pack and preparing supervised source tests; section 9 is later validation and signoff evidence. Unknown or unavailable facts should be marked **Unknown** with the gap, not guessed. Do not fill fields for an absent module or a category that will not be collected.
 
-Completion means all required fields have an answer or an explicit gap, with the SME and database owner reviewing their respective sections. It does **not** authorize source access, promote a query pack, validate a capability row, or accept G2. The governing requirements are the [database evidence contract](../003-health-assessment/database-evidence-contract.md), [capability matrix](../003-health-assessment/capability-matrix.md), and [collector implementation plan](implementation-plan.md).
+For applicable prefilled candidates, enter **Confirm**, **Correct**, **Not applicable**, or **Unknown** and explain corrections. Add rows for relevant missing modules, objects or fields. A public guide identifies possible product features; it does not prove that a module, table, column, permission, or behavior exists in the exact pilot build. Use protected artifact IDs and SHA-256 digests for evidence. Do not put credentials, customer records, raw SQL, host names, network topology, permission dumps, or unredacted exports in Git. Put detailed source artifacts in the approved protected review location and record only their references here.
 
-## 1. Environment and evidence ownership — one copy per environment
+An intake response is complete when the source-identification minimum has a value or an explicit gap for each environment. Later review records must identify authorized reviewers and decisions in the protected evidence system; this template needs only the decision reference, not SME or database-owner names. Neither intake completion nor the later template by itself authorizes source access, promotes a query pack, validates a capability row, or accepts G2. The governing requirements are the [database evidence contract](../003-health-assessment/database-evidence-contract.md), [capability matrix](../003-health-assessment/capability-matrix.md), and [collector implementation plan](implementation-plan.md).
 
-| Required datum | Prefill / response |
+## Source-identification minimum — per environment, when available
+
+| Required for exact-source planning | Why it is needed |
+|---|---|
+| `PILOT-ENV-A` or `PILOT-ENV-B` protected evidence ID and independence reference | Distinguish the two independently administered sources and baselines. |
+| Exact One Identity product and database schema build, relevant hotfixes, and evidence reference | Select compatible query and mapping candidates for that installed build. |
+| Installed module IDs and exact versions, plus absent/unsupported/unknown states for proposed categories | Decide which evidence categories apply and which are gaps. |
+| SQL Server build and compatibility level relevant to the proposed queries, with evidence reference | Check query behavior and database-owner execution plans. |
+
+The source-identification minimum does not require a person's name, organization, contact details, review date, full field dictionary, SQL text, query approval or scale result. Those later artifacts are requested only for the applicable gate below.
+
+## 1. Environment evidence — one copy per environment
+
+| Source-identification datum | Prefill / response |
 |---|---|
 | Pilot environment evidence ID | `PILOT-ENV-A` **or** `PILOT-ENV-B`: [choose one] |
 | Independent source evidence | [protected artifact ID showing separate administration and baseline; a clone/restore or second tenant of one source does not qualify] |
-| One Identity SME name, role, organization | [enter] |
-| Customer database owner name, role, organization | [enter] |
-| Technical and security reviewers | [enter or pending] |
-| Source evidence capture date/time and method | [enter; include timezone] |
-| Protected artifact location and access owner | [reference only] |
-| Artifact manifest/version and SHA-256 digest | [enter] |
-| Open questions and next review date | [enter] |
+| Source evidence reference and version/digest | [protected artifact ID and SHA-256; capture provenance stays with the protected artifact] |
 
 ## 2. Confirm the public starting points
 
-These are **candidate product facts**, not statements about this environment. Review against the exact installed release and record a correction if the 10.0 LTS behavior differs. Public references are listed at the end.
+These are **candidate product facts**, not statements about this environment. At intake, review only those relevant to the installed modules and proposed categories. Before using a candidate in a query pack or capability claim, check it against the exact installed release and record a correction if behavior differs. Public references are listed at the end.
 
 | Candidate to check | Public basis | SME decision / correction | Environment evidence ID |
 |---|---|---|---|
@@ -42,20 +49,18 @@ These are **candidate product facts**, not statements about this environment. Re
 
 ## 3. Exact product and database compatibility
 
-| Required datum | SME response | Provenance / protected evidence ID |
+| Source-identification datum | SME response | Provenance / protected evidence ID |
 |---|---|---|
 | Exact One Identity Manager product version | [enter full value] | [product metadata source and capture time] |
 | Exact database schema build/version | [enter full value; explain any difference from client version] | [enter] |
 | Installed hotfixes/cumulative updates/transport packages relevant to schema or behavior | [list exact identifiers and order, or none verified] | [enter] |
-| 10.x release notes and module-specific notes used | [exact document version/reference] | [enter] |
-| SQL Server product, edition, build and database compatibility level | [enter; database owner verifies] | [enter] |
-| Database collation or other query-relevant compatibility characteristic | [enter only if needed for exact query behavior; no topology] | [enter] |
-| Current capability-matrix row and proposed state | `declared` until factual evidence and gates support another state | [row version] |
-| Known version/hotfix limitations or unsupported combinations | [enter, including no-known-issue result if reviewed] | [enter] |
+| SQL Server product/build and database compatibility level | [enter; database owner verifies before query approval] | [enter] |
+| Query-relevant collation or compatibility characteristic, if applicable | [enter only if needed for exact query behavior; no topology] | [enter or not applicable] |
+| Known version/hotfix limitations, if any | [enter known limitation or unknown; no research required for intake] | [enter if available] |
 
 ## 4. Installed module and category inventory
 
-For every candidate family below, record **Installed**, **Not installed**, **Unsupported**, or **Unknown**, with exact module identifier and version where installed. Add custom modules and connectors. An uninstalled module is `not_applicable`; an installed but unreadable module is a gap. These families come from the approved [capability matrix](../003-health-assessment/capability-matrix.md); the list is a scope prompt, not proof of installation.
+For each proposed category, record **Installed**, **Not installed**, **Unsupported**, or **Unknown**, with exact module identifier and version where installed. Add relevant custom modules and connectors. An uninstalled module is `not_applicable`; an installed but unreadable module is a gap. These families come from the approved [capability matrix](../003-health-assessment/capability-matrix.md); the list is a scope prompt, not proof of installation. Unrelated families need no detailed row at intake.
 
 | Candidate family | State | Exact module ID/version or reason | Discovery evidence ID | Expected evidence categories / gaps |
 |---|---|---|---|---|
@@ -72,7 +77,7 @@ For every candidate family below, record **Installed**, **Not installed**, **Uns
 | Reporting, archiving and password-management **configuration only** | [enter] | [enter] | [enter] | [enter] |
 | Custom modules and connectors — add one row per item | [enter] | [enter] | [enter] | [enter] |
 
-## 5. Native object and field dictionary — repeat for every proposed object
+## 5. Native object and field dictionary — before exact query-pack approval
 
 The SME must supply the exact dictionary; public documentation is insufficient to preapprove SQL projections or field classifications. Start with `DialogTable` and `DialogColumn` as **candidate metadata objects only** if confirmed in section 2. For each row, attach protected evidence of the exact schema and any customization. Do not enter example customer values here.
 
@@ -84,7 +89,7 @@ The SME must supply the exact dictionary; public documentation is insufficient t
 
 For each object, also record: expected row count/range; whether it is a vendor default, modified default, customer-created object, or unknown; the method and evidence for comparing default with actual; supported relationship edges; unresolved-reference behavior; and any fields whose classification cannot be established. Mark unknown or prohibited values as no-value reason markers. General identity/account profiles and secret/government-identifier values are outside the approved payload.
 
-## 6. Exact read-only query-pack review — repeat for each query/build/module
+## 6. Exact read-only query-pack review — before exact query-pack approval
 
 **Do not paste executable SQL in this template.** Each query needs a separately protected artifact, static validation, SME review, and customer database-owner plan/permission approval before it can enter a promoted pack. A public example query or an unbounded `SELECT` is not an approved collector query.
 
@@ -104,7 +109,7 @@ For each object, also record: expected row count/range; whether it is a vendor d
 | Static SQL safety result and test evidence ID | [enter] |
 | SME decision, date and limitation | [Confirm/Correct/Reject/Pending; enter] |
 
-## 7. Defaults, customizations, relationships and fixtures
+## 7. Defaults, customizations, relationships and fixtures — before applicable rule/gate review
 
 Provide **sanitized synthetic fixtures**, never customer records, for every applicable category. State whether each outcome is expected to be assessed, a typed gap, or not applicable. Record fixture IDs and expected native keys/relationships without sensitive values.
 
@@ -120,7 +125,7 @@ Provide **sanitized synthetic fixtures**, never customer records, for every appl
 | Uninstalled, inaccessible, unsupported or partially collected module/category | [distinct state and user-visible gap] | [enter] |
 | Timeout, cancellation, row cap, changed page digest, schema drift | [checkpoint/gap/conflict outcome] | [enter] |
 
-## 8. Customer database-owner approval — completed by the database owner
+## 8. Customer database-owner approval — before supervised source testing
 
 | Required datum | Owner response / protected evidence ID |
 |---|---|
@@ -136,7 +141,7 @@ Provide **sanitized synthetic fixtures**, never customer records, for every appl
 | Supervised source-test window and rollback/stop contact | [enter] |
 | Query approval or rejection with date | [enter] |
 
-## 9. Coverage, scale and signoff
+## 9. Coverage, scale and signoff — later G2/G8 evidence
 
 | Required result | Response / evidence ID |
 |---|---|
@@ -144,9 +149,9 @@ Provide **sanitized synthetic fixtures**, never customer records, for every appl
 | Applicable named scale categories independently exercised at 100,000 records with bounded source impact, or explicit limitation | [test IDs, counts, duration and impact; no values] |
 | Exact build/module/query/field-policy/normalization/rule versions locked together | [versioned manifest/digests] |
 | SME summary of corrected public assumptions and newly discovered categories | [enter] |
-| SME review decision, reviewer, date and unresolved items | [enter] |
-| Database-owner review decision, reviewer, date and unresolved items | [enter] |
-| Technical/security review decision and capability-matrix row update | [pending or evidence ID] |
+| SME review decision and unresolved items | [protected decision artifact ID; reviewer identity and time stay in that record] |
+| Database-owner review decision and unresolved items | [protected decision artifact ID; reviewer identity and time stay in that record] |
+| Technical/security review decision and capability-matrix row update | [pending or protected decision artifact ID] |
 
 ## Public documentation used for the prefill
 
