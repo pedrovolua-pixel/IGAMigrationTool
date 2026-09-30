@@ -1,6 +1,7 @@
 using System.Runtime.Versioning;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Text;
 
 namespace CollectorHost;
 
@@ -9,7 +10,25 @@ public static class WindowsProtectedConfig
     [SupportedOSPlatform("windows")]
     public static CollectorConfig Read(string path)
     {
-        if (!LocalPath.IsValid(path))
+        var bytes = ReadProtectedBytes(path, 65536);
+        try
+        {
+            return CollectorConfig.Parse(new UTF8Encoding(false, true).GetString(bytes));
+        }
+        catch (DecoderFallbackException error)
+        {
+            throw new FormatException("Invalid collector configuration encoding.", error);
+        }
+        finally
+        {
+            Array.Clear(bytes);
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
+    public static byte[] ReadProtectedBytes(string path, int maxLength)
+    {
+        if (!LocalPath.IsValid(path) || maxLength <= 0)
         {
             throw new InvalidOperationException("CONFIG_INVALID");
         }
@@ -48,12 +67,19 @@ public static class WindowsProtectedConfig
             }
         }
 
-        if (file.Length is <= 0 or > 65536)
+        if (file.Length <= 0 || file.Length > maxLength)
         {
             throw new InvalidOperationException("CONFIG_INVALID");
         }
 
-        return CollectorConfig.Parse(File.ReadAllText(path));
+        var bytes = File.ReadAllBytes(path);
+        if (bytes.Length == 0 || bytes.Length > maxLength)
+        {
+            Array.Clear(bytes);
+            throw new InvalidOperationException("CONFIG_INVALID");
+        }
+
+        return bytes;
     }
 
     [SupportedOSPlatform("windows")]

@@ -85,6 +85,10 @@ finally
 
 Console.WriteLine($"{count} collector host contract cases passed.");
 Console.WriteLine($"{CheckpointStoreChecks.Run()} encrypted checkpoint-store cases passed.");
+if (OperatingSystem.IsWindows())
+{
+    Console.WriteLine($"{WindowsKeyStoreChecks.Run()} protected Windows key-store cases passed.");
+}
 
 void Check(string name, string[] args, bool expected)
 {

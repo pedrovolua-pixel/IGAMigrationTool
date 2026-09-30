@@ -53,7 +53,7 @@ The Windows reader rejects reparse points and disallowed write-capable ACL entri
 
 ## Pilot-local checkpoint ledger, version 1
 
-The internal checkpoint file begins with ASCII `IGC1`, a 12-byte random AES-GCM nonce, a 16-byte tag and ciphertext. Plaintext is versioned JSON containing the exact query/build/scope/policy/order context and an ordered array of completed page boundaries and SHA-256 digests. The exact context is authenticated as associated data. The 32-byte local key must come from a separately protected Windows key store; the current ledger API accepts that key but does not provision it. A wrong key/context, malformed file, duplicate page or changed completed-page prefix blocks recovery. A save writes and flushes a same-directory temporary file before replacing the ledger. The plaintext ceiling is 1 MiB and page ceiling 4,096. The calling service/CLI must hold the protected local run lease while reading or writing; that integration and crash/Windows durability tests remain open.
+The internal checkpoint file begins with ASCII `IGC1`, a 12-byte random AES-GCM nonce, a 16-byte tag and ciphertext. Plaintext is versioned JSON containing the exact query/build/scope/policy/order context and an ordered array of completed page boundaries and SHA-256 digests. The exact context is authenticated as associated data. The 32-byte local key is generated with a cryptographic RNG and protected by Windows DPAPI `LocalMachine` with scope-specific entropy. Its blob must be stored in a file passing the same ACL/reparse checks as the configuration; possession of the blob on the same machine must remain restricted by that ACL. The host can protect a new key and load an existing protected blob, but no installer provisioning or rotation workflow exists. A wrong key/context, malformed file, duplicate page or changed completed-page prefix blocks recovery. A save writes and flushes a same-directory temporary file before replacing the ledger. The plaintext ceiling is 1 MiB and page ceiling 4,096. The calling service/CLI must hold the protected local run lease while reading or writing; that integration and crash/Windows durability tests remain open.
 
 ## Security and test evidence before enablement
 
@@ -64,7 +64,7 @@ The internal checkpoint file begins with ASCII `IGC1`, a 12-byte random AES-GCM 
 
 ## Remaining implementation and external gates
 
-- The local file-sharing lease and encrypted checkpoint ledger must be wired into both service and CLI with a protected key provider before collection. Output directory ACL/space/overwrite enforcement and signed policy/pack verification must also precede source collection or package creation.
+- The local file-sharing lease, encrypted checkpoint ledger and protected key reader must be wired into both service and CLI with customer-admin provisioning before collection. Output directory ACL/space/overwrite enforcement and signed policy/pack verification must also precede source collection or package creation.
 - Customer-administrator provisioning, service identity, protected configuration location and MSI signing/install procedure require Windows evidence and reviewed operations steps before customer installation.
 - The exact query pack, source permissions and impact plan require One Identity SME and customer database-owner evidence. Offline envelope and receiving import remain separate reviewed contracts.
 
