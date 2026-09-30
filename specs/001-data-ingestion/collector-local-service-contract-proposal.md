@@ -1,20 +1,21 @@
 # Proposal: Pilot collector local service and CLI contract
 
-Status: Proposed — technical, security and operations review pending  
+Status: Approved for pilot-local implementation by repository owner standing preapproval; source and release gates remain open
 Scope: One Identity Manager 10.x Windows collector only  
 Owner: Technical owner  
-Last updated: 2026-09-29
+Last updated: 2026-09-30
 
-## Decision needed
+## Decision and limit
 
-Approve or revise this local contract before implementing the customer-facing Windows Service and one-shot CLI. The pilot collector technical specification approves the host profile but deliberately leaves command syntax and local configuration undefined. This proposal does not authorize a source connection, package exchange, MSI install, enrollment or release.
+The repository owner preapproved all pilot-local work on 2026-09-29 and directed development to continue without local review pauses. This local command, configuration and schedule contract is approved for implementation under that standing authorization. It does not authorize a source connection, package exchange, MSI install, enrollment or release.
 
 ## Proposed process boundary
 
 - One self-contained `win-x64` executable contains both host modes. The signed MSI registers the Windows Service; the same signed release offers a one-shot CLI. Neither mode listens on an inbound port or self-updates.
-- The service starts only from a customer-administrator installed, protected absolute configuration path recorded by the installer. The service refuses work if the configuration, required signatures, exact build or policy lock is absent or incompatible. It reports a payload-free status and remains stopped/disabled until corrected by a customer administrator.
+- The service starts only from a customer-administrator installed, protected absolute configuration path recorded by the installer. It refuses collection if the configuration, required signatures, exact build or policy lock is absent or incompatible. The pilot shell may stay running to report a payload-free blocked state; an invalid or unprotected configuration stops it.
 - The one-shot command is `collector collect-once --config <absolute-local-path> --offline-output <absolute-local-path>`. It shares the service's policy, query-pack, permission and checkpoint core. It does not accept SQL text, field lists, passwords, connection strings, endpoint overrides or arbitrary query parameters on the command line.
 - A separate `collector status --config <absolute-local-path>` command returns local operational state only. It does not run a query or reveal SQL text, row values, host topology, protected identifiers, credentials or package contents.
+- The installer invokes `collector service --config <absolute-local-path>` as the Windows Service command. This verb has the same protected configuration boundary and never accepts an output path or query overrides.
 - The executable has no install, enroll, revoke, upgrade, delete-evidence or source-write command. Those workflows require their separately approved customer-administrator and hosted operation contracts.
 
 ## Proposed protected configuration
@@ -38,7 +39,17 @@ Configuration changes are written atomically by an administrator, validated befo
 - Service scheduling uses the configured customer timezone and local time. On a daylight-saving gap, skip that day's nonexistent local occurrence. On an ambiguous local time, use the later occurrence once. Missed offline occurrences do not catch up.
 - A per-scope in-process gate skips overlapping runs. Restart recovery also requires a durable encrypted checkpoint and a cross-process/instance lease; neither is implemented by the current in-memory gate.
 - The CLI exits nonzero for invalid configuration, unsupported build, blocking permission, source/query failure, canceled work, local limit, package failure or incompatible checkpoint. A partially completed run is never reported as fully complete.
-- Service status and CLI output use stable event/error codes, counts, times, category-level gaps and opaque correlation IDs. They never print SQL text, query rows, secrets, topology or package payload. Exact event and exit-code values are a later local-contract appendix; implementation must not invent them independently.
+- Service status and CLI output use stable event/error codes, counts, times, category-level gaps and opaque correlation IDs. They never print SQL text, query rows, secrets, topology or package payload. The implemented shell's exact codes are below; collection-phase codes require their own implementation contract before source access.
+
+## Pilot-local shell contract, version 1
+
+The executable accepts only the three commands above. `--config` and `--offline-output` require a drive-qualified local Windows path (`C:\...`). UNC, device, relative, traversal, empty-segment and alternate-stream paths are rejected. The current one-shot command creates no file because no query pack or offline envelope is approved.
+
+The JSON root has exactly these case-sensitive properties; duplicate and unknown properties fail. `schemaVersion` is integer `1`; `scopeId`, `queryPackId`, `fieldPolicyId` and `offlineRecipientKeyId` are nonzero UUIDs in D form. `exactBuild` is nonempty text up to 128 characters. `queryPackVersion` and `fieldPolicyVersion` are positive integers; each `*Sha256` is exactly 64 hexadecimal characters. `sqlDescriptorRef` is a local absolute path, not a connection string. `timeZoneId` must resolve on the host; `localRunTime` is `HH:mm`; `enabled` is a boolean. `maxPageSize`, `maxRows`, `maxDurationSeconds` and `maxLocalBytes` are positive integers and cannot authorize work until compared with a promoted pack's limits. `retentionHours` is 1–720. The file is at most 64 KiB. The field references and digests are claims, not proof of signed pack/policy promotion.
+
+The shell emits one of the following payload-free codes. `status` exits `0` with `COLLECTOR_DISABLED` or `SOURCE_CONTRACT_PENDING`. Invalid arguments exit `2` with `ARGUMENTS_INVALID`; invalid/unprotected configuration exits `3` with `CONFIG_INVALID`; a non-Windows host exits `4` with `PLATFORM_UNSUPPORTED`. `collect-once` exits `5` with `COLLECTOR_DISABLED` or `SOURCE_CONTRACT_PENDING`. The service logs those states and `RUN_NOT_STARTED_CONTRACT_PENDING` at an enabled scheduled occurrence, without running SQL or writing an offline package. Future collection states and codes must be documented with the matching implementation.
+
+The Windows reader rejects reparse points and disallowed write-capable ACL entries on the config file and its immediate directory, and disallowed replacement-capable entries on ancestors. An invalid ACL stops the service. Windows Server 2022/2025 ACL and service-identity behavior still require controlled host tests; this local build alone does not prove installability.
 
 ## Security and test evidence before enablement
 
@@ -47,13 +58,13 @@ Configuration changes are written atomically by an administrator, validated befo
 - Test service restart, cancellation, overlap skip, missed schedule, daylight-saving boundaries, config drift, command-injection arguments, status redaction, local storage limits and protected file permissions on Windows Server 2022/2025 including Server Core.
 - Verify the service/CLI use the same collector core and cannot select a different query, field policy or permission outcome. A signed MSI and publisher/digest validation remain separate C2 gates.
 
-## Open review points
+## Remaining implementation and external gates
 
-- Confirm executable name, command words, protected configuration location, exact JSON schema, stable exit/event codes and status shape.
-- Confirm daylight-saving choice, cross-process lease/store, local offline-output path policy, ACL implementation and service stop/disabled semantics.
-- Confirm which customer-administrator workflow writes and signs configuration. Do not implement the service-facing contract until these are approved.
+- Cross-process lease/store, durable encrypted checkpoint, output directory ACL/space/overwrite enforcement, and signed policy/pack verification must precede source collection or package creation.
+- Customer-administrator provisioning, service identity, protected configuration location and MSI signing/install procedure require Windows evidence and reviewed operations steps before customer installation.
+- The exact query pack, source permissions and impact plan require One Identity SME and customer database-owner evidence. Offline envelope and receiving import remain separate reviewed contracts.
 
 ## Approval
 
-Approved by: Pending  
-Date: Pending
+Approved for pilot-local implementation by: Repository owner standing preapproval
+Date: 2026-09-29

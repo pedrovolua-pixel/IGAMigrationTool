@@ -4,7 +4,7 @@ Status: Approved for local pilot implementation — executable source fixtures p
 Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)  
 Technical spec: `specs/001-data-ingestion/technical-spec.md` (Approved for local pilot implementation)  
 Owner: Quality owner  
-Last updated: 2026-09-29
+Last updated: 2026-09-30
 
 Only the local synthetic cases recorded in the feature status are claimed executed. CI fixtures must be synthetic and payload-free. Exact SQL, modules, field dictionaries, scale data and production-impact plans are approved separately for each eligible build/environment.
 
@@ -37,6 +37,7 @@ Only the local synthetic cases recorded in the feature status are claimed execut
 - Field/category policy excludes prohibited values and general profiles, preserves allowed native type/UID/path/provenance and emits explicit redaction/gap markers.
 - Checkpoints bind pack/build/scope/policy/order/boundary/digest; replay same digest is idempotent, changed digest is conflict, incompatible checkpoint stops.
 - Package vectors cover AES-256-GCM authentication, RSA-OAEP-SHA256 wrap/unwrap, wrong key, altered nonce/tag/ciphertext/manifest, expiry, wrong scope and duplicate chunk. Exact serialized vectors await envelope approval.
+- Collector-host contract cases reject unknown/duplicate/future configuration fields, bad digests and limits, unapproved CLI switches, UNC/device/traversal/alternate-stream paths, and exercise spring gap, fall ambiguity and missed-run schedule behavior. The one-shot command must remain blocked without an approved query pack and offline envelope.
 
 ## Integration and end-to-end tests
 

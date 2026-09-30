@@ -301,7 +301,7 @@ Verification:
 
 ### Milestone 3 — Produce an eligible immutable One Identity baseline
 
-- [ ] Implement the approved Windows Service/CLI collector only after feature-001 plan dependencies are approved.
+- [ ] Complete the approved Windows Service/CLI collector; the pilot-local host shell is implemented under standing preapproval, while source, installer and delivery dependencies remain gated.
 - [ ] Implement query-pack static validation, exact-build/module applicability, parameter binding, bounded pages, checkpoints, cancellation, impact guardrails and permission attestation.
 - [ ] Block write/DDL/ownership/impersonation/admin capability before evidence queries; warn/audit excess read-only capability.
 - [ ] Implement outbound-only HTTPS enrollment/delivery and encrypted offline-package path without topology, credentials, secrets, government identifiers or prohibited profile data.
@@ -525,6 +525,7 @@ Record material discoveries and approved deviations without rewriting historical
 | 2026-09-29 | A local page-checkpoint verifier now binds query/build/scope/policy/order/boundary and digest, distinguishing replay from conflict. | It performs no source read, durable storage or atomic checkpoint write; G2 and feature-001 C0 remain open. | Twelve local synthetic cases; [partial remote run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36657204155) passed on `44915de` |
 | 2026-09-29 | An unweighted coverage-state count projection now requires complete reconciliation and includes a 100,000-item synthetic case. | No score, applicability or end-to-end scale claim follows from this local count. | Local cases and remote run pending |
 | 2026-09-29 | Repository owner approved the feature-001 pilot collector technical specification, implementation plan and test plan for local development; exact query packs and delivery contracts retain separate gates. Exact-build/module, page-budget and static T-SQL shape guards were added locally. | A Windows service, source query, signed package, cloud upload and G2 evidence remain unavailable until their corresponding contracts and environments are validated. | Local synthetic guard cases; remote run pending |
+| 2026-09-30 | Under repository-owner standing pilot-local preapproval, added a Windows Service/CLI host shell with strict protected config, fixed verbs and a daylight-saving schedule. | The shell reports blocked state and performs no SQL read or package export. Windows install, exact query pack, signed MSI, delivery, two-environment and G2 evidence remain open. | CollectorHost contract cases and local build; remote run pending |
 
 ## Approval
 

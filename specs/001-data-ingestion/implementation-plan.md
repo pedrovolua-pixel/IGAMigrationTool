@@ -5,7 +5,7 @@ Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)
 Technical spec: `specs/001-data-ingestion/technical-spec.md` (Approved for local pilot implementation)  
 Test plan: `specs/001-data-ingestion/test-plan.md` (Approved for local pilot implementation)  
 Owner: Technical owner  
-Last updated: 2026-09-29
+Last updated: 2026-09-30
 
 ## Scope and constraints
 
@@ -32,7 +32,8 @@ AC-ING-7–8 require the separately designed generic-upload slice. AC-ING-11 req
 ### C0 — Approve the executable collector boundary
 
 - [x] Repository owner approved the pilot technical spec, this plan and test plan for local development, including the explicit deferred product paths.
-- [ ] Resolve exact local configuration/CLI, enrollment/upload and offline envelope contracts with security and operations review.
+- [x] Resolve the pilot-local configuration/CLI shell contract under repository-owner standing preapproval; source and release gates remain separate.
+- [ ] Resolve enrollment/upload and offline envelope contracts with security and operations review.
 - [ ] Record query-pack/field-dictionary and package-signing approval authorities and evidence locations.
 
 Verification:
@@ -112,4 +113,5 @@ Verification:
 | 2026-09-29 | Pinned Microsoft's T-SQL ScriptDom parser and added a conservative single-table/static-page shape check with synthetic adversarial cases. | Parser preflight is necessary but insufficient; exact SQL, approved fields, pack promotion and customer database-owner execution plans remain unavailable. |
 | 2026-09-29 | Added an in-process per-scope run gate for overlap skip, failure release and cancellation release. | The future service/CLI needs a reviewed local configuration contract, durable cross-process coordination and restart recovery; this primitive cannot start collection. |
 | 2026-09-29 | Added the approved AES-256-GCM/RSA-OAEP-SHA256 encryption primitive with ten synthetic tamper and wrong-key cases. | No envelope serialization, signature, key identity, expiry, package-size bound, recipient import or delivery path is implemented; the reviewed offline contract remains a separate gate. |
-| 2026-09-29 | Drafted `collector-local-service-contract-proposal.md` covering service/CLI commands, protected configuration, schedule, status and negative tests. | The proposal is not approved; C2 service-facing implementation remains gated while unrelated local core work can continue. |
+| 2026-09-29 | Repository owner gave standing preapproval for all pilot-local development; the local service/CLI shell contract in `collector-local-service-contract-proposal.md` is approved. | Local host work proceeds without review pauses; exact source, envelope, installer and cloud dependencies remain separate gates. |
+| 2026-09-30 | Added `CollectorHost` with fixed CLI verbs, strict versioned config, Windows ACL/reparse checks, daylight-saving schedule and a Windows Service loop that stays blocked from collection. | No SQL connection, package output or customer install exists. Synthetic contract cases and cross-publish validate the local shell only; Windows service identity/ACL and MSI evidence remain open. |

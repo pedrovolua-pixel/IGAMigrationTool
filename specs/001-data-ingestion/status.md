@@ -4,7 +4,7 @@ State: IMPLEMENTING
 
 Owner: Product owner
 
-Last updated: 2026-09-29
+Last updated: 2026-09-30
 
 Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICAL DESIGN`, `TECHNICAL APPROVED`, `PLANNED`, `IMPLEMENTING`, `CODE REVIEW`, `VERIFICATION`, `STAGING`, `ACCEPTANCE`, `RELEASE READY`, `RELEASED`, `OBSERVED`, `BLOCKED`.
 
@@ -19,9 +19,10 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 
 ## In progress
 
-- A local `CollectorSafety` module classifies typed permission-probe outcomes, checks page replay versus conflict, compares trusted exact-build/module claims against query metadata, bounds the next page by row/time limits, rejects unsafe T-SQL structures with a pinned parser, skips in-process overlapping scope runs and encrypts a minimized payload using the approved primitive. It has no SQL probe, credential, Windows Service/CLI, query execution, encrypted checkpoint store, package envelope, enrollment or upload path; it cannot authorize collection or produce an importable package. C0's exact-contract decisions and G2 remain open.
+- A local `CollectorSafety` module classifies typed permission-probe outcomes, checks page replay versus conflict, compares trusted exact-build/module claims against query metadata, bounds the next page by row/time limits, rejects unsafe T-SQL structures with a pinned parser, skips in-process overlapping scope runs and encrypts a minimized payload using the approved primitive. It has no SQL probe, credential, query execution, encrypted checkpoint store, package envelope, enrollment or upload path; it cannot authorize collection or produce an importable package. G2 remains open.
+- `CollectorHost` now has fixed Windows Service/CLI verbs, versioned strict JSON configuration, protected-path ACL checks, a daylight-saving-aware daily schedule and payload-free blocked-state codes. The service never opens SQL and the one-shot command never writes a package until the separately gated contracts are implemented. Windows installation and ACL behavior are unverified on supported hosts.
 - The approved pilot-slice technical specification, implementation plan and test plan for the One Identity Manager 10.x Windows collector and immutable baseline boundary trace the approved feature-001 requirements, accepted ADRs, IMP-DEC-003 and the health-pilot evidence contract. Exact query packs, environment evidence, enrollment/upload operations, offline envelope serialization and MSI provenance remain open; technical/security/operations review of those contracts, SME and database-owner review are pending.
-- A concrete but unapproved local service/CLI contract proposal now covers command syntax, protected configuration, schedule and status behavior. It is a review artifact, not a running Windows service.
+- The pilot-local service/CLI shell contract is approved under the repository owner's standing preapproval. The host implementation remains a blocked shell pending query-pack, source, offline-envelope and installer evidence.
 - The broader SailPoint, hosted connector, generic upload and migration ingestion technical design remains open.
 
 ## Blocked
@@ -54,14 +55,14 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 | Product specification approved | PASS | Product owner approval recorded in `product-spec.md` on 2026-09-28 |
 | Least-privilege consistency | PASS WITH APPROVED EXCEPTION | NFR-SEC-1, FR-ING-7, and AC-ING-16 allow warned excess read-only scope for the pilot and block write, DDL, ownership, or administrative capability |
 | Technical design | APPROVED FOR LOCAL PILOT IMPLEMENTATION | Repository owner approved the pilot collector slice in `technical-spec.md` on 2026-09-29; exact source/delivery contracts and full feature design remain open |
-| Implementation/test plans | APPROVED FOR LOCAL PILOT IMPLEMENTATION | Repository owner approved `implementation-plan.md` and `test-plan.md` on 2026-09-29; C0 exact-contract decisions remain open |
-| Implementation and tests | LOCAL FOUNDATION / G2 NOT VERIFIED | `CollectorSafety` permission, checkpoint, query-applicability, page-budget, static T-SQL shape, run-gate and offline-encryption checks have 17, 12, 14, 12, 28, 8 and 10 synthetic cases locally. The prior [partial remote bootstrap run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36658938566) passed on `129d08e`; the new cases await remote verification. No source interaction, service, importable package, delivery or G2 execution evidence exists. |
+| Implementation/test plans | APPROVED FOR LOCAL PILOT IMPLEMENTATION | Repository owner approved `implementation-plan.md` and `test-plan.md` on 2026-09-29 and preapproved pilot-local shell decisions; external C0 contracts remain open |
+| Implementation and tests | LOCAL FOUNDATION / G2 NOT VERIFIED | `CollectorSafety` synthetic cases cover permission, checkpoint, query applicability, page budget, static T-SQL shape, overlap and encryption. `CollectorHost` passed 25 fixed-command, strict-configuration and schedule cases on 2026-09-30. Locked restore, format, Release build, architecture, existing unit suites, `win-x64` self-contained publish and Gitleaks passed locally. The prior [partial remote bootstrap run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36659509440) passed on `0a68d72`; this host change awaits remote verification. No source interaction, installed Windows service, importable package, delivery or G2 execution evidence exists. |
 
 ## Remaining work and verification
 
 - Enumerate supported source versions, modules, patches, endpoints, authentication mechanisms, and exact field contracts during technical design.
 - Conduct separate destination-mapping discovery for SailPoint to One Identity Manager, One Identity Manager to Veza, and later One Identity Manager to SailPoint.
-- Review the proposed local service/CLI contract, then resolve enrollment/upload, offline envelope and MSI contracts. Obtain One Identity SME and customer database-owner approval for exact query packs and source execution plans. C0 and G2 remain open beyond the local-plan approval.
+- Resolve enrollment/upload, offline envelope and MSI contracts. Obtain One Identity SME and customer database-owner approval for exact query packs and source execution plans. C0 and G2 remain open beyond the local-plan approval.
 
 ## Next transition
 

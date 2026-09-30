@@ -4,7 +4,7 @@ Status: Approved for local pilot implementation — exact source and delivery co
 Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)  
 Author: Codex  
 Reviewers: Technical owner, security owner, One Identity SME, customer database owner, operations owner  
-Last updated: 2026-09-29
+Last updated: 2026-09-30
 
 ## Overview and scope
 
@@ -70,7 +70,7 @@ AC-ING-1 through AC-ING-16 are mapped to executable and environment tests in the
 
 ## Interfaces and authorization
 
-The collector's local CLI and service share the same policy engine. The CLI accepts only a customer-admin supplied protected local configuration reference and one-shot collection action; it must not accept plaintext SQL credentials or arbitrary SQL/query text. The service accepts only signed local configuration changes made through customer administrator control. Exact command syntax, enrollment request/response, upload/import operations, status response and error schema are **not approved yet**; they must be specified and reviewed before implementation of those surfaces.
+The collector's local CLI and service share the same policy engine. The CLI accepts only a customer-admin supplied protected local configuration reference and one-shot collection action; it must not accept plaintext SQL credentials or arbitrary SQL/query text. The service accepts only protected local configuration changes made through customer administrator control. The pilot-local command, configuration, schedule and shell status contract is approved in `collector-local-service-contract-proposal.md` under the repository owner's standing pilot preapproval. Signed configuration provisioning, enrollment request/response, upload/import operations and collection-phase error schema remain separate contracts before enablement.
 
 The hosted side authorizes enrollment, upload, import, cancellation and baseline activation using customer/project/environment assignment and resource state. A device certificate proves collector identity, not customer role or source-database authority. The server resolves the customer data plane from trusted assignment; it does not trust scope or storage locators supplied by the collector. Revocation blocks new use while preserving the independently governed choice to delete prior evidence.
 
@@ -110,9 +110,9 @@ Synthetic tests must cover SQL static rejection, permission categories, build/mo
 ## Risks, open questions and required decisions
 
 - Exact build/module rows, query text, columns, field dictionary, minimum permission set, impact budgets and production-safe execution plans require pilot-environment/SME/database-owner evidence. No query pack can be promoted from this specification alone.
-- The enrollment/upload protocol, offline package envelope serialization and test vectors, MSI toolchain and signature/provenance process require concrete reviewed proposals before their implementation. The local configuration/CLI proposal in `collector-local-service-contract-proposal.md` remains unapproved and must be reviewed before the service-facing contract is implemented.
+- The enrollment/upload protocol, offline package envelope serialization and test vectors, MSI toolchain and signature/provenance process require concrete reviewed proposals before their implementation. The pilot-local configuration/CLI shell contract is approved, but its Windows ACL/service behavior needs controlled host verification before customer installation.
 - Feature 001's full multi-source technical design, implementation plan and test plan remain separate work. This pilot slice cannot be used to infer hosted SailPoint, generic upload or migration behavior.
-- The repository owner approved local pilot implementation against this specification on 2026-09-29. Exact query-pack/source access still needs One Identity SME and customer database-owner review; unresolved delivery, CLI, envelope and MSI contracts need technical/security/operations review before those surfaces are enabled. This approval does not establish G2.
+- The repository owner approved local pilot implementation against this specification on 2026-09-29 and gave standing approval for pilot-local work. Exact query-pack/source access still needs One Identity SME and customer database-owner review; unresolved delivery, envelope and MSI contracts need concrete evidence before those surfaces are enabled. This approval does not establish G2.
 
 ## Approval
 
