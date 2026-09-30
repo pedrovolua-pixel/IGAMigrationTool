@@ -37,6 +37,7 @@ checks++;
 
 Console.WriteLine($"{checks} assessment coverage reconciliation cases passed.");
 Console.WriteLine($"{CoverageCountChecks.Run()} assessment coverage count cases passed.");
+Console.WriteLine($"{CoverageLimitationChecks.Run()} assessment coverage limitation cases passed.");
 
 void Check(string name, CoverageIssueCode[] expectedIssues,
     CoverageKey[] expected, CoverageItem[] results)
