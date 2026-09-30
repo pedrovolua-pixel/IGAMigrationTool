@@ -4,7 +4,7 @@ State: PRODUCT APPROVED
 
 Owner: Product owner
 
-Last updated: 2026-09-28
+Last updated: 2026-09-29
 
 Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICAL DESIGN`, `TECHNICAL APPROVED`, `PLANNED`, `IMPLEMENTING`, `CODE REVIEW`, `VERIFICATION`, `STAGING`, `ACCEPTANCE`, `RELEASE READY`, `RELEASED`, `OBSERVED`, `BLOCKED`.
 
@@ -18,7 +18,8 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 
 ## In progress
 
-- Technical specification and capability-matrix design.
+- A pilot-slice technical specification, implementation plan and test plan for the One Identity Manager 10.x Windows collector and immutable baseline boundary are drafted in `technical-spec.md`, `implementation-plan.md` and `test-plan.md`. They trace the approved feature-001 requirements, accepted ADRs, IMP-DEC-003 and the approved health-pilot evidence contract. Exact query packs, environment evidence, enrollment/upload operations, offline envelope serialization and MSI provenance remain open; technical, security, operations, SME and database-owner review is pending.
+- The broader SailPoint, hosted connector, generic upload and migration ingestion technical design remains open.
 
 ## Blocked
 
@@ -49,14 +50,15 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 | Product-owner discovery input captured | PASS | `product-spec.md` |
 | Product specification approved | PASS | Product owner approval recorded in `product-spec.md` on 2026-09-28 |
 | Least-privilege consistency | PASS WITH APPROVED EXCEPTION | NFR-SEC-1, FR-ING-7, and AC-ING-16 allow warned excess read-only scope for the pilot and block write, DDL, ownership, or administrative capability |
-| Technical design | NOT VERIFIED | Not started; product approval required first |
+| Technical design | DRAFT / NOT APPROVED | Pilot collector slice in `technical-spec.md`; full feature design and required review remain open |
+| Implementation/test plans | DRAFT / NOT APPROVED | Pilot collector slice in `implementation-plan.md` and `test-plan.md`; C0 code gate remains open |
 | Implementation and tests | NOT VERIFIED | Not authorized or started |
 
 ## Remaining work and verification
 
 - Enumerate supported source versions, modules, patches, endpoints, authentication mechanisms, and exact field contracts during technical design.
 - Conduct separate destination-mapping discovery for SailPoint to One Identity Manager, One Identity Manager to Veza, and later One Identity Manager to SailPoint.
-- Create technical specification, implementation plan, and test plan only after product approval.
+- Obtain technical, security, operations, One Identity SME and customer database-owner review of the draft pilot collector technical specification, implementation plan and test plan. Product approval was recorded on 2026-09-28; C0 remains open.
 
 ## Next transition
 
