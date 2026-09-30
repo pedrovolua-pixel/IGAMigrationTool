@@ -104,3 +104,5 @@ Verification:
 | Date | Discovery | Impact/evidence |
 |---|---|---|
 | 2026-09-29 | Product approval exists but feature-001 technical/test/implementation approval does not. | Drafted a bounded pilot plan; collector behavior remains behind C0. |
+| 2026-09-29 | A side-effect-free permission-decision prototype was added under the approved health-pilot source-safety contract. | No SQL probe, connection, credential or collection capability exists. This local check cannot satisfy C0, G2 or customer database-owner approval. |
+| 2026-09-29 | A pure page-checkpoint verifier was added for the approved query/build/scope/policy/order/boundary/digest contract. | It distinguishes new, idempotent, conflicting and incompatible pages without storage or source access. Encrypted durable storage and atomic resume remain open. |

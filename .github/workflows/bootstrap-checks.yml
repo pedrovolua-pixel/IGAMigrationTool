@@ -32,6 +32,10 @@ jobs:
         run: dotnet build IgaMigrationTool.slnx --configuration Release --no-restore
       - name: Run synthetic artifact-integrity checks
         run: dotnet run --project tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj --configuration Release --no-build
+      - name: Check assessment coverage reconciliation
+        run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
+      - name: Check collector permission decisions
+        run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check project dependency boundaries
         run: dotnet run --project tests/architecture/BoundaryChecks/BoundaryChecks.csproj --configuration Release --no-build
       - name: Install pinned Bicep CLI

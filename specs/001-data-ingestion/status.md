@@ -18,6 +18,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 
 ## In progress
 
+- A local, side-effect-free `CollectorSafety` prototype classifies typed permission-probe outcomes and checks page checkpoint context/digest replay versus conflict. It has no SQL probe, credential, Windows Service/CLI, query execution, encrypted checkpoint store, enrollment, package or upload path; it cannot authorize collection. Feature-001 C0 and G2 remain open.
 - A pilot-slice technical specification, implementation plan and test plan for the One Identity Manager 10.x Windows collector and immutable baseline boundary are drafted in `technical-spec.md`, `implementation-plan.md` and `test-plan.md`. They trace the approved feature-001 requirements, accepted ADRs, IMP-DEC-003 and the approved health-pilot evidence contract. Exact query packs, environment evidence, enrollment/upload operations, offline envelope serialization and MSI provenance remain open; technical, security, operations, SME and database-owner review is pending.
 - The broader SailPoint, hosted connector, generic upload and migration ingestion technical design remains open.
 
@@ -52,7 +53,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 | Least-privilege consistency | PASS WITH APPROVED EXCEPTION | NFR-SEC-1, FR-ING-7, and AC-ING-16 allow warned excess read-only scope for the pilot and block write, DDL, ownership, or administrative capability |
 | Technical design | DRAFT / NOT APPROVED | Pilot collector slice in `technical-spec.md`; full feature design and required review remain open |
 | Implementation/test plans | DRAFT / NOT APPROVED | Pilot collector slice in `implementation-plan.md` and `test-plan.md`; C0 code gate remains open |
-| Implementation and tests | NOT VERIFIED | Not authorized or started |
+| Implementation and tests | LOCAL PROTOTYPE / NOT VERIFIED | Side-effect-free `CollectorSafety` permission and page-checkpoint checks have synthetic cases; no source interaction, service, package, delivery or G2 execution evidence |
 
 ## Remaining work and verification
 

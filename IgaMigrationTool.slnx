@@ -1,7 +1,11 @@
 <Solution>
+  <Folder Name="/src/collector/">
+    <Project Path="src/collector/CollectorSafety/CollectorSafety.csproj" />
+  </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/server/" />
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj" />
     <Project Path="src/server/modules/EvidenceGovernance/EvidenceGovernance.csproj" />
   </Folder>
   <Folder Name="/tests/" />
@@ -14,6 +18,8 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj" />
+    <Project Path="tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj" />
     <Project Path="tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj" />
   </Folder>
 </Solution>
