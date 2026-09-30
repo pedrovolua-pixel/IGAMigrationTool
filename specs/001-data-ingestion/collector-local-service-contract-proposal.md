@@ -64,7 +64,7 @@ The internal checkpoint file begins with ASCII `IGC1`, a 12-byte random AES-GCM 
 
 ## Remaining implementation and external gates
 
-- The local file-sharing lease, encrypted checkpoint ledger and protected key reader must be wired into both service and CLI with customer-admin provisioning before collection. Output directory ACL/space/overwrite enforcement and signed policy/pack verification must also precede source collection or package creation.
+- Both entry points now call a shared local coordinator. A synthetic adapter exercises the lease, encrypted checkpoint ledger, page bounds, field minimization and stage-before-checkpoint sequence. The shipped adapter has no approved run material and never reads or stages evidence. Customer-admin key provisioning, output directory ACL/space/overwrite enforcement and signed policy/pack verification must precede source collection or package creation.
 - Customer-administrator provisioning, service identity, protected configuration location and MSI signing/install procedure require Windows evidence and reviewed operations steps before customer installation.
 - The exact query pack, source permissions and impact plan require One Identity SME and customer database-owner evidence. Offline envelope and receiving import remain separate reviewed contracts.
 

@@ -9,3 +9,4 @@ Use [`release-readiness-review-template.md`](./release-readiness-review-template
 ## Health-assessment pilot
 
 - [`health-assessment-pilot-operations-plan.md`](./health-assessment-pilot-operations-plan.md) — deployment, rollback, monitoring, retention, backup, restore and readiness design.
+- [One Identity Manager pilot SME evidence handoff](./one-identity-sme-pilot-handoff.md) — exact source, query, field and database-owner evidence request.

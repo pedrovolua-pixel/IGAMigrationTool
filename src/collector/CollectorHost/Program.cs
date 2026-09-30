@@ -36,5 +36,8 @@ if (command.Command == CollectorCommand.Service && OperatingSystem.IsWindows())
     return 0;
 }
 
-Console.Error.WriteLine(config.Enabled ? "SOURCE_CONTRACT_PENDING" : "COLLECTOR_DISABLED");
+var result = await new CollectorRunCoordinator(new PendingCollectorRunAdapter())
+    .RunAsync(command.ConfigPath, config, CancellationToken.None);
+Console.Error.WriteLine(result.Outcome == CollectorRunOutcome.Disabled
+    ? "COLLECTOR_DISABLED" : "SOURCE_CONTRACT_PENDING");
 return 5;

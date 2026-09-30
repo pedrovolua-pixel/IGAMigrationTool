@@ -10,6 +10,8 @@ public sealed class CollectorService(
     IHostApplicationLifetime lifetime,
     ILogger<CollectorService> logger) : BackgroundService
 {
+    private readonly CollectorRunCoordinator coordinator = new(new PendingCollectorRunAdapter());
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         DateTimeOffset? next = null;
@@ -52,7 +54,9 @@ public sealed class CollectorService(
 
                 if (now >= next)
                 {
-                    logger.LogWarning("RUN_NOT_STARTED_CONTRACT_PENDING");
+                    var result = await coordinator.RunAsync(configPath, config, stoppingToken);
+                    logger.LogWarning("{CollectorRunState}", result.Outcome == CollectorRunOutcome.SourceContractPending
+                        ? "RUN_NOT_STARTED_CONTRACT_PENDING" : "RUN_NOT_STARTED");
                     next = DailySchedule.Next(now,
                         TimeZoneInfo.FindSystemTimeZoneById(config.TimeZoneId), config.LocalRunTime);
                 }

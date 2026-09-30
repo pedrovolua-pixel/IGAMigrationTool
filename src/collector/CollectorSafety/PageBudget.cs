@@ -1,8 +1,8 @@
 namespace CollectorSafety;
 
-public sealed record PageBudgetPolicy(int MaximumPageSize, int MaximumRows, TimeSpan MaximumDuration);
+public sealed record PageBudgetPolicy(int MaximumPageSize, long MaximumRows, TimeSpan MaximumDuration);
 
-public sealed record PageBudgetSnapshot(int RowsCompleted, TimeSpan Elapsed, bool CancellationRequested);
+public sealed record PageBudgetSnapshot(long RowsCompleted, TimeSpan Elapsed, bool CancellationRequested);
 
 public enum PageBudgetDecision
 {
@@ -48,6 +48,6 @@ public static class PageBudget
         }
 
         return new PageBudgetResult(PageBudgetDecision.Permit,
-            Math.Min(policy.MaximumPageSize, policy.MaximumRows - snapshot.RowsCompleted));
+            (int)Math.Min(policy.MaximumPageSize, policy.MaximumRows - snapshot.RowsCompleted));
     }
 }
