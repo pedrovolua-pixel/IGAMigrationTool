@@ -56,9 +56,13 @@ try {
     if ($LASTEXITCODE -ne 0 -or $status -ne 'COLLECTOR_DISABLED') {
         throw 'Collector status did not report the disabled state.'
     }
-    $oneShot = & $ExecutablePath collect-once --config $configPath --offline-output $outputPath 2>&1
-    if ($LASTEXITCODE -ne 5 -or $oneShot -ne 'COLLECTOR_DISABLED' -or (Test-Path $outputPath)) {
-        throw 'Blocked one-shot collection had an unexpected result.'
+    $stderrPath = Join-Path $directory 'collector.stderr'
+    $oneShotProcess = Start-Process -FilePath $ExecutablePath -NoNewWindow -Wait -PassThru `
+        -ArgumentList @('collect-once', '--config', $configPath, '--offline-output', $outputPath) `
+        -RedirectStandardError $stderrPath
+    $oneShotState = (Get-Content -Path $stderrPath -Raw).Trim()
+    if ($oneShotProcess.ExitCode -ne 5 -or $oneShotState -ne 'COLLECTOR_DISABLED' -or (Test-Path $outputPath)) {
+        throw "Blocked one-shot result: exit=$($oneShotProcess.ExitCode), state=$oneShotState, outputExists=$(Test-Path $outputPath)."
     }
     Write-Output 'Windows service start/stop, status, and blocked one-shot smoke checks passed.'
 }
