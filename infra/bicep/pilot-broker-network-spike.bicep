@@ -1,5 +1,5 @@
 // Partial G1 spike entry point. It provisions only network/static egress and
-// the Service Bus namespace. Queue, identities, roles and apps come later.
+// the Service Bus namespace and work queue. Identities, roles and apps come later.
 @minLength(1)
 param virtualNetworkName string
 
@@ -28,6 +28,9 @@ param natGatewayName string
 @maxLength(50)
 param serviceBusNamespaceName string
 
+@minLength(1)
+param workQueueName string
+
 module network 'modules/pilot-network-egress.bicep' = {
   name: 'pilot-network-egress'
   params: {
@@ -51,6 +54,16 @@ module serviceBus 'modules/pilot-service-bus-namespace.bicep' = {
   dependsOn: [network]
 }
 
+module workQueue 'modules/pilot-service-bus-work-queue.bicep' = {
+  name: 'pilot-service-bus-work-queue'
+  params: {
+    namespaceName: serviceBusNamespaceName
+    workQueueName: workQueueName
+  }
+  dependsOn: [serviceBus]
+}
+
 output containerAppsSubnetId string = network.outputs.containerAppsSubnetId
 output privateEndpointSubnetId string = network.outputs.privateEndpointSubnetId
 output namespaceResourceId string = serviceBus.outputs.namespaceResourceId
+output workQueueResourceId string = workQueue.outputs.queueResourceId

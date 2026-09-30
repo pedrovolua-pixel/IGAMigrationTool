@@ -53,9 +53,11 @@ jobs:
           "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-service-bus-namespace.bicep
           "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-service-bus-work-roles.bicep --outfile "$RUNNER_TEMP/pilot-service-bus-work-roles.json"
           "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-service-bus-work-roles.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-service-bus-work-queue.bicep --outfile "$RUNNER_TEMP/pilot-service-bus-work-queue.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-service-bus-work-queue.bicep
           "$RUNNER_TEMP/bicep" build infra/bicep/pilot-broker-network-spike.bicep --outfile "$RUNNER_TEMP/pilot-broker-network-spike.json"
           "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-broker-network-spike.bicep
-          dotnet run --project tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj --configuration Release --no-build -- "$RUNNER_TEMP/pilot-service-bus-namespace.json" "$RUNNER_TEMP/pilot-service-bus-work-roles.json" "$RUNNER_TEMP/pilot-broker-network-spike.json"
+          dotnet run --project tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj --configuration Release --no-build -- "$RUNNER_TEMP/pilot-service-bus-namespace.json" "$RUNNER_TEMP/pilot-service-bus-work-roles.json" "$RUNNER_TEMP/pilot-service-bus-work-queue.json" "$RUNNER_TEMP/pilot-broker-network-spike.json"
       - name: Compile, lint and check pilot network-egress baseline
         run: |
           "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-network-egress.bicep --outfile "$RUNNER_TEMP/pilot-network-egress.json"

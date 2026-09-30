@@ -1,8 +1,8 @@
 using System.Text.Json.Nodes;
 
-if (args.Length != 3 || !File.Exists(args[0]) || !File.Exists(args[1]) || !File.Exists(args[2]))
+if (args.Length != 4 || args.Any(path => !File.Exists(path)))
 {
-    Console.Error.WriteLine("Provide compiled Service Bus namespace, work-role and broker-network spike ARM template paths.");
+    Console.Error.WriteLine("Provide compiled Service Bus namespace, work-role, work-queue and broker-network spike ARM template paths.");
     Environment.ExitCode = 1;
     return;
 }
@@ -79,7 +79,36 @@ foreach (var change in roleChanges)
 
 Console.WriteLine($"Service Bus work-role baseline policy passed; {roleChanges.Length} unsafe drifts were denied.");
 
-var spikeTemplate = JsonNode.Parse(File.ReadAllText(args[2]));
+var queueTemplate = JsonNode.Parse(File.ReadAllText(args[2]));
+if (!IsClosedWorkQueue(queueTemplate))
+{
+    Console.Error.WriteLine("Service Bus work-queue baseline policy failed.");
+    Environment.ExitCode = 1;
+    return;
+}
+
+var queueChanges = new (string Name, Action<JsonNode> Mutate)[]
+{
+    ("duplicate detection disabled", node => Resource(node, "Microsoft.ServiceBus/namespaces/queues")["properties"]!["requiresDuplicateDetection"] = false),
+    ("expiry dead-lettering disabled", node => Resource(node, "Microsoft.ServiceBus/namespaces/queues")["properties"]!["deadLetteringOnMessageExpiration"] = false),
+    ("wrong namespace", node => Resource(node, "Microsoft.ServiceBus/namespaces/queues")["name"] = "other-namespace/queue"),
+    ("wrong API version", node => Resource(node, "Microsoft.ServiceBus/namespaces/queues")["apiVersion"] = "2024-01-01"),
+    ("extra queue resource", node => ((JsonArray)node["resources"]!).Add(new JsonObject { ["type"] = "Microsoft.ServiceBus/namespaces/queues" }))
+};
+
+foreach (var change in queueChanges)
+{
+    var altered = queueTemplate!.DeepClone();
+    change.Mutate(altered);
+    if (IsClosedWorkQueue(altered))
+    {
+        throw new Exception($"Infrastructure policy accepted {change.Name} queue drift.");
+    }
+}
+
+Console.WriteLine($"Service Bus work-queue baseline policy passed; {queueChanges.Length} unsafe drifts were denied.");
+
+var spikeTemplate = JsonNode.Parse(File.ReadAllText(args[3]));
 if (!IsClosedSpike(spikeTemplate))
 {
     Console.Error.WriteLine("Broker-network spike wiring policy failed.");
@@ -93,6 +122,9 @@ var spikeChanges = new (string Name, Action<JsonNode> Mutate)[]
     ("broker deploys before network", node => Deployment(node, "pilot-service-bus-namespace")["dependsOn"] = new JsonArray()),
     ("network uses a different IP", node => Deployment(node, "pilot-network-egress")["properties"]!["parameters"]!["staticEgressPublicIpName"]!["value"] = "other-ip"),
     ("wrong namespace parameter", node => Deployment(node, "pilot-service-bus-namespace")["properties"]!["parameters"]!["namespaceName"]!["value"] = "other-namespace"),
+    ("queue deploys before namespace", node => Deployment(node, "pilot-service-bus-work-queue")["dependsOn"] = new JsonArray()),
+    ("queue uses another namespace", node => Deployment(node, "pilot-service-bus-work-queue")["properties"]!["parameters"]!["namespaceName"]!["value"] = "other-namespace"),
+    ("queue uses another name", node => Deployment(node, "pilot-service-bus-work-queue")["properties"]!["parameters"]!["workQueueName"]!["value"] = "other-queue"),
     ("extra deployed resource", node => ((JsonArray)node["resources"]!).Add(new JsonObject { ["type"] = "Microsoft.Resources/deployments" }))
 };
 
@@ -226,13 +258,44 @@ static JsonNode Assignment(JsonNode template, string principalParameter) =>
     ((JsonArray)template["resources"]!).Single(node =>
         Value<string>(node?["properties"]?["principalId"]) == $"[parameters('{principalParameter}')]")!;
 
+static bool IsClosedWorkQueue(JsonNode? template)
+{
+    try
+    {
+        if (template?["resources"] is not JsonArray { Count: 1 } ||
+            template["parameters"] is not JsonObject parameters || parameters.Count != 2 ||
+            template["outputs"] is not JsonObject outputs || outputs.Count != 1 ||
+            Value<string>(parameters["namespaceName"]?["type"]) != "string" ||
+            Value<int>(parameters["namespaceName"]?["minLength"]) != 6 ||
+            Value<int>(parameters["namespaceName"]?["maxLength"]) != 50 ||
+            Value<string>(parameters["workQueueName"]?["type"]) != "string" ||
+            Value<int>(parameters["workQueueName"]?["minLength"]) != 1 ||
+            Value<string>(outputs["queueResourceId"]?["value"]) !=
+                "[resourceId('Microsoft.ServiceBus/namespaces/queues', parameters('namespaceName'), parameters('workQueueName'))]")
+        {
+            return false;
+        }
+
+        var queue = Resource(template, "Microsoft.ServiceBus/namespaces/queues");
+        return Value<string>(queue["apiVersion"]) == "2026-01-01" &&
+               Value<string>(queue["name"]) ==
+                   "[format('{0}/{1}', parameters('namespaceName'), parameters('workQueueName'))]" &&
+               Value<bool>(queue["properties"]?["deadLetteringOnMessageExpiration"]) &&
+               Value<bool>(queue["properties"]?["requiresDuplicateDetection"]);
+    }
+    catch (Exception exception) when (exception is InvalidOperationException or KeyNotFoundException or ArgumentException)
+    {
+        return false;
+    }
+}
+
 static bool IsClosedSpike(JsonNode? template)
 {
     try
     {
-        if (template?["resources"] is not JsonArray resources || resources.Count != 2 ||
-            template["parameters"] is not JsonObject parameters || parameters.Count != 9 ||
-            template["outputs"] is not JsonObject outputs || outputs.Count != 3)
+        if (template?["resources"] is not JsonArray resources || resources.Count != 3 ||
+            template["parameters"] is not JsonObject parameters || parameters.Count != 10 ||
+            template["outputs"] is not JsonObject outputs || outputs.Count != 4)
         {
             return false;
         }
@@ -241,7 +304,7 @@ static bool IsClosedSpike(JsonNode? template)
                  { "virtualNetworkName", "virtualNetworkAddressPrefix", "containerAppsSubnetName",
                      "containerAppsSubnetAddressPrefix", "privateEndpointSubnetName",
                      "privateEndpointSubnetAddressPrefix", "staticEgressPublicIpName", "natGatewayName",
-                     "serviceBusNamespaceName" })
+                     "serviceBusNamespaceName", "workQueueName" })
         {
             if (Value<string>(parameters[name]?["type"]) != "string")
             {
@@ -251,12 +314,15 @@ static bool IsClosedSpike(JsonNode? template)
 
         var network = Deployment(template, "pilot-network-egress");
         var broker = Deployment(template, "pilot-service-bus-namespace");
+        var queue = Deployment(template, "pilot-service-bus-work-queue");
         if (resources.Any(resource => Value<string>(resource?["type"]) != "Microsoft.Resources/deployments" ||
             Value<string>(resource?["apiVersion"]) != "2025-04-01") ||
             network["properties"]?["parameters"] is not JsonObject networkParameters ||
             networkParameters.Count != 8 ||
             broker["properties"]?["parameters"] is not JsonObject brokerParameters ||
             brokerParameters.Count != 2 ||
+            queue["properties"]?["parameters"] is not JsonObject queueParameters ||
+            queueParameters.Count != 2 ||
             broker["dependsOn"] is not JsonArray { Count: 1 } dependencies ||
             Value<string>(dependencies[0]) !=
                 "[resourceId('Microsoft.Resources/deployments', 'pilot-network-egress')]" ||
@@ -265,7 +331,14 @@ static bool IsClosedSpike(JsonNode? template)
             Value<string>(brokerParameters["staticEgressPublicIpName"]?["value"]) !=
                 "[parameters('staticEgressPublicIpName')]" ||
             Value<string>(networkParameters["staticEgressPublicIpName"]?["value"]) !=
-                "[parameters('staticEgressPublicIpName')]")
+                "[parameters('staticEgressPublicIpName')]" ||
+            queue["dependsOn"] is not JsonArray { Count: 1 } queueDependencies ||
+            Value<string>(queueDependencies[0]) !=
+                "[resourceId('Microsoft.Resources/deployments', 'pilot-service-bus-namespace')]" ||
+            Value<string>(queueParameters["namespaceName"]?["value"]) !=
+                "[parameters('serviceBusNamespaceName')]" ||
+            Value<string>(queueParameters["workQueueName"]?["value"]) !=
+                "[parameters('workQueueName')]")
         {
             return false;
         }
@@ -283,7 +356,8 @@ static bool IsClosedSpike(JsonNode? template)
 
         return outputs.ContainsKey("containerAppsSubnetId") &&
                outputs.ContainsKey("privateEndpointSubnetId") &&
-               outputs.ContainsKey("namespaceResourceId");
+               outputs.ContainsKey("namespaceResourceId") &&
+               outputs.ContainsKey("workQueueResourceId");
     }
     catch (Exception exception) when (exception is InvalidOperationException or KeyNotFoundException or ArgumentException)
     {
