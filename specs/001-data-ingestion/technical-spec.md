@@ -110,7 +110,7 @@ Synthetic tests must cover SQL static rejection, permission categories, build/mo
 ## Risks, open questions and required decisions
 
 - Exact build/module rows, query text, columns, field dictionary, minimum permission set, impact budgets and production-safe execution plans require pilot-environment/SME/database-owner evidence. No query pack can be promoted from this specification alone.
-- The enrollment/upload protocol, offline package envelope serialization and test vectors, local configuration/CLI contract, MSI toolchain and signature/provenance process require a concrete reviewed proposal before their implementation.
+- The enrollment/upload protocol, offline package envelope serialization and test vectors, MSI toolchain and signature/provenance process require concrete reviewed proposals before their implementation. The local configuration/CLI proposal in `collector-local-service-contract-proposal.md` remains unapproved and must be reviewed before the service-facing contract is implemented.
 - Feature 001's full multi-source technical design, implementation plan and test plan remain separate work. This pilot slice cannot be used to infer hosted SailPoint, generic upload or migration behavior.
 - The repository owner approved local pilot implementation against this specification on 2026-09-29. Exact query-pack/source access still needs One Identity SME and customer database-owner review; unresolved delivery, CLI, envelope and MSI contracts need technical/security/operations review before those surfaces are enabled. This approval does not establish G2.
 

@@ -21,6 +21,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 
 - A local `CollectorSafety` module classifies typed permission-probe outcomes, checks page replay versus conflict, compares trusted exact-build/module claims against query metadata, bounds the next page by row/time limits, rejects unsafe T-SQL structures with a pinned parser, skips in-process overlapping scope runs and encrypts a minimized payload using the approved primitive. It has no SQL probe, credential, Windows Service/CLI, query execution, encrypted checkpoint store, package envelope, enrollment or upload path; it cannot authorize collection or produce an importable package. C0's exact-contract decisions and G2 remain open.
 - The approved pilot-slice technical specification, implementation plan and test plan for the One Identity Manager 10.x Windows collector and immutable baseline boundary trace the approved feature-001 requirements, accepted ADRs, IMP-DEC-003 and the health-pilot evidence contract. Exact query packs, environment evidence, enrollment/upload operations, offline envelope serialization and MSI provenance remain open; technical/security/operations review of those contracts, SME and database-owner review are pending.
+- A concrete but unapproved local service/CLI contract proposal now covers command syntax, protected configuration, schedule and status behavior. It is a review artifact, not a running Windows service.
 - The broader SailPoint, hosted connector, generic upload and migration ingestion technical design remains open.
 
 ## Blocked
@@ -60,7 +61,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 
 - Enumerate supported source versions, modules, patches, endpoints, authentication mechanisms, and exact field contracts during technical design.
 - Conduct separate destination-mapping discovery for SailPoint to One Identity Manager, One Identity Manager to Veza, and later One Identity Manager to SailPoint.
-- Resolve and review exact local CLI/configuration, enrollment/upload, offline envelope and MSI contracts. Obtain One Identity SME and customer database-owner approval for exact query packs and source execution plans. C0 and G2 remain open beyond the local-plan approval.
+- Review the proposed local service/CLI contract, then resolve enrollment/upload, offline envelope and MSI contracts. Obtain One Identity SME and customer database-owner approval for exact query packs and source execution plans. C0 and G2 remain open beyond the local-plan approval.
 
 ## Next transition
 
