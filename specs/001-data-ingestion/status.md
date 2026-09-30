@@ -53,7 +53,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 | Least-privilege consistency | PASS WITH APPROVED EXCEPTION | NFR-SEC-1, FR-ING-7, and AC-ING-16 allow warned excess read-only scope for the pilot and block write, DDL, ownership, or administrative capability |
 | Technical design | DRAFT / NOT APPROVED | Pilot collector slice in `technical-spec.md`; full feature design and required review remain open |
 | Implementation/test plans | DRAFT / NOT APPROVED | Pilot collector slice in `implementation-plan.md` and `test-plan.md`; C0 code gate remains open |
-| Implementation and tests | LOCAL PROTOTYPE / NOT VERIFIED | Side-effect-free `CollectorSafety` permission and page-checkpoint checks have synthetic cases; no source interaction, service, package, delivery or G2 execution evidence |
+| Implementation and tests | LOCAL PROTOTYPE / NOT VERIFIED | Side-effect-free `CollectorSafety` permission and page-checkpoint checks have 17 and 12 synthetic cases, respectively; the [partial remote bootstrap run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36657204155) passed on `44915de`. No source interaction, service, package, delivery or G2 execution evidence exists. |
 
 ## Remaining work and verification
 
