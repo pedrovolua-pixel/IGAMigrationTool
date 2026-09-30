@@ -121,6 +121,14 @@ internal static class RunCoordinatorChecks
                 !File.Exists(approval.CheckpointPath));
             fake.FailStage = false;
 
+            fake.BlockStageUntilCancellation = true;
+            var stageTimedOut = await new CollectorRunCoordinator(fake).RunAsync(configPath,
+                config with { MaxDurationSeconds = 1 }, CancellationToken.None);
+            Check("stage deadline stops without advancing checkpoint",
+                stageTimedOut.Outcome == CollectorRunOutcome.LimitReached &&
+                stageTimedOut.CompletedPages == 0 && !File.Exists(approval.CheckpointPath));
+            fake.BlockStageUntilCancellation = false;
+
             using var canceled = new CancellationTokenSource();
             canceled.Cancel();
             before = fake.Reads;
@@ -169,6 +177,7 @@ internal static class RunCoordinatorChecks
         public List<IReadOnlyList<MinimizedField>> Staged { get; } = [];
         public bool FailRead { get; set; }
         public bool FailStage { get; set; }
+        public bool BlockStageUntilCancellation { get; set; }
 
         public Task<ApprovedCollectorRun?> LoadApprovedRunAsync(CollectorConfig config,
             CancellationToken cancellationToken)
@@ -193,7 +202,7 @@ internal static class RunCoordinatorChecks
             return Task.FromResult(Pages[Math.Min(index, Pages.Count - 1)]);
         }
 
-        public Task StagePageAsync(string boundary, string digest, IReadOnlyList<MinimizedField> fields,
+        public async Task StagePageAsync(string boundary, string digest, IReadOnlyList<MinimizedField> fields,
             CancellationToken cancellationToken)
         {
             if (FailStage)
@@ -201,8 +210,12 @@ internal static class RunCoordinatorChecks
                 throw new IOException("Synthetic stage failure.");
             }
 
+            if (BlockStageUntilCancellation)
+            {
+                await Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken);
+            }
+
             Staged.Add(fields);
-            return Task.CompletedTask;
         }
     }
 }

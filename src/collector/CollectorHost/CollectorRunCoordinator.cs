@@ -189,14 +189,23 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             }
 
             // A future adapter must durably and idempotently stage before the ledger advances.
+            // The same deadline bounds reading and staging of this page.
+            if (pageTimeout.IsCancellationRequested)
+            {
+                return new CollectorRunResult(cancellationToken.IsCancellationRequested
+                    ? CollectorRunOutcome.Canceled : CollectorRunOutcome.LimitReached,
+                    checkpoints.Count, rows, permission.RequiresWarningAndAudit);
+            }
+
             try
             {
-                await adapter.StagePageAsync(page.Boundary, digest, fields, cancellationToken);
+                await adapter.StagePageAsync(page.Boundary, digest, fields, pageTimeout.Token);
             }
-            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+            catch (OperationCanceledException) when (pageTimeout.IsCancellationRequested)
             {
-                return new CollectorRunResult(CollectorRunOutcome.Canceled, checkpoints.Count, rows,
-                    permission.RequiresWarningAndAudit);
+                return new CollectorRunResult(cancellationToken.IsCancellationRequested
+                    ? CollectorRunOutcome.Canceled : CollectorRunOutcome.LimitReached,
+                    checkpoints.Count, rows, permission.RequiresWarningAndAudit);
             }
             catch (Exception error) when (error is IOException or UnauthorizedAccessException or
                    InvalidDataException or CryptographicException)
