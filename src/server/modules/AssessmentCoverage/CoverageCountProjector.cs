@@ -19,7 +19,9 @@ public static class CoverageCountProjector
         IReadOnlyCollection<CoverageKey>? expected,
         IReadOnlyCollection<CoverageItem>? results)
     {
-        var reconciliation = CoverageReconciler.Reconcile(expected, results);
+        var expectedSnapshot = expected?.ToArray();
+        var resultSnapshot = results?.ToArray();
+        var reconciliation = CoverageReconciler.Reconcile(expectedSnapshot, resultSnapshot);
         if (!reconciliation.IsComplete)
         {
             return new CoverageCountResult(reconciliation.Issues, null);
@@ -27,13 +29,13 @@ public static class CoverageCountProjector
 
         var counts = Enum.GetValues<CoverageState>()
             .ToDictionary(state => state, _ => 0);
-        foreach (var result in results!)
+        foreach (var result in resultSnapshot!)
         {
             counts[result.State]++;
         }
 
-        return new CoverageCountResult([], counts
+        return new CoverageCountResult([], Array.AsReadOnly(counts
             .Select(pair => new CoverageStateCount(pair.Key, pair.Value))
-            .ToArray());
+            .ToArray()));
     }
 }
