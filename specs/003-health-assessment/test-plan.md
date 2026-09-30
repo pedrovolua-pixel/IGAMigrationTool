@@ -45,6 +45,7 @@ The synthetic fixture catalog follows the families in `implementation-plan.md`: 
 
 - Build expected inventory keys from the locked baseline, capability row, installed modules, scope and rule applicability.
 - Assert exactly one terminal coverage state for every key and no unknown/duplicate active key.
+- During a partial run, count only valid terminal results against the trusted plan. Missing keys remain outstanding; duplicate, unexpected, malformed or unexplained results deny the progress projection.
 - Exercise pass, finding, not-applicable, not-assessed, insufficient, excluded, inaccessible, redacted, unsupported and error.
 - Fail the test if absence is used instead of an explicit state.
 

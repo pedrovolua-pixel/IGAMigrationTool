@@ -52,7 +52,16 @@ public static class CoverageReconciler
 {
     public static CoverageReconciliationResult Reconcile(
         IReadOnlyCollection<CoverageKey>? expected,
-        IReadOnlyCollection<CoverageItem>? results)
+        IReadOnlyCollection<CoverageItem>? results) => Validate(expected, results, true);
+
+    internal static IReadOnlyList<CoverageIssue> ValidatePartial(
+        IReadOnlyCollection<CoverageKey>? expected,
+        IReadOnlyCollection<CoverageItem>? results) => Validate(expected, results, false).Issues;
+
+    private static CoverageReconciliationResult Validate(
+        IReadOnlyCollection<CoverageKey>? expected,
+        IReadOnlyCollection<CoverageItem>? results,
+        bool requireAll)
     {
         if (expected is null || results is null)
         {
@@ -114,11 +123,14 @@ public static class CoverageReconciler
             }
         }
 
-        foreach (var key in expectedKeys)
+        if (requireAll)
         {
-            if (!seen.Contains(key))
+            foreach (var key in expectedKeys)
             {
-                issues.Add(new CoverageIssue(CoverageIssueCode.MissingResult, key));
+                if (!seen.Contains(key))
+                {
+                    issues.Add(new CoverageIssue(CoverageIssueCode.MissingResult, key));
+                }
             }
         }
 

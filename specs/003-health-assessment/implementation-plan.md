@@ -316,7 +316,7 @@ Verification:
 
 ### Milestone 4 — Deliver Phase 1A evidence foundation
 
-A local, side-effect-free coverage reconciler checks one terminal result per trusted planned inventory/category key and explanations for gap states. Unweighted state counts and reason-level limitation projections are denied unless that reconciliation succeeds. Neither has a baseline reader, applicability planner, run state, authorization, persistence, UI or scoring path; TP-HAS-001 and all execution gates remain `NOT VERIFIED`.
+A local, side-effect-free coverage reconciler checks one terminal result per trusted planned inventory/category key and explanations for gap states. Unweighted state counts and reason-level limitation projections are denied unless that reconciliation succeeds. A separate progress projection accepts missing items while rejecting other malformed results, including on a 100,000-key synthetic plan. None has a baseline reader, applicability planner, run state, authorization, persistence, UI or scoring path; TP-HAS-001 and all execution gates remain `NOT VERIFIED`.
 
 - [ ] Implement capability-registry lifecycle and immutable exact-version locks; suspended/unsupported combinations cannot start new work.
 - [ ] Implement assessment start/idempotency, durable state machine, input locking, planning, cancellation, checkpoint/resume and terminal completion classification.
