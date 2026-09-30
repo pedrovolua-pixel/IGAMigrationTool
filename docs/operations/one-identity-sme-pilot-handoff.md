@@ -8,6 +8,8 @@ This handoff closes the source-knowledge gaps in the approved [database evidence
 
 Use the [prefilled SME evidence template](../../specs/001-data-ingestion/one-identity-sme-evidence-template.md) for each environment. Start with its four source-identification items; the query, field, database-owner and validation sections are staged for their later gates. Review only public-documentation candidates relevant to installed modules and proposed categories. Add relevant missing modules, objects and fields. The template records exact artifact references without exposing customer data in Git.
 
+For Environment A, start from the [partial report-backed SME response](../../specs/001-data-ingestion/one-identity-environment-a-sme-response.md). The report cover supplies **Edition version 10.0.0.287**. Confirm that it is the current installed build and obtain the database schema build before proposing A as an eligible source; do not infer installed module versions or source-query approval from the customization report.
+
 ## What the One Identity SME needs to provide
 
 1. **Exact source identity.** For each environment, provide a protected evidence reference for the exact One Identity Manager product version, build and hotfix, plus the installed module identifiers and exact module versions. Identify the approved product metadata source and when it was read. Mark each declared capability as installed, uninstalled, unsupported or still unknown. Record the SQL Server product and compatibility information needed to validate queries; do not put host names, network layout or credentials in this repository.

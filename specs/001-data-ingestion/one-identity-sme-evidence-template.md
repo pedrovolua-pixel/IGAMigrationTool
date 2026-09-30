@@ -1,7 +1,7 @@
 # One Identity Manager pilot — SME evidence template
 
 Status: Prefilled review template; no environment or query is verified
-Use: Make one protected copy for `PILOT-ENV-A` and a separate copy for `PILOT-ENV-B`.
+Use: Make one protected copy for `PILOT-ENV-A` and a separate copy for `PILOT-ENV-B`. The [partial Environment A response](one-identity-environment-a-sme-response.md) records what the supplied customization report supports.
 Owner: One Identity Manager SME; customer database owner completes the database section.
 Last updated: 2026-09-30
 
@@ -51,7 +51,7 @@ These are **candidate product facts**, not statements about this environment. At
 
 | Source-identification datum | SME response | Provenance / protected evidence ID |
 |---|---|---|
-| Exact One Identity Manager product version | [enter full value] | [product metadata source and capture time] |
+| Exact One Identity Manager product version | **A:** report cover states **Edition version 10.0.0.287**; current installed product/build still to confirm. **B:** [enter full value]. | **A:** [partial response](one-identity-environment-a-sme-response.md), report p. 1 and SHA-256; current-source confirmation pending. **B:** [product metadata source and capture time]. |
 | Exact database schema build/version | [enter full value; explain any difference from client version] | [enter] |
 | Installed hotfixes/cumulative updates/transport packages relevant to schema or behavior | [list exact identifiers and order, or none verified] | [enter] |
 | SQL Server product/build and database compatibility level | [enter; database owner verifies before query approval] | [enter] |
