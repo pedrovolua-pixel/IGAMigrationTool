@@ -36,6 +36,7 @@ if (invalid.Issues.Count != 1 || invalid.Issues[0].Code != CoverageIssueCode.Inv
 checks++;
 
 Console.WriteLine($"{checks} assessment coverage reconciliation cases passed.");
+Console.WriteLine($"{CoverageCountChecks.Run()} assessment coverage count cases passed.");
 
 void Check(string name, CoverageIssueCode[] expectedIssues,
     CoverageKey[] expected, CoverageItem[] results)

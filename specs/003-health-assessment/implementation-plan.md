@@ -316,7 +316,7 @@ Verification:
 
 ### Milestone 4 — Deliver Phase 1A evidence foundation
 
-A local, side-effect-free coverage reconciler now checks one terminal result per trusted planned inventory/category key and structured explanations for gap states. It has no baseline reader, applicability planner, run state, authorization, persistence, UI or scoring path; TP-HAS-001 and all execution gates remain `NOT VERIFIED`.
+A local, side-effect-free coverage reconciler checks one terminal result per trusted planned inventory/category key and explanations for gap states. An unweighted count projection is denied unless that reconciliation succeeds. Neither has a baseline reader, applicability planner, run state, authorization, persistence, UI or scoring path; TP-HAS-001 and all execution gates remain `NOT VERIFIED`.
 
 - [ ] Implement capability-registry lifecycle and immutable exact-version locks; suspended/unsupported combinations cannot start new work.
 - [ ] Implement assessment start/idempotency, durable state machine, input locking, planning, cancellation, checkpoint/resume and terminal completion classification.
@@ -523,6 +523,7 @@ Record material discoveries and approved deviations without rewriting historical
 | 2026-09-29 | Internal Phase 1A coverage reconciliation was added with thirteen synthetic cases and wired to the partial bootstrap workflow. | This checks terminal-result completeness only. Expected inventory generation, baseline eligibility, persistence, scoring and end-to-end TP-HAS-001 remain open. | Local Release build and synthetic cases; [partial remote run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36657204155) passed on `44915de` |
 | 2026-09-29 | A feature-001 collector safety prototype now classifies typed permission-probe outcomes, blocking missing minimum-read proof and all reported write/admin categories while marking excess read-only for warning. | It opens no SQL connection and cannot start collection; the approved query pack, trusted probe, warning/audit path, feature-001 C0 and G2 remain open. | Seventeen local synthetic permission cases; [partial remote run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36657204155) passed on `44915de` |
 | 2026-09-29 | A local page-checkpoint verifier now binds query/build/scope/policy/order/boundary and digest, distinguishing replay from conflict. | It performs no source read, durable storage or atomic checkpoint write; G2 and feature-001 C0 remain open. | Twelve local synthetic cases; [partial remote run](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36657204155) passed on `44915de` |
+| 2026-09-29 | An unweighted coverage-state count projection now requires complete reconciliation and includes a 100,000-item synthetic case. | No score, applicability or end-to-end scale claim follows from this local count. | Local cases and remote run pending |
 
 ## Approval
 
