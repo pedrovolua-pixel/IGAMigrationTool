@@ -40,6 +40,10 @@ internal static class RunCoordinatorChecks
             fake.Approval = null;
             Check("missing approved material stops before read",
                 (await Run(fake)).Outcome == CollectorRunOutcome.SourceContractPending && fake.Reads == 0);
+            fake.CancelApprovalWithoutToken = true;
+            Check("unexpected approval cancellation is a source failure",
+                (await Run(fake)).Outcome == CollectorRunOutcome.SourceFailed && fake.Reads == 0);
+            fake.CancelApprovalWithoutToken = false;
             fake.Approval = approval with { QueryPackSha256 = new string('c', 64) };
             Check("pack digest mismatch stops before read",
                 (await Run(fake)).Outcome == CollectorRunOutcome.InvalidApproval && fake.Reads == 0);
@@ -115,11 +119,21 @@ internal static class RunCoordinatorChecks
                 (await Run(fake)).Outcome == CollectorRunOutcome.SourceFailed &&
                 !File.Exists(approval.CheckpointPath));
             fake.FailRead = false;
+            fake.CancelReadWithoutToken = true;
+            Check("unexpected read cancellation leaves no checkpoint",
+                (await Run(fake)).Outcome == CollectorRunOutcome.SourceFailed &&
+                !File.Exists(approval.CheckpointPath));
+            fake.CancelReadWithoutToken = false;
             fake.FailStage = true;
             Check("stage failure leaves no checkpoint",
                 (await Run(fake)).Outcome == CollectorRunOutcome.StageFailed &&
                 !File.Exists(approval.CheckpointPath));
             fake.FailStage = false;
+            fake.CancelStageWithoutToken = true;
+            Check("unexpected stage cancellation leaves no checkpoint",
+                (await Run(fake)).Outcome == CollectorRunOutcome.StageFailed &&
+                !File.Exists(approval.CheckpointPath));
+            fake.CancelStageWithoutToken = false;
 
             fake.BlockStageUntilCancellation = true;
             var stageTimedOut = await new CollectorRunCoordinator(fake).RunAsync(configPath,
@@ -177,12 +191,19 @@ internal static class RunCoordinatorChecks
         public List<IReadOnlyList<MinimizedField>> Staged { get; } = [];
         public bool FailRead { get; set; }
         public bool FailStage { get; set; }
+        public bool CancelApprovalWithoutToken { get; set; }
+        public bool CancelReadWithoutToken { get; set; }
+        public bool CancelStageWithoutToken { get; set; }
         public bool BlockStageUntilCancellation { get; set; }
 
         public Task<ApprovedCollectorRun?> LoadApprovedRunAsync(CollectorConfig config,
             CancellationToken cancellationToken)
         {
             Loads++;
+            if (CancelApprovalWithoutToken)
+            {
+                throw new OperationCanceledException("Synthetic approval cancellation.");
+            }
             return Task.FromResult(Approval);
         }
 
@@ -193,6 +214,10 @@ internal static class RunCoordinatorChecks
             if (FailRead)
             {
                 throw new IOException("Synthetic read failure.");
+            }
+            if (CancelReadWithoutToken)
+            {
+                throw new OperationCanceledException("Synthetic read cancellation.");
             }
 
             RequestedBoundaries.Add(afterBoundary);
@@ -208,6 +233,10 @@ internal static class RunCoordinatorChecks
             if (FailStage)
             {
                 throw new IOException("Synthetic stage failure.");
+            }
+            if (CancelStageWithoutToken)
+            {
+                throw new OperationCanceledException("Synthetic stage cancellation.");
             }
 
             if (BlockStageUntilCancellation)

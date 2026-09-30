@@ -54,6 +54,10 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
         {
             return Result(CollectorRunOutcome.Canceled);
         }
+        catch (OperationCanceledException)
+        {
+            return Result(CollectorRunOutcome.SourceFailed);
+        }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or
                InvalidDataException or CryptographicException)
         {
@@ -143,6 +147,11 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
                     ? CollectorRunOutcome.Canceled : CollectorRunOutcome.LimitReached,
                     checkpoints.Count, rows, permission.RequiresWarningAndAudit);
             }
+            catch (OperationCanceledException)
+            {
+                return new CollectorRunResult(CollectorRunOutcome.SourceFailed, checkpoints.Count, rows,
+                    permission.RequiresWarningAndAudit);
+            }
             catch (Exception error) when (error is IOException or UnauthorizedAccessException or
                    InvalidDataException or CryptographicException)
             {
@@ -206,6 +215,11 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
                 return new CollectorRunResult(cancellationToken.IsCancellationRequested
                     ? CollectorRunOutcome.Canceled : CollectorRunOutcome.LimitReached,
                     checkpoints.Count, rows, permission.RequiresWarningAndAudit);
+            }
+            catch (OperationCanceledException)
+            {
+                return new CollectorRunResult(CollectorRunOutcome.StageFailed, checkpoints.Count, rows,
+                    permission.RequiresWarningAndAudit);
             }
             catch (Exception error) when (error is IOException or UnauthorizedAccessException or
                    InvalidDataException or CryptographicException)
