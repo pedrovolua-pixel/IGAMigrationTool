@@ -6,6 +6,8 @@ Last updated: 2026-09-30
 
 This handoff closes the source-knowledge gaps in the approved [database evidence contract](../../specs/003-health-assessment/database-evidence-contract.md) and [pilot capability matrix](../../specs/003-health-assessment/capability-matrix.md). It applies separately to `PILOT-ENV-A` and `PILOT-ENV-B`. The environments must be independently administered sources with distinct evidence baselines; a clone, restore or second tenant of one source does not count as the second environment.
 
+Use the [prefilled SME evidence template](../../specs/001-data-ingestion/one-identity-sme-evidence-template.md) for each environment. Confirm, correct or mark each public-documentation candidate as not applicable, and add missing modules, objects and fields. The template records exact artifact references without exposing customer data in Git.
+
 ## What the One Identity SME needs to provide
 
 1. **Exact source identity.** For each environment, provide a protected evidence reference for the exact One Identity Manager product version, build and hotfix, plus the installed module identifiers and exact module versions. Identify the approved product metadata source and when it was read. Mark each declared capability as installed, uninstalled, unsupported or still unknown. Record the SQL Server product and compatibility information needed to validate queries; do not put host names, network layout or credentials in this repository.
