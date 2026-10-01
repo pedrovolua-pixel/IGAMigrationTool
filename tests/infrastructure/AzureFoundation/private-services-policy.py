@@ -105,8 +105,23 @@ def validate_service(template, kind):
             'One private service connection required')
     require(len(resource(template, DNS_GROUP)['properties']['privateDnsZoneConfigs']) == 1,
             'One DNS zone required')
-    output_names = {'registryId', 'loginServer', 'privateEndpointId'} if kind == 'registry' else {'keyVaultId', 'privateEndpointId'}
-    require(set(template['outputs']) == output_names, 'Output allowlist required')
+    name = 'registryName' if kind == 'registry' else 'keyVaultName'
+    main_id = "[resourceId('" + main + "', parameters('" + name + "'))]"
+    endpoint_id = "[resourceId('Microsoft.Network/privateEndpoints', format('{0}-pe', parameters('" + name + "')))]"
+    outputs = {
+        'registryId' if kind == 'registry' else 'keyVaultId': {'type': 'string', 'value': main_id},
+        'privateEndpointId': {'type': 'string', 'value': endpoint_id},
+    }
+    if kind == 'registry':
+        outputs['loginServer'] = {'type': 'string', 'value':
+            "[reference(resourceId('Microsoft.ContainerRegistry/registries', parameters('registryName')), '2025-11-01').loginServer]"}
+    require(template['outputs'] == outputs, 'Only reviewed non-secret output expressions permitted')
+    endpoint_props = resource(template, ENDPOINT)['properties']
+    require(set(endpoint_props) == {'subnet', 'privateLinkServiceConnections'},
+            'Unsupported/manual private endpoint connections prohibited')
+    require(set(endpoint_props['subnet']) == {'id'}, 'Unsupported subnet settings prohibited')
+    require(set(endpoint_props['privateLinkServiceConnections'][0]['properties']) == {'privateLinkServiceId', 'groupIds'},
+            'Unsupported private service connection settings prohibited')
     require('policies' not in resource(template, main)['properties'], 'No unapproved retention policy')
     if kind == 'vault':
         for name in ['tenantId', 'softDeleteRetentionInDays', 'enablePurgeProtection']:
@@ -126,7 +141,11 @@ def validate_dns(template):
     props = resource(template, LINK)['properties']
     require(props['registrationEnabled'] is False, 'Auto-registration prohibited')
     require(props['virtualNetwork']['id'] == "[parameters('virtualNetworkId')]", 'Existing VNet link required')
-    require(set(template['outputs']) == {'privateDnsZoneId', 'virtualNetworkLinkId'}, 'DNS output allowlist required')
+    require(template['outputs'] == {
+        'privateDnsZoneId': {'type': 'string', 'value': "[resourceId('Microsoft.Network/privateDnsZones', parameters('zoneName'))]"},
+        'virtualNetworkLinkId': {'type': 'string', 'value':
+            "[resourceId('Microsoft.Network/privateDnsZones/virtualNetworkLinks', parameters('zoneName'), parameters('virtualNetworkLinkName'))]"},
+    }, 'Only reviewed non-secret DNS output expressions permitted')
 
 
 def expect_denied(template, validator, mutate, label):
@@ -161,6 +180,20 @@ def main():
         expect_denied(template, validator, lambda t: t['outputs'].update({'secret': {'type': 'string', 'value': 'unsafe'}}), 'secret output')
         expect_denied(template, validator, lambda t: t['variables'].update({'location': 'westeurope'}), 'non-US region')
         count += 3
+        for expression in ["[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', 'unsafe'), '2025-11-01')]",
+                           "[listKeys(resourceId('Microsoft.Storage/storageAccounts', 'unsafe'), '2025-06-01')]",
+                           "[reference(resourceId('Microsoft.KeyVault/vaults/secrets', 'unsafe', 'secret'), '2026-02-01').value]"]:
+            output_name = 'loginServer' if kind == 'registry' else 'keyVaultId'
+            expect_denied(template, validator,
+                          lambda t, n=output_name, e=expression: t['outputs'][n].update({'value': e}), 'secret output expression')
+            count += 1
+        expect_denied(template, validator,
+                      lambda t: resource(t, ENDPOINT)['properties'].update({'manualPrivateLinkServiceConnections': []}),
+                      'manual private connection')
+        expect_denied(template, validator,
+                      lambda t: resource(t, ENDPOINT)['properties']['privateLinkServiceConnections'].append({'properties': {}}),
+                      'additional private connection')
+        count += 2
     for name in ['tenantId', 'softDeleteRetentionInDays', 'enablePurgeProtection']:
         expect_denied(vault, lambda t: validate_service(t, 'vault'),
                       lambda t, n=name: t['parameters'][n].update({'defaultValue': 'unsafe'}), 'unapproved default ' + name)
@@ -175,6 +208,10 @@ def main():
         expect_denied(dns, validate_dns, lambda t, p=path, v=value: set_path(resource(t, LINK), p, v), str(path))
         count += 1
     expect_denied(dns, validate_dns, lambda t: t['parameters']['zoneName']['allowedValues'].append('example.com'), 'unapproved zone')
+    count += 1
+    expect_denied(dns, validate_dns,
+                  lambda t: t['outputs']['privateDnsZoneId'].update({'value': "[listKeys('unsafe', '2025-06-01')]"}),
+                  'secret DNS output expression')
     count += 1
     print(f'PASS: 3 compiled module baselines; {count} unsafe drift mutations denied. Live connectivity/access not verified.')
 
