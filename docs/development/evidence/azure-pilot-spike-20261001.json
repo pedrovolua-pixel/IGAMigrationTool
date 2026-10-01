@@ -1,0 +1,114 @@
+{
+  "schema": "azure-pilot-config-check-v1",
+  "date": "2026-10-01",
+  "environment": "isolated synthetic development, East US 2",
+  "source_commit": "e18837327be4bb759e865280889d118c2f3b2e24",
+  "compiled_sha256": "8bdffd48ffc62c893233a944b6b773cb362228819d236a9e2a64a466383a8265",
+  "parameters_sha256": "383962763a66b861182aa96d76c3fbae6b28d07ed7b86468e9eded34251c8492",
+  "owner_approval": "2026-10-01 conversation: exact USD 15 / 24-hour scope, addresses, scoped grants and disposal approved",
+  "fresh_budget": {
+    "monthly_limit_usd": 50,
+    "reported_spend_usd": 0,
+    "reporting_delayed": true
+  },
+  "deployment": {
+    "state": "Succeeded",
+    "error": null,
+    "completed_at": "2026-10-01T23:09:51.698279+00:00"
+  },
+  "configuration": {
+    "vnet": "10.64.0.0/16",
+    "app_subnet": "10.64.0.0/23",
+    "private_endpoint_subnet": "10.64.2.0/24",
+    "app_delegation": "Microsoft.App/environments",
+    "nat_attached": true,
+    "broker_sku": "Standard",
+    "broker_local_auth_disabled": true,
+    "minimum_tls": "1.2",
+    "default_network_action": "Deny",
+    "trusted_services_bypass": false,
+    "duplicate_detection": true,
+    "expiration_dead_lettering": true,
+    "queue_status": "Active"
+  },
+  "management_api_assertions": {
+    "staticIPv4": true,
+    "natIPMatches": true,
+    "brokerOnlyNat": true,
+    "distinctIdentities": true,
+    "queueGrantCount": 2,
+    "senderGrant": true,
+    "receiverGrant": true
+  },
+  "limitations": [
+    "Management configuration only; no attached workload or traffic proof",
+    "No runtime allow/deny, effective identity separation, observability or recovery evidence",
+    "G1 remains NOT VERIFIED; this is not a signed gate bundle"
+  ],
+  "verification_note": "Transcribed from executed Azure CLI management responses in authenticated ephemeral Cloud Shell. Initial role-list request combined --scope and --all and failed; corrected scope-only request returned these results.",
+  "cleanup": {
+    "date": "2026-10-01",
+    "scope": "six exact top-level disposable resources and broker children; no whole-group deletion",
+    "resource_inventory_after": [],
+    "evidence_preserved": true,
+    "within_24_hours": true,
+    "resource_group_preserved": true,
+    "budget_preserved": true,
+    "reported_spend_usd": 0,
+    "final_charges": "NOT VERIFIED"
+  },
+  "identity_prerequisites": {
+    "signed_in_role": "Global Administrator",
+    "tenant_plan": "Entra ID Premium P2",
+    "pilot_policy_effectiveness": "NOT VERIFIED",
+    "registration_created": false
+  },
+  "remaining_provider_preflight": [
+    {
+      "provider": "Microsoft.App",
+      "registered": true,
+      "east_us_2_advertised": true,
+      "planned_api": "2026-01-01",
+      "api_advertised": true
+    },
+    {
+      "provider": "Microsoft.ContainerRegistry",
+      "registered": true,
+      "east_us_2_advertised": true,
+      "planned_api": "2025-11-01",
+      "api_advertised": true
+    },
+    {
+      "provider": "Microsoft.DBforPostgreSQL",
+      "registered": true,
+      "east_us_2_advertised": true,
+      "planned_api": "2025-08-01",
+      "api_advertised": true
+    },
+    {
+      "provider": "Microsoft.KeyVault",
+      "registered": true,
+      "east_us_2_advertised": true,
+      "planned_api": "2026-02-01",
+      "api_advertised": true
+    },
+    {
+      "provider": "Microsoft.Storage",
+      "registered": true,
+      "east_us_2_advertised": true,
+      "planned_api": "2025-06-01",
+      "api_advertised": true
+    }
+  ],
+  "postgresql_capabilities": {
+    "major_18_advertised": true,
+    "tiers": [
+      "Burstable",
+      "GeneralPurpose",
+      "MemoryOptimized"
+    ],
+    "observed_restriction_fields": null,
+    "capacity_reserved": false,
+    "server_created": false
+  }
+}

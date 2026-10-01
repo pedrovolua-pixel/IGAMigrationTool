@@ -1,6 +1,6 @@
 # Azure pilot development setup
 
-Status: Initial Azure setup verified; paid platform spike pending  
+Status: Approved partial spike provisioned and configuration verified; approved cleanup verified
 Owner: Repository owner and platform engineer  
 Last updated: 2026-10-01
 
@@ -10,7 +10,7 @@ This is the environment setup handoff for [Milestone 1 / G1](../../specs/003-hea
 
 The owner selected **Subscription 1** and a **USD 50 monthly Azure development limit** on 2026-10-01. The portal showed that subscription as Active and the signed-in owner as Owner. An empty resource group, `rg-iga-pilot-dev-eastus2`, was created and verified in East US 2. Its `iga-pilot-dev-monthly` budget was created and verified at USD 50, resetting monthly from 2026-10-01 and expiring on 2028-09-30. Actual-cost alerts are configured at 50%, 80% and 100% to the owner's supplied recipient. Subscription/tenant IDs and the recipient address remain in Azure/environment configuration, outside this document and the status site.
 
-No application, network, broker, database, store, role assignment, app registration or credential was created in this setup. The portal showed zero resources and no deployments in the new group before budget creation. The continuation below records provider, network-quota and deployment-preview checks; Conditional Access, private DNS, workload federation and deployed service capacity remain unverified. G1–G9 remain `NOT VERIFIED`.
+The initial setup created no application, network, broker, database, store, role assignment, app registration or credential. The later approved partial spike is recorded below. The portal showed zero resources and no deployments in the new group before budget creation. The continuation below records provider, network-quota and deployment-preview checks; Conditional Access, private DNS, workload federation and deployed service capacity remain unverified. G1–G9 remain `NOT VERIFIED`.
 
 ## Cost boundary
 
@@ -62,15 +62,15 @@ Initial setup is a portal verification, not a deployed platform control test. Re
 
 ## First test proposal and executed preflight — 2026-10-01
 
-State: **Preview validated; owner review of addresses, timed test and cleanup pending. No paid deployment.**
+State: **Owner approved the exact isolated addresses, USD 15 / 24-hour test, scoped grants and disposable-resource cleanup on 2026-10-01. Deployment and management configuration checks passed; approved cleanup returned an empty resource inventory. G1 remains NOT VERIFIED.**
 
-The owner clarified that the source collector will send to Azure over outbound HTTPS. No Azure-to-source VPN, peering, inbound collector listener or SQL route is required or approved. The proposed Azure VNet is isolated. The selected subscription's VNet inventory returned empty; this does not verify address compatibility with any future connected network.
+The owner clarified that the source collector will send to Azure over outbound HTTPS. No Azure-to-source VPN, peering, inbound collector listener or SQL route is required or approved. The approved test Azure VNet was isolated. The selected subscription's VNet inventory returned empty; this does not verify address compatibility with any future connected network.
 
 The authenticated ephemeral Cloud Shell selected the protected subscription ID and returned `Subscription 1`, `Enabled`. Registration checks found App, Network, ManagedIdentity, ContainerRegistry, Storage, KeyVault, OperationalInsights, Insights and Authorization registered. ServiceBus was unregistered; its registration was started in the portal and the subsequent CLI result returned `Registered`. DBforPostgreSQL remains unregistered and was not enabled for this partial test.
 
 East US 2 network usage returned 0/1000 VNets, 0/20 public IPs and 0/100 NAT gateways. Provider metadata advertised the planned region and Network `2025-05-01`, ServiceBus namespace/queue `2026-01-01`, and ManagedIdentity `2024-11-30` APIs. Child-resource availability and policy were additionally exercised by Azure template validation. These checks do not reserve capacity or prove live workload networking.
 
-The [proposed parameter file](../../infra/bicep/environments/pilot-dev-spike.parameters.json) selects VNet `10.64.0.0/16`, Container Apps subnet `10.64.0.0/23`, and private-endpoint subnet `10.64.2.0/24`. Owner review is still required before these become an allocated environment plan. The current template creates no private endpoint or DNS zone; later protected-service modules must add their approved DNS paths.
+The [approved parameter file](../../infra/bicep/environments/pilot-dev-spike.parameters.json) selects VNet `10.64.0.0/16`, Container Apps subnet `10.64.0.0/23`, and private-endpoint subnet `10.64.2.0/24`. The owner approved these addresses for this isolated synthetic environment on 2026-10-01; a future network connection still requires its own reviewed address plan. The current template creates no private endpoint or DNS zone; later protected-service modules must add their approved DNS paths.
 
 ### Exact proposed scope
 
@@ -110,3 +110,25 @@ The network plus hourly broker reference would be approximately USD 1.52 before 
 - Azure group template validation returned `Succeeded`, no error, for the same proposed names/CIDRs. It creates no paid resources and is not evidence of deployed authorization, networking, observability or recovery.
 
 Chrome's automated upload required an extension file-access setting. The normal native file picker successfully uploaded only the compiled non-secret template; the setting was not changed. Cloud Shell files are ephemeral. No credentials, subscription/tenant IDs or user contact data are in the parameter file, this handoff or the private board.
+
+## Approved deployment execution — 2026-10-01
+
+The owner approved the concrete proposal and requested continued setup of development prerequisites. A fresh scope check returned the selected subscription enabled, the intended group empty, the uploaded compiled digest unchanged, and the monthly USD 50 budget with USD 0 reported spend. Reporting is delayed and this does not guarantee final charges.
+
+The exact reviewed spike deployment returned `Succeeded` and no error. Management reads verified the allocated VNet/subnets and Container Apps delegation/NAT attachment; Standard static IPv4 and its NAT association; Service Bus Standard, TLS 1.2, local/SAS disabled, default network Deny, no trusted-service bypass, and exactly the NAT IP allowed; active work queue, duplicate detection and expiration dead-lettering. Distinct identities have exactly two queue-scoped assignments, Data Sender and Data Receiver. The initial role read incorrectly combined `--scope` and `--all`; correcting it to scope-only returned the verified grants. These are configuration checks, not effective data-plane authorization proof.
+
+The [sanitized execution record](evidence/azure-pilot-spike-20261001.json) preserves template/parameter digests and actual results outside the disposable resources. It is developer evidence, not a signed gate bundle or restricted engineering-store artifact. No workload, customer evidence, message load or source connection was created.
+
+PostgreSQL's provider was enabled and returned `Registered`; its metadata lists East US 2. This administrative prerequisite creates no database. The full platform still lacks deployable Container Apps, database, ACR/private connectivity, Key Vault, diagnostics and complete evidence-store integration. Entra registration, exact redirect/logout inputs, user-license assignment, pilot Conditional Access configuration and live BFF federation proof remain open; directory administration and the tenant Premium P2 plan were verified below. Additional paid tests need complete modules, reviewed parameters, an estimate within the remaining monthly allowance and an exact evidence-preserving cleanup scope. Persistent ACR Premium alone exceeds this development limit.
+
+### Cleanup and identity prerequisites
+
+After preserving the configuration results, inventory showed exactly the six approved top-level test resources. The operator deleted the broker namespace/children, VNet/subnets, NAT, static IP and the two managed identities by exact name. The subsequent resource inventory returned `[]`, within the approved 24-hour window. No whole-group deletion occurred. Deployment history was retained. Final invoiced spend and email delivery remain unverified.
+
+The Entra admin center showed the signed-in account as Global Administrator and the tenant plan as Entra ID Premium P2. The Conditional Access overview is accessible. These administrative/licensing checks do not prove assigned-user licensing, pilot-specific MFA/authentication strength, policy scope, exclusions or emergency-account behavior. The pilot has no deployed BFF registration or approved actual web redirect/logout endpoints yet. Implement and validate those inputs and the dedicated federation path before enabling sign-in.
+
+### Remaining service preflight
+
+Authenticated management metadata returned registered providers, East US 2 availability and the approved stable API for Container Apps managed environments (`2026-01-01`), ACR (`2025-11-01`), PostgreSQL Flexible Server (`2025-08-01`), Key Vault (`2026-02-01`) and Storage (`2025-06-01`). Metadata is not capacity reservation or a deployed service-control test. PostgreSQL capabilities advertise Burstable including `Standard_B1ms` and 32 GiB managed disk; major 18 is listed among supported versions and the regional status/restriction/reason fields were null. No SKU or database was provisioned. These observations are candidate inputs for the next priced test, not a selected production configuration.
+
+After cleanup the retained group returned `Succeeded` in East US 2, and the retained budget returned USD 50 with USD 0 reported spend. Reconcile delayed billed charges before another paid test.
