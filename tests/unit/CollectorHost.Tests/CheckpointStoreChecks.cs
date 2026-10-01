@@ -26,6 +26,23 @@ internal static class CheckpointStoreChecks
             EncryptedCheckpointStore.Save(path, context, [first], localByteCap, key);
             Check("round trip", EncryptedCheckpointStore.Load(path, context, key)?.SequenceEqual([first]) == true);
             var firstBytes = File.ReadAllBytes(path);
+            EncryptedCheckpointStore.Save(path, context, [first], firstBytes.Length, key);
+            Check("same checkpoint replay succeeds at exact byte cap",
+                EncryptedCheckpointStore.Load(path, context, key)?.SequenceEqual([first]) == true);
+            Check("same checkpoint replay preserves ciphertext", File.ReadAllBytes(path).SequenceEqual(firstBytes));
+            Check("same checkpoint replay creates no temporary file", Directory.GetFiles(directory, "*.tmp").Length == 0);
+            Reject<InvalidDataException>("same checkpoint replay rejects narrowed byte cap", () =>
+                EncryptedCheckpointStore.Save(path, context, [first], firstBytes.Length - 1, key));
+            var otherPath = Path.Combine(directory, "other.enc");
+            byte[] otherBytes = [1];
+            File.WriteAllBytes(otherPath, otherBytes);
+            Reject<InvalidDataException>("same checkpoint replay counts unrelated run files", () =>
+                EncryptedCheckpointStore.Save(path, context, [first], firstBytes.Length, key));
+            EncryptedCheckpointStore.Save(path, context, [first], firstBytes.Length + 1, key);
+            Check("same checkpoint replay allows exact combined byte cap",
+                File.ReadAllBytes(path).SequenceEqual(firstBytes) && File.ReadAllBytes(otherPath).SequenceEqual(otherBytes));
+            File.Delete(otherPath);
+            Check("rejected checkpoint replays preserve prior ledger", File.ReadAllBytes(path).SequenceEqual(firstBytes));
             Reject<InvalidDataException>("checkpoint replacement obeys temporary byte cap", () =>
                 EncryptedCheckpointStore.Save(path, context, [first, second], firstBytes.Length, key));
             Check("capacity rejection preserves prior checkpoint", File.ReadAllBytes(path).SequenceEqual(firstBytes));

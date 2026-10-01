@@ -48,6 +48,7 @@ The synthetic fixture catalog follows the families in `implementation-plan.md`: 
 - Assert exactly one terminal coverage state for every key and no unknown/duplicate active key.
 - During a partial run, count only valid terminal results against the trusted plan. Missing keys remain outstanding; duplicate, unexpected, malformed or unexplained results deny the progress projection.
 - A nonempty reconciled terminal plan with only `pass`, `finding` and explained `not_applicable` results classifies as complete; any explained limitation state classifies as complete with gaps. Empty, missing, duplicate or unexplained results deny classification. This pure classification does not start or complete a durable run.
+- The internal capability-bound composition must return no combined projection when exact-version locking fails or terminal coverage is invalid/incomplete. Its synthetic fixtures bind the frozen lock to completion kind, state counts, executable numerator/denominator and grouped limitations, including zero applicable and 100,000-unit inputs. The separate versioned `SyntheticPilotFlow.Tests` host verifies independently expected primitive/composition results. These checks cover only a local subset; they do not establish baseline eligibility, trusted inventory generation, authorization, durable execution, UI or full TP-HAS-001/007 completion.
 - Exercise pass, finding, not-applicable, not-assessed, insufficient, excluded, inaccessible, redacted, unsupported and error.
 - Fail the test if absence is used instead of an explicit state.
 

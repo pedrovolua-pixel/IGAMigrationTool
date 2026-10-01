@@ -36,6 +36,8 @@ jobs:
         run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
       - name: Check assessment capability locks
         run: dotnet run --project tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj --configuration Release --no-build
+      - name: Check synthetic capability and coverage integration
+        run: dotnet run --project tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj --configuration Release --no-build
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check collector host contract

@@ -14,6 +14,8 @@ The local pilot build is a distinct checkpoint before live validation. The produ
 
 ## Local completion slices
 
+The owner approved a coordinator and three parallel workers on 2026-10-01. [The development workflow](../../docs/development/parallel-agent-workflow.md) assigns isolated implementation and independent verification; [cycle 01](local-pilot-parallel-cycle-01.md) tracks the first checkpoint-retry, assessment-composition and synthetic-integration packets. The coordinator maintains canonical records and publishes the private site after integration. Parallel execution changes delivery organization, not completion or acceptance criteria.
+
 | Slice | Locally reviewable outcome | External evidence deferred |
 |---|---|---|
 | Collector host and recovery | A Windows Service and one-shot CLI share the bounded collector core; protected configuration, lease, encrypted run directory/key, restart, retention and failure outcomes pass synthetic Windows tests. No arbitrary SQL or inbound listener. | Customer installation, real SQL credential, certificate trust, exact query pack, per-query impact approval, signed MSI. |

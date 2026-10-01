@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj" />
+    <ProjectReference Include="../../../src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj" />
+  </ItemGroup>
+</Project>

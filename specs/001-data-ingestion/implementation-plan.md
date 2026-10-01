@@ -104,6 +104,8 @@ Verification:
 
 ## Discoveries and plan changes
 
+Parallel cycle 01 (2026-10-01): C1 implements the already-required idempotent checkpoint save without an unnecessary encrypted rewrite. An authenticated identical ordered ledger validates aggregate existing bytes and returns unchanged; append writes still reserve transient bytes. Seven added assertions bring the checkpoint host to 26 cases. The coordinator's pinned audited locked solution restore, formatting, Release build, all current unit/integration/architecture hosts and self-contained Windows cross-publish passed locally. Independent worker review found no actionable issue. Windows execution for this change and site publication await coordinator completion; C2/C3/C4 and G2 remain open. [Execution record](../../plans/active/local-pilot-parallel-cycle-01.md).
+
 | Date | Discovery | Impact/evidence |
 |---|---|---|
 | 2026-09-29 | Product approval exists but feature-001 technical/test/implementation approval does not. | Drafted a bounded pilot plan; collector behavior remains behind C0. |

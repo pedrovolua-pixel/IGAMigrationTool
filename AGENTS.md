@@ -34,6 +34,10 @@ Run every applicable repository check before claiming completion: formatting, li
 
 For substantial work, keep the canonical implementation plan and feature status current.
 
+## Parallel pilot development
+
+The repository owner approved a coordinator and up to three bounded parallel workers on 2026-10-01. For approved local pilot implementation, delegate independent work through [the parallel development workflow](docs/development/parallel-agent-workflow.md). Use isolated worktrees for writing workers, explicit path ownership and traceable work packets. The coordinator owns shared configuration, integration, canonical records, human reporting and the existing private site. Workers return executed evidence and receive independent review; agent review does not replace required human approval. Use fewer workers when tasks are dependent or cannot be safely isolated.
+
 ## Pilot status site
 
 For One Identity health-assessment pilot work, also maintain the existing private [pilot status site](docs/development/pilot-status-site.md). The repository's approved plans, feature status, and evidence index remain authoritative; the site summarizes them for human review.

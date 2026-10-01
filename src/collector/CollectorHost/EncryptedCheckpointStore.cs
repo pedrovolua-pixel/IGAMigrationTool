@@ -99,6 +99,14 @@ public static class EncryptedCheckpointStore
             throw new InvalidDataException("Completed checkpoint pages cannot be rewritten.");
         }
 
+        if (previous is not null && previous.Count == pages.Count)
+        {
+            // Authenticated same-content replay needs no replacement or temporary bytes.
+            // Existing files must still fit the configured run-directory capacity.
+            LocalRunDirectoryCapacity.Validate(Path.GetDirectoryName(path)!, maxLocalBytes, 0);
+            return;
+        }
+
         var plaintext = JsonSerializer.SerializeToUtf8Bytes(new CheckpointDocument(2, context, [.. pages]), JsonOptions);
         if (plaintext.Length > MaxPlaintextBytes)
         {

@@ -19,6 +19,9 @@
     <Project Path="tests/infrastructure/NetworkEgressPolicy/NetworkEgressPolicy.csproj" />
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
+  <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
+  </Folder>
   <Folder Name="/tests/unit/">
     <Project Path="tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj" />
     <Project Path="tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj" />
