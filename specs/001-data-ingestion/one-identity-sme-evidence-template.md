@@ -51,18 +51,18 @@ These are **candidate product facts**, not statements about this environment. At
 
 | Source-identification datum | SME response | Provenance / protected evidence ID |
 |---|---|---|
-| Exact One Identity Manager product version | **A:** report cover states **Edition version 10.0.0.287**; current installed product/build still to confirm. **B:** [enter full value]. | **A:** [partial response](one-identity-environment-a-sme-response.md), report p. 1 and SHA-256; current-source confirmation pending. **B:** [product metadata source and capture time]. |
+| Exact One Identity Manager product version | **A:** report cover states **Edition version 10.0.0.287**; SME confirmed it is current. **B:** [enter full value]. | **A:** [partial response](one-identity-environment-a-sme-response.md), report p. 1 and SHA-256; protected current-source metadata reference pending. **B:** [product metadata source and capture time]. |
 | Exact database schema build/version | [enter full value; explain any difference from client version] | [enter] |
 | Installed hotfixes/cumulative updates/transport packages relevant to schema or behavior | [list exact identifiers and order, or none verified] | [enter] |
-| SQL Server product/build and database compatibility level | **A:** owner supplied SQL Server 2022 Database Engine build **16.0.1121.4** and reported database compatibility level **160**; confirm the source database setting. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); protected source/database-owner evidence pending. **B:** [enter]. |
-| Query-relevant collation or compatibility characteristic, if applicable | **A:** owner supplied default case-insensitive collation **`SQL_Latin1_General_CP1_CI_AS`**; confirm whether it is the source database setting. **B:** [enter only if needed]. | **A:** [partial response](one-identity-environment-a-sme-response.md); source-database scope/evidence pending. **B:** [enter or not applicable]. |
+| SQL Server product/build and database compatibility level | **A:** SME confirmed owner-supplied SQL Server 2022 Database Engine build **16.0.1121.4** and compatibility level **160** for the source database. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); protected source/database-owner evidence pending. **B:** [enter]. |
+| Query-relevant collation or compatibility characteristic, if applicable | **A:** SME confirmed case-insensitive collation **`SQL_Latin1_General_CP1_CI_AS`** applies to the source database. **B:** [enter only if needed]. | **A:** [partial response](one-identity-environment-a-sme-response.md); protected database-setting evidence pending. **B:** [enter or not applicable]. |
 | Known version/hotfix limitations, if any | [enter known limitation or unknown; no research required for intake] | [enter if available] |
 
 ## 4. Installed module and category inventory
 
 For each proposed category, record **Installed**, **Not installed**, **Unsupported**, or **Unknown**, with exact module identifier and version where installed. Add relevant custom modules and connectors. An uninstalled module is `not_applicable`; an installed but unreadable module is a gap. These families come from the approved [capability matrix](../003-health-assessment/capability-matrix.md); the list is a scope prompt, not proof of installation. Unrelated families need no detailed row at intake.
 
-For Environment A, the [partial response](one-identity-environment-a-sme-response.md) now records 14 owner-supplied module IDs, display values, exact module versions, and migration versions. Confirm that list against the current source and classify relevant unlisted modules before marking any family below as installed or not installed. Environment B remains unfilled.
+For Environment A, the [partial response](one-identity-environment-a-sme-response.md) records 14 module IDs, display values, exact module versions, and migration versions. The SME confirmed those rows came from a direct query of the current A database. The protected query reference, list completeness and classifications for relevant unlisted modules remain open. Environment B remains unfilled.
 
 | Candidate family | State | Exact module ID/version or reason | Discovery evidence ID | Expected evidence categories / gaps |
 |---|---|---|---|---|

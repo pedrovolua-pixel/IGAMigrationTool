@@ -1,6 +1,6 @@
 # Environment A — partial One Identity SME response
 
-Status: Report-backed and owner-supplied intake; exact source eligibility and query approval NOT VERIFIED
+Status: Report-backed, owner-supplied and SME-confirmed intake; exact source eligibility and query approval NOT VERIFIED
 
 Source: One Identity Manager Customization Documentation, generated 2026-07-08, 40 pages
 
@@ -8,16 +8,16 @@ Source SHA-256: `0e021547b83ac8a60c4dcabb2338176359d0698bd4d7e08585f61f6bca39df5
 
 Last updated: 2026-09-30
 
-This response applies the [SME evidence template](one-identity-sme-evidence-template.md) to the report supplied for `PILOT-ENV-A`. The report remains outside this public repository. Its protected artifact ID and confirmation that it represents the current, independently administered pilot source are still needed. Page numbers below refer to the supplied report, not to an approved query pack. Customer identifiers, configuration values, source code, and record contents are not reproduced here.
+This response applies the [SME evidence template](one-identity-sme-evidence-template.md) to the report supplied for `PILOT-ENV-A`. The report remains outside this public repository. On 2026-09-30, the SME confirmed that the report is bound to the current Environment A source and that A is independent from B. The protected artifact ID and independence evidence reference were not included in the response. Page numbers below refer to the supplied report, not to an approved query pack. Customer identifiers, configuration values, source code, and record contents are not reproduced here.
 
 ## Section 1 — environment evidence
 
 | Datum | Response | Remaining confirmation |
 |---|---|---|
-| Pilot environment | `PILOT-ENV-A`, as designated by the repository owner | Protected source identifier and report-to-source binding pending. |
-| Reported staging level | Development system (cover, p. 1) | Confirm current source and whether this is the intended independently administered pilot environment. |
-| Independence | Unknown | Evidence that A and B are independently administered sources with distinct baselines. |
-| Report provenance | Generated 2026-07-08; digest above | Protected artifact ID, capture method, and confirmation the report reflects the current source. |
+| Pilot environment | `PILOT-ENV-A`, as designated by the repository owner; SME confirmed the report is bound to the current A source on 2026-09-30. | Protected source/report artifact ID and capture reference pending. |
+| Reported staging level | Development system (cover, p. 1) | SME confirmed this is the current A source; source evidence reference pending. |
+| Independence | SME confirmed A is independent from B on 2026-09-30. | Protected evidence showing separate administration and distinct baselines pending. |
+| Report provenance | Generated 2026-07-08; digest above | Protected artifact ID and capture method pending. |
 
 ## Section 2 — public starting points and report scope
 
@@ -29,20 +29,20 @@ The report supports customization-inventory review and category discovery. It do
 
 | Source-identification datum | Report-backed response | Status / next evidence |
 |---|---|---|
-| One Identity Manager version | **10.0.0.287** is printed as **“Edition version”** on the cover (p. 1). | Report-stated version recorded. SME confirms it is the current installed product/build for A. |
-| Database schema build/version | Not separately established by this customization report. | Exact database schema build and its metadata source required. |
-| Relevant hotfixes/cumulative updates/transport packages | Not established by this report. | Exact identifiers or a verified none statement required. |
-| SQL Server product and Database Engine build | Repository owner supplied **SQL Server 2022**, build **16.0.1121.4**, and `sqlservr.exe` file version **2022.160.1121.4** on 2026-09-30. | Supplied value recorded; database-owner/source evidence reference pending. |
-| SQL Server servicing reference | Repository owner supplied GDR name **GDR** and Knowledge Base number **KB5040936** on 2026-09-30. | Record as supplied; servicing applicability/evidence pending. |
-| Database compatibility level | Repository owner supplied **SQL Server 2022 (160)** for Environment A databases on 2026-09-30. | Confirm the One Identity source database specifically reports level **160**; protected evidence reference pending. |
+| One Identity Manager version | **10.0.0.287** is printed as **“Edition version”** on the cover (p. 1); SME confirmed it is the current installed product/build on 2026-09-30. | Product/build claim SME-confirmed; protected current-source metadata reference pending. |
+| Database schema build/version | The SME replied “confirm” to the combined product/schema request but did not provide a separate schema-build value or state that it equals `10.0.0.287`. | Exact database schema build and metadata source still required. |
+| Relevant hotfixes/cumulative updates/transport packages | The SME replied “confirm” to the combined request but supplied no hotfix identifiers or explicit “none” statement. | Exact identifiers or a verified none statement still required. |
+| SQL Server product and Database Engine build | Repository owner supplied **SQL Server 2022**, build **16.0.1121.4**, and `sqlservr.exe` file version **2022.160.1121.4**; SME confirmed these apply to A on 2026-09-30. | SME-confirmed; database-owner/source evidence reference pending. |
+| SQL Server servicing reference | Repository owner supplied GDR name **GDR** and Knowledge Base number **KB5040936**; SME confirmed the supplied servicing reference for A on 2026-09-30. | SME-confirmed; servicing evidence reference pending. |
+| Database compatibility level | Repository owner supplied **SQL Server 2022 (160)**; SME confirmed level **160** applies to the One Identity source database on 2026-09-30. | SME-confirmed; protected database-setting evidence reference pending. |
 | Analysis Services version (supplemental) | Repository owner supplied build **16.0.42.216** and `msmdsrv.exe` file version **2022.160.42.216** on 2026-09-30. | Preserved as context; it does not supply the Database Engine compatibility level. |
-| Query-relevant collation/compatibility | Repository owner supplied default case-insensitive sort/collation **`SQL_Latin1_General_CP1_CI_AS`** on 2026-09-30. | Confirm whether this is the source database's collation or only a server/default setting before using it for exact queries. |
+| Query-relevant collation/compatibility | Repository owner supplied default case-insensitive sort/collation **`SQL_Latin1_General_CP1_CI_AS`**; SME confirmed it applies to the One Identity source database on 2026-09-30. | SME-confirmed; protected database-setting evidence reference pending. |
 
-The cover value is in the approved pilot's **10.x** family. It does not by itself prove current source identity, exact schema compatibility, module versions, or G2/G8 eligibility. One Identity's [configuration guide](https://support.oneidentity.com/technical-documents/identity-manager/9.1.2/configuration-guide/customizing-the-one-identity-manager-base-configuration/changing-database-connection-data) describes “Edition version” as the edition's version number. The SQL, compatibility, collation and Analysis Services values above are owner-supplied facts, not values extracted from the customization report; their source-database binding still needs evidence.
+The cover value is in the approved pilot's **10.x** family. SME confirmation resolves the conversational source binding for the supplied product and SQL values, but protected references and the separate schema/hotfix facts remain open. These claims do not establish G2/G8 eligibility. One Identity's [configuration guide](https://support.oneidentity.com/technical-documents/identity-manager/9.1.2/configuration-guide/customizing-the-one-identity-manager-base-configuration/changing-database-connection-data) describes “Edition version” as the edition's version number. The SQL, compatibility, collation and Analysis Services values above were supplied separately from the customization report.
 
 ## Section 4 — installed module and category inventory
 
-The repository owner supplied the following 14 Environment A module rows on 2026-09-30. They are **reported installed**, not yet reconciled to a protected source inventory. All rows have the supplied migration version `2025.0012.0001.0000`. The list's completeness and the state of modules not listed remain **Unknown**; absence must not be inferred.
+The repository owner supplied the following 14 Environment A module rows on 2026-09-30. The SME confirmed they were queried directly from the current A database, including their migration versions. The protected query result/artifact reference was not supplied. All rows have migration version `2025.0012.0001.0000`. The list's completeness and the state of modules not listed remain **Unknown**; absence must not be inferred.
 
 | Module ID | Display value supplied | Module version | Migration version |
 |---|---|---|---|
@@ -69,7 +69,7 @@ Native object/field dictionary, default-to-actual comparison, sanitized fixtures
 
 ## SME items needed next
 
-1. Confirm the report's protected artifact ID, its binding to the current `PILOT-ENV-A` source, and independence from `PILOT-ENV-B`.
-2. Confirm **10.0.0.287** as the current installed product/build and supply the exact database schema build and relevant hotfixes.
-3. Confirm the 14 supplied module rows against a current protected source inventory, including their migration versions, and classify relevant unlisted modules/categories as installed, not installed, unsupported, or unknown.
-4. Confirm that compatibility level **160** and collation **`SQL_Latin1_General_CP1_CI_AS`** apply to the One Identity source database, and supply protected evidence for those values, the supplied SQL Server build and its servicing reference. Query and database-owner evidence follows for the confirmed exact build and applicable modules.
+1. Provide protected artifact references for the report/current-source binding, A/B independence, direct database module query, and confirmed SQL product/settings/servicing values.
+2. Provide the exact database schema build and relevant hotfix identifiers, or an explicit verified “none” for hotfixes; these values were not supplied in the SME's confirmation.
+3. Classify relevant unlisted modules/categories as installed, not installed, unsupported, or unknown, and state whether the 14-row query is a complete installed-module inventory.
+4. Continue exact-build query-pack, field, permission and database-owner reviews only through their later gates; the confirmations above do not authorize source collection.
