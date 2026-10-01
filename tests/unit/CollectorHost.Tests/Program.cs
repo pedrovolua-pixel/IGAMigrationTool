@@ -1,6 +1,17 @@
 using System.Text.Json;
 using CollectorHost;
 
+AppDomain.CurrentDomain.UnhandledException += (_, details) =>
+{
+    if (details.ExceptionObject is Exception error)
+    {
+        var diagnostic = error.ToString().Replace("%", "%25", StringComparison.Ordinal)
+            .Replace("\r", "%0D", StringComparison.Ordinal)
+            .Replace("\n", "%0A", StringComparison.Ordinal);
+        Console.WriteLine($"::error title=CollectorHost.Tests::{diagnostic}");
+    }
+};
+
 if (args is ["--hold-lease", var heldConfigPath, var heldScopeText] &&
     Guid.TryParse(heldScopeText, out var heldScope))
 {
