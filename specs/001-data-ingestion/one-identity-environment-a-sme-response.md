@@ -73,3 +73,7 @@ Native object/field dictionary, default-to-actual comparison, sanitized fixtures
 2. Provide the exact database schema build and relevant hotfix identifiers, or an explicit verified “none” for hotfixes; these values were not supplied in the SME's confirmation.
 3. Classify relevant unlisted modules/categories as installed, not installed, unsupported, or unknown, and state whether the 14-row query is a complete installed-module inventory.
 4. Continue exact-build query-pack, field, permission and database-owner reviews only through their later gates; the confirmations above do not authorize source collection.
+
+## Source-access preparation
+
+On 2026-09-30, the repository owner, acting as the Environment A database owner, authorized bounded read-only metadata discovery for the named lab database. Network reachability was confirmed, but the SQL principal offered for access has administrative authority. The approved collector boundary blocks administrative principals before source queries. No database authentication or source query was attempted. A dedicated read-only principal, its effective-permission evidence, and a protected record of the approved discovery scope are needed before metadata discovery can begin. Connection details and credentials remain outside this repository.
