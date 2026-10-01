@@ -4,7 +4,7 @@ Status: Approved
 Product spec: `specs/003-health-assessment/product-spec.md` (Approved 2026-09-28)  
 Author: Codex, for technical-owner review  
 Reviewers: Technical owner, security owner, One Identity subject-matter expert, product owner, accessibility reviewer, operations owner  
-Last updated: 2026-09-29
+Last updated: 2026-10-01
 
 ## Overview
 
@@ -251,7 +251,7 @@ Insufficient-evidence domains do not count as met and are prominently disclosed.
 
 ## Interfaces and contracts
 
-Local implementation note (2026-10-01): the internal `CapabilityBoundCoverageProjector` composes the existing exact-version guard and terminal coverage projectors. It accepts only caller-supplied trusted descriptors and an already-authorized plan/results, returns no combined projection on any lock or coverage denial, and otherwise returns the frozen lock and existing coverage measures. This is a pure module composition with synthetic fixtures, not a new public operation or a baseline/inventory/authorization/durable-run implementation. See [development coverage guidance](../../docs/development/assessment-coverage.md) and [parallel cycle 01](../../plans/active/local-pilot-parallel-cycle-01.md).
+Local implementation note (2026-10-01): the internal `CapabilityBoundCoverageProjector` composes the existing exact-version guard and terminal coverage projectors. It accepts only caller-supplied trusted descriptors and an already-authorized plan/results, returns no combined projection on any lock or coverage denial, and otherwise returns the frozen lock and existing coverage measures. This is a pure module composition with synthetic fixtures, not a new public operation or a baseline/inventory/authorization/durable-run implementation. See [development coverage guidance](../../docs/development/assessment-coverage.md) and [parallel cycle 01](../../plans/completed/local-pilot-parallel-cycle-01.md).
 
 These are logical operation contracts. Concrete transport, paths, and public schemas require technical-owner approval during implementation planning.
 

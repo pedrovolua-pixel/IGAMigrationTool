@@ -1,6 +1,6 @@
 # Development documentation
 
-For coordinated pilot work with isolated writing workers, shared-file ownership, review and integration, use [parallel agent development](parallel-agent-workflow.md). The [first execution cycle](../../plans/active/local-pilot-parallel-cycle-01.md) tracks bounded packets and actual evidence.
+For coordinated pilot work with isolated writing workers, shared-file ownership, review and integration, use [parallel agent development](parallel-agent-workflow.md). The [first execution cycle](../../plans/completed/local-pilot-parallel-cycle-01.md) tracks bounded packets and actual evidence.
 
 For the selected Azure development subscription, USD 50 monthly limit, verified empty resource group/budget and the next platform preflight, use [Azure pilot development setup](azure-pilot-development-setup.md).
 

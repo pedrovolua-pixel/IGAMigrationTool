@@ -1,12 +1,12 @@
 # Local pilot parallel cycle 01
 
-Status: Engineering packets verified; coordinator publication in progress
+Status: Complete — first parallel work cycle verified and published 2026-10-01
 Owner: Coordinator / technical owner
 Approval: Repository owner approved the coordinator-plus-three-workers model on 2026-10-01. Packet scopes below refine existing approved local implementation.
 Baseline: `f6e37b937dc2cf266ce24dee8a98d735c9c161b7`
 Last updated: 2026-10-01
 
-Governing records: [local build](one-identity-local-pilot-build.md), [parallel workflow](../../docs/development/parallel-agent-workflow.md), feature [001 product](../../specs/001-data-ingestion/product-spec.md), [001 technical](../../specs/001-data-ingestion/technical-spec.md), [001 implementation](../../specs/001-data-ingestion/implementation-plan.md), [001 tests](../../specs/001-data-ingestion/test-plan.md), feature [003 product](../../specs/003-health-assessment/product-spec.md), [003 technical](../../specs/003-health-assessment/technical-spec.md), [003 implementation](../../specs/003-health-assessment/implementation-plan.md), and [003 tests](../../specs/003-health-assessment/test-plan.md).
+Governing records: [local build](../active/one-identity-local-pilot-build.md), [parallel workflow](../../docs/development/parallel-agent-workflow.md), feature [001 product](../../specs/001-data-ingestion/product-spec.md), [001 technical](../../specs/001-data-ingestion/technical-spec.md), [001 implementation](../../specs/001-data-ingestion/implementation-plan.md), [001 tests](../../specs/001-data-ingestion/test-plan.md), feature [003 product](../../specs/003-health-assessment/product-spec.md), [003 technical](../../specs/003-health-assessment/technical-spec.md), [003 implementation](../../specs/003-health-assessment/implementation-plan.md), and [003 tests](../../specs/003-health-assessment/test-plan.md).
 
 ## Objective
 
@@ -19,7 +19,7 @@ Exercise the approved coordination workflow with three isolated workers. Deliver
 | C1 | Collector; `src/collector/CollectorHost/EncryptedCheckpointStore.cs`, `tests/unit/CollectorHost.Tests/CheckpointStoreChecks.cs` | ING-PILOT-002/003; FR-ING-12/16/26; AC-ING-4; TP-ING-004 recovery subset | VERIFIED |
 | A1 | Assessment; new `src/server/modules/AssessmentOrchestration/CapabilityBoundCoverageProjector.cs`, existing assessment unit test host | FR-HAS-1/2/8/18/23/47; TP-HAS-001/007 composition subset | VERIFIED |
 | V1 | Verification; new `tests/integration/SyntheticPilotFlow.Tests/` project, host and lock file | FR-HAS-2/8/18/23; AC-HAS-1/7; TP-HAS-001/007 composition subset; IP-HAS-005 | VERIFIED |
-| O1 | Coordinator; project/solution configuration, canonical docs, integration and private site | Local build completion accounting and AGENTS.md evidence/site obligations | RUNNING |
+| O1 | Coordinator; project/solution configuration, canonical docs, integration and private site | Local build completion accounting and AGENTS.md evidence/site obligations | VERIFIED |
 
 ### C1 acceptance
 
@@ -44,7 +44,7 @@ The harness also checks the actual A1 combined projection against independent ex
 - [x] Patches receive independent review and integrate without ownership conflicts.
 - [x] Applicable pinned locked restore, formatting, Release build, unit/integration/architecture, secret/dependency/package checks run; unavailable checks are named and remain NOT VERIFIED.
 - [x] Feature plans/status/test descriptions and evidence index record the actual local results and remaining gaps.
-- [ ] Existing private pilot site and human board are updated from canonical records; publication confirmed.
+- [x] Existing private pilot site and human board are updated from canonical records; publication confirmed.
 - [x] Clean temporary worker worktrees are removed after preserving/integrating their changes.
 
 No new cloud deployment, source access, provider enablement, customer installation, production release or G1–G9 pass is authorized by this cycle.
@@ -60,3 +60,5 @@ The verification worker independently reviewed and executed C1/A1; the collector
 The tested source SHA-256 is `7fc2b5ec23c00d616961fb53a6f83157686155a1379e0b37f4862e840fa4d59d`: sorted repository-relative paths for 124 source/test .cs, .csproj and package-lock files plus solution, Directory.Build.props, global.json and bootstrap workflow, each path and file body separated by NUL. Generated bin/obj are excluded. The completed local verification transcript SHA-256 is `2a253f14bb58703011a261be924bd99077bae10b7a27eb637bfbad95e79136fa`. These metadata are developer evidence; no signed gate bundle or restricted-store artifact exists.
 
 Initial sandbox package-audit/IPC attempts were superseded by successful checks with authorized network/IPC access and isolated build settings; no audit, safety or pin was disabled. [partial bootstrap run 36935964103](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36935964103) passed on `ed3a77b` across Linux and Windows 2022/2025: audited locked restore, format/build/unit/integration/architecture, pinned secret scan, Bicep compile/lint/policies, Windows protected-key/ACL checks, cross-publish and blocked-service smoke all completed successfully. This cycle changes no infrastructure source. Manual accessibility, deployed isolation/restore, customer source tests, license acceptance, signed MSI/OCI provenance and full feature/E2E gates remain NOT VERIFIED; no corresponding product path is enabled here. No migrations, environment configuration changes or external package additions occurred.
+
+The first cycle snapshot was published to the existing owner-private site with native deployment status `succeeded` on 2026-10-01. Published Site source: `b2f902fed5a1b67b422c890afa0a13e0cfb130bd`; canonical snapshot: `0e466441def25b4a8b666b268dfff3131db6722f`; deployment: `appgdep_6abee1a669408191bd5cee9eff747f55`. Desktop (1440px) and mobile (390px) rendering/navigation/overflow checks passed, all eight human cards retain role/completion/source links, and 27 repository links plus internal anchors passed. This completed record is archived after that confirmation; the site source snapshot is refreshed to include this closure. The broader local pilot build remains incomplete.
