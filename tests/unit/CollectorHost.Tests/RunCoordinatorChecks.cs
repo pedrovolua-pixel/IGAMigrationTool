@@ -30,8 +30,15 @@ internal static class RunCoordinatorChecks
                     new FieldCandidate(excluded, FieldClassification.ApprovedReference, "private-display")], true);
             var second = new CollectorPage("page-2", 1,
                 [new FieldCandidate(included, FieldClassification.ApprovedReference, "uid-2")], false);
+            var stageDirectory = Path.Combine(directory, "staging");
+            Directory.CreateDirectory(stageDirectory);
+            var stageContext = new PageCheckpointContext(approval.Query.QueryId,
+                $"{approval.QueryPackId:D}/{approval.QueryPackVersion}/{approval.QueryPackSha256}",
+                config.ExactBuild, config.ScopeId.ToString("D"),
+                $"{config.FieldPolicyId:D}/{config.FieldPolicyVersion}/{config.FieldPolicySha256}",
+                approval.OrderingKey);
 
-            var fake = new FakeAdapter(approval, [first, second]);
+            var fake = new FakeAdapter(approval, [first, second], stageDirectory, stageContext, key);
             Check("disabled has no adapter calls",
                 (await new CollectorRunCoordinator(fake).RunAsync(configPath,
                     config with { Enabled = false }, CancellationToken.None)).Outcome == CollectorRunOutcome.Disabled &&
@@ -163,18 +170,15 @@ internal static class RunCoordinatorChecks
                 (await Run(fake)).Outcome == CollectorRunOutcome.StageFailed &&
                 !File.Exists(approval.CheckpointPath));
 
-            fake.Pages = [interruptedPage];
-            var recovered = await Run(fake);
-            Check("restart idempotently restages and checkpoints prior page",
+            var restarted = new FakeAdapter(approval, [interruptedPage], stageDirectory, stageContext, key);
+            var recovered = await Run(restarted);
+            Check("fresh adapter reuses encrypted staged page and checkpoints it",
                 recovered.Outcome == CollectorRunOutcome.Completed && recovered.CompletedPages == 1 &&
                 fake.Staged.Count == stagedBeforeWriteFailure + 1 &&
-                fake.StageAttempts == stagedAttemptsBeforeWriteFailure + 3 &&
-                EncryptedCheckpointStore.Load(approval.CheckpointPath,
-                    new PageCheckpointContext(approval.Query.QueryId,
-                        $"{approval.QueryPackId:D}/{approval.QueryPackVersion}/{approval.QueryPackSha256}",
-                        config.ExactBuild, config.ScopeId.ToString("D"),
-                        $"{config.FieldPolicyId:D}/{config.FieldPolicyVersion}/{config.FieldPolicySha256}",
-                        approval.OrderingKey), key)?.Count == 1);
+                fake.StageAttempts == stagedAttemptsBeforeWriteFailure + 2 &&
+                restarted.StageAttempts == 1 && restarted.Staged.Count == 0 &&
+                EncryptedPageStageStore.Load(stageDirectory, stageContext, "interrupted-page", key) is not null &&
+                EncryptedCheckpointStore.Load(approval.CheckpointPath, stageContext, key)?.Count == 1);
             File.Delete(approval.CheckpointPath);
 
             using var canceled = new CancellationTokenSource();
@@ -213,7 +217,8 @@ internal static class RunCoordinatorChecks
         }
     }
 
-    private sealed class FakeAdapter(ApprovedCollectorRun? approval, IReadOnlyList<CollectorPage> pages)
+    private sealed class FakeAdapter(ApprovedCollectorRun? approval, IReadOnlyList<CollectorPage> pages,
+        string stageDirectory, PageCheckpointContext stageContext, byte[] stageKey)
         : ICollectorRunAdapter
     {
         public ApprovedCollectorRun? Approval { get; set; } = approval;
@@ -223,7 +228,6 @@ internal static class RunCoordinatorChecks
         public List<string?> RequestedBoundaries { get; } = [];
         public List<int> RequestedSizes { get; } = [];
         public List<IReadOnlyList<MinimizedField>> Staged { get; } = [];
-        public Dictionary<string, string> StagedDigests { get; } = new(StringComparer.Ordinal);
         public int StageAttempts { get; private set; }
         public bool FailRead { get; set; }
         public bool FailStage { get; set; }
@@ -282,18 +286,11 @@ internal static class RunCoordinatorChecks
             }
 
             StageAttempts++;
-            if (StagedDigests.TryGetValue(boundary, out var priorDigest))
+            if (EncryptedPageStageStore.Stage(stageDirectory, stageContext, boundary, rowCount, digest,
+                    fields, stageKey) == EncryptedPageStageStore.StageResult.NewPage)
             {
-                if (priorDigest != digest)
-                {
-                    throw new InvalidDataException("Synthetic staged page conflicts with its prior digest.");
-                }
-
-                return;
+                Staged.Add(fields);
             }
-
-            StagedDigests.Add(boundary, digest);
-            Staged.Add(fields);
         }
     }
 }

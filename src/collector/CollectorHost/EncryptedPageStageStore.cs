@@ -6,8 +6,9 @@ using CollectorSafety;
 
 namespace CollectorHost;
 
-// Internal persistence primitive only. A reviewed adapter must validate the directory ACL,
-// manage the key and aggregate queue limits before using it in the customer service.
+// Internal persistence primitive for one extraction run only. A reviewed adapter must
+// provide a distinct run directory, validate its ACL, and manage the key and aggregate
+// queue limits before using it in the customer service.
 internal static class EncryptedPageStageStore
 {
     private const int MaxPlaintextBytes = 1024 * 1024;
