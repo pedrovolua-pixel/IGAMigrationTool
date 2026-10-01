@@ -6,9 +6,9 @@ using CollectorSafety;
 
 namespace CollectorHost;
 
-// Internal persistence primitive for one extraction run only. A reviewed adapter must
-// provide a distinct run directory, validate its ACL, and manage the key and aggregate
-// queue limits before using it in the customer service.
+// Internal persistence primitive for one extraction run only. Windows path/ACL checks
+// guard each operation, but a reviewed adapter must provision a distinct protected run
+// directory and manage the key and aggregate queue limits before customer use.
 internal static class EncryptedPageStageStore
 {
     private const int MaxPlaintextBytes = 1024 * 1024;
@@ -83,6 +83,8 @@ internal static class EncryptedPageStageStore
                         stream.Flush(true);
                     }
 
+                    ValidateWindowsFile(temp);
+
                     // Never overwrite a prior page, including one written by another process.
                     File.Move(temp, path);
                 }
@@ -127,6 +129,7 @@ internal static class EncryptedPageStageStore
         ReadOnlySpan<byte> key)
     {
         if (!File.Exists(path)) return null;
+        ValidateWindowsFile(path);
         if ((File.GetAttributes(path) & FileAttributes.ReparsePoint) != 0)
         {
             throw new InvalidDataException("Staged page path is a reparse point.");
@@ -218,6 +221,31 @@ internal static class EncryptedPageStageStore
             !Directory.Exists(directory) || (File.GetAttributes(directory) & FileAttributes.ReparsePoint) != 0)
         {
             throw new InvalidDataException("Staging directory is invalid.");
+        }
+
+        if (OperatingSystem.IsWindows())
+        {
+            try
+            {
+                WindowsProtectedConfig.ValidateProtectedStageDirectory(directory);
+            }
+            catch (InvalidOperationException error)
+            {
+                throw new InvalidDataException("Staging directory protection is invalid.", error);
+            }
+        }
+    }
+
+    private static void ValidateWindowsFile(string path)
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        try
+        {
+            WindowsProtectedConfig.ValidateProtectedStageFile(path);
+        }
+        catch (InvalidOperationException error)
+        {
+            throw new InvalidDataException("Staged page file protection is invalid.", error);
         }
     }
 

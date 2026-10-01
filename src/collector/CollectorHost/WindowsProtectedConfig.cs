@@ -83,6 +83,91 @@ public static class WindowsProtectedConfig
     }
 
     [SupportedOSPlatform("windows")]
+    internal static void ValidateProtectedStageDirectory(string path)
+    {
+        if (!LocalPath.IsValid(path))
+        {
+            throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+        }
+
+        var directory = new DirectoryInfo(path);
+        if (!directory.Exists)
+        {
+            throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+        }
+
+        var permitted = StagePrincipals();
+        for (var current = directory; current is not null; current = current.Parent)
+        {
+            if ((current.Attributes & FileAttributes.ReparsePoint) != 0)
+            {
+                throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+            }
+
+            var security = FileSystemAclExtensions.GetAccessControl(current);
+            if (current.FullName == directory.FullName)
+            {
+                CheckStageAcl(security, permitted, true);
+            }
+            else
+            {
+                CheckAcl(security, permitted, false);
+            }
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
+    internal static void ValidateProtectedStageFile(string path)
+    {
+        if (!LocalPath.IsValid(path))
+        {
+            throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+        }
+
+        var file = new FileInfo(path);
+        if (!file.Exists || (file.Attributes & FileAttributes.ReparsePoint) != 0)
+        {
+            throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+        }
+
+        CheckStageAcl(FileSystemAclExtensions.GetAccessControl(file), StagePrincipals(), false);
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static HashSet<SecurityIdentifier> StagePrincipals()
+    {
+        var current = WindowsIdentity.GetCurrent().User ??
+            throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+        return
+        [
+            current,
+            new SecurityIdentifier(WellKnownSidType.BuiltinAdministratorsSid, null),
+            new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null)
+        ];
+    }
+
+    [SupportedOSPlatform("windows")]
+    private static void CheckStageAcl(FileSystemSecurity security, HashSet<SecurityIdentifier> permitted,
+        bool requireProtectedRules)
+    {
+        if ((requireProtectedRules && !security.AreAccessRulesProtected) ||
+            security.GetOwner(typeof(SecurityIdentifier)) is not SecurityIdentifier owner ||
+            !permitted.Contains(owner))
+        {
+            throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+        }
+
+        foreach (FileSystemAccessRule rule in security.GetAccessRules(true, true, typeof(SecurityIdentifier)))
+        {
+            if (rule.AccessControlType == AccessControlType.Allow &&
+                !permitted.Contains((SecurityIdentifier)rule.IdentityReference))
+            {
+                throw new InvalidOperationException("STAGE_PROTECTION_INVALID");
+            }
+        }
+    }
+
+    [SupportedOSPlatform("windows")]
     private static void CheckAcl(FileSystemSecurity security, HashSet<SecurityIdentifier> permitted,
         bool protectedEntry)
     {

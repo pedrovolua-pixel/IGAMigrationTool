@@ -1,4 +1,6 @@
 using System.Security.Cryptography;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using CollectorHost;
 using CollectorSafety;
@@ -10,6 +12,7 @@ internal static class PageStageStoreChecks
         var count = 0;
         var directory = Path.Combine(Path.GetTempPath(), "iga-stage-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(directory);
+        if (OperatingSystem.IsWindows()) WindowsStageTestDirectory.Protect(directory);
         try
         {
             var context = new PageCheckpointContext("inventory", "pack-1", "10.0.0.287", "scope-1",
@@ -62,6 +65,32 @@ internal static class PageStageStoreChecks
             Check("other context has no matching page", EncryptedPageStageStore.Load(directory,
                 context with { ScopeId = "other" }, boundary, key) is null);
 
+            if (OperatingSystem.IsWindows())
+            {
+                var security = FileSystemAclExtensions.GetAccessControl(new DirectoryInfo(directory));
+                security.AddAccessRule(new FileSystemAccessRule(
+                    new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null),
+                    FileSystemRights.Read, AccessControlType.Allow));
+                FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), security);
+                Reject("broad stage directory rejected", () =>
+                    EncryptedPageStageStore.Load(directory, context, boundary, key));
+                WindowsStageTestDirectory.Protect(directory);
+
+                var stagedFile = new FileInfo(files[0]);
+                var fileSecurity = FileSystemAclExtensions.GetAccessControl(stagedFile);
+                fileSecurity.AddAccessRule(new FileSystemAccessRule(
+                    new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null),
+                    FileSystemRights.Read, AccessControlType.Allow));
+                FileSystemAclExtensions.SetAccessControl(stagedFile, fileSecurity);
+                Reject("broad stage file rejected", () =>
+                    EncryptedPageStageStore.Load(directory, context, boundary, key));
+                fileSecurity = FileSystemAclExtensions.GetAccessControl(stagedFile);
+                fileSecurity.RemoveAccessRuleAll(new FileSystemAccessRule(
+                    new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null),
+                    FileSystemRights.Read, AccessControlType.Allow));
+                FileSystemAclExtensions.SetAccessControl(stagedFile, fileSecurity);
+            }
+
             bytes[bytes.Length - 1] ^= 1;
             File.WriteAllBytes(files[0], bytes);
             RejectCrypto("tampering rejected", () => EncryptedPageStageStore.Load(directory, context,
@@ -91,5 +120,6 @@ internal static class PageStageStoreChecks
             try { action(); throw new Exception($"{name}: accepted invalid staged page."); }
             catch (CryptographicException) { count++; }
         }
+
     }
 }

@@ -32,6 +32,7 @@ internal static class RunCoordinatorChecks
                 [new FieldCandidate(included, FieldClassification.ApprovedReference, "uid-2")], false);
             var stageDirectory = Path.Combine(directory, "staging");
             Directory.CreateDirectory(stageDirectory);
+            if (OperatingSystem.IsWindows()) WindowsStageTestDirectory.Protect(stageDirectory);
             var stageContext = new PageCheckpointContext(approval.Query.QueryId,
                 $"{approval.QueryPackId:D}/{approval.QueryPackVersion}/{approval.QueryPackSha256}",
                 config.ExactBuild, config.ScopeId.ToString("D"),
