@@ -89,7 +89,12 @@ internal static class PageStageStoreChecks
                 FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), security);
                 Reject("broad stage directory rejected", () =>
                     EncryptedPageStageStore.Load(directory, context, boundary, key));
-                WindowsStageTestDirectory.Protect(directory);
+                var restoredDirectory = FileSystemAclExtensions.GetAccessControl(new DirectoryInfo(directory));
+                restoredDirectory.PurgeAccessRules(
+                    new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null));
+                FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), restoredDirectory);
+                Check("stage directory usable after broad rule removal",
+                    EncryptedPageStageStore.Load(directory, context, boundary, key) is not null);
 
                 var stagedFile = new FileInfo(files[0]);
                 var fileSecurity = FileSystemAclExtensions.GetAccessControl(stagedFile);
@@ -100,10 +105,10 @@ internal static class PageStageStoreChecks
                 Reject("broad stage file rejected", () =>
                     EncryptedPageStageStore.Load(directory, context, boundary, key));
                 fileSecurity = FileSystemAclExtensions.GetAccessControl(stagedFile);
-                fileSecurity.RemoveAccessRuleAll(new FileSystemAccessRule(
-                    new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null),
-                    FileSystemRights.Read, AccessControlType.Allow));
+                fileSecurity.PurgeAccessRules(new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null));
                 FileSystemAclExtensions.SetAccessControl(stagedFile, fileSecurity);
+                Check("stage file usable after broad rule removal",
+                    EncryptedPageStageStore.Load(directory, context, boundary, key) is not null);
             }
 
             var oldHeader = (byte[])bytes.Clone();

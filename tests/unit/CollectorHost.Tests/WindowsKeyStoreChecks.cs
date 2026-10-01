@@ -38,7 +38,10 @@ internal static class WindowsKeyStoreChecks
             Reject<InvalidOperationException>("broad key directory cannot provision", () =>
                 WindowsCheckpointKeyStore.ProvisionNew(path, scope));
             Check("rejected key provisioning leaves no blob", !File.Exists(path));
-            FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), security);
+            var restoredDirectory = FileSystemAclExtensions.GetAccessControl(new DirectoryInfo(directory));
+            restoredDirectory.PurgeAccessRules(new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null));
+            FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), restoredDirectory);
+            WindowsProtectedConfig.ValidateProtectedStageDirectory(directory);
             WindowsCheckpointKeyStore.ProvisionNew(path, scope);
             Check("create-once key provisioned", File.Exists(path));
             Reject<IOException>("existing key cannot be replaced", () =>
