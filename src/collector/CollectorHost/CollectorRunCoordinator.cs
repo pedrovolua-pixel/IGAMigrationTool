@@ -10,7 +10,7 @@ internal interface ICollectorRunAdapter
 {
     Task<ApprovedCollectorRun?> LoadApprovedRunAsync(CollectorConfig config, CancellationToken cancellationToken);
     Task<CollectorPage> ReadPageAsync(string? afterBoundary, int pageSize, CancellationToken cancellationToken);
-    Task StagePageAsync(string boundary, int rowCount, bool isTerminal, string digest,
+    Task StagePageAsync(string runDirectory, string boundary, int rowCount, bool isTerminal, string digest,
         IReadOnlyList<MinimizedField> fields,
         CancellationToken cancellationToken);
 }
@@ -73,6 +73,8 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
         {
             return Result(CollectorRunOutcome.InvalidApproval);
         }
+
+        var runDirectory = Path.GetDirectoryName(approved.RunStartPath)!;
 
         if (QueryApplicability.Evaluate(approved.Source, approved.Query) != QueryApplicabilityDecision.Compatible)
         {
@@ -244,7 +246,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
 
             try
             {
-                await adapter.StagePageAsync(page.Boundary, page.RowCount, isTerminal, digest, fields,
+                await adapter.StagePageAsync(runDirectory, page.Boundary, page.RowCount, isTerminal, digest, fields,
                     pageTimeout.Token);
             }
             catch (OperationCanceledException) when (pageTimeout.IsCancellationRequested)
@@ -269,7 +271,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             try
             {
                 EncryptedCheckpointStore.Save(approved.CheckpointPath, context, checkpoints,
-                    approved.CheckpointKey);
+                    config.MaxLocalBytes, approved.CheckpointKey);
             }
             catch (Exception error) when (error is IOException or UnauthorizedAccessException or
                    InvalidDataException or CryptographicException)
@@ -303,9 +305,46 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
         !string.IsNullOrWhiteSpace(run.OrderingKey) &&
         run.MaximumPageSize > 0 && run.MaximumRows > 0 &&
         run.MaximumDuration > TimeSpan.Zero &&
-        Path.IsPathFullyQualified(run.RunStartPath) &&
-        Path.IsPathFullyQualified(run.CheckpointPath) &&
+        RunPathsCompatible(run.RunStartPath, run.CheckpointPath) &&
         run.CheckpointKey is { Length: 32 };
+
+    private static bool RunPathsCompatible(string runStartPath, string checkpointPath)
+    {
+        if (string.IsNullOrWhiteSpace(runStartPath) || string.IsNullOrWhiteSpace(checkpointPath))
+        {
+            return false;
+        }
+
+        try
+        {
+            if (!Path.IsPathFullyQualified(runStartPath) || !Path.IsPathFullyQualified(checkpointPath) ||
+                (OperatingSystem.IsWindows() &&
+                 (!LocalPath.IsValid(runStartPath) || !LocalPath.IsValid(checkpointPath))))
+            {
+                return false;
+            }
+
+            var startDirectory = Path.GetDirectoryName(runStartPath);
+            var checkpointDirectory = Path.GetDirectoryName(checkpointPath);
+            if (startDirectory is null || checkpointDirectory is null ||
+                string.Equals(runStartPath, checkpointPath,
+                    OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal) ||
+                !string.Equals(startDirectory, checkpointDirectory,
+                    OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+            {
+                return false;
+            }
+
+            if (!OperatingSystem.IsWindows()) return Directory.Exists(startDirectory);
+            WindowsProtectedConfig.ValidateProtectedStageDirectory(startDirectory);
+            return true;
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or
+               InvalidOperationException or ArgumentException or NotSupportedException)
+        {
+            return false;
+        }
+    }
 
     private static CollectorRunResult Result(CollectorRunOutcome outcome) => new(outcome, 0, 0, false);
 }
@@ -318,7 +357,7 @@ internal sealed class PendingCollectorRunAdapter : ICollectorRunAdapter
     public Task<CollectorPage> ReadPageAsync(string? afterBoundary, int pageSize,
         CancellationToken cancellationToken) => throw new InvalidOperationException("Source contract is pending.");
 
-    public Task StagePageAsync(string boundary, int rowCount, bool isTerminal, string digest,
+    public Task StagePageAsync(string runDirectory, string boundary, int rowCount, bool isTerminal, string digest,
         IReadOnlyList<MinimizedField> fields,
         CancellationToken cancellationToken) => throw new InvalidOperationException("Delivery contract is pending.");
 }

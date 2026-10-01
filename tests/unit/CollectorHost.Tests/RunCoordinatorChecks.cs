@@ -9,9 +9,14 @@ internal static class RunCoordinatorChecks
         var count = 0;
         var directory = Path.Combine(Path.GetTempPath(), "iga-run-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(directory);
+        if (OperatingSystem.IsWindows()) WindowsStageTestDirectory.Protect(directory);
         try
         {
             var configPath = Path.Combine(directory, "collector.json");
+            var runId = Guid.NewGuid();
+            var stageDirectory = OperatingSystem.IsWindows()
+                ? WindowsRunDirectoryProvisioner.ProvisionNew(directory, runId)
+                : Directory.CreateDirectory(Path.Combine(directory, runId.ToString("N"))).FullName;
             var key = RandomNumberGenerator.GetBytes(32);
             var included = new FieldKey("schema", "uid");
             var excluded = new FieldKey("schema", "display");
@@ -24,16 +29,13 @@ internal static class RunCoordinatorChecks
                     config.FieldPolicyVersion.ToString(), config.FieldPolicySha256,
                     new HashSet<FieldKey> { included }, new HashSet<string>()),
                 "uid", 10, 100, TimeSpan.FromMinutes(1), DateTimeOffset.UtcNow,
-                Path.Combine(directory, "staging", "run-start.igr"),
-                Path.Combine(directory, "checkpoint.enc"), key);
+                Path.Combine(stageDirectory, "run-start.igr"),
+                Path.Combine(stageDirectory, "checkpoint.enc"), key);
             var first = new CollectorPage("page-1", 1,
                 [new FieldCandidate(included, FieldClassification.ApprovedReference, "uid-1"),
                     new FieldCandidate(excluded, FieldClassification.ApprovedReference, "private-display")], true);
             var second = new CollectorPage("page-2", 1,
                 [new FieldCandidate(included, FieldClassification.ApprovedReference, "uid-2")], false);
-            var stageDirectory = Path.Combine(directory, "staging");
-            Directory.CreateDirectory(stageDirectory);
-            if (OperatingSystem.IsWindows()) WindowsStageTestDirectory.Protect(stageDirectory);
             var stageContext = new PageCheckpointContext(approval.Query.QueryId,
                 $"{approval.QueryPackId:D}/{approval.QueryPackVersion}/{approval.QueryPackSha256}",
                 config.ExactBuild, config.ScopeId.ToString("D"),
@@ -56,6 +58,12 @@ internal static class RunCoordinatorChecks
             fake.CancelApprovalWithoutToken = false;
             fake.Approval = approval with { QueryPackSha256 = new string('c', 64) };
             Check("pack digest mismatch stops before read",
+                (await Run(fake)).Outcome == CollectorRunOutcome.InvalidApproval && fake.Reads == 0);
+            fake.Approval = approval with { CheckpointPath = Path.Combine(directory, "wrong-place.enc") };
+            Check("checkpoint outside run directory stops before read",
+                (await Run(fake)).Outcome == CollectorRunOutcome.InvalidApproval && fake.Reads == 0);
+            fake.Approval = approval with { CheckpointPath = approval.RunStartPath };
+            Check("run-start and checkpoint path collision stops before read",
                 (await Run(fake)).Outcome == CollectorRunOutcome.InvalidApproval && fake.Reads == 0);
             fake.Approval = approval with { ExtractionStartedAtUtc = DateTimeOffset.UtcNow.AddHours(1) };
             Check("future extraction start stops before read",
@@ -197,11 +205,12 @@ internal static class RunCoordinatorChecks
             var interruptedPage = new CollectorPage("interrupted-page", 1,
                 [new FieldCandidate(included, FieldClassification.ApprovedReference, "uid-interrupted")], false);
             fake.Pages = [interruptedPage];
-            Directory.CreateDirectory(approval.CheckpointPath);
+            fake.BlockCheckpointOnStage = true;
             var checkpointWriteFailure = await Run(fake);
             Check("staged page with failed checkpoint remains incomplete",
                 checkpointWriteFailure.Outcome == CollectorRunOutcome.CheckpointRejected &&
                 checkpointWriteFailure.CompletedPages == 0 && fake.Staged.Count == stagedBeforeWriteFailure + 1);
+            fake.BlockCheckpointOnStage = false;
             Directory.Delete(approval.CheckpointPath);
 
             fake.Pages = [interruptedPage with
@@ -278,6 +287,7 @@ internal static class RunCoordinatorChecks
         public bool CancelReadWithoutToken { get; set; }
         public bool CancelStageWithoutToken { get; set; }
         public bool BlockStageUntilCancellation { get; set; }
+        public bool BlockCheckpointOnStage { get; set; }
 
         public Task<ApprovedCollectorRun?> LoadApprovedRunAsync(CollectorConfig config,
             CancellationToken cancellationToken)
@@ -310,10 +320,15 @@ internal static class RunCoordinatorChecks
             return Task.FromResult(Pages[Math.Min(index, Pages.Count - 1)]);
         }
 
-        public async Task StagePageAsync(string boundary, int rowCount, bool isTerminal, string digest,
+        public async Task StagePageAsync(string runDirectory, string boundary, int rowCount, bool isTerminal, string digest,
             IReadOnlyList<MinimizedField> fields,
             CancellationToken cancellationToken)
         {
+            if (!string.Equals(runDirectory, stageDirectory,
+                    OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+            {
+                throw new IOException("Synthetic stage directory differs from the approved run directory.");
+            }
             if (FailStage)
             {
                 throw new IOException("Synthetic stage failure.");
@@ -333,6 +348,10 @@ internal static class RunCoordinatorChecks
                     fields, maxLocalBytes, stageKey) == EncryptedPageStageStore.StageResult.NewPage)
             {
                 Staged.Add(fields);
+            }
+            if (BlockCheckpointOnStage && Approval is not null)
+            {
+                Directory.CreateDirectory(Approval.CheckpointPath);
             }
         }
     }

@@ -24,11 +24,13 @@ public static class EncryptedCheckpointStore
         ValidateKey(key);
         ArgumentNullException.ThrowIfNull(expectedContext);
         ValidateContext(expectedContext);
+        ValidateLocation(path);
         if (!File.Exists(path))
         {
             return null;
         }
 
+        ValidateWindowsFile(path);
         if ((File.GetAttributes(path) & FileAttributes.ReparsePoint) != 0)
         {
             throw new InvalidDataException("Checkpoint path is a reparse point.");
@@ -81,13 +83,15 @@ public static class EncryptedCheckpointStore
     }
 
     public static void Save(
-        string path, PageCheckpointContext context, IReadOnlyList<PageCheckpoint> pages, ReadOnlySpan<byte> key)
+        string path, PageCheckpointContext context, IReadOnlyList<PageCheckpoint> pages,
+        long maxLocalBytes, ReadOnlySpan<byte> key)
     {
         ValidateKey(key);
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(pages);
         ValidateContext(context);
         ValidatePages(context, pages);
+        ValidateLocation(path);
         var previous = Load(path, context, key);
         if (previous is not null &&
             (previous.Count > pages.Count || !previous.SequenceEqual(pages.Take(previous.Count))))
@@ -100,6 +104,9 @@ public static class EncryptedCheckpointStore
         {
             throw new InvalidDataException("Checkpoint exceeds the local size limit.");
         }
+
+        LocalRunDirectoryCapacity.Validate(Path.GetDirectoryName(path)!, maxLocalBytes,
+            plaintext.Length + 32L);
 
         var nonce = RandomNumberGenerator.GetBytes(12);
         var tag = new byte[16];
@@ -124,7 +131,9 @@ public static class EncryptedCheckpointStore
                     stream.Flush(true);
                 }
 
+                ValidateWindowsFile(temp);
                 File.Move(temp, path, true);
+                ValidateWindowsFile(path);
             }
             finally
             {
@@ -170,6 +179,45 @@ public static class EncryptedCheckpointStore
             string.IsNullOrWhiteSpace(context.OrderingKey))
         {
             throw new InvalidDataException("Checkpoint context is incomplete.");
+        }
+    }
+
+    private static void ValidateLocation(string path)
+    {
+        if (string.IsNullOrWhiteSpace(path) || !Path.IsPathFullyQualified(path) ||
+            (OperatingSystem.IsWindows() && !LocalPath.IsValid(path)))
+        {
+            throw new InvalidDataException("Checkpoint location is invalid.");
+        }
+
+        var directory = Path.GetDirectoryName(path);
+        if (directory is null || !Directory.Exists(directory) ||
+            (File.GetAttributes(directory) & FileAttributes.ReparsePoint) != 0)
+        {
+            throw new InvalidDataException("Checkpoint directory is invalid.");
+        }
+
+        if (!OperatingSystem.IsWindows()) return;
+        try
+        {
+            WindowsProtectedConfig.ValidateProtectedStageDirectory(directory);
+        }
+        catch (InvalidOperationException error)
+        {
+            throw new InvalidDataException("Checkpoint directory protection is invalid.", error);
+        }
+    }
+
+    private static void ValidateWindowsFile(string path)
+    {
+        if (!OperatingSystem.IsWindows()) return;
+        try
+        {
+            WindowsProtectedConfig.ValidateProtectedStageFile(path);
+        }
+        catch (InvalidOperationException error)
+        {
+            throw new InvalidDataException("Checkpoint file protection is invalid.", error);
         }
     }
 
