@@ -77,7 +77,7 @@ Suspend a row for unsafe queries, vendor-schema incompatibility, material rule-q
 ## Open evidence requests
 
 - Create PILOT-ENV-A and PILOT-ENV-B, assign their protected identifiers, and record evidence proving they are independently administered distinct environments.
-- Reconcile A's report-cover and live main-database edition/build fields with the One Identity SME; identify the authoritative exact product/schema build, hotfix status, and report/source binding. The provisional local SQL/module artifacts do not establish G8 eligibility.
+- Reconcile A's report-cover and live main-database edition/build fields with the One Identity SME; identify the authoritative exact product/schema build, hotfix status, and report/source binding. The verified PDF cover and provisional local SQL/module artifacts do not establish G8 eligibility. [Vendor version guidance](https://support.oneidentity.com/identity-manager/kb/4257755/how-to-identify-the-version-of-one-identity-manager) points to System information or `QBMVSystemOverview` for a protected, field-reviewed next read.
 - Obtain protected A/B independence evidence, A's unlisted-category classifications and B's source-identification records through the approved ingestion path.
 - Establish whether the environments exercise different supported patch/hotfix levels, where available.
 - Record the eligible SQL Server product/compatibility information without collecting database topology.

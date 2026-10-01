@@ -36,6 +36,8 @@ The source-identification minimum does not require a person's name, organization
 
 These are **candidate product facts**, not statements about this environment. At intake, review only those relevant to the installed modules and proposed categories. Before using a candidate in a query pack or capability claim, check it against the exact installed release and record a correction if behavior differs. Public references are listed at the end.
 
+**A best-effort prefill:** The verified customization report confirms that the installed reporting tool can list configuration parameters, customization sections and schedules at its July snapshot. The live module rows support the A module classifications in section 4. Neither source confirms the exact `DialogTable`/`DialogColumn` columns, IT Shop activation, rule execution, or a safe collector read. Keep the candidate decisions below open until an SME checks the current source.
+
 | Candidate to check | Public basis | SME decision / correction | Environment evidence ID |
 |---|---|---|---|
 | One Identity Manager has a 10.0 LTS documentation set; the pilot targets an exact 10.x build rather than the broad `10.x` label. | [V1]; repository capability matrix | [Confirm/Correct/Unknown] | [enter] |
@@ -51,7 +53,7 @@ These are **candidate product facts**, not statements about this environment. At
 
 | Source-identification datum | SME response | Provenance / protected evidence ID |
 |---|---|---|
-| Exact One Identity Manager product version | **A:** July report cover says `CCC` edition **10.0.0.287**, while the live main database says `STE` edition `10.0` and its `CCC`/`QBM`/`DPR` modules say **10.0.0.287**. Exact installed product/build **NOT VERIFIED** pending SME reconciliation. **B:** [enter full value]. | **A:** [partial response and provisional live metadata](one-identity-environment-a-sme-response.md); authoritative product/build source pending. **B:** [product metadata source and capture time]. |
+| Exact One Identity Manager product version | **A:** The verified July report cover says `CCC` edition **10.0.0.287**, while the live main database says `STE` edition `10.0` and its `CCC`/`QBM`/`DPR` modules say **10.0.0.287**. Exact installed product/build **NOT VERIFIED** pending reconciliation. **B:** [enter full value]. | **A:** [partial response and provisional live metadata](one-identity-environment-a-sme-response.md); [vendor version-identification method](https://support.oneidentity.com/identity-manager/kb/4257755/how-to-identify-the-version-of-one-identity-manager) suggests a protected System information export or field-reviewed `QBMVSystemOverview` read. **B:** [product metadata source and capture time]. |
 | Exact database schema build/version | **A:** `DialogDatabase.EditionVersion=10.0` and active module migration version `2025.0012.0001.0000` were observed; neither is yet confirmed as the schema build. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); authoritative schema-build source pending. **B:** [enter]. |
 | Installed hotfixes/cumulative updates/transport packages relevant to schema or behavior | **A:** 15 permitted transport-history rows were all `Migration`; hotfix identifiers or verified none remain **Unknown**. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); SME statement pending. **B:** [enter]. |
 | SQL Server product/build and database compatibility level | **A:** live Database Engine build **16.0.1121.4** and source compatibility **160** match the supplied values. **B:** [enter]. | **A:** [partial response and provisional live metadata](one-identity-environment-a-sme-response.md); formal database-owner evidence pending. **B:** [enter]. |
@@ -62,22 +64,22 @@ These are **candidate product facts**, not statements about this environment. At
 
 For each proposed category, record **Installed**, **Not installed**, **Unsupported**, or **Unknown**, with exact module identifier and version where installed. Add relevant custom modules and connectors. An uninstalled module is `not_applicable`; an installed but unreadable module is a gap. These families come from the approved [capability matrix](../003-health-assessment/capability-matrix.md); the list is a scope prompt, not proof of installation. Unrelated families need no detailed row at intake.
 
-For Environment A, the [partial response](one-identity-environment-a-sme-response.md) records 14 module IDs, display values, exact module versions, and migration versions. A bounded live read returned the same 14 active `QBMModuleDef` rows under a 100-row cap. SME confirmation of that table's completeness as installed inventory and classifications for relevant unlisted families remain open. Environment B remains unfilled.
+For Environment A, the [partial response](one-identity-environment-a-sme-response.md) records 14 module IDs, display values, exact module versions, and migration versions. A bounded live read returned the same 14 active `QBMModuleDef` rows under a 100-row cap. The draft classifications below identify directly observed module rows only; feature activation, installed-inventory semantics, and relevant unlisted families remain open to SME correction. Environment B remains unfilled.
 
 | Candidate family | State | Exact module ID/version or reason | Discovery evidence ID | Expected evidence categories / gaps |
 |---|---|---|---|---|
-| Identity Management Base, Target System Base, schema/configuration, authorization | [enter] | [enter] | [enter] | [enter] |
-| Business Roles and System Roles | [enter] | [enter] | [enter] | [enter] |
-| IT Shop and approval workflows | [enter] | [enter] | [enter] | [enter] |
-| Attestation | [enter] | [enter] | [enter] | [enter] |
-| Compliance/SoD, company policies, risk and mitigations | [enter] | [enter] | [enter] | [enter] |
-| Application Governance | [enter] | [enter] | [enter] | [enter] |
-| Account definitions, manage levels and templates | [enter] | [enter] | [enter] | [enter] |
-| Synchronization and target-system metadata; installed AD, Entra, Exchange/Exchange Online connectors | [enter] | [enter] | [enter] | [enter] |
-| Processes, scripts, custom code, compilation and consistency | [enter] | [enter] | [enter] | [enter] |
-| Job Queue, DBQueue, audit and operational health | [enter] | [enter] | [enter] | [enter] |
-| Reporting, archiving and password-management **configuration only** | [enter] | [enter] | [enter] | [enter] |
-| Custom modules and connectors — add one row per item | [enter] | [enter] | [enter] | [enter] |
+| Identity Management Base, Target System Base, schema/configuration, authorization | **A:** installed module rows; authorization features unknown. **B:** unknown. | **A:** `QER 10.0.0.247`, `TSB 10.0.0.247`, `QBM 10.0.0.287`. | [A live module artifact in partial response](one-identity-environment-a-sme-response.md); B pending. | Exact objects, authorization configuration and read path unknown. |
+| Business Roles and System Roles | **A:** installed module rows. **B:** unknown. | **A:** `RMB 10.0.0.245`, `RMS 10.0.0.245`. | [A live module artifact](one-identity-environment-a-sme-response.md); B pending. | Hierarchy and assignment objects unknown. |
+| IT Shop and approval workflows | **A/B:** unknown at feature level. | A's `QER` row does not prove IT Shop activation. | [A partial response](one-identity-environment-a-sme-response.md); B pending. | Confirm active configuration and safe evidence path. |
+| Attestation | **A:** installed module row. **B:** unknown. | **A:** `ATT 10.0.0.246`. | [A live module artifact](one-identity-environment-a-sme-response.md); B pending. | Policy and operational usage unknown. |
+| Compliance/SoD, company policies, risk and mitigations | **A:** installed compliance/policy module rows; risk/mitigation feature details unknown. **B:** unknown. | **A:** `CPL 10.0.0.246`, `POL 10.0.0.246`. | [A live module artifact](one-identity-environment-a-sme-response.md); B pending. | Exact rules, policies and mitigations unknown. |
+| Application Governance | **A/B:** unknown. | No direct A module-to-feature proof in the bounded inventory. | [A partial response](one-identity-environment-a-sme-response.md); B pending. | Confirm module/feature state before planning collection. |
+| Account definitions, manage levels and templates | **A/B:** unknown at feature level. | A's `QER` and customization report do not establish complete usage. | [A partial response](one-identity-environment-a-sme-response.md); B pending. | Confirm exact objects, default/customized semantics and exclusions. |
+| Synchronization and target-system metadata; installed AD, Entra, Exchange/Exchange Online connectors | **A:** `DPR`, `ADS`, `ARS` rows installed; Entra and Exchange family status unknown. **B:** unknown. | **A:** `DPR 10.0.0.287`, `ADS 10.0.0.247`, `ARS 10.0.0.247`. | [A live module artifact](one-identity-environment-a-sme-response.md); B pending. | Connector configuration, sync state and other connectors unknown. |
+| Processes, scripts, custom code, compilation and consistency | **A:** customization report covers scripts, templates and process sections; live feature/health state unknown. **B:** unknown. | **A:** `CCC`/`QBM` rows; report pp. 19, 21, 40. | [A report and live module artifact](one-identity-environment-a-sme-response.md); B pending. | Exact code/definition fields, compilation status and safe projection unknown. |
+| Job Queue, DBQueue, audit and operational health | **A/B:** unknown at operational-evidence level. | A's `QBM` row does not establish safe queue/audit reads. | [A partial response](one-identity-environment-a-sme-response.md); B pending. | Confirm bounded metadata, no payload values. |
+| Reporting, archiving and password-management **configuration only** | **A:** report-subscription row installed; archiving/password-management status unknown. **B:** unknown. | **A:** `RPS 10.0.0.245`. | [A live module artifact](one-identity-environment-a-sme-response.md); B pending. | Definitions only; no generated report or secret values. |
+| Custom modules and connectors — add one row per item | **A:** customer-configured-content row installed; specific custom module/connector status unknown. **B:** unknown. | **A:** `CCC 10.0.0.287`. | [A report and live module artifact](one-identity-environment-a-sme-response.md); B pending. | The report shows customization categories, not complete custom-connector semantics. |
 
 ## 5. Native object and field dictionary — before exact query-pack approval
 
@@ -164,5 +166,6 @@ Provide **sanitized synthetic fixtures**, never customer records, for every appl
 - **[V5]** [One Identity Manager system roles — assigning system roles to business roles](https://docs.oneidentity.com/bundle/one-identity-manager_system-roles_9.2/page/sources/rms/esetassignbusinessroles.htm). This public earlier-version page states the Business Roles Module condition; confirm for the installed build.
 - **[V6]** [One Identity support — Job Queue and DBQueue upgrade check](https://support.oneidentity.com/identity-manager/kb/4342771/compilation-error-the-job-queue-and-or-the-dbqueue-is-not-empty). Used only to seed distinct operational categories; it does not identify safe collector tables or values.
 - **[V7]** [One Identity Manager 9.3 Attestation Administration Guide — attestation policies](https://support.oneidentity.com/technical-documents/identity-manager/9.3/attestation-administration-guide/10). Used to seed policy concepts; the installed 10.x build and exact fields remain open.
+- **[V8]** [One Identity Support — how to identify the version of One Identity Manager](https://support.oneidentity.com/identity-manager/kb/4257755/how-to-identify-the-version-of-one-identity-manager). Identifies System information and `QBMVSystemOverview` as version-information sources; neither has yet been verified as a safe, authorized A projection.
 
 If a vendor page changes or is inaccessible, the SME should record the exact guide version and protected copy/reference used. New public material may add candidate rows; it never substitutes for exact-build and customer database-owner evidence.

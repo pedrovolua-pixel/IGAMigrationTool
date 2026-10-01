@@ -7,6 +7,7 @@
   <Folder Name="/src/server/" />
   <Folder Name="/src/server/modules/">
     <Project Path="src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj" />
+    <Project Path="src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj" />
     <Project Path="src/server/modules/EvidenceGovernance/EvidenceGovernance.csproj" />
   </Folder>
   <Folder Name="/tests/" />
@@ -21,6 +22,7 @@
   <Folder Name="/tests/unit/">
     <Project Path="tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj" />
     <Project Path="tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj" />
+    <Project Path="tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj" />
     <Project Path="tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj" />
     <Project Path="tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj" />
   </Folder>
