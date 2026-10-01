@@ -20,7 +20,7 @@ internal sealed record ApprovedCollectorRun(
     SourceBuildClaim Source, QueryApplicabilityRule Query,
     PermissionProbe Permission, FieldPolicySnapshot FieldPolicy,
     string OrderingKey, int MaximumPageSize, long MaximumRows, TimeSpan MaximumDuration,
-    string CheckpointPath, byte[] CheckpointKey);
+    DateTimeOffset ExtractionStartedAtUtc, string CheckpointPath, byte[] CheckpointKey);
 
 internal sealed record CollectorPage(string Boundary, int RowCount,
     IReadOnlyList<FieldCandidate> Fields, bool HasMore);
@@ -29,7 +29,7 @@ internal enum CollectorRunOutcome
 {
     Disabled, SourceContractPending, InvalidApproval, UnsupportedSource,
     PermissionBlocked, OverlapSkipped, CheckpointRejected, PageRejected,
-    SourceFailed, StageFailed, Canceled, LimitReached, Completed
+    SourceFailed, StageFailed, Canceled, LimitReached, Expired, Completed
 }
 
 internal sealed record CollectorRunResult(CollectorRunOutcome Outcome, int CompletedPages,
@@ -69,6 +69,12 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
         }
 
         if (!ValidApproval(config, approved))
+        {
+            return Result(CollectorRunOutcome.InvalidApproval);
+        }
+
+        if (LocalRetentionWindow.Evaluate(approved.ExtractionStartedAtUtc, DateTimeOffset.UtcNow,
+                config.RetentionHours) == LocalRetentionDecision.InvalidInput)
         {
             return Result(CollectorRunOutcome.InvalidApproval);
         }
@@ -119,6 +125,12 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
                 permission.RequiresWarningAndAudit);
         }
 
+        if (Expired())
+        {
+            return new CollectorRunResult(CollectorRunOutcome.Expired, checkpoints.Count, rows,
+                permission.RequiresWarningAndAudit);
+        }
+
         if (checkpoints.LastOrDefault()?.IsTerminal == true)
         {
             return new CollectorRunResult(CollectorRunOutcome.Completed, checkpoints.Count, rows,
@@ -129,6 +141,12 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
 
         while (true)
         {
+            if (Expired())
+            {
+                return new CollectorRunResult(CollectorRunOutcome.Expired, checkpoints.Count, rows,
+                    permission.RequiresWarningAndAudit);
+            }
+
             var budget = PageBudget.Evaluate(policy,
                 new PageBudgetSnapshot(rows, started.Elapsed, cancellationToken.IsCancellationRequested));
             if (budget.Decision != PageBudgetDecision.Permit)
@@ -206,6 +224,12 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
                     checkpoints.Count, rows, permission.RequiresWarningAndAudit);
             }
 
+            if (Expired())
+            {
+                return new CollectorRunResult(CollectorRunOutcome.Expired, checkpoints.Count, rows,
+                    permission.RequiresWarningAndAudit);
+            }
+
             try
             {
                 await adapter.StagePageAsync(page.Boundary, page.RowCount, isTerminal, digest, fields,
@@ -249,6 +273,9 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
                     permission.RequiresWarningAndAudit);
             }
         }
+
+        bool Expired() => LocalRetentionWindow.Evaluate(approved.ExtractionStartedAtUtc,
+            DateTimeOffset.UtcNow, config.RetentionHours) != LocalRetentionDecision.Active;
     }
 
     private static bool ValidApproval(CollectorConfig config, ApprovedCollectorRun run) =>

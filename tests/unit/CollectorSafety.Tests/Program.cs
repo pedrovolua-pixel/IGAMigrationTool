@@ -42,6 +42,7 @@ Console.WriteLine($"{count} collector permission-attestation cases passed.");
 Console.WriteLine($"{PageCheckpointChecks.Run()} collector page-checkpoint cases passed.");
 Console.WriteLine($"{QueryApplicabilityChecks.Run()} collector query-applicability cases passed.");
 Console.WriteLine($"{PageBudgetChecks.Run()} collector page-budget cases passed.");
+Console.WriteLine($"{LocalRetentionWindowChecks.Run()} collector local-retention cases passed.");
 Console.WriteLine($"{StaticSqlShapeChecks.Run()} collector static-SQL shape cases passed.");
 Console.WriteLine($"{await CollectorRunGateChecks.RunAsync()} collector run-gate cases passed.");
 Console.WriteLine($"{OfflinePayloadEncryptionChecks.Run()} collector offline-encryption cases passed.");

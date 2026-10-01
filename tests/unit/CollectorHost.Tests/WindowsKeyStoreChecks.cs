@@ -30,7 +30,19 @@ internal static class WindowsKeyStoreChecks
             FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), security);
             var path = Path.Combine(directory, "key.blob");
             var scope = Guid.NewGuid();
-            File.WriteAllBytes(path, WindowsCheckpointKeyStore.ProtectNew(scope));
+            var broadDirectory = FileSystemAclExtensions.GetAccessControl(new DirectoryInfo(directory));
+            broadDirectory.AddAccessRule(new FileSystemAccessRule(
+                new SecurityIdentifier(WellKnownSidType.BuiltinUsersSid, null),
+                FileSystemRights.Read, AccessControlType.Allow));
+            FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), broadDirectory);
+            Reject<InvalidOperationException>("broad key directory cannot provision", () =>
+                WindowsCheckpointKeyStore.ProvisionNew(path, scope));
+            Check("rejected key provisioning leaves no blob", !File.Exists(path));
+            FileSystemAclExtensions.SetAccessControl(new DirectoryInfo(directory), security);
+            WindowsCheckpointKeyStore.ProvisionNew(path, scope);
+            Check("create-once key provisioned", File.Exists(path));
+            Reject<IOException>("existing key cannot be replaced", () =>
+                WindowsCheckpointKeyStore.ProvisionNew(path, scope));
             var first = WindowsCheckpointKeyStore.Load(path, scope);
             var second = WindowsCheckpointKeyStore.Load(path, scope);
             Check("same key reloaded", first.Length == 32 && first.SequenceEqual(second));
