@@ -34,3 +34,5 @@ Local synthetic checks, compiled-template policies, build, format, vulnerability
 | G7 operations | Pending | Pending | `NOT VERIFIED` | Pending | Pending |
 | G8 environment eligibility | Pending | Pending | `NOT VERIFIED` | Pending | Pending |
 | G9 acceptance | Pending | Pending | `NOT VERIFIED` | Pending | Pending |
+
+| Azure foundation continuation (developer preparation only) | [Cycle record](../../plans/active/azure-development-foundation-cycle.md), three isolated/independently reviewed packets and coordinator local checks, 2026-10-01 | Bicep 0.47.16; compiled SHA-256 `d586c2f92999ad56eb9d9e3560dfc656454c84f7d81fcaa850d13f060ad20347`; 152 unsafe template/manifest mutations + 14 invalid database inputs rejected; inactive Entra and aggregate-budget management readbacks | `PASS` for local preparation and executed no-cost configuration only; Azure foundation validation/create blocked by locked Mac; runtime/G1 `NOT VERIFIED` | Owner approved exact USD 25 / 24-hour session, synthetic policy/access/cleanup; independent worker reviews; no gate acceptance | Not applicable — no signed gate bundle or restricted-store artifact |

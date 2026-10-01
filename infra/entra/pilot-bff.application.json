@@ -1,0 +1,60 @@
+{
+  "displayName": "IGA Pilot Development BFF",
+  "signInAudience": "AzureADMyOrg",
+  "isFallbackPublicClient": false,
+  "requiredResourceAccess": [],
+  "passwordCredentials": [],
+  "keyCredentials": [],
+  "api": {
+    "oauth2PermissionScopes": []
+  },
+  "web": {
+    "redirectUris": [],
+    "implicitGrantSettings": {
+      "enableAccessTokenIssuance": false,
+      "enableIdTokenIssuance": false
+    }
+  },
+  "appRoles": [
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Coarse PilotConsultant role; product policy also requires customer/project/action authorization.",
+      "displayName": "PilotConsultant",
+      "id": "93db5a10-dcca-57e7-9285-ca67b5be2a87",
+      "isEnabled": true,
+      "value": "PilotConsultant"
+    },
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Coarse PilotCustomerUser role; product policy also requires customer/project/action authorization.",
+      "displayName": "PilotCustomerUser",
+      "id": "f0449246-d763-56ad-935f-05dcb3c66dac",
+      "isEnabled": true,
+      "value": "PilotCustomerUser"
+    },
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Coarse PilotAuditor role; product policy also requires customer/project/action authorization.",
+      "displayName": "PilotAuditor",
+      "id": "975862ef-d226-53d1-a52c-9bf9a4573771",
+      "isEnabled": true,
+      "value": "PilotAuditor"
+    },
+    {
+      "allowedMemberTypes": [
+        "User"
+      ],
+      "description": "Coarse PilotPlatformOperator role; product policy also requires customer/project/action authorization.",
+      "displayName": "PilotPlatformOperator",
+      "id": "57e528dc-41ce-5981-a8a9-7e12cbb5d806",
+      "isEnabled": true,
+      "value": "PilotPlatformOperator"
+    }
+  ]
+}

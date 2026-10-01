@@ -78,6 +78,20 @@ jobs:
           "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-workload-identity.bicep --outfile "$RUNNER_TEMP/pilot-workload-identity.json"
           "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-workload-identity.bicep
 
+      - name: Validate private Azure development foundation
+        run: |
+          for module in pilot-container-registry pilot-key-vault pilot-private-dns pilot-postgresql pilot-container-apps-environment pilot-observability pilot-monitor-private-link; do
+            "$RUNNER_TEMP/bicep" build "infra/bicep/modules/$module.bicep" --outfile "$RUNNER_TEMP/$module.json"
+            "$RUNNER_TEMP/bicep" lint "infra/bicep/modules/$module.bicep"
+          done
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-development-foundation.bicep --outfile "$RUNNER_TEMP/pilot-development-foundation.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-development-foundation.bicep
+          python3 tests/infrastructure/AzureFoundation/private-services-policy.py "$RUNNER_TEMP/pilot-container-registry.json" "$RUNNER_TEMP/pilot-key-vault.json" "$RUNNER_TEMP/pilot-private-dns.json"
+          python3 tests/infrastructure/AzureFoundation/postgresql-policy.py "$RUNNER_TEMP/pilot-postgresql.json"
+          python3 tests/infrastructure/AzureFoundation/compute-policy.py "$RUNNER_TEMP/pilot-container-apps-environment.json" "$RUNNER_TEMP/pilot-observability.json" "$RUNNER_TEMP/pilot-monitor-private-link.json"
+          python3 tests/infrastructure/AzureFoundation/composition-policy.py "$RUNNER_TEMP/pilot-development-foundation.json"
+          python3 tests/infrastructure/AzureFoundation/entra-policy.py infra/entra/pilot-bff.application.json
+
   collector-windows:
     strategy:
       matrix:

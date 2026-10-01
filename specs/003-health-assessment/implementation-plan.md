@@ -559,3 +559,9 @@ Product scope confirmation: Repository owner — approved pilot scope unchanged
 Date: 2026-09-29
 
 Only authorized human reviewers may change this plan to `Approved` and advance the feature to `PLANNED`.
+
+Implementation update 2026-10-01 (cycle 03 started): the owner requested durable assessment runs/recovery followed by consultant view development. [The exact local packet](../../plans/active/local-pilot-durable-consultant-cycle-03.md) bounds the synthetic PostgreSQL engine, private loopback-only demo transport and actual consultant UI; isolated workers own persistence, frontend and independent failure/browser verification. Production public contracts, Entra/customer trust, scoring/publication and G1–G9 are unchanged. Checks and Site publication are pending.
+
+### Azure foundation continuation execution note — 2026-10-01
+
+The [Azure continuation cycle](../../plans/active/azure-development-foundation-cycle.md) supplies missing private foundation modules, composition and independently reviewed negative policies. The [exact next session](../../docs/development/azure-foundation-session-proposal.md) is owner-approved. Inactive registration/aggregate-budget readbacks passed; paid resources and full provider validation have not run because the template upload requires an unlocked Mac. No G1 prerequisite is waived. Complete the authorized session once browser access resumes, preserve sanitized management evidence and clean up exact disposable resources within the approved window; implement remaining hosted workloads and live gate tests before acceptance.
