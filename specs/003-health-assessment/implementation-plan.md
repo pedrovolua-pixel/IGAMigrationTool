@@ -6,7 +6,7 @@ Technical spec: `specs/003-health-assessment/technical-spec.md` (Approved 2026-0
 Test plan: `specs/003-health-assessment/test-plan.md` (Approved 2026-09-28)  
 Owner: Technical owner  
 Reviewers: Product owner, security owner, operations owner, quality owner, One Identity SME, accessibility reviewer  
-Last updated: 2026-09-30
+Last updated: 2026-10-01
 
 ## Planning result
 
@@ -206,6 +206,8 @@ Quality owns the expected-result catalog and fixture-to-test traceability; the O
 - No rule, query pack, prompt/model, capability row or report renderer is promoted by code deployment alone. Promotion is a separately authorized, immutable, digest-bound event with required reviewers.
 - Database changes use expand/migrate/contract. No rollback deletes new customer data or rewrites immutable historical records.
 - A milestone is complete only when its stated verification has run and its evidence is recorded; implementation presence is not verification.
+
+The [local pilot build track](../../plans/active/one-identity-local-pilot-build.md), approved by the repository owner on 2026-10-01, completes implementation and synthetic verification without making A/B source validation a development prerequisite. It is a separate checkpoint before live evaluation. External gate evidence remains separate from local code completion. The G2/G8 rows below constrain live source collection and environment-based evaluation, while G1/G3/G5/G6/G7 constrain their respective deployed capabilities. A missing environment value is a typed gap or blocked activation, not a reason to stop unrelated local work.
 
 ## Dependencies and gates
 
@@ -539,6 +541,7 @@ Record material discoveries and approved deviations without rewriting historical
 | 2026-10-01 | The Environment A dedicated metadata principal reconnected. A bounded owner diagnostic found `STE`/`10.0` in the current version view's Installed Edition entry; a system-catalog read confirmed schema-column candidates. No broad view-value grant or source collection followed. | The July report and active module builds still do not establish the authoritative current application/schema build. A protected System information export and SME interpretation, hotfix/status evidence, source binding and reviewed field/query plans remain open. G2/G8 remain `NOT VERIFIED`. | [A partial SME response](../001-data-ingestion/one-identity-environment-a-sme-response.md) and provisional owner-only diagnostics; no acceptance evidence |
 | 2026-10-01 | Added a pure coverage completion projection that classifies a reconciled plan as complete or complete with gaps, reusing the limitation grouping so unexplained, missing or duplicate results cannot be classified. | This does not create a run state, accept an empty plan as eligible, authorize a baseline, score health or persist completion. Trusted plan generation and durable start/completion remain open. | Twelve synthetic completion cases; local Release build and format check |
 | 2026-10-01 | [Partial bootstrap run 36923312658](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36923312658) passed on `2840bec` across Linux and Windows 2022/2025. | The pure completion classification passed the current partial CI. Trusted run planning, durable state and G2/G4 remain unverified. | Linux format/build/unit/architecture/secret/Bicep checks and Windows collector publish/service smoke |
+| 2026-10-01 | Repository owner directed local pilot completion before further Environment A/B validation. | [The cross-feature local build plan](../../plans/active/one-identity-local-pilot-build.md) and amended product/test plans separate synthetic build completion from later live operational acceptance. G1–G9 retain their factual `NOT VERIFIED` status. | Owner direction; canonical feature, collector and product plans updated |
 
 ## Approval
 

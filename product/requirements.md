@@ -246,7 +246,7 @@ Proposed AI findings affect only a provisional score. Published scores use revie
 
 ### FR-HLT-23 — Pilot evaluation
 
-Pilot acceptance requires at least two independent eligible One Identity Manager 10.x environments, an initial assessment and reassessment, review of every Critical and High AI finding, and a module/category/severity-stratified sample totaling at least 100 reviewed AI findings or all findings when fewer exist. More than 80% of reviewed non-indeterminate AI findings must be confirmed.
+Local pilot build completion uses synthetic evidence and does not depend on Environment A/B validation. It is a separate engineering checkpoint before live source integration. Operational pilot acceptance requires at least two independent eligible One Identity Manager 10.x environments, an initial assessment and reassessment, review of every Critical and High AI finding, and a module/category/severity-stratified sample totaling at least 100 reviewed AI findings or all findings when fewer exist. More than 80% of reviewed non-indeterminate AI findings must be confirmed.
 
 ### FR-HLT-24 — Post-pilot vendor health portfolio
 

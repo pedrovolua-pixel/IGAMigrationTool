@@ -4,13 +4,13 @@ Status: Approved
 Product spec: `specs/003-health-assessment/product-spec.md` (Approved 2026-09-28)  
 Technical spec: `specs/003-health-assessment/technical-spec.md` (Approved 2026-09-28)  
 Owner: Quality owner  
-Last updated: 2026-09-29
+Last updated: 2026-10-01
 
 ## Test strategy and evidence rules
 
 Tests are traceable to immutable application, schema, query-pack, rule-catalog, prompt/model and environment versions. A pass requires executed evidence; an unimplemented or unexecuted test is `NOT VERIFIED`, never assumed. Test output must not contain credentials, protected evidence values, government identifiers, customer names or unrestricted report content.
 
-The pilot gate uses two independent eligible One Identity Manager 10.x SQL Server environments plus synthetic/fixture environments for destructive, adversarial and boundary testing. No destructive test runs against a customer production source. Source interaction remains read-only in every environment.
+The local pilot build checkpoint uses synthetic/fixture environments for product-path, destructive, adversarial and boundary testing. Its completion does not require Environment A/B validation or cloud resources. The later operational acceptance gate uses two independent eligible One Identity Manager 10.x SQL Server environments. No destructive test runs against a customer production source. Source interaction remains read-only in every environment.
 
 The synthetic fixture catalog follows the families in `implementation-plan.md`: exact build/module compatibility; query/permission/baseline; the five required classes per deterministic rule; all coverage/scoring states; authorization/lifecycle; adversarial AI; renderer/export/client; work/migration/recovery; and independent 100,000-record scale generators. Every case has a stable ID, schema/build/module applicability, generator seed or input digest, expected typed result and requirement/test mapping. Golden-result changes require attributed review. Synthetic compatibility never substitutes for G8 evidence from two authorized independent pilot environments.
 

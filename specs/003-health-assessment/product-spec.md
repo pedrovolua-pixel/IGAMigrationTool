@@ -6,7 +6,7 @@ Owner: Product owner
 
 Created: 2026-09-28
 
-Last updated: 2026-09-29
+Last updated: 2026-10-01
 
 ## Summary
 
@@ -16,6 +16,8 @@ Phase 1 delivers the pilot through sub-phases: Phase 1A establishes One Identity
 
 ## Phase 1 pilot boundary
 
+- The repository owner's 2026-10-01 pilot sequencing decision establishes a **local pilot build** checkpoint: implement and demonstrate the approved Phase 1 paths using versioned synthetic evidence before customer-environment validation. Environment A/B facts, source collection, cloud resources and provider checks are not prerequisites for local implementation or synthetic verification. A local build may be complete only when its stated executable checks pass; it is not a live customer assessment or production release.
+- After the local pilot build, perform exact-source integration and the existing two-environment evaluation before declaring the operational pilot accepted. Customer-source access still requires the approved query/field contract, database-owner authority and runtime protections. G8/G9 remain `NOT VERIFIED` until their own evidence passes.
 - Pilot validation uses at least two independent One Identity Manager 10.x environments on SQL Server and, where available, different supported patch or hotfix levels. Exact builds are recorded in a versioned capability matrix.
 - Evidence acquisition uses a dedicated read-only database account and an approved query set that avoids locks or material production impact. Excess read-only permissions produce a prominent warning and audit event without blocking the pilot; write, DDL, ownership, or administrative capability blocks collection. Database topology is not collected or classified.
 - Validated modules include Business Roles, System Roles, IT Shop, Attestation, Compliance Rules and separation of duties, Company Policies, Risk Assessment, Application Governance, report subscriptions and data archiving, password management, Active Directory, Microsoft Entra ID/Azure AD, Exchange/Exchange Online, and customer-specific connectors or custom modules.

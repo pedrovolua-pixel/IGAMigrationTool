@@ -3,9 +3,11 @@
 Status: Approved  
 Owner: Product owner  
 Reviewers: One Identity SME, technical owner, security owner  
-Last updated: 2026-09-28
+Last updated: 2026-10-01
 
 ## Objective and acceptance gate
+
+This evaluation follows the local synthetic pilot build. Environment eligibility is not a prerequisite to completing local implementation; this plan governs later live operational acceptance.
 
 Evaluate discovery representation, assessment behavior, reassessment, score explanations and AI finding accuracy across at least two independent eligible One Identity Manager 10.x SQL Server environments. Pilot acceptance requires:
 

@@ -33,6 +33,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 
 ## In progress
 
+- The [local pilot build track](../../plans/active/one-identity-local-pilot-build.md) is now explicit: A/B source validation and cloud evidence are later integration inputs, while collector, baseline, assessment and UI paths can be implemented and checked locally with synthetic evidence. The track remains incomplete; no end-to-end application or eligible live baseline exists yet.
 - A side-effect-free feature-001 collector safety prototype now rejects blocking source capability categories, distinguishes excess read-only warning and verifies page checkpoint replay/conflict context. It has no trusted SQL probe, query runner or durable checkpoint store; SEC-PILOT-003 and G2 remain open.
 - Phase 1A local foundation: an internal coverage reconciler rejects missing, duplicate and unexpected terminal results and gaps without reasons or responsible stages. Unweighted counts, reason-level limitations, executable-coverage counts and pure complete/complete-with-gaps classification stay unavailable until reconciliation succeeds; a partial progress projection counts terminal results without treating missing items as completion. Thirteen reconciliation, four count, five limitation, six progress, six executable-coverage and twelve completion cases include 100,000-key synthetic plans. The classifier does not transition a run or establish baseline eligibility. The trusted inventory plan, baseline adapter, authorization, persistence, full quality/scoring and UI remain unimplemented; TP-HAS-001 and TP-HAS-007 are not complete.
 - A local Phase 1A capability-start guard rejects suspended/unsupported rows, malformed inventories and mismatched exact version tuples, then freezes a digest-bound lock for later gates. Thirteen synthetic checks passed locally. Trusted registry/manifest loading, authorization, persistence, work scheduling and row promotion are still absent; the guard grants no run or source access.
@@ -46,11 +47,11 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - Provisioning planning for Entra application registrations and the OpenAI API project; concrete resource identifiers and verification evidence are intentionally deferred until environment setup.
 - Technical and security design for the first post-pilot vendor health-portfolio slice; this does not change or block the approved pilot implementation plan.
 
-## Blocked
+## External dependencies for live execution and acceptance
 
-- Pilot execution is blocked until two independent eligible One Identity 10.x SQL Server environments have exact build, module, query-pack, mapping, rule, and SME validation evidence.
-- Pilot execution remains blocked until PILOT-ENV-A and PILOT-ENV-B have protected identifiers/evidence owners and independence evidence, and until the Entra and OpenAI resources are provisioned and verified against the approved designs.
-- Pilot execution is blocked until the selected identity, AI, rendering, storage, queue and hosting controls are implemented and verified; Critical/High security findings are closed or validly accepted; backup/restore and accessibility gates pass; and the pilot evaluation succeeds.
+- Live customer-source collection and environment-based evaluation require exact build, module, query-pack, mapping, rule, SME and database-owner evidence for the applicable source. These inputs do not block local synthetic implementation.
+- Deployed protected-data use requires the selected Entra, Azure, OpenAI, rendering, storage, queue and hosting controls to be implemented and verified at their gates. Those resources do not block local contract and fixture work.
+- The product owner's 2026-10-01 sequencing amendment places Environment A/B validation after the local pilot build. G8/G9 still govern later operational acceptance; local build completion cannot be reported as their pass.
 
 ## Decisions made
 
@@ -98,7 +99,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - General AI is automatic in Phase 1 and limited to normalized, redacted evidence; AI raw-evidence retrieval is deferred.
 - Custom-rule management and anonymous peer benchmarking are Phase 3.
 - Direct remediation and production migration are Phase 4.
-- Pilot acceptance requires at least two independent eligible environments, an initial assessment and reassessment, review of every Critical/High AI finding plus the defined stratified sample, and greater than 80% confirmed accuracy.
+- Later operational pilot acceptance requires at least two independent eligible environments, an initial assessment and reassessment, review of every Critical/High AI finding plus the defined stratified sample, and greater than 80% confirmed accuracy. The local pilot build has a separate synthetic completion checklist.
 
 ## Evidence
 
@@ -106,6 +107,7 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 |---|---|---|
 | Product discovery captured | PASS | `product-spec.md` |
 | Product specification approved | PASS | Product owner approval recorded in `product-spec.md` on 2026-09-28 |
+| Local pilot sequencing | APPROVED / IN PROGRESS | Repository owner directed synthetic local build completion before Environment A/B validation on 2026-10-01; [cross-feature plan](../../plans/active/one-identity-local-pilot-build.md) records the separate checkpoint. Local completion checks remain open. |
 | Pilot scope decisions captured | PASS | `product-spec.md` Phase 1 pilot boundary; FR-HAS-1 through FR-HAS-56; AC-HAS-15 through AC-HAS-20 |
 | Post-pilot vendor health portfolio | PRODUCT APPROVED / TECHNICAL NOT DESIGNED | `product-spec.md` FR-HAS-57 and AC-HAS-21; excluded from pilot implementation scope |
 | Product-wide reconciliation | PASS | Vision, journeys, requirements, feature map, roadmap, open questions, and NFRs distinguish pilot scope from later product scope |

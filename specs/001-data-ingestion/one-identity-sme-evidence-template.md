@@ -7,7 +7,7 @@ Last updated: 2026-10-01
 
 ## How to complete this template
 
-No field in this template blocks local development with synthetic data. Complete the **source-identification minimum** below when an actual pilot environment is available. Sections 5–8 are needed only when proposing an exact query pack and preparing supervised source tests; section 9 is later validation and signoff evidence. Unknown or unavailable facts should be marked **Unknown** with the gap, not guessed. Do not fill fields for an absent module or a category that will not be collected.
+No field in this template blocks completion of the [local pilot build](../../plans/active/one-identity-local-pilot-build.md) with synthetic data. Treat every Environment A/B item below as a **later live-source integration task**. Complete the source-identification minimum before proposing an exact customer query pack or source test. Sections 5–8 are needed only when preparing those supervised tests; section 9 is later validation and signoff evidence. Unknown or unavailable facts should be marked **Unknown** with the gap, not guessed. Do not fill fields for an absent module or a category that will not be collected.
 
 For applicable prefilled candidates, enter **Confirm**, **Correct**, **Not applicable**, or **Unknown** and explain corrections. Add rows for relevant missing modules, objects or fields. A public guide identifies possible product features; it does not prove that a module, table, column, permission, or behavior exists in the exact pilot build. Use protected artifact IDs and SHA-256 digests for evidence. Do not put credentials, customer records, raw SQL, host names, network topology, permission dumps, or unredacted exports in Git. Put detailed source artifacts in the approved protected review location and record only their references here.
 
@@ -15,7 +15,7 @@ An intake response is complete when the source-identification minimum has a valu
 
 ## Source-identification minimum — per environment, when available
 
-| Required for exact-source planning | Why it is needed |
+| Later live-source planning input | Why it is needed |
 |---|---|
 | `PILOT-ENV-A` or `PILOT-ENV-B` protected evidence ID and independence reference | Distinguish the two independently administered sources and baselines. |
 | Exact One Identity product and database schema build, relevant hotfixes, and evidence reference | Select compatible query and mapping candidates for that installed build. |
