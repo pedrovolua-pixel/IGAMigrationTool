@@ -24,6 +24,7 @@ internal static class RunCoordinatorChecks
                     config.FieldPolicyVersion.ToString(), config.FieldPolicySha256,
                     new HashSet<FieldKey> { included }, new HashSet<string>()),
                 "uid", 10, 100, TimeSpan.FromMinutes(1), DateTimeOffset.UtcNow,
+                Path.Combine(directory, "staging", "run-start.igr"),
                 Path.Combine(directory, "checkpoint.enc"), key);
             var first = new CollectorPage("page-1", 1,
                 [new FieldCandidate(included, FieldClassification.ApprovedReference, "uid-1"),
@@ -58,8 +59,12 @@ internal static class RunCoordinatorChecks
                 (await Run(fake)).Outcome == CollectorRunOutcome.InvalidApproval && fake.Reads == 0);
             fake.Approval = approval with { ExtractionStartedAtUtc = DateTimeOffset.UtcNow.AddHours(1) };
             Check("future extraction start stops before read",
-                (await Run(fake)).Outcome == CollectorRunOutcome.InvalidApproval && fake.Reads == 0);
-            fake.Approval = approval with { ExtractionStartedAtUtc = DateTimeOffset.UtcNow.AddHours(-2) };
+                (await Run(fake)).Outcome == CollectorRunOutcome.CheckpointRejected && fake.Reads == 0);
+            fake.Approval = approval with
+            {
+                ExtractionStartedAtUtc = DateTimeOffset.UtcNow.AddHours(-2),
+                RunStartPath = Path.Combine(stageDirectory, "expired.igr")
+            };
             Check("expired extraction stops before read",
                 (await new CollectorRunCoordinator(fake).RunAsync(configPath,
                     config with { RetentionHours = 1 }, CancellationToken.None)).Outcome ==
@@ -96,12 +101,17 @@ internal static class RunCoordinatorChecks
             Check("checkpoint encrypted and present", File.Exists(approval.CheckpointPath) &&
                 !System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(approval.CheckpointPath)).Contains("uid-1",
                     StringComparison.Ordinal));
+            Check("run start encrypted and present", File.Exists(approval.RunStartPath) &&
+                !System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(approval.RunStartPath)).Contains(
+                    "schema-inventory", StringComparison.Ordinal));
             var before = fake.Reads;
+            fake.Approval = approval with { ExtractionStartedAtUtc = DateTimeOffset.UtcNow.AddHours(1) };
             var cappedResume = await new CollectorRunCoordinator(fake).RunAsync(configPath, oneRowConfig,
                 CancellationToken.None);
-            Check("row cap persists across coordinator restart",
+            Check("row cap and run start persist across coordinator restart",
                 cappedResume.Outcome == CollectorRunOutcome.LimitReached && cappedResume.CompletedRows == 1 &&
                 fake.Reads == before);
+            fake.Approval = approval;
 
             var resumed = await Run(fake);
             Check("resume from completed boundary", resumed.Outcome == CollectorRunOutcome.Completed &&
@@ -113,6 +123,11 @@ internal static class RunCoordinatorChecks
             Check("terminal checkpoint completes without rereading source",
                 terminalResume.Outcome == CollectorRunOutcome.Completed && terminalResume.CompletedRows == 2 &&
                 fake.Reads == before);
+            var savedRunStart = File.ReadAllBytes(approval.RunStartPath);
+            File.Delete(approval.RunStartPath);
+            Check("checkpoint without start fails closed",
+                (await Run(fake)).Outcome == CollectorRunOutcome.CheckpointRejected && fake.Reads == before);
+            File.WriteAllBytes(approval.RunStartPath, savedRunStart);
             var tighterResume = await new CollectorRunCoordinator(fake).RunAsync(configPath, oneRowConfig,
                 CancellationToken.None);
             Check("completed ledger cannot exceed newly narrowed row cap",

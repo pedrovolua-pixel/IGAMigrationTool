@@ -20,7 +20,8 @@ internal sealed record ApprovedCollectorRun(
     SourceBuildClaim Source, QueryApplicabilityRule Query,
     PermissionProbe Permission, FieldPolicySnapshot FieldPolicy,
     string OrderingKey, int MaximumPageSize, long MaximumRows, TimeSpan MaximumDuration,
-    DateTimeOffset ExtractionStartedAtUtc, string CheckpointPath, byte[] CheckpointKey);
+    DateTimeOffset ExtractionStartedAtUtc, string RunStartPath, string CheckpointPath,
+    byte[] CheckpointKey);
 
 internal sealed record CollectorPage(string Boundary, int RowCount,
     IReadOnlyList<FieldCandidate> Fields, bool HasMore);
@@ -73,12 +74,6 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             return Result(CollectorRunOutcome.InvalidApproval);
         }
 
-        if (LocalRetentionWindow.Evaluate(approved.ExtractionStartedAtUtc, DateTimeOffset.UtcNow,
-                config.RetentionHours) == LocalRetentionDecision.InvalidInput)
-        {
-            return Result(CollectorRunOutcome.InvalidApproval);
-        }
-
         if (QueryApplicability.Evaluate(approved.Source, approved.Query) != QueryApplicabilityDecision.Compatible)
         {
             return Result(CollectorRunOutcome.UnsupportedSource);
@@ -107,6 +102,23 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
         {
             checkpoints = [.. EncryptedCheckpointStore.Load(approved.CheckpointPath, context,
                 approved.CheckpointKey) ?? []];
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or
+               InvalidDataException or CryptographicException)
+        {
+            return Result(CollectorRunOutcome.CheckpointRejected);
+        }
+
+        DateTimeOffset extractionStartedAtUtc;
+        try
+        {
+            if (checkpoints.Count > 0 && !File.Exists(approved.RunStartPath))
+            {
+                return Result(CollectorRunOutcome.CheckpointRejected);
+            }
+
+            extractionStartedAtUtc = EncryptedRunStartStore.LoadOrCreate(approved.RunStartPath,
+                context, approved.ExtractionStartedAtUtc, approved.CheckpointKey);
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or
                InvalidDataException or CryptographicException)
@@ -274,7 +286,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             }
         }
 
-        bool Expired() => LocalRetentionWindow.Evaluate(approved.ExtractionStartedAtUtc,
+        bool Expired() => LocalRetentionWindow.Evaluate(extractionStartedAtUtc,
             DateTimeOffset.UtcNow, config.RetentionHours) != LocalRetentionDecision.Active;
     }
 
@@ -291,6 +303,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
         !string.IsNullOrWhiteSpace(run.OrderingKey) &&
         run.MaximumPageSize > 0 && run.MaximumRows > 0 &&
         run.MaximumDuration > TimeSpan.Zero &&
+        Path.IsPathFullyQualified(run.RunStartPath) &&
         Path.IsPathFullyQualified(run.CheckpointPath) &&
         run.CheckpointKey is { Length: 32 };
 
