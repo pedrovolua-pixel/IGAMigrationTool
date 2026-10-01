@@ -1,12 +1,12 @@
 # Local pilot parallel cycle 02
 
-Status: Local and remote packets VERIFIED — private-site publication pending
+Status: Complete — second parallel cycle verified and privately published 2026-10-01
 Owner: Coordinator / technical owner
 Approval: Repository owner requested the second cycle on 2026-10-01, following the proposed assessment, collector-contract and verification packets.
 Baseline: `0c75d4690dc660384850f00412da6064a8de403f`
 Last updated: 2026-10-01
 
-Governing records: [local build](one-identity-local-pilot-build.md), [workflow](../../docs/development/parallel-agent-workflow.md), health [product](../../specs/003-health-assessment/product-spec.md), [technical](../../specs/003-health-assessment/technical-spec.md), [implementation](../../specs/003-health-assessment/implementation-plan.md), [tests](../../specs/003-health-assessment/test-plan.md), [evidence contract](../../specs/003-health-assessment/database-evidence-contract.md), collector [technical](../../specs/001-data-ingestion/technical-spec.md), [tests](../../specs/001-data-ingestion/test-plan.md) and [delivery proposal](../../specs/001-data-ingestion/collector-delivery-and-installer-contract-proposal.md).
+Governing records: [local build](../active/one-identity-local-pilot-build.md), [workflow](../../docs/development/parallel-agent-workflow.md), health [product](../../specs/003-health-assessment/product-spec.md), [technical](../../specs/003-health-assessment/technical-spec.md), [implementation](../../specs/003-health-assessment/implementation-plan.md), [tests](../../specs/003-health-assessment/test-plan.md), [evidence contract](../../specs/003-health-assessment/database-evidence-contract.md), collector [technical](../../specs/001-data-ingestion/technical-spec.md), [tests](../../specs/001-data-ingestion/test-plan.md) and [delivery proposal](../../specs/001-data-ingestion/collector-delivery-and-installer-contract-proposal.md).
 
 ## Objective and boundaries
 
@@ -19,7 +19,7 @@ Connect versioned synthetic baseline inventory to an explicit coverage plan and 
 | A2 | Assessment; new `src/server/modules/AssessmentOrchestration/SyntheticBaselineInventoryPlanner.cs` and new `tests/unit/AssessmentOrchestration.Tests/SyntheticBaselineInventoryCases.cs` | IP-HAS-004/005; FR-HAS-1/2/5/29; TP-HAS-001/007/015/016 local synthetic subset | VERIFIED |
 | C2 | Collector; new `specs/001-data-ingestion/collector-offline-receiving-contract-draft.md` | ING-PILOT-003/004; FR-ING-23–27; C0/C3; TP-ING contract-negative subset | VERIFIED draft packet only |
 | V2 | Verification; `tests/integration/SyntheticPilotFlow.Tests/` only | Independent expected synthetic baseline/plan/progress/completion fixtures; TP-HAS-001/007 subset; review A2/C2 | VERIFIED |
-| O2 | Coordinator; shared entry points/project/workflow configuration, canonical records, reviews, integration, private site | Local build and evidence/site obligations | RUNNING |
+| O2 | Coordinator; shared entry points/project/workflow configuration, canonical records, reviews, integration, private site | Local build and evidence/site obligations | VERIFIED |
 
 ### A2 acceptance
 
@@ -39,7 +39,7 @@ Read governing specs independently. Add stable versioned fixtures with independe
 - [x] A2/C2/V2 independently reviewed and integrated; acceptance gaps explicit.
 - [x] Applicable locked restore, format, build, unit/integration/architecture, security/dependency and package checks executed and recorded.
 - [x] Canonical plans/status/test descriptions/evidence updated with exact scope and remaining work.
-- [ ] Existing private site and human board updated; deployment confirmed.
+- [x] Existing private site and human board updated; deployment confirmed.
 - [x] Worker changes preserved and clean temporary worktrees removed.
 
 ## Execution evidence
@@ -52,8 +52,10 @@ The tested source SHA-256 is `21a79d08370411a7236c7f5617e0a3c7cfa4aabb60a0da90d7
 
 The assessment and contract packets are preserved at `d498420` and `97e3cc6` on their isolated branches. V2 is preserved at `ce6755f`; copied test dependencies are excluded. All three clean temporary worktrees were removed; concurrent Azure worktrees were left to their owners. Verification independently reviewed A2/C2, and the contract worker reviewed A2/V2. Neither found a remaining actionable issue. The review tightened the draft's collection replay identity to bind substantive manifest metadata, and the verifier confirmed the final rule. Twenty-one draft references/anchors resolve; OFF-D01–08, OFF-N01–24 and INST-D01–09 remain proposals/planned vectors, with no runtime crypto/import/installer checks claimed.
 
-All G1–G9 remain NOT VERIFIED. Full feature/E2E, manual accessibility, customer baseline/source, deployed authorization/isolation/restore and signed release/installer evidence remain unverified. No migrations, environment configuration, external package additions or live activation occurred in this cycle. The concurrently completed Azure configuration/cleanup work is preserved separately and is not a cycle-02 gate pass. Private-site publication and final cleanup remain pending below.
+All G1–G9 remain NOT VERIFIED. Full feature/E2E, manual accessibility, customer baseline/source, deployed authorization/isolation/restore and signed release/installer evidence remain unverified. No migrations, environment configuration, external package additions or live activation occurred in this cycle. The concurrently completed Azure configuration/cleanup work is preserved separately and is not a cycle-02 gate pass. Private-site publication and final cleanup are confirmed below.
 
 Gitleaks 8.30.1 (the previously vendor-checksummed binary) scanned the final 242-file tracked/non-ignored snapshot with redaction enabled and found no secrets. Git history, ignored/private files and deployed/provider stores are outside this scan. Ninety-six affected-document local links resolved. Desktop 1440px and mobile 390px rendering/navigation/no-overflow checks passed, and all eight human cards retain role/completion/source links.
 
 [Partial bootstrap run 36940634611](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36940634611) passed on `918d48ef47a4c3eaf8563674d3fca50ae116c9b2`: Linux audited restore, format/build/unit/integration/architecture, pinned secret/Bicep compile/lint/policy checks, and Windows 2022/2025 protected-key/ACL, collector packaging and service/disabled-CLI smoke all succeeded. The workflow is a partial engineering gate, not pilot acceptance. No infrastructure source changed in cycle 02.
+
+The cycle snapshot was published to the existing owner-private site with native status `succeeded` at 2026-10-01T23:29:10Z: Site source `d4f4beeff34be01e4ea152d56f3f60803a1da032`, canonical snapshot `125db5c160c1da08012891f5ff1e5c25ab339f9d`, deployment `appgdep_6abeecc04df4819184888fe51ed887d5`. Twenty-nine repository links and internal anchors resolve; the eight human tasks retain requested roles, completion conditions and source links, including the exact offline review draft. The record is archived after confirmed publication, then the site snapshot is refreshed to include closure. The broad local pilot build is still incomplete, and completed workers do not continue unattended.

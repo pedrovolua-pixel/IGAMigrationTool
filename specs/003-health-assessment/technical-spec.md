@@ -156,7 +156,7 @@ All pilot AC-HAS-1 through AC-HAS-20 map to named verification scenarios in **Te
 
 ## Data model and lifecycle
 
-Local implementation note (cycle 02): a value-free `synthetic-baseline-inventory-v1` internal fixture projection checks matching opaque scope, declared permission and exact compatibility before freezing sorted coverage keys and caller-declared applicability/gap items. It is an executable engineering boundary, not the production evidence manifest/transport schema, trusted baseline adapter, eligibility/authorization grant, semantic applicability engine or durable run model. See [local coverage guidance](../../docs/development/assessment-coverage.md) and [cycle 02](../../plans/active/local-pilot-parallel-cycle-02.md) for its exact scope and evidence.
+Local implementation note (cycle 02): a value-free `synthetic-baseline-inventory-v1` internal fixture projection checks matching opaque scope, declared permission and exact compatibility before freezing sorted coverage keys and caller-declared applicability/gap items. It is an executable engineering boundary, not the production evidence manifest/transport schema, trusted baseline adapter, eligibility/authorization grant, semantic applicability engine or durable run model. See [local coverage guidance](../../docs/development/assessment-coverage.md) and [cycle 02](../../plans/completed/local-pilot-parallel-cycle-02.md) for its exact scope and evidence.
 
 ### Core records
 
