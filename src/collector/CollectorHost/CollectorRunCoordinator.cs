@@ -128,6 +128,28 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             return Result(CollectorRunOutcome.CheckpointRejected);
         }
 
+        // A checkpoint is a claim that its minimized page was durably staged. On restart,
+        // reject a missing or altered page before asking the source for another one.
+        try
+        {
+            foreach (var checkpoint in checkpoints)
+            {
+                var staged = EncryptedPageStageStore.Load(runDirectory, context,
+                    checkpoint.PageBoundary, approved.CheckpointKey);
+                if (staged is null || staged.RowCount != checkpoint.RowCount ||
+                    staged.IsTerminal != checkpoint.IsTerminal ||
+                    !string.Equals(staged.Digest, checkpoint.ContentSha256, StringComparison.OrdinalIgnoreCase))
+                {
+                    return Result(CollectorRunOutcome.CheckpointRejected);
+                }
+            }
+        }
+        catch (Exception error) when (error is IOException or UnauthorizedAccessException or
+               InvalidDataException or CryptographicException)
+        {
+            return Result(CollectorRunOutcome.CheckpointRejected);
+        }
+
         var started = Stopwatch.StartNew();
         var rows = checkpoints.Sum(page => (long)page.RowCount);
         var policy = new PageBudgetPolicy(Math.Min(config.MaxPageSize, approved.MaximumPageSize),

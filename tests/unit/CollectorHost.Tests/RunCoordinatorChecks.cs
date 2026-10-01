@@ -127,6 +127,18 @@ internal static class RunCoordinatorChecks
                 fake.RequestedBoundaries.Last() == "page-1" &&
                 fake.Staged.Count == 2);
             before = fake.Reads;
+            var stagedPath = Directory.GetFiles(stageDirectory, "*.stage")[0];
+            var stagedBytes = File.ReadAllBytes(stagedPath);
+            File.Delete(stagedPath);
+            Check("missing checkpointed stage rejects before source read",
+                (await Run(fake)).Outcome == CollectorRunOutcome.CheckpointRejected && fake.Reads == before);
+            File.WriteAllBytes(stagedPath, stagedBytes);
+            var alteredStage = (byte[])stagedBytes.Clone();
+            alteredStage[^1] ^= 1;
+            File.WriteAllBytes(stagedPath, alteredStage);
+            Check("tampered checkpointed stage rejects before source read",
+                (await Run(fake)).Outcome == CollectorRunOutcome.CheckpointRejected && fake.Reads == before);
+            File.WriteAllBytes(stagedPath, stagedBytes);
             var terminalResume = await Run(fake);
             Check("terminal checkpoint completes without rereading source",
                 terminalResume.Outcome == CollectorRunOutcome.Completed && terminalResume.CompletedRows == 2 &&
