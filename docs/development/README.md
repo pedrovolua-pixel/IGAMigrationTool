@@ -1,5 +1,7 @@
 # Development documentation
 
+Cycle 02 [partial bootstrap run 36940634611](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36940634611) passed on `918d48e` across Linux and Windows 2022/2025, including integration, pinned secret/Bicep checks, protected-key/ACL and collector service smoke. These are partial engineering checks; full-feature and live gates remain NOT VERIFIED.
+
 Parallel cycle 02 adds an internal versioned synthetic baseline-inventory planner and independent baseline-to-progress/coverage cases; see [coverage guidance](assessment-coverage.md) and [the cycle record](../../plans/active/local-pilot-parallel-cycle-02.md). The coordinator's audited locked restore, format, Release build, all current unit/integration/architecture hosts and self-contained Windows cross-publish passed locally on 2026-10-01. The planner has 62 focused cases; integration has 17 fixtures / 143 assertions, including 11 new baseline fixtures / 65 assertions. This is not a production baseline reader or a durable/UI/E2E assessment. [The offline receiving draft](../../specs/001-data-ingestion/collector-offline-receiving-contract-draft.md) remains unapproved and disabled; its proposed negative vectors were not executed.
 
 For coordinated pilot work with isolated writing workers, shared-file ownership, review and integration, use [parallel agent development](parallel-agent-workflow.md). The [first execution cycle](../../plans/completed/local-pilot-parallel-cycle-01.md) tracks bounded packets and actual evidence.

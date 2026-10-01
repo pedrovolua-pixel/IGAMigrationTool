@@ -1,6 +1,6 @@
 # Local pilot parallel cycle 02
 
-Status: Local packets VERIFIED — private-site publication and remote checks pending
+Status: Local and remote packets VERIFIED — private-site publication pending
 Owner: Coordinator / technical owner
 Approval: Repository owner requested the second cycle on 2026-10-01, following the proposed assessment, collector-contract and verification packets.
 Baseline: `0c75d4690dc660384850f00412da6064a8de403f`
@@ -40,7 +40,7 @@ Read governing specs independently. Add stable versioned fixtures with independe
 - [x] Applicable locked restore, format, build, unit/integration/architecture, security/dependency and package checks executed and recorded.
 - [x] Canonical plans/status/test descriptions/evidence updated with exact scope and remaining work.
 - [ ] Existing private site and human board updated; deployment confirmed.
-- [ ] Worker changes preserved and clean temporary worktrees removed.
+- [x] Worker changes preserved and clean temporary worktrees removed.
 
 ## Execution evidence
 
@@ -48,8 +48,12 @@ The three writing workers use `/private/tmp/iga-cycle02-assessment`, `/private/t
 
 On 2026-10-01 the coordinator's SDK 10.0.401 audited locked solution restore, solution formatting, Release build (zero warnings/errors), all five current unit hosts, the integration and architecture hosts, and self-contained win-x64 publish passed. Assessment checks include 13 existing lock, 25 existing composition and 62 new planner cases; integration includes the six existing fixtures / 78 assertions and eleven new baseline fixtures / 65 assertions (17 / 143 total). New fixture digests bind actual mutated descriptors and full 100,000-object/result inputs, not summary labels. Missing terminal results remain outstanding and cannot complete. An initial formatter attempt found four whitespace positions; corrected source passed the final full check run. No check, audit, version pin or safety boundary was disabled.
 
-The tested source SHA-256 is `21a79d08370411a7236c7f5617e0a3c7cfa4aabb60a0da90d75f0379db01d0b7`: sorted paths for 127 source/test .cs/.csproj/lock files plus solution, Directory.Build.props, global.json and bootstrap workflow, each path/body NUL-separated; bin/obj excluded. Final local check transcript SHA-256: `ca43ba910bddb4a7e242256a58182d19bc901c01b6d76d6d42068ffaf89a6f63`.
+The tested source SHA-256 is `21a79d08370411a7236c7f5617e0a3c7cfa4aabb60a0da90d75f0379db01d0b7`: 127 sorted files comprising source/test .cs/.csproj/locks, solution, Directory.Build.props, global.json and bootstrap workflow, each path/body NUL-separated; bin/obj excluded. Final local check transcript SHA-256: `ca43ba910bddb4a7e242256a58182d19bc901c01b6d76d6d42068ffaf89a6f63`.
 
-The assessment and contract packets are preserved at `d498420` and `97e3cc6` on their isolated branches. V2 returns an owned-files patch; copied test dependencies are excluded. Verification independently reviewed A2/C2, and the contract worker reviewed A2/V2. Neither found a remaining actionable issue. The review tightened the draft's collection replay identity to bind substantive manifest metadata, and the verifier confirmed the final rule. Twenty-one draft references/anchors resolve; OFF-D01–08, OFF-N01–24 and INST-D01–09 remain proposals/planned vectors, with no runtime crypto/import/installer checks claimed.
+The assessment and contract packets are preserved at `d498420` and `97e3cc6` on their isolated branches. V2 is preserved at `ce6755f`; copied test dependencies are excluded. All three clean temporary worktrees were removed; concurrent Azure worktrees were left to their owners. Verification independently reviewed A2/C2, and the contract worker reviewed A2/V2. Neither found a remaining actionable issue. The review tightened the draft's collection replay identity to bind substantive manifest metadata, and the verifier confirmed the final rule. Twenty-one draft references/anchors resolve; OFF-D01–08, OFF-N01–24 and INST-D01–09 remain proposals/planned vectors, with no runtime crypto/import/installer checks claimed.
 
 All G1–G9 remain NOT VERIFIED. Full feature/E2E, manual accessibility, customer baseline/source, deployed authorization/isolation/restore and signed release/installer evidence remain unverified. No migrations, environment configuration, external package additions or live activation occurred in this cycle. The concurrently completed Azure configuration/cleanup work is preserved separately and is not a cycle-02 gate pass. Private-site publication and final cleanup remain pending below.
+
+Gitleaks 8.30.1 (the previously vendor-checksummed binary) scanned the final 242-file tracked/non-ignored snapshot with redaction enabled and found no secrets. Git history, ignored/private files and deployed/provider stores are outside this scan. Ninety-six affected-document local links resolved. Desktop 1440px and mobile 390px rendering/navigation/no-overflow checks passed, and all eight human cards retain role/completion/source links.
+
+[Partial bootstrap run 36940634611](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36940634611) passed on `918d48ef47a4c3eaf8563674d3fca50ae116c9b2`: Linux audited restore, format/build/unit/integration/architecture, pinned secret/Bicep compile/lint/policy checks, and Windows 2022/2025 protected-key/ACL, collector packaging and service/disabled-CLI smoke all succeeded. The workflow is a partial engineering gate, not pilot acceptance. No infrastructure source changed in cycle 02.
