@@ -1,5 +1,7 @@
 # Development documentation
 
+For the selected Azure development subscription, USD 50 monthly limit, verified empty resource group/budget and the next platform preflight, use [Azure pilot development setup](azure-pilot-development-setup.md).
+
 The first implementation slice uses the SDK pinned in `global.json`. Install .NET SDK `10.0.401` and confirm `dotnet --version` reports that version from the repository root before running:
 
 ```sh

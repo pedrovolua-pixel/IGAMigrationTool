@@ -1,5 +1,7 @@
 # Azure infrastructure bootstrap
 
+Environment setup and the owner-selected USD 50 monthly development boundary are recorded in [Azure pilot development setup](../../docs/development/azure-pilot-development-setup.md). The dedicated East US 2 resource group and budget exist; paid resources, allocated CIDRs and deployment tests remain pending.
+
 `modules/engineering-evidence-store.bicep` is a partial Milestone 0 module for the separate engineering evidence store. It has no deployment entry point and has not been deployed. It fixes East US 2 and stable Storage and Network API versions. It disables public network access, blob public access and shared-key access; requires OAuth and HTTPS; and enables blob versioning with seven-day soft-delete windows. It takes non-secret subnet and Blob private DNS zone resource IDs, then defines the Blob private endpoint and DNS zone group. The compiled template outputs only resource IDs.
 
 The module is not a deployable store yet. The supplied subnet and private DNS zone must exist in the approved network and have correct virtual-network DNS linkage. Managed-identity data roles, diagnostics, signed decision-bundle intake, restricted reviewer access, lifecycle purge, and restore tests are still missing. No time-based WORM policy is enabled: signed digests and versioning are the proposed tamper-evidence path, subject to end-to-end retrieval and purge tests. Blob versions and backups still need a deletion-safe lifecycle job before this store can carry real evidence. This draft is not G1 evidence or authorization to deploy.
