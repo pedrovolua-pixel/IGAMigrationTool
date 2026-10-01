@@ -40,14 +40,14 @@ These are **candidate product facts**, not statements about this environment. At
 
 | Candidate to check | Public basis | SME decision / correction | Environment evidence ID |
 |---|---|---|---|
-| One Identity Manager has a 10.0 LTS documentation set; the pilot targets an exact 10.x build rather than the broad `10.x` label. | [V1]; repository capability matrix | [Confirm/Correct/Unknown] | [enter] |
-| The One Identity Manager schema has table and column definitions; Designer's Schema Editor and documentation reports are candidate ways to inspect definitions and customizations. | [V2] is the public 9.3 guide; verify 10.0 behavior in the installed tools | [Confirm/Correct/Unknown] | [enter] |
+| One Identity Manager has a 10.0 LTS documentation set; the pilot targets an exact 10.x build rather than the broad `10.x` label. | [V1]; repository capability matrix | [Confirm/Correct/Unknown] | [Correct] |
+| The One Identity Manager schema has table and column definitions; Designer's Schema Editor and documentation reports are candidate ways to inspect definitions and customizations. | [V2] is the public 9.3 guide; verify 10.0 behavior in the installed tools | [Confirm/Correct/Unknown] | [Correct] |
 | `DialogTable` and `DialogColumn` are candidate schema-metadata objects. Their exact columns, availability, and permitted read path must be confirmed for this build. | [V2] | **A:** Object/column-name existence confirmed by owner catalog read; meaning, classification and safe path still Unknown. **B:** Unknown. | [A provisional schema diagnostic](one-identity-environment-a-sme-response.md); B pending |
-| IT Shop uses concepts including shelves, service items/products, approval policies and workflows. No table or field mapping is assumed. | [V3] is the public 9.2 guide; verify 10.0 behavior | [Confirm/Correct/Not applicable] | [enter] |
-| Attestation policies are candidate governance objects with an attestation procedure, approval policy and schedule. | [V7] is the public 9.3 guide; verify 10.0 behavior | [Confirm/Correct/Not applicable] | [enter] |
+| IT Shop uses concepts including shelves, service items/products, approval policies and workflows. No table or field mapping is assumed. | [V3] is the public 9.2 guide; verify 10.0 behavior | [Confirm/Correct/Not applicable] | [Correct] |
+| Attestation policies are candidate governance objects with an attestation procedure, approval policy and schedule. | [V7] is the public 9.3 guide; verify 10.0 behavior | [Confirm/Correct/Not applicable] | [Correct] |
 | Compliance rule checks are a candidate operational category. Checks may be scheduled, automatic, or ad hoc; disabled rules are not checked. | [V4] 10.0 LTS | [Confirm/Correct/Not applicable] | [enter] |
-| Assignment of system roles to business roles depends on the Business Roles Module being installed. | [V5] is a public earlier-version guide; verify 10.0 behavior | [Confirm/Correct/Not applicable] | [enter] |
-| Job Queue and DBQueue are distinct process/queue concepts to consider for source-contained operational evidence. No queue payload is approved by this statement. | [V6] vendor support article applicable to 10.0 LTS | [Confirm/Correct/Not applicable] | [enter] |
+| Assignment of system roles to business roles depends on the Business Roles Module being installed. | [V5] is a public earlier-version guide; verify 10.0 behavior | [Confirm/Correct/Not applicable] | [Correct] |
+| Job Queue and DBQueue are distinct process/queue concepts to consider for source-contained operational evidence. No queue payload is approved by this statement. | [V6] vendor support article applicable to 10.0 LTS | [Confirm/Correct/Not applicable] | [Correct] |
 
 ## 3. Exact product and database compatibility
 
