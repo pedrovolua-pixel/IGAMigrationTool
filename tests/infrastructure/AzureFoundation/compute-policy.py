@@ -41,6 +41,7 @@ def closed_resources(template, expected):
 def environment_policy(template):
     closed_resources(template, ["Microsoft.App/managedEnvironments"])
     env = resource(template, "Microsoft.App/managedEnvironments")
+    require(env["apiVersion"] == "2026-01-01", "Approved ACA API pin required")
     require(env["location"] == "eastus2", "Approved single region required")
     props = env["properties"]
     require(props["publicNetworkAccess"] == "Disabled", "No public ingress")
@@ -176,6 +177,7 @@ def main():
         ("extra workload", ["resources"], env["resources"] + [{"type": "Microsoft.App/containerApps"}]),
         ("secret output", ["outputs", "environmentResourceId", "value"], "[listKeys('synthetic', '2025-01-01')]"),
         ("wrong region", ["resources", 0, "location"], "westus"),
+        ("ACA API drift", ["resources", 0, "apiVersion"], "2025-07-01"),
     ])
     wp, ap = ["resources", 0, "properties"], ["resources", 1, "properties"]
     mutations(obs, observability_policy, [

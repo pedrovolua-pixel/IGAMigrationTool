@@ -1,5 +1,5 @@
 // G1 scaffold only: no application, image, sign-in, or public ingress.
-// https://learn.microsoft.com/azure/templates/microsoft.app/2025-07-01/managedenvironments
+// https://learn.microsoft.com/azure/templates/microsoft.app/2026-01-01/managedenvironments
 // https://learn.microsoft.com/azure/container-apps/log-options
 @minLength(1)
 param environmentName string
@@ -24,7 +24,7 @@ resource containerAppsSubnet 'Microsoft.Network/virtualNetworks/subnets@2025-05-
   name: containerAppsSubnetName
 }
 
-resource environment 'Microsoft.App/managedEnvironments@2025-07-01' = {
+resource environment 'Microsoft.App/managedEnvironments@2026-01-01' = {
   name: environmentName
   location: 'eastus2'
   properties: {
