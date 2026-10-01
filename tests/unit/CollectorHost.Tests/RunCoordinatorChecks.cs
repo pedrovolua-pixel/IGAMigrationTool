@@ -39,7 +39,8 @@ internal static class RunCoordinatorChecks
                 $"{config.FieldPolicyId:D}/{config.FieldPolicyVersion}/{config.FieldPolicySha256}",
                 approval.OrderingKey);
 
-            var fake = new FakeAdapter(approval, [first, second], stageDirectory, stageContext, key);
+            var fake = new FakeAdapter(approval, [first, second], stageDirectory, stageContext,
+                config.MaxLocalBytes, key);
             Check("disabled has no adapter calls",
                 (await new CollectorRunCoordinator(fake).RunAsync(configPath,
                     config with { Enabled = false }, CancellationToken.None)).Outcome == CollectorRunOutcome.Disabled &&
@@ -87,11 +88,28 @@ internal static class RunCoordinatorChecks
             Check("checkpoint encrypted and present", File.Exists(approval.CheckpointPath) &&
                 !System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(approval.CheckpointPath)).Contains("uid-1",
                     StringComparison.Ordinal));
+            var before = fake.Reads;
+            var cappedResume = await new CollectorRunCoordinator(fake).RunAsync(configPath, oneRowConfig,
+                CancellationToken.None);
+            Check("row cap persists across coordinator restart",
+                cappedResume.Outcome == CollectorRunOutcome.LimitReached && cappedResume.CompletedRows == 1 &&
+                fake.Reads == before);
 
             var resumed = await Run(fake);
             Check("resume from completed boundary", resumed.Outcome == CollectorRunOutcome.Completed &&
-                resumed.CompletedPages == 2 && fake.RequestedBoundaries.Last() == "page-1" &&
+                resumed.CompletedPages == 2 && resumed.CompletedRows == 2 &&
+                fake.RequestedBoundaries.Last() == "page-1" &&
                 fake.Staged.Count == 2);
+            before = fake.Reads;
+            var terminalResume = await Run(fake);
+            Check("terminal checkpoint completes without rereading source",
+                terminalResume.Outcome == CollectorRunOutcome.Completed && terminalResume.CompletedRows == 2 &&
+                fake.Reads == before);
+            var tighterResume = await new CollectorRunCoordinator(fake).RunAsync(configPath, oneRowConfig,
+                CancellationToken.None);
+            Check("completed ledger cannot exceed newly narrowed row cap",
+                tighterResume.Outcome == CollectorRunOutcome.CheckpointRejected &&
+                tighterResume.CompletedRows == 2 && fake.Reads == before);
             Check("page size bounded", fake.RequestedSizes.All(size => size <= 10));
 
             var wrongPolicy = approval with
@@ -99,7 +117,7 @@ internal static class RunCoordinatorChecks
                 FieldPolicy = approval.FieldPolicy with { Sha256 = new string('d', 64) }
             };
             fake.Approval = wrongPolicy;
-            var before = fake.Reads;
+            before = fake.Reads;
             Check("policy digest mismatch stops before read",
                 (await Run(fake)).Outcome == CollectorRunOutcome.InvalidApproval && fake.Reads == before);
 
@@ -171,7 +189,8 @@ internal static class RunCoordinatorChecks
                 (await Run(fake)).Outcome == CollectorRunOutcome.StageFailed &&
                 !File.Exists(approval.CheckpointPath));
 
-            var restarted = new FakeAdapter(approval, [interruptedPage], stageDirectory, stageContext, key);
+            var restarted = new FakeAdapter(approval, [interruptedPage], stageDirectory, stageContext,
+                config.MaxLocalBytes, key);
             var recovered = await Run(restarted);
             Check("fresh adapter reuses encrypted staged page and checkpoints it",
                 recovered.Outcome == CollectorRunOutcome.Completed && recovered.CompletedPages == 1 &&
@@ -194,7 +213,7 @@ internal static class RunCoordinatorChecks
                 Permission = new PermissionProbe(true,
                     [SourceCapability.MinimumRead, SourceCapability.ExcessReadOnly])
             };
-            fake.Pages = [first with { HasMore = false }];
+            fake.Pages = [first with { Boundary = "warning-page", HasMore = false }];
             Check("excess read-only warning survives run",
                 (await Run(fake)).ExcessReadOnlyWarning);
             return count;
@@ -219,7 +238,7 @@ internal static class RunCoordinatorChecks
     }
 
     private sealed class FakeAdapter(ApprovedCollectorRun? approval, IReadOnlyList<CollectorPage> pages,
-        string stageDirectory, PageCheckpointContext stageContext, byte[] stageKey)
+        string stageDirectory, PageCheckpointContext stageContext, long maxLocalBytes, byte[] stageKey)
         : ICollectorRunAdapter
     {
         public ApprovedCollectorRun? Approval { get; set; } = approval;
@@ -268,7 +287,7 @@ internal static class RunCoordinatorChecks
             return Task.FromResult(Pages[Math.Min(index, Pages.Count - 1)]);
         }
 
-        public async Task StagePageAsync(string boundary, int rowCount, string digest,
+        public async Task StagePageAsync(string boundary, int rowCount, bool isTerminal, string digest,
             IReadOnlyList<MinimizedField> fields,
             CancellationToken cancellationToken)
         {
@@ -287,8 +306,8 @@ internal static class RunCoordinatorChecks
             }
 
             StageAttempts++;
-            if (EncryptedPageStageStore.Stage(stageDirectory, stageContext, boundary, rowCount, digest,
-                    fields, stageKey) == EncryptedPageStageStore.StageResult.NewPage)
+            if (EncryptedPageStageStore.Stage(stageDirectory, stageContext, boundary, rowCount, isTerminal, digest,
+                    fields, maxLocalBytes, stageKey) == EncryptedPageStageStore.StageResult.NewPage)
             {
                 Staged.Add(fields);
             }

@@ -14,8 +14,8 @@ internal static class CheckpointStoreChecks
             var path = Path.Combine(directory, "checkpoint.enc");
             var key = RandomNumberGenerator.GetBytes(32);
             var context = new PageCheckpointContext("query", "1", "10.0.0.1", "scope", "policy", "uid");
-            var first = new PageCheckpoint(context, "page-1", new string('a', 64));
-            var second = new PageCheckpoint(context, "page-2", new string('b', 64));
+            var first = new PageCheckpoint(context, "page-1", new string('a', 64), 2, false);
+            var second = new PageCheckpoint(context, "page-2", new string('b', 64), 3, true);
             EncryptedCheckpointStore.Save(path, context, [first], key);
             Check("round trip", EncryptedCheckpointStore.Load(path, context, key)?.SequenceEqual([first]) == true);
             EncryptedCheckpointStore.Save(path, context, [first, second], key);
@@ -23,11 +23,21 @@ internal static class CheckpointStoreChecks
             Reject<InvalidDataException>("no page removal", () => EncryptedCheckpointStore.Save(path, context, [first], key));
             Reject<InvalidDataException>("no page rewrite", () => EncryptedCheckpointStore.Save(path, context,
                 [first with { ContentSha256 = new string('c', 64) }, second], key));
+            Reject<InvalidDataException>("no completed row-count rewrite", () =>
+                EncryptedCheckpointStore.Save(path, context, [first with { RowCount = 4 }, second], key));
+            Reject<InvalidDataException>("no page after terminal", () => EncryptedCheckpointStore.Save(path,
+                context, [first, second, first with { PageBoundary = "page-3" }], key));
             Reject<CryptographicException>("wrong key", () =>
                 EncryptedCheckpointStore.Load(path, context, RandomNumberGenerator.GetBytes(32)));
             Reject<CryptographicException>("wrong context", () =>
                 EncryptedCheckpointStore.Load(path, context with { PolicyVersion = "other" }, key));
             var bytes = File.ReadAllBytes(path);
+            var oldHeader = (byte[])bytes.Clone();
+            oldHeader[3] = (byte)'1';
+            File.WriteAllBytes(path, oldHeader);
+            Reject<InvalidDataException>("old count-less ledger version rejected", () =>
+                EncryptedCheckpointStore.Load(path, context, key));
+            File.WriteAllBytes(path, bytes);
             bytes[^1] ^= 1;
             File.WriteAllBytes(path, bytes);
             Reject<CryptographicException>("tampered ciphertext", () => EncryptedCheckpointStore.Load(path, context, key));

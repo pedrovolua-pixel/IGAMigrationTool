@@ -24,9 +24,10 @@ internal static class PageStageStoreChecks
                 new(new FieldKey("schema", "uid"), FieldDisposition.Included, "permitted-marker"),
                 new(new FieldKey("schema", "display"), FieldDisposition.Excluded, null)
             };
-            var digest = MinimizedPageDigest.Compute(boundary, 1, fields);
+            const long stageLimit = 10_000_000;
+            var digest = MinimizedPageDigest.Compute(boundary, 1, true, fields);
             Check("first page staged", EncryptedPageStageStore.Stage(directory, context, boundary, 1,
-                digest, fields, key) == EncryptedPageStageStore.StageResult.NewPage);
+                true, digest, fields, stageLimit, key) == EncryptedPageStageStore.StageResult.NewPage);
             var files = Directory.GetFiles(directory, "*.stage");
             Check("one opaque staged file", files.Length == 1 && !files[0].Contains(boundary,
                 StringComparison.Ordinal));
@@ -35,31 +36,45 @@ internal static class PageStageStoreChecks
                 StringComparison.Ordinal) && !Encoding.UTF8.GetString(bytes).Contains(boundary,
                 StringComparison.Ordinal));
             var recovered = EncryptedPageStageStore.Load(directory, context, boundary, key);
-            Check("new instance recovers minimized page", recovered?.RowCount == 1 &&
+            Check("new instance recovers minimized page", recovered?.RowCount == 1 && recovered.IsTerminal &&
                 recovered.Digest == digest && recovered.Fields[0].IncludedValue == "permitted-marker" &&
                 recovered.Fields[1].IncludedValue is null);
             Check("same page replay is idempotent", EncryptedPageStageStore.Stage(directory, context,
-                boundary, 1, digest, fields, key) == EncryptedPageStageStore.StageResult.IdempotentReplay &&
+                boundary, 1, true, digest, fields, stageLimit, key) == EncryptedPageStageStore.StageResult.IdempotentReplay &&
                 Directory.GetFiles(directory, "*.stage").Length == 1);
+            var usedBytes = new FileInfo(files[0]).Length;
+            Check("completed page replay allowed at exact byte cap", EncryptedPageStageStore.Stage(directory,
+                context, boundary, 1, true, digest, fields, usedBytes, key) ==
+                EncryptedPageStageStore.StageResult.IdempotentReplay);
+            Reject("new page blocked by aggregate byte cap", () => EncryptedPageStageStore.Stage(directory,
+                context, "next-page", 1, true, MinimizedPageDigest.Compute("next-page", 1, true, fields),
+                fields, usedBytes, key));
+            Check("capacity rejection leaves no second page", Directory.GetFiles(directory, "*.stage").Length == 1);
+            Reject("nonpositive local byte cap rejected", () => EncryptedPageStageStore.Stage(directory,
+                context, "next-page", 1, true, MinimizedPageDigest.Compute("next-page", 1, true, fields),
+                fields, 0, key));
 
             var changed = new MinimizedField[] { fields[0] with { IncludedValue = "changed" }, fields[1] };
             Reject("changed content conflicts", () => EncryptedPageStageStore.Stage(directory, context,
-                boundary, 1, MinimizedPageDigest.Compute(boundary, 1, changed), changed, key));
+                boundary, 1, true, MinimizedPageDigest.Compute(boundary, 1, true, changed), changed, stageLimit, key));
+            Reject("changed terminal state conflicts", () => EncryptedPageStageStore.Stage(directory,
+                context, boundary, 1, false, MinimizedPageDigest.Compute(boundary, 1, false, fields),
+                fields, stageLimit, key));
             Reject("digest mismatch rejected", () => EncryptedPageStageStore.Stage(directory, context,
-                "new-page", 1, digest, fields, key));
+                "new-page", 1, true, digest, fields, stageLimit, key));
             Reject("prohibited field rejected", () => EncryptedPageStageStore.Stage(directory, context,
-                "prohibited", 1, MinimizedPageDigest.Compute("prohibited", 1,
+                "prohibited", 1, true, MinimizedPageDigest.Compute("prohibited", 1, true,
                     [new MinimizedField(fields[0].Key, FieldDisposition.Prohibited, null)]),
-                [new MinimizedField(fields[0].Key, FieldDisposition.Prohibited, null)], key));
+                [new MinimizedField(fields[0].Key, FieldDisposition.Prohibited, null)], stageLimit, key));
             Reject("excluded value rejected", () => EncryptedPageStageStore.Stage(directory, context,
-                "excluded", 1, MinimizedPageDigest.Compute("excluded", 1,
+                "excluded", 1, true, MinimizedPageDigest.Compute("excluded", 1, true,
                     [fields[1] with { IncludedValue = "leak" }]),
-                [fields[1] with { IncludedValue = "leak" }], key));
+                [fields[1] with { IncludedValue = "leak" }], stageLimit, key));
             var large = new MinimizedField(fields[0].Key, FieldDisposition.Included,
                 new string('x', 1024 * 1024));
             Reject("oversized page rejected before file creation", () => EncryptedPageStageStore.Stage(
-                directory, context, "large", 1, MinimizedPageDigest.Compute("large", 1, [large]),
-                [large], key));
+                directory, context, "large", 1, true, MinimizedPageDigest.Compute("large", 1, true, [large]),
+                [large], stageLimit, key));
             Check("wrong key cannot locate prior page", EncryptedPageStageStore.Load(directory, context,
                 boundary, RandomNumberGenerator.GetBytes(32)) is null);
             Check("other context has no matching page", EncryptedPageStageStore.Load(directory,
@@ -91,6 +106,12 @@ internal static class PageStageStoreChecks
                 FileSystemAclExtensions.SetAccessControl(stagedFile, fileSecurity);
             }
 
+            var oldHeader = (byte[])bytes.Clone();
+            oldHeader[3] = (byte)'1';
+            File.WriteAllBytes(files[0], oldHeader);
+            Reject("old stage format rejected", () => EncryptedPageStageStore.Load(directory, context,
+                boundary, key));
+            File.WriteAllBytes(files[0], bytes);
             bytes[bytes.Length - 1] ^= 1;
             File.WriteAllBytes(files[0], bytes);
             RejectCrypto("tampering rejected", () => EncryptedPageStageStore.Load(directory, context,

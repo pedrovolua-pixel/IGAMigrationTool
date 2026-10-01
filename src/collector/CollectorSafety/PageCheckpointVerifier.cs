@@ -11,7 +11,9 @@ public sealed record PageCheckpointContext(
 public sealed record PageCheckpoint(
     PageCheckpointContext Context,
     string PageBoundary,
-    string ContentSha256);
+    string ContentSha256,
+    int RowCount,
+    bool IsTerminal);
 
 public enum PageCheckpointDecision
 {
@@ -44,7 +46,8 @@ public static class PageCheckpointVerifier
             return PageCheckpointDecision.IncompatibleContext;
         }
 
-        string? completedDigest = null;
+        PageCheckpoint? priorPage = null;
+        var terminalSeen = false;
         foreach (var completed in completedPages)
         {
             if (!ValidCheckpoint(completed) || completed.Context != expectedContext)
@@ -52,33 +55,43 @@ public static class PageCheckpointVerifier
                 return PageCheckpointDecision.CorruptCompletedPages;
             }
 
+            if (terminalSeen)
+            {
+                return PageCheckpointDecision.CorruptCompletedPages;
+            }
+
+            terminalSeen = completed.IsTerminal;
+
             if (completed.PageBoundary != candidate.PageBoundary)
             {
                 continue;
             }
 
-            if (completedDigest is not null &&
-                !string.Equals(completedDigest, completed.ContentSha256, StringComparison.OrdinalIgnoreCase))
+            if (priorPage is not null &&
+                (!string.Equals(priorPage.ContentSha256, completed.ContentSha256,
+                    StringComparison.OrdinalIgnoreCase) || priorPage.RowCount != completed.RowCount ||
+                 priorPage.IsTerminal != completed.IsTerminal))
             {
                 return PageCheckpointDecision.CorruptCompletedPages;
             }
 
-            completedDigest = completed.ContentSha256;
+            priorPage = completed;
         }
 
-        if (completedDigest is null)
+        if (priorPage is null)
         {
-            return PageCheckpointDecision.NewPage;
+            return terminalSeen ? PageCheckpointDecision.ContentConflict : PageCheckpointDecision.NewPage;
         }
 
-        return string.Equals(completedDigest, candidate.ContentSha256, StringComparison.OrdinalIgnoreCase)
+        return string.Equals(priorPage.ContentSha256, candidate.ContentSha256, StringComparison.OrdinalIgnoreCase) &&
+               priorPage.RowCount == candidate.RowCount && priorPage.IsTerminal == candidate.IsTerminal
             ? PageCheckpointDecision.IdempotentReplay
             : PageCheckpointDecision.ContentConflict;
     }
 
     private static bool ValidCheckpoint(PageCheckpoint? checkpoint) =>
         checkpoint is not null && ValidContext(checkpoint.Context) &&
-        !string.IsNullOrWhiteSpace(checkpoint.PageBoundary) &&
+        !string.IsNullOrWhiteSpace(checkpoint.PageBoundary) && checkpoint.RowCount >= 0 &&
         checkpoint.ContentSha256 is { Length: 64 } digest &&
         digest.All(character => character is >= '0' and <= '9' or >= 'A' and <= 'F' or >= 'a' and <= 'f');
 

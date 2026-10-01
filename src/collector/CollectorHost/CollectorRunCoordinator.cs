@@ -10,7 +10,8 @@ internal interface ICollectorRunAdapter
 {
     Task<ApprovedCollectorRun?> LoadApprovedRunAsync(CollectorConfig config, CancellationToken cancellationToken);
     Task<CollectorPage> ReadPageAsync(string? afterBoundary, int pageSize, CancellationToken cancellationToken);
-    Task StagePageAsync(string boundary, int rowCount, string digest, IReadOnlyList<MinimizedField> fields,
+    Task StagePageAsync(string boundary, int rowCount, bool isTerminal, string digest,
+        IReadOnlyList<MinimizedField> fields,
         CancellationToken cancellationToken);
 }
 
@@ -108,10 +109,22 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
         }
 
         var started = Stopwatch.StartNew();
-        long rows = 0;
+        var rows = checkpoints.Sum(page => (long)page.RowCount);
         var policy = new PageBudgetPolicy(Math.Min(config.MaxPageSize, approved.MaximumPageSize),
             Math.Min(config.MaxRows, approved.MaximumRows),
             TimeSpan.FromSeconds(Math.Min(config.MaxDurationSeconds, approved.MaximumDuration.TotalSeconds)));
+        if (rows > policy.MaximumRows)
+        {
+            return new CollectorRunResult(CollectorRunOutcome.CheckpointRejected, checkpoints.Count, rows,
+                permission.RequiresWarningAndAudit);
+        }
+
+        if (checkpoints.LastOrDefault()?.IsTerminal == true)
+        {
+            return new CollectorRunResult(CollectorRunOutcome.Completed, checkpoints.Count, rows,
+                permission.RequiresWarningAndAudit);
+        }
+
         var boundary = checkpoints.LastOrDefault()?.PageBoundary;
 
         while (true)
@@ -175,8 +188,9 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             }
 
             // Digest only minimized fields; prohibited and excluded source values never enter the ledger.
-            var digest = MinimizedPageDigest.Compute(page.Boundary, page.RowCount, fields);
-            var checkpoint = new PageCheckpoint(context, page.Boundary, digest);
+            var isTerminal = !page.HasMore;
+            var digest = MinimizedPageDigest.Compute(page.Boundary, page.RowCount, isTerminal, fields);
+            var checkpoint = new PageCheckpoint(context, page.Boundary, digest, page.RowCount, isTerminal);
             if (PageCheckpointVerifier.Evaluate(context, checkpoints, checkpoint) != PageCheckpointDecision.NewPage)
             {
                 return new CollectorRunResult(CollectorRunOutcome.CheckpointRejected, checkpoints.Count, rows,
@@ -194,7 +208,8 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
 
             try
             {
-                await adapter.StagePageAsync(page.Boundary, page.RowCount, digest, fields, pageTimeout.Token);
+                await adapter.StagePageAsync(page.Boundary, page.RowCount, isTerminal, digest, fields,
+                    pageTimeout.Token);
             }
             catch (OperationCanceledException) when (pageTimeout.IsCancellationRequested)
             {
@@ -263,6 +278,7 @@ internal sealed class PendingCollectorRunAdapter : ICollectorRunAdapter
     public Task<CollectorPage> ReadPageAsync(string? afterBoundary, int pageSize,
         CancellationToken cancellationToken) => throw new InvalidOperationException("Source contract is pending.");
 
-    public Task StagePageAsync(string boundary, int rowCount, string digest, IReadOnlyList<MinimizedField> fields,
+    public Task StagePageAsync(string boundary, int rowCount, bool isTerminal, string digest,
+        IReadOnlyList<MinimizedField> fields,
         CancellationToken cancellationToken) => throw new InvalidOperationException("Delivery contract is pending.");
 }

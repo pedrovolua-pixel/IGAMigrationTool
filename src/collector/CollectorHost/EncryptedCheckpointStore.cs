@@ -10,11 +10,12 @@ public static class EncryptedCheckpointStore
 {
     private const int MaxPages = 4096;
     private const int MaxPlaintextBytes = 1024 * 1024;
-    private static readonly byte[] Magic = "IGC1"u8.ToArray();
+    private static readonly byte[] Magic = "IGC2"u8.ToArray();
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         MaxDepth = 16,
-        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow
+        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+        RespectRequiredConstructorParameters = true
     };
 
     public static IReadOnlyList<PageCheckpoint>? Load(
@@ -60,7 +61,7 @@ public static class EncryptedCheckpointStore
             }
 
             var document = JsonSerializer.Deserialize<CheckpointDocument>(plaintext, JsonOptions);
-            if (document is null || document.SchemaVersion != 1 || document.Context != expectedContext ||
+            if (document is null || document.SchemaVersion != 2 || document.Context != expectedContext ||
                 document.Pages is null)
             {
                 throw new InvalidDataException("Checkpoint context is incompatible.");
@@ -94,7 +95,7 @@ public static class EncryptedCheckpointStore
             throw new InvalidDataException("Completed checkpoint pages cannot be rewritten.");
         }
 
-        var plaintext = JsonSerializer.SerializeToUtf8Bytes(new CheckpointDocument(1, context, [.. pages]), JsonOptions);
+        var plaintext = JsonSerializer.SerializeToUtf8Bytes(new CheckpointDocument(2, context, [.. pages]), JsonOptions);
         if (plaintext.Length > MaxPlaintextBytes)
         {
             throw new InvalidDataException("Checkpoint exceeds the local size limit.");
@@ -173,7 +174,7 @@ public static class EncryptedCheckpointStore
     }
 
     private static byte[] ContextBytes(PageCheckpointContext context) =>
-        Encoding.UTF8.GetBytes(string.Join('\0', ["IGC1", context.QueryId, context.QueryVersion,
+        Encoding.UTF8.GetBytes(string.Join('\0', ["IGC2", context.QueryId, context.QueryVersion,
             context.ExactBuild, context.ScopeId, context.PolicyVersion, context.OrderingKey]));
 
     private static void ValidateKey(ReadOnlySpan<byte> key)

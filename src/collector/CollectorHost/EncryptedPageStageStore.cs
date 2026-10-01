@@ -12,26 +12,33 @@ namespace CollectorHost;
 internal static class EncryptedPageStageStore
 {
     private const int MaxPlaintextBytes = 1024 * 1024;
-    private static readonly byte[] Magic = "IGS1"u8.ToArray();
+    private static readonly byte[] Magic = "IGS2"u8.ToArray();
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         MaxDepth = 16,
-        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow
+        UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+        RespectRequiredConstructorParameters = true
     };
 
     internal enum StageResult { NewPage, IdempotentReplay }
 
-    internal sealed record StagedPage(int RowCount, string Digest, IReadOnlyList<MinimizedField> Fields);
+    internal sealed record StagedPage(int RowCount, bool IsTerminal, string Digest,
+        IReadOnlyList<MinimizedField> Fields);
     private sealed record StoredField(string CategoryId, string FieldId, FieldDisposition Disposition,
         string? IncludedValue);
     private sealed record StageDocument(int SchemaVersion, PageCheckpointContext Context, string Boundary,
-        int RowCount, string Digest, StoredField[] Fields);
+        int RowCount, bool IsTerminal, string Digest, StoredField[] Fields);
 
     internal static StageResult Stage(string directory, PageCheckpointContext context, string boundary,
-        int rowCount, string digest, IReadOnlyList<MinimizedField> fields, ReadOnlySpan<byte> key)
+        int rowCount, bool isTerminal, string digest, IReadOnlyList<MinimizedField> fields,
+        long maxLocalBytes, ReadOnlySpan<byte> key)
     {
         ValidateInput(directory, context, boundary, rowCount, digest, fields, key);
-        if (!string.Equals(MinimizedPageDigest.Compute(boundary, rowCount, fields), digest,
+        if (maxLocalBytes <= 0)
+        {
+            throw new InvalidDataException("Local staging byte limit is invalid.");
+        }
+        if (!string.Equals(MinimizedPageDigest.Compute(boundary, rowCount, isTerminal, fields), digest,
                 StringComparison.OrdinalIgnoreCase))
         {
             throw new InvalidDataException("Staged page digest does not match minimized content.");
@@ -49,7 +56,7 @@ internal static class EncryptedPageStageStore
             return StageResult.IdempotentReplay;
         }
 
-        var document = new StageDocument(1, context, boundary, rowCount, digest,
+        var document = new StageDocument(2, context, boundary, rowCount, isTerminal, digest,
             [.. fields.Select(field => new StoredField(field.Key!.CategoryId, field.Key.FieldId,
                 field.Disposition, field.IncludedValue))]);
         var plaintext = JsonSerializer.SerializeToUtf8Bytes(document, JsonOptions);
@@ -59,6 +66,8 @@ internal static class EncryptedPageStageStore
             {
                 throw new InvalidDataException("Staged page exceeds the per-page size limit.");
             }
+
+            ValidateCapacity(directory, maxLocalBytes, plaintext.Length + 32L);
 
             var nonce = RandomNumberGenerator.GetBytes(12);
             var tag = new byte[16];
@@ -157,7 +166,7 @@ internal static class EncryptedPageStageStore
             }
 
             var document = JsonSerializer.Deserialize<StageDocument>(plaintext, JsonOptions);
-            if (document is null || document.SchemaVersion != 1 || document.Context != context ||
+            if (document is null || document.SchemaVersion != 2 || document.Context != context ||
                 document.Boundary != boundary || document.Fields is null)
             {
                 throw new InvalidDataException("Staged page context is incompatible.");
@@ -172,13 +181,14 @@ internal static class EncryptedPageStageStore
                     field.IncludedValue)).ToArray();
             ValidateInput(Path.GetDirectoryName(path)!, context, boundary, document.RowCount,
                 document.Digest, fields, key);
-            if (!string.Equals(MinimizedPageDigest.Compute(boundary, document.RowCount, fields),
+            if (!string.Equals(MinimizedPageDigest.Compute(boundary, document.RowCount,
+                    document.IsTerminal, fields),
                     document.Digest, StringComparison.OrdinalIgnoreCase))
             {
                 throw new InvalidDataException("Staged page digest is inconsistent.");
             }
 
-            return new StagedPage(document.RowCount, document.Digest, fields);
+            return new StagedPage(document.RowCount, document.IsTerminal, document.Digest, fields);
         }
         catch (JsonException error)
         {
@@ -205,9 +215,36 @@ internal static class EncryptedPageStageStore
         }
     }
 
+    private static void ValidateCapacity(string directory, long maxLocalBytes, long incomingBytes)
+    {
+        var remaining = maxLocalBytes;
+        foreach (var path in Directory.EnumerateFileSystemEntries(directory))
+        {
+            var attributes = File.GetAttributes(path);
+            if ((attributes & (FileAttributes.Directory | FileAttributes.ReparsePoint)) != 0)
+            {
+                throw new InvalidDataException("Staging directory contains an unsupported entry.");
+            }
+
+            if (OperatingSystem.IsWindows()) ValidateWindowsFile(path);
+            var length = new FileInfo(path).Length;
+            if (length < 0 || length > remaining)
+            {
+                throw new InvalidDataException("Local staging byte limit is reached.");
+            }
+
+            remaining -= length;
+        }
+
+        if (incomingBytes > remaining)
+        {
+            throw new InvalidDataException("Local staging byte limit is reached.");
+        }
+    }
+
     private static void ValidateCheckpoint(PageCheckpointContext context, string boundary, string digest)
     {
-        if (PageCheckpointVerifier.Evaluate(context, [], new PageCheckpoint(context, boundary, digest)) !=
+        if (PageCheckpointVerifier.Evaluate(context, [], new PageCheckpoint(context, boundary, digest, 0, false)) !=
             PageCheckpointDecision.NewPage || boundary.Length > 1024)
         {
             throw new InvalidDataException("Staged page checkpoint identity is invalid.");
@@ -258,17 +295,19 @@ internal static class EncryptedPageStageStore
             .ToLowerInvariant() + ".stage");
 
     private static byte[] AssociatedData(PageCheckpointContext context, string boundary) =>
-        Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new { Domain = "IGS1", Context = context, Boundary = boundary }));
+        Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new { Domain = "IGS2", Context = context, Boundary = boundary }));
 }
 
 internal static class MinimizedPageDigest
 {
-    internal static string Compute(string boundary, int rowCount, IReadOnlyList<MinimizedField> fields)
+    internal static string Compute(string boundary, int rowCount, bool isTerminal,
+        IReadOnlyList<MinimizedField> fields)
     {
         var serialized = JsonSerializer.SerializeToUtf8Bytes(new
         {
             Boundary = boundary,
             RowCount = rowCount,
+            IsTerminal = isTerminal,
             Fields = fields.Select(field => new
             {
                 field.Key?.CategoryId,
