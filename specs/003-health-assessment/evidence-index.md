@@ -2,13 +2,13 @@
 
 Status: G0 approval recorded; local synthetic/bootstrap checks have run, but no G1–G9 execution gate evidence exists  
 Owner: Technical, quality, security and operations owners  
-Last updated: 2026-09-29
+Last updated: 2026-10-01
 
 This file records metadata only. Sanitized reports and attestations belong in the restricted East US 2 engineering artifact store under the retention and integrity rules in `implementation-plan.md`. Do not place customer payloads, names, protected environment identifiers, credentials, tokens, evidence values, prompts/responses containing evidence, report content or detailed security findings in this index.
 
 Each executed gate, milestone, deployment attestation or artifact-promotion decision gets one append-only index entry. G0 plan approval is supported by the approved plan and human decision record in this repository; its restricted-store reference is not applicable. For execution gates G1–G9, the result is `NOT VERIFIED` when the required bundle is missing, expired, inaccessible to its authorized reviewer or fails digest/signature verification. Never infer `PASS` from a planned row or a CI configuration that has not run.
 
-Local synthetic checks, compiled-template policies, build, format, vulnerability and secret scans are described in `implementation-plan.md` and `status.md`. They are developer evidence only. The partial bootstrap workflow passed remotely for commits `ea27cc6`, `4658776` and `8d6c02b`. The restricted evidence store has not been deployed, and no signed G1–G9 gate bundle has been indexed.
+Local synthetic checks, compiled-template policies, build, format, vulnerability and secret scans are described in `implementation-plan.md` and `status.md`. They are developer evidence only. The partial bootstrap workflow passed remotely for commits `ea27cc6`, `4658776`, `8d6c02b` and `028d864`. The restricted evidence store has not been deployed, and no signed G1–G9 gate bundle has been indexed.
 
 | Gate/work item and decision | Commit and CI run/manual check | Tested versions and artifact digests | Result | Reviewer/authority and date | Restricted-store reference and expiry |
 |---|---|---|---|---|---|
@@ -16,6 +16,7 @@ Local synthetic checks, compiled-template policies, build, format, vulnerability
 | Partial bootstrap CI (developer check only) | Commit `ea27cc6`; [run 36651093133](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36651093133) | Pinned .NET/Bicep workflow; commit SHA binds the tested tree | `PASS` for configured partial checks | GitHub Actions, 2026-09-29; no milestone acceptance decision | Not applicable — no signed gate bundle or restricted-store artifact |
 | Partial bootstrap CI (developer check only) | Commit `4658776`; [run 36651579793](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36651579793) | Pinned .NET/Bicep workflow; commit SHA binds the tested tree, including work queue | `PASS` for configured partial checks | GitHub Actions, 2026-09-29; no milestone acceptance decision | Not applicable — no signed gate bundle or restricted-store artifact |
 | Partial bootstrap CI (developer check only) | Commit `8d6c02b`; [run 36651897279](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36651897279) | Pinned .NET/Bicep workflow; commit SHA binds the tested tree, including isolated identity/role wiring | `PASS` for configured partial checks | GitHub Actions, 2026-09-29; no milestone acceptance decision | Not applicable — no signed gate bundle or restricted-store artifact |
+| Partial bootstrap CI (developer check only) | Commit `028d864`; [run 36868281712](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36868281712) | Pinned .NET/Bicep workflow; recovery fixtures, Windows service restart smoke, partial secret scan and draft contracts | `PASS` for configured partial checks | GitHub Actions, 2026-10-01; no milestone acceptance decision | Not applicable — no signed gate bundle or restricted-store artifact |
 | G1 platform foundation | Pending | Pending | `NOT VERIFIED` | Pending | Pending |
 | G2 evidence contract | Pending | Pending | `NOT VERIFIED` | Pending | Pending |
 | G3 customer isolation | Pending | Pending | `NOT VERIFIED` | Pending | Pending |
