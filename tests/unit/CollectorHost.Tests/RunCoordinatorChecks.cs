@@ -143,6 +143,40 @@ internal static class RunCoordinatorChecks
                 stageTimedOut.CompletedPages == 0 && !File.Exists(approval.CheckpointPath));
             fake.BlockStageUntilCancellation = false;
 
+            var stagedBeforeWriteFailure = fake.Staged.Count;
+            var stagedAttemptsBeforeWriteFailure = fake.StageAttempts;
+            var interruptedPage = new CollectorPage("interrupted-page", 1,
+                [new FieldCandidate(included, FieldClassification.ApprovedReference, "uid-interrupted")], false);
+            fake.Pages = [interruptedPage];
+            Directory.CreateDirectory(approval.CheckpointPath);
+            var checkpointWriteFailure = await Run(fake);
+            Check("staged page with failed checkpoint remains incomplete",
+                checkpointWriteFailure.Outcome == CollectorRunOutcome.CheckpointRejected &&
+                checkpointWriteFailure.CompletedPages == 0 && fake.Staged.Count == stagedBeforeWriteFailure + 1);
+            Directory.Delete(approval.CheckpointPath);
+
+            fake.Pages = [interruptedPage with
+            {
+                Fields = [new FieldCandidate(included, FieldClassification.ApprovedReference, "changed-value")]
+            }];
+            Check("changed restage conflicts before checkpoint",
+                (await Run(fake)).Outcome == CollectorRunOutcome.StageFailed &&
+                !File.Exists(approval.CheckpointPath));
+
+            fake.Pages = [interruptedPage];
+            var recovered = await Run(fake);
+            Check("restart idempotently restages and checkpoints prior page",
+                recovered.Outcome == CollectorRunOutcome.Completed && recovered.CompletedPages == 1 &&
+                fake.Staged.Count == stagedBeforeWriteFailure + 1 &&
+                fake.StageAttempts == stagedAttemptsBeforeWriteFailure + 3 &&
+                EncryptedCheckpointStore.Load(approval.CheckpointPath,
+                    new PageCheckpointContext(approval.Query.QueryId,
+                        $"{approval.QueryPackId:D}/{approval.QueryPackVersion}/{approval.QueryPackSha256}",
+                        config.ExactBuild, config.ScopeId.ToString("D"),
+                        $"{config.FieldPolicyId:D}/{config.FieldPolicyVersion}/{config.FieldPolicySha256}",
+                        approval.OrderingKey), key)?.Count == 1);
+            File.Delete(approval.CheckpointPath);
+
             using var canceled = new CancellationTokenSource();
             canceled.Cancel();
             before = fake.Reads;
@@ -189,6 +223,8 @@ internal static class RunCoordinatorChecks
         public List<string?> RequestedBoundaries { get; } = [];
         public List<int> RequestedSizes { get; } = [];
         public List<IReadOnlyList<MinimizedField>> Staged { get; } = [];
+        public Dictionary<string, string> StagedDigests { get; } = new(StringComparer.Ordinal);
+        public int StageAttempts { get; private set; }
         public bool FailRead { get; set; }
         public bool FailStage { get; set; }
         public bool CancelApprovalWithoutToken { get; set; }
@@ -244,6 +280,18 @@ internal static class RunCoordinatorChecks
                 await Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken);
             }
 
+            StageAttempts++;
+            if (StagedDigests.TryGetValue(boundary, out var priorDigest))
+            {
+                if (priorDigest != digest)
+                {
+                    throw new InvalidDataException("Synthetic staged page conflicts with its prior digest.");
+                }
+
+                return;
+            }
+
+            StagedDigests.Add(boundary, digest);
             Staged.Add(fields);
         }
     }

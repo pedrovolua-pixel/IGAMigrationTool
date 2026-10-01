@@ -52,6 +52,17 @@ try {
     }
     if (-not $running) { throw 'Collector service did not reach Running.' }
 
+    Restart-Service -Name $serviceName -Force
+    $restarted = $false
+    for ($attempt = 0; $attempt -lt 20; $attempt++) {
+        if ((Get-Service -Name $serviceName).Status -eq 'Running') {
+            $restarted = $true
+            break
+        }
+        Start-Sleep -Milliseconds 500
+    }
+    if (-not $restarted) { throw 'Collector service did not return to Running after restart.' }
+
     $status = & $ExecutablePath status --config $configPath
     if ($LASTEXITCODE -ne 0 -or $status -ne 'COLLECTOR_DISABLED') {
         throw 'Collector status did not report the disabled state.'
@@ -64,7 +75,7 @@ try {
     if ($oneShotProcess.ExitCode -ne 5 -or $oneShotState -ne 'COLLECTOR_DISABLED' -or (Test-Path $outputPath)) {
         throw "Blocked one-shot result: exit=$($oneShotProcess.ExitCode), state=$oneShotState, outputExists=$(Test-Path $outputPath)."
     }
-    Write-Output 'Windows service start/stop, status, and blocked one-shot smoke checks passed.'
+    Write-Output 'Windows service start/restart/stop, status, and blocked one-shot smoke checks passed.'
 }
 finally {
     $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue

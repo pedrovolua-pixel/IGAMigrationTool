@@ -1,6 +1,21 @@
 using System.Text.Json;
 using CollectorHost;
 
+if (args is ["--hold-lease", var heldConfigPath, var heldScopeText] &&
+    Guid.TryParse(heldScopeText, out var heldScope))
+{
+    using var heldLease = CrossProcessRunLease.TryAcquire(heldConfigPath, heldScope);
+    if (heldLease is null)
+    {
+        Environment.ExitCode = 2;
+        return;
+    }
+
+    Console.WriteLine("LEASE_HELD");
+    await Task.Delay(Timeout.InfiniteTimeSpan);
+    return;
+}
+
 var count = 0;
 var configPath = @"C:\ProgramData\IgaPilotCollector\collector.json";
 var outputPath = @"D:\Evidence\baseline.igapkg";
@@ -86,6 +101,7 @@ finally
 Console.WriteLine($"{count} collector host contract cases passed.");
 Console.WriteLine($"{CheckpointStoreChecks.Run()} encrypted checkpoint-store cases passed.");
 Console.WriteLine($"{await RunCoordinatorChecks.RunAsync(CollectorConfig.Parse(valid) with { Enabled = true })} shared run-coordinator cases passed.");
+Console.WriteLine($"{await LeaseCrashRecoveryChecks.RunAsync()} cross-process lease recovery cases passed.");
 if (OperatingSystem.IsWindows())
 {
     Console.WriteLine($"{WindowsKeyStoreChecks.Run()} protected Windows key-store cases passed.");

@@ -4,7 +4,7 @@ Status: Approved for local pilot implementation — executable source fixtures p
 Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)  
 Technical spec: `specs/001-data-ingestion/technical-spec.md` (Approved for local pilot implementation)  
 Owner: Quality owner  
-Last updated: 2026-09-30
+Last updated: 2026-10-01
 
 Only the local synthetic cases recorded in the feature status are claimed executed. CI fixtures must be synthetic and payload-free. Exact SQL, modules, field dictionaries, scale data and production-impact plans are approved separately for each eligible build/environment.
 
@@ -43,9 +43,11 @@ Only the local synthetic cases recorded in the feature status are claimed execut
 - The local encrypted checkpoint ledger must authenticate exact context, reject wrong keys, ciphertext tampering, duplicate pages, removal or rewriting of completed pages, and enforce file/page bounds. Protected key provisioning and crash recovery require Windows integration tests.
 - The shared local coordinator must reject absent/mismatched approved pack and policy material, unsupported exact build, blocking permission, overlapping runs, malformed/oversized/prohibited pages and wrong checkpoint key before staging. Synthetic pages must show bounded reads, field minimization, encrypted checkpoint resume, cancellation and failed read/stage behavior. A test adapter cannot substitute for the reviewed source probe, signed material loader, durable package sink or customer environment tests.
 - A synthetic staging adapter held until the configured deadline must return a partial limit outcome and leave the completed-page ledger unchanged. The production sink's cancellation and idempotent restart behavior remain integration checks.
+- If staging succeeds but checkpoint persistence fails, a fresh coordinator invocation must retry the same boundary without a second unique staged page; changed content for that boundary must conflict. This synthetic fixture does not prove a durable production sink.
 - An adapter cancellation that was not requested by the run or its configured deadline must return a source or staging failure, preserve completed checkpoints and avoid reporting a user cancellation or time limit.
+- A separate process must hold the local run lease, reject an overlapping process and allow reacquisition after forced process termination. This checks operating-system handle release, not a customer-host service crash.
 - Windows 2022/2025 CI cases must reload the same DPAPI-protected key, reject a wrong scope and tampered blob, and reject a key file with a write-capable broad ACL. These checks do not substitute for customer service-identity, Server Core, installer or crash-recovery validation.
-- Ephemeral Windows 2022/2025 runners must start and stop the self-contained collector under Service Control Manager with a synthetic protected config, observe payload-free disabled status, and confirm one-shot collection exits blocked without a package. This smoke check does not validate a signed MSI or customer service identity.
+- Ephemeral Windows 2022/2025 runners must start, restart and stop the self-contained collector under Service Control Manager with a synthetic protected config, observe payload-free disabled status, and confirm one-shot collection exits blocked without a package. This smoke check does not validate a signed MSI, customer service identity or source resume.
 
 ## Integration and end-to-end tests
 
