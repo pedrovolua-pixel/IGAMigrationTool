@@ -5,7 +5,7 @@ Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)
 Technical spec: `specs/001-data-ingestion/technical-spec.md` (Approved for local pilot implementation)  
 Test plan: `specs/001-data-ingestion/test-plan.md` (Approved for local pilot implementation)  
 Owner: Technical owner  
-Last updated: 2026-09-30
+Last updated: 2026-10-01
 
 ## Scope and constraints
 
