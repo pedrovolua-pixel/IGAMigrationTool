@@ -47,6 +47,7 @@ The synthetic fixture catalog follows the families in `implementation-plan.md`: 
 - Reject suspended/unsupported capability snapshots, malformed module inventories and exact product/schema/hotfix/SQL/module/query-pack/normalization mismatches before continuing to run-start gates; freeze a deterministic version lock. A local pure guard test does not establish the trusted registry, baseline adapter, authorization or durable start path.
 - Assert exactly one terminal coverage state for every key and no unknown/duplicate active key.
 - During a partial run, count only valid terminal results against the trusted plan. Missing keys remain outstanding; duplicate, unexpected, malformed or unexplained results deny the progress projection.
+- A nonempty reconciled terminal plan with only `pass`, `finding` and explained `not_applicable` results classifies as complete; any explained limitation state classifies as complete with gaps. Empty, missing, duplicate or unexplained results deny classification. This pure classification does not start or complete a durable run.
 - Exercise pass, finding, not-applicable, not-assessed, insufficient, excluded, inaccessible, redacted, unsupported and error.
 - Fail the test if absence is used instead of an explicit state.
 
