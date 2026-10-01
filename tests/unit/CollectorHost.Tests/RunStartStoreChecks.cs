@@ -18,16 +18,25 @@ internal static class RunStartStoreChecks
             var key = RandomNumberGenerator.GetBytes(32);
             var path = Path.Combine(directory, "run-start.igr");
             var start = DateTimeOffset.UtcNow.AddHours(-2);
+            const long localByteCap = 10_000;
 
             Reject("future new start", () => EncryptedRunStartStore.LoadOrCreate(path, context,
-                DateTimeOffset.UtcNow.AddHours(1), key));
+                DateTimeOffset.UtcNow.AddHours(1), localByteCap, key));
             Check("future start made no record", !File.Exists(path));
-            Check("new start persisted", EncryptedRunStartStore.LoadOrCreate(path, context, start, key) == start);
+            Reject("run-start metadata obeys local byte cap", () => EncryptedRunStartStore.LoadOrCreate(
+                path, context, start, 1, key));
+            Check("byte-cap rejection made no record", !File.Exists(path));
+            Check("new start persisted", EncryptedRunStartStore.LoadOrCreate(path, context, start,
+                localByteCap, key) == start);
             var bytes = File.ReadAllBytes(path);
+            Check("existing start allowed at exact byte cap", EncryptedRunStartStore.LoadOrCreate(path,
+                context, DateTimeOffset.UtcNow, bytes.Length, key) == start);
+            Reject("narrower byte cap rejects existing start", () => EncryptedRunStartStore.LoadOrCreate(
+                path, context, DateTimeOffset.UtcNow, bytes.Length - 1, key));
             Check("start is encrypted", !Encoding.UTF8.GetString(bytes).Contains("inventory",
                 StringComparison.Ordinal));
             Check("existing start ignores later proposal", EncryptedRunStartStore.LoadOrCreate(path, context,
-                DateTimeOffset.UtcNow.AddHours(1), key) == start);
+                DateTimeOffset.UtcNow.AddHours(1), localByteCap, key) == start);
             Check("existing start loads exactly", EncryptedRunStartStore.Load(path, context, key) == start);
             Reject("wrong key", () => EncryptedRunStartStore.Load(path, context,
                 RandomNumberGenerator.GetBytes(32)));
@@ -47,7 +56,7 @@ internal static class RunStartStoreChecks
 
             File.WriteAllText(Path.Combine(directory, "orphan.stage"), "orphan");
             Reject("stage without start cannot reset clock", () => EncryptedRunStartStore.LoadOrCreate(path,
-                context, DateTimeOffset.UtcNow, key));
+                context, DateTimeOffset.UtcNow, localByteCap, key));
             Check("orphan stage made no start", !File.Exists(path));
             return count;
         }

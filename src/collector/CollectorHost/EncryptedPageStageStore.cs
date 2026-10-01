@@ -67,7 +67,7 @@ internal static class EncryptedPageStageStore
                 throw new InvalidDataException("Staged page exceeds the per-page size limit.");
             }
 
-            ValidateCapacity(directory, maxLocalBytes, plaintext.Length + 32L);
+            LocalRunDirectoryCapacity.Validate(directory, maxLocalBytes, plaintext.Length + 32L);
 
             var nonce = RandomNumberGenerator.GetBytes(12);
             var tag = new byte[16];
@@ -212,33 +212,6 @@ internal static class EncryptedPageStageStore
                 (field.Disposition != FieldDisposition.Included && field.IncludedValue is not null)))
         {
             throw new InvalidDataException("Staged page contains an invalid or prohibited field.");
-        }
-    }
-
-    private static void ValidateCapacity(string directory, long maxLocalBytes, long incomingBytes)
-    {
-        var remaining = maxLocalBytes;
-        foreach (var path in Directory.EnumerateFileSystemEntries(directory))
-        {
-            var attributes = File.GetAttributes(path);
-            if ((attributes & (FileAttributes.Directory | FileAttributes.ReparsePoint)) != 0)
-            {
-                throw new InvalidDataException("Staging directory contains an unsupported entry.");
-            }
-
-            if (OperatingSystem.IsWindows()) ValidateWindowsFile(path);
-            var length = new FileInfo(path).Length;
-            if (length < 0 || length > remaining)
-            {
-                throw new InvalidDataException("Local staging byte limit is reached.");
-            }
-
-            remaining -= length;
-        }
-
-        if (incomingBytes > remaining)
-        {
-            throw new InvalidDataException("Local staging byte limit is reached.");
         }
     }
 

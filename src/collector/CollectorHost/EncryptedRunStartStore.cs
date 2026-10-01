@@ -21,16 +21,20 @@ internal static class EncryptedRunStartStore
         DateTimeOffset StartedAtUtc);
 
     internal static DateTimeOffset LoadOrCreate(string path, PageCheckpointContext context,
-        DateTimeOffset proposedStart, ReadOnlySpan<byte> key)
+        DateTimeOffset proposedStart, long maxLocalBytes, ReadOnlySpan<byte> key)
     {
         ValidateLocation(path, context, key);
-        if (File.Exists(path)) return Load(path, context, key);
+        var directory = Path.GetDirectoryName(path)!;
+        if (File.Exists(path))
+        {
+            LocalRunDirectoryCapacity.Validate(directory, maxLocalBytes, 0);
+            return Load(path, context, key);
+        }
         if (proposedStart < DateTimeOffset.UnixEpoch || proposedStart > DateTimeOffset.UtcNow)
         {
             throw new InvalidDataException("Extraction start is invalid.");
         }
 
-        var directory = Path.GetDirectoryName(path)!;
         if (Directory.EnumerateFiles(directory, "*.stage").Any())
         {
             throw new InvalidDataException("Staged pages exist without a run-start record.");
@@ -44,6 +48,8 @@ internal static class EncryptedRunStartStore
             {
                 throw new InvalidDataException("Run-start record exceeds its size limit.");
             }
+
+            LocalRunDirectoryCapacity.Validate(directory, maxLocalBytes, plaintext.Length + 32L);
 
             var nonce = RandomNumberGenerator.GetBytes(12);
             var tag = new byte[16];

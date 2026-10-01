@@ -118,7 +118,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             }
 
             extractionStartedAtUtc = EncryptedRunStartStore.LoadOrCreate(approved.RunStartPath,
-                context, approved.ExtractionStartedAtUtc, approved.CheckpointKey);
+                context, approved.ExtractionStartedAtUtc, config.MaxLocalBytes, approved.CheckpointKey);
         }
         catch (Exception error) when (error is IOException or UnauthorizedAccessException or
                InvalidDataException or CryptographicException)
