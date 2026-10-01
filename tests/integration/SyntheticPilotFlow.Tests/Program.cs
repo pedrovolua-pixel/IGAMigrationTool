@@ -152,6 +152,8 @@ Case("SYN-PILOT-006", "FR-HAS-2/18;AC-HAS-1/7;TP-HAS-001/007", new { capability,
 Console.WriteLine($"{checks} synthetic pilot composition assertions passed across 6 versioned fixtures.");
 Console.WriteLine("Scope: pure capability/coverage composition only; eligibility, authorization, durable execution and live gates NOT VERIFIED.");
 
+SyntheticBaselineFlowCases.Run();
+
 CapabilityVersionLock Lock(CapabilitySnapshot candidate, BaselineCompatibility source)
 {
     var result = CapabilityStartGuard.TryLock(candidate, source);

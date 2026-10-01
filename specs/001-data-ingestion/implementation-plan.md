@@ -104,6 +104,8 @@ Verification:
 
 ## Discoveries and plan changes
 
+Cycle 02 prepares [the exact offline receiving candidate](collector-offline-receiving-contract-draft.md), with OFF-D01–08 byte/schema/trust/lifetime/limit/replay proposals, OFF-N01–24 planned negative fixtures and INST-D01–09 installation inputs. This is a reviewed engineering draft, not human contract approval or executed transport/installer evidence. C0/C3 remain open; no delivery adapter, production schema, trust authority, replay lifecycle or installer is enabled.
+
 Parallel cycle 01 (2026-10-01): C1 implements the already-required idempotent checkpoint save without an unnecessary encrypted rewrite. An authenticated identical ordered ledger validates aggregate existing bytes and returns unchanged; append writes still reserve transient bytes. Seven added assertions bring the checkpoint host to 26 cases. The coordinator's pinned audited locked solution restore, formatting, Release build, all current unit/integration/architecture hosts and self-contained Windows cross-publish passed locally. Independent worker review found no actionable issue. [partial bootstrap run 36935964103](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36935964103) passed on `ed3a77b` across Linux and both Windows runners; the private site and human board were published with confirmed deployment; C2/C3/C4 and G2 remain open. [Execution record](../../plans/completed/local-pilot-parallel-cycle-01.md).
 
 | Date | Discovery | Impact/evidence |

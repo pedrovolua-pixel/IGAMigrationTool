@@ -34,6 +34,7 @@ Check(CapabilityLockIssue.InvalidInput, null, baseline);
 
 Console.WriteLine($"{passed} capability lock cases passed.");
 CapabilityBoundCoverageCases.Run(capability with { Modules = baseline.Modules }, baseline);
+SyntheticBaselineInventoryCases.Run();
 
 void Check(CapabilityLockIssue issue, CapabilitySnapshot? candidate, BaselineCompatibility source)
 {

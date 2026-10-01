@@ -22,6 +22,8 @@ The repository owner approved continuing local pilot development against this di
 
 ## Candidate offline package boundary
 
+[Cycle 02's exact offline receiving candidate](collector-offline-receiving-contract-draft.md) makes byte framing, header/manifest bindings, signer/bootstrap, replay/receiving states, lifetime/size proposals, negative vectors and installer review inputs concrete. It is DRAFT, UNAPPROVED and DISABLED. Its OFF/INST choices require attributed technical/security/operations/quality decisions and governing-contract updates before dependent behavior; this direction approval does not approve them.
+
 The package must identify a versioned header, recipient key identity, opaque assigned scope, collector/query-pack/schema/policy versions, creation and expiry, ordered page/chunk digests, coverage and gap markers, and a content digest. It must contain only minimized permitted evidence. A random per-package AES-256-GCM key encrypts the permitted content, and the platform's approved RSA public key wraps it with RSA-OAEP-SHA256. An authenticated signature must bind the header, manifest and ciphertext digest to a reviewer-approved signing identity. Package possession or a digest alone never grants import authority.
 
 The receiving path must check authorization and assignment, package size and structure, supported versions and algorithms, expiry, replay, signature trust, wrapped-key identity, authenticated decryption, page/chunk digests, prohibited-field policy and immutable baseline compatibility before activation. A failed unit stays ineligible and exposes only approved forensic metadata. Import cannot resolve a customer data plane from a package-provided locator.
