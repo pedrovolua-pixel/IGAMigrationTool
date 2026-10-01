@@ -3,7 +3,7 @@
 Status: Prefilled review template; no environment or query is verified
 Use: Make one protected copy for `PILOT-ENV-A` and a separate copy for `PILOT-ENV-B`. The [partial Environment A response](one-identity-environment-a-sme-response.md) records what the supplied customization report supports.
 Owner: One Identity Manager SME; customer database owner completes the database section.
-Last updated: 2026-09-30
+Last updated: 2026-10-01
 
 ## How to complete this template
 
@@ -51,18 +51,18 @@ These are **candidate product facts**, not statements about this environment. At
 
 | Source-identification datum | SME response | Provenance / protected evidence ID |
 |---|---|---|
-| Exact One Identity Manager product version | **A:** report cover states **Edition version 10.0.0.287**; SME confirmed it is current. **B:** [enter full value]. | **A:** [partial response](one-identity-environment-a-sme-response.md), report p. 1 and SHA-256; protected current-source metadata reference pending. **B:** [product metadata source and capture time]. |
-| Exact database schema build/version | [enter full value; explain any difference from client version] | [enter] |
-| Installed hotfixes/cumulative updates/transport packages relevant to schema or behavior | [list exact identifiers and order, or none verified] | [enter] |
-| SQL Server product/build and database compatibility level | **A:** SME confirmed owner-supplied SQL Server 2022 Database Engine build **16.0.1121.4** and compatibility level **160** for the source database. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); protected source/database-owner evidence pending. **B:** [enter]. |
-| Query-relevant collation or compatibility characteristic, if applicable | **A:** SME confirmed case-insensitive collation **`SQL_Latin1_General_CP1_CI_AS`** applies to the source database. **B:** [enter only if needed]. | **A:** [partial response](one-identity-environment-a-sme-response.md); protected database-setting evidence pending. **B:** [enter or not applicable]. |
+| Exact One Identity Manager product version | **A:** July report cover says `CCC` edition **10.0.0.287**, while the live main database says `STE` edition `10.0` and its `CCC`/`QBM`/`DPR` modules say **10.0.0.287**. Exact installed product/build **NOT VERIFIED** pending SME reconciliation. **B:** [enter full value]. | **A:** [partial response and provisional live metadata](one-identity-environment-a-sme-response.md); authoritative product/build source pending. **B:** [product metadata source and capture time]. |
+| Exact database schema build/version | **A:** `DialogDatabase.EditionVersion=10.0` and active module migration version `2025.0012.0001.0000` were observed; neither is yet confirmed as the schema build. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); authoritative schema-build source pending. **B:** [enter]. |
+| Installed hotfixes/cumulative updates/transport packages relevant to schema or behavior | **A:** 15 permitted transport-history rows were all `Migration`; hotfix identifiers or verified none remain **Unknown**. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); SME statement pending. **B:** [enter]. |
+| SQL Server product/build and database compatibility level | **A:** live Database Engine build **16.0.1121.4** and source compatibility **160** match the supplied values. **B:** [enter]. | **A:** [partial response and provisional live metadata](one-identity-environment-a-sme-response.md); formal database-owner evidence pending. **B:** [enter]. |
+| Query-relevant collation or compatibility characteristic, if applicable | **A:** live source database collation **`SQL_Latin1_General_CP1_CI_AS`** matches the supplied value. **B:** [enter only if needed]. | **A:** [partial response and provisional live metadata](one-identity-environment-a-sme-response.md). **B:** [enter or not applicable]. |
 | Known version/hotfix limitations, if any | [enter known limitation or unknown; no research required for intake] | [enter if available] |
 
 ## 4. Installed module and category inventory
 
 For each proposed category, record **Installed**, **Not installed**, **Unsupported**, or **Unknown**, with exact module identifier and version where installed. Add relevant custom modules and connectors. An uninstalled module is `not_applicable`; an installed but unreadable module is a gap. These families come from the approved [capability matrix](../003-health-assessment/capability-matrix.md); the list is a scope prompt, not proof of installation. Unrelated families need no detailed row at intake.
 
-For Environment A, the [partial response](one-identity-environment-a-sme-response.md) records 14 module IDs, display values, exact module versions, and migration versions. The SME confirmed those rows came from a direct query of the current A database. The protected query reference, list completeness and classifications for relevant unlisted modules remain open. Environment B remains unfilled.
+For Environment A, the [partial response](one-identity-environment-a-sme-response.md) records 14 module IDs, display values, exact module versions, and migration versions. A bounded live read returned the same 14 active `QBMModuleDef` rows under a 100-row cap. SME confirmation of that table's completeness as installed inventory and classifications for relevant unlisted families remain open. Environment B remains unfilled.
 
 | Candidate family | State | Exact module ID/version or reason | Discovery evidence ID | Expected evidence categories / gaps |
 |---|---|---|---|---|

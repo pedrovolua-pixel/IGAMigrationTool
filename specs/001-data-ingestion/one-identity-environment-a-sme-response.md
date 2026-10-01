@@ -1,14 +1,16 @@
 # Environment A — partial One Identity SME response
 
-Status: Report-backed, owner-supplied and SME-confirmed intake; exact source eligibility and query approval NOT VERIFIED
+Status: Live metadata discovery reconciles SQL and module claims; edition/build discrepancy, source eligibility and query approval NOT VERIFIED
 
 Source: One Identity Manager Customization Documentation, generated 2026-07-08, 40 pages
 
 Source SHA-256: `0e021547b83ac8a60c4dcabb2338176359d0698bd4d7e08585f61f6bca39df5d`
 
-Last updated: 2026-09-30
+Last updated: 2026-10-01
 
-This response applies the [SME evidence template](one-identity-sme-evidence-template.md) to the report supplied for `PILOT-ENV-A`. The report remains outside this public repository. On 2026-09-30, the SME confirmed that the report is bound to the current Environment A source and that A is independent from B. The protected artifact ID and independence evidence reference were not included in the response. Page numbers below refer to the supplied report, not to an approved query pack. Customer identifiers, configuration values, source code, and record contents are not reproduced here.
+This response applies the [SME evidence template](one-identity-sme-evidence-template.md) to the report supplied for `PILOT-ENV-A` and a bounded live metadata read on 2026-10-01. The report remains outside this public repository. On 2026-09-30, the SME confirmed that the report is bound to the current Environment A source and that A is independent from B. The protected report ID and independence evidence reference were not included. The live metadata raises an edition/build discrepancy that requires SME reconciliation before this source can be eligible. Page numbers below refer to the supplied report, not to an approved collection query pack. Customer identifiers, connection details, configuration values, source code, and record contents are not reproduced here.
+
+The owner-only local diagnostic artifacts are `PILOT-ENV-A-LAB-METADATA-20261001` (SHA-256 `7ea3e77998b2ea5dc2c05692f8285b471a91f9baa84e1ce066ba4b7cdc96d8c5`) and `PILOT-ENV-A-LAB-PERMISSION-20261001` (SHA-256 `4f5988e4b993a8a9bc7f0f58dd872d8bc8959fd2be2f69f49795d666a194592c`). They are provisional local evidence, not immutable restricted-store or G2/G8 acceptance artifacts.
 
 ## Section 1 — environment evidence
 
@@ -29,20 +31,20 @@ The report supports customization-inventory review and category discovery. It do
 
 | Source-identification datum | Report-backed response | Status / next evidence |
 |---|---|---|
-| One Identity Manager version | **10.0.0.287** is printed as **“Edition version”** on the cover (p. 1); SME confirmed it is the current installed product/build on 2026-09-30. | Product/build claim SME-confirmed; protected current-source metadata reference pending. |
-| Database schema build/version | The SME replied “confirm” to the combined product/schema request but did not provide a separate schema-build value or state that it equals `10.0.0.287`. | Exact database schema build and metadata source still required. |
-| Relevant hotfixes/cumulative updates/transport packages | The SME replied “confirm” to the combined request but supplied no hotfix identifiers or explicit “none” statement. | Exact identifiers or a verified none statement still required. |
-| SQL Server product and Database Engine build | Repository owner supplied **SQL Server 2022**, build **16.0.1121.4**, and `sqlservr.exe` file version **2022.160.1121.4**; SME confirmed these apply to A on 2026-09-30. | SME-confirmed; database-owner/source evidence reference pending. |
-| SQL Server servicing reference | Repository owner supplied GDR name **GDR** and Knowledge Base number **KB5040936**; SME confirmed the supplied servicing reference for A on 2026-09-30. | SME-confirmed; servicing evidence reference pending. |
-| Database compatibility level | Repository owner supplied **SQL Server 2022 (160)**; SME confirmed level **160** applies to the One Identity source database on 2026-09-30. | SME-confirmed; protected database-setting evidence reference pending. |
+| One Identity Manager version | The July report cover calls `CCC` edition version **10.0.0.287**, and the SME confirmed that as the installed product/build on 2026-09-30. The live main `DialogDatabase` row instead reports edition `STE`, edition version `10.0`, and customer prefix `CCC`. The live `CCC`, `DPR`, and `QBM` module versions are **10.0.0.287**. | The cover and database fields have different meanings or snapshots; the exact installed product/build remains **NOT VERIFIED** until the SME identifies the authoritative build source and reconciles them. |
+| Database schema build/version | The live main `DialogDatabase` row reports `EditionVersion=10.0` and a migration time on 2026-10-01; the 14 active module rows have migration version `2025.0012.0001.0000`. Neither value was established as a separate database schema build. | Exact database schema build and its authoritative metadata source still required. |
+| Relevant hotfixes/cumulative updates/transport packages | The live bounded read found 15 `QBMTransportHistory` rows, all of type `Migration`, and no separate hotfix identifier in the permitted fields. The SME supplied no hotfix identifiers or verified “none” statement. | Hotfix/package inventory and applicability remain **Unknown**; absence is not inferred from this history slice. |
+| SQL Server product and Database Engine build | Repository owner supplied **SQL Server 2022**, build **16.0.1121.4**, and `sqlservr.exe` file version **2022.160.1121.4**. The live Database Engine reports **16.0.1121.4** and Developer Edition. | Engine build directly matched; file version remains owner-supplied and unverified by this database read. |
+| SQL Server servicing reference | Repository owner supplied GDR name **GDR** and Knowledge Base number **KB5040936**. The live server reports update reference **KB5040936**, product level `RTM`, and no `ProductUpdateLevel` value. | KB reference directly matched; the GDR label requires separate servicing evidence. |
+| Database compatibility level | Repository owner supplied **SQL Server 2022 (160)**; the live source database reports level **160**. | Directly matched in provisional local metadata evidence. |
 | Analysis Services version (supplemental) | Repository owner supplied build **16.0.42.216** and `msmdsrv.exe` file version **2022.160.42.216** on 2026-09-30. | Preserved as context; it does not supply the Database Engine compatibility level. |
-| Query-relevant collation/compatibility | Repository owner supplied default case-insensitive sort/collation **`SQL_Latin1_General_CP1_CI_AS`**; SME confirmed it applies to the One Identity source database on 2026-09-30. | SME-confirmed; protected database-setting evidence reference pending. |
+| Query-relevant collation/compatibility | Repository owner supplied default case-insensitive sort/collation **`SQL_Latin1_General_CP1_CI_AS`**; the live source database reports the same collation. | Directly matched in provisional local metadata evidence. |
 
-The cover value is in the approved pilot's **10.x** family. SME confirmation resolves the conversational source binding for the supplied product and SQL values, but protected references and the separate schema/hotfix facts remain open. These claims do not establish G2/G8 eligibility. One Identity's [configuration guide](https://support.oneidentity.com/technical-documents/identity-manager/9.1.2/configuration-guide/customizing-the-one-identity-manager-base-configuration/changing-database-connection-data) describes “Edition version” as the edition's version number. The SQL, compatibility, collation and Analysis Services values above were supplied separately from the customization report.
+The cover and live module values are in the approved pilot's **10.x** family, but they do not establish the exact installed product build. The different `CCC`/`STE` edition labels and `10.0.0.287`/`10.0` version values must be explained by the SME against the current source and report generation method. The live migration timestamp is later than the report generation date, so the report cannot by itself prove the current source state. These claims do not establish G2/G8 eligibility. One Identity's [configuration guide](https://support.oneidentity.com/technical-documents/identity-manager/9.1.2/configuration-guide/customizing-the-one-identity-manager-base-configuration/changing-database-connection-data) describes “Edition version” as the edition's version number. The SQL, compatibility, collation and Analysis Services values above were supplied separately from the customization report.
 
 ## Section 4 — installed module and category inventory
 
-The repository owner supplied the following 14 Environment A module rows on 2026-09-30. The SME confirmed they were queried directly from the current A database, including their migration versions. The protected query result/artifact reference was not supplied. All rows have migration version `2025.0012.0001.0000`. The list's completeness and the state of modules not listed remain **Unknown**; absence must not be inferred.
+The repository owner supplied the following 14 Environment A module rows on 2026-09-30. The SME confirmed they were queried directly from the current A database, including their migration versions. A bounded live read of active `QBMModuleDef` rows on 2026-10-01 returned exactly these 14 rows under a 100-row cap, with no additional active row at that snapshot. All have migration version `2025.0012.0001.0000`. The table's authoritative installed-module semantics and classifications for unlisted capability families still need SME review; an absent family is not inferred to be uninstalled.
 
 | Module ID | Display value supplied | Module version | Migration version |
 |---|---|---|---|
@@ -65,15 +67,15 @@ These rows give candidate module-to-capability leads for governance, roles, atte
 
 ## Sections 5–9 — later source and gate review
 
-Native object/field dictionary, default-to-actual comparison, sanitized fixtures, bounded read-only query pack, effective database permissions, execution plans, source impact, coverage, scale, and reviewer decisions remain pending. This report is an input to those reviews, not an authorization to query or a G2/G8 acceptance artifact.
+Native object/field dictionary, default-to-actual comparison, sanitized fixtures, approved collection query pack, formal effective-permission attestation, execution plans, source impact, coverage, scale, and reviewer decisions remain pending. The bounded metadata diagnostic is not a collector run or a G2/G8 acceptance artifact.
 
 ## SME items needed next
 
-1. Provide protected artifact references for the report/current-source binding, A/B independence, direct database module query, and confirmed SQL product/settings/servicing values.
-2. Provide the exact database schema build and relevant hotfix identifiers, or an explicit verified “none” for hotfixes; these values were not supplied in the SME's confirmation.
-3. Classify relevant unlisted modules/categories as installed, not installed, unsupported, or unknown, and state whether the 14-row query is a complete installed-module inventory.
+1. Reconcile the July report's `CCC`/`10.0.0.287` cover with the current main database's `STE`/`10.0` edition fields and `CCC`/`QBM`/`DPR` module builds; identify the authoritative current product/build and schema-build source.
+2. Provide protected evidence binding the report and live database to the same Environment A source, and evidence for A/B independence. The current local metadata artifact does not prove either relationship.
+3. Provide relevant hotfix/package identifiers or an explicit verified “none” statement. Confirm whether the 14 active `QBMModuleDef` rows are the complete installed inventory and classify applicable unlisted categories.
 4. Continue exact-build query-pack, field, permission and database-owner reviews only through their later gates; the confirmations above do not authorize source collection.
 
 ## Source-access preparation
 
-On 2026-09-30, the repository owner, acting as the Environment A database owner, authorized bounded read-only metadata discovery for the named lab database. Network reachability was confirmed, but the SQL principal offered for access has administrative authority. The approved collector boundary blocks administrative principals before source queries. No database authentication or source query was attempted. A dedicated read-only principal, its effective-permission evidence, and a protected record of the approved discovery scope are needed before metadata discovery can begin. Connection details and credentials remain outside this repository.
+On 2026-09-30, the repository owner, acting as the Environment A database owner, authorized bounded read-only metadata discovery. On 2026-10-01, the owner authorized creation of a dedicated SQL login when the existing account's effective capabilities did not satisfy the source-safety boundary. Database-owner provisioning created a new login, removed broad `db_datareader` membership, and granted `SELECT` only on chosen metadata columns in three tables. The subsequent diagnostic probe found no blocking server role, database role, database permission, applicable object permission, or schema permission. A `TOP (0)` check confirmed that the prohibited connection-string column was denied. The live read used encrypted SQL with lab certificate trust relaxed; certificate validation and a formal signed permission/impact review remain open before G2. The administrator credential was used for account and grant provisioning, never as the collector evidence principal. Credentials, account names, host and database details remain outside this repository.

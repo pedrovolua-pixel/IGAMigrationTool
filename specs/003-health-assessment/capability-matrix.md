@@ -3,7 +3,7 @@
 Status: Approved — environment evidence required  
 Owner: Technical owner  
 Reviewers: One Identity SME, security owner, product owner  
-Last updated: 2026-09-28
+Last updated: 2026-10-01
 
 ## Purpose
 
@@ -28,7 +28,7 @@ Historical assessments retain the locked matrix version even if a row is later s
 
 | Environment evidence ID | Independence evidence | One Identity exact version/build/hotfix | SQL Server product/compatibility | Installed validated modules | Query pack | Normalized schema | Rule catalog | State | Evidence owner |
 |---|---|---|---|---|---|---|---|---|---|
-| PILOT-ENV-A | SME confirmed report/current-source binding and A/B independence; protected identity and independence references pending | SME confirmed current edition `10.0.0.287`; separate schema build/hotfix and protected source reference `NOT VERIFIED` | SME confirmed SQL Server 2022 build `16.0.1121.4`, source-database compatibility `160` and collation; protected evidence `NOT VERIFIED` | [14 rows confirmed by SME as direct A database query](../001-data-ingestion/one-identity-environment-a-sme-response.md); protected query reference, completeness and validated modules `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `declared` | Repository owner (planned) |
+| PILOT-ENV-A | SME asserted report/current-source binding and A/B independence; protected proof pending | Report cover `CCC`/`10.0.0.287` differs from live main database `STE`/`10.0`; modules `CCC`/`QBM`/`DPR` report `10.0.0.287`. Exact product/schema build and hotfix `NOT VERIFIED` | Provisional live metadata matches SQL Server 2022 build `16.0.1121.4`, source compatibility `160`, collation and KB `5040936`; formal evidence pending | [14 supplied rows match active live module inventory](../001-data-ingestion/one-identity-environment-a-sme-response.md); installed-category interpretation and validation pending | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `declared` | Repository owner (planned) |
 | PILOT-ENV-B | Repository owner committed to create as an environment distinct from PILOT-ENV-A; evidence pending | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `declared` | Repository owner (planned) |
 
 Independence means separately administered source environments with distinct evidence baselines. A cloned database, restore, repeated run, or second tenant backed by the same source environment does not count as the second environment. Customer identity may remain confidential in this document; the protected validation record must establish independence.
@@ -77,7 +77,8 @@ Suspend a row for unsafe queries, vendor-schema incompatibility, material rule-q
 ## Open evidence requests
 
 - Create PILOT-ENV-A and PILOT-ENV-B, assign their protected identifiers, and record evidence proving they are independently administered distinct environments.
-- Obtain protected references for the SME-confirmed A report/source binding, independence, SQL settings and direct database module query; obtain A's separate schema build/hotfix, unlisted-module classifications and B's corresponding records through the approved ingestion path.
+- Reconcile A's report-cover and live main-database edition/build fields with the One Identity SME; identify the authoritative exact product/schema build, hotfix status, and report/source binding. The provisional local SQL/module artifacts do not establish G8 eligibility.
+- Obtain protected A/B independence evidence, A's unlisted-category classifications and B's source-identification records through the approved ingestion path.
 - Establish whether the environments exercise different supported patch/hotfix levels, where available.
 - Record the eligible SQL Server product/compatibility information without collecting database topology.
 - Approve the first query pack, normalization schema, rule catalog and fixture bundle.
