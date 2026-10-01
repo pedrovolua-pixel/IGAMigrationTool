@@ -118,6 +118,7 @@ Console.WriteLine($"{await LeaseCrashRecoveryChecks.RunAsync()} cross-process le
 if (OperatingSystem.IsWindows())
 {
     Console.WriteLine($"{WindowsKeyStoreChecks.Run()} protected Windows key-store cases passed.");
+    Console.WriteLine($"{WindowsRunDirectoryChecks.Run()} protected Windows run-directory cases passed.");
 }
 
 void Check(string name, string[] args, bool expected)
