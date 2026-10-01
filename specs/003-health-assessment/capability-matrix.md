@@ -28,7 +28,7 @@ Historical assessments retain the locked matrix version even if a row is later s
 
 | Environment evidence ID | Independence evidence | One Identity exact version/build/hotfix | SQL Server product/compatibility | Installed validated modules | Query pack | Normalized schema | Rule catalog | State | Evidence owner |
 |---|---|---|---|---|---|---|---|---|---|
-| PILOT-ENV-A | Repository owner committed to create; identity and independence evidence pending | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `declared` | Repository owner (planned) |
+| PILOT-ENV-A | Protected identity and independence evidence pending | Report cover: edition `10.0.0.287`; current product/schema build and hotfix `NOT VERIFIED` | Owner supplied SQL Server 2022 build `16.0.1121.4`, reported compatibility `160` and default collation; source database binding `NOT VERIFIED` | [14 owner-supplied module rows](../001-data-ingestion/one-identity-environment-a-sme-response.md); completeness and validated modules `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `declared` | Repository owner (planned) |
 | PILOT-ENV-B | Repository owner committed to create as an environment distinct from PILOT-ENV-A; evidence pending | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `NOT VERIFIED` | `declared` | Repository owner (planned) |
 
 Independence means separately administered source environments with distinct evidence baselines. A cloned database, restore, repeated run, or second tenant backed by the same source environment does not count as the second environment. Customer identity may remain confidential in this document; the protected validation record must establish independence.
@@ -77,7 +77,7 @@ Suspend a row for unsafe queries, vendor-schema incompatibility, material rule-q
 ## Open evidence requests
 
 - Create PILOT-ENV-A and PILOT-ENV-B, assign their protected identifiers, and record evidence proving they are independently administered distinct environments.
-- Obtain exact product build/hotfix and installed-module records through the approved ingestion path.
+- Confirm A's owner-supplied product, SQL and 14 module-version claims against the current source; obtain exact schema build/hotfix, module completeness and B's corresponding records through the approved ingestion path.
 - Establish whether the environments exercise different supported patch/hotfix levels, where available.
 - Record the eligible SQL Server product/compatibility information without collecting database topology.
 - Approve the first query pack, normalization schema, rule catalog and fixture bundle.

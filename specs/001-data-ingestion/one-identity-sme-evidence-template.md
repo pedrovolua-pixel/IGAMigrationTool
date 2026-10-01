@@ -62,6 +62,8 @@ These are **candidate product facts**, not statements about this environment. At
 
 For each proposed category, record **Installed**, **Not installed**, **Unsupported**, or **Unknown**, with exact module identifier and version where installed. Add relevant custom modules and connectors. An uninstalled module is `not_applicable`; an installed but unreadable module is a gap. These families come from the approved [capability matrix](../003-health-assessment/capability-matrix.md); the list is a scope prompt, not proof of installation. Unrelated families need no detailed row at intake.
 
+For Environment A, the [partial response](one-identity-environment-a-sme-response.md) now records 14 owner-supplied module IDs, display values, exact module versions, and migration versions. Confirm that list against the current source and classify relevant unlisted modules before marking any family below as installed or not installed. Environment B remains unfilled.
+
 | Candidate family | State | Exact module ID/version or reason | Discovery evidence ID | Expected evidence categories / gaps |
 |---|---|---|---|---|
 | Identity Management Base, Target System Base, schema/configuration, authorization | [enter] | [enter] | [enter] | [enter] |

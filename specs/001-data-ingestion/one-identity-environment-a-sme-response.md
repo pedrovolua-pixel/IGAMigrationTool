@@ -42,7 +42,26 @@ The cover value is in the approved pilot's **10.x** family. It does not by itsel
 
 ## Section 4 — installed module and category inventory
 
-Activated configuration and schedules identify candidate categories for SME review, including governance and operational behavior. They do **not** provide exact installed module IDs and versions. Every proposed family remains **Unknown** until the SME supplies a current module inventory and explicitly marks absent or unsupported families. The report's customization names and code remain in protected evidence; any proposed collector field still needs classification and an exact-build query review.
+The repository owner supplied the following 14 Environment A module rows on 2026-09-30. They are **reported installed**, not yet reconciled to a protected source inventory. All rows have the supplied migration version `2025.0012.0001.0000`. The list's completeness and the state of modules not listed remain **Unknown**; absence must not be inferred.
+
+| Module ID | Display value supplied | Module version | Migration version |
+|---|---|---|---|
+| `ADS` | Active Directory Module | `10.0.0.247` | `2025.0012.0001.0000` |
+| `ARS` | Active Roles Module | `10.0.0.247` | `2025.0012.0001.0000` |
+| `ATT` | Attestation Module | `10.0.0.246` | `2025.0012.0001.0000` |
+| `CAP` | Governance Base Module | `10.0.0.247` | `2025.0012.0001.0000` |
+| `CCC` | Customer configured content | `10.0.0.287` | `2025.0012.0001.0000` |
+| `CPL` | Compliance Rules Module | `10.0.0.246` | `2025.0012.0001.0000` |
+| `DPR` | Target System Synchronization Module | `10.0.0.287` | `2025.0012.0001.0000` |
+| `POL` | Company Policies Module | `10.0.0.246` | `2025.0012.0001.0000` |
+| `QBM` | Configuration Module | `10.0.0.287` | `2025.0012.0001.0000` |
+| `QER` | Identity Management Base Module | `10.0.0.247` | `2025.0012.0001.0000` |
+| `RMB` | Business Roles Module | `10.0.0.245` | `2025.0012.0001.0000` |
+| `RMS` | System Roles Module | `10.0.0.245` | `2025.0012.0001.0000` |
+| `RPS` | Report Subscription Module | `10.0.0.245` | `2025.0012.0001.0000` |
+| `TSB` | Target System Base Module | `10.0.0.247` | `2025.0012.0001.0000` |
+
+These rows give candidate module-to-capability leads for governance, roles, attestation, compliance, target synchronization, Active Directory/Active Roles, report subscriptions, and customer configuration. They do not confirm that every feature within those families is enabled, readable, or in scope. IT Shop, Application Governance, Entra, Exchange, archival, password-management and other unlisted families remain to be classified by the SME as installed, not installed, unsupported, or unknown. The report's customization names and code remain in protected evidence; any proposed collector field still needs classification and an exact-build query review.
 
 ## Sections 5–9 — later source and gate review
 
@@ -52,5 +71,5 @@ Native object/field dictionary, default-to-actual comparison, sanitized fixtures
 
 1. Confirm the report's protected artifact ID, its binding to the current `PILOT-ENV-A` source, and independence from `PILOT-ENV-B`.
 2. Confirm **10.0.0.287** as the current installed product/build and supply the exact database schema build and relevant hotfixes.
-3. Supply installed module IDs and exact versions, with absent/unsupported/unknown states for proposed categories.
+3. Confirm the 14 supplied module rows against a current protected source inventory, including their migration versions, and classify relevant unlisted modules/categories as installed, not installed, unsupported, or unknown.
 4. Confirm that compatibility level **160** and collation **`SQL_Latin1_General_CP1_CI_AS`** apply to the One Identity source database, and supply protected evidence for those values, the supplied SQL Server build and its servicing reference. Query and database-owner evidence follows for the confirmed exact build and applicable modules.
