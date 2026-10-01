@@ -10,7 +10,7 @@ This is the environment setup handoff for [Milestone 1 / G1](../../specs/003-hea
 
 The owner selected **Subscription 1** and a **USD 50 monthly Azure development limit** on 2026-10-01. The portal showed that subscription as Active and the signed-in owner as Owner. An empty resource group, `rg-iga-pilot-dev-eastus2`, was created and verified in East US 2. Its `iga-pilot-dev-monthly` budget was created and verified at USD 50, resetting monthly from 2026-10-01 and expiring on 2028-09-30. Actual-cost alerts are configured at 50%, 80% and 100% to the owner's supplied recipient. Subscription/tenant IDs and the recipient address remain in Azure/environment configuration, outside this document and the status site.
 
-No application, network, broker, database, store, role assignment, app registration or credential was created in this setup. The portal showed zero resources and no deployments in the new group before budget creation. No resource provider, quota, Conditional Access, private DNS, workload federation or service capacity check has passed yet. G1–G9 remain `NOT VERIFIED`.
+No application, network, broker, database, store, role assignment, app registration or credential was created in this setup. The portal showed zero resources and no deployments in the new group before budget creation. The continuation below records provider, network-quota and deployment-preview checks; Conditional Access, private DNS, workload federation and deployed service capacity remain unverified. G1–G9 remain `NOT VERIFIED`.
 
 ## Cost boundary
 
@@ -18,7 +18,7 @@ The USD 50 limit applies to pilot development resources. The existing subscripti
 
 Azure budgets alert on delayed cost data; they do not stop resources or enforce a hard spending cap. See [Microsoft's budget documentation](https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-acm-create-budgets). The created budget has no automatic shutdown action.
 
-Microsoft's public retail feed was queried on 2026-10-01 for East US 2, USD, Consumption prices. ACR Premium's `Premium Registry Unit` was USD 1.6666/day (USD 51.6646 over October's 31 days), before private endpoints, networking and the other services. ACR private endpoints require Premium. Service Bus Standard returned both an hourly base meter of USD 0.013441/hour and a monthly base meter of USD 10/month; confirm the applicable billing meter for this subscription rather than summing both. These are reference prices, not a subscription quote or a complete estimate. NAT Gateway pricing was not resolved in this session and stays unverified.
+Microsoft's public retail feed was queried on 2026-10-01 for East US 2, USD, Consumption prices. ACR Premium's `Premium Registry Unit` was USD 1.6666/day (USD 51.6646 over October's 31 days), before private endpoints, networking and the other services. ACR private endpoints require Premium. Service Bus Standard returned both an hourly base meter of USD 0.013441/hour and a monthly base meter of USD 10/month; confirm the applicable billing meter for this subscription rather than summing both. These are reference prices, not a subscription quote. The continuation resolved NAT through the official pricing page's East US 2 price data: USD 0.045/hour and USD 0.045/GB processed, with partial hours rounded up.
 
 Sources: [Azure retail price API](https://learn.microsoft.com/en-us/rest/api/cost-management/retail-prices/azure-retail-prices), [ACR pricing](https://azure.microsoft.com/en-us/pricing/details/container-registry/), [ACR private endpoints](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-private-endpoints), [Service Bus pricing](https://azure.microsoft.com/en-us/pricing/details/service-bus/), and [NAT Gateway pricing](https://azure.microsoft.com/en-us/pricing/details/azure-nat-gateway/).
 
@@ -59,3 +59,54 @@ Repeat the provider check for the intended services. Follow [the infrastructure 
 ## Evidence and gate accounting
 
 Initial setup is a portal verification, not a deployed platform control test. Record subsequent exact commit/template/parameter digests, tested API/SKU/runtime versions, cost window, sanitized results and reviewer decisions in the [evidence index](../../specs/003-health-assessment/evidence-index.md). Runtime identity/network/customer denial, observability and recovery evidence are still required by the approved test plan. Customer evidence, AI provider activation, PDF publication and operational acceptance retain their existing gates. Local synthetic pilot implementation continues under the [local build plan](../../plans/active/one-identity-local-pilot-build.md).
+
+## First test proposal and executed preflight — 2026-10-01
+
+State: **Preview validated; owner review of addresses, timed test and cleanup pending. No paid deployment.**
+
+The owner clarified that the source collector will send to Azure over outbound HTTPS. No Azure-to-source VPN, peering, inbound collector listener or SQL route is required or approved. The proposed Azure VNet is isolated. The selected subscription's VNet inventory returned empty; this does not verify address compatibility with any future connected network.
+
+The authenticated ephemeral Cloud Shell selected the protected subscription ID and returned `Subscription 1`, `Enabled`. Registration checks found App, Network, ManagedIdentity, ContainerRegistry, Storage, KeyVault, OperationalInsights, Insights and Authorization registered. ServiceBus was unregistered; its registration was started in the portal and the subsequent CLI result returned `Registered`. DBforPostgreSQL remains unregistered and was not enabled for this partial test.
+
+East US 2 network usage returned 0/1000 VNets, 0/20 public IPs and 0/100 NAT gateways. Provider metadata advertised the planned region and Network `2025-05-01`, ServiceBus namespace/queue `2026-01-01`, and ManagedIdentity `2024-11-30` APIs. Child-resource availability and policy were additionally exercised by Azure template validation. These checks do not reserve capacity or prove live workload networking.
+
+The [proposed parameter file](../../infra/bicep/environments/pilot-dev-spike.parameters.json) selects VNet `10.64.0.0/16`, Container Apps subnet `10.64.0.0/23`, and private-endpoint subnet `10.64.2.0/24`. Owner review is still required before these become an allocated environment plan. The current template creates no private endpoint or DNS zone; later protected-service modules must add their approved DNS paths.
+
+### Exact proposed scope
+
+Within the existing `rg-iga-pilot-dev-eastus2` only:
+
+- `vnet-iga-pilot-dev`, with `snet-container-apps` and `snet-private-endpoints`.
+- Standard static IPv4 `pip-iga-pilot-dev-egress` and Standard `nat-iga-pilot-dev`.
+- Standard namespace `sb-iga-pilot-dev-1001-pv`, its deny-by-default NAT-IP rule set and `synthetic-work` queue.
+- Distinct `id-iga-pilot-dev-sb-sender` and `id-iga-pilot-dev-sb-receiver` identities, with only their respective queue-scoped Data Sender / Data Receiver assignments.
+
+There is no workload attachment, app registration, customer evidence, database, ACR, Key Vault, private endpoint, telemetry workspace or source connection in this scope. A successful deployment proves resource provisioning/configuration only; live allowed/denied workload tests and full G1 remain later work.
+
+### 24-hour cost envelope and cleanup
+
+The active window begins only after deployment is authorized. The platform operator executing the test must preserve sanitized configuration/results outside disposable resources, inspect actual costs and delete only the above test resources and their child grants within **24 hours of creation**, sooner when checks finish. Keep the existing resource group and budget. Do not use whole-group deletion. Stop before cleanup if ownership or evidence preservation is uncertain; notify the owner promptly because continuing resource hours still incur charges. This document does not itself authorize deletion.
+
+| Item | Reference rate / conservative allowance | 24-hour estimate or reserve |
+|---|---|---:|
+| Standard NAT resource hours | USD 0.045/hour, 24 billed hours | USD 1.08 |
+| Standard static IPv4 | USD 0.005/hour, 24 hours | USD 0.12 |
+| NAT processed traffic | At most 1 GB synthetic allowance, USD 0.045/GB | USD 0.045 |
+| Service Bus Standard base | Reserve the entire USD 10 monthly reference amount pending subscription meter reconciliation; do not also add hourly base | USD 10.00 |
+| Service Bus operations | Reserve USD 0.80 for up to 1 million operations, without relying on included allowance | USD 0.80 |
+| Bandwidth, price variation and contingency | Remaining reserve; no workload/load test in this scope | USD 2.955 |
+| **Requested test envelope** | Within the USD 50 monthly limit, subject to a fresh cost check | **USD 15.00** |
+
+The network plus hourly broker reference would be approximately USD 1.52 before traffic; the USD 15 proposal uses the conservative monthly broker reserve. This is an estimate, not a hard cap or contract quote. No new session starts unless the remaining monthly pilot allowance covers the full envelope. Future sessions and added services require a new estimate. The initial Azure budget showed USD 0 evaluated spend, with delayed cost reporting; refresh it before creation. NAT billing begins at creation even without workloads.
+
+### Executed checks and preview limitations
+
+- Bicep `0.47.16` macOS ARM64 vendor SHA-256 verified, then build and lint passed for the spike, network, namespace, queue and role modules. SDK `10.0.401` was used for policy runners.
+- Network policy passed, rejected nine unsafe drifts, passed fourteen synthetic address cases, and accepted the exact proposed three CIDRs.
+- Service Bus policy passed and rejected eleven namespace, seven role, five queue and thirteen spike-wiring drifts.
+- Compiled spike SHA-256: `8bdffd48ffc62c893233a944b6b773cb362228819d236a9e2a64a466383a8265`. Uploaded Cloud Shell file returned the same digest.
+- Parameter-file SHA-256: `383962763a66b861182aa96d76c3fbae6b28d07ed7b86468e9eded34251c8492`.
+- Azure group what-if returned `Succeeded`, no error, ten `Create` changes and two `Unsupported` role-assignment previews. It showed no modification or deletion of existing resources. The unsupported grants depend on newly created managed-identity principal IDs; their exact queue scopes and role definitions were reviewed in the compiled source and local policy, but propagation and effective access remain live tests.
+- Azure group template validation returned `Succeeded`, no error, for the same proposed names/CIDRs. It creates no paid resources and is not evidence of deployed authorization, networking, observability or recovery.
+
+Chrome's automated upload required an extension file-access setting. The normal native file picker successfully uploaded only the compiled non-secret template; the setting was not changed. Cloud Shell files are ephemeral. No credentials, subscription/tenant IDs or user contact data are in the parameter file, this handoff or the private board.
