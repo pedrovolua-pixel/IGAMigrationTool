@@ -84,6 +84,7 @@ The synthetic fixture catalog follows the families in `implementation-plan.md`: 
 
 - Assess a baseline containing every gap type, rule failure and AI-budget exhaustion.
 - Reconcile terminal coverage before projecting reason-level limitations; missing results or unexplained gaps must not produce a limitation summary. Keep `pass`, `finding`, and `not_applicable` out of that summary.
+- Reconcile before projecting executable coverage; count `pass`/`finding` in the numerator, remove only explicit `not_applicable` units from the applicable planned denominator, retain gap states in that denominator, and report zero applicable units as unavailable rather than 100%.
 - Verify health narrative remains health-focused, gap units do not improve or reduce default health, and the quality report contains complete limitations/counts/reasons.
 - Verify main report contains a prominent compact limitation and link/reference to quality details.
 
