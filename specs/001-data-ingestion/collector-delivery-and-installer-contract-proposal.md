@@ -1,6 +1,6 @@
 # Proposal: Pilot collector delivery and installer contracts
 
-Status: Draft for technical, security and operations review; no delivery or installer implementation approved
+Status: Pilot direction approved by repository owner on 2026-10-01; exact contracts remain draft and disabled
 Scope: One Identity Manager 10.x pilot collector only
 Owner: Technical owner
 Last updated: 2026-10-01
@@ -8,6 +8,8 @@ Last updated: 2026-10-01
 ## Fixed boundaries
 
 The [approved pilot technical specification](technical-spec.md), [local service contract](collector-local-service-contract-proposal.md), and [ADR-0004](../../architecture/decisions/ADR-0004-azure-pilot-technology-platform.md) already select a customer-operated, signed, self-contained .NET 10 `win-x64` Windows Service and one-shot CLI. Online delivery is outbound HTTPS after one-time device-certificate enrollment; offline delivery is an authenticated encrypted package. The collector has no inbound listener, remote self-update, Azure identity, cloud-held SQL credential, or authority to select a customer data plane. These proposals cannot enable collection or G2.
+
+The repository owner approved continuing local pilot development against this direction on 2026-10-01. That approval does not select the exact wire schemas, signer trust, offline serialization, MSI toolchain or customer installation procedure requested below. Their dependent adapters and release operations remain disabled.
 
 ## Candidate online enrollment and upload flow
 

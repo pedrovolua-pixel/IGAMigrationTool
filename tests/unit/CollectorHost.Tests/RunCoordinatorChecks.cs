@@ -263,7 +263,8 @@ internal static class RunCoordinatorChecks
             return Task.FromResult(Pages[Math.Min(index, Pages.Count - 1)]);
         }
 
-        public async Task StagePageAsync(string boundary, string digest, IReadOnlyList<MinimizedField> fields,
+        public async Task StagePageAsync(string boundary, int rowCount, string digest,
+            IReadOnlyList<MinimizedField> fields,
             CancellationToken cancellationToken)
         {
             if (FailStage)

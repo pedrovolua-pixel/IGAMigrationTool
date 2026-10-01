@@ -1,6 +1,4 @@
 using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Text.Json;
 using CollectorSafety;
 
 namespace CollectorHost;
@@ -11,7 +9,7 @@ internal interface ICollectorRunAdapter
 {
     Task<ApprovedCollectorRun?> LoadApprovedRunAsync(CollectorConfig config, CancellationToken cancellationToken);
     Task<CollectorPage> ReadPageAsync(string? afterBoundary, int pageSize, CancellationToken cancellationToken);
-    Task StagePageAsync(string boundary, string digest, IReadOnlyList<MinimizedField> fields,
+    Task StagePageAsync(string boundary, int rowCount, string digest, IReadOnlyList<MinimizedField> fields,
         CancellationToken cancellationToken);
 }
 
@@ -176,20 +174,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             }
 
             // Digest only minimized fields; prohibited and excluded source values never enter the ledger.
-            var serialized = JsonSerializer.SerializeToUtf8Bytes(new
-            {
-                page.Boundary,
-                page.RowCount,
-                Fields = fields.Select(field => new
-                {
-                    field.Key?.CategoryId,
-                    field.Key?.FieldId,
-                    field.Disposition,
-                    field.IncludedValue
-                })
-            });
-            var digest = Convert.ToHexString(SHA256.HashData(serialized)).ToLowerInvariant();
-            CryptographicOperations.ZeroMemory(serialized);
+            var digest = MinimizedPageDigest.Compute(page.Boundary, page.RowCount, fields);
             var checkpoint = new PageCheckpoint(context, page.Boundary, digest);
             if (PageCheckpointVerifier.Evaluate(context, checkpoints, checkpoint) != PageCheckpointDecision.NewPage)
             {
@@ -208,7 +193,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
 
             try
             {
-                await adapter.StagePageAsync(page.Boundary, digest, fields, pageTimeout.Token);
+                await adapter.StagePageAsync(page.Boundary, page.RowCount, digest, fields, pageTimeout.Token);
             }
             catch (OperationCanceledException) when (pageTimeout.IsCancellationRequested)
             {
@@ -277,6 +262,6 @@ internal sealed class PendingCollectorRunAdapter : ICollectorRunAdapter
     public Task<CollectorPage> ReadPageAsync(string? afterBoundary, int pageSize,
         CancellationToken cancellationToken) => throw new InvalidOperationException("Source contract is pending.");
 
-    public Task StagePageAsync(string boundary, string digest, IReadOnlyList<MinimizedField> fields,
+    public Task StagePageAsync(string boundary, int rowCount, string digest, IReadOnlyList<MinimizedField> fields,
         CancellationToken cancellationToken) => throw new InvalidOperationException("Delivery contract is pending.");
 }

@@ -100,6 +100,7 @@ finally
 
 Console.WriteLine($"{count} collector host contract cases passed.");
 Console.WriteLine($"{CheckpointStoreChecks.Run()} encrypted checkpoint-store cases passed.");
+Console.WriteLine($"{PageStageStoreChecks.Run()} encrypted page-stage cases passed.");
 Console.WriteLine($"{await RunCoordinatorChecks.RunAsync(CollectorConfig.Parse(valid) with { Enabled = true })} shared run-coordinator cases passed.");
 Console.WriteLine($"{await LeaseCrashRecoveryChecks.RunAsync()} cross-process lease recovery cases passed.");
 if (OperatingSystem.IsWindows())
