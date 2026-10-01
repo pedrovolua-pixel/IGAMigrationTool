@@ -1,6 +1,6 @@
 # Environment A — partial One Identity SME response
 
-Status: Report-backed intake; exact source eligibility and query approval NOT VERIFIED
+Status: Report-backed and owner-supplied intake; exact source eligibility and query approval NOT VERIFIED
 
 Source: One Identity Manager Customization Documentation, generated 2026-07-08, 40 pages
 
@@ -32,10 +32,13 @@ The report supports customization-inventory review and category discovery. It do
 | One Identity Manager version | **10.0.0.287** is printed as **“Edition version”** on the cover (p. 1). | Report-stated version recorded. SME confirms it is the current installed product/build for A. |
 | Database schema build/version | Not separately established by this customization report. | Exact database schema build and its metadata source required. |
 | Relevant hotfixes/cumulative updates/transport packages | Not established by this report. | Exact identifiers or a verified none statement required. |
-| SQL Server build and database compatibility level | Not established by this report. | Database-owner evidence required before query review. |
+| SQL Server product and Database Engine build | Repository owner supplied **SQL Server 2022**, build **16.0.1121.4**, and `sqlservr.exe` file version **2022.160.1121.4** on 2026-09-30. | Supplied value recorded; database-owner/source evidence reference pending. |
+| SQL Server servicing reference | Repository owner supplied GDR name **GDR** and Knowledge Base number **KB5040936** on 2026-09-30. | Record as supplied; servicing applicability/evidence pending. |
+| Database compatibility level | Not supplied by the report or the repository owner. | Exact database-level compatibility value required before query review; do not infer it from the server build. |
+| Analysis Services version (supplemental) | Repository owner supplied build **16.0.42.216** and `msmdsrv.exe` file version **2022.160.42.216** on 2026-09-30. | Preserved as context; it does not supply the Database Engine compatibility level. |
 | Query-relevant collation/compatibility | Not established by this report. | Supply only if needed for exact queries. |
 
-The cover value is in the approved pilot's **10.x** family. It does not by itself prove current source identity, exact schema compatibility, module versions, or G2/G8 eligibility. One Identity's [configuration guide](https://support.oneidentity.com/technical-documents/identity-manager/9.1.2/configuration-guide/customizing-the-one-identity-manager-base-configuration/changing-database-connection-data) describes “Edition version” as the edition's version number; the separate database and SQL Server facts still need evidence.
+The cover value is in the approved pilot's **10.x** family. It does not by itself prove current source identity, exact schema compatibility, module versions, or G2/G8 eligibility. One Identity's [configuration guide](https://support.oneidentity.com/technical-documents/identity-manager/9.1.2/configuration-guide/customizing-the-one-identity-manager-base-configuration/changing-database-connection-data) describes “Edition version” as the edition's version number; the separate database schema and compatibility facts still need evidence. The SQL and Analysis Services values above are owner-supplied facts, not values extracted from the customization report.
 
 ## Section 4 — installed module and category inventory
 
@@ -50,4 +53,4 @@ Native object/field dictionary, default-to-actual comparison, sanitized fixtures
 1. Confirm the report's protected artifact ID, its binding to the current `PILOT-ENV-A` source, and independence from `PILOT-ENV-B`.
 2. Confirm **10.0.0.287** as the current installed product/build and supply the exact database schema build and relevant hotfixes.
 3. Supply installed module IDs and exact versions, with absent/unsupported/unknown states for proposed categories.
-4. Supply SQL Server build and database compatibility level. Query and database-owner evidence follows for the confirmed exact build and applicable modules.
+4. Supply the database compatibility level and protected evidence for the supplied SQL Server build, servicing reference and effective Database Engine version. Query and database-owner evidence follows for the confirmed exact build and applicable modules.

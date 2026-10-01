@@ -54,7 +54,7 @@ These are **candidate product facts**, not statements about this environment. At
 | Exact One Identity Manager product version | **A:** report cover states **Edition version 10.0.0.287**; current installed product/build still to confirm. **B:** [enter full value]. | **A:** [partial response](one-identity-environment-a-sme-response.md), report p. 1 and SHA-256; current-source confirmation pending. **B:** [product metadata source and capture time]. |
 | Exact database schema build/version | [enter full value; explain any difference from client version] | [enter] |
 | Installed hotfixes/cumulative updates/transport packages relevant to schema or behavior | [list exact identifiers and order, or none verified] | [enter] |
-| SQL Server product/build and database compatibility level | [enter; database owner verifies before query approval] | [enter] |
+| SQL Server product/build and database compatibility level | **A:** owner supplied SQL Server 2022 Database Engine build **16.0.1121.4**; database compatibility level [enter]. **B:** [enter]. | **A:** [partial response](one-identity-environment-a-sme-response.md); protected source/database-owner evidence pending. **B:** [enter]. |
 | Query-relevant collation or compatibility characteristic, if applicable | [enter only if needed for exact query behavior; no topology] | [enter or not applicable] |
 | Known version/hotfix limitations, if any | [enter known limitation or unknown; no research required for intake] | [enter if available] |
 
