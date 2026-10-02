@@ -39,6 +39,7 @@ public static class BffRegistration
             options.ClientId = settings.ClientId.ToString("D");
             options.CallbackPath = settings.CallbackPath;
             options.SignedOutCallbackPath = settings.SignedOutCallbackPath;
+            options.RemoteSignOutPath = settings.CookiePath + "/signout-oidc";
             options.ClientCredentials = [new CredentialDescription
             {
                 SourceType = CredentialSource.SignedAssertionFromManagedIdentity,

@@ -49,6 +49,20 @@ jobs:
         run: dotnet run --project tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj --configuration Release --no-build
       - name: Check synthetic baseline planning and coverage integration
         run: dotnet run --project tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj --configuration Release --no-build
+      - name: Check BFF transport, sessions and human authorization
+        run: |
+          dotnet run --project tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj --configuration Release --no-build
+      - name: Check shared PostgreSQL BFF sessions and real HTTPS transport
+        env:
+          IGA_SESSION_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_sessions;Username=iga_synthetic
+          IGA_BFF_FLOW_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_http;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_bff_sessions
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_bff_http
+          dotnet run --project tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
+          dotnet run --project tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj --configuration Release --no-build
       - name: Check durable synthetic run contracts
         run: dotnet run --project tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj --configuration Release --no-build
       - name: Check deterministic fixture rules and health scoring

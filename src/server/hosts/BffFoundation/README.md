@@ -19,3 +19,6 @@ Sources: [Microsoft certificateless guidance](https://learn.microsoft.com/en-us/
 The executable unit harness checks configuration refusal, immutable identity/admission negatives, real cookie authentication and attributes, authority/version revocation, HTTPS refusal and real synchronizer antiforgery validation with synthetic identities and an in-memory test ticket store. These are internal test compositions, not product login endpoints. The coordinator adds PostgreSQL/two-instance integration evidence separately.
 
 Live Entra code redemption, managed assertion renewal, nonce/state/PKCE replay, signing-key rollover, trust-removal, multi-replica provider behavior, provider logout, licensed users and reviewed Conditional Access remain unverified. Local options/middleware assertions do not prove those provider cases. Live sign-in activation and Azure deployment require their existing gates.
+# Scoped logout callback
+
+The supported provider remote sign-out callback is configured under the same narrow cookie path (`/bff/signout-oidc` by default). Provider logout and Entra front-channel configuration still require live verification; this setting does not claim global sign-out.

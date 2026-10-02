@@ -56,3 +56,7 @@ Build/lint instructions and limits: [Bicep README](README.md). The [bootstrap wo
 ## Subsequent application-package templates (not deployed)
 
 [`pilot-development-bootstrap-apps.bicep`](pilot-development-bootstrap-apps.bicep),its[private hosting module](modules/pilot-development-bootstrap-apps.bicep) and [intentionally unresolved example](environments/pilot-dev-bootstrap.parameters.example.json) prepare inert diagnostic web/worker hosting. They were not used in the earlier foundation session and add no access grants. See[package handoff](../../docs/development/azure-application-package.md) for concrete image/private-pull/product dependencies.
+
+## BFF federation input template (not provisioned)
+
+[`../entra/pilot-bff.federated-credential.template.json`](../entra/pilot-bff.federated-credential.template.json) records the approved exact tenant issuer, dedicated BFF managed-identity principal subject and token-exchange audience. Its placeholders must be replaced in protected ephemeral inputs after deployment review. No federated credential, redirect endpoint or consent was created by the local [BFF foundation cycle](../../plans/active/bff-identity-session-cycle.md).

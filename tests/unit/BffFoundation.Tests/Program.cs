@@ -68,6 +68,7 @@ Check(cookie.Cookie.SecurePolicy == CookieSecurePolicy.Always && cookie.Cookie.H
 var oidc = provider.GetRequiredService<IOptionsMonitor<OpenIdConnectOptions>>().Get(BffRegistration.OidcScheme);
 Check(oidc.ResponseType == "code" && oidc.UsePkce && !oidc.SaveTokens && !oidc.MapInboundClaims && oidc.RequireHttpsMetadata && !oidc.GetClaimsFromUserInfoEndpoint, "OIDC hardening");
 Check(oidc.Scope.ToHashSet().SetEquals(["openid", "profile"]), "no requested downstream/offline scopes");
+Check(oidc.RemoteSignOutPath == settings.CookiePath + "/signout-oidc", "remote logout callback stays inside narrow cookie path");
 Check(oidc.TokenValidationParameters.ValidIssuer == $"https://login.microsoftonline.com/{tenant:D}/v2.0" && oidc.TokenValidationParameters.ValidAudience == client.ToString("D") && oidc.TokenValidationParameters.ClockSkew == TimeSpan.Zero, "exact validation inputs");
 var microsoft = provider.GetRequiredService<IOptionsMonitor<MicrosoftIdentityOptions>>().Get(BffRegistration.OidcScheme);
 Check(microsoft.ClientCredentials!.Count() == 1 && microsoft.ClientCredentials!.Single().SourceType == CredentialSource.SignedAssertionFromManagedIdentity && microsoft.ClientCredentials!.Single().ManagedIdentityClientId == settings.ManagedIdentityClientId.ToString("D") && string.IsNullOrEmpty(microsoft.ClientSecret), "MI only credential");
@@ -198,7 +199,7 @@ foreach (var (enabled, secure) in new[] { (false, true), (false, false), (true, 
     challenge.Request.Scheme = secure ? "https" : "http";
     await challenge.ChallengeAsync(BffRegistration.OidcScheme);
     Check(challenge.Response.StatusCode == 403 && !challenge.Response.Headers.ContainsKey("Location"), "pre-metadata challenge gate");
-    foreach (var path in new[] { settings.CallbackPath, settings.SignedOutCallbackPath, "/signout-oidc" })
+    foreach (var path in new[] { settings.CallbackPath, settings.SignedOutCallbackPath, settings.CookiePath + "/signout-oidc" })
     {
         var callback = Context(guardedProvider, "POST");
         callback.Request.Scheme = secure ? "https" : "http";
