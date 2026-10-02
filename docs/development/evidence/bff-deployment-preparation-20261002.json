@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "recordedUtc": "2026-10-02T13:56:05.866855+00:00",
+  "scope": "Bounded permanently disabled BFF development executable and developer image-inventory collection; no Azure deployment or gate acceptance",
+  "source": {
+    "testedCodeCommit": "c7b071ada291a0573534e96f88a89c3cd4786b1d",
+    "publishedPilotBase": "6c53e6676b07930fb6ded3db8fa92b96cf8c0301",
+    "branch": "codex/bff-integration",
+    "draftPullRequest": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/2",
+    "draft": true,
+    "merged": false,
+    "packetCommits": {
+      "DP01": "a20d9157180ee9cd32bf13875fda43eefe38a02b",
+      "DP02": "e6d2784bf0f85d7a6245e551e563031806227ccd",
+      "DP02SpdxCorrection": "b77b7120533d84eb386c752b47fdb18345ebe57e"
+    },
+    "fileSha256": {
+      ".github/workflows/azure-application-package.yml": "9feac5a74b190ca300362f145d67840d879636513405979b9a8910879ecd5c83",
+      "IgaMigrationTool.slnx": "4043308c92be09cfdcd56dcf97ae6e630de0fa0e5f665c5c255a009bcf9942db",
+      "infra/containers/azure-development-bootstrap.Dockerfile": "6f3966a4388a80a4f2251dc7daa3a6141912229ca8af1639cccb32d44c5c6bad",
+      "infra/containers/azure-development-bootstrap.Dockerfile.dockerignore": "70cf21bf2ff518568f880b08d322458fa6796519c4f348a08d29405842b75699",
+      "infra/containers/azure-development-bootstrap.images.lock.json": "ec209ff57a634c2be02500581716cebee4a254be50a99d3ba735e72ccb889042",
+      "infra/containers/bff-development.Dockerfile": "2f891c3a7a99722d009d20f3db4190851946e3859d1cdd4d2312e0384fad2fe1",
+      "infra/containers/bff-development.Dockerfile.dockerignore": "869c1aecc670d9f5655072a7011a256304311a8dfb5bab23b2892f52856ec5fa",
+      "infra/containers/bff-development.images.lock.json": "ec209ff57a634c2be02500581716cebee4a254be50a99d3ba735e72ccb889042",
+      "infra/containers/build-bff-development.py": "b75acb30cd5371b1f724d52f43313330bff0c959e03edf9332ac105f044db454",
+      "infra/containers/build-development-bootstrap.py": "69442d39b5d6feb88750ef14a1c1054313aeb347a2c69f2f651fa8a4a6f2812b",
+      "infra/containers/collect-image-evidence.py": "af2127371ae3e1de08f513a84988bd1a3c464d7e2e374afef3e44db683b4e070",
+      "infra/containers/image-evidence-tools.lock.json": "02b4c011f7edf2af56578c1074554ddde6e8d84c843a576f72582189971cb89c",
+      "src/server/hosts/BffDevelopmentHost/BffDevelopmentHost.csproj": "a4cd2d3582283294a0658ea2932765b892c88a75c0ff9b61b491cda339f14ef6",
+      "src/server/hosts/BffDevelopmentHost/Program.cs": "6e09e4841068cdf1b7faa67d58334b3d898e1e76f57bee0558d926ca5b243042",
+      "src/server/hosts/BffDevelopmentHost/README.md": "3feb3bbad7a585393f9b6ccc0e08520bd3f9623b761274eb2869582c8172caf2",
+      "src/server/hosts/BffDevelopmentHost/packages.lock.json": "cb22bb75732b3fdf8f76568c2a8f3bdabc324e8686ebaf714cdf9db6cf98a88e",
+      "src/server/modules/IdentityPolicy/Contracts.cs": "7b65c2748191d7630cfa5ca9adcc123be9be4d76e242ea9bfd31c68878f9dd58",
+      "src/server/modules/IdentityPolicy/HumanPolicy.cs": "358897c8fa42a9b0d3826079abe31d1b126bcedc943f009495f9ef6851b0f36c",
+      "src/server/modules/IdentityPolicy/IdentityPolicy.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+      "src/server/modules/IdentityPolicy/README.md": "319cafa6226949246b7303d59f80d6147d39e9c74683521e0480ca6ed2ee4ec2",
+      "src/server/modules/IdentityPolicy/packages.lock.json": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb",
+      "src/server/modules/IdentitySessions/IdentitySessions.csproj": "68cdf9a0c25398fb6db2234af608947823e8f8dd0fff6bbfa89f9a68a2de8b2a",
+      "src/server/modules/IdentitySessions/PostgreSqlSessionAuthority.cs": "e1107d64af9410239ab2f9b54dd0893b9bb0230c97b47e90c332ee2227dbcde1",
+      "src/server/modules/IdentitySessions/PostgreSqlTicketStore.cs": "95111f8ae4bc5c356b2cdd063655a477c1ecc88017b6c79a5fdaeece50925083",
+      "src/server/modules/IdentitySessions/README.md": "ea4cc9914d501a77dd3574471604c7337dd95abb6b6e1a7b9620b19f9a91c2b9",
+      "src/server/modules/IdentitySessions/SessionDatabase.cs": "b2850c7051847542603f4f039052b0e99be05ce836d69a9a09992b07c9cdb0d2",
+      "src/server/modules/IdentitySessions/SessionTicket.cs": "07a7d6e69dd0170c37f6f16a423e2bde5a3ce5b36f736814657c533cc42380e8",
+      "src/server/modules/IdentitySessions/packages.lock.json": "ef0b1094a4ffbf71f97742bf7e8ffc6a232e1a11aefd31161fb469345ed67d86",
+      "tests/infrastructure/ImageEvidence/README.md": "0f4e1a2991ce45b281be550fe4d0b6e947d9d9296ba2c75e5a7d84363ed7431d",
+      "tests/infrastructure/ImageEvidence/test_collection.py": "2e85bcecce5226d878bd705597aa94cede22d087f98c9c9908474e060530fb2b",
+      "tests/integration/BffDevelopmentHost/README.md": "c8fd93b2018230c63d592dad88da26e33979a7f8f5874cfc73e971e0d607d1ce",
+      "tests/integration/BffDevelopmentHost/container_smoke.py": "a46fc861b56b6952ec4c91a489a754bb91a89fda2482b4c75bb8fc8e3a2b4d3a",
+      "tests/integration/BffDevelopmentHost/verify.py": "0cb6a99f33b3851845d3629af92f97fc92d1e2f969a6eedcf0d100cd04ce402a",
+      "tests/integration/BffDevelopmentHost/verify_inputs.py": "7ff4320f5e356bfa43e90ab6e0f91c5adec8b35e1c241144447990f13e26bb4a"
+    }
+  },
+  "reviews": [
+    {
+      "packet": "DP01",
+      "result": "APPROVED",
+      "reviewer": "Non-author deployment reviewer",
+      "executed": "Container inputs and actual 254-assertion disabled host repeat"
+    },
+    {
+      "packet": "DP02",
+      "result": "APPROVED AFTER CORRECTION",
+      "reviewer": "Non-author deployment reviewer",
+      "executed": "14 fixture methods, including missing/wrong/duplicate SPDX document/container roots and ImageID binding",
+      "initialFinding": "Unrelated SPDX document could pass initial validator; corrected before integration"
+    },
+    {
+      "packet": "Shared CI and exact contract proposal",
+      "result": "APPROVED FOR HUMAN REVIEW",
+      "reviewer": "Non-author deployment reviewer"
+    },
+    {
+      "packet": "c7b071a additive pilot merge",
+      "result": "APPROVED",
+      "reviewer": "Non-author host worker",
+      "executed": "46 unique solution projects; unchanged product/private contract source versus published pilot base; unchanged BFF source versus reviewed package; pinned generator, whitespace and conflict checks"
+    },
+    {
+      "packet": "Final sanitized evidence/docs",
+      "result": "APPROVED AFTER STALE PRE-CI WORDING CORRECTION",
+      "reviewer": "Non-author deployment reviewer",
+      "executed": "34 file hashes matched; hosted package/Windows status independently fetched; metadata privacy and digest/acceptance limits checked"
+    }
+  ],
+  "localChecks": [
+    {
+      "name": "43-project pre-merge locked audited restore / format / Release build",
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0,
+      "note": "Initial shared MSBuild child-node failure resolved by serial no-node-reuse retry; incoming 46-project merge is independently source-reviewed and verified by hosted CI separately"
+    },
+    {
+      "name": "Actual disabled host process",
+      "result": "PASS",
+      "assertions": 254,
+      "sqlOrProxyTrapConnections": 0
+    },
+    {
+      "name": "Focused foundation and architecture",
+      "result": "PASS",
+      "transportAssertions": 72,
+      "sessionCases": 27,
+      "humanPolicyCases": 2546,
+      "architecturePolicyCases": 7,
+      "projectScannerCases": 4
+    },
+    {
+      "name": "Image evidence fixtures",
+      "result": "PASS",
+      "methods": 14
+    },
+    {
+      "name": "Frontend pinned install, format, generator, type-check, build and audit after regeneration",
+      "result": "PASS",
+      "reportedVulnerabilities": 0
+    },
+    {
+      "name": "Current-tree gitleaks before additive base merge",
+      "result": "PASS",
+      "findings": 0
+    }
+  ],
+  "hostedChecks": {
+    "codeCommit": "c7b071ada291a0573534e96f88a89c3cd4786b1d",
+    "result": "PASS",
+    "bootstrapRunId": 37015069129,
+    "packageRunId": 37015069054,
+    "package": {
+      "result": "PASS",
+      "runId": 37015069054,
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37015069054",
+      "jobId": 110863817322,
+      "actualProcessAssertions": 268,
+      "actualLinuxNonRootReadOnlyContainer": "PASS",
+      "fixtureMethods": 14,
+      "pinnedScannerTarAndBinaryChecksums": "PASS",
+      "actualVulnerabilityLicenseAndSpdxCollection": "PASS",
+      "dockerConfigId": "sha256:1797d20af863f2b9df38da33e03bb428ea7173b4f33f828f66726158a9574087",
+      "ephemeralOutputsCleanup": "PASS",
+      "rawArtifactsUploaded": false
+    },
+    "bootstrap": {
+      "result": "PASS",
+      "runId": 37015069129,
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37015069129",
+      "jobs": {
+        "Linux": 110863817126,
+        "Windows2022": 110863817325,
+        "Windows2025": 110863817589
+      },
+      "projects": 46,
+      "buildWarnings": 0,
+      "buildErrors": 0,
+      "lockedRestore": "PASS",
+      "format": "PASS",
+      "secretScanFindings": 0,
+      "allConfiguredUnitIntegrationBrowserInfrastructureChecks": "PASS",
+      "bff": {
+        "transport": 72,
+        "sessions": 27,
+        "humanPolicy": 2546,
+        "actualPostgres": 100,
+        "actualHttps": 84
+      },
+      "frontendAuditReportedVulnerabilities": 0,
+      "browserRegressions": {
+        "consultant": 388,
+        "analysisScoring": 732,
+        "reviewMaturity": 2153,
+        "draftAndRecommendation": "PASS"
+      },
+      "manualWindowsAccessibilityAndLiveControls": "NOT VERIFIED"
+    }
+  },
+  "earlierCi": [
+    {
+      "commit": "ec497b8b32bdbc426368f25dbdef00f42fbe7753",
+      "packageRunId": 37012265107,
+      "package": "PASS",
+      "bootstrapRunId": 37012265207,
+      "bootstrap": "FAILED generated type formatting drift; reviewed deterministic regeneration d086f42"
+    },
+    {
+      "commit": "d086f42410768923faf4114035a92f9b16818d12",
+      "packageRunId": 37013019890,
+      "package": "PASS",
+      "bootstrapRunId": 37013019896,
+      "bootstrap": "FAILED required nullable sibling missing from partial imported pilot implementation; reviewed inert repair81d5294; later incoming full pilot source supersedes repair"
+    },
+    {
+      "commit": "81d5294d063f1fce4dd090d8aef695ab5880f02c",
+      "result": "NOT RUN; base concurrently advanced and draft temporarily conflicted; resolved by reviewed additive merge c7b071a"
+    }
+  ],
+  "configuration": {
+    "liveSignInEnabled": false,
+    "developmentPackageCanActivateSignIn": false,
+    "azureResourcesCreated": false,
+    "permissionsGranted": false,
+    "schemaOrMigrationExecuted": false,
+    "customerDataUsed": false,
+    "newPaidSessionStarted": false
+  },
+  "inventoryLimits": {
+    "digestKind": "Local Docker image config ID; not published registry manifest digest",
+    "rawReports": "Collected in private ephemeral runner output and destroyed during always-run cleanup; no public raw report upload or retained restricted evidence artifact",
+    "licenseAndVulnerabilityAcceptance": "NOT VERIFIED",
+    "signedProvenance": "NOT VERIFIED",
+    "sourceToImageBuildBinding": "NOT VERIFIED",
+    "releaseOrPromotion": "NOT VERIFIED",
+    "scannerPublisherCryptoTrust": "NOT VERIFIED"
+  },
+  "remaining": {
+    "D01D02ExactLocalContractApproval": "PENDING",
+    "D03D04ProductionEnrollmentAuthorityAuditProxyKeys": "DEFERRED",
+    "actualNamedLicensedUsersAndReviewedConditionalAccess": "NOT VERIFIED",
+    "privateRegistryPublicationPullAndFederation": "NOT VERIFIED",
+    "freshRatesCapacityAndPricedSessionApproval": "NOT VERIFIED",
+    "Milestone2AndG1G9": "NOT VERIFIED"
+  },
+  "privateBoard": {
+    "result": "PENDING SAME-CYCLE PUBLICATION"
+  }
+}

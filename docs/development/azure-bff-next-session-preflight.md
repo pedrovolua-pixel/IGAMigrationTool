@@ -9,6 +9,8 @@ Related: [BFF execution plan](../../plans/active/bff-azure-deployment-preparatio
 
 The authenticated Azure portal still exposes the owner-selected Subscription 1. October accumulated **subscription** cost reports USD0.35; the forecast reports USD5.09. The pilot group budget is USD50 monthly and reports evaluated spend USD0.21; the aggregate subscription budget is USD50 monthly and reports evaluated spend USD0.00. These readings are inconsistent because evaluation/usage ingestion is delayed. They are observations, not final invoices, available allowance, an enforced spending cap or approval to reserve another USD25. Do not change unrelated budgets or resources.
 
+The pilot group inventory also shows zero resources with Type and Location both set to all. The platform-managed Container Apps group is absent from the subscription group list; unrelated groups remain. This confirms the visible workload inventory, not every provider soft-delete state.
+
 Refresh delayed charges immediately before proposing a new paid session. The prior USD25/24-hour authorization covered the disposed session and is not automatically renewed. Regional capacity, selected resource prices, quota and exact deployment what-if have not been refreshed in this cycle.
 
 ## Required executable inputs
