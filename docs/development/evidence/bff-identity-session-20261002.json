@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "started": "2026-10-01",
-  "recordedUtc": "2026-10-02T04:16:42Z",
+  "recordedUtc": "2026-10-02T04:23:02Z",
   "scope": "Bounded local BFF identity, shared sessions and human authorization foundation; live sign-in disabled",
   "source": {
     "base": "131eaa6fe88be2d06a2f7056561ba115ae9802a8",
@@ -134,6 +134,12 @@
       "name": "Updated hosted CI, Windows execution and container build",
       "result": "NOT VERIFIED",
       "reason": "New source branch not yet published; public GitHub publication approval pending. No local Docker engine or Windows runtime."
+    },
+    {
+      "name": "Azure bootstrap hosting policy",
+      "result": "PASS",
+      "unsafeDriftsDenied": 44,
+      "scope": "Compiled inert root/module templates; separate distinct output paths used for equal filenames. No deployed image/pull proof."
     }
   ],
   "review": [
@@ -202,6 +208,23 @@
   },
   "publication": {
     "source": "LOCAL REVIEWABLE BRANCH; public publication approval pending",
-    "privateBoard": "Update pending; deployment success must be confirmed separately"
+    "privateBoard": {
+      "result": "SUCCEEDED",
+      "version": 53,
+      "sourceCommit": "f48b51a41e6a95dd181f905bd64071deceb048a7",
+      "deploymentId": "appgdep_6abf318af4148191b0f3444b8ce82a3f",
+      "confirmedUtc": "2026-10-02T04:22:41.696542Z",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "audience": "Existing owner-private audience preserved",
+      "localPreview": "Desktop and 390px mobile layout reviewed; no horizontal overflow/broken internal anchors; 31 unique repository links verified in published immutable snapshot."
+    }
+  },
+  "cleanup": {
+    "result": "PASS",
+    "syntheticPostgresCluster": "Stopped only the dedicated BFF PostgreSQL cluster after independent review finished; stopped fixture files retained locally",
+    "temporaryWorkerCheckouts": "Three clean writing worktrees removed; committed branches preserved",
+    "integrationCheckout": "Retained for review and publication approval",
+    "preview": "Temporary preview server stopped and own browser tab closed; viewport override reset",
+    "azureChanges": "None"
   }
 }
