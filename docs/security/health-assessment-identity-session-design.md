@@ -96,3 +96,9 @@ Security owner: Repository owner
 Date: 2026-09-29
 
 Initial tenancy, guest and MFA policy approved by Repository owner on 2026-09-28. Application-registration, workload and session defaults approved by Repository owner on 2026-09-29.
+
+## D01/D02 local contract addendum — 2026-10-02
+
+The owner accepted [D01/D02](../development/bff-production-contract-proposal.md) for local implementation. [Versioned authentication transport](../../contracts/bff-authentication/bff-v1.openapi.json) and [the implementation cycle](../../plans/active/bff-authentication-contract-cycle.md) freeze the minimal session JSON, same-origin synchronizer checks, native form challenge and exact local session revocation. Subject eligibility is separate from signed original authentication bound to a protected, at-most-15-minute, single-use transaction. Protocol completion consumes it only after supported signature/issuer/audience/state/nonce/correlation validation. Exact session/cutoff/security version/roles remain checked on each request; another session's authentication or MFA cannot satisfy these checks. Unknown personal/guest-origin evidence and privileged authentication remain denied. Existing idle30-minute, absolute8-hour and provider-under15-minute limits remain unchanged.
+
+Additive migration002 leaves existing missing-cutoff subjects denied, without selecting pending-record cleanup/retention or executing a live migration. Production provider and app-role retrieval, guest evidence, audit atomicity, key/proxy composition and live acceptance remain deferred. Synthetic proofs do not establish live-provider behavior.

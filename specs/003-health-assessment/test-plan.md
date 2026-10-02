@@ -329,3 +329,7 @@ Security owner: Repository owner
 Accessibility reviewer: Repository owner  
 Product owner: Repository owner  
 Date: 2026-09-28
+
+## Accepted D01/D02 local authentication verification — 2026-10-02
+
+Exact public operations follow [the accepted OpenAPI contract](../../contracts/bff-authentication/bff-v1.openapi.json) and [the attributed owner decision](../../docs/development/bff-production-contract-proposal.md). The [bounded cycle](../../plans/active/bff-authentication-contract-cycle.md) requires actual HTTPS status/body/header and strict UTF-8/field/byte-limit checks; anonymous and distinct same-subject session CSRF isolation; native top-level form navigation; removal failure before cookie clearing and other-session preservation. Supported signed synthetic OIDC proofs must check fixed issuer/client, state/correlation/nonce/code+PKCE, unsigned/missing/stale/future `auth_time`, exact 15-minute bounds, and single challenge completion after all protocol checks. Shared PostgreSQL proofs must cover replay/races, cutoff/version/role changes and failure denial. Synthetic provider tokens do not verify real Entra issuance, Conditional Access, managed-identity redemption, production guests or deployed activation. Record each executed source/run separately; unsupported or unexecuted provider, production audit/key/proxy and image promotion checks remain NOT VERIFIED.
