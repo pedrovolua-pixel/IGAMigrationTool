@@ -198,7 +198,8 @@ TestServer Build(bool live)
             Check(context.ProtocolMessage.MaxAge == "0" && context.Properties.RedirectUri == "/bff/v1/session", "challenge fresh auth fixed return");
             fixture.Challenges++;
             context.Response.StatusCode = 302;
-            context.Response.Headers.Location = "https://provider.invalid/authorize";
+            context.Response.Headers.Location = args.Contains("--browser-fixture", StringComparer.Ordinal)
+                ? origin + "/fixture/provider" : "https://provider.invalid/authorize";
             context.HandleResponse();
             return Task.CompletedTask;
         };
@@ -220,6 +221,12 @@ TestServer Build(bool live)
                 document.querySelector('#sign-in').onclick = navigateBffSignIn;
                 </script></html>
                 """);
+            return;
+        }
+        if (args.Contains("--browser-fixture", StringComparer.Ordinal) && context.Request.Path == "/fixture/provider")
+        {
+            context.Response.ContentType = "text/html; charset=utf-8";
+            await context.Response.WriteAsync("<!doctype html><html lang=\"en\"><title>Synthetic provider navigation</title><p>Local transport fixture only.</p></html>");
             return;
         }
         if (args.Contains("--browser-fixture", StringComparer.Ordinal) && context.Request.Path == "/fixture/helper.js")
