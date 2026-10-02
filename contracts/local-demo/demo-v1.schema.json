@@ -1060,6 +1060,16 @@
               "type": "null"
             }
           ]
+        },
+        "reportDraft": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReportDraft"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -1083,7 +1093,8 @@
         "warnings",
         "review",
         "maturity",
-        "reviewSnapshotDigest"
+        "reviewSnapshotDigest",
+        "reportDraft"
       ]
     },
     "ReviewKind": {
@@ -1698,6 +1709,771 @@
         "domains",
         "ownership"
       ]
+    },
+    "DraftScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["customerId", "projectId", "environmentId"],
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "environmentId": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftFrozenVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profileVersion",
+        "scoringAlgorithmVersion",
+        "aiPolicyVersion",
+        "promptVersion",
+        "modelVersion",
+        "applicationVersion",
+        "workSchemaVersion",
+        "scriptedResultsDigest",
+        "analysisFixtureDigest",
+        "maturityFixtureDigest",
+        "desiredOutcomeVersion"
+      ],
+      "properties": {
+        "profileVersion": {
+          "type": "string"
+        },
+        "scoringAlgorithmVersion": {
+          "type": "string"
+        },
+        "aiPolicyVersion": {
+          "type": "string"
+        },
+        "promptVersion": {
+          "type": "string"
+        },
+        "modelVersion": {
+          "type": "string"
+        },
+        "applicationVersion": {
+          "type": "string"
+        },
+        "workSchemaVersion": {
+          "type": "string"
+        },
+        "scriptedResultsDigest": {
+          "type": "string"
+        },
+        "analysisFixtureDigest": {
+          "type": "string"
+        },
+        "maturityFixtureDigest": {
+          "type": "string"
+        },
+        "desiredOutcomeVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "DraftModuleVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftCapabilityLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matrixVersion",
+        "stateAtLock",
+        "productBuild",
+        "databaseSchemaBuild",
+        "hotfixSetDigest",
+        "sqlServerBuild",
+        "queryPackVersion",
+        "normalizationSchemaVersion",
+        "ruleCatalogVersion",
+        "lockDigest",
+        "compatibilityLevel",
+        "modules"
+      ],
+      "properties": {
+        "matrixVersion": {
+          "type": "string"
+        },
+        "stateAtLock": {
+          "type": "string"
+        },
+        "productBuild": {
+          "type": "string"
+        },
+        "databaseSchemaBuild": {
+          "type": "string"
+        },
+        "hotfixSetDigest": {
+          "type": "string"
+        },
+        "sqlServerBuild": {
+          "type": "string"
+        },
+        "queryPackVersion": {
+          "type": "string"
+        },
+        "normalizationSchemaVersion": {
+          "type": "string"
+        },
+        "ruleCatalogVersion": {
+          "type": "string"
+        },
+        "lockDigest": {
+          "type": "string"
+        },
+        "compatibilityLevel": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftModuleVersion"
+          }
+        }
+      }
+    },
+    "DraftCompatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceProduct",
+        "productVersion",
+        "evidenceSchemaVersion",
+        "ruleLanguageVersion"
+      ],
+      "properties": {
+        "sourceProduct": {
+          "type": "string"
+        },
+        "productVersion": {
+          "type": "string"
+        },
+        "evidenceSchemaVersion": {
+          "type": "string"
+        },
+        "ruleLanguageVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftAnalysisLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packVersion",
+        "packDigest",
+        "presetId",
+        "presetVersion",
+        "evidenceDigest",
+        "catalogVersion",
+        "catalogDigest",
+        "profileId",
+        "profileVersion",
+        "profileDigest",
+        "scope",
+        "compatibility"
+      ],
+      "properties": {
+        "packVersion": {
+          "type": "string"
+        },
+        "packDigest": {
+          "type": "string"
+        },
+        "presetId": {
+          "type": "string"
+        },
+        "presetVersion": {
+          "type": "string"
+        },
+        "evidenceDigest": {
+          "type": "string"
+        },
+        "catalogVersion": {
+          "type": "string"
+        },
+        "catalogDigest": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "profileVersion": {
+          "type": "string"
+        },
+        "profileDigest": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/DraftScope"
+        },
+        "compatibility": {
+          "$ref": "#/$defs/DraftCompatibility"
+        }
+      }
+    },
+    "DraftSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runInputDigest",
+        "analysisFixtureDigest",
+        "analysisContentDigest",
+        "scoringContentDigest",
+        "savedCoverageDigest",
+        "reviewSnapshotDigest",
+        "maturityFixtureDigest",
+        "maturityInputDigest",
+        "maturityContentDigest",
+        "scope",
+        "runId",
+        "runRevision",
+        "runState",
+        "baselineId",
+        "profileId",
+        "frozenVersions",
+        "capabilityLock",
+        "analysisLock",
+        "reviewRunId",
+        "reviewRunRevision"
+      ],
+      "properties": {
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisFixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scoringContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "savedCoverageDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewSnapshotDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "maturityFixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "maturityInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "maturityContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scope": {
+          "$ref": "#/$defs/DraftScope"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "runState": {
+          "const": "Scoring"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "frozenVersions": {
+          "$ref": "#/$defs/DraftFrozenVersions"
+        },
+        "capabilityLock": {
+          "$ref": "#/$defs/DraftCapabilityLock"
+        },
+        "analysisLock": {
+          "$ref": "#/$defs/DraftAnalysisLock"
+        },
+        "reviewRunId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "reviewRunRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "DraftFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": ["Critical", "High", "Medium", "Low", "Informational"]
+        },
+        "confidencePercent": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "reviewRequired": {
+          "type": "boolean"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "rootCauseKey": {
+          "type": "string"
+        },
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "impact": {
+          "type": "string"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationGuidance": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidenceBand": {
+          "type": "string"
+        },
+        "method": {
+          "const": "Deterministic"
+        },
+        "likelihood": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "originalDigests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outcomeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rootCause": {
+          "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "initialState": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "occurrenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "category",
+        "severity",
+        "confidencePercent",
+        "state",
+        "reviewRequired",
+        "ruleId",
+        "ruleVersion",
+        "baselineId",
+        "rootCauseKey",
+        "objectIds",
+        "evidenceReferences",
+        "facts",
+        "inferences",
+        "assumptions",
+        "impact",
+        "recommendations",
+        "validationGuidance",
+        "sources",
+        "confidenceBand",
+        "method",
+        "likelihood",
+        "limitations",
+        "originalDigests",
+        "outcomeIds",
+        "rootCause",
+        "originalTitle",
+        "initialState",
+        "revision",
+        "businessContext",
+        "occurrenceIds"
+      ]
+    },
+    "DraftReviewHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findingId",
+        "revision",
+        "originalTitle",
+        "businessContext",
+        "events"
+      ],
+      "properties": {
+        "findingId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReviewEvent"
+          }
+        }
+      }
+    },
+    "DraftHealthyControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objectId", "ruleId", "ruleVersion", "state"],
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "state": {
+          "const": "Pass"
+        }
+      }
+    },
+    "DraftLimitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objectId", "ruleId", "state", "reasonCode"],
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/CoverageState"
+        },
+        "reasonCode": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftContent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provisional",
+        "publishableCurrent",
+        "categories",
+        "objectTypes",
+        "modules",
+        "outcomes",
+        "quality",
+        "findings",
+        "warnings",
+        "maturity",
+        "reviewHistory",
+        "healthyControls",
+        "limitations",
+        "methodology",
+        "unavailableSections"
+      ],
+      "properties": {
+        "provisional": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "publishableCurrent": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisCategoryRow"
+          }
+        },
+        "objectTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "quality": {
+          "$ref": "#/$defs/AnalysisQuality"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftFinding"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maturity": {
+          "$ref": "#/$defs/MaturityDetail"
+        },
+        "reviewHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftReviewHistory"
+          }
+        },
+        "healthyControls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftHealthyControl"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftLimitation"
+          }
+        },
+        "methodology": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unavailableSections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DraftSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "status",
+        "source",
+        "canonicalContentDigest",
+        "content"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-draft-report-v1"
+        },
+        "status": {
+          "const": "SyntheticDraft"
+        },
+        "source": {
+          "$ref": "#/$defs/DraftSourceBinding"
+        },
+        "canonicalContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "content": {
+          "$ref": "#/$defs/DraftContent"
+        }
+      }
+    },
+    "DraftMarkdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "canonicalContentDigest",
+        "markdownText",
+        "markdownSha256"
+      ],
+      "properties": {
+        "version": {
+          "const": "synthetic-draft-markdown-v1"
+        },
+        "canonicalContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "markdownText": {
+          "type": "string"
+        },
+        "markdownSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "ReportDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reasonCode", "snapshot", "markdown"],
+      "properties": {
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "markdown": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftMarkdown"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
     }
   }
 }

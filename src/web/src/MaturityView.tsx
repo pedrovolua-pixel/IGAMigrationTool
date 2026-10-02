@@ -1,14 +1,20 @@
 import type { MaturityDetail } from './demo-contract.generated';
 
-export function MaturityView({ maturity }: { maturity: MaturityDetail }) {
+export function MaturityView({
+  maturity,
+  headingId = 'maturity-heading',
+}: {
+  maturity: MaturityDetail;
+  headingId?: string;
+}) {
   if (maturity.status !== 'Ready')
     return (
       <p className="warning-note">Maturity is unavailable. No capability level is inferred.</p>
     );
   return (
-    <section className="subsection" aria-labelledby="maturity-heading">
+    <section className="subsection" aria-labelledby={headingId}>
       <p className="eyebrow">Separate evidence-based capability maturity</p>
-      <h4 id="maturity-heading">Maturity: {maturity.level}</h4>
+      <h4 id={headingId}>Maturity: {maturity.level}</h4>
       <p className="field-note">
         Maturity is independent of health. Every one of the {maturity.mandatoryDomains} declared
         mandatory domains stays in the denominator, including missing or partial evidence. Higher

@@ -3,11 +3,17 @@ using AssessmentRuns;
 
 internal static class DemoMaturityProjection
 {
-    internal static object Detail(SyntheticRunSnapshot run)
+    internal static MaturityResult Project(SyntheticRunSnapshot run)
     {
         var fixture = DemoAnalysisCatalog.FreezeMaturity(run.BaselineCatalogId, run.ProfileCatalogId);
-        var response = fixture.ContentDigest == run.FrozenInputs.MaturityFixtureDigest
+        return fixture.ContentDigest == run.FrozenInputs.MaturityFixtureDigest
             ? PilotMaturityProjector.Project(fixture.Input) : new MaturityResult(MaturityIssue.InvalidInput, null);
+    }
+
+    internal static object Detail(SyntheticRunSnapshot run) => Detail(Project(run));
+
+    internal static object Detail(MaturityResult response)
+    {
         var data = response.Projection;
         var gates = data is null ? [] : new[]
         {

@@ -230,6 +230,7 @@ export type AnalysisDetail = {
   readonly review: ReviewDetail | null;
   readonly maturity: MaturityDetail | null;
   readonly reviewSnapshotDigest: string | null;
+  readonly reportDraft: ReportDraft | null;
 };
 
 export type ReviewKind = "Confirm" | "Reject" | "Defer" | "Comment" | "EditPresentation";
@@ -344,4 +345,186 @@ export type MaturityDetail = {
   readonly gates: ReadonlyArray<MaturityGate>;
   readonly domains: ReadonlyArray<MaturityDomain>;
   readonly ownership: MaturityOwnership | null;
+};
+
+export type DraftScope = {
+  readonly customerId: string;
+  readonly projectId: string;
+  readonly environmentId: string;
+};
+
+export type DraftFrozenVersions = {
+  readonly profileVersion: string;
+  readonly scoringAlgorithmVersion: string;
+  readonly aiPolicyVersion: string;
+  readonly promptVersion: string;
+  readonly modelVersion: string;
+  readonly applicationVersion: string;
+  readonly workSchemaVersion: string;
+  readonly scriptedResultsDigest: string;
+  readonly analysisFixtureDigest: string;
+  readonly maturityFixtureDigest: string;
+  readonly desiredOutcomeVersion: string | null;
+};
+
+export type DraftModuleVersion = {
+  readonly id: string;
+  readonly version: string;
+};
+
+export type DraftCapabilityLock = {
+  readonly matrixVersion: string;
+  readonly stateAtLock: string;
+  readonly productBuild: string;
+  readonly databaseSchemaBuild: string;
+  readonly hotfixSetDigest: string;
+  readonly sqlServerBuild: string;
+  readonly queryPackVersion: string;
+  readonly normalizationSchemaVersion: string;
+  readonly ruleCatalogVersion: string;
+  readonly lockDigest: string;
+  readonly compatibilityLevel: number;
+  readonly modules: ReadonlyArray<DraftModuleVersion>;
+};
+
+export type DraftCompatibility = {
+  readonly sourceProduct: string;
+  readonly productVersion: string;
+  readonly evidenceSchemaVersion: string;
+  readonly ruleLanguageVersion: string;
+};
+
+export type DraftAnalysisLock = {
+  readonly packVersion: string;
+  readonly packDigest: string;
+  readonly presetId: string;
+  readonly presetVersion: string;
+  readonly evidenceDigest: string;
+  readonly catalogVersion: string;
+  readonly catalogDigest: string;
+  readonly profileId: string;
+  readonly profileVersion: string;
+  readonly profileDigest: string;
+  readonly scope: DraftScope;
+  readonly compatibility: DraftCompatibility;
+};
+
+export type DraftSourceBinding = {
+  readonly runInputDigest: string;
+  readonly analysisFixtureDigest: string;
+  readonly analysisContentDigest: string;
+  readonly scoringContentDigest: string;
+  readonly savedCoverageDigest: string;
+  readonly reviewSnapshotDigest: string;
+  readonly maturityFixtureDigest: string;
+  readonly maturityInputDigest: string;
+  readonly maturityContentDigest: string;
+  readonly scope: DraftScope;
+  readonly runId: string;
+  readonly runRevision: number;
+  readonly runState: "Scoring";
+  readonly baselineId: string;
+  readonly profileId: string;
+  readonly frozenVersions: DraftFrozenVersions;
+  readonly capabilityLock: DraftCapabilityLock;
+  readonly analysisLock: DraftAnalysisLock;
+  readonly reviewRunId: string;
+  readonly reviewRunRevision: number;
+};
+
+export type DraftFinding = {
+  readonly id: string;
+  readonly title: string;
+  readonly category: string;
+  readonly severity: "Critical" | "High" | "Medium" | "Low" | "Informational";
+  readonly confidencePercent: string;
+  readonly state: string;
+  readonly reviewRequired: boolean;
+  readonly ruleId: string;
+  readonly ruleVersion: string;
+  readonly baselineId: string;
+  readonly rootCauseKey: string;
+  readonly objectIds: ReadonlyArray<string>;
+  readonly evidenceReferences: ReadonlyArray<string>;
+  readonly facts: ReadonlyArray<string>;
+  readonly inferences: ReadonlyArray<string>;
+  readonly assumptions: ReadonlyArray<string>;
+  readonly impact: string;
+  readonly recommendations: ReadonlyArray<string>;
+  readonly validationGuidance: string;
+  readonly sources: ReadonlyArray<string>;
+  readonly confidenceBand: string;
+  readonly method: "Deterministic";
+  readonly likelihood: string;
+  readonly limitations: ReadonlyArray<string>;
+  readonly originalDigests: ReadonlyArray<string>;
+  readonly outcomeIds: ReadonlyArray<string>;
+  readonly rootCause: string;
+  readonly originalTitle: string;
+  readonly initialState: string;
+  readonly revision: number;
+  readonly businessContext: string;
+  readonly occurrenceIds: ReadonlyArray<string>;
+};
+
+export type DraftReviewHistory = {
+  readonly findingId: string;
+  readonly revision: number;
+  readonly originalTitle: string;
+  readonly businessContext: string;
+  readonly events: ReadonlyArray<ReviewEvent>;
+};
+
+export type DraftHealthyControl = {
+  readonly objectId: string;
+  readonly ruleId: string;
+  readonly ruleVersion: string;
+  readonly state: "Pass";
+};
+
+export type DraftLimitation = {
+  readonly objectId: string;
+  readonly ruleId: string;
+  readonly state: CoverageState;
+  readonly reasonCode: string;
+};
+
+export type DraftContent = {
+  readonly provisional: AnalysisScore;
+  readonly publishableCurrent: AnalysisScore;
+  readonly categories: ReadonlyArray<AnalysisCategoryRow>;
+  readonly objectTypes: ReadonlyArray<AnalysisScoreRow>;
+  readonly modules: ReadonlyArray<AnalysisScoreRow>;
+  readonly outcomes: ReadonlyArray<AnalysisScoreRow>;
+  readonly quality: AnalysisQuality;
+  readonly findings: ReadonlyArray<DraftFinding>;
+  readonly warnings: ReadonlyArray<string>;
+  readonly maturity: MaturityDetail;
+  readonly reviewHistory: ReadonlyArray<DraftReviewHistory>;
+  readonly healthyControls: ReadonlyArray<DraftHealthyControl>;
+  readonly limitations: ReadonlyArray<DraftLimitation>;
+  readonly methodology: ReadonlyArray<string>;
+  readonly unavailableSections: ReadonlyArray<string>;
+};
+
+export type DraftSnapshot = {
+  readonly schemaVersion: "synthetic-draft-report-v1";
+  readonly status: "SyntheticDraft";
+  readonly source: DraftSourceBinding;
+  readonly canonicalContentDigest: string;
+  readonly content: DraftContent;
+};
+
+export type DraftMarkdown = {
+  readonly version: "synthetic-draft-markdown-v1";
+  readonly canonicalContentDigest: string;
+  readonly markdownText: string;
+  readonly markdownSha256: string;
+};
+
+export type ReportDraft = {
+  readonly status: "Ready" | "Unavailable";
+  readonly reasonCode: string | null;
+  readonly snapshot: DraftSnapshot | null;
+  readonly markdown: DraftMarkdown | null;
 };

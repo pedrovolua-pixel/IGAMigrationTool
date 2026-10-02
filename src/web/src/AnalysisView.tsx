@@ -8,6 +8,7 @@ import type {
 import { request } from './api';
 import { ReviewPanel } from './ReviewPanel';
 import { MaturityView } from './MaturityView';
+import { DraftReportView } from './DraftReportView';
 
 export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: string }) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
@@ -37,7 +38,8 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
             (!value.review ||
               (value.review.runId === value.runId &&
                 value.review.runRevision === value.runRevision &&
-                value.review.snapshotDigest === value.reviewSnapshotDigest))
+                value.review.snapshotDigest === value.reviewSnapshotDigest)) &&
+            coherentDraft(value, run)
           )
             setResponse(value);
           else if (!controller.signal.aborted) {
@@ -313,6 +315,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
           }}
         />
       )}
+      <DraftReportView key={response.runId} report={response.reportDraft} />
       {response.maturity && <MaturityView maturity={response.maturity} />}
       <details className="locked-inputs">
         <summary>Analysis versions and content digests</summary>
@@ -348,6 +351,59 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         </p>
       </details>
     </section>
+  );
+}
+
+function coherentDraft(value: AnalysisDetail, run: RunDetail): boolean {
+  const draft = value.reportDraft;
+  if (!draft || draft.status !== 'Ready') return true;
+  const snapshot = draft.snapshot;
+  const markdown = draft.markdown;
+  const maturity = value.maturity;
+  if (!snapshot || !markdown || !maturity || maturity.status !== 'Ready') return false;
+  const source = snapshot.source;
+  const versions = source.frozenVersions;
+  const locked = (name: string) => run.lockedInputs.find((input) => input.name === name);
+  const versionBindings: ReadonlyArray<readonly [string, string]> = [
+    ['Profile', versions.profileVersion],
+    ['Desired outcomes', versions.desiredOutcomeVersion ?? 'disabled'],
+    ['Scoring algorithm', versions.scoringAlgorithmVersion],
+    ['AI policy', versions.aiPolicyVersion],
+    ['Prompt', versions.promptVersion],
+    ['Model', versions.modelVersion],
+    ['Application', versions.applicationVersion],
+    ['Work schema', versions.workSchemaVersion],
+    ['Rule catalog', source.analysisLock.catalogVersion],
+    ['Capability', source.capabilityLock.matrixVersion],
+  ];
+  return (
+    snapshot.schemaVersion === 'synthetic-draft-report-v1' &&
+    snapshot.status === 'SyntheticDraft' &&
+    markdown.version === 'synthetic-draft-markdown-v1' &&
+    snapshot.canonicalContentDigest === markdown.canonicalContentDigest &&
+    source.runId === value.runId &&
+    source.runRevision === value.runRevision &&
+    source.runState === 'Scoring' &&
+    source.baselineId === run.selection.baselineId &&
+    source.profileId === run.selection.profileId &&
+    source.runInputDigest === locked('Complete frozen input')?.sha256 &&
+    source.capabilityLock.lockDigest === locked('Exact capability tuple')?.sha256 &&
+    versions.scriptedResultsDigest === locked('Scripted result fixture')?.sha256 &&
+    versionBindings.every(([name, version]) => locked(name)?.version === version) &&
+    source.reviewRunId === value.runId &&
+    source.reviewRunRevision === value.runRevision &&
+    source.reviewSnapshotDigest === value.reviewSnapshotDigest &&
+    source.analysisFixtureDigest === value.fixtureDigest &&
+    source.analysisFixtureDigest === locked('Frozen analysis contents')?.sha256 &&
+    source.frozenVersions.scoringAlgorithmVersion === value.algorithmVersion &&
+    source.scoringContentDigest === value.contentDigest &&
+    source.maturityInputDigest === maturity.inputDigest &&
+    source.maturityContentDigest === maturity.contentDigest &&
+    source.scope.customerId === 'synthetic-customer' &&
+    source.scope.projectId === 'synthetic-project' &&
+    source.scope.environmentId === 'synthetic-environment' &&
+    snapshot.content.maturity.inputDigest === maturity.inputDigest &&
+    snapshot.content.maturity.contentDigest === maturity.contentDigest
   );
 }
 function scoreText(score: AnalysisScore) {

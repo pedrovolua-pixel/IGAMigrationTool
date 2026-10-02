@@ -1,4 +1,6 @@
 using System.Globalization;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using AssessmentCoverage;
 using AssessmentRuns;
 using AssessmentScoring;
@@ -69,7 +71,8 @@ internal static class DemoAnalysisProjection
                 warnings.Add($"{scoring.Quality.UnreviewedMandatoryFindings} Critical/High finding occurrences await mandatory review and are excluded from publishable-current health.");
             if (gaps > 0) warnings.Add($"{gaps} explained gap units reduce executable coverage and are excluded from default health. An unavailable score is not 100.");
         }
-        return new
+        var maturityResponse = reviewProfile && response.IsAvailable ? DemoMaturityProjection.Project(run) : null;
+        var detail = new
         {
             schemaVersion = 1,
             demoOnly = true,
@@ -82,7 +85,7 @@ internal static class DemoAnalysisProjection
             contentDigest = scoring?.ContentDigest,
             reviewSnapshotDigest = scoring is null ? null : review?.Snapshot?.SnapshotDigest,
             review = reviewProfile ? DemoReviewService.Detail(run, review ?? new("review_input_denied", null)) : null,
-            maturity = reviewProfile && response.IsAvailable ? DemoMaturityProjection.Detail(run) : null,
+            maturity = maturityResponse is null ? null : DemoMaturityProjection.Detail(maturityResponse),
             provisional = scoring is null ? null : Measure(scoring.Provisional.Overall),
             publishableCurrent = scoring is null ? null : Measure(scoring.PublishableCurrent.Overall),
             categories = scoring is null ? [] : scoring.Profile.Categories.OrderBy(category => category.CategoryId, StringComparer.Ordinal).Select(category => new
@@ -108,6 +111,12 @@ internal static class DemoAnalysisProjection
             findings,
             warnings
         };
+        var node = JsonSerializer.SerializeToNode(detail, DemoReportDraftProjection.JsonOptions)!.AsObject();
+        var sourceContent = JsonSerializer.SerializeToElement(detail, DemoReportDraftProjection.JsonOptions);
+        node["reportDraft"] = JsonSerializer.SerializeToNode(reviewProfile
+            ? DemoReportDraftProjection.Detail(run, response, review, maturityResponse, sourceContent) : null,
+            DemoReportDraftProjection.JsonOptions);
+        return node;
     }
     private static object Measure(HealthMeasure score) => new
     {

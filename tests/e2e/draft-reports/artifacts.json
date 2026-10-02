@@ -1,0 +1,528 @@
+{
+  "version": "draft-report-independent-evidence-v1",
+  "scope": "Synthetic unpublished read-only draft, no durable ReportVersion or production acceptance",
+  "definitionBinding": [
+    {
+      "path": "tests/integration/ReportDrafts.Tests/Check.cs",
+      "sha256": "2fb5496032f72835b7d1393dae320a0473c278eaedf5701f6dfefbcc0c5b7ec8"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/CoreCases.cs",
+      "sha256": "e7b8d5951de64c86b78279151b5abe173b063ef1963eeef9cab74e1a484960cd"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/CoreFixture.cs",
+      "sha256": "2e234b974542a9db8e1d3c0a86a8a2feff71c6ba6910a57415db85628627d39d"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/MarkdownCases.cs",
+      "sha256": "a1c0b39f3a53d868a746c6d3519d9babd0c4cb4031be3081b2a130c8bff6d0ae"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/PersistenceCases.cs",
+      "sha256": "b18e62cf70c30fead14197bb3f22a4c3fb25e7ddd4869d9e25848bda343de4de"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/Program.cs",
+      "sha256": "cc20ac3904574a5f8b724c71db2a92aef6e9624a2804eafc3f2fbb981dfa4a59"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/README.md",
+      "sha256": "0c8ddfd03946333c8668d6807cad6cd0d282be96afe699a10cc7d4cf17cefb3d"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/ReportDrafts.Tests.csproj",
+      "sha256": "2aaf92ce74e3875be7b5bf41dc51dcbbd52f09f06e6d05422604d3c0aca9a324"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/SavedDraftFixture.cs",
+      "sha256": "e3688eefa3704542623cf7e7b582be805602f1cb9409e6de9bfe692c89058b85"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/canonical-golden-provenance.json",
+      "sha256": "5d0757901630b9d33ab04f31b2d5b874526c14cfd89c57fb31311546caf71842"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/canonical-golden.json",
+      "sha256": "a48a9aefe6efcfa864812f6ba7b84211877a73df9e519704a114561dc31d07e9"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/golden-design.md",
+      "sha256": "bb3b257c181bc2da39b9fdce1a12f9106d9c65332a299cb4cb59fdc91ebcfa2d"
+    },
+    {
+      "path": "tests/integration/ReportDrafts.Tests/packages.lock.json",
+      "sha256": "e72f6b29b31fc761e741f7726a3d1b2ef680db2e978c982fea4f54e7dd580521"
+    },
+    {
+      "path": "tests/e2e/draft-reports/README.md",
+      "sha256": "ef5770f007f501ec4886c8386b991eefdc5670eb30ab1ec0364b87ddc00d1174"
+    },
+    {
+      "path": "tests/e2e/draft-reports/bind-artifacts.mjs",
+      "sha256": "05a4c1d33df610163df7c6e63e233b7718198b8743315b4cb83544a996fd0aac"
+    },
+    {
+      "path": "tests/e2e/draft-reports/browser-support.mjs",
+      "sha256": "33b0075997f6b6d860c77c7e2ece4b08aea05a5dc6f1b62b3067edc8136525dd"
+    },
+    {
+      "path": "tests/e2e/draft-reports/host-harness.mjs",
+      "sha256": "bb7f12fc5954e9c8fb7ff80cccafa754cbb3c18d1ba2bb676df605b5569b5be6"
+    },
+    {
+      "path": "tests/e2e/draft-reports/verify.mjs",
+      "sha256": "518e7c3c2c46d93c43dedf5449926c8a68aec5229db76ad329b734ec045c3eed"
+    }
+  ],
+  "rootSourceBinding": [
+    {
+      "path": "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs",
+      "sha256": "36b849fdfe187f4020ce55a38aa18491a5adcc66793cc822fdb39d024b777b18"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/ReportDraftContracts.cs",
+      "sha256": "ce95bd07d174190de1f61b3364ac76fc39e149a3beb127519252e24d464799c8"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/ReportDrafts.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/StructuredDraftMarkdown.cs",
+      "sha256": "70d8d6ce231407565190ee2d66c16dbdb2b48ed87761b9b0e89f3e949bddeb25"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+      "sha256": "41c38a927c6c64558f87d39277485bd79ad4f9d7187e058becb9abb10b1fe923"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+      "sha256": "8e16b0be032325fc9104b022fbf429e75c4084b7368b1164ed588c72ae95e2cd"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+      "sha256": "5a42794adaecc34bdaabcf8af47017d1b3beaaf643ffbc83cdb16ec1bbc37287"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDemoAnalysisAdapter.cs",
+      "sha256": "f2f1f6a0890261b962d88743929232516130b7448f3ea412277cd6531ac77c4d"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+      "sha256": "f76ed53a88f9e56ef7051f64cb1f416c1c75271f7e5d5083715dcd9bb87b0f69"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+      "sha256": "1f18bab1ed1d94db3f47b6d49f8bf2b3e1e638cb9e976b802b86fd2f68314e32"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunDbContext.cs",
+      "sha256": "734275bfcc32ef733f208fac4aa7740816ffd6a7a360d2abe53276cac539acf4"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs",
+      "sha256": "7488f7ffa74f816114bac085ad7c465b01ec823a25394dab69edd5f7a878dfbb"
+    },
+    {
+      "path": "src/server/modules/FindingReview/FindingReview.csproj",
+      "sha256": "f99b247acd978501a3a3109049de1e3a3e1a403841b037ef4cd0d23551d3223b"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewContracts.cs",
+      "sha256": "2ad909342eeff5ec30a9d65372cf7a7e8fdd8ff2ecd6e7c81762a1cd8b9147ce"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewDigest.cs",
+      "sha256": "5003deec3f7b5da61ca32c452e150e45d12d835507f8358dc75c302b5c850d6f"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewMigration.cs",
+      "sha256": "ae13d7b224bee6e477ed1a08a88d434e2b5ffc15bf507e85d854a8cb48f1db84"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewPolicy.cs",
+      "sha256": "c7ebe399e6db00882c07bd181f1d3c28171eee6d93a20dbd27db7eb27e8392ba"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+      "sha256": "08db408fb5cd96ae937276d8ea0a830d91a7fd28d42ffd55ca104e8bf77918cb"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/MaturityContracts.cs",
+      "sha256": "7522ace8380b6cb08797521252eb5653f3959bc1c51503c24ab4313339f195b0"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/PilotMaturityProjector.cs",
+      "sha256": "903ab34434c2597a60ba00413cd87a352b6f3802e4e54578147252f01d950393"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/SyntheticMaturityFixturePack.cs",
+      "sha256": "82c8ebe48e188b3671c18b27a683a32702ffcbbbe38d02f0e6849aa10a087ebd"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/AssessmentScoring.csproj",
+      "sha256": "7eefcc78004c01aeaeeef3fce1670be213d2cf3599b535c277790550f1b1f81b"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/PilotHealthScorer.cs",
+      "sha256": "4108969453ec3f3eec338cef4ab6c6b9d9470dbf3e0ad400ea1082003c0e3d1a"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/ScoringContracts.cs",
+      "sha256": "2f0e2a8849074f0643bf1a5d371cf73cbb765da130408a66db5504cdb2cae6cc"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj",
+      "sha256": "cfc53a6a0b4ca9c95c7470ebd488a964b53dd7fcc9ab88fc62b98c655d94b211"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisContracts.cs",
+      "sha256": "abc65c0ecee6265077e3d2ce91115bd4396c16afc418742bb9df4b2b0c80855a"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisEngine.cs",
+      "sha256": "3a9d8fa75f670750315c6681ccbfe8fe505121b7f9f2a4599be13dc9b18f69e7"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisFixturePack.cs",
+      "sha256": "9e84110430fe09d72c9d83e3bd2e2b7f562fc4fbe4d6d6de6730352a5823f760"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticCanonicalDigest.cs",
+      "sha256": "3715d5773a70b2a45678814a3603dc85406c8ad700a4fb7b420031fd66d83aa4"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticRuleEvaluator.cs",
+      "sha256": "ebb7ceaa86acf6e460ab6606ed0f7ff6fd7dd4890493582430e42a63cfa48188"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+      "sha256": "77520a30000640544b8d3247b540a5a9cd58996faadaab6fd508048794751cad"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoMaturityProjection.cs",
+      "sha256": "5ed2c404a66ef82e398f3b3c1dd3593b14bcec1ab5ea92d5cb507a048c80a899"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoReportDraftProjection.cs",
+      "sha256": "541b8d80313b856636619c1ac8c692d33f491ee7e850a4e4e8dff7616e3042b7"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+      "sha256": "106f9907f5c6c55617ef5ce3bbdcf574dfc012de85ae97539af643d5b9c54b8e"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+      "sha256": "459fffffcfb8265c996cf0110e728a5882bd1c1cc94757189845525e6b5705b7"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+      "sha256": "c13688f9b0eb34effa50e3999f606cf0261b3081d807f3714781bc16b49ca7f3"
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "bba9f47811985ba01176401e5069f5e1976be438aeff0872cc27dd0f03b49a83"
+    },
+    {
+      "path": "src/web/src/DraftReportView.tsx",
+      "sha256": "07cdf830f52c56d8c68931bdd883a6500fc1651d32a155c4fa6e56ec6d2aed1d"
+    },
+    {
+      "path": "src/web/src/MaturityView.tsx",
+      "sha256": "ed13d1063c5bd56950a2ddda799868755eb05cde94360720961351cbccf91143"
+    },
+    {
+      "path": "src/web/src/ReviewPanel.tsx",
+      "sha256": "93999eb45cab07024fbaf0945e4337173bc8367b5c225ea0e74d32db4ad32164"
+    },
+    {
+      "path": "src/web/src/api.ts",
+      "sha256": "9fa62aa42aa5a890a5adfd3b01c3c81cd5bd4362f84880fc206e10b1f18c99a0"
+    },
+    {
+      "path": "src/web/src/styles.css",
+      "sha256": "98ac6c74bdc24732cebed0c757b12242a545ce69090ee29f47291f2f8e8cd2f7"
+    },
+    {
+      "path": "src/web/src/demo-contract.generated.ts",
+      "sha256": "8d4b72b5f13c38a4b66fc31105f837d5af3101836d90c03faed281ecfd318a8a"
+    },
+    {
+      "path": "contracts/local-demo/demo-v1.schema.json",
+      "sha256": "06bae840edeaf4b5728ba4917278c3a56fd321613e7f0aa4071cc46398459972"
+    },
+    {
+      "path": "src/web/dist/assets/index-BUiKDdWr.css",
+      "sha256": "3711645754d6c16980073bf9b0bfbfb34c8b9c8bb8b6d89679bcd630758a6ce7"
+    },
+    {
+      "path": "src/web/dist/assets/index-DtzxviFB.js",
+      "sha256": "9a9ed1619f2f9cceb6595d9df2d9e2e6a896d2dc19df74580893f52cc3822e3c"
+    },
+    {
+      "path": "src/web/dist/index.html",
+      "sha256": "00f49c4ea5e325250180fb554b5fe37c92f67b0018bc9df5bf1413e542fe3657"
+    }
+  ],
+  "integrationDependencyBinding": [
+    {
+      "path": "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs",
+      "sha256": "36b849fdfe187f4020ce55a38aa18491a5adcc66793cc822fdb39d024b777b18"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/ReportDraftContracts.cs",
+      "sha256": "ce95bd07d174190de1f61b3364ac76fc39e149a3beb127519252e24d464799c8"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/ReportDrafts.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/StructuredDraftMarkdown.cs",
+      "sha256": "70d8d6ce231407565190ee2d66c16dbdb2b48ed87761b9b0e89f3e949bddeb25"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+      "sha256": "41c38a927c6c64558f87d39277485bd79ad4f9d7187e058becb9abb10b1fe923"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+      "sha256": "8e16b0be032325fc9104b022fbf429e75c4084b7368b1164ed588c72ae95e2cd"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+      "sha256": "5a42794adaecc34bdaabcf8af47017d1b3beaaf643ffbc83cdb16ec1bbc37287"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDemoAnalysisAdapter.cs",
+      "sha256": "f2f1f6a0890261b962d88743929232516130b7448f3ea412277cd6531ac77c4d"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+      "sha256": "f76ed53a88f9e56ef7051f64cb1f416c1c75271f7e5d5083715dcd9bb87b0f69"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+      "sha256": "1f18bab1ed1d94db3f47b6d49f8bf2b3e1e638cb9e976b802b86fd2f68314e32"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunDbContext.cs",
+      "sha256": "734275bfcc32ef733f208fac4aa7740816ffd6a7a360d2abe53276cac539acf4"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs",
+      "sha256": "7488f7ffa74f816114bac085ad7c465b01ec823a25394dab69edd5f7a878dfbb"
+    },
+    {
+      "path": "src/server/modules/FindingReview/FindingReview.csproj",
+      "sha256": "f99b247acd978501a3a3109049de1e3a3e1a403841b037ef4cd0d23551d3223b"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewContracts.cs",
+      "sha256": "2ad909342eeff5ec30a9d65372cf7a7e8fdd8ff2ecd6e7c81762a1cd8b9147ce"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewDigest.cs",
+      "sha256": "5003deec3f7b5da61ca32c452e150e45d12d835507f8358dc75c302b5c850d6f"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewMigration.cs",
+      "sha256": "ae13d7b224bee6e477ed1a08a88d434e2b5ffc15bf507e85d854a8cb48f1db84"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewPolicy.cs",
+      "sha256": "c7ebe399e6db00882c07bd181f1d3c28171eee6d93a20dbd27db7eb27e8392ba"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+      "sha256": "08db408fb5cd96ae937276d8ea0a830d91a7fd28d42ffd55ca104e8bf77918cb"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/MaturityContracts.cs",
+      "sha256": "7522ace8380b6cb08797521252eb5653f3959bc1c51503c24ab4313339f195b0"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/PilotMaturityProjector.cs",
+      "sha256": "903ab34434c2597a60ba00413cd87a352b6f3802e4e54578147252f01d950393"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/SyntheticMaturityFixturePack.cs",
+      "sha256": "82c8ebe48e188b3671c18b27a683a32702ffcbbbe38d02f0e6849aa10a087ebd"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/AssessmentScoring.csproj",
+      "sha256": "7eefcc78004c01aeaeeef3fce1670be213d2cf3599b535c277790550f1b1f81b"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/PilotHealthScorer.cs",
+      "sha256": "4108969453ec3f3eec338cef4ab6c6b9d9470dbf3e0ad400ea1082003c0e3d1a"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/ScoringContracts.cs",
+      "sha256": "2f0e2a8849074f0643bf1a5d371cf73cbb765da130408a66db5504cdb2cae6cc"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj",
+      "sha256": "cfc53a6a0b4ca9c95c7470ebd488a964b53dd7fcc9ab88fc62b98c655d94b211"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisContracts.cs",
+      "sha256": "abc65c0ecee6265077e3d2ce91115bd4396c16afc418742bb9df4b2b0c80855a"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisEngine.cs",
+      "sha256": "3a9d8fa75f670750315c6681ccbfe8fe505121b7f9f2a4599be13dc9b18f69e7"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisFixturePack.cs",
+      "sha256": "9e84110430fe09d72c9d83e3bd2e2b7f562fc4fbe4d6d6de6730352a5823f760"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticCanonicalDigest.cs",
+      "sha256": "3715d5773a70b2a45678814a3603dc85406c8ad700a4fb7b420031fd66d83aa4"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticRuleEvaluator.cs",
+      "sha256": "ebb7ceaa86acf6e460ab6606ed0f7ff6fd7dd4890493582430e42a63cfa48188"
+    }
+  ],
+  "integrationExecutionBinding": [
+    {
+      "path": "tests/integration/ReportDrafts.Tests/execution.log",
+      "sha256": "e53ce6f504a26fbf1c67594905ad1aa94054453d2e75214c0b5d0efdd3862df3"
+    }
+  ],
+  "hostBinding": [
+    {
+      "path": "LocalConsultantDemo.dll",
+      "sha256": "7b50d580c47829e43c101aced4f0c66818c11f34f7695093480e5139063a9bb7"
+    }
+  ],
+  "executedEvidenceBinding": [
+    {
+      "path": "execution.json",
+      "sha256": "2f526736a028fffad0acd6951015cd1dd95fa916b70225ba28fcbcee598d5d0f"
+    },
+    {
+      "path": "execution.log",
+      "sha256": "018e44bf5e6c90a9cb756e9dcd1e084a82ed4761e4864e9bd3fb095d5eba5562"
+    },
+    {
+      "path": "desktop-draft.png",
+      "sha256": "0e78aefeaccc0a4dc911c9b2e0c36c87e6b99faabbb4e1b929300fe2e620ce85"
+    },
+    {
+      "path": "desktop-viewport.png",
+      "sha256": "5d6ee9d765ce7fc252a984c2f12474fa5d9b525df97dc3743959040984cec35c"
+    },
+    {
+      "path": "mobile-draft.png",
+      "sha256": "251ceaac19a7edecd4e8eeffe0a9888deaaafafd7e4a19a32e2312953d6141d4"
+    },
+    {
+      "path": "reflow-draft.png",
+      "sha256": "8d901161d45c3294287a8abb25480517d87de62d81248b2810a94b255d2dab81"
+    },
+    {
+      "path": "reflow-viewport.png",
+      "sha256": "fcabe3188e0b33ebcc56755b538af37f48e08b3d43eb2dc3a58c999f304d34e9"
+    }
+  ],
+  "preservedHistoricalBinding": [
+    {
+      "path": "tests/e2e/consultant-demo/artifact-digests.json",
+      "sha256": "fea4a1cc67ad09d69ce136ba42b22c63f19500185184e5da08b1f07b19302476"
+    },
+    {
+      "path": "tests/e2e/analysis-scoring/execution.json",
+      "sha256": "98eb4bbca5cb017ae5cc3ac8796b18b9d2e83b76243a4e9f0b088641d740e8db"
+    },
+    {
+      "path": "tests/e2e/review-maturity/artifacts.json",
+      "sha256": "f0d59a6deb41e86a1c0ad2ef3110268d199f332b78337a590cac282f4268c2a7"
+    },
+    {
+      "path": "tests/integration/ReviewMaturity.Tests/HistoricalGoldens.cs",
+      "sha256": "66fa6336f9e30d5bea7792fbca0ef1a54a8962811f7fb29a0404be655639e7bc"
+    }
+  ],
+  "dependencyVersions": {
+    "playwright": "1.62.1",
+    "axe": "4.13.0",
+    "postgres": "18.4",
+    "dotnetSdk": "10.0.401"
+  },
+  "coreCommit": "343765a28a3227f42ed11240661f6d04be9bc16f",
+  "markdownCommit": "c7d8d3e5e8ac50e49d51d0b3857face1b3063ed9",
+  "execution": {
+    "status": "PASS",
+    "assertions": 2137,
+    "groups": [
+      "DR-API-001 actual saved coherent draft, review change, immutable originals and hostile Markdown",
+      "DR-API-002 independent healthy/gap/mixed/weighted and historical profile literals",
+      "DR-UI-001 native summary/technical/inert Markdown, unique maturity, keyboard review refresh",
+      "DR-UI-002 source/version/digest/scope substitution refusal and same-revision retry",
+      "DR-UI-003 late old GET selection race remains bound to new run",
+      "DR-UI-004 actual process restart/reload reproducibility",
+      "DR-UI-005 desktop390320, expanded captured evidence, axe and native focus engineering checks"
+    ],
+    "accessibility": [
+      {
+        "label": "desktop expanded technical draft",
+        "version": "4.13.0",
+        "passes": 31,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr"
+        ]
+      },
+      {
+        "label": "320px expanded technical draft",
+        "version": "4.13.0",
+        "passes": 33,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr",
+          "color-contrast"
+        ]
+      }
+    ],
+    "browser": "145.0.7632.6",
+    "node": "v24.21.0",
+    "ownedHostRestartExecuted": true,
+    "substitutionCases": [
+      "schema",
+      "published",
+      "Markdown version",
+      "canonical digest",
+      "run",
+      "review revision",
+      "baseline",
+      "profile",
+      "input digest",
+      "capability tuple",
+      "scripted digest",
+      "application lock",
+      "desired outcomes",
+      "analysis fixture",
+      "scoring digest",
+      "maturity digest",
+      "wrong scope"
+    ],
+    "limitations": [
+      "Fixed synthetic scope only; no durable ReportVersion, publication/export/customer authority",
+      "Full supported Windows/NVDA/Narrator/manual WCAG acceptance NOT VERIFIED",
+      "axe desktop expanded technical draft incomplete:aria-prohibited-attr; NOT VERIFIED",
+      "axe 320px expanded technical draft incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+    ]
+  }
+}
