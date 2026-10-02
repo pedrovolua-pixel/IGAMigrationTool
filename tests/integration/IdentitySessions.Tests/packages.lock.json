@@ -26,7 +26,7 @@
       "identitysessions": {
         "type": "Project",
         "dependencies": {
-          "Npgsql": "[10.0.3, )"
+          "Npgsql": "[10.0.3, 10.0.3]"
         }
       }
     }

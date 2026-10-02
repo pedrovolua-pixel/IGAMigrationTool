@@ -28,7 +28,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
     {
         var now = clock.GetUtcNow();
         var context = SessionTicket.Validate(ticket, now);
-        RequireFreshIssuance(ticket, context.Authenticated, now);
+        RequireIssuance(ticket, context.Authenticated, now);
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
         var state = await SessionDatabase.LockSubjectAsync(connection, transaction, context.Subject, cancellationToken);
@@ -39,7 +39,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         }
         now = clock.GetUtcNow();
         context = SessionTicket.Validate(ticket, now);
-        RequireFreshIssuance(ticket, context.Authenticated, now);
+        RequireIssuance(ticket, context.Authenticated, now);
         if (!SessionDatabase.Current(state, now, context.Version))
         {
             throw new InvalidOperationException("Authoritative provider status expired during admission.");
@@ -161,7 +161,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
     {
         var now = clock.GetUtcNow();
         var context = SessionTicket.Validate(replacement, now);
-        RequireFreshIssuance(replacement, context.Authenticated, now);
+        RequireIssuance(replacement, context.Authenticated, now);
         var hash = SessionTicket.HashKey(oldKey);
         if (hash is null)
         {
@@ -178,8 +178,13 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         }
         now = clock.GetUtcNow();
         context = SessionTicket.Validate(replacement, now);
-        RequireFreshIssuance(replacement, context.Authenticated, now);
+        RequireIssuance(replacement, context.Authenticated, now);
         if (!SessionDatabase.Current(session.State, now, context.Version))
+        {
+            return null;
+        }
+        var previousExpiry = new[] { session.LastSeen + SessionTicket.IdleLifetime, session.AbsoluteExpires }.Min();
+        if (now >= previousExpiry && context.Authenticated < previousExpiry)
         {
             return null;
         }
@@ -258,7 +263,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
                 session.GetFieldValue<byte[]>(5)) : null;
     }
 
-    private static void RequireFreshIssuance(AuthenticationTicket ticket, DateTimeOffset authenticated, DateTimeOffset now)
+    private static void RequireIssuance(AuthenticationTicket ticket, DateTimeOffset authenticated, DateTimeOffset now)
     {
         if (ticket.Properties.Items.ContainsKey(SessionTicket.SessionReference) ||
             now - authenticated >= SessionTicket.AbsoluteLifetime)

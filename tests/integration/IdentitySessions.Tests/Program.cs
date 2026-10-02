@@ -107,9 +107,14 @@ try
     Check(await second.RetrieveAsync(staleKey) is not null, "Verified provider check may resume unexpired session");
 
     var idleSubject = await Subject(); var idleKey = await first.StoreAsync(Ticket(idleSubject));
+    var beforeIdleAuthentication = clock.GetUtcNow();
     clock.Advance(TimeSpan.FromMinutes(30));
     await authority.ConfirmProviderAsync(idleSubject, clock.GetUtcNow());
     Check(await second.RetrieveAsync(idleKey) is null, "Exact idle boundary denied despite fresh provider");
+    var staleRotation = Ticket(idleSubject);
+    staleRotation.Properties.Items[SessionTicket.AuthenticatedUtc] = beforeIdleAuthentication.ToString("O");
+    Check(await first.RotateAsync(idleKey, staleRotation) is null, "Idle-expired key cannot rotate using original authentication");
+    Check(await second.RotateAsync(idleKey, Ticket(idleSubject)) is not null, "Trusted authentication after idle expiry can rotate to a new key");
     var absoluteSubject = await Subject(); var absoluteKey = await first.StoreAsync(Ticket(absoluteSubject));
     for (var i = 0; i < 31; i++)
     {
