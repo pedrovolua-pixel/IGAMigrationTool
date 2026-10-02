@@ -1070,6 +1070,16 @@
               "type": "null"
             }
           ]
+        },
+        "recommendationGuidance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RecommendationGuidance"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -1094,7 +1104,8 @@
         "review",
         "maturity",
         "reviewSnapshotDigest",
-        "reportDraft"
+        "reportDraft",
+        "recommendationGuidance"
       ]
     },
     "ReviewKind": {
@@ -2467,6 +2478,340 @@
           "anyOf": [
             {
               "$ref": "#/$defs/DraftMarkdown"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "GuidanceSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runInputDigest",
+        "analysisFixtureDigest",
+        "analysisContentDigest",
+        "savedCoverageDigest",
+        "reviewSnapshotDigest",
+        "scope",
+        "runId",
+        "runRevision",
+        "runState",
+        "baselineId",
+        "profileId",
+        "frozenVersions",
+        "capabilityLock",
+        "analysisLock",
+        "reviewRunId",
+        "reviewRunRevision"
+      ],
+      "properties": {
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisFixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "savedCoverageDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewSnapshotDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scope": {
+          "$ref": "#/$defs/DraftScope"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "runState": {
+          "const": "Scoring"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "frozenVersions": {
+          "$ref": "#/$defs/DraftFrozenVersions"
+        },
+        "capabilityLock": {
+          "$ref": "#/$defs/DraftCapabilityLock"
+        },
+        "analysisLock": {
+          "$ref": "#/$defs/DraftAnalysisLock"
+        },
+        "reviewRunId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "reviewRunRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "GuidanceOccurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "occurrenceId",
+        "objectId",
+        "objectType",
+        "moduleId",
+        "originalDigest",
+        "evidenceReference"
+      ],
+      "properties": {
+        "occurrenceId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "moduleId": {
+          "type": "string"
+        },
+        "originalDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "evidenceReference": {
+          "type": "string"
+        }
+      }
+    },
+    "GuidanceOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scopedOptionId",
+        "optionId",
+        "status",
+        "text",
+        "prerequisites",
+        "risk",
+        "recoveryGuidance"
+      ],
+      "properties": {
+        "scopedOptionId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "optionId": {
+          "type": "string"
+        },
+        "status": {
+          "const": "Unverified"
+        },
+        "text": {
+          "type": "string"
+        },
+        "prerequisites": {
+          "type": "string"
+        },
+        "risk": {
+          "type": "string"
+        },
+        "recoveryGuidance": {
+          "type": "string"
+        }
+      }
+    },
+    "GuidanceFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findingId",
+        "ruleId",
+        "ruleVersion",
+        "categoryId",
+        "originalTitle",
+        "presentationTitle",
+        "businessContext",
+        "rootCause",
+        "severity",
+        "initialState",
+        "currentState",
+        "findingRevision",
+        "occurrences",
+        "options",
+        "validationGuidance",
+        "guidanceReferences",
+        "assumptions",
+        "limitations"
+      ],
+      "properties": {
+        "findingId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "presentationTitle": {
+          "type": "string"
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "rootCause": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": ["Critical", "High", "Medium", "Low", "Informational"]
+        },
+        "initialState": {
+          "enum": ["Proposed", "AutoConfirmed"]
+        },
+        "currentState": {
+          "enum": [
+            "Proposed",
+            "AutoConfirmed",
+            "Confirmed",
+            "Rejected",
+            "Deferred"
+          ]
+        },
+        "findingRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "occurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuidanceOccurrence"
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuidanceOption"
+          }
+        },
+        "validationGuidance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guidanceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GuidanceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "status",
+        "source",
+        "contentDigest",
+        "findings",
+        "warnings",
+        "unavailableSections"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-recommendation-guidance-v1"
+        },
+        "status": {
+          "const": "SyntheticUnverified"
+        },
+        "source": {
+          "$ref": "#/$defs/GuidanceSourceBinding"
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuidanceFinding"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unavailableSections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RecommendationGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reasonCode", "snapshot"],
+      "properties": {
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GuidanceSnapshot"
             },
             {
               "type": "null"
