@@ -1,6 +1,6 @@
 {
   "cycle": 11,
-  "status": "VERIFIED_BOUNDARY_PRIVATE_CLOSURE_PENDING",
+  "status": "COMPLETE_BOUNDED_DEVELOPER_CYCLE",
   "capturedUtc": "2026-10-02T20:32:23.178833+00:00",
   "sdk": "10.0.401",
   "solutionProjects": 51,
@@ -3210,8 +3210,15 @@
     "qaFile": "/private/tmp/iga-cycle11-start-site-final-qa.json"
   },
   "site": {
-    "status": "PENDING matching private closure publication",
+    "canonicalCommit": "02caacb950f19a186fabb865fb86cdeae090377c",
+    "siteSourceCommit": "cb326730a83d0406bcca8b8ab472496148ec8fa8",
+    "version": 78,
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_6fa7da95058481918db79217e251870b",
+    "deploymentId": "appgdep_6ac0154a30e08191a9ee73df190b31d8",
+    "deploymentStatus": "succeeded",
     "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
-    "audience": "Existing owner-only custom policy preserved"
+    "access": "owner-only custom1owner/0external/0groups preserved",
+    "qa": "Three viewports;11 unchanged open task bodies/roles/completion/links;60 immutable Git paths/fragments; no overflow/page errors; actual desktop inspected",
+    "note": "Matching verified closure publication succeeded; final docs-only COMPLETE snapshot is republished in the same cycle, with terminal proof retained in private coordinator evidence. No human gate acceptance."
   }
 }
