@@ -1,0 +1,10 @@
+{
+  "authority": "Independent Python standard-library primitive oracle; no application implementation invoked",
+  "digests": {
+    "packet-input.json": "b6fcc1ad68879ba80fcca1e19cfe1f05493d250008abc07ca7ac6e3c92c5e81c",
+    "provider-output.json": "f534e84d23a33d575c70f37ba6a772c6b4c4a96516e42510bf2e054b791308fc",
+    "packet-golden.json": "ddfa6758fdf5aead7b315579cf210952cbde8b9ae832e8e755df9a37f58a7fa0",
+    "proposal-golden.json": "7153e797474d619bc96bcb93581574b1fa7899d0642995bed188b55abd25fef9",
+    "preview-golden.json": "0d7c49c25f11a8a61f76a6af0787f9ccbe9c9b9bfb1c268232835809448fad7e"
+  }
+}

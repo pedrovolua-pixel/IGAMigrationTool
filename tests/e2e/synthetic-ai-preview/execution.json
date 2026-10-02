@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "v9-browser-execution-v1",
+  "result": "PASS",
+  "checks": 440,
+  "groups": [
+    "V9-BROWSER-desktop",
+    "V9-BROWSER-mobile",
+    "V9-BROWSER-reflow"
+  ],
+  "browserVersion": "145.0.7632.6",
+  "nodeVersion": "v24.21.0",
+  "playwrightVersion": "1.62.1",
+  "harnessSha256": "fb1f6d9141ef301ca01bb3429a6abd1577cf54f6d01774ab1d84eb277ff1e090",
+  "controlNormalization": {
+    "context": "HTML body text",
+    "sourceNulCount": 1,
+    "expectedDomNulCount": 0,
+    "sourceCrCount": 2,
+    "expectedDomCrCount": 0
+  },
+  "inputManifestSha256": "e0638332699b531d8d12757b7d545e9650319d3aba9b60ef8e789bcd58694572",
+  "viewports": [
+    {
+      "viewport": "desktop",
+      "viewportPath": "/private/tmp/iga-cycle09-verification/tests/e2e/synthetic-ai-preview/desktop-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle09-verification/tests/e2e/synthetic-ai-preview/desktop-preview.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "e73293cd4f74043fb7f0ea197ff2660ff9ed92ac0c6093233738395f86484e46",
+      "fullSha256": "588eb851216a0aaf56abdcc8193ca09802d439b8722997e79a1e331f60410477"
+    },
+    {
+      "viewport": "mobile",
+      "viewportPath": "/private/tmp/iga-cycle09-verification/tests/e2e/synthetic-ai-preview/mobile-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle09-verification/tests/e2e/synthetic-ai-preview/mobile-preview.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "b315320ca085e2e6953342f3023c4bd08391a689fc61ff9e5d28597ddaf3ffe3",
+      "fullSha256": "3b8e379794548761028a07b30011c332170e815a24d9980515f7cbb02429b5f0"
+    },
+    {
+      "viewport": "reflow",
+      "viewportPath": "/private/tmp/iga-cycle09-verification/tests/e2e/synthetic-ai-preview/reflow-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle09-verification/tests/e2e/synthetic-ai-preview/reflow-preview.png",
+      "width": 320,
+      "height": 844,
+      "sha256": "efad9aedc12d7decb729c8e03a27017a63b72cee6edb079f47b3ad26380239f8",
+      "fullSha256": "8cb5bf06fc349e0e8d07dc2d1cd88d282e2d2aac7773f50f4395291c15343d1d"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "name": "benign.html",
+      "sha256": "55fd622c1947684578c132f97a7150ae0158865c475087d69aa479a252502806",
+      "previewDigest": "0d7c49c25f11a8a61f76a6af0787f9ccbe9c9b9bfb1c268232835809448fad7e"
+    },
+    {
+      "name": "hostile.html",
+      "sha256": "5908c6b08dd422595965a547e7c7a4a8f131da9ae49f0d8cf15355e0e1cbb21f",
+      "previewDigest": "f2d89f54ef9132a689e66cd42bb3df31e2fb21149b90d30bd6e852b8a5603658"
+    },
+    {
+      "name": "empty.html",
+      "sha256": "55a4c1b54ad136c6b0d04ec52f6e1ae546bae9420451f8f6c4dbd0991e96af10",
+      "previewDigest": "a4982590facec1733b86682c9f841d0755e855b077ce2d4467590e0052472646"
+    },
+    {
+      "name": "conflict.html",
+      "sha256": "55fd622c1947684578c132f97a7150ae0158865c475087d69aa479a252502806",
+      "previewDigest": "0d7c49c25f11a8a61f76a6af0787f9ccbe9c9b9bfb1c268232835809448fad7e"
+    }
+  ],
+  "requests": {
+    "documents": 18,
+    "externalOrNonDocument": 0
+  },
+  "blockedRequests": 0,
+  "errors": 0,
+  "dialogs": 0,
+  "limits": [
+    "Chromium only; supported Windows browser and manual screen-reader acceptance NOT VERIFIED",
+    "Fictional local preview; production sandbox/auth/provider/semantic redaction/model quality NOT VERIFIED",
+    "Chromium HTML body-text parsing removes serialized NUL and normalizes CR/CRLF to LF; canonical typed values and serialized source bytes retain originals"
+  ]
+}

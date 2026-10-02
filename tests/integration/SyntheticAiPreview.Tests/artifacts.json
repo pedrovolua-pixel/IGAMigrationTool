@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "v9-execution-bindings-v1",
+  "status": "PASS",
+  "files": [
+    {
+      "path": "specs/003-health-assessment/synthetic-ai-preview-contract.md",
+      "sha256": "091044a0eca52c12f8419879a26509c3f127131b6ee39faeccd7faeb01ed4ee9"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewBuilder.cs",
+      "sha256": "944fd60053b4deb560fdb1ffa1d73236472c04d11cd0e3bb26263f5f66100990"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewCanonical.cs",
+      "sha256": "a546551b3b75daef11177ce7e5d74bf9b50f1d7e07ac3972cdebb2ef23e1e527"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewContracts.cs",
+      "sha256": "244be0394eeec4b3b26a3845724bbdb2e281fc507d2bd2593f64c3e3f80bfd8f"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewRenderer.cs",
+      "sha256": "309c9345c85b6d3d3e336c9e4629f9b3e1d1de682f1dee79a2c15d5dc902ec00"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj",
+      "sha256": "7b531ebaca9d5f7260ebc9b59feb9d2a742507d3dee1e5d39bae303934aae8db"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/packages.lock.json",
+      "sha256": "8af39d741896c7b887dbdbb611028462778e62f52deae9e2c19f4200dffe0893"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/FixtureJson.cs",
+      "sha256": "6b0f1b2c71e9e424ddba4bb9868b9d83bc85ef787c7f4c93478b579de331b32c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuildResult.cs",
+      "sha256": "71a6f828f1a0e41c35a9e8a1decc70ff9aecb081b883811bef5bbb724801f2d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuilder.cs",
+      "sha256": "972a884e4bc0fef605a975f4e59a1a888c2aba93174eccf283b2c7388e1ae8d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalContracts.cs",
+      "sha256": "2874bf68aa17345d6e585095cdd99069f57ede4b5f24a9f113d44b79fc1d074c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalValidator.cs",
+      "sha256": "26b727544d4a5b70c79c4d366af1d963bee1c8863e6d199a43c1b97a34e5388c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiPacket.cs",
+      "sha256": "6a4d50e62857082c6867589644e4ff8b17fbfd68d4ee3656c31c705cddddb0e6"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/packages.lock.json",
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/desktop-preview.png",
+      "sha256": "588eb851216a0aaf56abdcc8193ca09802d439b8722997e79a1e331f60410477"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/desktop-viewport.png",
+      "sha256": "e73293cd4f74043fb7f0ea197ff2660ff9ed92ac0c6093233738395f86484e46"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/execution.json",
+      "sha256": "b2ed7b26b4d9055e3fac2ddd806b77f1e32b2a6f5e7272efb1a8f5fe3af7799a"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/execution.log",
+      "sha256": "653c6293056cd3a5e4af3f3c340dc5b49b39bb87d3b0e4116b52b63047776b8d"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/format.log",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/mobile-preview.png",
+      "sha256": "3b8e379794548761028a07b30011c332170e815a24d9980515f7cbb02429b5f0"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/mobile-viewport.png",
+      "sha256": "b315320ca085e2e6953342f3023c4bd08391a689fc61ff9e5d28597ddaf3ffe3"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/reflow-preview.png",
+      "sha256": "8cb5bf06fc349e0e8d07dc2d1cd88d282e2d2aac7773f50f4395291c15343d1d"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/reflow-viewport.png",
+      "sha256": "efad9aedc12d7decb729c8e03a27017a63b72cee6edb079f47b3ad26380239f8"
+    },
+    {
+      "path": "tests/e2e/synthetic-ai-preview/verify.mjs",
+      "sha256": "fb1f6d9141ef301ca01bb3429a6abd1577cf54f6d01774ab1d84eb277ff1e090"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/Program.cs",
+      "sha256": "47a429137396e91470a0fe4436f2e6b2beed9266331867ad61c6d7cbde4b9d8b"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj",
+      "sha256": "e8cb6291dc790964c4a153ec2eadbdc07073ef01eff136edade3778e99d2f35d"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.Tests.dll",
+      "sha256": "552e4bc36b65af9c15213767d1268a78bc50982c14a2bb032251de16307961c8"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.dll",
+      "sha256": "adaded44bf03f428d07aa32f6fff2dd7372615fdb39061664a2f5a99e8898fa1"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiValidation.dll",
+      "sha256": "03d87e890e04d0399d41bd686b62bd7e3c0f3c2404d60aef91afcdee15c7908c"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/bind-artifacts.py",
+      "sha256": "76519c378bdf9fb60a86ab927c32fa239daebb5de4311fecb6ab847f3db79f77"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/build.log",
+      "sha256": "215c83a65f41de5f2f02e583e807f4a3b9c21c6295ab1b7a46737e5caf650962"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/execution.json",
+      "sha256": "9bac9015861877971bfc8e8ac8a9ab86fcf49a4ef32896683b6a90983b7548c5"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/execution.log",
+      "sha256": "287e10795246626124d4f213f3986d1b7aef3682f1f773fd486357259b5cf3c4"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/format-write.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/golden-oracle.py",
+      "sha256": "dc6853e0fedc473ec42f6e8cd715db4d4446f60e49e1365c6e19a79922bd6415"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/golden-provenance.json",
+      "sha256": "bcb1305bae63c677ba23bec611067f99a0745dbe9d41fa6e6d8bc65cff99a790"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/html-golden-provenance.json",
+      "sha256": "18a543c6011f6343c1419052719976e5cefa37c3475d016e022cafec1570f7af"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/html-oracle.py",
+      "sha256": "72920413e26e9dc8181cc12cf2a880b28dce6b93d1a814d7ce47821116517a35"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/packages.lock.json",
+      "sha256": "61f9f6e8443f279b178f19e82e2dc81836f76220f4aeae319a19a6692744ef03"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/packet-golden.json",
+      "sha256": "ddfa6758fdf5aead7b315579cf210952cbde8b9ae832e8e755df9a37f58a7fa0"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/packet-input.json",
+      "sha256": "b6fcc1ad68879ba80fcca1e19cfe1f05493d250008abc07ca7ac6e3c92c5e81c"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/preview-golden.html",
+      "sha256": "55fd622c1947684578c132f97a7150ae0158865c475087d69aa479a252502806"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/preview-golden.json",
+      "sha256": "0d7c49c25f11a8a61f76a6af0787f9ccbe9c9b9bfb1c268232835809448fad7e"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/proposal-golden.json",
+      "sha256": "7153e797474d619bc96bcb93581574b1fa7899d0642995bed188b55abd25fef9"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/provider-output.json",
+      "sha256": "f534e84d23a33d575c70f37ba6a772c6b4c4a96516e42510bf2e054b791308fc"
+    },
+    {
+      "path": "tests/integration/SyntheticAiPreview.Tests/restore.log",
+      "sha256": "0b542702c4c9466df4dfdc2473f4e6c3f086666c4a1d29065a89ceabbc565a9f"
+    }
+  ]
+}
