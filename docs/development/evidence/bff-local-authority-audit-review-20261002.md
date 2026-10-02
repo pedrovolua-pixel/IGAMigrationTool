@@ -41,3 +41,8 @@ GitHub initially held checks because the approved pilot base had advanced. Non-a
 ## Hosted precision fixture correction
 
 Linux CI37052401010 passed authority120 but failed the exact positive audit lifecycle boundary. A deterministic seventh fractional digit7 reproduces PostgreSQL canonical timestamp rounding versus Npgsql parameter truncation. Fixture-only `a320876` now derives exact twelve-month ±one-microsecond and stale-restoration time from the persisted PostgreSQL event timestamp. Author81PG/build/format/secrets passed; non-author review confirms all exact early/positive, holds, thirty-day purge, tombstone and restore/replay assertions remain. No SQL/runtime/retention policy changed. Windows and both container jobs passed on the first combined source; the corrected full hosted run is separately bound in execution evidence.
+
+
+## Historical metadata scanner alerts
+
+GitGuardian check110999704920 still flags six Generic High Entropy Secret occurrences in metadata checkpoint02dc25b, at execution-evidence lines96/147/184/208/228/241. Each value was independently recomputed as the exact SHA256 of its named secrets.log Git blob at tested codeba8de41; none is a credential. All223 bindings remain unchanged in corrected path/digest records64d497d, and whole-checkout Gitleaks passes without an exception. The failed02dc Linux secrets gate, later skipped Linux steps, successful Windows/container checks and exact replacement CI are recorded in the execution evidence. Historical provider incidents remain unchanged. Technical/security review must record their false-positive dispositions before any future merge; merge/release remains outside this bounded local approval. This does not affect the unchanged runtime proof or authorize production.
