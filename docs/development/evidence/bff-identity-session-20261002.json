@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "started": "2026-10-01",
-  "recordedUtc": "2026-10-02T11:37:59.166591Z",
+  "recordedUtc": "2026-10-02T11:37:59.165506Z",
   "scope": "Bounded local BFF identity, shared sessions and human authorization foundation; live sign-in disabled",
   "source": {
     "base": "131eaa6fe88be2d06a2f7056561ba115ae9802a8",
