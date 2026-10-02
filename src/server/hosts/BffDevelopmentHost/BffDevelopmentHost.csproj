@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../BffFoundation/BffFoundation.csproj" />
+    <ProjectReference Include="../../modules/IdentitySessions/IdentitySessions.csproj" />
+  </ItemGroup>
+</Project>
