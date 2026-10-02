@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import subprocess
 import tempfile
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[3]
 EXPECTED = {'global.json', 'Directory.Build.props', 'migrations/identity-sessions/001-initial.sql', 'migrations/identity-sessions/002-authentication-context.sql'}
@@ -25,6 +26,12 @@ assert subprocess.run(['python3', str(helper), '--check-inputs-only'], check=Tru
 for tag in ('remote.azurecr.io/image:tag', 'iga-bff-development:../bad', 'iga-bff-development:UPPER'):
     assert subprocess.run(['python3', str(helper), '--check-inputs-only', '--tag', tag], capture_output=True).returncode != 0
 recipe = (ROOT / 'infra/containers/bff-development.Dockerfile').read_text()
+# Every embedded module resource must be explicitly present at compile time.
+for project in (ROOT / 'src/server/modules/IdentitySessions').glob('*.csproj'):
+    for resource in ET.parse(project).getroot().iter('EmbeddedResource'):
+        relative = str((project.parent / resource.attrib['Include']).resolve().relative_to(ROOT))
+        assert relative in allowed and f'COPY {relative} {relative}' in recipe, 'Embedded resource must reach the image compiler'
+
 assert 'USER 1654' in recipe and '--locked-mode' in recipe and '--no-restore' in recipe
 assert 'sha256:${SDK_IMAGE_DIGEST}' in recipe and 'sha256:${RUNTIME_IMAGE_DIGEST}' in recipe
 assert 'ENV ' not in recipe and 'IGA_BFF_' not in recipe and 'COPY . ' not in recipe

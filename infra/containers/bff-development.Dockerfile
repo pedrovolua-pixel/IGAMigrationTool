@@ -8,6 +8,7 @@ COPY src/server/hosts/BffFoundation/ src/server/hosts/BffFoundation/
 COPY src/server/hosts/BffDevelopmentHost/ src/server/hosts/BffDevelopmentHost/
 COPY src/server/modules/IdentitySessions/ src/server/modules/IdentitySessions/
 COPY migrations/identity-sessions/001-initial.sql migrations/identity-sessions/001-initial.sql
+COPY migrations/identity-sessions/002-authentication-context.sql migrations/identity-sessions/002-authentication-context.sql
 RUN dotnet restore src/server/hosts/BffDevelopmentHost/BffDevelopmentHost.csproj --locked-mode \
     && dotnet publish src/server/hosts/BffDevelopmentHost/BffDevelopmentHost.csproj \
         -c Release --no-restore --no-self-contained -o /out /p:UseAppHost=false
