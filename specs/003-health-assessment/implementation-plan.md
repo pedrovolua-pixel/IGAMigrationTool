@@ -615,3 +615,8 @@ The owner requested next tasks after the D01/D02 checkpoint. [The bounded prepar
 ## Approved BFF local authority/audit cycle — 2026-10-02
 
 The repository owner approved P01–P05 and ADR-0009 for local synthetic implementation against immutable reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. [Execution plan](../../plans/active/bff-local-authority-audit-implementation.md) owns implementation, exact P01–P05 verification and independent review. Real provider/Azure/SQL grants, production activation, audit-outage preservation, paid deployment and G1–G9 remain separate. Implementation is RUNNING; no new tests or completion are claimed by this approval record.
+
+
+### P01–P05 local authority/audit execution — 2026-10-02
+
+The owner accepted immutable packet `cacbe37` and ADR-0009 for local synthetic implementation. [The canonical execution cycle](../../plans/active/bff-local-authority-audit-implementation.md) now binds isolated AUTH/AUDIT work, opt-in BFF bridge, fixed host/key seams and independent corrected-source PostgreSQL/HTTPS proof. Local implementation/review checks pass; configured CI and private publication remain closure work. No actual grants, live provider/host, audit outage fallback, paid deployment, full Milestone2 or G1–G9 acceptance follows. [Protected binding intake](../../docs/development/bff-production-bindings-template.json) and [handoff](../../docs/development/bff-local-authority-audit-handoff.md) state the remaining real inputs.

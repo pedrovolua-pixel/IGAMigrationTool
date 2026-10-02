@@ -77,4 +77,11 @@ The same package code source passed all configured existing Linux/Windows 2022/2
 
 ## Production BFF proposal preparation (no runtime evidence)
 
-[The P01–P05 proposal](../../docs/development/bff-production-authority-hosting-proposal.md), [Proposed ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) and [preparation plan](../../plans/active/bff-production-contract-preparation.md) record current primary-source research and non-author consistency review. Documentation/link/secret checks are recorded in the cycle; no new runtime test, migration/grant/provider proof or gate acceptance follows. Matching private publication is confirmed in the preparation cycle. Exact human design decision and protected live bindings remain pending.
+[The P01–P05 proposal](../../docs/development/bff-production-authority-hosting-proposal.md), [Accepted local ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) and [preparation plan](../../plans/active/bff-production-contract-preparation.md) record current primary-source research and non-author consistency review. Documentation/link/secret checks are recorded in the cycle; no new runtime test, migration/grant/provider proof or gate acceptance follows. Matching private publication is confirmed in the preparation cycle. The owner subsequently accepted exact local P01–P05/ADR-0009; protected live bindings remain pending. See the local execution cycle below.
+
+
+## Accepted local BFF authority and audit — 2026-10-02
+
+| Evidence | Source / result | Status and practical limits |
+|---|---|---|
+| P01–P05 local implementation | [Execution bindings](../../docs/development/evidence/bff-local-authority-audit-20261002.json); [non-author review](../../docs/development/evidence/bff-local-authority-audit-review-20261002.md); [handoff](../../docs/development/bff-local-authority-audit-handoff.md) |87 authority unit/120PG;69 audit unit/81PG;258 independent composition;60 actual HTTPS/framework key seams PASS.57-project locked audited restore/whole formatting/warning-free build, all portable units/architecture,254 disabled process,14 image fixtures and secret/input checks PASS. Hosted gates/private publication pending; no milestone/G1–G9/production acceptance. |

@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "bff-local-authority-audit-execution-v1",
+  "date": "2026-10-02",
+  "status": "LOCAL_VERIFIED_HOSTED_AND_PRIVATE_PUBLICATION_PENDING",
+  "approval": {
+    "scope": "P01\u2013P05 and ADR-0009 local synthetic implementation only",
+    "reviewedPacket": "cacbe372ff8a9bc448033e6918308c5f820b4bfd",
+    "recordedAtCommit": "487f6f7"
+  },
+  "source": {
+    "combinedCode": "fd2285ec3317546529ba05321cbae6c16608397b",
+    "base": "7f46fdb339f9e05aa761aafcba7c32d5b74b645c",
+    "authorAuthority": [
+      "1e5ecb4cb7a29d61bb3e48babd147bf0f3dd5c07",
+      "0a7da14861bd75556c7cf1f0ab8ff751a4ef497e"
+    ],
+    "authorAudit": [
+      "64716f6f6859fa75aae456b3314e2a992cba9cfa",
+      "d9173e9f2568323eec4cddadf1089776a205f92a",
+      "970a1ab55aac6f31041985369be7544a2f1a8c6a"
+    ],
+    "bridge": "4202ab8",
+    "independentComposition": "58cb8a7 atop209c4ec and28efef9",
+    "changedFileSha256": {
+      ".github/workflows/azure-application-package.yml": "929687a20cfd6eef07c45435c657c7ae683f6ceed9d0e8b4eae633c49090552a",
+      ".github/workflows/bootstrap-checks.yml": "ec3601a05ea8ae0134d7591544e279fc681ab97a9bb9e84e757c33372ad22658",
+      "IgaMigrationTool.slnx": "7c8967e81a6f853cdab9c364b01c373d88a19ad3d3fee45414633d9e88d56de0",
+      "architecture/README.md": "08a8e0e3921609239c27ea98988ce96f86904467100d9feeee59d3a053646131",
+      "architecture/decisions/ADR-0009-production-bff-authority-and-audit.md": "94898eb5f36503072be82b1cdcc12fc06fa8b03c30e23ba685e476eeaad35baa",
+      "architecture/decisions/README.md": "ac0fb376d4bf7e4d0f3aa5d3ccbc1ce30d2e5f3c067632b08a87661956513e1d",
+      "docs/development/bff-local-authority-audit-handoff.md": "9ed9468e55595e44f3ded88be941060941657b9506791c397be189dcd9f79300",
+      "docs/development/bff-production-authority-hosting-proposal.md": "f3511c9817870c09479b388690ddfbbbf3a3eeac6994c332d9c6b393ba10d96b",
+      "docs/development/bff-production-contract-proposal.md": "582c6173725d5179ec0e0a2d919f6a8c7cdeba40158983effbe8e1e409cbb5c8",
+      "infra/containers/bff-development.Dockerfile": "546cc884e105c5b4ce61e4375cc3c36d17f3bbf34c2da638af9d7f4a7fbc808a",
+      "infra/containers/bff-development.Dockerfile.dockerignore": "afc5731ea7d45c4c59d5f1b318a323fe692b8aff7c2d2ef5b897f1b312b2522f",
+      "migrations/identity-authority/001-authority.sql": "ec59a49b0de6abd5b8532ef7ecdd65f348c25ba04cb6e26b90b83250f1284636",
+      "migrations/identity-authority/README.md": "109634749ea52b35bcf39a167fdb9c5785b99c8f370d90343ac26fbab5a4311a",
+      "migrations/identity-sessions/003-atomic-audit.sql": "62a85f01199eaf37ae1d82585a6a498eb97509ab7e6523e98891b9f166aaf2e2",
+      "migrations/identity-sessions/README.md": "4ae8fe1c67ca45e8a2cb62b1be98a2327ac994cf6746015d05528490b6b25ae4",
+      "plans/active/bff-azure-deployment-preparation.md": "64727382f0c28c89285f9842e891adbe95693925c93db51f1ac30e3b1b40e45c",
+      "plans/active/bff-local-authority-audit-implementation.md": "1fe73e41c4d4a6745f65d8b056265869558a858f00972bd51f743d8b1a421e06",
+      "plans/active/bff-production-contract-preparation.md": "b2f57f8915f6101491306ffb29d325323d25f09d3b7b23e3b0298089b0eaeb75",
+      "specs/003-health-assessment/implementation-plan.md": "375abf83a4c8c84445679ca834fc2ef1572c1ca509886d796e2f22b637306904",
+      "specs/003-health-assessment/status.md": "5933fec170d97aac0fd1680eec98fb731d61efb784026a81d0284318f0bf053f",
+      "specs/003-health-assessment/technical-spec.md": "f9f35c6a894582bce17707e833c3f1a8946cc7f1c426f3f7fc608fd56f471295",
+      "specs/003-health-assessment/test-plan.md": "a721c95b42903db21cbdddae48ec3b51ea6791ce6dc124321841ce5e02a625c7",
+      "src/server/hosts/BffDevelopmentHost/packages.lock.json": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38",
+      "src/server/hosts/BffFoundation/BffFoundation.csproj": "b8b0536294800119d99d63e1603685dcf82ec1b6bedc63530a603936a7faaa6c",
+      "src/server/hosts/BffFoundation/BffHostingContracts.cs": "dfaeff1230d4f2192dab9afe6cabeb88795163dd3df2f272c098226b2880f5d8",
+      "src/server/hosts/BffFoundation/PostgreSqlBffSubjectAuthority.cs": "4ff0512fb68d6b86aa0daff83ff7dec8a8076506148fccbed03efbb9375c9623",
+      "src/server/hosts/BffFoundation/README.md": "1a2be55d3d21086e015ba94c49083025e8c7f2bbedcbed736e2997cf49ab646b",
+      "src/server/hosts/BffFoundation/packages.lock.json": "402e3a15f2c1c920314d94785067882596467d93bc818a57e539ee4842f60a71",
+      "src/server/modules/IdentityAuthority/AuthorityCodec.cs": "960af4f3fe30b0e02b836ac8361118b1e620a4d9fed712311086a42cce08e3ba",
+      "src/server/modules/IdentityAuthority/Contracts.cs": "f1f5dc1986aef570055d1de97cc1bfd9d5cad14df6341bcd8acff99224d901af",
+      "src/server/modules/IdentityAuthority/IdentityAuthority.csproj": "5c1838921f30aff31a26950ea07670758552692e616d3708ca944e55b69cc62b",
+      "src/server/modules/IdentityAuthority/PostgreSqlIdentityAuthority.cs": "2047895b9611b58b0e5b05401ea4259929ddfafa09102cb5a740442c0b1c81de",
+      "src/server/modules/IdentityAuthority/README.md": "53d7138b17e647ef8ca35bb51f39c91259b866fefd02cedc5f00a263b0d55526",
+      "src/server/modules/IdentityAuthority/SyntheticProviderReader.cs": "ca4ecb5070c60358a931c4ccbeb9bcd804e35589b6acc28b10e8a34e11144218",
+      "src/server/modules/IdentityAuthority/packages.lock.json": "337324e07366c0b4a522d98c189b405cef7510e1dc522a02f7d53aefc15a89ef",
+      "src/server/modules/IdentitySessions/AuditIntegrityVerifier.cs": "94ac0c2a3dbe841fc2bc45ef6ae5561589d727c9584e504c096167a20d29fd1f",
+      "src/server/modules/IdentitySessions/ITransactionalSessionAdmissionPolicy.cs": "3ee8ddeb990f2fe8451703a3cf8427e8d4f223a15259b16007a546bd14a3e458",
+      "src/server/modules/IdentitySessions/IdentitySessions.csproj": "13965df7324c102c4e6e025fe89ca4a22f17afe3ffd72a07e84b455d88f2fdef",
+      "src/server/modules/IdentitySessions/PostgreSqlAuditedSessionAuthority.cs": "4a5b651e75c6cde95ea2b29e1e0a9504d241d365e894401118d8cf0930f0ce57",
+      "src/server/modules/IdentitySessions/PostgreSqlSecurityAudit.cs": "b753820c5247b5af22cd6b22151c8ff873abf23fea8a3b7ad79f76185877dedf",
+      "src/server/modules/IdentitySessions/PostgreSqlTicketStore.cs": "ea3904683d438b043fc9f609253467f5d396de2facb47a1a309a0cf0e34caf7e",
+      "src/server/modules/IdentitySessions/README.md": "1f8f12b7655a1edd66fe5b057e879c4f038fec37a4a54d665fa9683c3d4f8246",
+      "src/server/modules/IdentitySessions/SecurityAuditContracts.cs": "c481b90687c98e6753bbc8da8d032141fb82f88451021ca7355acb3611ec8d24",
+      "src/server/modules/IdentitySessions/SessionDatabase.cs": "95cb82b0b8754fc18557785a736eda1a38fd544c5ea80ee9a77ce6c512fcb692",
+      "tests/integration/BffAuthenticationTransport.Tests/packages.lock.json": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38",
+      "tests/integration/BffAuthorityComposition.Tests/BffAuthorityComposition.Tests.csproj": "011da98da3b1c4d30ef6064e33d21b06ae093d36f72333ec327f1a7ddd1b9cc3",
+      "tests/integration/BffAuthorityComposition.Tests/Fixture.cs": "216c19a3779a98224a202b7a3268090bb65c520caaa67b1e4899c6c1d04ff740",
+      "tests/integration/BffAuthorityComposition.Tests/Program.cs": "7bf4bea1e53e1f5e6f95b0c7fc6f29ea71e19be87e45394977d54ac899e36d4a",
+      "tests/integration/BffAuthorityComposition.Tests/README.md": "8306f7e93bf874cc411e58976efb001ebc4b80458544207c63eb163252c8450e",
+      "tests/integration/BffAuthorityComposition.Tests/packages.lock.json": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38",
+      "tests/integration/BffDevelopmentHost/verify_inputs.py": "bd409d12ed2153c72f99d19b601e26e53757ae6c1f728d586f0efa0e1ae0931e",
+      "tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj": "17ebb195d9cd5d275a2cb8c0b0e6a2f266242ab8adaf3aa4bb336537dc3fa0d3",
+      "tests/integration/BffHostingContracts.Tests/Program.cs": "ce6c6d37ccbdf8af58d46135e95283d1bc3ce3235bfa3beb8665d4a590e74f35",
+      "tests/integration/BffHostingContracts.Tests/packages.lock.json": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38",
+      "tests/integration/BffSessionFlow.Tests/packages.lock.json": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38",
+      "tests/integration/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj": "e69ce459278635007febe6c0b51d731f22b2077c38ea45ef1ee1be1f587b47a8",
+      "tests/integration/IdentityAuthority.Tests/Program.cs": "7f03167c27559366914771ca6952c289303fa84099ade7299a6d41fa29214731",
+      "tests/integration/IdentityAuthority.Tests/README.md": "ac08ee9c814cf28de05045f5e56339c85ed8767360702c50e0384b3501784278",
+      "tests/integration/IdentityAuthority.Tests/packages.lock.json": "d08f970c2cae33e982d1e21cc82d94aa8c97ca7f617286d2a33175a4eb61a05c",
+      "tests/integration/SecurityAudit.Tests/Program.cs": "550370ed8a51b29cae4be80bd26d6a11bd17f7d29d586685672d83ad0fca40bf",
+      "tests/integration/SecurityAudit.Tests/README.md": "3dcd0e752b41b9ee3f1efdec3635d2392023eb8da3dc372cc5aaadf50adf7023",
+      "tests/integration/SecurityAudit.Tests/SecurityAudit.Tests.csproj": "05f8f3d320771945f1bd319800cad6ee82899f82e1213b2689b5369102abeb70",
+      "tests/integration/SecurityAudit.Tests/packages.lock.json": "ddb0377a3f79d372d11f7125d27dca25343f7140c2e53b0d4e4d4f3fa05ae057",
+      "tests/unit/BffFoundation.Tests/packages.lock.json": "d17404eea911f7dbacc039b72c57dc0bf7abddfdf2e57c95cfaef0f9622c74ab",
+      "tests/unit/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj": "e69ce459278635007febe6c0b51d731f22b2077c38ea45ef1ee1be1f587b47a8",
+      "tests/unit/IdentityAuthority.Tests/Program.cs": "7380224cdb9cfb0cebbbd1a84ca6f0ea149796dd0f64d5fdd622563d049c1627",
+      "tests/unit/IdentityAuthority.Tests/README.md": "a97f9fcc23449b681aa6c17a08525a121f9c857eb4a844370dd4d67e1bcff0f3",
+      "tests/unit/IdentityAuthority.Tests/packages.lock.json": "d08f970c2cae33e982d1e21cc82d94aa8c97ca7f617286d2a33175a4eb61a05c",
+      "tests/unit/IdentitySessions.Tests/Program.cs": "106263227d80e30af60d5e98513d2e25df4b67a354c93ef20ca149ec6219a8b8"
+    }
+  },
+  "checks": {
+    "authorityUnit": {
+      "result": "PASS",
+      "count": 87,
+      "executor": "author"
+    },
+    "authorityPostgreSql": {
+      "result": "PASS",
+      "count": 120,
+      "executor": "author",
+      "engine": "PostgreSQL 18.4, separate restricted LOGINs"
+    },
+    "auditUnit": {
+      "result": "PASS",
+      "count": 69,
+      "executor": "author"
+    },
+    "auditPostgreSql": {
+      "result": "PASS",
+      "count": 81,
+      "executor": "author"
+    },
+    "existingSessionPostgreSql": {
+      "result": "PASS",
+      "count": 126,
+      "executor": "audit author before SQL-only followups"
+    },
+    "independentCompositionPostgreSql": {
+      "result": "PASS",
+      "count": 258,
+      "executor": "non-author",
+      "exactDependencies": "final authority/audit corrections + bridge4202ab8"
+    },
+    "hostingHttpsFrameworkProtection": {
+      "result": "PASS",
+      "count": 60,
+      "executor": "coordinator and independent reviewer",
+      "limits": "synthetic storage/wrapping, not Azure providers or conditional writes"
+    },
+    "solution": {
+      "result": "PASS",
+      "projects": 57,
+      "lockedAuditedRestore": true,
+      "wholeFormat": true,
+      "releaseBuildWarnings": 0,
+      "releaseBuildErrors": 0
+    },
+    "portableUnitsAndArchitecture": "PASS all integrated unit executables plus7 policy/4 scan architecture checks",
+    "inertHostProcess": {
+      "result": "PASS",
+      "count": 254,
+      "limits": "local actual process; Docker in hosted CI pending"
+    },
+    "imageCollectorFixtures": {
+      "result": "PASS",
+      "count": 14
+    },
+    "exactContainerInputs": "PASS including all embedded migrations and required sources/locks",
+    "secretScan": "PASS Gitleaks8.30.1 no leaks; redacted whole checkout",
+    "gitWhitespace": "PASS",
+    "hostedConfiguredChecks": "PENDING",
+    "independentlyRepeatedAuditPostgreSql": {
+      "result": "PASS",
+      "count": 81,
+      "executor": "non-author repeat of author corpus, separate from own258 checks"
+    }
+  },
+  "review": {
+    "result": "PASS no remaining validated source findings",
+    "record": "bff-local-authority-audit-review-20261002.md",
+    "authorityNonAuthor": "production_hosting_proposal",
+    "auditAndBridgeNonAuthor": "production_identity_proposal",
+    "compositionAndHostNonAuthor": "auth_transport"
+  },
+  "corrections": [
+    "same-transaction authority admission and consistent advisory/row/target/head lock order",
+    "post-head trusted timestamp and deadline resampling",
+    "strict enum/canonical field/byte/bounded64 receipt/event binding",
+    "SESSION_USER stream/action event and receipt authority",
+    "SQL command/provider digest recomputation",
+    "trusted nonfuture lifecycle/receipt/checkpoint timestamps",
+    "provider-callback compatibility under ingress contract",
+    "whole-solution formatting after ineffective include filters",
+    "prepared fixture async lambda and unsupported parameterized multiple statements",
+    "GitHub PR conflict against newly advanced approved pilot base: shared solution and canonical records require additive integration; configured CI not yet runnable"
+  ],
+  "calibration": [
+    "Fractional rounding allegation disproven: PostgreSQL text-to-bigint rejects fractions. Explicit guards/direct negatives retain closed-wire proof.",
+    "Simulated acknowledgment loss deliberately discards successful COMMIT response; actual TCP failure remains NOT VERIFIED."
+  ],
+  "migrations": [
+    "identity-sessions/003-atomic-audit.sql after001/002",
+    "identity-authority/001-authority.sql after sessions003; manual controlled executor only"
+  ],
+  "configuration": "Opt-in bridge and fixed proxy/key seams only. Disabled Program unchanged, no live grants/providers/enrollment/paid session/new retention policy.",
+  "hostedRuns": [],
+  "privateSite": {
+    "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "status": "PENDING",
+    "audience": "existing owner only"
+  },
+  "notVerified": [
+    "live Graph/property/direct app-role/home origin semantics",
+    "licensed users/Conditional Access/federation",
+    "deployed private reachability/DNS/certificate/proxy",
+    "Azure shared keys, SDK conditional writes, managed identities/history/recovery",
+    "actual SQL ownership/grants/migration/negative tests",
+    "retained witness/lifecycle tombstone authority against privileged operator",
+    "durable audit-store-outage failure preservation",
+    "live retention/backup/restore and actual network unknown COMMIT",
+    "image finding/license acceptance/provenance/private pull/restricted evidence promotion",
+    "refreshed priced Azure session",
+    "Milestone2, G1\u2013G9 and production release"
+  ]
+}
