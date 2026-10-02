@@ -80,12 +80,18 @@ def policy(template):
     require(admin["properties"] == {"principalName": parameter("administratorPrincipalName"),
                                      "principalType": parameter("administratorPrincipalType"),
                                      "tenantId": parameter("entraTenantId")}, "Administrator tenant/binding mismatch")
-    require(admin["dependsOn"] == [SERVER_ID], "Administrator must follow server")
+    dns_id = "[resourceId('Microsoft.Network/privateEndpoints/privateDnsZoneGroups', format('{0}-pe', parameters('serverName')), 'default')]"
+    tls_id = "[resourceId('Microsoft.DBforPostgreSQL/flexibleServers/configurations', parameters('serverName'), 'ssl_min_protocol_version')]"
+    require(set(admin["dependsOn"]) == {SERVER_ID, dns_id, tls_id},
+            "Administrator must wait for TLS configuration and private DNS")
     for name, value in (("require_secure_transport", "ON"), ("ssl_min_protocol_version", "TLSv1.2")):
         config = next(r for r in resources if r["type"] == SERVER + "/configurations"
                       and r["name"] == f"[format('{{0}}/{{1}}', parameters('serverName'), '{name}')]")
         require(config["properties"] == {"value": value, "source": "user-override"}, "TLS weakening prohibited")
-        require(config["dependsOn"] == [SERVER_ID], "TLS setting must follow server")
+        expected = {SERVER_ID}
+        if name == "ssl_min_protocol_version":
+            expected.add("[resourceId('Microsoft.DBforPostgreSQL/flexibleServers/configurations', parameters('serverName'), 'require_secure_transport')]")
+        require(set(config["dependsOn"]) == expected, "TLS changes must run in sequence after server")
     endpoint = next(r for r in resources if r["type"] == PE)
     require(endpoint["location"] == "[variables('location')]", "Endpoint region must use locked region")
     require(endpoint["properties"]["subnet"] == {"id": parameter("privateEndpointSubnetId")}, "Wrong PE subnet binding")
@@ -172,6 +178,8 @@ def main():
         (("parameters", "administratorPrincipalType", "allowedValues"), ["Unknown"]),
         (("outputs", "serverFqdn", "value"), "synthetic-forbidden-password"),
         (("resources", 4, "dependsOn"), []),
+        (("resources", 1, "dependsOn"), [SERVER_ID]),
+        (("resources", 3, "dependsOn"), [SERVER_ID]),
     ]
     for path, value in mutations:
         altered = copy.deepcopy(template)

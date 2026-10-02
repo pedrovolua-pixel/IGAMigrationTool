@@ -38,7 +38,9 @@ resource vault 'Microsoft.KeyVault/vaults@2026-02-01' = {
     enabledForTemplateDeployment: false
     enableSoftDelete: true
     softDeleteRetentionInDays: softDeleteRetentionInDays
-    enablePurgeProtection: enablePurgeProtection
+    // Azure rejects explicit false, including on creation. Null leaves the
+    // optional property unset; true remains an explicit irreversible opt-in.
+    enablePurgeProtection: enablePurgeProtection ? true : null
     publicNetworkAccess: 'Disabled'
     networkAcls: {
       bypass: 'None'

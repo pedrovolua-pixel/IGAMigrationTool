@@ -92,6 +92,9 @@ resource administrator 'Microsoft.DBforPostgreSQL/flexibleServers/administrators
     principalType: administratorPrincipalType
     tenantId: entraTenantId
   }
+  // Configuration changes can temporarily make Entra principal operations
+  // unavailable. Wait for TLS configuration and the private DNS path first.
+  dependsOn: [minimumTls, dnsZoneGroup]
 }
 
 resource secureTransport 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@2025-08-01' = {
@@ -110,6 +113,7 @@ resource minimumTls 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@20
     value: 'TLSv1.2'
     source: 'user-override'
   }
+  dependsOn: [secureTransport]
 }
 
 resource privateEndpoint 'Microsoft.Network/privateEndpoints@2025-05-01' = {

@@ -70,7 +70,7 @@ def controls(kind):
             (('properties', 'enabledForTemplateDeployment'), False),
             (('properties', 'enableSoftDelete'), True),
             (('properties', 'softDeleteRetentionInDays'), "[parameters('softDeleteRetentionInDays')]"),
-            (('properties', 'enablePurgeProtection'), "[parameters('enablePurgeProtection')]"),
+            (('properties', 'enablePurgeProtection'), "[if(parameters('enablePurgeProtection'), true(), null())]"),
             (('properties', 'networkAcls', 'bypass'), 'None'),
             (('properties', 'networkAcls', 'defaultAction'), 'Deny'),
             (('properties', 'networkAcls', 'ipRules'), []),
@@ -194,6 +194,11 @@ def main():
                       lambda t: resource(t, ENDPOINT)['properties']['privateLinkServiceConnections'].append({'properties': {}}),
                       'additional private connection')
         count += 2
+    for literal in [False, True]:
+        expect_denied(vault, lambda t: validate_service(t, 'vault'),
+                      lambda t, v=literal: resource(t, VAULT)['properties'].update({'enablePurgeProtection': v}),
+                      'invalid false or unapproved unconditional purge protection')
+        count += 1
     for name in ['tenantId', 'softDeleteRetentionInDays', 'enablePurgeProtection']:
         expect_denied(vault, lambda t: validate_service(t, 'vault'),
                       lambda t, n=name: t['parameters'][n].update({'defaultValue': 'unsafe'}), 'unapproved default ' + name)

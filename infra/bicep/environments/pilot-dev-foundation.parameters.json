@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "namingSuffix": {
+      "value": "dev1001pv"
+    },
+    "virtualNetworkName": {
+      "value": "vnet-iga-pilot-dev"
+    },
+    "containerAppsSubnetName": {
+      "value": "snet-container-apps"
+    },
+    "privateEndpointSubnetName": {
+      "value": "snet-private-endpoints"
+    },
+    "infrastructureResourceGroupName": {
+      "value": "rg-iga-pilot-dev-aca-eastus2"
+    },
+    "databaseAdministratorType": {
+      "value": "User"
+    },
+    "databaseBackupRetentionDays": {
+      "value": 7
+    },
+    "vaultSoftDeleteRetentionDays": {
+      "value": 7
+    },
+    "vaultPurgeProtection": {
+      "value": false
+    },
+    "telemetryRetentionDays": {
+      "value": 30
+    },
+    "dailyIngestionCapGb": {
+      "value": 1
+    }
+  }
+}
