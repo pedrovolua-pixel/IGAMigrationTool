@@ -194,7 +194,7 @@ def validate_database(version_info, cache, version, collected):
             'metadata': metadata, 'freshnessPolicy': 'NOT_VERIFIED'}
 
 
-def validate_spdx(sbom, version, collected):
+def validate_spdx(sbom, version, collected, image_id):
     require(isinstance(sbom, dict) and sbom.get('spdxVersion') == 'SPDX-2.3'
             and sbom.get('SPDXID') == 'SPDXRef-DOCUMENT', 'unsupported-sbom-schema')
     creation = sbom.get('creationInfo', {})
@@ -206,6 +206,25 @@ def validate_spdx(sbom, version, collected):
     require(all(isinstance(p.get('SPDXID'), str) and p['SPDXID'].startswith('SPDXRef-')
                 for p in packages), 'invalid-sbom-package')
     require(len({p['SPDXID'] for p in packages}) == len(packages), 'duplicate-sbom-package')
+    # v0.73.0's encoder copies the validated report ImageID onto the container root;
+    # its SPDX producer links DOCUMENT DESCRIBES that root and emits this annotation.
+    # This is structural subject binding, not verified build provenance or completeness.
+    require(DIGEST.fullmatch(image_id) is not None, 'invalid-sbom-expected-image')
+    relationships = sbom.get('relationships')
+    require(isinstance(relationships, list)
+            and all(isinstance(r, dict) for r in relationships), 'missing-sbom-relationships')
+    described = [r for r in relationships if r.get('relationshipType') == 'DESCRIBES']
+    require(len(described) == 1 and described[0].get('spdxElementId') == 'SPDXRef-DOCUMENT',
+            'missing-or-duplicate-sbom-root')
+    roots = [p for p in packages if p.get('primaryPackagePurpose') == 'CONTAINER']
+    require(len(roots) == 1 and described[0].get('relatedSpdxElement') == roots[0]['SPDXID'],
+            'wrong-sbom-container-root')
+    annotations = roots[0].get('annotations')
+    require(isinstance(annotations, list)
+            and all(isinstance(a, dict) and isinstance(a.get('comment'), str)
+                    for a in annotations), 'missing-sbom-image-annotation')
+    identifiers = [a['comment'] for a in annotations if a['comment'].startswith('ImageID:')]
+    require(identifiers == ['ImageID: ' + image_id], 'sbom-image-mismatch')
     return len(packages)
 
 
@@ -256,7 +275,7 @@ def collect(args):
         sbom_path = output / 'sbom.spdx.json'
         run(common + ['convert', '--format', 'spdx-json', '--output', str(sbom_path), str(report_path)])
         collected = datetime.now(timezone.utc)
-        sbom_count = validate_spdx(read_json(sbom_path), version, collected)
+        sbom_count = validate_spdx(read_json(sbom_path), version, collected, args.image)
         require(digest(report_path) == report_hash, 'inventory-changed-during-conversion')
         require(digest(cache / 'db/trivy.db') == database['databaseSha256']
                 and digest(cache / 'db/metadata.json') == database['metadataSha256'],

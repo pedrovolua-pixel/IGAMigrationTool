@@ -37,7 +37,12 @@ def spdx():
     return {'spdxVersion': 'SPDX-2.3', 'SPDXID': 'SPDXRef-DOCUMENT',
             'creationInfo': {'created': '2026-10-02T11:00:00Z',
                              'creators': ['Tool: trivy-' + VERSION]},
-            'packages': [{'SPDXID': 'SPDXRef-SYNTHETIC'}]}
+            'packages': [{'SPDXID': 'SPDXRef-SYNTHETIC',
+                          'primaryPackagePurpose': 'CONTAINER',
+                          'annotations': [{'comment': 'ImageID: ' + ID}]}],
+            'relationships': [{'spdxElementId': 'SPDXRef-DOCUMENT',
+                               'relationshipType': 'DESCRIBES',
+                               'relatedSpdxElement': 'SPDXRef-SYNTHETIC'}]}
 
 
 def metadata():
@@ -118,14 +123,56 @@ class CollectionTests(unittest.TestCase):
             self.deny(collector.validate_database, data, cache, VERSION, NOW)
 
     def test_spdx_invalid_empty_wrong_tool_future(self):
-        self.assertEqual(collector.validate_spdx(spdx(), VERSION, NOW), 1)
+        self.assertEqual(collector.validate_spdx(spdx(), VERSION, NOW, ID), 1)
         for delta in [{'spdxVersion': 'SPDX-1.0'}, {'packages': []},
                       {'packages': [{'SPDXID': '../escape'}]},
                       {'packages': [{'SPDXID': 'SPDXRef-DUP'}, {'SPDXID': 'SPDXRef-DUP'}]},
                       {'creationInfo': {'created': '2027-01-01T00:00:00Z',
                                         'creators': ['Tool: trivy-' + VERSION]}},
                       {'creationInfo': {'created': '2026-10-02T11:00:00Z', 'creators': []}}]:
-            self.deny(collector.validate_spdx, {**spdx(), **delta}, VERSION, NOW)
+            self.deny(collector.validate_spdx, {**spdx(), **delta}, VERSION, NOW, ID)
+
+    def test_spdx_rejects_unrelated_missing_wrong_and_duplicate_image_roots(self):
+        import copy
+        valid = spdx()
+        cases = []
+        unrelated = copy.deepcopy(valid)
+        unrelated['packages'][0]['annotations'][0]['comment'] = 'ImageID: sha256:' + '4' * 64
+        cases.append(unrelated)
+        missing_root = copy.deepcopy(valid)
+        missing_root.pop('relationships')
+        cases.append(missing_root)
+        missing_describe = copy.deepcopy(valid)
+        missing_describe['relationships'] = []
+        cases.append(missing_describe)
+        wrong_describe = copy.deepcopy(valid)
+        wrong_describe['relationships'][0]['relatedSpdxElement'] = 'SPDXRef-UNRELATED'
+        cases.append(wrong_describe)
+        wrong_source = copy.deepcopy(valid)
+        wrong_source['relationships'][0]['spdxElementId'] = 'SPDXRef-UNRELATED'
+        cases.append(wrong_source)
+        wrong_purpose = copy.deepcopy(valid)
+        wrong_purpose['packages'][0]['primaryPackagePurpose'] = 'LIBRARY'
+        cases.append(wrong_purpose)
+        duplicate_describe = copy.deepcopy(valid)
+        duplicate_describe['relationships'] *= 2
+        cases.append(duplicate_describe)
+        duplicate_container = copy.deepcopy(valid)
+        duplicate_container['packages'].append({**duplicate_container['packages'][0],
+                                                'SPDXID': 'SPDXRef-SECOND'})
+        cases.append(duplicate_container)
+        missing_id = copy.deepcopy(valid)
+        missing_id['packages'][0]['annotations'] = []
+        cases.append(missing_id)
+        duplicate_id = copy.deepcopy(valid)
+        duplicate_id['packages'][0]['annotations'] *= 2
+        cases.append(duplicate_id)
+        ambiguous_id = copy.deepcopy(valid)
+        ambiguous_id['packages'][0]['annotations'].append({'comment': 'ImageID: sha256:' + '4' * 64})
+        cases.append(ambiguous_id)
+        for index, bad in enumerate(cases):
+            with self.subTest(case=index):
+                self.deny(collector.validate_spdx, bad, VERSION, NOW, ID)
 
     def test_binary_digest_rejects_fake_scanner_and_symlink(self):
         lock = collector.read_json(collector.LOCK)
