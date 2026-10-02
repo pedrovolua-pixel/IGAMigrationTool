@@ -3,5 +3,6 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="../../../src/server/modules/IdentityAuthority/IdentityAuthority.csproj" />
+    <ProjectReference Include="../../../src/server/hosts/BffFoundation/BffFoundation.csproj" />
   </ItemGroup>
 </Project>

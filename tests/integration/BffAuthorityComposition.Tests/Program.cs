@@ -2,6 +2,7 @@ using System.Text.Json;
 using IdentityAuthority;
 using IdentityPolicy;
 using IdentitySessions;
+using IgaMigration.BffFoundation;
 using Microsoft.AspNetCore.DataProtection;
 using Npgsql;
 
@@ -59,6 +60,15 @@ try
     await first.RemoveAsync(rotated!); await second.RemoveAsync(rotated!);
     Check(await first.RetrieveAsync(rotated!) is null && await second.RetrieveAsync(otherKey) is not null, "Local revoke preserves another subject.");
     var snapshot = (await f.RuntimeAuthority.ReadAsync(a))!;
+    var bridge = new PostgreSqlBffSubjectAuthority(f.RuntimeAuthority, f.Clock);
+    var admission = await bridge.CheckAsync(new(a.TenantId, a.ObjectId), CancellationToken.None);
+    Check(admission is
+    {
+        Active: true, Assigned: true, ProviderStatusValid: true, IsGuest: false, OrganizationalGuestOriginVerified: false,
+        OrganizationalGuestHomeTenantId: null
+    } && admission.SecurityVersion == v && admission.CoarseRoles.SequenceEqual(["PilotConsultant"])
+        && admission.SignInValidFromUtc == DateTimeOffset.UnixEpoch, "Opt-in BFF bridge projects only current internal admission and exact coarse role.");
+    Check(await bridge.CheckAsync(new(Guid.NewGuid(), a.ObjectId), CancellationToken.None) is null, "BFF bridge rejects cross-tenant subject substitution.");
     Check(f.RuntimeAuthority.ExactAssignments(snapshot, f.Scope, "normalized", f.Clock.GetUtcNow()).Length == 1,
         "Exact complete scope/category projects assignment.");
     foreach (var wrong in new[] { f.Scope with { CustomerId = Guid.NewGuid() }, f.Scope with { ProjectId = Guid.NewGuid() },
@@ -73,6 +83,8 @@ try
     var cutoffKey = await first.StoreAsync(f.Ticket(cutoffSubject, await f.Version(cutoffSubject), original));
     await f.Publish(cutoffSubject, f.Clock.GetUtcNow().AddMinutes(-1));
     Check(await second.RetrieveAsync(cutoffKey) is null, "Resource cutoff invalidates original authentication.");
+    Check((await bridge.CheckAsync(new(cutoffSubject.TenantId, cutoffSubject.ObjectId), CancellationToken.None))!.SignInValidFromUtc
+        == f.Clock.GetUtcNow().AddMinutes(-1), "Internal BFF admission projects current resource cutoff.");
     var cutoffVersion = await f.Version(cutoffSubject);
     await Refused(() => first.StoreAsync(f.Ticket(cutoffSubject, cutoffVersion, original)), "New ticket cannot bypass resource cutoff with old authentication.");
 
@@ -109,6 +121,7 @@ try
     await Refused(() => f.AdminAuthority.ExecuteAsync(conflict), "Reused operation with different digest denied.");
     Check(await Counts() == committedCounts, "Conflicting receipt cannot change data.");
     await Refused(() => first.StoreAsync(f.Ticket(a, v)), "Suspended subject cannot issue old-version session.");
+    Check(await bridge.CheckAsync(new(a.TenantId, a.ObjectId), CancellationToken.None) is null, "BFF bridge denies suspended current authority.");
     Check(await second.RetrieveAsync(otherKey) is not null, "Authority mutation preserves other subject.");
     var concurrentSubject = await f.Enroll();
     var concurrentSnapshot = (await f.RuntimeAuthority.ReadAsync(concurrentSubject))!;
@@ -143,8 +156,8 @@ try
     var issuances = Enumerable.Range(0, 8).Select(_ => RacingIssue()).ToArray();
     var suspending = f.AdminAuthority.ExecuteAsync(f.Command(lockSubject, lockSnapshot.Enrollment.Revision, AuthorityOperation.SuspendSubject));
     await Task.WhenAll(issuances.Cast<Task>().Append(suspending)).WaitAsync(TimeSpan.FromSeconds(8));
-    foreach (var issued in issuances.Select(t => t.Result).OfType<string>())
-        Check(await second.RetrieveAsync(issued) is null, "Concurrent authority change invalidates every issued old-version session.");
+    var issuedTickets = await Task.WhenAll(issuances.Select(t => t.Result).OfType<string>().Select(issued => second.RetrieveAsync(issued)));
+    Check(issuedTickets.All(t => t is null), "Concurrent authority change invalidates every issued old-version session.");
     Check((await f.RuntimeAuthority.ReadAsync(lockSubject))!.SecurityVersion == lockSnapshot.SecurityVersion + 1,
         "Opposing authority and session operations complete without lock-order deadlock.");
 
@@ -172,7 +185,7 @@ try
         await Refused(() => Fixture.Sql(f.Runtime, sql), "Runtime bypass refused: " + sql);
     await Refused(() => Fixture.Sql(f.Publisher, "SELECT identity_authority.apply_command('{}')"), "Provider cannot administer subjects.");
     await Refused(() => Fixture.Sql(f.Administrator, "SELECT identity_authority.publish_provider('{}',NULL,NULL,'x')"), "Administrator cannot publish provider state.");
-    await Refused(() => Fixture.Sql(f.Runtime, "SELECT security_audit.issue_ticket($1,$2,$3,$4,$5,$6,$7,$8,NULL)", new string('b', 64), Guid.NewGuid(),
+    await Refused(async () => await Fixture.Sql(f.Runtime, "SELECT security_audit.issue_ticket($1,$2,$3,$4,$5,$6,$7,$8,NULL)", new string('b', 64), Guid.NewGuid(),
         other.TenantId, other.ObjectId, await f.Version(other), f.Clock.GetUtcNow(), f.Clock.GetUtcNow().AddHours(1), new byte[16]), "NULL operation cannot bypass issue audit.");
     var unmatchedBefore = await Counts();
     await Refused(async () =>
@@ -247,6 +260,10 @@ try
     var externalKey = await first.StoreAsync(f.Ticket(external, externalSnapshot.SecurityVersion, original));
     await f.Publish(external, homeCutoff: f.Clock.GetUtcNow().AddMinutes(-1));
     Check(await second.RetrieveAsync(externalKey) is null, "Home cutoff denies original session even with valid resource cutoff.");
+    var externalAdmission = await bridge.CheckAsync(new(external.TenantId, external.ObjectId), CancellationToken.None);
+    Check(externalAdmission is { IsGuest: true, GuestOnboardingValid: true, OrganizationalGuestOriginVerified: true }
+        && externalAdmission.OrganizationalGuestHomeTenantId == externalSnapshot.Enrollment.HomeTenantId
+        && externalAdmission.SignInValidFromUtc == f.Clock.GetUtcNow().AddMinutes(-1), "External Member BFF projection requires reviewed external lifecycle and max home/resource cutoff.");
     var regressingHome = await f.Observation(external, homeCutoff: DateTimeOffset.UnixEpoch);
     await Refused(() => f.ProviderAuthority.PublishAsync(regressingHome, Guid.NewGuid()), "Home cutoff cannot regress and resurrect original authentication.");
     Check(await second.RetrieveAsync(externalKey) is null, "Rejected home regression preserves session denial.");

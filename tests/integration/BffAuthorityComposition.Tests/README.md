@@ -24,4 +24,8 @@ The command deliberately resets only its dedicated database schemas. It refuses 
 
 ## Evidence limits
 
-Execution results and immutable source commits will be recorded after author checkpoints are integrated. A discarded successful response followed by receipt lookup represents simulated acknowledgment loss; it does not prove a real network failure during COMMIT. Live provider adapters, Azure bindings and permissions, independently retained audit witness, operational outage preservation, retention jobs, backup restore, and production activation are not verified here.
+Compiled checkpoint: AUDIT `64716f6`, AUTH `1e5ecb4`, and BFF bridge `4202ab8`. The independently executed fixture passed 252 assertions in the dedicated reviewer-owned PostgreSQL18.4 database. Locked audited restore and Release build passed with zero warnings/errors. Required subsequent author corrections still need integration and a final rerun; this checkpoint is not final review completion.
+
+The fixture deliberately throws a timeout after an actual successful COMMIT, then looks up the internal receipt and retries the exact command. This proves metadata-only reconciliation without another version/event or credential replay; it does not prove a real network failure during COMMIT. Live provider adapters, Azure bindings and permissions, independently retained audit witness, operational outage preservation, retention jobs, backup restore, and production activation are not verified here.
+
+The initial authored fixture attempts found an await in a nonasync lambda and a parameterized multi-statement PostgreSQL setup error; both were corrected before the passing run. The separate hosting fixture initially failed clean locked restore because its normal SDK project lacked an explicit ASP.NET framework reference; coordinator `4dbb784` corrected it. Independent hosting clean restore/build/format and all60 actual HTTPS/framework data-protection checks passed after that correction.

@@ -103,7 +103,10 @@ sealed class Fixture : IAsyncDisposable
             GRANT EXECUTE ON FUNCTION identity_authority.publish_provider(jsonb,jsonb,uuid,text) TO icom_provider;
             """);
         await Sql(Operator, "INSERT INTO identity_authority.writer_bindings VALUES('icom_admin','Administrator',$1,$2),('icom_provider','Provider',$1,$2),('icom_runtime','Reader',$1,$2)", Actor.TenantId, Actor.ObjectId);
-        await Sql(Operator, "INSERT INTO identity_authority.customers VALUES($1); INSERT INTO identity_authority.projects VALUES($1,$2); INSERT INTO identity_authority.environments VALUES($1,$2,$3); INSERT INTO identity_authority.assessments VALUES($1,$2,$3,$4)", Scope.CustomerId, Scope.ProjectId, Scope.EnvironmentId, Scope.AssessmentId);
+        await Sql(Operator, "INSERT INTO identity_authority.customers VALUES($1)", Scope.CustomerId);
+        await Sql(Operator, "INSERT INTO identity_authority.projects VALUES($1,$2)", Scope.CustomerId, Scope.ProjectId);
+        await Sql(Operator, "INSERT INTO identity_authority.environments VALUES($1,$2,$3)", Scope.CustomerId, Scope.ProjectId, Scope.EnvironmentId);
+        await Sql(Operator, "INSERT INTO identity_authority.assessments VALUES($1,$2,$3,$4)", Scope.CustomerId, Scope.ProjectId, Scope.EnvironmentId, Scope.AssessmentId);
         await using (var binding = Operator.CreateCommand("INSERT INTO identity_authority.role_bindings VALUES($1,$2)"))
         { binding.Parameters.AddWithValue(Actor.TenantId); binding.Parameters.AddWithValue(NpgsqlDbType.Jsonb, AuthorityCodec.Serialize(Roles)); await binding.ExecuteNonQueryAsync(); }
         var b = Audit.Binding;
