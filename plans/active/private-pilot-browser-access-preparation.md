@@ -1,10 +1,10 @@
 # Private pilot browser access: preparation and proposed execution
 
-Status: PREPARATION COMPLETE — recommended design awaits owner decision; implementation/live tests not started
+Status: LOCAL IMPLEMENTATION RUNNING — ADR/design and PA01–PA02 local templates approved; live deployment/tests gated
 Owner: Azure/BFF coordinator
 Date: 2026-10-02
 Approved product/technical basis: [feature003](../../specs/003-health-assessment/product-spec.md), [technical specification](../../specs/003-health-assessment/technical-spec.md), [test plan](../../specs/003-health-assessment/test-plan.md), accepted ADR-0004/0009.
-New boundary: [Proposed ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md).
+New boundary: [Accepted bounded ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md).
 
 ## Completed authorized preparation
 
@@ -12,7 +12,7 @@ The owner replaces the personal external customer request with an organizational
 
 Current Microsoft docs and public candidate rates were reviewed. The recommendation is one owner-operated private Windows desktop through free Bastion Developer in the same VNet. Candidate source, exact rates and limits are in [evidence](../../docs/development/evidence/private-browser-access-preparation-20261002.json). No Azure operation, new runtime behavior, VM credential or policy change occurred. Initial independent read-only review confirms this is an owner-operated sequential synthetic test candidate, not simultaneous customer access or an RDS/customer desktop service. It requires local OS login, separate administrative/routine identities, Developer-source NSG proof, explicit desktop egress, app VNet ingress, DNS/cert trust and complete costs. Review performed no runtime/Azure tests; actual proposed packet receives final consistency review below.
 
-## Proposed technical scope after ADR acceptance
+## Approved bounded local technical scope
 
 A distinct nondelegated workstation subnet/NIC/NSG, one Standard_B2s Windows VM with supported official OS/browser image and E10 LRS single-writer OS disk, Bastion Developer attachment to the same pilot VNet, private environment-default-domain DNS and the approved private BFF endpoint. All protected parameters require explicit values. No public VM IP, general SSH/RDP rule, peering, VPN, public app ingress, customer Azure role, broad service grants or automatic paid-tier fallback.
 
@@ -30,7 +30,7 @@ The BFF app requires VNet-scope ingress in an internal environment; existing boo
 - Actual external account home organization/work-school origin; exact immutable tenant/object IDs, sponsor, customer/project/environment assignment, Customer reviewer or Executive scope, lifecycle and MFA/CA proof. No email/UPN authorization keys.
 - Exact build/private publish/pull, deployment artifacts, trusted proxy/key/audit bindings and refreshed priced session/ownership/disposal inventory, named cleanup operator and enforceable session-end deallocation/disposal mechanism (not guest OS shutdown); no blanket reuse of historical budget/session.
 
-## Proposed bounded implementation packets
+## Bounded implementation packets
 
 | Packet | Owner/path | Requirement mapping | Completion evidence |
 |---|---|---|---|
@@ -38,7 +38,7 @@ The BFF app requires VNet-scope ingress in an internal environment; existing boo
 | PA02: browser DNS/network proof | Coordinator owns shared optional composition and operations docs; separate private input file | ADR-0004, IP-HAS-002/003, SEC-PILOT-008/009 | Environment-derived DNS/cert/host checks, VM-only app443 reachability and denied protected data/worker endpoints; exact validate/what-if and inventory |
 | PA03: independently reviewed disposable session | Coordinator/operator with separate approval; independent verifier read-only | G1/G3/G7, TP-HAS-009/014/020 | Quota/current rate/delayed-charge checks, exact total priced approval, allowed portal/OS connection, denied external RDP/app and unauthorized callers, preservation and exact cleanup |
 
-Only after attributed approval, freeze common base and isolate writing workers with explicit path ownership. Coordinator integrates non-author review, canonical evidence and private board. Agent review never replaces owner decision or acceptance. Use fewer workers for dependent DNS/composition changes.
+The repository owner accepted the reviewed design/local template packet on2026-10-02: “Move forward with bastion but plan Https portal with login after pilot is done.” Freeze the approval/work packet checkpoint and isolate writing workers with explicit path ownership. Coordinator integrates non-author review, canonical evidence and private board. Agent review never replaces owner decision or acceptance. Use fewer workers for dependent DNS/composition changes.
 
 ## Test and acceptance matrix — all runtime cases NOT VERIFIED
 
@@ -61,11 +61,24 @@ Select fresh names/parameters after review; preview only exact planned scope. Pr
 
 ## Completion and human dependency
 
-Preparation may close when sanitized inputs/options/current rates and independent review are recorded and document/secret checks execute. Design remains Proposed; new access/spending requires exact owner decision before implementation/provisioning. Live G1/G3/G7, Milestone2, image promotion, protected customer tests, production release and simultaneous customer access are NOT VERIFIED.
+Preparation may close when sanitized inputs/options/current rates and independent review are recorded and document/secret checks execute. Design and local templates are accepted; exact access/spending inputs and the full composed session require a fresh owner decision before provisioning. Live G1/G3/G7, Milestone2, image promotion, protected customer tests, production release and simultaneous customer access are NOT VERIFIED.
 
 The private board update remains blocked by automatic approval review of the official publishing helper credential/network path. Exact publishing approval was requested separately and is not inferred from Start work. Last confirmed BFF board snapshot4346e0f is stale for this private-access change; canonical records are authoritative.
 
 
 ## Executed preparation review and checks
 
-Read-only non-author auth_transport review of packet checkpoint564e42e found one monthly-cost wording error:744hours Windows compute is USD36.9024, plus USD9.60 disk = USD46.5024 before operations/foundation. The sentence was corrected without any meter, runtime, template or decision change. Review otherwise found no unsafe selected default or deployment-readiness claim; exact input/live boundaries remain blocked. Coordinator executed changed JSON parsing,193 changed Markdown local-target checks, supplied-account exclusion and documentation-only scope checks, rate arithmetic, git diff --check and whole-checkout Gitleaks8.30.1 with no leaks. Final local checks are repeated after the wording/evidence correction. No infrastructure compilation/build or runtime test is claimed for this documentation-only proposal. Preparation is COMPLETE; ADR/design acceptance, templates and all live cases remain pending.
+Read-only non-author auth_transport review of packet checkpoint564e42e found one monthly-cost wording error:744hours Windows compute is USD36.9024, plus USD9.60 disk = USD46.5024 before operations/foundation. The sentence was corrected without any meter, runtime, template or decision change. Review otherwise found no unsafe selected default or deployment-readiness claim; exact input/live boundaries remain blocked. Coordinator executed changed JSON parsing,193 changed Markdown local-target checks, supplied-account exclusion and documentation-only scope checks, rate arithmetic, git diff --check and whole-checkout Gitleaks8.30.1 with no leaks. Final local checks are repeated after the wording/evidence correction. No infrastructure compilation/build or runtime test is claimed for this documentation-only proposal. Preparation is COMPLETE at checkpoint c02c6ba; the later owner approval below authorizes local templates, while all live cases remain pending.
+
+
+## Accepted local execution ledger — 2026-10-02
+
+PA01 RUNNING: one isolated writing worker owns only the new workstation/Bastion module and `tests/infrastructure/PrivateBrowserAccess/`. Coordinator owns shared composition, workflow, DNS module, operations instructions and all canonical records. Non-author read-only review is required before integration.
+
+PA02 RUNNING (local portion only): optional standalone access composition references an existing approved VNet/NAT/internal environment; derive browser DNS from actual environment metadata. Do not modify/replay the disposed foundation, bootstrap ingress or BFF host. Parameter examples remain deliberately incomplete and must be rejected before live deployment. Provider/what-if/effective-network/TLS/runtime evidence remain NOT VERIFIED.
+
+Required local tests: pinned Bicep0.47.16 build/lint, compiled-resource policy plus unsafe mutations, protected input validation with synthetic fixtures, affected existing infrastructure checks, JSON/link checks, whole-checkout Gitleaks8.30.1 and diff scope. No public addresses, paid Bastion fallback, customer roles, VM extensions/credentials in outputs or broad outbound rules. Exact Developer source and necessary outbound IP/port inputs have no defaults; require review proof and reject broad rules. An input approval flag is not provider/network evidence.
+
+PA03 BLOCKED FOR LIVE: exact inputs, official pinned image/capacity, owner credential handoff, complete quoted session and cleanup approval, deployable BFF composition and live identity/key/audit gates. No Azure write is authorized by local template verification.
+
+The [post-pilot HTTPS portal plan](post-pilot-https-portal.md) is deferred until the pilot has an attributed completion decision; implementation/public exposure requires a separately reviewed product/technical/test packet and ADR.

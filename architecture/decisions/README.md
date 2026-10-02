@@ -23,6 +23,6 @@ ADRs are append-only decision history. Supersede an accepted ADR with a new ADR 
 - [`ADR-0009-production-bff-authority-and-audit.md`](./ADR-0009-production-bff-authority-and-audit.md) — versioned product/provider authority and atomic payload-free session/authority audit; accepted for local P01–P05 synthetic implementation on2026-10-02. No live access or deployment authorization.
 
 
-## Proposed private development browser access
+## Accepted bounded private development access
 
-- [ADR-0010-private-pilot-browser-access.md](ADR-0010-private-pilot-browser-access.md) — proposed owner-operated private test desktop through Bastion Developer; no design/access/spending acceptance or live gate evidence.
+- [ADR-0010-private-pilot-browser-access.md](ADR-0010-private-pilot-browser-access.md) — accepted owner-operated private test desktop design and local templates through Bastion Developer on2026-10-02; exact Azure access/spending and live gates remain separate.

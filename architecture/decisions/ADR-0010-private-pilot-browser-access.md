@@ -1,6 +1,6 @@
 # ADR-0010: Private pilot browser access for bounded development
 
-Status: Proposed — technical/security owner decision required
+Status: Accepted for bounded local development design and templates; live deployment remains gated
 Date: 2026-10-02
 Decision owners: Repository owner; platform/network/identity/operations reviewers
 
@@ -39,7 +39,7 @@ Dedicated paid Bastion adds richer features but needs its own exact reviewed bou
 
 ## Decision
 
-**Recommended candidate: A for initial owner-operated development. Not accepted yet.** No subnet/CIDR, NSG source, VM credential, Azure grant or resource is authorized by the recommendation. The owner supplied private-hosting intent and an organizational external account request; the new operational workstation/access boundary still requires this concrete review under AGENTS.md. No production customer delivery or simultaneous customer testing claim follows.
+**Accepted: A for initial owner-operated sequential synthetic development and bounded local templates.** On 2026-10-02 the repository owner said “Move forward with bastion but plan Https portal with login after pilot is done,” accepting the previously presented ADR and local implementation/test packet. Exact subnet/CIDR, Developer source, egress destinations, image version, credentials, Azure grants and paid deployment remain separately gated. No production customer delivery or simultaneous customer testing claim follows. The post-pilot HTTPS portal is a deferred planning request, not approval to expose this pilot.
 
 ## Proposed connection sequence
 
@@ -89,6 +89,8 @@ After exact design acceptance, add a separate optional VM/Bastion/browser-DNS te
 
 ## Approval
 
-Accepted by: Pending
-Date: Pending
-Scope requested: bounded design/technical/test review only; templates follow acceptance. Exact Azure access actions, credentials, paid session, live sign-in, production release and G1 acceptance remain separate.
+Accepted by: Repository owner, explicit instruction quoted under Decision
+Date: 2026-10-02
+Scope accepted: bounded owner-operated development design and local PA01–PA02 template/test implementation. Exact Azure access actions, credentials, paid session, live sign-in, production release and G1 acceptance remain separate.
+
+The original preparation checkpoint c02c6ba recorded Proposed status; its evidence remains historical. [Post-pilot portal plan](../../plans/active/post-pilot-https-portal.md) records the separately deferred request.
