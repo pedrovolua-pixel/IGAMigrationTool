@@ -179,6 +179,30 @@
     "documentation": "PASS: two changed evidence JSON records parsed; 178 changed Markdown local targets exist; eight exact candidate rate bindings; preflight invariants and documentation-only scope",
     "secrets": "PASS: whole-checkout Gitleaks8.30.1 no leaks",
     "diff": "PASS: git diff --check",
-    "runtime": "UNCHANGED; configured final metadata CI observed terminal success; no new runtime check claimed"
+    "runtime": "UNCHANGED; configured final metadata CI observed terminal success; no new runtime check claimed",
+    "intake": "PASS: new private directory/files are current-user owned, modes0700/0600; no access-grant ACL entries; no credentials stored"
+  },
+  "suppliedIntake": {
+    "protectedReference": "LOCAL-INTAKE-20261002-01",
+    "date": "2026-10-02",
+    "location": "Owner-only local folder outside Git; directory0700/file0600 verified",
+    "organizationalAccountRequests": 2,
+    "roleRequests": [
+      "Consultant",
+      "customer detailed role unresolved"
+    ],
+    "externalPersonalAccount": "Feasibility request; current organizational policy and home-origin contract do not admit it",
+    "browserPreference": "Public authenticated application feasibility requested; no topology or public exposure approved",
+    "grantsPerformed": [],
+    "directoryLicensingConditionalAccess": "NOT_VERIFIED"
+  },
+  "intakeAdviceChecks": {
+    "result": "PASS",
+    "localMarkdownTargets": 160,
+    "json": "Changed JSON parsed",
+    "protectedData": "Supplied account strings absent from every changed Git file; actual values only in owner-only local intake",
+    "scope": "Documentation only; runtime, templates, provider policy and Azure unchanged",
+    "secrets": "PASS: whole-checkout Gitleaks8.30.1 no leaks",
+    "diff": "PASS: git diff --check"
   }
 }
