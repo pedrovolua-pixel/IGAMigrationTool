@@ -9,6 +9,7 @@ import { request } from './api';
 import { ReviewPanel } from './ReviewPanel';
 import { MaturityView } from './MaturityView';
 import { DraftReportView } from './DraftReportView';
+import { RecommendationGuidanceView } from './RecommendationGuidanceView';
 
 export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: string }) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
@@ -30,7 +31,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         `/runs/${encodeURIComponent(run.runId)}/analysis`,
         controller.signal,
       )
-        .then((value) => {
+        .then(async (value) => {
           if (
             !controller.signal.aborted &&
             value.runId === run.runId &&
@@ -39,7 +40,9 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
               (value.review.runId === value.runId &&
                 value.review.runRevision === value.runRevision &&
                 value.review.snapshotDigest === value.reviewSnapshotDigest)) &&
-            coherentDraft(value, run)
+            coherentDraft(value, run) &&
+            (await coherentGuidance(value, run)) &&
+            !controller.signal.aborted
           )
             setResponse(value);
           else if (!controller.signal.aborted) {
@@ -316,6 +319,10 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         />
       )}
       <DraftReportView key={response.runId} report={response.reportDraft} />
+      <RecommendationGuidanceView
+        key={`guidance-${response.runId}`}
+        guidance={response.recommendationGuidance}
+      />
       {response.maturity && <MaturityView maturity={response.maturity} />}
       <details className="locked-inputs">
         <summary>Analysis versions and content digests</summary>
@@ -405,6 +412,192 @@ function coherentDraft(value: AnalysisDetail, run: RunDetail): boolean {
     snapshot.content.maturity.inputDigest === maturity.inputDigest &&
     snapshot.content.maturity.contentDigest === maturity.contentDigest
   );
+}
+async function coherentGuidance(value: AnalysisDetail, run: RunDetail): Promise<boolean> {
+  const guidance = value.recommendationGuidance;
+  if (guidance === undefined) return false;
+  if (guidance === null) return true;
+  if (guidance.status === 'Unavailable') return guidance.snapshot === null;
+  if (guidance.status !== 'Ready' || guidance.reasonCode !== null) return false;
+  const snapshot = guidance.snapshot;
+  const review = value.review;
+  if (!snapshot || !review || review.status !== 'Ready') return false;
+  const source = snapshot.source;
+  const versions = source.frozenVersions;
+  const locked = (name: string) => run.lockedInputs.find((input) => input.name === name);
+  const versionBindings: ReadonlyArray<readonly [string, string]> = [
+    ['Profile', versions.profileVersion],
+    ['Desired outcomes', versions.desiredOutcomeVersion ?? 'disabled'],
+    ['Scoring algorithm', versions.scoringAlgorithmVersion],
+    ['AI policy', versions.aiPolicyVersion],
+    ['Prompt', versions.promptVersion],
+    ['Model', versions.modelVersion],
+    ['Application', versions.applicationVersion],
+    ['Work schema', versions.workSchemaVersion],
+    ['Rule catalog', source.analysisLock.catalogVersion],
+    ['Capability', source.capabilityLock.matrixVersion],
+  ];
+  const sameSet = (a: ReadonlyArray<string>, b: ReadonlyArray<string>) => {
+    const sortedB = [...b].sort();
+    return a.length === b.length && [...a].sort().every((item, index) => item === sortedB[index]);
+  };
+  const digest = (text: string) => /^[a-f0-9]{64}$/.test(text);
+  const draftSource =
+    value.reportDraft?.status === 'Ready' ? value.reportDraft.snapshot?.source : null;
+  if (
+    snapshot.schemaVersion !== 'synthetic-recommendation-guidance-v1' ||
+    snapshot.status !== 'SyntheticUnverified' ||
+    !digest(snapshot.contentDigest) ||
+    source.runId !== run.runId ||
+    source.runId !== value.runId ||
+    source.runRevision !== run.revision ||
+    source.runRevision !== value.runRevision ||
+    source.runState !== 'Scoring' ||
+    source.baselineId !== run.selection.baselineId ||
+    source.profileId !== run.selection.profileId ||
+    source.runInputDigest !== locked('Complete frozen input')?.sha256 ||
+    source.capabilityLock.lockDigest !== locked('Exact capability tuple')?.sha256 ||
+    versions.scriptedResultsDigest !== locked('Scripted result fixture')?.sha256 ||
+    !versionBindings.every(([name, version]) => locked(name)?.version === version) ||
+    source.analysisFixtureDigest !== value.fixtureDigest ||
+    source.analysisFixtureDigest !== locked('Frozen analysis contents')?.sha256 ||
+    source.frozenVersions.scoringAlgorithmVersion !== value.algorithmVersion ||
+    source.scope.customerId !== 'synthetic-customer' ||
+    source.scope.projectId !== 'synthetic-project' ||
+    source.scope.environmentId !== 'synthetic-environment' ||
+    source.reviewRunId !== value.runId ||
+    source.reviewRunRevision !== value.runRevision ||
+    source.reviewSnapshotDigest !== value.reviewSnapshotDigest ||
+    source.reviewSnapshotDigest !== review.snapshotDigest ||
+    !digest(source.analysisContentDigest) ||
+    !digest(source.savedCoverageDigest) ||
+    (draftSource &&
+      (source.analysisContentDigest !== draftSource.analysisContentDigest ||
+        source.savedCoverageDigest !== draftSource.savedCoverageDigest ||
+        JSON.stringify(source.analysisLock) !== JSON.stringify(draftSource.analysisLock) ||
+        JSON.stringify(source.capabilityLock) !== JSON.stringify(draftSource.capabilityLock) ||
+        JSON.stringify(source.frozenVersions) !== JSON.stringify(draftSource.frozenVersions))) ||
+    snapshot.findings.length !== value.findings.length ||
+    snapshot.findings.length !== review.findings.length ||
+    new Set(snapshot.findings.map((finding) => finding.findingId)).size !== snapshot.findings.length
+  )
+    return false;
+  const results = await Promise.all(
+    snapshot.findings.map(async (finding) => {
+      const original = value.findings.find((item) => item.id === finding.findingId);
+      const current = review.findings.find((item) => item.id === finding.findingId);
+      if (!original || !current) return false;
+      const optionIds = finding.options.map((option) => option.optionId);
+      if (!sameSet(optionIds, ['inspect-fixture', 'compare-new-fixture'])) return false;
+      const scopedIds = await Promise.all(
+        finding.options.map((option) =>
+          fixtureIdentityDigest({
+            findingId: finding.findingId,
+            optionId: option.optionId,
+            runId: source.runId,
+            scope: {
+              customerId: source.scope.customerId,
+              environmentId: source.scope.environmentId,
+              projectId: source.scope.projectId,
+            },
+          }),
+        ),
+      );
+      const occurrenceIds = await Promise.all(
+        finding.occurrences.map((occurrence) =>
+          fixtureIdentityDigest({
+            EvidenceDigest: source.analysisLock.evidenceDigest,
+            Id: finding.ruleId,
+            ObjectId: occurrence.objectId,
+            PresetId: source.analysisLock.presetId,
+            Scope: {
+              CustomerId: source.scope.customerId,
+              EnvironmentId: source.scope.environmentId,
+              ProjectId: source.scope.projectId,
+            },
+            Version: finding.ruleVersion,
+            runId: source.runId,
+          }),
+        ),
+      );
+      const rowsMatch = finding.occurrences.every((occurrence, index) => {
+        const originalIndex = original.objectIds.indexOf(occurrence.objectId);
+        return (
+          originalIndex >= 0 &&
+          occurrence.occurrenceId === occurrenceIds[index] &&
+          occurrence.originalDigest === original.originalDigests[originalIndex] &&
+          occurrence.evidenceReference === original.evidenceReferences[originalIndex] &&
+          occurrence.objectType === 'SyntheticControl' &&
+          occurrence.moduleId ===
+            (finding.categoryId === 'SECURITY' ? 'SyntheticSecurity' : 'SyntheticOperations')
+        );
+      });
+      return (
+        finding.ruleId === original.ruleId &&
+        finding.ruleVersion === original.ruleVersion &&
+        finding.categoryId === original.category &&
+        finding.categoryId === current.category &&
+        finding.severity === original.severity &&
+        finding.originalTitle === original.originalTitle &&
+        finding.originalTitle === current.originalTitle &&
+        finding.presentationTitle === original.title &&
+        finding.presentationTitle === current.title &&
+        finding.businessContext === current.businessContext &&
+        finding.initialState === original.initialState &&
+        finding.initialState === current.initialState &&
+        finding.currentState === original.state &&
+        finding.currentState === current.state &&
+        finding.findingRevision === current.revision &&
+        finding.rootCause === original.rootCause &&
+        sameSet(
+          finding.occurrences.map((item) => item.occurrenceId),
+          current.occurrenceIds,
+        ) &&
+        sameSet(
+          finding.occurrences.map((item) => item.originalDigest),
+          original.originalDigests,
+        ) &&
+        sameSet(
+          finding.occurrences.map((item) => item.objectId),
+          original.objectIds,
+        ) &&
+        sameSet(
+          finding.occurrences.map((item) => item.evidenceReference),
+          original.evidenceReferences,
+        ) &&
+        sameSet(finding.guidanceReferences, original.sources) &&
+        finding.validationGuidance.join(' ') === original.validationGuidance &&
+        JSON.stringify(finding.assumptions) === JSON.stringify(original.assumptions) &&
+        JSON.stringify(finding.limitations) === JSON.stringify(original.limitations) &&
+        finding.options.length === original.recommendations.length &&
+        new Set(finding.options.map((option) => option.optionId)).size === finding.options.length &&
+        new Set(finding.options.map((option) => option.scopedOptionId)).size ===
+          finding.options.length &&
+        rowsMatch &&
+        finding.options.every(
+          (option, index) =>
+            option.status === 'Unverified' &&
+            option.scopedOptionId === scopedIds[index] &&
+            `${option.text} Prerequisites: ${option.prerequisites} Risk: ${option.risk} Recovery: ${option.recoveryGuidance}` ===
+              original.recommendations[option.optionId === 'inspect-fixture' ? 0 : 1],
+        ) &&
+        sameSet(
+          finding.options.map(
+            (option) =>
+              `${option.text} Prerequisites: ${option.prerequisites} Risk: ${option.risk} Recovery: ${option.recoveryGuidance}`,
+          ),
+          original.recommendations,
+        )
+      );
+    }),
+  );
+  return results.every(Boolean);
+}
+// Exact already-frozen fictional identities contain only ASCII IDs. This read-consistency check grants no authority.
+async function fixtureIdentityDigest(value: object): Promise<string> {
+  const bytes = new TextEncoder().encode(JSON.stringify(value));
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 function scoreText(score: AnalysisScore) {
   return score.display === null ? 'Not assessed' : `${score.display} / 100 · ${score.status}`;

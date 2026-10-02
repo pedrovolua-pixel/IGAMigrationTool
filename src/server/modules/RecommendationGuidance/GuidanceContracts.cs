@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Text.Json;
 namespace RecommendationGuidance;
+
 public enum GuidanceIssue { InvalidInput, UnknownVersion, WrongScope, InvalidSource, SourceMismatch, InvalidContent, DuplicateId }
 public sealed record GuidanceScope(string CustomerId, string ProjectId, string EnvironmentId);
 // Already-authorized host bindings; this module grants no authority and resolves no evidence.

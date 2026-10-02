@@ -1,0 +1,8 @@
+PASS RG-API-001 literal structured options/scoped IDs/canonical digest/captured review/immutable originals
+PASS RG-API-002 healthy/gaps/mixed/weighted and all four older-profile null compatibility
+PASS RG-UI-001 keyboard disclosure/actual finding review/focus/current-state/unverified complete visible options
+PASS RG-UI-002 source/content substitution refusal, focused same-revision retry and typed unavailable no fallback
+PASS RG-UI-003 held old response selection/abort/focus fence
+PASS RG-UI-003B post-GET async digest selection/abort/focus fence
+PASS RG-UI-004 actual owned host process restart and saved read reproducibility
+PASS RG-UI-005 hostile structured text, desktop390320, native table focus, forced colors and axe engineering evidence

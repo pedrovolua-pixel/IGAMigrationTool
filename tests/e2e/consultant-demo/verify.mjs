@@ -391,7 +391,10 @@ try {
     "limitations table has semantic headers",
   );
   check(
-    (await page.getByRole("status").getAttribute("aria-live")) === "polite",
+    (await page
+      .getByRole("status")
+      .filter({ hasText: "Run state:" })
+      .getAttribute("aria-live")) === "polite",
     "status announcements are noninterrupting",
   );
   await scanAccessibility("desktop gap coverage");

@@ -1,0 +1,133 @@
+.recommendation-guidance {
+  border: 1px solid #b8cad5;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-block: 1.5rem;
+  background: #f8fafc;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.guidance-warning {
+  color: #684514;
+  background: #fff2d9;
+  border-left: 4px solid #9b6a1b;
+  padding: 0.7rem;
+}
+
+.guidance-warning p {
+  margin-bottom: 0;
+}
+
+.guidance-count,
+.guidance-empty {
+  margin-block: 1rem;
+}
+
+.guidance-finding {
+  margin-block: 1rem;
+  padding: 0.8rem;
+  border: 1px solid #b8cad5;
+  border-radius: 8px;
+  background: #fff;
+  min-width: 0;
+}
+
+.recommendation-guidance summary {
+  min-height: 44px;
+  padding-block: 0.4rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.recommendation-guidance summary:focus-visible,
+.guidance-table-scroll:focus-visible {
+  outline: 3px solid #143f50;
+  outline-offset: 3px;
+}
+
+.guidance-current,
+.guidance-original,
+.guidance-disclosure {
+  margin-block: 1rem;
+  padding-block-start: 0.5rem;
+  border-top: 1px solid #cedbe2;
+}
+
+.guidance-option {
+  border-left: 3px solid #b8cad5;
+  padding-inline-start: 0.7rem;
+  margin-block: 0.7rem;
+}
+
+.recommendation-guidance dl {
+  font-size: 0.8rem;
+  margin-block: 0.7rem;
+}
+
+.recommendation-guidance dl > div {
+  padding-block: 0.4rem;
+}
+
+.recommendation-guidance dt {
+  font-weight: 650;
+  margin-block-end: 0.25rem;
+}
+
+.recommendation-guidance dd {
+  margin-inline-start: 0;
+}
+
+.guidance-text,
+.recommendation-guidance code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.guidance-table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.guidance-table-scroll table {
+  table-layout: fixed;
+}
+
+.guidance-table-scroll caption {
+  text-align: left;
+  padding-block: 0.6rem;
+  font-weight: 650;
+}
+
+.guidance-table-scroll th,
+.guidance-table-scroll td {
+  padding: 0.7rem 0.4rem;
+}
+
+.guidance-bindings {
+  min-width: 0;
+}
+
+@media (max-width: 390px) {
+  .recommendation-guidance {
+    padding: 0.7rem;
+  }
+
+  .guidance-finding {
+    padding: 0.6rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .guidance-warning,
+  .guidance-finding,
+  .guidance-option {
+    border-color: CanvasText;
+  }
+
+  .recommendation-guidance summary:focus-visible,
+  .guidance-table-scroll:focus-visible {
+    outline-color: Highlight;
+  }
+}

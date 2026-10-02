@@ -66,6 +66,14 @@ jobs:
         run: |
           dotnet run --project tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj --configuration Release --no-build
+      - name: Check canonical unverified recommendation guidance
+        run: dotnet run --project tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build
+      - name: Check independent recommendation identities, originals and saved review bridge
+        env:
+          IGA_GUIDANCE_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v7;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_v7
+          dotnet run --project tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build -- --postgres
       - name: Check independent canonical draft goldens and saved source bridge
         env:
           IGA_DRAFT_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v6;Username=iga_synthetic
@@ -147,6 +155,15 @@ jobs:
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
           node tests/e2e/draft-reports/verify.mjs
+      - name: Check structured recommendation guidance and inert consultant display
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v7;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/recommendation-guidance/verify.mjs
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check collector host contract
