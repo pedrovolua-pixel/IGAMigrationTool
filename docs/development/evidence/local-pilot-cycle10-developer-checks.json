@@ -1,6 +1,6 @@
 {
   "cycle": 10,
-  "status": "VERIFIED_BOUNDED_ENGINEERING_PRIVATE_PUBLICATION_PENDING",
+  "status": "COMPLETE_BOUNDED_OFFLINE_ENGINEERING",
   "capturedUtc": "2026-10-02T18:55:19.974906+00:00",
   "codeCommit": "0b95ca6142792e8c2c94e5a12ef657c862f23c66",
   "coordinatorCommit": "6e786da00ea232abafef6cbc99f4347dd35b8281",
@@ -1960,7 +1960,8 @@
   "reviews": {
     "remainingFindings": 0,
     "A10ReviewArtifactSha256": "b7af300a80c3493b8c091e140384eeb701b415a06d0a56ec98fc2634adb3844d",
-    "workerReviewIsHumanGateAcceptance": false
+    "workerReviewIsHumanGateAcceptance": false,
+    "finalCanonicalReview": "PASS\u2014473 source hashes,476 worker bindings,2,907 archived file entries,139 coordinator bindings; three documentation findings corrected and independently closed"
   },
   "coordinatorExecution": {
     "codeCommit": "0b95ca6142792e8c2c94e5a12ef657c862f23c66",
@@ -3338,11 +3339,51 @@
     "defaultLinuxHostStartup": "PASS\u2014five historical flows and Cycle10 actual host/browser, no local reload override"
   },
   "site": {
-    "status": "PRIVATE_CLOSURE_PUBLICATION_PENDING",
+    "status": "CONFIRMED_OWNER_PRIVATE_PUBLICATION",
     "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
     "ownerOnly": true,
     "humanTasks": 11,
-    "localBoardQa": "PASS desktop/mobile/320px; no overflow/page errors; all task roles/source/completion preserved",
-    "startDeployment": "appgdep_6abfec09bbfc819183a5d4a7585ac4c0"
-  }
+    "immutableLinksAndFragments": 57,
+    "localQa": "PASS desktop/mobile/320px; zero overflow/page errors; role/source/done-when retained",
+    "verifiedPublication": {
+      "deployment": {
+        "id": "appgdep_6abfff5ee3f88191b28670f535ccb0e5",
+        "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+        "title": "IGA Pilot Progress",
+        "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_e161b26d76448191896f20373e0b8e58",
+        "type": "publish",
+        "status": "succeeded",
+        "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+        "has_mcp": false,
+        "screenshot_asset_pointer": null,
+        "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+        "failure_message": null,
+        "env_set_revision": 0,
+        "updated_at": "2026-10-02T19:00:54.090404+00:00"
+      },
+      "version": {
+        "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_e161b26d76448191896f20373e0b8e58",
+        "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+        "version_number": 73,
+        "source": {
+          "commit_sha": "a6453cb15914d5162de7b37ff46f67863f8d168c"
+        },
+        "archive_storage": {
+          "archive_format": "tar",
+          "sediment_file_id": "file_000000001e0481f9adf32695a0ca8cc0",
+          "content_hash": "sha256:18e1d993462bd7e66a6023d5a35a1c55fd92959047d5e5973ba86b5c06672430",
+          "size_bytes": 71680,
+          "file_count": 2
+        },
+        "screenshot_url": null,
+        "deployment_id": "appgdep_6abfff5ee3f88191b28670f535ccb0e5"
+      },
+      "repositorySnapshot": "af172f2cdbf02d478e0473b5b43b295cb26ad258",
+      "siteSource": "a6453cb15914d5162de7b37ff46f67863f8d168c",
+      "ownerPrivate": true,
+      "humanTaskCards": 11
+    },
+    "completedRecordPresentation": "Final presentation follows this confirmed publication with unchanged runtime/evidence/audience."
+  },
+  "closedUtc": "2026-10-02T19:01:59.251963+00:00"
 }

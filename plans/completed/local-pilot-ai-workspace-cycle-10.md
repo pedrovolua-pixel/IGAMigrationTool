@@ -1,6 +1,6 @@
 # Local cycle10 — offline AI proposal preview in the consultant workspace
 
-Status: VERIFIED BOUNDED ENGINEERING — hosted checks PASS; private closure publication pending,2026-10-02.
+Status: COMPLETE — BOUNDED OFFLINE ENGINEERING — local/hosted checks and owner-private publication confirmed,2026-10-02.
 Owner: Coordinator / repository owner
 Source checkpoint: `23cef694a6ed0224f753b5be7dc7846b1ae9a83b`
 
@@ -17,7 +17,7 @@ Make the Cycle08/09 offline explanation path inspectable in the running localhos
 | A10 source/host | AssessmentRuns/DemoAiPreviewCatalog.cs and fixtures/ai-preview-*.json; scoped DemoFixtureCatalog.cs, DemoAnalysisCatalog.cs and SyntheticRunContracts.cs; LocalConsultantDemo/DemoAiPreviewProjection.cs; tests/unit/LocalAiPreview.Tests/** | Dedicated fixture/profile/frozen-input compatibility; actual pure composition; old null/locks preserved; typed denials and complete independent portable goldens | REVIEWED; executed worker evidence preserved |
 | B10 workspace | src/web/src/AiProposalPreview.tsx and .css; tests/unit/AiProposalPreview.Tests/** | Complete text-only typed display, source/canonical digest guards, empty/unavailable, keyboard and narrow-screen behavior; focused independent component oracles | REVIEWED; executed worker evidence preserved |
 | V10 independent verification | tests/integration/LocalAiPreview.Tests/**; tests/e2e/local-ai-preview/** | Actual dedicated PostgreSQL saved run and host/browser flow; separate expected values; historical/scoring invariance, cross-run/field/digest/stale denials, inert strings, reflow and source/output/asset bindings | REVIEWED; executed worker evidence preserved |
-| Coordinator | Shared project/resources/solution/schema/generated types, host/AnalysisView integration, CI/configuration, canonical records, review and private Site | Settle contract before work; isolate ownership/worktrees; independent reviews, frozen combined checks, preserve unrelated BFF/UI/research changes and publish current private board | FINAL VERIFICATION / PUBLICATION |
+| Coordinator | Shared project/resources/solution/schema/generated types, host/AnalysisView integration, CI/configuration, canonical records, review and private Site | Settle contract before work; isolate ownership/worktrees; independent reviews, frozen combined checks, preserve unrelated BFF/UI/research changes and publish current private board | COMPLETE |
 
 Workers start at one recorded contract checkpoint in isolated codex worktrees. Do not edit shared configuration/canonical records or another packet's paths. A10/B10 review each other, V10 reviews integration, another non-author reviews V10/coordinator. Agents cannot accept human gates. Coordinator integrates only its own changes onto committed UI; concurrent uncommitted workspace UI is preserved and excluded from source/verification claims.
 
@@ -26,7 +26,7 @@ Workers start at one recorded contract checkpoint in isolated codex worktrees. D
 - [x] A10/B10 independent meaningful portable/component checks and non-author reviews pass.
 - [x] V10 actual saved-source/host/browser checks pass with negative/isolation/stale/network cases, source bindings and review.
 - [x] Frozen pinned locked audited restore, formatting, build, all current units/database/architecture/frontend/browser/infrastructure/secret and hosted Linux/Windows/container checks execute; limits are explicitly NOT VERIFIED. No shared PostgreSQL cluster restart.
-- [ ] Canonical status/implementation/evidence and private Site/human board match and native publication succeeds. Human dependencies retain role/source/done-when.
+- [x] Canonical status/implementation/evidence and private Site/human board match and native publication succeeds. Human dependencies retain role/source/done-when.
 - [x] Original worker source/needed executed evidence preserved; clean writing checkouts removed.
 
 Rollback removes the opt-in catalog/optional omitted-when-null input value/nullable read/UI additions without interpreting historical input locks differently. New synthetic runs remain isolated developer data; no production DDL migration, new package or runtime setting. Manual accessibility, actual provider/security, production activation/persistence/review/publication and full local pilot completion remain open.
@@ -41,4 +41,8 @@ Final47-project local restore/format/build and current checks passed. Default ma
 
 No new migration, dependency, provider or live resource. Concurrent working-tree UI/BFF/research remains excluded from frozen source claims; committed draft UAT documentation is preserved. Full local pilot completion, UAT readiness/acceptance, supported manual accessibility, live identity/source/provider/budgets/retention/report publication and G1–G9 stay NOT VERIFIED. Automated axe reported zero violations in prior flows, with incomplete checks recorded rather than accepted.
 
-Hosted [bootstrap run37049034667](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37049034667) and [package run37049034557](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37049034557) passed on code `0b95ca6`, including default Linux host startup and all seven browser flows, Windows2022/2025 portable/collector/protected-key/service checks and actual non-root/read-only container smoke. These are configured partial checks, not full live gate acceptance. Private board closure publication is pending.
+Hosted [bootstrap run37049034667](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37049034667) and [package run37049034557](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37049034557) passed on code `0b95ca6`, including default Linux host startup and all seven browser flows, Windows2022/2025 portable/collector/protected-key/service checks and actual non-root/read-only container smoke. These are configured partial checks, not full live gate acceptance. Owner-private board publication succeeded; bounded Cycle10 is complete.
+
+## Confirmed private publication
+
+Canonical checkpoint `af172f2cdbf02d478e0473b5b43b295cb26ad258` was published owner-private from exact Site source `a6453cb15914d5162de7b37ff46f67863f8d168c`. Native deployment `appgdep_6abfff5ee3f88191b28670f535ccb0e5` succeeded at2026-10-02T19:00:54.090404+00:00; saved version73 confirms the same source/archive.57 immutable repository links/fragments and desktop/mobile/320px layout/navigation checks passed. All11 task cards retain requested role, source and completion condition; BFF panels and approved audience are preserved. Final completed-record presentation follows this confirmed publication with the same runtime, checks and human dependencies.
