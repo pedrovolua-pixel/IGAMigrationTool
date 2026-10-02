@@ -233,7 +233,7 @@
   },
   "documentationFollowup": "Later canonical documentation and pilot closure merge are documentation only; src/tests/workflows/contracts/dependencies/solution unchanged from passing c7b071a. Existing draft description updated through authorized browser because connector lacks PR metadata write permission.",
   "cleanup": {
-    "temporaryPreview": "Own loopback preview will be stopped and own preview tab closed before handoff",
+    "temporaryPreview": "PASS: stopped only owned loopback server5127 and closed own preview tab; preserved user Azure tab and draft review tab",
     "viewport": "Reset to normal1920width after390px check",
     "azure": "No changes"
   }
