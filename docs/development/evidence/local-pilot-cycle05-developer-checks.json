@@ -314,7 +314,7 @@
     "infrastructureTemplates": 18,
     "bootstrapHostingUnsafeDrifts": 44,
     "checkoutScan": "PASS final440 tracked/non-ignored checkout files, zero leaks; metadata representation corrected without allowlist",
-    "remotePartialCI": "PENDING",
+    "remotePartialCI": "PASS configured Linux/Windows2022/2025 and actual Azure package",
     "privatePublication": "PENDING final; approved start snapshot confirmed",
     "ciBrowserDatabase": "Dedicated iga_synthetic_v5, distinct from historical browser database"
   },
@@ -440,7 +440,7 @@
     "Database cluster crash-restart not repeated; explicit opt-in absent",
     "320px axe color-contrast incomplete; supported Windows/NVDA/Narrator and WCAG conformance NOT VERIFIED",
     "Production identity/customer authority/risk/closure/AI/tasks/report/live gates NOT VERIFIED",
-    "Remote partial CI and final private publication pending"
+    "Matching final private publication pending"
   ],
   "initialPrivatePublication": {
     "repositorySnapshot": "8f75eb49af13cb1ba36af9bac88ca8699a072a85",
@@ -450,5 +450,42 @@
     "status": "succeeded",
     "confirmedUtc": "2026-10-02T03:24:10.166075+00:00",
     "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+  },
+  "independentReview": {
+    "reviewer": "R5 author, separate from V5 author",
+    "exactSupplementCommit": "8b60ae88a92ae3baba537be0b726ccb5c94347c9",
+    "result": "No actionable issue remains; read-only review executed, no reviewer tests claimed"
+  },
+  "workerCleanup": {
+    "status": "Complete after exact source archives/patches and commits preserved; only three completed cycle05 worktrees removed",
+    "preservedCommits": {
+      "M5": "ebdb15e0db021b6088f9c18850a7dda4802e9377",
+      "R5": "964333be841ef1fa6535570aed85b80c66940544",
+      "U5": "730869f5b723673e07f9dd492bd8f4ebcce50898",
+      "V5": "e883ef066b75b0fbc202928697584dc754a1c31e",
+      "V5Supplement": "8b60ae88a92ae3baba537be0b726ccb5c94347c9"
+    },
+    "otherPilotWorktrees": "Preserved BFF integration worktree; no other cycle modified"
+  },
+  "implementationCommit": "97f7a890df03d630f6fd10e2c5f6d0152eeb5231",
+  "remotePartialCI": {
+    "bootstrap": {
+      "runId": 36964164461,
+      "conclusion": "success",
+      "jobs": [
+        "dotnet-bootstrap",
+        "collector-windows (windows-2022)",
+        "collector-windows (windows-2025)"
+      ]
+    },
+    "azurePackage": {
+      "runId": 36964164350,
+      "conclusion": "success",
+      "jobs": [
+        "bootstrap-package"
+      ]
+    },
+    "sourceCommit": "97f7a890df03d630f6fd10e2c5f6d0152eeb5231",
+    "scope": "Configured partial engineering workflows; no full feature/live gate acceptance"
   }
 }

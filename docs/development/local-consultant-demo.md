@@ -1,6 +1,6 @@
 # Local synthetic durable run and consultant view
 
-This local demo combines [cycle 03](../../plans/completed/local-pilot-durable-consultant-cycle-03.md) durable coverage/recovery with [cycle 04](../../plans/completed/local-pilot-analysis-scoring-cycle-04.md) synthetic analysis and health calculations, and [cycle05](../../plans/active/local-pilot-review-maturity-cycle-05.md) opt-in consultant review/history and independent maturity. Historical presets retain their original behavior. Coverage readiness pauses at `Scoring`; local projections do not complete an assessment. Eligible customer baselines, Entra sign-in, source connections, AI and publication remain unavailable. Full live and accessibility gates remain open.
+This local demo combines [cycle 03](../../plans/completed/local-pilot-durable-consultant-cycle-03.md) durable coverage/recovery with [cycle 04](../../plans/completed/local-pilot-analysis-scoring-cycle-04.md) synthetic analysis and health calculations, and [cycle05](../../plans/completed/local-pilot-review-maturity-cycle-05.md) opt-in consultant review/history and independent maturity. Historical presets retain their original behavior. Coverage readiness pauses at `Scoring`; local projections do not complete an assessment. Eligible customer baselines, Entra sign-in, source connections, AI and publication remain unavailable. Full live and accessibility gates remain open.
 
 ## Build and run
 

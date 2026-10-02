@@ -1,6 +1,6 @@
 # Synthetic capability maturity
 
-This cycle-05 internal module implements the approved cumulative `pilot-maturity-v1` algorithm over fictional mandatory-domain indicator evidence. Its authority is feature 003 and `plans/active/local-pilot-review-maturity-cycle-05.md`, explicitly approved by the repository owner. It has no health input, scoring dependency, source reader, review mutation, catalog promotion, production validation or publication operation. Synthetic evidence/ownership flags establish no actual customer authority.
+This cycle-05 internal module implements the approved cumulative `pilot-maturity-v1` algorithm over fictional mandatory-domain indicator evidence. Its authority is feature 003 and `plans/completed/local-pilot-review-maturity-cycle-05.md`, explicitly approved by the repository owner. It has no health input, scoring dependency, source reader, review mutation, catalog promotion, production validation or publication operation. Synthetic evidence/ownership flags establish no actual customer authority.
 
 `PilotMaturityProjector.Project(MaturityInput)` returns either a typed issue with no projection or an immutable maturity projection. Every declared domain is mandatory. All declared mandatory domains remain in every denominator, including domains with partial or missing evidence, as approved for this packet. An empty/invalid catalog exposes no projection. Missing indicators become explicit `InsufficientEvidence` entries with `MISSING-SYNTHETIC-INDICATOR`; their domain never disappears from the denominator.
 
