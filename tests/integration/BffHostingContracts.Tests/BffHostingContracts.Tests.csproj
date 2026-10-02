@@ -1,4 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
-  <ItemGroup><ProjectReference Include="../../../src/server/hosts/BffFoundation/BffFoundation.csproj" /></ItemGroup>
+  <ItemGroup><FrameworkReference Include="Microsoft.AspNetCore.App" /><ProjectReference Include="../../../src/server/hosts/BffFoundation/BffFoundation.csproj" /></ItemGroup>
 </Project>
