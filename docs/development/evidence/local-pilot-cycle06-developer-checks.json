@@ -409,6 +409,10 @@
     {
       "path": "/private/tmp/iga-cycle06-closure-secret-scan.log",
       "sha256": "3620cb1336975eaae3d30a870e710f2376b96861f5e5b0ed03b8f9ba8a8647e7"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-postpublication-secret-scan.log",
+      "sha256": "8b37cf9b2728a570fbc07d3bfa1ad71e3c11477211b2f668aea135837baf1c7e"
     }
   ],
   "checks": {
@@ -426,7 +430,7 @@
     "frontendContractTypeFormatBuildAudit": "PASS zero vulnerabilities",
     "infrastructureTemplates": 18,
     "bootstrapHostingUnsafeDrifts": 44,
-    "secretScan": "PASS474 tracked/owned source files and final records; no allowlists",
+    "secretScan": "PASS final475 tracked/owned files including archived closure record; no allowlists",
     "remotePartialCI": "PASS configured Linux/Windows2022/2025 and Azure package partial checks",
     "privatePublication": "PASS confirmed owner-private publication",
     "historicalCoverageBrowserChecks": 397,
