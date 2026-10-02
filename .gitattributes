@@ -1,0 +1,3 @@
+# Exact UTF-8 preview oracles include LF bytes on every checkout platform.
+/tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.html text eol=lf
+/tests/integration/SyntheticAiPreview.Tests/preview-golden.html text eol=lf
