@@ -1,0 +1,10 @@
+**
+!global.json
+!Directory.Build.props
+!src/
+!src/server/
+!src/server/hosts/
+!src/server/hosts/AzureDevelopmentBootstrap/
+!src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj
+!src/server/hosts/AzureDevelopmentBootstrap/Program.cs
+!src/server/hosts/AzureDevelopmentBootstrap/packages.lock.json
