@@ -1,6 +1,6 @@
 # Local synthetic durable run and consultant view
 
-This local demo is part of [cycle 03](../../plans/active/local-pilot-durable-consultant-cycle-03.md). It uses only fixed, value-free synthetic baseline/profile presets and explicitly scripted outcomes. Coverage readiness pauses at `Scoring`; there is no health score, eligible customer baseline, Entra sign-in, source connection, AI, finding review or publication. Full live and accessibility gates remain open.
+This local demo is part of [cycle 03](../../plans/completed/local-pilot-durable-consultant-cycle-03.md). It uses only fixed, value-free synthetic baseline/profile presets and explicitly scripted outcomes. Coverage readiness pauses at `Scoring`; there is no health score, eligible customer baseline, Entra sign-in, source connection, AI, finding review or publication. Full live and accessibility gates remain open.
 
 ## Build and run
 

@@ -1,6 +1,6 @@
 # Private synthetic consultant demo contract v1
 
-Authorized only for [cycle 03](../../plans/active/local-pilot-durable-consultant-cycle-03.md). This is a localhost fixture-host transport, not the production OpenAPI contract or an Entra/customer permission grant. Production contract and identity gates remain open.
+Authorized only for [cycle 03](../../plans/completed/local-pilot-durable-consultant-cycle-03.md). This is a localhost fixture-host transport, not the production OpenAPI contract or an Entra/customer permission grant. Production contract and identity gates remain open.
 
 `demo-v1.schema.json` is the strict DTO source. Generate the checked-in readonly TypeScript projection with `node contracts/local-demo/generate-types.mjs`; verify drift using `--check`. The host must serialize camelCase property names, exact PascalCase string enum values, UTC ISO timestamps, UUID run/request IDs and every required nullable field (use JSON null, not omission). Reject extra request properties; IDs resolve only against the fixed server catalog. Empty history and incomplete progress are valid; empty inventory cannot become perfect coverage. `Scoring` displays **Coverage ready · scoring pending**. `coverageCompletionKind` concerns coverage only.
 
