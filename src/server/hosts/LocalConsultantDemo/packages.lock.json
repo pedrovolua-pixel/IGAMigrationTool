@@ -86,6 +86,9 @@
           "Npgsql": "[10.0.3, )"
         }
       },
+      "recommendationguidance": {
+        "type": "Project"
+      },
       "reportdrafts": {
         "type": "Project"
       }

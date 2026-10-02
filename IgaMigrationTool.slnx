@@ -15,6 +15,7 @@
     <Project Path="src/server/modules/IdentitySessions/IdentitySessions.csproj" />
     <Project Path="src/server/modules/IdentityPolicy/IdentityPolicy.csproj" />
     <Project Path="src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
+    <Project Path="src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj" />
     <Project Path="src/server/modules/ReportDrafts/ReportDrafts.csproj" />
     <Project Path="src/server/modules/FindingReview/FindingReview.csproj" />
     <Project Path="src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj" />
@@ -36,6 +37,7 @@
   <Folder Name="/tests/integration/">
     <Project Path="tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj" />
+    <Project Path="tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/integration/ReportDrafts.Tests/ReportDrafts.Tests.csproj" />
     <Project Path="tests/integration/ReviewMaturity.Tests/ReviewMaturity.Tests.csproj" />
     <Project Path="tests/integration/AnalysisScoring.Tests/AnalysisScoring.Tests.csproj" />
@@ -46,6 +48,7 @@
     <Project Path="tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj" />
     <Project Path="tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj" />
+    <Project Path="tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj" />
     <Project Path="tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj" />
     <Project Path="tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj" />

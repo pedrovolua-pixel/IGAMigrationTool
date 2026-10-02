@@ -1,6 +1,6 @@
 # Local cycle07 — structured synthetic recommendation guidance
 
-Status: APPROVED LOCAL SCOPE / READY — owner's “Next cycle” on2026-10-02 continues the approved synthetic local build.
+Status: APPROVED LOCAL SCOPE / RUNNING — owner's “Next cycle” on2026-10-02 continues the approved synthetic local build.
 Owner: Coordinator / repository owner
 Source checkpoint: `2bf2b6470a701c28432b04c02af92386eb39e99f`
 
@@ -45,4 +45,8 @@ Update this record, feature status/implementation/evidence and the private Site/
 
 ## Execution record
 
-Two independent read-only assessments recommended structured existing guidance before task/export/report history. Report publication lacks terminal state/exact write/frozen manifest fences; recurrence lacks native stable UID/lifecycle inputs. Those remain later approved work. No cycle07 check is claimed passed. R7/U7/V7 start after the recorded plan/contract checkpoint and private start board update.
+Two independent read-only assessments recommended structured existing guidance before task/export/report history. Report publication lacks terminal state/exact write/frozen manifest fences; recurrence lacks native stable UID/lifecycle inputs. Those remain later approved work. R7/U7/V7 are implemented, sealed and independently reviewed. Locked audited restore,37-project format/build/current suites, frontend audit and18 infrastructure templates passed. Initial actual257 PostgreSQL/2941 guidance browser checks passed; final client-key correction is independently reviewed and all five browser workflows are being repeated on corrected assets. Configured remote partial CI and private closure remain pending.
+
+Initial owner-private start board publication confirmed Succeeded2026-10-02T12:54:06.361584+00:00, repository plan/contract `f29601816414f8dba3e3cf4a21b3dcb95a9e08b9`, Site source `67fe75069a9a6538c34d00d656ef6c9f8337b5ba`, deployment `appgdep_6abfa967c92c819194520ea6cdc204b7`, version `appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_121f022bdec881919589689921c2d006`. Desktop/mobile rendering, keyboard navigation/reflow and ten source-linked requested-role/completion human tasks passed; owner-only audience and completed BFF publication dependency preserved. R7/U7/V7 writing worktrees share f296018 and exact ownership. Initial focused checks are now recorded below; start-board content remains the earlier dated snapshot until closure publication.
+
+Coordinator integration checkpoint: R7 sealed720d1db/U7 sealed4f42ed6/V7 sealed45ef5c8 passed exact non-author reviews. Guidance287 assertions, component47 rendering assertions, independent112 portable/257 actualPG and initial2941 browser assertions passed. Whole37-project restore/format/build and all current suites/Windows cross-publish/bootstrap/frontend checks passed, with18 template policies and44 unsafe hosting drifts refused. Historical checks exposed an ambiguous run-state test selector and duplicate sibling rendering keys; independently reviewed scoped announcer and guidance-prefixed key corrections are integrated. Final five-browser regression evidence and configured remote CI/private closure are still pending. Earlier worker browser/artifact evidence remains bound to its original assets; coordinator final metadata will bind corrected assets.

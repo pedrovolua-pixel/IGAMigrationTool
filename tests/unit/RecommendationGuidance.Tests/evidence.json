@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "packet": "R7",
+  "sourceCheckpoint": "f29601816414f8dba3e3cf4a21b3dcb95a9e08b9",
+  "recordedAtUtc": "2026-10-02T13:09:07.678619+00:00",
+  "toolchain": {
+    "dotnet": "10.0.401"
+  },
+  "assertions": 287,
+  "result": "PASS bounded portable developer evidence",
+  "sourceBindings": [
+    {
+      "path": "src/server/modules/RecommendationGuidance/GuidanceContracts.cs",
+      "sha256": "3de7f1ec79f6caf27dd809869b4cf2945ed62b9018dda2b42f7555f10ae72d19"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/README.md",
+      "sha256": "0b6d2a9f3f8af1817c2e970e5225475881c8ca4184d4ea147f074b4826a691a6"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+      "sha256": "cb2d378973626288fc0b1db933979fd4c99c640ebc00c49338987184040d5d7a"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/packages.lock.json",
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "tests/unit/RecommendationGuidance.Tests/GuidanceFixture.cs",
+      "sha256": "abd68d0dd33b4d771be558302cf68879a2e5d7a6174cb050105fe6da7adc3347"
+    },
+    {
+      "path": "tests/unit/RecommendationGuidance.Tests/Program.cs",
+      "sha256": "fd3e77b39c95775113cc32ab5248ddae7f123f009e90608c780222ff466bc6b5"
+    },
+    {
+      "path": "tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj",
+      "sha256": "70b4b15dcf01dd14c8033c71d9155609e3a04e602abf9566c27d0370a5b662f1"
+    },
+    {
+      "path": "tests/unit/RecommendationGuidance.Tests/golden-oracle.py",
+      "sha256": "5732239f29b4241a0cf5a04aac53d14ac780543d8474896f40e0f4e225d30838"
+    },
+    {
+      "path": "tests/unit/RecommendationGuidance.Tests/golden-payload.json",
+      "sha256": "d141e78843b8df1307b98f4d3f80724574c8c7177a6e87fb9c70035b789d6b46"
+    },
+    {
+      "path": "tests/unit/RecommendationGuidance.Tests/packages.lock.json",
+      "sha256": "237df3c87b8f13dfa34c08d3242192ddf5f1e49489cf3698777cbaef0dfc37f8"
+    }
+  ],
+  "aggregateSourceSha256": "9a5eb816b3a7e6c3472043b50d20af5ebb53a47271142b3cd01f8cea7c3af74e",
+  "transcriptSha256": "6f1d920c084f57392438ad3c6ab2384b2cb7e85463a8c4ce5e8a916bf3ffdba1",
+  "checks": [
+    {
+      "check": "locked audited restore",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "check": "direct module format --verify-no-changes",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "check": "direct unit format --verify-no-changes",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "check": "Release build",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "check": "portable unit execution",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "check": "independent literal golden oracle",
+      "result": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "goldenContentSha256": "d141e78843b8df1307b98f4d3f80724574c8c7177a6e87fb9c70035b789d6b46",
+  "limits": [
+    "No database/transport/browser/production authorization tests in this packet.",
+    "No milestone, Phase1B or G1-G9 completion follows."
+  ],
+  "corrections": [
+    "Initial sandbox formatter pipe restriction; exact module/unit formatter runs subsequently passed with local pipe access."
+  ]
+}

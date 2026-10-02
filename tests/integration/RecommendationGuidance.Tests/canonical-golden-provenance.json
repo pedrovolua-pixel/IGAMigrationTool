@@ -1,0 +1,11 @@
+{
+  "fixtureDefinitionVersion": "guidance-independent-v1",
+  "method": "Explicit synthetic contract fixture plus pre-cycle literal source; standalone Python standard sorted JSON and SHA256. No Guidance builder, canonical helper or digest helper invoked to prepare expected bytes.",
+  "sha256": "8cb3d8874c104b5175e1d84a942306a3d93cdb20d9eedd13965120db071bd4c7",
+  "scopedOptionIds": [
+    "f61bada481e27da074fe7e806826ad838ed082bbdb6249fc16ef40a8951445fd",
+    "2d5ade1b376cfdf42c697f5758aeacdb36430dcfc89de8464466682e573853fb",
+    "0d56675e00e67fa2d09dc760be56f5fa3eb5f545202ff786e5b30a27d5a76a76"
+  ],
+  "preCycleDraftGoldenSha256": "a48a9aefe6efcfa864812f6ba7b84211877a73df9e519704a114561dc31d07e9"
+}

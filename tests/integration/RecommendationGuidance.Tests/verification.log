@@ -1,0 +1,32 @@
+10.0.401
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  RecommendationGuidance -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/RecommendationGuidance/bin/Release/net10.0/RecommendationGuidance.dll
+  AssessmentMaturity -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/AssessmentMaturity/bin/Release/net10.0/AssessmentMaturity.dll
+  ReportDrafts -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/ReportDrafts/bin/Release/net10.0/ReportDrafts.dll
+  AssessmentCoverage -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/AssessmentCoverage/bin/Release/net10.0/AssessmentCoverage.dll
+  FindingReview -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/FindingReview/bin/Release/net10.0/FindingReview.dll
+  AssessmentOrchestration -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/AssessmentOrchestration/bin/Release/net10.0/AssessmentOrchestration.dll
+  AssessmentScoring -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/AssessmentScoring/bin/Release/net10.0/AssessmentScoring.dll
+  DeterministicAnalysis -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/DeterministicAnalysis/bin/Release/net10.0/DeterministicAnalysis.dll
+  AssessmentRuns -> /private/tmp/iga-cycle07-guidance-verification/src/server/modules/AssessmentRuns/bin/Release/net10.0/AssessmentRuns.dll
+  RecommendationGuidance.Tests -> /private/tmp/iga-cycle07-guidance-verification/tests/integration/RecommendationGuidance.Tests/bin/Release/net10.0/RecommendationGuidance.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.79
+PASS RG-CORE-001 literal complete fields/grouping/scoped identities/canonical bytes/digest
+PASS RG-CORE-002 independent ordering/immutability/current-vs-original/empty/draft compatibility
+PASS RG-CORE-003 missing/unknown/cross-scope/run/revision/versions/locks/duplicate/current/original/option denial
+NOT VERIFIED RG-PG: actual saved run/review requires --postgres.
+112 independent guidance assertions passed. Inert synthetic unverified values only; manual Windows, live pilot, CSV/PDF acceptance NOT VERIFIED.
+PostgreSQL 18.4 (Homebrew) on aarch64-apple-darwin24.6.0, compiled by Apple clang version 17.0.0 (clang-1700.6.4.2), 64-bit
+PASS RG-CORE-001 literal complete fields/grouping/scoped identities/canonical bytes/digest
+PASS RG-CORE-002 independent ordering/immutability/current-vs-original/empty/draft compatibility
+PASS RG-CORE-003 missing/unknown/cross-scope/run/revision/versions/locks/duplicate/current/original/option denial
+PASS RG-PG-001 actual saved grouped options/current review/immutable original/scoped identity/reload/old locks/no storage
+257 independent guidance assertions passed. Inert synthetic unverified values only; manual Windows, live pilot, CSV/PDF acceptance NOT VERIFIED.
+Checking formatting...
+All matched files use Prettier code style!

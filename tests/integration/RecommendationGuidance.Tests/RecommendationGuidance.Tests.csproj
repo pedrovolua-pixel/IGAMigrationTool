@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj" />
+    <ProjectReference Include="../../../src/server/modules/ReportDrafts/ReportDrafts.csproj" />
+    <ProjectReference Include="../../../src/server/modules/AssessmentRuns/AssessmentRuns.csproj" />
+    <ProjectReference Include="../../../src/server/modules/FindingReview/FindingReview.csproj" />
+    <ProjectReference Include="../../../src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="../ReportDrafts.Tests/CoreFixture.cs" Link="LegacyDraftInputFixture.cs" />
+    <Compile Include="../ReportDrafts.Tests/SavedDraftFixture.cs" Link="LegacySavedDraftInputFixture.cs" />
+    <Compile Include="../ReviewMaturity.Tests/HistoricalGoldens.cs" Link="HistoricalGoldens.cs" />
+    <None Update="canonical-golden.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

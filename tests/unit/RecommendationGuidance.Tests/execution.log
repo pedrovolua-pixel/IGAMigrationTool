@@ -1,0 +1,27 @@
+R7 executed verification, SDK10.0.401, own isolated CLI home.
+
+locked audited restore: exit0
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+direct module format --verify-no-changes: exit0
+
+direct unit format --verify-no-changes: exit0
+
+Release build: exit0
+  RecommendationGuidance -> /private/tmp/iga-cycle07-guidance/src/server/modules/RecommendationGuidance/bin/Release/net10.0/RecommendationGuidance.dll
+  RecommendationGuidance.Tests -> /private/tmp/iga-cycle07-guidance/tests/unit/RecommendationGuidance.Tests/bin/Release/net10.0/RecommendationGuidance.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.07
+
+portable unit execution: exit0
+PASS 287 recommendation guidance assertions
+
+independent literal golden oracle: exit0
+PASS independent literal golden bytes and option/content SHA256
+
+Initial sandbox formatter was unable to bind its required named pipe; it was stopped and rerun with permitted local pipe access. Initial result is not passed evidence.
