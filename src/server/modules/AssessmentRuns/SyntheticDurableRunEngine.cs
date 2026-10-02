@@ -462,7 +462,9 @@ public sealed class SyntheticDurableRunEngine
         (versions.AnalysisFixtureDigest is null || versions.AnalysisFixtureDigest is { Length: 64 } &&
             versions.AnalysisFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
         (versions.MaturityFixtureDigest is null || versions.MaturityFixtureDigest is { Length: 64 } &&
-            versions.MaturityFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
+            versions.MaturityFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
+        (versions.AiPreviewFixtureDigest is null || versions.AiPreviewFixtureDigest is { Length: 64 } &&
+            versions.AiPreviewFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
     private static bool LiveLease(RunRow run, Guid generation, DateTimeOffset now) => generation != Guid.Empty &&
         run.LeaseGeneration == generation && run.LeaseExpiresAt > now;
     private static SyntheticRunIssue? Guard(RunRow run, Guid generation, long? revision, DateTimeOffset now, bool allowCancellation)
@@ -532,6 +534,10 @@ public sealed class SyntheticDurableRunEngine
     }
     private static CoverageKey[] ReadActive(RunRow run) => JsonSerializer.Deserialize<CoverageKey[]>(run.ActiveWorkJson)
         ?? throw new SyntheticRunIntegrityException("Stored in-flight checkpoint is invalid.");
+    // Pure local input-lock recipe; a digest does not confer source or actor authority.
+    public static string ComputeInputDigest(SyntheticInventoryPlan plan, SyntheticRunInputVersions versions, string baselineId, string profileId) =>
+        InputDigest(JsonSerializer.Serialize(plan), JsonSerializer.Serialize(versions), baselineId, profileId);
+
     private static string InputDigest(string planJson, string versionsJson, string baselineId, string profileId)
     {
         var values = new StringBuilder();

@@ -9,4 +9,5 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
     <EmbeddedResource Include="../../../../migrations/assessment-runs/001-initial.sql" LogicalName="AssessmentRuns.001-initial.sql" />
   </ItemGroup>
+  <ItemGroup><EmbeddedResource Include="fixtures/ai-preview-*.json" /></ItemGroup>
 </Project>

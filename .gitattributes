@@ -1,3 +1,6 @@
 # Exact UTF-8 preview oracles include LF bytes on every checkout platform.
 /tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.html text eol=lf
 /tests/integration/SyntheticAiPreview.Tests/preview-golden.html text eol=lf
+
+# These embedded bytes are part of new immutable offline fixture input locks.
+/src/server/modules/AssessmentRuns/fixtures/ai-preview-*.json text eol=lf

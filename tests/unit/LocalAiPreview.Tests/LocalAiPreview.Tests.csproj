@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/AssessmentRuns/AssessmentRuns.csproj" />
+    <ProjectReference Include="../../../src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj" />
+    <Compile Include="../../../src/server/hosts/LocalConsultantDemo/DemoAiPreviewProjection.cs" Link="DemoAiPreviewProjection.cs" />
+  </ItemGroup>
+</Project>

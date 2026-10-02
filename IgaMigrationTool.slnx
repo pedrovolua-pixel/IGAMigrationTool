@@ -61,4 +61,6 @@
     <Project Path="tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj" />
     <Project Path="tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj" />
   </Folder>
+  <Project Path="tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
+  <Project Path="tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
 </Solution>
