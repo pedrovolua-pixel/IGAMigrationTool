@@ -71,6 +71,11 @@ jobs:
           dotnet run --project tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj --configuration Release --no-build
+      - name: Check offline synthetic AI preview and inert HTML
+        run: |
+          dotnet run --project tests/unit/SyntheticAiPreview.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticAiPreviewHtml.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-build
       - name: Check canonical unverified recommendation guidance
         run: dotnet run --project tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build
       - name: Check independent recommendation identities, originals and saved review bridge
@@ -169,6 +174,11 @@ jobs:
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
           node tests/e2e/recommendation-guidance/verify.mjs
+      - name: Check actual inert offline AI preview browser
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-build -- --write-previews "$RUNNER_TEMP/ai-preview"
+          node tests/e2e/synthetic-ai-preview/verify.mjs --preview-directory "$RUNNER_TEMP/ai-preview" --playwright-module "$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright"
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check collector host contract
@@ -243,6 +253,11 @@ jobs:
         run: dotnet run --project tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --configuration Release --no-restore
       - name: Check Windows independent fake-provider composition
         run: dotnet run --project tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj --configuration Release --no-restore
+      - name: Check Windows offline AI preview and inert HTML
+        run: |
+          dotnet run --project tests/unit/SyntheticAiPreview.Tests --configuration Release --no-restore
+          dotnet run --project tests/unit/SyntheticAiPreviewHtml.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-restore
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
       - name: Check Windows collector host and protected key behavior

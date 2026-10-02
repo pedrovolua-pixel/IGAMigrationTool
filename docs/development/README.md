@@ -42,3 +42,5 @@ The partial engineering evidence-store Bicep module and its compile/lint/policy 
 Add setup, migration and operational commands here only after they have been executed and verified.
 
 The offline [synthetic AI validation foundation](synthetic-ai-validation.md) supplies dependency-free packet and proposed-output validators plus independent fake-provider hosts. It has no live provider or application integration; its [fixture contract](../../specs/003-health-assessment/synthetic-ai-fixture-contract.md) preserves the unresolved production controls.
+
+The separate [offline AI proposal preview](synthetic-ai-preview.md) preserves typed explanations and exact source citations in an encoded Proposed-only fictional document. Its [internal preview contract](../../specs/003-health-assessment/synthetic-ai-preview-contract.md) leaves application, provider, policy and publication integration disabled.
