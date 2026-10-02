@@ -1,6 +1,6 @@
 # BFF identity and session foundation
 
-Status: RUNNING — bounded local implementation; live sign-in disabled  
+Status: LOCAL VERIFICATION PASSED — reviewable branch; public publication approval pending; live sign-in disabled
 Owner: Coordinator / repository owner  
 Started: 2026-10-01
 
@@ -31,4 +31,12 @@ Before live sign-in: accepted Container Apps authorization-code redemption with 
 
 ## Execution record
 
-- Planning: approved specifications read; implementation workflow applied. Packet checks and reviews pending.
+- Planning: approved specifications read; repository implementation and scoped security-review workflows applied. Writing packets used isolated worktrees from `131eaa6` and received independent review.
+- BFF-S1 accepted after the expired-rotation correction: session author `90fb073f294a0b37ae3088ce044d4650b22a3982`; coordinator 27 unit / 100 PostgreSQL checks; independent reviewer 27 unit / 103 PostgreSQL checks.
+- BFF-S2 accepted after pre-metadata challenge/callback/sign-out guards: transport author `bba44cbd95169ea11cc84457c9ac6337d02b220d`; independent reviewer 71 assertions plus a separate zero-fetch probe. Coordinator scoped remote sign-out under the cookie path and passed the final 72 assertions.
+- BFF-S3 accepted: policy author `f5c7c39a2a044255f504a2726c1416814ebcbbdc`; author and independent reviewer each passed 2546 matrix/boundary/overlap cases.
+- BFF-I1 implementation `3781b3b464102062795185fd812818555259aa20`: 84 actual HTTPS/shared-store checks passed, independently repeated against that immutable head. Actual subject binding and denial HTTP results were corrected before review acceptance. Final source contains no public authentication bypass or deployed product routes.
+- Pinned 33-project restore/format/Release build, all 11 unit executables, architecture and existing synthetic/database regressions, advisory scan, secret scan, 18 Bicep compile/lint files and infrastructure policies passed. Exact results and limits: [evidence](../../docs/development/evidence/bff-identity-session-20261002.json), [scoped security review](../../docs/development/evidence/bff-foundation-review-20261002.md), [composition handoff](../../docs/development/bff-identity-session-foundation.md).
+- The coordinator integrated on `codex/bff-integration` at `/tmp/iga-bff-integration` because another approved cycle owns unfinished shared-checkout edits. Those edits are preserved; the BFF modules are not yet integrated into that dirty checkout.
+- Automatic approval review blocked source publication. The authenticated owner and public visibility of `pedrovolua-pixel/IGAMigrationTool` were verified; explicit public branch/draft-PR approval is pending. Updated hosted CI and Windows/container execution remain NOT VERIFIED. No gate or production approval is inferred.
+- Private pilot board update/publication is pending. This cycle is not administratively closed until its documentation and board reflect the verified handoff/publication state.
