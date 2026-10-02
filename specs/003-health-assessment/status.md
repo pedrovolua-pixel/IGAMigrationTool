@@ -4,7 +4,7 @@ State: IMPLEMENTING
 
 Owner: Product owner
 
-Last updated: 2026-10-01
+Last updated: 2026-10-02
 
 Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICAL DESIGN`, `TECHNICAL APPROVED`, `PLANNED`, `IMPLEMENTING`, `CODE REVIEW`, `VERIFICATION`, `STAGING`, `ACCEPTANCE`, `RELEASE READY`, `RELEASED`, `OBSERVED`, `BLOCKED`.
 
@@ -32,6 +32,10 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 - Repository owner gave standing preapproval for pilot-local work. A collector Windows Service/CLI shell now validates protected local configuration, fixed commands and schedule semantics; isolated local lease and encrypted checkpoint primitives have synthetic checks, and Windows DPAPI/ACL checks passed on both hosted server runners. SQL and package output remain blocked pending exact contracts.
 
 ## In progress
+
+[BFF Azure deployment preparation](../../plans/active/bff-azure-deployment-preparation.md) is underway in the existing unmerged BFF draft. The independently reviewed permanently disabled executable passed 254 actual-process checks and the integrated 43-project locked restore/format/build passed. Image inventory collection is being independently reviewed; actual Linux Docker/Trivy checks are pending. The [exact D01/D02 local transport/session contract](../../docs/development/bff-production-contract-proposal.md) awaits technical/security-owner approval. Production enrollment/app-role authority, proxy/keys and durable session/audit decisions remain deferred; no new Azure session, Graph consent, live sign-in or G1 acceptance follows.
+
+[Cycle07](../../plans/active/local-pilot-recommendation-guidance-cycle-07.md) begins the approved read-only structured synthetic recommendation-guidance slice. Existing frozen options retain prerequisites/risk/recovery/validation and original provenance alongside captured current finding presentation. All guidance remains unverified; finding confirmation cannot review advice or validate remediation. Priority/effort/task/export/publication contracts remain unavailable. Isolated implementation/UI/verification packets and private start publication are pending; no new-cycle check or milestone pass is claimed.
 
 [Cycle06](../../plans/completed/local-pilot-draft-report-cycle-06.md) implements the approved read-only canonical synthetic draft preparation. Summary, technical and inert Markdown previews share one captured review/health/quality/independent-maturity value and digest. Current Scoring runs remain unpublished. Independent review and180 draft/114 Markdown/201 source-database/2137 browser assertions and historical regressions passed, alongside whole-solution/frontend/infrastructure checks. Configured Linux/Windows/container partial CI passed on f4c7f82; owner-private publication is confirmed and the bounded cycle is closed. Full local pilot, report history/publication/PDF, manual accessibility and G1–G9 remain gated.
 
