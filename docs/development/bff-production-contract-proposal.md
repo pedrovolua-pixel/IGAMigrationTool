@@ -63,3 +63,7 @@ Tests after acceptance include anonymous/authenticated CSRF binding, wrong/missi
 ## Attributed local approval — 2026-10-02
 
 Repository owner replied “approved” to the exact D01/D02 review request after the verified disabled-package checkpoint. D01/D02 are accepted for bounded local implementation and synthetic verification. This records the technical/security-owner decision requested by AGENTS.md; it grants no production activation, new provider permission, customer access, Azure session or release. D03/D04 remain deferred and D05 controls remain unverified. [The implementation packet](../../plans/completed/bff-authentication-contract-cycle.md) owns executed evidence and completion.
+
+## D03/D04 concrete review packet — 2026-10-02
+
+Deferred production choices now have a [concrete P01–P05 proposal](bff-production-authority-hosting-proposal.md), [Proposed ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md), and [protected binding intake](bff-production-bindings-template.json). These remain unaccepted. The exact next approval covers local synthetic authority/audit/configuration primitives only; Graph/SQL/key/cloud access, production host/adapter activation, audit-outage preservation, D05 and paid session remain separate. D01/D02 acceptance is unchanged.

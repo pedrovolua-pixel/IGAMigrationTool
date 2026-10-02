@@ -17,3 +17,7 @@ ADRs are append-only decision history. Supersede an accepted ADR with a new ADR 
 - [`ADR-0006-engineering-evidence-store-access.md`](./ADR-0006-engineering-evidence-store-access.md) — separate create, read and purge data identities implemented as a pilot draft; Milestone 0 review pending.
 - [`ADR-0007-reviewer-decision-evidence.md`](./ADR-0007-reviewer-decision-evidence.md) — signed, metadata-only reviewer decisions and trusted role coverage implemented as a pilot draft; Milestone 0 review pending.
 - [`ADR-0008-pilot-owner-override-evidence.md`](./ADR-0008-pilot-owner-override-evidence.md) — signed, exact-scope pilot-owner waiver evidence implemented as a local draft; Milestone 0 review pending.
+
+## Proposed production composition
+
+- [`ADR-0009-production-bff-authority-and-audit.md`](./ADR-0009-production-bff-authority-and-audit.md) — versioned product/provider authority and atomic payload-free session/authority audit; technical/security decision pending. No live access or deployment authorization.
