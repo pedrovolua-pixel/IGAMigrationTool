@@ -181,11 +181,53 @@
     "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
     "audience": "Existing owner-private; confirmed owner/custom/one owner/no groups/no external visitors",
     "lastConfirmedVersionAtPreparation": 82,
-    "thisCyclePublication": "PENDING \u2014 publish exact canonical proposal and dependency board after source integration; retain actual native deployment proof separately"
+    "thisCyclePublication": "CONFIRMED for reviewed proposal snapshot; final metadata-only source will be republished and its native proof retained separately",
+    "confirmedCanonicalCommit": "fc276f0b382966cf7bd054bfa4de2866192e8fe3",
+    "confirmedVersion": 83,
+    "sourceCommit": "e3e12963f9695350fcb861aa8f378793cee7f4f2",
+    "deploymentId": "appgdep_6ac04099d4888191bf376325bf714f4a",
+    "deploymentStatus": "succeeded",
+    "succeededAtUtc": "2026-10-02T23:39:11.957742+00:00",
+    "humanTasks": {
+      "existing11Preserved": true,
+      "newPendingArtifactReviewDecision": 1,
+      "totalOpen": 12
+    },
+    "checks": {
+      "immutableRepositoryLinks": 68,
+      "desktopMobile320": "PASS",
+      "taskRoleCompletionLinksAndNavigation": "PASS",
+      "unexpectedPageErrors": 0,
+      "visualInspection": "Desktop and 320px captured views inspected"
+    },
+    "proof": {
+      "path": "/private/tmp/iga-cycle13-publication-proof.json",
+      "sha256": "5d3f95540ca53d9999728b85820b5ce9f998386ddd29f2c41623378826372202"
+    },
+    "archive": {
+      "path": "/private/tmp/iga-cycle13-private-preparation.tar.gz",
+      "sha256": "84e7e2c7b173d0d89270678156c9df2d63eaaf072c4af33d12cc523776d88797"
+    }
   },
   "preservation": {
     "originalConcurrentFiles": 51,
     "status": "PASS byte-exact before coordinator integration",
     "record": "/private/tmp/iga-cycle13-root-preservation.json"
-  }
+  },
+  "integrationControlEvidence": {
+    "initialAutomaticReview": "REJECTED generic integration script: concern about whole-file staging/overwriting concurrently dirty canonical documents; rejected action did not run",
+    "saferVerifiedAction": "Read-only full apply/reverse simulation proved four append-only canonical hunks and four exact new documents; explicit index patch then worktree patch accepted; no whole-file staging",
+    "safetyProof": {
+      "path": "/private/tmp/iga-cycle13-scoped-integration-safety-proof.json",
+      "sha256": "53a83930b796125e46734207384dca408b9b1648298aafb5863318167044bd37"
+    },
+    "preservationProof": {
+      "path": "/private/tmp/iga-cycle13-final-root-preservation.json",
+      "sha256": "3527160e8acb427dfc861c65d9ec49fe12b4dcdbc2e965ec76515c7fede508c3"
+    },
+    "remainingAutomaticReviewBlock": "None",
+    "originalToolFailure": "An unprivileged git write-tree comparison could not create index.lock; replaced with successful read-only git diff --cached comparison and actual equal commit tree reads. No failed check claimed PASS."
+  },
+  "prepublicationCorrection": "An unverified placeholder Git commit string in the local board was corrected to actual fc276f0b382966cf7bd054bfa4de2866192e8fe3 before link checks, screenshots, push or deployment. All68 exact immutable links then passed.",
+  "closure": "Documentary preparation complete; human AR13-01\u201305 decision remains PENDING and implementation remains BLOCKED. No runtime implementation check or feature/gate acceptance. Final native publication proof retained separately to avoid self-referential commit binding."
 }
