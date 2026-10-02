@@ -22,3 +22,11 @@ Live Entra code redemption, managed assertion renewal, nonce/state/PKCE replay, 
 # Scoped logout callback
 
 The supported provider remote sign-out callback is configured under the same narrow cookie path (`/bff/signout-oidc` by default). Provider logout and Entra front-channel configuration still require live verification; this setting does not claim global sign-out.
+
+## Approved local D02 contract
+
+Current `SubjectAdmission` supplies subject eligibility, roles, monotonic version, current provider check and explicit provider sign-in cutoff. It contains no subject-wide authentication timestamp or MFA admission flag. Guest admission additionally requires the exact reviewed organizational home tenant; unknown or mismatched signed `idp`, documented personal-account origins and absent trusted evidence deny. These are synthetic local contracts, not a production enrollment/provider adapter.
+
+`GuardedOpenIdConnectHandler` carries a random pending transaction in framework-protected state and forces fresh code/PKCE authentication and the fixed session return. The token validator requires a signed scalar integer `auth_time`; the supported protocol validator verifies the framework-read nonce even when Microsoft.Identity.Web manually redeems a code (the framework otherwise skips that token-response validator). Token validation never consumes the pending transaction. Consumption follows successful complete framework processing, is atomic in the shared PostgreSQL store, and rechecks the deadline after a contended lock. Authentication and challenge freshness are rechecked after async consumption. A later failure can burn a transaction, but cannot issue a session.
+
+Cookie validation binds the original authentication, exact store reference, immutable subject, current cutoff, roles and security version; it sets `BffValidatedSession` only after those checks. The privileged verifier remains separate and default-denying. Unbound remote signout refuses because minimal product tickets do not retain an approved provider `sid`/issuer binding. D01 local signout remains separate. The diagnostic executable stays permanently disabled. Actual Entra/Graph/Conditional Access, managed-identity redemption, deployed keys/audit and production proxy authority remain NOT VERIFIED.

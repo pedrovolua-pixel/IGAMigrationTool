@@ -192,7 +192,7 @@ public static class BffRegistration
                 var now = (clock ?? TimeProvider.System).GetUtcNow();
                 if (admission?.Subject != subject || !BffIdentity.IsAdmitted(admission, now) ||
                     !BffAuthenticationEvidence.OrganizationalOrigin(context.Principal, admission!, settings.TenantId) ||
-                    context.Properties is null || !BffAuthenticationEvidence.TryReadAuthentication(context.Principal, context.Properties, now, out var authenticated) ||
+                    context.Properties is null || !BffAuthenticationEvidence.TryReadAuthentication(context.Principal, context.SecurityToken!, context.Properties, now, out var authenticated) ||
                     authenticated < admission!.SignInValidFromUtc)
                 {
                     context.Fail("Identity admission refused.");

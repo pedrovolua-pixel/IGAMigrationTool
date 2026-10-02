@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using IdentitySessions;
 using Microsoft.AspNetCore.Authentication;
@@ -57,13 +58,17 @@ internal static class BffAuthenticationEvidence
         return true;
     }
 
-    internal static bool TryReadAuthentication(ClaimsPrincipal principal, AuthenticationProperties properties,
+    internal static bool TryReadAuthentication(ClaimsPrincipal principal, JwtSecurityToken token, AuthenticationProperties properties,
         DateTimeOffset now, out DateTimeOffset authenticated)
     {
         authenticated = default;
         var times = principal.FindAll("auth_time").ToArray();
+        // Claim projection can deduplicate repeated array values. Require a
+        // scalar integer in the validated signed payload itself as well.
+        if (!token.Payload.TryGetValue("auth_time", out var raw) || raw is not (long or int)) return false;
         if (!TryReadChallenge(properties, out var challenge) || challenge.IssuedUtc > now ||
             now - challenge.IssuedUtc >= TimeSpan.FromMinutes(15) || times.Length != 1 ||
+            times[0].ValueType is not (ClaimValueTypes.Integer64 or ClaimValueTypes.Integer32) ||
             !long.TryParse(times[0].Value, NumberStyles.None, CultureInfo.InvariantCulture, out var seconds) ||
             seconds < challenge.IssuedUtc.ToUnixTimeSeconds() || seconds > now.ToUnixTimeSeconds())
         {

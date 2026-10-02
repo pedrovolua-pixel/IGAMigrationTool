@@ -152,7 +152,7 @@ async Task<TokenValidatedContext> Admit(ClaimsPrincipal identity, string? issuer
     var context = new TokenValidatedContext(Context(provider),
         new AuthenticationScheme(BffRegistration.OidcScheme, null, typeof(OpenIdConnectHandler)), oidc, identity, new AuthenticationProperties())
     {
-        Principal = new ClaimsPrincipal(new ClaimsIdentity(identity.Claims.Append(new Claim("auth_time", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture))), BffRegistration.CookieScheme, "oid", "roles")),
+        Principal = new ClaimsPrincipal(new ClaimsIdentity(identity.Claims.Append(new Claim("auth_time", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture), ClaimValueTypes.Integer64)), BffRegistration.CookieScheme, "oid", "roles")),
         Properties = new AuthenticationProperties(new Dictionary<string, string?>
         {
             ["bff.pendingReference"] = SessionTicket.NewKey(),
@@ -161,7 +161,7 @@ async Task<TokenValidatedContext> Admit(ClaimsPrincipal identity, string? issuer
         { RedirectUri = returnPath },
         Nonce = eventNonce,
         TokenEndpointResponse = new OpenIdConnectMessage { IdToken = "synthetic-event-only", AccessToken = "synthetic-unused-access", TokenType = "Bearer" },
-        SecurityToken = new JwtSecurityToken(issuer ?? $"https://login.microsoftonline.com/{tenant:D}/v2.0", client.ToString("D"), [new Claim("nonce", eventNonce), new Claim("sub", "synthetic-event-subject"), new Claim("iat", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)], DateTime.UtcNow.AddMinutes(-1), DateTime.UtcNow.AddMinutes(10))
+        SecurityToken = new JwtSecurityToken(issuer ?? $"https://login.microsoftonline.com/{tenant:D}/v2.0", client.ToString("D"), [new Claim("nonce", eventNonce), new Claim("sub", "synthetic-event-subject"), new Claim("iat", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), new Claim("auth_time", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)], DateTime.UtcNow.AddMinutes(-1), DateTime.UtcNow.AddMinutes(10))
     };
     await oidc.Events.TokenValidated(context);
     return context;
@@ -272,6 +272,7 @@ sealed class MemoryChallenges : IPendingAuthenticationChallengeStore
 {
     private readonly System.Collections.Concurrent.ConcurrentDictionary<string, DateTimeOffset> pending = new();
     public int Consumes { get; private set; }
+    public Action? AfterConsume { get; set; }
     public ValueTask<PendingAuthenticationChallenge?> CreateAsync(DateTimeOffset now, CancellationToken cancellationToken)
     {
         var reference = SessionTicket.NewKey(); pending[reference] = now;
@@ -281,7 +282,7 @@ sealed class MemoryChallenges : IPendingAuthenticationChallengeStore
     {
         var ok = challenge.IssuedUtc <= now && now - challenge.IssuedUtc < TimeSpan.FromMinutes(15) &&
             pending.TryGetValue(challenge.Reference, out var issued) && issued == challenge.IssuedUtc && pending.TryRemove(challenge.Reference, out _);
-        if (ok) Consumes++;
+        if (ok) { Consumes++; AfterConsume?.Invoke(); }
         return ValueTask.FromResult(ok);
     }
 }

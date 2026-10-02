@@ -66,3 +66,9 @@ whose name starts `iga_synthetic_`, plus `--reset-synthetic-schema`. They reset 
 the session schema in that explicit disposable database and exercise real PostgreSQL,
 two store/data-protection instances, exact lifetimes, tamper denial and concurrent
 renew/store/rotate versus revoke. No in-memory store substitutes for persistence.
+
+## Additive authentication context migration
+
+Apply `002-authentication-context.sql` only through the controlled migration identity after `001`; startup performs no migration. Existing subject rows have a null provider cutoff and fail closed until trusted administration supplies explicit evidence. `ProvisionAsync` and `ConfirmProviderAsync` require that cutoff; refresh cannot move it backward. Retrieval uses the stored session's original authentication, so a newer session for the same subject cannot refresh the older one.
+
+`PostgreSqlAuthenticationChallengeStore` stores only a hash of the opaque state reference and its microsecond-precise issuance timestamp. A row lock, fresh injected server clock and conditional update allow one successful consume across replicas within the accepted strict 15-minute validity. The handler owns protected OIDC state and consumes only after all supported protocol checks. Missing composition defaults to `DenyingAuthenticationChallengeStore`. Consumed or expired records remain until a separately reviewed cleanup/retention decision; this migration chooses no deletion schedule and grants no role. PostgreSQL retrieval errors fail closed with no returned ticket. Production migration permissions, compatible rollback, provider cutoff retrieval, origin semantics and deployed replica/key behavior remain unverified.
