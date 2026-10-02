@@ -154,5 +154,25 @@
     "AMPLS delete returned Not Found after removing it; absence verified before continuation",
     "One DNS zone remained after generic delete response; link list verified empty, dedicated DNS delete succeeded and remaining DNS controls used",
     "Scope-only role query fails after namespace deletion; subscription-wide role list filtered to exact queue scope confirmed zero remaining grants"
-  ]
+  ],
+  "executionRecordPartialCi": {
+    "runId": 36950617049,
+    "sourceCommit": "c9f0c1f5807466b27e49af146513a9038d4514c3",
+    "status": "PASS",
+    "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36950617049"
+  },
+  "privateBoardPublication": {
+    "siteSourceCommit": "e15f696fa1c804faec6a3eca9d53929281c81828",
+    "repositorySnapshot": "c9f0c1f5807466b27e49af146513a9038d4514c3",
+    "deploymentId": "appgdep_6abf07f5dd548191875809ee38ba2d1b",
+    "publishedUtc": "2026-10-02T01:25:16.927257+00:00",
+    "status": "Succeeded",
+    "liveBoardSnapshotAndCleanupText": "PASS",
+    "desktopWidth": 1920,
+    "mobileWidth": 390,
+    "pageAndTaskCardOverflow": "NONE",
+    "internalAnchorTargets": "PASS",
+    "audience": "existing owner-private",
+    "proofScreenshotSha256": "66ab6197f5ffdafce684f845b342b4c385524a719f6288e7e6d04c970af6ce1c"
+  }
 }
