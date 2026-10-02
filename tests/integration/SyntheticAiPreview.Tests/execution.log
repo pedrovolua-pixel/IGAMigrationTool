@@ -1,0 +1,5 @@
+PASS V9-001 complete independent canonical/HTML/source/category/citation/conflict goldens
+PASS V9-002 foreign-run/packet/corrupt-content/metadata denials without partial output
+PASS V9-003 immutable/deterministic/hostile-Unicode/empty/escaped-expansion composition
+PASS V9-004 four actual composed preview files and digest manifest written
+192 independent V9 composition assertions passed. Fictional offline only; real provider, production authorization, semantic redaction, budgets, recovery and manual accessibility NOT VERIFIED.

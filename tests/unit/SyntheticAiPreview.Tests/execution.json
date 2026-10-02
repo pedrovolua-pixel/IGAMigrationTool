@@ -1,0 +1,183 @@
+{
+  "schema": "synthetic-ai-preview-projection-execution-v1",
+  "worker": "A9",
+  "baseCommit": "2461f6d1f1407658f09c9954a27a79768a807fb5",
+  "sdk": "10.0.401",
+  "recordedAtUtc": "2026-10-02T15:47:57.728555+00:00",
+  "result": {
+    "suite": "synthetic-ai-preview-projection-v1",
+    "assertions": 512,
+    "factoryCases": 21,
+    "deniedCases": 68,
+    "goldenDigest": "c5439fef93a3c2c6e59efb5f54780ba79b4961ccf31a01dcaae414882a83a1dd",
+    "goldenBytes": 2417,
+    "expandedPacketBytes": 372437,
+    "expandedProposalBytes": 1483147,
+    "expandedPreviewBytes": 1483806,
+    "result": "PASS",
+    "reflection": "denial fixtures only; actual factories for accepted inputs"
+  },
+  "checks": {
+    "lockedAuditedRestore": "PASS",
+    "ownedModuleAndUnitFormatVerification": "PASS",
+    "releaseWarningsAsErrorsBuild": "PASS: zero warnings/errors",
+    "actualUnitExecution": "PASS",
+    "ownedSecretScan": "PASS: pinned Gitleaks8.30.1, 50415 bytes, zero findings, no allowlist",
+    "ownedWhitespace": "PASS: exact staged git diff --cached --check"
+  },
+  "sources": [
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewBuilder.cs",
+      "sha256": "944fd60053b4deb560fdb1ffa1d73236472c04d11cd0e3bb26263f5f66100990",
+      "bytes": 13344
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/packages.lock.json",
+      "sha256": "61f9f6e8443f279b178f19e82e2dc81836f76220f4aeae319a19a6692744ef03",
+      "bytes": 282
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/golden-packet.json",
+      "sha256": "eaceb95394275e655328cf2033d3237a4f060234ad317f19643586e8e7077415",
+      "bytes": 1117
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/golden-digest.txt",
+      "sha256": "1009115a62953adcaac3d939c8e4c7e2498af57d220993c281c6ade9cef5c949",
+      "bytes": 64
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/README.md",
+      "sha256": "6d4106978967be2239cbf30b0532533bcffa613635a6ad706fc42fc1ba5c7cda",
+      "bytes": 1957
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj",
+      "sha256": "ab5a256a484a9ab5093fdfbb0e5bf1b878f073a5e027212b573b10a0f425d083",
+      "bytes": 401
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/golden-proposal.json",
+      "sha256": "7a79c4d1dc2c75b6099f0fd9e213a8710c9c869ea2233f67157cd4acf348f9c0",
+      "bytes": 1758
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/fake-output.json",
+      "sha256": "2df034bbb212614957453014733b044ed1ccc8c0356d3066e516448074ee1f20",
+      "bytes": 1735
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/packet-input.json",
+      "sha256": "86ddda99d6e325c47e494d417c35f3c6590c244f59988b9b17c1bfcff974d3ac",
+      "bytes": 1087
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/golden-preview.json",
+      "sha256": "c5439fef93a3c2c6e59efb5f54780ba79b4961ccf31a01dcaae414882a83a1dd",
+      "bytes": 2417
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/Program.cs",
+      "sha256": "b88f436b05de5e45cd9dbdbbcdc9f25dc983a8c636c2d384465d03515a1ed24b",
+      "bytes": 18333
+    }
+  ],
+  "sharedInputs": [
+    {
+      "path": "specs/003-health-assessment/synthetic-ai-preview-contract.md",
+      "sha256": "091044a0eca52c12f8419879a26509c3f127131b6ee39faeccd7faeb01ed4ee9",
+      "bytes": 6877
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewContracts.cs",
+      "sha256": "244be0394eeec4b3b26a3845724bbdb2e281fc507d2bd2593f64c3e3f80bfd8f",
+      "bytes": 3415
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewCanonical.cs",
+      "sha256": "a546551b3b75daef11177ce7e5d74bf9b50f1d7e07ac3972cdebb2ef23e1e527",
+      "bytes": 2189
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj",
+      "sha256": "7b531ebaca9d5f7260ebc9b59feb9d2a742507d3dee1e5d39bae303934aae8db",
+      "bytes": 163
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuilder.cs",
+      "sha256": "972a884e4bc0fef605a975f4e59a1a888c2aba93174eccf283b2c7388e1ae8d8",
+      "bytes": 5809
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalValidator.cs",
+      "sha256": "26b727544d4a5b70c79c4d366af1d963bee1c8863e6d199a43c1b97a34e5388c",
+      "bytes": 7177
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/FixtureJson.cs",
+      "sha256": "6b0f1b2c71e9e424ddba4bb9868b9d83bc85ef787c7f4c93478b579de331b32c",
+      "bytes": 4294
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiPacket.cs",
+      "sha256": "6a4d50e62857082c6867589644e4ff8b17fbfd68d4ee3656c31c705cddddb0e6",
+      "bytes": 767
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalContracts.cs",
+      "sha256": "2874bf68aa17345d6e585095cdd99069f57ede4b5f24a9f113d44b79fc1d074c",
+      "bytes": 1460
+    }
+  ],
+  "executedBinaries": [
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.Tests.dll",
+      "sha256": "4571ad605f20318dd364a9f3f024d1ac8a341b4fcc6647e754a34d15342d612c",
+      "bytes": 30720
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.dll",
+      "sha256": "ea2cebca6714a2e0d9298b1327636d0ed8aa50385fdf3eba6e38a3d20fd8e9ec",
+      "bytes": 31744
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiValidation.dll",
+      "sha256": "adafe44ed26c5a140b28cf98b8694deb3e2161db24f22b1c2d4014b8e2e95915",
+      "bytes": 23552
+    }
+  ],
+  "transcripts": [
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/execution/build.log",
+      "sha256": "2698bc7f396aee6b73360fad34fbd1a0aecc1dc13d99d4943ea86cc24be3ee24",
+      "bytes": 518
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/execution/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/execution/restore.log",
+      "sha256": "3a42c4728abd8b4974744a9b8f96dc85d6853d8d700b2bc38380c1e2ac6097d7",
+      "bytes": 416
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/execution/run.log",
+      "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0",
+      "bytes": 382
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreview.Tests/execution/secrets.log",
+      "sha256": "81d4e648bb87f0b80d2e3ddb60123682986974fa2da93ecab3a5410902f0e2fb",
+      "bytes": 81
+    }
+  ],
+  "limits": [
+    "Local synthetic immutable values only",
+    "Reflection only for impossible-value denial fixtures",
+    "HTML/browser validation assigned to B9/V9",
+    "No real provider, policy, redaction or authorization semantic evidence",
+    "No persistence/scoring/review/run-profile integration or gate acceptance"
+  ]
+}

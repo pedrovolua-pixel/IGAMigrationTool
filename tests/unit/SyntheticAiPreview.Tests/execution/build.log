@@ -1,0 +1,9 @@
+  SyntheticAiValidation -> /private/tmp/iga-cycle09-projection/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  SyntheticAiPreview -> /private/tmp/iga-cycle09-projection/src/server/modules/SyntheticAiPreview/bin/Release/net10.0/SyntheticAiPreview.dll
+  SyntheticAiPreview.Tests -> /private/tmp/iga-cycle09-projection/tests/unit/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.47

@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "synthetic-ai-preview-html-execution-v1",
+  "packet": "B9",
+  "status": "Executed isolated checks; independent review and actual composition/browser are coordinator-owned",
+  "baseCommit": "2461f6d1f1407658f09c9954a27a79768a807fb5",
+  "toolchain": {
+    "dotnet": "10.0.401",
+    "target": "net10.0",
+    "gitleaks": "8.30.1",
+    "python": "Python 3.9.6"
+  },
+  "checks": {
+    "lockedAuditedRestore": "PASS",
+    "ownedWhitespaceFormatter": "PASS",
+    "ownedFullFormatter": "PASS",
+    "releaseBuild": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "portableHost": {
+      "result": "PASS",
+      "assertions": 217,
+      "acceptedRenderCalls": 18,
+      "payloadFreeDenials": 66
+    },
+    "independentPythonOracle": {
+      "result": "PASS",
+      "exactArtifacts": 3,
+      "htmlSha256": "91b9aa245a17ac8b3b4a279a0c0c34b7346ff35c93513f94ef34736e4cda292c"
+    },
+    "ownedSecretScan": {
+      "result": "PASS",
+      "findings": 0,
+      "files": 9
+    },
+    "whitespaceDiff": "PASS"
+  },
+  "sourceBindings": [
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewRenderer.cs",
+      "bytes": 9187,
+      "sha256": "309c9345c85b6d3d3e336c9e4629f9b3e1d1de682f1dee79a2c15d5dc902ec00"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/Program.cs",
+      "bytes": 16006,
+      "sha256": "98746232563e0a6412d1795c91e40eae79aa03382459e82d8786abe0440c76e6"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/README.md",
+      "bytes": 2176,
+      "sha256": "bb743028bc61acf52e0d55b5718d7349996a3d7512502e676ae4a7eee8f095ed"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/SyntheticAiPreviewHtml.Tests.csproj",
+      "bytes": 391,
+      "sha256": "c3fcb3b5c18de0fd64087bcc45648a662e74ee63ee4baf66c515dcfea3556e0a"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.html",
+      "bytes": 5244,
+      "sha256": "91b9aa245a17ac8b3b4a279a0c0c34b7346ff35c93513f94ef34736e4cda292c"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.json",
+      "bytes": 2723,
+      "sha256": "7e885e2690b24304a2ab45b7ef51f5aa298d8be94a99aa1b1670653bab9c0f9d"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.sha256",
+      "bytes": 64,
+      "sha256": "c71e0bdc96ede6420099eb252271fa410177bc2a298be7e79a095eb3c6631540"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/oracle.py",
+      "bytes": 7749,
+      "sha256": "5c480af892e0a8fd34d4852c118d1b55b174e0e3468fe60a725e4de62d4727ed"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/packages.lock.json",
+      "bytes": 282,
+      "sha256": "61f9f6e8443f279b178f19e82e2dc81836f76220f4aeae319a19a6692744ef03"
+    }
+  ],
+  "sharedBindings": [
+    {
+      "path": "specs/003-health-assessment/synthetic-ai-preview-contract.md",
+      "bytes": 6877,
+      "sha256": "091044a0eca52c12f8419879a26509c3f127131b6ee39faeccd7faeb01ed4ee9"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewCanonical.cs",
+      "bytes": 2189,
+      "sha256": "a546551b3b75daef11177ce7e5d74bf9b50f1d7e07ac3972cdebb2ef23e1e527"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewContracts.cs",
+      "bytes": 3415,
+      "sha256": "244be0394eeec4b3b26a3845724bbdb2e281fc507d2bd2593f64c3e3f80bfd8f"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj",
+      "bytes": 163,
+      "sha256": "7b531ebaca9d5f7260ebc9b59feb9d2a742507d3dee1e5d39bae303934aae8db"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/packages.lock.json",
+      "bytes": 133,
+      "sha256": "8af39d741896c7b887dbdbb611028462778e62f52deae9e2c19f4200dffe0893"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/FixtureJson.cs",
+      "bytes": 4294,
+      "sha256": "6b0f1b2c71e9e424ddba4bb9868b9d83bc85ef787c7f4c93478b579de331b32c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuildResult.cs",
+      "bytes": 346,
+      "sha256": "71a6f828f1a0e41c35a9e8a1decc70ff9aecb081b883811bef5bbb724801f2d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuilder.cs",
+      "bytes": 5809,
+      "sha256": "972a884e4bc0fef605a975f4e59a1a888c2aba93174eccf283b2c7388e1ae8d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalContracts.cs",
+      "bytes": 1460,
+      "sha256": "2874bf68aa17345d6e585095cdd99069f57ede4b5f24a9f113d44b79fc1d074c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalValidator.cs",
+      "bytes": 7177,
+      "sha256": "26b727544d4a5b70c79c4d366af1d963bee1c8863e6d199a43c1b97a34e5388c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiPacket.cs",
+      "bytes": 767,
+      "sha256": "6a4d50e62857082c6867589644e4ff8b17fbfd68d4ee3656c31c705cddddb0e6"
+    }
+  ],
+  "executedBinaryBindings": [
+    {
+      "path": "src/server/modules/SyntheticAiPreview/bin/Release/net10.0/SyntheticAiPreview.dll",
+      "bytes": 31744,
+      "sha256": "12424673f659d86e5d28dfdfcbf1b33fed3e2bd9421bd4b0053bc82baa11a566"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll",
+      "bytes": 23552,
+      "sha256": "58b8f30e502614ef5ab141ca0f83db35f18e60edf66eaa58dbbd0df9f5bc70d0"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/bin/Release/net10.0/SyntheticAiPreviewHtml.Tests.dll",
+      "bytes": 24576,
+      "sha256": "b5ba9e6af6b24ad62c764be7eb20f44a66f5d3fb6342691a63ad1e7b0427596d"
+    }
+  ],
+  "transcriptBindings": [
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/execution-checks.log",
+      "bytes": 1184,
+      "sha256": "514bc3d212b880573433a9e0f12a244157387d282885a44cea5769711360b12a"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/execution-format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/SyntheticAiPreviewHtml.Tests/execution-secrets.log",
+      "bytes": 81,
+      "sha256": "58cc4cbc260b49be6dbd9a3e4a99dd778e0f12a5731eeced03bb40993c00a3cc"
+    }
+  ],
+  "executionCommands": [
+    "dotnet restore tests/unit/SyntheticAiPreviewHtml.Tests/SyntheticAiPreviewHtml.Tests.csproj --locked-mode -p:NuGetAudit=true -p:NuGetAuditMode=all -p:NuGetAuditLevel=low",
+    "dotnet format whitespace <project> --no-restore --include <owned renderer/test> --verify-no-changes",
+    "dotnet format <project> --no-restore --include <owned renderer/test> --verify-no-changes",
+    "dotnet build <project> -c Release --no-restore",
+    "dotnet run --project <project> -c Release --no-restore --no-build",
+    "python3 tests/unit/SyntheticAiPreviewHtml.Tests/oracle.py --verify",
+    "gitleaks dir <owned 9-file snapshot> --redact --no-banner",
+    "git diff --check"
+  ],
+  "testOnlyBoundary": "Nonpublic constructor reflection assembles independent typed primitives and canonical fixture; no A9 builder implementation existed in this isolated base. V9 proves actual factory composition. Oversized reflection-only graph is not a valid Cycle08 original wire input.",
+  "limits": [
+    "No browser or supported Windows/manual assistive-technology checks executed in this worker.",
+    "No provider/network/customer/auth/storage/host/UI/review/score/action/export/production paths added or exercised.",
+    "No production CSP or deployment sandbox proof.",
+    "No semantic verification of claims/citations/conflicts; supplied categories remain Proposed and untrusted."
+  ],
+  "migrations": [],
+  "dependenciesAdded": [],
+  "runtimeConfigurationChanges": []
+}

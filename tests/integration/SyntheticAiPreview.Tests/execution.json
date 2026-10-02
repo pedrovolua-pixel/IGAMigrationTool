@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "v9-independent-execution-v1",
+  "status": "PASS",
+  "sourceBase": "2461f6d1f1407658f09c9954a27a79768a807fb5",
+  "integratedHead": "82e80218d7b238a94b2cdbd431741aeee5895869",
+  "reviewedPackets": {
+    "A9": "556cfffbe61abe154886d237b4ae34fc9398aa8c",
+    "B9": "34252f8a214f09044d68fc218fbb4323423c846e",
+    "coordinatorShared": "2461f6d1f1407658f09c9954a27a79768a807fb5",
+    "coordinatorWiring": "d6e46cbb0b35d838954fca1def013c07144ea62e",
+    "documentationNormalizationClarification": "28e09bf"
+  },
+  "executed": {
+    "SDK": "10.0.401",
+    "lockedAuditedRestore": "PASS",
+    "scopedRepositoryFormat": "PASS",
+    "ReleaseBuild": "PASS zero warnings/errors",
+    "portableCompositionAssertions": 192,
+    "actualBrowserChecks": 440,
+    "browserHarnessPrettierAndSyntax": "PASS",
+    "ownedSecretScans": "PASS two independent scans exit0",
+    "independentCanonicalOracle": "PASS full packet/proposal/preview bytes",
+    "independentHtmlOracle": "PASS full5505bytes SHA55fd622c1947684578c132f97a7150ae0158865c475087d69aa479a252502806"
+  },
+  "reviewFindings": [
+    {
+      "finding": "Harness initially observed requests without blocking unexpected destinations",
+      "resolution": "Closed: before navigation, context route allows only exact owned GET document URLs, aborts every other attempt and final count must equal zero"
+    },
+    {
+      "finding": "Owned server cleanup could be skipped when browser.close rejects",
+      "resolution": "Closed: nested finally guarantees server.close"
+    },
+    {
+      "finding": "Every statement citation display needs substantive browser assertions",
+      "resolution": "Closed: ordered evidence/rule citations independently asserted across each proposal/category and empty categories"
+    }
+  ],
+  "supersededAttempts": [
+    {
+      "result": "FAIL keyboard-proposals-anchor",
+      "cause": "Test assumed the nav tab order remains after activating an anchor to a later section",
+      "resolution": "Two independent keyboard-only source/proposal paths start from document beginning; final PASS"
+    },
+    {
+      "result": "FAIL hostile-unicode-text-with-HTML-normalization",
+      "cause": "Initial reviewer assumption expected U+FFFD for literal NUL in HTML body text",
+      "resolution": "Count-only diagnosis and independently expected body-text parsing establish NUL removal and CR/CRLF normalization; original typed values/serialized bytes checked separately; final PASS440"
+    },
+    {
+      "result": "Format process pipe unavailable under restricted sandbox",
+      "resolution": "Formatter rerun with permitted local process communication; write and verify PASS"
+    }
+  ],
+  "limits": [
+    "No actual provider/customer data/network/host/database/shared PostgreSQL restart",
+    "Canonical typed values and serialized HTML retain supplied controls; Chromium HTML body text removes literal NUL and normalizes CR/CRLF to LF",
+    "No lossless-browser-control display policy implied",
+    "Production authorization/semantic redaction/factual quality/provider US/ZDR/budgets/recovery/deletion/retention NOT VERIFIED",
+    "Supported Windows browsers/manual screenreader/WCAG/full milestones and gates NOT VERIFIED"
+  ]
+}

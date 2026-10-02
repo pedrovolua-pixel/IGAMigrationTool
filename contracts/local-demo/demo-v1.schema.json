@@ -1080,6 +1080,16 @@
               "type": "null"
             }
           ]
+        },
+        "aiPreview": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AiPreviewDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -1105,7 +1115,8 @@
         "maturity",
         "reviewSnapshotDigest",
         "reportDraft",
-        "recommendationGuidance"
+        "recommendationGuidance",
+        "aiPreview"
       ]
     },
     "ReviewKind": {
@@ -2819,6 +2830,249 @@
           ]
         }
       }
+    },
+    "AiPreviewSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "environmentId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "baselineDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "profileDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "normalizationVersion": {
+          "type": "string"
+        },
+        "redactionVersion": {
+          "type": "string"
+        },
+        "promptVersion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customerId",
+        "projectId",
+        "environmentId",
+        "runId",
+        "baselineDigest",
+        "profileDigest",
+        "normalizationVersion",
+        "redactionVersion",
+        "promptVersion"
+      ]
+    },
+    "AiPreviewStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ruleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["text", "evidenceIds", "ruleIds"]
+    },
+    "AiPreviewProposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposalId": {
+          "type": "string"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "inferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "missingContext": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "uncertainty": {
+          "type": "string"
+        },
+        "conflictingEvidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "proposalId",
+        "facts",
+        "inferences",
+        "assumptions",
+        "missingContext",
+        "suggestions",
+        "uncertainty",
+        "conflictingEvidenceIds"
+      ]
+    },
+    "AiPreviewSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-ai-preview-v1"
+        },
+        "status": {
+          "const": "Proposed"
+        },
+        "disclaimer": {
+          "const": "Fictional offline preview. AI output is proposed and untrusted; cited statements are not verified facts. No evidence is resolved and no action is authorized."
+        },
+        "canonicalJson": {
+          "type": "string"
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source": {
+          "$ref": "#/$defs/AiPreviewSource"
+        },
+        "packetDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "proposalDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "proposals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewProposal"
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "disclaimer",
+        "canonicalJson",
+        "contentDigest",
+        "source",
+        "packetDigest",
+        "proposalDigest",
+        "proposals"
+      ]
+    },
+    "AiPreviewDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-ai-demo-preview-v1"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "fixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AiPreviewSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "runId",
+        "runRevision",
+        "runInputDigest",
+        "baselineId",
+        "profileId",
+        "fixtureDigest",
+        "status",
+        "reasonCode",
+        "snapshot"
+      ]
     }
   }
 }

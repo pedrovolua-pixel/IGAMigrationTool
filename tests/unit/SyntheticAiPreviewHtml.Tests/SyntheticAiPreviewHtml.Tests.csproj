@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj" /></ItemGroup>
+  <ItemGroup><None Include="golden-preview.json;golden-preview.html;golden-preview.sha256;oracle.py" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

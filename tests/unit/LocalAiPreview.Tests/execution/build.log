@@ -1,0 +1,15 @@
+  AssessmentCoverage -> /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentCoverage/bin/Release/net10.0/AssessmentCoverage.dll
+  AssessmentOrchestration -> /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentOrchestration/bin/Release/net10.0/AssessmentOrchestration.dll
+  DeterministicAnalysis -> /private/tmp/iga-cycle10-backend/src/server/modules/DeterministicAnalysis/bin/Release/net10.0/DeterministicAnalysis.dll
+  AssessmentScoring -> /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentScoring/bin/Release/net10.0/AssessmentScoring.dll
+  AssessmentMaturity -> /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentMaturity/bin/Release/net10.0/AssessmentMaturity.dll
+  AssessmentRuns -> /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentRuns/bin/Release/net10.0/AssessmentRuns.dll
+  SyntheticAiValidation -> /private/tmp/iga-cycle10-backend/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  SyntheticAiPreview -> /private/tmp/iga-cycle10-backend/src/server/modules/SyntheticAiPreview/bin/Release/net10.0/SyntheticAiPreview.dll
+  LocalAiPreview.Tests -> /private/tmp/iga-cycle10-backend/tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/LocalAiPreview.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.44

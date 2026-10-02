@@ -19,7 +19,9 @@ public static class DemoAnalysisCatalog
         _ => id
     };
     public static bool IsAnalysisProfile(string id) => SyntheticAnalysisFixturePack.Profiles.Any(item => item.Id == AnalysisProfileId(id));
-    public static bool Compatible(string baselineId, string profileId) => IsAnalysisBaseline(baselineId) == IsAnalysisProfile(profileId);
+    public static bool Compatible(string baselineId, string profileId) => baselineId == DemoAiPreviewCatalog.BaselineId || DemoAiPreviewCatalog.IsProfile(profileId)
+        ? baselineId == DemoAiPreviewCatalog.BaselineId && DemoAiPreviewCatalog.IsProfile(profileId)
+        : IsAnalysisBaseline(baselineId) == IsAnalysisProfile(profileId);
     public static SyntheticAnalysisLock Freeze(string baselineId, string profileId) =>
         SyntheticAnalysisFixturePack.Freeze(SyntheticAnalysisFixturePack.Scope, baselineId, AnalysisProfileId(profileId));
     public static string FrozenDigest(string baselineId, string profileId) => SyntheticCanonicalDigest.Compute(Freeze(baselineId, profileId));
@@ -75,6 +77,8 @@ public static class DemoAnalysisCatalog
             !DemoFixtureCatalog.Profiles.Any(item => item.Id == run.ProfileCatalogId)) return false;
         if (!Compatible(run.BaselineCatalogId, run.ProfileCatalogId)) return false;
         if (DemoFixtureCatalog.ScriptDigest(run.BaselineCatalogId) != run.FrozenInputs.ScriptedResultsDigest) return false;
+        if (DemoAiPreviewCatalog.IsProfile(run.ProfileCatalogId)) return DemoAiPreviewCatalog.MatchesFrozenFixture(run);
+        if (run.FrozenInputs.AiPreviewFixtureDigest is not null) return false;
         if (!IsAnalysisBaseline(run.BaselineCatalogId)) return run.FrozenInputs.AnalysisFixtureDigest is null && run.FrozenInputs.MaturityFixtureDigest is null;
         var expected = DemoFixtureCatalog.CreateStartRequest(run.BaselineCatalogId, run.ProfileCatalogId, "synthetic-analysis-version-check");
         if (run.FrozenInputs != expected.Versions) return false;

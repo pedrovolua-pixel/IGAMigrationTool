@@ -10,6 +10,7 @@ import { ReviewPanel } from './ReviewPanel';
 import { MaturityView } from './MaturityView';
 import { DraftReportView } from './DraftReportView';
 import { RecommendationGuidanceView } from './RecommendationGuidanceView';
+import { AiProposalPreview, coherentAiPreview } from './AiProposalPreview';
 
 export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: string }) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
@@ -42,6 +43,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
                 value.review.snapshotDigest === value.reviewSnapshotDigest)) &&
             coherentDraft(value, run) &&
             (await coherentGuidance(value, run)) &&
+            (await coherentAiPreview(value, run)) &&
             !controller.signal.aborted
           )
             setResponse(value);
@@ -61,8 +63,11 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
   }, [run.runId, run.revision, run.state, retry]);
   useEffect(() => {
     if (response && retryFocus.current) {
-      if (response.status === 'Ready' && response.runId === retryFocus.current)
-        heading.current?.focus();
+      if (response.runId === retryFocus.current) {
+        if (response.status === 'Ready') heading.current?.focus();
+        else if (response.aiPreview)
+          document.getElementById('ai-proposal-preview-heading')?.focus();
+      }
       retryFocus.current = null;
     }
   }, [response]);
@@ -90,11 +95,14 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
   }
   if (response.status !== 'Ready') {
     return (
-      <p className="field-note">
-        {response.reasonCode === 'coverage_only_fixture'
-          ? 'This saved fixture demonstrates coverage only; health scoring remains unavailable.'
-          : 'Analysis is unavailable for this saved run. No health result is inferred.'}
-      </p>
+      <>
+        <p className="field-note">
+          {response.reasonCode === 'coverage_only_fixture'
+            ? 'This saved fixture demonstrates coverage only; health scoring remains unavailable.'
+            : 'Analysis is unavailable for this saved run. No health result is inferred.'}
+        </p>
+        <AiProposalPreview preview={response.aiPreview} run={run} />
+      </>
     );
   }
   return (
@@ -323,6 +331,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         key={`guidance-${response.runId}`}
         guidance={response.recommendationGuidance}
       />
+      <AiProposalPreview preview={response.aiPreview} run={run} />
       {response.maturity && <MaturityView maturity={response.maturity} />}
       <details className="locked-inputs">
         <summary>Analysis versions and content digests</summary>

@@ -1,0 +1,21 @@
+v24.21.0
+11.20.0
+Checking formatting...
+All matched files use Prettier code style!
+
+> iga-synthetic-consultant-demo@0.1.0 typecheck
+> tsc --noEmit
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 23 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.47 kB │ gzip:  0.31 kB
+dist/assets/index-CafamDP9.css   12.65 kB │ gzip:  3.55 kB
+dist/assets/index-C6I2f9A6.js   287.57 kB │ gzip: 84.44 kB
+
+✓ built in 59ms
+found 0 vulnerabilities
+{"suite":"ai-proposal-preview-component-v1","checks":257,"accepted":16,"denied":176,"goldenDigest":"1aae4d20776163739233c0506db492716bb4681e5abc1e3e420332a9a6ab41e7","compiledDigest":"f4e70b04798a164d0cf48c3c315f68c03e69320922de8d1bb84db06bee9ef721","result":"PASS","limitations":"Literal isolated frontend fixtures, ReactDOMServer and exact SHA/DTO fences; actual host/browser/deployed/manual checks belong to V10/coordinator."}
+B10 independent primitive/component oracle: three exact artifacts verified

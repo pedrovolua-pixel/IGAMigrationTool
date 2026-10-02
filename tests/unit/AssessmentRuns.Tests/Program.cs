@@ -12,13 +12,13 @@ var wrong = scope with { CustomerId = "synthetic-other-customer" };
 
 Check("SYN-D3-001 fixed catalog explicit outcome digest", () =>
 {
-    Require(DemoFixtureCatalog.Baselines.Count == 8 && DemoFixtureCatalog.Profiles.Count == 6);
+    Require(DemoFixtureCatalog.Baselines.Count == 9 && DemoFixtureCatalog.Profiles.Count == 8);
     Require(DemoFixtureCatalog.Profiles.Select(item => item.Id).Take(4).SequenceEqual(new[]
         { "profile-standard", "profile-comparison", "synthetic-analysis-equal-v1", "synthetic-analysis-operations-v1" }));
     Require(DemoFixtureCatalog.Baselines.Where(item => !DemoAnalysisCatalog.IsAnalysisBaseline(item.Id)).Select(item => item.Id)
-        .SequenceEqual(new[] { "baseline-complete", "baseline-gaps", "baseline-recovery", "baseline-not-applicable" }));
+        .SequenceEqual(new[] { "baseline-complete", "baseline-gaps", "baseline-recovery", "baseline-not-applicable", "baseline-ai-configuration-v1" }));
     Require(DemoFixtureCatalog.Profiles.Where(item => !DemoAnalysisCatalog.IsAnalysisProfile(item.Id)).Select(item => item.Id)
-        .SequenceEqual(new[] { "profile-standard", "profile-comparison" }));
+        .SequenceEqual(new[] { "profile-standard", "profile-comparison", "profile-ai-preview-v1", "profile-ai-preview-empty-v1" }));
     Require(request.Versions.ScriptedResultsDigest == DemoFixtureCatalog.ScriptDigest("baseline-complete"));
     var script = DemoFixtureCatalog.Baselines[0].ScriptedResults;
     Require(DemoFixtureCatalog.ComputeScriptedResultsDigest(script) == DemoFixtureCatalog.ComputeScriptedResultsDigest(script.Reverse()));

@@ -232,6 +232,7 @@ export type AnalysisDetail = {
   readonly reviewSnapshotDigest: string | null;
   readonly reportDraft: ReportDraft | null;
   readonly recommendationGuidance: RecommendationGuidance | null;
+  readonly aiPreview: AiPreviewDetail | null;
 };
 
 export type ReviewKind = "Confirm" | "Reject" | "Defer" | "Comment" | "EditPresentation";
@@ -603,4 +604,58 @@ export type RecommendationGuidance = {
   readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly snapshot: GuidanceSnapshot | null;
+};
+
+export type AiPreviewSource = {
+  readonly customerId: string;
+  readonly projectId: string;
+  readonly environmentId: string;
+  readonly runId: string;
+  readonly baselineDigest: string;
+  readonly profileDigest: string;
+  readonly normalizationVersion: string;
+  readonly redactionVersion: string;
+  readonly promptVersion: string;
+};
+
+export type AiPreviewStatement = {
+  readonly text: string;
+  readonly evidenceIds: ReadonlyArray<string>;
+  readonly ruleIds: ReadonlyArray<string>;
+};
+
+export type AiPreviewProposal = {
+  readonly proposalId: string;
+  readonly facts: ReadonlyArray<AiPreviewStatement>;
+  readonly inferences: ReadonlyArray<AiPreviewStatement>;
+  readonly assumptions: ReadonlyArray<AiPreviewStatement>;
+  readonly missingContext: ReadonlyArray<string>;
+  readonly suggestions: ReadonlyArray<AiPreviewStatement>;
+  readonly uncertainty: string;
+  readonly conflictingEvidenceIds: ReadonlyArray<string>;
+};
+
+export type AiPreviewSnapshot = {
+  readonly schemaVersion: "synthetic-ai-preview-v1";
+  readonly status: "Proposed";
+  readonly disclaimer: "Fictional offline preview. AI output is proposed and untrusted; cited statements are not verified facts. No evidence is resolved and no action is authorized.";
+  readonly canonicalJson: string;
+  readonly contentDigest: string;
+  readonly source: AiPreviewSource;
+  readonly packetDigest: string;
+  readonly proposalDigest: string;
+  readonly proposals: ReadonlyArray<AiPreviewProposal>;
+};
+
+export type AiPreviewDetail = {
+  readonly schemaVersion: "synthetic-ai-demo-preview-v1";
+  readonly runId: string;
+  readonly runRevision: number;
+  readonly runInputDigest: string;
+  readonly baselineId: string;
+  readonly profileId: string;
+  readonly fixtureDigest: string;
+  readonly status: "Ready" | "Unavailable";
+  readonly reasonCode: string | null;
+  readonly snapshot: AiPreviewSnapshot | null;
 };

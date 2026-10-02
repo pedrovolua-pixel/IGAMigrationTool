@@ -1,0 +1,42 @@
+{
+  "authority": "Executed original six-profile catalog from preserved pre-Cycle10 assembly in isolated load context; independent input digest recipe",
+  "assemblySha256": "d80374f29acc328dbd3124c8698136f61485df747ba957f83ec6861aa9bca009",
+  "entries": [
+    {
+      "baselineId": "baseline-complete",
+      "profileId": "profile-standard",
+      "versionsJson": "{\u0022ProfileVersion\u0022:\u0022synthetic-profile-v1\u0022,\u0022DesiredOutcomeVersion\u0022:null,\u0022ScoringAlgorithmVersion\u0022:\u0022synthetic-scoring-unimplemented-v1\u0022,\u0022AiPolicyVersion\u0022:\u0022synthetic-ai-disabled-v1\u0022,\u0022PromptVersion\u0022:\u0022synthetic-prompt-disabled-v1\u0022,\u0022ModelVersion\u0022:\u0022synthetic-model-disabled-v1\u0022,\u0022ApplicationVersion\u0022:\u0022synthetic-app-v1\u0022,\u0022WorkSchemaVersion\u0022:\u0022synthetic-run-work-v1\u0022,\u0022ScriptedResultsDigest\u0022:\u002249e0019d8b4e02057d82eedec37e0021a7f25e0945b4cba548c95cb3d4db30e8\u0022}",
+      "inputDigest": "8e3053ae1be2ca5b1d861cd6467bbbf82a670f1bd23045d80e733ed2d27eebb1"
+    },
+    {
+      "baselineId": "baseline-complete",
+      "profileId": "profile-comparison",
+      "versionsJson": "{\u0022ProfileVersion\u0022:\u0022synthetic-profile-v2\u0022,\u0022DesiredOutcomeVersion\u0022:null,\u0022ScoringAlgorithmVersion\u0022:\u0022synthetic-scoring-unimplemented-v1\u0022,\u0022AiPolicyVersion\u0022:\u0022synthetic-ai-disabled-v1\u0022,\u0022PromptVersion\u0022:\u0022synthetic-prompt-disabled-v1\u0022,\u0022ModelVersion\u0022:\u0022synthetic-model-disabled-v1\u0022,\u0022ApplicationVersion\u0022:\u0022synthetic-app-v1\u0022,\u0022WorkSchemaVersion\u0022:\u0022synthetic-run-work-v1\u0022,\u0022ScriptedResultsDigest\u0022:\u002249e0019d8b4e02057d82eedec37e0021a7f25e0945b4cba548c95cb3d4db30e8\u0022}",
+      "inputDigest": "2afb9d47570b3b70170f5637778e137e556a6b4d34effd73969dd45730abfbfc"
+    },
+    {
+      "baselineId": "synthetic-analysis-findings-v1",
+      "profileId": "synthetic-analysis-equal-v1",
+      "versionsJson": "{\u0022ProfileVersion\u0022:\u0022synthetic-profile-v1\u0022,\u0022DesiredOutcomeVersion\u0022:null,\u0022ScoringAlgorithmVersion\u0022:\u0022pilot-health-v1\u0022,\u0022AiPolicyVersion\u0022:\u0022synthetic-ai-disabled-v1\u0022,\u0022PromptVersion\u0022:\u0022synthetic-prompt-disabled-v1\u0022,\u0022ModelVersion\u0022:\u0022synthetic-model-disabled-v1\u0022,\u0022ApplicationVersion\u0022:\u0022synthetic-analysis-app-v1\u0022,\u0022WorkSchemaVersion\u0022:\u0022synthetic-run-work-v1\u0022,\u0022ScriptedResultsDigest\u0022:\u0022169c74eae120bd7b0110485539a346066960dbb46bfaa8a7a36eb55603e95229\u0022,\u0022AnalysisFixtureDigest\u0022:\u0022cb048aadcdf7e3f29b928bbbbb55081b3fc2cda95317ef4f3595ed6b07937bc7\u0022}",
+      "inputDigest": "555a0fcb514799b7337ac82a27fdb48cf9423a790b70b09782a7789fdc0068c1"
+    },
+    {
+      "baselineId": "synthetic-analysis-findings-v1",
+      "profileId": "synthetic-analysis-operations-v1",
+      "versionsJson": "{\u0022ProfileVersion\u0022:\u0022synthetic-profile-v1\u0022,\u0022DesiredOutcomeVersion\u0022:null,\u0022ScoringAlgorithmVersion\u0022:\u0022pilot-health-v1\u0022,\u0022AiPolicyVersion\u0022:\u0022synthetic-ai-disabled-v1\u0022,\u0022PromptVersion\u0022:\u0022synthetic-prompt-disabled-v1\u0022,\u0022ModelVersion\u0022:\u0022synthetic-model-disabled-v1\u0022,\u0022ApplicationVersion\u0022:\u0022synthetic-analysis-app-v1\u0022,\u0022WorkSchemaVersion\u0022:\u0022synthetic-run-work-v1\u0022,\u0022ScriptedResultsDigest\u0022:\u0022169c74eae120bd7b0110485539a346066960dbb46bfaa8a7a36eb55603e95229\u0022,\u0022AnalysisFixtureDigest\u0022:\u00223143f09ee919040a7bd324cd0d4330ef75350a0110f5918d688db0b57d0b374b\u0022}",
+      "inputDigest": "a4bd3e726b4d89d5830f4648001fa4a6b9de119e913d90d5caa834f28b0836ea"
+    },
+    {
+      "baselineId": "synthetic-analysis-findings-v1",
+      "profileId": "synthetic-review-maturity-equal-v1",
+      "versionsJson": "{\u0022ProfileVersion\u0022:\u0022synthetic-profile-v1\u0022,\u0022DesiredOutcomeVersion\u0022:null,\u0022ScoringAlgorithmVersion\u0022:\u0022pilot-health-v1\u0022,\u0022AiPolicyVersion\u0022:\u0022synthetic-ai-disabled-v1\u0022,\u0022PromptVersion\u0022:\u0022synthetic-prompt-disabled-v1\u0022,\u0022ModelVersion\u0022:\u0022synthetic-model-disabled-v1\u0022,\u0022ApplicationVersion\u0022:\u0022synthetic-review-maturity-app-v1\u0022,\u0022WorkSchemaVersion\u0022:\u0022synthetic-run-work-v1\u0022,\u0022ScriptedResultsDigest\u0022:\u0022169c74eae120bd7b0110485539a346066960dbb46bfaa8a7a36eb55603e95229\u0022,\u0022AnalysisFixtureDigest\u0022:\u0022cb048aadcdf7e3f29b928bbbbb55081b3fc2cda95317ef4f3595ed6b07937bc7\u0022,\u0022MaturityFixtureDigest\u0022:\u0022f616139c6921679f03f937f2a5e60d8a801d53da2513c2b6c506a3addc517df5\u0022}",
+      "inputDigest": "d7d0d2e148ebccb396382e76fe05daaab21f4309978fa33f93de9537eff3770e"
+    },
+    {
+      "baselineId": "synthetic-analysis-findings-v1",
+      "profileId": "synthetic-review-maturity-operations-v1",
+      "versionsJson": "{\u0022ProfileVersion\u0022:\u0022synthetic-profile-v1\u0022,\u0022DesiredOutcomeVersion\u0022:null,\u0022ScoringAlgorithmVersion\u0022:\u0022pilot-health-v1\u0022,\u0022AiPolicyVersion\u0022:\u0022synthetic-ai-disabled-v1\u0022,\u0022PromptVersion\u0022:\u0022synthetic-prompt-disabled-v1\u0022,\u0022ModelVersion\u0022:\u0022synthetic-model-disabled-v1\u0022,\u0022ApplicationVersion\u0022:\u0022synthetic-review-maturity-app-v1\u0022,\u0022WorkSchemaVersion\u0022:\u0022synthetic-run-work-v1\u0022,\u0022ScriptedResultsDigest\u0022:\u0022169c74eae120bd7b0110485539a346066960dbb46bfaa8a7a36eb55603e95229\u0022,\u0022AnalysisFixtureDigest\u0022:\u00223143f09ee919040a7bd324cd0d4330ef75350a0110f5918d688db0b57d0b374b\u0022,\u0022MaturityFixtureDigest\u0022:\u0022a1291da3441773d2c4c1e4c165047977602a3a7c12e8ac5d977df2b2363ef065\u0022}",
+      "inputDigest": "6d9e2fc6a87d6961d6e691866aca4cae36959a3f8aede1d8f990af847a31fb9f"
+    }
+  ]
+}

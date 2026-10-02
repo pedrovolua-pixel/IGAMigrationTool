@@ -91,6 +91,15 @@
       },
       "reportdrafts": {
         "type": "Project"
+      },
+      "syntheticaipreview": {
+        "type": "Project",
+        "dependencies": {
+          "SyntheticAiValidation": "[1.0.0, )"
+        }
+      },
+      "syntheticaivalidation": {
+        "type": "Project"
       }
     }
   }

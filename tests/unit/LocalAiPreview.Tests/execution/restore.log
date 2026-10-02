@@ -1,0 +1,10 @@
+  Determining projects to restore...
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentScoring/AssessmentScoring.csproj (in 40 ms).
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj (in 40 ms).
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj (in 37 ms).
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj (in 40 ms).
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj (in 37 ms).
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj (in 40 ms).
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj (in 37 ms).
+  Restored /private/tmp/iga-cycle10-backend/src/server/modules/AssessmentRuns/AssessmentRuns.csproj (in 847 ms).
+  Restored /private/tmp/iga-cycle10-backend/tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj (in 847 ms).

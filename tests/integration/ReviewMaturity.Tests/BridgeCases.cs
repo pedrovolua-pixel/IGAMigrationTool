@@ -9,7 +9,7 @@ internal static class BridgeCases
 {
     internal static async Task Run(string[] args)
     {
-        Check.That(DemoFixtureCatalog.Profiles.Count == 6 && DemoFixtureCatalog.Profiles.Where(profile => DemoAnalysisCatalog.IsReviewMaturityProfile(profile.Id)).Select(profile => profile.Id)
+        Check.That(DemoFixtureCatalog.Profiles.Count == 8 && DemoFixtureCatalog.Profiles.Count(profile => !DemoAiPreviewCatalog.IsProfile(profile.Id)) == 6 && DemoFixtureCatalog.Profiles.Where(profile => DemoAnalysisCatalog.IsReviewMaturityProfile(profile.Id)).Select(profile => profile.Id)
             .Order(StringComparer.Ordinal).SequenceEqual(new[] { "synthetic-review-maturity-equal-v1", "synthetic-review-maturity-operations-v1" }), "exactly two explicit review/maturity profiles added; four historical profiles retained");
         if (!args.Contains("--postgres", StringComparer.Ordinal)) { Console.WriteLine("NOT VERIFIED RM-BRIDGE: actual saved-run checks require --postgres."); return; }
         var connection = Environment.GetEnvironmentVariable("IGA_REVIEW_TEST_DATABASE") ?? "Host=127.0.0.1;Port=55433;Database=iga_synthetic_v5;Username=iga_synthetic";
