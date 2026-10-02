@@ -1,6 +1,6 @@
 # BFF browser and external identity options
 
-Status: ADVICE / REVIEW INPUTS — no changed architecture, policy or access accepted
+Status: HISTORICAL OPTIONS with current private/organizational request below — no new access accepted
 Date: 2026-10-02
 Owner: Repository owner acting as technical/security owner; platform/identity/network reviewers
 Related: [current preflight](azure-bff-next-session-preflight.md), [identity policy](../security/health-assessment-identity-session-design.md), [role matrix](../security/health-assessment-authorization-matrix.md), [accepted local authority/hosting](bff-production-authority-hosting-proposal.md), [Azure platform ADR](../../architecture/decisions/ADR-0004-azure-pilot-technology-platform.md)
@@ -47,3 +47,8 @@ No public application was deployed or production release authorized. The ordinar
 Protected intake location and desired account list are supplied. Detailed customer role, directory/licensing/CA verification, consumer identity decision, public reachability design, production composition and exact priced deployment remain open. G1–G9 and Milestone2 remain NOT VERIFIED.
 
 Canonical records contain only the opaque protected reference and sanitized decisions. The private status-board update remains blocked by automatic approval review of the official publishing helper's credential/network path; its requested exact approval has not been received. Last confirmed BFF board snapshot4346e0f does not include this intake change. No board access or sharing was changed.
+
+
+## Current owner decision — private hosting and organizational guest request
+
+The owner retains private application hosting and replaces the personal external account request with an organizational account under protected intake `LOCAL-INTAKE-20261002-01`. Earlier Google/consumer and public-browser sections are historical options, not active implementation. Organizational home origin/current account proof is still NOT VERIFIED; email domain alone cannot satisfy admission. No invitation or assignment occurred. [The private browser access proposal](../../plans/active/private-pilot-browser-access-preparation.md) recommends one owner-operated test desktop through Bastion Developer, with [Proposed ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md) and required security/cost/verification decisions. Customer roles and actual inputs remain unresolved; no public application, VPN or workstation has been provisioned.

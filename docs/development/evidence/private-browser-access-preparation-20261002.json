@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "private-browser-access-preparation-v1",
+  "date": "2026-10-02",
+  "status": "PREPARATION_ONLY_DESIGN_PROPOSED",
+  "baseSource": "7ebe5f34bb5a95cbe156ab32f26b4f3acb9c4e59",
+  "protectedIntakeReference": "LOCAL-INTAKE-20261002-01",
+  "userSteering": {
+    "privateHosting": "RETAINED",
+    "externalPersonalAccountRequest": "SUPERSEDED by requested organizational account; actual details protected",
+    "customerDetailedRole": "UNRESOLVED",
+    "accountHomeTenantAndLicensing": "NOT_VERIFIED"
+  },
+  "recommendedCandidate": "One owner-operated private Windows desktop through Bastion Developer for bounded synthetic development",
+  "retailPriceSource": "https://prices.azure.com/api/retail/prices",
+  "readAtUtc": "2026-10-02T23:06:26.683687+00:00",
+  "candidateMeters": [
+    {
+      "meterId": "5dbaed1b-c402-4016-a12c-973037fd29e3",
+      "productName": "Virtual Machines BS Series Windows",
+      "skuName": "B2s",
+      "meterName": "B2s",
+      "retailPrice": 0.0496,
+      "unitOfMeasure": "1 Hour",
+      "currencyCode": "USD",
+      "armRegionName": "eastus2",
+      "effectiveStartDate": "2025-10-01T00:00:00Z"
+    },
+    {
+      "meterId": "ce957933-8287-4f8b-83ee-53a5cbe056d9",
+      "productName": "Standard SSD Managed Disks",
+      "skuName": "E10 LRS",
+      "meterName": "E10 LRS Disk Operations",
+      "retailPrice": 0.002,
+      "unitOfMeasure": "10K",
+      "currencyCode": "USD",
+      "armRegionName": "eastus2",
+      "effectiveStartDate": "2018-11-01T00:00:00Z"
+    },
+    {
+      "meterId": "9a08b750-3a9b-450f-ab79-a01dbfaf3026",
+      "productName": "Standard SSD Managed Disks",
+      "skuName": "E10 LRS",
+      "meterName": "E10 LRS Disk",
+      "retailPrice": 9.6,
+      "unitOfMeasure": "1/Month",
+      "currencyCode": "USD",
+      "armRegionName": "eastus2",
+      "effectiveStartDate": "2018-11-01T00:00:00Z"
+    },
+    {
+      "meterId": "f7f36e66-5b21-445a-9df1-f192e56ed76c",
+      "productName": "VPN Gateway",
+      "skuName": "VpnGw1AZ",
+      "meterName": "VpnGw1AZ",
+      "retailPrice": 0.21,
+      "unitOfMeasure": "1 Hour",
+      "currencyCode": "USD",
+      "armRegionName": "eastus2",
+      "effectiveStartDate": "2025-01-01T00:00:00Z"
+    }
+  ],
+  "calculations": {
+    "windowsCompute24HoursUsd": 1.1904,
+    "vpnGw1AZ744HoursUsd": 156.24
+  },
+  "costLimits": "Partial public retail meter comparison, not full quote; includes no offer-specific discount, quota/capacity or selected retention. All foundation/disk/operations/network/DNS and delayed-charge reserve require fresh exact session. ExistingUSD50 alert budget remains.",
+  "docsCaveat": "SKU-specific Developer Windows RDP/region table and quickstart support candidate; generic RDP article still says Basic minimum. Exact provider/authentication/NSG proof required; no automatic upgrade.",
+  "independentReview": {
+    "initialReview": "auth_transport read-only source/Microsoft documentation review; no Azure/runtime tests",
+    "result": "Suitable candidate for bounded owner-operated synthetic testing; exact OS credential, source/NSG/egress/DNS/private app/identity/cost inputs remain blocked",
+    "finalPacketReview": "PENDING"
+  },
+  "checks": {
+    "documentation": "PASS: 193 changed Markdown local targets; 2 changed JSON records; exact rate arithmetic and four candidate meters; protected-account exclusion; documentation-only scope",
+    "secrets": "PASS: whole-checkout Gitleaks8.30.1 no leaks",
+    "diff": "PASS: git diff --check"
+  },
+  "notVerified": [
+    "exact subnet/NSG/source/egress and image bindings",
+    "Developer actual OS authentication and connection",
+    "private app DNS/TLS/VNet-scope ingress and immediate peer",
+    "organizational external home/account/session proof and scoped role",
+    "directory/licensing/CA",
+    "production provider/key/audit host composition",
+    "regional quota/capacity and exact provider what-if",
+    "complete priced session",
+    "live sign-in, G1\u2013G9 and Milestone2"
+  ],
+  "azureActionsPerformed": [],
+  "credentialCreationPerformed": false,
+  "identityInvitationOrGrantPerformed": false,
+  "templateImplementationStarted": false,
+  "privateBoard": "BLOCKED by previously reported automatic approval review; requested exact publishing approval not received; last confirmed BFF snapshot4346e0f stale for current update"
+}
