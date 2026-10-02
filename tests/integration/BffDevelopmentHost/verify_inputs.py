@@ -6,7 +6,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[3]
-EXPECTED = {'global.json', 'Directory.Build.props', 'migrations/identity-sessions/001-initial.sql'}
+EXPECTED = {'global.json', 'Directory.Build.props', 'migrations/identity-sessions/001-initial.sql', 'migrations/identity-sessions/002-authentication-context.sql'}
 for directory in ('src/server/hosts/BffFoundation', 'src/server/hosts/BffDevelopmentHost', 'src/server/modules/IdentitySessions'):
     EXPECTED.update(str(p.relative_to(ROOT)) for p in (ROOT / directory).iterdir()
                     if p.is_file() and (p.suffix in ('.cs', '.csproj') or p.name == 'packages.lock.json'))
