@@ -58,10 +58,25 @@ def composition_policy(template):
     require(len(modules) == 2, 'Only separate access and DNS deployments')
     require(set(modules) == {'private-development-desktop', 'private-development-browser-dns'}, 'Exact module scope')
     require(all(r['properties']['mode'] == 'Incremental' for r in modules.values()), 'No Complete-mode deletion')
+    for key, dependencies in (('desktop', None), ('browserDns', ['environment'])):
+        deployment = resources[key]
+        expected_keys = {'type', 'apiVersion', 'name', 'properties'} | ({'dependsOn'} if dependencies else set())
+        require(set(deployment) == expected_keys and deployment['type'] == 'Microsoft.Resources/deployments' and
+                deployment['apiVersion'] == '2025-04-01', 'Closed same-scope deployments only')
+        require(deployment.get('dependsOn') == dependencies, 'Exact observed-environment dependency')
+        require(set(deployment['properties']) == {'expressionEvaluationOptions', 'mode', 'parameters', 'template'} and
+                deployment['properties']['expressionEvaluationOptions'] == {'scope': 'inner'},
+                'No scope, template-link, credential or deployment-mode overrides')
     dns = modules['private-development-browser-dns']['properties']
     ref = "reference('environment')"
     require(dns['parameters']['environmentDefaultDomain']['value'] == f'[{ref}.defaultDomain]' and
             dns['parameters']['environmentStaticIp']['value'] == f'[{ref}.staticIp]', 'DNS from current environment')
+    require(dns['parameters'] == {
+        'environmentDefaultDomain': {'value': f'[{ref}.defaultDomain]'},
+        'environmentStaticIp': {'value': f'[{ref}.staticIp]'},
+        'existingVnetName': {'value': "[parameters('existingVnetName')]"},
+        'virtualNetworkLinkName': {'value': "[parameters('browserDnsLinkName')]"}},
+        'Exact reviewed DNS link and environment bindings only')
     dns_policy(dns['template'])
     require(dns['parameters']['existingVnetName']['value'] == "[parameters('existingVnetName')]", 'Same VNet DNS')
     require(all('defaultValue' not in p for p in template['parameters'].values()), 'No deployable default inputs')
@@ -135,6 +150,11 @@ def main():
             ('insecure password type', ['parameters', 'adminPassword', 'type'], 'string'),
             ('RDP source substitution', ['resources', 'desktop', 'properties', 'parameters', 'developerRdpSourceAddress', 'value'], '*'),
             ('child paid Bastion', ['resources', 'desktop', 'properties', 'template', 'resources', 'bastion', 'sku', 'name'], 'Standard'),
+            ('wrong DNS link', dp + ['parameters', 'virtualNetworkLinkName', 'value'], 'existing-unreviewed-link'),
+            ('foreign deployment group', ['resources', 'desktop', 'resourceGroup'], 'other-group'),
+            ('foreign subscription', ['resources', 'browserDns', 'subscriptionId'], '/synthetic/foreign'),
+            ('conditional omission', ['resources', 'desktop', 'condition'], False),
+            ('missing environment dependency', ['resources', 'browserDns', 'dependsOn'], []),
             ('child public address', ['resources', 'desktop', 'properties', 'template', 'resources', 'workstationNic', 'properties', 'ipConfigurations', 0, 'properties', 'publicIPAddress'], {'id': '/synthetic/public'}),
         ])
     print('Local structural checks only; metadata freshness, TLS and effective network behavior NOT VERIFIED.')
