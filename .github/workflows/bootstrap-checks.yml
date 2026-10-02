@@ -210,7 +210,7 @@ jobs:
       - name: Check actual inert fictional fix-package browser
         run: |
           export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
-          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll -- --write-previews "$RUNNER_TEMP/fix-packages"
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll --write-previews "$RUNNER_TEMP/fix-packages"
           node tests/e2e/synthetic-fix-packages/verify.mjs --preview-directory "$RUNNER_TEMP/fix-packages" --playwright-module "$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
