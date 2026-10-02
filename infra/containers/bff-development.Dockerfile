@@ -7,6 +7,10 @@ COPY global.json Directory.Build.props ./
 COPY src/server/hosts/BffFoundation/ src/server/hosts/BffFoundation/
 COPY src/server/hosts/BffDevelopmentHost/ src/server/hosts/BffDevelopmentHost/
 COPY src/server/modules/IdentitySessions/ src/server/modules/IdentitySessions/
+COPY src/server/modules/IdentityAuthority/ src/server/modules/IdentityAuthority/
+COPY src/server/modules/IdentityPolicy/ src/server/modules/IdentityPolicy/
+COPY migrations/identity-authority/001-authority.sql migrations/identity-authority/001-authority.sql
+COPY migrations/identity-sessions/003-atomic-audit.sql migrations/identity-sessions/003-atomic-audit.sql
 COPY migrations/identity-sessions/001-initial.sql migrations/identity-sessions/001-initial.sql
 COPY migrations/identity-sessions/002-authentication-context.sql migrations/identity-sessions/002-authentication-context.sql
 RUN dotnet restore src/server/hosts/BffDevelopmentHost/BffDevelopmentHost.csproj --locked-mode \

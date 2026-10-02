@@ -7,6 +7,9 @@ on:
       - 'src/server/hosts/BffDevelopmentHost/**'
       - 'src/server/hosts/BffFoundation/**'
       - 'src/server/modules/IdentitySessions/**'
+      - 'src/server/modules/IdentityAuthority/**'
+      - 'src/server/modules/IdentityPolicy/**'
+      - 'migrations/identity-authority/**'
       - 'migrations/identity-sessions/**'
       - 'tests/integration/BffDevelopmentHost/**'
       - 'tests/infrastructure/ImageEvidence/**'
@@ -102,6 +105,8 @@ jobs:
             --input-lock src/server/hosts/BffDevelopmentHost/packages.lock.json \
             --input-lock src/server/hosts/BffFoundation/packages.lock.json \
             --input-lock src/server/modules/IdentitySessions/packages.lock.json \
+            --input-lock src/server/modules/IdentityAuthority/packages.lock.json \
+            --input-lock src/server/modules/IdentityPolicy/packages.lock.json \
             --output "$RUNNER_TEMP/bff-image-evidence"
       - name: Remove ephemeral raw image evidence
         if: always()

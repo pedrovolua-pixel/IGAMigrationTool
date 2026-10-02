@@ -13,3 +13,7 @@ The health-assessment pilot architecture and Azure technology platform are selec
 - [`diagrams/README.md`](./diagrams/README.md) — diagram conventions, scope and official icon sources.
 
 - [`diagrams/05-azure-development-foundation.md`](./diagrams/05-azure-development-foundation.md) — detailed executed development foundation, editable official-icon diagram and deployment-template mapping.
+
+## Accepted local BFF transaction boundary
+
+[ADR-0009](decisions/ADR-0009-production-bff-authority-and-audit.md) accepts P01–P05 for local synthetic implementation. [The handoff](../docs/development/bff-local-authority-audit-handoff.md) maps policy-owned authority persistence, same-transaction session/audit primitives and proxy/shared-key contracts. Existing Azure diagrams remain architecture targets; this local acceptance adds no deployed component, permission or production activation.

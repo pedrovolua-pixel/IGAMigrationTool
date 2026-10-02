@@ -57,6 +57,19 @@ jobs:
           dotnet run --project tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj --configuration Release --no-build
       - name: Check reviewed BFF ingress and local shared key seams
         run: dotnet run --project tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj --configuration Release --no-build
+      - name: Check local identity authority and atomic audit composition
+        env:
+          IGA_AUTHORITY_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_identity_authority;Username=iga_synthetic
+          IGA_AUDIT_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_security_audit;Username=iga_synthetic
+          IGA_COMPOSITION_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_composition;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_identity_authority
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_security_audit
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_bff_composition
+          dotnet run --project tests/unit/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/integration/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
+          dotnet run --project tests/integration/SecurityAudit.Tests/SecurityAudit.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
+          dotnet run --project tests/integration/BffAuthorityComposition.Tests/BffAuthorityComposition.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
       - name: Check shared PostgreSQL BFF sessions and real HTTPS transport
         env:
           IGA_SESSION_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_sessions;Username=iga_synthetic

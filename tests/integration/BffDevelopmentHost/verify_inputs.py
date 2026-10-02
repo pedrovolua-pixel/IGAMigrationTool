@@ -7,8 +7,8 @@ import tempfile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[3]
-EXPECTED = {'global.json', 'Directory.Build.props', 'migrations/identity-sessions/001-initial.sql', 'migrations/identity-sessions/002-authentication-context.sql'}
-for directory in ('src/server/hosts/BffFoundation', 'src/server/hosts/BffDevelopmentHost', 'src/server/modules/IdentitySessions'):
+EXPECTED = {'global.json', 'Directory.Build.props', 'migrations/identity-sessions/001-initial.sql', 'migrations/identity-sessions/002-authentication-context.sql', 'migrations/identity-sessions/003-atomic-audit.sql', 'migrations/identity-authority/001-authority.sql'}
+for directory in ('src/server/hosts/BffFoundation', 'src/server/hosts/BffDevelopmentHost', 'src/server/modules/IdentitySessions', 'src/server/modules/IdentityAuthority', 'src/server/modules/IdentityPolicy'):
     EXPECTED.update(str(p.relative_to(ROOT)) for p in (ROOT / directory).iterdir()
                     if p.is_file() and (p.suffix in ('.cs', '.csproj') or p.name == 'packages.lock.json'))
 ignore = (ROOT / 'infra/containers/bff-development.Dockerfile.dockerignore').read_text().splitlines()
@@ -27,7 +27,7 @@ for tag in ('remote.azurecr.io/image:tag', 'iga-bff-development:../bad', 'iga-bf
     assert subprocess.run(['python3', str(helper), '--check-inputs-only', '--tag', tag], capture_output=True).returncode != 0
 recipe = (ROOT / 'infra/containers/bff-development.Dockerfile').read_text()
 # Every embedded module resource must be explicitly present at compile time.
-for project in (ROOT / 'src/server/modules/IdentitySessions').glob('*.csproj'):
+for project in [ROOT / f'src/server/modules/{module}/{module}.csproj' for module in ('IdentitySessions', 'IdentityAuthority', 'IdentityPolicy')]:
     for resource in ET.parse(project).getroot().iter('EmbeddedResource'):
         relative = str((project.parent / resource.attrib['Include']).resolve().relative_to(ROOT))
         assert relative in allowed and f'COPY {relative} {relative}' in recipe, 'Embedded resource must reach the image compiler'

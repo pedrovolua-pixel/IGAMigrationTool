@@ -12,6 +12,7 @@
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/IdentityAuthority/IdentityAuthority.csproj" />
     <Project Path="src/server/modules/IdentitySessions/IdentitySessions.csproj" />
     <Project Path="src/server/modules/IdentityPolicy/IdentityPolicy.csproj" />
     <Project Path="src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
@@ -36,6 +37,9 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj" />
+    <Project Path="tests/integration/SecurityAudit.Tests/SecurityAudit.Tests.csproj" />
+    <Project Path="tests/integration/BffAuthorityComposition.Tests/BffAuthorityComposition.Tests.csproj" />
     <Project Path="tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj" />
     <Project Path="tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj" />
@@ -49,6 +53,7 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj" />
     <Project Path="tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj" />
     <Project Path="tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj" />

@@ -261,9 +261,20 @@
       "bfffoundation": {
         "type": "Project",
         "dependencies": {
+          "IdentityAuthority": "[1.0.0, )",
           "IdentitySessions": "[1.0.0, )",
           "Microsoft.Identity.Web": "[4.15.0, 4.15.0]"
         }
+      },
+      "identityauthority": {
+        "type": "Project",
+        "dependencies": {
+          "IdentityPolicy": "[1.0.0, )",
+          "IdentitySessions": "[1.0.0, )"
+        }
+      },
+      "identitypolicy": {
+        "type": "Project"
       },
       "identitysessions": {
         "type": "Project",
