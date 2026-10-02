@@ -423,7 +423,7 @@
     "infrastructureTemplates": 18,
     "bootstrapHostingUnsafeDrifts": 44,
     "secretScan": "PASS474 tracked/owned source files; no allowlists",
-    "remotePartialCI": "PENDING",
+    "remotePartialCI": "PASS configured Linux/Windows2022/2025 and Azure package partial checks",
     "privatePublication": "PENDING matching final snapshot",
     "historicalCoverageBrowserChecks": 397,
     "historicalAnalysisBrowserAssertions": 724,
@@ -618,7 +618,7 @@
     "Full Windows/manual assistive-technology/WCAG and PDF acceptance NOT VERIFIED",
     "Production identity/customer source/catalog/risk/reassessment/AI/tasks/publication/G1\u2013G9 NOT VERIFIED",
     "Pure returned-value immutability only; no durable report history",
-    "Remote partial CI and matching private publication pending",
+    "Matching private closure publication pending",
     "Axe aria-prohibited-attr incomplete at desktop/320 and color-contrast incomplete at320; those checks NOT VERIFIED"
   ],
   "initialPrivatePublication": {
@@ -637,17 +637,38 @@
   },
   "preservedWorkerArtifacts": [
     {
-      "path": "/private/tmp/iga-cycle06-d6-source.tar"
+      "path": "/private/tmp/iga-cycle06-d6-source.tar",
+      "sha256": "cb4e34ddd081060a06c14eaaa984534abf0c1ae7ad6af46598a063ac10721a6a"
     },
     {
-      "path": "/private/tmp/iga-cycle06-m6-source.tar"
+      "path": "/private/tmp/iga-cycle06-m6-source.tar",
+      "sha256": "62723682eb1c73a88868246124f68f22d446458426fad438dd968f6022f2e34a"
     },
     {
-      "path": "/private/tmp/iga-cycle06-v6-source.tar"
+      "path": "/private/tmp/iga-cycle06-v6-source.tar",
+      "sha256": "9ede284b032661443c42388810f366e1531303e66fab47360b452e8fb6ab5597"
     },
     {
       "path": "/private/tmp/iga-cycle06-preserved-v6-tests",
       "purpose": "Exact executed worker integration binaries/dependencies"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-borrowed-source.tar",
+      "sha256": "015e96db5e899795c2d867586fbbeb23cd7aed74f8101b07fe17cae1466c4521",
+      "purpose": "Borrowed module copies including build outputs preserved before temporary worktree cleanup"
     }
-  ]
+  ],
+  "remoteVerification": {
+    "sourceCommit": "f4c7f8238c2a78edd2363b35a1ae407db7d4248c",
+    "bootstrapRunId": 37006798017,
+    "bootstrapJobIds": [
+      110836863181,
+      110836862860,
+      110836863125
+    ],
+    "azurePackageRunId": 37006798048,
+    "azurePackageJobId": 110836863777,
+    "conclusions": "All success; configured partial engineering evidence only"
+  },
+  "workerCheckoutCleanup": "Completed after preservation; committed packet branches retained; separate BFF worktree and unrelated research/work files preserved"
 }
