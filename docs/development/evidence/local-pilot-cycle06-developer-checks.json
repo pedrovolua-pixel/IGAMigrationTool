@@ -1,0 +1,700 @@
+{
+  "recordedUtc": "2026-10-02",
+  "scope": "Approved bounded read-only synthetic developer cycle06; no milestone/live gate acceptance",
+  "sourceFileCount": 294,
+  "sourceSha256": "6a3e383eb1eebe5a448c4ecbe99adbde66ecf263ac84ea54ba11fad6c7984d14",
+  "sourceDigestMethod": "Sorted selected source/config/test paths: UTF8 relative path + NUL + exact bytes + NUL; excludes docs, ignored outputs and generated execution metadata.",
+  "sourceFiles": [
+    ".github/workflows/azure-application-package.yml",
+    ".github/workflows/bootstrap-checks.yml",
+    "Directory.Build.props",
+    "IgaMigrationTool.slnx",
+    "contracts/local-demo/demo-v1.schema.json",
+    "contracts/local-demo/generate-types.mjs",
+    "global.json",
+    "infra/bicep/environments/pilot-dev-bootstrap.parameters.example.json",
+    "infra/bicep/environments/pilot-dev-foundation.parameters.json",
+    "infra/bicep/environments/pilot-dev-spike.parameters.json",
+    "infra/bicep/modules/engineering-evidence-roles.bicep",
+    "infra/bicep/modules/engineering-evidence-store.bicep",
+    "infra/bicep/modules/pilot-container-apps-environment.bicep",
+    "infra/bicep/modules/pilot-container-registry.bicep",
+    "infra/bicep/modules/pilot-development-bootstrap-apps.bicep",
+    "infra/bicep/modules/pilot-key-vault.bicep",
+    "infra/bicep/modules/pilot-monitor-private-link.bicep",
+    "infra/bicep/modules/pilot-network-egress.bicep",
+    "infra/bicep/modules/pilot-observability.bicep",
+    "infra/bicep/modules/pilot-postgresql.bicep",
+    "infra/bicep/modules/pilot-private-dns.bicep",
+    "infra/bicep/modules/pilot-service-bus-namespace.bicep",
+    "infra/bicep/modules/pilot-service-bus-work-queue.bicep",
+    "infra/bicep/modules/pilot-service-bus-work-roles.bicep",
+    "infra/bicep/modules/pilot-workload-identity.bicep",
+    "infra/bicep/pilot-broker-network-spike.bicep",
+    "infra/bicep/pilot-development-bootstrap-apps.bicep",
+    "infra/bicep/pilot-development-foundation.bicep",
+    "infra/containers/azure-development-bootstrap.images.lock.json",
+    "infra/containers/build-development-bootstrap.py",
+    "infra/entra/pilot-bff.application.json",
+    "migrations/assessment-runs/001-initial.sql",
+    "migrations/finding-review/001-initial.sql",
+    "src/collector/CollectorHost/AssemblyInfo.cs",
+    "src/collector/CollectorHost/CollectorArguments.cs",
+    "src/collector/CollectorHost/CollectorConfig.cs",
+    "src/collector/CollectorHost/CollectorHost.csproj",
+    "src/collector/CollectorHost/CollectorRunCoordinator.cs",
+    "src/collector/CollectorHost/CollectorService.cs",
+    "src/collector/CollectorHost/CollectorServiceRunner.cs",
+    "src/collector/CollectorHost/CrossProcessRunLease.cs",
+    "src/collector/CollectorHost/DailySchedule.cs",
+    "src/collector/CollectorHost/EncryptedCheckpointStore.cs",
+    "src/collector/CollectorHost/EncryptedPageStageStore.cs",
+    "src/collector/CollectorHost/EncryptedRunStartStore.cs",
+    "src/collector/CollectorHost/LocalRunDirectoryCapacity.cs",
+    "src/collector/CollectorHost/Program.cs",
+    "src/collector/CollectorHost/WindowsCheckpointKeyStore.cs",
+    "src/collector/CollectorHost/WindowsProtectedConfig.cs",
+    "src/collector/CollectorHost/WindowsRunDirectoryProvisioner.cs",
+    "src/collector/CollectorHost/packages.lock.json",
+    "src/collector/CollectorSafety/CollectorRunGate.cs",
+    "src/collector/CollectorSafety/CollectorSafety.csproj",
+    "src/collector/CollectorSafety/FieldMinimizer.cs",
+    "src/collector/CollectorSafety/LocalRetentionWindow.cs",
+    "src/collector/CollectorSafety/OfflinePayloadEncryptionPrimitive.cs",
+    "src/collector/CollectorSafety/PageBudget.cs",
+    "src/collector/CollectorSafety/PageCheckpointVerifier.cs",
+    "src/collector/CollectorSafety/PermissionAttestation.cs",
+    "src/collector/CollectorSafety/QueryApplicability.cs",
+    "src/collector/CollectorSafety/StaticSqlShapeValidator.cs",
+    "src/collector/CollectorSafety/packages.lock.json",
+    "src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj",
+    "src/server/hosts/AzureDevelopmentBootstrap/Program.cs",
+    "src/server/hosts/AzureDevelopmentBootstrap/packages.lock.json",
+    "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoMaturityProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoReportDraftProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+    "src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+    "src/server/hosts/LocalConsultantDemo/Program.cs",
+    "src/server/hosts/LocalConsultantDemo/packages.lock.json",
+    "src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj",
+    "src/server/modules/AssessmentCoverage/CoverageCompletionProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageCountProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageLimitationProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageProgressProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageReconciler.cs",
+    "src/server/modules/AssessmentCoverage/ExecutableCoverageProjector.cs",
+    "src/server/modules/AssessmentCoverage/packages.lock.json",
+    "src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj",
+    "src/server/modules/AssessmentMaturity/MaturityContracts.cs",
+    "src/server/modules/AssessmentMaturity/PilotMaturityProjector.cs",
+    "src/server/modules/AssessmentMaturity/SyntheticMaturityFixturePack.cs",
+    "src/server/modules/AssessmentMaturity/packages.lock.json",
+    "src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj",
+    "src/server/modules/AssessmentOrchestration/CapabilityBoundCoverageProjector.cs",
+    "src/server/modules/AssessmentOrchestration/CapabilityStartGuard.cs",
+    "src/server/modules/AssessmentOrchestration/SyntheticBaselineInventoryPlanner.cs",
+    "src/server/modules/AssessmentOrchestration/packages.lock.json",
+    "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+    "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+    "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+    "src/server/modules/AssessmentRuns/SyntheticDemoAnalysisAdapter.cs",
+    "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+    "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+    "src/server/modules/AssessmentRuns/SyntheticRunDbContext.cs",
+    "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs",
+    "src/server/modules/AssessmentRuns/packages.lock.json",
+    "src/server/modules/AssessmentScoring/AssessmentScoring.csproj",
+    "src/server/modules/AssessmentScoring/PilotHealthScorer.cs",
+    "src/server/modules/AssessmentScoring/ScoringContracts.cs",
+    "src/server/modules/AssessmentScoring/packages.lock.json",
+    "src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj",
+    "src/server/modules/DeterministicAnalysis/SyntheticAnalysisContracts.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticAnalysisEngine.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticAnalysisFixturePack.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticCanonicalDigest.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticRuleEvaluator.cs",
+    "src/server/modules/DeterministicAnalysis/packages.lock.json",
+    "src/server/modules/EvidenceGovernance/ArtifactIntegrityVerifier.cs",
+    "src/server/modules/EvidenceGovernance/EvidenceGovernance.csproj",
+    "src/server/modules/EvidenceGovernance/GateCheckBundleRules.cs",
+    "src/server/modules/EvidenceGovernance/GateCheckBundleVerifier.cs",
+    "src/server/modules/EvidenceGovernance/GateCheckBundleWriter.cs",
+    "src/server/modules/EvidenceGovernance/GateEvidenceRetention.cs",
+    "src/server/modules/EvidenceGovernance/GateSigningTrustRegistry.cs",
+    "src/server/modules/EvidenceGovernance/NormalPromotionEvidencePreflight.cs",
+    "src/server/modules/EvidenceGovernance/OwnerOverrideTrustRegistry.cs",
+    "src/server/modules/EvidenceGovernance/PilotOwnerOverrideBundle.cs",
+    "src/server/modules/EvidenceGovernance/PromotionMachineEvidencePreflight.cs",
+    "src/server/modules/EvidenceGovernance/ReviewEvidenceCoverage.cs",
+    "src/server/modules/EvidenceGovernance/ReviewerDecisionBundle.cs",
+    "src/server/modules/EvidenceGovernance/ReviewerTrustRegistry.cs",
+    "src/server/modules/EvidenceGovernance/packages.lock.json",
+    "src/server/modules/FindingReview/FindingReview.csproj",
+    "src/server/modules/FindingReview/SyntheticReviewContracts.cs",
+    "src/server/modules/FindingReview/SyntheticReviewDigest.cs",
+    "src/server/modules/FindingReview/SyntheticReviewMigration.cs",
+    "src/server/modules/FindingReview/SyntheticReviewPolicy.cs",
+    "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+    "src/server/modules/FindingReview/packages.lock.json",
+    "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs",
+    "src/server/modules/ReportDrafts/ReportDraftContracts.cs",
+    "src/server/modules/ReportDrafts/ReportDrafts.csproj",
+    "src/server/modules/ReportDrafts/StructuredDraftMarkdown.cs",
+    "src/server/modules/ReportDrafts/packages.lock.json",
+    "src/web/.prettierrc.json",
+    "src/web/index.html",
+    "src/web/package-lock.json",
+    "src/web/package.json",
+    "src/web/src/AnalysisView.tsx",
+    "src/web/src/App.tsx",
+    "src/web/src/DraftReportView.tsx",
+    "src/web/src/MaturityView.tsx",
+    "src/web/src/ReviewPanel.tsx",
+    "src/web/src/api.ts",
+    "src/web/src/assets.d.ts",
+    "src/web/src/demo-contract.generated.ts",
+    "src/web/src/main.tsx",
+    "src/web/src/styles.css",
+    "src/web/tsconfig.json",
+    "tests/architecture/BoundaryChecks/BoundaryChecks.csproj",
+    "tests/architecture/BoundaryChecks/Program.cs",
+    "tests/architecture/BoundaryChecks/ProjectBoundaryVerifier.cs",
+    "tests/architecture/BoundaryChecks/packages.lock.json",
+    "tests/e2e/analysis-scoring/verify.mjs",
+    "tests/e2e/consultant-demo/package-lock.json",
+    "tests/e2e/consultant-demo/package.json",
+    "tests/e2e/consultant-demo/verify.mjs",
+    "tests/e2e/draft-reports/bind-artifacts.mjs",
+    "tests/e2e/draft-reports/browser-support.mjs",
+    "tests/e2e/draft-reports/host-harness.mjs",
+    "tests/e2e/draft-reports/verify.mjs",
+    "tests/e2e/review-maturity/bind-artifacts.mjs",
+    "tests/e2e/review-maturity/browser-support.mjs",
+    "tests/e2e/review-maturity/verify.mjs",
+    "tests/infrastructure/AzureApplicationPackage/hosting-policy.py",
+    "tests/infrastructure/AzureFoundation/composition-policy.py",
+    "tests/infrastructure/AzureFoundation/compute-policy.py",
+    "tests/infrastructure/AzureFoundation/entra-policy.py",
+    "tests/infrastructure/AzureFoundation/postgresql-policy.py",
+    "tests/infrastructure/AzureFoundation/private-services-policy.py",
+    "tests/infrastructure/EvidenceStorePolicy/EvidenceStorePolicy.csproj",
+    "tests/infrastructure/EvidenceStorePolicy/Program.cs",
+    "tests/infrastructure/EvidenceStorePolicy/packages.lock.json",
+    "tests/infrastructure/NetworkEgressPolicy/AddressPlanValidator.cs",
+    "tests/infrastructure/NetworkEgressPolicy/NetworkEgressPolicy.csproj",
+    "tests/infrastructure/NetworkEgressPolicy/Program.cs",
+    "tests/infrastructure/NetworkEgressPolicy/packages.lock.json",
+    "tests/infrastructure/ServiceBusPolicy/Program.cs",
+    "tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj",
+    "tests/infrastructure/ServiceBusPolicy/packages.lock.json",
+    "tests/integration/AnalysisScoring.Tests/AnalysisAndStoreCases.cs",
+    "tests/integration/AnalysisScoring.Tests/AnalysisScoring.Tests.csproj",
+    "tests/integration/AnalysisScoring.Tests/DurableCases.cs",
+    "tests/integration/AnalysisScoring.Tests/Program.cs",
+    "tests/integration/AnalysisScoring.Tests/ScoringFixture.cs",
+    "tests/integration/AnalysisScoring.Tests/packages.lock.json",
+    "tests/integration/AzureDevelopmentBootstrap/container_smoke.py",
+    "tests/integration/AzureDevelopmentBootstrap/verify.py",
+    "tests/integration/DurableAssessment.Tests/DurableAssessment.Tests.csproj",
+    "tests/integration/DurableAssessment.Tests/Program.cs",
+    "tests/integration/DurableAssessment.Tests/SyntheticFixture.cs",
+    "tests/integration/DurableAssessment.Tests/packages.lock.json",
+    "tests/integration/ReportDrafts.Tests/Check.cs",
+    "tests/integration/ReportDrafts.Tests/CoreCases.cs",
+    "tests/integration/ReportDrafts.Tests/CoreFixture.cs",
+    "tests/integration/ReportDrafts.Tests/MarkdownCases.cs",
+    "tests/integration/ReportDrafts.Tests/PersistenceCases.cs",
+    "tests/integration/ReportDrafts.Tests/Program.cs",
+    "tests/integration/ReportDrafts.Tests/ReportDrafts.Tests.csproj",
+    "tests/integration/ReportDrafts.Tests/SavedDraftFixture.cs",
+    "tests/integration/ReportDrafts.Tests/canonical-golden-provenance.json",
+    "tests/integration/ReportDrafts.Tests/canonical-golden.json",
+    "tests/integration/ReportDrafts.Tests/packages.lock.json",
+    "tests/integration/ReviewMaturity.Tests/BridgeCases.cs",
+    "tests/integration/ReviewMaturity.Tests/Check.cs",
+    "tests/integration/ReviewMaturity.Tests/HistoricalGoldens.cs",
+    "tests/integration/ReviewMaturity.Tests/MaturityCases.cs",
+    "tests/integration/ReviewMaturity.Tests/MaturityFixtures.cs",
+    "tests/integration/ReviewMaturity.Tests/Program.cs",
+    "tests/integration/ReviewMaturity.Tests/ReviewFixtures.cs",
+    "tests/integration/ReviewMaturity.Tests/ReviewMaturity.Tests.csproj",
+    "tests/integration/ReviewMaturity.Tests/ReviewPolicyCases.cs",
+    "tests/integration/ReviewMaturity.Tests/ReviewStoreCases.cs",
+    "tests/integration/ReviewMaturity.Tests/historical-baseline-goldens.json",
+    "tests/integration/ReviewMaturity.Tests/packages.lock.json",
+    "tests/integration/SyntheticPilotFlow.Tests/Program.cs",
+    "tests/integration/SyntheticPilotFlow.Tests/SyntheticBaselineFlowCases.cs",
+    "tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj",
+    "tests/integration/SyntheticPilotFlow.Tests/packages.lock.json",
+    "tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj",
+    "tests/unit/AssessmentCoverage.Tests/CoverageCompletionChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/CoverageCountChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/CoverageLimitationChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/CoverageProgressChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/ExecutableCoverageChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/Program.cs",
+    "tests/unit/AssessmentCoverage.Tests/packages.lock.json",
+    "tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj",
+    "tests/unit/AssessmentMaturity.Tests/Program.cs",
+    "tests/unit/AssessmentMaturity.Tests/packages.lock.json",
+    "tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj",
+    "tests/unit/AssessmentOrchestration.Tests/CapabilityBoundCoverageCases.cs",
+    "tests/unit/AssessmentOrchestration.Tests/Program.cs",
+    "tests/unit/AssessmentOrchestration.Tests/SyntheticBaselineInventoryCases.cs",
+    "tests/unit/AssessmentOrchestration.Tests/packages.lock.json",
+    "tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj",
+    "tests/unit/AssessmentRuns.Tests/Program.cs",
+    "tests/unit/AssessmentRuns.Tests/packages.lock.json",
+    "tests/unit/AssessmentScoring.Tests/AssessmentScoring.Tests.csproj",
+    "tests/unit/AssessmentScoring.Tests/Program.cs",
+    "tests/unit/AssessmentScoring.Tests/packages.lock.json",
+    "tests/unit/CollectorHost.Tests/CheckpointStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj",
+    "tests/unit/CollectorHost.Tests/LeaseCrashRecoveryChecks.cs",
+    "tests/unit/CollectorHost.Tests/PageStageStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/Program.cs",
+    "tests/unit/CollectorHost.Tests/RunCoordinatorChecks.cs",
+    "tests/unit/CollectorHost.Tests/RunStartStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/WindowsKeyStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/WindowsRunDirectoryChecks.cs",
+    "tests/unit/CollectorHost.Tests/WindowsStageTestDirectory.cs",
+    "tests/unit/CollectorHost.Tests/packages.lock.json",
+    "tests/unit/CollectorSafety.Tests/CollectorRunGateChecks.cs",
+    "tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj",
+    "tests/unit/CollectorSafety.Tests/FieldMinimizerChecks.cs",
+    "tests/unit/CollectorSafety.Tests/LocalRetentionWindowChecks.cs",
+    "tests/unit/CollectorSafety.Tests/OfflinePayloadEncryptionChecks.cs",
+    "tests/unit/CollectorSafety.Tests/PageBudgetChecks.cs",
+    "tests/unit/CollectorSafety.Tests/PageCheckpointChecks.cs",
+    "tests/unit/CollectorSafety.Tests/Program.cs",
+    "tests/unit/CollectorSafety.Tests/QueryApplicabilityChecks.cs",
+    "tests/unit/CollectorSafety.Tests/StaticSqlShapeChecks.cs",
+    "tests/unit/CollectorSafety.Tests/packages.lock.json",
+    "tests/unit/DeterministicAnalysis.Tests/DeterministicAnalysis.Tests.csproj",
+    "tests/unit/DeterministicAnalysis.Tests/Program.cs",
+    "tests/unit/DeterministicAnalysis.Tests/packages.lock.json",
+    "tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj",
+    "tests/unit/EvidenceGovernance.Tests/GateCheckBundleChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/GateCheckBundleWriterChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/GateEvidenceRetentionChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/GateSigningTrustChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/NormalPromotionEvidenceChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/OwnerOverrideTrustChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/PilotOwnerOverrideChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/Program.cs",
+    "tests/unit/EvidenceGovernance.Tests/PromotionMachineEvidenceChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/ReviewerDecisionChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/ReviewerTrustChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/packages.lock.json",
+    "tests/unit/FindingReview.Tests/FindingReview.Tests.csproj",
+    "tests/unit/FindingReview.Tests/Program.cs",
+    "tests/unit/FindingReview.Tests/packages.lock.json",
+    "tests/unit/ReportDrafts.Tests/DraftFixture.cs",
+    "tests/unit/ReportDrafts.Tests/Program.cs",
+    "tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj",
+    "tests/unit/ReportDrafts.Tests/packages.lock.json",
+    "tests/unit/ReportMarkdown.Tests/MarkdownFixture.cs",
+    "tests/unit/ReportMarkdown.Tests/Program.cs",
+    "tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj",
+    "tests/unit/ReportMarkdown.Tests/packages.lock.json",
+    "tests/windows/collector-service-smoke.ps1"
+  ],
+  "workers": {
+    "D6": "343765a28a3227f42ed11240661f6d04be9bc16f",
+    "M6": "c7d8d3e5e8ac50e49d51d0b3857face1b3063ed9",
+    "V6": "93e103b4020b32c1f0ee5077227d8de9caf2d3cb"
+  },
+  "transcripts": [
+    {
+      "path": "/private/tmp/iga-cycle06-browser-regressions-final.log",
+      "sha256": "8cbbcdf39f3222bbef9b8625e8885e5426deb58ee1dde64acfc9341b085a9000"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-browser-regressions.log",
+      "sha256": "1bfff8cb34f5beb605ba07e1a8e1c193e0aed8f933c22b67941c134385dc5bd5"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-browser-review-final.log",
+      "sha256": "0e79152f0b5a1e0899b7695bd405bd8cd9ce1c7dc686c771482c730cfda332a9"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-checks.log",
+      "sha256": "78668e52fb5d88d6d82be0087a8ddcadaeb27356971fed02500ef9141aacb322"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-final-host-build.log",
+      "sha256": "ebfa08f4e235df819908b5af629e4e39523f94506777e6fd706ded25f69b5329"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-format-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-format-initial.log",
+      "sha256": "cd8ec042d0f7f74aded04da7296282fc3cb832a5434f5e623761f15a6c6d5054"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-frontend-final.log",
+      "sha256": "344f53945eda066aab03b3fa8f545168371b05a6d36194db550585792cda2354"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-frozen-host-build.log",
+      "sha256": "06a12f514cfc573106ae0671c6748015e481e6ed3e28deb1f80e64b3772f1fa0"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-full-build-final.log",
+      "sha256": "2df57d430dcf252cd7f564692ab6499ea8a868c38e922a10dc8271b01c6944e0"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-full-build.log",
+      "sha256": "51e5194368e3dc108c8663bc25f9dbac58787ce4d901f63988abc6301929dfc1"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-host-format-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-hosting-policy.log",
+      "sha256": "188356cb66b736a70925bacb276b30eaa33168684aa17227f8c46ba9dfbc05dc"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-independent-draft.log",
+      "sha256": "e53ce6f504a26fbf1c67594905ad1aa94054453d2e75214c0b5d0efdd3862df3"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-infra.log",
+      "sha256": "281e502cedfbda02eb20fbf5963360d7c02096e1239a1ae2e09bc9699fa2297f"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-initial-build.log",
+      "sha256": "93b2c537dae67309112a2715cccfa7b02b4adb414c3e2b331c77ddc064722e0e"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-initial-restore.log",
+      "sha256": "1dc19095e1cf25247f8d5f5d4f8742ae4aa8706b6b9e261c5cf3159d7b8dc0ba"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-locked-restore-final.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-locked-restore.log",
+      "sha256": "3ca89b0a17ba35372e2b4b7a1827356a9694bbffae255fad1ef18e5e071404e1"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-root-d6-restore.log",
+      "sha256": "4f68fba1862d41a5751cdfda7e3511f2f4dda98d3fdf7b50a4c4f1e93a93a1d9"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-root-d6-test.log",
+      "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-root-format-repair.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-secret-scan-final.log",
+      "sha256": "ee504b6e2d9defac778eedadd1f7680a544a7e22627cade405249a58af611023"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-secret-scan.log",
+      "sha256": "60fba34ad860c2709679495f170fa0c61ea51c07d2e21d7d3d09fca7b031d990"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-vulnerable-packages.log",
+      "sha256": "ac840ecbfa613786c036c83038a0993d97a705561740cbd054a530247eadf1ef"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-closure-secret-scan.log",
+      "sha256": "3620cb1336975eaae3d30a870e710f2376b96861f5e5b0ed03b8f9ba8a8647e7"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-postpublication-secret-scan.log",
+      "sha256": "8b37cf9b2728a570fbc07d3bfa1ad71e3c11477211b2f668aea135837baf1c7e"
+    }
+  ],
+  "checks": {
+    "auditedLockedRestore": "PASS",
+    "wholeSolutionFormat": "PASS after disclosed whitespace repair",
+    "releaseBuild": "PASS 34 projects zero warnings/errors",
+    "currentSuitesAndCrossPublish": "PASS",
+    "draftChecks": 180,
+    "markdownAssertions": 114,
+    "independentSourceAndPostgreSQLAssertions": 201,
+    "newDraftBrowserAssertions": 2137,
+    "durablePostgreSQLAssertions": 80,
+    "analysisPostgreSQLAssertions": 399,
+    "reviewMaturityPostgreSQLAssertions": 342,
+    "frontendContractTypeFormatBuildAudit": "PASS zero vulnerabilities",
+    "infrastructureTemplates": 18,
+    "bootstrapHostingUnsafeDrifts": 44,
+    "secretScan": "PASS final475 tracked/owned files including archived closure record; no allowlists",
+    "remotePartialCI": "PASS configured Linux/Windows2022/2025 and Azure package partial checks",
+    "privatePublication": "PASS confirmed owner-private publication",
+    "historicalCoverageBrowserChecks": 397,
+    "historicalAnalysisBrowserAssertions": 724,
+    "historicalReviewBrowserAssertions": 2195
+  },
+  "historicalBrowser": {
+    "consultant-demo": {
+      "status": "PASS",
+      "checks": 397,
+      "groups": [
+        "DEMO-001 strict transport and independent durable coverage golden",
+        "DEMO-002 actual keyboard start/progress/locks/reload/history/focus",
+        "DEMO-003 keyboard cancellation preserves incomplete durable results",
+        "DEMO-004 semantic/target/reflow/forced-colors engineering smoke",
+        "DEMO-006 actual host SIGKILL/reload/expired-lease keyboard resume/missing-only completion",
+        "DEMO-005 unavailable coverage and focused denied-action error recovery"
+      ],
+      "accessibility": [
+        {
+          "label": "desktop gap coverage",
+          "version": "4.13.0",
+          "passes": 30,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "label": "320px cancellation with expanded locks",
+          "version": "4.13.0",
+          "passes": 29,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ],
+      "browser": "145.0.7632.6",
+      "node": "v24.21.0",
+      "base": "http://127.0.0.1:5183",
+      "limitations": [
+        "Automated Chromium engineering smoke only; supported Windows browser and NVDA/Narrator acceptance NOT VERIFIED",
+        "Production identity/customer isolation, live source, scoring, AI and ServiceBus NOT VERIFIED"
+      ]
+    },
+    "analysis-scoring": {
+      "status": "PASS",
+      "assertions": 724,
+      "groups": [
+        "AS-API-001 real stored findings/provisional/publishable/quality/provenance precision goldens",
+        "AS-API-002 comparisons/mixed/gaps/explicit healthy/historical/cancelled",
+        "AS-API-003 hostile scope/weights/frozen lock/profile/origin/Host/unknown-resource",
+        "AS-UI-001 actual keyboard start/grouped original/reload/history immutable score",
+        "AS-UI-002 actual transient failure/keyboard read-only same-revision retry/stale projection denial",
+        "AS-UI-003 actual findings provenance/desktop390320/axe/forced-colors engineering smoke"
+      ],
+      "accessibility": [
+        {
+          "label": "desktop findings/original",
+          "version": "4.13.0",
+          "passes": 30,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "label": "320px findings/original",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ],
+      "browser": "145.0.7632.6",
+      "node": "v24.21.0",
+      "limitations": [
+        "Synthetic internal scoring only; no actual rule promotion, review/risk grant, publication, maturity or AI enabled",
+        "Full supported Windows browser/NVDA/Narrator acceptance NOT VERIFIED",
+        "Axe 320px findings/original incomplete:color-contrast; those rules are NOT VERIFIED"
+      ]
+    },
+    "review-maturity": {
+      "status": "PASS",
+      "assertions": 2195,
+      "groups": [
+        "RM-API-001 stored originals/current health/coherent snapshot/history/replay/maturity goldens",
+        "RM-API-002 defer penalty/health independence/mixed/gaps/historical read-only profile",
+        "RM-API-003 server-owned actor/scope/originals unsupported actions/body4KiB CSRF/Host/Origin",
+        "RM-UI-001 actual keyboard confirm/reject/comment/edit inert text/originals/history/reload",
+        "RM-UI-002 actual stale CAS focused recovery and cross-run response denial",
+        "RM-UI-005 committed-response-loss exact-event retry and delayed GET/POST selection races with visible score/history goldens",
+        "RM-UI-003 keyboard Defer and actual owned-host restart preserves durable history",
+        "RM-UI-004 desktop390320 expanded history/evidence/axe/forced-color engineering smoke"
+      ],
+      "accessibility": [
+        {
+          "label": "desktop review/history/maturity",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr"
+          ]
+        },
+        {
+          "label": "320px review/history/maturity",
+          "version": "4.13.0",
+          "passes": 33,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ],
+      "browser": "145.0.7632.6",
+      "node": "v24.21.0",
+      "ownedHostRestartExecuted": true,
+      "limitations": [
+        "Fixed synthetic reviewer identity, fictional maturity indicators only; no customer risk acceptance/publication/production authority",
+        "Full supported Windows/NVDA/Narrator acceptance NOT VERIFIED",
+        "Axe desktop review/history/maturity incomplete:aria-prohibited-attr; NOT VERIFIED",
+        "Axe 320px review/history/maturity incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+      ]
+    }
+  },
+  "newDraftBrowser": {
+    "status": "PASS",
+    "assertions": 2137,
+    "groups": [
+      "DR-API-001 actual saved coherent draft, review change, immutable originals and hostile Markdown",
+      "DR-API-002 independent healthy/gap/mixed/weighted and historical profile literals",
+      "DR-UI-001 native summary/technical/inert Markdown, unique maturity, keyboard review refresh",
+      "DR-UI-002 source/version/digest/scope substitution refusal and same-revision retry",
+      "DR-UI-003 late old GET selection race remains bound to new run",
+      "DR-UI-004 actual process restart/reload reproducibility",
+      "DR-UI-005 desktop390320, expanded captured evidence, axe and native focus engineering checks"
+    ],
+    "accessibility": [
+      {
+        "label": "desktop expanded technical draft",
+        "version": "4.13.0",
+        "passes": 31,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr"
+        ]
+      },
+      {
+        "label": "320px expanded technical draft",
+        "version": "4.13.0",
+        "passes": 33,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr",
+          "color-contrast"
+        ]
+      }
+    ],
+    "browser": "145.0.7632.6",
+    "node": "v24.21.0",
+    "ownedHostRestartExecuted": true,
+    "substitutionCases": [
+      "schema",
+      "published",
+      "Markdown version",
+      "canonical digest",
+      "run",
+      "review revision",
+      "baseline",
+      "profile",
+      "input digest",
+      "capability tuple",
+      "scripted digest",
+      "application lock",
+      "desired outcomes",
+      "analysis fixture",
+      "scoring digest",
+      "maturity digest",
+      "wrong scope"
+    ],
+    "limitations": [
+      "Fixed synthetic scope only; no durable ReportVersion, publication/export/customer authority",
+      "Full supported Windows/NVDA/Narrator/manual WCAG acceptance NOT VERIFIED",
+      "axe desktop expanded technical draft incomplete:aria-prohibited-attr; NOT VERIFIED",
+      "axe 320px expanded technical draft incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+    ]
+  },
+  "migrationChanges": "None; existing assessment001 and syntheticReview001 unchanged",
+  "dependencyVersionChanges": "None",
+  "limitations": [
+    "Configured CI is partial engineering evidence, not full merge/release gate",
+    "Full Windows/manual assistive-technology/WCAG and PDF acceptance NOT VERIFIED",
+    "Production identity/customer source/catalog/risk/reassessment/AI/tasks/publication/G1\u2013G9 NOT VERIFIED",
+    "Pure returned-value immutability only; no durable report history",
+    "Axe aria-prohibited-attr incomplete at desktop/320 and color-contrast incomplete at320; those checks NOT VERIFIED"
+  ],
+  "initialPrivatePublication": {
+    "repositorySnapshot": "62eba5abe17fbdf0d3c71c039bbb1c412790f1f6",
+    "sourceSha": "5a546fde2a0b3cf470d8d0d3f71672d5d25b8f94",
+    "deploymentId": "appgdep_6abf9791397081919516ff0d41e4a7d2",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_0b4462d925d88191b5d9e39a9ac587f9",
+    "status": "succeeded",
+    "confirmedUtc": "2026-10-02T11:37:59.787154+00:00"
+  },
+  "independentReview": {
+    "D6": "M6 read-only closed at343765a",
+    "M6": "D6 read-only closed atc7d8d3e",
+    "V6": "M6 read-only closed at93e103b;110 source/artifact/DLL hashes matched",
+    "coordinator": "M6 source review plus V6 actual201/2137 and coordinator final historical397/724/2195 regressions; two scoped review selectors independently reviewed"
+  },
+  "preservedWorkerArtifacts": [
+    {
+      "path": "/private/tmp/iga-cycle06-d6-source.tar",
+      "sha256": "cb4e34ddd081060a06c14eaaa984534abf0c1ae7ad6af46598a063ac10721a6a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-m6-source.tar",
+      "sha256": "62723682eb1c73a88868246124f68f22d446458426fad438dd968f6022f2e34a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-v6-source.tar",
+      "sha256": "9ede284b032661443c42388810f366e1531303e66fab47360b452e8fb6ab5597"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-preserved-v6-tests",
+      "purpose": "Exact executed worker integration binaries/dependencies"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-borrowed-source.tar",
+      "sha256": "015e96db5e899795c2d867586fbbeb23cd7aed74f8101b07fe17cae1466c4521",
+      "purpose": "Borrowed module copies including build outputs preserved before temporary worktree cleanup"
+    }
+  ],
+  "remoteVerification": {
+    "sourceCommit": "f4c7f8238c2a78edd2363b35a1ae407db7d4248c",
+    "bootstrapRunId": 37006798017,
+    "bootstrapJobIds": [
+      110836863181,
+      110836862860,
+      110836863125
+    ],
+    "azurePackageRunId": 37006798048,
+    "azurePackageJobId": 110836863777,
+    "conclusions": "All success; configured partial engineering evidence only"
+  },
+  "workerCheckoutCleanup": "Completed after preservation; committed packet branches retained; separate BFF worktree and unrelated research/work files preserved",
+  "closedPrivatePublication": {
+    "repositorySnapshot": "6271dfa8a9e8e38749469321bb7cae7f8bca46db",
+    "sourceSha": "105ae3dea37075cac21c3b630d5218eeb68d759f",
+    "deploymentId": "appgdep_6abfa5b7e3588191867efdaaf7f8f2ec",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_aa0466b650608191a61f6bb14a84e347",
+    "status": "succeeded",
+    "confirmedUtc": "2026-10-02T12:38:22.534581+00:00"
+  },
+  "privateBoardChecks": {
+    "desktopWidth": 1440,
+    "mobileWidth": 390,
+    "reflowNavigation": "PASS",
+    "immutableRepositoryFileLinks": 35,
+    "openHumanTasks": 10,
+    "requestedRoleCompletionSourceLinks": "PASS",
+    "audience": "Owner-only preserved; one allowed owner, zero external visitors",
+    "bff": "Completed publication task and separate immutable source/check references preserved"
+  },
+  "cycleStatus": "COMPLETE bounded developer cycle only"
+}

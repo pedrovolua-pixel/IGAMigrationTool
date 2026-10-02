@@ -85,6 +85,9 @@
         "dependencies": {
           "Npgsql": "[10.0.3, )"
         }
+      },
+      "reportdrafts": {
+        "type": "Project"
       }
     }
   }

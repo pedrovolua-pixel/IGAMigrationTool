@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "assertions": 2137,
+  "groups": [
+    "DR-API-001 actual saved coherent draft, review change, immutable originals and hostile Markdown",
+    "DR-API-002 independent healthy/gap/mixed/weighted and historical profile literals",
+    "DR-UI-001 native summary/technical/inert Markdown, unique maturity, keyboard review refresh",
+    "DR-UI-002 source/version/digest/scope substitution refusal and same-revision retry",
+    "DR-UI-003 late old GET selection race remains bound to new run",
+    "DR-UI-004 actual process restart/reload reproducibility",
+    "DR-UI-005 desktop390320, expanded captured evidence, axe and native focus engineering checks"
+  ],
+  "accessibility": [
+    {
+      "label": "desktop expanded technical draft",
+      "version": "4.13.0",
+      "passes": 31,
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr"
+      ]
+    },
+    {
+      "label": "320px expanded technical draft",
+      "version": "4.13.0",
+      "passes": 33,
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr",
+        "color-contrast"
+      ]
+    }
+  ],
+  "browser": "145.0.7632.6",
+  "node": "v24.21.0",
+  "ownedHostRestartExecuted": true,
+  "substitutionCases": [
+    "schema",
+    "published",
+    "Markdown version",
+    "canonical digest",
+    "run",
+    "review revision",
+    "baseline",
+    "profile",
+    "input digest",
+    "capability tuple",
+    "scripted digest",
+    "application lock",
+    "desired outcomes",
+    "analysis fixture",
+    "scoring digest",
+    "maturity digest",
+    "wrong scope"
+  ],
+  "limitations": [
+    "Fixed synthetic scope only; no durable ReportVersion, publication/export/customer authority",
+    "Full supported Windows/NVDA/Narrator/manual WCAG acceptance NOT VERIFIED",
+    "axe desktop expanded technical draft incomplete:aria-prohibited-attr; NOT VERIFIED",
+    "axe 320px expanded technical draft incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+  ]
+}

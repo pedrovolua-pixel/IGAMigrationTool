@@ -719,6 +719,7 @@ try {
   );
   await page.reload();
   await page
+    .getByLabel("Consultant review and history", { exact: true })
     .getByRole("heading", { name: hostile, exact: true, level: 5 })
     .waitFor();
   equal(
@@ -734,6 +735,7 @@ try {
     .focus();
   await page.keyboard.press("Enter");
   await page
+    .getByLabel("Consultant review and history", { exact: true })
     .getByRole("heading", { name: hostile, exact: true, level: 5 })
     .waitFor();
   group(
