@@ -50,3 +50,7 @@ The [SME template](../../specs/001-data-ingestion/one-identity-sme-evidence-temp
 ## Consultant review/history and independent maturity — cycle05
 
 [Cycle05](../completed/local-pilot-review-maturity-cycle-05.md) adds approved opt-in synthetic review decisions, comments, presentation edits, durable append-only history and separately frozen cumulative maturity. Coherent current health/quality uses a verified saved review snapshot, while originals and earlier four-profile input envelopes remain fixed. Local342 integrated/2,162 browser assertions and historical391/712 regressions passed; configured Linux/Windows and Azure package CI passed; owner-private publication is confirmed and the bounded cycle is closed. This is another bounded Phase1B slice. The full completion checklist, production identity/risk/closure, AI/recommendations/fix/tasks/report/MCP and live gates remain open.
+
+## Canonical synthetic draft-report preparation — cycle06
+
+[Cycle06](local-pilot-draft-report-cycle-06.md) prepares a read-only current draft from one coherent saved review/analysis/maturity snapshot, with summary/technical views and inert Markdown parity. Current Scoring runs do not become terminal or published. This bounded Milestone9 preparation slice adds no durable ReportVersion, publication/share/download/PDF permission or live gate. Implementation/checks/private publication are pending.
