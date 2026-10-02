@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "synthetic-ai-fixture-output-v1",
+  "runId": "11111111-2222-3333-4444-555555555555",
+  "packetDigest": "39c0b00c1443ddbeb42e17e02ec2f0f5ea897988d0e01de14478d0fb71a8ccaf",
+  "proposals": [
+    {
+      "proposalId": "proposal-02",
+      "facts": [
+        {
+          "text": "Fictional retry policy was supplied.",
+          "evidenceIds": [
+            "ev-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          ],
+          "ruleIds": [
+            "fixture-rule-conflict-v1"
+          ]
+        }
+      ],
+      "inferences": [],
+      "assumptions": [],
+      "missingContext": [],
+      "suggestions": [],
+      "uncertainty": "",
+      "conflictingEvidenceIds": []
+    },
+    {
+      "proposalId": "proposal-01",
+      "facts": [
+        {
+          "text": "Fictional observed schedule flag.",
+          "evidenceIds": [
+            "ev-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "ruleIds": [
+            "fixture-rule-schedule-v1"
+          ]
+        }
+      ],
+      "inferences": [
+        {
+          "text": "A fictional comparison may need review.",
+          "evidenceIds": [
+            "ev-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "ev-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "ruleIds": [
+            "fixture-rule-schedule-v1",
+            "fixture-rule-conflict-v1"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "text": "The two fixtures are deliberately fictional.",
+          "evidenceIds": [
+            "ev-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "ev-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          ],
+          "ruleIds": [
+            "fixture-rule-schedule-v1",
+            "fixture-rule-conflict-v1"
+          ]
+        }
+      ],
+      "missingContext": [
+        "Fresh fixture context is missing.",
+        "No customer configuration is supplied."
+      ],
+      "suggestions": [
+        {
+          "text": "Review the synthetic comparison.",
+          "evidenceIds": [
+            "ev-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "ev-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          ],
+          "ruleIds": [
+            "fixture-rule-schedule-v1",
+            "fixture-rule-conflict-v1"
+          ]
+        }
+      ],
+      "uncertainty": "Fixture states conflict; no preference is selected.",
+      "conflictingEvidenceIds": [
+        "ev-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "ev-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      ]
+    }
+  ]
+}
