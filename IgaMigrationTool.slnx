@@ -34,6 +34,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
     <Project Path="tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
     <Project Path="tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
     <Project Path="tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
@@ -46,6 +47,7 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixPackageHtml.Tests/SyntheticFixPackageHtml.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
     <Project Path="tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />

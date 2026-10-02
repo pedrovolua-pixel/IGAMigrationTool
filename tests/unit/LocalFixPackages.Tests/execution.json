@@ -1,0 +1,1315 @@
+{
+  "status": "PASS",
+  "baseCommit": "fe0a09e24a61dfcb7885c0989942a32ba0e22b71",
+  "branch": "codex/cycle12-source",
+  "workingDirectory": "/private/tmp/iga-cycle12-a12",
+  "sourceAuthority": "Immutable worker commit enclosing this record; final compiled source hashes and original outputs are bound below. Compilation occurred with the declared base Git HEAD.",
+  "assertions": 553,
+  "environment": {
+    "inheritance": "Only PATH HOME TMPDIR LANG LC_ALL SHELL USER LOGNAME; no database/provider/application variables.",
+    "dotnetRoot": "/private/tmp/iga-dotnet-10.0.401",
+    "cliHome": "/private/tmp/iga-coordinator-cli",
+    "sdk": "10.0.401",
+    "childTimeoutSeconds": 180
+  },
+  "checks": [
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj",
+        "--locked-mode",
+        "--disable-parallel",
+        "-p:NuGetAudit=true",
+        "-p:NuGetAuditMode=all"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/restore.log"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "list",
+        "tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj",
+        "package",
+        "--vulnerable",
+        "--include-transitive",
+        "--no-restore"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/audit.log"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj",
+        "--no-restore",
+        "--configuration",
+        "Release",
+        "--disable-build-servers",
+        "-p:UseSharedCompilation=false",
+        "-warnaserror",
+        "-m:1"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/build.log"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.UnitTests.dll"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/unit.log"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "--info"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/sdk.log"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj",
+        "--no-restore",
+        "--verify-no-changes",
+        "--include",
+        "src/server/modules/AssessmentRuns/DemoFixPackageCatalog.cs",
+        "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+        "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+        "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+        "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+        "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+        "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs",
+        "src/server/hosts/LocalConsultantDemo/DemoFixPackageProjection.cs",
+        "src/server/hosts/LocalConsultantDemo/DemoRecommendationGuidanceProjection.cs",
+        "tests/unit/LocalFixPackages.Tests/Program.cs",
+        "tests/unit/LocalFixPackages.Tests/SavedFixture.cs",
+        "tests/unit/LocalFixPackages.Tests/IndependentCanonical.cs",
+        "tests/unit/LocalFixPackages.Tests/GuidanceFixture.cs",
+        "tests/unit/LocalFixPackages.Tests/DraftFixture.cs",
+        "--verbosity",
+        "minimal"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/format.log"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "tests/unit/LocalFixPackages.Tests/independent-oracle.py"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/oracle.log"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-parallel-tools/gitleaks",
+        "dir",
+        "tests/unit/LocalFixPackages.Tests",
+        "--redact",
+        "--no-banner",
+        "--exit-code",
+        "1"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/secrets-tests.log"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-parallel-tools/gitleaks",
+        "protect",
+        "--staged",
+        "--redact",
+        "--no-banner",
+        "--exit-code",
+        "1"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/secrets-staged.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "exitCode": 0,
+      "launcher": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/diff.log"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "Directory.Build.props",
+      "bytes": 463,
+      "sha256": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e"
+    },
+    {
+      "path": "global.json",
+      "bytes": 75,
+      "sha256": "9969064a379ad96f0fd9358b4133bf2652018a32c60d44f37a0638168381a90d"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/AssemblyInfo.cs",
+      "bytes": 169,
+      "sha256": "26674fc0bdadf24f9a46874177c1c3a7c43b4eb64dc4ab47c8801b8da1a1c85d"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoAiPreviewProjection.cs",
+      "bytes": 3669,
+      "sha256": "9cd65728a5ef3c939774a1f0d052f53f035adc8c394160a448d53e700a0cce59"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+      "bytes": 9838,
+      "sha256": "f634e53a7076bfc6bae528e9fedef1460823b12321cfcac2a05f7062a338f556"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoFixPackageProjection.cs",
+      "bytes": 9622,
+      "sha256": "094cde938b6fc189a3c690bf7701157573a37e84539f87deece9e2b7cfecce93"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoMaturityProjection.cs",
+      "bytes": 3379,
+      "sha256": "5ed2c404a66ef82e398f3b3c1dd3593b14bcec1ab5ea92d5cb507a048c80a899"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoRecommendationGuidanceProjection.cs",
+      "bytes": 6066,
+      "sha256": "717d8ec6108f6190540c23a28072dcb8ca5090689589a395465091d236142665"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoReportDraftProjection.cs",
+      "bytes": 7326,
+      "sha256": "541b8d80313b856636619c1ac8c692d33f491ee7e850a4e4e8dff7616e3042b7"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+      "bytes": 6293,
+      "sha256": "106f9907f5c6c55617ef5ce3bbdcf574dfc012de85ae97539af643d5b9c54b8e"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+      "bytes": 686,
+      "sha256": "85dc2eed816d4a08ff5a90fb3c90d73244a563252c827f6e93455e061659614d"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+      "bytes": 25133,
+      "sha256": "3f8a55390c217697fe8a5719d1251079c2643f443bf9012cd5207a1525f07d0f"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/obj/LocalConsultantDemo.csproj.nuget.g.props",
+      "bytes": 1547,
+      "sha256": "8c06cce77b7086280c4fd5070f38a4da7f7c12ff2853b9ffaf5609cd21d5f014"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/obj/LocalConsultantDemo.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/obj/project.assets.json",
+      "bytes": 45389,
+      "sha256": "eaf4b4a2897d3b282ab2d30a6e260672d9cc112723a55eef533a39ab557cd729"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/packages.lock.json",
+      "bytes": 3570,
+      "sha256": "839463979a98a626274e66f9f2bbcf95bbf52a7f3269bcea533580c5919ee399"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj",
+      "bytes": 36,
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageCompletionProjector.cs",
+      "bytes": 1343,
+      "sha256": "e8bddf89169cfb3dac7b3b13c8a66910a014e7d755bc40572ffd85c3e4285ea3"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageCountProjector.cs",
+      "bytes": 1384,
+      "sha256": "579e2f0f89da45e317ec97eb4db242ff23aba9f7c9124d4712ffe15c25e16df1"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageLimitationProjector.cs",
+      "bytes": 2024,
+      "sha256": "b77c0ace8ea2704da0b8a4797d9f6e0febfb04bc8dccbc66181ecca5104f92a5"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageProgressProjector.cs",
+      "bytes": 1755,
+      "sha256": "2a0f0a568f0f1e7bc69d3eca9da551f48baca4ae6f4b9134163fa305d968a89b"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageReconciler.cs",
+      "bytes": 4351,
+      "sha256": "f68953b4bbc89666b09c3026ae6e9f84c51abfc6f20469c4514800d16dc77bdb"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/ExecutableCoverageProjector.cs",
+      "bytes": 1690,
+      "sha256": "54ab78919bb052b32b7c27a14c6cec5e341d3c5a509f53648921e34bcf028543"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/obj/AssessmentCoverage.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/obj/AssessmentCoverage.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/obj/project.assets.json",
+      "bytes": 20732,
+      "sha256": "2141bd0ca3ffaad56eb3f623914c24d9365a8bb87c44c344b85bf10ac1747caa"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/packages.lock.json",
+      "bytes": 61,
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj",
+      "bytes": 36,
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/MaturityContracts.cs",
+      "bytes": 3224,
+      "sha256": "7522ace8380b6cb08797521252eb5653f3959bc1c51503c24ab4313339f195b0"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/PilotMaturityProjector.cs",
+      "bytes": 13227,
+      "sha256": "903ab34434c2597a60ba00413cd87a352b6f3802e4e54578147252f01d950393"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/SyntheticMaturityFixturePack.cs",
+      "bytes": 3014,
+      "sha256": "82c8ebe48e188b3671c18b27a683a32702ffcbbbe38d02f0e6849aa10a087ebd"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/obj/AssessmentMaturity.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/obj/AssessmentMaturity.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/obj/project.assets.json",
+      "bytes": 20732,
+      "sha256": "612bb693b669aa38d34f2dd925e524b43051a73cc7b65c6acaa8968e6e2a70c7"
+    },
+    {
+      "path": "src/server/modules/AssessmentMaturity/packages.lock.json",
+      "bytes": 61,
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj",
+      "bytes": 157,
+      "sha256": "cfc53a6a0b4ca9c95c7470ebd488a964b53dd7fcc9ab88fc62b98c655d94b211"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/CapabilityBoundCoverageProjector.cs",
+      "bytes": 2305,
+      "sha256": "bb45720f547b8150f576f845689276ceb0412c0e92a93d6304a96fd9aeac0a6b"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/CapabilityStartGuard.cs",
+      "bytes": 7118,
+      "sha256": "ea3e3697dd6e7c2d7955699d6f7cb4dfafb99bec60e891eea41287306de02bff"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/SyntheticBaselineInventoryPlanner.cs",
+      "bytes": 9489,
+      "sha256": "552c6cfc789fe3fbd4de67b01dcf48fba4d1c4aab80c7dccba0b7312fe8e20d8"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/obj/AssessmentOrchestration.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/obj/AssessmentOrchestration.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/obj/project.assets.json",
+      "bytes": 21568,
+      "sha256": "b156f2e486e3958f28e97daa095e0e2b79e80532f4cbe8a28e69507e6bff0a68"
+    },
+    {
+      "path": "src/server/modules/AssessmentOrchestration/packages.lock.json",
+      "bytes": 130,
+      "sha256": "574ec40030e331c16f3dc160141e85d09947a49b67b84d7d6a9c8890c394f3eb"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/../../../../migrations/assessment-runs/001-initial.sql",
+      "bytes": 5424,
+      "sha256": "67bad3b18091babdda2abb898666932b7dc09df767c4e6a3ed49265590e34f88"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+      "bytes": 905,
+      "sha256": "50a1bca2dd121bcfa7ed867d240a3f6e739ae059c9af5815604aec969004a353"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoAiPreviewCatalog.cs",
+      "bytes": 5829,
+      "sha256": "d0da26761f1553241c76c2aa561642ba262f7fcb380aa3e6480b6b65410d711a"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+      "bytes": 8145,
+      "sha256": "b549a1e63a4718ccfd2e85d1f9e3c2b1935ca80be42a4df9854f695d8e88c125"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoFixPackageCatalog.cs",
+      "bytes": 1586,
+      "sha256": "2b4dbe9dcad0762ddf0821509867b10efca79f4cd753c6b7dbf28cbfa987fafb"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+      "bytes": 8544,
+      "sha256": "a4a09dd418b98a257588231125a07249d20ef3b646b06e479c8598841cd13606"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDemoAnalysisAdapter.cs",
+      "bytes": 5158,
+      "sha256": "f2f1f6a0890261b962d88743929232516130b7448f3ea412277cd6531ac77c4d"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+      "bytes": 39056,
+      "sha256": "99c84aed114c95c7007b40ba227ccbc7b061ef45e616966e22db999db3ee5378"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+      "bytes": 4462,
+      "sha256": "bb3c6a4b0ea3e2f43f7c0df87e98486a64b62c1da82f519ecd586688937935e8"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunDbContext.cs",
+      "bytes": 4453,
+      "sha256": "734275bfcc32ef733f208fac4aa7740816ffd6a7a360d2abe53276cac539acf4"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs",
+      "bytes": 6405,
+      "sha256": "7488f7ffa74f816114bac085ad7c465b01ec823a25394dab69edd5f7a878dfbb"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-empty.json",
+      "bytes": 212,
+      "sha256": "ca88cea9c3bfc0c03d9a538017f224463d5a5b39bb62a1d5ea2cf288d969f220"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-packet.json",
+      "bytes": 1225,
+      "sha256": "d4d584f5903957cd999fbf9adfbebaddb0be54d8393719b87932bf3890b596c4"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-proposals.json",
+      "bytes": 2500,
+      "sha256": "209f918a7d8b5602499ff74b180ffbc667404c0c1784cac0fe438d6083762011"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/obj/AssessmentRuns.csproj.nuget.g.props",
+      "bytes": 1547,
+      "sha256": "8c06cce77b7086280c4fd5070f38a4da7f7c12ff2853b9ffaf5609cd21d5f014"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/obj/AssessmentRuns.csproj.nuget.g.targets",
+      "bytes": 859,
+      "sha256": "7775ee9f9b054501d29f2d03e9a077aa1cb92e09b6c8c9bec58a255dba66c093"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/obj/project.assets.json",
+      "bytes": 57239,
+      "sha256": "796d801f4e5d614602e4ade906246088d24fd4153315bea8c4e284569e2d6485"
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/packages.lock.json",
+      "bytes": 6226,
+      "sha256": "61be9ab1289c5185db26bb6850874e99a9085d60777f69c87868c87361e219d3"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/AssessmentScoring.csproj",
+      "bytes": 149,
+      "sha256": "7eefcc78004c01aeaeeef3fce1670be213d2cf3599b535c277790550f1b1f81b"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/PilotHealthScorer.cs",
+      "bytes": 16699,
+      "sha256": "4108969453ec3f3eec338cef4ab6c6b9d9470dbf3e0ad400ea1082003c0e3d1a"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/ScoringContracts.cs",
+      "bytes": 3973,
+      "sha256": "2f0e2a8849074f0643bf1a5d371cf73cbb765da130408a66db5504cdb2cae6cc"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/obj/AssessmentScoring.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/obj/AssessmentScoring.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/obj/project.assets.json",
+      "bytes": 21532,
+      "sha256": "49ddb7a7b245f0d67d814b7854acb2c6efc1cef78a6fe06fd991979e747cdc37"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/packages.lock.json",
+      "bytes": 130,
+      "sha256": "574ec40030e331c16f3dc160141e85d09947a49b67b84d7d6a9c8890c394f3eb"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj",
+      "bytes": 157,
+      "sha256": "cfc53a6a0b4ca9c95c7470ebd488a964b53dd7fcc9ab88fc62b98c655d94b211"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisContracts.cs",
+      "bytes": 6045,
+      "sha256": "abc65c0ecee6265077e3d2ce91115bd4396c16afc418742bb9df4b2b0c80855a"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisEngine.cs",
+      "bytes": 6748,
+      "sha256": "3a9d8fa75f670750315c6681ccbfe8fe505121b7f9f2a4599be13dc9b18f69e7"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisFixturePack.cs",
+      "bytes": 7733,
+      "sha256": "9e84110430fe09d72c9d83e3bd2e2b7f562fc4fbe4d6d6de6730352a5823f760"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticCanonicalDigest.cs",
+      "bytes": 1362,
+      "sha256": "3715d5773a70b2a45678814a3603dc85406c8ad700a4fb7b420031fd66d83aa4"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticRuleEvaluator.cs",
+      "bytes": 1959,
+      "sha256": "ebb7ceaa86acf6e460ab6606ed0f7ff6fd7dd4890493582430e42a63cfa48188"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/obj/DeterministicAnalysis.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/obj/DeterministicAnalysis.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/obj/project.assets.json",
+      "bytes": 21556,
+      "sha256": "c6b48db003c6db53183dd16c848dcd67a97fac86309a4707d5bf26ee79943362"
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/packages.lock.json",
+      "bytes": 130,
+      "sha256": "574ec40030e331c16f3dc160141e85d09947a49b67b84d7d6a9c8890c394f3eb"
+    },
+    {
+      "path": "src/server/modules/FindingReview/../../../../migrations/finding-review/001-initial.sql",
+      "bytes": 4108,
+      "sha256": "f919f6a16de9a579573e52046ca1d756f691dfed5f79c1d6eda5ecc7b370180d"
+    },
+    {
+      "path": "src/server/modules/FindingReview/FindingReview.csproj",
+      "bytes": 361,
+      "sha256": "f99b247acd978501a3a3109049de1e3a3e1a403841b037ef4cd0d23551d3223b"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewContracts.cs",
+      "bytes": 3847,
+      "sha256": "2ad909342eeff5ec30a9d65372cf7a7e8fdd8ff2ecd6e7c81762a1cd8b9147ce"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewDigest.cs",
+      "bytes": 1319,
+      "sha256": "5003deec3f7b5da61ca32c452e150e45d12d835507f8358dc75c302b5c850d6f"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewMigration.cs",
+      "bytes": 8093,
+      "sha256": "ae13d7b224bee6e477ed1a08a88d434e2b5ffc15bf507e85d854a8cb48f1db84"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewPolicy.cs",
+      "bytes": 4737,
+      "sha256": "c7ebe399e6db00882c07bd181f1d3c28171eee6d93a20dbd27db7eb27e8392ba"
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+      "bytes": 20770,
+      "sha256": "08db408fb5cd96ae937276d8ea0a830d91a7fd28d42ffd55ca104e8bf77918cb"
+    },
+    {
+      "path": "src/server/modules/FindingReview/obj/FindingReview.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/FindingReview/obj/FindingReview.csproj.nuget.g.targets",
+      "bytes": 580,
+      "sha256": "8c144c7ad077e3ad3e3fb00e422987e0570f13e9ce3a3d871eb5d42df88ef29d"
+    },
+    {
+      "path": "src/server/modules/FindingReview/obj/project.assets.json",
+      "bytes": 30936,
+      "sha256": "e6bce74e16812cc1fd55ed5c998c26d831e6a0144277d48b0dcbf1eb94a5766a"
+    },
+    {
+      "path": "src/server/modules/FindingReview/packages.lock.json",
+      "bytes": 1030,
+      "sha256": "6ff924feda26bd21287e8102eb80e9a946da3555c51d2dd098ecfab1b00dff9b"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/GuidanceContracts.cs",
+      "bytes": 3614,
+      "sha256": "3de7f1ec79f6caf27dd809869b4cf2945ed62b9018dda2b42f7555f10ae72d19"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj",
+      "bytes": 36,
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+      "bytes": 19433,
+      "sha256": "5935420741d1a6dfbc3961d7a83fe1bf2ed1c1dd70332d6cd0fde45422f6ff93"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/obj/RecommendationGuidance.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/obj/RecommendationGuidance.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/obj/project.assets.json",
+      "bytes": 20756,
+      "sha256": "fef731188c3703d5fbdb257fa1c7d45c94d336df2b7be649bbd60e70d7e6dd8e"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/packages.lock.json",
+      "bytes": 61,
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs",
+      "bytes": 31226,
+      "sha256": "5832fe50a41354b97387fda62979c65c0d9764d2b0c072fa1368b5e203afa29f"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/ReportDraftContracts.cs",
+      "bytes": 1572,
+      "sha256": "ce95bd07d174190de1f61b3364ac76fc39e149a3beb127519252e24d464799c8"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/ReportDrafts.csproj",
+      "bytes": 36,
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/StructuredDraftMarkdown.cs",
+      "bytes": 7058,
+      "sha256": "70d8d6ce231407565190ee2d66c16dbdb2b48ed87761b9b0e89f3e949bddeb25"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/obj/ReportDrafts.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/obj/ReportDrafts.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/obj/project.assets.json",
+      "bytes": 20696,
+      "sha256": "7b4e846521811c9832b8f37a4c7b4006872ac28dd78b6e64c90ec3a58b43d6e5"
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/packages.lock.json",
+      "bytes": 61,
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewBuilder.cs",
+      "bytes": 13344,
+      "sha256": "944fd60053b4deb560fdb1ffa1d73236472c04d11cd0e3bb26263f5f66100990"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewCanonical.cs",
+      "bytes": 2189,
+      "sha256": "a546551b3b75daef11177ce7e5d74bf9b50f1d7e07ac3972cdebb2ef23e1e527"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewContracts.cs",
+      "bytes": 3415,
+      "sha256": "244be0394eeec4b3b26a3845724bbdb2e281fc507d2bd2593f64c3e3f80bfd8f"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewRenderer.cs",
+      "bytes": 9187,
+      "sha256": "309c9345c85b6d3d3e336c9e4629f9b3e1d1de682f1dee79a2c15d5dc902ec00"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj",
+      "bytes": 163,
+      "sha256": "7b531ebaca9d5f7260ebc9b59feb9d2a742507d3dee1e5d39bae303934aae8db"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/obj/SyntheticAiPreview.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/obj/SyntheticAiPreview.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/obj/project.assets.json",
+      "bytes": 21577,
+      "sha256": "0a768b2925fa9a4e3007d01ab67642baf125c181813627a6aa97d65415a37f25"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/packages.lock.json",
+      "bytes": 133,
+      "sha256": "8af39d741896c7b887dbdbb611028462778e62f52deae9e2c19f4200dffe0893"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/FixtureJson.cs",
+      "bytes": 4294,
+      "sha256": "6b0f1b2c71e9e424ddba4bb9868b9d83bc85ef787c7f4c93478b579de331b32c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuildResult.cs",
+      "bytes": 346,
+      "sha256": "71a6f828f1a0e41c35a9e8a1decc70ff9aecb081b883811bef5bbb724801f2d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuilder.cs",
+      "bytes": 5809,
+      "sha256": "972a884e4bc0fef605a975f4e59a1a888c2aba93174eccf283b2c7388e1ae8d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalContracts.cs",
+      "bytes": 1460,
+      "sha256": "2874bf68aa17345d6e585095cdd99069f57ede4b5f24a9f113d44b79fc1d074c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalValidator.cs",
+      "bytes": 7177,
+      "sha256": "26b727544d4a5b70c79c4d366af1d963bee1c8863e6d199a43c1b97a34e5388c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiPacket.cs",
+      "bytes": 767,
+      "sha256": "6a4d50e62857082c6867589644e4ff8b17fbfd68d4ee3656c31c705cddddb0e6"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj",
+      "bytes": 36,
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/obj/SyntheticAiValidation.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/obj/SyntheticAiValidation.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/obj/project.assets.json",
+      "bytes": 20750,
+      "sha256": "5710b845393109b383f49068b5d156e272dbc7d9c6ac7e23e59cab62938cba21"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/packages.lock.json",
+      "bytes": 61,
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageBuilder.cs",
+      "bytes": 9595,
+      "sha256": "a164d098553ea45ce93834f1b84202079880b2fa29247995bd6ef93815f10e50"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageContracts.cs",
+      "bytes": 2282,
+      "sha256": "12a55f6e33657aed31993d27cd24c5bb8557f73315662dba6a103d8a8e31a084"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageHtmlRenderer.cs",
+      "bytes": 10552,
+      "sha256": "822703e9f86b852043b7a6b6ac8fcab1ae307014b02b023e005948a69d5e4c3a"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj",
+      "bytes": 165,
+      "sha256": "6a88130b401e2e5ca0b65d0b4aa39aae25ced3b2cb5ea7ac930f9e22fc3a40b1"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/obj/SyntheticFixPackages.csproj.nuget.g.props",
+      "bytes": 1175,
+      "sha256": "f893c7ec56261424700408ebf7e35722ae9e71ea2d33b9cd70c8da7f53c7852f"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/obj/SyntheticFixPackages.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/obj/project.assets.json",
+      "bytes": 21602,
+      "sha256": "ab3f9200fdecbbc37eb58a497025421b9f19e2428137e3bc9d7903f391eed680"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/packages.lock.json",
+      "bytes": 134,
+      "sha256": "bdfa54267d7a47b94b1b9fbaee6b9ee60bc3dba2784d2634865866208f7bfe4d"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/DraftFixture.cs",
+      "bytes": 8985,
+      "sha256": "64164dbc896ab5456d18609c21412eac0d63a7d1bebca13fb9f788f3bc6563e2"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/GuidanceFixture.cs",
+      "bytes": 5165,
+      "sha256": "abd68d0dd33b4d771be558302cf68879a2e5d7a6174cb050105fe6da7adc3347"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/IndependentCanonical.cs",
+      "bytes": 1300,
+      "sha256": "d27f22eb86217f0d9dff22f054e89fc2b90f63c545718e5dec85ef9a0812e6c8"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj",
+      "bytes": 442,
+      "sha256": "3aaa4cdd61b1651299831c3a58e6163accd5d22022ea509d72760724d42bc06e"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/Program.cs",
+      "bytes": 25972,
+      "sha256": "6a0051207b0eba90bc131b0b0bb2188717bc2acf715feb1f365c3984883d02d8"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/README.md",
+      "bytes": 3092,
+      "sha256": "9b9597769c4cc011f60e1874a2e9e185d5f8acf8f51440aec8244129be214e75"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/SavedFixture.cs",
+      "bytes": 5503,
+      "sha256": "31b483837e03db76fb2b633e8c289c68f1c80848ac27ee409d59a41ca5b2e6c9"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentCoverage.dll",
+      "bytes": 36864,
+      "sha256": "756141c50bc144c0f2b02f104b50c797dd02f5f85e0705b0689383528eb1a7df"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentCoverage.pdb",
+      "bytes": 17008,
+      "sha256": "dc22ef65f383a372915e7e2863391ffa60f96953ad0c5e9a8d4dba2199967776"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentMaturity.dll",
+      "bytes": 47616,
+      "sha256": "15b57258dace7451f010570df619a15e8cdea3ab3bb9d622ee71fa487b5b2f76"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentMaturity.pdb",
+      "bytes": 19148,
+      "sha256": "a9db3132f74de2935ebf9429eaa679a45ff8184e5b435188bc1810a0e8bd97d7"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentOrchestration.dll",
+      "bytes": 45056,
+      "sha256": "49f243efe37e46ce8eaa0d061e17dfeca9326fb453157338332869131f3fc1da"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentOrchestration.pdb",
+      "bytes": 18940,
+      "sha256": "8723d9fcb09e69c2f82d28a93c3cb6f88fe33cf4a5f417be5348a2e3828e91bb"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentRuns.dll",
+      "bytes": 170496,
+      "sha256": "4cd58a96cb1c48a148afffb2a56675052e26ced2d9c401ad1782eeb1b4b17b9d"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentRuns.pdb",
+      "bytes": 38156,
+      "sha256": "8ee9337d89b590be3fffbc4fe6491e4423806d954a524df299551c42b411d688"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentScoring.dll",
+      "bytes": 54272,
+      "sha256": "51a921e0249e8af401ba392504c4dd1778ee50888662fc7ad60526940f27bf3a"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/AssessmentScoring.pdb",
+      "bytes": 20108,
+      "sha256": "b2d2c9e22847f82f17d0b6dceb4e428450bf741e0cf53e049535f48a87447544"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/DeterministicAnalysis.dll",
+      "bytes": 94208,
+      "sha256": "49af1c3f4c23e4e99a284465425513851498cef73af11ceede9d0044abe9a306"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/DeterministicAnalysis.pdb",
+      "bytes": 24544,
+      "sha256": "5b26f004cabac6bda73658a6c2efcf83ed2b162f36e8fe88dafa35130f0c7bd0"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/FindingReview.dll",
+      "bytes": 93696,
+      "sha256": "5df0f24aaed9a22e22e3904ac59de9b27776acf3a3356494f035357258bd43c2"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/FindingReview.pdb",
+      "bytes": 26208,
+      "sha256": "a5bd419b2fcc7dd088aff416dce686f5f0e3d6b6b3d0fd35755707dff9d2354c"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalConsultantDemo",
+      "bytes": 124712,
+      "sha256": "37cc85df5c2465562b7653c0a2691fbfd7a3748a66132981ba26481c8a29c005"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalConsultantDemo.deps.json",
+      "bytes": 8755,
+      "sha256": "60ff1f2187ac13649b08eef7fa7c471e3018f092ffc175a2bedf384c88c59347"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalConsultantDemo.dll",
+      "bytes": 179712,
+      "sha256": "1a22b1c2ae73933460a1f65e24d4217c262d73fe668801a88db2ec2ff1ed1adc"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalConsultantDemo.pdb",
+      "bytes": 38680,
+      "sha256": "47fecc0ddca55b664615c7d41603ee3fd75c91853a54ed73def860c7d1a6b8de"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalConsultantDemo.runtimeconfig.json",
+      "bytes": 540,
+      "sha256": "eff38a9750f7cca2407b1d639a963d56ffea92088e6da971bbbfa74e3dcd7224"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalConsultantDemo.staticwebassets.endpoints.json",
+      "bytes": 51,
+      "sha256": "eb6525c892afda953a2560f151f9c5e5bc6e79ef6741d886488ac450262c91e3"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.UnitTests",
+      "bytes": 124712,
+      "sha256": "e1db7361bf30db6737fe550221ae449e0189600bfde59a392d5221261c6cfe85"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.UnitTests.deps.json",
+      "bytes": 9175,
+      "sha256": "9761c18ce9ef5657dafafea6ccdf300e1b53273b9293eb1adc16a631c920471b"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.UnitTests.dll",
+      "bytes": 132608,
+      "sha256": "75364f61111ef11f9d923d3dec3af0d43fefa9a7bd1c2d8fac78b98b6d186d87"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.UnitTests.pdb",
+      "bytes": 30460,
+      "sha256": "c005d9b85925f0e87c561a4daf02fc8183c539190559dcb55fad2c07c584ef65"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.UnitTests.runtimeconfig.json",
+      "bytes": 508,
+      "sha256": "bdbb6b43e509fbbab6c78b7004c4debf1e9791a648a08f730ff5997f71ef7099"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
+      "bytes": 34616,
+      "sha256": "74bc17c936d66ea090b6a5b4cc4307d2154c9692e57edd4c55d68dd4a99c11b6"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Relational.dll",
+      "bytes": 2194744,
+      "sha256": "a1e4f36208650b15b75a4b01a5821d61d5be417ac2e86ec3c65e2560a87e0d7d"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/Microsoft.EntityFrameworkCore.dll",
+      "bytes": 2829152,
+      "sha256": "f5b1703d608e241314952b2ede8dcdd1b8d8adda8c91a13cb7e6b1007414cef4"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
+      "bytes": 679424,
+      "sha256": "94fcf66e8e953fdb02c40c72ca89821dd5eed5324d4c0f12a7219ea8cd3d5a5e"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/Npgsql.dll",
+      "bytes": 1478656,
+      "sha256": "e2bcafe1660fe4543fe9dfcabed972ec8d32259e5ea8009462ce1de23c7034c2"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/RecommendationGuidance.dll",
+      "bytes": 60416,
+      "sha256": "55368251a2c4aa61b70d909ea7c115ce6701190354a66d08797a229f3f8e7446"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/RecommendationGuidance.pdb",
+      "bytes": 19828,
+      "sha256": "45b387ea22e24aa585a2ac4792c263faa32fb7ce0b03a38906ebf57fc93d05b5"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/ReportDrafts.dll",
+      "bytes": 54272,
+      "sha256": "0c00129c79f43db5718b413c0d1badc319db2835eb70b5e7b45c54dc87dc0113"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/ReportDrafts.pdb",
+      "bytes": 19728,
+      "sha256": "68c5626611a034e010a3782a5c308c90a1484a87686239eec65bc905b20c9530"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/SyntheticAiPreview.dll",
+      "bytes": 40448,
+      "sha256": "a326c78c2f7450eae5ae64cd98380282b70f934aca90b5446fa2aa0aa8aca0bf"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/SyntheticAiPreview.pdb",
+      "bytes": 17980,
+      "sha256": "c073bbf68210c557529ae63fa29aaeb71ce33f266ff5df4df1382cd490b0ed59"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/SyntheticAiValidation.dll",
+      "bytes": 23552,
+      "sha256": "0ba2ab06bc427714cab224bb540f8263113d7cbff6207abdc3e2342456be8593"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/SyntheticAiValidation.pdb",
+      "bytes": 16180,
+      "sha256": "53339ce5a525e90d0da57c1320cd8cb163ceb92e0f341dd84ed9b08b15be7add"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.dll",
+      "bytes": 46080,
+      "sha256": "54f3eb16e0b13a7b47274fcd9e233f5eba5786ae2024c04f7a33c2363a0f749a"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.pdb",
+      "bytes": 17012,
+      "sha256": "3563f02a1ca0e4174d14ce1ac3bb9dc915e35170f2c77686a74cb32ad790ad40"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/empty-golden.json",
+      "bytes": 6038,
+      "sha256": "3d05e269bd74fd490f16298d2a17662b95bff34395bd96993f2d76138fed79ed"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/golden-digests.json",
+      "bytes": 1263,
+      "sha256": "dbbfe652c33c025d0c7ea1248fd2339a726acf4bf6f37065f830135b4ac4025d"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/historical-comparison-golden.json",
+      "bytes": 445,
+      "sha256": "ad033f5b93e1cd6f9445d2e4d8358a7d7fbf7492ddbdb1ea74c0279436f4c19e"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/historical-guidance-golden.json",
+      "bytes": 5439,
+      "sha256": "d141e78843b8df1307b98f4d3f80724574c8c7177a6e87fb9c70035b789d6b46"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/historical-standard-golden.json",
+      "bytes": 445,
+      "sha256": "ed5be03d65fa30b32a7da1517365e394f411b711e2a323bf73af4bf69a2933d6"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/hostile-golden.json",
+      "bytes": 8879,
+      "sha256": "656b341c0aa08159d32ebd5ef72ad961964afb882bbd6af2f54990c413e48067"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/multi-golden.json",
+      "bytes": 12193,
+      "sha256": "cfebc6435004958e411519965a5db7a217fa147ff60217c7f3272b01e30a6a85"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/normal-golden.json",
+      "bytes": 8333,
+      "sha256": "04ecf01e8f54e818ed316c8d364f8318b5cc980a2b5df5b00a056e26c4367e3b"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/packages.lock.json",
+      "bytes": 3933,
+      "sha256": "8f65b0541a40ed2b12105378a4e1dff5c73da0a75297218791d4f1d479719684"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/bind-artifacts.py",
+      "bytes": 8569,
+      "sha256": "4b6e66f4796ba6f2fd9fd5f31d99ea6f99586b2f42a963cda248014988c08eb5"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/empty-golden.json",
+      "bytes": 6038,
+      "sha256": "3d05e269bd74fd490f16298d2a17662b95bff34395bd96993f2d76138fed79ed"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/audit.log",
+      "bytes": 171,
+      "sha256": "174f737a5aa8c4dc7f314503bf28ca6a55d09f2c23fe7e550b76c02a88f710ae"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/build-fixture-correction.log",
+      "bytes": 1964,
+      "sha256": "107ffecdd91f053dd42f47e9ee9e75dcaa157a93c5e5b062103bd8be800e2b8d"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/build-initial.log",
+      "bytes": 1964,
+      "sha256": "deccf32a8b2a3b353962d0692ccfbd8b2af5064d1ee907a8ce86b93f670ba864"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/build.log",
+      "bytes": 1964,
+      "sha256": "f8fae1800140e4b28845ce9b706061492a56e9ff70781e0d0da4b1bd93ad7b67"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/diff.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/format-correction.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/format-initial.log",
+      "bytes": 1936,
+      "sha256": "78ce055f4ccbea6eb979337311434de97d6e365af4c330983f540f951daf0572"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/oracle.log",
+      "bytes": 84,
+      "sha256": "63f7b1f4f3a0895dac31ba8474ee7c82b03052b9d8c93d917610e473b4ab15f2"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/restore-initial-stalled.log",
+      "bytes": 116,
+      "sha256": "4ae60de3d71aed792ffe8b846833a6187604393d74f7634670551ce482c516f7"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/restore.log",
+      "bytes": 1667,
+      "sha256": "540f4c06658206f5a6575e5ba7a19874ded2efa047803e9e4f402d12b028b0aa"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/sdk.log",
+      "bytes": 1341,
+      "sha256": "c41a56115001510201798eb642f43322107a6ac91132e71bac02e89b100fe1c8"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/secrets-initial-unstaged.log",
+      "bytes": 176,
+      "sha256": "c1ae9e16e720108505072b8dfc63ff497851208c46fadd6a1212e464cc5caf5b"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/secrets-staged.log",
+      "bytes": 189,
+      "sha256": "29d8294f00bbb06765071bbd16d37b0f9cfc0c3d5c13e3db2ed5803dd8209de5"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/secrets-tests.log",
+      "bytes": 133,
+      "sha256": "35f6fe55af8fe170ede6d74037664dbd086768cd0efb2afe6d348c68a1777f90"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/unit-fixture-corrected.log",
+      "bytes": 88,
+      "sha256": "0be07fb95582beba2e2f1acd2172f4ccd0eb0f895e72741d9fd814a9dbc82127"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/unit-initial.log",
+      "bytes": 395,
+      "sha256": "9b13ea79596ab89bcc43317cafedefbf052a3ad3c1908d9e83c824936ddd6350"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/execution/unit.log",
+      "bytes": 88,
+      "sha256": "0be07fb95582beba2e2f1acd2172f4ccd0eb0f895e72741d9fd814a9dbc82127"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/golden-digests.json",
+      "bytes": 1263,
+      "sha256": "dbbfe652c33c025d0c7ea1248fd2339a726acf4bf6f37065f830135b4ac4025d"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/historical-comparison-golden.json",
+      "bytes": 445,
+      "sha256": "ad033f5b93e1cd6f9445d2e4d8358a7d7fbf7492ddbdb1ea74c0279436f4c19e"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/historical-guidance-golden.json",
+      "bytes": 5439,
+      "sha256": "d141e78843b8df1307b98f4d3f80724574c8c7177a6e87fb9c70035b789d6b46"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/historical-standard-golden.json",
+      "bytes": 445,
+      "sha256": "ed5be03d65fa30b32a7da1517365e394f411b711e2a323bf73af4bf69a2933d6"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/hostile-golden.json",
+      "bytes": 8879,
+      "sha256": "656b341c0aa08159d32ebd5ef72ad961964afb882bbd6af2f54990c413e48067"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/independent-oracle.py",
+      "bytes": 10647,
+      "sha256": "a0765d4a1b8d94bdb8d210e190e54e2ddf796a8618e49099b24c906db752f9cb"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/multi-golden.json",
+      "bytes": 12193,
+      "sha256": "cfebc6435004958e411519965a5db7a217fa147ff60217c7f3272b01e30a6a85"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/normal-golden.json",
+      "bytes": 8333,
+      "sha256": "04ecf01e8f54e818ed316c8d364f8318b5cc980a2b5df5b00a056e26c4367e3b"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/obj/LocalFixPackages.Tests.csproj.nuget.g.props",
+      "bytes": 1547,
+      "sha256": "8c06cce77b7086280c4fd5070f38a4da7f7c12ff2853b9ffaf5609cd21d5f014"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/obj/LocalFixPackages.Tests.csproj.nuget.g.targets",
+      "bytes": 149,
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/obj/project.assets.json",
+      "bytes": 45253,
+      "sha256": "8c59e683a55157ab43a07c3f2de896ab45994074f17b86692810dbbf0dedb540"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/packages.lock.json",
+      "bytes": 3933,
+      "sha256": "8f65b0541a40ed2b12105378a4e1dff5c73da0a75297218791d4f1d479719684"
+    },
+    {
+      "path": "tests/unit/LocalFixPackages.Tests/run-check.py",
+      "bytes": 768,
+      "sha256": "4194266d0df80b8df70dbaa35b91e81d6600d479f84407028ca2d01a197bfb60"
+    }
+  ],
+  "historicalCopyEqualities": [
+    {
+      "copy": "tests/unit/LocalFixPackages.Tests/historical-guidance-golden.json",
+      "original": "tests/unit/RecommendationGuidance.Tests/golden-payload.json",
+      "sourceCommit": "fe0a09e24a61dfcb7885c0989942a32ba0e22b71",
+      "sha256": "d141e78843b8df1307b98f4d3f80724574c8c7177a6e87fb9c70035b789d6b46",
+      "bytes": 5439
+    },
+    {
+      "copy": "tests/unit/LocalFixPackages.Tests/historical-standard-golden.json",
+      "original": "tests/unit/LocalAiPreview.Tests/golden-historical-standard.json",
+      "sourceCommit": "fe0a09e24a61dfcb7885c0989942a32ba0e22b71",
+      "sha256": "ed5be03d65fa30b32a7da1517365e394f411b711e2a323bf73af4bf69a2933d6",
+      "bytes": 445
+    },
+    {
+      "copy": "tests/unit/LocalFixPackages.Tests/historical-comparison-golden.json",
+      "original": "tests/unit/LocalAiPreview.Tests/golden-historical-comparison.json",
+      "sourceCommit": "fe0a09e24a61dfcb7885c0989942a32ba0e22b71",
+      "sha256": "ad033f5b93e1cd6f9445d2e4d8358a7d7fbf7492ddbdb1ea74c0279436f4c19e",
+      "bytes": 445
+    }
+  ],
+  "failureHistory": [
+    {
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/restore-initial-stalled.log",
+      "status": "STOPPED",
+      "detail": "Initial sandbox/cache-less restore did not progress past Determining projects to restore. Identified exact owned PID 51237 and sent TERM. Subsequent bounded allowlisted audited restore passed; no audit claim for initial attempt."
+    },
+    {
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/unit-initial.log",
+      "status": "FAILED",
+      "detail": "Historical test scaffold omitted planner DeclaredItems, so summary had no completion. Corrected only test input. Initial composite shell returned zero because it then printed the failure log; underlying unit exit code was not preserved, and no pass is claimed."
+    },
+    {
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/format-initial.log",
+      "status": "FAILED",
+      "exitCode": 2,
+      "detail": "Whitespace verification; correction applied only to explicitly owned files. Final full formatter check and rebuild/unit reran exact formatted source."
+    },
+    {
+      "transcript": "tests/unit/LocalFixPackages.Tests/execution/secrets-initial-unstaged.log",
+      "status": "NOT_SCOPED",
+      "detail": "Initial staging was denied by the filesystem sandbox, so the following staged scan saw no assigned patch. Staging then succeeded under scoped authorization and secrets-staged.log records the actual owned patch scan. No coverage claim for the initial empty scan."
+    }
+  ],
+  "limits": [
+    "Portable pure fixture code only; no PG/HTTP/browser/provider launch or database call.",
+    "Full solution/integration/hosted/security architecture/manual/UAT/publication checks remain coordinator/V12 responsibility.",
+    "No human approval, deployed sandbox isolation, customer remediation or full milestone/gate completion is established."
+  ]
+}

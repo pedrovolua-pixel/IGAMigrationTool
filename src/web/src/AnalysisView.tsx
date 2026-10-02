@@ -11,6 +11,7 @@ import { MaturityView } from './MaturityView';
 import { DraftReportView } from './DraftReportView';
 import { RecommendationGuidanceView } from './RecommendationGuidanceView';
 import { AiProposalPreview, coherentAiPreview } from './AiProposalPreview';
+import { FixPackagePreview, coherentFixPackages } from './FixPackagePreview';
 
 export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: string }) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
@@ -19,12 +20,14 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
   const [notice, setNotice] = useState<string | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const retryFocus = useRef<string | null>(null);
+  const readEpoch = useRef(0);
   useEffect(() => {
     retryFocus.current = null;
     setNotice(null);
   }, [run.runId]);
   useEffect(() => {
     const controller = new AbortController();
+    const epoch = ++readEpoch.current;
     setResponse(null);
     setFailed(false);
     if (run.state === 'Scoring') {
@@ -35,6 +38,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         .then(async (value) => {
           if (
             !controller.signal.aborted &&
+            epoch === readEpoch.current &&
             value.runId === run.runId &&
             value.runRevision === run.revision &&
             (!value.review ||
@@ -44,16 +48,18 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
             coherentDraft(value, run) &&
             (await coherentGuidance(value, run)) &&
             (await coherentAiPreview(value, run)) &&
+            (await coherentFixPackages(value, run)) &&
+            epoch === readEpoch.current &&
             !controller.signal.aborted
           )
             setResponse(value);
-          else if (!controller.signal.aborted) {
+          else if (!controller.signal.aborted && epoch === readEpoch.current) {
             retryFocus.current = null;
             setFailed(true);
           }
         })
         .catch(() => {
-          if (!controller.signal.aborted) {
+          if (!controller.signal.aborted && epoch === readEpoch.current) {
             retryFocus.current = null;
             setFailed(true);
           }
@@ -67,6 +73,8 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         if (response.status === 'Ready') heading.current?.focus();
         else if (response.aiPreview)
           document.getElementById('ai-proposal-preview-heading')?.focus();
+        else if (response.fixPackages)
+          document.getElementById('fix-package-preview-heading')?.focus();
       }
       retryFocus.current = null;
     }
@@ -84,6 +92,8 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
           <button
             onClick={() => {
               retryFocus.current = run.runId;
+              ++readEpoch.current;
+              setResponse(null);
               setRetry((value) => value + 1);
             }}
           >
@@ -102,6 +112,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
             : 'Analysis is unavailable for this saved run. No health result is inferred.'}
         </p>
         <AiProposalPreview preview={response.aiPreview} run={run} />
+        <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
       </>
     );
   }
@@ -319,6 +330,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
           review={response.review}
           csrfToken={csrfToken}
           onReload={(message) => {
+            ++readEpoch.current;
             setNotice(message ?? 'Saved analysis refreshed.');
             retryFocus.current = run.runId;
             setResponse(null);
@@ -332,6 +344,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         guidance={response.recommendationGuidance}
       />
       <AiProposalPreview preview={response.aiPreview} run={run} />
+      <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
       {response.maturity && <MaturityView maturity={response.maturity} />}
       <details className="locked-inputs">
         <summary>Analysis versions and content digests</summary>

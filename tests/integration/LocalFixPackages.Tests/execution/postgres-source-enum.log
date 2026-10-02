@@ -1,0 +1,2 @@
+PASS V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants
+FAIL V12; code=current-health-overlay-preserved; checks=522; exception=InvalidOperationException; payload-suppressed

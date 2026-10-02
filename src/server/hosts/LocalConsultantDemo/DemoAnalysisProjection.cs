@@ -116,8 +116,10 @@ internal static class DemoAnalysisProjection
         node["reportDraft"] = JsonSerializer.SerializeToNode(reviewProfile
             ? DemoReportDraftProjection.Detail(run, response, review, maturityResponse, sourceContent) : null,
             DemoReportDraftProjection.JsonOptions);
-        node["recommendationGuidance"] = JsonSerializer.SerializeToNode(reviewProfile
-            ? DemoRecommendationGuidanceProjection.Detail(run, response, review) : null,
+        var guidance = reviewProfile ? DemoRecommendationGuidanceProjection.Detail(run, response, review) : null;
+        node["recommendationGuidance"] = JsonSerializer.SerializeToNode(guidance,
+            DemoReportDraftProjection.JsonOptions);
+        node["fixPackages"] = JsonSerializer.SerializeToNode(DemoFixPackageProjection.Detail(run, guidance, review),
             DemoReportDraftProjection.JsonOptions);
         node["aiPreview"] = JsonSerializer.SerializeToNode(DemoAiPreviewProjection.Detail(run),
             DemoReportDraftProjection.JsonOptions);

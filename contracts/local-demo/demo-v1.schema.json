@@ -1090,6 +1090,16 @@
               "type": "null"
             }
           ]
+        },
+        "fixPackages": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FixPackageDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -1116,7 +1126,8 @@
         "reviewSnapshotDigest",
         "reportDraft",
         "recommendationGuidance",
-        "aiPreview"
+        "aiPreview",
+        "fixPackages"
       ]
     },
     "ReviewKind": {
@@ -1804,6 +1815,9 @@
               "type": "null"
             }
           ]
+        },
+        "fixPackageTemplateDigest": {
+          "const": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
         }
       }
     },
@@ -3069,6 +3083,211 @@
         "baselineId",
         "profileId",
         "fixtureDigest",
+        "status",
+        "reasonCode",
+        "snapshot"
+      ]
+    },
+    "FixTemplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "templateId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": ["Configuration", "Script", "Sql"]
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": ["templateId", "kind", "text"]
+    },
+    "FixArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": ["Configuration", "Script", "Sql"]
+        },
+        "status": {
+          "const": "Unverified"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": ["artifactId", "templateId", "kind", "status", "text"]
+    },
+    "FixOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scopedOptionId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixArtifact"
+          }
+        }
+      },
+      "required": ["scopedOptionId", "artifacts"]
+    },
+    "FixPackage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "packageId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "findingId": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixOption"
+          }
+        }
+      },
+      "required": ["packageId", "findingId", "options"]
+    },
+    "FixPackageSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-fix-package-preview-v1"
+        },
+        "status": {
+          "const": "Unverified"
+        },
+        "disclaimer": {
+          "const": "Fictional fix-package preview. Every artifact is unverified and review-only; these generic examples are not supported One Identity remediation. No execution or approval is authorized."
+        },
+        "guidance": {
+          "$ref": "#/$defs/GuidanceSnapshot"
+        },
+        "templateVersion": {
+          "const": "fictional-fix-templates-v1"
+        },
+        "templateDigest": {
+          "const": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixTemplate"
+          }
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixPackage"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unavailableSections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "canonicalJson": {
+          "type": "string"
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "disclaimer",
+        "guidance",
+        "templateVersion",
+        "templateDigest",
+        "templates",
+        "packages",
+        "warnings",
+        "unavailableSections",
+        "canonicalJson",
+        "contentDigest"
+      ]
+    },
+    "FixPackageDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-fix-package-demo-v1"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "const": "synthetic-review-maturity-fix-packages-equal-v1"
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FixPackageSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "runId",
+        "runRevision",
+        "runInputDigest",
+        "baselineId",
+        "profileId",
         "status",
         "reasonCode",
         "snapshot"

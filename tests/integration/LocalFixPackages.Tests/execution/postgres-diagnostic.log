@@ -1,0 +1,3 @@
+PASS V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants
+POSTGRES-SQLSTATE 28000
+FAIL V12; code=owned-database-admin-open; checks=137; exception=PostgresException; payload-suppressed

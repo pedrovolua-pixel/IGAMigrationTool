@@ -464,7 +464,9 @@ public sealed class SyntheticDurableRunEngine
         (versions.MaturityFixtureDigest is null || versions.MaturityFixtureDigest is { Length: 64 } &&
             versions.MaturityFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
         (versions.AiPreviewFixtureDigest is null || versions.AiPreviewFixtureDigest is { Length: 64 } &&
-            versions.AiPreviewFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
+            versions.AiPreviewFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
+        (versions.FixPackageTemplateDigest is null || versions.FixPackageTemplateDigest is { Length: 64 } &&
+            versions.FixPackageTemplateDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
     private static bool LiveLease(RunRow run, Guid generation, DateTimeOffset now) => generation != Guid.Empty &&
         run.LeaseGeneration == generation && run.LeaseExpiresAt > now;
     private static SyntheticRunIssue? Guard(RunRow run, Guid generation, long? revision, DateTimeOffset now, bool allowCancellation)

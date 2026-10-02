@@ -1,0 +1,45 @@
+{
+  "schema": "v12-precheckpoint-corrections-v1",
+  "failures": [
+    {
+      "log": "restore-sandbox-stalled.log",
+      "result": "stalled; stopped only identified owned PID52830; native locked restore subsequently passed"
+    },
+    {
+      "log": "build-initial.log",
+      "result": "test Program name collided with real host Program; constructor omitted explicit trusted scope; corrected owned sources only"
+    },
+    {
+      "log": "postgres-diagnostic.log",
+      "result": "SQLSTATE28000 before mutation",
+      "initialDefaultConnectionLiteral": "Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle12_v12;Username=pedrovolu",
+      "correctedEstablishedRole": "iga_synthetic",
+      "originalPreCorrectionSourceAndDllPreserved": false
+    },
+    {
+      "log": "postgres-configured-initial.log",
+      "result": "163 checks then numeric expected capability enum mismatched contract text; independent expected serializer corrected; literal golden bytes unchanged"
+    },
+    {
+      "log": "postgres-source-enum.log",
+      "result": "522 checks then verifier health adapter call omitted required review digest; corrected actual adapter call"
+    },
+    {
+      "logs": [
+        "postgres-review-binding.log",
+        "postgres-tamper-diagnostic.log"
+      ],
+      "result": "561 checks then tamper harness reused stale original review capture with denied source; corrected test to real host ReadAsync capture; no confirmed endpoint defect"
+    },
+    {
+      "log": "build-checkpoint.log",
+      "result": "SDK implicitly compiled preservation .cs copies; changed ignored copied names to .frozen, retained exact bytes; no shared project change"
+    },
+    {
+      "log": "postgres-checkpoint.log",
+      "result": "691PASS against prior DLL after preceding build failed; diagnostic only, superseded by successful build-checkpoint-correction.log plus postgres-checkpoint-final.log"
+    }
+  ],
+  "primaryFinalCheckpoint": "build-checkpoint-correction.log / portable-checkpoint-final.log / postgres-checkpoint-final.log",
+  "initialFailureSources": "Failure logs and known recipes/corrections retained; do not claim original pre-correction source/DLL preservation where not captured."
+}

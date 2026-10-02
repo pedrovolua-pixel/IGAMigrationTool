@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "v12-independent-oracle-v1",
+  "files": [
+    {
+      "path": "empty-fix-golden.json",
+      "sha256": "65e43540987b133e4fa9fa01312ea5d427ddc19e25df12759b6b677ac80e8278",
+      "bytes": 6032
+    },
+    {
+      "path": "empty-guidance-golden.json",
+      "sha256": "62b990f37730b599eb3071871c055b87c460355801b56077ecc20831f0c20c79",
+      "bytes": 4249
+    },
+    {
+      "path": "empty-input.json",
+      "sha256": "3ca09adebbb543f3d86971c3486b33fd5c52da27f4788c1dda95dda1d83a913f",
+      "bytes": 3746
+    },
+    {
+      "path": "expected-manifest.json",
+      "sha256": "a72f2557ac10057d4c97941ed3eef6ac64dd8379440c5a6df93cb05493670ebd",
+      "bytes": 63141
+    },
+    {
+      "path": "hostile-fix-golden.json",
+      "sha256": "5557f2392b1dd4ef51f60a7adafd2613b839e392bf7de6f9154bcbb5ea52795b",
+      "bytes": 33127
+    },
+    {
+      "path": "hostile-guidance-golden.json",
+      "sha256": "60387c2c22d383e92637220c7e1744e034ed07da947b3576e86a3ce0681d040e",
+      "bytes": 27444
+    },
+    {
+      "path": "hostile-input.json",
+      "sha256": "dbf66134f7f515afc038cc85e272e5029c445c7b4e0c26d4a289372520543cf2",
+      "bytes": 22959
+    },
+    {
+      "path": "normal-fix-golden.json",
+      "sha256": "8fb1ab227ced31b59e7abe5f119c3910cf29d0557b23359c4b69e68df86d3d34",
+      "bytes": 13554
+    },
+    {
+      "path": "normal-guidance-golden.json",
+      "sha256": "ff8dc5d91dd3570df5b9bbfc5a828c63e732de884e6a242b57000f1ea8563990",
+      "bytes": 7871
+    },
+    {
+      "path": "normal-input.json",
+      "sha256": "5027d79be6564ef5004c06c84b0004e3e328d3a2ee96d80abad336227a63a9c1",
+      "bytes": 8011
+    }
+  ]
+}

@@ -5,10 +5,17 @@ using DeterministicAnalysis;
 using FindingReview;
 using RecommendationGuidance;
 
+internal sealed class DemoRecommendationGuidanceDetail(string status, string? reasonCode, GuidanceSnapshot? snapshot)
+{
+    public string Status { get; } = status;
+    public string? ReasonCode { get; } = reasonCode;
+    public GuidanceSnapshot? Snapshot { get; } = snapshot;
+}
+
 /// <summary>Already-validated saved synthetic originals plus one captured current review. No advice approval or authority resolution.</summary>
 internal static class DemoRecommendationGuidanceProjection
 {
-    internal static object Detail(SyntheticRunSnapshot run, SyntheticDemoAnalysisResponse response, DemoReviewContext? review)
+    internal static DemoRecommendationGuidanceDetail Detail(SyntheticRunSnapshot run, SyntheticDemoAnalysisResponse response, DemoReviewContext? review)
     {
         var analysis = response.Projection?.Analysis;
         var snapshot = review?.Snapshot;
@@ -61,9 +68,9 @@ internal static class DemoRecommendationGuidanceProjection
             snapshot.RunSeed.RunId, run.Revision, snapshot.SnapshotDigest);
         var result = RecommendationGuidanceBuilder.Build(new(source, findings.ToImmutable()));
         return result.Succeeded
-            ? new { status = "Ready", reasonCode = (string?)null, snapshot = result.Snapshot }
+            ? new("Ready", null, result.Snapshot)
             : Deny($"guidance_{result.Issue}");
     }
 
-    private static object Deny(string reasonCode) => new { status = "Unavailable", reasonCode, snapshot = (object?)null };
+    private static DemoRecommendationGuidanceDetail Deny(string reasonCode) => new("Unavailable", reasonCode, null);
 }

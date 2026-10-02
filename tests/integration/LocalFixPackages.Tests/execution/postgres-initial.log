@@ -1,0 +1,2 @@
+PASS V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants
+FAIL V12; code=no-new-baseline; checks=137; exception=PostgresException; payload-suppressed

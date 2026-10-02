@@ -11,10 +11,10 @@ public static class DemoAnalysisCatalog
     public static bool IsAnalysisBaseline(string id) => SyntheticAnalysisFixturePack.Presets.Any(item => item.Id == id);
     public const string ReviewEqualProfileId = "synthetic-review-maturity-equal-v1";
     public const string ReviewOperationsProfileId = "synthetic-review-maturity-operations-v1";
-    public static bool IsReviewMaturityProfile(string id) => id is ReviewEqualProfileId or ReviewOperationsProfileId;
+    public static bool IsReviewMaturityProfile(string id) => id is ReviewEqualProfileId or ReviewOperationsProfileId or DemoFixPackageCatalog.ProfileId;
     public static string AnalysisProfileId(string id) => id switch
     {
-        ReviewEqualProfileId => "synthetic-analysis-equal-v1",
+        ReviewEqualProfileId or DemoFixPackageCatalog.ProfileId => "synthetic-analysis-equal-v1",
         ReviewOperationsProfileId => "synthetic-analysis-operations-v1",
         _ => id
     };
@@ -32,12 +32,17 @@ public static class DemoAnalysisCatalog
     public static IEnumerable<SyntheticDemoProfile> CreateProfiles() => OriginalProfiles().Concat(new[]
     {
         ReviewProfile(ReviewEqualProfileId, "Synthetic consultant review + maturity · equal weights"),
-        ReviewProfile(ReviewOperationsProfileId, "Synthetic consultant review + maturity · operations weights")
+        ReviewProfile(ReviewOperationsProfileId, "Synthetic consultant review + maturity · operations weights"),
+        ReviewProfile(DemoFixPackageCatalog.ProfileId, "Synthetic consultant review + fictional fix packages · equal weights")
     });
     private static SyntheticDemoProfile ReviewProfile(string id, string label)
     {
         var original = OriginalProfiles().Single(item => item.Id == AnalysisProfileId(id));
-        return new(id, label, original.Versions with { ApplicationVersion = "synthetic-review-maturity-app-v1" });
+        return new(id, label, original.Versions with
+        {
+            ApplicationVersion = DemoFixPackageCatalog.IsProfile(id) ? DemoFixPackageCatalog.ApplicationVersion : "synthetic-review-maturity-app-v1",
+            FixPackageTemplateDigest = DemoFixPackageCatalog.IsProfile(id) ? DemoFixPackageCatalog.TemplateDigest : null
+        });
     }
     public static SyntheticMaturityFrozenFixture FreezeMaturity(string baselineId, string profileId) =>
         IsReviewMaturityProfile(profileId) ? SyntheticMaturityFixturePack.Freeze(baselineId, FrozenDigest(baselineId, profileId)) :
@@ -77,6 +82,7 @@ public static class DemoAnalysisCatalog
             !DemoFixtureCatalog.Profiles.Any(item => item.Id == run.ProfileCatalogId)) return false;
         if (!Compatible(run.BaselineCatalogId, run.ProfileCatalogId)) return false;
         if (DemoFixtureCatalog.ScriptDigest(run.BaselineCatalogId) != run.FrozenInputs.ScriptedResultsDigest) return false;
+        if (!DemoFixPackageCatalog.IsProfile(run.ProfileCatalogId) && run.FrozenInputs.FixPackageTemplateDigest is not null) return false;
         if (DemoAiPreviewCatalog.IsProfile(run.ProfileCatalogId)) return DemoAiPreviewCatalog.MatchesFrozenFixture(run);
         if (run.FrozenInputs.AiPreviewFixtureDigest is not null) return false;
         if (!IsAnalysisBaseline(run.BaselineCatalogId)) return run.FrozenInputs.AnalysisFixtureDigest is null && run.FrozenInputs.MaturityFixtureDigest is null;

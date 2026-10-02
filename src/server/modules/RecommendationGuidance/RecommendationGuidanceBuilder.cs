@@ -79,13 +79,16 @@ public static class RecommendationGuidanceBuilder
     {
         if (source.Scope != new GuidanceScope("synthetic-customer", "synthetic-project", "synthetic-environment")) return GuidanceIssue.WrongScope;
         if (source.RunId == Guid.Empty || source.RunRevision < 0 || source.RunState != "Scoring") return GuidanceIssue.InvalidSource;
-        if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1") ||
+        if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1" or "synthetic-review-maturity-fix-packages-equal-v1") ||
             source.BaselineId is not ("synthetic-analysis-healthy-v1" or "synthetic-analysis-findings-v1" or "synthetic-analysis-mixed-v1" or "synthetic-analysis-gaps-v1")) return GuidanceIssue.UnknownVersion;
         if (source.ReviewRunId != source.RunId || source.ReviewRunRevision != source.RunRevision) return GuidanceIssue.SourceMismatch;
         foreach (var digest in new[] { source.RunInputDigest, source.AnalysisFixtureDigest, source.AnalysisContentDigest, source.SavedCoverageDigest, source.ReviewSnapshotDigest })
             if (!Digest(digest)) return GuidanceIssue.InvalidSource;
+        var fixPackages = source.ProfileId == "synthetic-review-maturity-fix-packages-equal-v1";
         var versions = source.FrozenVersions;
-        if (!Object(versions, ["profileVersion", "desiredOutcomeVersion", "scoringAlgorithmVersion", "aiPolicyVersion", "promptVersion", "modelVersion", "applicationVersion", "workSchemaVersion", "scriptedResultsDigest", "analysisFixtureDigest", "maturityFixtureDigest"])) return GuidanceIssue.InvalidSource;
+        string[] versionFields = ["profileVersion", "desiredOutcomeVersion", "scoringAlgorithmVersion", "aiPolicyVersion", "promptVersion", "modelVersion", "applicationVersion", "workSchemaVersion", "scriptedResultsDigest", "analysisFixtureDigest", "maturityFixtureDigest"];
+        if (!Object(versions, fixPackages ? [.. versionFields, "fixPackageTemplateDigest"] : versionFields)) return GuidanceIssue.InvalidSource;
+        if (fixPackages && String(versions, "fixPackageTemplateDigest") != "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669") return GuidanceIssue.UnknownVersion;
         var expectedVersions = new Dictionary<string, string>
         {
             ["profileVersion"] = "synthetic-profile-v1",
@@ -93,7 +96,7 @@ public static class RecommendationGuidanceBuilder
             ["aiPolicyVersion"] = "synthetic-ai-disabled-v1",
             ["promptVersion"] = "synthetic-prompt-disabled-v1",
             ["modelVersion"] = "synthetic-model-disabled-v1",
-            ["applicationVersion"] = "synthetic-review-maturity-app-v1",
+            ["applicationVersion"] = fixPackages ? "synthetic-fix-packages-app-v1" : "synthetic-review-maturity-app-v1",
             ["workSchemaVersion"] = "synthetic-run-work-v1"
         };
         if (expectedVersions.Any(pair => String(versions, pair.Key) != pair.Value) || versions.GetProperty("desiredOutcomeVersion").ValueKind != JsonValueKind.Null) return GuidanceIssue.UnknownVersion;
@@ -133,7 +136,7 @@ public static class RecommendationGuidanceBuilder
             String(analysis, "profileVersion") != String(versions, "profileVersion") || String(analysis, "catalogVersion") != String(capability, "ruleCatalogVersion")) return GuidanceIssue.SourceMismatch;
         if (String(analysis, "packVersion") != "synthetic-analysis-pack-v1" || String(analysis, "presetVersion") != "synthetic-evidence-v1" ||
             String(analysis, "catalogVersion") != "synthetic-analysis-catalog-v1" ||
-            String(analysis, "profileId") != source.ProfileId.Replace("synthetic-review-maturity-", "synthetic-analysis-", StringComparison.Ordinal)) return GuidanceIssue.UnknownVersion;
+            String(analysis, "profileId") != (fixPackages ? "synthetic-analysis-equal-v1" : source.ProfileId.Replace("synthetic-review-maturity-", "synthetic-analysis-", StringComparison.Ordinal))) return GuidanceIssue.UnknownVersion;
         foreach (var name in new[] { "packDigest", "evidenceDigest", "catalogDigest", "profileDigest" }) if (!Digest(String(analysis, name))) return GuidanceIssue.InvalidSource;
         var compatibility = analysis.GetProperty("compatibility");
         if (!Object(compatibility, ["sourceProduct", "productVersion", "evidenceSchemaVersion", "ruleLanguageVersion"])) return GuidanceIssue.InvalidSource;

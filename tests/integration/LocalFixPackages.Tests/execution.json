@@ -1,0 +1,93 @@
+{
+  "schema": "v12-independent-execution-v1",
+  "status": "PASS_BOUNDED_LOCAL_SUBSET",
+  "workingDirectory": "/private/tmp/iga-cycle12-v12",
+  "authoredCheckpoint": "d37cce6",
+  "dependencyCheckpoint": "b07195e1933f713c3dc5a3a4239f1fd89e37af6a",
+  "sdk": "10.0.401",
+  "commands": {
+    "restore": "DOTNET_ROOT=/private/tmp/iga-dotnet-10.0.401 /private/tmp/iga-dotnet-10.0.401/dotnet restore tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj --locked-mode",
+    "build": "DOTNET_ROOT=/private/tmp/iga-dotnet-10.0.401 /private/tmp/iga-dotnet-10.0.401/dotnet build tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj -c Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1",
+    "portable": "DOTNET_ROOT=/private/tmp/iga-dotnet-10.0.401 /private/tmp/iga-dotnet-10.0.401/dotnet tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.IntegrationTests.dll --portable",
+    "postgres": "DOTNET_ROOT=/private/tmp/iga-dotnet-10.0.401 /private/tmp/iga-dotnet-10.0.401/dotnet tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.IntegrationTests.dll",
+    "browser": "Set required IGA_HOST_WORKING_DIRECTORY, IGA_HOST_DLL, IGA_SYNTHETIC_DATABASE and IGA_PLAYWRIGHT_MODULE as README; /private/tmp/node-v24.21.0-darwin-arm64/bin/node tests/e2e/local-fix-packages/verify.mjs"
+  },
+  "restore": {
+    "status": "PASS",
+    "log": "execution/restore.log",
+    "mode": "locked native SDK"
+  },
+  "build": {
+    "status": "PASS",
+    "warnings": 0,
+    "errors": 0,
+    "log": "execution/build-capture-final.log"
+  },
+  "portable": {
+    "status": "PASS",
+    "checks": 137,
+    "log": "execution/portable-observed-capture-final.log"
+  },
+  "postgres": {
+    "status": "PASS",
+    "checks": 691,
+    "log": "execution/postgres-observed-capture-final.log",
+    "database": "iga_synthetic_cycle12_v12",
+    "role": "iga_synthetic",
+    "clusterRestarted": false,
+    "observedEvidence": "execution/observed-capture-manifest.json",
+    "earlierDynamicBytesReconstructed": false
+  },
+  "browser": {
+    "status": "PASS",
+    "checks": 3538,
+    "report": "../../e2e/local-fix-packages/execution.json",
+    "log": "../../e2e/local-fix-packages/browser-final.log",
+    "sourceSha256": "bbd3e12189101245b3dccacb1a9167ca53c2a45472ed47475eebccc1dbb1a1af",
+    "blockedRequests": 0,
+    "pageFaults": 0,
+    "dialogs": 0,
+    "axeSubsetRecords": 9,
+    "axeViolations": 0,
+    "original3531Run": "../../e2e/local-fix-packages/original-3531-preservation.json",
+    "readableViewportCaptures": [
+      "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/desktop-visible.png",
+      "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/mobile-visible.png",
+      "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/narrow-visible.png"
+    ],
+    "readableViewportImagesInspected": true,
+    "ownedPortAfterCleanup": "PASS port5183-free"
+  },
+  "source": {
+    "databaseCasesSha256": "4dc1c8c4c2d622f44efa7c61385e6fcaee897541df5f1d1b174f79a9383dbae7",
+    "literalOracleSha256": "e53db24cd6215b72e95a972633f537bd72900e5b1c3afaa59847b2094a4c789b",
+    "normalFullExpectedBytes": 13554,
+    "normalFullExpectedSha256": "8fb1ab227ced31b59e7abe5f119c3910cf29d0557b23359c4b69e68df86d3d34",
+    "observedInputsNeverUsedAsExpected": true
+  },
+  "checks": {
+    "csharpWhitespaceFormat": "PASS execution/format-capture-verify.log",
+    "browserPrettier": "PASS ../../e2e/local-fix-packages/format-final.log",
+    "pythonAstSyntax": "PASS 3 files",
+    "nodeSyntax": "PASS verify.mjs",
+    "independentLiteralOracle": "PASS 11 files",
+    "nugetDirectTransitiveAudit": "PASS no vulnerable packages execution/audit.log",
+    "secrets": "PASS exact authored file set and browser; full ignored captured-output scan reported 120 generic-api-key false positives on rootCauseKey SHA256 fictional finding IDs, exhaustively classified in execution/secret-scan-classification.json",
+    "diffWhitespace": "PASS"
+  },
+  "originalCompiledFrontend": "execution/consumed-frontend.json",
+  "originalRuntimeCopies": [
+    "execution/consumed-inputs.json",
+    "execution/consumed-inputs-checkpoint-final.json",
+    "execution/consumed-inputs-observed-capture-final.json",
+    "execution/consumed-inputs-final-seal.json"
+  ],
+  "limitations": [
+    "Default Mac startup NOT VERIFIED; temporary DOTNET_hostBuilder__reloadConfigOnChange=false used",
+    "Windows browser, manual screen-reader and full OS/browser matrix NOT VERIFIED",
+    "Global feature acceptance, Milestone7, G1-G9, production release and deployed credential/network-free sandbox NOT VERIFIED",
+    "Earlier pre-correction native sources/DLLs not captured; logs/explanations do not reconstruct them",
+    "Held analysis plus visible comment UI is unreachable; readEpoch protections additionally reviewed statically",
+    "Historical eight API/null-fix and browser flows tested; complete historical UI acceptance relies on separate coordinator gates"
+  ]
+}
