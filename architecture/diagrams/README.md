@@ -1,6 +1,6 @@
 # Health-assessment pilot diagrams
 
-These diagrams explain the accepted pilot architecture before implementation planning. They are descriptive views of the approved product specification, ADR-0001 through ADR-0004, identity/session design, authorization matrix, AI controls and operations plan. They do not claim that any resource has been provisioned or verified.
+Views 01–04 explain the accepted pilot architecture before implementation planning. They are descriptive views of the approved product specification, ADR-0001 through ADR-0004, identity/session design, authorization matrix, AI controls and operations plan. Views 01–04 do not claim that any resource has been provisioned or verified. View 05 separately records the executed and cleaned-up development foundation with planned application paths clearly marked.
 
 ## Views
 
@@ -8,6 +8,8 @@ These diagrams explain the accepted pilot architecture before implementation pla
 2. [`02-azure-deployment-and-network.svg`](./02-azure-deployment-and-network.svg) ([PNG preview](./previews/02-azure-deployment-and-network.png)) — the accepted Azure services and their public/private network paths.
 3. [`03-assessment-processing-flow.svg`](./03-assessment-processing-flow.svg) ([PNG preview](./previews/03-assessment-processing-flow.png)) — how an immutable baseline becomes reviewed and published assessment results.
 4. [`04-identity-and-tenant-isolation.svg`](./04-identity-and-tenant-isolation.svg) ([PNG preview](./previews/04-identity-and-tenant-isolation.png)) — how Entra authentication, product authorization and customer data-plane isolation work together.
+
+5. [`05-azure-development-foundation.svg`](./05-azure-development-foundation.svg) ([PNG preview](./previews/05-azure-development-foundation.png), [technical notes](./05-azure-development-foundation.md)) — detailed tested development topology, private DNS, identity, controls and stored deployment provenance; temporary resources subsequently removed.
 
 ## Conventions
 
@@ -45,6 +47,7 @@ Microsoft permits these icons in architecture diagrams, training materials and d
 
 ## Review status
 
-- Architecture content: accepted design; implementation not started.
+- Views 01–04: accepted architecture design; their original review predates implementation.
+- View 05: executed synthetic foundation configuration and cleanup evidence; live workload controls and G1 remain unverified. Rendered and visually inspected on 2026-10-01; official icon usage guidance rechecked.
 - Icon source and usage: official Microsoft packages; repository copies are unmodified.
 - Visual verification: all four SVGs were rendered at 2× resolution to aspect-ratio-preserving PNG previews and inspected on 2026-09-29.

@@ -11,3 +11,5 @@ The health-assessment pilot architecture and Azure technology platform are selec
 - [`diagrams/03-assessment-processing-flow.svg`](./diagrams/03-assessment-processing-flow.svg) — durable assessment, AI, review, scoring and publication flow.
 - [`diagrams/04-identity-and-tenant-isolation.svg`](./diagrams/04-identity-and-tenant-isolation.svg) — human identity, workload identity and Pilot A/Pilot B data separation.
 - [`diagrams/README.md`](./diagrams/README.md) — diagram conventions, scope and official icon sources.
+
+- [`diagrams/05-azure-development-foundation.md`](./diagrams/05-azure-development-foundation.md) — detailed executed development foundation, editable official-icon diagram and deployment-template mapping.
