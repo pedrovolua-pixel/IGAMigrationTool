@@ -1,0 +1,221 @@
+{
+  "recordedAtUtc": "2026-10-02T04:18:54.538Z",
+  "execution": {
+    "status": "PASS",
+    "assertions": 2162,
+    "groups": [
+      "RM-API-001 stored originals/current health/coherent snapshot/history/replay/maturity goldens",
+      "RM-API-002 defer penalty/health independence/mixed/gaps/historical read-only profile",
+      "RM-API-003 server-owned actor/scope/originals unsupported actions/body4KiB CSRF/Host/Origin",
+      "RM-UI-001 actual keyboard confirm/reject/comment/edit inert text/originals/history/reload",
+      "RM-UI-002 actual stale CAS focused recovery and cross-run response denial",
+      "RM-UI-005 committed-response-loss exact-event retry and delayed GET/POST selection races with visible score/history goldens",
+      "RM-UI-003 keyboard Defer and actual owned-host restart preserves durable history",
+      "RM-UI-004 desktop390320 expanded history/evidence/axe/forced-color engineering smoke"
+    ],
+    "accessibility": [
+      {
+        "label": "desktop review/history/maturity",
+        "version": "4.13.0",
+        "passes": 31,
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "label": "320px review/history/maturity",
+        "version": "4.13.0",
+        "passes": 33,
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      }
+    ],
+    "browser": "145.0.7632.6",
+    "node": "v24.21.0",
+    "ownedHostRestartExecuted": true,
+    "limitations": [
+      "Fixed synthetic reviewer identity, fictional maturity indicators only; no customer risk acceptance/publication/production authority",
+      "Full supported Windows/NVDA/Narrator acceptance NOT VERIFIED",
+      "Axe 320px review/history/maturity incomplete:color-contrast; NOT VERIFIED"
+    ]
+  },
+  "authoritativeArtifactSha256": [
+    {
+      "path": "contracts/local-demo/README.md",
+      "sha256": "2f7337828fb72fe9a9372ed5226a5d147ecad0da8dd28f8ebbc3caf1815883b1"
+    },
+    {
+      "path": "contracts/local-demo/demo-v1.schema.json",
+      "sha256": "001918face676df349cf903eb1f3d4982f0af7ec8d8af25410f71298e8dfef3f"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+      "sha256": "521f65c35dfd516141b31c1331bbe5e1f9660897dc618b93f93abab408dc97f6"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoMaturityProjection.cs",
+      "sha256": "011f496f22dd154f85904ef0214edeb8fb4988e792919f2104002cf13b4d101a"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+      "sha256": "106f9907f5c6c55617ef5ce3bbdcf574dfc012de85ae97539af643d5b9c54b8e"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+      "sha256": "c13688f9b0eb34effa50e3999f606cf0261b3081d807f3714781bc16b49ca7f3"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/AssessmentCoverage.dll",
+      "sha256": "39910f0f3f251c943907fcaf73280b61b9efcfa25be66ed14d4ba29e412d6830"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/AssessmentMaturity.dll",
+      "sha256": "1b7edd3f5a07acb525145f16bcf555bde70574ffb70627f4c1ac53a3d2c7a4d3"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/AssessmentOrchestration.dll",
+      "sha256": "cde16503bc7b6df8cdece985d6611fa51df050ad1caaf329799df384e8d81f5a"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/AssessmentRuns.dll",
+      "sha256": "92af15ffb3c5eb5d1602338b536a9c03c5a577cbde84ddfd49599cb440928f9f"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/AssessmentScoring.dll",
+      "sha256": "3ef4ab62e645e11510e69ae900385450f13d4f52ddb1ecf8381ef4c58f9d8594"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/DeterministicAnalysis.dll",
+      "sha256": "cbd7959bf2ad6792b4ac7db66377a13117668d060dd6d179c9989e7c7d962499"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/FindingReview.dll",
+      "sha256": "d94f54542348929ac9e895e648861930290ee0fd3f16e4a55a3b057306bd279f"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.deps.json",
+      "sha256": "c5bcc3f0cb88aae913efba1a907c2c3a6a89d16b384fa2b91e60d57b21593c8c"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll",
+      "sha256": "5e7bb9953de688122e7ca021cf1159ab2b9f550516e8417ed3defcf1e3d2627e"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.runtimeconfig.json",
+      "sha256": "eff38a9750f7cca2407b1d639a963d56ffea92088e6da971bbbfa74e3dcd7224"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.staticwebassets.endpoints.json",
+      "sha256": "eb6525c892afda953a2560f151f9c5e5bc6e79ef6741d886488ac450262c91e3"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
+      "sha256": "74bc17c936d66ea090b6a5b4cc4307d2154c9692e57edd4c55d68dd4a99c11b6"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Relational.dll",
+      "sha256": "a1e4f36208650b15b75a4b01a5821d61d5be417ac2e86ec3c65e2560a87e0d7d"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/Microsoft.EntityFrameworkCore.dll",
+      "sha256": "f5b1703d608e241314952b2ede8dcdd1b8d8adda8c91a13cb7e6b1007414cef4"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
+      "sha256": "94fcf66e8e953fdb02c40c72ca89821dd5eed5324d4c0f12a7219ea8cd3d5a5e"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/Npgsql.dll",
+      "sha256": "e2bcafe1660fe4543fe9dfcabed972ec8d32259e5ea8009462ce1de23c7034c2"
+    },
+    {
+      "path": "src/web/dist/assets/index-1g7Y_2w-.js",
+      "sha256": "6093e393a33453c874666e604f10a481faec374af37d4c58417130940a4e8274"
+    },
+    {
+      "path": "src/web/dist/assets/index-BOJgNfQG.css",
+      "sha256": "390454f1d2ed0c58a71ec55adffebe1aa29b1e879e562482023b8ed0cdbc26ed"
+    },
+    {
+      "path": "src/web/dist/index.html",
+      "sha256": "3a5f803bd02a7d38153eb7580a3ca312133e4799a7bd834d26d152420ee57218"
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "031e663974b27dff06b30aa7790f28a093a4d269cc92581125449931d37d99ba"
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "sha256": "33082ef962e552e232bb09c8be9982e75e4e5281a4008b6c3906667f4fe42f90"
+    },
+    {
+      "path": "src/web/src/MaturityView.tsx",
+      "sha256": "2f213b12bb76dad3e0424f4fe39a08a436bbac9950c4516224d9799f08c3e6b8"
+    },
+    {
+      "path": "src/web/src/ReviewPanel.tsx",
+      "sha256": "93999eb45cab07024fbaf0945e4337173bc8367b5c225ea0e74d32db4ad32164"
+    },
+    {
+      "path": "src/web/src/api.ts",
+      "sha256": "9fa62aa42aa5a890a5adfd3b01c3c81cd5bd4362f84880fc206e10b1f18c99a0"
+    },
+    {
+      "path": "src/web/src/styles.css",
+      "sha256": "3d17b82a911d5fc2038666c157fb2cf6dddc59618e10facf145bb5325e654558"
+    },
+    {
+      "path": "tests/e2e/consultant-demo/package-lock.json",
+      "sha256": "3f151ef6ce03447fd62f401e5b0d35af36275d52ffae97a167b7806787f8bbb1"
+    },
+    {
+      "path": "tests/e2e/consultant-demo/package.json",
+      "sha256": "f1944e37f215591a83ecac47b80b237163550b6b2deba519e4cbb60e2875e6ec"
+    }
+  ],
+  "testDefinitionSha256": [
+    {
+      "path": "tests/e2e/review-maturity/README.md",
+      "sha256": "2c6d7a7e822edf3b38574c1238f2843661096e9b1deefa7c67fa93f2bb1510d1"
+    },
+    {
+      "path": "tests/e2e/review-maturity/bind-artifacts.mjs",
+      "sha256": "4d94aff127ab4b43f5023c9d006397086ba3ff569b5fa25a770cada746ac4520"
+    },
+    {
+      "path": "tests/e2e/review-maturity/browser-support.mjs",
+      "sha256": "33b0075997f6b6d860c77c7e2ece4b08aea05a5dc6f1b62b3067edc8136525dd"
+    },
+    {
+      "path": "tests/e2e/review-maturity/verify.mjs",
+      "sha256": "9c8671f844f33da2a2d1b660c1148314bf7ade2c7cfa787c04d72b2cfa39f26f"
+    }
+  ],
+  "screenshotSha256": [
+    {
+      "path": "desktop-review.png",
+      "sha256": "7ca7e7ddfa127ab37a2b419ab04c0b45ab1ee2e1f0f27f3c43f07d4c387b56bf"
+    },
+    {
+      "path": "mobile-review.png",
+      "sha256": "8637e314622189fbe696900898431a881ce3113854a007bc6ae5f5961226d5b9"
+    },
+    {
+      "path": "reflow-review.png",
+      "sha256": "191ec1dafd4dd432fdd0898313a81560baff0efe3542d41a6a6a4e474eae8fe7"
+    }
+  ],
+  "executionSha256": "cb6dbb4e09e4b209ded1cf053e59a31973d20c2fb8d139b8797b6f0793712fd8",
+  "method": "Complete suite against final primary assemblies, production assets and strict private schema; complete definitions include exact fault injection and legal-whitespace-padded valid transport commands, not summary pseudo-inputs",
+  "cleanup": "Own browser/API contexts closed and own host stopped; no PostgreSQL restart/drop/customer data",
+  "sourceReview": "Independent M5/R5/U5/bridge reviews closed; focused test-oracle findings corrected before final execution",
+  "runtime": {
+    "dotnetSdk": "10.0.401",
+    "postgres": "18.4",
+    "node": "v24.21.0",
+    "playwright": "1.62.1",
+    "axe": "4.13.0",
+    "chromium": "145.0.7632.6"
+  }
+}

@@ -6,6 +6,7 @@ using AssessmentCoverage;
 using AssessmentScoring;
 using System.Globalization;
 using AssessmentRuns;
+using FindingReview;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.DataProtection;
 
@@ -17,6 +18,9 @@ var connection = Environment.GetEnvironmentVariable("IGA_SYNTHETIC_DATABASE")
 var engine = new SyntheticDurableRunEngine(connection, DemoFixtureCatalog.Scope,
     new SyntheticRunPolicy(TimeSpan.FromSeconds(5), 2, 512));
 await engine.InitializeAsync();
+var reviewStore = new SyntheticReviewStore(connection, SyntheticReviewScope.Fixed);
+await reviewStore.InitializeAsync();
+var reviewService = new DemoReviewService(reviewStore);
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { Args = Array.Empty<string>(), EnvironmentName = "SyntheticLocalDemo" });
 builder.WebHost.ConfigureKestrel(server =>
 {
@@ -97,7 +101,41 @@ app.MapGet("/local-demo/v1/runs/{runId:guid}", async (Guid runId) =>
 app.MapGet("/local-demo/v1/runs/{runId:guid}/analysis", async (Guid runId) =>
 {
     var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
-    return read.Succeeded ? Results.Json(DemoAnalysisProjection.Detail(read.Snapshot!)) : DemoProjection.Result(read);
+    return read.Succeeded ? Results.Json(DemoAnalysisProjection.Detail(read.Snapshot!,
+        DemoAnalysisCatalog.IsReviewMaturityProfile(read.Snapshot!.ProfileCatalogId) ? await reviewService.ReadAsync(read.Snapshot!) : null))
+        : DemoProjection.Result(read);
+});
+app.MapGet("/local-demo/v1/runs/{runId:guid}/review", async (Guid runId) =>
+{
+    var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
+    return read.Succeeded ? Results.Json(DemoReviewService.Detail(read.Snapshot!, await reviewService.ReadAsync(read.Snapshot!)))
+        : DemoProjection.Result(read);
+});
+app.MapPost("/local-demo/v1/runs/{runId:guid}/findings/{findingId}/events", async (HttpContext context, Guid runId, string findingId) =>
+{
+    using var document = await DemoProjection.ReviewBody(context);
+    var body = document.RootElement;
+    var kindText = body.GetProperty("kind").GetString();
+    if (!Guid.TryParse(body.GetProperty("eventId").GetString(), out var eventId) || eventId == Guid.Empty ||
+        !body.GetProperty("expectedRevision").TryGetInt64(out var revision) || revision < 0 ||
+        !Enum.TryParse<SyntheticReviewEventKind>(kindText, false, out var kind) || !Enum.IsDefined(kind) || kind.ToString() != kindText)
+        return DemoProjection.Error("InvalidInput", "Use a valid event, action and current finding revision.", 400);
+    var command = new SyntheticReviewCommand(eventId, revision, kind, body.GetProperty("reason").GetString(),
+        body.GetProperty("text").GetString(), body.GetProperty("title").GetString(), body.GetProperty("businessContext").GetString());
+    if (SyntheticReviewPolicy.ValidateCommand(command) is not null)
+        return DemoProjection.Error("InvalidInput", "Supply only the bounded fields for the selected review action.", 400);
+    var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
+    if (!read.Succeeded) return DemoProjection.Result(read);
+    var review = await reviewService.ReadAsync(read.Snapshot!);
+    if (review.Snapshot is null) return DemoProjection.Error("Denied", "Review is unavailable for this saved run.", 403);
+    var applied = await reviewService.ApplyAsync(runId, findingId, command);
+    if (!applied.Succeeded)
+        return DemoProjection.Error(applied.Issue.ToString()!, "The finding changed or the action is unavailable. Refresh before a new action.",
+            applied.Issue == SyntheticReviewIssue.NotFound ? 404 : applied.Issue is SyntheticReviewIssue.Denied or SyntheticReviewIssue.WrongScope ? 403 : 409);
+    // Replayed events preserve their original outcome in storage; the screen always receives fresh current history.
+    var current = await reviewService.ReadAsync(read.Snapshot!);
+    return current.Snapshot is null ? DemoProjection.Error("Unavailable", "The saved review could not be verified. Refresh the run.", 503)
+        : Results.Json(DemoReviewService.Detail(read.Snapshot!, current));
 });
 app.MapPost("/local-demo/v1/runs", async (HttpContext context) =>
 {
@@ -143,6 +181,22 @@ await app.RunAsync();
 
 internal static class DemoProjection
 {
+    internal static async Task<JsonDocument> ReviewBody(HttpContext context)
+    {
+        var document = await JsonDocument.ParseAsync(context.Request.Body, new JsonDocumentOptions { MaxDepth = 4 });
+        var fields = new[] { "eventId", "expectedRevision", "kind", "reason", "text", "title", "businessContext" };
+        var root = document.RootElement;
+        if (root.ValueKind != JsonValueKind.Object || !root.EnumerateObject().Select(property => property.Name).Order(StringComparer.Ordinal)
+            .SequenceEqual(fields.Order(StringComparer.Ordinal)) || fields.Any(field => root.GetProperty(field).ValueKind !=
+                (field == "expectedRevision" ? JsonValueKind.Number : JsonValueKind.String) &&
+                !(field is "reason" or "text" or "title" or "businessContext" && root.GetProperty(field).ValueKind == JsonValueKind.Null)))
+        {
+            document.Dispose();
+            throw new JsonException("Unexpected review fields or values.");
+        }
+        return document;
+    }
+
     internal static async Task<JsonDocument> Body(HttpContext context, string[] fields)
     {
         var document = await JsonDocument.ParseAsync(context.Request.Body, new JsonDocumentOptions { MaxDepth = 4 });

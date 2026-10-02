@@ -18,7 +18,9 @@ const states: Record<RunState, string> = {
   Failed: 'Failed',
 };
 const stateLabel = (state: RunState, profileId: string) =>
-  state === 'Scoring' && profileId.startsWith('synthetic-analysis-')
+  state === 'Scoring' &&
+  (profileId.startsWith('synthetic-analysis-') ||
+    profileId.startsWith('synthetic-review-maturity-'))
     ? 'Coverage ready · local analysis'
     : states[state];
 const storageKey = 'iga.synthetic.selected-run';
@@ -528,7 +530,8 @@ export function App() {
                 {run.state === 'Scoring' && (
                   <div className="coverage-ready">
                     <strong>
-                      {run.selection.profileId.startsWith('synthetic-analysis-')
+                      {run.selection.profileId.startsWith('synthetic-analysis-') ||
+                      run.selection.profileId.startsWith('synthetic-review-maturity-')
                         ? 'Coverage ready. Inspect local analysis below.'
                         : 'Coverage ready. Scoring is pending.'}
                     </strong>
@@ -642,7 +645,7 @@ export function App() {
                     </p>
                   )}
                 </section>
-                <AnalysisView run={run} />
+                <AnalysisView key={run.runId} run={run} csrfToken={catalog?.csrfToken ?? ''} />
                 <details className="locked-inputs">
                   <summary>Locked input versions and digests</summary>
                   <p className="field-note">

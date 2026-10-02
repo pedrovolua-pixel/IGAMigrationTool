@@ -2,5 +2,6 @@
   <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../../modules/AssessmentRuns/AssessmentRuns.csproj" />
+    <ProjectReference Include="../../modules/FindingReview/FindingReview.csproj" />
   </ItemGroup>
 </Project>

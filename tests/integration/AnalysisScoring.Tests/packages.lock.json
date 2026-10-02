@@ -128,6 +128,9 @@
       "assessmentcoverage": {
         "type": "Project"
       },
+      "assessmentmaturity": {
+        "type": "Project"
+      },
       "assessmentorchestration": {
         "type": "Project",
         "dependencies": {
@@ -137,6 +140,7 @@
       "assessmentruns": {
         "type": "Project",
         "dependencies": {
+          "AssessmentMaturity": "[1.0.0, )",
           "AssessmentOrchestration": "[1.0.0, )",
           "AssessmentScoring": "[1.0.0, )",
           "DeterministicAnalysis": "[1.0.0, )",

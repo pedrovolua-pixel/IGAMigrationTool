@@ -32,7 +32,8 @@ public static class DemoFixtureCatalog
             profile.Versions with
             {
                 ScriptedResultsDigest = ScriptDigest(baselineId),
-                AnalysisFixtureDigest = DemoAnalysisCatalog.IsAnalysisBaseline(baselineId) ? DemoAnalysisCatalog.FrozenDigest(baselineId, profileId) : null
+                AnalysisFixtureDigest = DemoAnalysisCatalog.IsAnalysisBaseline(baselineId) ? DemoAnalysisCatalog.FrozenDigest(baselineId, profileId) : null,
+                MaturityFixtureDigest = DemoAnalysisCatalog.IsReviewMaturityProfile(profileId) ? DemoAnalysisCatalog.FreezeMaturity(baselineId, profileId).ContentDigest : null
             });
     }
 

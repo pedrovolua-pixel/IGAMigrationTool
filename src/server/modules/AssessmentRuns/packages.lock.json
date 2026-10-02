@@ -131,6 +131,9 @@
       "assessmentcoverage": {
         "type": "Project"
       },
+      "assessmentmaturity": {
+        "type": "Project"
+      },
       "assessmentorchestration": {
         "type": "Project",
         "dependencies": {

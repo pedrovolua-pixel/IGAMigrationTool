@@ -6,15 +6,19 @@ import type {
   RunDetail,
 } from './demo-contract.generated';
 import { request } from './api';
+import { ReviewPanel } from './ReviewPanel';
+import { MaturityView } from './MaturityView';
 
-export function AnalysisView({ run }: { run: RunDetail }) {
+export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: string }) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
   const [failed, setFailed] = useState(false);
   const [retry, setRetry] = useState(0);
+  const [notice, setNotice] = useState<string | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const retryFocus = useRef<string | null>(null);
   useEffect(() => {
     retryFocus.current = null;
+    setNotice(null);
   }, [run.runId]);
   useEffect(() => {
     const controller = new AbortController();
@@ -29,7 +33,11 @@ export function AnalysisView({ run }: { run: RunDetail }) {
           if (
             !controller.signal.aborted &&
             value.runId === run.runId &&
-            value.runRevision === run.revision
+            value.runRevision === run.revision &&
+            (!value.review ||
+              (value.review.runId === value.runId &&
+                value.review.runRevision === value.runRevision &&
+                value.review.snapshotDigest === value.reviewSnapshotDigest))
           )
             setResponse(value);
           else if (!controller.signal.aborted) {
@@ -90,9 +98,15 @@ export function AnalysisView({ run }: { run: RunDetail }) {
       <h3 id="analysis-heading" tabIndex={-1} ref={heading}>
         Findings and reproducible health calculations
       </h3>
+      {notice && (
+        <p role="status" className="field-note">
+          {notice}
+        </p>
+      )}
       <p className="field-note">
         These are local calculations from fixed synthetic evidence. The publishable-current
-        calculation is not a published report. Review, maturity and live assessment remain pending.
+        calculation is not a published report. Review and maturity, when available, use frozen
+        fictional fixtures; live assessment remains pending.
       </p>
       <div className="analysis-score-grid">
         <Score label="Provisional health" score={response.provisional!} />
@@ -213,6 +227,10 @@ export function AnalysisView({ run }: { run: RunDetail }) {
               <details>
                 <summary>Read generated original and provenance</summary>
                 <p>
+                  <strong>Original title</strong>: {finding.originalTitle} · Initial state:{' '}
+                  {finding.initialState}
+                </p>
+                <p>
                   <strong>Observed facts</strong>
                 </p>
                 <ul>
@@ -275,14 +293,27 @@ export function AnalysisView({ run }: { run: RunDetail }) {
                 </p>
 
                 <p className="field-note">
-                  The generated original is read-only. No disposition or risk acceptance action is
-                  available in this local slice.
+                  The generated original is read-only. Available synthetic review actions appear
+                  below. Risk acceptance and closure remain unavailable.
                 </p>
               </details>
             </article>
           ))
         )}
       </section>
+      {response.review && (
+        <ReviewPanel
+          review={response.review}
+          csrfToken={csrfToken}
+          onReload={(message) => {
+            setNotice(message ?? 'Saved analysis refreshed.');
+            retryFocus.current = run.runId;
+            setResponse(null);
+            setRetry((value) => value + 1);
+          }}
+        />
+      )}
+      {response.maturity && <MaturityView maturity={response.maturity} />}
       <details className="locked-inputs">
         <summary>Analysis versions and content digests</summary>
         <dl>
@@ -302,6 +333,14 @@ export function AnalysisView({ run }: { run: RunDetail }) {
               <code>{response.contentDigest}</code>
             </dd>
           </div>
+          {response.reviewSnapshotDigest && (
+            <div>
+              <dt>Reviewed snapshot</dt>
+              <dd>
+                <code>{response.reviewSnapshotDigest}</code>
+              </dd>
+            </div>
+          )}
         </dl>
         <p className="field-note">
           Exact saved input locks and canonical coverage results determine this read-only analysis.

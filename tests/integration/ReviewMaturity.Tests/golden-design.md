@@ -1,0 +1,24 @@
+# V5 independent golden and adversarial design
+
+Fixture-definition version: `review-maturity-independent-v1`. Authority: the owner-approved cycle05 plan, FR-HAS-12/13/15/17/20, TP-HAS-003/004/005/017, the approved authorization matrix and accepted ADR0001/0002/0003. These expectations precede the author API handoff and use literal specification-derived outcomes. No scorer or maturity implementation calculates its own expected goldens.
+
+| Case | Input and independent expected behavior |
+| --- | --- |
+| RM-MAT-001 | Ten declared mandatory domains; design and implementation met in five yields Initial; six yields Developing; eight plus evidenced ownership yields Defined. Exact60%/80% are inclusive. |
+| RM-MAT-002 | Partial, not-met and insufficient evidence never count as met. Declared domains with missing evidence remain in denominator and limitations. Invalid/empty catalog exposes no projection. |
+| RM-MAT-003 | Defined plus measured operation and regular review in eight of ten domains yields Managed. Seven of ten remains Defined. Every preceding level remains necessary. |
+| RM-MAT-004 | Managed plus validated improvement in eight of ten domains, each tied to at least two distinct assessment references, yields Optimized. Seven improved domains or only one distinct assessment remains Managed. Duplicate assessment references do not make two. |
+| RM-MAT-005 | Missing ownership blocks Defined and higher levels; missing design/implementation blocks higher levels even if operational/improvement indicators are met. Health input cannot affect maturity. Order and caller mutation cannot rewrite frozen maturity evidence or digests. |
+| RM-MAT-006 | Global cumulative prerequisites: design+implementation in domains1–8, operation+review3–10, improvement1–6 plus9–10, all at80%, with ownership and two distinct references yields Optimized despite only six-domain intersections. The coordinator confirmed this exact reading of approved global prerequisites. |
+| RM-POL-001 | Active server-supplied scoped consultant can Confirm/Reject/Defer Proposed and add comment/presentation edit; unauthorized roles, inactive/revoked identity/assignment, wrong customer/project/environment/category/run and incompatible states are denied server-side. |
+| RM-POL-002 | Reject needs nonblank reason. Client actor/role/assignment/originals/weights/permissions cannot override policy. Risk acceptance, remediation, validated closure, recurrence and other unsupported transitions remain denied. |
+| RM-STORE-001 | Immutable seeds bind exact run/input/analysis digests and original occurrence references. A successful append and current projection update commit atomically; originals do not change. Comments and edits retain attributed append-only history and server time. |
+| RM-STORE-002 | Identical event-ID/payload replay returns original outcome; changed payload replay and stale revision conflict with no append or projection mutation. Two actual PostgreSQL concurrent writers using one expected revision allow exactly one successful new event. |
+| RM-STORE-003 | Precommit observer failure rolls back event and current projection together. Fresh engine reload reproduces originals/current/history/locks. Migration content/actual schema drift refuses access; older assessment inputs and migrations remain unchanged. |
+| RM-VIEW-001 | Complete new opt-in profile shows separate immutable maturity and current reviewed health. Confirm/Defer retain penalties, Reject removes current penalty; mandatory-review counts use the same durable snapshot. Old profiles are read-only compatible and never acquire write authority. |
+| RM-UI-001 | Actual keyboard Confirm/Reject/Defer with reason, comments and presentation edits; hostile markup remains encoded text. Reload/history show original and every event. Concurrent stale review revision and cross-run stale responses cannot overwrite current display. |
+| RM-UI-002 | Strict4KiB transport rejects extra properties, actor/scope/weight injection, unsupported states, missing CSRF, hostile Origin/Host and oversized text/body. Native accessible actions, desktop/390/320 reflow, axe and incomplete disclosures; no full Windows/conformance claim. |
+
+The coordinator confirmed global cumulative prerequisites; same-domain design+implementation and same-domain operation+review pairs count independently, without an extra common-domain intersection across levels. Exact final typed refusal codes, IDs and fixture bindings will follow the approved API handoff; no public contract is invented.
+
+Evidence will hash complete test definitions, all actual negative mutations and generator definitions, final module sources and built host/frontend/private schema artifacts. Synthetic scope only. Production identity, customer risk authority, live evidence/rules/AI, publication and full Windows/NVDA/Narrator acceptance remain NOT VERIFIED.

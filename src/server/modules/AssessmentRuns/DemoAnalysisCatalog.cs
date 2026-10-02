@@ -1,4 +1,5 @@
 using AssessmentCoverage;
+using AssessmentMaturity;
 using AssessmentOrchestration;
 using DeterministicAnalysis;
 
@@ -8,15 +9,37 @@ namespace AssessmentRuns;
 public static class DemoAnalysisCatalog
 {
     public static bool IsAnalysisBaseline(string id) => SyntheticAnalysisFixturePack.Presets.Any(item => item.Id == id);
-    public static bool IsAnalysisProfile(string id) => SyntheticAnalysisFixturePack.Profiles.Any(item => item.Id == id);
+    public const string ReviewEqualProfileId = "synthetic-review-maturity-equal-v1";
+    public const string ReviewOperationsProfileId = "synthetic-review-maturity-operations-v1";
+    public static bool IsReviewMaturityProfile(string id) => id is ReviewEqualProfileId or ReviewOperationsProfileId;
+    public static string AnalysisProfileId(string id) => id switch
+    {
+        ReviewEqualProfileId => "synthetic-analysis-equal-v1",
+        ReviewOperationsProfileId => "synthetic-analysis-operations-v1",
+        _ => id
+    };
+    public static bool IsAnalysisProfile(string id) => SyntheticAnalysisFixturePack.Profiles.Any(item => item.Id == AnalysisProfileId(id));
     public static bool Compatible(string baselineId, string profileId) => IsAnalysisBaseline(baselineId) == IsAnalysisProfile(profileId);
     public static SyntheticAnalysisLock Freeze(string baselineId, string profileId) =>
-        SyntheticAnalysisFixturePack.Freeze(SyntheticAnalysisFixturePack.Scope, baselineId, profileId);
+        SyntheticAnalysisFixturePack.Freeze(SyntheticAnalysisFixturePack.Scope, baselineId, AnalysisProfileId(profileId));
     public static string FrozenDigest(string baselineId, string profileId) => SyntheticCanonicalDigest.Compute(Freeze(baselineId, profileId));
-    public static IEnumerable<SyntheticDemoProfile> CreateProfiles() => SyntheticAnalysisFixturePack.Profiles.Select(profile => new SyntheticDemoProfile(
+    private static IEnumerable<SyntheticDemoProfile> OriginalProfiles() => SyntheticAnalysisFixturePack.Profiles.Select(profile => new SyntheticDemoProfile(
         profile.Id, profile.Label, new(profile.Version, null, profile.AlgorithmVersion, "synthetic-ai-disabled-v1",
             "synthetic-prompt-disabled-v1", "synthetic-model-disabled-v1", "synthetic-analysis-app-v1",
             SyntheticDurableRunEngine.WorkSchemaVersion, new string('0', 64))));
+    public static IEnumerable<SyntheticDemoProfile> CreateProfiles() => OriginalProfiles().Concat(new[]
+    {
+        ReviewProfile(ReviewEqualProfileId, "Synthetic consultant review + maturity · equal weights"),
+        ReviewProfile(ReviewOperationsProfileId, "Synthetic consultant review + maturity · operations weights")
+    });
+    private static SyntheticDemoProfile ReviewProfile(string id, string label)
+    {
+        var original = OriginalProfiles().Single(item => item.Id == AnalysisProfileId(id));
+        return new(id, label, original.Versions with { ApplicationVersion = "synthetic-review-maturity-app-v1" });
+    }
+    public static SyntheticMaturityFrozenFixture FreezeMaturity(string baselineId, string profileId) =>
+        IsReviewMaturityProfile(profileId) ? SyntheticMaturityFixturePack.Freeze(baselineId, FrozenDigest(baselineId, profileId)) :
+            throw new ArgumentException("This profile has no frozen maturity fixture.");
     public static IEnumerable<SyntheticDemoBaseline> CreateBaselines()
     {
         var modules = SyntheticAnalysisFixturePack.Rules.Select(rule => rule.ModuleId).Distinct(StringComparer.Ordinal)
@@ -52,7 +75,7 @@ public static class DemoAnalysisCatalog
             !DemoFixtureCatalog.Profiles.Any(item => item.Id == run.ProfileCatalogId)) return false;
         if (!Compatible(run.BaselineCatalogId, run.ProfileCatalogId)) return false;
         if (DemoFixtureCatalog.ScriptDigest(run.BaselineCatalogId) != run.FrozenInputs.ScriptedResultsDigest) return false;
-        if (!IsAnalysisBaseline(run.BaselineCatalogId)) return run.FrozenInputs.AnalysisFixtureDigest is null;
+        if (!IsAnalysisBaseline(run.BaselineCatalogId)) return run.FrozenInputs.AnalysisFixtureDigest is null && run.FrozenInputs.MaturityFixtureDigest is null;
         var expected = DemoFixtureCatalog.CreateStartRequest(run.BaselineCatalogId, run.ProfileCatalogId, "synthetic-analysis-version-check");
         if (run.FrozenInputs != expected.Versions) return false;
         var expectedPlan = SyntheticBaselineInventoryPlanner.Plan(expected.Capability, expected.Baseline, expected.Scope);

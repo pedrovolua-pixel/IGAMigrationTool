@@ -21,7 +21,9 @@ public sealed record SyntheticRunInputVersions(
     string AiPolicyVersion, string PromptVersion, string ModelVersion,
     string ApplicationVersion, string WorkSchemaVersion, string ScriptedResultsDigest,
     [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
-    string? AnalysisFixtureDigest = null);
+    string? AnalysisFixtureDigest = null,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    string? MaturityFixtureDigest = null);
 
 public sealed record SyntheticStartRequest(
     SyntheticAuthorizedScope Scope, string IdempotencyKey, string BaselineCatalogId, string ProfileCatalogId,
