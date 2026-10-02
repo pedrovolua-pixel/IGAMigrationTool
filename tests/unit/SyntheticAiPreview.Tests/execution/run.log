@@ -1,0 +1,1 @@
+{"suite":"synthetic-ai-preview-projection-v1","assertions":512,"factoryCases":21,"deniedCases":68,"goldenDigest":"c5439fef93a3c2c6e59efb5f54780ba79b4961ccf31a01dcaae414882a83a1dd","goldenBytes":2417,"expandedPacketBytes":372437,"expandedProposalBytes":1483147,"expandedPreviewBytes":1483806,"result":"PASS","reflection":"denial fixtures only; actual factories for accepted inputs"}
