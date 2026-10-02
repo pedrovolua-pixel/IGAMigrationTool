@@ -8,13 +8,13 @@
     "npm": "11.20.0"
   },
   "scripts": {
-    "generate": "node ../../contracts/local-demo/generate-types.mjs",
-    "contract:check": "node ../../contracts/local-demo/generate-types.mjs --check",
+    "generate": "node ../../contracts/local-demo/generate-types.mjs && node ../../contracts/bff-authentication/generate-types.mjs",
+    "contract:check": "node ../../contracts/local-demo/generate-types.mjs --check && node ../../contracts/bff-authentication/generate-types.mjs --check",
     "typecheck": "tsc --noEmit",
     "build": "npm run contract:check && npm run typecheck && vite build",
     "audit": "npm audit --audit-level=low",
-    "format": "prettier --write . ../../contracts/local-demo",
-    "format:check": "prettier --check . ../../contracts/local-demo"
+    "format": "prettier --write . ../../contracts/local-demo ../../contracts/bff-authentication",
+    "format:check": "prettier --check . ../../contracts/local-demo ../../contracts/bff-authentication"
   },
   "dependencies": {
     "react": "19.3.0",

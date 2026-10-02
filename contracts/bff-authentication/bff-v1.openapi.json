@@ -1,0 +1,326 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "IGA local BFF authentication transport",
+    "version": "1.0.0",
+    "description": "D01/D02 approved for local implementation by repository owner 2026-10-02. Reusable library only; production composition/provider activation remains separately gated."
+  },
+  "paths": {
+    "/bff/v1/session": {
+      "get": {
+        "operationId": "getBffSession",
+        "security": [],
+        "x-query-fields": [],
+        "responses": {
+          "200": {
+            "description": "Minimal transport state only.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BffSession"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid bounded content/schema; no input echoed.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin, synchronizer or current authority denied; no identity/provider detail.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Unsupported method.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bff/v1/sign-in": {
+      "post": {
+        "operationId": "navigateBffSignIn",
+        "security": [],
+        "x-query-fields": [],
+        "x-browser-navigation": "Obtain CSRF token from GET session, then native top-level hidden-form POST. Never fetch the provider redirect.",
+        "x-fixed-return-path": "/bff/v1/session",
+        "x-body-limit-bytes": 8192,
+        "parameters": [
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exactly the configured canonical HTTPS origin. No caller return URL/scope."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/BffSignInForm"
+              },
+              "encoding": {
+                "__RequestVerificationToken": {
+                  "contentType": "text/plain; charset=utf-8"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "302": {
+            "description": "Supported single-tenant code+PKCE redirect, fresh authentication max_age=0; fixed completion path.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid bounded content/schema; no input echoed.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin, synchronizer or current authority denied; no identity/provider detail.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Already authenticated; no replacement/additional ticket.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Unsupported method.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bff/v1/sign-out": {
+      "post": {
+        "operationId": "signOutBffSession",
+        "security": [
+          {
+            "BffSessionCookie": []
+          }
+        ],
+        "x-query-fields": [],
+        "x-body-limit-bytes": 8192,
+        "parameters": [
+          {
+            "name": "Origin",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Exactly the configured canonical HTTPS origin."
+          },
+          {
+            "name": "X-CSRF-Token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BffSignOutBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Exact local store session revoked before cookie clear; no provider/global logout claim.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Missing authenticated session.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid bounded content/schema; no input echoed.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Origin, synchronizer or current authority denied; no identity/provider detail.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Unsupported method.",
+            "headers": {
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "const": "no-store"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BffSession": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["schemaVersion", "authenticated", "csrfToken"],
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "const": "bff-session-v1"
+          },
+          "authenticated": {
+            "type": "boolean"
+          },
+          "csrfToken": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "BffSignInForm": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["__RequestVerificationToken"],
+        "properties": {
+          "__RequestVerificationToken": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        }
+      },
+      "BffSignOutBody": {
+        "type": "object",
+        "additionalProperties": false,
+        "maxProperties": 0
+      }
+    },
+    "securitySchemes": {
+      "BffSessionCookie": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "__Secure-IgaBff",
+        "description": "Opaque protected server-managed session; no browser provider tokens."
+      }
+    }
+  },
+  "x-application-precedence": [
+    "unknown path 404",
+    "unsupported method 405",
+    "disabled sign-in 403 before body/provider",
+    "unauthenticated sign-out 401",
+    "authenticated sign-in 409",
+    "origin 403",
+    "bounded content/schema/undeclared query 400",
+    "synchronizer/current-authority 403"
+  ],
+  "x-charsets": "UTF-8 only; absent charset means UTF-8. Strict decoding; reject duplicate/extra fields.",
+  "x-framework-callbacks": [
+    "/bff/signin-oidc",
+    "/bff/signout-callback-oidc",
+    "/bff/signout-oidc"
+  ],
+  "x-callback-boundary": "Supported handler owns protocol callbacks and mandatory state/nonce/correlation/PKCE/token validation. OIDC form_post bypasses only application Origin/form/JSON/CSRF guards; no generic forwarding."
+}
