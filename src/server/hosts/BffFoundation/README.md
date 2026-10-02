@@ -34,3 +34,9 @@ Cookie validation binds the original authentication, exact store reference, immu
 ## Accepted D01/D02 verification handoff
 
 The [OpenAPI contract](../../../../contracts/bff-authentication/bff-v1.openapi.json), [native browser helper](../../../web/src/bff-authentication-navigation.ts) and [authentication cycle](../../../../plans/completed/bff-authentication-contract-cycle.md) describe the new bounded local transport. Actual synthetic HTTPS and signed protocol checks do not verify deployed Entra/CA/federation. Current result bindings and deferred production inputs belong to [the authentication evidence](../../../../docs/development/evidence/bff-authentication-contract-20261002.json).
+
+## Approved hosting contracts (local only)
+
+`BffSharedProtectionContract` validates fixed dedicated private Blob/key URIs, explicit workload identity and environment discriminator. It attaches no Azure provider. `UseBffReviewedIngress` is an opt-in exact-peer/host one-hop middleware seam installed before authentication; it accepts only HTTPS forwarding, optional single client address, and denies alternate Host/prefix/hops. It is not installed by the permanently disabled development executable. Route-specific Origin policy remains in the existing public D01 handlers, preserving provider-origin OIDC callbacks. Actual named ingress peer, DNS, routes, certificate and key/blob identity scopes remain protected review inputs.
+
+`BffHostingContracts.Tests` executes actual HTTPS and framework Data Protection with a synthetic encrypted XML repository/wrapping service. This proves local replica/environment/historical-key behavior and denial seams, not Microsoft Blob SDK conditional-write behavior or live Key Vault grants. Cached keys require authoritative session revocation and replica drain during an incident; deleting wrapping keys is not a session-revocation mechanism.

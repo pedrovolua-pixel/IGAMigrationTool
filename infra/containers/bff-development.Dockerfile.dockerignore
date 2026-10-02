@@ -35,3 +35,4 @@
 !src/server/hosts/BffFoundation/PublicAuthenticationOptions.cs
 !src/server/hosts/BffFoundation/SignedJsonWebTokenHandler.cs
 !src/server/modules/IdentitySessions/PendingAuthenticationChallenge.cs
+!src/server/hosts/BffFoundation/BffHostingContracts.cs

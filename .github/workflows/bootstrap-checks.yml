@@ -55,6 +55,8 @@ jobs:
           dotnet run --project tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj --configuration Release --no-build
+      - name: Check reviewed BFF ingress and local shared key seams
+        run: dotnet run --project tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj --configuration Release --no-build
       - name: Check shared PostgreSQL BFF sessions and real HTTPS transport
         env:
           IGA_SESSION_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_sessions;Username=iga_synthetic

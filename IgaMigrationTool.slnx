@@ -36,6 +36,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj" />
     <Project Path="tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj" />
     <Project Path="tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj" />
