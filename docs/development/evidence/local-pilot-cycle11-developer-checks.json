@@ -2324,6 +2324,22 @@
     "Named-pipe/listener sandbox constraints retried through approved native execution",
     "Initial independent HTML oracle assumed encoded backticks; explicit recipe correction retained, old representation is reconstructed, not claimed as preserved original bytes",
     "Whole-solution formatting failure corrected only line wrapping/indentation, original seals preserved",
-    "Line-oriented whitespace diff exited1 and was not treated as zero difference"
-  ]
+    "Line-oriented whitespace diff exited1 and was not treated as zero difference",
+    "Bootstrap37057941421 newWindows2025 step NETSDK1060 before assertions; normal compilation separated from minimal-environment directDLL execution. Windows2022 matrixcancelled."
+  ],
+  "initialHostedChecks": {
+    "bootstrap": {
+      "run": 37057941421,
+      "status": "Windows2025FAIL/Windows2022CANCELLED; Linux maycontinue, notclosure"
+    },
+    "package": {
+      "run": 37057941363,
+      "status": "PASS"
+    },
+    "failureLog": {
+      "path": "/private/tmp/iga-cycle11-windows-initial-failure.log",
+      "sha256": "3463322b6da78c4a26633778dee69b94eeb12aed6816b5c00a0270b832ea4f2d",
+      "note": "Decoded public job log normalized CRLF to LF, original connector result retained in session memory."
+    }
+  }
 }

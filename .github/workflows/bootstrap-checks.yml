@@ -86,9 +86,9 @@ jobs:
           dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-build -- --postgres
       - name: Check fictional unverified fix packages and inert HTML
         run: |
-          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" run --project tests/unit/SyntheticFixPackages.Tests --configuration Release --no-build
-          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" run --project tests/unit/SyntheticFixPackageHtml.Tests --configuration Release --no-build
-          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" run --project tests/integration/SyntheticFixPackages.Tests --configuration Release --no-build
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
       - name: Check canonical unverified recommendation guidance
         run: dotnet run --project tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build
       - name: Check independent recommendation identities, originals and saved review bridge
@@ -210,7 +210,7 @@ jobs:
       - name: Check actual inert fictional fix-package browser
         run: |
           export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
-          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" run --project tests/integration/SyntheticFixPackages.Tests --configuration Release --no-build -- --write-previews "$RUNNER_TEMP/fix-packages"
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll -- --write-previews "$RUNNER_TEMP/fix-packages"
           node tests/e2e/synthetic-fix-packages/verify.mjs --preview-directory "$RUNNER_TEMP/fix-packages" --playwright-module "$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
@@ -293,9 +293,12 @@ jobs:
           dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-restore
       - name: Check Windows fictional fix packages and inert HTML
         run: |
-          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source run --project tests/unit/SyntheticFixPackages.Tests --configuration Release --no-restore
-          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source run --project tests/unit/SyntheticFixPackageHtml.Tests --configuration Release --no-restore
-          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source run --project tests/integration/SyntheticFixPackages.Tests --configuration Release --no-restore
+          dotnet build tests/unit/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+          dotnet build tests/unit/SyntheticFixPackageHtml.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
+          dotnet build tests/integration/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
       - name: Check Windows fixed offline AI workspace source
