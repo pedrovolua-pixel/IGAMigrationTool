@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using IdentityAuthority;
 using IdentityPolicy;
 using IdentitySessions;
@@ -147,6 +148,58 @@ try
     Check(enrollmentWins.Count(w => w) == 1, "Different concurrent commands cannot overwrite nonexistent enrollment.");
     Check((await Counts()).Mutations == enrollmentBefore.Mutations + 1 && (await Counts()).Events == enrollmentBefore.Events + 1,
         "New-enrollment race commits one attributed event and mutation.");
+    string CommandJsonWithDigest(JsonNode node)
+    {
+        node["decision"]!["payloadSha256"] = new string('0', 64);
+        using var document = JsonDocument.Parse(node.ToJsonString()); using var bytes = new MemoryStream();
+        void Canonical(Utf8JsonWriter writer, JsonElement value)
+        {
+            if (value.ValueKind == JsonValueKind.Object)
+            {
+                writer.WriteStartObject();
+                foreach (var field in value.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal))
+                { writer.WritePropertyName(field.Name); Canonical(writer, field.Value); }
+                writer.WriteEndObject();
+            }
+            else if (value.ValueKind == JsonValueKind.Array)
+            { writer.WriteStartArray(); foreach (var child in value.EnumerateArray()) Canonical(writer, child); writer.WriteEndArray(); }
+            else value.WriteTo(writer);
+        }
+        using (var writer = new Utf8JsonWriter(bytes)) Canonical(writer, document.RootElement);
+        node["decision"]!["payloadSha256"] = Convert.ToHexStringLower(System.Security.Cryptography.SHA256.HashData(bytes.ToArray()));
+        return node.ToJsonString();
+    }
+    async Task SchemaError(NpgsqlDataSource source, string sql, string json, string expectedState, string? expectedMessage = null)
+    {
+        await using var connection = await source.OpenConnectionAsync(); await using var transaction = await connection.BeginTransactionAsync();
+        var immediate = false;
+        try
+        {
+            await using var command = new NpgsqlCommand(sql, connection, transaction);
+            command.Parameters.AddWithValue(NpgsqlTypes.NpgsqlDbType.Jsonb, json); await command.ExecuteNonQueryAsync();
+        }
+        catch (PostgresException e) { immediate = e.SqlState == expectedState && (expectedMessage is null || e.MessageText == expectedMessage); }
+        await transaction.RollbackAsync();
+        Check(immediate, "Direct SQL must reject malformed counter/digest at schema guard before deferred receipt checks.");
+    }
+    var malformedSubject = new SessionSubject(f.Actor.TenantId, Guid.NewGuid());
+    var numericBase = f.Command(malformedSubject, 0, AuthorityOperation.EnrollPending, newEnrollment with { Subject = malformedSubject });
+    var numericBaseline = await Counts();
+    foreach (var field in new[] { "expectedRevision", "revision" })
+    {
+        var node = JsonNode.Parse(AuthorityCodec.Serialize(numericBase))!;
+        node[field == "expectedRevision" ? "decision" : "enrollment"]![field] = JsonValue.Create(field == "expectedRevision" ? 0.4m : 1.4m);
+        await SchemaError(f.Administrator, "SELECT * FROM identity_authority.apply_command($1)", CommandJsonWithDigest(node), "P0001", "authority integer denied");
+    }
+    var overflow = JsonNode.Parse(AuthorityCodec.Serialize(numericBase))!;
+    overflow["decision"]!["expectedRevision"] = JsonNode.Parse("9223372036854775808");
+    await SchemaError(f.Administrator, "SELECT * FROM identity_authority.apply_command($1)", CommandJsonWithDigest(overflow), "22003");
+    var forged = JsonNode.Parse(AuthorityCodec.Serialize(numericBase))!; forged["decision"]!["payloadSha256"] = new string('f', 64);
+    await SchemaError(f.Administrator, "SELECT * FROM identity_authority.apply_command($1)", forged.ToJsonString(), "P0001", "authority payload digest denied");
+    var wrongProviderDigest = await f.Observation(other);
+    await SchemaError(f.Publisher, "SELECT * FROM identity_authority.publish_provider($1,NULL,'11111111-1111-1111-1111-111111111111','ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')",
+        AuthorityCodec.Serialize(wrongProviderDigest.Observation), "P0001", "provider payload digest denied");
+    Check(await Counts() == numericBaseline, "Immediate numeric/digest denial preserves all authority/session/audit counts.");
     var lockSubject = await f.Enroll(); var lockSnapshot = (await f.RuntimeAuthority.ReadAsync(lockSubject))!;
     async Task<string?> RacingIssue()
     {
