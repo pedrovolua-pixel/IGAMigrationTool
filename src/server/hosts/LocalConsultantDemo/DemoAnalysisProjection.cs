@@ -119,6 +119,8 @@ internal static class DemoAnalysisProjection
         node["recommendationGuidance"] = JsonSerializer.SerializeToNode(reviewProfile
             ? DemoRecommendationGuidanceProjection.Detail(run, response, review) : null,
             DemoReportDraftProjection.JsonOptions);
+        node["aiPreview"] = JsonSerializer.SerializeToNode(DemoAiPreviewProjection.Detail(run),
+            DemoReportDraftProjection.JsonOptions);
         return node;
     }
     private static object Measure(HealthMeasure score) => new

@@ -1,0 +1,4 @@
+PASS V10-002 portable real builder/validator/preview full independent oracles and source denial
+PASS V10-001 independent whole-template/literal-proposal/six-old-lock/opt-in contracts
+NOT VERIFIED V10-PG: actual saved-source checks require --postgres.
+78 independent local AI preview assertions passed. Fictional fixed response only; provider, production authorization, budgets, retention, manual accessibility and gates NOT VERIFIED.

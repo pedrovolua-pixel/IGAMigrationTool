@@ -1,0 +1,25 @@
+{
+  "observedFinalPassingBrowserSourceSha256": "644e16b3b2ca784896bc33bdb843df8ec8b34401a565cd769514178b2ebd62bd",
+  "observations": [
+    {
+      "status": "FAIL",
+      "checks": 142,
+      "lastCode": "actual-owned-API-start",
+      "correction": "Refresh antiforgery token from fresh catalog after owned-host restart."
+    },
+    {
+      "status": "FAIL",
+      "checks": 289,
+      "lastCode": "historical-literal-provisional-health",
+      "correction": "Use the existing API display string field instead of an invented numeric displayScore field."
+    },
+    {
+      "status": "FAIL",
+      "checks": 614,
+      "lastCode": "delayed-preview-cleared-before-result",
+      "correction": "Use exact profile label to select history row; history markup does not display run ID."
+    }
+  ],
+  "rawFailedReportsOrTranscriptsPreserved": false,
+  "limits": "Observed counts/codes and harness-only corrections; original failed raw artifacts were already overwritten. No application defect is inferred."
+}

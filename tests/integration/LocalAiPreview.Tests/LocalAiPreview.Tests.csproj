@@ -5,4 +5,5 @@
     <ProjectReference Include="../../../src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj" />
     <Compile Include="../../../src/server/hosts/LocalConsultantDemo/DemoAiPreviewProjection.cs" Link="DemoAiPreviewProjection.cs" />
   </ItemGroup>
+  <ItemGroup><None Update="*.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
 </Project>

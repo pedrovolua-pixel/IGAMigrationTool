@@ -4,3 +4,11 @@
 
 # These embedded bytes are part of new immutable offline fixture input locks.
 /src/server/modules/AssessmentRuns/fixtures/ai-preview-*.json text eol=lf
+
+# Independent new frozen JSON oracles retain their exact UTF-8/LF source bytes.
+/tests/unit/LocalAiPreview.Tests/golden-*.json text eol=lf
+/tests/integration/LocalAiPreview.Tests/legacy-goldens.json text eol=lf
+/tests/unit/AiProposalPreview.Tests/fixture.json text eol=lf
+/tests/unit/AiProposalPreview.Tests/golden-component.sha256 text eol=lf
+# Preserve the independently hashed literal component markup without text conversion.
+/tests/unit/AiProposalPreview.Tests/golden-component.html -text

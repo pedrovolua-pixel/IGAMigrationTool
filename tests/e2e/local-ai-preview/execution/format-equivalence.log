@@ -1,0 +1,1 @@
+PASS existing Babel/Prettier complete AST equality with source-position/comment/raw lexical metadata removed. AST-SHA256=805867d789b3ed0e218b6006e7529c035bcb4406ca21756f7f04dd1272fb874d. Final whitespace-only source was not browser-reexecuted; original bytes are preserved separately.

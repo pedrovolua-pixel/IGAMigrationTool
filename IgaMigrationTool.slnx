@@ -33,6 +33,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
     <Project Path="tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj" />
     <Project Path="tests/integration/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj" />
@@ -43,6 +44,7 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
     <Project Path="tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj" />
@@ -61,6 +63,4 @@
     <Project Path="tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj" />
     <Project Path="tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj" />
   </Folder>
-  <Project Path="tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
-  <Project Path="tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
 </Solution>

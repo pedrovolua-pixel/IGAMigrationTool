@@ -13,12 +13,12 @@ public sealed record SyntheticDemoProfile(string Id, string Name, SyntheticRunIn
 public static class DemoFixtureCatalog
 {
     public static SyntheticAuthorizedScope Scope { get; } = new("synthetic-customer", "synthetic-project", "synthetic-environment");
-    public static IReadOnlyList<SyntheticDemoBaseline> Baselines { get; } = Array.AsReadOnly(CreateBaselines().Concat(DemoAnalysisCatalog.CreateBaselines()).ToArray());
+    public static IReadOnlyList<SyntheticDemoBaseline> Baselines { get; } = Array.AsReadOnly(CreateBaselines().Concat(DemoAnalysisCatalog.CreateBaselines()).Append(DemoAiPreviewCatalog.CreateBaseline()).ToArray());
     public static IReadOnlyList<SyntheticDemoProfile> Profiles { get; } = Array.AsReadOnly(new[]
     {
         new SyntheticDemoProfile("profile-standard", "Synthetic standard profile", Versions("synthetic-profile-v1")),
         new SyntheticDemoProfile("profile-comparison", "Synthetic comparison profile", Versions("synthetic-profile-v2"))
-    }.Concat(DemoAnalysisCatalog.CreateProfiles()).ToArray());
+    }.Concat(DemoAnalysisCatalog.CreateProfiles()).Concat(DemoAiPreviewCatalog.CreateProfiles()).ToArray());
 
     public static SyntheticStartRequest CreateStartRequest(string baselineId, string profileId, string idempotencyKey)
     {
@@ -33,7 +33,8 @@ public static class DemoFixtureCatalog
             {
                 ScriptedResultsDigest = ScriptDigest(baselineId),
                 AnalysisFixtureDigest = DemoAnalysisCatalog.IsAnalysisBaseline(baselineId) ? DemoAnalysisCatalog.FrozenDigest(baselineId, profileId) : null,
-                MaturityFixtureDigest = DemoAnalysisCatalog.IsReviewMaturityProfile(profileId) ? DemoAnalysisCatalog.FreezeMaturity(baselineId, profileId).ContentDigest : null
+                MaturityFixtureDigest = DemoAnalysisCatalog.IsReviewMaturityProfile(profileId) ? DemoAnalysisCatalog.FreezeMaturity(baselineId, profileId).ContentDigest : null,
+                AiPreviewFixtureDigest = DemoAiPreviewCatalog.IsProfile(profileId) ? DemoAiPreviewCatalog.FixtureDigest(profileId) : null
             });
     }
 

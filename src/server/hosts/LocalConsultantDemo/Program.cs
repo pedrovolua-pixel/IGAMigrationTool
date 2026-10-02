@@ -312,7 +312,12 @@ internal static class DemoProjection
                 .Append(new { name = "Complete frozen input", version = "synthetic-input-lock-v1", sha256 = run.InputDigest })
                 .Append(new { name = "Exact capability tuple", version = run.Plan.CapabilityLock.MatrixVersion, sha256 = run.Plan.CapabilityLock.LockDigest })
                 .Append(new { name = "Scripted result fixture", version = "synthetic-outcomes-v1", sha256 = versions.ScriptedResultsDigest })
-                .Concat(versions.AnalysisFixtureDigest is null ? [] : new[] { new { name = "Frozen analysis contents", version = "synthetic-analysis-lock-v1", sha256 = versions.AnalysisFixtureDigest } }),
+                .Concat(versions.AnalysisFixtureDigest is null ? [] : new[] { new { name = "Frozen analysis contents", version = "synthetic-analysis-lock-v1", sha256 = versions.AnalysisFixtureDigest } })
+                .Concat(!DemoAiPreviewCatalog.IsProfile(run.ProfileCatalogId) || versions.AiPreviewFixtureDigest is null ? [] : new[]
+                {
+                    new { name = "Frozen offline AI contents", version = "synthetic-ai-demo-fixture-v1", sha256 = versions.AiPreviewFixtureDigest },
+                    new { name = "Offline AI configuration template", version = "synthetic-ai-configuration-v1", sha256 = DemoAiPreviewCatalog.PacketTemplateDigest }
+                }),
             warnings = PermissionWarnings(run.Plan.HasPermissionWarning),
             stateCounts = run.Progress.TerminalStateCounts.Select(item => new { state = item.State.ToString(), item.Count }),
             executableCoverage = run.CoverageSummary is null ? null : new

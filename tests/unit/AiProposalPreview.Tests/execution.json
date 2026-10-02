@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "local-ai-preview-component-execution-v1",
+  "worker": "B10",
+  "baseCommit": "bdca2465dc3d99827ee0c5762c6220b1ddbb5eea",
+  "toolchain": {
+    "node": "24.21.0",
+    "npm": "11.20.0",
+    "react": "19.3.0",
+    "vite": "8.3.1",
+    "typescript": "7.0.2",
+    "prettier": "3.9.9",
+    "gitleaks": "8.30.1"
+  },
+  "result": {
+    "suite": "ai-proposal-preview-component-v1",
+    "checks": 257,
+    "accepted": 16,
+    "denied": 176,
+    "goldenDigest": "1aae4d20776163739233c0506db492716bb4681e5abc1e3e420332a9a6ab41e7",
+    "compiledDigest": "f4e70b04798a164d0cf48c3c315f68c03e69320922de8d1bb84db06bee9ef721",
+    "result": "PASS",
+    "limitations": "Literal isolated frontend fixtures, ReactDOMServer and exact SHA/DTO fences; actual host/browser/deployed/manual checks belong to V10/coordinator."
+  },
+  "checks": {
+    "pinnedNpmCiIgnoreScripts": "PASS; existing lock unchanged",
+    "ownedScopedFormatVerification": "PASS",
+    "frontendTypecheck": "PASS",
+    "directViteProductionBuild": "PASS; base does not mount component yet",
+    "npmDependencyAudit": "PASS; zero vulnerabilities",
+    "componentAndCoherenceHost": "PASS",
+    "independentPythonOracle": "PASS; three full committed artifacts",
+    "ownedSecretScan": "PASS; ten source/output files, zero findings",
+    "whitespaceDiff": "PASS",
+    "fullNpmBuild": "FAILED at unchanged shared base: generated contract drift. Coordinator corrected exact generator output in8afdb28; isolated worker did not modify shared sources. Combined coordinator full check remains separate."
+  },
+  "sources": [
+    {
+      "path": "src/web/src/AiProposalPreview.css",
+      "bytes": 1457,
+      "sha256": "ca096222827fdada282393c834ab75f6210655c96aaf5a1c29565313c7682d6e"
+    },
+    {
+      "path": "src/web/src/AiProposalPreview.tsx",
+      "bytes": 17423,
+      "sha256": "8704ae4ec86cedcee181c6b7cd4a3d477363f4af9e9b3b76d6f5ee5fd97cabfe"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/README.md",
+      "bytes": 3185,
+      "sha256": "bdf49bd7e30b600d80579acd42e0b70ca46cc60f979a138f36e00282c670e5b8"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/fixture.json",
+      "bytes": 12358,
+      "sha256": "ddfe3f91dca52793501e3773712f8e3602a7855d39a699cf72a538eb9b997e99"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/golden-component.html",
+      "bytes": 4761,
+      "sha256": "1aae4d20776163739233c0506db492716bb4681e5abc1e3e420332a9a6ab41e7"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/golden-component.sha256",
+      "bytes": 64,
+      "sha256": "680a23cfd808d827a9b7f9510fc11eafa5ef1d1b6d96da18e6d16e6c6dac923d"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/oracle.py",
+      "bytes": 8453,
+      "sha256": "54b7b22b463141948cab0cfec8520a863ff0d6382a29dce9bd1b86d6707f59c6"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/verify.mjs",
+      "bytes": 16424,
+      "sha256": "4b1a3a6a7b7922572a6fc6e2029005b85a02e36dac4314ef25562cf429f783db"
+    }
+  ],
+  "executedArtifacts": [
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/artifacts/actual-component.html",
+      "bytes": 4761,
+      "sha256": "1aae4d20776163739233c0506db492716bb4681e5abc1e3e420332a9a6ab41e7"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/artifacts/component.mjs",
+      "bytes": 16076,
+      "sha256": "f4e70b04798a164d0cf48c3c315f68c03e69320922de8d1bb84db06bee9ef721"
+    }
+  ],
+  "sharedInputs": [
+    {
+      "path": "specs/003-health-assessment/local-ai-preview-integration-contract.md",
+      "bytes": 8287,
+      "sha256": "cbd790337f8b9eda1d36d5233eb09b9abe870f00fb1ef95eb47c898a75fa667a"
+    },
+    {
+      "path": "src/web/src/demo-contract.generated.ts",
+      "bytes": 20772,
+      "sha256": "946b22441a235a33293b2986457fa98afcd3732e40eb355d0c800dad5fbcabf3"
+    },
+    {
+      "path": "contracts/local-demo/demo-v1.schema.json",
+      "bytes": 67730,
+      "sha256": "3f335f9ff7766b9d87b440fcfb158cf473f8df261aed9c5dc2409a5e575fddb2"
+    },
+    {
+      "path": "contracts/local-demo/generate-types.mjs",
+      "bytes": 1668,
+      "sha256": "9ddc28c905635e6f3097e3529fd921d3881e54c828dc5ad5ad2e7dc386984ccf"
+    },
+    {
+      "path": "src/web/package.json",
+      "bytes": 900,
+      "sha256": "a52d363e3358d64520696bcada6d53a352022dcca5d1c1fb876cd54d110be95d"
+    },
+    {
+      "path": "src/web/package-lock.json",
+      "bytes": 40559,
+      "sha256": "baefd0a0d25052138b9b2f5b080285cd242f8a981fdf31469cb57389a1a25b1d"
+    },
+    {
+      "path": "src/web/tsconfig.json",
+      "bytes": 403,
+      "sha256": "24bd9eec94129d13041a3e64a073bb052dcece65504ed545d2f26b8fe6853ebc"
+    },
+    {
+      "path": "src/web/.prettierrc.json",
+      "bytes": 73,
+      "sha256": "85378d4d734cb7d35641c44ffdf322fe0bc76a3b12841927f20aa5f0eba12695"
+    },
+    {
+      "path": "src/web/.prettierignore",
+      "bytes": 51,
+      "sha256": "5424a270c713a697409ba2912ac683972f97d96a742e3e8fbfe27b87a9dd6a1f"
+    }
+  ],
+  "transcripts": [
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/execution/build-drift.log",
+      "bytes": 825,
+      "sha256": "e8eac81d9cd53058e09439d77ce6f88228dd0a874802c752f8bfd1539e731394"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/execution/checks.log",
+      "bytes": 1024,
+      "sha256": "1d772cd3ac29693e0ef1b8305fdb126df125f9e8517dbbe43fa43bb291abbd13"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/execution/npm.log",
+      "bytes": 143,
+      "sha256": "e260aa0acd4c548295536d1998ea93167864338bbad5b895b04d8dd5d5d0cd33"
+    },
+    {
+      "path": "tests/unit/AiProposalPreview.Tests/execution/secrets.log",
+      "bytes": 78,
+      "sha256": "36c7d907967094cc9d3c76d21951d7d9cbba27a59c958c23c885d5486cbbfa23"
+    }
+  ],
+  "commands": [
+    "npm ci --ignore-scripts (src/web; pinned npm11.20.0)",
+    "node src/web/node_modules/prettier/bin/prettier.cjs --check <owned .tsx/.css/verify.mjs/README>",
+    "npm --prefix src/web run typecheck",
+    "node node_modules/vite/bin/vite.js build (src/web)",
+    "npm --prefix src/web audit --audit-level=low",
+    "node tests/unit/AiProposalPreview.Tests/verify.mjs",
+    "python3 tests/unit/AiProposalPreview.Tests/oracle.py --verify",
+    "gitleaks dir <owned ten-file snapshot> --redact --no-banner",
+    "git diff --check"
+  ],
+  "independentFixtureLimit": "Literal UI run/analysis values with bound placeholder digests, independently authored Python canonical and entire React text markup oracle; not an actual PostgreSQL/backend fixture. Node canonical rehash test helper is separate from private component implementation.",
+  "componentFence": "Parent coordinator awaits coherentAiPreview SHA256 before accepting read; component itself repeats strict structural/source/canonical-field fence.",
+  "limits": [
+    "No owned host or actual browser/stale-request/keyboard/reflow/network execution; V10 and coordinator provide separate evidence.",
+    "Existing frontend application remains unmodified and does not mount new component at this worker base.",
+    "Backend authorities remain authoritative; client content digests do not authenticate actors, prove actual redaction or verify factual semantics.",
+    "No real provider, credential, persistence, evidence resolution, task/CSV, download, score/review promotion, production release or human gate accepted.",
+    "Supported Windows/manual assistive technology and all full milestone/gate acceptance remain NOT VERIFIED."
+  ],
+  "migrations": [],
+  "newDependencies": [],
+  "runtimeSettings": [],
+  "documentationReviewClarification": "A10 review clarified parsed HTML/SSR control normalization versus client React text-node fidelity; no runtime, assertions, compiled artifact or golden changes."
+}

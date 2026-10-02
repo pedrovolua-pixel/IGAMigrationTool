@@ -23,7 +23,9 @@ public sealed record SyntheticRunInputVersions(
     [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     string? AnalysisFixtureDigest = null,
     [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
-    string? MaturityFixtureDigest = null);
+    string? MaturityFixtureDigest = null,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    string? AiPreviewFixtureDigest = null);
 
 public sealed record SyntheticStartRequest(
     SyntheticAuthorizedScope Scope, string IdempotencyKey, string BaselineCatalogId, string ProfileCatalogId,
