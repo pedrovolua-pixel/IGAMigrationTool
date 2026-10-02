@@ -32,11 +32,22 @@ def policy(template):
                 'workstation': ('Microsoft.Compute/virtualMachines', '2024-11-01'),
                 'bastion': ('Microsoft.Network/bastionHosts', '2024-05-01')}
     require(set(resources) == set(expected), 'Closed resource scope; no public IP, grant, extension or route')
+    names = {'existingVnet': parameter('existingVnetName'), 'existingNat': parameter('existingNatGatewayName'),
+             'workstationNsg': parameter('workstationNsgName'),
+             'workstationSubnet': "[format('{0}/{1}', parameters('existingVnetName'), parameters('workstationSubnetName'))]",
+             'workstationNic': parameter('workstationNicName'), 'workstation': parameter('workstationVmName'),
+             'bastion': parameter('bastionName')}
+    dependencies = {'workstationSubnet': ['workstationNsg'],
+                    'workstationNic': ['workstationNsg', 'workstationSubnet'],
+                    'workstation': ['workstationNic']}
     require(template['variables']['location'] == 'eastus2', 'East US 2 only')
     require(set(template['variables']) == {'location', 'dnsServerAddresses', 'copy'}, 'Closed network variable scope')
     for name, (kind, version) in expected.items():
         resource = resources[name]
         require((resource['type'], resource['apiVersion']) == (kind, version), 'Resource/API pin drift')
+        require(resource['name'] == names[name], 'Resource name/parent must bind validated scope')
+        if name in dependencies:
+            require(resource['dependsOn'] == dependencies[name], 'Boundary resource dependency drift')
         if name in {'existingVnet', 'existingNat'}:
             require(resource.get('existing') is True and set(resource) == {'type', 'apiVersion', 'existing', 'name'},
                     'Existing foundation only; no VNet/NAT reconfiguration')
@@ -134,8 +145,15 @@ def policy(template):
           'Platform and default lateral/Internet deny must supersede provider defaults')
     require(set(template['outputs']) == {'workstationResourceId', 'workstationNicResourceId', 'workstationNsgResourceId',
                                         'workstationSubnetResourceId', 'bastionResourceId'}, 'Only boundary inventory outputs')
-    for output in template['outputs'].values():
-        require(output['type'] == 'string' and output['value'].startswith('[resourceId('), 'No secret/credential/network output')
+    outputs = {
+      'workstationResourceId': resource_id('Microsoft.Compute/virtualMachines', 'workstationVmName'),
+      'workstationNicResourceId': resource_id('Microsoft.Network/networkInterfaces', 'workstationNicName'),
+      'workstationNsgResourceId': resource_id('Microsoft.Network/networkSecurityGroups', 'workstationNsgName'),
+      'workstationSubnetResourceId': resource_id('Microsoft.Network/virtualNetworks/subnets', 'existingVnetName', 'workstationSubnetName'),
+      'bastionResourceId': resource_id('Microsoft.Network/bastionHosts', 'bastionName'),
+    }
+    require(template['outputs'] == {name: {'type': 'string', 'value': value} for name, value in outputs.items()},
+            'Exact owned inventory IDs only; no wrapped secret or unbound resource outputs')
 
 
 def run(template):
@@ -144,6 +162,19 @@ def run(template):
       ('region', ['variables', 'location'], 'westus'),
       ('paid Bastion', ['resources', 'bastion', 'sku', 'name'], 'Standard'),
       ('peered Bastion', ['resources', 'bastion', 'properties', 'virtualNetwork', 'id'], '/other/vnet'),
+      ('wrong existing VNet', ['resources', 'existingVnet', 'name'], 'other-vnet'),
+      ('wrong existing NAT', ['resources', 'existingNat', 'name'], 'other-nat'),
+      ('overwrite different subnet', ['resources', 'workstationSubnet', 'name'],
+       "[format('{0}/{1}', parameters('existingVnetName'), 'existing-protected-subnet')]"),
+      ('wrong subnet parent', ['resources', 'workstationSubnet', 'name'],
+       "[format('{0}/{1}', 'other-vnet', parameters('workstationSubnetName'))]"),
+      ('wrong owned VM name', ['resources', 'workstation', 'name'], 'unreviewed-vm'),
+      ('wrong owned NIC name', ['resources', 'workstationNic', 'name'], 'unreviewed-nic'),
+      ('wrong owned NSG name', ['resources', 'workstationNsg', 'name'], 'unreviewed-nsg'),
+      ('wrong owned Bastion name', ['resources', 'bastion', 'name'], 'unreviewed-bastion'),
+      ('missing subnet dependency', ['resources', 'workstationSubnet', 'dependsOn'], []),
+      ('wrong NIC dependency', ['resources', 'workstationNic', 'dependsOn'], ['otherSubnet']),
+      ('wrong VM dependency', ['resources', 'workstation', 'dependsOn'], ['otherNic']),
       ('native tunnel', ['resources', 'bastion', 'properties', 'enableTunneling'], True),
       ('public IP resource', ['resources', 'publicIp'], {'type': 'Microsoft.Network/publicIPAddresses'}),
       ('role grant', ['resources', 'role'], {'type': 'Microsoft.Authorization/roleAssignments'}),
@@ -175,7 +206,12 @@ def run(template):
       ('plain credential type', ['parameters', 'adminPassword', 'type'], 'string'),
       ('implicit source', ['parameters', 'developerRdpSourceAddress', 'defaultValue'], '168.63.129.16'),
       ('unsealed flow', ['definitions', 'EgressRule', 'additionalProperties'], True),
+      ('unreviewed parameter', ['parameters', 'unreviewed'], {'type': 'string'}),
       ('credential output', ['outputs', 'workstationResourceId', 'value'], parameter('adminPassword')),
+      ('wrapped credential output', ['outputs', 'workstationResourceId', 'value'],
+       "[resourceId('Microsoft.Compute/virtualMachines', concat(parameters('workstationVmName'), parameters('adminPassword')))]"),
+      ('other resource output', ['outputs', 'workstationResourceId', 'value'],
+       "[resourceId('Microsoft.Compute/virtualMachines', 'unreviewed-vm')]"),
     ]
     for label, path, value in cases:
         mutated = copy.deepcopy(template)
