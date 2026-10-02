@@ -611,3 +611,7 @@ Owner approval in [the exact decision record](../../docs/development/bff-product
 ## Production BFF contract preparation — 2026-10-02
 
 The owner requested next tasks after the D01/D02 checkpoint. [The bounded preparation packet](../../plans/active/bff-production-contract-preparation.md) supplies [exact P01–P05 candidates](../../docs/development/bff-production-authority-hosting-proposal.md), Proposed ADR-0009 and a protected empty intake after read-only current-provider research and independent proposal review. No runtime, migration, package, permission, resource or live configuration change is made. Approval for local synthetic authority/audit/configuration primitives is pending; actual Graph property/role/home-origin semantics, audit-outage preservation, private browser reachability, lifecycle/key recovery, D05 and refreshed priced session remain open. Milestone2 and G1–G9 are unchanged.
+
+## Approved BFF local authority/audit cycle — 2026-10-02
+
+The repository owner approved P01–P05 and ADR-0009 for local synthetic implementation against immutable reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. [Execution plan](../../plans/active/bff-local-authority-audit-implementation.md) owns implementation, exact P01–P05 verification and independent review. Real provider/Azure/SQL grants, production activation, audit-outage preservation, paid deployment and G1–G9 remain separate. Implementation is RUNNING; no new tests or completion are claimed by this approval record.

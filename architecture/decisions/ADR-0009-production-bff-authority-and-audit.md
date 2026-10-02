@@ -1,6 +1,6 @@
 # ADR-0009: Production BFF authority and atomic security audit
 
-Status: Proposed
+Status: Accepted for local synthetic implementation only
 Date: 2026-10-02
 Decision owners: Technical/security owner; operations and identity/platform owners
 
@@ -39,7 +39,7 @@ Use explicit module-owned versioned authority rows and narrowly callable Postgre
 
 ## Decision
 
-**Proposed, not selected:** Option A, with exact schemas, boundaries and tests in [the D03/D04 proposal](../../docs/development/bff-production-authority-hosting-proposal.md). Only an authorized human may accept this ADR. Current approved architecture and live disabled paths remain unchanged.
+**Accepted for local synthetic implementation:** Option A, with exact schemas, boundaries and tests in [the D03/D04 proposal](../../docs/development/bff-production-authority-hosting-proposal.md). The repository owner accepted P01–P05 and this ADR on 2026-10-02 against immutable packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. Actual provider/Azure/SQL grants, production activation, audit-outage preservation and paid deployment remain separate.
 
 ## Rationale
 
@@ -83,5 +83,6 @@ Use the proposal's exact local test matrix, non-author review and scoped role-ne
 
 ## Approval
 
-Accepted by: Pending
-Date: Pending
+Accepted by: Repository owner acting as technical/security owner, explicit approval in the active session
+Date: 2026-10-02
+Scope: P01–P05 local synthetic implementation only; [execution plan](../../plans/active/bff-local-authority-audit-implementation.md).

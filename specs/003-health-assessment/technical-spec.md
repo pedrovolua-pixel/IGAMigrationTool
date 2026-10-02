@@ -518,3 +518,7 @@ The repository owner accepted exact D01/D02 in [the attributed decision](../../d
 ## Proposed production BFF addendum — 2026-10-02
 
 The [P01–P05 production authority/hosting proposal](../../docs/development/bff-production-authority-hosting-proposal.md) and [Proposed ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) supply candidate closed enrollment/assignment/external lifecycle/provider observations, one subject security version, direct-only initial role boundary, atomic session/audit functions, explicit proxy trust and shared protection keys. This addendum is **Proposed**, not part of the accepted implementation contract. Exact human approval precedes local synthetic implementation; real bindings, audit-outage preservation, live provider/access and acceptance remain separate.
+
+## Approved BFF local authority/audit cycle — 2026-10-02
+
+The repository owner approved P01–P05 and ADR-0009 for local synthetic implementation against immutable reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. [Execution plan](../../plans/active/bff-local-authority-audit-implementation.md) owns implementation, exact P01–P05 verification and independent review. Real provider/Azure/SQL grants, production activation, audit-outage preservation, paid deployment and G1–G9 remain separate. Implementation is RUNNING; no new tests or completion are claimed by this approval record.

@@ -337,3 +337,7 @@ Exact public operations follow [the accepted OpenAPI contract](../../contracts/b
 ## Planned production BFF contract tests — 2026-10-02
 
 The [P05 test matrix](../../docs/development/bff-production-authority-hosting-proposal.md#p05--planned-tests-and-ordered-local-work) maps the proposed next local packet to IP-HAS-002/003, identity/audit policies and TP-HAS-009/014/020. Planned cases cover cross-scope/external-Member denial, command revisions/idempotency, provider refresh/revoke races, monotonic cutoffs, exact resource app roles, durable audited session mutations/unknown commits, SQL-role bypass, payload minimization, lifecycle/tombstone restore and trusted proxy/shared-key failure. **None of these new proposal tests has executed.** Existing D01/D02 results remain historical verified evidence; production outage/provider/replica/cloud proofs stay NOT VERIFIED.
+
+## Approved BFF local authority/audit cycle — 2026-10-02
+
+The repository owner approved P01–P05 and ADR-0009 for local synthetic implementation against immutable reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. [Execution plan](../../plans/active/bff-local-authority-audit-implementation.md) owns implementation, exact P01–P05 verification and independent review. Real provider/Azure/SQL grants, production activation, audit-outage preservation, paid deployment and G1–G9 remain separate. Implementation is RUNNING; no new tests or completion are claimed by this approval record.

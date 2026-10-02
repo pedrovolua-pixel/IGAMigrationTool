@@ -1,6 +1,6 @@
 # Production BFF authority and hosting proposal
 
-Status: PROPOSED — exact technical/security decision pending
+Status: APPROVED for P01–P05 local synthetic implementation only; production inputs unresolved
 Owner/reviewers: Technical/security owner; identity/platform and operations owners
 Date: 2026-10-02
 Preparation: [work packet](../../plans/active/bff-production-contract-preparation.md)
@@ -18,7 +18,7 @@ This turns deferred D03/D04 into concrete candidates. It does not change approve
 | P04 — Shared keys and proxy | Dedicated private Blob ring, explicit environment discriminator, versionless dedicated Key Vault wrapping URI with historical versions; one explicitly verified ingress hop | Configuration contracts and local test seams. Any supported SDK dependency must be exactly pinned, audited and reviewed with its concrete use. No real key/blob grant, production proxy range or cloud-host activation |
 | P05 — Bounded verification | Independent real local PostgreSQL/HTTPS, synthetic provider and key/proxy denial tests mapped below | Local implementation and review packets after attributed acceptance; no merge, production release, paid session or milestone/gate acceptance |
 
-Accept/replace/reject P01–P05 and ADR-0009 explicitly. The audit outage preservation choice and all real environment bindings remain unresolved production blockers. Passing local tests or accepting these designs cannot authorize production composition. No change to role/action/category rules, privileged MFA/CA denial, guest90-day/review30-day bounds, idle30-minute/absolute8-hour/provider-under15-minute limits, or approved audit retention is proposed.
+The repository owner explicitly accepted P01–P05 and ADR-0009 on 2026-10-02 against immutable reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. Implementation follows [the bounded execution plan](../../plans/active/bff-local-authority-audit-implementation.md). The audit outage preservation choice and all real environment bindings remain unresolved production blockers. Passing local tests or accepting these designs cannot authorize production composition. No change to role/action/category rules, privileged MFA/CA denial, guest90-day/review30-day bounds, idle30-minute/absolute8-hour/provider-under15-minute limits, or approved audit retention is proposed.
 
 ## Requirement trace
 

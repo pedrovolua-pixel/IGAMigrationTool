@@ -1,0 +1,34 @@
+# BFF local authority and atomic audit implementation
+
+Status: RUNNING
+Owner: BFF coordinator
+Date: 2026-10-02
+
+## Approval and scope
+
+The repository owner explicitly approved P01–P05 and ADR-0009 for local synthetic implementation against [immutable reviewed packet cacbe37](https://github.com/pedrovolua-pixel/IGAMigrationTool/blob/cacbe372ff8a9bc448033e6918308c5f820b4bfd/docs/development/bff-production-authority-hosting-proposal.md). [Accepted ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) and the packet define exact internal shapes and tests. Existing feature product/technical/test approval remains the requirement authority; this approval adds the exact internal schema/security boundary only.
+
+No actual user enrollment, Graph HTTP adapter/consent, Azure/SQL grants, production host activation, paid deployment, merge/release, or outage fallback is authorized. The diagnostic Program remains permanently disabled. No new retention/permission policy is selected.
+
+## Work packets
+
+| Packet | Owner / isolated checkout | Paths | Acceptance | State |
+|---|---|---|---|---|
+| AUTH | production_identity_proposal / /tmp/iga-bff-authority | src/server/modules/IdentityAuthority/**; migrations/identity-authority/**; tests/unit/IdentityAuthority.Tests/**; tests/integration/IdentityAuthority.Tests/** | P01/P02 closed versioned records, exact scope, attributed revision/idempotency, conservative provider publication, direct-role paging and external-origin denial; actual local PG tests | READY |
+| AUDIT | production_hosting_proposal / /tmp/iga-bff-audit | src/server/modules/IdentitySessions/**; migrations/identity-sessions/003-atomic-audit.sql; tests/unit/IdentitySessions.Tests/**; tests/integration/IdentitySessions.Tests/**; tests/integration/SecurityAudit.Tests/** | P03 atomic ticket/revoke/rotate/authority event receipts, stream chain, lifecycle/restore and negative role tests, real PG rollback/concurrency | READY |
+| HOST | coordinator / /tmp/iga-bff-integration | src/server/hosts/BffFoundation/BffHostingContracts.cs; tests/unit/BffHostingContracts.Tests/**; tests/integration/BffHostingContracts.Tests/**; shared project/CI/package config; canonical docs/evidence | P04 one verified hop and canonical host, fixed key/environment config, replica/historical-key/failure seams; no Azure provider attachment | RUNNING |
+| REVIEW | auth_transport / read-only then coordinator-owned verification paths if explicitly assigned | Independent review of AUTH/AUDIT/HOST, integrated proof and applicable regressions | P05 non-author review and real local PG/HTTPS; no gate claim | READY |
+
+## Shared contract and ordering
+
+AUTH references IdentityPolicy and IdentitySessions; IdentitySessions never references IdentityAuthority. AUDIT exposes a closed typed `SecurityAuditEventV1` and transaction-bound `PostgreSqlSecurityAudit.AppendAsync(NpgsqlConnection, NpgsqlTransaction, event, cancellationToken)` for AUTH. Writers settle exact constructor/receipt/event fields before dependent use. Each authority mutation and its event/receipt shares one existing PG transaction; AUTH uses the existing subject security_version. Audit append obtains stream head lock after subject/target locks; caller rechecks fresh clock immediately before commit. Schema order: identity-sessions 001,002,003, then identity-authority additive migrations. No startup migration or real grants.
+
+Coordinator owns solution/CI/container allowlists and canonical records. Authors return executed evidence and immutable commits; non-author review precedes completion. Legacy synthetic fixture methods must not be represented as the new restricted production boundary.
+
+## Verification and completion
+
+Map every approved P01–P05 case to executed tests or explicit NOT VERIFIED. Run all applicable pinned restore/audit/format/build/unit/integration/architecture/frontend/infrastructure/security/package checks. Preserve failures and corrections. Update feature status/evidence and parent plan, publish the existing owner-private board and confirm deployment. Actual provider/key/proxy bindings, audit outage preservation, live retention inputs, human gates and production release remain open.
+
+## Execution evidence
+
+Approval recorded; implementation and verification pending.
