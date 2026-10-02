@@ -7,9 +7,9 @@ internal sealed record SubjectState(bool Active, long Version, DateTimeOffset Pr
 internal static class SessionDatabase
 {
     public static async Task<SubjectState?> LockSubjectAsync(NpgsqlConnection connection,
-        NpgsqlTransaction transaction, SessionSubject subject, CancellationToken cancellationToken)
+        NpgsqlTransaction transaction, SessionSubject subject, CancellationToken cancellationToken, bool restricted = false)
     {
-        await using var command = new NpgsqlCommand("""
+        await using var command = new NpgsqlCommand(restricted ? "SELECT * FROM security_audit.lock_subject($1,$2)" : """
             SELECT active, security_version, provider_checked_at, sign_in_valid_from_at FROM identity_sessions.subjects
             WHERE tenant_id=$1 AND object_id=$2 FOR UPDATE
             """, connection, transaction);

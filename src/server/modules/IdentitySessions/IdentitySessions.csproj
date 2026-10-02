@@ -4,5 +4,6 @@
     <PackageReference Include="Npgsql" Version="[10.0.3]" />
     <EmbeddedResource Include="../../../../migrations/identity-sessions/001-initial.sql" LogicalName="IdentitySessions.001-initial.sql" />
     <EmbeddedResource Include="../../../../migrations/identity-sessions/002-authentication-context.sql" LogicalName="IdentitySessions.002-authentication-context.sql" />
+    <EmbeddedResource Include="../../../../migrations/identity-sessions/003-atomic-audit.sql" LogicalName="IdentitySessions.003-atomic-audit.sql" />
   </ItemGroup>
 </Project>

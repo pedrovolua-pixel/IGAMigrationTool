@@ -12,6 +12,8 @@ public sealed class PostgreSqlTicketStore : ITicketStore
     private readonly IDataProtector protector;
     private readonly TimeProvider clock;
     private readonly ISessionAdmissionPolicy admission;
+    private readonly PostgreSqlSecurityAudit? audit;
+    public bool HasAtomicAudit => audit is not null;
 
     public PostgreSqlTicketStore(NpgsqlDataSource dataSource, IDataProtectionProvider protection,
         TimeProvider clock, ISessionAdmissionPolicy admission)
@@ -23,6 +25,16 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         this.admission = admission ?? throw new ArgumentNullException(nameof(admission));
     }
 
+    // Explicit audited composition. The four-argument constructor is a legacy
+    // synthetic fixture seam, never the restricted production transaction boundary.
+    public PostgreSqlTicketStore(NpgsqlDataSource dataSource, IDataProtectionProvider protection,
+        TimeProvider clock, ISessionAdmissionPolicy admission, PostgreSqlSecurityAudit audit)
+        : this(dataSource, protection, clock, admission)
+    {
+        this.audit = audit ?? throw new ArgumentNullException(nameof(audit));
+        if (admission is not ITransactionalSessionAdmissionPolicy) throw new ArgumentException("Audited sessions require transaction-bound authority.", nameof(admission));
+    }
+
     public Task<string> StoreAsync(AuthenticationTicket ticket) => StoreAsync(ticket, CancellationToken.None);
     public async Task<string> StoreAsync(AuthenticationTicket ticket, CancellationToken cancellationToken)
     {
@@ -31,9 +43,9 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         RequireIssuance(ticket, context.Authenticated, now);
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
-        var state = await SessionDatabase.LockSubjectAsync(connection, transaction, context.Subject, cancellationToken);
+        var state = await SessionDatabase.LockSubjectAsync(connection, transaction, context.Subject, cancellationToken, audit is not null);
         if (!SessionDatabase.Current(state, now, context.Version) || context.Authenticated < state!.SignInValidFrom ||
-            !await admission.IsEligibleAsync(context.Subject, cancellationToken))
+            !await CheckAdmissionAsync(context.Subject, connection, transaction, context.Authenticated, cancellationToken))
         {
             throw new InvalidOperationException("Current authoritative session admission is required.");
         }
@@ -44,16 +56,20 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         {
             throw new InvalidOperationException("Authoritative provider status expired during admission.");
         }
-        var key = await InsertAsync(connection, transaction, ticket, context.Subject, state!, now, cancellationToken);
+        var operation = Guid.NewGuid();
+        var inserted = await InsertAsync(connection, transaction, ticket, context.Subject, state!, now, operation, cancellationToken);
+        await AuditMutationAsync(connection, transaction, operation, context.Subject, state!.Version,
+            SecurityAuditAction.SessionIssued, inserted.Reference, null, cancellationToken);
+        await RequireCurrentAdmissionAsync(ticket, state, context.Subject, connection, transaction, cancellationToken);
         await transaction.CommitAsync(cancellationToken);
-        return key;
+        return inserted.Key;
     }
 
     public Task<AuthenticationTicket?> RetrieveAsync(string key) => RetrieveAsync(key, CancellationToken.None);
     public async Task<AuthenticationTicket?> RetrieveAsync(string key, CancellationToken cancellationToken)
     {
         try { return await RetrieveCoreAsync(key, cancellationToken); }
-        catch (Exception exception) when (exception is NpgsqlException or TimeoutException) { return null; }
+        catch (Exception exception) when (exception is NpgsqlException or TimeoutException or InvalidOperationException) { return null; }
     }
 
     private async Task<AuthenticationTicket?> RetrieveCoreAsync(string key, CancellationToken cancellationToken)
@@ -67,7 +83,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
         var session = await LoadAsync(connection, transaction, hash, cancellationToken);
         var now = clock.GetUtcNow();
-        if (!Valid(session, now) || !await admission.IsEligibleAsync(session!.Subject, cancellationToken))
+        if (!Valid(session, now) || !await CheckAdmissionAsync(session!.Subject, connection, transaction, audit is null ? clock.GetUtcNow() : OriginalAuthentication(session), cancellationToken))
         {
             return null;
         }
@@ -118,7 +134,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
         var session = await LoadAsync(connection, transaction, hash, cancellationToken);
         if (!Valid(session, now) || context.Subject != session!.Subject || context.Version != session.Version ||
-            !await admission.IsEligibleAsync(context.Subject, cancellationToken))
+            !await CheckAdmissionAsync(context.Subject, connection, transaction, context.Authenticated, cancellationToken))
         {
             return;
         }
@@ -158,7 +174,18 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         {
             return;
         }
-        await RevokeAsync(connection, transaction, hash, cancellationToken);
+        if (session.Revoked) return;
+        var operation = Guid.NewGuid();
+        await RevokeAsync(connection, transaction, hash, operation, cancellationToken);
+        await AuditMutationAsync(connection, transaction, operation, session.Subject, session.Version,
+            SecurityAuditAction.SessionRevoked, session.Reference, null, cancellationToken);
+        if (audit is not null)
+        {
+            var authenticated = OriginalAuthentication(session);
+            if (!await CheckAdmissionAsync(session.Subject, connection, transaction, authenticated, cancellationToken) ||
+                !Valid(session, clock.GetUtcNow()) || authenticated < session.State.SignInValidFrom)
+                throw new InvalidOperationException("Exact authenticated revocation expired before commit.");
+        }
         await transaction.CommitAsync(cancellationToken);
     }
 
@@ -178,7 +205,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         var session = await LoadAsync(connection, transaction, hash, cancellationToken);
         if (session is null || session.Revoked || session.Subject != context.Subject ||
             !SessionDatabase.Current(session.State, now, context.Version) || context.Authenticated < session.State.SignInValidFrom ||
-            !await admission.IsEligibleAsync(context.Subject, cancellationToken))
+            !await CheckAdmissionAsync(context.Subject, connection, transaction, context.Authenticated, cancellationToken))
         {
             return null;
         }
@@ -196,16 +223,20 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         }
         // A fresh trusted reauthentication may replace an idle/absolute-expired
         // session, but cannot replace a revoked key or bypass subject revocation.
-        await RevokeAsync(connection, transaction, hash, cancellationToken);
-        var key = await InsertAsync(connection, transaction, replacement, context.Subject,
-            session.State, now, cancellationToken);
+        var operation = Guid.NewGuid();
+        await RevokeAsync(connection, transaction, hash, operation, cancellationToken);
+        var inserted = await InsertAsync(connection, transaction, replacement, context.Subject,
+            session.State, now, operation, cancellationToken);
+        await AuditMutationAsync(connection, transaction, operation, context.Subject, session.State.Version,
+            SecurityAuditAction.SessionRotated, inserted.Reference, session.Reference, cancellationToken);
+        await RequireCurrentAdmissionAsync(replacement, session.State, context.Subject, connection, transaction, cancellationToken);
         await transaction.CommitAsync(cancellationToken);
-        return key;
+        return inserted.Key;
     }
 
-    private async Task<string> InsertAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+    private async Task<(string Key, Guid Reference)> InsertAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
         AuthenticationTicket ticket, SessionSubject subject, SubjectState state, DateTimeOffset now,
-        CancellationToken cancellationToken)
+        Guid operation, CancellationToken cancellationToken)
     {
         var key = SessionTicket.NewKey();
         var reference = Guid.NewGuid();
@@ -214,7 +245,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         var minimal = SessionTicket.Minimal(ticket, absoluteExpires, now, state.ProviderChecked);
         minimal.Properties.Items[SessionTicket.SessionReference] = reference.ToString("D");
         var payload = protector.Protect(TicketSerializer.Default.Serialize(minimal));
-        await using var command = new NpgsqlCommand("""
+        await using var command = new NpgsqlCommand(audit is not null ? "SELECT security_audit.issue_ticket($1,$2,$3,$4,$5,$6,$7,$8,$9)" : """
             INSERT INTO identity_sessions.tickets (key_hash,session_reference,tenant_id,object_id,
                 security_version,created_at,last_seen_at,absolute_expires_at,protected_ticket)
             VALUES ($1,$2,$3,$4,$5,$6,$6,$7,$8)
@@ -227,8 +258,9 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         command.Parameters.AddWithValue(now);
         command.Parameters.AddWithValue(absoluteExpires);
         command.Parameters.AddWithValue(payload);
+        if (audit is not null) command.Parameters.AddWithValue(operation);
         await command.ExecuteNonQueryAsync(cancellationToken);
-        return key;
+        return (key, reference);
     }
 
     private sealed record StoredSession(SessionSubject Subject, SubjectState State, long Version, Guid Reference,
@@ -238,11 +270,11 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         !session.Revoked && now >= session.LastSeen && now < session.AbsoluteExpires &&
         now - session.LastSeen < SessionTicket.IdleLifetime && SessionDatabase.Current(session.State, now, session.Version);
 
-    private static async Task<StoredSession?> LoadAsync(NpgsqlConnection connection,
+    private async Task<StoredSession?> LoadAsync(NpgsqlConnection connection,
         NpgsqlTransaction transaction, string hash, CancellationToken cancellationToken)
     {
         SessionSubject subject;
-        await using (var find = new NpgsqlCommand("SELECT tenant_id,object_id FROM identity_sessions.tickets WHERE key_hash=$1", connection, transaction))
+        await using (var find = new NpgsqlCommand(audit is not null ? "SELECT * FROM security_audit.lookup_ticket_subject($1)" : "SELECT tenant_id,object_id FROM identity_sessions.tickets WHERE key_hash=$1", connection, transaction))
         {
             find.Parameters.AddWithValue(hash);
             await using var reader = await find.ExecuteReaderAsync(cancellationToken);
@@ -252,12 +284,12 @@ public sealed class PostgreSqlTicketStore : ITicketStore
             }
             subject = new SessionSubject(reader.GetGuid(0), reader.GetGuid(1));
         }
-        var state = await SessionDatabase.LockSubjectAsync(connection, transaction, subject, cancellationToken);
+        var state = await SessionDatabase.LockSubjectAsync(connection, transaction, subject, cancellationToken, audit is not null);
         if (state is null)
         {
             return null;
         }
-        await using var command = new NpgsqlCommand("""
+        await using var command = new NpgsqlCommand(audit is not null ? "SELECT * FROM security_audit.lock_ticket($1)" : """
             SELECT security_version,created_at,last_seen_at,absolute_expires_at,revoked_at IS NOT NULL,protected_ticket,session_reference
             FROM identity_sessions.tickets WHERE key_hash=$1 FOR UPDATE
             """, connection, transaction);
@@ -278,21 +310,66 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         }
     }
 
-    private static async Task TouchAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+    private async Task TouchAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
         string hash, DateTimeOffset now, CancellationToken cancellationToken)
     {
-        await using var command = new NpgsqlCommand("UPDATE identity_sessions.tickets SET last_seen_at=$2 WHERE key_hash=$1 AND revoked_at IS NULL", connection, transaction);
+        await using var command = new NpgsqlCommand(audit is not null ? "SELECT security_audit.touch_ticket($1,$2)" : "UPDATE identity_sessions.tickets SET last_seen_at=$2 WHERE key_hash=$1 AND revoked_at IS NULL", connection, transaction);
         command.Parameters.AddWithValue(hash);
         command.Parameters.AddWithValue(now);
         await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
     private async Task RevokeAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
-        string hash, CancellationToken cancellationToken)
+        string hash, Guid operation, CancellationToken cancellationToken)
     {
-        await using var command = new NpgsqlCommand("UPDATE identity_sessions.tickets SET revoked_at=$2 WHERE key_hash=$1 AND revoked_at IS NULL", connection, transaction);
+        await using var command = new NpgsqlCommand(audit is not null ? "SELECT security_audit.revoke_ticket($1,$2,$3)" : "UPDATE identity_sessions.tickets SET revoked_at=$2 WHERE key_hash=$1 AND revoked_at IS NULL", connection, transaction);
         command.Parameters.AddWithValue(hash);
         command.Parameters.AddWithValue(clock.GetUtcNow());
+        if (audit is not null) command.Parameters.AddWithValue(operation);
         await command.ExecuteNonQueryAsync(cancellationToken);
+    }
+
+    private ValueTask<bool> CheckAdmissionAsync(SessionSubject subject, NpgsqlConnection connection,
+        NpgsqlTransaction transaction, DateTimeOffset authenticated, CancellationToken ct) => audit is null
+        ? admission.IsEligibleAsync(subject, ct)
+        : ((ITransactionalSessionAdmissionPolicy)admission).IsEligibleAsync(subject, connection, transaction, authenticated, ct);
+
+    private DateTimeOffset OriginalAuthentication(StoredSession session)
+    {
+        try
+        {
+            var ticket = TicketSerializer.Default.Deserialize(protector.Unprotect(session.Payload))
+                ?? throw new InvalidOperationException("Invalid stored authentication.");
+            return DateTimeOffset.Parse(SessionTicket.Property(ticket, SessionTicket.AuthenticatedUtc) ?? throw new InvalidOperationException("Missing original authentication."), System.Globalization.CultureInfo.InvariantCulture);
+        }
+        catch (Exception exception) when (exception is CryptographicException or FormatException)
+        { throw new InvalidOperationException("Invalid stored authentication."); }
+    }
+
+    private async Task RequireCurrentAdmissionAsync(AuthenticationTicket ticket, SubjectState state, SessionSubject subject, NpgsqlConnection connection, NpgsqlTransaction transaction, CancellationToken ct)
+    {
+        if (audit is null) return;
+        if (!await CheckAdmissionAsync(subject, connection, transaction, SessionTicket.Validate(ticket, clock.GetUtcNow()).Authenticated, ct)) throw new InvalidOperationException("Current audited admission unavailable.");
+        var now = clock.GetUtcNow(); var context = SessionTicket.Validate(ticket, now);
+        RequireIssuance(ticket, context.Authenticated, now);
+        if (!SessionDatabase.Current(state, now, context.Version) || context.Authenticated < state.SignInValidFrom ||
+            now - context.Authenticated >= SessionTicket.ProviderFreshness)
+            throw new InvalidOperationException("Audited admission expired before commit.");
+    }
+
+    private async Task AuditMutationAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, Guid operation,
+        SessionSubject subject, long version, SecurityAuditAction action, Guid reference, Guid? oldReference, CancellationToken ct)
+    {
+        if (audit is null) return;
+        // Only closed nonsecret metadata enters the receipt digest; no cookie key,
+        // lookup hash or protected ticket is replayable through reconciliation.
+        var request = new OperationReceiptRequestV1(operation, audit.Binding.Writer, SecurityAuditActorKind.Human,
+            subject, action, subject, SecurityAuditCanonical.Hash($"{action}:{subject.TenantId:D}:{subject.ObjectId:D}:{reference:D}:{oldReference:D}:{version}"),
+            OldSessionReference: action == SecurityAuditAction.SessionRevoked ? reference : oldReference);
+        var evt = new SecurityAuditEventV1(Guid.NewGuid(), operation, clock.GetUtcNow(), SecurityAuditActorKind.Human,
+            subject, Guid.NewGuid(), action, SecurityAuditOutcome.Succeeded, SecurityAuditReason.None, subject, reference, oldReference, version);
+        var committed = await audit.AppendAsync(connection, transaction, evt, ct);
+        await audit.RecordReceiptAsync(connection, transaction, new(request, SecurityAuditOutcome.Succeeded,
+            clock.GetUtcNow(), null, version, action == SecurityAuditAction.SessionRevoked ? null : reference, [committed.EventId]), ct);
     }
 }

@@ -1,13 +1,28 @@
-# Identity session migration
+# Identity session migration order
 
-Apply `001-initial.sql` once through the approved control-plane migration runner
-and ledger. The script creates only the `identity_sessions` schema; it is never a
-customer database migration or an application-startup operation. Tables have no
-passwords, tokens, connection strings or raw cookie identifiers. Tickets contain a
-hashed lookup, protected minimal authentication ticket and expiry/revocation metadata.
+Execute `001-initial.sql`, then `002-authentication-context.sql`, then
+`003-atomic-audit.sql` through an explicitly controlled migration identity before
+the additive identity-authority migrations. No host executes a startup migration.
+Existing null-cutoff subjects deny; no synthetic fixture backfills production.
 
-The runtime data source and trusted authority writer need separately reviewed
-permissions. No grant is created here. Keep every writer on the subject-row-first
-lock protocol, increment the monotonic version on product security changes and use
-subject revocation before disabling access. No retention/purge schedule is invented;
-its operational approval and deletion-safe recovery remain open.
+Migration `003` creates closed audit/event/receipt/integrity/lifecycle schemas and
+restricted functions. It creates no LOGIN role, trust binding, stream, data
+grant, retention schedule or production resource. PUBLIC execution is revoked.
+Production function ownership and exact role privileges require a separately
+reviewed protected binding and deployed negative tests. The local synthetic
+SecurityAudit.Tests fixture establishes only disposable loopback test roles.
+
+Use a distinct NONLOGIN function owner, migration executor, administration,
+provider publisher, ordinary ticket runtime, scoped reader, lifecycle and witness
+identities. Populate only explicitly reviewed `writer_roles`, `reader_scopes`,
+`lifecycle_bindings` and `witness_bindings`; missing configuration denies.
+Runtime writers need exact allowed action sets, not a shared broad grant.
+
+Rollback disables admission and preserves version, audit, receipt, deletion
+tombstone, checkpoint and key state. Do not drop records, reduce a security
+version or restore a revoked session to make an old reader run. Actual live
+cleanup/backup/restore and audit-outage preservation remain unverified.
+
+The initial schema is control-plane only, never a customer database. Ticket rows
+contain a hashed lookup, protected minimal ticket and expiration/revocation
+metadata, without raw cookie identifiers, passwords, tokens or connection strings.

@@ -4,6 +4,73 @@ Internal Milestone 2 / IP-HAS-003 composition only. No endpoint, guest onboardin
 sign-in activation, customer permission, audit export or data-plane access exists
 here. The approved profile is in `docs/security/health-assessment-identity-session-design.md`.
 
+## Accepted P03 local atomic audit
+
+The five-argument `PostgreSqlTicketStore` constructor explicitly requires
+`PostgreSqlSecurityAudit` and `ITransactionalSessionAdmissionPolicy`. Authority
+checks use the **same** connection and transaction with the original signed
+authentication time; no nested subject-locking connection can deadlock against
+the store. The four-argument constructor and `PostgreSqlSessionAuthority` remain
+legacy synthetic fixture seams, not the new restricted audited boundary. No
+production composition may claim atomic audit by selecting those seams.
+
+Apply additive `003-atomic-audit.sql` after `001`/`002`, before identity-authority
+migrations, using a controlled migration executor. It creates no LOGIN role,
+grants, stream, trusted binding, schedule or real enrollment. Its SQL functions
+are schema-qualified, use `search_path=pg_catalog`, and revoke PUBLIC execution.
+The explicit synthetic fixture assigns a distinct NONLOGIN nonsuperuser function
+owner and separate runtime, administration, audit reader, lifecycle and witness
+LOGIN roles. Actual production owners and grants remain protected review inputs.
+
+The audited runtime uses only `lookup_ticket_subject`, `lock_subject`,
+`lock_ticket`, `touch_ticket`, `issue_ticket`, `revoke_ticket`, `lock_head`,
+`append_event`, `read_receipt` and `append_receipt` functions in `security_audit`;
+it requires no direct ticket-table privileges. Administration uses the separate
+`revoke_reference`/`revoke_subject` functions through
+`PostgreSqlAuditedSessionAuthority`. Direct writes are not a recovery fallback.
+All callers take the same subject advisory lock, then subject row, target row,
+and finally stream head. The advisory expression/seed matches IdentityAuthority.
+
+Issuance/rotation/revocation, closed event and metadata-only receipt share one
+transaction. Deferred constraints bind tickets, subject mutations and mutation
+events to exact receipts; null operation IDs cannot bypass the restricted
+functions. Audited issuance and rotation recheck authentication/provider and
+transaction-bound eligibility after the stream wait immediately before commit.
+Exact local logout rechecks its authenticated session deadline and authority.
+The event timestamp is sampled from the trusted clock after the head lock.
+Store/rotate receipts never preserve or replay a raw cookie key, lookup hash,
+protected ticket or credential. Lost commit acknowledgment is an uncertain
+outcome, not evidence of rollback; trusted internal commands reconcile a closed
+issuer/actor/kind/target/digest-bound receipt before retry. A revoked browser
+cookie has no receipt route and remains unauthenticated under D01.
+
+`writer_roles` binds the actual `SESSION_USER` to one configured stream,
+writer-binding reference and explicit allowed actions; knowing a binding GUID
+does not confer writer authority. `reader_scopes` restricts the visible view to
+configured stream/platform or exact customer/project and optional actor scope.
+`lifecycle_bindings` and `witness_bindings` authorize distinct actors. These
+tables are migration/operator-owned configuration, never caller-populated.
+
+Event hashing uses the approved closed RFC8785 subset: sorted ASCII keys, exact
+canonical GUIDs/digests, seven-fraction UTC timestamps and decimal-string 64-bit
+counters. Closed reconstruction rejects duplicate/missing/unknown fields,
+versions, prohibited payload fields, inconsistent combinations and writer,
+receipt or stream bindings. The stream head and event allocate together.
+`AuditIntegrityVerifier` uses an independently supplied checkpoint, the complete
+ordered event/tombstone chain and receipts; it rejects gaps, regressed heads,
+wrong writers, time anomalies and altered receipt links. Database-local hashes
+are not independent protection against a privileged operator.
+
+Explicit synthetic lifecycle tests exercise the already approved 12-month
+soft-delete boundary, holds, release, 30-day active purge and tombstone replay
+before restored records become visible. No automatic cleanup, hold creation,
+retention default, backup execution, checkpoint schedule or live witness is
+introduced. Challenge/ticket/receipt cleanup and retained independent witnesses
+remain reviewed production inputs. The audit-unavailable failure-preservation
+decision remains unresolved; rollback/denial tests do not claim that logging is
+a durable outage audit fallback. Live sign-in and the diagnostic host remain
+disabled.
+
 ## Composition
 
 Supply `NpgsqlDataSource` for the **control-plane** database, a production-approved
