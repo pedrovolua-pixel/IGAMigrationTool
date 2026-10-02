@@ -1,6 +1,6 @@
 # Local BFF authority, audit and hosting handoff
 
-Status: RUNNING — integrated verification pending
+Status: VERIFIED LOCAL AND CONFIGURED HOSTED — matching private publication pending
 Date: 2026-10-02
 Authority: [P01–P05 approved local packet](bff-production-authority-hosting-proposal.md), [accepted local ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md), [execution plan](../../plans/active/bff-local-authority-audit-implementation.md).
 
@@ -28,7 +28,7 @@ Local lifecycle functions/tests preserve the approved 12-month event retention, 
 
 ## Verification
 
-Integrated immutable source, executed checks, non-author review and private-board publication will be bound in the execution evidence. Passing bounded local checks does not complete Milestone 2, G1–G9, image acceptance, actual network/provider/CA/managed-identity/key/SQL evidence or production release.
+Corrected code `ba8de41` passed independent258PG composition,87 authority unit/120PG,69 audit unit/81PG and60 actualHTTPS/framework key checks. The63-project locked audited restore/format/build and all configured Linux/Windows/browser/PG/infrastructure/container checks passed; non-author review closed. Exact source, failure/correction records and confirmed private publication are bound in [the execution evidence](evidence/bff-local-authority-audit-20261002.json). Passing bounded local checks does not complete Milestone 2, G1–G9, image acceptance, actual network/provider/CA/managed-identity/key/SQL evidence or production release.
 
 ## Next protected deployment inputs
 

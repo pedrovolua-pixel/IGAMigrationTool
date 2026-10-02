@@ -31,3 +31,13 @@ A supplied checkpoint establishes tested ordered chain/head/receipt continuity. 
 Final source review: AUTH `1e5ecb4` + `0a7da148`; AUDIT `64716f6` + `d9173e9` + `970a1ab`; bridge `4202ab8`. Independent PostgreSQL composition passed258 checks; HOST60 actual HTTPS/framework checks passed. AUTH87unit/120PG and AUDIT69unit/81PG are separately executed author evidence, not independently rerun author suites.
 
 Final immutable source, executed counts, configured CI runs and private publication are bound in [the execution evidence](bff-local-authority-audit-20261002.json).
+
+
+## Additive pilot integration
+
+GitHub initially held checks because the approved pilot base had advanced. Non-author review of merge `2e97739` confirms all113 scoped BFF blobs from `fd2285e` unchanged and all550 scoped pilot runtime/frontend/test blobs from `7b2a741` retained, apart from the documented additive BFF frontend commands/ignore entry. Dependencies/engines remain unchanged. The63-project solution is the exact union of the57-project BFF branch and47-project pilot base, with no duplicates or missing references; both workflows preserve parent steps. Both canonical histories are retained. The coordinator repeated locked audited restore, whole formatting, zero-warning/error build, all portable unit/architecture checks and Gitleaks. Actual configured hosted runs are bound separately in the evidence.
+
+
+## Hosted precision fixture correction
+
+Linux CI37052401010 passed authority120 but failed the exact positive audit lifecycle boundary. A deterministic seventh fractional digit7 reproduces PostgreSQL canonical timestamp rounding versus Npgsql parameter truncation. Fixture-only `a320876` now derives exact twelve-month ±one-microsecond and stale-restoration time from the persisted PostgreSQL event timestamp. Author81PG/build/format/secrets passed; non-author review confirms all exact early/positive, holds, thirty-day purge, tombstone and restore/replay assertions remain. No SQL/runtime/retention policy changed. Windows and both container jobs passed on the first combined source; the corrected full hosted run is separately bound in execution evidence.
