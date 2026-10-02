@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "local-pilot-cycle13-preparation-v1",
+  "preparedAtUtc": "2026-10-02T23:29:00Z",
+  "baseCommit": "874c653a495921dbf20f628715b4ce70f3ecc030",
+  "status": "AWAITING_HUMAN_CONTRACT_DECISION",
+  "humanDecision": {
+    "status": "PENDING",
+    "document": "specs/003-health-assessment/local-artifact-review-contract-proposal.md",
+    "decisionIds": [
+      "AR13-01",
+      "AR13-02",
+      "AR13-03",
+      "AR13-04",
+      "AR13-05"
+    ],
+    "requestedRole": "Repository owner with product, technical and security responsibility",
+    "completion": "Record approval or amendments for the exact reviewed document revision/commit; coordinator finalizes contract and dependent execution checkpoint before code."
+  },
+  "approvedAuthority": {
+    "scope": "Existing local synthetic build direction only; new artifact review semantics are proposed, not approved.",
+    "requirements": [
+      "FR-HAS-35",
+      "FR-HAS-37",
+      "FR-HAS-42",
+      "FR-HAS-50",
+      "AC-HAS-14",
+      "AC-HAS-18",
+      "IP-HAS-008"
+    ],
+    "gates": "Full Milestone7/local completion/UAT/G1\u2013G9 NOT VERIFIED"
+  },
+  "scope": "Documentation-only decision preparation; no runtime, dependency, permission, API, migration or configuration changed.",
+  "sourceBindings": [
+    {
+      "path": "plans/active/local-pilot-artifact-review-cycle-13.md",
+      "sha256": "f3199e29d84c59f4e4f668051368a0854231e258dba89a50318f5f60d5208a7a",
+      "bytes": 8295
+    },
+    {
+      "path": "specs/003-health-assessment/local-artifact-review-contract-proposal.md",
+      "sha256": "c243feb9aa705bdddd69a9c8ee476b25b6dc647bbbea938298a0f02ee1af90f6",
+      "bytes": 14348
+    },
+    {
+      "path": "specs/003-health-assessment/local-artifact-review-test-plan.md",
+      "sha256": "de642062c66de5d4340208a5a95cf1d39c578cabb0092c46ad3da8e7c6b4bedc",
+      "bytes": 7489
+    },
+    {
+      "path": "plans/active/one-identity-local-pilot-build.md",
+      "sha256": "81e42605f85b2fb422019288fe6d8018e19e84cfbbf061d6610b7ce4f5bb6d5c",
+      "bytes": 21139
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "11a3fb0f3197a082378c88ef486733650f5d0c144ee72041eb4df62f722a36de",
+      "bytes": 54425
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "c58acadf132d68c24e7f5d3f21ce17b05d619c85a1d93925d37576ce855b8d0f",
+      "bytes": 118138
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "87ed06b537dac2d9e28e03121f200374fb9e775a29c024b007797172d3daf744",
+      "bytes": 30867
+    }
+  ],
+  "documentChecks": [
+    {
+      "name": "relative-path-and-heading-links",
+      "status": "PASS",
+      "count": 30
+    },
+    {
+      "name": "exact-five-pending-decisions",
+      "status": "PASS"
+    },
+    {
+      "name": "exact-twelve-planned-tests",
+      "status": "PASS"
+    },
+    {
+      "name": "all-implementation-packets-blocked",
+      "status": "PASS"
+    },
+    {
+      "name": "no-runtime-source-changes",
+      "status": "PASS"
+    },
+    {
+      "name": "git-diff-whitespace",
+      "status": "PASS"
+    },
+    {
+      "name": "concurrent-root-files-preserved",
+      "status": "PASS",
+      "count": 51
+    },
+    {
+      "name": "scoped-document-secret-scan",
+      "status": "PASS",
+      "tool": "gitleaks8.30.1",
+      "scannedBytes": 254701,
+      "findings": 0,
+      "report": "/private/tmp/iga-cycle13-document-secret-scan.json",
+      "reportSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "name": "preparation-and-prior-evidence-secret-scan",
+      "status": "PASS",
+      "tool": "gitleaks8.30.1",
+      "scannedBytes": 1430006,
+      "findings": 0,
+      "report": "/private/tmp/iga-cycle13-evidence-secret-scan.json",
+      "reportSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ],
+  "sourceAudit": {
+    "independentAgents": [
+      "cycle09_scope",
+      "cycle09_html"
+    ],
+    "reviewedCommit": "874c653a495921dbf20f628715b4ce70f3ecc030",
+    "result": "Both independently confirmed exact review authority/history/invalidation pending and recommended artifact-review-only contract preparation.",
+    "separateConflict": "Auditor conditional CSV export allowed by approved matrix versus assigned-Consultant-only technical operation; deferred for explicit owner reconciliation."
+  },
+  "independentProposalReviews": {
+    "status": "PASS after corrections",
+    "agents": [
+      "cycle09_scope",
+      "cycle09_html"
+    ],
+    "bindingsMatchSource": true,
+    "findingsClosed": [
+      "Withdrawal/source-change labels and exact sequence tests",
+      "Historical replay precedence vs stale new command",
+      "Versioned immutable source seeds with continuous artifact revision/history",
+      "Shared source-validator path ownership and strict historical compatibility checkpoint",
+      "Production/customer vs dedicated-synthetic migration boundary",
+      "AR13-03 summary aligned with latest-withdrawal behavior"
+    ],
+    "notApproval": true,
+    "reportBindings": [
+      {
+        "path": "/private/tmp/iga-cycle13-scope-review.json",
+        "sha256": "ddf1efad8b49507f509ba5eb80b160251da403a0df3e1a2d8ebf6602196e2806",
+        "bytes": 6776
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-contract-review.json",
+        "sha256": "8b2e54d0de6c1dfdc47db65565bf288f6305a9e29b42de647a2e6575210f4b09",
+        "bytes": 4486
+      }
+    ]
+  },
+  "independentDocumentationVerification": {
+    "status": "PASS final documentary recheck",
+    "initialFindings": [
+      "Explicit planned withdrawal/re-review transition cases missing: corrected",
+      "Preparation metadata target missing while assembling evidence: now created"
+    ],
+    "report": "/private/tmp/iga-cycle13-document-review/verification.json",
+    "initialFindingsClosed": true,
+    "finalReceipt": {
+      "path": "/private/tmp/iga-cycle13-document-review/final-recheck.json",
+      "sha256": "f3c93cf2d621029296dd7950bce3c5257154c205fcf1a5ff35097d57ddb6a6f2"
+    },
+    "initialReceiptSha256": "a56c3fe55f615a7e0ab9e4b67be95224f56ce9d79cc7d52af681d4408efae77a",
+    "scope": "Exact inspected pre-closure metadata snapshot retained by independent verifier; finalReceipt binding added afterward as metadata only. All seven documentary source bindings unchanged."
+  },
+  "runtimeChecks": {
+    "unit": "NOT RUN \u2014 no implementation",
+    "integration": "NOT RUN \u2014 no implementation",
+    "e2e": "NOT RUN \u2014 no implementation",
+    "formatBuildTypes": "NOT RUN \u2014 no source/configuration change",
+    "hostedImplementationCI": "NOT RUN \u2014 no implementation; historical Cycle12 results not relabeled"
+  },
+  "privateSite": {
+    "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "audience": "Existing owner-private; confirmed owner/custom/one owner/no groups/no external visitors",
+    "lastConfirmedVersionAtPreparation": 82,
+    "thisCyclePublication": "PENDING \u2014 publish exact canonical proposal and dependency board after source integration; retain actual native deployment proof separately"
+  },
+  "preservation": {
+    "originalConcurrentFiles": 51,
+    "status": "PASS byte-exact before coordinator integration",
+    "record": "/private/tmp/iga-cycle13-root-preservation.json"
+  }
+}
