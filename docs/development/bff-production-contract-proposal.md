@@ -1,6 +1,6 @@
 # Production BFF integration contract proposal
 
-Status: PROPOSED — exact public contract and consequential security decisions require owner review
+Status: D01/D02 APPROVED FOR LOCAL IMPLEMENTATION — D03/D04 production decisions deferred; D05 live/image acceptance separate
 Owner/reviewer: Technical and security owner; identity/platform owner for actual environment bindings
 Date: 2026-10-02
 Related: [execution plan](../../plans/active/bff-azure-deployment-preparation.md), [approved identity design](../security/health-assessment-identity-session-design.md), [foundation handoff](bff-identity-session-foundation.md)
@@ -59,3 +59,7 @@ Before any paid session: refresh delayed spending and regional capacity, price t
 Technical/security owner: accept/replace/reject D01/D02 for local route and session-context implementation only. D03/D04 remain deferred pending concrete schema, authority, key/proxy and audit decisions. Default-denying internal interfaces and synthetic tests can be prepared; production provider/admission/audit adapters cannot be enabled from this approval. Environment-specific access and activation stay disabled pending separate exact review. No code implementing unapproved public routes or new access is permitted.
 
 Tests after acceptance include anonymous/authenticated CSRF binding, wrong/missing subject/session/security version, independent sessions with different original authentication/MFA, exact deadline boundaries, database revocation/failure/concurrency, no auto-enrollment, account/cutoff/guest denial, no provider activity while disabled, callback/proxy spoofing, no credentials in client/logs, key/audit failure and all affected authorization paths. Entra/Graph/CA/Container Apps claims stay NOT VERIFIED until actual deployed tests run and human evidence review accepts them.
+
+## Attributed local approval — 2026-10-02
+
+Repository owner replied “approved” to the exact D01/D02 review request after the verified disabled-package checkpoint. D01/D02 are accepted for bounded local implementation and synthetic verification. This records the technical/security-owner decision requested by AGENTS.md; it grants no production activation, new provider permission, customer access, Azure session or release. D03/D04 remain deferred and D05 controls remain unverified. [The implementation packet](../../plans/active/bff-authentication-contract-cycle.md) owns executed evidence and completion.

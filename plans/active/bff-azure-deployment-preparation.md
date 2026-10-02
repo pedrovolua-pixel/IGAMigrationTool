@@ -1,6 +1,6 @@
 # BFF Azure deployment preparation
 
-Status: INDEPENDENT PREPARATION VERIFIED — exact local D01/D02 approval pending; production/live decisions deferred
+Status: INDEPENDENT PREPARATION VERIFIED — D01/D02 local implementation approved and running; production/live decisions deferred
 Owner: Azure/BFF coordinator
 Started: 2026-10-02
 
@@ -62,3 +62,5 @@ Initial whole-branch CI exposed formatting drift in imported generated types, th
 Independent executable/container/inventory preparation is verified and published for draft review. DP03 D01/D02 implementation is waiting for the exact human contract decision. DP04 cannot form a live-provider deployment until production bindings/authority exist; fresh rates/capacity and a separate priced session approval remain required. This plan stays active; no milestone, gate, draft merge or live release is accepted.
 
 Owner-private board publication confirmed2026-10-02: source `a9b36e92ef3a2d1bac5262d16f1596e89bb16833`, deployment `appgdep_6abfba5758448191b6d30816512e0ce8`; [current board](https://iga-pilot-progress.pedro-volu.chatgpt.site) preserves completed pilot work and11open human tasks, including exact D01/D02 review. Source/archive reference was refreshed after concurrent-site reconciliation; no history or access was overwritten.
+
+Owner approval update2026-10-02: exact D01/D02 accepted for local implementation. [The bounded authentication packet](bff-authentication-contract-cycle.md) is RUNNING. Earlier pending-approval observations above are historical; production/live decisions remain deferred.
