@@ -1142,5 +1142,19 @@
     "canonicalSnapshot": "02dc25b0898e5145802dc288b5e8fad9cb9b58ee",
     "checks": "71 immutable repository link targets;11 task cards; desktop1365/mobile390/narrow320 no horizontal overflow; scoped BFF panel/task/snapshot only; all unrelated concurrent Cycle11 board content preserved",
     "concurrency": "initial push rejected; fresh source3c53c19 reopened, scoped delta reapplied, no history overwritten"
+  },
+  "finalMetadataHostedChecks": {
+    "source": "d51349a0bedc5299f990ba2b759dc4bd3eb29242",
+    "bootstrap": {
+      "run": 37056853245,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "package": {
+      "run": 37056853227,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "scope": "Configured developer checks; does not accept live gates or external historical GitGuardian incidents"
   }
 }

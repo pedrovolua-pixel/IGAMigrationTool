@@ -8,7 +8,7 @@ Basis: Accepted [D01/D02](bff-production-contract-proposal.md), [identity design
 
 ## Review outcome and exact approval scope
 
-This turns deferred D03/D04 into concrete candidates. It does not change approved policy or deploy anything. [Proposed ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) records the new durable transaction boundary. All versioned shapes below are internal candidates, not new public APIs. Existing D01 operations and the permanently disabled diagnostic executable remain unchanged.
+This turns deferred D03/D04 into concrete candidates. It does not change approved policy or deploy anything. [Accepted local ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) records the new durable transaction boundary. All versioned shapes below are internal candidates, not new public APIs. Existing D01 operations and the permanently disabled diagnostic executable remain unchanged.
 
 | Decision | Recommended candidate for local implementation | What acceptance would authorize |
 |---|---|---|
@@ -166,7 +166,7 @@ D05 vulnerability/license acceptance, signed provenance, restricted retained art
 
 Preparation source: `e1983ad` plus the scoped proposal change. Identity and hosting researchers performed read-only repository/current Microsoft documentation review; no cloud operation or runtime test occurred. Non-author final consistency review and documentation/link/secret checks are recorded in the preparation cycle. Proposed decisions, ADR and live inputs remain unaccepted until attributed human review.
 
-Technical/security decision P01–P05: Pending
-ADR-0009: Proposed
+Technical/security decision P01–P05: Accepted for local synthetic scope against packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`; bounded implementation COMPLETE
+ADR-0009: Accepted for that local scope; earlier proposed/pending review observations are historical
 Audit-outage production decision: Pending
 Actual bindings, Graph/SQL/key/registry grants, paid session and production release: Not authorized by this proposal
