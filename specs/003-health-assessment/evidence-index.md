@@ -49,3 +49,5 @@ Local synthetic checks, compiled-template policies, build, format, vulnerability
 Azure package preparation (developer evidence only):[cycle](../../plans/active/azure-application-package-cycle.md),[sanitized metadata](../../docs/development/evidence/azure-application-package-20261001.json). Local bootstrap build/format/publish,actual-process refusal/shutdown and 44hostingdrifts passed;container/image/supply-chain/live cloud tests remain NOT VERIFIED pending executed evidence. No signed gate bundle or G1 acceptance.
 
 Package CI evidence: [run 36953664310](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664310), tested source `ae785af008f527b0396c8291d50f69743bf8575d`, actual Linux AMD64 image build/non-root web/worker smoke PASS. Supply-chain promotion/private Azure pull/product sign-in/G1 NOT VERIFIED. Exact config digest and scope are in the sanitized package metadata.
+
+The same package code source passed all configured existing Linux/Windows 2022/2025 [partial bootstrap jobs](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664189). This is developer evidence, not full-feature or live gate acceptance.

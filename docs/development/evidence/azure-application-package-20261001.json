@@ -53,5 +53,12 @@
     "user": "1654",
     "lastPolicyCheckUtc": "2026-10-02T02:02:07Z",
     "limits": "Local image configuration digest is not a published registry manifest digest. No image push, provenance/signature, SBOM, license/vulnerability scan or Azure activation."
+  },
+  "bootstrapPartialCi": {
+    "sourceCommit": "ae785af008f527b0396c8291d50f69743bf8575d",
+    "runId": 36953664189,
+    "result": "PASS:all configured Linux and Windows2022/2025 jobs",
+    "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664189",
+    "limits": "Partial workflow only; no live G1 acceptance"
   }
 }
