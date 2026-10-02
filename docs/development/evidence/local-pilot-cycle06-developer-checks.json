@@ -405,6 +405,10 @@
     {
       "path": "/private/tmp/iga-cycle06-vulnerable-packages.log",
       "sha256": "ac840ecbfa613786c036c83038a0993d97a705561740cbd054a530247eadf1ef"
+    },
+    {
+      "path": "/private/tmp/iga-cycle06-closure-secret-scan.log",
+      "sha256": "3620cb1336975eaae3d30a870e710f2376b96861f5e5b0ed03b8f9ba8a8647e7"
     }
   ],
   "checks": {
@@ -422,9 +426,9 @@
     "frontendContractTypeFormatBuildAudit": "PASS zero vulnerabilities",
     "infrastructureTemplates": 18,
     "bootstrapHostingUnsafeDrifts": 44,
-    "secretScan": "PASS474 tracked/owned source files; no allowlists",
+    "secretScan": "PASS474 tracked/owned source files and final records; no allowlists",
     "remotePartialCI": "PASS configured Linux/Windows2022/2025 and Azure package partial checks",
-    "privatePublication": "PENDING matching final snapshot",
+    "privatePublication": "PASS confirmed owner-private publication",
     "historicalCoverageBrowserChecks": 397,
     "historicalAnalysisBrowserAssertions": 724,
     "historicalReviewBrowserAssertions": 2195
@@ -618,7 +622,6 @@
     "Full Windows/manual assistive-technology/WCAG and PDF acceptance NOT VERIFIED",
     "Production identity/customer source/catalog/risk/reassessment/AI/tasks/publication/G1\u2013G9 NOT VERIFIED",
     "Pure returned-value immutability only; no durable report history",
-    "Matching private closure publication pending",
     "Axe aria-prohibited-attr incomplete at desktop/320 and color-contrast incomplete at320; those checks NOT VERIFIED"
   ],
   "initialPrivatePublication": {
@@ -670,5 +673,24 @@
     "azurePackageJobId": 110836863777,
     "conclusions": "All success; configured partial engineering evidence only"
   },
-  "workerCheckoutCleanup": "Completed after preservation; committed packet branches retained; separate BFF worktree and unrelated research/work files preserved"
+  "workerCheckoutCleanup": "Completed after preservation; committed packet branches retained; separate BFF worktree and unrelated research/work files preserved",
+  "closedPrivatePublication": {
+    "repositorySnapshot": "6271dfa8a9e8e38749469321bb7cae7f8bca46db",
+    "sourceSha": "105ae3dea37075cac21c3b630d5218eeb68d759f",
+    "deploymentId": "appgdep_6abfa5b7e3588191867efdaaf7f8f2ec",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_aa0466b650608191a61f6bb14a84e347",
+    "status": "succeeded",
+    "confirmedUtc": "2026-10-02T12:38:22.534581+00:00"
+  },
+  "privateBoardChecks": {
+    "desktopWidth": 1440,
+    "mobileWidth": 390,
+    "reflowNavigation": "PASS",
+    "immutableRepositoryFileLinks": 35,
+    "openHumanTasks": 10,
+    "requestedRoleCompletionSourceLinks": "PASS",
+    "audience": "Owner-only preserved; one allowed owner, zero external visitors",
+    "bff": "Completed publication task and separate immutable source/check references preserved"
+  },
+  "cycleStatus": "COMPLETE bounded developer cycle only"
 }
