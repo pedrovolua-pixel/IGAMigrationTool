@@ -6,10 +6,11 @@ The [exact internal contract](../../../../docs/development/cycle11-fictional-fix
 
 `FixPackageBuilder.Build(guidance)` returns a payload-free issue or an immutable snapshot. `FixPackageHtmlRenderer.Render(snapshot)` revalidates actual fields and produces framework-encoded, deterministic HTML with fixed restrictive CSP and native disclosure. Identifiers, prose, references and code remain text; there are no supplied URLs, resource loads, execution, review, task, export or download controls. Upstream unavailable statements are shown explicitly as the historical guidance boundary; the new preview disclaimer describes this separate layer.
 
-Run the portable fixture host with the pinned repository SDK:
+Build the portable fixture host with the pinned repository SDK, then execute its built DLL through the minimal-environment launcher (replace the absolute SDK executable path):
 
 ```sh
-dotnet run --project tests/integration/SyntheticFixPackages.Tests --configuration Release -- --write-previews /tmp/iga-fix-previews
+dotnet build tests/integration/SyntheticFixPackages.Tests --configuration Release
+python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py /absolute/path/to/dotnet tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll --write-previews /tmp/iga-fix-previews
 ```
 
 It produces fixed normal, hostile-content and empty fixtures plus independent expected browser metadata. The actual browser verifier reuses the pinned Playwright package from the existing consultant test project:
@@ -20,4 +21,4 @@ node tests/e2e/synthetic-fix-packages/verify.mjs --preview-directory /tmp/iga-fi
 
 Use a separate fixture-only process with an explicit minimal environment, excluding application/database/provider credentials. The browser harness serves only the fixed fixture allowlist on ephemeral loopback, denies other requests, and blocks external fetches. It checks complete provenance/display, hostile text, absence of actions/resources, keyboard disclosure and narrow-screen reflow. This bounded local proof does **not** verify the deployed ADR-0001 worker sandbox, customer security, supported manual/browser/accessibility matrix or full TP-HAS-018 (task/CSV cases remain absent).
 
-There is no new dependency, migration, configuration, application endpoint, input profile, actual provider, protected resolver or durable artifact history. Consultant review/invalidation, objectives, priority/effort, tasks/CSV, execution, validated remediation and report publication remain later contracts. See [Cycle11](../../../../plans/active/local-pilot-fix-packages-cycle-11.md) for execution and review state; completion never grants milestone/gate acceptance.
+There is no new dependency, migration, configuration, application endpoint, input profile, actual provider, protected resolver or durable artifact history. Consultant review/invalidation, objectives, priority/effort, tasks/CSV, execution, validated remediation and report publication remain later contracts. See [Cycle11](../../../../plans/completed/local-pilot-fix-packages-cycle-11.md) for execution and review state; completion never grants milestone/gate acceptance.

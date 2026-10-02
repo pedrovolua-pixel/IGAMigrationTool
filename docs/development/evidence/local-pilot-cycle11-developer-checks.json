@@ -1,12 +1,12 @@
 {
   "cycle": 11,
-  "status": "LOCAL_CHECKS_VERIFIED_BROWSER_HOSTED_CLOSURE_PENDING",
-  "capturedUtc": "2026-10-02T20:00:45.605153+00:00",
+  "status": "VERIFIED_BOUNDARY_PRIVATE_CLOSURE_PENDING",
+  "capturedUtc": "2026-10-02T20:32:23.178833+00:00",
   "sdk": "10.0.401",
   "solutionProjects": 51,
   "sourceBinding": {
     "algorithm": "SHA256 of sorted path NUL per-file-SHA256 LF entries",
-    "sha256": "11e4852636036bdc5430e8095a1f973320d45b31c3873b6919db62da35a4a078",
+    "sha256": "7e9b991dee01532dd5b286905bc4d087eb84ef67d22304132ecbb4ec29961c35",
     "files": [
       {
         "path": ".gitattributes",
@@ -18,7 +18,7 @@
       },
       {
         "path": ".github/workflows/bootstrap-checks.yml",
-        "sha256": "bae06ee42adca7e7325ce81a02e18a30691168b7b46576e484b2a8bac22c942b"
+        "sha256": "64de71962e5c1087f3b7626f788cfb993fb46b4782f8e7ed4b7ff48722eeff39"
       },
       {
         "path": "Directory.Build.props",
@@ -2132,6 +2132,10 @@
         "path": "tests/windows/collector-service-smoke.ps1",
         "sha256": "602acbd37891a0661404ea544e2b79152c307a119a9b3c98929ec9187b4b5a7c"
       }
+    ],
+    "codeCommit": "265c3ed2aea6fab50f6565de229de8be4d70dda3",
+    "changedSinceLocalExecution": [
+      ".github/workflows/bootstrap-checks.yml"
     ]
   },
   "newAssertions": {
@@ -2262,6 +2266,12 @@
       "path": "/private/tmp/iga-cycle11-format-correction-review.json",
       "sha256": "23dce3ea7cf0b8af62ea5023541a906efe7c137f6320dee0db41c0eba89b6b40",
       "bytes": 1622
+    },
+    {
+      "reviewer": "V11 non-author coordinator CI launcher review",
+      "result": "PASS no actionable findings; local338 direct-DLL replay and4 generated-byte comparisons PASS",
+      "proof": "/private/tmp/iga-cycle11-ci-launch-review-0lr8l2ti/review-proof.json",
+      "sha256": "add6852edf32bb8117b52477ea4d2c09451609815c0b9391f7e78b664280ae05"
     }
   ],
   "formatCorrection": {
@@ -2289,21 +2299,721 @@
     "newMigration": false,
     "newApplicationRouteOrProfile": false,
     "newExecutionReviewTaskCsvProviderCustomerPath": false,
-    "changes": "Four framework-only projects, solution/CI entries and scoped LF reference-file rules only."
+    "changes": "Four framework-only projects, solution/CI entries and scoped LF reference-file rules only.",
+    "ciCorrections": "Normal Windows compile environment followed by unchanged minimal direct-DLL launcher; Linux direct-DLL fixture generation takes --write-previews directly. No deployed application setting.",
+    "dependenciesMigrations": "No new third-party dependency, database migration or durable schema change."
   },
-  "browserRegressions": "RUNNING",
-  "hostedChecks": "PENDING",
-  "site": {
-    "canonicalStartCommit": "301f6c9ad549d9c3fa6a4addc42a521d40fab9eb",
-    "siteSourceCommit": "3c53c19f143d312586a58d79e9a36d9913dab30c",
-    "version": 75,
-    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_656dc40274048191b1897395ba756f71",
-    "deploymentId": "appgdep_6ac0059ade908191934eb8f7c92833aa",
-    "deploymentStatus": "succeeded",
-    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
-    "access": "owner-only custom 1owner/0external/0groups",
-    "qa": "desktop/mobile320taskrolescompletionlinksnav noerrors/overflow;59immutable repository links/fragments verified",
-    "qaFile": "/private/tmp/iga-cycle11-start-site-final-qa.json"
+  "browserRegressions": [
+    {
+      "suite": "consultant-demo",
+      "result": "PASS",
+      "checks": 384,
+      "reportSha256": "85bdf21d5007465d83fe006049eb5254d1639855c21c67f39f73ee60f0ec6d3c",
+      "accessibility": [
+        {
+          "label": "desktop gap coverage",
+          "version": "4.13.0",
+          "passes": 30,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "label": "320px cancellation with expanded locks",
+          "version": "4.13.0",
+          "passes": 29,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ],
+      "evidenceSource": "Preserved actual coordinator report; historical tracked report restored only after archive verification."
+    },
+    {
+      "suite": "analysis-scoring",
+      "result": "PASS",
+      "checks": 700,
+      "reportSha256": "fb0f78a97d2c7a99ba0d593e30b7d62f5a9d7bd0f3181983aa13b82c68a4e86b",
+      "accessibility": [
+        {
+          "label": "desktop findings/original",
+          "version": "4.13.0",
+          "passes": 30,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "label": "320px findings/original",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ],
+      "evidenceSource": "Preserved actual coordinator report; historical tracked report restored only after archive verification."
+    },
+    {
+      "suite": "review-maturity",
+      "result": "PASS",
+      "checks": 2276,
+      "reportSha256": "aec7b826504d81506e11626a2cb7e535f7a529f3a0215dd7d9f34c95bb09d5e8",
+      "accessibility": [
+        {
+          "label": "desktop review/history/maturity",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr"
+          ]
+        },
+        {
+          "label": "320px review/history/maturity",
+          "version": "4.13.0",
+          "passes": 33,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ],
+      "evidenceSource": "Preserved actual coordinator report; historical tracked report restored only after archive verification."
+    },
+    {
+      "suite": "draft-reports",
+      "result": "PASS",
+      "checks": 2206,
+      "reportSha256": "af05d03bf1eb7b788132ce497ba8b07dd158f10dfd46443c97e7bc2eeceac1db",
+      "accessibility": [
+        {
+          "label": "desktop expanded technical draft",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr"
+          ]
+        },
+        {
+          "label": "320px expanded technical draft",
+          "version": "4.13.0",
+          "passes": 33,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ],
+      "evidenceSource": "Preserved actual coordinator report; historical tracked report restored only after archive verification."
+    },
+    {
+      "suite": "recommendation-guidance",
+      "result": "PASS",
+      "checks": 3016,
+      "reportSha256": "b5f71abae3ef74b765cb388d140afca0cebd221afbb9828e260604bbc617e6f6",
+      "accessibility": [
+        {
+          "label": "desktop expanded guidance",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr"
+          ]
+        },
+        {
+          "label": "320px expanded guidance",
+          "version": "4.13.0",
+          "passes": 33,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ],
+      "evidenceSource": "Preserved actual coordinator report; historical tracked report restored only after archive verification."
+    },
+    {
+      "suite": "local-ai-preview",
+      "result": "PASS",
+      "checks": 635,
+      "reportSha256": "0970b4e64d6e411b2e26ea40c93b87523f912df123c75d6c3f0e66bad447812b",
+      "accessibility": [],
+      "evidenceSource": "Preserved actual coordinator report; historical tracked report restored only after archive verification."
+    },
+    {
+      "suite": "synthetic-ai-preview",
+      "result": "PASS",
+      "checks": 440,
+      "reportSha256": "6daaee32122e2d4502c97873db1b95e4b343fa6e8f22f59ba2a13edda794e26f",
+      "accessibility": [],
+      "evidenceSource": "Preserved actual coordinator report; historical tracked report restored only after archive verification."
+    }
+  ],
+  "hostedChecks": {
+    "result": "PASS",
+    "capturedUtc": "2026-10-02T20:32:16.200Z",
+    "codeCommit": "265c3ed2aea6fab50f6565de229de8be4d70dda3",
+    "bootstrapRunId": 37059854360,
+    "packageRunId": 37059854412,
+    "workflowRuns": [
+      {
+        "id": 37059854412,
+        "name": "Azure development package (partial checks)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 55,
+        "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37059854412/jobs",
+        "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37059854412/logs",
+        "workflow_id": 372721003
+      },
+      {
+        "id": 37059854360,
+        "name": "Bootstrap checks (partial gate)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 145,
+        "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37059854360/jobs",
+        "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37059854360/logs",
+        "workflow_id": 370675336
+      }
+    ],
+    "jobs": [
+      {
+        "id": 111013557834,
+        "name": "dotnet-bootstrap",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37059854360,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Initialize containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Scan checkout for secrets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Restore locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Verify formatting",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Build",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Run synthetic artifact-integrity checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Check assessment coverage reconciliation",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Check assessment capability locks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Check synthetic baseline planning and coverage integration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Check durable synthetic run contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Check deterministic fixture rules and health scoring",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Check independent maturity and durable finding review",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          },
+          {
+            "name": "Check detached canonical draft and inert Markdown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Check offline synthetic AI packets and proposed output",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          },
+          {
+            "name": "Check offline synthetic AI preview and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18
+          },
+          {
+            "name": "Check saved-source offline AI workspace projection",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Check fictional unverified fix packages and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Check canonical unverified recommendation guidance",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          },
+          {
+            "name": "Check independent recommendation identities, originals and saved review bridge",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Check independent canonical draft goldens and saved source bridge",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Check independent review and maturity goldens",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Check persisted analysis and independent scoring goldens",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          },
+          {
+            "name": "Check real PostgreSQL persistence and process recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26
+          },
+          {
+            "name": "Build and audit pinned consultant view",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27
+          },
+          {
+            "name": "Check independent offline AI preview component",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28
+          },
+          {
+            "name": "Check consultant browser flow and recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29
+          },
+          {
+            "name": "Check analysis findings, scoring and browser read recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30
+          },
+          {
+            "name": "Check consultant review history, current scores and independent maturity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31
+          },
+          {
+            "name": "Check draft summary, technical and inert Markdown browser parity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 32
+          },
+          {
+            "name": "Check structured recommendation guidance and inert consultant display",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 33
+          },
+          {
+            "name": "Check offline AI preview in the consultant workspace",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 34
+          },
+          {
+            "name": "Check actual inert offline AI preview browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 35
+          },
+          {
+            "name": "Check actual inert fictional fix-package browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 36
+          },
+          {
+            "name": "Check collector permission decisions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 37
+          },
+          {
+            "name": "Check collector host contract",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 38
+          },
+          {
+            "name": "Check project dependency boundaries",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 39
+          },
+          {
+            "name": "Install pinned Bicep CLI",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 40
+          },
+          {
+            "name": "Compile, lint and check evidence-store baseline",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 41
+          },
+          {
+            "name": "Compile, lint and check Service Bus baselines",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 42
+          },
+          {
+            "name": "Compile, lint and check pilot network-egress baseline",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 43
+          },
+          {
+            "name": "Compile and lint workload identity module",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 44
+          },
+          {
+            "name": "Validate private Azure development foundation",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 45
+          },
+          {
+            "name": "Post Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 88
+          },
+          {
+            "name": "Post Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 89
+          },
+          {
+            "name": "Stop containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 90
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 91
+          }
+        ]
+      },
+      {
+        "id": 111013558141,
+        "name": "collector-windows (windows-2025)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37059854360,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Restore locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Check Windows offline synthetic AI packets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Check Windows offline synthetic proposed output",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check Windows independent fake-provider composition",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check Windows offline AI preview and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Check Windows fictional fix packages and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Build collector host tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Check Windows fixed offline AI workspace source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Check Windows collector host and protected key behavior",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Publish self-contained collector",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Smoke test Windows Service and one-shot CLI",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Post Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27
+          },
+          {
+            "name": "Post Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29
+          }
+        ]
+      },
+      {
+        "id": 111013558672,
+        "name": "collector-windows (windows-2022)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37059854360,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Restore locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Check Windows offline synthetic AI packets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Check Windows offline synthetic proposed output",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check Windows independent fake-provider composition",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check Windows offline AI preview and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Check Windows fictional fix packages and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Build collector host tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Check Windows fixed offline AI workspace source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Check Windows collector host and protected key behavior",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Publish self-contained collector",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Smoke test Windows Service and one-shot CLI",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Post Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27
+          },
+          {
+            "name": "Post Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29
+          }
+        ]
+      }
+    ],
+    "scope": "Configured partial CI only; no human/full milestone/gate or live acceptance"
   },
   "notVerified": [
     "Full Milestone7/local-pilot/UAT readiness/G1-G9",
@@ -2325,7 +3035,16 @@
     "Initial independent HTML oracle assumed encoded backticks; explicit recipe correction retained, old representation is reconstructed, not claimed as preserved original bytes",
     "Whole-solution formatting failure corrected only line wrapping/indentation, original seals preserved",
     "Line-oriented whitespace diff exited1 and was not treated as zero difference",
-    "Bootstrap37057941421 newWindows2025 step NETSDK1060 before assertions; normal compilation separated from minimal-environment directDLL execution. Windows2022 matrixcancelled."
+    "Bootstrap37057941421 newWindows2025 step NETSDK1060 before assertions; normal compilation separated from minimal-environment directDLL execution. Windows2022 matrixcancelled.",
+    {
+      "runId": 37058521308,
+      "codeCommit": "88b1390a85cbae79b882c89228f340785fa9ec00",
+      "step": "Linux actual inert fictional fix-package browser",
+      "cause": "Direct DLL invocation retained duplicated -- separator from dotnet run; fixture CLI rejected arguments before assertions. Both Windows jobs and all prior Linux browser flows passed.",
+      "correction": "Remove only duplicated separator; product/test/oracle source unchanged. Corrected preview CLI replay338 passed.",
+      "log": "/private/tmp/iga-cycle11-linux-second-failure.log",
+      "logSha256": "7610d686a3cb9164e043cf687b8ed956e71437d8064e76082240c048197d7c6b"
+    }
   ],
   "initialHostedChecks": {
     "bootstrap": {
@@ -2341,5 +3060,158 @@
       "sha256": "3463322b6da78c4a26633778dee69b94eeb12aed6816b5c00a0270b832ea4f2d",
       "note": "Decoded public job log normalized CRLF to LF, original connector result retained in session memory."
     }
+  },
+  "localExecutionBinding": {
+    "codeCommit": "59bf7ed38665ffc0c7f059917d3b4f764c0f90c8",
+    "sha256": "11e4852636036bdc5430e8095a1f973320d45b31c3873b6919db62da35a4a078",
+    "note": "All local source/test/golden/project/frontend bytes are identical to hosted code265c; only bootstrap workflow changed to build normally then execute existing DLL through unchanged minimal launcher. Local new checks already used direct DLL execution."
+  },
+  "browserRegressionLimit": "Historical axe incomplete color-contrast/aria-prohibited-attr results retained as NOT VERIFIED manual acceptance; new standalone preview nine audits have zero violations/incomplete. Local historical app host uses temporary configuration-watch override; default Linux hosted startup separately passed.",
+  "preservation": {
+    "originalWorkers": {
+      "manifest": "/private/tmp/iga-cycle11-preserved/workers/manifest.json",
+      "sha256": "f2e832c518485ad3f91ec3e697d1f726b72b1377ee39dce1d19f7d13d6b8aa72",
+      "workers": [
+        {
+          "packet": "A11",
+          "files": 787,
+          "archiveSha256": "46e3309b313680e02c886f1456d9ffbea217a0312513eb5d841b9df85b886f45"
+        },
+        {
+          "packet": "B11",
+          "files": 787,
+          "archiveSha256": "a47ec3e9471698ced6308b305f6827420dd3208dbca3d981f365053e9021d6f1"
+        },
+        {
+          "packet": "V11",
+          "files": 841,
+          "archiveSha256": "eab3032b32f0b73f023880312e543014c98dd42fd592a60dff10be467e77fcf6"
+        }
+      ]
+    },
+    "originalBindings": [
+      {
+        "packet": "A11",
+        "declaredBindings": 57,
+        "result": "PASS original checkout and archive"
+      },
+      {
+        "packet": "B11",
+        "declaredBindings": 47,
+        "result": "PASS original checkout and archive"
+      },
+      {
+        "packet": "V11",
+        "declaredBindings": 106,
+        "result": "PASS original checkout and archive"
+      }
+    ],
+    "coordinator": {
+      "entries": 1946,
+      "manifest": "/private/tmp/iga-cycle11-preserved/coordinator-execution/manifest.json",
+      "manifestSha256": "ea608ab7773f412ab89c47a324058e689adce8f1fb4cd156e299aba224d0f698",
+      "archive": "/private/tmp/iga-cycle11-preserved/coordinator-execution/coordinator-original-execution.tar.gz",
+      "archiveSha256": "608c800efa0233feca7f2c7621ce54c56ac1ba260cdf3e559bbd8900edf7bcdb",
+      "archiveBytes": 203435405,
+      "result": "PASS: every archive entry independently rehashed"
+    },
+    "note": "Worker metadata binds original sealed checkout/archive, not final formatter-corrected source. All2415 worker and1946 coordinator entries independently rehashed. Original browser bytes, reports, logs, separate review replays and needed Release binaries retained in private TMP archives."
+  },
+  "supplementalPreservation": {
+    "archive": "/private/tmp/iga-cycle11-preserved/coordinator-execution/supplemental-closure.tar.gz",
+    "archiveSha256": "f569cc321197620159bce646adff14fc5da7d071dfbe5794bc1207e0836a14bf",
+    "entries": [
+      {
+        "path": "iga-cycle11-ci-cli-correction-replay.log",
+        "sha256": "1e859d38264a84de2b21ba4085650f62e0505f4e2f00768c7ecc20653a52d636",
+        "bytes": 225
+      },
+      {
+        "path": "iga-cycle11-ci-launch-review-0lr8l2ti/empty.html",
+        "sha256": "a7540aced9caa64a6a9338f33d5d26b9981d189a30ef30d28cdadc7cb2e6e990",
+        "bytes": 9771
+      },
+      {
+        "path": "iga-cycle11-ci-launch-review-0lr8l2ti/hostile.html",
+        "sha256": "6fb857aa442c1ef9483fcab10a6461f7b46af7d336044264937de52372f648c5",
+        "bytes": 40906
+      },
+      {
+        "path": "iga-cycle11-ci-launch-review-0lr8l2ti/normal.html",
+        "sha256": "1c358da22e64220bb9c40a774369bfe5670537d7fdccba42836e0ef9c8646227",
+        "bytes": 21445
+      },
+      {
+        "path": "iga-cycle11-ci-launch-review-0lr8l2ti/preview-manifest.json",
+        "sha256": "dbf3a75f1b1973807ce1fe6d097677656048e62a64cd4fe656ca81263033d06e",
+        "bytes": 53936
+      },
+      {
+        "path": "iga-cycle11-ci-launch-review-0lr8l2ti/review-proof.json",
+        "sha256": "add6852edf32bb8117b52477ea4d2c09451609815c0b9391f7e78b664280ae05",
+        "bytes": 2600
+      },
+      {
+        "path": "iga-cycle11-frozen-source.json",
+        "sha256": "56c9ba3e6558d2e2d81aeccc039f9e7208357509d4a855d8b5f38bff5eb05c96",
+        "bytes": 89949
+      },
+      {
+        "path": "iga-cycle11-linux-second-failure.log",
+        "sha256": "7610d686a3cb9164e043cf687b8ed956e71437d8064e76082240c048197d7c6b",
+        "bytes": 137413
+      },
+      {
+        "path": "iga-cycle11-original-binding-proof.json",
+        "sha256": "b07a8856a61180024306b21898a38e4c6780836be602aa6602dce5845a588cfa",
+        "bytes": 331
+      },
+      {
+        "path": "iga-cycle11-worker-cleanup-proof.json",
+        "sha256": "0b2b10b4179dc6de59538a44134ac6938e0aa2209e845abe2b054141bcae5fc9",
+        "bytes": 684
+      }
+    ],
+    "result": "PASS all supplemental entries rehashed"
+  },
+  "cleanup": [
+    {
+      "packet": "A11",
+      "head": "4f7e1dfb1a7eb0df9ae026e01405dad6e377bea1",
+      "archiveSha256": "46e3309b313680e02c886f1456d9ffbea217a0312513eb5d841b9df85b886f45",
+      "cleanBeforeRemoval": true,
+      "removed": true
+    },
+    {
+      "packet": "B11",
+      "head": "72320c198290b132b8a651bf572fa598397e8b04",
+      "archiveSha256": "a47ec3e9471698ced6308b305f6827420dd3208dbca3d981f365053e9021d6f1",
+      "cleanBeforeRemoval": true,
+      "removed": true
+    },
+    {
+      "packet": "V11",
+      "head": "c4162838e99feb94aaea3c87d183571b7dfb3306",
+      "archiveSha256": "eab3032b32f0b73f023880312e543014c98dd42fd592a60dff10be467e77fcf6",
+      "cleanBeforeRemoval": true,
+      "removed": true
+    }
+  ],
+  "siteStart": {
+    "canonicalStartCommit": "301f6c9ad549d9c3fa6a4addc42a521d40fab9eb",
+    "siteSourceCommit": "3c53c19f143d312586a58d79e9a36d9913dab30c",
+    "version": 75,
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_656dc40274048191b1897395ba756f71",
+    "deploymentId": "appgdep_6ac0059ade908191934eb8f7c92833aa",
+    "deploymentStatus": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "access": "owner-only custom 1owner/0external/0groups",
+    "qa": "desktop/mobile320taskrolescompletionlinksnav noerrors/overflow;59immutable repository links/fragments verified",
+    "qaFile": "/private/tmp/iga-cycle11-start-site-final-qa.json"
+  },
+  "site": {
+    "status": "PENDING matching private closure publication",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "audience": "Existing owner-only custom policy preserved"
   }
 }
