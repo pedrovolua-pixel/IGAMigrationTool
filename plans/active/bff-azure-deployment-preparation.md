@@ -41,3 +41,12 @@ Coordinator: integrate reviewed packets, run all applicable configured checks in
 - Repository owner: a refreshed priced Azure session within the remaining $50 monthly allowance, exact scope and disposal; complete when approved and verified runtime evidence preserved before cleanup.
 
 Canonical records remain authoritative. Update and publish the existing owner-private board as these packets and dependencies change; retain completed cycle06 and existing live-source tasks.
+
+
+## Execution progress — 2026-10-02
+
+DP01 author commit `a20d9157180ee9cd32bf13875fda43eefe38a02b` received non-author source/input review and an independently repeated 254-assertion process run. Coordinator integration passed pinned 43-project locked restore, whole-solution formatting and Release build (zero warnings/errors), 72 transport, 27 ticket, 2546 human-policy assertions, dependency boundaries, exact container context and the actual 254-assertion disabled host run with no SQL/proxy trap connections. Actual Docker build/run awaits hosted Linux CI; no input check substitutes for it.
+
+DP02 initial commit `e6d2784bf0f85d7a6245e551e563031806227ccd` passed 13 author and independently repeated negative/composition fixture methods. Review found its initial SPDX validation did not bind the described container to the scanned config ID; worker correction and non-author re-review are required before integration. Correction `b77b7120533d84eb386c752b47fdb18345ebe57e` now binds exactly one described CONTAINER root and unique ImageID annotation to the scanned config ID; 14 author, independent reviewer and coordinator fixture methods passed. The reproduced unrelated-document case now denies. No blocking review finding remains. Actual scan, acceptance, source-to-image build provenance, signer/restricted-store and promotion remain NOT VERIFIED.
+
+The independently reviewed D01/D02 exact local contract has been presented to the technical/security owner; approval is pending. D03/D04 production schemas/authority/audit/proxy/keys remain explicitly deferred. A read-only [Azure preflight](../../docs/development/azure-bff-next-session-preflight.md) observed delayed current-month cost/budget readings; capacity, rates, exact image/bindings and fresh priced session approval remain open. No resource or grant was created.
