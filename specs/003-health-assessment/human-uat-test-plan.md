@@ -1,9 +1,9 @@
 # Human UAT Test Plan: One Identity Manager Health-Assessment Pilot
 
-Status: Draft — execution starts only when the entry criteria for the selected checkpoint are met  
-Derived from: [product specification](product-spec.md), [approved technical test plan](test-plan.md), [evaluation plan](evaluation-plan.md), [capability matrix](capability-matrix.md), and [local build plan](../../plans/active/one-identity-local-pilot-build.md)  
-Owner: Quality owner  
-Human roles: Pilot UAT lead, consultant, One Identity SME, customer risk owner, database owner, accessibility reviewer, security reviewer  
+Status: Draft — execution starts only when the entry criteria for the selected checkpoint are met
+Derived from: [product specification](product-spec.md), [approved technical test plan](test-plan.md), [evaluation plan](evaluation-plan.md), [capability matrix](capability-matrix.md), and [local build plan](../../plans/active/one-identity-local-pilot-build.md)
+Owner: Quality owner
+Human roles: Pilot UAT lead, consultant, One Identity SME, customer risk owner, database owner, accessibility reviewer, security reviewer
 Last updated: 2026-10-02
 
 ## Purpose and checkpoints
