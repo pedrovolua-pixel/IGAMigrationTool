@@ -1,0 +1,45 @@
+{
+  "recordedUtc": "2026-10-02T02:00:00.882899+00:00",
+  "scope": "Development bootstrap preparation only; not product BFF/worker or G1 acceptance",
+  "sourceBase": "75e654d",
+  "sourceFilesSha256": {
+    ".github/workflows/azure-application-package.yml": "8ac0cc5284ab7a9dc5c62e9f0ba21721250f7f6379317558c92a3b230a903727",
+    "infra/bicep/modules/pilot-development-bootstrap-apps.bicep": "5c9e536a5b0ebed0448cefa6b15da14acd7bbcbea883f514d81ea9456b3223af",
+    "infra/bicep/pilot-development-bootstrap-apps.bicep": "bd12471e7c50fd27c730b55c6b29016a906305210593ba281b53fb8d8edae529",
+    "infra/containers/azure-development-bootstrap.Dockerfile": "6f3966a4388a80a4f2251dc7daa3a6141912229ca8af1639cccb32d44c5c6bad",
+    "infra/containers/azure-development-bootstrap.Dockerfile.dockerignore": "70cf21bf2ff518568f880b08d322458fa6796519c4f348a08d29405842b75699",
+    "infra/containers/azure-development-bootstrap.images.lock.json": "ec209ff57a634c2be02500581716cebee4a254be50a99d3ba735e72ccb889042",
+    "infra/containers/build-development-bootstrap.py": "69442d39b5d6feb88750ef14a1c1054313aeb347a2c69f2f651fa8a4a6f2812b",
+    "src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj": "80de1c4ca3ff607f818458e1f28fee8eede2af370d95f6e3f16d0939eeb13a1a",
+    "src/server/hosts/AzureDevelopmentBootstrap/Program.cs": "6fe416e0e068183b754f973bf3787b28d075d78842fb810dfd58ff35877b39c4",
+    "src/server/hosts/AzureDevelopmentBootstrap/packages.lock.json": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb",
+    "tests/infrastructure/AzureApplicationPackage/hosting-policy.py": "3622a9db4e7f26f380a56bd6ba0afeceedef5edee6b785e062dbbbad4af488e5",
+    "tests/integration/AzureDevelopmentBootstrap/container_smoke.py": "024a53880f1589b8cd0929ccd69bde7963c3c6c5f5a25d4e0cccf7ce59354f00",
+    "tests/integration/AzureDevelopmentBootstrap/verify.py": "2216dcc9db74cc87bef7157651d5b600caffdcd3eeb1d76b4c4b6c4f37b0b337"
+  },
+  "checks": {
+    "sdk": "10.0.401",
+    "bicep": "0.47.16",
+    "lockedRestore": "PASS",
+    "fullSolutionBuild": "PASS:25 projects;zero warnings/errors",
+    "fullSolutionFormat": "PASS after sandbox IPC rerun",
+    "publish": "PASS",
+    "architecture": "PASS:7policy+4scan cases",
+    "packageVulnerabilityInventory": "PASS:framework-only host, no NuGet packages",
+    "actualProcess": "PASS:8startup refusals;2probes;31method/path refusals;gracefulSIGTERM;no worker HTTP;no protected logs",
+    "compiledHostingPolicy": "PASS:44unsafe mutations rejected",
+    "bicepBuildLint": "PASS:root+module",
+    "inputLock": "PASS:realMicrosoftmanifestbytes/digests+linuxamd64 verified",
+    "secretScan": "PASS:wholeworkingtree redacted",
+    "containerBuildRun": "NOT VERIFIED:pending CI",
+    "supplyChain": "NOT VERIFIED:image scan,SBOM,license,provenance/signatures"
+  },
+  "azureMutation": false,
+  "G1": "NOT VERIFIED",
+  "remaining": [
+    "RealBFF/worker contracts and integration",
+    "Private registry builder/publication/pulls and reviewed grants",
+    "Fresh spending/capacity approval before timed deployment",
+    "Corrected foundation full replay and all required live gate tests"
+  ]
+}

@@ -6,6 +6,7 @@
   <Folder Name="/src/" />
   <Folder Name="/src/server/" />
   <Folder Name="/src/server/hosts/">
+    <Project Path="src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj" />
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">

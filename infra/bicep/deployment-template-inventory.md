@@ -52,3 +52,7 @@ For exact compiled-template SHA-256 fingerprints, input-subset fingerprint, repa
 Build/lint instructions and limits: [Bicep README](README.md). The [bootstrap workflow](../../.github/workflows/bootstrap-checks.yml) runs the infrastructure policy suites, including the five foundation Python checks. Compiled-template checks do not establish live networking, authorization, recovery, workload behavior or G1 acceptance.
 
 [Detailed architecture diagram and technical notes](../../architecture/diagrams/05-azure-development-foundation.md) maps this source to the tested topology. This documentation adds no deployment, access grant or new policy.
+
+## Subsequent application-package templates (not deployed)
+
+[`pilot-development-bootstrap-apps.bicep`](pilot-development-bootstrap-apps.bicep),its[private hosting module](modules/pilot-development-bootstrap-apps.bicep) and [intentionally unresolved example](environments/pilot-dev-bootstrap.parameters.example.json) prepare inert diagnostic web/worker hosting. They were not used in the earlier foundation session and add no access grants. See[package handoff](../../docs/development/azure-application-package.md) for concrete image/private-pull/product dependencies.
