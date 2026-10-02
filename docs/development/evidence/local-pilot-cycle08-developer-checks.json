@@ -2529,5 +2529,15 @@
     "audience": "Owner-private custom, one owner, zero external viewers/groups confirmed",
     "status": "PUBLICATION_PENDING",
     "humanTaskCount": 11
+  },
+  "relatedCanonicalObservation": {
+    "feature": "Separate BFF authentication contract cycle",
+    "localApprovalCommit": "543cf0acb150a50d1b4c01d30af78c0ee1bfa534",
+    "sourcePath": "docs/development/bff-production-contract-proposal.md",
+    "sourceSha256": "a7ebb77e5cf8c49e2e99fd4427210f4206a3ae901b4c7cb1ba4ff93a5ed662b0",
+    "observation": "Attributed repository-owner D01/D02 local approval is recorded in isolated canonical commit. Its implementation is RUNNING; D03/D04 production decisions and D05 live/image acceptance remain open. No human approval is inferred from agent review.",
+    "publicDraftHeadObserved": "8a746dc08785534e08f15d795dab050624825f89",
+    "publicDraft": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/2",
+    "publicationLimit": "Local approval record not yet on observed public draft head. Cycle08 coordinator does not modify or publish BFF code/records. Board may reflect the recorded local approval and deferred D03/D04 tasks with this source note and the existing public proposal."
   }
 }
