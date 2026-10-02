@@ -1,0 +1,1114 @@
+{
+  "recordedUtc": "2026-10-02",
+  "verifiedSourceCommit": "6c53e6676b07930fb6ded3db8fa92b96cf8c0301",
+  "finalBrowserArtifacts": "docs/development/evidence/local-pilot-cycle07-final-browser-artifacts.json",
+  "scope": "Approved bounded read-only synthetic developer cycle07; no milestone/live gate acceptance",
+  "sourceFiles": [
+    ".github/workflows/azure-application-package.yml",
+    ".github/workflows/bootstrap-checks.yml",
+    "Directory.Build.props",
+    "IgaMigrationTool.slnx",
+    "contracts/local-demo/demo-v1.schema.json",
+    "contracts/local-demo/generate-types.mjs",
+    "global.json",
+    "infra/bicep/environments/pilot-dev-bootstrap.parameters.example.json",
+    "infra/bicep/environments/pilot-dev-foundation.parameters.json",
+    "infra/bicep/environments/pilot-dev-spike.parameters.json",
+    "infra/bicep/modules/engineering-evidence-roles.bicep",
+    "infra/bicep/modules/engineering-evidence-store.bicep",
+    "infra/bicep/modules/pilot-container-apps-environment.bicep",
+    "infra/bicep/modules/pilot-container-registry.bicep",
+    "infra/bicep/modules/pilot-development-bootstrap-apps.bicep",
+    "infra/bicep/modules/pilot-key-vault.bicep",
+    "infra/bicep/modules/pilot-monitor-private-link.bicep",
+    "infra/bicep/modules/pilot-network-egress.bicep",
+    "infra/bicep/modules/pilot-observability.bicep",
+    "infra/bicep/modules/pilot-postgresql.bicep",
+    "infra/bicep/modules/pilot-private-dns.bicep",
+    "infra/bicep/modules/pilot-service-bus-namespace.bicep",
+    "infra/bicep/modules/pilot-service-bus-work-queue.bicep",
+    "infra/bicep/modules/pilot-service-bus-work-roles.bicep",
+    "infra/bicep/modules/pilot-workload-identity.bicep",
+    "infra/bicep/pilot-broker-network-spike.bicep",
+    "infra/bicep/pilot-development-bootstrap-apps.bicep",
+    "infra/bicep/pilot-development-foundation.bicep",
+    "infra/containers/azure-development-bootstrap.images.lock.json",
+    "infra/containers/build-development-bootstrap.py",
+    "infra/entra/pilot-bff.application.json",
+    "migrations/assessment-runs/001-initial.sql",
+    "migrations/finding-review/001-initial.sql",
+    "src/collector/CollectorHost/AssemblyInfo.cs",
+    "src/collector/CollectorHost/CollectorArguments.cs",
+    "src/collector/CollectorHost/CollectorConfig.cs",
+    "src/collector/CollectorHost/CollectorHost.csproj",
+    "src/collector/CollectorHost/CollectorRunCoordinator.cs",
+    "src/collector/CollectorHost/CollectorService.cs",
+    "src/collector/CollectorHost/CollectorServiceRunner.cs",
+    "src/collector/CollectorHost/CrossProcessRunLease.cs",
+    "src/collector/CollectorHost/DailySchedule.cs",
+    "src/collector/CollectorHost/EncryptedCheckpointStore.cs",
+    "src/collector/CollectorHost/EncryptedPageStageStore.cs",
+    "src/collector/CollectorHost/EncryptedRunStartStore.cs",
+    "src/collector/CollectorHost/LocalRunDirectoryCapacity.cs",
+    "src/collector/CollectorHost/Program.cs",
+    "src/collector/CollectorHost/WindowsCheckpointKeyStore.cs",
+    "src/collector/CollectorHost/WindowsProtectedConfig.cs",
+    "src/collector/CollectorHost/WindowsRunDirectoryProvisioner.cs",
+    "src/collector/CollectorHost/packages.lock.json",
+    "src/collector/CollectorSafety/CollectorRunGate.cs",
+    "src/collector/CollectorSafety/CollectorSafety.csproj",
+    "src/collector/CollectorSafety/FieldMinimizer.cs",
+    "src/collector/CollectorSafety/LocalRetentionWindow.cs",
+    "src/collector/CollectorSafety/OfflinePayloadEncryptionPrimitive.cs",
+    "src/collector/CollectorSafety/PageBudget.cs",
+    "src/collector/CollectorSafety/PageCheckpointVerifier.cs",
+    "src/collector/CollectorSafety/PermissionAttestation.cs",
+    "src/collector/CollectorSafety/QueryApplicability.cs",
+    "src/collector/CollectorSafety/StaticSqlShapeValidator.cs",
+    "src/collector/CollectorSafety/packages.lock.json",
+    "src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj",
+    "src/server/hosts/AzureDevelopmentBootstrap/Program.cs",
+    "src/server/hosts/AzureDevelopmentBootstrap/packages.lock.json",
+    "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoMaturityProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoRecommendationGuidanceProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoReportDraftProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+    "src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+    "src/server/hosts/LocalConsultantDemo/Program.cs",
+    "src/server/hosts/LocalConsultantDemo/packages.lock.json",
+    "src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj",
+    "src/server/modules/AssessmentCoverage/CoverageCompletionProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageCountProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageLimitationProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageProgressProjector.cs",
+    "src/server/modules/AssessmentCoverage/CoverageReconciler.cs",
+    "src/server/modules/AssessmentCoverage/ExecutableCoverageProjector.cs",
+    "src/server/modules/AssessmentCoverage/packages.lock.json",
+    "src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj",
+    "src/server/modules/AssessmentMaturity/MaturityContracts.cs",
+    "src/server/modules/AssessmentMaturity/PilotMaturityProjector.cs",
+    "src/server/modules/AssessmentMaturity/SyntheticMaturityFixturePack.cs",
+    "src/server/modules/AssessmentMaturity/packages.lock.json",
+    "src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj",
+    "src/server/modules/AssessmentOrchestration/CapabilityBoundCoverageProjector.cs",
+    "src/server/modules/AssessmentOrchestration/CapabilityStartGuard.cs",
+    "src/server/modules/AssessmentOrchestration/SyntheticBaselineInventoryPlanner.cs",
+    "src/server/modules/AssessmentOrchestration/packages.lock.json",
+    "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+    "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+    "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+    "src/server/modules/AssessmentRuns/SyntheticDemoAnalysisAdapter.cs",
+    "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+    "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+    "src/server/modules/AssessmentRuns/SyntheticRunDbContext.cs",
+    "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs",
+    "src/server/modules/AssessmentRuns/packages.lock.json",
+    "src/server/modules/AssessmentScoring/AssessmentScoring.csproj",
+    "src/server/modules/AssessmentScoring/PilotHealthScorer.cs",
+    "src/server/modules/AssessmentScoring/ScoringContracts.cs",
+    "src/server/modules/AssessmentScoring/packages.lock.json",
+    "src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj",
+    "src/server/modules/DeterministicAnalysis/SyntheticAnalysisContracts.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticAnalysisEngine.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticAnalysisFixturePack.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticCanonicalDigest.cs",
+    "src/server/modules/DeterministicAnalysis/SyntheticRuleEvaluator.cs",
+    "src/server/modules/DeterministicAnalysis/packages.lock.json",
+    "src/server/modules/EvidenceGovernance/ArtifactIntegrityVerifier.cs",
+    "src/server/modules/EvidenceGovernance/EvidenceGovernance.csproj",
+    "src/server/modules/EvidenceGovernance/GateCheckBundleRules.cs",
+    "src/server/modules/EvidenceGovernance/GateCheckBundleVerifier.cs",
+    "src/server/modules/EvidenceGovernance/GateCheckBundleWriter.cs",
+    "src/server/modules/EvidenceGovernance/GateEvidenceRetention.cs",
+    "src/server/modules/EvidenceGovernance/GateSigningTrustRegistry.cs",
+    "src/server/modules/EvidenceGovernance/NormalPromotionEvidencePreflight.cs",
+    "src/server/modules/EvidenceGovernance/OwnerOverrideTrustRegistry.cs",
+    "src/server/modules/EvidenceGovernance/PilotOwnerOverrideBundle.cs",
+    "src/server/modules/EvidenceGovernance/PromotionMachineEvidencePreflight.cs",
+    "src/server/modules/EvidenceGovernance/ReviewEvidenceCoverage.cs",
+    "src/server/modules/EvidenceGovernance/ReviewerDecisionBundle.cs",
+    "src/server/modules/EvidenceGovernance/ReviewerTrustRegistry.cs",
+    "src/server/modules/EvidenceGovernance/packages.lock.json",
+    "src/server/modules/FindingReview/FindingReview.csproj",
+    "src/server/modules/FindingReview/SyntheticReviewContracts.cs",
+    "src/server/modules/FindingReview/SyntheticReviewDigest.cs",
+    "src/server/modules/FindingReview/SyntheticReviewMigration.cs",
+    "src/server/modules/FindingReview/SyntheticReviewPolicy.cs",
+    "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+    "src/server/modules/FindingReview/packages.lock.json",
+    "src/server/modules/RecommendationGuidance/GuidanceContracts.cs",
+    "src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj",
+    "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+    "src/server/modules/RecommendationGuidance/packages.lock.json",
+    "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs",
+    "src/server/modules/ReportDrafts/ReportDraftContracts.cs",
+    "src/server/modules/ReportDrafts/ReportDrafts.csproj",
+    "src/server/modules/ReportDrafts/StructuredDraftMarkdown.cs",
+    "src/server/modules/ReportDrafts/packages.lock.json",
+    "src/web/.prettierrc.json",
+    "src/web/index.html",
+    "src/web/package-lock.json",
+    "src/web/package.json",
+    "src/web/src/AnalysisView.tsx",
+    "src/web/src/App.tsx",
+    "src/web/src/DraftReportView.tsx",
+    "src/web/src/MaturityView.tsx",
+    "src/web/src/RecommendationGuidanceView.css",
+    "src/web/src/RecommendationGuidanceView.tsx",
+    "src/web/src/ReviewPanel.tsx",
+    "src/web/src/api.ts",
+    "src/web/src/assets.d.ts",
+    "src/web/src/demo-contract.generated.ts",
+    "src/web/src/main.tsx",
+    "src/web/src/styles.css",
+    "src/web/tsconfig.json",
+    "tests/architecture/BoundaryChecks/BoundaryChecks.csproj",
+    "tests/architecture/BoundaryChecks/Program.cs",
+    "tests/architecture/BoundaryChecks/ProjectBoundaryVerifier.cs",
+    "tests/architecture/BoundaryChecks/packages.lock.json",
+    "tests/e2e/analysis-scoring/verify.mjs",
+    "tests/e2e/consultant-demo/package-lock.json",
+    "tests/e2e/consultant-demo/package.json",
+    "tests/e2e/consultant-demo/verify.mjs",
+    "tests/e2e/draft-reports/bind-artifacts.mjs",
+    "tests/e2e/draft-reports/browser-support.mjs",
+    "tests/e2e/draft-reports/host-harness.mjs",
+    "tests/e2e/draft-reports/verify.mjs",
+    "tests/e2e/recommendation-guidance/bind-artifacts.mjs",
+    "tests/e2e/recommendation-guidance/browser-support.mjs",
+    "tests/e2e/recommendation-guidance/host-harness.mjs",
+    "tests/e2e/recommendation-guidance/verify.mjs",
+    "tests/e2e/review-maturity/bind-artifacts.mjs",
+    "tests/e2e/review-maturity/browser-support.mjs",
+    "tests/e2e/review-maturity/verify.mjs",
+    "tests/infrastructure/AzureApplicationPackage/hosting-policy.py",
+    "tests/infrastructure/AzureFoundation/composition-policy.py",
+    "tests/infrastructure/AzureFoundation/compute-policy.py",
+    "tests/infrastructure/AzureFoundation/entra-policy.py",
+    "tests/infrastructure/AzureFoundation/postgresql-policy.py",
+    "tests/infrastructure/AzureFoundation/private-services-policy.py",
+    "tests/infrastructure/EvidenceStorePolicy/EvidenceStorePolicy.csproj",
+    "tests/infrastructure/EvidenceStorePolicy/Program.cs",
+    "tests/infrastructure/EvidenceStorePolicy/packages.lock.json",
+    "tests/infrastructure/NetworkEgressPolicy/AddressPlanValidator.cs",
+    "tests/infrastructure/NetworkEgressPolicy/NetworkEgressPolicy.csproj",
+    "tests/infrastructure/NetworkEgressPolicy/Program.cs",
+    "tests/infrastructure/NetworkEgressPolicy/packages.lock.json",
+    "tests/infrastructure/ServiceBusPolicy/Program.cs",
+    "tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj",
+    "tests/infrastructure/ServiceBusPolicy/packages.lock.json",
+    "tests/integration/AnalysisScoring.Tests/AnalysisAndStoreCases.cs",
+    "tests/integration/AnalysisScoring.Tests/AnalysisScoring.Tests.csproj",
+    "tests/integration/AnalysisScoring.Tests/DurableCases.cs",
+    "tests/integration/AnalysisScoring.Tests/Program.cs",
+    "tests/integration/AnalysisScoring.Tests/ScoringFixture.cs",
+    "tests/integration/AnalysisScoring.Tests/packages.lock.json",
+    "tests/integration/AzureDevelopmentBootstrap/container_smoke.py",
+    "tests/integration/AzureDevelopmentBootstrap/verify.py",
+    "tests/integration/DurableAssessment.Tests/DurableAssessment.Tests.csproj",
+    "tests/integration/DurableAssessment.Tests/Program.cs",
+    "tests/integration/DurableAssessment.Tests/SyntheticFixture.cs",
+    "tests/integration/DurableAssessment.Tests/packages.lock.json",
+    "tests/integration/RecommendationGuidance.Tests/Check.cs",
+    "tests/integration/RecommendationGuidance.Tests/CoreCases.cs",
+    "tests/integration/RecommendationGuidance.Tests/IndependentCanonical.cs",
+    "tests/integration/RecommendationGuidance.Tests/InputFixture.cs",
+    "tests/integration/RecommendationGuidance.Tests/PersistenceCases.cs",
+    "tests/integration/RecommendationGuidance.Tests/Program.cs",
+    "tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj",
+    "tests/integration/RecommendationGuidance.Tests/SavedGuidanceFixture.cs",
+    "tests/integration/RecommendationGuidance.Tests/canonical-golden-provenance.json",
+    "tests/integration/RecommendationGuidance.Tests/canonical-golden.json",
+    "tests/integration/RecommendationGuidance.Tests/packages.lock.json",
+    "tests/integration/ReportDrafts.Tests/Check.cs",
+    "tests/integration/ReportDrafts.Tests/CoreCases.cs",
+    "tests/integration/ReportDrafts.Tests/CoreFixture.cs",
+    "tests/integration/ReportDrafts.Tests/MarkdownCases.cs",
+    "tests/integration/ReportDrafts.Tests/PersistenceCases.cs",
+    "tests/integration/ReportDrafts.Tests/Program.cs",
+    "tests/integration/ReportDrafts.Tests/ReportDrafts.Tests.csproj",
+    "tests/integration/ReportDrafts.Tests/SavedDraftFixture.cs",
+    "tests/integration/ReportDrafts.Tests/canonical-golden-provenance.json",
+    "tests/integration/ReportDrafts.Tests/canonical-golden.json",
+    "tests/integration/ReportDrafts.Tests/packages.lock.json",
+    "tests/integration/ReviewMaturity.Tests/BridgeCases.cs",
+    "tests/integration/ReviewMaturity.Tests/Check.cs",
+    "tests/integration/ReviewMaturity.Tests/HistoricalGoldens.cs",
+    "tests/integration/ReviewMaturity.Tests/MaturityCases.cs",
+    "tests/integration/ReviewMaturity.Tests/MaturityFixtures.cs",
+    "tests/integration/ReviewMaturity.Tests/Program.cs",
+    "tests/integration/ReviewMaturity.Tests/ReviewFixtures.cs",
+    "tests/integration/ReviewMaturity.Tests/ReviewMaturity.Tests.csproj",
+    "tests/integration/ReviewMaturity.Tests/ReviewPolicyCases.cs",
+    "tests/integration/ReviewMaturity.Tests/ReviewStoreCases.cs",
+    "tests/integration/ReviewMaturity.Tests/historical-baseline-goldens.json",
+    "tests/integration/ReviewMaturity.Tests/packages.lock.json",
+    "tests/integration/SyntheticPilotFlow.Tests/Program.cs",
+    "tests/integration/SyntheticPilotFlow.Tests/SyntheticBaselineFlowCases.cs",
+    "tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj",
+    "tests/integration/SyntheticPilotFlow.Tests/packages.lock.json",
+    "tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj",
+    "tests/unit/AssessmentCoverage.Tests/CoverageCompletionChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/CoverageCountChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/CoverageLimitationChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/CoverageProgressChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/ExecutableCoverageChecks.cs",
+    "tests/unit/AssessmentCoverage.Tests/Program.cs",
+    "tests/unit/AssessmentCoverage.Tests/packages.lock.json",
+    "tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj",
+    "tests/unit/AssessmentMaturity.Tests/Program.cs",
+    "tests/unit/AssessmentMaturity.Tests/packages.lock.json",
+    "tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj",
+    "tests/unit/AssessmentOrchestration.Tests/CapabilityBoundCoverageCases.cs",
+    "tests/unit/AssessmentOrchestration.Tests/Program.cs",
+    "tests/unit/AssessmentOrchestration.Tests/SyntheticBaselineInventoryCases.cs",
+    "tests/unit/AssessmentOrchestration.Tests/packages.lock.json",
+    "tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj",
+    "tests/unit/AssessmentRuns.Tests/Program.cs",
+    "tests/unit/AssessmentRuns.Tests/packages.lock.json",
+    "tests/unit/AssessmentScoring.Tests/AssessmentScoring.Tests.csproj",
+    "tests/unit/AssessmentScoring.Tests/Program.cs",
+    "tests/unit/AssessmentScoring.Tests/packages.lock.json",
+    "tests/unit/CollectorHost.Tests/CheckpointStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj",
+    "tests/unit/CollectorHost.Tests/LeaseCrashRecoveryChecks.cs",
+    "tests/unit/CollectorHost.Tests/PageStageStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/Program.cs",
+    "tests/unit/CollectorHost.Tests/RunCoordinatorChecks.cs",
+    "tests/unit/CollectorHost.Tests/RunStartStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/WindowsKeyStoreChecks.cs",
+    "tests/unit/CollectorHost.Tests/WindowsRunDirectoryChecks.cs",
+    "tests/unit/CollectorHost.Tests/WindowsStageTestDirectory.cs",
+    "tests/unit/CollectorHost.Tests/packages.lock.json",
+    "tests/unit/CollectorSafety.Tests/CollectorRunGateChecks.cs",
+    "tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj",
+    "tests/unit/CollectorSafety.Tests/FieldMinimizerChecks.cs",
+    "tests/unit/CollectorSafety.Tests/LocalRetentionWindowChecks.cs",
+    "tests/unit/CollectorSafety.Tests/OfflinePayloadEncryptionChecks.cs",
+    "tests/unit/CollectorSafety.Tests/PageBudgetChecks.cs",
+    "tests/unit/CollectorSafety.Tests/PageCheckpointChecks.cs",
+    "tests/unit/CollectorSafety.Tests/Program.cs",
+    "tests/unit/CollectorSafety.Tests/QueryApplicabilityChecks.cs",
+    "tests/unit/CollectorSafety.Tests/StaticSqlShapeChecks.cs",
+    "tests/unit/CollectorSafety.Tests/packages.lock.json",
+    "tests/unit/DeterministicAnalysis.Tests/DeterministicAnalysis.Tests.csproj",
+    "tests/unit/DeterministicAnalysis.Tests/Program.cs",
+    "tests/unit/DeterministicAnalysis.Tests/packages.lock.json",
+    "tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj",
+    "tests/unit/EvidenceGovernance.Tests/GateCheckBundleChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/GateCheckBundleWriterChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/GateEvidenceRetentionChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/GateSigningTrustChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/NormalPromotionEvidenceChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/OwnerOverrideTrustChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/PilotOwnerOverrideChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/Program.cs",
+    "tests/unit/EvidenceGovernance.Tests/PromotionMachineEvidenceChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/ReviewerDecisionChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/ReviewerTrustChecks.cs",
+    "tests/unit/EvidenceGovernance.Tests/packages.lock.json",
+    "tests/unit/FindingReview.Tests/FindingReview.Tests.csproj",
+    "tests/unit/FindingReview.Tests/Program.cs",
+    "tests/unit/FindingReview.Tests/packages.lock.json",
+    "tests/unit/RecommendationGuidance.Tests/GuidanceFixture.cs",
+    "tests/unit/RecommendationGuidance.Tests/Program.cs",
+    "tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj",
+    "tests/unit/RecommendationGuidance.Tests/golden-oracle.py",
+    "tests/unit/RecommendationGuidance.Tests/golden-payload.json",
+    "tests/unit/RecommendationGuidance.Tests/packages.lock.json",
+    "tests/unit/ReportDrafts.Tests/DraftFixture.cs",
+    "tests/unit/ReportDrafts.Tests/Program.cs",
+    "tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj",
+    "tests/unit/ReportDrafts.Tests/packages.lock.json",
+    "tests/unit/ReportMarkdown.Tests/MarkdownFixture.cs",
+    "tests/unit/ReportMarkdown.Tests/Program.cs",
+    "tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj",
+    "tests/unit/ReportMarkdown.Tests/packages.lock.json",
+    "tests/windows/collector-service-smoke.ps1"
+  ],
+  "sourceFileCount": 322,
+  "sourceSha256": "2bd93b8950129f7ac5c8132b98aecf909e1dcaf9681f93c4a67ab4e7c17b8225",
+  "sourceDigestMethod": "Sorted selected source/config/test paths: UTF8 relative path + NUL + exact bytes + NUL; excludes docs, ignored outputs and generated execution metadata.",
+  "workers": {
+    "R7": "720d1dbd8018ebcdf037a05aecaba7d0e293c853",
+    "U7": "4f42ed6cff89b705072017034852fce6f0116380",
+    "V7": "45ef5c883f7d7defe73f3474db9d274a57502d60"
+  },
+  "transcripts": [
+    {
+      "path": "/private/tmp/iga-cycle07-browser-final.log",
+      "sha256": "54e1344217a9a50ac17717647d4e99386fdf3c1ee1860dac0bf70984e63e65b7"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-browser-frozen.log",
+      "sha256": "929faf503c65e0de0d6684430b8aa22dc084f30737cf54b3bbb061eb93e1bd2b"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-browser-regressions-before-key-fix.log",
+      "sha256": "403213e4d4c56b92b6f7a03feb885fed44ae23b37187e6f7453507e725df6aab"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-browser-regressions-initial.log",
+      "sha256": "7d6cbc3fd82fe09b92161fb848393313fcdb89646a9025d4119f56297231258d"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-browser-regressions.log",
+      "sha256": "403213e4d4c56b92b6f7a03feb885fed44ae23b37187e6f7453507e725df6aab"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-browser-shared-output-superseded.log",
+      "sha256": "54e1344217a9a50ac17717647d4e99386fdf3c1ee1860dac0bf70984e63e65b7"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-checks.log",
+      "sha256": "be552addb39c36e93d6694d7adad6eba82dec2bc1e0a3a85eba1a3ab050ca3cc"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-final-artifact-binding.log",
+      "sha256": "adfca3a12e501deafaf7565687dab5629b7d751222b90d1d0250a7c399f991b6"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-final-build.log",
+      "sha256": "587c95671fb990e7f82fdc7d17c3e93e7ecf4ec51182a1cdbcc2e742118154c8"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-final-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-final-restore.log",
+      "sha256": "5a8aae7b4b4d48c9fbc2cf281dfc95c0ae83b9ce3f2b90d1b3f5beabc23c1020"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-format-frontend-frozen.log",
+      "sha256": "da4f2e13f41f369319f3e04fc48a598dbea94a21ce7d7efea7f738e1b00afcd4"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-frontend-final.log",
+      "sha256": "8dbc6776315f77d3ad59fd9411995e2465569107e92e2b761bce74c5cf8b2901"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-frontend-frozen.log",
+      "sha256": "ebd97b7161a0419f24ad64ccac6355b673c4fda5e14ead344b215c52cf1cb782"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-host-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-hosting-policy.log",
+      "sha256": "188356cb66b736a70925bacb276b30eaa33168684aa17227f8c46ba9dfbc05dc"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-infra.log",
+      "sha256": "281e502cedfbda02eb20fbf5963360d7c02096e1239a1ae2e09bc9699fa2297f"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-initial-host-build.log",
+      "sha256": "5285ac1c8212070b06d7941299620410b5f9dd23bc348b02d553b18058467d06"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-initial-restore.log",
+      "sha256": "c7212f5dd8165ad1bbdf86b22758d93b8780d3d868521010825494492ba7c5e1"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-locked-restore.log",
+      "sha256": "6366d6f6a429eacc27d050f9b93d65bb955c113ba1fc9e5758f1901a861629b9"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-r7-repro-build.log",
+      "sha256": "1267a3439697061c565d4efd6320877efcb4fcdfbf040985bb76dedaf86f81f4"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-r7-repro-restore.log",
+      "sha256": "d4887b22618571811ef2b09d109a4be76555b6865083e3ef7027e20b67304d91"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-r7-repro-test.log",
+      "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-secret-scan.log",
+      "sha256": "8665cfd6e3cfe0064bac99a1b2aa5e2e7a7b7d924afd09e1248afa61b3d89cec"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-v7-review-portable.log",
+      "sha256": "7d909b9776d15446004b18e008fa3498c1bb29b4eb0656723f1783214cf7f60c"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-secret-scan-final.log",
+      "sha256": "336ba7e2e8b3c10bd3f83c1bfd3b1a3c65db15ea1c5d2a6551caba9a5ca94371"
+    }
+  ],
+  "checks": {
+    "auditedLockedRestore": "PASS",
+    "wholeSolutionFormat": "PASS",
+    "releaseBuild": "PASS37projects zero warnings/errors",
+    "moduleAssertions": 287,
+    "componentRenderingAssertions": 47,
+    "independentPortableAssertions": 112,
+    "independentSourceAndPostgreSQLAssertions": 257,
+    "newGuidanceBrowserAssertions": 2980,
+    "substitutionCases": 44,
+    "currentSuitesAndCrossPublish": "PASS",
+    "frontendContractTypeFormatBuildAudit": "PASS zero vulnerabilities",
+    "infrastructureTemplates": 18,
+    "bootstrapHostingUnsafeDrifts": 44,
+    "secretScan": "PASS521 tracked/ownedfiles including final artifacts/closure; no leaks/allowlists",
+    "remotePartialCI": "PASS all configured Linux/Windows2022/2025 and Azure package jobs",
+    "privatePublication": "PASS confirmed owner-private deployment",
+    "historicalCoverageBrowserChecks": 404,
+    "historicalAnalysisBrowserAssertions": 738,
+    "historicalReviewBrowserAssertions": 2213,
+    "historicalDraftBrowserAssertions": 2176
+  },
+  "historicalBrowser": {
+    "consultant-demo": {
+      "status": "PASS",
+      "checks": 404,
+      "groups": [
+        "DEMO-001 strict transport and independent durable coverage golden",
+        "DEMO-002 actual keyboard start/progress/locks/reload/history/focus",
+        "DEMO-003 keyboard cancellation preserves incomplete durable results",
+        "DEMO-004 semantic/target/reflow/forced-colors engineering smoke",
+        "DEMO-006 actual host SIGKILL/reload/expired-lease keyboard resume/missing-only completion",
+        "DEMO-005 unavailable coverage and focused denied-action error recovery"
+      ],
+      "accessibility": [
+        {
+          "label": "desktop gap coverage",
+          "version": "4.13.0",
+          "passes": 30,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "label": "320px cancellation with expanded locks",
+          "version": "4.13.0",
+          "passes": 29,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ],
+      "browser": "145.0.7632.6",
+      "node": "v24.21.0",
+      "base": "http://127.0.0.1:5183",
+      "limitations": [
+        "Automated Chromium engineering smoke only; supported Windows browser and NVDA/Narrator acceptance NOT VERIFIED",
+        "Production identity/customer isolation, live source, scoring, AI and ServiceBus NOT VERIFIED"
+      ]
+    },
+    "analysis-scoring": {
+      "status": "PASS",
+      "assertions": 738,
+      "groups": [
+        "AS-API-001 real stored findings/provisional/publishable/quality/provenance precision goldens",
+        "AS-API-002 comparisons/mixed/gaps/explicit healthy/historical/cancelled",
+        "AS-API-003 hostile scope/weights/frozen lock/profile/origin/Host/unknown-resource",
+        "AS-UI-001 actual keyboard start/grouped original/reload/history immutable score",
+        "AS-UI-002 actual transient failure/keyboard read-only same-revision retry/stale projection denial",
+        "AS-UI-003 actual findings provenance/desktop390320/axe/forced-colors engineering smoke"
+      ],
+      "accessibility": [
+        {
+          "label": "desktop findings/original",
+          "version": "4.13.0",
+          "passes": 30,
+          "violations": [],
+          "incomplete": []
+        },
+        {
+          "label": "320px findings/original",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "color-contrast"
+          ]
+        }
+      ],
+      "browser": "145.0.7632.6",
+      "node": "v24.21.0",
+      "limitations": [
+        "Synthetic internal scoring only; no actual rule promotion, review/risk grant, publication, maturity or AI enabled",
+        "Full supported Windows browser/NVDA/Narrator acceptance NOT VERIFIED",
+        "Axe 320px findings/original incomplete:color-contrast; those rules are NOT VERIFIED"
+      ]
+    },
+    "review-maturity": {
+      "status": "PASS",
+      "assertions": 2213,
+      "groups": [
+        "RM-API-001 stored originals/current health/coherent snapshot/history/replay/maturity goldens",
+        "RM-API-002 defer penalty/health independence/mixed/gaps/historical read-only profile",
+        "RM-API-003 server-owned actor/scope/originals unsupported actions/body4KiB CSRF/Host/Origin",
+        "RM-UI-001 actual keyboard confirm/reject/comment/edit inert text/originals/history/reload",
+        "RM-UI-002 actual stale CAS focused recovery and cross-run response denial",
+        "RM-UI-005 committed-response-loss exact-event retry and delayed GET/POST selection races with visible score/history goldens",
+        "RM-UI-003 keyboard Defer and actual owned-host restart preserves durable history",
+        "RM-UI-004 desktop390320 expanded history/evidence/axe/forced-color engineering smoke"
+      ],
+      "accessibility": [
+        {
+          "label": "desktop review/history/maturity",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr"
+          ]
+        },
+        {
+          "label": "320px review/history/maturity",
+          "version": "4.13.0",
+          "passes": 33,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ],
+      "browser": "145.0.7632.6",
+      "node": "v24.21.0",
+      "ownedHostRestartExecuted": true,
+      "limitations": [
+        "Fixed synthetic reviewer identity, fictional maturity indicators only; no customer risk acceptance/publication/production authority",
+        "Full supported Windows/NVDA/Narrator acceptance NOT VERIFIED",
+        "Axe desktop review/history/maturity incomplete:aria-prohibited-attr; NOT VERIFIED",
+        "Axe 320px review/history/maturity incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+      ]
+    },
+    "draft-reports": {
+      "status": "PASS",
+      "assertions": 2176,
+      "groups": [
+        "DR-API-001 actual saved coherent draft, review change, immutable originals and hostile Markdown",
+        "DR-API-002 independent healthy/gap/mixed/weighted and historical profile literals",
+        "DR-UI-001 native summary/technical/inert Markdown, unique maturity, keyboard review refresh",
+        "DR-UI-002 source/version/digest/scope substitution refusal and same-revision retry",
+        "DR-UI-003 late old GET selection race remains bound to new run",
+        "DR-UI-004 actual process restart/reload reproducibility",
+        "DR-UI-005 desktop390320, expanded captured evidence, axe and native focus engineering checks"
+      ],
+      "accessibility": [
+        {
+          "label": "desktop expanded technical draft",
+          "version": "4.13.0",
+          "passes": 31,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr"
+          ]
+        },
+        {
+          "label": "320px expanded technical draft",
+          "version": "4.13.0",
+          "passes": 33,
+          "violations": [],
+          "incomplete": [
+            "aria-prohibited-attr",
+            "color-contrast"
+          ]
+        }
+      ],
+      "browser": "145.0.7632.6",
+      "node": "v24.21.0",
+      "ownedHostRestartExecuted": true,
+      "substitutionCases": [
+        "schema",
+        "published",
+        "Markdown version",
+        "canonical digest",
+        "run",
+        "review revision",
+        "baseline",
+        "profile",
+        "input digest",
+        "capability tuple",
+        "scripted digest",
+        "application lock",
+        "desired outcomes",
+        "analysis fixture",
+        "scoring digest",
+        "maturity digest",
+        "wrong scope"
+      ],
+      "limitations": [
+        "Fixed synthetic scope only; no durable ReportVersion, publication/export/customer authority",
+        "Full supported Windows/NVDA/Narrator/manual WCAG acceptance NOT VERIFIED",
+        "axe desktop expanded technical draft incomplete:aria-prohibited-attr; NOT VERIFIED",
+        "axe 320px expanded technical draft incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+      ]
+    }
+  },
+  "newGuidanceBrowser": {
+    "status": "PASS",
+    "assertions": 2980,
+    "groups": [
+      "RG-API-001 literal structured options/scoped IDs/canonical digest/captured review/immutable originals",
+      "RG-API-002 healthy/gaps/mixed/weighted and all four older-profile null compatibility",
+      "RG-UI-001 keyboard disclosure/actual finding review/focus/current-state/unverified complete visible options",
+      "RG-UI-002 source/content substitution refusal, focused same-revision retry and typed unavailable no fallback",
+      "RG-UI-003 held old response selection/abort/focus fence",
+      "RG-UI-003B post-GET async digest selection/abort/focus fence",
+      "RG-UI-004 actual owned host process restart and saved read reproducibility",
+      "RG-UI-005 hostile structured text, desktop390320, native table focus, forced colors and axe engineering evidence"
+    ],
+    "accessibility": [
+      {
+        "label": "desktop expanded guidance",
+        "version": "4.13.0",
+        "passes": 31,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr"
+        ]
+      },
+      {
+        "label": "320px expanded guidance",
+        "version": "4.13.0",
+        "passes": 33,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr",
+          "color-contrast"
+        ]
+      }
+    ],
+    "browser": "145.0.7632.6",
+    "node": "v24.21.0",
+    "ownedHostRestartExecuted": true,
+    "substitutionCases": [
+      "schema",
+      "status",
+      "content digest shape",
+      "run",
+      "run revision",
+      "state",
+      "review run",
+      "review revision",
+      "review digest",
+      "scope",
+      "baseline",
+      "profile",
+      "input",
+      "analysis fixture",
+      "analysis content",
+      "coverage",
+      "capability",
+      "frozen version",
+      "analysis lock",
+      "finding group duplicate",
+      "original title",
+      "current title",
+      "current state",
+      "context",
+      "finding revision",
+      "original digest",
+      "evidence reference",
+      "object",
+      "object type",
+      "module",
+      "option reviewed",
+      "duplicate option",
+      "option text",
+      "recovery",
+      "validation",
+      "references",
+      "assumptions",
+      "limitations",
+      "scoped option identity",
+      "unknown original option identity",
+      "paired original digests",
+      "paired evidence references",
+      "paired occurrence identities",
+      "option payload identity pairing"
+    ],
+    "limitations": [
+      "Fixed synthetic read-only unverified guidance; no advice approval, task/export, execution or customer authority",
+      "Full supported Windows/NVDA/Narrator/manual WCAG/CSV/PDF acceptance NOT VERIFIED",
+      "axe desktop expanded guidance incomplete:aria-prohibited-attr; NOT VERIFIED",
+      "axe 320px expanded guidance incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+    ]
+  },
+  "sealedWorkerGuidanceBrowser": {
+    "status": "PASS",
+    "assertions": 2941,
+    "groups": [
+      "RG-API-001 literal structured options/scoped IDs/canonical digest/captured review/immutable originals",
+      "RG-API-002 healthy/gaps/mixed/weighted and all four older-profile null compatibility",
+      "RG-UI-001 keyboard disclosure/actual finding review/focus/current-state/unverified complete visible options",
+      "RG-UI-002 source/content substitution refusal, focused same-revision retry and typed unavailable no fallback",
+      "RG-UI-003 held old response selection/abort/focus fence",
+      "RG-UI-003B post-GET async digest selection/abort/focus fence",
+      "RG-UI-004 actual owned host process restart and saved read reproducibility",
+      "RG-UI-005 hostile structured text, desktop390320, native table focus, forced colors and axe engineering evidence"
+    ],
+    "accessibility": [
+      {
+        "label": "desktop expanded guidance",
+        "version": "4.13.0",
+        "passes": 31,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr"
+        ]
+      },
+      {
+        "label": "320px expanded guidance",
+        "version": "4.13.0",
+        "passes": 33,
+        "violations": [],
+        "incomplete": [
+          "aria-prohibited-attr",
+          "color-contrast"
+        ]
+      }
+    ],
+    "browser": "145.0.7632.6",
+    "node": "v24.21.0",
+    "ownedHostRestartExecuted": true,
+    "substitutionCases": [
+      "schema",
+      "status",
+      "content digest shape",
+      "run",
+      "run revision",
+      "state",
+      "review run",
+      "review revision",
+      "review digest",
+      "scope",
+      "baseline",
+      "profile",
+      "input",
+      "analysis fixture",
+      "analysis content",
+      "coverage",
+      "capability",
+      "frozen version",
+      "analysis lock",
+      "finding group duplicate",
+      "original title",
+      "current title",
+      "current state",
+      "context",
+      "finding revision",
+      "original digest",
+      "evidence reference",
+      "object",
+      "object type",
+      "module",
+      "option reviewed",
+      "duplicate option",
+      "option text",
+      "recovery",
+      "validation",
+      "references",
+      "assumptions",
+      "limitations",
+      "scoped option identity",
+      "unknown original option identity",
+      "paired original digests",
+      "paired evidence references",
+      "paired occurrence identities",
+      "option payload identity pairing"
+    ],
+    "limitations": [
+      "Fixed synthetic read-only unverified guidance; no advice approval, task/export, execution or customer authority",
+      "Full supported Windows/NVDA/Narrator/manual WCAG/CSV/PDF acceptance NOT VERIFIED",
+      "axe desktop expanded guidance incomplete:aria-prohibited-attr; NOT VERIFIED",
+      "axe 320px expanded guidance incomplete:aria-prohibited-attr,color-contrast; NOT VERIFIED"
+    ]
+  },
+  "migrationChanges": "None; assessment001 and syntheticReview001 unchanged",
+  "dependencyVersionChanges": "None",
+  "limitations": [
+    "Configured CI is partial engineering evidence, not full merge/release gate",
+    "Axe aria-prohibited-attr incomplete at desktop/320 and color-contrast incomplete320 NOT VERIFIED",
+    "Full supported Windows/NVDA/Narrator/manual WCAG/CSV/PDF NOT VERIFIED",
+    "Customer source/catalog, production identity/AI/task/risk/reassessment/publication and G1\u2013G9 NOT VERIFIED",
+    "Pure returned-value immutability only; no durable recommendation history",
+    "DUR-PG-008 disposable-cluster restart opt-in absent; shared historical cluster preserved"
+  ],
+  "initialPrivatePublication": {
+    "repositorySnapshot": "f29601816414f8dba3e3cf4a21b3dcb95a9e08b9",
+    "sourceSha": "67fe75069a9a6538c34d00d656ef6c9f8337b5ba",
+    "deploymentId": "appgdep_6abfa967c92c819194520ea6cdc204b7",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_121f022bdec881919589689921c2d006",
+    "status": "succeeded",
+    "confirmedUtc": "2026-10-02T12:54:06.361584+00:00"
+  },
+  "independentReview": {
+    "R7": "U7 closed exact720d1db",
+    "U7": "R7 closed exact4f42ed6",
+    "coordinator": {
+      "moduleCommit": "720d1dbd8018ebcdf037a05aecaba7d0e293c853",
+      "authorIndependentOfReviewer": true,
+      "reviewer": "U7",
+      "ownedGitFilesVerified": 13,
+      "sourceBindingsVerified": 11,
+      "authorTranscriptVerified": "6f1d920c084f57392438ad3c6ab2384b2cb7e85463a8c4ce5e8a916bf3ffdba1",
+      "executedPortableAssertions": 287,
+      "independentPythonGoldenChecker": "PASS",
+      "literalGoldenSha256": "d141e78843b8df1307b98f4d3f80724574c8c7177a6e87fb9c70035b789d6b46",
+      "executedArtifacts": [
+        {
+          "path": "/private/tmp/iga-cycle07-guidance/tests/unit/RecommendationGuidance.Tests/bin/Release/net10.0/RecommendationGuidance.Tests.dll",
+          "sha256": "4a5dcde13c383c8f04e8b1c17d3fdaa34cc77fd0623d893cdc0ceae98cc13eb6"
+        },
+        {
+          "path": "/private/tmp/iga-cycle07-guidance/tests/unit/RecommendationGuidance.Tests/bin/Release/net10.0/RecommendationGuidance.dll",
+          "sha256": "f155e690f9a7b9cfd867df5c5166d1afb7244a4a5d05c8896b24d682e2fef1e2"
+        }
+      ],
+      "integrationReview": {
+        "paths": [
+          {
+            "path": "src/server/hosts/LocalConsultantDemo/DemoRecommendationGuidanceProjection.cs",
+            "sha256": "b6e0977abe0565236f6ae77d2e7770419f429c6ea7f4a5291a3ad3026389f08d"
+          },
+          {
+            "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+            "sha256": "96a41de266d755072fd731ae19d4e94cf5ccd72202aa20d0e9ec2f893ee0563e"
+          },
+          {
+            "path": "src/web/src/AnalysisView.tsx",
+            "sha256": "25792e91c71f60f6993c20742487eee1399c29d37e10956e9d0aefdd1bb0dd8d"
+          },
+          {
+            "path": "contracts/local-demo/demo-v1.schema.json",
+            "sha256": "ff26e1ec340dc099a07817d8896490009e8428115a0ecc61527da7423cac0e5d"
+          },
+          {
+            "path": "src/web/src/demo-contract.generated.ts",
+            "sha256": "d724fb9ebe649228de3e68601e99336f3577e96c17a34dde41847c339df47a32"
+          }
+        ],
+        "coherenceHarness": "/private/tmp/iga-cycle07-coherence-review.cjs",
+        "normalAndReorderedBaseline": "PASS",
+        "deniedSubstitutions": [
+          "scoped option ID",
+          "original option ID",
+          "occurrence ID",
+          "evidence row pairing",
+          "original digest row pairing",
+          "object type",
+          "module",
+          "option payload pairing"
+        ],
+        "previousFindings": "closed after coordinator exact source guard fixes",
+        "priorSourceBindingsBeforeFinalKeyCorrection": [
+          {
+            "path": "src/server/hosts/LocalConsultantDemo/DemoRecommendationGuidanceProjection.cs",
+            "sha256": "b6e0977abe0565236f6ae77d2e7770419f429c6ea7f4a5291a3ad3026389f08d"
+          },
+          {
+            "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+            "sha256": "96a41de266d755072fd731ae19d4e94cf5ccd72202aa20d0e9ec2f893ee0563e"
+          },
+          {
+            "path": "src/web/src/AnalysisView.tsx",
+            "sha256": "b7d99ba4be95e03ce71d5f791188f679addbfb68f58336976c12acd2086d67b3"
+          },
+          {
+            "path": "contracts/local-demo/demo-v1.schema.json",
+            "sha256": "ff26e1ec340dc099a07817d8896490009e8428115a0ecc61527da7423cac0e5d"
+          },
+          {
+            "path": "src/web/src/demo-contract.generated.ts",
+            "sha256": "d724fb9ebe649228de3e68601e99336f3577e96c17a34dde41847c339df47a32"
+          }
+        ],
+        "finalCorrection": {
+          "finding": "Adjacent DraftReportView and RecommendationGuidanceView used equal response.runId keys; selection reconciliation could retain duplicate draft controls.",
+          "change": "Only new guidance key now guidance-${response.runId}; existing draft key unchanged.",
+          "reviewResult": "PASS closed",
+          "previousAnalysisViewSha256": "b7d99ba4be95e03ce71d5f791188f679addbfb68f58336976c12acd2086d67b3",
+          "reviewedAnalysisViewSha256": "25792e91c71f60f6993c20742487eee1399c29d37e10956e9d0aefdd1bb0dd8d",
+          "exactByteReversalProof": "Reverting only the new guidance key and its formatter wrapping reproduces the preceding independently reviewed AnalysisView hash exactly. All guard/abort/scoring/draft source code is unchanged.",
+          "reviewChecks": {
+            "distinctSiblingKeys": true,
+            "runSpecificGuidanceKey": true,
+            "existingDraftKeyUnchanged": true,
+            "sealedU7ImplementationBytesUnchanged": true,
+            "previousGuardFixesUnchanged": true
+          },
+          "browserEvidenceBoundary": "V7 original manifest remains bound to its earlier tested assets. Coordinator will execute and bind final-assets V7 and historical regressions separately; this source review does not relabel superseded browser evidence.",
+          "reviewedAtUtc": "2026-10-02T13:35:07.563289+00:00"
+        },
+        "keyFinding": "closed after exact source review"
+      },
+      "remainingFindings": [],
+      "limits": [
+        "Portable unit DLL execution and Python oracle only; author build/format/restore claims reviewed but not repeated by U7.",
+        "No database/browser/manual accessibility/production authorization/release or milestone acceptance claimed by this review.",
+        "Hashes identify source/value; never permission or authority."
+      ],
+      "recordedAtUtc": "2026-10-02T13:12:19.595220+00:00"
+    },
+    "V7": {
+      "schemaVersion": 1,
+      "review": "Independent exact V7 source/artifact/evidence review",
+      "reviewer": "R7/U7 non-author reviewer",
+      "commit": "45ef5c883f7d7defe73f3474db9d274a57502d60",
+      "manifestSha256": "5d7688e4f845dc1569b40c64100b6a00ea19af016400e4514e3f0c9e3927fa37",
+      "recordedAtUtc": "2026-10-02T13:25:13.767522+00:00",
+      "hashComparisons": {
+        "definitionBinding": 17,
+        "linkedIndependentFixtureBinding": 4,
+        "executedBorrowedSourceBinding": 81,
+        "hostBinaryBinding": 17,
+        "integrationBinaryBinding": 26,
+        "integrationExecutionBinding": 2,
+        "executedEvidenceBinding": 7,
+        "preservedHistoricalBinding": 4,
+        "independentCoordinatorComparison": 81,
+        "exactCommittedOwned": 27
+      },
+      "hashComparisonTotal": 266,
+      "mismatches": [],
+      "portableExecution": {
+        "assertions": 112,
+        "exitCode": 0,
+        "transcript": "/private/tmp/iga-cycle07-v7-review-portable.log",
+        "sha256": "7d909b9776d15446004b18e008fa3498c1bb29b4eb0656723f1783214cf7f60c",
+        "result": "PASS"
+      },
+      "reportedAuthorExecutions": {
+        "actualPostgreSqlAssertions": 257,
+        "browserAssertions": 2941,
+        "browserGroups": 8,
+        "substitutionCases": 44,
+        "ownedRestart": true,
+        "selectionRaces": 2
+      },
+      "sourceReview": "CLOSED - no actionable findings on exact sealed authored files and bound borrowed execution sources",
+      "limitations": [
+        "Reviewer executed only portable DLL; did not rerun browser, DB, host or restart.",
+        "Axe aria-prohibited-attr incomplete desktop/320; color-contrast incomplete320.",
+        "Full supported Windows/NVDA/Narrator/manual WCAG/CSV/PDF/live/milestone acceptance NOT VERIFIED."
+      ],
+      "reviewCompletedAtUtc": "2026-10-02T13:28:01.590085+00:00",
+      "reviewedBehavior": [
+        "Independent explicit full canonical byte golden and scoped identity literal SHA256; expected golden never uses the builder helper.",
+        "All options/current-original/provenance fields independently literal checked; Confirm/Reject/edit preserve options and unchanged prior returned values.",
+        "Actual author PostgreSQL evidence uses only dedicated loopback iga_synthetic_v7; fresh engine/store read reproducibility and exact historical envelopes are asserted.",
+        "Browser keyboard native disclosures, current review refresh/focus, unavailable/retry,44 explicit source/content guards,two held GET/WebCrypto selection races,owned host stop/start,reflow,inert hostile text and no active controls/network loads.",
+        "Manifest exact source/binaries/transcripts/screenshots/historical evidence and authored Git objects independently verified; zero mismatches.",
+        "Desktop and320px viewport images visually inspected; narrow technical table labels/provenance wrap heavily, with manual acceptance explicitly deferred."
+      ],
+      "clientIntegrityBoundary": "Client checks complete contentDigest shape, explicit source/current/original content linkage and scoped option/occurrence SHA identities; client does not recompute complete canonical snapshot SHA. Independent portable/API golden oracles verify full snapshot bytes/SHA.",
+      "findings": [],
+      "changesMade": "Only readable review metadata and portable transcript under /private/tmp; no repository source, evidence, host, database or services changed.",
+      "reviewCorrection": "Initial interpretation that stale complete contentDigest alone denied browser substitutions was corrected after exact AnalysisView source inspection: actual44 mutations exercise explicit field/identity guards, because complete client digest recomputation is absent."
+    }
+  },
+  "historicalSelectorReview": {
+    "reviewer": "U7",
+    "type": "Read-only focused historical test selector review",
+    "result": "PASS no remaining finding",
+    "sourceHead": "f29601816414f8dba3e3cf4a21b3dcb95a9e08b9",
+    "testPath": "tests/e2e/consultant-demo/verify.mjs",
+    "previousTestSha256": "253af315973e4387c7b87f5c3711db5301cef30610858d9c38f76afba817118a",
+    "reviewedTestSha256": "147eeea709baf95bdd8bd9f39b0d016c519afd012545b26f053c31d2412696a5",
+    "exactChange": "Only narrow the status locator by existing Run state: text; retain aria-live attribute assertion equal to polite.",
+    "executedReviewChecks": {
+      "onlyOneLocatorChanged": true,
+      "allOtherBytesAndAssertionsUnchanged": true,
+      "existingRunAnnouncerInApp": true,
+      "existingRunAnnouncerExplicitPoliteAndAtomic": true,
+      "loadingStatusHasDifferentFixedText": true,
+      "locatorKeepsStrictGetAttributeWithoutFirstOrNth": true
+    },
+    "evidence": "Initial final-assets transcript identified exactly the existing sr-only Run state announcer and transient analysis-loading status; source agrees with both.",
+    "sourceBindings": [
+      {
+        "path": "src/web/src/App.tsx",
+        "sha256": "33082ef962e552e232bb09c8be9982e75e4e5281a4008b6c3906667f4fe42f90"
+      },
+      {
+        "path": "src/web/src/AnalysisView.tsx",
+        "sha256": "b7d99ba4be95e03ce71d5f791188f679addbfb68f58336976c12acd2086d67b3"
+      }
+    ],
+    "scopeLimits": [
+      "No application source change by reviewer.",
+      "No host or browser launched; coordinator owns final browser rerun.",
+      "This verifies the focused existing announcer assertion; it does not claim full manual accessibility acceptance."
+    ],
+    "recordedAtUtc": "2026-10-02T13:28:28.392655+00:00"
+  },
+  "preservedWorkerArtifacts": [
+    {
+      "path": "/private/tmp/iga-cycle07-r7-source.tar",
+      "sha256": "9593e1331601bf5038c12b636e22a619b740402bddd70776d06eccaea0ce2af6",
+      "purpose": "Exact sealed full worker source"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-u7-source.tar",
+      "sha256": "e324636bab2fdbdeb8aee6bdd1f0a09ff57874f437c7d25e23c537e73ec9fc3d",
+      "purpose": "Exact sealed full worker source"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-v7-source.tar",
+      "sha256": "6713d25ef4239b054bff4382d717345e373fc0feba7b7fcefac08b1a7f8f6606",
+      "purpose": "Exact sealed full worker source"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-v7-borrowed-source-and-binaries.tar",
+      "sha256": "4d7e375b189788777ba62c6252d8c18b3e04ff14d1bf9b7fea7f1c95ad3696f2",
+      "purpose": "Exact borrowed host/module/frontend source/assets/build outputs and executed integration binaries before worker cleanup"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-preserved-r7-exact-tests",
+      "purpose": "Exact original author287-test binaries reproduced from original parent revision; both DLL hashes equal independent review record,287 rerun PASS"
+    },
+    {
+      "path": "/private/tmp/iga-cycle07-preserved-coordinator-r7-tests",
+      "purpose": "Coordinator executed287-test outputs from combined37-project build"
+    }
+  ],
+  "workerCheckoutCleanup": "Completed after source/V7 binary preservation; R7 original binary hashes independently reproduced at original parent-revision build state and preserved; all writing-worker checkouts removed, packet branches retained; separate BFF/research/work preserved",
+  "cycleStatus": "COMPLETE bounded developer cycle only",
+  "finalBrowserArtifactSha256": "c44a8a58500665cefd72751a1f5bc52bea9119abe4689a3959b142678d2a7800",
+  "coordinatorFinalSourceIsolation": "Shared output was rebuilt by a separate UI task. Superseded shared-output runs are not final evidence. Allfive workflows reran against isolated6c53e66 source and reproduced C6I2f9A6/CafamDP9 assets. Source digest reads exact frozen committed files; separate App/workspace files remain uncommitted and excluded.",
+  "remoteVerification": {
+    "sourceCommit": "6c53e6676b07930fb6ded3db8fa92b96cf8c0301",
+    "bootstrapRunId": 37014159936,
+    "bootstrapJobIds": [
+      110860810031,
+      110860810382,
+      110860810258
+    ],
+    "azurePackageRunId": 37014160633,
+    "azurePackageJobId": 110860812179,
+    "conclusions": "All success; configured partial engineering evidence only"
+  },
+  "closedPrivatePublication": {
+    "repositorySnapshot": "b363fe2b35a1834e7569b6589c97c8d337ab8ed5",
+    "sourceSha": "9a6bcb25ea10ce2fccc872136750c99c7b432c5d",
+    "deploymentId": "appgdep_6abfb73cae908191a64ac0169cb250a9",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_3ca1dcc310a881919775770b6d1baf01",
+    "status": "succeeded",
+    "confirmedUtc": "2026-10-02T13:53:07.873691+00:00"
+  },
+  "privateBoardChecks": {
+    "desktopWidth": 1440,
+    "mobileWidth": 390,
+    "reflowNavigation": "PASS",
+    "immutableRepositoryFileLinks": 40,
+    "openHumanTasks": 11,
+    "requestedRoleCompletionSourceLinks": "PASS",
+    "audience": "Owner-only preserved, one allowed owner/zero external visitors",
+    "bff": "Canonical public draft/preparation references and D01/D02 technical/security-owner review task preserved"
+  }
+}
