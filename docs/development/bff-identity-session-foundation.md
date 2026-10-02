@@ -1,6 +1,6 @@
 # BFF identity and session foundation
 
-Status: Local implementation in progress; Azure sign-in disabled  
+Status: Independently verified local foundation on `codex/bff-integration`; public publication approval pending; Azure sign-in disabled
 Scope: Milestone 2 / IP-HAS-003
 
 ## Components
@@ -34,8 +34,14 @@ Use one shared application-discriminated Data Protection key ring for replicas, 
 
 ## Verification and activation
 
-Executed checks, reviews and remaining cases are recorded in the [cycle plan](../../plans/active/bff-identity-session-cycle.md) and its evidence record when complete. Local fixtures do not prove OIDC signature/lifetime/nonce/state/PKCE/key rollover, Entra status retrieval, actual managed-identity assertion renewal, Container Apps multi-replica sign-in, wrong trust/removal, licensed users or tenant Conditional Access.
+Executed checks, reviews and remaining cases are recorded in the [cycle plan](../../plans/active/bff-identity-session-cycle.md) and the [executed evidence record](evidence/bff-identity-session-20261002.json), with an [independent scoped review](evidence/bff-foundation-review-20261002.md). Local fixtures do not prove OIDC signature/lifetime/nonce/state/PKCE/key rollover, Entra status retrieval, actual managed-identity assertion renewal, Container Apps multi-replica sign-in, wrong trust/removal, licensed users or tenant Conditional Access.
 
 `LiveSignInEnabled` defaults to false. Production composition and enabling sign-in remain blocked until the approved provider spike, full authorization matrix across API/workload/render/export/share/MCP paths, trusted routing/assignment/audit adapters and human review are accepted. The present human-only policy denies non-human identity kinds. It does not issue worker scopes, authorize share viewers, perform field redaction itself, record append-only audit or cancel queued work. Unknown/unsupported operations deny. Complete product integration must provide those boundaries before live use.
 
 No Azure resources, trust, consent, redirect endpoints, customer assignments, customer data or paid session were created by this local cycle. G1–G9 remain NOT VERIFIED.
+
+## Local handoff — 2026-10-02
+
+The immutable implementation `3781b3b464102062795185fd812818555259aa20` passed 72 transport assertions, 27 session unit cases, 100 shared-store checks, 2546 human policy cases and 84 actual two-server HTTPS checks. A different reviewer repeated the 84 HTTPS checks against that head. The 33-project solution passed audited locked restore, formatting and Release build with zero warnings/errors. Existing assessment database regressions and compiled infrastructure policies also passed. Hosted CI and Windows/container execution for this new source remain NOT VERIFIED while public branch publication awaits explicit approval.
+
+The source is committed in the separate local `codex/bff-integration` branch/worktree, preserving another cycle's unfinished shared-checkout changes. Start composition from that branch; do not assume the original checkout already contains these modules. Test runner safety conditions and executed commands are in each test README. There is no production sign-in endpoint, browser login screen or deployable BFF image from this cycle. The next technical packet is production host/adapters plus the accepted deployed Entra federation proof, followed by cross-path authorization/key/audit integration. A newly priced Azure resource window and its cleanup scope need their own approval.
