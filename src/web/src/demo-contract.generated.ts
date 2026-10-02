@@ -1,21 +1,11 @@
 // Generated from contracts/local-demo/demo-v1.schema.json. Do not edit.
 // Private synthetic demo only; does not establish production HTTP approval.
 
-export type RunState = 'Planned' | 'Running' | 'Scoring' | 'Cancelled' | 'Failed';
+export type RunState = "Planned" | "Running" | "Scoring" | "Cancelled" | "Failed";
 
-export type CompletionKind = 'Complete' | 'CompleteWithGaps';
+export type CompletionKind = "Complete" | "CompleteWithGaps";
 
-export type CoverageState =
-  | 'Pass'
-  | 'Finding'
-  | 'NotApplicable'
-  | 'NotAssessed'
-  | 'InsufficientEvidence'
-  | 'Excluded'
-  | 'Inaccessible'
-  | 'Redacted'
-  | 'Unsupported'
-  | 'Error';
+export type CoverageState = "Pass" | "Finding" | "NotApplicable" | "NotAssessed" | "InsufficientEvidence" | "Excluded" | "Inaccessible" | "Redacted" | "Unsupported" | "Error";
 
 export type ScopeOption = {
   readonly id: string;
@@ -159,7 +149,7 @@ export type DemoError = {
 export type AnalysisScore = {
   readonly raw: string | null;
   readonly display: string | null;
-  readonly status: 'Unavailable' | 'Red' | 'Yellow' | 'Green';
+  readonly status: "Unavailable" | "Red" | "Yellow" | "Green";
   readonly eligibleUnits: number;
 };
 
@@ -181,7 +171,7 @@ export type AnalysisFinding = {
   readonly id: string;
   readonly title: string;
   readonly category: string;
-  readonly severity: 'Critical' | 'High' | 'Medium' | 'Low' | 'Informational';
+  readonly severity: "Critical" | "High" | "Medium" | "Low" | "Informational";
   readonly confidencePercent: string;
   readonly state: string;
   readonly reviewRequired: boolean;
@@ -199,7 +189,7 @@ export type AnalysisFinding = {
   readonly validationGuidance: string;
   readonly sources: ReadonlyArray<string>;
   readonly confidenceBand: string;
-  readonly method: 'Deterministic';
+  readonly method: "Deterministic";
   readonly likelihood: string;
   readonly limitations: ReadonlyArray<string>;
   readonly originalDigests: ReadonlyArray<string>;
@@ -223,7 +213,7 @@ export type AnalysisDetail = {
   readonly demoOnly: true;
   readonly runId: string;
   readonly runRevision: number;
-  readonly status: 'Ready' | 'Unavailable';
+  readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly algorithmVersion: string | null;
   readonly fixtureDigest: string | null;
@@ -244,7 +234,7 @@ export type AnalysisDetail = {
   readonly recommendationGuidance: RecommendationGuidance | null;
 };
 
-export type ReviewKind = 'Confirm' | 'Reject' | 'Defer' | 'Comment' | 'EditPresentation';
+export type ReviewKind = "Confirm" | "Reject" | "Defer" | "Comment" | "EditPresentation";
 
 export type ReviewCommand = {
   readonly eventId: string;
@@ -298,7 +288,7 @@ export type ReviewDetail = {
   readonly demoOnly: true;
   readonly runId: string;
   readonly runRevision: number;
-  readonly status: 'Ready' | 'Unavailable';
+  readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly snapshotDigest: string | null;
   readonly actor: string | null;
@@ -340,9 +330,9 @@ export type MaturityOwnership = {
 };
 
 export type MaturityDetail = {
-  readonly status: 'Ready' | 'Unavailable';
+  readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
-  readonly level: 'Initial' | 'Developing' | 'Defined' | 'Managed' | 'Optimized' | null;
+  readonly level: "Initial" | "Developing" | "Defined" | "Managed" | "Optimized" | null;
   readonly algorithmVersion: string | null;
   readonly catalogVersion: string | null;
   readonly inputDigest: string | null;
@@ -433,7 +423,7 @@ export type DraftSourceBinding = {
   readonly scope: DraftScope;
   readonly runId: string;
   readonly runRevision: number;
-  readonly runState: 'Scoring';
+  readonly runState: "Scoring";
   readonly baselineId: string;
   readonly profileId: string;
   readonly frozenVersions: DraftFrozenVersions;
@@ -447,7 +437,7 @@ export type DraftFinding = {
   readonly id: string;
   readonly title: string;
   readonly category: string;
-  readonly severity: 'Critical' | 'High' | 'Medium' | 'Low' | 'Informational';
+  readonly severity: "Critical" | "High" | "Medium" | "Low" | "Informational";
   readonly confidencePercent: string;
   readonly state: string;
   readonly reviewRequired: boolean;
@@ -465,7 +455,7 @@ export type DraftFinding = {
   readonly validationGuidance: string;
   readonly sources: ReadonlyArray<string>;
   readonly confidenceBand: string;
-  readonly method: 'Deterministic';
+  readonly method: "Deterministic";
   readonly likelihood: string;
   readonly limitations: ReadonlyArray<string>;
   readonly originalDigests: ReadonlyArray<string>;
@@ -490,7 +480,7 @@ export type DraftHealthyControl = {
   readonly objectId: string;
   readonly ruleId: string;
   readonly ruleVersion: string;
-  readonly state: 'Pass';
+  readonly state: "Pass";
 };
 
 export type DraftLimitation = {
@@ -519,22 +509,22 @@ export type DraftContent = {
 };
 
 export type DraftSnapshot = {
-  readonly schemaVersion: 'synthetic-draft-report-v1';
-  readonly status: 'SyntheticDraft';
+  readonly schemaVersion: "synthetic-draft-report-v1";
+  readonly status: "SyntheticDraft";
   readonly source: DraftSourceBinding;
   readonly canonicalContentDigest: string;
   readonly content: DraftContent;
 };
 
 export type DraftMarkdown = {
-  readonly version: 'synthetic-draft-markdown-v1';
+  readonly version: "synthetic-draft-markdown-v1";
   readonly canonicalContentDigest: string;
   readonly markdownText: string;
   readonly markdownSha256: string;
 };
 
 export type ReportDraft = {
-  readonly status: 'Ready' | 'Unavailable';
+  readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly snapshot: DraftSnapshot | null;
   readonly markdown: DraftMarkdown | null;
@@ -549,7 +539,7 @@ export type GuidanceSourceBinding = {
   readonly scope: DraftScope;
   readonly runId: string;
   readonly runRevision: number;
-  readonly runState: 'Scoring';
+  readonly runState: "Scoring";
   readonly baselineId: string;
   readonly profileId: string;
   readonly frozenVersions: DraftFrozenVersions;
@@ -571,7 +561,7 @@ export type GuidanceOccurrence = {
 export type GuidanceOption = {
   readonly scopedOptionId: string;
   readonly optionId: string;
-  readonly status: 'Unverified';
+  readonly status: "Unverified";
   readonly text: string;
   readonly prerequisites: string;
   readonly risk: string;
@@ -587,9 +577,9 @@ export type GuidanceFinding = {
   readonly presentationTitle: string;
   readonly businessContext: string;
   readonly rootCause: string;
-  readonly severity: 'Critical' | 'High' | 'Medium' | 'Low' | 'Informational';
-  readonly initialState: 'Proposed' | 'AutoConfirmed';
-  readonly currentState: 'Proposed' | 'AutoConfirmed' | 'Confirmed' | 'Rejected' | 'Deferred';
+  readonly severity: "Critical" | "High" | "Medium" | "Low" | "Informational";
+  readonly initialState: "Proposed" | "AutoConfirmed";
+  readonly currentState: "Proposed" | "AutoConfirmed" | "Confirmed" | "Rejected" | "Deferred";
   readonly findingRevision: number;
   readonly occurrences: ReadonlyArray<GuidanceOccurrence>;
   readonly options: ReadonlyArray<GuidanceOption>;
@@ -600,8 +590,8 @@ export type GuidanceFinding = {
 };
 
 export type GuidanceSnapshot = {
-  readonly schemaVersion: 'synthetic-recommendation-guidance-v1';
-  readonly status: 'SyntheticUnverified';
+  readonly schemaVersion: "synthetic-recommendation-guidance-v1";
+  readonly status: "SyntheticUnverified";
   readonly source: GuidanceSourceBinding;
   readonly contentDigest: string;
   readonly findings: ReadonlyArray<GuidanceFinding>;
@@ -610,7 +600,7 @@ export type GuidanceSnapshot = {
 };
 
 export type RecommendationGuidance = {
-  readonly status: 'Ready' | 'Unavailable';
+  readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly snapshot: GuidanceSnapshot | null;
 };
