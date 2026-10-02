@@ -1,0 +1,37 @@
+locked-audited-restore
+$ /private/tmp/iga-dotnet-10.0.401/dotnet restore tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --locked-mode -p:NuGetAudit=true
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+exit=0
+
+focused-format-verify
+$ /private/tmp/iga-dotnet-10.0.401/dotnet format whitespace tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --no-restore --verify-no-changes --include src/server/modules/SyntheticAiValidation/ProposalContracts.cs src/server/modules/SyntheticAiValidation/ProposalValidator.cs tests/unit/SyntheticAiProposals.Tests/Program.cs --verbosity minimal
+
+exit=0
+
+release-build
+$ /private/tmp/iga-dotnet-10.0.401/dotnet build tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --no-restore --disable-build-servers -p:UseSharedCompilation=false -c Release
+  SyntheticAiValidation -> /private/tmp/iga-cycle08-proposals/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  SyntheticAiProposals.Tests -> /private/tmp/iga-cycle08-proposals/tests/unit/SyntheticAiProposals.Tests/bin/Release/net10.0/SyntheticAiProposals.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.23
+exit=0
+
+unit-host
+$ /private/tmp/iga-dotnet-10.0.401/dotnet tests/unit/SyntheticAiProposals.Tests/bin/Release/net10.0/SyntheticAiProposals.Tests.dll
+PASS: 362 synthetic proposal assertions.
+exit=0
+
+independent-golden-oracle
+$ python3 tests/unit/SyntheticAiProposals.Tests/golden-oracle.py
+PASS: independent literal proposal golden bytes and SHA256.
+exit=0
+
+diff-whitespace
+$ git diff --check
+
+exit=0
