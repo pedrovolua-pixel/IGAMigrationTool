@@ -28,7 +28,7 @@ The BFF app requires VNet-scope ingress in an internal environment; existing boo
 - Owner-only infrastructure/OS login and credential-handling decision; Developer local-login proof (Entra RDP requires Basic or higher), distinct setup administration and routine nonadministrator RDP use. No password may enter Git/tool logs. Owner performs browser credential setup; separate app sign-in/persona authority remains enforced.
 - Exact official Windows image version/browser availability, SKU/region quota/capacity, OS disk/image minimum and price offer; synthetic-only workstation data and browser/clipboard cleanup.
 - Actual external account home organization/work-school origin; exact immutable tenant/object IDs, sponsor, customer/project/environment assignment, Customer reviewer or Executive scope, lifecycle and MFA/CA proof. No email/UPN authorization keys.
-- Exact build/private publish/pull, deployment artifacts, trusted proxy/key/audit bindings and refreshed priced session/ownership/disposal inventory; no blanket reuse of historical budget/session.
+- Exact build/private publish/pull, deployment artifacts, trusted proxy/key/audit bindings and refreshed priced session/ownership/disposal inventory, named cleanup operator and enforceable session-end deallocation/disposal mechanism (not guest OS shutdown); no blanket reuse of historical budget/session.
 
 ## Proposed bounded implementation packets
 
@@ -64,3 +64,8 @@ Select fresh names/parameters after review; preview only exact planned scope. Pr
 Preparation may close when sanitized inputs/options/current rates and independent review are recorded and document/secret checks execute. Design remains Proposed; new access/spending requires exact owner decision before implementation/provisioning. Live G1/G3/G7, Milestone2, image promotion, protected customer tests, production release and simultaneous customer access are NOT VERIFIED.
 
 The private board update remains blocked by automatic approval review of the official publishing helper credential/network path. Exact publishing approval was requested separately and is not inferred from Start work. Last confirmed BFF board snapshot4346e0f is stale for this private-access change; canonical records are authoritative.
+
+
+## Executed preparation review and checks
+
+Read-only non-author auth_transport review of packet checkpoint564e42e found one monthly-cost wording error:744hours Windows compute is USD36.9024, plus USD9.60 disk = USD46.5024 before operations/foundation. The sentence was corrected without any meter, runtime, template or decision change. Review otherwise found no unsafe selected default or deployment-readiness claim; exact input/live boundaries remain blocked. Coordinator executed changed JSON parsing,193 changed Markdown local-target checks, supplied-account exclusion and documentation-only scope checks, rate arithmetic, git diff --check and whole-checkout Gitleaks8.30.1 with no leaks. Final local checks are repeated after the wording/evidence correction. No infrastructure compilation/build or runtime test is claimed for this documentation-only proposal. Preparation is COMPLETE; ADR/design acceptance, templates and all live cases remain pending.

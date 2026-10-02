@@ -1,7 +1,7 @@
 {
   "schemaVersion": "private-browser-access-preparation-v1",
   "date": "2026-10-02",
-  "status": "PREPARATION_ONLY_DESIGN_PROPOSED",
+  "status": "PREPARATION_COMPLETE_DESIGN_PROPOSED_NOT_ACCEPTED",
   "baseSource": "7ebe5f34bb5a95cbe156ab32f26b4f3acb9c4e59",
   "protectedIntakeReference": "LOCAL-INTAKE-20261002-01",
   "userSteering": {
@@ -61,19 +61,25 @@
   ],
   "calculations": {
     "windowsCompute24HoursUsd": 1.1904,
-    "vpnGw1AZ744HoursUsd": 156.24
+    "vpnGw1AZ744HoursUsd": 156.24,
+    "windowsCompute744HoursUsd": 36.9024,
+    "windowsComputeAndDisk744HoursUsd": 46.5024
   },
   "costLimits": "Partial public retail meter comparison, not full quote; includes no offer-specific discount, quota/capacity or selected retention. All foundation/disk/operations/network/DNS and delayed-charge reserve require fresh exact session. ExistingUSD50 alert budget remains.",
   "docsCaveat": "SKU-specific Developer Windows RDP/region table and quickstart support candidate; generic RDP article still says Basic minimum. Exact provider/authentication/NSG proof required; no automatic upgrade.",
   "independentReview": {
-    "initialReview": "auth_transport read-only source/Microsoft documentation review; no Azure/runtime tests",
-    "result": "Suitable candidate for bounded owner-operated synthetic testing; exact OS credential, source/NSG/egress/DNS/private app/identity/cost inputs remain blocked",
-    "finalPacketReview": "PENDING"
+    "reviewer": "auth_transport",
+    "packetCheckpoint": "564e42e",
+    "scope": "Read-only source/Microsoft guidance and written packet consistency; no runtime/Azure tests",
+    "finding": "One monthly total wording error:36.9024 compute +9.60 disk =46.5024 before operations/foundation",
+    "resolution": "Coordinator corrected exact sentence; meter selections/arithmetic/runtime/policy unchanged",
+    "result": "No unsafe selected default/readiness claim found; explicit blocked inputs and human approval scope retained"
   },
   "checks": {
     "documentation": "PASS: 193 changed Markdown local targets; 2 changed JSON records; exact rate arithmetic and four candidate meters; protected-account exclusion; documentation-only scope",
     "secrets": "PASS: whole-checkout Gitleaks8.30.1 no leaks",
-    "diff": "PASS: git diff --check"
+    "diff": "PASS: git diff --check",
+    "finalDocumentation": "PASS: 193 changed Markdown local targets, two changed JSON records, exact rate and packet hash bindings, protected-account exclusion, documentation-only scope"
   },
   "notVerified": [
     "exact subnet/NSG/source/egress and image bindings",
@@ -90,5 +96,15 @@
   "credentialCreationPerformed": false,
   "identityInvitationOrGrantPerformed": false,
   "templateImplementationStarted": false,
-  "privateBoard": "BLOCKED by previously reported automatic approval review; requested exact publishing approval not received; last confirmed BFF snapshot4346e0f stale for current update"
+  "privateBoard": "BLOCKED by previously reported automatic approval review; requested exact publishing approval not received; last confirmed BFF snapshot4346e0f stale for current update",
+  "packetFiles": [
+    {
+      "path": "architecture/decisions/ADR-0010-private-pilot-browser-access.md",
+      "sha256": "13a5fab6cd694886ccbc7db993d6c97b1d5a3ff9ff15fbe12bd01b1717415c63"
+    },
+    {
+      "path": "plans/active/private-pilot-browser-access-preparation.md",
+      "sha256": "e35d45e7661caa40e44fa18678458ca1bb17296a2140e6cb601264277b312ef1"
+    }
+  ]
 }
