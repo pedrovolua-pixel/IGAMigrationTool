@@ -33,7 +33,9 @@ Valid states: `IDEA`, `DISCOVERY`, `PRODUCT SPEC`, `PRODUCT APPROVED`, `TECHNICA
 
 ## In progress
 
-Cycle 02 is closed after verified checks and confirmed owner-private site publication; its human contract-review task remains open. The broader local pilot build remains incomplete.
+[Cycle 03](../../plans/active/local-pilot-durable-consultant-cycle-03.md) has delivered the requested durable synthetic PostgreSQL runs/recovery and the actual React consultant view. Frozen inputs/script digests, project idempotency, atomic result/checkpoint/outbox commits, revision checks, database-clock lease fences, retries, cancellation and durable history are implemented. Independent final-source verification passed 86 PostgreSQL assertions including actual worker SIGKILL/database crash-restart and expired-commit rollback; final browser execution passed 392 checks across six groups including keyboard start/cancel/resume, reload, actual host loss and missing-only 40-unit recovery, gaps, input locks and hostile transport/input denial. Pinned local restore/format/Release build, current suites, frontend build/type/format/audit, infrastructure policies and secret scan passed. Independent review findings were fixed and closed. Partial CI and private publication are pending; this is local engineering evidence. Scoring remains paused at coverage readiness, full Windows/manual accessibility and production identity/customer routing/public contracts/cancellation grant remain NOT VERIFIED. The broader local pilot build remains incomplete.
+
+Cycle 02 is closed after verified checks and confirmed owner-private site publication; its human contract-review task remains open.
 
 Cycle 02 [partial bootstrap run 36940634611](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36940634611) passed on `918d48e` across Linux and Windows 2022/2025, including integration, pinned secret/Bicep checks, protected-key/ACL and collector service smoke. These are partial engineering checks; full-feature and live gates remain NOT VERIFIED.
 

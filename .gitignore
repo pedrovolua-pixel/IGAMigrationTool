@@ -4,3 +4,7 @@
 **/.env.local
 *.user
 *.suo
+# Local synthetic consultant frontend and private status site checkout
+src/web/node_modules/
+src/web/dist/
+.sites-work/

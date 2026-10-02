@@ -1,0 +1,19 @@
+{
+  "kind": "actual final built browser host and frontend dependency artifacts",
+  "d3Commit": "0254aa1",
+  "u3Commit": "d0bb6472d9f8ac71f1113f23cc2816e985c5e405",
+  "sha256": {
+    "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs": "a4aa7f224a010a788952357501e6a74161d3c8f77724053726aa302bc5d7388c",
+    "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs": "1c2596dab8f348cc842790fad18a06252510e3af679b67301362acfd01f3f91c",
+    "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs": "7488f7ffa74f816114bac085ad7c465b01ec823a25394dab69edd5f7a878dfbb",
+    "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs": "a8be38826bb785f778d73c216a19f4bfdbf1e730ae01d3a0a02d9dcb9b9dd21a",
+    "migrations/assessment-runs/001-initial.sql": "67bad3b18091babdda2abb898666932b7dc09df767c4e6a3ed49265590e34f88",
+    "src/server/hosts/LocalConsultantDemo/Program.cs": "80725500e59ae40edf889fdb5a8a6520b33cd6fe7bd2129a6ee89fa343f549e2",
+    "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll": "ed2f6657c130a7b9325cb6a4a43e52871d2e37a7f6b3524ffa0402b72112cc54",
+    "src/web/src/App.tsx": "d2f968037d400b85b57645bdf7b9daa691c3536d745002ddfa2dd34923c76376",
+    "src/web/src/styles.css": "a8ce1e4dd596f4ed1d999fe35a5a1dd48072729b42d048f2d5eb0787650b7d4a",
+    "src/web/dist/index.html": "b7ee1117471f62ab6ec4ddbe6f91db7f61b88a6b70749ff72266479b170004c3",
+    "src/web/dist/assets/index-1m_phUuy.js": "6a906ecdfdc9ccad85a71cf1f5d3ffd473d2b5e8b79161eac0c41a334faf6988",
+    "src/web/dist/assets/index-DQMmEbn7.css": "c7db0b3238a9b37f40eaf581d9cb9b62ed2a31b0ec607ef4fce62cfac0949d4b"
+  }
+}

@@ -1,0 +1,18 @@
+# Private synthetic consultant demo contract v1
+
+Authorized only for [cycle 03](../../plans/active/local-pilot-durable-consultant-cycle-03.md). This is a localhost fixture-host transport, not the production OpenAPI contract or an Entra/customer permission grant. Production contract and identity gates remain open.
+
+`demo-v1.schema.json` is the strict DTO source. Generate the checked-in readonly TypeScript projection with `node contracts/local-demo/generate-types.mjs`; verify drift using `--check`. The host must serialize camelCase property names, exact PascalCase string enum values, UTC ISO timestamps, UUID run/request IDs and every required nullable field (use JSON null, not omission). Reject extra request properties; IDs resolve only against the fixed server catalog. Empty history and incomplete progress are valid; empty inventory cannot become perfect coverage. `Scoring` displays **Coverage ready · scoring pending**. `coverageCompletionKind` concerns coverage only.
+
+| Operation                                 | Input                | Output                                                                                |
+| ----------------------------------------- | -------------------- | ------------------------------------------------------------------------------------- |
+| `GET /local-demo/v1/catalog`              | None                 | `Catalog`; initializes same-origin antiforgery cookie and returns request `csrfToken` |
+| `POST /local-demo/v1/runs`                | `StartRunRequest`    | `RunDetail`, 201 new / 200 idempotent retry                                           |
+| `GET /local-demo/v1/runs`                 | None                 | `RunHistory`, newest first, bounded server list                                       |
+| `GET /local-demo/v1/runs/{runId}`         | Catalog-bound UUID   | `RunDetail`                                                                           |
+| `POST /local-demo/v1/runs/{runId}/cancel` | `RunMutationRequest` | `RunDetail`                                                                           |
+| `POST /local-demo/v1/runs/{runId}/resume` | `RunMutationRequest` | `RunDetail`; server permits only expired-lease recovery                               |
+
+Mutations send JSON with `Content-Type: application/json` and `X-CSRF-TOKEN`; server requires same origin/cookie, a 4 KiB body maximum and strict DTO validation. Start deduplicates the same request ID and exact fixture selection; changed selection conflicts. Mutations check revision and server-controlled actions; stale writes return 409. Non-success returns `DemoError`, with safe explanation and nullable correlation/current revision. Use 400 malformed, 403 denied/CSRF, 404 unknown demo resource, 409 revision/idempotency/action conflict, 503 dependency unavailable. No route accepts fixture contents, arbitrary profiles/weights, paths, SQL, payloads or lease tokens.
+
+`selection` labels come from the fixed catalog. `lockedInputs` carries value-free named immutable versions/digests; never credentials, data-plane locators or customer payloads. `actions` is authoritative; UI timestamps are explanatory only. Results/history/progress come from the durable engine; browser storage holds only the selected run ID. No score or full assessment completion is inferred. API no-store, loopback/Host/Origin restrictions, antiforgery, CSP and disabled production paths belong to the coordinator-owned host.

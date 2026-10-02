@@ -5,7 +5,11 @@
   </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/server/" />
+  <Folder Name="/src/server/hosts/">
+    <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
+  </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/AssessmentRuns/AssessmentRuns.csproj" />
     <Project Path="src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj" />
     <Project Path="src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj" />
     <Project Path="src/server/modules/EvidenceGovernance/EvidenceGovernance.csproj" />
@@ -20,9 +24,11 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/DurableAssessment.Tests/DurableAssessment.Tests.csproj" />
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj" />
     <Project Path="tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj" />
     <Project Path="tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj" />
     <Project Path="tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj" />

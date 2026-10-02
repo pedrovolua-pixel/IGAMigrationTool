@@ -11,6 +11,17 @@ permissions:
 jobs:
   dotnet-bootstrap:
     runs-on: ubuntu-24.04
+    services:
+      synthetic-postgres:
+        image: postgres:18.4@sha256:a02db8cac496f15b094798a38254f14d6e00741f709360e5e00bb6668ea31636
+        env:
+          POSTGRES_USER: iga_synthetic
+          POSTGRES_DB: iga_synthetic_v3
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: [55433:5432]
+        options: >-
+          --health-cmd "pg_isready -U iga_synthetic -d iga_synthetic_v3"
+          --health-interval 5s --health-timeout 5s --health-retries 12
     steps:
       - name: Check out repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -38,6 +49,44 @@ jobs:
         run: dotnet run --project tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj --configuration Release --no-build
       - name: Check synthetic baseline planning and coverage integration
         run: dotnet run --project tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj --configuration Release --no-build
+      - name: Check durable synthetic run contracts
+        run: dotnet run --project tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj --configuration Release --no-build
+      - name: Check real PostgreSQL persistence and process recovery
+        env:
+          IGA_SYNTHETIC_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v3;Username=iga_synthetic
+        run: |
+          export IGA_DOTNET="$(command -v dotnet)"
+          dotnet run --project tests/integration/DurableAssessment.Tests/DurableAssessment.Tests.csproj --configuration Release --no-build
+      - name: Build and audit pinned consultant view
+        run: |
+          curl -fsS https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.gz -o "$RUNNER_TEMP/node.tar.gz"
+          curl -fsS https://nodejs.org/dist/v24.21.0/SHASUMS256.txt -o "$RUNNER_TEMP/node-shasums.txt"
+          node_digest=$(awk '$2 == "node-v24.21.0-linux-x64.tar.gz" {print $1}' "$RUNNER_TEMP/node-shasums.txt")
+          test -n "$node_digest"
+          echo "$node_digest  $RUNNER_TEMP/node.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/node.tar.gz" -C "$RUNNER_TEMP"
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          npm install --prefix "$RUNNER_TEMP/approved-npm" npm@11.20.0 --ignore-scripts --no-audit --no-fund
+          npm_cli="$RUNNER_TEMP/approved-npm/node_modules/npm/bin/npm-cli.js"
+          cd src/web
+          node "$npm_cli" ci --ignore-scripts
+          node "$npm_cli" run format:check
+          node "$npm_cli" run build
+          node "$npm_cli" audit --audit-level=low
+      - name: Check consultant browser flow and recovery
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          npm_cli="$RUNNER_TEMP/approved-npm/node_modules/npm/bin/npm-cli.js"
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_ci_demo
+          node "$npm_cli" ci --prefix tests/e2e/consultant-demo --ignore-scripts
+          node "$npm_cli" audit --prefix tests/e2e/consultant-demo --audit-level=low
+          node tests/e2e/consultant-demo/node_modules/playwright/cli.js install chromium --with-deps
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/consultant-demo/verify.mjs
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check collector host contract

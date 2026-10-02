@@ -1,0 +1,624 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "iga:private-local-demo:v1",
+  "title": "Private synthetic local-demo DTOs \u2014 not a production HTTP contract",
+  "$defs": {
+    "RunState": {
+      "enum": ["Planned", "Running", "Scoring", "Cancelled", "Failed"]
+    },
+    "CompletionKind": {
+      "enum": ["Complete", "CompleteWithGaps"]
+    },
+    "CoverageState": {
+      "enum": [
+        "Pass",
+        "Finding",
+        "NotApplicable",
+        "NotAssessed",
+        "InsufficientEvidence",
+        "Excluded",
+        "Inaccessible",
+        "Redacted",
+        "Unsupported",
+        "Error"
+      ]
+    },
+    "ScopeOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": ["id", "label"]
+    },
+    "Warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": ["code", "message"]
+    },
+    "BaselineOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "scopeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Warning"
+          }
+        }
+      },
+      "required": ["id", "label", "scopeId", "version", "warnings"]
+    },
+    "ProfileOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "required": ["id", "label", "version", "baselineIds"]
+    },
+    "Catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScopeOption"
+          }
+        },
+        "baselines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BaselineOption"
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProfileOption"
+          }
+        },
+        "csrfToken": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "scopes",
+        "baselines",
+        "profiles",
+        "csrfToken"
+      ]
+    },
+    "StartRunRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profileId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "requestId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": ["scopeId", "baselineId", "profileId", "requestId"]
+    },
+    "RunMutationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requestId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": ["expectedRevision", "requestId"]
+    },
+    "Selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "scopeLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profileId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profileLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "scopeId",
+        "scopeLabel",
+        "baselineId",
+        "baselineLabel",
+        "profileId",
+        "profileLabel"
+      ]
+    },
+    "Progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plannedUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "terminalUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "remainingUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allTerminal": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "plannedUnits",
+        "terminalUnits",
+        "remainingUnits",
+        "allTerminal"
+      ]
+    },
+    "LockedInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": ["name", "version", "sha256"]
+    },
+    "StateCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/CoverageState"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["state", "count"]
+    },
+    "Limitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/CoverageState"
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "responsibleStage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["state", "reasonCode", "responsibleStage", "count"]
+    },
+    "ExecutableCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "numerator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "denominator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hasApplicableUnits": {
+          "type": "boolean"
+        }
+      },
+      "required": ["numerator", "denominator", "hasApplicableUnits"]
+    },
+    "RunActions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canCancel": {
+          "type": "boolean"
+        },
+        "canResume": {
+          "type": "boolean"
+        },
+        "resumeAvailableAtUtc": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "canCancel",
+        "canResume",
+        "resumeAvailableAtUtc",
+        "reasonCode"
+      ]
+    },
+    "RunSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state": {
+          "$ref": "#/$defs/RunState"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "selection": {
+          "$ref": "#/$defs/Selection"
+        },
+        "progress": {
+          "$ref": "#/$defs/Progress"
+        },
+        "coverageCompletionKind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CompletionKind"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cancelRequested": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "runId",
+        "revision",
+        "state",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "selection",
+        "progress",
+        "coverageCompletionKind",
+        "cancelRequested"
+      ]
+    },
+    "RunDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state": {
+          "$ref": "#/$defs/RunState"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "selection": {
+          "$ref": "#/$defs/Selection"
+        },
+        "progress": {
+          "$ref": "#/$defs/Progress"
+        },
+        "coverageCompletionKind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CompletionKind"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lockedInputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LockedInput"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Warning"
+          }
+        },
+        "stateCounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StateCount"
+          }
+        },
+        "executableCoverage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExecutableCoverage"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Limitation"
+          }
+        },
+        "actions": {
+          "$ref": "#/$defs/RunActions"
+        },
+        "cancelRequested": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "runId",
+        "revision",
+        "state",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "selection",
+        "progress",
+        "coverageCompletionKind",
+        "lockedInputs",
+        "warnings",
+        "stateCounts",
+        "executableCoverage",
+        "limitations",
+        "actions",
+        "cancelRequested"
+      ]
+    },
+    "RunHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RunSummary"
+          }
+        }
+      },
+      "required": ["schemaVersion", "demoOnly", "runs"]
+    },
+    "DemoError": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "correlationId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "currentRevision": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "code",
+        "message",
+        "correlationId",
+        "currentRevision"
+      ]
+    }
+  }
+}

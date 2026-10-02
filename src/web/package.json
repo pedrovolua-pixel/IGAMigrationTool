@@ -1,0 +1,31 @@
+{
+  "name": "iga-synthetic-consultant-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.21.0",
+    "npm": "11.20.0"
+  },
+  "scripts": {
+    "generate": "node ../../contracts/local-demo/generate-types.mjs",
+    "contract:check": "node ../../contracts/local-demo/generate-types.mjs --check",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run contract:check && npm run typecheck && vite build",
+    "audit": "npm audit --audit-level=low",
+    "format": "prettier --write . ../../contracts/local-demo",
+    "format:check": "prettier --check . ../../contracts/local-demo"
+  },
+  "dependencies": {
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "prettier": "3.9.9",
+    "typescript": "7.0.2",
+    "vite": "8.3.1"
+  },
+  "packageManager": "npm@11.20.0"
+}

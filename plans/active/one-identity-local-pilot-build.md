@@ -14,7 +14,7 @@ The local pilot build is a distinct checkpoint before live validation. The produ
 
 ## Local completion slices
 
-The owner approved a coordinator and three parallel workers on 2026-10-01. [The development workflow](../../docs/development/parallel-agent-workflow.md) assigns isolated implementation and independent verification; [cycle 01](../completed/local-pilot-parallel-cycle-01.md) records the first checkpoint-retry, assessment-composition and synthetic-integration packets. The coordinator maintains canonical records and publishes the private site after integration. Parallel execution changes delivery organization, not completion or acceptance criteria. [Cycle 02](../completed/local-pilot-parallel-cycle-02.md) now connects an internal value-free synthetic inventory to coverage planning and summaries, with a separate draft offline-receiving contract for human review. It does not implement or validate the production baseline reader, durable run or application UI.
+The owner approved a coordinator and three parallel workers on 2026-10-01. [The development workflow](../../docs/development/parallel-agent-workflow.md) assigns isolated implementation and independent verification; [cycle 01](../completed/local-pilot-parallel-cycle-01.md) records the first checkpoint-retry, assessment-composition and synthetic-integration packets. The coordinator maintains canonical records and publishes the private site after integration. Parallel execution changes delivery organization, not completion or acceptance criteria. [Cycle 02](../completed/local-pilot-parallel-cycle-02.md) now connects an internal value-free synthetic inventory to coverage planning and summaries, with a separate draft offline-receiving contract for human review. Cycle 02 does not implement or validate those paths. [Cycle 03](local-pilot-durable-consultant-cycle-03.md) now implements the synthetic PostgreSQL run/checkpoint/recovery path and actual local consultant view, with frozen inputs and explicit coverage readiness. Production baseline, identity, scoring/review/report/AI and full local-pilot completion remain open.
 
 | Slice | Locally reviewable outcome | External evidence deferred |
 |---|---|---|
@@ -37,7 +37,7 @@ Each slice follows its approved feature plan and test plan. Do not fill an undec
 - [ ] Failure, retry, cancellation, tampering, out-of-scope input and unauthorized operations fail closed in local fixtures.
 - [ ] Feature plans, status, evidence index, operations handoff and the owner-private pilot status site reflect the same local completion state and deferred external tasks.
 
-The current repository is **not** locally complete: it contains collector and coverage/governance primitives, a blocked collector host, partial CI, and no end-to-end application. The remaining checkboxes must be earned by implementation and executed checks. Do not treat this plan as evidence that they have passed.
+The current repository is **not** locally complete: it contains collector and coverage/governance primitives, a blocked collector host, partial CI, and no complete end-to-end pilot application. The remaining checkboxes must be earned by implementation and executed checks. Do not treat this plan as evidence that they have passed.
 
 ## Deferred integration and acceptance
 
