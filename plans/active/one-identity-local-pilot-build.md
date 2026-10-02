@@ -54,3 +54,7 @@ The [SME template](../../specs/001-data-ingestion/one-identity-sme-evidence-temp
 ## Canonical synthetic draft-report preparation — cycle06
 
 [Cycle06](../completed/local-pilot-draft-report-cycle-06.md) prepares a read-only current draft from one coherent saved review/analysis/maturity snapshot, with summary/technical views and inert Markdown parity. Current Scoring runs do not become terminal or published. This bounded Milestone9 preparation slice adds no durable ReportVersion, publication/share/download/PDF permission or live gate. Implementation and independent local verification passed180 draft/114 Markdown/201 source-database/2137 browser assertions and historical regressions. Configured Linux/Windows/container partial CI passed on f4c7f82; owner-private publication is confirmed and the bounded cycle is closed.
+
+## Structured synthetic recommendation guidance — cycle07
+
+[Cycle07](local-pilot-recommendation-guidance-cycle-07.md) starts a read-only current guidance projection preserving all frozen fictional option IDs, prerequisites, risks, recovery/validation steps and original references. Captured finding status is separate from recommendation review; every option remains unverified. The additive private field does not change existing draft-v1 or historical run inputs. Three isolated implementation/UI/independent verification packets are planned. Local/remote checks and private publication are pending; full Milestone7, task/CSV/fix review and live gates remain open.
