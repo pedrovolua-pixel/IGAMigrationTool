@@ -2,7 +2,7 @@
 
 Requested from: One Identity subject-matter expert, product owner and technical owner; security owner for security rules.
 
-The local [cycle-04 fixtures](../../plans/active/local-pilot-analysis-scoring-cycle-04.md) demonstrate typed rule execution and reproducible health calculations. They are fictional marker predicates, not actual One Identity rules. Their passing tests do not approve a vendor catalog or customer baseline.
+The local [cycle-04 fixtures](../../plans/completed/local-pilot-analysis-scoring-cycle-04.md) demonstrate typed rule execution and reproducible health calculations. They are fictional marker predicates, not actual One Identity rules. Their passing tests do not approve a vendor catalog or customer baseline.
 
 For later real catalog activation, supply an exact immutable rule/catalog version and digest, applicable One Identity product/schema/hotfix/module builds, normalized evidence-field contract, rule purpose/risk/logic/applicability, sources, severity/weight/auto-confirm policy, recommendation/validation guidance, limitations and false-positive conditions. Account for every mandatory installed domain/module with approved rules or an explicit unsupported declaration. Bind positive, negative, insufficient-evidence, exclusion and version-compatibility fixture results to each exact rule. Promotion uses the approved signed reviewer/evidence process; no global bypass or approval is inferred from synthetic fixtures.
 

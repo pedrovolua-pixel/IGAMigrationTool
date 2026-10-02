@@ -1,6 +1,6 @@
 # Local synthetic durable run and consultant view
 
-This local demo is part of [cycle 03](../../plans/completed/local-pilot-durable-consultant-cycle-03.md). It uses only fixed, value-free synthetic baseline/profile presets and explicitly scripted outcomes. Coverage readiness pauses at `Scoring`; there is no health score, eligible customer baseline, Entra sign-in, source connection, AI, finding review or publication. Full live and accessibility gates remain open.
+This local demo combines [cycle 03](../../plans/completed/local-pilot-durable-consultant-cycle-03.md) durable coverage/recovery with [cycle 04](../../plans/completed/local-pilot-analysis-scoring-cycle-04.md) read-only synthetic analysis and health calculations. Historical presets retain scripted coverage-only behavior; new analysis presets execute fixed fictional predicates over typed synthetic facts. Coverage readiness pauses at `Scoring`; new presets expose local health/quality projections without completing an assessment. Eligible customer baselines, Entra sign-in, source connections, AI, mutating finding review and publication remain unavailable. Full live and accessibility gates remain open.
 
 ## Build and run
 
@@ -41,7 +41,7 @@ Done when: the exact production contract and cancellation authority have an appr
 
 ## Phase 1B synthetic analysis presets
 
-[Cycle 04](../../plans/active/local-pilot-analysis-scoring-cycle-04.md) adds four named typed-fact baselines (passing controls, findings at every severity, gaps only, mixed facts) and two fixed analysis profiles (equal categories or operations-weighted comparison). These opt into the versioned synthetic analysis pack; original coverage-only presets and saved input serialization stay compatible. Old/new profile families cannot be mixed. No One Identity rule, vendor catalog, customer outcome or live source is activated.
+[Cycle 04](../../plans/completed/local-pilot-analysis-scoring-cycle-04.md) adds four named typed-fact baselines (passing controls, findings at every severity, gaps only, mixed facts) and two fixed analysis profiles (equal categories or operations-weighted comparison). These opt into the versioned synthetic analysis pack; original coverage-only presets and saved input serialization stay compatible. Old/new profile families cannot be mixed. No One Identity rule, vendor catalog, customer outcome or live source is activated.
 
 The worker executes fixed rule predicates on immutable typed fixture facts and saves their results through the existing checkpoint path. Completed canonical coverage drives a read-only exact-input projection. New runs freeze a digest of scope, evidence, catalog and profile contents plus their complete version tuple in optional JSON run metadata. A changed lock, unsupported/missing result, wrong scope, cancelled/incomplete run or changed evidence/result fact exposes no analysis. `AnalysisFixtureDigest` is omitted when absent, preserving older request serialization/idempotency. The same existing additive SQL migration remains in use; no new table or destructive data migration is introduced.
 

@@ -9,7 +9,7 @@
     "iga-cycle04-format-repair.log": "5715f79b019046d6b0c9bf858801ef872697dc17f2445529a3259031117974af",
     "iga-cycle04-infra-checks.log": "cde691044586231d24c5cb1a79148ee5ad308c542bbd79e8eb19b35c9125e739",
     "iga-cycle04-coverage-final.log": "67f769a94d471f8b238d12c4fed48d817c868982ba535c30fadc4a4573f2ba5c",
-    "iga-cycle04-checkout-scan.log": "402b403ad75c0efdb17e12e300674e1b7f43cb503e997b884fe5edd80bac93aa"
+    "iga-cycle04-checkout-scan.log": "348a036e25bedade23491bc392b9df7d4d89213000d6b26b8675a2329a1bf213"
   },
   "recordedUtc": "2026-10-02",
   "scope": "Bounded first Phase1B synthetic developer slice; no human milestone or live gate acceptance",
@@ -34,8 +34,9 @@
     "secretScan": "PASS zero leaks after prose false-positive rewording; no allowlist",
     "secretScanSnapshotFiles": 351,
     "whitespace": "PASS",
-    "remotePartialCI": "Initial run36951320677: Windows2022/2025 PASS; Linux stopped on generic-api-key matching the SHA256 of a scan transcript in this metadata. Non-secret field reworded; no allowlist; full rerun pending.",
-    "privatePublication": "Initial matching owner-private board publication Succeeded"
+    "remotePartialCI": "PASS all configured Linux/Windows2022/2025 jobs, run36951595057 on38340b5e180c1dbaa6d15bb22e68d81975576da3; initial metadata-only failure run36951320677 retained in cycle record",
+    "privatePublication": "Confirmed initial matching owner-private Succeeded; final archived snapshot published in same closure work cycle",
+    "temporaryWorktrees": "All three removed after preserving commits/evidence"
   },
   "coverageRecoveryFinal": {
     "status": "PASS",
@@ -88,5 +89,10 @@
     "status": "succeeded",
     "confirmedUtc": "2026-10-02T01:33:03.888141+00:00",
     "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+  },
+  "closureScan": {
+    "files": 353,
+    "status": "PASS zero leaks; final canonical records plus concurrent owner non-ignored diagram artifacts",
+    "transcriptSha256": "ce02fae4f3cd338583c85f4ca888058c4363a70104ac399a1cf5c77aec24cf46"
   }
 }
