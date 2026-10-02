@@ -52,6 +52,7 @@ jobs:
       - name: Check BFF transport, sessions and human authorization
         run: |
           dotnet run --project tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj --configuration Release --no-build
       - name: Check shared PostgreSQL BFF sessions and real HTTPS transport
@@ -142,6 +143,7 @@ jobs:
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
           node tests/e2e/consultant-demo/verify.mjs
+          node tests/e2e/bff-authentication/verify.mjs
       - name: Check analysis findings, scoring and browser read recovery
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic

@@ -63,7 +63,8 @@
               }
             }
           }
-        }
+        },
+        "description": "No ticket creation/revocation or product/authority mutation; existing authenticated-request idle bookkeeping remains governed by the shared-store policy."
       }
     },
     "/bff/v1/sign-in": {
