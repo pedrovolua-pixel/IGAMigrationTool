@@ -136,6 +136,18 @@
         "dependencies": {
           "AssessmentCoverage": "[1.0.0, )"
         }
+      },
+      "assessmentscoring": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )"
+        }
+      },
+      "deterministicanalysis": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )"
+        }
       }
     }
   }

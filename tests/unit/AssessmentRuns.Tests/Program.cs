@@ -12,7 +12,11 @@ var wrong = scope with { CustomerId = "synthetic-other-customer" };
 
 Check("SYN-D3-001 fixed catalog explicit outcome digest", () =>
 {
-    Require(DemoFixtureCatalog.Baselines.Count == 4 && DemoFixtureCatalog.Profiles.Count == 2);
+    Require(DemoFixtureCatalog.Baselines.Count == 8 && DemoFixtureCatalog.Profiles.Count == 4);
+    Require(DemoFixtureCatalog.Baselines.Where(item => !DemoAnalysisCatalog.IsAnalysisBaseline(item.Id)).Select(item => item.Id)
+        .SequenceEqual(new[] { "baseline-complete", "baseline-gaps", "baseline-recovery", "baseline-not-applicable" }));
+    Require(DemoFixtureCatalog.Profiles.Where(item => !DemoAnalysisCatalog.IsAnalysisProfile(item.Id)).Select(item => item.Id)
+        .SequenceEqual(new[] { "profile-standard", "profile-comparison" }));
     Require(request.Versions.ScriptedResultsDigest == DemoFixtureCatalog.ScriptDigest("baseline-complete"));
     var script = DemoFixtureCatalog.Baselines[0].ScriptedResults;
     Require(DemoFixtureCatalog.ComputeScriptedResultsDigest(script) == DemoFixtureCatalog.ComputeScriptedResultsDigest(script.Reverse()));

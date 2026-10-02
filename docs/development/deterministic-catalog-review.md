@@ -1,0 +1,9 @@
+# Deterministic catalog promotion review
+
+Requested from: One Identity subject-matter expert, product owner and technical owner; security owner for security rules.
+
+The local [cycle-04 fixtures](../../plans/active/local-pilot-analysis-scoring-cycle-04.md) demonstrate typed rule execution and reproducible health calculations. They are fictional marker predicates, not actual One Identity rules. Their passing tests do not approve a vendor catalog or customer baseline.
+
+For later real catalog activation, supply an exact immutable rule/catalog version and digest, applicable One Identity product/schema/hotfix/module builds, normalized evidence-field contract, rule purpose/risk/logic/applicability, sources, severity/weight/auto-confirm policy, recommendation/validation guidance, limitations and false-positive conditions. Account for every mandatory installed domain/module with approved rules or an explicit unsupported declaration. Bind positive, negative, insufficient-evidence, exclusion and version-compatibility fixture results to each exact rule. Promotion uses the approved signed reviewer/evidence process; no global bypass or approval is inferred from synthetic fixtures.
+
+Done when: independently attributable required reviewer decisions approve the exact catalog/digest and module/build coverage, all five fixture classes pass per rule, and the production promotion/runtime compatibility gates deny suspended/unapproved/mismatching artifacts. Live evidence eligibility, source read authority and G4 acceptance remain separate conditions in the [implementation plan](../../specs/003-health-assessment/implementation-plan.md) and [test plan](../../specs/003-health-assessment/test-plan.md). No customer payload or credentials belong in this review document; use protected artifact references.

@@ -145,3 +145,84 @@ export type DemoError = {
   readonly correlationId: string | null;
   readonly currentRevision: number | null;
 };
+
+export type AnalysisScore = {
+  readonly raw: string | null;
+  readonly display: string | null;
+  readonly status: "Unavailable" | "Red" | "Yellow" | "Green";
+  readonly eligibleUnits: number;
+};
+
+export type AnalysisScoreRow = {
+  readonly id: string;
+  readonly provisional: AnalysisScore;
+  readonly publishableCurrent: AnalysisScore;
+};
+
+export type AnalysisCategoryRow = {
+  readonly id: string;
+  readonly provisional: AnalysisScore;
+  readonly publishableCurrent: AnalysisScore;
+  readonly provisionalWeight: string | null;
+  readonly publishableWeight: string | null;
+};
+
+export type AnalysisFinding = {
+  readonly id: string;
+  readonly title: string;
+  readonly category: string;
+  readonly severity: "Critical" | "High" | "Medium" | "Low" | "Informational";
+  readonly confidencePercent: string;
+  readonly state: string;
+  readonly reviewRequired: boolean;
+  readonly ruleId: string;
+  readonly ruleVersion: string;
+  readonly baselineId: string;
+  readonly rootCauseKey: string;
+  readonly objectIds: ReadonlyArray<string>;
+  readonly evidenceReferences: ReadonlyArray<string>;
+  readonly facts: ReadonlyArray<string>;
+  readonly inferences: ReadonlyArray<string>;
+  readonly assumptions: ReadonlyArray<string>;
+  readonly impact: string;
+  readonly recommendations: ReadonlyArray<string>;
+  readonly validationGuidance: string;
+  readonly sources: ReadonlyArray<string>;
+  readonly confidenceBand: string;
+  readonly method: "Deterministic";
+  readonly likelihood: string;
+  readonly limitations: ReadonlyArray<string>;
+  readonly originalDigests: ReadonlyArray<string>;
+  readonly outcomeIds: ReadonlyArray<string>;
+  readonly rootCause: string;
+};
+
+export type AnalysisQuality = {
+  readonly plannedUnits: number;
+  readonly executedUnits: number;
+  readonly gapUnits: number;
+  readonly notApplicableUnits: number;
+  readonly proposedReviewUnits: number;
+  readonly totalFindingUnits: number;
+};
+
+export type AnalysisDetail = {
+  readonly schemaVersion: 1;
+  readonly demoOnly: true;
+  readonly runId: string;
+  readonly runRevision: number;
+  readonly status: "Ready" | "Unavailable";
+  readonly reasonCode: string | null;
+  readonly algorithmVersion: string | null;
+  readonly fixtureDigest: string | null;
+  readonly contentDigest: string | null;
+  readonly provisional: AnalysisScore | null;
+  readonly publishableCurrent: AnalysisScore | null;
+  readonly categories: ReadonlyArray<AnalysisCategoryRow>;
+  readonly objectTypes: ReadonlyArray<AnalysisScoreRow>;
+  readonly modules: ReadonlyArray<AnalysisScoreRow>;
+  readonly outcomes: ReadonlyArray<AnalysisScoreRow>;
+  readonly quality: AnalysisQuality | null;
+  readonly findings: ReadonlyArray<AnalysisFinding>;
+  readonly warnings: ReadonlyArray<string>;
+};

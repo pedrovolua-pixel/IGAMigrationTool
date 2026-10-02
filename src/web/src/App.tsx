@@ -8,6 +8,7 @@ import type {
   Selection,
 } from './demo-contract.generated';
 import { DemoRequestError, request } from './api';
+import { AnalysisView } from './AnalysisView';
 
 const states: Record<RunState, string> = {
   Planned: 'Planned',
@@ -16,6 +17,10 @@ const states: Record<RunState, string> = {
   Cancelled: 'Cancelled',
   Failed: 'Failed',
 };
+const stateLabel = (state: RunState, profileId: string) =>
+  state === 'Scoring' && profileId.startsWith('synthetic-analysis-')
+    ? 'Coverage ready · local analysis'
+    : states[state];
 const storageKey = 'iga.synthetic.selected-run';
 const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
 const formatNumber = (value: number) => value.toLocaleString();
@@ -349,7 +354,8 @@ export function App() {
         </div>
         <aside className="boundary-note" aria-label="Demo scope">
           <strong>Synthetic evidence only.</strong> Coverage is demonstrated with fixed fixtures.
-          Scoring and live customer assessment remain pending.
+          Named analysis presets calculate health from fixed synthetic facts. Live customer
+          assessment remains pending.
         </aside>
         <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
           {announcement}
@@ -456,7 +462,7 @@ export function App() {
               </div>
               {run && (
                 <span className={`state-pill state-${run.state.toLowerCase()}`}>
-                  {states[run.state]}
+                  {stateLabel(run.state, run.selection.profileId)}
                 </span>
               )}
             </div>
@@ -521,7 +527,11 @@ export function App() {
                 </p>
                 {run.state === 'Scoring' && (
                   <div className="coverage-ready">
-                    <strong>Coverage ready. Scoring is pending.</strong>
+                    <strong>
+                      {run.selection.profileId.startsWith('synthetic-analysis-')
+                        ? 'Coverage ready. Inspect local analysis below.'
+                        : 'Coverage ready. Scoring is pending.'}
+                    </strong>
                     <p>
                       {run.coverageCompletionKind === 'CompleteWithGaps'
                         ? 'Coverage finished with explicit gaps.'
@@ -632,6 +642,7 @@ export function App() {
                     </p>
                   )}
                 </section>
+                <AnalysisView run={run} />
                 <details className="locked-inputs">
                   <summary>Locked input versions and digests</summary>
                   <p className="field-note">
@@ -709,7 +720,7 @@ export function App() {
                       <td>
                         {item.cancelRequested && item.state !== 'Cancelled'
                           ? 'Cancellation requested'
-                          : states[item.state]}
+                          : stateLabel(item.state, item.selection.profileId)}
                       </td>
                       <td>
                         {formatNumber(item.progress.terminalUnits)} /{' '}
@@ -737,8 +748,8 @@ export function App() {
         </section>
       </main>
       <footer className="footer">
-        Local demonstration · Fixed synthetic fixtures · Live source, identity, scoring and
-        publication remain disabled
+        Local demonstration · Fixed synthetic fixtures · Live source, identity, AI and publication
+        remain disabled
       </footer>
     </>
   );

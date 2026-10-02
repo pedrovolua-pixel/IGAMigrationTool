@@ -619,6 +619,431 @@
         "correlationId",
         "currentRevision"
       ]
+    },
+    "AnalysisScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "display": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": ["Unavailable", "Red", "Yellow", "Green"]
+        },
+        "eligibleUnits": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["raw", "display", "status", "eligibleUnits"]
+    },
+    "AnalysisScoreRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "provisional": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "publishableCurrent": {
+          "$ref": "#/$defs/AnalysisScore"
+        }
+      },
+      "required": ["id", "provisional", "publishableCurrent"]
+    },
+    "AnalysisCategoryRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "provisional": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "publishableCurrent": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "provisionalWeight": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publishableWeight": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "provisional",
+        "publishableCurrent",
+        "provisionalWeight",
+        "publishableWeight"
+      ]
+    },
+    "AnalysisFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": ["Critical", "High", "Medium", "Low", "Informational"]
+        },
+        "confidencePercent": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "reviewRequired": {
+          "type": "boolean"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "rootCauseKey": {
+          "type": "string"
+        },
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "impact": {
+          "type": "string"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationGuidance": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidenceBand": {
+          "type": "string"
+        },
+        "method": {
+          "const": "Deterministic"
+        },
+        "likelihood": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "originalDigests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outcomeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rootCause": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "category",
+        "severity",
+        "confidencePercent",
+        "state",
+        "reviewRequired",
+        "ruleId",
+        "ruleVersion",
+        "baselineId",
+        "rootCauseKey",
+        "objectIds",
+        "evidenceReferences",
+        "facts",
+        "inferences",
+        "assumptions",
+        "impact",
+        "recommendations",
+        "validationGuidance",
+        "sources",
+        "confidenceBand",
+        "method",
+        "likelihood",
+        "limitations",
+        "originalDigests",
+        "outcomeIds",
+        "rootCause"
+      ]
+    },
+    "AnalysisQuality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plannedUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "executedUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gapUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notApplicableUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "proposedReviewUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalFindingUnits": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "plannedUnits",
+        "executedUnits",
+        "gapUnits",
+        "notApplicableUnits",
+        "proposedReviewUnits",
+        "totalFindingUnits"
+      ]
+    },
+    "AnalysisDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "algorithmVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fixtureDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contentDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "provisional": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisScore"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publishableCurrent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisScore"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisCategoryRow"
+          }
+        },
+        "objectTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "quality": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisQuality"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisFinding"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "runId",
+        "runRevision",
+        "status",
+        "reasonCode",
+        "algorithmVersion",
+        "fixtureDigest",
+        "contentDigest",
+        "provisional",
+        "publishableCurrent",
+        "categories",
+        "objectTypes",
+        "modules",
+        "outcomes",
+        "quality",
+        "findings",
+        "warnings"
+      ]
     }
   }
 }

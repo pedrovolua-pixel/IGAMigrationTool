@@ -57,9 +57,23 @@
         "type": "Project",
         "dependencies": {
           "AssessmentOrchestration": "[1.0.0, )",
+          "AssessmentScoring": "[1.0.0, )",
+          "DeterministicAnalysis": "[1.0.0, )",
           "Microsoft.EntityFrameworkCore": "[10.0.12, )",
           "Microsoft.EntityFrameworkCore.Relational": "[10.0.12, )",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )"
+        }
+      },
+      "assessmentscoring": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )"
+        }
+      },
+      "deterministicanalysis": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )"
         }
       }
     }

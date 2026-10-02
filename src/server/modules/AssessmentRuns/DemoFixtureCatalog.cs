@@ -13,12 +13,12 @@ public sealed record SyntheticDemoProfile(string Id, string Name, SyntheticRunIn
 public static class DemoFixtureCatalog
 {
     public static SyntheticAuthorizedScope Scope { get; } = new("synthetic-customer", "synthetic-project", "synthetic-environment");
-    public static IReadOnlyList<SyntheticDemoBaseline> Baselines { get; } = CreateBaselines();
+    public static IReadOnlyList<SyntheticDemoBaseline> Baselines { get; } = Array.AsReadOnly(CreateBaselines().Concat(DemoAnalysisCatalog.CreateBaselines()).ToArray());
     public static IReadOnlyList<SyntheticDemoProfile> Profiles { get; } = Array.AsReadOnly(new[]
     {
         new SyntheticDemoProfile("profile-standard", "Synthetic standard profile", Versions("synthetic-profile-v1")),
         new SyntheticDemoProfile("profile-comparison", "Synthetic comparison profile", Versions("synthetic-profile-v2"))
-    });
+    }.Concat(DemoAnalysisCatalog.CreateProfiles()).ToArray());
 
     public static SyntheticStartRequest CreateStartRequest(string baselineId, string profileId, string idempotencyKey)
     {
@@ -26,8 +26,14 @@ public static class DemoFixtureCatalog
             ?? throw new ArgumentException("Unknown synthetic baseline catalog ID.", nameof(baselineId));
         var profile = Profiles.SingleOrDefault(item => item.Id == profileId)
             ?? throw new ArgumentException("Unknown synthetic profile catalog ID.", nameof(profileId));
+        if (!DemoAnalysisCatalog.Compatible(baselineId, profileId))
+            throw new ArgumentException("Choose a profile available for this synthetic baseline.", nameof(profileId));
         return new(Scope, idempotencyKey, baseline.Id, profile.Id, baseline.Capability, baseline.Inventory,
-            profile.Versions with { ScriptedResultsDigest = ScriptDigest(baselineId) });
+            profile.Versions with
+            {
+                ScriptedResultsDigest = ScriptDigest(baselineId),
+                AnalysisFixtureDigest = DemoAnalysisCatalog.IsAnalysisBaseline(baselineId) ? DemoAnalysisCatalog.FrozenDigest(baselineId, profileId) : null
+            });
     }
 
     public static string ScriptDigest(string baselineId) => ComputeScriptedResultsDigest(

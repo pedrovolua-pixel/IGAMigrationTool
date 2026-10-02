@@ -3,6 +3,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using AssessmentCoverage;
+using AssessmentScoring;
+using System.Globalization;
 using AssessmentRuns;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.DataProtection;
@@ -92,6 +94,11 @@ app.MapGet("/local-demo/v1/runs", async () => Results.Json(new
 }));
 app.MapGet("/local-demo/v1/runs/{runId:guid}", async (Guid runId) =>
     DemoProjection.Result(await engine.ReadAsync(DemoFixtureCatalog.Scope, runId)));
+app.MapGet("/local-demo/v1/runs/{runId:guid}/analysis", async (Guid runId) =>
+{
+    var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
+    return read.Succeeded ? Results.Json(DemoAnalysisProjection.Detail(read.Snapshot!)) : DemoProjection.Result(read);
+});
 app.MapPost("/local-demo/v1/runs", async (HttpContext context) =>
 {
     using var body = await DemoProjection.Body(context, ["scopeId", "baselineId", "profileId", "requestId"]);
@@ -101,7 +108,8 @@ app.MapPost("/local-demo/v1/runs", async (HttpContext context) =>
         return DemoProjection.Error("InvalidInput", "Choose a scope and presets from the demo catalog.", 400);
     var baselineId = root.GetProperty("baselineId").GetString();
     var profileId = root.GetProperty("profileId").GetString();
-    if (!DemoFixtureCatalog.Baselines.Any(item => item.Id == baselineId) || !DemoFixtureCatalog.Profiles.Any(item => item.Id == profileId)) return DemoProjection.Error("InvalidInput", "The selected demo presets are unavailable.", 400);
+    if (!DemoFixtureCatalog.Baselines.Any(item => item.Id == baselineId) || !DemoFixtureCatalog.Profiles.Any(item => item.Id == profileId) ||
+        !DemoAnalysisCatalog.Compatible(baselineId!, profileId!)) return DemoProjection.Error("InvalidInput", "The selected demo presets are unavailable.", 400);
     var request = DemoFixtureCatalog.CreateStartRequest(baselineId!, profileId!, requestId!);
     var result = await engine.StartAsync(request);
     return DemoProjection.Result(result, result.AlreadyApplied ? 200 : 201);
@@ -184,7 +192,7 @@ internal static class DemoProjection
             version = SyntheticBaselineVersion,
             warnings = Warnings(item.Id)
         }),
-        profiles = DemoFixtureCatalog.Profiles.Select(item => new { id = item.Id, label = item.Name, version = item.Versions.ProfileVersion, baselineIds = DemoFixtureCatalog.Baselines.Select(baseline => baseline.Id) }),
+        profiles = DemoFixtureCatalog.Profiles.Select(item => new { id = item.Id, label = item.Name, version = item.Versions.ProfileVersion, baselineIds = DemoFixtureCatalog.Baselines.Where(baseline => DemoAnalysisCatalog.Compatible(baseline.Id, item.Id)).Select(baseline => baseline.Id) }),
         csrfToken
     };
     private const string SyntheticBaselineVersion = "synthetic-baseline-inventory-v1";
@@ -220,7 +228,7 @@ internal static class DemoProjection
     {
         var active = run.State is SyntheticRunState.Planned or SyntheticRunState.Running;
         var available = run.Lease is null || run.Lease.ExpiresAt <= run.ObservedAtDatabaseUtc;
-        var fixtureMatches = DemoFixtureCatalog.ScriptDigest(run.BaselineCatalogId) == run.FrozenInputs.ScriptedResultsDigest;
+        var fixtureMatches = DemoAnalysisCatalog.MatchesFrozenFixture(run);
         var limits = run.Results.Where(item => item.ReasonCode is not null && item.State != CoverageState.NotApplicable)
             .GroupBy(item => new { item.State, item.ReasonCode, item.ResponsibleStage })
             .Select(group => new { state = group.Key.State.ToString(), group.Key.ReasonCode, group.Key.ResponsibleStage, count = group.Count() });
@@ -249,7 +257,8 @@ internal static class DemoProjection
             lockedInputs = refs.Select(item => new { name = item.Name, version = item.Version, sha256 = Digest(item.Version) })
                 .Append(new { name = "Complete frozen input", version = "synthetic-input-lock-v1", sha256 = run.InputDigest })
                 .Append(new { name = "Exact capability tuple", version = run.Plan.CapabilityLock.MatrixVersion, sha256 = run.Plan.CapabilityLock.LockDigest })
-                .Append(new { name = "Scripted result fixture", version = "synthetic-outcomes-v1", sha256 = versions.ScriptedResultsDigest }),
+                .Append(new { name = "Scripted result fixture", version = "synthetic-outcomes-v1", sha256 = versions.ScriptedResultsDigest })
+                .Concat(versions.AnalysisFixtureDigest is null ? [] : new[] { new { name = "Frozen analysis contents", version = "synthetic-analysis-lock-v1", sha256 = versions.AnalysisFixtureDigest } }),
             warnings = PermissionWarnings(run.Plan.HasPermissionWarning),
             stateCounts = run.Progress.TerminalStateCounts.Select(item => new { state = item.State.ToString(), item.Count }),
             executableCoverage = run.CoverageSummary is null ? null : new
@@ -297,7 +306,7 @@ internal sealed class SyntheticDemoWorker(SyntheticDurableRunEngine engine, ILog
                         if (final.Succeeded) owned.Remove(run.RunId);
                         continue;
                     }
-                    if (DemoFixtureCatalog.ScriptDigest(run.BaselineCatalogId) != run.FrozenInputs.ScriptedResultsDigest) continue;
+                    if (!DemoAnalysisCatalog.MatchesFrozenFixture(run)) continue;
                     if (!owned.TryGetValue(run.RunId, out var generation))
                     {
                         var acquire = await engine.AcquireLeaseAsync(run.Scope, run.RunId, "local-consultant-worker", null, stoppingToken);
@@ -318,7 +327,7 @@ internal sealed class SyntheticDemoWorker(SyntheticDurableRunEngine engine, ILog
                         run = heartbeat.Snapshot!;
                     }
                     var existing = run.Results.Select(item => item.Key).ToHashSet();
-                    var next = DemoFixtureCatalog.Baselines.Single(item => item.Id == run.BaselineCatalogId).ScriptedResults.FirstOrDefault(item => !existing.Contains(item.Key));
+                    var next = DemoAnalysisCatalog.WorkResults(run).FirstOrDefault(item => !existing.Contains(item.Key));
                     SyntheticRunCommandResult result;
                     if (next is null)
                         result = await engine.CompleteCoverageAsync(run.Scope, run.RunId, generation, run.Revision, stoppingToken);

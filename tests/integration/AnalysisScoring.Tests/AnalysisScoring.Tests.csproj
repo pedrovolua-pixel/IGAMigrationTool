@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/AssessmentScoring/AssessmentScoring.csproj" />
+    <ProjectReference Include="../../../src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj" />
+    <ProjectReference Include="../../../src/server/modules/AssessmentRuns/AssessmentRuns.csproj" />
+  </ItemGroup>
+</Project>

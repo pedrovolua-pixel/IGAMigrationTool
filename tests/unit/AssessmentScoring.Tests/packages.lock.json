@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "assessmentcoverage": {
+        "type": "Project"
+      },
+      "assessmentscoring": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

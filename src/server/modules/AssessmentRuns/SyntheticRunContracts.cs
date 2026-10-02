@@ -19,7 +19,9 @@ public sealed record SyntheticRunPolicy(TimeSpan LeaseDuration, int MaxAttempts,
 public sealed record SyntheticRunInputVersions(
     string ProfileVersion, string? DesiredOutcomeVersion, string ScoringAlgorithmVersion,
     string AiPolicyVersion, string PromptVersion, string ModelVersion,
-    string ApplicationVersion, string WorkSchemaVersion, string ScriptedResultsDigest);
+    string ApplicationVersion, string WorkSchemaVersion, string ScriptedResultsDigest,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    string? AnalysisFixtureDigest = null);
 
 public sealed record SyntheticStartRequest(
     SyntheticAuthorizedScope Scope, string IdempotencyKey, string BaselineCatalogId, string ProfileCatalogId,
