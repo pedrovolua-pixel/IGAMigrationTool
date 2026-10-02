@@ -289,12 +289,21 @@
     "Fresh Azure priced session/grants/release approval"
   ],
   "privateBoard": {
-    "status": "Final source publication pending; final layout/links verified at desktop and390px",
-    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+    "status": "CONFIRMED \u2014 owner-private deployment succeeded; desktop and390px layout/links verified",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "sourceCommit": "8c58bb7ccc0faf87a227e9e584256992f9fb54a9",
+    "repositorySnapshot": "e380f6fbee23db89761ac8dec63ee73968e48f29",
+    "deploymentId": "appgdep_6abfd1beafcc81918e49e9a8702ac0a8",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_12d735aef9c08191b4b147d3f2abc52f",
+    "confirmedAt": "2026-10-02T15:46:14.153890+00:00",
+    "audience": "Owner only; unchanged",
+    "openHumanTasks": 11,
+    "completion": "Local D01/D02 approval and implementation closed; concrete production identity/hosting task remains open"
   },
   "cleanup": {
     "temporaryAuthenticationWorktrees": "Three clean writing/review checkouts removed; original Git branches retained",
     "syntheticDatabases": "Coordinator and reviewer own PostgreSQL stopped; author stopped own instance",
-    "preservedLocalProof": "Reviewer sanitized JSON and executed synthetic worker binaries preserved outside removed checkouts"
+    "preservedLocalProof": "Reviewer sanitized JSON and executed synthetic worker binaries preserved outside removed checkouts",
+    "temporaryPreview": "Own local preview tab closed and own port5391 HTTP server stopped; draft PR retained"
   }
 }

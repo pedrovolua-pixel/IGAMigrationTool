@@ -1,6 +1,6 @@
 # BFF Azure deployment preparation
 
-Status: INDEPENDENT PREPARATION VERIFIED — D01/D02 local implementation approved and running; production/live decisions deferred
+Status: INDEPENDENT PREPARATION VERIFIED — D01/D02 local implementation verified and complete; production/live decisions deferred
 Owner: Azure/BFF coordinator
 Started: 2026-10-02
 
@@ -65,4 +65,4 @@ Owner-private board publication confirmed2026-10-02: source `a9b36e92ef3a2d1bac5
 
 Owner approval update2026-10-02: exact D01/D02 accepted for local implementation. [The bounded authentication packet](../completed/bff-authentication-contract-cycle.md) now records the verified local checkpoint. Earlier pending-approval observations above are historical; production/live decisions remain deferred.
 
-D01/D02 local completion update2026-10-02: [the accepted authentication cycle](../completed/bff-authentication-contract-cycle.md) passed188 foundation/116 signed HTTPS protocol,308 transport,126PG,84 sharedHTTPS and native browser checks with non-author final review. Full51-project/current local checks and configured Linux/Windows/browser/PG/infrastructure CI37027174252 passed; packaging correction46f009a passed actual non-root/read-only Docker and private inventories in CI37027174418. The D01/D02 approval/implementation dependency is closed. D03/D04 production composition, D05 acceptance/live inputs and a refreshed priced session remain open; no live sign-in or gate is accepted. Matching private publication is pending.
+D01/D02 local completion update2026-10-02: [the accepted authentication cycle](../completed/bff-authentication-contract-cycle.md) passed188 foundation/116 signed HTTPS protocol,308 transport,126PG,84 sharedHTTPS and native browser checks with non-author final review. Full51-project/current local checks and configured Linux/Windows/browser/PG/infrastructure CI37027174252 passed; packaging correction46f009a passed actual non-root/read-only Docker and private inventories in CI37027174418. The D01/D02 approval/implementation dependency is closed. D03/D04 production composition, D05 acceptance/live inputs and a refreshed priced session remain open; no live sign-in or gate is accepted. Matching owner-private publication is confirmed in the completed authentication cycle; this parent plan remains active for the production/live dependencies.
