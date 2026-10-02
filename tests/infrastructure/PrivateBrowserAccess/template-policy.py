@@ -45,9 +45,9 @@ def policy(template):
             keys = {'type', 'apiVersion', 'name', 'properties'}
             if name != 'workstationSubnet':
                 keys.add('location')
-            if name != 'bastion':
+            if name in {'workstationSubnet', 'workstationNic', 'workstation'}:
                 keys.add('dependsOn')
-            else:
+            if name == 'bastion':
                 keys.add('sku')
             require(set(resource) == keys, 'No additional resource identity, scope or configuration')
             if name != 'workstationSubnet':
