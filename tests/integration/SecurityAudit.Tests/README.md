@@ -22,6 +22,10 @@ not simulate an actual TCP interruption. Chain/witness tests include holds,
 before restored events become readable. Lifecycle tests seed past events and
 prove null/future operator times are refused against the actual database clock.
 Restricted receipt and witness calls likewise reject null/future timestamps.
+The fixture deliberately uses a seven-fraction instant that rounds differently
+between PostgreSQL JSON timestamp parsing and Npgsql timestamp parameters.
+Exact retention boundaries and restored timestamps derive from the persisted
+PostgreSQL event instant; the one-microsecond early denial remains explicit.
 Tests use synthetic clock/bindings and
 an independently supplied synthetic witness, not a production signer/destination.
 

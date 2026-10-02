@@ -263,7 +263,10 @@ try
     await Refused(() => { AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, (new List<AuditIntegrityEntryV1>(Entries().GetAwaiter().GetResult())).Skip(1).ToList(), Receipts().GetAwaiter().GetResult()); return Task.CompletedTask; }, "Unexplained gap accepted");
     await Refused(() => { AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence - 1, head.Digest, [], []); return Task.CompletedTask; }, "Regressed restore head accepted");
     var firstEvent = (await Entries()).OrderBy(e => e.Sequence).First(); var holdId = Guid.NewGuid();
-    var twelveMonths = clock.Initial.AddMonths(12);
+    await using var persistedTime = owner.CreateCommand("SELECT event_at_utc FROM security_audit.events WHERE event_id=$1");
+    persistedTime.Parameters.AddWithValue(firstEvent.EventId);
+    var persistedEventAt = new DateTimeOffset((DateTime)(await persistedTime.ExecuteScalarAsync())!);
+    var twelveMonths = persistedEventAt.AddMonths(12);
     await Refused(() => RoleSql(lifecycle, "SELECT security_audit.soft_delete_event($1,$2,$3)", firstEvent.EventId, DateTimeOffset.UtcNow.AddYears(1), lifecycleAuthority), "Future lifecycle soft delete accepted");
     await Refused(() => RoleSql(lifecycle, "SELECT security_audit.soft_delete_event($1,NULL,$2)", firstEvent.EventId, lifecycleAuthority), "Null lifecycle soft delete accepted");
     await Refused(() => RoleSql(lifecycle, "SELECT security_audit.soft_delete_event($1,$2,$3)", firstEvent.EventId, twelveMonths.AddTicks(-10), lifecycleAuthority), "Early soft-delete allowed");
@@ -285,7 +288,7 @@ try
     // Simulate restoring a stale event over an authoritative deletion tombstone:
     // restore must replay tombstone before any read and cannot resurrect it.
     await Sql("INSERT INTO security_audit.events VALUES($1,$2,$3,$4,$5,$6,$7,$8)", firstEvent.EventId,
-        JsonDocument.Parse(firstEvent.CanonicalEvent!).RootElement.GetProperty("operationId").GetGuid(), binding.StreamId, firstEvent.Sequence, clock.Initial, firstEvent.PreviousSha256, firstEvent.EventSha256, firstEvent.CanonicalEvent!);
+        JsonDocument.Parse(firstEvent.CanonicalEvent!).RootElement.GetProperty("operationId").GetGuid(), binding.StreamId, firstEvent.Sequence, persistedEventAt, firstEvent.PreviousSha256, firstEvent.EventSha256, firstEvent.CanonicalEvent!);
     await Refused(() => { AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, Entries().GetAwaiter().GetResult(), Receipts().GetAwaiter().GetResult()); return Task.CompletedTask; }, "Restored duplicate deleted event accepted");
     await Sql("DELETE FROM security_audit.events WHERE event_id IN(SELECT event_id FROM security_audit.tombstones)");
     AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, await Entries(), await Receipts()); count++;
@@ -295,7 +298,9 @@ try
 finally { Directory.Delete(dir, true); }
 sealed class Clock : TimeProvider
 {
-    public DateTimeOffset Initial { get; } = DateTimeOffset.UtcNow.AddYears(-2);
+    // Preserve a seven-digit instant that PostgreSQL text parsing rounds up,
+    // while Npgsql timestamp parameters truncate to the prior microsecond.
+    public DateTimeOffset Initial { get; } = new(DateTimeOffset.UtcNow.AddYears(-2).Ticks / 10 * 10 + 7, TimeSpan.Zero);
     private TimeSpan elapsed;
     public override DateTimeOffset GetUtcNow() => Initial + elapsed;
     public void Advance(TimeSpan value) => elapsed += value;
