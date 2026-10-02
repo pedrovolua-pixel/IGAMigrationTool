@@ -80,30 +80,27 @@ try {
   const context = await browser.newContext({ ignoreHTTPSErrors: true });
   const signIns = [];
   let providerRequests = 0;
+  context.on("request", (request) => {
+    if (new URL(request.url()).pathname === "/fixture/provider") {
+      assert.equal(request.isNavigationRequest(), true);
+      providerRequests++;
+    }
+  });
   await context.route("**/*", async (route) => {
     const request = route.request();
     const url = new URL(request.url());
-    if (url.origin === origin) {
-      if (url.pathname === "/bff/v1/sign-in") signIns.push(request);
-      return route.continue();
-    }
     assert.equal(
-      request.url(),
-      "https://provider.invalid/authorize",
-      "no real provider/network request",
+      url.origin,
+      origin,
+      "only synthetic loopback requests allowed",
     );
-    assert.equal(request.isNavigationRequest(), true);
-    providerRequests++;
-    await route.fulfill({
-      status: 200,
-      contentType: "text/html",
-      body: "<!doctype html><title>Intercepted synthetic provider navigation</title>",
-    });
+    if (url.pathname === "/bff/v1/sign-in") signIns.push(request);
+    await route.continue();
   });
   const page = await context.newPage();
   await page.goto(origin + "/fixture");
   await Promise.all([
-    page.waitForURL("https://provider.invalid/authorize"),
+    page.waitForURL(origin + "/fixture/provider"),
     page.locator("#sign-in").click(),
   ]);
   assert.equal(signIns.length, 1);
@@ -138,7 +135,7 @@ try {
   );
   await context.close();
   console.log(
-    "PASS exact repository helper: real Chromium HTTPS session CSRF -> native form POST -> intercepted synthetic provider document navigation; no real provider activity.",
+    "PASS exact repository helper: real Chromium HTTPS session CSRF -> native form POST -> same-loopback synthetic provider document navigation; no real provider activity.",
   );
 } finally {
   if (browser) await browser.close();
