@@ -60,5 +60,16 @@
     "result": "PASS:all configured Linux and Windows2022/2025 jobs",
     "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664189",
     "limits": "Partial workflow only; no live G1 acceptance"
+  },
+  "privateBoardPublication": {
+    "siteSourceCommit": "0decc48488a55b3a51b0835a47dd3cc32f5fab66",
+    "repositorySnapshot": "7013a07de4e1ae91319be565927f0c9bb2411351",
+    "deploymentId": "appgdep_6abf126ec7a88191b41311220f01b539",
+    "status": "succeeded",
+    "confirmedUtc": "2026-10-02T02:09:56.977779+00:00",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "audience": "owner-private; preserved and enforced by native private publication",
+    "qa": "Desktop1920/mobile390 preview:zero page/card overflow;zero broken anchors;source links verified against snapshot;images visually inspected;cycle-five proposal preserved",
+    "limits": "Native deployment success confirms private publication;live browser navigation not repeated. No live Azure/G1 acceptance."
   }
 }

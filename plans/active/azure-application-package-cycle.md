@@ -48,4 +48,10 @@ The package is locally reviewable; the separate partial GitHub container workflo
 
 [Existing partial bootstrap run 36953664189](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664189) passed all configured Linux and Windows 2022/2025 jobs on the same tested code source. No paid resources were created. The exact source recipes/templates and sanitized evidence are stored in the repo; independently reviewed workers are finished.
 
-The three clean temporary worker worktrees were removed after integration/review; commits remain recoverable. The bounded package preparation is verified, with the product/activation/supply-chain dependencies above still open. Private board publication is being completed for this canonical snapshot.
+The three clean temporary worker worktrees were removed after integration/review; commits remain recoverable. The bounded package preparation is verified, with the product/activation/supply-chain dependencies above still open. Private board publication is confirmed below for this canonical snapshot.
+
+## Confirmed private board publication
+
+The existing owner-private board source `0decc48488a55b3a51b0835a47dd3cc32f5fab66` was pushed/packaged from the checked source, with repository snapshot `7013a07de4e1ae91319be565927f0c9bb2411351`. Native owner-private deployment `appgdep_6abf126ec7a88191b41311220f01b539` succeeded at 2026-10-02T02:09:56.977779+00:00. The board now summarizes the passing bootstrap container checks and keeps actual BFF/worker, supply-chain, private-pull and live gate tasks open with requested roles/source links/completion conditions. The concurrent cycle-five proposal and explicit owner dependency were preserved.
+
+Desktop 1920px/mobile 390px preview checks found no page/card overflow or broken internal anchors; relative repository links were verified against the exact snapshot, and screenshots were visually inspected. The source/archive contains no protected identifiers or payloads and its redacted secret scan passed. Native private publication confirms the unchanged audience; live browser navigation was not repeated merely to finish publication. This closes the bounded preparation work cycle without changing G1–G9, customer authority or product activation.
