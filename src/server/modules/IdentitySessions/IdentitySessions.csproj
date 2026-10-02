@@ -3,5 +3,6 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Npgsql" Version="[10.0.3]" />
     <EmbeddedResource Include="../../../../migrations/identity-sessions/001-initial.sql" LogicalName="IdentitySessions.001-initial.sql" />
+    <EmbeddedResource Include="../../../../migrations/identity-sessions/002-authentication-context.sql" LogicalName="IdentitySessions.002-authentication-context.sql" />
   </ItemGroup>
 </Project>

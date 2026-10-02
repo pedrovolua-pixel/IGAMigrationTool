@@ -2,5 +2,6 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Identity.Web" Version="[4.15.0]" />
+    <ProjectReference Include="../../modules/IdentitySessions/IdentitySessions.csproj" />
   </ItemGroup>
 </Project>

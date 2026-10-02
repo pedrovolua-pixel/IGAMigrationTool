@@ -386,6 +386,14 @@
           "System.IdentityModel.Tokens.Jwt": "8.22.0"
         }
       },
+      "Npgsql": {
+        "type": "Transitive",
+        "resolved": "10.0.3",
+        "contentHash": "7nb5YzXuvWWJxB0J8DiyL3we+X4FOctZrt0fIBnucOIaIevFEEwGQVZKtiu9olXdlNAK1eNgqSral6r/jlhI4w==",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.0"
+        }
+      },
       "System.ClientModel": {
         "type": "Transitive",
         "resolved": "1.8.0",
@@ -430,7 +438,14 @@
       "bfffoundation": {
         "type": "Project",
         "dependencies": {
+          "IdentitySessions": "[1.0.0, )",
           "Microsoft.Identity.Web": "[4.15.0, 4.15.0]"
+        }
+      },
+      "identitysessions": {
+        "type": "Project",
+        "dependencies": {
+          "Npgsql": "[10.0.3, 10.0.3]"
         }
       }
     }

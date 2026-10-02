@@ -261,6 +261,7 @@
       "bfffoundation": {
         "type": "Project",
         "dependencies": {
+          "IdentitySessions": "[1.0.0, )",
           "Microsoft.Identity.Web": "[4.15.0, 4.15.0]"
         }
       },
