@@ -430,7 +430,7 @@
       "bfffoundation": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.Identity.Web": "[4.15.0, )"
+          "Microsoft.Identity.Web": "[4.15.0, 4.15.0]"
         }
       }
     }

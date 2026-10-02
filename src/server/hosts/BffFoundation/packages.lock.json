@@ -4,7 +4,7 @@
     "net10.0": {
       "Microsoft.Identity.Web": {
         "type": "Direct",
-        "requested": "[4.15.0, )",
+        "requested": "[4.15.0, 4.15.0]",
         "resolved": "4.15.0",
         "contentHash": "hjpuga1sZMiqcL6qnqduWC0b+6nHkVfRAhjkQLP8s6J8UBbK8KaBtgffGjYxcWb4hUAZCJPZOIaCowcILwCUyQ==",
         "dependencies": {
