@@ -42,6 +42,14 @@ def policy(template):
                     'Existing foundation only; no VNet/NAT reconfiguration')
         else:
             require('existing' not in resource, 'Created boundary resource required')
+            keys = {'type', 'apiVersion', 'name', 'properties'}
+            if name != 'workstationSubnet':
+                keys.add('location')
+            if name != 'bastion':
+                keys.add('dependsOn')
+            else:
+                keys.add('sku')
+            require(set(resource) == keys, 'No additional resource identity, scope or configuration')
             if name != 'workstationSubnet':
                 require(resource['location'] == "[variables('location')]", 'Region binding drift')
     require(set(template['parameters']) == {'existingVnetName', 'existingNatGatewayName', 'workstationSubnetName',
@@ -155,6 +163,7 @@ def run(template):
       ('latest image', ['resources', 'workstation', 'properties', 'storageProfile', 'imageReference', 'version'], 'latest'),
       ('automated extensions', ['resources', 'workstation', 'properties', 'osProfile', 'allowExtensionOperations'], True),
       ('identity assigned', ['resources', 'workstation', 'properties', 'identity'], {'type': 'SystemAssigned'}),
+      ('actual VM identity', ['resources', 'workstation', 'identity'], {'type': 'SystemAssigned'}),
       ('broad rule', ['resources', 'workstationNsg', 'properties', 'securityRules'], "[concat(variables('essentialRules'))]"),
       ('wide egress source', ['variables', 'copy', 0, 'input', 'properties', 'sourceAddressPrefix'], 'VirtualNetwork'),
       ('wide egress destination', ['variables', 'copy', 0, 'input', 'properties', 'destinationAddressPrefix'], 'Internet'),
