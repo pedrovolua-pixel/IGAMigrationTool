@@ -207,7 +207,7 @@
     "G1-G9": "NOT VERIFIED"
   },
   "publication": {
-    "source": "LOCAL REVIEWABLE BRANCH; public publication approval pending",
+    "source": "APPROVED; branch push and draft creation in progress",
     "privateBoard": {
       "result": "SUCCEEDED",
       "version": 53,
@@ -217,6 +217,12 @@
       "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
       "audience": "Existing owner-private audience preserved",
       "localPreview": "Desktop and 390px mobile layout reviewed; no horizontal overflow/broken internal anchors; 31 unique repository links verified in published immutable snapshot."
+    },
+    "approval": {
+      "result": "APPROVED",
+      "date": "2026-10-02",
+      "scope": "Publish public codex/bff-integration branch and open draft pull request; execute hosted checks",
+      "humanStatement": "Approved"
     }
   },
   "cleanup": {

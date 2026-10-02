@@ -1,6 +1,6 @@
 # BFF identity and session foundation
 
-Status: LOCAL VERIFICATION PASSED — reviewable branch; public publication approval pending; live sign-in disabled
+Status: LOCAL VERIFICATION PASSED — reviewable branch; public publication approved; hosted verification pending; live sign-in disabled
 Owner: Coordinator / repository owner  
 Started: 2026-10-01
 
@@ -46,3 +46,7 @@ Before live sign-in: accepted Container Apps authorization-code redemption with 
 Requested role: Repository owner. Review the [local handoff](../../docs/development/bff-identity-session-foundation.md), [exact check evidence](../../docs/development/evidence/bff-identity-session-20261002.json) and [independent review](../../docs/development/evidence/bff-foundation-review-20261002.md); approve or refuse publishing the `codex/bff-integration` source/evidence branch to the owner’s public `pedrovolua-pixel/IGAMigrationTool` repository and opening a draft pull request. Automatic approval review rejected the original push because explicit publishing authorization was not established. Authentication proved the owner login and public repository visibility; neither is itself approval to publish this new branch.
 
 Complete when: explicit owner approval is recorded, the exact branch and draft review are available, configured hosted checks have executed and their results/limitations are recorded. Keep this dependency open until those facts exist. The local verified checkpoint and published private board are complete; hosted CI and administrative cycle closure remain pending. Human live-use/G3 review, production endpoint contracts and any newly priced Azure session remain separate approvals.
+
+## Public publication approval — 2026-10-02
+
+The owner answered “Approved” to the explicit request to publish `codex/bff-integration` to the owner’s public GitHub repository and open a draft pull request. This authorizes branch/source/evidence publication and configured hosted checks. The earlier automatic-review publishing blocker is resolved. It does not authorize merging/releasing the draft, live sign-in, new Azure grants or a new paid resource window. The latest completed pilot base `0a58364de8a60dea5d9ef64d9e6b3b2c381eae9f` is merged into this isolated branch; resolved shared solution/docs conflicts preserve both packets. Hosted results and final publication closure will be recorded after execution.

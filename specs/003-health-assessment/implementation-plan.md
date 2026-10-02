@@ -578,13 +578,9 @@ The owner requested the next Azure preparation step. [The bounded package cycle]
 
 Package execution update: [partial run 36953664310](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664310) passed actual Linux AMD64 image build and non-root/read-only web/worker smoke on `ae785af`; image supply-chain acceptance, published private registry pulls, real BFF/worker integration and G1 remain NOT VERIFIED.
 
-<<<<<<< HEAD
-Implementation update 2026-10-01 (cycle05 approval): repository owner explicitly approved [the exact review/maturity proposal](../../plans/active/local-pilot-review-maturity-cycle-05.md), including new opt-in private routes, server-supplied synthetic consultant test identity, separate append-only review schema and fixed maturity denominator. Isolated maturity/review/verification workers implement this bounded local packet; coordinator owns shared integration and private status Site. No production customer authority, risk acceptance, public contract or live gate is granted.
-=======
 Implementation update 2026-10-01 (cycle05 approval): repository owner explicitly approved [the exact review/maturity proposal](../../plans/completed/local-pilot-review-maturity-cycle-05.md), including new opt-in private routes, server-supplied synthetic consultant test identity, separate append-only review schema and fixed maturity denominator. Isolated maturity/review/verification workers implement this bounded local packet; coordinator owns shared integration and private status Site. No production customer authority, risk acceptance, public contract or live gate is granted.
 
 Implementation update2026-10-02 (cycle05 local verification): [the approved packet](../../plans/completed/local-pilot-review-maturity-cycle-05.md) now implements append-only synthetic review/comments/presentation, immutable originals, same-snapshot health/quality and independent evidence-based maturity in two new opt-in profiles. Independent review findings are closed; final local342 integration/2,162 browser assertions and historical391/712 browser regressions passed, alongside full restore/format/build/current suites/frontend/infrastructure checks. Four literal old-profile envelopes/digests remain compatible. Configured Linux/Windows/Azure package CI passed; owner-private publication is confirmed. These partial Milestone5 behaviors do not check off full milestone, Phase1B/1C or G1–G9 acceptance.
->>>>>>> origin/codex/pilot-foundation
 
 ## BFF identity/session local foundation — 2026-10-02
 
