@@ -1,6 +1,6 @@
-# Proposed local cycle 05 — consultant review/history and maturity
+# Local cycle 05 — consultant review/history and maturity
 
-Status: DRAFT — explicit owner approval pending. No implementation, new permission, migration or worktree is authorized by this draft.
+Status: APPROVED / RUNNING — owner explicitly approved this exact proposal on 2026-10-01 EDT / 2026-10-02 UTC.
 
 Requested from: Repository owner acting as product, technical and security owner.
 
@@ -46,4 +46,8 @@ Writing workers will use isolated worktrees from one known cycle-start commit on
 
 ## Decision record
 
-Pending explicit owner approval. The earlier action was rejected before execution; no cycle05 implementation or worker worktree was created.
+Repository owner responded “Approved” after reviewing the explicit bounded proposal, including private write routes, fixed synthetic consultant identity, separate review schema and maturity denominator convention. Product/technical/security approval is recorded for this local packet. The earlier rejected action did not execute; this subsequent approval authorizes isolated workers and implementation. Production/live gates are unchanged.
+
+## Execution record
+
+Pending implementation, independent review, executed evidence, remote partial CI and confirmed matching private publication.
