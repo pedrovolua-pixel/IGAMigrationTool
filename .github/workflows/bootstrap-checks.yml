@@ -287,6 +287,21 @@ jobs:
           python3 tests/infrastructure/AzureFoundation/composition-policy.py "$RUNNER_TEMP/pilot-development-foundation.json"
           python3 tests/infrastructure/AzureFoundation/entra-policy.py infra/entra/pilot-bff.application.json
 
+
+      - name: Validate optional Bastion private development access
+        run: |
+          for module in pilot-development-private-browser-access pilot-development-browser-dns; do
+            "$RUNNER_TEMP/bicep" build "infra/bicep/modules/$module.bicep" --outfile "$RUNNER_TEMP/$module.json"
+            "$RUNNER_TEMP/bicep" lint "infra/bicep/modules/$module.bicep"
+          done
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-development-private-browser-access.bicep --outfile "$RUNNER_TEMP/private-browser-composition.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-development-private-browser-access.bicep
+          python3 tests/infrastructure/PrivateBrowserAccess/template-policy.py "$RUNNER_TEMP/pilot-development-private-browser-access.json"
+          python3 tests/infrastructure/PrivateBrowserAccess/test-inputs.py
+          python3 tests/infrastructure/PrivateBrowserDns/policy.py "$RUNNER_TEMP/pilot-development-browser-dns.json" "$RUNNER_TEMP/private-browser-composition.json"
+          python3 tests/infrastructure/PrivateBrowserDns/environment_inputs.py --self-test
+          python3 tests/infrastructure/PrivateBrowserDns/test_composition_inputs.py
+
   collector-windows:
     strategy:
       matrix:

@@ -18,10 +18,11 @@ flowchart LR
     User[Customer browser] -->|HTTPS| Edge[Reviewed public HTTPS entry point]
     Edge --> BFF[Portal and BFF]
     BFF -->|Sign-in and session authority| Entra[Microsoft Entra ID]
-    BFF -->|Private workload access| Services[Private database, evidence, key and broker services]
+    BFF -->|Private workload access| Services[Private database, evidence and key services]
+    BFF -->|Approved restricted public endpoint exception| Broker[Service Bus Standard]
 ```
 
-Candidate shape only: a narrowly exposed portal/BFF entry point with private data services. Select the ingress service, origin exposure controls, certificate/domain and proxy trust in a new reviewed ADR. Do not assume a public Container Apps environment, paid edge SKU, custom domain or network-wide access. Existing [ADR-0002](../../architecture/decisions/ADR-0002-pilot-tenant-isolation.md), [ADR-0004](../../architecture/decisions/ADR-0004-azure-pilot-technology-platform.md) and [ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) constrain tenancy, platform and BFF authority.
+Candidate shape only: a narrowly exposed portal/BFF entry point with private data services. Preserve ADR-0004’s Service Bus Standard restricted public endpoint exception; this plan does not change it to Private Link or select a different broker SKU. Select the ingress service, origin exposure controls, certificate/domain and proxy trust in a new reviewed ADR. Do not assume a public Container Apps environment, paid edge SKU, custom domain or network-wide access. Existing [ADR-0002](../../architecture/decisions/ADR-0002-pilot-tenant-isolation.md), [ADR-0004](../../architecture/decisions/ADR-0004-azure-pilot-technology-platform.md) and [ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) constrain tenancy, platform and BFF authority.
 
 Use the approved [identity/session design](../../docs/security/health-assessment-identity-session-design.md) and [authorization matrix](../../docs/security/health-assessment-authorization-matrix.md) as the baseline: supported organizational Entra sign-in, reviewed B2B onboarding, MFA/Conditional Access, server-side sessions and server-side customer/project/role isolation. An invited identity must also receive the exact product assignment. Public reachability grants no data authority. Consumer/social accounts, open self-registration and new customer roles require separate policy/product decisions.
 
@@ -38,7 +39,7 @@ Use the approved [identity/session design](../../docs/security/health-assessment
 
 ## Required tests and operational review
 
-Map the new approved packet to feature003 tests and security controls before coding. Verify anonymous access cannot reach protected data; MFA and external organizational admission; tenant/project isolation and field filtering; secure cookies/CSRF; exact TLS/canonical host/redirect URI; trusted proxy and header spoofing denials; direct-origin bypass; private database/key/blob/broker reachability; abuse controls; sign-out/revocation; audit failures and unknown commits; availability/recovery; manual accessibility. No planned test is a passing test.
+Map the new approved packet to feature003 tests and security controls before coding. Verify anonymous access cannot reach protected data; MFA and external organizational admission; tenant/project isolation and field filtering; secure cookies/CSRF; exact TLS/canonical host/redirect URI; trusted proxy and header spoofing denials; direct-origin bypass; private database/key/blob reachability and the separately restricted public broker endpoint; abuse controls; sign-out/revocation; audit failures and unknown commits; availability/recovery; manual accessibility. No planned test is a passing test.
 
 Price the complete public architecture against the expected usage and new budget decision. The existing USD50 development allowance and disposed historical session do not authorize an always-on customer service. Define monitoring, incident/support ownership, certificate/key/image updates, backups/restores, evidence retention and rollback from approved policies, not invented defaults.
 

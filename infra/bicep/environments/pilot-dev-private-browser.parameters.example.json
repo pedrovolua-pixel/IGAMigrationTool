@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "existingVnetName": {
+      "value": null
+    },
+    "existingNatGatewayName": {
+      "value": null
+    },
+    "workstationSubnetName": {
+      "value": null
+    },
+    "workstationSubnetCidr": {
+      "value": null
+    },
+    "workstationPrivateAddress": {
+      "value": null
+    },
+    "workstationVmName": {
+      "value": null
+    },
+    "workstationNicName": {
+      "value": null
+    },
+    "workstationNsgName": {
+      "value": null
+    },
+    "bastionName": {
+      "value": null
+    },
+    "appIlbAddress": {
+      "value": null
+    },
+    "developerRdpSourceAddress": {
+      "value": null
+    },
+    "windowsImageVersion": {
+      "value": null
+    },
+    "adminUsername": {
+      "value": null
+    },
+    "egressRules": {
+      "value": null
+    },
+    "environmentName": {
+      "value": null
+    },
+    "browserDnsLinkName": {
+      "value": null
+    }
+  }
+}
