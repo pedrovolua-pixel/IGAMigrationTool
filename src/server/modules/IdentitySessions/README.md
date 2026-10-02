@@ -46,7 +46,8 @@ cookie has no receipt route and remains unauthenticated under D01.
 
 `writer_roles` binds the actual `SESSION_USER` to one configured stream,
 writer-binding reference and explicit allowed actions; knowing a binding GUID
-does not confer writer authority. `reader_scopes` restricts the visible view to
+does not confer writer authority. Receipt creation verifies that same login,
+stream and allowed action for every linked event. `reader_scopes` restricts the visible view to
 configured stream/platform or exact customer/project and optional actor scope.
 `lifecycle_bindings` and `witness_bindings` authorize distinct actors. These
 tables are migration/operator-owned configuration, never caller-populated.
@@ -63,7 +64,9 @@ are not independent protection against a privileged operator.
 
 Explicit synthetic lifecycle tests exercise the already approved 12-month
 soft-delete boundary, holds, release, 30-day active purge and tombstone replay
-before restored records become visible. No automatic cleanup, hold creation,
+before restored records become visible. Lifecycle functions reject null or
+future caller time against a fresh database clock after row locks; tests seed
+past events instead of advancing the lifecycle operator's clock. No automatic cleanup, hold creation,
 retention default, backup execution, checkpoint schedule or live witness is
 introduced. Challenge/ticket/receipt cleanup and retained independent witnesses
 remain reviewed production inputs. The audit-unavailable failure-preservation

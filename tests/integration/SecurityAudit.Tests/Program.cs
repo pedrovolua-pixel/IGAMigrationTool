@@ -134,6 +134,10 @@ try
         var nonfixedUtc = valid.Replace(closedEvent.EventAtUtc.ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'", System.Globalization.CultureInfo.InvariantCulture), closedEvent.EventAtUtc.ToString("yyyy-MM-dd'T'HH:mm:ss'Z'", System.Globalization.CultureInfo.InvariantCulture), StringComparison.Ordinal);
         try { await RoleSql(runtime, "SELECT security_audit.append_event($1,$2,$3,$4)", binding.StreamId, binding.WriterBindingReference, nonfixedUtc, SecurityAuditCanonical.Hash(nonfixedUtc)); throw new Exception("Nonfixed UTC SQL audit value accepted"); }
         catch (PostgresException exception) when (exception.MessageText == "Closed event value refused") { count++; }
+        var denied = closedEvent with { Action = SecurityAuditAction.AuthenticationDenied, Outcome = SecurityAuditOutcome.Denied, Reason = SecurityAuditReason.AuthorityDenied, SessionReference = null, SecurityVersion = long.MaxValue };
+        var overflow = SecurityAuditCanonical.Event(binding, denied, nextHead + 1, previous).Replace(long.MaxValue.ToString(System.Globalization.CultureInfo.InvariantCulture), "9223372036854775808", StringComparison.Ordinal);
+        try { await RoleSql(runtime, "SELECT security_audit.append_event($1,$2,$3,$4)", binding.StreamId, binding.WriterBindingReference, overflow, SecurityAuditCanonical.Hash(overflow)); throw new Exception("Overflow SQL audit version accepted"); }
+        catch (PostgresException exception) when (exception.SqlState == "22003") { count++; }
         foreach (var field in new[] { "actorKind", "action", "securityVersion", "writer", "applicationClientId", "writerBindingReference" })
         {
             var node = System.Text.Json.Nodes.JsonNode.Parse(valid)!; node[field] = null;
@@ -148,6 +152,21 @@ try
     await Sql("INSERT INTO security_audit.streams(stream_id,environment_id,writer_binding_reference,writer_tenant_id,writer_object_id,application_client_id) VALUES($1,$2,$3,$4,$5,$6)", otherBinding.StreamId, otherBinding.EnvironmentId, otherBinding.WriterBindingReference, writer.TenantId, writer.ObjectId, otherBinding.ApplicationClientId);
     var otherAudit = new PostgreSqlSecurityAudit(otherBinding, clock);
     await Refused(async () => { await using var c = await runtime.OpenConnectionAsync(); await using var t = await c.BeginTransactionAsync(); await otherAudit.AppendAsync(c, t, closedEvent); }, "Known foreign stream GUID bypassed SESSION_USER binding");
+    var otherEvent = closedEvent with { EventId = Guid.NewGuid(), OperationId = Guid.NewGuid(), Action = SecurityAuditAction.AuthenticationDenied, Outcome = SecurityAuditOutcome.Denied, Reason = SecurityAuditReason.AuthorityDenied, SessionReference = null };
+    var otherCanonical = SecurityAuditCanonical.Event(otherBinding, otherEvent, 1, new string('0', 64));
+    await Sql("INSERT INTO security_audit.events VALUES($1,$2,$3,1,$4,$5,$6,$7)", otherEvent.EventId, otherEvent.OperationId, otherBinding.StreamId, clock.GetUtcNow(), new string('0', 64), SecurityAuditCanonical.Hash(otherCanonical), otherCanonical);
+    var otherRequest = new OperationReceiptRequestV1(otherEvent.OperationId, writer, otherEvent.ActorKind, otherEvent.Actor, otherEvent.Action, a, SecurityAuditCanonical.Hash("synthetic-denial"));
+    var otherReceipt = new OperationReceiptV1(otherRequest, SecurityAuditOutcome.Denied, clock.GetUtcNow(), null, 1, null, [otherEvent.EventId]);
+    try { await RoleSql(runtime, "SELECT security_audit.append_receipt($1,$2,$3,$4)", otherEvent.OperationId, SecurityAuditCanonical.Request(otherRequest), SecurityAuditCanonical.Receipt(otherReceipt), new[] { otherEvent.EventId }); throw new Exception("Foreign stream receipt accepted"); }
+    catch (PostgresException exception) when (exception.MessageText == "Receipt writer/action denied") { count++; }
+    var actionEvent = otherEvent with { EventId = Guid.NewGuid(), OperationId = Guid.NewGuid() };
+    var actionCanonical = SecurityAuditCanonical.Event(binding, actionEvent, 999, new string('0', 64));
+    await Sql("INSERT INTO security_audit.events VALUES($1,$2,$3,999,$4,$5,$6,$7)", actionEvent.EventId, actionEvent.OperationId, binding.StreamId, clock.GetUtcNow(), new string('0', 64), SecurityAuditCanonical.Hash(actionCanonical), actionCanonical);
+    var actionRequest = otherRequest with { OperationId = actionEvent.OperationId };
+    var actionReceipt = otherReceipt with { Request = actionRequest, EventIds = new[] { actionEvent.EventId } };
+    try { await RoleSql(admin, "SELECT security_audit.append_receipt($1,$2,$3,$4)", actionEvent.OperationId, SecurityAuditCanonical.Request(actionRequest), SecurityAuditCanonical.Receipt(actionReceipt), new[] { actionEvent.EventId }); throw new Exception("Unauthorized receipt action accepted"); }
+    catch (PostgresException exception) when (exception.MessageText == "Receipt writer/action denied") { count++; }
+    await Sql("DELETE FROM security_audit.events WHERE event_id=ANY($1)", new[] { otherEvent.EventId, actionEvent.EventId });
     await Sql("DELETE FROM security_audit.streams WHERE stream_id=$1", otherBinding.StreamId);
     await Sql("UPDATE security_audit.reader_scopes SET actor_tenant_id=$1,actor_object_id=$2", a.TenantId, a.ObjectId);
     await using (var actorFiltered = readerRole.CreateCommand("SELECT count(*) FROM security_audit.visible_events"))
@@ -237,6 +256,8 @@ try
     await Refused(() => { AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence - 1, head.Digest, [], []); return Task.CompletedTask; }, "Regressed restore head accepted");
     var firstEvent = (await Entries()).OrderBy(e => e.Sequence).First(); var holdId = Guid.NewGuid();
     var twelveMonths = clock.Initial.AddMonths(12);
+    await Refused(() => RoleSql(lifecycle, "SELECT security_audit.soft_delete_event($1,$2,$3)", firstEvent.EventId, DateTimeOffset.UtcNow.AddYears(1), lifecycleAuthority), "Future lifecycle soft delete accepted");
+    await Refused(() => RoleSql(lifecycle, "SELECT security_audit.soft_delete_event($1,NULL,$2)", firstEvent.EventId, lifecycleAuthority), "Null lifecycle soft delete accepted");
     await Refused(() => RoleSql(lifecycle, "SELECT security_audit.soft_delete_event($1,$2,$3)", firstEvent.EventId, twelveMonths.AddTicks(-10), lifecycleAuthority), "Early soft-delete allowed");
     await RoleSql(lifecycle, "SELECT security_audit.set_hold($1,$2,$3,$4)", firstEvent.EventId, holdId, twelveMonths.AddMonths(1), lifecycleAuthority);
     await Refused(() => RoleSql(lifecycle, "SELECT security_audit.soft_delete_event($1,$2,$3)", firstEvent.EventId, twelveMonths, lifecycleAuthority), "Hold allowed deletion");
@@ -248,6 +269,8 @@ try
     await RoleSql(lifecycle, "SELECT security_audit.set_hold($1,$2,$3,$4)", firstEvent.EventId, holdId, twelveMonths.AddMonths(1), lifecycleAuthority);
     await Refused(() => RoleSql(lifecycle, "SELECT security_audit.purge_event($1,$2,$3)", firstEvent.EventId, twelveMonths.AddDays(30), lifecycleAuthority), "Held soft-deleted event purge allowed");
     await RoleSql(lifecycle, "SELECT security_audit.release_hold($1,$2,$3)", firstEvent.EventId, holdId, lifecycleAuthority);
+    await Refused(() => RoleSql(lifecycle, "SELECT security_audit.purge_event($1,$2,$3)", firstEvent.EventId, DateTimeOffset.UtcNow.AddYears(1), lifecycleAuthority), "Future lifecycle purge accepted");
+    await Refused(() => RoleSql(lifecycle, "SELECT security_audit.purge_event($1,NULL,$2)", firstEvent.EventId, lifecycleAuthority), "Null lifecycle purge accepted");
     await RoleSql(lifecycle, "SELECT security_audit.purge_event($1,$2,$3)", firstEvent.EventId, twelveMonths.AddDays(30), lifecycleAuthority);
     Check(await Scalar("SELECT count(*) FROM security_audit.tombstones") == 1, "Authorized purge preserves sequence/digest tombstone");
     AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, await Entries(), await Receipts()); count++;
@@ -264,7 +287,7 @@ try
 finally { Directory.Delete(dir, true); }
 sealed class Clock : TimeProvider
 {
-    public DateTimeOffset Initial { get; } = DateTimeOffset.Parse("2026-10-02T12:00:00+00:00");
+    public DateTimeOffset Initial { get; } = DateTimeOffset.UtcNow.AddYears(-2);
     private TimeSpan elapsed;
     public override DateTimeOffset GetUtcNow() => Initial + elapsed;
     public void Advance(TimeSpan value) => elapsed += value;

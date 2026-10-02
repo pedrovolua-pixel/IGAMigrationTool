@@ -111,6 +111,10 @@ RETURNS void LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog AS $$
 DECLARE j jsonb; r jsonb;
 BEGIN
     j:=p_request::jsonb; r:=p_receipt::jsonb;
+    IF EXISTS(SELECT 1 FROM security_audit.events e WHERE e.event_id=ANY(p_events) AND NOT EXISTS(
+       SELECT 1 FROM security_audit.writer_roles w JOIN security_audit.streams s USING(stream_id)
+       WHERE w.stream_id=e.stream_id AND w.role_name=session_user AND w.writer_binding_reference=s.writer_binding_reference
+       AND j->>'operationKind'=ANY(w.allowed_actions))) THEN RAISE EXCEPTION 'Receipt writer/action denied'; END IF;
     IF j->>'schemaVersion'<>'operation-receipt-request-v1' OR j->>'operationId'<>p_operation::text OR
        (SELECT count(*) FROM jsonb_object_keys(j))<>13 OR cardinality(p_events)=0 OR
        cardinality(p_events)<>(SELECT count(DISTINCT x) FROM unnest(p_events) x) OR
@@ -208,6 +212,7 @@ DECLARE e security_audit.events%ROWTYPE;
 BEGIN
  IF p_authority IS NULL OR NOT EXISTS(SELECT 1 FROM security_audit.lifecycle_bindings WHERE role_name=session_user AND lifecycle_authority=p_authority) THEN RAISE EXCEPTION 'Wrong lifecycle authority role'; END IF;
  SELECT * INTO STRICT e FROM security_audit.events WHERE event_id=p_event FOR UPDATE;
+ IF p_now IS NULL OR p_now>clock_timestamp() THEN RAISE EXCEPTION 'Untrusted lifecycle time'; END IF;
  IF p_now<e.event_at_utc+interval '12 months' OR EXISTS(SELECT 1 FROM security_audit.lifecycle WHERE event_id=p_event AND hold_reference IS NOT NULL) THEN RAISE EXCEPTION 'Audit lifecycle boundary refused'; END IF;
  INSERT INTO security_audit.lifecycle(event_id,soft_deleted_at,lifecycle_authority) VALUES(p_event,p_now,p_authority)
  ON CONFLICT(event_id) DO UPDATE SET soft_deleted_at=COALESCE(security_audit.lifecycle.soft_deleted_at,p_now),lifecycle_authority=p_authority;
@@ -219,6 +224,7 @@ BEGIN
  IF p_authority IS NULL OR NOT EXISTS(SELECT 1 FROM security_audit.lifecycle_bindings WHERE role_name=session_user AND lifecycle_authority=p_authority) THEN RAISE EXCEPTION 'Wrong lifecycle authority role'; END IF;
  SELECT * INTO STRICT e FROM security_audit.events WHERE event_id=p_event FOR UPDATE;
  SELECT * INTO STRICT l FROM security_audit.lifecycle WHERE event_id=p_event FOR UPDATE;
+ IF p_now IS NULL OR p_now>clock_timestamp() THEN RAISE EXCEPTION 'Untrusted lifecycle time'; END IF;
  IF l.soft_deleted_at IS NULL OR l.hold_reference IS NOT NULL OR p_now<l.soft_deleted_at THEN RAISE EXCEPTION 'Audit purge boundary refused'; END IF;
  INSERT INTO security_audit.tombstones VALUES(e.event_id,e.stream_id,e.sequence,e.previous_sha256,e.event_sha256,p_now,p_authority);
  DELETE FROM security_audit.lifecycle WHERE event_id=p_event;
@@ -289,6 +295,7 @@ BEGIN
     (j->'customerId'='null'::jsonb AND j->>'scope'<>'Platform') OR
     (j->'customerId'<>'null'::jsonb AND (j->>'scope'<>'CustomerProject' OR j->>'action'<>'AuthorityChanged'))
     THEN RAISE EXCEPTION 'Closed event value refused'; END IF;
+ IF j->'securityVersion'<>'null'::jsonb THEN PERFORM (j->>'securityVersion')::bigint; END IF;
  FOREACH k IN ARRAY ARRAY['eventId','operationId','correlationId','sessionReference','previousSessionReference','customerId','projectId'] LOOP
   v:=j->>k;
   IF j->k<>'null'::jsonb AND (jsonb_typeof(j->k)<>'string' OR v !~ '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$' OR v='00000000-0000-0000-0000-000000000000')
