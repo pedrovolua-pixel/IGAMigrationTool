@@ -234,6 +234,7 @@ CREATE FUNCTION security_audit.record_checkpoint(p_witness uuid,p_stream uuid,p_
 RETURNS void LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog AS $$
 BEGIN
  IF NOT EXISTS(SELECT 1 FROM security_audit.witness_bindings WHERE role_name=session_user AND stream_id=p_stream) THEN RAISE EXCEPTION 'Wrong witness role'; END IF;
+ IF p_time IS NULL OR p_time>clock_timestamp() THEN RAISE EXCEPTION 'Untrusted checkpoint time'; END IF;
  IF NOT EXISTS(SELECT 1 FROM security_audit.streams WHERE stream_id=p_stream AND environment_id=p_environment AND writer_binding_reference=p_binding AND head_sequence=p_sequence AND head_sha256=p_digest) THEN RAISE EXCEPTION 'Checkpoint head mismatch'; END IF;
  INSERT INTO security_audit.checkpoints VALUES(p_witness,p_stream,p_environment,p_binding,p_sequence,p_digest,p_time);
 END $$;
@@ -357,6 +358,7 @@ BEGIN
    (j->>'operationKind'='SessionRevoked' AND canonical_event::jsonb->>'sessionReference'=j->>'oldSessionReference' OR j->>'operationKind'='SessionRotated' AND canonical_event::jsonb->>'previousSessionReference'=j->>'oldSessionReference'))) THEN RAISE EXCEPTION 'Exact old reference missing/conflicting'; END IF;
  IF EXISTS(SELECT 1 FROM security_audit.events WHERE event_id=ANY(p_events) AND (canonical_event::jsonb->'customerId' IS DISTINCT FROM j->'customerId' OR canonical_event::jsonb->'projectId' IS DISTINCT FROM j->'projectId' OR (canonical_event::jsonb->>'eventAtUtc')::timestamptz>(r->>'committedAtUtc')::timestamptz)) THEN RAISE EXCEPTION 'Receipt scope/time conflict'; END IF;
  PERFORM (r->>'committedAtUtc')::timestamptz;
+ IF (r->>'committedAtUtc')::timestamptz>clock_timestamp() THEN RAISE EXCEPTION 'Untrusted receipt time'; END IF;
  PERFORM security_audit.append_receipt_checked_binding(p_operation,p_request,p_receipt,p_events);
 END $$;
 REVOKE ALL ON ALL FUNCTIONS IN SCHEMA security_audit FROM PUBLIC;

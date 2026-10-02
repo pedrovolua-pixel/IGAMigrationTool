@@ -21,6 +21,7 @@ not simulate an actual TCP interruption. Chain/witness tests include holds,
 12-month soft deletion, active purge at 30 days, deletion tombstones and replay
 before restored events become readable. Lifecycle tests seed past events and
 prove null/future operator times are refused against the actual database clock.
+Restricted receipt and witness calls likewise reject null/future timestamps.
 Tests use synthetic clock/bindings and
 an independently supplied synthetic witness, not a production signer/destination.
 

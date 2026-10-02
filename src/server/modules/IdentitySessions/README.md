@@ -47,7 +47,9 @@ cookie has no receipt route and remains unauthenticated under D01.
 `writer_roles` binds the actual `SESSION_USER` to one configured stream,
 writer-binding reference and explicit allowed actions; knowing a binding GUID
 does not confer writer authority. Receipt creation verifies that same login,
-stream and allowed action for every linked event. `reader_scopes` restricts the visible view to
+stream and allowed action for every linked event. Receipt and witness checkpoint
+timestamps also reject null/future values against the database clock.
+`reader_scopes` restricts the visible view to
 configured stream/platform or exact customer/project and optional actor scope.
 `lifecycle_bindings` and `witness_bindings` authorize distinct actors. These
 tables are migration/operator-owned configuration, never caller-populated.

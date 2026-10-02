@@ -164,6 +164,12 @@ try
     await Sql("INSERT INTO security_audit.events VALUES($1,$2,$3,999,$4,$5,$6,$7)", actionEvent.EventId, actionEvent.OperationId, binding.StreamId, clock.GetUtcNow(), new string('0', 64), SecurityAuditCanonical.Hash(actionCanonical), actionCanonical);
     var actionRequest = otherRequest with { OperationId = actionEvent.OperationId };
     var actionReceipt = otherReceipt with { Request = actionRequest, EventIds = new[] { actionEvent.EventId } };
+    var futureReceipt = actionReceipt with { CommittedAtUtc = DateTimeOffset.UtcNow.AddYears(1) };
+    try { await RoleSql(runtime, "SELECT security_audit.append_receipt($1,$2,$3,$4)", actionEvent.OperationId, SecurityAuditCanonical.Request(actionRequest), SecurityAuditCanonical.Receipt(futureReceipt), new[] { actionEvent.EventId }); throw new Exception("Future SQL receipt time accepted"); }
+    catch (PostgresException exception) when (exception.MessageText == "Untrusted receipt time") { count++; }
+    var nullReceipt = System.Text.Json.Nodes.JsonNode.Parse(SecurityAuditCanonical.Receipt(actionReceipt))!; nullReceipt["committedAtUtc"] = null;
+    try { await RoleSql(runtime, "SELECT security_audit.append_receipt($1,$2,$3,$4)", actionEvent.OperationId, SecurityAuditCanonical.Request(actionRequest), nullReceipt.ToJsonString(), new[] { actionEvent.EventId }); throw new Exception("Null SQL receipt time accepted"); }
+    catch (PostgresException exception) when (exception.MessageText == "Invalid result scalar") { count++; }
     try { await RoleSql(admin, "SELECT security_audit.append_receipt($1,$2,$3,$4)", actionEvent.OperationId, SecurityAuditCanonical.Request(actionRequest), SecurityAuditCanonical.Receipt(actionReceipt), new[] { actionEvent.EventId }); throw new Exception("Unauthorized receipt action accepted"); }
     catch (PostgresException exception) when (exception.MessageText == "Receipt writer/action denied") { count++; }
     await Sql("DELETE FROM security_audit.events WHERE event_id=ANY($1)", new[] { otherEvent.EventId, actionEvent.EventId });
@@ -251,6 +257,8 @@ try
     { var values = new List<OperationReceiptV1>(); await using var c = witnessRole.CreateCommand("SELECT receipt_canonical FROM security_audit.operation_receipts"); await using var r = await c.ExecuteReaderAsync(); while (await r.ReadAsync()) values.Add(SecurityAuditCanonical.ReadReceipt(r.GetString(0))); return values; }
     var head = await Head(); var checkpoint = new AuditCheckpointV1(binding.StreamId, binding.EnvironmentId, binding.WriterBindingReference, head.Sequence, head.Digest, clock.GetUtcNow(), Guid.NewGuid());
     await RoleSql(witnessRole, "SELECT security_audit.record_checkpoint($1,$2,$3,$4,$5,$6,$7)", checkpoint.WitnessReference, binding.StreamId, binding.EnvironmentId, binding.WriterBindingReference, head.Sequence, head.Digest, clock.GetUtcNow());
+    await Refused(() => RoleSql(witnessRole, "SELECT security_audit.record_checkpoint($1,$2,$3,$4,$5,$6,$7)", Guid.NewGuid(), binding.StreamId, binding.EnvironmentId, binding.WriterBindingReference, head.Sequence, head.Digest, DateTimeOffset.UtcNow.AddYears(1)), "Future checkpoint time accepted");
+    await Refused(() => RoleSql(witnessRole, "SELECT security_audit.record_checkpoint($1,$2,$3,$4,$5,$6,NULL)", Guid.NewGuid(), binding.StreamId, binding.EnvironmentId, binding.WriterBindingReference, head.Sequence, head.Digest), "Null checkpoint time accepted");
     AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, await Entries(), await Receipts()); count++;
     await Refused(() => { AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, (new List<AuditIntegrityEntryV1>(Entries().GetAwaiter().GetResult())).Skip(1).ToList(), Receipts().GetAwaiter().GetResult()); return Task.CompletedTask; }, "Unexplained gap accepted");
     await Refused(() => { AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence - 1, head.Digest, [], []); return Task.CompletedTask; }, "Regressed restore head accepted");
