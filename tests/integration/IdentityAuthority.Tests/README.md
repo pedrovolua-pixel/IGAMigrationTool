@@ -12,5 +12,6 @@ The executable covers:
 - External Members under the same sponsor/expiry/review/home boundary; known engagement change, attributed renewal and home-cutoff monotonicity.
 - Actual audited ticket issue/read, transaction-bound admission without self-lock, original authentication cutoff and atomic authority ticket revocation.
 - Audit failure rollback, direct unaudited mutation denial, and missing/null/Pascal receipt fields failing deferred integrity checks.
+- Restricted SQL full-command/provider digest mismatch and immediate fractional/overflow integer denial, with no authority change.
 
 Synthetic success is not live property-permission, role-replication, guest-home trust, unknown network commit, resource-policy endpoint or production proof. Independent combined tests and canonical evidence are coordinator-owned.

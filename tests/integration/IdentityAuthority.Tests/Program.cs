@@ -1,6 +1,8 @@
 using System.Collections.Immutable;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using IdentityAuthority;
 using IdentityPolicy;
 using IdentitySessions;
@@ -136,8 +138,10 @@ AuthenticationTicket Ticket(SessionSubject target, long version) => new(new Clai
     new Claim("tid", target.TenantId.ToString()), new Claim("oid", target.ObjectId.ToString()), new Claim("roles", "PilotConsultant")], "Cookie", "oid", "roles")),
     new AuthenticationProperties(new Dictionary<string, string?>
     {
-        [SessionTicket.AuthenticatedUtc] = clock.GetUtcNow().ToString("O"), [SessionTicket.ProviderCheckedUtc] = clock.GetUtcNow().ToString("O"),
-        [SessionTicket.SecurityVersion] = version.ToString(System.Globalization.CultureInfo.InvariantCulture), [SessionTicket.MfaCaVerified] = "false"
+        [SessionTicket.AuthenticatedUtc] = clock.GetUtcNow().ToString("O"),
+        [SessionTicket.ProviderCheckedUtc] = clock.GetUtcNow().ToString("O"),
+        [SessionTicket.SecurityVersion] = version.ToString(System.Globalization.CultureInfo.InvariantCulture),
+        [SessionTicket.MfaCaVerified] = "false"
     }), "Cookie");
 var ticketKey = await ticketStore.StoreAsync(Ticket(subject, snapshot.SecurityVersion));
 Check(await ticketStore.RetrieveAsync(ticketKey) is not null, "Actual restricted audited store composes transaction-bound product authority");
@@ -205,8 +209,12 @@ Check(!await read.IsEligibleAsync(failureSubject, default), "Explicit approved r
 await provider.PublishAsync(Observation(failureSnapshot, 3, role: roleBinding.AppRoles[1].AppRoleId), Guid.NewGuid());
 failureSnapshot = (await read.ReadAsync(failureSubject))!;
 Check(await read.IsEligibleAsync(failureSubject, default), "Approved resumption plus new evidence can admit");
-var revokedAssignment = failureSnapshot.Assignments[0] with { Active = false, Revision = 2,
-    Attribution = new(Guid.NewGuid(), administrator, clock.GetUtcNow()) };
+var revokedAssignment = failureSnapshot.Assignments[0] with
+{
+    Active = false,
+    Revision = 2,
+    Attribution = new(Guid.NewGuid(), administrator, clock.GetUtcNow())
+};
 await admin.ExecuteAsync(Command(failureSubject, 5, AuthorityOperation.RevokeAssignment, assignment: revokedAssignment));
 Check(!await read.IsEligibleAsync(failureSubject, default) && !(await read.ReadAsync(failureSubject))!.Assignments[0].Active,
     "Exact assignment revocation increments authority and denies");
@@ -237,8 +245,12 @@ await Denied(() => provider.PublishAsync(Observation(newestExternalSnapshot, 3, 
 Check(await Count("security_audit.events") == homeEvents && await ticketStore.RetrieveAsync(externalKey) is null, "Home regression publishes no event/freshness and keeps denial");
 await admin.ExecuteAsync(Command(externalSubject, 4, AuthorityOperation.MarkExternalChange));
 Check(!await read.IsEligibleAsync(externalSubject, default), "Known sponsor or engagement change denies immediately");
-var renewedGuest = guest with { EngagementRevision = 2, LastReviewedAtUtc = clock.GetUtcNow(),
-    Attribution = new(Guid.NewGuid(), administrator, clock.GetUtcNow()) };
+var renewedGuest = guest with
+{
+    EngagementRevision = 2,
+    LastReviewedAtUtc = clock.GetUtcNow(),
+    Attribution = new(Guid.NewGuid(), administrator, clock.GetUtcNow())
+};
 await admin.ExecuteAsync(Command(externalSubject, 5, AuthorityOperation.ApproveExternalLifecycle, guest: renewedGuest));
 externalSnapshot = (await read.ReadAsync(externalSubject))!;
 Check(!await read.IsEligibleAsync(externalSubject, default), "Attributed guest renewal cannot restore stale provider evidence");
@@ -278,6 +290,73 @@ foreach (var head in new[] { false, true })
 // Restricted direct SQL calls cannot bypass closed command parsing or durable receipt.
 var directSubject = await Enroll(); var directSnapshot = (await read.ReadAsync(directSubject))!;
 var direct = Command(directSubject, 3, AuthorityOperation.SuspendSubject);
+string RawCommand(string json, string path, string raw)
+{
+    var root = JsonNode.Parse(json)!;
+    var parts = path.Split('.'); JsonNode parent = root;
+    foreach (var part in parts[..^1]) parent = parent[part]!;
+    parent[parts[^1]] = JsonNode.Parse(raw);
+    root["decision"]!["payloadSha256"] = new string('0', 64);
+    using var document = JsonDocument.Parse(root.ToJsonString()); using var buffer = new MemoryStream();
+    void Canonical(Utf8JsonWriter writer, JsonElement element)
+    {
+        if (element.ValueKind == JsonValueKind.Object)
+        { writer.WriteStartObject(); foreach (var property in element.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal)) { writer.WritePropertyName(property.Name); Canonical(writer, property.Value); } writer.WriteEndObject(); }
+        else if (element.ValueKind == JsonValueKind.Array)
+        { writer.WriteStartArray(); foreach (var item in element.EnumerateArray()) Canonical(writer, item); writer.WriteEndArray(); }
+        else element.WriteTo(writer);
+    }
+    using (var writer = new Utf8JsonWriter(buffer)) Canonical(writer, document.RootElement);
+    root["decision"]!["payloadSha256"] = SecurityAuditCanonical.Hash(Encoding.UTF8.GetString(buffer.ToArray()));
+    return root.ToJsonString();
+}
+async Task SqlRefused(NpgsqlDataSource db, string sql, string error, params object[] parameters)
+{
+    try
+    {
+        await using var q = db.CreateCommand(sql);
+        foreach (var parameter in parameters) q.Parameters.AddWithValue(parameter is string ? NpgsqlDbType.Jsonb : NpgsqlDbType.Uuid, parameter);
+        await q.ExecuteNonQueryAsync(); throw new Exception("Expected immediate restricted SQL rejection");
+    }
+    catch (PostgresException exception) when (exception.MessageText == error || error == "overflow" && exception.SqlState == "22003") { checks++; }
+}
+var rawPendingSubject = new SessionSubject(tenant, Guid.NewGuid()); var rawNow = clock.GetUtcNow();
+var rawEnrollment = new SubjectEnrollmentV1("subject-enrollment-v1", rawPendingSubject, 1, EnrollmentLifecycle.Pending,
+    OrganizationalOrigin.InternalOrganizational, tenant, rawNow, new(Guid.NewGuid(), administrator, rawNow));
+var rawPending = Command(rawPendingSubject, 0, AuthorityOperation.EnrollPending, rawEnrollment);
+var rawAssignment = directSnapshot.Assignments[0] with { Revision = 2, Attribution = new(Guid.NewGuid(), administrator, rawNow) };
+foreach (var (command, path) in new[] { (rawPending, "decision.expectedRevision"), (rawPending, "enrollment.revision"),
+    (Command(directSubject, 3, AuthorityOperation.SetAssignment, assignment: rawAssignment), "assignment.revision"),
+    (Command(externalSubject, 6, AuthorityOperation.ApproveExternalLifecycle, guest: renewedGuest), "guest.engagementRevision") })
+    foreach (var (raw, error) in new[] { ("1.2", "authority integer denied"), ("9223372036854775808", "overflow") })
+        await SqlRefused(adminDb, "SELECT * FROM identity_authority.apply_command($1)", error,
+            RawCommand(AuthorityCodec.Serialize(command), path, raw));
+await SqlRefused(adminDb, "SELECT * FROM identity_authority.apply_command($1)", "authority payload digest denied",
+    AuthorityCodec.Serialize(direct).Replace(direct.Decision.PayloadSha256, new string('f', 64), StringComparison.Ordinal));
+Check((await read.ReadAsync(directSubject))!.SecurityVersion == directSnapshot.SecurityVersion, "Raw integer and mismatched digest commands change no authority");
+async Task ProviderRefused(JsonNode raw, string error, bool wrongDigest = false)
+{
+    try
+    {
+        await using var q = providerDb.CreateCommand("SELECT * FROM identity_authority.publish_provider($1,$2,$3,$4)");
+        q.Parameters.AddWithValue(NpgsqlDbType.Jsonb, raw["observation"]!.ToJsonString());
+        q.Parameters.AddWithValue(NpgsqlDbType.Jsonb, raw["homeStatus"] is { } rawHome ? rawHome.ToJsonString() : DBNull.Value);
+        q.Parameters.AddWithValue(Guid.NewGuid()); q.Parameters.AddWithValue(wrongDigest ? new string('f', 64) : SecurityAuditCanonical.Hash(raw.ToJsonString()));
+        await q.ExecuteNonQueryAsync(); throw new Exception("Expected immediate provider SQL rejection");
+    }
+    catch (PostgresException exception) when (exception.MessageText == error || error == "overflow" && exception.SqlState == "22003") { checks++; }
+}
+var rawExternalSnapshot = (await read.ReadAsync(externalSubject))!;
+var rawHomeEvidence = renewedHome with { CheckedAtUtc = clock.GetUtcNow() };
+foreach (var path in new[] { "observation.sequence", "observation.enrollmentRevision", "observation.securityVersion", "homeStatus.enrollmentRevision", "homeStatus.securityVersion" })
+    foreach (var (number, error) in new[] { ("1.2", "authority integer denied"), ("9223372036854775808", "overflow") })
+    {
+        var raw = JsonNode.Parse(AuthorityCodec.Serialize(Observation(rawExternalSnapshot, 4, home: rawHomeEvidence)))!;
+        var parts = path.Split('.'); raw[parts[0]]![parts[1]] = JsonNode.Parse(number);
+        await ProviderRefused(raw, error);
+    }
+await ProviderRefused(JsonNode.Parse(AuthorityCodec.Serialize(Observation(directSnapshot)))!, "provider payload digest denied", true);
+Check((await read.ReadAsync(directSubject))!.SecurityVersion == directSnapshot.SecurityVersion, "Raw provider integers and mismatched digest change no authority");
 foreach (var badJson in new[] { AuthorityCodec.Serialize(direct).Replace("\"authority-command-v1\"", "null"),
     AuthorityCodec.Serialize(direct).Replace("\"SuspendSubject\"", "\"Unknown\""),
     AuthorityCodec.Serialize(direct).Replace("\"expectedRevision\":3", "\"expectedRevision\":null"),

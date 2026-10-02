@@ -87,6 +87,38 @@ BEGIN
         IF jsonb_typeof(p->field) IS DISTINCT FROM kind THEN RAISE EXCEPTION 'authority field type denied'; END IF;
     END LOOP;
 END $$;
+CREATE FUNCTION identity_authority.integers(p jsonb,fields text[],allow_zero boolean DEFAULT false) RETURNS void LANGUAGE plpgsql SET search_path=pg_catalog AS $$
+DECLARE field text; n bigint;
+BEGIN
+    FOREACH field IN ARRAY fields LOOP
+        IF jsonb_typeof(p->field) IS DISTINCT FROM 'number' OR (p->>field) !~ (CASE WHEN allow_zero THEN '^(0|[1-9][0-9]*)$' ELSE '^[1-9][0-9]*$' END) THEN RAISE EXCEPTION 'authority integer denied'; END IF;
+        n:=(p->>field)::bigint;
+    END LOOP;
+END $$;
+-- Authority commands sort every object key; provider receipts retain the fixed
+-- DTO declaration order. Both encodings are closed ASCII JSON with exact ints.
+CREATE FUNCTION identity_authority.digest_json(p jsonb,provider_wire boolean DEFAULT false) RETURNS text LANGUAGE plpgsql IMMUTABLE SET search_path=pg_catalog AS $$
+DECLARE result text; keys text[];
+BEGIN
+    CASE jsonb_typeof(p)
+    WHEN 'null' THEN RETURN 'null';
+    WHEN 'string','number','boolean' THEN RETURN p::text;
+    WHEN 'array' THEN
+        SELECT '['||COALESCE(string_agg(identity_authority.digest_json(value,provider_wire),',' ORDER BY ordinal),'')||']' INTO result FROM jsonb_array_elements(p) WITH ORDINALITY a(value,ordinal);
+    WHEN 'object' THEN
+        IF provider_wire THEN
+            IF p ? 'observation' THEN keys:=ARRAY['observation','homeStatus'];
+            ELSIF p ? 'schemaVersion' THEN keys:=ARRAY['schemaVersion','subject','clientId','resourceServicePrincipalId','sequence','startedAtUtc','completedAtUtc','enrollmentRevision','securityVersion','returnedSubjectId','accountEnabled','userType','invitationState','resourceCutoffUtc','appRoleIds','complete','correlationId'];
+            ELSIF p ? 'homeTenantId' THEN keys:=ARRAY['subject','homeTenantId','enrollmentRevision','securityVersion','checkedAtUtc','cutoffUtc','active','complete'];
+            ELSE keys:=ARRAY['tenantId','objectId']; END IF;
+            SELECT '{'||string_agg(to_jsonb(key)::text||':'||identity_authority.digest_json(p->key,true),',' ORDER BY ordinal)||'}' INTO result FROM unnest(keys) WITH ORDINALITY a(key,ordinal);
+        ELSE
+            SELECT '{'||COALESCE(string_agg(to_jsonb(key)::text||':'||identity_authority.digest_json(value,false),',' ORDER BY key COLLATE "C"),'')||'}' INTO result FROM jsonb_each(p);
+        END IF;
+    ELSE RAISE EXCEPTION 'authority digest scalar denied';
+    END CASE;
+    RETURN result;
+END $$;
 CREATE FUNCTION identity_authority.utc(p jsonb,fields text[]) RETURNS void LANGUAGE plpgsql SET search_path=pg_catalog AS $$
 DECLARE field text;
 BEGIN
@@ -114,8 +146,9 @@ BEGIN
     PERFORM identity_authority.typed(p,ARRAY['schemaVersion'],'string');
     d=p->'decision'; PERFORM identity_authority.closed(d,ARRAY['schemaVersion','commandId','expectedRevision','subject','scope','operation','decisionReference','reason','administrator','payloadSha256']);
     PERFORM identity_authority.typed(d,ARRAY['schemaVersion','operation','reason','payloadSha256'],'string');
-    PERFORM identity_authority.typed(d,ARRAY['expectedRevision'],'number');
+    PERFORM identity_authority.integers(d,ARRAY['expectedRevision'],true);
     PERFORM identity_authority.ids(d,ARRAY['commandId','decisionReference']);
+    IF d->>'payloadSha256' IS DISTINCT FROM encode(sha256(convert_to(identity_authority.digest_json(jsonb_set(p,'{decision,payloadSha256}',to_jsonb(repeat('0',64)))),'UTF8')),'hex') THEN RAISE EXCEPTION 'authority payload digest denied'; END IF;
     IF d->>'expectedRevision' !~ '^(0|[1-9][0-9]*)$' THEN RAISE EXCEPTION 'authority integer revision denied'; END IF;
     target=d->'subject'; PERFORM identity_authority.closed(target,ARRAY['tenantId','objectId']);
     IF NOT identity_authority.valid_subject(target) OR NOT identity_authority.valid_subject(d->'administrator') THEN RAISE EXCEPTION 'authority subject denied'; END IF;
@@ -135,7 +168,7 @@ BEGIN
     IF en<>'null'::jsonb THEN
         PERFORM identity_authority.closed(en,ARRAY['schemaVersion','subject','revision','lifecycle','origin','homeTenantId','enrolledAtUtc','attribution']);
         PERFORM identity_authority.typed(en,ARRAY['schemaVersion','lifecycle','origin'],'string');
-        PERFORM identity_authority.typed(en,ARRAY['revision'],'number');
+        PERFORM identity_authority.integers(en,ARRAY['revision']);
         PERFORM identity_authority.ids(en,ARRAY['homeTenantId']); PERFORM identity_authority.utc(en,ARRAY['enrolledAtUtc']);
         IF NOT identity_authority.valid_subject(en->'subject') THEN RAISE EXCEPTION 'enrollment subject denied'; END IF;
     END IF;
@@ -163,7 +196,7 @@ BEGIN
             PERFORM identity_authority.closed(a,ARRAY['schemaVersion','assignmentId','subject','scope','role','active','startsAtUtc','expiresAtUtc','evidenceCategories','conditions','revision','attribution']);
             PERFORM identity_authority.closed(a->'scope',ARRAY['customerId','projectId','environmentId','assessmentId']);
             PERFORM identity_authority.ids(a,ARRAY['assignmentId']); PERFORM identity_authority.ids(a->'scope',ARRAY['customerId','projectId','environmentId','assessmentId']);
-            PERFORM identity_authority.typed(a,ARRAY['schemaVersion','role'],'string'); PERFORM identity_authority.typed(a,ARRAY['revision'],'number');
+            PERFORM identity_authority.typed(a,ARRAY['schemaVersion','role'],'string'); PERFORM identity_authority.integers(a,ARRAY['revision']);
             PERFORM identity_authority.typed(a,ARRAY['active'],'boolean'); PERFORM identity_authority.typed(a,ARRAY['evidenceCategories','conditions'],'array');
             PERFORM identity_authority.utc(a,ARRAY['startsAtUtc','expiresAtUtc']);
             IF NOT identity_authority.valid_attribution(a->'attribution',d) THEN RAISE EXCEPTION 'assignment attribution denied'; END IF;
@@ -189,7 +222,7 @@ BEGIN
             END IF;
         ELSIF op='ApproveExternalLifecycle' THEN
             PERFORM identity_authority.closed(g,ARRAY['schemaVersion','subject','sponsor','assignedAtUtc','expiresAtUtc','lastReviewedAtUtc','engagementReference','engagementRevision','sponsorOrEngagementChanged','attribution']);
-            PERFORM identity_authority.ids(g,ARRAY['engagementReference']); PERFORM identity_authority.typed(g,ARRAY['engagementRevision'],'number');
+            PERFORM identity_authority.ids(g,ARRAY['engagementReference']); PERFORM identity_authority.integers(g,ARRAY['engagementRevision']);
             PERFORM identity_authority.typed(g,ARRAY['sponsorOrEngagementChanged'],'boolean'); PERFORM identity_authority.typed(g,ARRAY['schemaVersion'],'string');
             PERFORM identity_authority.utc(g,ARRAY['assignedAtUtc','expiresAtUtc','lastReviewedAtUtc']);
             IF (g->>'engagementRevision')::bigint<=0 THEN RAISE EXCEPTION 'guest engagement revision denied'; END IF;
@@ -219,7 +252,8 @@ LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog AS $$
 DECLARE t uuid; o uuid; e identity_authority.enrollments; prev identity_authority.provider_observations; b jsonb; now_at timestamptz; start_at timestamptz; end_at timestamptz; cutoff_at timestamptz; v bigint; valid boolean; changed boolean;
 BEGIN
     PERFORM identity_authority.closed(p,ARRAY['schemaVersion','subject','clientId','resourceServicePrincipalId','sequence','startedAtUtc','completedAtUtc','enrollmentRevision','securityVersion','returnedSubjectId','accountEnabled','userType','invitationState','resourceCutoffUtc','appRoleIds','complete','correlationId']);
-    PERFORM identity_authority.typed(p,ARRAY['schemaVersion','userType'],'string'); PERFORM identity_authority.typed(p,ARRAY['sequence','enrollmentRevision','securityVersion'],'number');
+    PERFORM identity_authority.typed(p,ARRAY['schemaVersion','userType'],'string'); PERFORM identity_authority.integers(p,ARRAY['sequence','enrollmentRevision','securityVersion']);
+    IF p_digest IS DISTINCT FROM encode(sha256(convert_to(identity_authority.digest_json(jsonb_build_object('observation',p,'homeStatus',h),true),'UTF8')),'hex') THEN RAISE EXCEPTION 'provider payload digest denied'; END IF;
     PERFORM identity_authority.typed(p,ARRAY['accountEnabled','complete'],'boolean'); PERFORM identity_authority.typed(p,ARRAY['appRoleIds'],'array');
     PERFORM identity_authority.ids(p,ARRAY['clientId','resourceServicePrincipalId','returnedSubjectId','correlationId']);
     PERFORM identity_authority.utc(p,ARRAY['startedAtUtc','completedAtUtc','resourceCutoffUtc']);
@@ -246,7 +280,7 @@ BEGIN
     IF e.origin='ExternalOrganizational' THEN
         PERFORM identity_authority.closed(h,ARRAY['subject','homeTenantId','enrollmentRevision','securityVersion','checkedAtUtc','cutoffUtc','active','complete']);
         PERFORM identity_authority.ids(h,ARRAY['homeTenantId']); PERFORM identity_authority.utc(h,ARRAY['checkedAtUtc','cutoffUtc']);
-        PERFORM identity_authority.typed(h,ARRAY['enrollmentRevision','securityVersion'],'number'); PERFORM identity_authority.typed(h,ARRAY['active','complete'],'boolean');
+        PERFORM identity_authority.integers(h,ARRAY['enrollmentRevision','securityVersion']); PERFORM identity_authority.typed(h,ARRAY['active','complete'],'boolean');
         valid=valid AND p->>'invitationState'='Accepted' AND h IS NOT NULL
             AND h->'subject'=p->'subject' AND (h->>'homeTenantId')::uuid=e.home_tenant_id
             AND (h->>'enrollmentRevision')::bigint=e.revision AND (h->>'securityVersion')::bigint=v

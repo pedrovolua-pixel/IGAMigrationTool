@@ -131,12 +131,16 @@ public static class AuthorityCodec
                 Require((c.Assignment is not null) == (operation is AuthorityOperation.SetAssignment or AuthorityOperation.RevokeAssignment));
                 Require((c.Guest is not null) == (operation == AuthorityOperation.ApproveExternalLifecycle));
                 if (c.Enrollment is { } ce)
-                { Validate(ce); Require(ce.Subject == c.Decision.Subject && ce.Revision == c.Decision.ExpectedRevision + 1
+                {
+                    Validate(ce); Require(ce.Subject == c.Decision.Subject && ce.Revision == c.Decision.ExpectedRevision + 1
                     && ce.Lifecycle == (operation == AuthorityOperation.EnrollPending ? EnrollmentLifecycle.Pending : EnrollmentLifecycle.Active));
-                    if (operation == AuthorityOperation.EnrollPending) Match(ce.Attribution, c.Decision); }
+                    if (operation == AuthorityOperation.EnrollPending) Match(ce.Attribution, c.Decision);
+                }
                 if (c.Assignment is { } ca)
-                { Validate(ca); Require(ca.Subject == c.Decision.Subject && ca.Scope == c.Decision.Scope
-                    && (operation != AuthorityOperation.RevokeAssignment || !ca.Active)); Match(ca.Attribution, c.Decision); }
+                {
+                    Validate(ca); Require(ca.Subject == c.Decision.Subject && ca.Scope == c.Decision.Scope
+                    && (operation != AuthorityOperation.RevokeAssignment || !ca.Active)); Match(ca.Attribution, c.Decision);
+                }
                 if (c.Guest is { } cg) { Validate(cg); Require(cg.Subject == c.Decision.Subject && !cg.SponsorOrEngagementChanged); Match(cg.Attribution, c.Decision); }
                 Require((c.Decision.Scope is not null) == (c.Assignment is not null)); break;
             default: throw new InvalidOperationException("Unsupported closed authority schema.");
