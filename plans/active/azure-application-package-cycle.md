@@ -1,6 +1,6 @@
 # Azure application package preparation
 
-Status: RUNNING — local packaging preparation authorized; paid deployment and G1 activation not included
+Status: VERIFIED — bounded bootstrap preparation; product integration and G1 NOT VERIFIED
 Owner: Azure setup coordinator
 Date: 2026-10-01
 Source base: `75e654d`
@@ -38,6 +38,12 @@ Results and independent review will be recorded before this cycle closes. Canoni
 
 PKG-01 source `c8afd85` integrated as `539be16`; PKG-02 `0cb2563` integrated as `cfd8434`; independent PKG-03 `1f3ecb8` integrated as `39e4e2a`. The verifier found encoded-path alias acceptance; the host author corrected raw-target checks before the passing process suite. Host/template authors and verifier kept explicit path ownership. The host worker independently reviewed the coordinator build helper, real MCR input lock and partial workflow with no material remaining source defect. Agent engineering review is not human gate acceptance.
 
-Coordinator executed SDK 10.0.401 locked restore, full 25-project Release build (zero warnings/errors), full-solution format verification, standalone publish, seven architecture policy/four scan cases,  framework-only NuGet vulnerability inventory, Bicep 0.47.16 build/lint root/module, 44 unsafe hosting mutations, actual process suite (eight startup refusals, two probes, 31 method/path refusals, web/worker SIGTERM and no worker HTTP/protected logs), locked-input preflight, documentation links/whitespace and whole working tree redacted Gitleaks. The formatter initially failed sandbox IPC; rerun with required local pipe access passed. No product route or customer access was enabled.
+Coordinator executed SDK 10.0.401 locked restore, full 25-project Release build (zero warnings/errors), full-solution format verification, standalone publish, seven architecture policy/four scan cases, framework-only NuGet vulnerability inventory, Bicep 0.47.16 build/lint root/module, 44 unsafe hosting mutations, actual process suite (eight startup refusals, two probes, 31 method/path refusals, web/worker SIGTERM and no worker HTTP/protected logs), locked-input preflight, documentation links/whitespace and whole working tree redacted Gitleaks. The formatter initially failed sandbox IPC; rerun with required local pipe access passed. No product route or customer access was enabled.
 
-The package is locally reviewable; container checks are queued for the separate partial GitHub workflow. Image vulnerability/license scans, SBOM, release provenance/signatures, registry publication/pulls, ARM runtime fail-guard execution, full corrected foundation replay and all live G1 evidence remain NOT VERIFIED until actually run. No paid Azure deployment or new permissions were applied. The feature remains IMPLEMENTING.
+The package is locally reviewable; the separate partial GitHub container workflow passed as recorded below. Image vulnerability/license scans, SBOM, release provenance/signatures, registry publication/pulls, ARM runtime fail-guard execution, full corrected foundation replay and all live G1 evidence remain NOT VERIFIED until actually run. No paid Azure deployment or new permissions were applied. The feature remains IMPLEMENTING.
+
+## Executed container CI
+
+[Azure package run 36953664310](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664310) passed on source `ae785af008f527b0396c8291d50f69743bf8575d`. Logs confirm an actual Linux AMD64 image build from the locked MCR bases and passing web/worker container execution: non-root UID 1654, read-only filesystem, all capabilities dropped, no-new-privileges, bounded resources, loopback-only web publication, isolated inert worker and graceful shutdown. Process refusal tests and all 44 compiled-hosting mutations also passed. This supersedes the initially queued image build/runtime result; image vulnerability/license scans, SBOM, release provenance/signatures and cloud pulls remain unverified. The local image config digest is metadata only, not a registry manifest digest or deployable promotion proof.
+
+The broader existing Linux/Windows partial bootstrap run 36953664189 remains in progress at this checkpoint. No paid resources were created. The exact source recipes/templates and sanitized evidence are stored in the repo; independently reviewed workers are finished.

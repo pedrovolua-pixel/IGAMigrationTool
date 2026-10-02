@@ -31,7 +31,7 @@
     "bicepBuildLint": "PASS:root+module",
     "inputLock": "PASS:realMicrosoftmanifestbytes/digests+linuxamd64 verified",
     "secretScan": "PASS:wholeworkingtree redacted",
-    "containerBuildRun": "NOT VERIFIED:pending CI",
+    "containerBuildRun": "PASS: actual Linux AMD64 image build and non-root/read-only/drop-capability/no-new-privileges web/isolated-worker smoke with graceful shutdown",
     "supplyChain": "NOT VERIFIED:image scan,SBOM,license,provenance/signatures"
   },
   "azureMutation": false,
@@ -41,5 +41,17 @@
     "Private registry builder/publication/pulls and reviewed grants",
     "Fresh spending/capacity approval before timed deployment",
     "Corrected foundation full replay and all required live gate tests"
-  ]
+  ],
+  "packagePartialCi": {
+    "sourceCommit": "ae785af008f527b0396c8291d50f69743bf8575d",
+    "runId": 36953664310,
+    "jobId": 110671815047,
+    "result": "PASS",
+    "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/36953664310",
+    "localImageConfigDigest": "sha256:dc01bda22c35e768ebf2c56e1865deb6e876fe76a4f5bbec4e121958a08b82a0",
+    "architecture": "amd64",
+    "user": "1654",
+    "lastPolicyCheckUtc": "2026-10-02T02:02:07Z",
+    "limits": "Local image configuration digest is not a published registry manifest digest. No image push, provenance/signature, SBOM, license/vulnerability scan or Azure activation."
+  }
 }
