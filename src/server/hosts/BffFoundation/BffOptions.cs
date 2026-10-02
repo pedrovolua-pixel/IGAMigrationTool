@@ -38,8 +38,8 @@ public interface IBffSubjectAuthority
 }
 
 public sealed record SubjectAdmission(HumanSubject Subject, bool Active, bool Assigned, bool GuestOnboardingValid,
-    bool ProviderStatusValid, DateTimeOffset ProviderCheckedUtc, DateTimeOffset AuthenticatedUtc,
-    bool MfaCaVerified, long SecurityVersion, IReadOnlyList<string> CoarseRoles);
+    bool ProviderStatusValid, DateTimeOffset ProviderCheckedUtc, long SecurityVersion, IReadOnlyList<string> CoarseRoles,
+    DateTimeOffset? SignInValidFromUtc = null, bool IsGuest = false, bool OrganizationalGuestOriginVerified = false, Guid? OrganizationalGuestHomeTenantId = null);
 
 public static class BffIdentity
 {
@@ -70,7 +70,8 @@ public static class BffIdentity
     public static bool IsAdmitted(SubjectAdmission? state, DateTimeOffset now) => state is not null &&
         state.Active && state.Assigned && state.GuestOnboardingValid && state.ProviderStatusValid &&
         state.SecurityVersion > 0 && state.ProviderCheckedUtc <= now &&
-        now - state.ProviderCheckedUtc < TimeSpan.FromMinutes(15) && state.AuthenticatedUtc <= now &&
-        now - state.AuthenticatedUtc < TimeSpan.FromHours(8) && state.CoarseRoles.Count > 0 &&
+        now - state.ProviderCheckedUtc < TimeSpan.FromMinutes(15) &&
+        state.SignInValidFromUtc is { } cutoff && cutoff <= now &&
+        (!state.IsGuest || state.OrganizationalGuestOriginVerified && state.OrganizationalGuestHomeTenantId is { } home && home != Guid.Empty && home != Guid.Parse("9188040d-6c67-4c5b-b112-36a304b66dad")) && state.CoarseRoles.Count > 0 &&
         state.CoarseRoles.All(AllowedRoles.Contains) && state.CoarseRoles.Distinct(StringComparer.Ordinal).Count() == state.CoarseRoles.Count;
 }

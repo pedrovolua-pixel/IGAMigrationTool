@@ -1,4 +1,6 @@
 using System.Globalization;
+using IdentitySessions;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -27,6 +29,7 @@ public static class BffRegistration
         services.AddSingleton(settings);
         services.AddSingleton(authority);
         services.AddSingleton(clock ?? TimeProvider.System);
+        services.TryAddSingleton<IPendingAuthenticationChallengeStore, DenyingAuthenticationChallengeStore>();
         services.AddAuthentication(options =>
         {
             options.DefaultScheme = CookieScheme;
@@ -52,6 +55,7 @@ public static class BffRegistration
             options.Schemes.Single(scheme => scheme.Name == OidcScheme).HandlerType = typeof(GuardedOpenIdConnectHandler));
         services.PostConfigure<CookieAuthenticationOptions>(CookieScheme, options =>
         {
+            options.TimeProvider = clock ?? TimeProvider.System;
             options.Cookie.Name = "__Secure-IgaBff";
             options.Cookie.Path = settings.CookiePath;
             options.Cookie.Domain = null;
@@ -72,15 +76,12 @@ public static class BffRegistration
                 try
                 {
                     var admission = await authority.CheckAsync(subject, context.HttpContext.RequestAborted);
-                    context.Properties.Items.TryGetValue("bff.securityVersion", out var versionText);
-                    if (admission?.Subject != subject || !BffIdentity.IsAdmitted(admission, (clock ?? TimeProvider.System).GetUtcNow()) ||
-                        !long.TryParse(versionText, NumberStyles.None, CultureInfo.InvariantCulture, out var version) ||
-                        version != admission!.SecurityVersion ||
-                        context.Principal.Claims.Any(claim => claim.Type is not ("tid" or "oid" or "roles")) ||
-                        !context.Principal.FindAll("roles").Select(claim => claim.Value).ToHashSet(StringComparer.Ordinal).SetEquals(admission.CoarseRoles))
+                    if (!BffSessionContext.TryRead(new AuthenticationTicket(context.Principal, context.Properties, CookieScheme),
+                        admission, (clock ?? TimeProvider.System).GetUtcNow(), out var session))
                     {
                         context.RejectPrincipal();
                     }
+                    else context.HttpContext.Features.Set(session);
                 }
                 catch (Exception)
                 {
@@ -93,6 +94,9 @@ public static class BffRegistration
                 {
                     throw new InvalidOperationException("Live sign-in is disabled or transport is insecure.");
                 }
+                // Framework remote completion adds its internal scheme marker
+                // after our handler returns. It is not product/session evidence.
+                context.Properties.Items.Remove(".AuthScheme");
                 return Task.CompletedTask;
             };
             options.Events.OnRedirectToLogin = context =>
@@ -108,6 +112,7 @@ public static class BffRegistration
         });
         services.PostConfigure<OpenIdConnectOptions>(OidcScheme, options =>
         {
+            options.TimeProvider = clock ?? TimeProvider.System;
             options.Scope.Clear();
             options.Scope.Add("openid");
             options.Scope.Add("profile");
@@ -124,6 +129,9 @@ public static class BffRegistration
             options.TokenValidationParameters.ValidateLifetime = true;
             options.TokenValidationParameters.RequireSignedTokens = true;
             options.TokenValidationParameters.RequireExpirationTime = true;
+            options.ProtocolValidator.RequireNonce = true;
+            options.UseSecurityTokenValidator = false;
+            options.TokenHandler = new SignedJsonWebTokenHandler();
             options.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
             var previousRedemption = options.Events.OnAuthorizationCodeReceived;
             options.Events.OnAuthorizationCodeReceived = async context =>
@@ -151,6 +159,26 @@ public static class BffRegistration
                     context.Fail("Identity admission refused.");
                     return;
                 }
+                try
+                {
+                    // Microsoft.Identity.Web manually redeems the code. The
+                    // framework skips this supported validator in that path;
+                    // run it explicitly with the framework-read nonce before
+                    // accepting evidence. Consumption remains after base success.
+                    if (context.TokenEndpointResponse is null) throw new InvalidOperationException("Code response required.");
+                    options.ProtocolValidator.ValidateTokenResponse(new OpenIdConnectProtocolValidationContext
+                    {
+                        ClientId = settings.ClientId.ToString("D"),
+                        ProtocolMessage = context.TokenEndpointResponse,
+                        ValidatedIdToken = context.SecurityToken,
+                        Nonce = context.Nonce
+                    });
+                }
+                catch (Exception)
+                {
+                    context.Fail("Protocol completion refused.");
+                    return;
+                }
                 SubjectAdmission? admission;
                 try
                 {
@@ -161,7 +189,11 @@ public static class BffRegistration
                     context.Fail("Identity authority unavailable.");
                     return;
                 }
-                if (admission?.Subject != subject || !BffIdentity.IsAdmitted(admission, (clock ?? TimeProvider.System).GetUtcNow()))
+                var now = (clock ?? TimeProvider.System).GetUtcNow();
+                if (admission?.Subject != subject || !BffIdentity.IsAdmitted(admission, now) ||
+                    !BffAuthenticationEvidence.OrganizationalOrigin(context.Principal, admission!, settings.TenantId) ||
+                    context.Properties is null || !BffAuthenticationEvidence.TryReadAuthentication(context.Principal, context.Properties, now, out var authenticated) ||
+                    authenticated < admission!.SignInValidFromUtc)
                 {
                     context.Fail("Identity admission refused.");
                     return;
@@ -169,19 +201,12 @@ public static class BffRegistration
                 var claims = new List<Claim> { new("tid", subject.TenantId.ToString("D")), new("oid", subject.ObjectId.ToString("D")) };
                 claims.AddRange(admission!.CoarseRoles.Select(role => new Claim("roles", role)));
                 context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, CookieScheme, "oid", "roles"));
-                var intendedPath = context.Properties?.RedirectUri;
-                context.Properties = new AuthenticationProperties();
-                if (intendedPath is not null && intendedPath.StartsWith(settings.CookiePath + "/", StringComparison.Ordinal) &&
-                    System.Text.RegularExpressions.Regex.IsMatch(intendedPath, "^/[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$"))
-                {
-                    // Only a narrow local path survives protocol completion. Product
-                    // authorization is evaluated again when that host action runs.
-                    context.Properties.RedirectUri = intendedPath;
-                }
-                context.Properties.Items["bff.authenticatedUtc"] = admission.AuthenticatedUtc.ToString("O", CultureInfo.InvariantCulture);
-                context.Properties.Items["bff.securityVersion"] = admission.SecurityVersion.ToString(CultureInfo.InvariantCulture);
-                context.Properties.Items["bff.providerCheckedUtc"] = admission.ProviderCheckedUtc.ToString("O", CultureInfo.InvariantCulture);
-                context.Properties.Items["bff.mfaCaVerified"] = admission.MfaCaVerified ? "true" : "false";
+                // Do not consume or discard protected protocol properties here:
+                // framework nonce/token-response validation still follows this event.
+                context.Properties.Items[SessionTicket.AuthenticatedUtc] = authenticated.ToString("O", CultureInfo.InvariantCulture);
+                context.Properties.Items[SessionTicket.SecurityVersion] = admission.SecurityVersion.ToString(CultureInfo.InvariantCulture);
+                context.Properties.Items[SessionTicket.ProviderCheckedUtc] = admission.ProviderCheckedUtc.ToString("O", CultureInfo.InvariantCulture);
+                context.Properties.Items[SessionTicket.MfaCaVerified] = "false";
             };
             options.Events.OnRedirectToIdentityProvider = context =>
             {
@@ -190,6 +215,15 @@ public static class BffRegistration
                     context.HandleResponse();
                     context.Response.StatusCode = StatusCodes.Status403Forbidden;
                 }
+                context.ProtocolMessage.MaxAge = "0";
+                return Task.CompletedTask;
+            };
+            options.Events.OnRemoteSignOut = context =>
+            {
+                // Minimal product tickets deliberately have no supported sid/iss
+                // binding; do not let the framework skip missing comparisons.
+                context.HandleResponse();
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
                 return Task.CompletedTask;
             };
             var previousSignOut = options.Events.OnRedirectToIdentityProviderForSignOut;

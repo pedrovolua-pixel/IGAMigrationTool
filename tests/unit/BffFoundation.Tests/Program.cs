@@ -1,4 +1,6 @@
 using System.Security.Claims;
+using IdentitySessions;
+using System.Globalization;
 using IgaMigration.BffFoundation;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Authentication;
@@ -28,7 +30,7 @@ var client = Guid.NewGuid();
 var subject = new HumanSubject(tenant, Guid.NewGuid());
 var settings = new BffOptions { TenantId = tenant, ClientId = client, ManagedIdentityClientId = Guid.NewGuid(), LiveSignInEnabled = true };
 var authority = new Authority(new SubjectAdmission(subject, true, true, true, true,
-    DateTimeOffset.UtcNow, DateTimeOffset.UtcNow, false, 1, ["PilotConsultant"]));
+    DateTimeOffset.UtcNow, 1, ["PilotConsultant"], DateTimeOffset.UnixEpoch));
 ClaimsPrincipal Principal(params Claim[] extras) => new(new ClaimsIdentity(
     new Claim[] { new("tid", tenant.ToString("D")), new("oid", subject.ObjectId.ToString("D")) }.Concat(extras),
     BffRegistration.CookieScheme, "oid", "roles"));
@@ -41,7 +43,7 @@ Check(!BffIdentity.TryReadSubject(new ClaimsPrincipal(new ClaimsIdentity(valid.C
 Check(!BffIdentity.TryReadSubject(new ClaimsPrincipal(new[] { (ClaimsIdentity)valid.Identity!, new ClaimsIdentity() }), tenant, out _), "multiple identities");
 var now = DateTimeOffset.UtcNow;
 Check(!BffIdentity.IsAdmitted(authority.State! with { ProviderCheckedUtc = now.AddMinutes(-15) }, now), "provider stale boundary");
-Check(!BffIdentity.IsAdmitted(authority.State! with { AuthenticatedUtc = now.AddHours(-8) }, now), "absolute boundary");
+Check(!BffIdentity.IsAdmitted(authority.State! with { SignInValidFromUtc = null }, now), "missing provider cutoff");
 Check(!BffIdentity.IsAdmitted(authority.State! with { SecurityVersion = 0 }, now), "invalid version");
 Check(!BffIdentity.IsAdmitted(authority.State! with { CoarseRoles = ["Administrator"] }, now), "unknown coarse role");
 Check(!BffIdentity.IsAdmitted(authority.State! with { GuestOnboardingValid = false }, now), "guest onboarding");
@@ -55,6 +57,7 @@ ServiceProvider Provider(BffOptions options, CountingConfiguration? configuratio
     var services = new ServiceCollection();
     services.AddLogging();
     services.AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
+    services.AddSingleton<IPendingAuthenticationChallengeStore, MemoryChallenges>();
     services.AddBffFoundation(options, new MemoryTickets(), authority);
     if (configuration is not null)
     {
@@ -93,6 +96,9 @@ RequestDelegate Pipeline(IServiceProvider services)
 }
 var properties = new AuthenticationProperties();
 properties.Items["bff.securityVersion"] = "1";
+properties.Items[SessionTicket.AuthenticatedUtc] = DateTimeOffset.UtcNow.ToString("O");
+properties.Items[SessionTicket.ProviderCheckedUtc] = DateTimeOffset.UtcNow.ToString("O");
+properties.Items[SessionTicket.MfaCaVerified] = "false";
 var signIn = Context(provider);
 await signIn.SignInAsync(BffRegistration.CookieScheme, valid, properties);
 var setCookie = signIn.Response.Headers.SetCookie.ToString();
@@ -139,16 +145,23 @@ await Pipeline(disabledProvider)(disabled);
 Check(disabled.Response.StatusCode == 403, "default disabled gate");
 try { await Context(disabledProvider).SignInAsync(BffRegistration.CookieScheme, valid); throw new Exception("disabled sign-in accepted"); }
 catch (InvalidOperationException) { checks++; }
-authority.State = new SubjectAdmission(subject, true, true, true, true, DateTimeOffset.UtcNow,
-    DateTimeOffset.UtcNow, false, 1, ["PilotConsultant"]);
+authority.State = new SubjectAdmission(subject, true, true, true, true, DateTimeOffset.UtcNow, 1, ["PilotConsultant"], DateTimeOffset.UnixEpoch);
 async Task<TokenValidatedContext> Admit(ClaimsPrincipal identity, string? issuer = null, string? returnPath = null)
 {
+    var eventNonce = oidc.ProtocolValidator.GenerateNonce();
     var context = new TokenValidatedContext(Context(provider),
         new AuthenticationScheme(BffRegistration.OidcScheme, null, typeof(OpenIdConnectHandler)), oidc, identity, new AuthenticationProperties())
     {
-        Principal = identity,
-        Properties = new AuthenticationProperties { RedirectUri = returnPath },
-        SecurityToken = new JwtSecurityToken(issuer ?? $"https://login.microsoftonline.com/{tenant:D}/v2.0", client.ToString("D"))
+        Principal = new ClaimsPrincipal(new ClaimsIdentity(identity.Claims.Append(new Claim("auth_time", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture))), BffRegistration.CookieScheme, "oid", "roles")),
+        Properties = new AuthenticationProperties(new Dictionary<string, string?>
+        {
+            ["bff.pendingReference"] = SessionTicket.NewKey(),
+            ["bff.pendingIssuedUtc"] = DateTimeOffset.FromUnixTimeSeconds(DateTimeOffset.UtcNow.ToUnixTimeSeconds()).ToString("O")
+        })
+        { RedirectUri = returnPath },
+        Nonce = eventNonce,
+        TokenEndpointResponse = new OpenIdConnectMessage { IdToken = "synthetic-event-only", AccessToken = "synthetic-unused-access", TokenType = "Bearer" },
+        SecurityToken = new JwtSecurityToken(issuer ?? $"https://login.microsoftonline.com/{tenant:D}/v2.0", client.ToString("D"), [new Claim("nonce", eventNonce), new Claim("sub", "synthetic-event-subject"), new Claim("iat", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)], DateTime.UtcNow.AddMinutes(-1), DateTime.UtcNow.AddMinutes(10))
     };
     await oidc.Events.TokenValidated(context);
     return context;
@@ -156,10 +169,10 @@ async Task<TokenValidatedContext> Admit(ClaimsPrincipal identity, string? issuer
 var admitted = await Admit(Principal(new Claim("amr", "mfa"), new Claim("roles", "Administrator"), new Claim("email", "synthetic")));
 Check(admitted.Result?.Failure is null && admitted.Principal!.Claims.All(claim => claim.Type is "tid" or "oid" or "roles") &&
     admitted.Properties!.Items["bff.mfaCaVerified"] == "false" && admitted.Principal.IsInRole("PilotConsultant") && !admitted.Principal.IsInRole("Administrator"), "trusted minimal admission ignores presentation/MFA/unknown role claims");
-Check((await Admit(valid, returnPath: "/bff/review")).Properties?.RedirectUri == "/bff/review", "narrow intended local action retained");
+Check((await Admit(valid, returnPath: "/bff/review")).Properties?.Items.ContainsKey("bff.pendingReference") == true, "pending evidence preserved until full protocol completion");
 foreach (var unsafeReturn in new[] { "https://example.invalid/", "//example.invalid/", "/bff/../external", "/bff/%2fexternal", "/bff/review?token=synthetic", "/external", "/bff/\\external" })
 {
-    Check((await Admit(valid, returnPath: unsafeReturn)).Properties?.RedirectUri is null, "unsafe return target stripped");
+    Check((await Admit(valid, returnPath: unsafeReturn)).Properties?.Items.ContainsKey("bff.pendingReference") == true, "protocol event does not finish redirect/transaction before validation");
 }
 Check((await Admit(valid, $"https://sts.windows.net/{tenant:D}/")).Result?.Failure is not null, "exact v2 issuer callback gate");
 Check((await Admit(Principal(new Claim("azp", Guid.NewGuid().ToString("D"))))).Result?.Failure is not null, "wrong authorized party callback gate");
@@ -226,6 +239,7 @@ using (var enabledProvider = Provider(settings, enabledConfiguration))
         Check(enabledConfiguration.Calls == 1, "enabled secure challenge delegates to supported metadata path");
     }
 }
+checks += await BffProtocolProof.RunAsync();
 Console.WriteLine($"PASS {checks} BFF foundation assertions; local middleware/options only, live OIDC/FIC unverified");
 
 sealed class Authority(SubjectAdmission? state) : IBffSubjectAuthority
@@ -236,7 +250,7 @@ sealed class Authority(SubjectAdmission? state) : IBffSubjectAuthority
 sealed class MemoryTickets : ITicketStore
 {
     private readonly Dictionary<string, AuthenticationTicket> tickets = [];
-    public Task<string> StoreAsync(AuthenticationTicket ticket) { var key = Guid.NewGuid().ToString(); tickets[key] = ticket; return Task.FromResult(key); }
+    public Task<string> StoreAsync(AuthenticationTicket ticket) { var key = Guid.NewGuid().ToString(); ticket.Properties.Items[SessionTicket.SessionReference] = Guid.NewGuid().ToString("D"); tickets[key] = ticket; return Task.FromResult(key); }
     public Task RenewAsync(string key, AuthenticationTicket ticket) { tickets[key] = ticket; return Task.CompletedTask; }
     public Task<AuthenticationTicket?> RetrieveAsync(string key) => Task.FromResult(tickets.GetValueOrDefault(key));
     public Task RemoveAsync(string key) { tickets.Remove(key); return Task.CompletedTask; }
@@ -252,4 +266,22 @@ sealed class CountingConfiguration : IConfigurationManager<OpenIdConnectConfigur
         throw new InvalidOperationException("Unexpected synthetic metadata access.");
     }
     public void RequestRefresh() => Refreshes++;
+}
+
+sealed class MemoryChallenges : IPendingAuthenticationChallengeStore
+{
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, DateTimeOffset> pending = new();
+    public int Consumes { get; private set; }
+    public ValueTask<PendingAuthenticationChallenge?> CreateAsync(DateTimeOffset now, CancellationToken cancellationToken)
+    {
+        var reference = SessionTicket.NewKey(); pending[reference] = now;
+        return ValueTask.FromResult<PendingAuthenticationChallenge?>(new(reference, now));
+    }
+    public ValueTask<bool> TryConsumeAsync(PendingAuthenticationChallenge challenge, DateTimeOffset now, CancellationToken cancellationToken)
+    {
+        var ok = challenge.IssuedUtc <= now && now - challenge.IssuedUtc < TimeSpan.FromMinutes(15) &&
+            pending.TryGetValue(challenge.Reference, out var issued) && issued == challenge.IssuedUtc && pending.TryRemove(challenge.Reference, out _);
+        if (ok) Consumes++;
+        return ValueTask.FromResult(ok);
+    }
 }

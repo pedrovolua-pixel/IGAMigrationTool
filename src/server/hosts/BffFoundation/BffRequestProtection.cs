@@ -38,11 +38,7 @@ public static class BffRequestProtection
             return;
         }
         var now = context.RequestServices.GetRequiredService<TimeProvider>().GetUtcNow();
-        string? versionText = null;
-        authentication.Properties?.Items.TryGetValue("bff.securityVersion", out versionText);
-        if (admission?.Subject != subject || !BffIdentity.IsAdmitted(admission, now) ||
-            !long.TryParse(versionText,
-                NumberStyles.None, CultureInfo.InvariantCulture, out var version) || version != admission!.SecurityVersion)
+        if (authentication.Ticket is null || !BffSessionContext.IsCurrent(authentication.Ticket, admission, now))
         {
             context.Response.StatusCode = StatusCodes.Status403Forbidden;
             return;

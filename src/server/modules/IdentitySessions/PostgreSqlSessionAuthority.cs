@@ -7,18 +7,20 @@ namespace IdentitySessions;
 public sealed class PostgreSqlSessionAuthority(NpgsqlDataSource dataSource, TimeProvider clock)
 {
     public async Task ProvisionAsync(SessionSubject subject, bool active,
-        DateTimeOffset verifiedProviderUtc, CancellationToken cancellationToken = default)
+        DateTimeOffset verifiedProviderUtc, DateTimeOffset signInValidFromUtc, CancellationToken cancellationToken = default)
     {
         ValidateSubject(subject);
         ValidateProviderTime(verifiedProviderUtc);
+        if (signInValidFromUtc > clock.GetUtcNow()) throw new ArgumentException("Provider cutoff cannot be future dated.");
         await using var command = dataSource.CreateCommand("""
             INSERT INTO identity_sessions.subjects
-            (tenant_id,object_id,active,security_version,provider_checked_at) VALUES ($1,$2,$3,1,$4)
+            (tenant_id,object_id,active,security_version,provider_checked_at,sign_in_valid_from_at) VALUES ($1,$2,$3,1,$4,$5)
             """);
         command.Parameters.AddWithValue(subject.TenantId);
         command.Parameters.AddWithValue(subject.ObjectId);
         command.Parameters.AddWithValue(active);
         command.Parameters.AddWithValue(verifiedProviderUtc);
+        command.Parameters.AddWithValue(signInValidFromUtc);
         await command.ExecuteNonQueryAsync(cancellationToken);
     }
 
@@ -51,21 +53,23 @@ public sealed class PostgreSqlSessionAuthority(NpgsqlDataSource dataSource, Time
     }
 
     public async Task ConfirmProviderAsync(SessionSubject subject, DateTimeOffset verifiedProviderUtc,
-        CancellationToken cancellationToken = default)
+        DateTimeOffset signInValidFromUtc, CancellationToken cancellationToken = default)
     {
         ValidateSubject(subject);
         ValidateProviderTime(verifiedProviderUtc);
+        if (signInValidFromUtc > clock.GetUtcNow()) throw new ArgumentException("Provider cutoff cannot be future dated.");
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
         _ = await SessionDatabase.LockSubjectAsync(connection, transaction, subject, cancellationToken)
             ?? throw new InvalidOperationException("Subject is not provisioned.");
         await using var command = new NpgsqlCommand("""
-            UPDATE identity_sessions.subjects SET provider_checked_at=$3
-            WHERE tenant_id=$1 AND object_id=$2 AND provider_checked_at <= $3
+            UPDATE identity_sessions.subjects SET provider_checked_at=$3, sign_in_valid_from_at=$4
+            WHERE tenant_id=$1 AND object_id=$2 AND provider_checked_at <= $3 AND (sign_in_valid_from_at IS NULL OR sign_in_valid_from_at <= $4)
             """, connection, transaction);
         command.Parameters.AddWithValue(subject.TenantId);
         command.Parameters.AddWithValue(subject.ObjectId);
         command.Parameters.AddWithValue(verifiedProviderUtc);
+        command.Parameters.AddWithValue(signInValidFromUtc);
         await command.ExecuteNonQueryAsync(cancellationToken);
         await transaction.CommitAsync(cancellationToken);
     }

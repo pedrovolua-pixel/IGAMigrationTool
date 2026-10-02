@@ -30,6 +30,9 @@ while (!File.Exists(Path.Combine(root, "IgaMigrationTool.slnx")))
 await using (var migration = dataSource.CreateCommand(await File.ReadAllTextAsync(
                  Path.Combine(root, "migrations/identity-sessions/001-initial.sql"))))
     await migration.ExecuteNonQueryAsync();
+await using (var migration = dataSource.CreateCommand(await File.ReadAllTextAsync(
+                 Path.Combine(root, "migrations/identity-sessions/002-authentication-context.sql"))))
+    await migration.ExecuteNonQueryAsync();
 
 var keys = Path.Combine(Path.GetTempPath(), "iga-bff-flow-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(keys);
@@ -53,8 +56,8 @@ var settings = new BffOptions
     ClientId = Guid.Parse("00000000-0000-4000-8000-000000000002"),
     ManagedIdentityClientId = Guid.Parse("00000000-0000-4000-8000-000000000003")
 };
-await sessions.ProvisionAsync(fixture.SessionSubject, true, clock.GetUtcNow());
-await sessions.ProvisionAsync(new(fixture.OtherSubject.TenantId, fixture.OtherSubject.ObjectId), true, clock.GetUtcNow());
+await sessions.ProvisionAsync(fixture.SessionSubject, true, clock.GetUtcNow(), DateTimeOffset.UnixEpoch);
+await sessions.ProvisionAsync(new(fixture.OtherSubject.TenantId, fixture.OtherSubject.ObjectId), true, clock.GetUtcNow(), DateTimeOffset.UnixEpoch);
 await using var serverA = BuildServer(storeA);
 await using var serverB = BuildServer(storeB);
 try
@@ -152,7 +155,7 @@ try
     async Task ConfirmProvider()
     {
         fixture.ProviderChecked = clock.GetUtcNow();
-        await sessions.ConfirmProviderAsync(fixture.SessionSubject, fixture.ProviderChecked);
+        await sessions.ConfirmProviderAsync(fixture.SessionSubject, fixture.ProviderChecked, DateTimeOffset.UnixEpoch);
     }
     async Task Status(string address, string path, string? sessionCookie, HttpStatusCode expected, string description)
     {
@@ -299,8 +302,8 @@ sealed class AuthorityFixture(FixtureClock clock) : IBffSubjectAuthority, ISessi
         ValueTask.FromResult(subject == SessionSubject && Assigned || subject == new SessionSubject(OtherSubject.TenantId, OtherSubject.ObjectId));
     public ValueTask<SubjectAdmission?> CheckAsync(HumanSubject subject, CancellationToken cancellationToken) =>
         ValueTask.FromResult<SubjectAdmission?>(subject == Subject ? new(Subject, true, Assigned, true, true,
-            ProviderChecked, Authenticated, false, Version, ["PilotConsultant"]) : subject == OtherSubject ?
-            new(OtherSubject, true, true, true, true, ProviderChecked, Authenticated, false, 1, ["PilotConsultant"]) : null);
+            ProviderChecked, Version, ["PilotConsultant"], DateTimeOffset.UnixEpoch) : subject == OtherSubject ?
+            new(OtherSubject, true, true, true, true, ProviderChecked, 1, ["PilotConsultant"], DateTimeOffset.UnixEpoch) : null);
     public AuthenticationProperties AuthenticationProperties()
     {
         var properties = new AuthenticationProperties();

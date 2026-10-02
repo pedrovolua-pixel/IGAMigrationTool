@@ -32,7 +32,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
         var state = await SessionDatabase.LockSubjectAsync(connection, transaction, context.Subject, cancellationToken);
-        if (!SessionDatabase.Current(state, now, context.Version) ||
+        if (!SessionDatabase.Current(state, now, context.Version) || context.Authenticated < state!.SignInValidFrom ||
             !await admission.IsEligibleAsync(context.Subject, cancellationToken))
         {
             throw new InvalidOperationException("Current authoritative session admission is required.");
@@ -40,7 +40,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         now = clock.GetUtcNow();
         context = SessionTicket.Validate(ticket, now);
         RequireIssuance(ticket, context.Authenticated, now);
-        if (!SessionDatabase.Current(state, now, context.Version))
+        if (!SessionDatabase.Current(state, now, context.Version) || context.Authenticated < state!.SignInValidFrom)
         {
             throw new InvalidOperationException("Authoritative provider status expired during admission.");
         }
@@ -51,6 +51,12 @@ public sealed class PostgreSqlTicketStore : ITicketStore
 
     public Task<AuthenticationTicket?> RetrieveAsync(string key) => RetrieveAsync(key, CancellationToken.None);
     public async Task<AuthenticationTicket?> RetrieveAsync(string key, CancellationToken cancellationToken)
+    {
+        try { return await RetrieveCoreAsync(key, cancellationToken); }
+        catch (Exception exception) when (exception is NpgsqlException or TimeoutException) { return null; }
+    }
+
+    private async Task<AuthenticationTicket?> RetrieveCoreAsync(string key, CancellationToken cancellationToken)
     {
         var hash = SessionTicket.HashKey(key);
         if (hash is null)
@@ -82,7 +88,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
             // read from the authoritative DB, not the protected issuance ticket.
             ticket.Properties.Items[SessionTicket.ProviderCheckedUtc] = session.State.ProviderChecked.ToString("O");
             var context = SessionTicket.Validate(ticket, now);
-            if (context.Subject != session.Subject || context.Version != session.Version)
+            if (context.Subject != session.Subject || context.Version != session.Version || context.Authenticated < session.State.SignInValidFrom)
             {
                 return null;
             }
@@ -171,7 +177,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
         var session = await LoadAsync(connection, transaction, hash, cancellationToken);
         if (session is null || session.Revoked || session.Subject != context.Subject ||
-            !SessionDatabase.Current(session.State, now, context.Version) ||
+            !SessionDatabase.Current(session.State, now, context.Version) || context.Authenticated < session.State.SignInValidFrom ||
             !await admission.IsEligibleAsync(context.Subject, cancellationToken))
         {
             return null;
@@ -179,7 +185,7 @@ public sealed class PostgreSqlTicketStore : ITicketStore
         now = clock.GetUtcNow();
         context = SessionTicket.Validate(replacement, now);
         RequireIssuance(replacement, context.Authenticated, now);
-        if (!SessionDatabase.Current(session.State, now, context.Version))
+        if (!SessionDatabase.Current(session.State, now, context.Version) || context.Authenticated < session.State.SignInValidFrom)
         {
             return null;
         }

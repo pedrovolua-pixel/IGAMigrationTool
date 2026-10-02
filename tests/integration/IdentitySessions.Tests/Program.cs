@@ -21,6 +21,10 @@ using (var migration = typeof(PostgreSqlTicketStore).Assembly.GetManifestResourc
 using (var reader = new StreamReader(migration))
 await using (var command = database.CreateCommand(await reader.ReadToEndAsync()))
     await command.ExecuteNonQueryAsync();
+using (var migration = typeof(PostgreSqlTicketStore).Assembly.GetManifestResourceStream("IdentitySessions.002-authentication-context.sql")!)
+using (var reader = new StreamReader(migration))
+await using (var command = database.CreateCommand(await reader.ReadToEndAsync()))
+    await command.ExecuteNonQueryAsync();
 var keysDirectory = Path.Combine(Path.GetTempPath(), "iga-session-test-keys-" + Guid.NewGuid().ToString("N"));
 Directory.CreateDirectory(keysDirectory);
 try
@@ -38,7 +42,7 @@ try
     async Task<SessionSubject> Subject()
     {
         var value = new SessionSubject(tenant, Guid.NewGuid());
-        await authority.ProvisionAsync(value, true, clock.GetUtcNow());
+        await authority.ProvisionAsync(value, true, clock.GetUtcNow(), DateTimeOffset.UnixEpoch);
         return value;
     }
     AuthenticationTicket Ticket(SessionSubject subject, long version = 1) => new(new ClaimsPrincipal(new ClaimsIdentity([
@@ -103,13 +107,13 @@ try
     clock.Advance(TimeSpan.FromMinutes(15));
     Check(await first.RetrieveAsync(staleKey) is null, "Provider status expires at exact 15-minute bound");
     await Refused(() => first.StoreAsync(Ticket(staleSubject)), "New ticket cannot manufacture DB provider freshness");
-    await authority.ConfirmProviderAsync(staleSubject, clock.GetUtcNow());
+    await authority.ConfirmProviderAsync(staleSubject, clock.GetUtcNow(), DateTimeOffset.UnixEpoch);
     Check(await second.RetrieveAsync(staleKey) is not null, "Verified provider check may resume unexpired session");
 
     var idleSubject = await Subject(); var idleKey = await first.StoreAsync(Ticket(idleSubject));
     var beforeIdleAuthentication = clock.GetUtcNow();
     clock.Advance(TimeSpan.FromMinutes(30));
-    await authority.ConfirmProviderAsync(idleSubject, clock.GetUtcNow());
+    await authority.ConfirmProviderAsync(idleSubject, clock.GetUtcNow(), DateTimeOffset.UnixEpoch);
     Check(await second.RetrieveAsync(idleKey) is null, "Exact idle boundary denied despite fresh provider");
     var staleRotation = Ticket(idleSubject);
     staleRotation.Properties.Items[SessionTicket.AuthenticatedUtc] = beforeIdleAuthentication.ToString("O");
@@ -119,10 +123,10 @@ try
     for (var i = 0; i < 31; i++)
     {
         clock.Advance(TimeSpan.FromMinutes(15));
-        await authority.ConfirmProviderAsync(absoluteSubject, clock.GetUtcNow());
+        await authority.ConfirmProviderAsync(absoluteSubject, clock.GetUtcNow(), DateTimeOffset.UnixEpoch);
         Check(await (i % 2 == 0 ? first : second).RetrieveAsync(absoluteKey) is not null, "Activity should extend idle within absolute bound");
     }
-    clock.Advance(TimeSpan.FromMinutes(15)); await authority.ConfirmProviderAsync(absoluteSubject, clock.GetUtcNow());
+    clock.Advance(TimeSpan.FromMinutes(15)); await authority.ConfirmProviderAsync(absoluteSubject, clock.GetUtcNow(), DateTimeOffset.UnixEpoch);
     Check(await first.RetrieveAsync(absoluteKey) is null, "Activity cannot extend exact eight-hour deadline");
 
     var versionSubject = await Subject(); var versionKey = await first.StoreAsync(Ticket(versionSubject));
@@ -184,6 +188,63 @@ try
     await using (var corrupt = database.CreateCommand("UPDATE identity_sessions.tickets SET protected_ticket=decode('00000000','hex') WHERE key_hash=$1"))
     { corrupt.Parameters.AddWithValue(SessionTicket.HashKey(corruptKey)!); await corrupt.ExecuteNonQueryAsync(); }
     Check(await second.RetrieveAsync(corruptKey) is null, "Corrupt ciphertext must fail closed");
+    // Missing provider cutoff is unavailable evidence, never a guessed epoch.
+    var cutoffSubject = await Subject(); var cutoffTicket = Ticket(cutoffSubject);
+    cutoffTicket.Properties.Items[SessionTicket.AuthenticatedUtc] = clock.GetUtcNow().AddMinutes(-1).ToString("O");
+    var cutoffKey = await first.StoreAsync(cutoffTicket);
+    await authority.ConfirmProviderAsync(cutoffSubject, clock.GetUtcNow(), clock.GetUtcNow());
+    Check(await second.RetrieveAsync(cutoffKey) is null, "Current cutoff revokes earlier original authentication");
+    Check(await second.RetrieveAsync(await first.StoreAsync(Ticket(cutoffSubject))) is not null, "Fresh original authentication at cutoff can issue independently");
+    await using (var missingCutoff = database.CreateCommand("UPDATE identity_sessions.subjects SET sign_in_valid_from_at=NULL WHERE tenant_id=$1 AND object_id=$2"))
+    { missingCutoff.Parameters.AddWithValue(cutoffSubject.TenantId); missingCutoff.Parameters.AddWithValue(cutoffSubject.ObjectId); await missingCutoff.ExecuteNonQueryAsync(); }
+    await Refused(() => first.StoreAsync(Ticket(cutoffSubject)), "Missing cutoff denies issuance");
+    Check(await second.RetrieveAsync(cutoffKey) is null, "Missing cutoff denies retrieval");
+    var pendingA = new PostgreSqlAuthenticationChallengeStore(database, clock);
+    var pendingB = new PostgreSqlAuthenticationChallengeStore(database2, clock);
+    var pending = (await pendingA.CreateAsync(clock.GetUtcNow().AddTicks(9), default))!;
+    Check(pending.IssuedUtc.UtcTicks % 10 == 0, "Pending precision matches PostgreSQL persisted microseconds");
+    Check(!await pendingB.TryConsumeAsync(pending with { Reference = "invalid" }, clock.GetUtcNow().AddTicks(10), default), "Malformed pending reference denied");
+    Check(!await pendingB.TryConsumeAsync(pending with { IssuedUtc = pending.IssuedUtc.AddSeconds(-1) }, clock.GetUtcNow().AddTicks(10), default), "Altered issued binding denied");
+    Check(!await pendingB.TryConsumeAsync(pending, pending.IssuedUtc.AddTicks(-1), default), "Future transaction denied");
+    Check(await pendingB.TryConsumeAsync(pending, clock.GetUtcNow(), default), "Different replica consumes exact pending transaction");
+    Check(!await pendingA.TryConsumeAsync(pending, clock.GetUtcNow(), default), "Consumed pending transaction cannot replay");
+    var deadline = (await pendingA.CreateAsync(clock.GetUtcNow(), default))!;
+    Check(!await pendingB.TryConsumeAsync(deadline, deadline.IssuedUtc.AddMinutes(15), default), "Exact fifteen-minute pending deadline denied");
+    clock.Advance(TimeSpan.FromMinutes(15).Add(TimeSpan.FromTicks(-10)));
+    Check(await pendingA.TryConsumeAsync(deadline, clock.GetUtcNow(), default), "Strictly before pending deadline accepted");
+    clock.Advance(-TimeSpan.FromMinutes(15).Add(TimeSpan.FromTicks(-10)));
+    for (var iteration = 0; iteration < 10; iteration++)
+    {
+        var concurrent = (await pendingA.CreateAsync(clock.GetUtcNow(), default))!;
+        var wins = await Task.WhenAll(Enumerable.Range(0, 32).Select(index =>
+            (index % 2 == 0 ? pendingA : pendingB).TryConsumeAsync(concurrent, clock.GetUtcNow(), default).AsTask()));
+        Check(wins.Count(value => value) == 1, "Thirty-two concurrent cross-replica pending consumes exactly one winner");
+    }
+    var blocked = (await pendingA.CreateAsync(clock.GetUtcNow(), default))!;
+    await using (var lockConnection = await database.OpenConnectionAsync())
+    await using (var lockTransaction = await lockConnection.BeginTransactionAsync())
+    {
+        await using var hold = new NpgsqlCommand("SELECT issued_at FROM identity_sessions.pending_challenges WHERE key_hash=$1 FOR UPDATE", lockConnection, lockTransaction);
+        hold.Parameters.AddWithValue(SessionTicket.HashKey(blocked.Reference)!); await hold.ExecuteScalarAsync();
+        var waiting = pendingB.TryConsumeAsync(blocked, clock.GetUtcNow(), default).AsTask();
+        // Observe the actual PostgreSQL lock wait before advancing trusted time.
+        var lockObserved = false;
+        for (var attempt = 0; attempt < 100 && !lockObserved; attempt++)
+        {
+            await using var activity = database.CreateCommand("SELECT EXISTS(SELECT 1 FROM pg_stat_activity WHERE datname=current_database() AND wait_event_type='Lock' AND query LIKE '%pending_challenges%')");
+            lockObserved = (bool)(await activity.ExecuteScalarAsync())!;
+            if (!lockObserved) await Task.Delay(10);
+        }
+        Check(lockObserved && !waiting.IsCompleted, "Actual contended pending row observed waiting");
+        clock.Advance(TimeSpan.FromMinutes(15));
+        await lockTransaction.CommitAsync();
+        Check(!await waiting, "Pending deadline rechecked after actual database lock wait");
+        await using var consumed = database.CreateCommand("SELECT consumed_at IS NULL FROM identity_sessions.pending_challenges WHERE key_hash=$1");
+        consumed.Parameters.AddWithValue(SessionTicket.HashKey(blocked.Reference)!);
+        Check((bool)(await consumed.ExecuteScalarAsync())!, "Expired lock-wait transaction did not consume pending row");
+    }
+    await using (var raw = database.CreateCommand("SELECT key_hash FROM identity_sessions.pending_challenges WHERE key_hash=$1"))
+    { raw.Parameters.AddWithValue(SessionTicket.HashKey(pending.Reference)!); Check((string?)await raw.ExecuteScalarAsync() != pending.Reference, "Pending references stored only as hashes"); }
     Console.WriteLine($"PASS: {checks} real PostgreSQL shared-ticket/context/lifetime/rotation/revocation/race checks.");
     Console.WriteLine("NOT VERIFIED: deployed Entra/provider verification, production data-protection key ring, product guest/assignment adapter, audit and complete BFF/G1 gates.");
 }
