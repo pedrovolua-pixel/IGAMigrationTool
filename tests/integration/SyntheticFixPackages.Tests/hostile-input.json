@@ -1,0 +1,196 @@
+{
+  "source": {
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "runRevision": 17,
+    "runState": "Scoring",
+    "runInputDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "baselineId": "synthetic-analysis-mixed-v1",
+    "profileId": "synthetic-review-maturity-equal-v1",
+    "frozenVersions": {
+      "profileVersion": "synthetic-profile-v1",
+      "desiredOutcomeVersion": null,
+      "scoringAlgorithmVersion": "pilot-health-v1",
+      "aiPolicyVersion": "synthetic-ai-disabled-v1",
+      "promptVersion": "synthetic-prompt-disabled-v1",
+      "modelVersion": "synthetic-model-disabled-v1",
+      "applicationVersion": "synthetic-review-maturity-app-v1",
+      "workSchemaVersion": "synthetic-run-work-v1",
+      "scriptedResultsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "analysisFixtureDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "maturityFixtureDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "capabilityLock": {
+      "matrixVersion": "synthetic-analysis-matrix-v1",
+      "stateAtLock": "FixtureVerified",
+      "productBuild": "fixture-product-v1",
+      "databaseSchemaBuild": "fixture-facts-v1",
+      "hotfixSetDigest": "synthetic-hotfix-digest",
+      "sqlServerBuild": "synthetic-sql-build",
+      "compatibilityLevel": 160,
+      "modules": [
+        {
+          "id": "SyntheticOperations",
+          "version": "synthetic-module-v1"
+        },
+        {
+          "id": "SyntheticSecurity",
+          "version": "synthetic-module-v1"
+        }
+      ],
+      "queryPackVersion": "synthetic-query-pack-v1",
+      "normalizationSchemaVersion": "synthetic-normalization-v1",
+      "ruleCatalogVersion": "synthetic-analysis-catalog-v1",
+      "lockDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "analysisLock": {
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "packVersion": "synthetic-analysis-pack-v1",
+      "packDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "presetId": "synthetic-analysis-mixed-v1",
+      "presetVersion": "synthetic-evidence-v1",
+      "evidenceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "catalogVersion": "synthetic-analysis-catalog-v1",
+      "catalogDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "profileId": "synthetic-analysis-equal-v1",
+      "profileVersion": "synthetic-profile-v1",
+      "profileDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "compatibility": {
+        "sourceProduct": "SYNTHETIC-ONLY",
+        "productVersion": "fixture-product-v1",
+        "evidenceSchemaVersion": "fixture-facts-v1",
+        "ruleLanguageVersion": "count-predicate-v1"
+      }
+    },
+    "analysisFixtureDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "analysisContentDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "savedCoverageDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "reviewRunId": "12345678-1234-4234-8234-123456789abc",
+    "reviewRunRevision": 17,
+    "reviewSnapshotDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "findings": [
+    {
+      "findingId": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "ruleId": "SYN-V11-1",
+      "ruleVersion": "synthetic-rule-v1",
+      "categoryId": "SECURITY",
+      "severity": "High",
+      "originalTitle": "Original fictional V11 title 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "presentationTitle": "Current fictional V11 title 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "businessContext": "Fictional V11 business context 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "initialState": "Proposed",
+      "currentState": "Confirmed",
+      "findingRevision": 2,
+      "rootCause": "Same fictional root cause <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "occurrences": [
+        {
+          "occurrenceId": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "objectId": "FIXTURE-OBJECT-1",
+          "objectType": "SyntheticControl",
+          "moduleId": "SyntheticSecurity",
+          "originalDigest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "evidenceReference": "fixture-evidence:V11-object-1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+        },
+        {
+          "occurrenceId": "2222222222222222222222222222222222222222222222222222222222222222",
+          "objectId": "FIXTURE-OBJECT-3",
+          "objectType": "SyntheticControl",
+          "moduleId": "SyntheticSecurity",
+          "originalDigest": "3333333333333333333333333333333333333333333333333333333333333333",
+          "evidenceReference": "fixture-evidence:V11-object-3 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+        }
+      ],
+      "options": [
+        {
+          "optionId": "inspect-v11",
+          "text": "Fictional option inspect-v11 for group 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "prerequisites": "Fictional prerequisites inspect-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "risk": "Fictional risk inspect-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "recoveryGuidance": "Fictional recovery inspect-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+        },
+        {
+          "optionId": "retain-v11",
+          "text": "Fictional option retain-v11 for group 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "prerequisites": "Fictional prerequisites retain-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "risk": "Fictional risk retain-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "recoveryGuidance": "Fictional recovery retain-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+        }
+      ],
+      "validationGuidance": [
+        "Validate fictional original 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+        "Collect fictional validation 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ],
+      "guidanceReferences": [
+        "fixture-guidance:V11-1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ],
+      "assumptions": [
+        "Fictional V11 premise 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ],
+      "limitations": [
+        "Fictional V11 limitation 1 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ]
+    },
+    {
+      "findingId": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "ruleId": "SYN-V11-2",
+      "ruleVersion": "synthetic-rule-v1",
+      "categoryId": "OPERATIONS",
+      "severity": "Low",
+      "originalTitle": "Original fictional V11 title 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "presentationTitle": "Current fictional V11 title 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "businessContext": "Fictional V11 business context 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "initialState": "Proposed",
+      "currentState": "Deferred",
+      "findingRevision": 2,
+      "rootCause": "Same fictional root cause <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+      "occurrences": [
+        {
+          "occurrenceId": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "objectId": "FIXTURE-OBJECT-2",
+          "objectType": "SyntheticControl",
+          "moduleId": "SyntheticOperations",
+          "originalDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+          "evidenceReference": "fixture-evidence:V11-object-2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+        }
+      ],
+      "options": [
+        {
+          "optionId": "inspect-v11",
+          "text": "Fictional option inspect-v11 for group 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "prerequisites": "Fictional prerequisites inspect-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "risk": "Fictional risk inspect-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "recoveryGuidance": "Fictional recovery inspect-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+        },
+        {
+          "optionId": "retain-v11",
+          "text": "Fictional option retain-v11 for group 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "prerequisites": "Fictional prerequisites retain-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "risk": "Fictional risk retain-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+          "recoveryGuidance": "Fictional recovery retain-v11 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+        }
+      ],
+      "validationGuidance": [
+        "Validate fictional original 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel",
+        "Collect fictional validation 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ],
+      "guidanceReferences": [
+        "fixture-guidance:V11-2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ],
+      "assumptions": [
+        "Fictional V11 premise 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ],
+      "limitations": [
+        "Fictional V11 limitation 2 <script>globalThis.v11Injected=1</script><img src=\"https://fixture.invalid/x\" onerror=\"globalThis.v11Injected=2\"><form action=\"https://fixture.invalid/post\"></form><svg onload=\"globalThis.v11Injected=3\"></svg> javascript:alert(1) =HYPERLINK(\"https://fixture.invalid\") $(curl https://fixture.invalid) `shell` & caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL sentinel\r\nCRLF sentinel\rCR sentinel"
+      ]
+    }
+  ]
+}

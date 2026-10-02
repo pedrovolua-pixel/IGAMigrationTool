@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "v11-independent-composition-execution-v1",
+  "status": "PASS",
+  "baseCommit": "d8519e48e8d755919441b777acefe356f9e16724",
+  "branch": "codex/cycle11-verification",
+  "workingDirectory": "/private/tmp/iga-cycle11-v11",
+  "checks": 338,
+  "acceptedFixValues": 11,
+  "typedBuilderRendererDenials": 63,
+  "implementationSeals": {
+    "A11": "4f7e1dfb1a7eb0df9ae026e01405dad6e377bea1",
+    "B11": "72320c198290b132b8a651bf572fa598397e8b04"
+  },
+  "executedSources": [
+    {
+      "path": "tests/integration/SyntheticFixPackages.Tests/Program.cs",
+      "sha256": "28741a7b14ab427e7816d8be7260c9f026f3e6e2e4f00830ac78b370d6fe9b3a"
+    },
+    {
+      "path": "tests/integration/SyntheticFixPackages.Tests/run-isolated.py",
+      "sha256": "0c84fd88f94c2084ae04d5ff7297d4973d1f7a7f5abf7907590903128d13ce7a"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageBuilder.cs",
+      "sha256": "a164d098553ea45ce93834f1b84202079880b2fa29247995bd6ef93815f10e50"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageContracts.cs",
+      "sha256": "12a55f6e33657aed31993d27cd24c5bb8557f73315662dba6a103d8a8e31a084"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageHtmlRenderer.cs",
+      "sha256": "e212516d02937849e402c88f6ef65179b165183abda8629bd8b4ed60a938785a"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+      "sha256": "cb2d378973626288fc0b1db933979fd4c99c640ebc00c49338987184040d5d7a"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/GuidanceContracts.cs",
+      "sha256": "3de7f1ec79f6caf27dd809869b4cf2945ed62b9018dda2b42f7555f10ae72d19"
+    }
+  ],
+  "environment": {
+    "strategy": "Explicit subprocess allowlist preserving actual OS HOME/PATH/temp/TZ/SystemRoot values plus .NET tooling/cache settings; no application/database/provider environment forwarded",
+    "valuesLogged": false,
+    "dotnetRootResolution": "DOTNET_ROOT uses incoming absolute executable resolved symlink parent; HOME remains actual inherited value"
+  },
+  "commands": {
+    "build": "python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py /private/tmp/iga-dotnet-10.0.401/dotnet build tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1 -c Release",
+    "composition": "python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py /private/tmp/iga-dotnet-10.0.401/dotnet tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll --write-previews <owned absolute generated directory>",
+    "format": "Scoped dotnet format --no-restore --verify-no-changes --include owned Program.cs; native named-pipe execution required"
+  },
+  "normalCanonical": {
+    "bytes": 13450,
+    "sha256": "a2a4458420d2cac3f35981c4ade47f0320375a62ade508fbfb2db4db461dc704"
+  },
+  "normalHtml": {
+    "bytes": 21445,
+    "sha256": "1c358da22e64220bb9c40a774369bfe5670537d7fdccba42836e0ef9c8646227"
+  },
+  "attempts": [
+    {
+      "result": "FAIL",
+      "kind": "initial compile overload ambiguity",
+      "code": "CS0121",
+      "errors": 2,
+      "correction": "Explicit typed-null ImmutableArray.Create argument; harness only"
+    },
+    {
+      "result": "FAIL",
+      "kind": "initial independent HTML recipe",
+      "checks": 151,
+      "actualBytes": 40906,
+      "expectedBytes": 41296,
+      "correction": "Independent HtmlEncoder recipe: literal backtick retained; no runtime capture or product modification",
+      "initialRecipePreservation": "Explicit reconstruction from sole recipe correction; not claimed original preserved raw file"
+    },
+    {
+      "result": "FAIL",
+      "kind": "default tool sandbox local listener/named pipe denied",
+      "correction": "Authorized native execution for isolated server/Chromium and scoped formatter"
+    },
+    {
+      "result": "PASS",
+      "kind": "final source composition",
+      "checks": 338
+    }
+  ],
+  "limitations": [
+    "Source shape/digest checks are fixture integrity, not customer factual validation or authorization",
+    "No app/PG/provider integration, tasks/CSV/artifact review/execution/publication",
+    "Deployed sandbox and supported Windows/manual accessibility NOT VERIFIED",
+    "No shared cluster/host startup/restart executed",
+    "Earlier provisional browser source bytes not independently preserved; historical diagnostic metadata is not final closure evidence"
+  ]
+}

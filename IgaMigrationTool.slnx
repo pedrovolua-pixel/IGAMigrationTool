@@ -10,6 +10,7 @@
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj" />
     <Project Path="src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
     <Project Path="src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj" />
     <Project Path="src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj" />
@@ -33,6 +34,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
     <Project Path="tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
     <Project Path="tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj" />
@@ -44,6 +46,8 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/SyntheticFixPackageHtml.Tests/SyntheticFixPackageHtml.Tests.csproj" />
+    <Project Path="tests/unit/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
     <Project Path="tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
     <Project Path="tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj" />

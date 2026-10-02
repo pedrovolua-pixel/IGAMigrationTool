@@ -1,0 +1,128 @@
+{
+  "source": {
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "11111111-2222-4333-8444-555555555555",
+    "runRevision": 7,
+    "runState": "Scoring",
+    "runInputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "baselineId": "synthetic-analysis-findings-v1",
+    "profileId": "synthetic-review-maturity-equal-v1",
+    "frozenVersions": {
+      "profileVersion": "synthetic-profile-v1",
+      "desiredOutcomeVersion": null,
+      "scoringAlgorithmVersion": "pilot-health-v1",
+      "aiPolicyVersion": "synthetic-ai-disabled-v1",
+      "promptVersion": "synthetic-prompt-disabled-v1",
+      "modelVersion": "synthetic-model-disabled-v1",
+      "applicationVersion": "synthetic-review-maturity-app-v1",
+      "workSchemaVersion": "synthetic-run-work-v1",
+      "scriptedResultsDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "analysisFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "maturityFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "capabilityLock": {
+      "matrixVersion": "synthetic-analysis-matrix-v1",
+      "stateAtLock": "FixtureVerified",
+      "productBuild": "fixture-product-v1",
+      "databaseSchemaBuild": "fixture-facts-v1",
+      "hotfixSetDigest": "synthetic-hotfix-digest",
+      "sqlServerBuild": "synthetic-sql-build",
+      "compatibilityLevel": 160,
+      "modules": [
+        {
+          "id": "SyntheticOperations",
+          "version": "synthetic-module-v1"
+        },
+        {
+          "id": "SyntheticSecurity",
+          "version": "synthetic-module-v1"
+        }
+      ],
+      "queryPackVersion": "synthetic-query-pack-v1",
+      "normalizationSchemaVersion": "synthetic-normalization-v1",
+      "ruleCatalogVersion": "synthetic-analysis-catalog-v1",
+      "lockDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "analysisLock": {
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "packVersion": "synthetic-analysis-pack-v1",
+      "packDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "presetId": "synthetic-analysis-findings-v1",
+      "presetVersion": "synthetic-evidence-v1",
+      "evidenceDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "catalogVersion": "synthetic-analysis-catalog-v1",
+      "catalogDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "profileId": "synthetic-analysis-equal-v1",
+      "profileVersion": "synthetic-profile-v1",
+      "profileDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "compatibility": {
+        "sourceProduct": "SYNTHETIC-ONLY",
+        "productVersion": "fixture-product-v1",
+        "evidenceSchemaVersion": "fixture-facts-v1",
+        "ruleLanguageVersion": "count-predicate-v1"
+      }
+    },
+    "analysisFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "analysisContentDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+    "savedCoverageDigest": "3333333333333333333333333333333333333333333333333333333333333333",
+    "reviewRunId": "11111111-2222-4333-8444-555555555555",
+    "reviewRunRevision": 7,
+    "reviewSnapshotDigest": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "findings": [
+    {
+      "findingId": "5555555555555555555555555555555555555555555555555555555555555555",
+      "ruleId": "FICTIONAL-B11",
+      "ruleVersion": "synthetic-rule-v1",
+      "categoryId": "SECURITY",
+      "severity": "Critical",
+      "originalTitle": "Original <script>never()</script>",
+      "presentationTitle": "Current café Ω 中文 😀",
+      "businessContext": "Context \"quoted\" & <untrusted>",
+      "initialState": "Proposed",
+      "currentState": "Confirmed",
+      "findingRevision": 2,
+      "rootCause": "Fictional root cause =SUM(A1:A2)",
+      "occurrences": [
+        {
+          "occurrenceId": "6666666666666666666666666666666666666666666666666666666666666666",
+          "objectId": "OBJECT-B11",
+          "objectType": "SyntheticControl",
+          "moduleId": "SyntheticSecurity",
+          "originalDigest": "7777777777777777777777777777777777777777777777777777777777777777",
+          "evidenceReference": "https://example.invalid/evidence?x=1&y=2"
+        }
+      ],
+      "options": [
+        {
+          "optionId": "fixture-option",
+          "text": "Review $(curl https://example.invalid) only.",
+          "prerequisites": "No execution; review required.",
+          "risk": "Unverified <img src=x onerror=alert(1)>",
+          "recoveryGuidance": "No restore was attempted."
+        }
+      ],
+      "validationGuidance": [
+        "Validate fictional baseline.",
+        "No customer validation."
+      ],
+      "guidanceReferences": [
+        "javascript:alert(1) is a reference string"
+      ],
+      "assumptions": [
+        "Fictional premise + context."
+      ],
+      "limitations": [
+        "No customer evidence."
+      ]
+    }
+  ]
+}

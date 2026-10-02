@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "recommendationguidance": {
+        "type": "Project"
+      },
+      "syntheticfixpackages": {
+        "type": "Project",
+        "dependencies": {
+          "RecommendationGuidance": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

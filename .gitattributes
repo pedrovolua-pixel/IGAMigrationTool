@@ -12,3 +12,10 @@
 /tests/unit/AiProposalPreview.Tests/golden-component.sha256 text eol=lf
 # Preserve the independently hashed literal component markup without text conversion.
 /tests/unit/AiProposalPreview.Tests/golden-component.html -text
+
+# Cycle11 independent fixed-template/canonical/HTML reference bytes use LF on supported runners.
+/tests/unit/SyntheticFixPackages.Tests/*.json text eol=lf
+/tests/unit/SyntheticFixPackageHtml.Tests/*.json text eol=lf
+/tests/unit/SyntheticFixPackageHtml.Tests/*.html text eol=lf
+/tests/integration/SyntheticFixPackages.Tests/*.json text eol=lf
+/tests/integration/SyntheticFixPackages.Tests/*.html text eol=lf
