@@ -55,6 +55,7 @@ var san = new SubjectAlternativeNameBuilder(); san.AddIpAddress(IPAddress.Loopba
 request.CertificateExtensions.Add(san.Build());
 using var certificate = request.CreateSelfSigned(DateTimeOffset.UtcNow.AddMinutes(-1), DateTimeOffset.UtcNow.AddHours(1));
 var port = FreePort();
+var backendPort = FreePort();
 var builder = WebApplication.CreateBuilder();
 builder.Logging.ClearProviders();
 builder.Services.AddBffFoundation(new BffOptions { LiveSignInEnabled = true, TenantId = Guid.NewGuid(), ClientId = Guid.NewGuid(), ManagedIdentityClientId = Guid.NewGuid() }, new DenyingTickets(), new DenyingAuthority());
@@ -62,7 +63,7 @@ builder.Services.AddBffPublicAuthenticationTransport();
 builder.Services.AddSingleton<IDataProtectionProvider>(new EphemeralDataProtectionProvider());
 builder.Services.PostConfigure<OpenIdConnectOptions>(BffRegistration.OidcScheme, options => options.ConfigurationManager =
     new StaticConfigurationManager<OpenIdConnectConfiguration>(new OpenIdConnectConfiguration()));
-builder.WebHost.ConfigureKestrel(options => options.Listen(IPAddress.Loopback, port, endpoint => endpoint.UseHttps(certificate)));
+builder.WebHost.ConfigureKestrel(options => { options.Listen(IPAddress.Loopback, port, endpoint => endpoint.UseHttps(certificate)); options.Listen(IPAddress.Loopback, backendPort); });
 await using var app = builder.Build();
 app.UseBffReviewedIngress(ingress);
 app.UseAuthentication();
@@ -79,6 +80,12 @@ async Task<int> Send(string host, params (string Name, string Value)[] headers)
     using var response = await client.SendAsync(message); return (int)response.StatusCode;
 }
 Check(await Send(ingress.CanonicalHost, ("X-Forwarded-Proto", "https")) == 204, "real HTTPS verified hop");
+using (var offload = new HttpRequestMessage(HttpMethod.Get, $"http://127.0.0.1:{backendPort}/ingress-check"))
+{
+    offload.Headers.Host = ingress.CanonicalHost; offload.Headers.Add("X-Forwarded-Proto", "https");
+    using var response = await client.SendAsync(offload);
+    Check((int)response.StatusCode == 204, "trusted TLS offload makes real backend HTTP effective HTTPS before authentication");
+}
 Check(await Send(ingress.CanonicalHost, ("X-Forwarded-Proto", "https"), ("Origin", ingress.FixedOrigin)) == 204, "fixed origin");
 Check(await Send("attacker.test", ("X-Forwarded-Proto", "https")) == 403, "original host spoof");
 Check(await Send(ingress.CanonicalHost) == 403, "absent proxy evidence");

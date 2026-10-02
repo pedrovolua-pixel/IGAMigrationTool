@@ -1,6 +1,6 @@
 # BFF production contract preparation
 
-Status: READY FOR HUMAN REVIEW — concrete proposal independently reviewed; implementation awaits exact decision
+Status: COMPLETE — exact local P01–P05/ADR-0009 acceptance received2026-10-02
 Owner: Azure/BFF coordinator
 Started: 2026-10-02
 Authority: Owner requested “Start next tasks” after the accepted local D01/D02 checkpoint.
@@ -46,3 +46,7 @@ The existing [private board](https://iga-pilot-progress.pedro-volu.chatgpt.site)
 An initial Site push was rejected because concurrent pilot source advanced. Its local changes/commit were preserved; a fresh checkout from `aea4e6cb8d9b47e34a15b73db6d5004797995148` received only the scoped BFF panel/task/snapshot delta. No remote history was overwritten. Final desktop/mobile checks verified immutable proposal links,11cards, zero broken anchors/placeholders and no horizontal overflow. Temporary preview tab and own HTTP server5392 are stopped.
 
 Preparation is complete and reviewable. This plan remains READY FOR HUMAN REVIEW; P01–P05 and ADR-0009 are unaccepted, all new implementation tests remain planned, and production outage/binding/access/D05/spend/release dependencies remain open. No runtime or configuration implementation changed.
+
+## Attributed local acceptance
+
+On2026-10-02 the repository owner explicitly approved P01–P05 and ADR-0009 against frozen reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. This closes preparation and authorizes [the separate local execution cycle](bff-local-authority-audit-implementation.md). Historical proposal hashes and publication above remain preparation evidence. Production bindings, audit outage preservation and paid/live operations remain separate.

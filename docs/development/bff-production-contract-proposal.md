@@ -67,3 +67,7 @@ Repository owner replied “approved” to the exact D01/D02 review request afte
 ## D03/D04 concrete review packet — 2026-10-02
 
 Deferred production choices now have a [concrete P01–P05 proposal](bff-production-authority-hosting-proposal.md), [Proposed ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md), and [protected binding intake](bff-production-bindings-template.json). These remain unaccepted. The exact next approval covers local synthetic authority/audit/configuration primitives only; Graph/SQL/key/cloud access, production host/adapter activation, audit-outage preservation, D05 and paid session remain separate. D01/D02 acceptance is unchanged.
+
+## P01–P05 local acceptance — 2026-10-02
+
+The owner accepted the exact P01–P05 packet and ADR-0009 against reviewed commit `cacbe372ff8a9bc448033e6918308c5f820b4bfd` for local synthetic authority/audit/configuration implementation. Earlier pending-design observations are historical. [The execution plan](../../plans/active/bff-local-authority-audit-implementation.md) records work and verification. Production provider/Azure/SQL grants, activation, audit-outage preservation, actual lifecycle bindings, image acceptance and paid deployment remain separate.

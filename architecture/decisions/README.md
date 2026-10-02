@@ -20,4 +20,4 @@ ADRs are append-only decision history. Supersede an accepted ADR with a new ADR 
 
 ## Proposed production composition
 
-- [`ADR-0009-production-bff-authority-and-audit.md`](./ADR-0009-production-bff-authority-and-audit.md) — versioned product/provider authority and atomic payload-free session/authority audit; technical/security decision pending. No live access or deployment authorization.
+- [`ADR-0009-production-bff-authority-and-audit.md`](./ADR-0009-production-bff-authority-and-audit.md) — versioned product/provider authority and atomic payload-free session/authority audit; accepted for local P01–P05 synthetic implementation on2026-10-02. No live access or deployment authorization.

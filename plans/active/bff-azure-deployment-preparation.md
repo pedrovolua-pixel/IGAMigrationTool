@@ -70,3 +70,7 @@ D01/D02 local completion update2026-10-02: [the accepted authentication cycle](.
 ## Concrete D03/D04 next tasks — 2026-10-02
 
 [P01–P05 and Proposed ADR-0009](../../docs/development/bff-production-authority-hosting-proposal.md) are prepared for the technical/security owner. [The separate preparation plan](bff-production-contract-preparation.md) records proposal research/review and documentation checks. Implementation remains gated on exact local acceptance. Real provider/role/home-origin proof, audit-outage preservation, private human browser path/key and SQL bindings, D05 and newly priced session remain open; no Azure operation or resource/grant was performed.
+
+## P01–P05 local acceptance — 2026-10-02
+
+Exact local acceptance was received for reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd` and ADR-0009. [Authority/audit implementation](bff-local-authority-audit-implementation.md) is RUNNING with isolated AUTH/AUDIT writers, coordinator HOST work and independent review. The earlier proposal-pending observation is historical. No Azure session/access/activation approval follows.
