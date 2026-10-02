@@ -3,6 +3,7 @@
     <ProjectReference Include="../AssessmentOrchestration/AssessmentOrchestration.csproj" />
     <ProjectReference Include="../DeterministicAnalysis/DeterministicAnalysis.csproj" />
     <ProjectReference Include="../AssessmentScoring/AssessmentScoring.csproj" />
+    <ProjectReference Include="../AssessmentMaturity/AssessmentMaturity.csproj" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.12" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />

@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "assertions": 2162,
+  "groups": [
+    "RM-API-001 stored originals/current health/coherent snapshot/history/replay/maturity goldens",
+    "RM-API-002 defer penalty/health independence/mixed/gaps/historical read-only profile",
+    "RM-API-003 server-owned actor/scope/originals unsupported actions/body4KiB CSRF/Host/Origin",
+    "RM-UI-001 actual keyboard confirm/reject/comment/edit inert text/originals/history/reload",
+    "RM-UI-002 actual stale CAS focused recovery and cross-run response denial",
+    "RM-UI-005 committed-response-loss exact-event retry and delayed GET/POST selection races with visible score/history goldens",
+    "RM-UI-003 keyboard Defer and actual owned-host restart preserves durable history",
+    "RM-UI-004 desktop390320 expanded history/evidence/axe/forced-color engineering smoke"
+  ],
+  "accessibility": [
+    {
+      "label": "desktop review/history/maturity",
+      "version": "4.13.0",
+      "passes": 31,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "320px review/history/maturity",
+      "version": "4.13.0",
+      "passes": 33,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    }
+  ],
+  "browser": "145.0.7632.6",
+  "node": "v24.21.0",
+  "ownedHostRestartExecuted": true,
+  "limitations": [
+    "Fixed synthetic reviewer identity, fictional maturity indicators only; no customer risk acceptance/publication/production authority",
+    "Full supported Windows/NVDA/Narrator acceptance NOT VERIFIED",
+    "Axe 320px review/history/maturity incomplete:color-contrast; NOT VERIFIED"
+  ]
+}

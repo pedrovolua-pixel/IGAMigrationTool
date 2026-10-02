@@ -826,6 +826,12 @@
         },
         "rootCause": {
           "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "initialState": {
+          "type": "string"
         }
       },
       "required": [
@@ -855,7 +861,9 @@
         "limitations",
         "originalDigests",
         "outcomeIds",
-        "rootCause"
+        "rootCause",
+        "originalTitle",
+        "initialState"
       ]
     },
     "AnalysisQuality": {
@@ -1022,6 +1030,36 @@
           "items": {
             "type": "string"
           }
+        },
+        "review": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReviewDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maturity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MaturityDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewSnapshotDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -1042,7 +1080,623 @@
         "outcomes",
         "quality",
         "findings",
-        "warnings"
+        "warnings",
+        "review",
+        "maturity",
+        "reviewSnapshotDigest"
+      ]
+    },
+    "ReviewKind": {
+      "enum": ["Confirm", "Reject", "Defer", "Comment", "EditPresentation"]
+    },
+    "ReviewCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kind": {
+          "$ref": "#/$defs/ReviewKind"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 250
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "businessContext": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "eventId",
+        "expectedRevision",
+        "kind",
+        "reason",
+        "text",
+        "title",
+        "businessContext"
+      ]
+    },
+    "ReviewActions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "confirm": {
+          "type": "boolean"
+        },
+        "reject": {
+          "type": "boolean"
+        },
+        "defer": {
+          "type": "boolean"
+        },
+        "comment": {
+          "type": "boolean"
+        },
+        "editPresentation": {
+          "type": "boolean"
+        }
+      },
+      "required": ["confirm", "reject", "defer", "comment", "editPresentation"]
+    },
+    "ReviewEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "$ref": "#/$defs/ReviewKind"
+        },
+        "recordedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state": {
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "businessContext": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "eventId",
+        "actorId",
+        "actorRoles",
+        "kind",
+        "recordedAtUtc",
+        "revision",
+        "state",
+        "reason",
+        "text",
+        "title",
+        "businessContext"
+      ]
+    },
+    "ReviewFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "category": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "initialState": {
+          "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "originalDigests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "occurrenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "$ref": "#/$defs/ReviewActions"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReviewEvent"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "revision",
+        "category",
+        "state",
+        "initialState",
+        "originalTitle",
+        "title",
+        "businessContext",
+        "originalDigests",
+        "occurrenceIds",
+        "actions",
+        "history"
+      ]
+    },
+    "ReviewDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshotDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReviewFinding"
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "runId",
+        "runRevision",
+        "status",
+        "reasonCode",
+        "snapshotDigest",
+        "actor",
+        "findings"
+      ]
+    },
+    "MaturityGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "type": "string"
+        },
+        "metDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mandatoryDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requiredPercent": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isMet": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "level",
+        "metDomains",
+        "mandatoryDomains",
+        "requiredPercent",
+        "isMet"
+      ]
+    },
+    "MaturityIndicator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assessmentReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasValidatedImprovementEvidence": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "state",
+        "reasonCode",
+        "evidenceReferences",
+        "assessmentReferences",
+        "hasValidatedImprovementEvidence"
+      ]
+    },
+    "MaturityDomain": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "baseMet": {
+          "type": "boolean"
+        },
+        "operationAndReviewMet": {
+          "type": "boolean"
+        },
+        "improvementMet": {
+          "type": "boolean"
+        },
+        "insufficientIndicators": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "indicators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaturityIndicator"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "baseMet",
+        "operationAndReviewMet",
+        "improvementMet",
+        "insufficientIndicators",
+        "indicators"
+      ]
+    },
+    "MaturityOwnership": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "ownerId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["state", "ownerId", "evidenceReferences", "reasonCode"]
+    },
+    "MaturityDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "level": {
+          "anyOf": [
+            {
+              "enum": [
+                "Initial",
+                "Developing",
+                "Defined",
+                "Managed",
+                "Optimized"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "algorithmVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "catalogVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inputDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contentDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authorityBoundary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mandatoryDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "insufficientIndicators": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "insufficientDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "improvementMissingDistinctAssessments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "governanceOwnershipEvidenced": {
+          "type": "boolean"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaturityGate"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaturityDomain"
+          }
+        },
+        "ownership": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MaturityOwnership"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reasonCode",
+        "level",
+        "algorithmVersion",
+        "catalogVersion",
+        "inputDigest",
+        "contentDigest",
+        "authorityBoundary",
+        "mandatoryDomains",
+        "insufficientIndicators",
+        "insufficientDomains",
+        "improvementMissingDistinctAssessments",
+        "governanceOwnershipEvidenced",
+        "gates",
+        "domains",
+        "ownership"
       ]
     }
   }

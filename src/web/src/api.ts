@@ -20,6 +20,8 @@ export async function request<T>(
   const response = await fetch(`${prefix}${path}`, {
     method: body ? 'POST' : 'GET',
     credentials: 'same-origin',
+    mode: 'same-origin',
+    redirect: 'error',
     cache: 'no-store',
     signal,
     headers: body

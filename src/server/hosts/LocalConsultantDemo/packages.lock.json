@@ -47,6 +47,9 @@
       "assessmentcoverage": {
         "type": "Project"
       },
+      "assessmentmaturity": {
+        "type": "Project"
+      },
       "assessmentorchestration": {
         "type": "Project",
         "dependencies": {
@@ -56,6 +59,7 @@
       "assessmentruns": {
         "type": "Project",
         "dependencies": {
+          "AssessmentMaturity": "[1.0.0, )",
           "AssessmentOrchestration": "[1.0.0, )",
           "AssessmentScoring": "[1.0.0, )",
           "DeterministicAnalysis": "[1.0.0, )",
@@ -74,6 +78,12 @@
         "type": "Project",
         "dependencies": {
           "AssessmentCoverage": "[1.0.0, )"
+        }
+      },
+      "findingreview": {
+        "type": "Project",
+        "dependencies": {
+          "Npgsql": "[10.0.3, )"
         }
       }
     }

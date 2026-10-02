@@ -195,6 +195,8 @@ export type AnalysisFinding = {
   readonly originalDigests: ReadonlyArray<string>;
   readonly outcomeIds: ReadonlyArray<string>;
   readonly rootCause: string;
+  readonly originalTitle: string;
+  readonly initialState: string;
 };
 
 export type AnalysisQuality = {
@@ -225,4 +227,121 @@ export type AnalysisDetail = {
   readonly quality: AnalysisQuality | null;
   readonly findings: ReadonlyArray<AnalysisFinding>;
   readonly warnings: ReadonlyArray<string>;
+  readonly review: ReviewDetail | null;
+  readonly maturity: MaturityDetail | null;
+  readonly reviewSnapshotDigest: string | null;
+};
+
+export type ReviewKind = "Confirm" | "Reject" | "Defer" | "Comment" | "EditPresentation";
+
+export type ReviewCommand = {
+  readonly eventId: string;
+  readonly expectedRevision: number;
+  readonly kind: ReviewKind;
+  readonly reason: string | null;
+  readonly text: string | null;
+  readonly title: string | null;
+  readonly businessContext: string | null;
+};
+
+export type ReviewActions = {
+  readonly confirm: boolean;
+  readonly reject: boolean;
+  readonly defer: boolean;
+  readonly comment: boolean;
+  readonly editPresentation: boolean;
+};
+
+export type ReviewEvent = {
+  readonly eventId: string;
+  readonly actorId: string;
+  readonly actorRoles: ReadonlyArray<string>;
+  readonly kind: ReviewKind;
+  readonly recordedAtUtc: string;
+  readonly revision: number;
+  readonly state: string;
+  readonly reason: string | null;
+  readonly text: string | null;
+  readonly title: string | null;
+  readonly businessContext: string | null;
+};
+
+export type ReviewFinding = {
+  readonly id: string;
+  readonly revision: number;
+  readonly category: string;
+  readonly state: string;
+  readonly initialState: string;
+  readonly originalTitle: string;
+  readonly title: string;
+  readonly businessContext: string;
+  readonly originalDigests: ReadonlyArray<string>;
+  readonly occurrenceIds: ReadonlyArray<string>;
+  readonly actions: ReviewActions;
+  readonly history: ReadonlyArray<ReviewEvent>;
+};
+
+export type ReviewDetail = {
+  readonly schemaVersion: 1;
+  readonly demoOnly: true;
+  readonly runId: string;
+  readonly runRevision: number;
+  readonly status: "Ready" | "Unavailable";
+  readonly reasonCode: string | null;
+  readonly snapshotDigest: string | null;
+  readonly actor: string | null;
+  readonly findings: ReadonlyArray<ReviewFinding>;
+};
+
+export type MaturityGate = {
+  readonly level: string;
+  readonly metDomains: number;
+  readonly mandatoryDomains: number;
+  readonly requiredPercent: number;
+  readonly isMet: boolean;
+};
+
+export type MaturityIndicator = {
+  readonly kind: string;
+  readonly state: string;
+  readonly reasonCode: string | null;
+  readonly evidenceReferences: ReadonlyArray<string>;
+  readonly assessmentReferences: ReadonlyArray<string>;
+  readonly hasValidatedImprovementEvidence: boolean;
+};
+
+export type MaturityDomain = {
+  readonly id: string;
+  readonly name: string;
+  readonly baseMet: boolean;
+  readonly operationAndReviewMet: boolean;
+  readonly improvementMet: boolean;
+  readonly insufficientIndicators: number;
+  readonly indicators: ReadonlyArray<MaturityIndicator>;
+};
+
+export type MaturityOwnership = {
+  readonly state: string;
+  readonly ownerId: string | null;
+  readonly evidenceReferences: ReadonlyArray<string>;
+  readonly reasonCode: string | null;
+};
+
+export type MaturityDetail = {
+  readonly status: "Ready" | "Unavailable";
+  readonly reasonCode: string | null;
+  readonly level: "Initial" | "Developing" | "Defined" | "Managed" | "Optimized" | null;
+  readonly algorithmVersion: string | null;
+  readonly catalogVersion: string | null;
+  readonly inputDigest: string | null;
+  readonly contentDigest: string | null;
+  readonly authorityBoundary: string | null;
+  readonly mandatoryDomains: number;
+  readonly insufficientIndicators: number;
+  readonly insufficientDomains: number;
+  readonly improvementMissingDistinctAssessments: number;
+  readonly governanceOwnershipEvidenced: boolean;
+  readonly gates: ReadonlyArray<MaturityGate>;
+  readonly domains: ReadonlyArray<MaturityDomain>;
+  readonly ownership: MaturityOwnership | null;
 };

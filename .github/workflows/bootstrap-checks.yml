@@ -55,6 +55,19 @@ jobs:
         run: |
           dotnet run --project tests/unit/DeterministicAnalysis.Tests/DeterministicAnalysis.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/AssessmentScoring.Tests/AssessmentScoring.Tests.csproj --configuration Release --no-build
+      - name: Check independent maturity and durable finding review
+        env:
+          IGA_R5_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_r5;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_r5
+          dotnet run --project tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/FindingReview.Tests/FindingReview.Tests.csproj --configuration Release --no-build
+      - name: Check independent review and maturity goldens
+        env:
+          IGA_REVIEW_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v5;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_v5
+          dotnet run --project tests/integration/ReviewMaturity.Tests/ReviewMaturity.Tests.csproj --configuration Release --no-build -- --postgres
       - name: Check persisted analysis and independent scoring goldens
         env:
           IGA_ANALYSIS_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v4;Username=iga_synthetic
@@ -106,6 +119,15 @@ jobs:
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
           node tests/e2e/analysis-scoring/verify.mjs
+      - name: Check consultant review history, current scores and independent maturity
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v5;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/review-maturity/verify.mjs
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check collector host contract

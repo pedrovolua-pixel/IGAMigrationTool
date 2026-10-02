@@ -2,12 +2,18 @@ using System.Globalization;
 using AssessmentCoverage;
 using AssessmentRuns;
 using AssessmentScoring;
+using FindingReview;
 
 internal static class DemoAnalysisProjection
 {
-    internal static object Detail(SyntheticRunSnapshot run)
+    internal static object Detail(SyntheticRunSnapshot run, DemoReviewContext? review = null)
     {
-        var response = SyntheticDemoAnalysisAdapter.Project(run);
+        var reviewProfile = DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId);
+        var states = review?.Snapshot?.Findings.ToDictionary(finding => finding.Seed.FindingId,
+            finding => Enum.Parse<ScoringFindingState>(finding.Current.State.ToString()), StringComparer.Ordinal);
+        var response = reviewProfile && review?.Snapshot is null
+            ? new SyntheticDemoAnalysisResponse(review?.ReasonCode ?? "review_input_denied", null)
+            : SyntheticDemoAnalysisAdapter.Project(run, states, review?.Snapshot?.SnapshotDigest);
         var data = response.Projection;
         var analysis = data?.Analysis;
         var scoring = data?.Scoring;
@@ -17,17 +23,21 @@ internal static class DemoAnalysisProjection
         {
             var members = analysis.Findings.Where(finding => group.OccurrenceIds.Contains(finding.OccurrenceId)).ToArray();
             var first = members[0];
+            var current = review?.Snapshot?.Findings.Single(finding => finding.Seed.FindingId == group.RootCauseKey).Current;
             return new
             {
                 id = group.RootCauseKey,
-                first.Title,
+                title = current?.PresentationTitle ?? first.Title,
+                originalTitle = first.Title,
+                initialState = first.InitialDisposition.ToString(),
                 category = first.CategoryId,
                 severity = first.Severity.ToString(),
                 confidencePercent = Decimal(first.ConfidencePercent),
                 first.ConfidenceBand,
-                state = first.InitialDisposition.ToString(),
+                state = current?.State.ToString() ?? first.InitialDisposition.ToString(),
                 method = first.DetectionMethod,
-                reviewRequired = first.Severity is DeterministicAnalysis.SyntheticSeverity.Critical or DeterministicAnalysis.SyntheticSeverity.High,
+                reviewRequired = (current?.State.ToString() ?? first.InitialDisposition.ToString()) == "Proposed" &&
+                    first.Severity is DeterministicAnalysis.SyntheticSeverity.Critical or DeterministicAnalysis.SyntheticSeverity.High,
                 ruleId = first.Provenance.RuleId,
                 ruleVersion = first.Provenance.RuleVersion,
                 baselineId = first.Provenance.BaselineId,
@@ -70,6 +80,9 @@ internal static class DemoAnalysisProjection
             algorithmVersion = scoring?.Versions.AlgorithmVersion,
             fixtureDigest = scoring is null ? null : run.FrozenInputs.AnalysisFixtureDigest,
             contentDigest = scoring?.ContentDigest,
+            reviewSnapshotDigest = scoring is null ? null : review?.Snapshot?.SnapshotDigest,
+            review = reviewProfile ? DemoReviewService.Detail(run, review ?? new("review_input_denied", null)) : null,
+            maturity = reviewProfile && response.IsAvailable ? DemoMaturityProjection.Detail(run) : null,
             provisional = scoring is null ? null : Measure(scoring.Provisional.Overall),
             publishableCurrent = scoring is null ? null : Measure(scoring.PublishableCurrent.Overall),
             categories = scoring is null ? [] : scoring.Profile.Categories.OrderBy(category => category.CategoryId, StringComparer.Ordinal).Select(category => new

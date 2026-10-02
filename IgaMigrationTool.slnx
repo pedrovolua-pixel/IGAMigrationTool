@@ -10,6 +10,8 @@
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
+    <Project Path="src/server/modules/FindingReview/FindingReview.csproj" />
     <Project Path="src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj" />
     <Project Path="src/server/modules/AssessmentScoring/AssessmentScoring.csproj" />
     <Project Path="src/server/modules/AssessmentRuns/AssessmentRuns.csproj" />
@@ -27,11 +29,14 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/ReviewMaturity.Tests/ReviewMaturity.Tests.csproj" />
     <Project Path="tests/integration/AnalysisScoring.Tests/AnalysisScoring.Tests.csproj" />
     <Project Path="tests/integration/DurableAssessment.Tests/DurableAssessment.Tests.csproj" />
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj" />
+    <Project Path="tests/unit/FindingReview.Tests/FindingReview.Tests.csproj" />
     <Project Path="tests/unit/AssessmentScoring.Tests/AssessmentScoring.Tests.csproj" />
     <Project Path="tests/unit/DeterministicAnalysis.Tests/DeterministicAnalysis.Tests.csproj" />
     <Project Path="tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj" />
