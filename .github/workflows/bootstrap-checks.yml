@@ -66,6 +66,11 @@ jobs:
         run: |
           dotnet run --project tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj --configuration Release --no-build
+      - name: Check offline synthetic AI packets and proposed output
+        run: |
+          dotnet run --project tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj --configuration Release --no-build
       - name: Check canonical unverified recommendation guidance
         run: dotnet run --project tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build
       - name: Check independent recommendation identities, originals and saved review bridge
@@ -232,6 +237,12 @@ jobs:
           global-json-file: global.json
       - name: Restore locked dependencies
         run: dotnet restore IgaMigrationTool.slnx --locked-mode
+      - name: Check Windows offline synthetic AI packets
+        run: dotnet run --project tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj --configuration Release --no-restore
+      - name: Check Windows offline synthetic proposed output
+        run: dotnet run --project tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --configuration Release --no-restore
+      - name: Check Windows independent fake-provider composition
+        run: dotnet run --project tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj --configuration Release --no-restore
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
       - name: Check Windows collector host and protected key behavior
