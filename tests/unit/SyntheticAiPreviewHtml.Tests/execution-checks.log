@@ -1,0 +1,17 @@
+10.0.401
+  Determining projects to restore...
+  Restored /private/tmp/iga-cycle09-html/src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj (in 40 ms).
+  Restored /private/tmp/iga-cycle09-html/src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj (in 36 ms).
+  Restored /private/tmp/iga-cycle09-html/tests/unit/SyntheticAiPreviewHtml.Tests/SyntheticAiPreviewHtml.Tests.csproj (in 40 ms).
+  SyntheticAiValidation -> /private/tmp/iga-cycle09-html/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  SyntheticAiPreview -> /private/tmp/iga-cycle09-html/src/server/modules/SyntheticAiPreview/bin/Release/net10.0/SyntheticAiPreview.dll
+  SyntheticAiPreviewHtml.Tests -> /private/tmp/iga-cycle09-html/tests/unit/SyntheticAiPreviewHtml.Tests/bin/Release/net10.0/SyntheticAiPreviewHtml.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.54
+B9 synthetic HTML tests passed: 217 assertions, 18 accepted render calls, 66 payload-free denials.
+Independent full HTML SHA256: 91b9aa245a17ac8b3b4a279a0c0c34b7346ff35c93513f94ef34736e4cda292c
+B9 independent Python oracle: 3 exact UTF-8 artifacts verified
