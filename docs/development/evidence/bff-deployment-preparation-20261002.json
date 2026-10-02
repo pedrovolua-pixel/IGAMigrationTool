@@ -221,6 +221,20 @@
     "Milestone2AndG1G9": "NOT VERIFIED"
   },
   "privateBoard": {
-    "result": "PENDING SAME-CYCLE PUBLICATION"
+    "result": "SUCCEEDED",
+    "sourceCommit": "a9b36e92ef3a2d1bac5262d16f1596e89bb16833",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_621b88b891ac8191a332ce4cd6bd9f9a",
+    "deploymentId": "appgdep_6abfba5758448191b6d30816512e0ce8",
+    "confirmedUtc": "2026-10-02T14:06:22.033098+00:00",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "audience": "Existing owner-only audience preserved",
+    "checks": "Desktop1920/mobile390 no horizontal overflow,11open human tasks and41frozen repository targets; newer pilot closure preserved by additive site merge",
+    "initialPublicationIssues": "Concurrent source advance and stale source-reference auto-review rejection; refreshed exact source and credentials, rebuilt archive, then verified native private publication"
+  },
+  "documentationFollowup": "Later canonical documentation and pilot closure merge are documentation only; src/tests/workflows/contracts/dependencies/solution unchanged from passing c7b071a. Existing draft description updated through authorized browser because connector lacks PR metadata write permission.",
+  "cleanup": {
+    "temporaryPreview": "Own loopback preview will be stopped and own preview tab closed before handoff",
+    "viewport": "Reset to normal1920width after390px check",
+    "azure": "No changes"
   }
 }
