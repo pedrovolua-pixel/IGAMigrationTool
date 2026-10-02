@@ -1,6 +1,6 @@
 # BFF local authentication contract implementation
 
-Status: RUNNING
+Status: VERIFIED LOCAL CHECKPOINT — configured checks passed; matching private publication pending
 Owner: Azure/BFF coordinator
 Decision: Repository owner “approved”,2026-10-02; exact D01/D02 in [the decision record](../../docs/development/bff-production-contract-proposal.md)
 Base: `8a746dc` on existing unmerged `codex/bff-integration` draft
@@ -29,3 +29,15 @@ D01: exact JSON shape and no claims/tokens/session refs; anonymous/authenticated
 D02: signed immutable identities/client/issuer and auth_time, missing/malformed/future/stale time; integer issuance floor and strict15-minute deadline; protected transaction missing/expired/altered/replayed/concurrent consumes; no consumption before framework state/nonce/correlation validation; no provider activity when disabled; guest personal-idp and unknown-origin denial; two same-subject sessions with distinct original authentication/privileged evidence; next-request version/role/assignment/account/cutoff revocation; DB failure/concurrency. Actual Entra/CA/FIC/provider claims remain NOT VERIFIED; synthetic OIDC proof is not deployed-provider acceptance.
 
 Coordinator: pinned locked audited restore, format, warning-free build, architecture/contract drift, affected unit/real PostgreSQL/HTTPS suites, all configured current browser regressions, infrastructure and secret/dependency checks, actual container smoke/inventory where hosted runner exists. No missing scan/license/provenance/manual or restricted-store proof is relabeled PASS. Record source/test/run IDs and known limitations. Update canonical feature status, execution/evidence index and existing private human tasks board in the same cycle. Close only the exact D01/D02 approval task; production/live human tasks remain open.
+
+## Executed local checkpoint
+
+AUTH-D01 original816e5fe plus browser-only fixture correction2ec515a and AUTH-D02 originalf302f4f plus1cbfc36 are integrated as runtimec21b93a. The51-project solution preserves the published pilot AI/runtime and later closuref977515. The only merge conflict was adjacent historical implementation-plan prose, resolved additively; concurrent primary UI and site work stayed intact.
+
+Coordinator and non-author final checks passed:188 foundation including116 signed synthetic HTTPS,308 public transport,126 actualPG,84 two-serverHTTPS/sharedPG,27 session and2546 policy checks, native Chromium actual helper, frozen OpenAPI/generated types, full locked audited restore/format/zero-warning Release build, current local unit/architecture, frontend/typecheck/build/audits, whole-repository secret and exact-container input checks. Existing hard-disabled process passed254 locally. The first hosted image build failed due to missing explicit002 COPY; reviewed correction46f009a passed the resource-copy guard and real hosted packageCI37027174418 (264 Linux process assertions, non-root/read-only container,14 fixtures and pinned vulnerability/license/SPDX collection). Raw reports stayed private ephemeral outputs and were removed; no acceptance, signed provenance or retained gate artifact follows.
+
+Whole-pilot configured Linux/Windows/browser/PG/infrastructure CI37027174252 passed on correction46f009a. [The execution record](../../docs/development/evidence/bff-authentication-contract-20261002.json) distinguishes every original failure and final result; [non-author review](../../docs/development/evidence/bff-authentication-review-20261002.md) has no unresolved findings. All three clean temporary authentication worker worktrees were removed; original Git branches, review metadata and needed executed synthetic binaries are preserved outside them. Coordinator and reviewer disposable PostgreSQL instances and test listeners are stopped. Owner-private publication remains pending the final canonical source publication.
+
+## Configured verification complete
+
+Every configured hosted job passed on source46f009a: [bootstrap run37027174252](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37027174252) and [actual package run37027174418](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37027174418). Runtime source remains exactly the independently reviewedc21b93a; correction46f009a only copies002 and checks embedded resources. The local Docker config ID is sha256:de58283c3d139bca35f6b18668b92e46359bf8ace862bcfbba7c0335a166e069, not a published manifest digest. Final documentation preserves completed cycle08f977515. D01/D02 is now implemented, independently reviewed and verified; production, acceptance, access/spend and all full milestone/gate decisions remain open.

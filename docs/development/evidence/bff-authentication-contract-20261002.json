@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-02",
+  "scope": "Approved D01/D02 local authentication transport and exact challenge/session evidence; no live activation",
+  "approval": {
+    "ownerDecision": "approved",
+    "date": "2026-10-02",
+    "record": "docs/development/bff-production-contract-proposal.md",
+    "scope": "D01/D02 only; D03/D04 deferred; D05 separate"
+  },
+  "source": {
+    "combinedCodeCommit": "c21b93a659aee1f931ac0fffd4566ee667809f25",
+    "publishedDraft": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/2",
+    "draftMerged": false,
+    "projects": 51,
+    "preservedPilotBase": "3b25357",
+    "workerCommits": {
+      "AUTH-D01": [
+        "816e5feff7ef2c9bcd375a26919db553386dff6e",
+        "2ec515a8d5ec28fc008ec41c08f6c4cdf19576cb"
+      ],
+      "AUTH-D02": [
+        "f302f4f39298cc7038800aad6b5158cc20db8be4",
+        "1cbfc366af7a5a508f7ca352af926387b925f67e"
+      ]
+    },
+    "fileSha256": [
+      {
+        "path": "contracts/bff-authentication/README.md",
+        "sha256": "38ce2830612da1d074bfaa08ffc422347f3fafba0d614dc754b2b96b20a122a9"
+      },
+      {
+        "path": "contracts/bff-authentication/bff-v1.openapi.json",
+        "sha256": "f2bb0fae6a25cb8871c8d58febe2b768ec05c432874985582ce2375bd331487d"
+      },
+      {
+        "path": "contracts/bff-authentication/check-contract.mjs",
+        "sha256": "f9ceaa5a3a544ae73be8bdbfb6dcd4f0e906a20d194daeae314e89fef961825c"
+      },
+      {
+        "path": "contracts/bff-authentication/generate-types.mjs",
+        "sha256": "9e7fbb5aa9df0ef8b1fbbc10fad57eb9d38a0dd9504c8a1cee5d18bf3de2347e"
+      },
+      {
+        "path": "migrations/identity-sessions/001-initial.sql",
+        "sha256": "4bb6535c9a88e037926ac9093b0e639db37808ae587d432c5d24aeb587db96cd"
+      },
+      {
+        "path": "migrations/identity-sessions/002-authentication-context.sql",
+        "sha256": "fd676d4f0ec52fca1fc7a54c1aa9aa13e8925b997b7708b2ab6c8a045413ad01"
+      },
+      {
+        "path": "migrations/identity-sessions/README.md",
+        "sha256": "ed9a349b2cea26b69a26003d67b14104e799b7f8bb18023497bd31f771221fd1"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/BffFoundation.csproj",
+        "sha256": "d95014570ae130c2369e61f2c0021c078773e94c0979ae787c5c6fcfc502bcaf"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/BffOptions.cs",
+        "sha256": "8f0a1c20255c4c84b8f6c5631146bb06a39e98209c48e8b54a86a4e1d8e9c66f"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/BffRegistration.cs",
+        "sha256": "91bd40331218e7cf687f1d0490cf5df487dfa9e89548f8a0ff13c4e4fbea19c0"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/BffRequestProtection.cs",
+        "sha256": "34642d05f34b74012e108aed29fcd21af0c4f1faa72ceb3ed5344f0605dc8309"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/BffSessionContext.cs",
+        "sha256": "31c8499fb7b75f9946a1fb65c0ed027ae0428ecf5e7a54a62765ef03d2c2b24b"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/DiscardTokenCacheProvider.cs",
+        "sha256": "fec667adc81cce8bed022bca6a416313b0e8f61f6f51b9e4f6180a8d07651e4e"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/GuardedOpenIdConnectHandler.cs",
+        "sha256": "69782c481d5ff97141183ce3f2832d2ca39f5fabcf757f275f7a42639447abdb"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/PublicAuthenticationAntiforgeryDataProvider.cs",
+        "sha256": "eec8e9cf972600311c2c96372c68509b28f56d82b645ba14e519d6a3e9c0b322"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/PublicAuthenticationBody.cs",
+        "sha256": "eebfbeea3d299d36401ccf236d855de8572be0a91ac93b8129f71e4d9c5d07b8"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/PublicAuthenticationEndpoints.cs",
+        "sha256": "0211f8336b99eb5ca42a691dbcf4c785028b74bcd3d49728a36819f2438d51a6"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/PublicAuthenticationOptions.cs",
+        "sha256": "cb82209e6028599825f7ac07b391985e0e2663b5f16287adeca48826dccfb9f9"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/README.md",
+        "sha256": "aad401928194f9dfc62fba0b0d3e866c2dc49dbd1bf44038f3cfd9ba5c4e5909"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/SignedJsonWebTokenHandler.cs",
+        "sha256": "3305ff4f3018ea29cab46bf444726b8eaed39b54420f29a521e06ddce0624f45"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/packages.lock.json",
+        "sha256": "56cbc6e9b3769189fc4ee5ba45fe35668bc1e4eea2447dc0eba64afe4518d9a2"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/IdentitySessions.csproj",
+        "sha256": "dbb7e3f4fff7e0ee2b8aa1b5ace1c7f62d5332009b469dd88849da2b4c97feea"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/PendingAuthenticationChallenge.cs",
+        "sha256": "d90c0c08b8943fc3c34239805e6cc41a8bb174cc7c257d53be1625fb3f45a646"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/PostgreSqlSessionAuthority.cs",
+        "sha256": "c2e2297e95fdecadd42cb4d0a98349c69399c5b3324c7071fc0cc22967acf283"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/PostgreSqlTicketStore.cs",
+        "sha256": "9e7136112ca1633dbc38a9a82d06b165f08761133e1c8fe3b546d99d158733e8"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/README.md",
+        "sha256": "d2b24e7d9bd83a749236377d8c1d51e8782136d9d0daa5b1d60ada237cf917cd"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/SessionDatabase.cs",
+        "sha256": "498b322cd333b3c9b3d7657e1de3afc04e5dd0ec0c73d7b8e9a366b5829c1cb6"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/SessionTicket.cs",
+        "sha256": "07a7d6e69dd0170c37f6f16a423e2bde5a3ce5b36f736814657c533cc42380e8"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/packages.lock.json",
+        "sha256": "ef0b1094a4ffbf71f97742bf7e8ffc6a232e1a11aefd31161fb469345ed67d86"
+      },
+      {
+        "path": "tests/e2e/bff-authentication/README.md",
+        "sha256": "1e9abce826bfbe444212094d830de6d76fa08a419186669173c3b9f2fde040dc"
+      },
+      {
+        "path": "tests/e2e/bff-authentication/verify.mjs",
+        "sha256": "9b22e25d8549d1cc941f93cbd78d519b455ef121969fc2b258d6d4ea2934ae61"
+      },
+      {
+        "path": "tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj",
+        "sha256": "b715b74733918b95953612ee88d8a491c1b1b9403f681e8f320a5beba8ab4ccf"
+      },
+      {
+        "path": "tests/integration/BffAuthenticationTransport.Tests/Program.cs",
+        "sha256": "682d4479e86c82f251396ae688e7198d6cc777ba1ff99d4298f9b227c6b0e3b2"
+      },
+      {
+        "path": "tests/integration/BffAuthenticationTransport.Tests/README.md",
+        "sha256": "8480a536867fb06e5835756394286506363cf1a29a99ad6d6fc2597daf0fca9a"
+      },
+      {
+        "path": "tests/integration/BffAuthenticationTransport.Tests/packages.lock.json",
+        "sha256": "e5c243d67ec53d74022198927659d2eaf5275cbc72329ce32edbca89bfc4a953"
+      }
+    ],
+    "packagingCorrection": "46f009ace3d2e4a685c98cfd169eada4c74c3aad",
+    "preservedPilotClosure": "f97751548283f33ceee96ffc01c687486130e8ff",
+    "packagingFilesSha256": [
+      {
+        "path": "global.json",
+        "sha256": "9969064a379ad96f0fd9358b4133bf2652018a32c60d44f37a0638168381a90d"
+      },
+      {
+        "path": "Directory.Build.props",
+        "sha256": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e"
+      },
+      {
+        "path": "infra/containers/bff-development.Dockerfile",
+        "sha256": "33c0ad7de4ee085ea02f31fa7d47326c456b7eaeb2da35517ecaf36c20db8ce2"
+      },
+      {
+        "path": "infra/containers/bff-development.Dockerfile.dockerignore",
+        "sha256": "8991e0675aba41daca4bd8a812c58f8331f59edb17bde296274196907adacf90"
+      },
+      {
+        "path": "infra/containers/bff-development.images.lock.json",
+        "sha256": "ec209ff57a634c2be02500581716cebee4a254be50a99d3ba735e72ccb889042"
+      },
+      {
+        "path": "infra/containers/image-evidence-tools.lock.json",
+        "sha256": "02b4c011f7edf2af56578c1074554ddde6e8d84c843a576f72582189971cb89c"
+      },
+      {
+        "path": "src/server/hosts/BffDevelopmentHost/packages.lock.json",
+        "sha256": "e5c243d67ec53d74022198927659d2eaf5275cbc72329ce32edbca89bfc4a953"
+      }
+    ]
+  },
+  "runtime": {
+    "dotnetSdk": "10.0.401",
+    "aspNetCore": "10.0.12",
+    "node": "24.21.0",
+    "npm": "11.20.0",
+    "postgresql": "18.4",
+    "playwright": "1.62.1",
+    "syntheticChromium": "151.0.7922.34"
+  },
+  "localChecks": {
+    "lockedAuditedRestore": "PASS",
+    "fullReleaseBuild": "PASS; zero warnings/errors",
+    "format": "PASS at exact c21b93a",
+    "existingLocalUnitAndArchitectureSuites": "PASS at365fad2; affected final repeat PASS",
+    "foundationAssertions": 188,
+    "signedProtocolHttpsAssertionsIncluded": 116,
+    "publicAuthenticationHttpsAssertions": 308,
+    "sharedPostgresqlAssertions": 126,
+    "twoServerHttpsPostgresqlAssertions": 84,
+    "sessionUnitAssertions": 27,
+    "humanPolicyAssertions": 2546,
+    "nativeBrowserHelper": "PASS: exact repository helper real native top-level form + same-loopback synthetic provider document",
+    "frozenOpenApiAndGeneratedTypes": "PASS",
+    "disabledDiagnosticActualProcessAssertions": 254,
+    "exactContainerInputPolicy": "PASS",
+    "gitleaks": "PASS; zero leaks after metadata labeling correction, no scanner suppression",
+    "browserDependencyAudit": "PASS; zero findings",
+    "frontendFormatBuildTypecheckAudit": "PASS; dependency audit0 after network retry"
+  },
+  "hostedChecks": [
+    {
+      "runId": 37027174252,
+      "sourceHead": "46f009ace3d2e4a685c98cfd169eada4c74c3aad",
+      "kind": "All configured Linux/Windows2022/2025, actualPG, five existing browser regressions plus native authentication helper, frontend/infrastructure/secret checks",
+      "status": "PASS",
+      "jobIds": [
+        110904661010,
+        110904661440,
+        110904661491
+      ],
+      "testedPullRequestMergeCommit": "430e00bdc009f4a4beef4c5b704f1a7da3dea402"
+    },
+    {
+      "runId": 37027174418,
+      "sourceHead": "46f009ace3d2e4a685c98cfd169eada4c74c3aad",
+      "kind": "Actual Linux disabled process/non-root read-only Docker,14 inventory fixture methods, pinned real vulnerability/license/SPDX collection and cleanup",
+      "status": "PASS",
+      "jobIds": [
+        110904661487,
+        110904661696
+      ],
+      "actualLinuxProcessAssertions": 264,
+      "localDockerConfigId": "sha256:de58283c3d139bca35f6b18668b92e46359bf8ace862bcfbba7c0335a166e069",
+      "publishedManifestDigest": null,
+      "rawScannerReports": "Private ephemeral outputs removed by always-cleanup; no retained signed gate bundle",
+      "testedPullRequestMergeCommit": "430e00bdc009f4a4beef4c5b704f1a7da3dea402"
+    }
+  ],
+  "independentReview": {
+    "worker": "AUTH-V non-author",
+    "record": "docs/development/evidence/bff-authentication-review-20261002.md",
+    "status": "PASS; exact c21b93a final build/format/protocol/public/PG/flow/browser/contract repeats; no unresolved source findings",
+    "packagingCorrection": "46f009a APPROVED; actual verify_inputs repeated"
+  },
+  "migration": {
+    "path": "migrations/identity-sessions/002-authentication-context.sql",
+    "scope": "Additive local control-plane cutoff/pending challenge; existing null cutoffs deny",
+    "startupApplied": false,
+    "azureApplied": false,
+    "retentionOrCleanupSelected": false
+  },
+  "initialFailuresAndRepairs": [
+    "Synthetic OIDC configuration initially retained Microsoft metadata manager; actual fixture failed, then explicit StaticConfigurationManager/rejecting backchannel prevented external requests. No credentials/grants or successful real provider proof.",
+    "Actual nonce-negative fixture found handled code redemption skips framework token-response validation; mandatory supported validator added before complete-handler consumption.",
+    "Independent review required fresh deadline checks after database lock/consume waits, exact reviewed guest home origin and compatible exact-session CSRF on generic protected endpoints; fixes passed focused tests.",
+    "Browser dependencies initially absent; existing pinned dependencies installed/audited and pinned browser downloaded to disposable test directory.",
+    "First browser provider.invalid redirect escaped chain route interception and failed DNS; browser-only fixture now redirects to its own loopback document, real navigation passes without provider activity.",
+    "Hosted container run37026545438 failed: embedded migration002 allowed into context but omitted from explicit Dockerfile COPY; copy and embedded-resource input check added.",
+    "Metadata digest map keys containing token/auth file names triggered generic-key false positives; split path and SHA256 fields without suppressing the scanner."
+  ],
+  "notVerified": [
+    "Actual Entra signed optional auth_time/provider guest semantics and current app-role authority",
+    "Graph/current provider production adapters and consent",
+    "Managed-identity code redemption/federation/CA/licensed users/key rollover",
+    "Production enrollment/proxy/shared keys/durable audit atomicity",
+    "Image findings/license acceptance/signed provenance/restricted retained gate evidence/private registry publication",
+    "Deployed multi-replica activation, full Milestone2 and G1-G9",
+    "Fresh Azure priced session/grants/release approval"
+  ],
+  "privateBoard": {
+    "status": "Final source publication pending; final layout/links verified at desktop and390px",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+  },
+  "cleanup": {
+    "temporaryAuthenticationWorktrees": "Three clean writing/review checkouts removed; original Git branches retained",
+    "syntheticDatabases": "Coordinator and reviewer own PostgreSQL stopped; author stopped own instance",
+    "preservedLocalProof": "Reviewer sanitized JSON and executed synthetic worker binaries preserved outside removed checkouts"
+  }
+}
