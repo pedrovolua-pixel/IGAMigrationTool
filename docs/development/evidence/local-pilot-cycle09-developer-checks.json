@@ -1,7 +1,7 @@
 {
   "cycle": 9,
-  "status": "VERIFIED_BOUNDED_ENGINEERING_PRIVATE_CLOSEOUT_PENDING",
-  "capturedUtc": "2026-10-02T16:26:49.742376+00:00",
+  "status": "COMPLETE_BOUNDED_OFFLINE_ENGINEERING",
+  "capturedUtc": "2026-10-02T16:30:03.700393+00:00",
   "codeCommit": "3af83bbea71a59d9c0bde6a0847f5b83bb26f2de",
   "localFullCheckCommit": "2e4a9fc2773afe24b78fb1f9f4d15060d1ca8537",
   "localCheckCompatibility": "Only .gitattributes changes from full local check commit to hosted code; renderer, tests, compiled modules and all runtime/configuration inputs unchanged. All three new preserved combined hosts independently rerun after correction passed.",
@@ -2653,7 +2653,7 @@
     "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
     "audience": "Owner-private custom, one owner, no external visitors or groups",
     "humanTaskCount": 11,
-    "status": "START_PUBLICATION_SUCCEEDED_FINAL_PENDING",
+    "status": "SUCCEEDED_OWNER_PRIVATE",
     "startPublication": {
       "source": {
         "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
@@ -2676,7 +2676,260 @@
         "env_set_revision": 0,
         "updated_at": "2026-10-02T15:54:39.537991+00:00"
       }
-    }
+    },
+    "sourceCommit": "9569c1b37626c9dac043db337d7d4927b2b735a1",
+    "canonicalSnapshot": "76237226539afb180b8f34f6617739eee07cb6e8",
+    "deployment": {
+      "id": "appgdep_6abfdbb81eb481918b4555ecd9e7a266",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_1369baac43588191aa8f56b80b73b087",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-02T16:28:48.739487+00:00"
+    },
+    "visualQa": [
+      {
+        "name": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "status": "PASS",
+        "headline": "Offline AI proposals are ready to inspect.",
+        "overflow": false,
+        "tasks": [
+          {
+            "title": "Reconcile A build and complete B source facts",
+            "role": "Requested from: One Identity SME with the repository owner",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Confirm source queries, fields and fixtures",
+            "role": "Requested from: One Identity SME; technical and security reviewers",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Authorize the read-only database plan",
+            "role": "Requested from: Customer database owner",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Settle collector delivery and installer contracts",
+            "role": "Requested from: Technical, security, operations and quality owners; customer collector administrator and evidence-policy authorizer",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Approve production run operations and cancellation",
+            "role": "Requested from: Technical and security owners, with the identity administrator",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Provide hosted workloads and live foundation evidence",
+            "role": "Requested from: Platform engineer, technical/security owners and identity administrator",
+            "done": true,
+            "links": 8
+          },
+          {
+            "title": "Define production sign-in authority and hosting rules",
+            "role": "Requested from: Technical/security owner and identity/platform owner",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Configure the approved Entra identity path",
+            "role": "Requested from: Identity administrator and platform owner",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Approve the exact real rule catalog",
+            "role": "Requested from: One Identity SME, product and technical owners; security owner for security rules",
+            "done": true,
+            "links": 1
+          },
+          {
+            "title": "Verify the OpenAI pilot project",
+            "role": "Requested from: API project owner, technical/evaluation owner and security reviewer",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Supply PDF license and review environment",
+            "role": "Requested from: Pilot owner and accessibility reviewer",
+            "done": true,
+            "links": 2
+          }
+        ],
+        "missingAnchors": 0
+      },
+      {
+        "name": "mobile",
+        "width": 390,
+        "height": 844,
+        "status": "PASS",
+        "headline": "Offline AI proposals are ready to inspect.",
+        "overflow": false,
+        "tasks": [
+          {
+            "title": "Reconcile A build and complete B source facts",
+            "role": "Requested from: One Identity SME with the repository owner",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Confirm source queries, fields and fixtures",
+            "role": "Requested from: One Identity SME; technical and security reviewers",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Authorize the read-only database plan",
+            "role": "Requested from: Customer database owner",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Settle collector delivery and installer contracts",
+            "role": "Requested from: Technical, security, operations and quality owners; customer collector administrator and evidence-policy authorizer",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Approve production run operations and cancellation",
+            "role": "Requested from: Technical and security owners, with the identity administrator",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Provide hosted workloads and live foundation evidence",
+            "role": "Requested from: Platform engineer, technical/security owners and identity administrator",
+            "done": true,
+            "links": 8
+          },
+          {
+            "title": "Define production sign-in authority and hosting rules",
+            "role": "Requested from: Technical/security owner and identity/platform owner",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Configure the approved Entra identity path",
+            "role": "Requested from: Identity administrator and platform owner",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Approve the exact real rule catalog",
+            "role": "Requested from: One Identity SME, product and technical owners; security owner for security rules",
+            "done": true,
+            "links": 1
+          },
+          {
+            "title": "Verify the OpenAI pilot project",
+            "role": "Requested from: API project owner, technical/evaluation owner and security reviewer",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Supply PDF license and review environment",
+            "role": "Requested from: Pilot owner and accessibility reviewer",
+            "done": true,
+            "links": 2
+          }
+        ],
+        "missingAnchors": 0
+      },
+      {
+        "name": "reflow",
+        "width": 320,
+        "height": 844,
+        "status": "PASS",
+        "headline": "Offline AI proposals are ready to inspect.",
+        "overflow": false,
+        "tasks": [
+          {
+            "title": "Reconcile A build and complete B source facts",
+            "role": "Requested from: One Identity SME with the repository owner",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Confirm source queries, fields and fixtures",
+            "role": "Requested from: One Identity SME; technical and security reviewers",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Authorize the read-only database plan",
+            "role": "Requested from: Customer database owner",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Settle collector delivery and installer contracts",
+            "role": "Requested from: Technical, security, operations and quality owners; customer collector administrator and evidence-policy authorizer",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Approve production run operations and cancellation",
+            "role": "Requested from: Technical and security owners, with the identity administrator",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Provide hosted workloads and live foundation evidence",
+            "role": "Requested from: Platform engineer, technical/security owners and identity administrator",
+            "done": true,
+            "links": 8
+          },
+          {
+            "title": "Define production sign-in authority and hosting rules",
+            "role": "Requested from: Technical/security owner and identity/platform owner",
+            "done": true,
+            "links": 3
+          },
+          {
+            "title": "Configure the approved Entra identity path",
+            "role": "Requested from: Identity administrator and platform owner",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Approve the exact real rule catalog",
+            "role": "Requested from: One Identity SME, product and technical owners; security owner for security rules",
+            "done": true,
+            "links": 1
+          },
+          {
+            "title": "Verify the OpenAI pilot project",
+            "role": "Requested from: API project owner, technical/evaluation owner and security reviewer",
+            "done": true,
+            "links": 2
+          },
+          {
+            "title": "Supply PDF license and review environment",
+            "role": "Requested from: Pilot owner and accessibility reviewer",
+            "done": true,
+            "links": 2
+          }
+        ],
+        "missingAnchors": 0
+      }
+    ],
+    "visualQaSha256": "cf25db025379858e136c079c30fd56918d5e8ab6fe7b1a85c64b7c5129edb62a",
+    "immutableSourceLinksVerified": 50,
+    "closurePresentation": "Final completed-record presentation follows this confirmed verified-snapshot deployment; no runtime or audience change."
   },
   "relatedCanonicalObservation": {
     "feature": "Separate accepted local BFF authentication",
