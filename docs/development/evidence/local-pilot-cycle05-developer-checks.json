@@ -295,7 +295,8 @@
     "iga-cycle05-host-terminal-build.log": "c933bc791156777bc7f368c851010e1ffdf12848e11b32eca3d1c17cdd5df813",
     "iga-cycle05-format-repair-exact.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "iga-cycle05-format-initial-approved.log": "2120b0a73ea77fc2223aad8c3f0ebab1929274d93b1cfe8b8d4266391cebdfe7",
-    "iga-cycle05-final-checkout-scan.log": "a90aaf46f10d870d84c867956d7e36a4f6b9df9146f95ecbf07db0ebe83efb2b"
+    "iga-cycle05-final-checkout-scan.log": "a90aaf46f10d870d84c867956d7e36a4f6b9df9146f95ecbf07db0ebe83efb2b",
+    "iga-cycle05-closure-checkout-scan.log": "db0f0b0f0cf3605498a6e01e84857e8ed3b08a4066a6ac48f8a2c55da4925c0a"
   },
   "checks": {
     "auditedLockedRestore": "PASS",
@@ -315,7 +316,7 @@
     "bootstrapHostingUnsafeDrifts": 44,
     "checkoutScan": "PASS final440 tracked/non-ignored checkout files, zero leaks; metadata representation corrected without allowlist",
     "remotePartialCI": "PASS configured Linux/Windows2022/2025 and actual Azure package",
-    "privatePublication": "PENDING final; approved start snapshot confirmed",
+    "privatePublication": "PASS native Succeeded owner-private; matching closed-cycle snapshot publication follows canonical closure commit",
     "ciBrowserDatabase": "Dedicated iga_synthetic_v5, distinct from historical browser database"
   },
   "historicalCoverageBrowser": {
@@ -439,8 +440,7 @@
   "limitations": [
     "Database cluster crash-restart not repeated; explicit opt-in absent",
     "320px axe color-contrast incomplete; supported Windows/NVDA/Narrator and WCAG conformance NOT VERIFIED",
-    "Production identity/customer authority/risk/closure/AI/tasks/report/live gates NOT VERIFIED",
-    "Matching final private publication pending"
+    "Production identity/customer authority/risk/closure/AI/tasks/report/live gates NOT VERIFIED"
   ],
   "initialPrivatePublication": {
     "repositorySnapshot": "8f75eb49af13cb1ba36af9bac88ca8699a072a85",
@@ -487,5 +487,30 @@
     },
     "sourceCommit": "97f7a890df03d630f6fd10e2c5f6d0152eeb5231",
     "scope": "Configured partial engineering workflows; no full feature/live gate acceptance"
+  },
+  "boardChecks": {
+    "date": "2026-10-02",
+    "desktopMobile": "PASS1440/390 rendering, navigation, no horizontal overflow",
+    "humanTasks": 11,
+    "immutableRepositoryLinks": 32,
+    "otherCoordinatorStatus": "Preserved BFF handoff, publication dependency and live controls",
+    "repositorySnapshot": "6b0187d997a896314f464919aafa473481468945"
+  },
+  "privatePublication": {
+    "id": "appgdep_6abf335018ac81918688442116e5e506",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_32480331535881919a21f8a718f336b0",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-02T04:30:23.032000+00:00",
+    "sourceSha": "8fed6bdec75d288095477536e14464a35d998775",
+    "repositorySnapshot": "6b0187d997a896314f464919aafa473481468945"
   }
 }
