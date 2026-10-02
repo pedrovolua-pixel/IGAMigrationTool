@@ -40,3 +40,5 @@ The architecture check scans declared `.csproj` references under `src/`. It reje
 The partial engineering evidence-store Bicep module and its compile/lint/policy commands are documented in [`infra/bicep/README.md`](../../infra/bicep/README.md). No infrastructure deployment has been run.
 
 Add setup, migration and operational commands here only after they have been executed and verified.
+
+The offline [synthetic AI validation foundation](synthetic-ai-validation.md) supplies dependency-free packet and proposed-output validators plus independent fake-provider hosts. It has no live provider or application integration; its [fixture contract](../../specs/003-health-assessment/synthetic-ai-fixture-contract.md) preserves the unresolved production controls.

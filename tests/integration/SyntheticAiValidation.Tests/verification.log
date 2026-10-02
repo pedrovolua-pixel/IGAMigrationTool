@@ -1,0 +1,19 @@
+10.0.401
+Microsoft.AspNetCore.App 10.0.12 [/private/tmp/iga-dotnet-10.0.401/shared/Microsoft.AspNetCore.App]
+Microsoft.NETCore.App 10.0.12 [/private/tmp/iga-dotnet-10.0.401/shared/Microsoft.NETCore.App]
+  Determining projects to restore...
+  Restored /private/tmp/iga-cycle08-verification/src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj (in 33 ms).
+  Restored /private/tmp/iga-cycle08-verification/tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj (in 36 ms).
+  SyntheticAiValidation -> /private/tmp/iga-cycle08-verification/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  SyntheticAiValidation.Tests -> /private/tmp/iga-cycle08-verification/tests/integration/SyntheticAiValidation.Tests/bin/Release/net10.0/SyntheticAiValidation.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.86
+PASS V8-001 composed fixed-provider independent canonical/source/conflict/empty/immutable/proposed-only oracles
+PASS V8-002 independent packet closed shape/classification/allowlist/source/duplicate/malformed denial matrix
+PASS V8-003 independent proposed schema/run/digest/member citations/typed statements/conflict/duplicate denial matrix
+PASS V8-004 UTF8/string/depth/record/statement bounds, escaped surrogate denial and hostile inert data
+978 independent composed synthetic AI assertions passed. Fixed fake provider only; live AI, authorization/redaction semantics, factual accuracy, budget/recovery and rendering NOT VERIFIED.

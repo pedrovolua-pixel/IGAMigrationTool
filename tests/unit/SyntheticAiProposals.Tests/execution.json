@@ -1,0 +1,73 @@
+{
+  "packet": "B8",
+  "completedAtUtc": "2026-10-02T14:26:15.848485+00:00",
+  "branch": "codex/cycle08-ai-proposals",
+  "baseCommit": "875ded7f2a7bc4ff8952ba8a31fa496d1e525af7",
+  "scope": "Internal synthetic proposed-output validator only",
+  "assertions": 362,
+  "checks": [
+    {
+      "name": "locked-audited-restore",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "focused-format-verify",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "release-build",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "unit-host",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "independent-golden-oracle",
+      "exitCode": 0,
+      "result": "PASS"
+    },
+    {
+      "name": "diff-whitespace",
+      "exitCode": 0,
+      "result": "PASS"
+    }
+  ],
+  "sourceSha256": {
+    "src/server/modules/SyntheticAiValidation/ProposalContracts.cs": "2874bf68aa17345d6e585095cdd99069f57ede4b5f24a9f113d44b79fc1d074c",
+    "src/server/modules/SyntheticAiValidation/ProposalValidator.cs": "26b727544d4a5b70c79c4d366af1d963bee1c8863e6d199a43c1b97a34e5388c",
+    "tests/unit/SyntheticAiProposals.Tests/Program.cs": "33856b4f64f0970488d41f08907df6b2c4803512fb906f8a48c27791114d2a48",
+    "tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj": "0e5436d371d278c6e729ec1e86bce7f40686e833cbda2ad7211c43e3697fae52",
+    "tests/unit/SyntheticAiProposals.Tests/packages.lock.json": "8af39d741896c7b887dbdbb611028462778e62f52deae9e2c19f4200dffe0893",
+    "tests/unit/SyntheticAiProposals.Tests/golden-snapshot.json": "00e9e843b07046984a8964c33dc3f375535f75dda2cba7a4cf26701aa0359881",
+    "tests/unit/SyntheticAiProposals.Tests/golden-digest.txt": "5a832225e45efb38147ace54dcc028fe45822d9056e8d8efc9e4e611f94fef04",
+    "tests/unit/SyntheticAiProposals.Tests/golden-oracle.py": "3404a691044e515286ef927adf464ae79fadf9b923d4bc8a8d6fca75f93cd05f",
+    "tests/unit/SyntheticAiProposals.Tests/README.md": "4fbfab7e6d58e9d854ce29c369a52ad67f97231cd2dd0df0d06463f95fd2635c"
+  },
+  "borrowedSourceSha256": {
+    "src/server/modules/SyntheticAiValidation/FixtureJson.cs": "6b0f1b2c71e9e424ddba4bb9868b9d83bc85ef787c7f4c93478b579de331b32c",
+    "src/server/modules/SyntheticAiValidation/SyntheticAiPacket.cs": "6a4d50e62857082c6867589644e4ff8b17fbfd68d4ee3656c31c705cddddb0e6",
+    "src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+    "Directory.Build.props": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e",
+    "global.json": "9969064a379ad96f0fd9358b4133bf2652018a32c60d44f37a0638168381a90d",
+    "specs/003-health-assessment/synthetic-ai-fixture-contract.md": "ee9fc65bb538b08fcdb87364b8b92462fc809f436b80fd0497349425ad729f6b",
+    "plans/active/local-pilot-synthetic-ai-cycle-08.md": "47c9c4a1da32a8602085fe87e7e027254e2e2237c19a6a0b07f5f07970c45fb1"
+  },
+  "executionLogSha256": "67b8eb7a23fc114aadf53f2ced0fe9a51b3e02cddba9aa22d0d940595844cfc2",
+  "dependenciesAdded": [],
+  "migrations": [],
+  "configurationImplications": [
+    "Coordinator integrates the new package-free unit host into solution and CI."
+  ],
+  "limitations": [
+    "Test-only reflection creates the internal packet for isolated units; actual builder composition is covered separately by V8.",
+    "Initial sandbox formatter failed due to local named-pipe permissions; scoped formatter and verify rerun succeeded outside sandbox.",
+    "Initial compiler-server build was canceled; final Release build disables build servers and passes.",
+    "Full provider/model/authorization/redaction/budget/retry/retention/rendering/scoring/review/publication acceptance is not verified.",
+    "Shared module lockfile created by restore is unowned and is excluded from this worker commit."
+  ]
+}
