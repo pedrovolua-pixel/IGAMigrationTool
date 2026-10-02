@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "started": "2026-10-01",
-  "recordedUtc": "2026-10-02T04:23:02Z",
+  "recordedUtc": "2026-10-02T11:37:59.165506Z",
   "scope": "Bounded local BFF identity, shared sessions and human authorization foundation; live sign-in disabled",
   "source": {
     "base": "131eaa6fe88be2d06a2f7056561ba115ae9802a8",
@@ -11,7 +11,9 @@
       "codex/bff-sessions": "90fb073f294a0b37ae3088ce044d4650b22a3982",
       "codex/bff-transport": "bba44cbd95169ea11cc84457c9ac6337d02b220d",
       "codex/bff-policy": "f5c7c39a2a044255f504a2726c1416814ebcbbdc"
-    }
+    },
+    "combinedPublicationCodeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4",
+    "combinedPilotBase": "0a58364de8a60dea5d9ef64d9e6b3b2c381eae9f"
   },
   "authorization": "Owner requested Work on it; existing approved feature003 identity/session design, authorization matrix, technical specification and implementation/test plans. No new live trust or paid Azure session authorized.",
   "checks": [
@@ -131,15 +133,54 @@
       "result": "PASS"
     },
     {
-      "name": "Updated hosted CI, Windows execution and container build",
-      "result": "NOT VERIFIED",
-      "reason": "New source branch not yet published; public GitHub publication approval pending. No local Docker engine or Windows runtime."
+      "name": "Configured hosted CI, Windows execution and container build",
+      "result": "PASS",
+      "codeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4",
+      "bootstrap": {
+        "runId": 37001243915,
+        "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37001243915",
+        "result": "success",
+        "jobs": [
+          "Linux dotnet-bootstrap",
+          "Windows 2022 collector",
+          "Windows 2025 collector"
+        ]
+      },
+      "package": {
+        "runId": 37001244041,
+        "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37001244041",
+        "result": "success",
+        "scope": "Inert bootstrap image, actual non-root/read-only container smoke and hosting policy; not a deployable BFF image or live Azure proof"
+      }
     },
     {
       "name": "Azure bootstrap hosting policy",
       "result": "PASS",
       "unsafeDriftsDenied": 44,
       "scope": "Compiled inert root/module templates; separate distinct output paths used for equal filenames. No deployed image/pull proof."
+    },
+    {
+      "name": "Combined published code snapshot local verification",
+      "result": "PASS",
+      "codeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4",
+      "projects": 38,
+      "lockedRestore": "PASS",
+      "format": "PASS",
+      "releaseBuild": {
+        "warnings": 0,
+        "errors": 0
+      },
+      "bffFocusedRepeat": {
+        "transport": 72,
+        "sessionUnit": 27,
+        "humanPolicy": 2546
+      },
+      "architecture": {
+        "policyCases": 7,
+        "scannerCases": 4
+      },
+      "secretScanFindings": 0,
+      "bffRuntimeTestSourceDiffFromReviewedImplementation": "EMPTY"
     }
   ],
   "review": [
@@ -207,7 +248,7 @@
     "G1-G9": "NOT VERIFIED"
   },
   "publication": {
-    "source": "APPROVED; branch push and draft creation in progress",
+    "source": "PUBLISHED; draft PR and configured hosted checks verified",
     "privateBoard": {
       "result": "SUCCEEDED",
       "version": 53,
@@ -221,15 +262,28 @@
     "approval": {
       "result": "APPROVED",
       "date": "2026-10-02",
-      "scope": "Publish public codex/bff-integration branch and open draft pull request; execute hosted checks",
-      "humanStatement": "Approved"
+      "humanStatement": "Approved",
+      "scope": "Publish the BFF source/evidence branch to the owner public repository, open a draft PR and execute configured hosted checks; no merge/release/live sign-in or Azure grants/paid resources"
+    },
+    "draftPullRequest": {
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/2",
+      "number": 2,
+      "headBranch": "codex/bff-integration",
+      "baseBranch": "codex/pilot-foundation",
+      "draft": true,
+      "merged": false,
+      "checkedCodeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4"
+    },
+    "humanPublicationDependency": "CLOSED",
+    "currentBoardUpdate": {
+      "result": "PENDING confirmation; prior version53 below is historical local handoff"
     }
   },
   "cleanup": {
     "result": "PASS",
     "syntheticPostgresCluster": "Stopped only the dedicated BFF PostgreSQL cluster after independent review finished; stopped fixture files retained locally",
     "temporaryWorkerCheckouts": "Three clean writing worktrees removed; committed branches preserved",
-    "integrationCheckout": "Retained for review and publication approval",
+    "integrationCheckout": "Retained for published draft review",
     "preview": "Temporary preview server stopped and own browser tab closed; viewport override reset",
     "azureChanges": "None"
   }
