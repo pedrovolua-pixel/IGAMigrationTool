@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Abstractions;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.Identity.Client;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text.Json;
@@ -48,12 +50,16 @@ foreach (var unsafeSettings in new[] { settings with { TenantId = Guid.Empty }, 
     try { new ServiceCollection().AddBffFoundation(unsafeSettings, new MemoryTickets(), authority); throw new Exception("accepted unsafe settings"); }
     catch (ArgumentException) { checks++; }
 }
-ServiceProvider Provider(BffOptions options)
+ServiceProvider Provider(BffOptions options, CountingConfiguration? configuration = null)
 {
     var services = new ServiceCollection();
     services.AddLogging();
     services.AddSingleton<IConfiguration>(new ConfigurationBuilder().Build());
     services.AddBffFoundation(options, new MemoryTickets(), authority);
+    if (configuration is not null)
+    {
+        services.PostConfigure<OpenIdConnectOptions>(BffRegistration.OidcScheme, oidc => oidc.ConfigurationManager = configuration);
+    }
     return services.BuildServiceProvider();
 }
 using var provider = Provider(settings);
@@ -182,6 +188,43 @@ Check(System.Text.Encoding.UTF8.GetString(((ITokenCacheSerializer)cacheClient.Us
 new DiscardTokenCacheProvider().Initialize(cacheClient.UserTokenCache);
 Check(!(await cacheClient.GetAccountsAsync()).Any(), "discard provider clears real MSAL cache on access");
 Check(!System.Text.Encoding.UTF8.GetString(((ITokenCacheSerializer)cacheClient.UserTokenCache).SerializeMsalV3()).Contains("synthetic.synthetic"), "no retained synthetic cache account");
+foreach (var (enabled, secure) in new[] { (false, true), (false, false), (true, false) })
+{
+    var configuration = new CountingConfiguration();
+    using var guardedProvider = Provider(settings with { LiveSignInEnabled = enabled }, configuration);
+    var scheme = await guardedProvider.GetRequiredService<IAuthenticationSchemeProvider>().GetSchemeAsync(BffRegistration.OidcScheme);
+    Check(scheme?.HandlerType == typeof(GuardedOpenIdConnectHandler), "guarded supported OIDC handler registered");
+    var challenge = Context(guardedProvider);
+    challenge.Request.Scheme = secure ? "https" : "http";
+    await challenge.ChallengeAsync(BffRegistration.OidcScheme);
+    Check(challenge.Response.StatusCode == 403 && !challenge.Response.Headers.ContainsKey("Location"), "pre-metadata challenge gate");
+    foreach (var path in new[] { settings.CallbackPath, settings.SignedOutCallbackPath, "/signout-oidc" })
+    {
+        var callback = Context(guardedProvider, "POST");
+        callback.Request.Scheme = secure ? "https" : "http";
+        callback.Request.Path = path;
+        await Pipeline(guardedProvider)(callback);
+        Check(callback.Response.StatusCode == 403, "pre-metadata callback gate");
+    }
+    var signOut = Context(guardedProvider);
+    signOut.Request.Scheme = secure ? "https" : "http";
+    await signOut.SignOutAsync(BffRegistration.OidcScheme);
+    Check(signOut.Response.StatusCode == 403, "pre-metadata signout gate");
+    Check(configuration.Calls == 0 && configuration.Refreshes == 0, "no provider metadata or refresh activity while disabled/insecure");
+}
+var enabledConfiguration = new CountingConfiguration();
+using (var enabledProvider = Provider(settings, enabledConfiguration))
+{
+    try
+    {
+        await Context(enabledProvider).ChallengeAsync(BffRegistration.OidcScheme);
+        throw new Exception("Synthetic metadata sentinel was not reached.");
+    }
+    catch (InvalidOperationException)
+    {
+        Check(enabledConfiguration.Calls == 1, "enabled secure challenge delegates to supported metadata path");
+    }
+}
 Console.WriteLine($"PASS {checks} BFF foundation assertions; local middleware/options only, live OIDC/FIC unverified");
 
 sealed class Authority(SubjectAdmission? state) : IBffSubjectAuthority
@@ -196,4 +239,16 @@ sealed class MemoryTickets : ITicketStore
     public Task RenewAsync(string key, AuthenticationTicket ticket) { tickets[key] = ticket; return Task.CompletedTask; }
     public Task<AuthenticationTicket?> RetrieveAsync(string key) => Task.FromResult(tickets.GetValueOrDefault(key));
     public Task RemoveAsync(string key) { tickets.Remove(key); return Task.CompletedTask; }
+}
+
+sealed class CountingConfiguration : IConfigurationManager<OpenIdConnectConfiguration>
+{
+    public int Calls { get; private set; }
+    public int Refreshes { get; private set; }
+    public Task<OpenIdConnectConfiguration> GetConfigurationAsync(CancellationToken cancel)
+    {
+        Calls++;
+        throw new InvalidOperationException("Unexpected synthetic metadata access.");
+    }
+    public void RequestRefresh() => Refreshes++;
 }

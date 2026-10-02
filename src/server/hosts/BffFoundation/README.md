@@ -1,6 +1,6 @@
 # Composable BFF transport foundation
 
-This class library implements reviewed identity/session transport building blocks. It exposes no product endpoint and does not enable live sign-in by default. The existing Azure bootstrap and local synthetic demo remain separate.
+This class library implements reviewed identity/session transport building blocks. A narrow supported OpenIdConnectHandler subclass refuses disabled or insecure challenge, callback and provider sign-out before metadata retrieval or code redemption; the framework and Microsoft.Identity.Web retain all protocol processing. It exposes no product endpoint and does not enable live sign-in by default. The existing Azure bootstrap and local synthetic demo remain separate.
 
 A host must inject the shared PostgreSQL `ITicketStore`, a trusted `IBffSubjectAuthority`, explicit tenant/app/dedicated managed-identity GUID configuration, and the shared protected Data Protection key ring. Register `AddBffFoundation`, then compose `UseAuthentication` followed by `UseBffRequestProtection` before every host-owned product endpoint. Hosts own endpoint schemas, product policy/resource routing, audited revocation and logout, safe read-only method semantics, reviewed HTTPS proxy trust, and antiforgery request-token delivery. The foundation maps no login/logout/token routes. Cookie/callback paths are host configuration and must remain narrow within the same application scope. Tokens are never returned through a library endpoint.
 

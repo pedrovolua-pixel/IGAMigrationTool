@@ -47,6 +47,8 @@ public static class BffRegistration
         }, cookieScheme: CookieScheme, openIdConnectScheme: OidcScheme)
             .EnableTokenAcquisitionToCallDownstreamApi([]);
         services.AddSingleton<IMsalTokenCacheProvider, DiscardTokenCacheProvider>();
+        services.PostConfigure<AuthenticationOptions>(options =>
+            options.Schemes.Single(scheme => scheme.Name == OidcScheme).HandlerType = typeof(GuardedOpenIdConnectHandler));
         services.PostConfigure<CookieAuthenticationOptions>(CookieScheme, options =>
         {
             options.Cookie.Name = "__Secure-IgaBff";
