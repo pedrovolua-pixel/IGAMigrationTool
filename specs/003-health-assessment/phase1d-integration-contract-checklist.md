@@ -23,3 +23,9 @@ P1D-D01–03 local approval is closed in the [exact receipt](local-phase1d-appro
 ## Completion condition
 
 Record attributable reporting/technical/security decisions against exact immutable reader and client-contract bytes, with an approved integration/test plan and evidence owners. Mark each part individually; neither local harness checks nor this template satisfies operational UAT or gates. No current request authorizes an irreversible or production operation. Full Milestone11/Phase1D/G1–G9 remain NOT VERIFIED until their own executed evidence and human acceptance exist.
+
+## Cycle02 source-backed handoff
+
+[The committed-source inventory](phase1d-integration-readiness-cycle02.md) confirms that saved run/review inputs, detached draft values and transient evaluation captures do not supply an actual immutable publication. [I01–I07](phase1d-integration-intake-cycle02.md) identify reporting/technical/security/operations inputs required for the reader; [I08–I11](phase1d-integration-intake-cycle02.md) separately identify later client/identity/configuration/activation evidence. Existing retention policy remains unchanged. Protected provisioning values are later evidence, not substitutes for design approval.
+
+[The isolated reader candidate](phase1d-integration-implementation-candidate-cycle02.md) is CONDITIONAL / NOT READY. [P02-T01–18](phase1d-publication-conformance-test-plan-cycle02.md) are PROPOSED / NOT EXECUTED. All checklist items above remain open; this preparation supplies neither actual source bytes nor approval by inference.

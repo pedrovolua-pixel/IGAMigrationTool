@@ -1,0 +1,267 @@
+{
+  "date": "2026-10-03",
+  "status": "COMPLETED_DOCUMENTARY_PREPARATION",
+  "sourceInventoryCommit": "7030a64b4953958ef631c820b8e247ed562f4f32",
+  "authority": "Owner Next cycle; approved feature003/local-synthetic scope; follow-on checklist. No actual reader/client implementation approval.",
+  "checks": {
+    "status": "PASS",
+    "markdownAndJsonFiles": 7,
+    "localLinks": 32,
+    "uniqueIntakeRows": 11,
+    "proposedUnexecutedTests": 18,
+    "unchangedPreexistingWorkingFiles": 323,
+    "unchangedFixtureOracleFiles": 16,
+    "runtimeChanges": 0,
+    "checks": [
+      "UTF8/LF/final-newline/trailing-whitespace",
+      "local repository link targets",
+      "intake/test unique IDs and explicitly unexecuted status",
+      "baseline working-source SHA256 preservation",
+      "tested fixture/oracle byte equality"
+    ],
+    "links": [
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-implementation-candidate-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-implementation-candidate-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-publication-conformance-test-plan-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-contract-checklist.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/ReportDrafts/ReportDraftContracts.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/hosts/LocalConsultantDemo/DemoReportDraftProjection.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/ReportDrafts/StructuredDraftMarkdown.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/FindingReview/SyntheticReviewStore.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/SyntheticEvaluationSourceIntegration/Phase1BEvaluationSourceAdapter.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/SyntheticMcp/Contracts.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "src/server/modules/SyntheticMcp/PublicationCodec.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-implementation-candidate-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-publication-conformance-test-plan-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-publication-conformance-test-plan-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-publication-conformance-test-plan-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-implementation-candidate-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-contract-checklist.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-contract-checklist.md",
+        "to": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-contract-checklist.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-contract-checklist.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-contract-checklist.md",
+        "to": "specs/003-health-assessment/phase1d-integration-implementation-candidate-cycle02.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-integration-contract-checklist.md",
+        "to": "specs/003-health-assessment/phase1d-publication-conformance-test-plan-cycle02.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-contract-checklist.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-integration-readiness-cycle02.md",
+        "to": "docs/development/evidence/phase1d-integration-readiness-cycle02-20261003.json"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-integration-readiness-cycle02.md",
+        "to": "docs/development/evidence/phase1d-hosted-20261003.json"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-integration-implementation-candidate-cycle02.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-integration-readiness-cycle02.md",
+        "to": "specs/003-health-assessment/phase1d-publication-conformance-test-plan-cycle02.md"
+      }
+    ]
+  },
+  "secretScan": {
+    "command": [
+      "/private/tmp/iga-parallel-tools/gitleaks",
+      "dir",
+      "--no-banner",
+      "--redact=100",
+      ".sites-work/phase1d-cycle02-evidence/scan"
+    ],
+    "exitCode": 0,
+    "result": "no leaks found; clean scoped proposed/canonical/hosted documentation snapshot"
+  },
+  "reviews": {
+    "baseline": "7030a64b4953958ef631c820b8e247ed562f4f32",
+    "reviews": [
+      {
+        "packet": "P02-A",
+        "agent": "/root/p1d_c02_publication",
+        "mode": "read-only",
+        "result": "No committed actual publication persistence/reader in scoped src/server/contracts/migrations. Run/review inputs persist, drafts and evaluation captures do not establish publication. No executable tests.",
+        "scope": "Saved run, draft/Markdown/host, review, Phase1B evaluation capture, fixture contracts; approved FR45/46/55 and ADR0003."
+      },
+      {
+        "packet": "P02-B",
+        "agent": "/root/p1d_c02_boundary",
+        "mode": "read-only",
+        "result": "Publication/mapping/lifecycle/current authority/audit/client/identity/topology inputs missing. Established authorization and retention policy unchanged. Conditional isolated persisted reader first; external activation separate.",
+        "scope": "Approved local receipt, security identity/audit/authorization, operations retention/recovery, technical interfaces."
+      },
+      {
+        "packet": "P02-V",
+        "agent": "/root/p1d_c02_review",
+        "mode": "read-only",
+        "originalFinding": {
+          "severity": "MEDIUM",
+          "locations": [
+            "readiness:31",
+            "intake:16",
+            "candidate:11",
+            "test-plan:15"
+          ],
+          "finding": "Native item/response/grant commitments were prescribed from fixture details without native approval.",
+          "correction": "Reviewed native integrity scheme/original-versus-serving mapping; item/response/grant mechanisms apply only when separately selected and approved.",
+          "status": "CLOSED"
+        },
+        "final": "Acceptable documentary readiness only. Actual reader NOT READY, external contracts unapproved, proposed tests NOT EXECUTED. No additional actionable findings; no runtime tests/external verification."
+      }
+    ],
+    "kind": "Coordinator preservation of returned agent findings and final dispositions; not raw tool execution logs."
+  },
+  "packetArtifacts": [
+    {
+      "artifact": "specs/003-health-assessment/phase1d-integration-implementation-candidate-cycle02.md",
+      "sha256": "5227aa54099456c527e4220c6c2bd25c6bd01a900501c56b0e30cb7191fd4cac"
+    },
+    {
+      "artifact": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md",
+      "sha256": "f12de654a14a2361f4b8333dac0fc9cb377b9e4de881f6a98172561e479efea1"
+    },
+    {
+      "artifact": "specs/003-health-assessment/phase1d-integration-readiness-cycle02.md",
+      "sha256": "59eb37df366d801dede2db8fe7f9892f5d26dd381cb7bda63f70e0699606d304"
+    },
+    {
+      "artifact": "specs/003-health-assessment/phase1d-publication-conformance-test-plan-cycle02.md",
+      "sha256": "cac7a47554c63d662925d83b9f8e3a5e80c7206546061cc3e3d1e998dbe5b17c"
+    },
+    {
+      "artifact": "specs/003-health-assessment/phase1d-integration-contract-checklist.md",
+      "sha256": "e0dd24061d30515ccee2850074abfa3b81f7bedbb2fe16870960b5b7c7ba8e68"
+    },
+    {
+      "artifact": "plans/active/local-pilot-phase1d-integration-readiness-cycle02.md",
+      "sha256": "bc52523e1e2f1eb920f68a51dcdafc0a3ad9cf48cc7d545cbcb15f7c46ff8fd5"
+    },
+    {
+      "artifact": "docs/development/evidence/phase1d-hosted-20261003.json",
+      "sha256": "aa6be8b9d21c2fa1275e57a4b6c647dd35f1e344cd8a55a29477a2968392a907"
+    }
+  ],
+  "nativeEvidence": [
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/baseline-commit.txt",
+      "sha256": "d851e5afa5238d6bbc2aee1b35b68261152cd0c035e66108c8fe5a32fe55d9fb"
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/baseline-source-hashes.json",
+      "sha256": "1137ccfcc028160b641ea9b746f441a269fb0c06b422ed6fc44ae392e71c0125"
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/documentary-checks.json",
+      "sha256": "f4ca3d103e27cd7bbbfd9312ac5db853adf52cc269884765b51bf0bbf2140b14"
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/read-only-reviews.json",
+      "sha256": "c028d6972dab9e10e893d7ccd3004fdb9547cfe5cd9e35c118fc3d76b5bb03a5"
+    }
+  ],
+  "runtimeChecks": "No runtime build/type/unit/integration/E2E/dependency/architecture tests rerun: no runtime/configuration/dependency change. Prior exact-source full hosted outcomes read separately in phase1d-hosted-20261003.json.",
+  "intake": "I01–I07 reader source/policy inputs missing; I08–I11 external contract/configuration/activation separate.",
+  "futureTests": "P02-T01–18 PROPOSED / NOT EXECUTED",
+  "changes": {
+    "runtime": 0,
+    "dependencies": 0,
+    "migrations": 0,
+    "registrations": 0,
+    "productionOperations": 0
+  },
+  "limits": [
+    "Actual immutable publication reader absent from scoped committed source; implementation NOT READY.",
+    "No selected native integrity mechanism, client/protocol/version/transport/SDK, identity registration or live grant.",
+    "Existing policy and closed synthetic approval unchanged.",
+    "Full Milestone11/Phase1D/UAT/G1–G9 NOT VERIFIED.",
+    "Private deployment proof recorded separately; this receipt is not publication evidence."
+  ]
+}
