@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 // Executes only when the coordinator supplies an already running fictional host.
 // Never starts/stops a host, reads credentials, resets a database, or regenerates goldens.
-// Consultant mode needs one complete 480-unit run available in the fixed shared fixture epoch.
+// Consultant mode needs one complete 240-unit run available in the fixed shared fixture epoch.
 const directory = dirname(fileURLToPath(import.meta.url));
 const base = process.env.IGA_DEMO_BASE_URL ?? "http://127.0.0.1:5183";
 const endpoint = new URL(base);
@@ -357,7 +357,7 @@ try {
     await page.getByLabel("Stable outcome ID").fill(outcomeId);
     await page.getByLabel("Title", { exact: true }).fill(title);
     await page.getByLabel("Desired behavior").fill(behavior);
-    await page.getByLabel("Origin", { exact: true }).selectOption("Inferred");
+    await page.getByLabel(/^Origin/).selectOption("Inferred");
     await page
       .getByLabel("Applicability display filter")
       .selectOption("SECURITY");
@@ -545,8 +545,8 @@ try {
     );
     equal(
       ready.ai.works.flatMap((work) => work.attempts).length,
-      2,
-      "two benign dispatches need exactly two attempts",
+      1,
+      "one benign provider dispatch returns the two frozen AI proposals",
     );
     equal(
       ready.ai.works
@@ -556,8 +556,8 @@ try {
             sum + attempt.receipt.inputUse + attempt.receipt.outputUse,
           0,
         ),
-      480,
-      "independent two-success literal actual usage is480",
+      240,
+      "one frozen benign call uses literal eighty input plus one hundred sixty output units",
     );
     check(
       ready.ai.works.every((work) =>
@@ -720,7 +720,7 @@ try {
         (value) => value.identity.taskId === option.identity.taskId,
       );
     check(
-      task && task.freshness === "Current" && task.status === "Planned",
+      task && task.freshness === "CurrentPlan" && task.status === "Planned",
       "explicit task is saved as a current planning record",
     );
     equal(
