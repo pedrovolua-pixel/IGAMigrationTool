@@ -7,6 +7,7 @@ using AssessmentScoring;
 using System.Globalization;
 using AssessmentRuns;
 using FindingReview;
+using SyntheticFixReview;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.DataProtection;
 
@@ -15,12 +16,17 @@ if (!args.Contains("--synthetic-local-demo", StringComparer.Ordinal))
     throw new InvalidOperationException("This host requires --synthetic-local-demo and supports synthetic loopback use only.");
 var connection = Environment.GetEnvironmentVariable("IGA_SYNTHETIC_DATABASE")
     ?? "Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle03;Username=iga_synthetic";
+var artifactReviewEnabled = args.Contains("--enable-synthetic-artifact-review", StringComparer.Ordinal);
+if (artifactReviewEnabled && !new Npgsql.NpgsqlConnectionStringBuilder(connection).Database!.StartsWith("iga_synthetic_cycle13_", StringComparison.Ordinal))
+    throw new InvalidOperationException("Artifact review requires an explicitly selected dedicated Cycle13 synthetic database.");
 var engine = new SyntheticDurableRunEngine(connection, DemoFixtureCatalog.Scope,
     new SyntheticRunPolicy(TimeSpan.FromSeconds(5), 2, 512));
 await engine.InitializeAsync();
 var reviewStore = new SyntheticReviewStore(connection, SyntheticReviewScope.Fixed);
 await reviewStore.InitializeAsync();
 var reviewService = new DemoReviewService(reviewStore);
+var artifactReviewService = new DemoArtifactReviewService(connection, engine, reviewService);
+if (artifactReviewEnabled) await artifactReviewService.InitializeAsync();
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { Args = Array.Empty<string>(), EnvironmentName = "SyntheticLocalDemo" });
 builder.WebHost.ConfigureKestrel(server =>
 {
@@ -98,9 +104,21 @@ app.MapGet("/local-demo/v1/runs", async () => Results.Json(new
 }));
 app.MapGet("/local-demo/v1/runs/{runId:guid}", async (Guid runId) =>
     DemoProjection.Result(await engine.ReadAsync(DemoFixtureCatalog.Scope, runId)));
-app.MapGet("/local-demo/v1/runs/{runId:guid}/analysis", async (Guid runId) =>
+app.MapGet("/local-demo/v1/runs/{runId:guid}/analysis", async (HttpContext context, Guid runId) =>
 {
     var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
+    if (read.Succeeded && DemoArtifactReviewCatalog.IsProfile(read.Snapshot!.ProfileCatalogId))
+    {
+        if (artifactReviewEnabled)
+        {
+            var captured = await artifactReviewService.ReadAnalysisAsync(read.Snapshot!, context.RequestAborted);
+            return captured is null ? DemoProjection.Error("Unavailable", "The current artifact source could not be verified. Refresh the run.", 503)
+                : Results.Json(captured);
+        }
+        var disabled = DemoAnalysisProjection.Capture(read.Snapshot!, await reviewService.ReadAsync(read.Snapshot!));
+        disabled.Analysis["artifactReview"] = JsonSerializer.SerializeToNode(DemoArtifactReviewService.Detail(new(ArtifactReviewIssue.SourceUnavailable, null)), DemoReportDraftProjection.JsonOptions);
+        return Results.Json(disabled.Analysis);
+    }
     return read.Succeeded ? Results.Json(DemoAnalysisProjection.Detail(read.Snapshot!,
         DemoAnalysisCatalog.IsReviewMaturityProfile(read.Snapshot!.ProfileCatalogId) ? await reviewService.ReadAsync(read.Snapshot!) : null))
         : DemoProjection.Result(read);
@@ -137,6 +155,38 @@ app.MapPost("/local-demo/v1/runs/{runId:guid}/findings/{findingId}/events", asyn
     return current.Snapshot is null ? DemoProjection.Error("Unavailable", "The saved review could not be verified. Refresh the run.", 503)
         : Results.Json(DemoReviewService.Detail(read.Snapshot!, current));
 });
+app.MapPost("/local-demo/v1/runs/{runId:guid}/artifacts/{artifactId}/review", async (HttpContext context, Guid runId, string artifactId) =>
+{
+    if (!artifactReviewEnabled) return DemoProjection.Error("Denied", "Artifact review is unavailable in this local host.", 403);
+    using var document = await DemoProjection.Body(context, ["eventId", "kind", "expectedRevision", "expectedSourceDigest", "reason"]);
+    var body = document.RootElement;
+    if (!Guid.TryParseExact(body.GetProperty("eventId").GetString(), "D", out var eventId) || eventId == Guid.Empty ||
+        !body.GetProperty("expectedRevision").TryGetInt64(out var revision) || revision < 0 || revision > 9007199254740991 ||
+        body.GetProperty("kind").GetString() is not ("ReviewForPlanning" or "WithdrawReview"))
+        return DemoProjection.Error("InvalidInput", "Use a valid artifact action and current source/revision.", 400);
+    var command = new ArtifactReviewCommand(eventId, Enum.Parse<ArtifactReviewKind>(body.GetProperty("kind").GetString()!), revision,
+        body.GetProperty("expectedSourceDigest").GetString()!, body.GetProperty("reason").GetString()!);
+    var result = await artifactReviewService.ApplyAsync(runId, artifactId, command, context.RequestAborted);
+    if (!result.Succeeded)
+    {
+        var status = result.Issue switch
+        {
+            ArtifactReviewIssue.Denied or ArtifactReviewIssue.WrongScope => 403,
+            ArtifactReviewIssue.NotFound => 404,
+            ArtifactReviewIssue.InvalidInput => 400,
+            _ => 409
+        };
+        return DemoProjection.Error(result.Issue.ToString()!, "The artifact source changed or this operation is unavailable. Refresh before a new action.", status);
+    }
+    return Results.Json(new
+    {
+        schemaVersion = 1,
+        demoOnly = true,
+        issue = (string?)null,
+        result.AlreadyApplied,
+        receipt = DemoArtifactReviewService.Receipt(result.Receipt!)
+    });
+});
 app.MapPost("/local-demo/v1/runs", async (HttpContext context) =>
 {
     using var body = await DemoProjection.Body(context, ["scopeId", "baselineId", "profileId", "requestId"]);
@@ -148,6 +198,8 @@ app.MapPost("/local-demo/v1/runs", async (HttpContext context) =>
     var profileId = root.GetProperty("profileId").GetString();
     if (!DemoFixtureCatalog.Baselines.Any(item => item.Id == baselineId) || !DemoFixtureCatalog.Profiles.Any(item => item.Id == profileId) ||
         !DemoAnalysisCatalog.Compatible(baselineId!, profileId!)) return DemoProjection.Error("InvalidInput", "The selected demo presets are unavailable.", 400);
+    if (DemoArtifactReviewCatalog.IsProfile(profileId) && !artifactReviewEnabled)
+        return DemoProjection.Error("Denied", "Start the dedicated Cycle13 synthetic host to use artifact review.", 403);
     var request = DemoFixtureCatalog.CreateStartRequest(baselineId!, profileId!, requestId!);
     var result = await engine.StartAsync(request);
     return DemoProjection.Result(result, result.AlreadyApplied ? 200 : 201);
@@ -312,13 +364,14 @@ internal static class DemoProjection
                 .Append(new { name = "Complete frozen input", version = "synthetic-input-lock-v1", sha256 = run.InputDigest })
                 .Append(new { name = "Exact capability tuple", version = run.Plan.CapabilityLock.MatrixVersion, sha256 = run.Plan.CapabilityLock.LockDigest })
                 .Append(new { name = "Scripted result fixture", version = "synthetic-outcomes-v1", sha256 = versions.ScriptedResultsDigest })
+                .Concat(versions.FixReviewContractDigest is null ? [] : new[] { new { name = "Artifact review contract", version = "synthetic-fix-review-contract-v1", sha256 = versions.FixReviewContractDigest } })
                 .Concat(versions.AnalysisFixtureDigest is null ? [] : new[] { new { name = "Frozen analysis contents", version = "synthetic-analysis-lock-v1", sha256 = versions.AnalysisFixtureDigest } })
                 .Concat(!DemoAiPreviewCatalog.IsProfile(run.ProfileCatalogId) || versions.AiPreviewFixtureDigest is null ? [] : new[]
                 {
                     new { name = "Frozen offline AI contents", version = "synthetic-ai-demo-fixture-v1", sha256 = versions.AiPreviewFixtureDigest },
                     new { name = "Offline AI configuration template", version = "synthetic-ai-configuration-v1", sha256 = DemoAiPreviewCatalog.PacketTemplateDigest }
                 })
-                .Concat(!DemoFixPackageCatalog.MatchesFrozenFixture(run) || versions.FixPackageTemplateDigest is null ? [] : new[]
+                .Concat(!(DemoFixPackageCatalog.MatchesFrozenFixture(run) || DemoArtifactReviewCatalog.MatchesFrozenFixture(run)) || versions.FixPackageTemplateDigest is null ? [] : new[]
                 {
                     new { name = "Fictional fix-package templates", version = DemoFixPackageCatalog.TemplateVersion, sha256 = versions.FixPackageTemplateDigest }
                 }),

@@ -1,0 +1,598 @@
+{
+  "schema": "cycle13-v13-independent-final-review-v1",
+  "reviewer": "B13",
+  "finalSeal": "9712d8204b1427c267538619422bc78b0ba01f00",
+  "executedBrowserSourceSeal": "ae4e422dd03d23d5e9dcca58f29646449fb93740",
+  "result": "No remaining actionable scoped findings",
+  "scope": "All owned independent primitive/canonical/state/source/portable/PG/browser test implementation, corrected final harness, exact original evidence and six actual screenshot files",
+  "closedFindings": [
+    {
+      "id": "B13-V13-01",
+      "resolution": "Actual same-selected-run unchangedrevision held committed receipt + real finding Comment/read refresh proves readEpoch boundary; old receipt leaves original command/reason uncertain, explicit exact historical replay preserves currentsource/zero duplicateevents."
+    },
+    {
+      "id": "B13-V13-02",
+      "resolution": "Actual committed receipt malformed with non-UTC date-only timestamp; strict metadata denial/errorfocus/originalfrozencommand/reason then explicitexactretry/no duplicateevent."
+    },
+    {
+      "id": "B13-V13-03",
+      "resolution": "Await changed actualsource + visiblecurrentdigest/withheldattestation before releasing heldresponse; await route completion before Retry/errorfocus. No premature busy Retry wait or one-shotGET/commit race."
+    }
+  ],
+  "harnessCorrection": "Pinned screenshot caret:initial avoids Playwright instrumentation; strict style/event/resource/inert assertions remain unchanged. Native keyboard Enter invokes real review/withdraw; nonblank reason enables real action before Tab. Added captures/hostlog checks are observed evidence, not expectedfixtures. No production behavior change.",
+  "executedReviewerEvidence": {
+    "originalUnmodifiedPortableDllAssertions": 218,
+    "originalPortableReplay": {
+      "seal": "9712d8204b1427c267538619422bc78b0ba01f00",
+      "bindings": 1533,
+      "copyEqualities": 45,
+      "originalReplayCommand": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/bin/Release/net10.0/LocalArtifactReview.IntegrationTests.dll",
+        "--portable"
+      ],
+      "exitCode": 0,
+      "transcriptSha256": "0bb290a8aae25f8acad5f62d9a318762697c0a61ed49ccf7dd808ed56ffc2967",
+      "oracleTranscriptSha256": "323cea3258bf9b70c6b9f46846425ef96ee2affb8491f68780dfd939559c1128",
+      "beforeAndAfterOriginalBytesUnchanged": true,
+      "environmentKeys": [
+        "DOTNET_CLI_HOME",
+        "DOTNET_CLI_TELEMETRY_OPTOUT",
+        "DOTNET_ROOT",
+        "DOTNET_SKIP_FIRST_TIME_EXPERIENCE",
+        "DOTNET_hostBuilder__reloadConfigOnChange",
+        "HOME",
+        "LANG",
+        "LC_ALL",
+        "PATH",
+        "TMPDIR"
+      ]
+    },
+    "independentFullLiteralOracleFiles": 33,
+    "originalBindingsBeforeAndAfterReplay": 1533,
+    "consumedFixtureCopyEqualitiesBeforeAndAfterReplay": 45,
+    "ownedExactGitBlobs": 79,
+    "readonlyTelemetryRecomputation": {
+      "reasonValues": 9,
+      "artifactValues": 30,
+      "result": "PASS originals absent from exacthostlog",
+      "hostLogSha256": "9ba1a79ecc95ae189797109654a9143901ab0e0bf5acf656707b7982e9400f0b"
+    }
+  },
+  "authorBoundExecution": {
+    "portable": 218,
+    "inclusiveOwnedPostgres": 911,
+    "browser": 10564,
+    "hostSchemaDenialHelper": 7,
+    "independentSchemaRecovery": 1,
+    "axeRecords": 3,
+    "axeViolations": 0,
+    "axeIncomplete": 0,
+    "blockedAttempts": 0,
+    "pageFaults": 0,
+    "dialogs": 0,
+    "countsNotAdditive": true,
+    "nativeMetadataSha256": "5a169eeb81194512710c6d9a884611603c1cbb07e00cabb0d169fecf82edcb56",
+    "browserMetadataSha256": "58f8afe0a5e5fc48edbfb2592657abf64fa396d7291f1252fca3dda2d6967a55",
+    "browserSourceSha256": "ca0e2e1cabf845bad09180ea33388655bb6f2cedef635740b086c2f274159644"
+  },
+  "visualReview": {
+    "actualFiles": [
+      {
+        "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop.png",
+        "sha256": "97e95cf575c5003ea09aca4ec50d6fa618be86fcbb4266eb10b6f77ee5a9d9f4"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop-viewport.png",
+        "sha256": "4d4c2b142c64725254e28e79c6a7b8702d59dc9c93c6320d209f990ff49b3c3f"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile.png",
+        "sha256": "1cd209dd3c35ec490cff346b05bd2f98347b50ba63c56c8cabe8998d8924bc4a"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile-viewport.png",
+        "sha256": "a22ea39bfc195d304be1b20eb4b9b3489d7b33bca34a78f4bb0a51844cfaea21"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow.png",
+        "sha256": "d64ba578fd2014d18445d616ceb0e6d5b7c696997830db688a59bfcdb841c832"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow-viewport.png",
+        "sha256": "eff431ea1381af5b9abc72d8eb19911aef41e389a5514aaa24f3cd4f696ce2a6"
+      }
+    ],
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "result": "No sampled clipping/overlap/contrast or wrapping/reflow issue. Fixed warnings/current-vs-original/history/source labels readable; code and longidentifiers wrap, reason/control labels retained and focusring visible.",
+    "method": "All six original images inspected; extremely tall fullregion images also inspected through9reviewer-only native-resolution crops covering originaltext/history/meta/controls. This is sampled visual inspection plus bound completeDOM/reflow assertions, not exhaustive manual reading of every tallregion pixel.",
+    "reviewerCrops": [
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/desktop-first-artifact.png",
+        "sha256": "e6331f42d72b9f8e063a47e4e496bb4ab05a70c78cfa00adb7732ab22c392f34"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/desktop-history-sample.png",
+        "sha256": "3d533e6514c724a87cf1bf8db356b25da394db09d792e9869c7264631a27499e"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/desktop-last-artifact.png",
+        "sha256": "48b4b8a7bdb2d8ee4516a4ba2c34dbadecfbc27e7f7990222aab07e372fa4567"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/mobile-first-artifact.png",
+        "sha256": "999ab307aa67487ffae32323f086a4f2712d74ff3d59491ca91e441234cac4a8"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/mobile-history-sample.png",
+        "sha256": "3c620fabb27173bd423b963caf7fe64af16201f52bf183623bb0dd3d55ca0b83"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/mobile-last-artifact.png",
+        "sha256": "c0760338dad4f3d1dc3fa386545812925523465a9c2015015e1028ffd5fca6f1"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/narrow-first-artifact.png",
+        "sha256": "d5f7023f291f1cb3d0fb937617d691ead7d9bc42962856dad7944e0ff55a47c4"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/narrow-history-sample.png",
+        "sha256": "c7bc3ff1f4c890bfdf37bd3c0f9b01bb021b58186af0c674c7e55c66b807f3ad"
+      },
+      {
+        "path": "/private/tmp/iga-cycle13-v13-review-by-b13/visual-crops/narrow-last-artifact.png",
+        "sha256": "e5da32c09e6db61f6dd1666ed76c38dd3ab429b267bfba92929f7824fb1f2a50"
+      }
+    ]
+  },
+  "retainedAuthorFailures": [
+    {
+      "generation": "first-failure",
+      "status": "FAIL",
+      "checks": 608,
+      "lastCode": "every-artifact-identity-revision-capability-field-visible",
+      "sourceSha256": "2e25db69cd9632599b4fe78df43b074ddcd42c5b0828579b8f16adea593687be",
+      "sourceBindingVerified": true
+    },
+    {
+      "generation": "second-failure",
+      "status": "FAIL",
+      "checks": 9132,
+      "lastCode": "reason-to-action-keyboard-order",
+      "sourceSha256": "24e446ae6fe28b4cc12bbcb4a41f7cb7489b61c27963d9a1b4d1a5a0cfe6951f",
+      "sourceBindingVerified": true
+    },
+    {
+      "generation": "third-failure",
+      "status": "FAIL",
+      "checks": 9658,
+      "lastCode": "no-injected-event-resource-action-attributes",
+      "sourceSha256": "78d5082ade0e1a2ddd1ec18b5444b32a88ee396c0445fa41969ef5be72cc6aab",
+      "sourceBindingVerified": true
+    }
+  ],
+  "originalManifest": {
+    "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/artifact-bindings.json",
+    "sha256": "8361fee77d8a6b620ca1acd1647d17aec3af7af9416c917cbd31a15a03f44b21",
+    "bindings": 1533,
+    "copyEqualities": 45
+  },
+  "priorReviewReceipts": [
+    {
+      "path": "/private/tmp/iga-cycle13-v13-review-by-b13/interim-review.json",
+      "sha256": "4f3f764dd42e617e251c943ba4338b0cd0d47efd879bc548e3b1557314a053df"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13-review-by-b13/source-review09330b5.json",
+      "sha256": "544769b710157cda1adb5cbabf6f8f40763fe4fe26db00a0e279dbfd97249729"
+    }
+  ],
+  "limitations": [
+    "No reviewer host/database/browser/networkaudit/schema/process operations; originalportable and pureoracle only.",
+    "Actual911PG/10564browser evidence independentlysource/log/native/artifactbound but not reviewerreexecuted.",
+    "Chromium/macOS engineering subset only. Supported manualaccessibility/Windows/defaultmacOSstartup/productionidentity/deployedsandbox/fullproductgates/humanacceptance/release remainNOTVERIFIED.",
+    "Temporary configwatchfalse originalhost override retained; controlledrollback/cancellation/ownedrestart does not establish hardkillmidcommit recovery.",
+    "Originalauthorfiles/runtime/logs unchanged after reviewerreplay; reviewersources/crops/transcripts only outsideworktree."
+  ],
+  "ownedBindings": [
+    {
+      "path": "tests/e2e/artifact-review/.gitignore",
+      "bytes": 13,
+      "sha256": "7a5e328c7bbe0b11b0af1ec7e3b55d752e72bbb7d9108999a6d0d7c43e70de54"
+    },
+    {
+      "path": "tests/e2e/artifact-review/README.md",
+      "bytes": 2685,
+      "sha256": "1fc8568be5074cab51382a852a5d7bb1063101aaa596a0311f27073e80ca0ae5"
+    },
+    {
+      "path": "tests/e2e/artifact-review/desktop-viewport.png",
+      "bytes": 148012,
+      "sha256": "4d4c2b142c64725254e28e79c6a7b8702d59dc9c93c6320d209f990ff49b3c3f"
+    },
+    {
+      "path": "tests/e2e/artifact-review/desktop.png",
+      "bytes": 5730445,
+      "sha256": "97e95cf575c5003ea09aca4ec50d6fa618be86fcbb4266eb10b6f77ee5a9d9f4"
+    },
+    {
+      "path": "tests/e2e/artifact-review/execution.json",
+      "bytes": 3479,
+      "sha256": "58f8afe0a5e5fc48edbfb2592657abf64fa396d7291f1252fca3dda2d6967a55"
+    },
+    {
+      "path": "tests/e2e/artifact-review/expected.mjs",
+      "bytes": 7418,
+      "sha256": "8890d5600972a38b691ea711af4c78400133b7c2744b86be03bd324c7fe64129"
+    },
+    {
+      "path": "tests/e2e/artifact-review/mobile-viewport.png",
+      "bytes": 72827,
+      "sha256": "a22ea39bfc195d304be1b20eb4b9b3489d7b33bca34a78f4bb0a51844cfaea21"
+    },
+    {
+      "path": "tests/e2e/artifact-review/mobile.png",
+      "bytes": 5662372,
+      "sha256": "1cd209dd3c35ec490cff346b05bd2f98347b50ba63c56c8cabe8998d8924bc4a"
+    },
+    {
+      "path": "tests/e2e/artifact-review/narrow-viewport.png",
+      "bytes": 60698,
+      "sha256": "eff431ea1381af5b9abc72d8eb19911aef41e389a5514aaa24f3cd4f696ce2a6"
+    },
+    {
+      "path": "tests/e2e/artifact-review/narrow.png",
+      "bytes": 5755591,
+      "sha256": "d64ba578fd2014d18445d616ceb0e6d5b7c696997830db688a59bfcdb841c832"
+    },
+    {
+      "path": "tests/e2e/artifact-review/verify.mjs",
+      "bytes": 72927,
+      "sha256": "ca0e2e1cabf845bad09180ea33388655bb6f2cedef635740b086c2f274159644"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/.gitignore",
+      "bytes": 31,
+      "sha256": "6fecb622c011a4723b0fad2dcbfe7c3f57686fb009bdc7b8a12dcb3a0a9d77a2"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/DatabaseCases.cs",
+      "bytes": 26036,
+      "sha256": "52829d4df3a2f157ac41ebe5b861859f6aa60f0425d7c76366c7361ee549be48"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/Expected.cs",
+      "bytes": 10427,
+      "sha256": "50af56b66c3dff3fdebd4a572b94569fd825b89d252ee66e5075c34adca508b9"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/HostSchemaCases.cs",
+      "bytes": 2819,
+      "sha256": "97ba6fac08a48423a1c4f57744f88855a7b4062d05df9073dd3cc98c4099aed3"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/PolicyCases.cs",
+      "bytes": 4780,
+      "sha256": "606c9fedee5153549051230528225d7cf48108fa1c0d31fcbb45d7d9a34ad0ce"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/PortableCases.cs",
+      "bytes": 10439,
+      "sha256": "121028e2ec1ff42076db38543572c581ceef47c18f13b83e6b18c57b8f89af07"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/Program.cs",
+      "bytes": 1837,
+      "sha256": "efb8db5c2d69822c3f36cdd25f4578f766b780cd82b1917d795a50a44f4c9d8a"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/README.md",
+      "bytes": 5357,
+      "sha256": "3affd1cc80f4f59c3ee2e5f201ccd47d596f2e81f1624a6e188a188adc59cb31"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/SavedSourceCases.cs",
+      "bytes": 16495,
+      "sha256": "05f9288c3bff46a0fb199f126b3aed587e8f3b4e5da983b15895e2da19598f48"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/artifact-bindings.json",
+      "bytes": 482946,
+      "sha256": "8361fee77d8a6b620ca1acd1647d17aec3af7af9416c917cbd31a15a03f44b21"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/bind-artifacts.py",
+      "bytes": 4514,
+      "sha256": "ac7ef97ffaffc16455cf0af3d5f75940bcb24c8756bb101137173d4f657f8095"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/command-golden.json",
+      "bytes": 3125,
+      "sha256": "135852402ed9f20d0ca1ae8e2982bdab7c5f7b4ab17ca681fb1af055c100dae4"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/empty-artifacts-golden.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/empty-binding-golden.json",
+      "bytes": 911,
+      "sha256": "95becc8b1c3fc9605257414128e2e4611d55dde67ad6befcf5bcd434d71ba337"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/empty-fix-golden.json",
+      "bytes": 6121,
+      "sha256": "76136a0e904d2d66a5097438866814124ac2e9276ed85d4735c3dcbd74769330"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/empty-guidance-golden.json",
+      "bytes": 4338,
+      "sha256": "652bbeb74aee1a40c8b9c8e4e424fd29f48be45c89ece406ba2268bd60b67143"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/empty-input.json",
+      "bytes": 3843,
+      "sha256": "4f06e17f4aff055eea999b628303e15e3f1e02e053786b19a455eb6c82ff40c6"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/execution.json",
+      "bytes": 9983,
+      "sha256": "5a169eeb81194512710c6d9a884611603c1cbb07e00cabb0d169fecf82edcb56"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/expected-manifest.json",
+      "bytes": 167919,
+      "sha256": "0237549fed9f5d7a233fd667b971f7928ddc922fef68bd7e733970433c6e8540"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-empty-fix-golden.json",
+      "bytes": 6032,
+      "sha256": "65e43540987b133e4fa9fa01312ea5d427ddc19e25df12759b6b677ac80e8278"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-empty-guidance-golden.json",
+      "bytes": 4249,
+      "sha256": "62b990f37730b599eb3071871c055b87c460355801b56077ecc20831f0c20c79"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-empty-input.json",
+      "bytes": 3746,
+      "sha256": "3ca09adebbb543f3d86971c3486b33fd5c52da27f4788c1dda95dda1d83a913f"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-historical-six-locks.json",
+      "bytes": 5954,
+      "sha256": "0b651ddf271aca59236c151fc07ade3c193c0caa96dba59416ece48f4137dac2"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-hostile-fix-golden.json",
+      "bytes": 33127,
+      "sha256": "5557f2392b1dd4ef51f60a7adafd2613b839e392bf7de6f9154bcbb5ea52795b"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-hostile-guidance-golden.json",
+      "bytes": 27444,
+      "sha256": "60387c2c22d383e92637220c7e1744e034ed07da947b3576e86a3ce0681d040e"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-hostile-input.json",
+      "bytes": 22959,
+      "sha256": "dbf66134f7f515afc038cc85e272e5029c445c7b4e0c26d4a289372520543cf2"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-normal-fix-golden.json",
+      "bytes": 13554,
+      "sha256": "8fb1ab227ced31b59e7abe5f119c3910cf29d0557b23359c4b69e68df86d3d34"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-normal-guidance-golden.json",
+      "bytes": 7871,
+      "sha256": "ff8dc5d91dd3570df5b9bbfc5a828c63e732de884e6a242b57000f1ea8563990"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/historical-normal-input.json",
+      "bytes": 8011,
+      "sha256": "5027d79be6564ef5004c06c84b0004e3e328d3a2ee96d80abad336227a63a9c1"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/hostile-artifacts-golden.json",
+      "bytes": 5861,
+      "sha256": "af7e074779cbaaa9bc69308136136d12771b5fb820dcf03e6ad0e144834c0a8a"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/hostile-binding-golden.json",
+      "bytes": 1098,
+      "sha256": "1788f3419ad901965511554bef44a1158f113fcd06841dc9aab5a0cf13567219"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/hostile-fix-golden.json",
+      "bytes": 33216,
+      "sha256": "b78a0cbc39c84a24713ae9a8f79c4eb92b204c7bfa29005fab4900a1380f7518"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/hostile-guidance-golden.json",
+      "bytes": 27533,
+      "sha256": "3fcc71c36a9c3881f08e2cdb00f67e0ea1f61557b5be5455f47f66a07e5221e3"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/hostile-input.json",
+      "bytes": 23056,
+      "sha256": "d370dd0eb2a1d118803e2fc3f61a2226a4c1c649b837409673d610e99ddbccfe"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/normal-artifacts-golden.json",
+      "bytes": 5861,
+      "sha256": "af7e074779cbaaa9bc69308136136d12771b5fb820dcf03e6ad0e144834c0a8a"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/normal-binding-golden.json",
+      "bytes": 1098,
+      "sha256": "12ebf5ef09d1f64d1f525c33d3fdc813cc14872684d62c01890b94a295219290"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/normal-fix-golden.json",
+      "bytes": 13643,
+      "sha256": "8a954fc101dfd8cda73041252b42385322dd0bc714ba462adacd0b35ed3dd372"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/normal-guidance-golden.json",
+      "bytes": 7960,
+      "sha256": "2541e814581e05af62042be0cf554da5e7715d7e5b50377c77e634a4eecadf1f"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/normal-input.json",
+      "bytes": 8108,
+      "sha256": "dc0dc74884ea7e70d79e3b39189c2f3cad35da585b6087e78831037b20ebd8e9"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/oracle-provenance.json",
+      "bytes": 5214,
+      "sha256": "f6a8a8194162733d9c2670926675324b668cb30d6830833f6b84835382860ec8"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/oracle.py",
+      "bytes": 16529,
+      "sha256": "10382e5c8e55317ca82c3c313653f2b795866b88525a9698d3f121643a751640"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/preauthor/approved-primitives.json",
+      "bytes": 9471,
+      "sha256": "534b3ab7d633e3e991a46d101e44635a8b6b50083ff8da93c403fa0e9e6fc2fd"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/preauthor/contract-review.json",
+      "bytes": 3189,
+      "sha256": "d0144aaaeff68d58266374f4512d9dc58c2da0b7baba25135776162cbd284ebe"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/preauthor/design.md",
+      "bytes": 14630,
+      "sha256": "a1d99f93a5efa8b2ce9063802339e3458be87a83ff1ac1f51cb4cdad5afee90e"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/preauthor/packet.json",
+      "bytes": 1562,
+      "sha256": "6cc8c175d66a024556c5438565ca7f66aa46d195cb77dfc2d643dba35e6bd581"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/preauthor/state-replay-oracles.json",
+      "bytes": 7274,
+      "sha256": "8cbee50e8cf14d28777f8f0f9b9065a3e8e1547e539b3a2f2e4425457ecb6926"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/reviews/draft-correction-closure.json",
+      "bytes": 15935,
+      "sha256": "2070d54615f6fc8a869ed258e162b4ce00966dc773b3f95d4210f66fd7529406"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/reviews/iga-cycle13-v13-b13-initial-review.json",
+      "bytes": 2482,
+      "sha256": "09609ff169eb7d9f4bc4c45adc0ddab8f42f81557280136d6840474b6e493cd3"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/reviews/iga-cycle13-v13-production-review.json",
+      "bytes": 4732,
+      "sha256": "d567134f8f6510d738f58a0ff995bb9d66603179ae405cebee04399503de5bfb"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/reviews/source-review09330b5.json",
+      "bytes": 16436,
+      "sha256": "544769b710157cda1adb5cbabf6f8f40763fe4fe26db00a0e279dbfd97249729"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/run-later-artifacts-golden.json",
+      "bytes": 5861,
+      "sha256": "af7e074779cbaaa9bc69308136136d12771b5fb820dcf03e6ad0e144834c0a8a"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/run-later-binding-golden.json",
+      "bytes": 1098,
+      "sha256": "f7bb3a8e27152bb70779e232f4dcc4d49d0912c0ef072f1a65c44935ab525d39"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/run-later-fix-golden.json",
+      "bytes": 13643,
+      "sha256": "35d389e8e0c11b7931bc1ea5ae09c52a79a8bccec2cfc1b6cb42e40857c89453"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/run-later-guidance-golden.json",
+      "bytes": 7960,
+      "sha256": "0084c9abeb33c482e752fb24830c2caca3e9784a720f0fca96a062a4e98a986f"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/run-later-input.json",
+      "bytes": 8108,
+      "sha256": "49e2fe41d38081b5d9875c6848316bba7491af2fd1425dde4be7a717f4471031"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-b-artifacts-golden.json",
+      "bytes": 5861,
+      "sha256": "af7e074779cbaaa9bc69308136136d12771b5fb820dcf03e6ad0e144834c0a8a"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-b-binding-golden.json",
+      "bytes": 1098,
+      "sha256": "c99104c5287870c1ed288d4331f232911a7271a6b5842d0de03f814605514897"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-b-fix-golden.json",
+      "bytes": 13646,
+      "sha256": "a465fa7b8e2d71b28266b339260369d04a2ec2b9280785bd5588f0b1f6983255"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-b-guidance-golden.json",
+      "bytes": 7963,
+      "sha256": "9f5c918857f2fdeb9f7d4f89e18e1faacfd145f0e1df38be1e9329f3c1427692"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-b-input.json",
+      "bytes": 8111,
+      "sha256": "c698e4b7086dfbf483ed131fe4640424f6a3ebc220ac1c24c09d96cc959ad494"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-return-artifacts-golden.json",
+      "bytes": 5861,
+      "sha256": "af7e074779cbaaa9bc69308136136d12771b5fb820dcf03e6ad0e144834c0a8a"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-return-binding-golden.json",
+      "bytes": 1098,
+      "sha256": "5716a56b48afa2931571e53875b023cbfc4aae6eb13032f4a5067d7ee0cb0ab6"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-return-fix-golden.json",
+      "bytes": 13643,
+      "sha256": "bb3416bfa890b35e69554805882a6b835d6bed6886dfe34302adb38f2e4a7cda"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-return-guidance-golden.json",
+      "bytes": 7960,
+      "sha256": "f0431390a16f2e393bc308cd42dd8356a326ab9bf05427ed71a59081db803234"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/source-return-input.json",
+      "bytes": 8108,
+      "sha256": "310b71bd634fe47467327cb7c1258511c66ab9271a1fac4d4caf310743d1e260"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/technical-supplement.json",
+      "bytes": 2208,
+      "sha256": "1af94a212ceae45004bbab8199a81e3e3561f29d1422ecb96e8873bfb02e78f7"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/telemetry.json",
+      "bytes": 365,
+      "sha256": "d96b34474dd4c53326c6b7b840059ddd6bf72d3795f824abb1fc4a0785968b6a"
+    },
+    {
+      "path": "tests/integration/LocalArtifactReview.Tests/verify-telemetry.py",
+      "bytes": 1390,
+      "sha256": "955dae11e42d4c452d90d5670c615b28b7ddbe8e96e25a041d9efaa0f8bf5cc2"
+    }
+  ]
+}

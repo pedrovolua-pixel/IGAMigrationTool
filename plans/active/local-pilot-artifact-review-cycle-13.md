@@ -1,9 +1,9 @@
 # Local pilot consultant artifact review — Cycle13
 
-Status: RUNNING — AR13-01–05 approved; internal contracts being settled before writing packets
+Status: COMPLETE — approved bounded local synthetic implementation; broader pilot acceptance remains open
 Owner: Coordinator
 Last updated: 2026-10-02
-Source checkpoint: `874c653a495921dbf20f628715b4ce70f3ecc030`
+Executed code checkpoint: `804d71a3e27aa5dbc8da48fe6d3732b76f6c6bc1`
 Product/technical authority: approved feature003 specifications and approved local synthetic build
 Approved decision: [AR13-01 through AR13-05](../../specs/003-health-assessment/local-artifact-review-contract-proposal.md#requested-decision)
 Test plan: [bounded artifact-review tests](../../specs/003-health-assessment/local-artifact-review-test-plan.md)
@@ -39,21 +39,21 @@ All writing packets start in separate `codex/` worktrees from the same coordinat
 
 | Packet | Exact intended ownership | Dependency and acceptance | State |
 | --- | --- | --- | --- |
-| A13 domain/store | New `src/server/modules/SyntheticFixReview/*.cs`, module README; new `tests/unit/SyntheticFixReview.Tests` except project/lock; no shared configuration | Approved AR13 contract, settled schema/source concurrency fence; immutable originals, authority, source binding, append-only event/current/receipt transaction, replay/conflict/restart; T01–T06/T12 | READY — approved; oracle/source contract preparation |
-| B13 presentation | New `src/web/src/ArtifactReviewPanel.tsx/.css`; new `tests/unit/ArtifactReviewComponent.Tests` except project/lock | Approved closed overlay DTO and exact action schemas; independent component states/text/hostile content/source fences/focus/reflow; no host/backend edits | READY — approved; awaits settled DTO |
-| V13 verification | New `tests/integration/LocalArtifactReview.Tests` except project/lock; new `tests/e2e/artifact-review` | Independent literal/source/authority/state/concurrency oracles before reading author conclusions; later actual owned PG/host/browser composition, historical regressions, non-author reviews | READY — approved; oracle/source contract preparation |
-| Coordinator | Projects/locks/solution/workflow; AssessmentRuns/LocalConsultantDemo private integration; narrow `RecommendationGuidanceBuilder.cs`/`DraftSnapshotBuilder.cs` source validators; `contracts/local-demo`, type generation, `api.ts`/`AnalysisView.tsx`/`FixPackagePreview.tsx` strict profile/lock/coherence guards, canonical records, integration and existing private Site | Preserve unrelated workspace edits; separate new profile/input locks; combined applicable checks, exact evidence, reviews, cleanup and confirmed owner-private publication | RUNNING — internal source/DTO/schema contract and shared configuration |
+| A13 domain/store | New `src/server/modules/SyntheticFixReview/*.cs`, module README, `migrations/fix-review/001-initial.sql`; new `tests/unit/SyntheticFixReview.Tests` except project/lock; no shared configuration | Approved AR13 contract, settled schema/source concurrency fence; immutable originals, authority, source binding, append-only event/current/receipt transaction, replay/conflict/restart; T01–T06/T12 | COMPLETE — executed evidence and non-author review closed |
+| B13 presentation | New `src/web/src/ArtifactReviewPanel.tsx/.css`; new `tests/unit/ArtifactReviewComponent.Tests` except project/lock | Approved closed overlay DTO and exact action schemas; independent component states/text/hostile content/source fences/focus/reflow; no host/backend edits | COMPLETE — executed evidence and non-author review closed |
+| V13 verification | New `tests/integration/LocalArtifactReview.Tests` except project/lock; new `tests/e2e/artifact-review` | Independent literal/source/authority/state/concurrency oracles before reading author conclusions; later actual owned PG/host/browser composition, historical regressions, non-author reviews | COMPLETE — executed evidence and non-author review closed |
+| Coordinator | Projects/locks/solution/workflow; AssessmentRuns/LocalConsultantDemo private integration; narrow `RecommendationGuidanceBuilder.cs`/`DraftSnapshotBuilder.cs` source validators; `contracts/local-demo`, type generation, `api.ts`/`App.tsx`/`AnalysisView.tsx`/`useArtifactReview.ts`/`FixPackagePreview.tsx` strict profile/lock/coherence guards, canonical records, integration and existing private Site | Preserve unrelated workspace edits; separate new profile/input locks; combined applicable checks, exact evidence, reviews, cleanup and confirmed owner-private publication | COMPLETE — combined local/hosted evidence, canonical closure and private publication |
 
 Before coding, record an exact compatibility checkpoint for the new profile/application/contract lock through saved inputs, source validators, captured guidance/draft/package reads and strict web guards. New-profile acceptance is explicit; historical nine-profile byte checks and old eleven/twelve-field locks remain strict. Shared source-concurrency/schema/API contracts are settled before dependent code, never through competing worker assumptions. Workers request cross-owner edits from the coordinator. No new third-party dependency is currently justified.
 
 ## Verification and closure after approval
 
-- [ ] Execute AR13-T01 through T12 and record exact PASS/FAIL/NOT VERIFIED per source.
-- [ ] Pinned full-solution locked audited restore, formatting, lint/type checks, zero-warning Release build, new and current unit/portable/PostgreSQL integrations, architecture/secret/infrastructure/collector checks run.
-- [ ] New actual-browser scenarios and all prior applicable owned-host browser suites run against frozen combined source; inspect desktop/mobile/320 capture and focus behavior.
-- [ ] Configured Linux, Windows2022/2025 and container checks run; distinguish their exact source/environment/counts from local evidence.
-- [ ] Non-author findings close without weakened assertions; original executed worker source, binary closures, consumed fixtures, logs and review proofs are retained and rehashed before clean checkout removal.
-- [ ] Canonical implementation/status/evidence/operations handoff updated; existing owner-private Site status and human board published and confirmed.
+- [x] Execute AR13-T01 through T12 and record exact PASS/FAIL/NOT VERIFIED per source.
+- [x] Pinned full-solution locked audited restore, formatting, lint/type checks, zero-warning Release build, new and current unit/portable/PostgreSQL integrations, architecture/secret/infrastructure/collector checks run.
+- [x] New actual-browser scenarios and all prior applicable owned-host browser suites run against frozen combined source; inspect desktop/mobile/320 capture and focus behavior.
+- [x] Configured Linux, Windows2022/2025 and container checks run; distinguish their exact source/environment/counts from local evidence.
+- [x] Non-author findings close without weakened assertions; original executed worker source, binary closures, consumed fixtures, logs and review proofs are retained and rehashed before clean checkout removal.
+- [x] Canonical implementation/status/evidence/operations handoff updated; existing owner-private Site status and human board published and confirmed.
 
 No check is checked because it is listed here. Full Milestone7, TP-HAS-018, local build completion, UAT, deployed sandbox/identity, supported manual accessibility and G1–G9 remain NOT VERIFIED. The known default-Mac startup limitation remains open; any temporary test-only workaround is separately disclosed.
 
@@ -63,4 +63,24 @@ Recorded AR13 approval allows one new isolated synthetic schema and new opt-in p
 
 ## Resume instruction
 
-Read the actual human decision and finalized contract first. If AR13 choices are amended, update this plan/test/DTO/schema before dispatch. Start A13 and independent V13 oracle design together; B13 can implement the approved component contract once settled. Coordinator integrates after non-author review, runs the combined checks and publishes the existing private board. No recurring job or unattended agent was started by this preparation checkpoint.
+This bounded cycle is closed. Read its exact evidence and remaining limits before selecting new work. Task/conversion/priority/effort and CSV authority require an approved later contract; do not restart completed packets or infer new permissions from this closure. No recurring job or unattended agent was started.
+
+## Frozen implementation checkpoint
+
+The [reviewed internal contract](../../specs/003-health-assessment/local-artifact-review-implementation-contract.md) has SHA256 `a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f` (exact UTF8/LF/final-newline bytes). A13/B13/V13 reviewed it before implementation. V13 preserved its independent oracle first. Shared framework-only run fence and project configuration belong to the coordinator; A13 owns only its additive new migration. All current source writers join the same fence before row locks; old migration/input bytes remain unchanged. Writing worktrees branch from the coordinator checkpoint containing this exact contract/configuration.
+
+## Executed bounded closure — 2026-10-02
+
+The approved localhost Consultant can review or withdraw review of an individual fictional artifact, with exact-source attribution and continuous append-only history. Generated originals remain byte-identical and Unverified. A source change gives Needs review; current withdrawal remains Unverified after refresh. Exact command replay returns its original historical metadata-only receipt. All current source writers share a run transaction fence, and unavailable or inconsistent source suppresses actions.
+
+[Exact developer evidence](../../docs/development/evidence/local-pilot-cycle13-developer-checks.json) binds code804d71a, original worker generations, retained failures/corrections, native logs, independent reviews and preserved archives. A13 passed212 portable and370 combined PostgreSQL assertions; coordinator369 on a fresh dedicated database omits only the author's separate older-original-database case. B13 passed572 assertions. V13 passed218 portable,911 combined PostgreSQL and10,564 actual-browser checks, with33 independent byte oracles. Three new viewport axe audits had0violations/0incomplete; all six captures were visually inspected. Counts from repeated/overlapping executions are not additive. All nine prior browser flows and applicable58-project local checks passed; configured hosted results are recorded on the exact code commit.
+
+The only additive migration is `migrations/fix-review/001-initial.sql` (SHA256 `def3557d73879f4fc199d8152b1ff6c404f2e2477a99f7e50b031cccf5d92ab8`). Activation needs the explicit artifact-review flag and dedicated Cycle13 synthetic database prefix. Existing nine profiles remain separate. Rollback disables new actions/profile and preserves append-only records; no data deletion or customer migration. No third-party dependency was added.
+
+Original source/runtime/consumed fixtures/logs were preserved and rehashed. A13 original265 bindings were independently checked before a whitespace rebuild;254 were retained afterward, with11 generated obj intermediates unavailable and explicitly recorded. Original executed source and Release runtime remain available. Initial A13/B13 failed-generation provenance limitations remain disclosed. Root UI/BFF/research changes were preserved; their separate composed build is bounded evidence.
+
+The next substantial slice needs an exact task/conversion/priority/effort contract and resolution of the Auditor CSV-role discrepancy. This cycle does not authorize those choices. Full Milestone7/TP-HAS-018, local build completion, UAT, G1–G9, real source/provider and customer/production activation remain NOT VERIFIED. Supported manual accessibility, default Mac startup and shared-cluster restart are also unverified. Local host tests used the disclosed test-only configuration-watch override. No hard-kill mid-commit result is claimed.
+
+## Confirmed private publication
+
+Private status Site version86 deployed successfully at2026-10-03T02:00:28Z, exact source `caec0c357348bfd849c907ccdbbd899bd4ce3e43` summarizing canonical snapshot `d0a9754db173ed10cd25e0b264bbf995494906b2`. Owner-private access remains one owner, zero external visitors/groups. All11 human tasks remain unchanged;69 immutable repository links/anchors and actual desktop/mobile320 layout/navigation checks passed. [Deployment/source receipt](../../docs/development/evidence/local-pilot-cycle13-site-publication.json) records the confirmed version separately from executed code804d71a.

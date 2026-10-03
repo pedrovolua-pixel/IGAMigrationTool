@@ -146,7 +146,8 @@
           "DeterministicAnalysis": "[1.0.0, )",
           "Microsoft.EntityFrameworkCore": "[10.0.12, )",
           "Microsoft.EntityFrameworkCore.Relational": "[10.0.12, )",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
         }
       },
       "assessmentscoring": {
@@ -160,6 +161,9 @@
         "dependencies": {
           "AssessmentCoverage": "[1.0.0, )"
         }
+      },
+      "syntheticsourcefence": {
+        "type": "Project"
       }
     }
   }

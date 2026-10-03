@@ -1,0 +1,175 @@
+{
+  "schema": "v13-preauthored-approved-primitives-v1",
+  "approvedByOwner": true,
+  "approvalBasis": "Parent relay of direct owner approval of AR13-01..05 for exact c243 proposal at d897; coordinator transcribes actual approval record separately",
+  "approvedProposalCommit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+  "approvedProposalSha256": "c243feb9aa705bdddd69a9c8ee476b25b6dc647bbbea938298a0f02ee1af90f6",
+  "oldDocumentStatusPreserved": "Old committed Draft/PENDING wording is retained in snapshots; it is not substituted for the newly supplied approval",
+  "sourceImplementationInspected": "Existing Cycle12 verifier only; no A13/B13 source consumed",
+  "newProfileId": "synthetic-review-maturity-fix-review-equal-v1",
+  "newApplicationVersion": "synthetic-fix-review-app-v1",
+  "templateVersion": "fictional-fix-templates-v1",
+  "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669",
+  "templates": [
+    {
+      "id": "fictional-config-v1",
+      "kind": "Configuration",
+      "text": "{\n  \"fixtureOnly\": true,\n  \"reviewRequired\": true\n}",
+      "textSha256": "b9abcdda5f4c3b92d80964d636b13ca6e3205b60e1f3e1105b1725b41ef5c584"
+    },
+    {
+      "id": "fictional-script-v1",
+      "kind": "Script",
+      "text": "# Fictional review-only example. No customer-system action.\nWrite-Output 'Fixture review required'",
+      "textSha256": "c608018b537e79241e5aaedaa84e46e0c75d856ac5d529cd8dee83b6a76f1405"
+    },
+    {
+      "id": "fictional-sql-v1",
+      "kind": "Sql",
+      "text": "-- Fictional review-only example. No customer database or object.\nSELECT 'Fixture review required' AS FixtureMessage;",
+      "textSha256": "0c3f9c8f57acfb4b4da08f8abe40aa276e17a07a339b7ef8d38626a43b595357"
+    }
+  ],
+  "generatedOriginalStatus": "Unverified",
+  "reviewOverlayLabel": "Reviewed for planning \u2014 fictional, review-only; correctness and remediation unverified",
+  "actions": [
+    "ReviewForPlanning",
+    "WithdrawReview"
+  ],
+  "currentLabels": [
+    "Unverified",
+    "Reviewed for planning",
+    "Needs review"
+  ],
+  "maximumReasonUtf16Units": 2000,
+  "exactNewLockRecipeAndValue": "PENDING shared technical checkpoint",
+  "rawSourceSnapshots": [
+    {
+      "path": "specs/003-health-assessment/local-artifact-review-contract-proposal.md",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "c243feb9aa705bdddd69a9c8ee476b25b6dc647bbbea938298a0f02ee1af90f6",
+      "bytes": 14348,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/specs/003-health-assessment/local-artifact-review-contract-proposal.md"
+    },
+    {
+      "path": "specs/003-health-assessment/local-artifact-review-test-plan.md",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "de642062c66de5d4340208a5a95cf1d39c578cabb0092c46ad3da8e7c6b4bedc",
+      "bytes": 7489,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/specs/003-health-assessment/local-artifact-review-test-plan.md"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/Expected.cs",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "23bd735f0daa06e725093c8e7536a38ed8b488487b5366c81c8ab320b79b642e",
+      "bytes": 7225,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/Expected.cs"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/PortableCases.cs",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "f71866f38a9fab758c32f52225bd3c255234bb3d8dd63ec3ad09371f38ea226e",
+      "bytes": 8962,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/PortableCases.cs"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/DatabaseCases.cs",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "cf3d8fbeefce5b498e928176857eda61037afbf706994aae400a1e45c052d109",
+      "bytes": 25057,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/DatabaseCases.cs"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/oracle.py",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "e53db24cd6215b72e95a972633f537bd72900e5b1c3afaa59847b2094a4c789b",
+      "bytes": 13343,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/oracle.py"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/oracle-provenance.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "7f5c469515c9130d5d97714aaf073749f17019ce2dd772ea2a616bcf11f7933f",
+      "bytes": 1643,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/oracle-provenance.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/normal-input.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "5027d79be6564ef5004c06c84b0004e3e328d3a2ee96d80abad336227a63a9c1",
+      "bytes": 8011,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/normal-input.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/normal-fix-golden.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "8fb1ab227ced31b59e7abe5f119c3910cf29d0557b23359c4b69e68df86d3d34",
+      "bytes": 13554,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/normal-fix-golden.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/hostile-input.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "dbf66134f7f515afc038cc85e272e5029c445c7b4e0c26d4a289372520543cf2",
+      "bytes": 22959,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/hostile-input.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/hostile-fix-golden.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "5557f2392b1dd4ef51f60a7adafd2613b839e392bf7de6f9154bcbb5ea52795b",
+      "bytes": 33127,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/hostile-fix-golden.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/empty-input.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "3ca09adebbb543f3d86971c3486b33fd5c52da27f4788c1dda95dda1d83a913f",
+      "bytes": 3746,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/empty-input.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/empty-fix-golden.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "65e43540987b133e4fa9fa01312ea5d427ddc19e25df12759b6b677ac80e8278",
+      "bytes": 6032,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/empty-fix-golden.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/historical-six-locks.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "0b651ddf271aca59236c151fc07ade3c193c0caa96dba59416ece48f4137dac2",
+      "bytes": 5954,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/historical-six-locks.json"
+    },
+    {
+      "path": "tests/integration/LocalFixPackages.Tests/execution.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "bbc89348bf26ed01cbfc90af1b27f69c8bb7b1ea9161e45b70a42822a2ded40b",
+      "bytes": 5033,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/integration/LocalFixPackages.Tests/execution.json"
+    },
+    {
+      "path": "tests/e2e/local-fix-packages/expected.mjs",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "1b93897bfebcb098c0fd664c157be4c6f384ff9ef01f0378093ab807d85fbab8",
+      "bytes": 5182,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/e2e/local-fix-packages/expected.mjs"
+    },
+    {
+      "path": "tests/e2e/local-fix-packages/verify.mjs",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "bbd3e12189101245b3dccacb1a9167ca53c2a45472ed47475eebccc1dbb1a1af",
+      "bytes": 40473,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/e2e/local-fix-packages/verify.mjs"
+    },
+    {
+      "path": "tests/e2e/local-fix-packages/execution.json",
+      "commit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+      "sha256": "16c65718980ac76fbd1dccbff612bc53d921b63264e74ffb5e81a31256f12197",
+      "bytes": 7089,
+      "snapshot": "/private/tmp/iga-cycle13-v13-oracle-preparation/committed-prior-inputs/tests/e2e/local-fix-packages/execution.json"
+    }
+  ],
+  "runtimeChecks": "NOT RUN"
+}

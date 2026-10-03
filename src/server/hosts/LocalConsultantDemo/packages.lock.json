@@ -65,7 +65,8 @@
           "DeterministicAnalysis": "[1.0.0, )",
           "Microsoft.EntityFrameworkCore": "[10.0.12, )",
           "Microsoft.EntityFrameworkCore.Relational": "[10.0.12, )",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
         }
       },
       "assessmentscoring": {
@@ -83,7 +84,8 @@
       "findingreview": {
         "type": "Project",
         "dependencies": {
-          "Npgsql": "[10.0.3, )"
+          "Npgsql": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
         }
       },
       "recommendationguidance": {
@@ -106,6 +108,17 @@
         "dependencies": {
           "RecommendationGuidance": "[1.0.0, )"
         }
+      },
+      "syntheticfixreview": {
+        "type": "Project",
+        "dependencies": {
+          "Npgsql": "[10.0.3, )",
+          "SyntheticFixPackages": "[1.0.0, )",
+          "SyntheticSourceFence": "[1.0.0, )"
+        }
+      },
+      "syntheticsourcefence": {
+        "type": "Project"
       }
     }
   }

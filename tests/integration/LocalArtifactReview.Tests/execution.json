@@ -1,0 +1,203 @@
+{
+  "schema": "v13-independent-final-execution-v1",
+  "status": "PASS_BOUNDED_LOCAL_VERIFICATION",
+  "sourceCheckpoint": "ae4e422",
+  "workingDirectory": "/private/tmp/iga-cycle13-v13",
+  "frozenContractSha256": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+  "priorPacketSha256": "6cc8c175d66a024556c5438565ca7f66aa46d195cb77dfc2d643dba35e6bd581",
+  "finalExecutedCounts": {
+    "portable": 218,
+    "combinedOwnedPostgres": 911,
+    "browser": 10564,
+    "hostSchemaHelper": 7,
+    "independentSchemaRecovery": 1,
+    "pythonOracleFiles": 33,
+    "javascriptOracleChecks": 20,
+    "axeRecords": 3,
+    "axeViolations": 0,
+    "axeIncomplete": 0
+  },
+  "requirements": [
+    {
+      "id": "AR13-T01",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "218 portable real Guidance\u2192Fix\u2192Source; six full literal byte/digest/identity/artifact cases, rejected malformed/forged inputs, empty/permutation"
+    },
+    {
+      "id": "AR13-T02",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "actual trusted policy/reason/namespace matrix plus host closed body/origin/CSRF denials"
+    },
+    {
+      "id": "AR13-T03",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "source/state/withdraw/review/return-to-earlier-content sequences; original package and health invariance; real finding source changes"
+    },
+    {
+      "id": "AR13-T04",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "actual atomic history/revision/receipt, original actor-bound historical replay, changed reuse/stale commands/read-no-write; malformed/lost committed receipt retry"
+    },
+    {
+      "id": "AR13-T05",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "one winner at concurrent revision, real finding/assessment/seed advisory fence waits, source conflict and no partial writes"
+    },
+    {
+      "id": "AR13-T06",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "failed/cancelled transaction atomic rollback; new store/DB reconnect; owned host stop/restart and exact original receipt/history"
+    },
+    {
+      "id": "AR13-T07",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "complete actual readable source/original/history; same-run held receipt source epoch, run-switch draft/frozen command, stale analysis/forged old source, error focus/retry/conflict"
+    },
+    {
+      "id": "AR13-T08",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "independent older six lock bytes and three original fix goldens; nine actual saved and browser historical profiles/null overlay/route denial"
+    },
+    {
+      "id": "AR13-T09",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "actual hostile script/form/network/control/Unicode inert text; unchanged original bytes; zero injected nodes/requests/dialogs/faults"
+    },
+    {
+      "id": "AR13-T10",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "keyboard review/withdraw/disclosures/reason action focus; desktop/mobile320 reflow; three axe4.13 engineering records0 violations and0 incomplete; actual viewport visual inspection"
+    },
+    {
+      "id": "AR13-T11",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "opt-in migration flag required/new profile only; historical actions and task/export/execute/publish/download routes denied; original health/findings unchanged"
+    },
+    {
+      "id": "AR13-T12",
+      "result": "PASS_BOUNDED_EXECUTED_SUBSET",
+      "evidence": "append-only delete/truncate/schema fences; actual pre-capture503 closed no-source response; original trigger and independent killed-child recovery; original nine reasons/thirty artifact texts absent from captured host telemetry"
+    }
+  ],
+  "environment": {
+    "platform": "macOS-15.3.1-arm64-arm-64bit",
+    "dotnet": "10.0.401",
+    "node": "24.21.0",
+    "playwright": "1.62.1",
+    "chromium": "145.0.7632.6",
+    "axe": "4.13.0",
+    "postgres": "18.4 (Homebrew)",
+    "database": "iga_synthetic_cycle13_v13_v2",
+    "role": "iga_synthetic",
+    "loopback": "127.0.0.1:55433",
+    "host": "127.0.0.1:5183",
+    "environmentStrategy": "closed allowlist applied before fixture/browser loading; no marker bypass",
+    "removedEnvironmentKeys": 41,
+    "temporaryConfigurationWatchOverride": true,
+    "defaultMacStartupVerified": false,
+    "npm": "not invoked; direct pinned Node runs existing installed contract/typecheck/Vite commands; no dependency changes"
+  },
+  "firstExecutedGeneration": {
+    "source": "619555a8ac47c35f6cc0d2c62d152d64cb5c1c5d",
+    "database": "iga_synthetic_cycle13_v13",
+    "portable": 218,
+    "combinedPostgres": 908,
+    "closure": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/.native/first-success",
+    "note": "Preserved original before final fingerprint/format/source changes; v1 untouched thereafter"
+  },
+  "failures": [
+    {
+      "generation": "initial restore",
+      "result": "STALLED_STOPPED",
+      "note": "Sandbox determining-projects stall; exact owned80133 stopped; locked audited retryPASS. Session exit0 after stop is not claimed as restorePASS."
+    },
+    {
+      "checks": 608,
+      "code": "every-artifact-identity-revision-capability-field-visible",
+      "correction": "Independent direct root-dl selector; complete field expectations unchanged",
+      "closure": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/.host/first-failure"
+    },
+    {
+      "checks": 9132,
+      "code": "reason-to-action-keyboard-order",
+      "correction": "Fill nonblank fictional reason to enable action before Tab; original successful command correctly cleared reason",
+      "closure": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/.host/second-failure"
+    },
+    {
+      "checks": 9658,
+      "code": "no-injected-event-resource-action-attributes",
+      "correction": "Actual diagnostic confirms screenshot produced30 empty TEXTAREA style attrs from before0; pinned caret:initial avoids instrumentation without relaxing product assertions",
+      "closure": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/.host/third-failure"
+    }
+  ],
+  "commands": [
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "dotnet restore tests/integration/LocalArtifactReview.Tests/LocalArtifactReview.Tests.csproj --locked-mode --disable-build-servers -m:1",
+      "result": "PASS audited retry"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests",
+      "command": "dotnet format whitespace LocalArtifactReview.Tests.csproj --no-restore --include Program.cs Expected.cs PortableCases.cs PolicyCases.cs DatabaseCases.cs SavedSourceCases.cs HostSchemaCases.cs --verify-no-changes --verbosity diagnostic",
+      "result": "PASS0of10 formatted"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "dotnet build tests/integration/LocalArtifactReview.Tests/LocalArtifactReview.Tests.csproj --no-restore -c Release --disable-build-servers -p:UseSharedCompilation=false -m:1",
+      "result": "PASS0warnings/errors"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "dotnet tests/integration/LocalArtifactReview.Tests/bin/Release/net10.0/LocalArtifactReview.IntegrationTests.dll --portable",
+      "result": "PASS218"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "dotnet tests/integration/LocalArtifactReview.Tests/bin/Release/net10.0/LocalArtifactReview.IntegrationTests.dll",
+      "result": "PASS911 dedicatedv2"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "node tests/e2e/artifact-review/verify.mjs",
+      "result": "PASS10564 with documented fixed env/paths"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "python3 tests/integration/LocalArtifactReview.Tests/oracle.py",
+      "result": "PASS33"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "python3 tests/integration/LocalArtifactReview.Tests/verify-telemetry.py",
+      "result": "PASS9reason/30artifact values absent"
+    },
+    {
+      "cwd": "/private/tmp/iga-cycle13-v13",
+      "command": "gitleaks dir /private/tmp/iga-cycle13-v13-source-scan --redact --no-banner --report-format json",
+      "result": "PASS scoped66tracked files0findings before final evidence-only docs; no ignore/policy changes"
+    }
+  ],
+  "finalBrowserSourceSha256": "ca0e2e1cabf845bad09180ea33388655bb6f2cedef635740b086c2f274159644",
+  "originalArtifactsManifest": "artifact-bindings.json",
+  "screenshots": [
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop-viewport.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile-viewport.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow-viewport.png"
+  ],
+  "originalFinalClosure": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/.frozen",
+  "historicalCountsNotRelabeled": {
+    "V12Portable": 137,
+    "V12Postgres": 691,
+    "V12Browser": 3538
+  },
+  "limitations": [
+    "Windows/manual supported accessibility/production identity/deployed sandbox/retention/production release/UAT/Milestone7/G1\u2013G9 NOT VERIFIED.",
+    "No hard-kill mid-commit scenario executed; evidence covers controlled transaction failure/cancellation, reconnect and owned stop/restart.",
+    "Final original Release includes consumed input/goldens; captured outputs never become expected fixtures.",
+    "No claim unavailable first intermediate raw traces reconstructed. Scope stays local synthetic database/process only.",
+    "Coordinator owns full58solution/global checks/canonical records and Site; worker does not grant human or production acceptance."
+  ]
+}

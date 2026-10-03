@@ -1,0 +1,1 @@
+Initial module build --no-restore FAILED NETSDK1004: Assets file '/private/tmp/iga-cycle13-a13/src/server/modules/SyntheticFixReview/obj/project.assets.json' not found.0 warnings1error.

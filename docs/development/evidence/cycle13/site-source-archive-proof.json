@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "canonicalSnapshot": "d0a9754db173ed10cd25e0b264bbf995494906b2",
+  "siteSource": "caec0c357348bfd849c907ccdbbd899bd4ce3e43",
+  "archive": "/private/tmp/iga-cycle13-closure-site.tar.gz",
+  "archiveSha256": "d17a4de17222f0ff815bee253fb5c6f7fb9efcb29ba7d69cd1b2c2e6104e5a85",
+  "htmlSha256": "f6c07189da055cdbcdadb3051e506036ffb34b6b68a14fbaa016176ccc6f714a",
+  "archiveEqualsCommittedHtml": true,
+  "immutableRepositoryLinks": 69,
+  "humanTasksPreserved": 11,
+  "qa": "Actual desktop/mobile320 task roles/completion/links/anchors/navigation/nooverflow/nopageerrors PASS; final captures visually inspected",
+  "retainedFailedQa": "Initial board-card matcher omitted card with id; strict count fixed before source write. Initial badge overflow at320 corrected by shorter exact badge. Original outcome preserved."
+}

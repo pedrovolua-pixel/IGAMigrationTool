@@ -56,16 +56,18 @@ public static class DraftSnapshotBuilder
         if (source.Scope != new DraftScope("synthetic-customer", "synthetic-project", "synthetic-environment")) return DraftReportIssue.WrongScope;
         if (source.RunId == Guid.Empty || source.RunRevision < 0 || source.RunState != "Scoring" ||
             !Text(source.BaselineId) || !Text(source.ProfileId)) return DraftReportIssue.InvalidSource;
-        if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1" or "synthetic-review-maturity-fix-packages-equal-v1")) return DraftReportIssue.UnknownVersion;
+        if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1" or "synthetic-review-maturity-fix-packages-equal-v1" or "synthetic-review-maturity-fix-review-equal-v1")) return DraftReportIssue.UnknownVersion;
         if (source.BaselineId is not ("synthetic-analysis-healthy-v1" or "synthetic-analysis-findings-v1" or "synthetic-analysis-mixed-v1" or "synthetic-analysis-gaps-v1")) return DraftReportIssue.UnknownVersion;
         if (source.ReviewRunId != source.RunId || source.ReviewRunRevision != source.RunRevision) return DraftReportIssue.SourceMismatch;
         foreach (var digest in new[] { source.RunInputDigest, source.AnalysisFixtureDigest, source.AnalysisContentDigest,
             source.ScoringContentDigest, source.SavedCoverageDigest, source.ReviewSnapshotDigest, source.MaturityFixtureDigest,
             source.MaturityInputDigest, source.MaturityContentDigest }) if (!Digest(digest)) return DraftReportIssue.InvalidSource;
-        var fixPackages = source.ProfileId == "synthetic-review-maturity-fix-packages-equal-v1";
+        var artifactReview = source.ProfileId == "synthetic-review-maturity-fix-review-equal-v1";
+        var fixPackages = artifactReview || source.ProfileId == "synthetic-review-maturity-fix-packages-equal-v1";
         var versions = source.FrozenVersions;
+        if (artifactReview && String(versions, "fixReviewContractDigest") != "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f") return DraftReportIssue.UnknownVersion;
         string[] versionFields = ["profileVersion", "desiredOutcomeVersion", "scoringAlgorithmVersion", "aiPolicyVersion", "promptVersion", "modelVersion", "applicationVersion", "workSchemaVersion", "scriptedResultsDigest", "analysisFixtureDigest", "maturityFixtureDigest"];
-        if (!Object(versions, fixPackages ? [.. versionFields, "fixPackageTemplateDigest"] : versionFields)) return DraftReportIssue.InvalidSource;
+        if (!Object(versions, artifactReview ? [.. versionFields, "fixPackageTemplateDigest", "fixReviewContractDigest"] : fixPackages ? [.. versionFields, "fixPackageTemplateDigest"] : versionFields)) return DraftReportIssue.InvalidSource;
         if (fixPackages && String(versions, "fixPackageTemplateDigest") != "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669") return DraftReportIssue.UnknownVersion;
         var expected = new Dictionary<string, string>
         {
@@ -74,7 +76,7 @@ public static class DraftSnapshotBuilder
             ["aiPolicyVersion"] = "synthetic-ai-disabled-v1",
             ["promptVersion"] = "synthetic-prompt-disabled-v1",
             ["modelVersion"] = "synthetic-model-disabled-v1",
-            ["applicationVersion"] = fixPackages ? "synthetic-fix-packages-app-v1" : "synthetic-review-maturity-app-v1",
+            ["applicationVersion"] = artifactReview ? "synthetic-fix-review-app-v1" : fixPackages ? "synthetic-fix-packages-app-v1" : "synthetic-review-maturity-app-v1",
             ["workSchemaVersion"] = "synthetic-run-work-v1"
         };
         if (expected.Any(item => String(versions, item.Key) != item.Value) || versions.GetProperty("desiredOutcomeVersion").ValueKind != JsonValueKind.Null)

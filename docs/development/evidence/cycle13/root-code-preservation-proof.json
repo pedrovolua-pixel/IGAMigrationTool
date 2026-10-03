@@ -1,0 +1,264 @@
+{
+  "schema": "cycle13-root-code-preservation-v1",
+  "coordinatorCode": "1e0713fbaf40d91d327137d818129e816b3b74a3",
+  "rootBeforeCode": "7fdf9d6169536004b5e37ed70a68cb51bbed64f9",
+  "codePatchSha256": "c3b30886657bbb3300eb5478cbb8e38b03a7ecdbbb384fc375736d4010bdc1f3",
+  "preservedConcurrentOriginals": [
+    {
+      "path": "docs/development/azure-bff-next-session-preflight.md",
+      "sha256": "be9da66390bdd2ded87404b33e2f3277047be5e5d0504e4ddf7edb15aa38ad2c",
+      "originalMatched": true
+    },
+    {
+      "path": "docs/development/bff-production-contract-proposal.md",
+      "sha256": "d19f3218b9e39e7e0a39980901591cf21079d95219843fa15fe49192cd72194c",
+      "originalMatched": true
+    },
+    {
+      "path": "docs/development/evidence/assessment-workspace-ui-20261002.json",
+      "sha256": "4d356cb8303911619bc2d7aff2b338b5f2e05e276d50738e6d6e0938844e951f",
+      "originalMatched": true
+    },
+    {
+      "path": "docs/development/evidence/bff-deployment-preparation-20261002.json",
+      "sha256": "dd009faba412921a99ed61f1e19d485ededdcb7d5588d0ea383fa2887219b05d",
+      "originalMatched": true
+    },
+    {
+      "path": "docs/development/evidence/finding-evidence-ui-20261002.json",
+      "sha256": "91f219522ed5fd7ed52320c0e4a2b981ebcb10518a1f61cde40b338935d4d5ab",
+      "originalMatched": true
+    },
+    {
+      "path": "infra/bicep/deployment-template-inventory.md",
+      "sha256": "51dd5ce3a8dab2c31d497adfef72f93ed4353d82d7887b55b6974c6bb0f690b6",
+      "originalMatched": true
+    },
+    {
+      "path": "plans/active/bff-azure-deployment-preparation.md",
+      "sha256": "0a2c04bf739dc165b34b10e606d26eae3ec14acf59dce2c6c3a48b607adfa6cc",
+      "originalMatched": true
+    },
+    {
+      "path": "plans/completed/local-pilot-assessment-workspace-ui.md",
+      "sha256": "4001e5946ed69d230408c7a7cf29cb4e8145cb97f2847f95eac0cc87206005f6",
+      "originalMatched": true
+    },
+    {
+      "path": "plans/completed/local-pilot-finding-evidence-ui.md",
+      "sha256": "f4d93e166d7fd44e6122a7b3485f057c0577d4ddb217e9442d0497951a3ac817",
+      "originalMatched": true
+    },
+    {
+      "path": "product/research/ui-reference-review-2026-10-01.md",
+      "sha256": "52a3c61e08720bfaaa0c7bd5bc6f91f07bfc1eaf2d8dba3b3344c03b9005a2b0",
+      "originalMatched": true
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "829f0291633ed74ab2b2c157474c100b0a4e9e9846aedbcb3dd21733de579814",
+      "originalMatched": true
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "90e1c47419139e199323ff073adee29e9b6cc0b55b9114171ba1564e05b297a9",
+      "originalMatched": true
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "723087082ca8f554314abc147fa92846d6a54d1152eb29b5292f786ad1846494",
+      "originalMatched": true
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "ed34497a33c3103a91f3342e8fdd2fecb4d32533a002be4a1beb506cb1fb8863",
+      "originalMatched": true
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "sha256": "3e5d51fdf1d323575c3f60774cff47d3f212aef2d17354f720c58c3d0a15e85e",
+      "originalMatched": true
+    },
+    {
+      "path": "src/web/src/FindingsExplorer.css",
+      "sha256": "2750e4b304c8ad39808fefa0710c233879daa450a12ce8bff59f42978a026896",
+      "originalMatched": true
+    },
+    {
+      "path": "src/web/src/FindingsExplorer.tsx",
+      "sha256": "6a92662aa20b39de007928d77098c183ad9ad8eceb483da28872c0604626842e",
+      "originalMatched": true
+    },
+    {
+      "path": "src/web/src/ReviewPanel.tsx",
+      "sha256": "a9726033e4d7cc178386f3bbc64c0c3c2301d97badce283d1f431702a5d23f30",
+      "originalMatched": true
+    },
+    {
+      "path": "src/web/src/WorkspaceNavigation.tsx",
+      "sha256": "c41f26a55c05198f55c9ecc473d24ce52e708a1311ce12dc0aca8ac072a91b64",
+      "originalMatched": true
+    },
+    {
+      "path": "src/web/src/workspace.css",
+      "sha256": "5303693dd832311b58b87b54efbc23a4158944def1f5f8c08228cd02ed2ee233",
+      "originalMatched": true
+    },
+    {
+      "path": "tests/e2e/assessment-workspace/README.md",
+      "sha256": "c83a12ee1c4c77cd20d7477b2c4a428abc5dee9f78e1f4fda0e87761e5d8175d",
+      "originalMatched": true
+    },
+    {
+      "path": "tests/e2e/assessment-workspace/preview.mjs",
+      "sha256": "1b6501e7cbb81694d6be29daa892178ecdcf75885fa465ec547682d447eda597",
+      "originalMatched": true
+    },
+    {
+      "path": "tests/e2e/assessment-workspace/verify.mjs",
+      "sha256": "ca7bf5a84a7cf85314a98f610adcdbb42c9545421ec4ed5173f47b4390874054",
+      "originalMatched": true
+    },
+    {
+      "path": "tests/e2e/finding-evidence/README.md",
+      "sha256": "2287f73134ad4080cf4aa8afc3369539fd1e6c31da3b07f0e3bd166db731ad8a",
+      "originalMatched": true
+    },
+    {
+      "path": "tests/e2e/finding-evidence/host-harness.mjs",
+      "sha256": "a68c099a4820930955d93830eaab199a06eff1d05c45c5d0f00046107115bd46",
+      "originalMatched": true
+    },
+    {
+      "path": "tests/e2e/finding-evidence/verify.mjs",
+      "sha256": "0e4253a3d7b61465284fe81cfbe8e99c3f8d98095e76cdf4e52bd5288d3f06f1",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/assessment-ui-concepts.html",
+      "sha256": "2b290b4015b3f03fc18365fb7d2ce4a076f45cc2250e3b4aa4d5362639c0c028",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/assessment-ui-preview.html",
+      "sha256": "3253af021495da5b7ab2964af76e9af767bd55e88d2ab26d2c58f26ed127d3e6",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/assistant-desktop.png",
+      "sha256": "cedd35d4fe06dafcaaf81942d34f24b9d44a94fa02b6d353f8e938c061b9b265",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/assistant-narrow-dark.png",
+      "sha256": "045a8b9bd61845fb8cad7f829744a4be5aa2e3d293b984d1a6db56b9c6dbe7e9",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/finding-evidence-desktop.png",
+      "sha256": "3518f642ea1be865c049596d133143595f46429fa8b59aaa0c4547a0b73c3fa9",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/finding-evidence-narrow.png",
+      "sha256": "7e757621d9786c858d9a123f797b93b146898ddbee31a4ed3fff2e1a2caf95d5",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/finding-evidence-review.png",
+      "sha256": "52b7aa6e282d0d4e69be4d89b6da56ef7dfbf9efd61958fd51ff579b5f0342dd",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/mockup-checks.json",
+      "sha256": "9f88befaba96f7c0f88870cd15cf78efccd2d4f475e5fec3f6ca1057763516ee",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/studio-desktop.png",
+      "sha256": "e0f55ded4088bcf89bd22106d9ba040ef362d0cf2042110bd99a5ac4c6b026f8",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/studio-narrow-dark.png",
+      "sha256": "73deb921e553cdf988fa359c97dba1aeafedee1410b7f3af42e92e14404ffb31",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/verify-mockups.cjs",
+      "sha256": "81a4d29cd58cbdd02535d50a30adf9549709f9c3e115671a94009ee05626cc6a",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/drilldown-desktop.png",
+      "sha256": "40d735da50174f6856439ecb2b697073755d5c39c0b010c9cf17c1e0a9435724",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/drilldown-evidence.png",
+      "sha256": "265b83034a294f133bd4af1a72c4ed8d625da94578e51cb5a11df567a1f830ee",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/drilldown-mobile.png",
+      "sha256": "80b99a8d63f5c9f049394086a8d8a543276edbb618e408572282fcfad6cd29f3",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/evidence.png",
+      "sha256": "32a079535a5210ca27ea1d782f9ebeeed21c7bb398d2e982d382acfa333499c7",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/graphical-workspace.html",
+      "sha256": "8b8f5cd0329c3a34bf6360b0408e1f9c5d8f64ad57f9df88fbb6f855b1acc83b",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/overlay-no-blur-desktop.png",
+      "sha256": "2072bfe1978eccea08d924f808bcdd188c641b1e5713b65e4fe6eea276646e7f",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/overlay-no-blur-mobile.png",
+      "sha256": "88ed7b82f28aad6fda72b57074d0104ea7b66ea6602394f0a5ac9d8c61d928fe",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/overview.png",
+      "sha256": "721a1ee25b8f5d8ed01d0b451c6a55c6be1f1685c90b95dbeb71c0f6a8cc80f6",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/relationships-overlay-desktop.png",
+      "sha256": "d505929ee295c1e7b7bd0403d25ea5233c5013c3d40e9dd35d2e70d51e21e93e",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/relationships-overlay-mobile.png",
+      "sha256": "47969701cf1fd17d74ddc7f0a3b431cd292d3c101da0d34b505f515d3f169370",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/visual-concepts/risk-analysis.png",
+      "sha256": "b2b39226a4b75d7fb700053de62611ad642b76204912abc11ea5ecc3179eab27",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/workspace-desktop.png",
+      "sha256": "18c2dbb11a4d436a8a327791218c369609106aa27878eea1936ab362bd5c8ca0",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/workspace-narrow-dark.png",
+      "sha256": "976da7c6f99bbb28bd1b52edbb68862dddebb43f2d0ac55a5097709d5b651dfd",
+      "originalMatched": true
+    },
+    {
+      "path": "work/ui-review/workspace-narrow.png",
+      "sha256": "30fd8a9d330b0f7e47adfa37c802ed07db0db02a4e22d55efeb4be2962c3e0fd",
+      "originalMatched": true
+    }
+  ],
+  "evidence": "All51 initial concurrent files recover byte-for-byte by reversing only owned approval/code additions in a disposable copy. Root originals were not reset or staged."
+}

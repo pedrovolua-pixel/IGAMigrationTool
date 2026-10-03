@@ -423,7 +423,7 @@ try {
   const catalogResponse = await api.get("/local-demo/v1/catalog");
   equal(catalogResponse.status(), 200, "actual-catalog-ready");
   const catalog = await catalogResponse.json();
-  equal(catalog.profiles.length, 9, "actual-catalog-nine-profiles");
+  equal(catalog.profiles.length, 10, "actual-catalog-ten-profiles");
   equal(catalog.baselines.length, 9, "actual-catalog-nine-baselines");
   const headers = { Origin: base, "X-CSRF-TOKEN": catalog.csrfToken };
   const normal = await start(expected.baseline, expected.normal, headers),

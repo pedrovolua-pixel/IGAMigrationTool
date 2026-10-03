@@ -15,6 +15,8 @@
     <Project Path="src/server/modules/IdentityAuthority/IdentityAuthority.csproj" />
     <Project Path="src/server/modules/IdentitySessions/IdentitySessions.csproj" />
     <Project Path="src/server/modules/IdentityPolicy/IdentityPolicy.csproj" />
+    <Project Path="src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj" />
+    <Project Path="src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj" />
     <Project Path="src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj" />
     <Project Path="src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
     <Project Path="src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj" />
@@ -46,6 +48,7 @@
     <Project Path="tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj" />
     <Project Path="tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj" />
+    <Project Path="tests/integration/LocalArtifactReview.Tests/LocalArtifactReview.Tests.csproj" />
     <Project Path="tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
     <Project Path="tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
     <Project Path="tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
@@ -63,6 +66,8 @@
     <Project Path="tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj" />
     <Project Path="tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj" />
+    <Project Path="tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj" />
+    <Project Path="tests/unit/ArtifactReviewComponent.Tests/ArtifactReviewComponent.Tests.csproj" />
     <Project Path="tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixPackageHtml.Tests/SyntheticFixPackageHtml.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />

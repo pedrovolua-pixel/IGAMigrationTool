@@ -1,0 +1,50 @@
+{
+  "schema": "cycle13-independent-oracle-preparation-packet-v1",
+  "status": "PREPARED_READ_ONLY_NOT_EXECUTED",
+  "approvedProposalSha256": "c243feb9aa705bdddd69a9c8ee476b25b6dc647bbbea938298a0f02ee1af90f6",
+  "approvedProposalCommit": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+  "files": [
+    {
+      "path": "/private/tmp/iga-cycle13-v13-oracle-preparation/approved-primitives.json",
+      "sha256": "534b3ab7d633e3e991a46d101e44635a8b6b50083ff8da93c403fa0e9e6fc2fd",
+      "bytes": 9471
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13-oracle-preparation/state-replay-oracles.json",
+      "sha256": "8cbee50e8cf14d28777f8f0f9b9065a3e8e1547e539b3a2f2e4425457ecb6926",
+      "bytes": 7274
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13-oracle-preparation/design.md",
+      "sha256": "a1d99f93a5efa8b2ce9063802339e3458be87a83ff1ac1f51cb4cdad5afee90e",
+      "bytes": 14630
+    }
+  ],
+  "semanticCases": 21,
+  "plannedTestGroups": [
+    "AR13-T01",
+    "AR13-T02",
+    "AR13-T03",
+    "AR13-T04",
+    "AR13-T05",
+    "AR13-T06",
+    "AR13-T07",
+    "AR13-T08",
+    "AR13-T09",
+    "AR13-T10",
+    "AR13-T11",
+    "AR13-T12"
+  ],
+  "historicalCountsNotRelabeled": {
+    "V12Portable": 137,
+    "V12Database": 691,
+    "V12Browser": 3538,
+    "V12AxeSubsetRuns": 9
+  },
+  "repositoryEdits": false,
+  "implementationCodeAuthored": false,
+  "A13B13ImplementationConsumed": false,
+  "runtimeExecuted": false,
+  "databaseHostActions": false,
+  "nextDependency": "Coordinator shared technical contract and explicit isolated V13 writing worktree"
+}

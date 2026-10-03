@@ -1,0 +1,319 @@
+{
+  "schema": "a13-style-correction-v1",
+  "originalSeal": "675172ad6630d6323306e9230e30bd9eef624a7e",
+  "correctedSeal": "c4b5aaf37acabc3298e02569853a422b817fd6fe",
+  "originalLiveBindingsStillMatching": 251,
+  "changedLiveBindings": [
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/Program.cs",
+      "originalSha256": "628a19e206962f931b7c83ab87871922b66611a47ad0f663ae11b81716865d5b",
+      "currentSha256": "c4f0e4abd9ef7a7c7ad54c85e19ce009f5b75ef387231232f81cfe7d8d68bfbf",
+      "currentBytes": 14938
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Debug/net10.0/SyntheticFixReview.Tests.AssemblyInfo.cs",
+      "originalSha256": "5ada60684c358a1887af779c2922aa4bb65ff5897155ef757c13c4410790d118",
+      "currentSha256": "bf04be4d970737cfccd2fa604248975f00f7665a3c5a4e63f03efdd51768ea24",
+      "currentBytes": 1024
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Debug/net10.0/SyntheticFixReview.Tests.AssemblyInfoInputs.cache",
+      "originalSha256": "70532fbbd1771432470771ffcbc91600b34d79a5309d49a95123d8df8eca4b98",
+      "currentSha256": "a747f231eb5c4fe3691c5601aead8c6783bca8bfa5b1d81e1b235bfae36529b9",
+      "currentBytes": 65
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.AssemblyInfo.cs",
+      "originalSha256": "162cd21d9f5070d2876592db84022e177b320c8c01823d9248db5dbbf6f29fea",
+      "currentSha256": "6ad76422ca45e4ed5b056e6cee3c61fd7ce5b8e2d2a0e3fcb73fb5bc10d65cec",
+      "currentBytes": 1026
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.AssemblyInfoInputs.cache",
+      "originalSha256": "18a0477bcc1f9077e0005b2e34fa6e12051af303b632c15683ed6ea5a02a3da3",
+      "currentSha256": "780f1fea0c6d0d2c0d1023080e7f981b0d7053a3570907d92a806f04051503e1",
+      "currentBytes": 65
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.csproj.AssemblyReference.cache",
+      "originalSha256": "e6785894fe6e0546c2d8205957295c7d846901c55faf74da18e3cdb44fc7c688",
+      "currentSha256": "00ae272bd8dfd1cc6b847938d862c6dcc362b554980f8cc7189cbb464fdaa3bb",
+      "currentBytes": 5494
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.csproj.CoreCompileInputs.cache",
+      "originalSha256": "3e8e0350d366527100886db8698128fe1be8698d344fb0e4a0eabc1e9ff1bab9",
+      "currentSha256": "89acfc6b0474bdfb1dd27cd0334fea5b61b4b0314b39d866b65595b67cd67d1a",
+      "currentBytes": 65
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.csproj.FileListAbsolute.txt",
+      "originalSha256": "8ec26f87d5c4a7a72599364c866322bc3d2de5c94531fb944de1c0aab70e48a0",
+      "currentSha256": "fb36ae08d3750fae77517f245ec515b19ace39f128235d40be286f7b27e2f687",
+      "currentBytes": 3851
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.dll",
+      "originalSha256": "ae34e8f3ece4493dc91826714125544e5a25129f85cec3e5486fd130b5c8116e",
+      "currentSha256": "af7ed963baab0fea8e26ce8fc28c34ee4dc8168e3b8f089ff1977647ac412c67",
+      "currentBytes": 85504
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.genruntimeconfig.cache",
+      "originalSha256": "31101aa8915f39fadc2498ac6b085867f99322e8a092fdf59e33e3111acbe28c",
+      "currentSha256": "e7578e5bd1a9e64a4f79c9156507c3dd8e6ec9bcc8ff7210da89794db08f8975",
+      "currentBytes": 65
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.pdb",
+      "originalSha256": "98cbadb795139bd9fea36ddd47b41f02f062e18401e3b43fd2e923ebded3f1ca",
+      "currentSha256": "68d659db1ac17bd7e539c0dd0ed8db1156199df7315c4a9e12339e3023a8210f",
+      "currentBytes": 19616
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/SyntheticFixReview.Tests.sourcelink.json",
+      "originalSha256": "ce455bf21e4cd45e2495489efa0101539b75919296093bf841ec0a2bc995bed1",
+      "currentSha256": "de9cf8aceecafa652eedc91a275549301eaba92acf251e4a366f09c231941b91",
+      "currentBytes": 161
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/ref/SyntheticFixReview.Tests.dll",
+      "originalSha256": "58cbf4a213ea57e1a3505f96f0d895367953ea5db13709c3c526da318f736f91",
+      "currentSha256": "a3ae1d5b095e5bcd596528ee25e72dee33f9a8ee1c958e9ba63667140c13e8f3",
+      "currentBytes": 10752
+    },
+    {
+      "path": "tests/unit/SyntheticFixReview.Tests/obj/Release/net10.0/refint/SyntheticFixReview.Tests.dll",
+      "originalSha256": "58cbf4a213ea57e1a3505f96f0d895367953ea5db13709c3c526da318f736f91",
+      "currentSha256": "a3ae1d5b095e5bcd596528ee25e72dee33f9a8ee1c958e9ba63667140c13e8f3",
+      "currentBytes": 10752
+    }
+  ],
+  "originalEvidenceAndReleaseBinariesUnmodified": true,
+  "change": "tests/unit/SyntheticFixReview.Tests/Program.cs",
+  "originalSha256": "628a19e206962f931b7c83ab87871922b66611a47ad0f663ae11b81716865d5b",
+  "correctedSha256": "c4f0e4abd9ef7a7c7ad54c85e19ce009f5b75ef387231232f81cfe7d8d68bfbf",
+  "whitespaceStrippedIdentical": true,
+  "checks": {
+    "absoluteIncludeExit0Limitation": "Did not select file; not evidence old full formatting passed",
+    "relativeSoleIncludeApplyExit": 0,
+    "projectNoIncludeVerifyExit": 0,
+    "separateReleaseBuild": {
+      "exit": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "separatePortable": {
+      "exit": 0,
+      "assertions": 212
+    }
+  },
+  "postgresFinalCorrectedSource": "NOT RUN; original675 actual370 retained separately; coordinator executes combined final",
+  "bindings": [
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+      "bytes": 65872,
+      "sha256": "da04edc338d5aa0f38a1f5fa5ff3ee7e36affe9c961daf3ea724a428bd746bc6"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/Microsoft.Extensions.Logging.Abstractions.dll",
+      "bytes": 66856,
+      "sha256": "7c242f8ca612fa1acc61f78efd5f8c89e01bd0bd47dc4ecc65e0e6e24f1a1668"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/Npgsql.dll",
+      "bytes": 1478656,
+      "sha256": "e2bcafe1660fe4543fe9dfcabed972ec8d32259e5ea8009462ce1de23c7034c2"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/RecommendationGuidance.deps.json",
+      "bytes": 438,
+      "sha256": "2f43385533b323d3b3a949c11e0296f1147083a4e8e0d0af8759d0e6e32161dd"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/RecommendationGuidance.dll",
+      "bytes": 60928,
+      "sha256": "7777e6299ad05fbc1fb42c481cce9bc415db9e052bf9d5eb19cece4a27d0b24d"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/RecommendationGuidance.pdb",
+      "bytes": 19868,
+      "sha256": "c93bef2b8eb90c52d7ad814ae73e6b830221ba8c0a294566f0c550295dcaefd9"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixPackages.deps.json",
+      "bytes": 843,
+      "sha256": "62516243a9d4e07fb69d50bbae0cd3ea314a6693118d8f98023fe3f24605dfcf"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixPackages.dll",
+      "bytes": 46080,
+      "sha256": "cc47f628a1a94211086c77582dbed6480cadceac24622f88adbd9d11f794456a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixPackages.pdb",
+      "bytes": 17012,
+      "sha256": "bc61e63a2625c6bcbd3cc12bfbac1ea8fe49891bf7410c75750d7b0a81be4f7a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.Tests",
+      "bytes": 124712,
+      "sha256": "fc724a4cac11087241c60bd6d83f890e7846cdee94456e802a03f23e24ecfbbd"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.Tests.deps.json",
+      "bytes": 4177,
+      "sha256": "0b151d3989b92a197e42318d683d7d959d7530519d0ca7eb039f4a4d5ee49dc8"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.Tests.dll",
+      "bytes": 85504,
+      "sha256": "af7ed963baab0fea8e26ce8fc28c34ee4dc8168e3b8f089ff1977647ac412c67"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.Tests.pdb",
+      "bytes": 19616,
+      "sha256": "68d659db1ac17bd7e539c0dd0ed8db1156199df7315c4a9e12339e3023a8210f"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.Tests.runtimeconfig.json",
+      "bytes": 330,
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.deps.json",
+      "bytes": 3764,
+      "sha256": "ca4fe91f19059edc1ce24aa97c225b2bff956d231e19e26030c915dcb0f9ec03"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.dll",
+      "bytes": 119808,
+      "sha256": "7d04abe2b6cc637ac655580b1f2d8eec0c0d1a80f26ca4dcee93c76cb0d46b3d"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticFixReview.pdb",
+      "bytes": 31200,
+      "sha256": "c2c67c8fdd1927f0ae96bf73a1e90a997f7b08d65ca09a40c8ea938f34a4aa18"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticSourceFence.deps.json",
+      "bytes": 432,
+      "sha256": "690f6cf4370e73cc2498d6c6b15613c50e957373b5e0281370a63a360971b5df"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticSourceFence.dll",
+      "bytes": 9728,
+      "sha256": "3e1465f8c5388ee9a0ab17a67da81fe4d6dc3c55babb28bfc09021e666150ae7"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/SyntheticSourceFence.pdb",
+      "bytes": 12244,
+      "sha256": "260013089bb4c0c7e7df176b3094ef6e6b0925041faad1d704b5055264a7b8e1"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/empty-artifacts.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/empty-binding.json",
+      "bytes": 914,
+      "sha256": "6e832160dcc7e13026dcea02f384e68daf452dd3ed5f75d09c6a3cb5f37ab02a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/empty-golden.json",
+      "bytes": 6127,
+      "sha256": "42c1086ec76356466521751373f17553f8ec4e471a8ea89ab9582a8cd4b6f4b3"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/hostile-artifacts.json",
+      "bytes": 1463,
+      "sha256": "2b4e17501afa2cbc39c27e2960dd7eb97b2076b8e9473ec4316f29c544bf534b"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/hostile-binding.json",
+      "bytes": 1007,
+      "sha256": "d7d68fdb8ee5227307505c5597dca820aef1cba968939e5a98cfc206cc6b9de7"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/hostile-golden.json",
+      "bytes": 8968,
+      "sha256": "d9c7c251795b0b1e1f6d24dad55193e633a7541ba4aeaca58a8ffc3e8fc1495a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/independent-oracle.py",
+      "bytes": 12243,
+      "sha256": "ec655a47d92c16d7a7e480c322572af7ebb3cf3fc76e7554ebc64bed6a9d5918"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/multi-artifacts.json",
+      "bytes": 4387,
+      "sha256": "9d43e1acd17f89918d8c10138a9d8d252bc1de38ed8ffc72184bc87721fc868d"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/multi-binding.json",
+      "bytes": 1101,
+      "sha256": "970d5ea039cb85585acd92091fd97511b0494c8887ae7afab5f465875ec05591"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/multi-golden.json",
+      "bytes": 12282,
+      "sha256": "7db3b1147a2fc50b7b9d5827c02a207a489588c77ad2885babc0aa3d9da444b2"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/normal-artifacts.json",
+      "bytes": 1463,
+      "sha256": "2b4e17501afa2cbc39c27e2960dd7eb97b2076b8e9473ec4316f29c544bf534b"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/normal-binding.json",
+      "bytes": 1007,
+      "sha256": "6b01f5f027ce61d831451b393f9a0808c65f0a86107b71b620b34ecd3bfee077"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/bin/Release/net10.0/normal-golden.json",
+      "bytes": 8422,
+      "sha256": "40eabf9671c35ed2e60736af0c583a9c20e3f862776c60db76d1403e7b590ebf"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/build.txt",
+      "bytes": 659,
+      "sha256": "e812ead92ea15387bb4e2b30e95985f6f7060b3e9ec70ab792febbc1ab2e9972"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/correction.patch",
+      "bytes": 1645,
+      "sha256": "714cd4dbc23ede103c7fe1541621f023fafe9a075c6890b4fedf04fbf22696b7"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/format-apply-full.txt",
+      "bytes": 23905,
+      "sha256": "3cf258b2aaf1dc06026cfc2cc4e2b88ccb2ede0a34df01c6a38010755a636196"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/format-apply.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/format-relative.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/format-verify.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/original-Program.cs.frozen",
+      "bytes": 14886,
+      "sha256": "628a19e206962f931b7c83ab87871922b66611a47ad0f663ae11b81716865d5b"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-a13-style-evidence/portable.txt",
+      "bytes": 62,
+      "sha256": "d54e493eb5b97ef64f1b78e6386fd56d51d178382ae849e1bc2714fb3eccfd1a"
+    }
+  ]
+}

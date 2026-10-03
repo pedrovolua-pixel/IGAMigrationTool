@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import type { RefObject } from 'react';
+import type { ArtifactReviewDraft } from './ArtifactReviewPanel';
 import type {
   AnalysisDetail,
   AnalysisScore,
@@ -12,8 +14,18 @@ import { DraftReportView } from './DraftReportView';
 import { RecommendationGuidanceView } from './RecommendationGuidanceView';
 import { AiProposalPreview, coherentAiPreview } from './AiProposalPreview';
 import { FixPackagePreview, coherentFixPackages } from './FixPackagePreview';
+import { ArtifactReviewPanel, coherentArtifactReview } from './ArtifactReviewPanel';
+import { useArtifactReview } from './useArtifactReview';
 
-export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: string }) {
+export function AnalysisView({
+  run,
+  csrfToken,
+  artifactDrafts,
+}: {
+  run: RunDetail;
+  csrfToken: string;
+  artifactDrafts: RefObject<Record<string, ArtifactReviewDraft>>;
+}) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
   const [failed, setFailed] = useState(false);
   const [retry, setRetry] = useState(0);
@@ -21,8 +33,24 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
   const heading = useRef<HTMLHeadingElement>(null);
   const retryFocus = useRef<string | null>(null);
   const readEpoch = useRef(0);
+  const artifactFocus = useRef<string | null>(null);
+  const artifactControls = useArtifactReview(
+    run,
+    csrfToken,
+    response,
+    readEpoch,
+    (message, artifactId) => {
+      ++readEpoch.current;
+      setNotice(message);
+      artifactFocus.current = artifactId;
+      setResponse(null);
+      setRetry((value) => value + 1);
+    },
+    artifactDrafts,
+  );
   useEffect(() => {
     retryFocus.current = null;
+    artifactFocus.current = null;
     setNotice(null);
   }, [run.runId]);
   useEffect(() => {
@@ -49,6 +77,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
             (await coherentGuidance(value, run)) &&
             (await coherentAiPreview(value, run)) &&
             (await coherentFixPackages(value, run)) &&
+            (await coherentArtifactReview(value, run)) &&
             epoch === readEpoch.current &&
             !controller.signal.aborted
           )
@@ -68,6 +97,12 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
     return () => controller.abort();
   }, [run.runId, run.revision, run.state, retry]);
   useEffect(() => {
+    if (response && artifactFocus.current) {
+      const target = document.getElementById(`artifact-review-${artifactFocus.current}`);
+      const error = document.getElementById(`artifact-review-error-${artifactFocus.current}`);
+      (error ?? target ?? document.getElementById('artifact-review-heading'))?.focus();
+      artifactFocus.current = null;
+    }
     if (response && retryFocus.current) {
       if (response.runId === retryFocus.current) {
         if (response.status === 'Ready') heading.current?.focus();
@@ -113,6 +148,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
         </p>
         <AiProposalPreview preview={response.aiPreview} run={run} />
         <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
+        <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
       </>
     );
   }
@@ -345,6 +381,7 @@ export function AnalysisView({ run, csrfToken }: { run: RunDetail; csrfToken: st
       />
       <AiProposalPreview preview={response.aiPreview} run={run} />
       <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
+      <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
       {response.maturity && <MaturityView maturity={response.maturity} />}
       <details className="locked-inputs">
         <summary>Analysis versions and content digests</summary>

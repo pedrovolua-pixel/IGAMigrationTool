@@ -1,0 +1,53 @@
+{
+  "schema": "v13-independent-B-parent-initial-source-review-v1",
+  "reviewedBSourceCommit": "a3795a92a56c0b0d2ff7eb3be4baab78617fc0e4",
+  "bindings": [
+    {
+      "path": "/private/tmp/iga-cycle13-b13/src/web/src/ArtifactReviewPanel.tsx",
+      "sha256": "2bb6c16c889871d5839d15b7708887a743bc9dcfac71d79d696ec3f65a2f4e7b"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-b13/src/web/src/ArtifactReviewPanel.css",
+      "sha256": "22caf17bfd870c5c383afc7a53408545b5a82f065d57962483f306bd91f13c67"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-implementation/src/web/src/useArtifactReview.ts",
+      "sha256": "21bf6729c0f4618478299ea3cc5ab401dba844539259b02b99b0be3f9380fbc8"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-implementation/src/web/src/AnalysisView.tsx",
+      "sha256": "318abd63a4dfa82b91ef79d7bcf356169c8aa3d3f2401952d485e0674d9d178f"
+    }
+  ],
+  "findings": [
+    {
+      "priority": "MEDIUM",
+      "owner": "Coordinator",
+      "location": "App.tsx keyed AnalysisView and useArtifactReview.ts local saved state",
+      "issue": "Run changes unmount AnalysisView and discard entered reasons/frozen uncertain commands despite parent-owned run/artifact persistence contract.",
+      "status": "ACCEPTED_FIX_PENDING",
+      "correction": "Lift ephemeral draft reference above keyed AnalysisView; keep late completion epochs; no persistence across browser restart implied."
+    },
+    {
+      "priority": "LOW",
+      "owner": "B13",
+      "location": "ArtifactReviewPanel.tsx aggregate history total bound",
+      "issue": "Undocumented aggregate 100000 historical-event limit can reject valid store output; frozen bound applies source artifacts/findings.",
+      "status": "ACCEPTED_FIX_PENDING",
+      "correction": "Remove aggregate history cap and preserve complete event validation."
+    }
+  ],
+  "noOtherActionableFindingsInReviewedScope": true,
+  "scope": [
+    "closed shapes/current package digest source locks",
+    "strict membership/text digest async revalidation",
+    "history state/roles/time/revision/source references",
+    "inert React text/native disclosure/reason labels/focus hooks",
+    "parent receipt agreement/run/source/read epochs/explicit exact retry"
+  ],
+  "limitations": [
+    "Source review only; no browser/PG/component test executed by reviewer at this stage.",
+    "No author expected outputs or test counts used as proof.",
+    "Re-review corrected exact bytes is required before final finding closure."
+  ]
+}

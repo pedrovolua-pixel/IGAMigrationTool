@@ -19,3 +19,20 @@
 /tests/unit/SyntheticFixPackageHtml.Tests/*.html text eol=lf
 /tests/integration/SyntheticFixPackages.Tests/*.json text eol=lf
 /tests/integration/SyntheticFixPackages.Tests/*.html text eol=lf
+
+# Cycle13 independent component literal bytes must survive every supported checkout.
+tests/unit/ArtifactReviewComponent.Tests/complete-fixture.json text eol=lf
+tests/unit/ArtifactReviewComponent.Tests/empty-fixture.json text eol=lf
+tests/unit/ArtifactReviewComponent.Tests/oracle-hashes.json text eol=lf
+tests/unit/ArtifactReviewComponent.Tests/complete-expected.html text eol=lf
+tests/unit/ArtifactReviewComponent.Tests/empty-expected.html text eol=lf
+
+# Cycle13 backend and independent saved-source JSON oracles preserve exact LF bytes.
+/tests/unit/SyntheticFixReview.Tests/*.json text eol=lf
+/tests/integration/LocalArtifactReview.Tests/*.json text eol=lf
+/specs/003-health-assessment/local-artifact-review-implementation-contract.md text eol=lf
+# The additive migration and captured originals are exact immutable evidence bytes.
+/migrations/fix-review/001-initial.sql text eol=lf
+/tests/unit/SyntheticFixReview.Tests/execution/**/*.frozen -text
+/tests/unit/SyntheticFixReview.Tests/execution/**/*.txt -text
+/tests/integration/LocalArtifactReview.Tests/**/*.json text eol=lf

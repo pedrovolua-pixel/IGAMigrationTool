@@ -1,0 +1,244 @@
+{
+  "schema": "v13-independent-semantic-oracle-design-v1",
+  "status": "PREAUTHORED_PLANNED_NOT_EXECUTED",
+  "symbols": {
+    "A": "Same trusted run R, initial complete source binding and captured finding review",
+    "B": "Same R/run revision and fixed artifact text/IDs; later actual finding review gives new full digest",
+    "C": "Later actual review revision with presentation text returned to its earlier value; complete source differs from A/B",
+    "R": "Fixed portable synthetic run ID; actual PG runs generated and bound separately",
+    "Z": "Different trusted synthetic run, no inherited attestation",
+    "E1-E4": "Distinct fixture client event IDs; exact literal namespace/DTO pending shared contract"
+  },
+  "sourceBindingFields": [
+    "synthetic customer/project/environment",
+    "runId",
+    "runInputDigest",
+    "findingId",
+    "packageId",
+    "scopedOptionId",
+    "artifactId",
+    "kind",
+    "artifactTextDigest",
+    "templateVersion",
+    "templateDigest",
+    "packageContentDigest",
+    "guidanceDigest",
+    "capturedFindingReviewDigest"
+  ],
+  "stateCases": [
+    {
+      "id": "S01",
+      "history": [],
+      "currentSource": "A",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "zero writes on read"
+    },
+    {
+      "id": "S02",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "A",
+      "expectedCurrentLabel": "Reviewed for planning",
+      "invariant": "one accepted transition"
+    },
+    {
+      "id": "S03",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "B",
+      "expectedCurrentLabel": "Needs review",
+      "invariant": "same history/revision; new source alone writes nothing"
+    },
+    {
+      "id": "S04",
+      "history": [
+        "Review E1 A",
+        "Withdraw E2 A"
+      ],
+      "currentSource": "A",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "withdraw is latest accepted event"
+    },
+    {
+      "id": "S05",
+      "history": [
+        "Review E1 A",
+        "Withdraw E2 A"
+      ],
+      "currentSource": "B",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "withdraw remains latest after source refresh"
+    },
+    {
+      "id": "S06",
+      "history": [
+        "Review E1 A",
+        "Review E3 B"
+      ],
+      "currentSource": "B",
+      "expectedCurrentLabel": "Reviewed for planning",
+      "invariant": "new immutable seed; continuous artifact history/revision"
+    },
+    {
+      "id": "S07",
+      "history": [
+        "Review E1 A",
+        "Review E3 B",
+        "Withdraw E4 B"
+      ],
+      "currentSource": "B",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "A/B attribution and original outcomes retained"
+    },
+    {
+      "id": "S08",
+      "history": [
+        "Review E1 A",
+        "DENY Withdraw E2 A after source B"
+      ],
+      "currentSource": "B",
+      "expectedCurrentLabel": "Needs review",
+      "invariant": "stale withdrawal changes nothing"
+    },
+    {
+      "id": "S09",
+      "history": [
+        "DENY Withdraw E1 A with no review"
+      ],
+      "currentSource": "A",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "no current attestation: no write"
+    },
+    {
+      "id": "S10",
+      "history": [
+        "Review E1 A",
+        "DENY fresh-ID Review E2 A"
+      ],
+      "currentSource": "A",
+      "expectedCurrentLabel": "Reviewed for planning",
+      "invariant": "already-current review: no write"
+    },
+    {
+      "id": "S11",
+      "history": [
+        "Review E1 A",
+        "finding review A\u2192B\u2192earlier prose at C"
+      ],
+      "currentSource": "C",
+      "expectedCurrentLabel": "Needs review",
+      "invariant": "source C has later monotonic review revision; earlier prose cannot resurrect A"
+    },
+    {
+      "id": "S12",
+      "history": [
+        "Review E1 A in run R"
+      ],
+      "currentSource": "A-in-foreign-run-Z",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "no cross-run carryover; different run-bound artifact identities"
+    }
+  ],
+  "replayCases": [
+    {
+      "id": "R01",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "A",
+      "command": "Replay E1 exact",
+      "expectedCurrentLabel": "Reviewed for planning",
+      "invariant": "Original historical receipt/AlreadyApplied; no write"
+    },
+    {
+      "id": "R02",
+      "history": [
+        "Review E1 A",
+        "Withdraw E2 A"
+      ],
+      "currentSource": "A",
+      "command": "Replay E1 exact",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "Old review replay cannot restore current overlay"
+    },
+    {
+      "id": "R03",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "B",
+      "command": "Replay E1 exact",
+      "expectedCurrentLabel": "Needs review",
+      "invariant": "Authorized identical history replay allowed; source expectation checked only for new events"
+    },
+    {
+      "id": "R04",
+      "history": [
+        "Review E1 A",
+        "Withdraw E2 A"
+      ],
+      "currentSource": "B",
+      "command": "Replay E2 exact",
+      "expectedCurrentLabel": "Unverified",
+      "invariant": "Withdrawal replay preserves latest withdrawal"
+    },
+    {
+      "id": "R05",
+      "history": [
+        "Review E1 A",
+        "Withdraw E2 A",
+        "Review E3 B"
+      ],
+      "currentSource": "B",
+      "command": "Replay E2 exact",
+      "expectedCurrentLabel": "Reviewed for planning",
+      "invariant": "Old withdrawal replay cannot remove later review B"
+    },
+    {
+      "id": "R06",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "A",
+      "command": "E1 with changed semantic field",
+      "expectedCurrentLabel": "Reviewed for planning",
+      "invariant": "Conflict: change reason/action/member/expected revision/source one field at a time"
+    },
+    {
+      "id": "R07",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "B",
+      "command": "Fresh E2 claiming old A",
+      "expectedCurrentLabel": "Needs review",
+      "invariant": "Source conflict; no write"
+    },
+    {
+      "id": "R08",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "A",
+      "command": "Replay after current actor/category/resource visibility denied",
+      "expectedCurrentLabel": "SUPPRESSED",
+      "invariant": "No historical receipt/history contents disclosed"
+    },
+    {
+      "id": "R09",
+      "history": [
+        "Review E1 A"
+      ],
+      "currentSource": "unavailable-current-source",
+      "command": "Replay E1 exact",
+      "expectedCurrentLabel": "SUPPRESSED",
+      "invariant": "Current unavailable/invalid source denies even otherwise identical replay"
+    }
+  ],
+  "revisionOracle": "Continuous artifact revision increases only on accepted new actions. Exact initial value, increment/range and wire representation require shared checkpoint; source changes/replays/denials/reads never reset or increment.",
+  "receiptOracle": "Original accepted event identity, trusted attribution/time/source/reason/outcome preserved; replay indicates historical/AlreadyApplied and does not represent current overlay. Exact fields/bytes pending shared checkpoint.",
+  "noSourceHelperForExpectedValues": true,
+  "runtimeExecuted": false
+}

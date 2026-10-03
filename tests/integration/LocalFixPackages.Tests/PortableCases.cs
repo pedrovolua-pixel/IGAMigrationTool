@@ -90,9 +90,9 @@ internal static class PortableCases
             versions.Remove("FixPackageTemplateDigest"); versions["ApplicationVersion"] = "synthetic-review-maturity-app-v1";
             Check.Equal(Expected.Canonical(versions), Expected.Canonical(JsonSerializer.SerializeToNode(original.Versions)), "new-input-only-settled-two-field-difference");
         }
-        foreach (var profile in DemoFixtureCatalog.Profiles.Where(p => p.Id != Expected.Profile))
+        foreach (var profile in DemoFixtureCatalog.Profiles.Where(p => p.Id != Expected.Profile && p.Id != DemoArtifactReviewCatalog.ProfileId))
             Check.That(!JsonSerializer.Serialize(profile.Versions).Contains("FixPackageTemplateDigest", StringComparison.Ordinal), "all-eight-historical-profile-new-lock-omitted");
-        Check.Equal(DemoFixtureCatalog.Profiles.Count, 9, "one-opt-in-plus-eight-historical-profiles");
+        Check.Equal(DemoFixtureCatalog.Profiles.Count, 10, "two-explicit-fix-profiles-plus-eight-earlier-profiles");
         Check.Equal(DemoFixtureCatalog.Baselines.Count, 9, "no-new-baseline");
         Check.Group("V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants");
     }
