@@ -1,6 +1,6 @@
 # Private pilot browser access: preparation and proposed execution
 
-Status: LOCAL TEMPLATES VERIFIED — PA01 and local PA02 complete; composed hosted checks pending; PA03/live deployment gated
+Status: LOCAL TEMPLATES VERIFIED — PA01 and local PA02 complete; configured hosted checks PASS on0dc58e8; PA03/live deployment gated
 Owner: Azure/BFF coordinator
 Date: 2026-10-02
 Approved product/technical basis: [feature003](../../specs/003-health-assessment/product-spec.md), [technical specification](../../specs/003-health-assessment/technical-spec.md), [test plan](../../specs/003-health-assessment/test-plan.md), accepted ADR-0004/0009.
@@ -89,3 +89,8 @@ The [post-pilot HTTPS portal plan](post-pilot-https-portal.md) is deferred until
 [Executed evidence](../../docs/development/evidence/private-browser-access-implementation-20261002.json) binds the final local source84b53eb, worker97cc60b and non-author auth_transport review. Build/lint of all21 Bicep files passed with zero diagnostics. New cases:49 workstation compiled mutations,48 input negatives,16 DNS mutations,16 composition mutations,19 provider metadata negatives and17 actual combined CLI denials =165; synthetic positive baselines passed. Existing private-services/PostgreSQL/compute/monitor/foundation-composition/inactive-Entra policies passed. JSON/local links, protected-account exclusion, diff and whole-checkout Gitleaks checks executed; final canonical closure repeats them. No new runtime dependency/migration or Azure action. Four additive draft/base conflicts are reconciled for configured combined CI; no hosted pass is claimed before execution.
 
 Scope and output checker findings were corrected and independently reprobed before VERIFIED. No Windows update/agent policy was invented; official image defaults require live patch/browser readiness proof. Required input validation does not authorize deployment or prove a string review reference. Exact provider/effective network/OS/DNS/TLS/cost/cleanup and BFF/identity/key/audit cases remain NOT VERIFIED. Original preparation evidence remains historical. The private board is stale for this checkpoint because its specific publishing action remains rejected/pending approval.
+
+
+## Hosted verification closure — 2026-10-02
+
+Configured [bootstrap37080912801](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37080912801) and [package37080912872](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37080912872) are terminal PASS on immutable combined source `0dc58e8fe69eb501510a9a5b183bd32f48f66f63`, including Linux infrastructure/optional Bastion and both Windows collector jobs. The earlier pending observations describe their recording checkpoints. No runtime/template change is made by this evidence closure. The clean completed writing checkout was removed after its reviewed source was preserved in the integrated commits and retained branch. Historical GitGuardian digest incidents still need human disposition before merge; no scanner result was suppressed. Live PA03/G1–G9/Milestone2 remain NOT VERIFIED. Private BFF board publication remains blocked by the separately pending automatic-review credential/network action; canonical records are authoritative.
