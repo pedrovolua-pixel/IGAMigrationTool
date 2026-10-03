@@ -227,7 +227,9 @@
     "originalConsolePassed": 2849,
     "newFailureLabelObserved": true,
     "newProbePassAbsent": true,
-    "scope": "External test-only Compile substitution of new probe class; actual existing Program wrapper and production module unchanged. Output isolated from ordinary source-bound build. No repository source edits."
+    "scope": "External test-only Compile substitution constrained to test project; original Program wrapper and tracked production source unchanged. Reflection guard proves no substituted class in production assembly.",
+    "projectScopeGuard": "MSBuildProjectName == SyntheticMcp.Tests; reflection confirms substituted class absent from production assembly.",
+    "initialControlQualification": "Initial unconstrained ItemGroup could apply to transitive ProjectReferences. Original control source/targets/log/evidence preserved; constrained final control supersedes its binary-scope claim."
   },
   "nonauthorReview": {
     "date": "2026-10-03",
@@ -580,7 +582,782 @@
       "bytes": 282
     }
   ],
-  "hosted": "Intermediate native jobs preserved; final observed source-bound results appended before closure. No unobserved full-bootstrap pass inferred.",
+  "hosted": {
+    "sourceCommit": "cb38bb69483e3983a1ccb84734001915cdbadb6f",
+    "observation": "native GitHub connector; completed success; partial repository gates only",
+    "runs": {
+      "workflow_runs": [
+        {
+          "id": 37154105078,
+          "name": "Azure development package (partial checks)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 128,
+          "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37154105078/jobs",
+          "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37154105078/logs",
+          "workflow_id": 372721003
+        },
+        {
+          "id": 37154105088,
+          "name": "Bootstrap checks (partial gate)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 218,
+          "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37154105088/jobs",
+          "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37154105088/logs",
+          "workflow_id": 370675336
+        }
+      ]
+    },
+    "jobs": {
+      "jobs": [
+        {
+          "id": 111293812692,
+          "name": "collector-windows (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37154105088,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Install approved SDK",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Restore locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check approved Phase1B Windows portable contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Check Windows offline synthetic AI packets",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Check Windows offline synthetic proposed output",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Check Windows independent fake-provider composition",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Check Windows offline AI preview and inert HTML",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Check Windows fictional fix packages and inert HTML",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Build collector host tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Verify Windows local Phase1D synthetic MCP boundaries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Check Windows fixed offline AI workspace source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Check Windows synthetic evaluation accuracy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Check Windows approved synthetic evaluation policy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Check Windows saved-source capture canonical contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Check Windows isolated evaluation workflow",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Check Windows fictional fix-package workspace sources",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Check Windows portable artifact review and independent source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            },
+            {
+              "name": "Check Windows portable planning tasks and independent source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 20
+            },
+            {
+              "name": "Check Windows collector host and protected key behavior",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21
+            },
+            {
+              "name": "Publish self-contained collector",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 22
+            },
+            {
+              "name": "Smoke test Windows Service and one-shot CLI",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 23
+            },
+            {
+              "name": "Post Install approved SDK",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 45
+            },
+            {
+              "name": "Post Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 46
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 47
+            }
+          ]
+        },
+        {
+          "id": 111293812868,
+          "name": "collector-windows (windows-2025)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37154105088,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Install approved SDK",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Restore locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Check approved Phase1B Windows portable contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Check Windows offline synthetic AI packets",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Check Windows offline synthetic proposed output",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Check Windows independent fake-provider composition",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Check Windows offline AI preview and inert HTML",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Check Windows fictional fix packages and inert HTML",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Build collector host tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Verify Windows local Phase1D synthetic MCP boundaries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Check Windows fixed offline AI workspace source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Check Windows synthetic evaluation accuracy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Check Windows approved synthetic evaluation policy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Check Windows saved-source capture canonical contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Check Windows isolated evaluation workflow",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Check Windows fictional fix-package workspace sources",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Check Windows portable artifact review and independent source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            },
+            {
+              "name": "Check Windows portable planning tasks and independent source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 20
+            },
+            {
+              "name": "Check Windows collector host and protected key behavior",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21
+            },
+            {
+              "name": "Publish self-contained collector",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 22
+            },
+            {
+              "name": "Smoke test Windows Service and one-shot CLI",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 23
+            },
+            {
+              "name": "Post Install approved SDK",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 45
+            },
+            {
+              "name": "Post Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 46
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 47
+            }
+          ]
+        },
+        {
+          "id": 111293812937,
+          "name": "dotnet-bootstrap",
+          "status": "completed",
+          "conclusion": "success",
+          "run_id": 37154105088,
+          "logs_url": null,
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1
+            },
+            {
+              "name": "Initialize containers",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2
+            },
+            {
+              "name": "Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3
+            },
+            {
+              "name": "Scan checkout for secrets",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4
+            },
+            {
+              "name": "Install approved SDK",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5
+            },
+            {
+              "name": "Restore locked dependencies",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6
+            },
+            {
+              "name": "Verify formatting",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7
+            },
+            {
+              "name": "Build",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8
+            },
+            {
+              "name": "Verify approved local Phase1D synthetic MCP boundaries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9
+            },
+            {
+              "name": "Check approved Phase1B portable and owning PostgreSQL contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10
+            },
+            {
+              "name": "Execute Linux isolated CSV renderer and adversarial boundary probes",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11
+            },
+            {
+              "name": "Run synthetic artifact-integrity checks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12
+            },
+            {
+              "name": "Check synthetic evaluation accuracy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13
+            },
+            {
+              "name": "Check approved synthetic evaluation policy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14
+            },
+            {
+              "name": "Check isolated synthetic evaluation workflow",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15
+            },
+            {
+              "name": "Check actual saved Phase1B evaluation source capture",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16
+            },
+            {
+              "name": "Check assessment coverage reconciliation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17
+            },
+            {
+              "name": "Check assessment capability locks",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 18
+            },
+            {
+              "name": "Check synthetic baseline planning and coverage integration",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 19
+            },
+            {
+              "name": "Check durable synthetic run contracts",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 20
+            },
+            {
+              "name": "Check deterministic fixture rules and health scoring",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 21
+            },
+            {
+              "name": "Check independent maturity and durable finding review",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 22
+            },
+            {
+              "name": "Check detached canonical draft and inert Markdown",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 23
+            },
+            {
+              "name": "Check offline synthetic AI packets and proposed output",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 24
+            },
+            {
+              "name": "Check offline synthetic AI preview and inert HTML",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 25
+            },
+            {
+              "name": "Check saved-source offline AI workspace projection",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 26
+            },
+            {
+              "name": "Check fictional unverified fix packages and inert HTML",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 27
+            },
+            {
+              "name": "Check saved-source fictional fix-package workspace projection",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 28
+            },
+            {
+              "name": "Check synthetic artifact review contracts and independent durable source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 29
+            },
+            {
+              "name": "Check synthetic planning tasks and independent durable source",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 30
+            },
+            {
+              "name": "Check canonical unverified recommendation guidance",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 31
+            },
+            {
+              "name": "Check independent recommendation identities, originals and saved review bridge",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 32
+            },
+            {
+              "name": "Check independent canonical draft goldens and saved source bridge",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 33
+            },
+            {
+              "name": "Check independent review and maturity goldens",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 34
+            },
+            {
+              "name": "Check persisted analysis and independent scoring goldens",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 35
+            },
+            {
+              "name": "Check real PostgreSQL persistence and process recovery",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 36
+            },
+            {
+              "name": "Build and audit pinned consultant view",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 37
+            },
+            {
+              "name": "Build isolated evaluation workspace",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 38
+            },
+            {
+              "name": "Check independent offline AI preview component",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 39
+            },
+            {
+              "name": "Check independent fictional fix-package component",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 40
+            },
+            {
+              "name": "Check independent artifact review component",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 41
+            },
+            {
+              "name": "Check independent planning task component",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 42
+            },
+            {
+              "name": "Check consultant browser flow and recovery",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 43
+            },
+            {
+              "name": "Check isolated evaluation HTTP and browser flow",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 44
+            },
+            {
+              "name": "Check analysis findings, scoring and browser read recovery",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 45
+            },
+            {
+              "name": "Check consultant review history, current scores and independent maturity",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 46
+            },
+            {
+              "name": "Check draft summary, technical and inert Markdown browser parity",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 47
+            },
+            {
+              "name": "Check structured recommendation guidance and inert consultant display",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 48
+            },
+            {
+              "name": "Check offline AI preview in the consultant workspace",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 49
+            },
+            {
+              "name": "Check actual inert offline AI preview browser",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 50
+            },
+            {
+              "name": "Check actual inert fictional fix-package browser",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 51
+            },
+            {
+              "name": "Check fictional fix packages in the consultant workspace",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 52
+            },
+            {
+              "name": "Check opt-in artifact review browser history and recovery",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 53
+            },
+            {
+              "name": "Check opt-in planning task browser history and recovery",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 54
+            },
+            {
+              "name": "Check collector permission decisions",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 55
+            },
+            {
+              "name": "Check collector host contract",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 56
+            },
+            {
+              "name": "Check project dependency boundaries",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 57
+            },
+            {
+              "name": "Install pinned Bicep CLI",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 58
+            },
+            {
+              "name": "Compile, lint and check evidence-store baseline",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 59
+            },
+            {
+              "name": "Compile, lint and check Service Bus baselines",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 60
+            },
+            {
+              "name": "Compile, lint and check pilot network-egress baseline",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 61
+            },
+            {
+              "name": "Compile and lint workload identity module",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 62
+            },
+            {
+              "name": "Validate private Azure development foundation",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 63
+            },
+            {
+              "name": "Post Install approved SDK",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 124
+            },
+            {
+              "name": "Post Check out repository",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 125
+            },
+            {
+              "name": "Stop containers",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 126
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 127
+            }
+          ]
+        }
+      ]
+    }
+  },
   "applicability": "Whole-solution restore/format/build, original oracle, two unit suites, composed integration/new regression, architecture, dependency/secret checks executed. Local ordinary-host/browser/manual/PDF/customer/provider/retention/distributed tests not rerun or invented: no production/host/UI/API changes. Configured hosted regression outcomes reported separately.",
   "changes": {
     "testFiles": 3,
@@ -599,5 +1376,761 @@
     "Cycle02 I01\u2013I11 remain open;P02-T01\u201318 proposed/not executed.",
     "Full Milestone11/Phase1D/UAT/G1\u2013G9 NOT VERIFIED.",
     "Private publication confirmed only by separate native receipt."
-  ]
+  ],
+  "failureControlInitial": {
+    "status": "PASS_EXPECTED_FAILURE_EXIT",
+    "sourceCommit": "ab0459ca45bd53793582236ec7c21675baba2cfd",
+    "buildCommand": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "build",
+      "tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:CustomAfterMicrosoftCommonTargets=/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/failure-control/MinimizationFailureControl.targets",
+      "-p:OutputPath=/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/failure-control/bin"
+    ],
+    "buildExit": 0,
+    "runCommand": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/failure-control/bin/SyntheticMcp.Tests.dll"
+    ],
+    "expectedAndObservedExit": 1,
+    "originalConsolePassed": 2849,
+    "newFailureLabelObserved": true,
+    "newProbePassAbsent": true,
+    "scope": "External test-only Compile substitution of new probe class; actual existing Program wrapper and production module unchanged. Output isolated from ordinary source-bound build. No repository source edits.",
+    "scopeQualification": "Initial unconstrained ItemGroup could apply to transitive ProjectReferences; final constrained control supersedes binary-scope claim."
+  },
+  "nonauthorFailureControlReview": {
+    "reviewer": "/root/p1d_c03_review",
+    "status": "CLOSED_NO_UNRESOLVED_FINDINGS",
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/failure-control/bin/SyntheticMcp.Tests.dll"
+    ],
+    "observedExit": 1,
+    "expectedExit": 1,
+    "originalSuitePass": 2849,
+    "newProbePassAbsent": true,
+    "injectedLabelObserved": true,
+    "reflectionScopeGuardPassed": true,
+    "otherExecuted": [
+      "Nine coordinator check-log hashes match, all recorded check exits0"
+    ],
+    "limits": [
+      "Full runtime suites remain coordinator-executed; prior read-only/no-runtime review closure retained as historical."
+    ],
+    "initialControl": "Initial unconstrained target/source/logs/evidence preserved; final constrained target explicitly supersedes initial binary-scope claim."
+  },
+  "artifactPreservation": {
+    "status": "PRESERVED_BEFORE_OWN_WORKTREE_REMOVAL",
+    "artifacts": [
+      {
+        "artifact": "architecture.log",
+        "bytes": 116,
+        "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+      },
+      {
+        "artifact": "baseline-commit.txt",
+        "bytes": 41,
+        "sha256": "5f3623a283e017fc34c9ef7038ee5f17489d0e681f6df2b550c9204d7e9d85c0"
+      },
+      {
+        "artifact": "baseline-source-hashes.json",
+        "bytes": 48601,
+        "sha256": "2334c371cca3a27dc8228ae3cf1e3f4b35a7193ac89be397f8ce8f1857e39340"
+      },
+      {
+        "artifact": "boundary.log",
+        "bytes": 116,
+        "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6"
+      },
+      {
+        "artifact": "build.log",
+        "bytes": 15130,
+        "sha256": "2127d68577b2c0a22e980acd2e503e410e7275f6a880cb2a1c49b52e9c8a4b7a"
+      },
+      {
+        "artifact": "canonical-additions.json",
+        "bytes": 6399,
+        "sha256": "def5ac76305fa4bdc6083bf1bc281d07ee2720f2d023d8a8b55fd6cdcaedf4ef"
+      },
+      {
+        "artifact": "checks.json",
+        "bytes": 4181,
+        "sha256": "05b895968ca131b68b9a9686761264f3e8e5338009ea9902d19e0f3e0bdadc9d"
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests",
+        "bytes": 124712,
+        "sha256": "c3c8ca37613e285db0a625f995993cd6915ae1c963b6b0bce95631968a654b99"
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.deps.json",
+        "bytes": 797,
+        "sha256": "290695616edb392a2a1d49b2180bca010411234851a4642b325754fd616cbb8a"
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.dll",
+        "bytes": 107520,
+        "sha256": "7ef9ca54cf3a7993d82acee9c2abf205c81c602708bee56d3cb9dd8a10696fe6"
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.pdb",
+        "bytes": 27848,
+        "sha256": "f72a30341db40f145bda89bbb8fb61d900bf8e15455736fc2124392dd954b641"
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.runtimeconfig.json",
+        "bytes": 330,
+        "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.dll",
+        "bytes": 77312,
+        "sha256": "d1e036ad4d39c98408b2300ca590094be59042ce76d23def32d2aee58ad8cc2f"
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.pdb",
+        "bytes": 24716,
+        "sha256": "f1bf50e179e8b124932ce2388a7a6d1803a91fb48f8a014f4b4b1ca9e18f62f8"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/author_oracle.py",
+        "bytes": 5342,
+        "sha256": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/denial-corpus.json",
+        "bytes": 7798,
+        "sha256": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/golden-hashes.json",
+        "bytes": 1203,
+        "sha256": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/manifest.json",
+        "bytes": 2472,
+        "sha256": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-coverage-a.json",
+        "bytes": 159,
+        "sha256": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-coverage-b.json",
+        "bytes": 135,
+        "sha256": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-finding-a.json",
+        "bytes": 237,
+        "sha256": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-finding-b.json",
+        "bytes": 242,
+        "sha256": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-finding-c.json",
+        "bytes": 237,
+        "sha256": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-rec-a.json",
+        "bytes": 230,
+        "sha256": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-rec-b.json",
+        "bytes": 230,
+        "sha256": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-rec-c.json",
+        "bytes": 230,
+        "sha256": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-ref-a.json",
+        "bytes": 92,
+        "sha256": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-ref-b.json",
+        "bytes": 92,
+        "sha256": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-score.json",
+        "bytes": 104,
+        "sha256": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10"
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-status.json",
+        "bytes": 148,
+        "sha256": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef"
+      },
+      {
+        "artifact": "composed.log",
+        "bytes": 378,
+        "sha256": "216ff548639be7c2dd414172e9a7729cd08ff70c87fa1ce1c500882e4bc6b73f"
+      },
+      {
+        "artifact": "coordinator-proof-correction.json",
+        "bytes": 328,
+        "sha256": "6572117a73ad03a53cf7c13045c0d53f57c74ca45c9b429bfbd84db04aa5546f"
+      },
+      {
+        "artifact": "dependency-audit.log",
+        "bytes": 13495,
+        "sha256": "2836ba46d67ca3d7d451e853d279037d6c3f4143ab98c1f818697004434eb217"
+      },
+      {
+        "artifact": "documentary-checks.json",
+        "bytes": 3588,
+        "sha256": "53923c2fc105f2b0e5e46b55cedeac5306d6869c716810ea6d3c09efb58acf4c"
+      },
+      {
+        "artifact": "failure-control/MinimizationFailureControl.cs",
+        "bytes": 404,
+        "sha256": "baee854e190e33a33bfee992a31cedcee380e7943d6d95da9188b0faaf5cd8cf"
+      },
+      {
+        "artifact": "failure-control/MinimizationFailureControl.targets",
+        "bytes": 351,
+        "sha256": "d61b43f912a6344bab8042c956a0fc2e77798e47479684f1672d444762143ea9"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.Tests",
+        "bytes": 124712,
+        "sha256": "c3c8ca37613e285db0a625f995993cd6915ae1c963b6b0bce95631968a654b99"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.Tests.deps.json",
+        "bytes": 797,
+        "sha256": "290695616edb392a2a1d49b2180bca010411234851a4642b325754fd616cbb8a"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.Tests.dll",
+        "bytes": 83968,
+        "sha256": "1ceb88a5994c245f70f0d3fd637c5237cda46bcb153300733347a349f2eea61d"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.Tests.pdb",
+        "bytes": 24344,
+        "sha256": "0a386e9b65806c08ccd8f0a1ef36776e65ec02d8bd4274340058a01373434491"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.Tests.runtimeconfig.json",
+        "bytes": 330,
+        "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.deps.json",
+        "bytes": 408,
+        "sha256": "765c23e636fe12377890350ba87e1b97e50a4d69fadb90d12dad1bddb5f68eba"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.dll",
+        "bytes": 77312,
+        "sha256": "d1e036ad4d39c98408b2300ca590094be59042ce76d23def32d2aee58ad8cc2f"
+      },
+      {
+        "artifact": "failure-control/bin/SyntheticMcp.pdb",
+        "bytes": 24716,
+        "sha256": "f1bf50e179e8b124932ce2388a7a6d1803a91fb48f8a014f4b4b1ca9e18f62f8"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/author_oracle.py",
+        "bytes": 5342,
+        "sha256": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/denial-corpus.json",
+        "bytes": 7798,
+        "sha256": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/golden-hashes.json",
+        "bytes": 1203,
+        "sha256": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/manifest.json",
+        "bytes": 2472,
+        "sha256": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-coverage-a.json",
+        "bytes": 159,
+        "sha256": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-coverage-b.json",
+        "bytes": 135,
+        "sha256": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-finding-a.json",
+        "bytes": 237,
+        "sha256": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-finding-b.json",
+        "bytes": 242,
+        "sha256": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-finding-c.json",
+        "bytes": 237,
+        "sha256": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-rec-a.json",
+        "bytes": 230,
+        "sha256": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-rec-b.json",
+        "bytes": 230,
+        "sha256": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-rec-c.json",
+        "bytes": 230,
+        "sha256": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-ref-a.json",
+        "bytes": 92,
+        "sha256": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-ref-b.json",
+        "bytes": 92,
+        "sha256": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-score.json",
+        "bytes": 104,
+        "sha256": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10"
+      },
+      {
+        "artifact": "failure-control/bin/fixtures/syn-status.json",
+        "bytes": 148,
+        "sha256": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef"
+      },
+      {
+        "artifact": "failure-control/build.log",
+        "bytes": 376,
+        "sha256": "e12a038849511fdaefb68c321ed955298144ce74286d835c02f949acf3c55c9f"
+      },
+      {
+        "artifact": "failure-control/evidence.json",
+        "bytes": 1563,
+        "sha256": "682de92059434a503ab77e11af0b5a03c9280ac78cc92f8591e9761559c76a7d"
+      },
+      {
+        "artifact": "failure-control/initial-MinimizationFailureControl.cs",
+        "bytes": 170,
+        "sha256": "bfb2bdeaedc025d73508960214557e166984e09594ea2a4d40d86648eaa66225"
+      },
+      {
+        "artifact": "failure-control/initial-MinimizationFailureControl.targets",
+        "bytes": 291,
+        "sha256": "1b17f6a38411dcc137ae59383020ed4d595d683e939cc175ef285cc00117b704"
+      },
+      {
+        "artifact": "failure-control/initial-build.log",
+        "bytes": 376,
+        "sha256": "833ed17053235d7c82dfc939719e4533a7d91e3eb0e7f7786d59afe3d5c6ffe4"
+      },
+      {
+        "artifact": "failure-control/initial-evidence.json",
+        "bytes": 1193,
+        "sha256": "de49c164d9ee473a0806780224bc8af91525a9c8695baefe1c3261b659d65b6a"
+      },
+      {
+        "artifact": "failure-control/initial-run.log",
+        "bytes": 197,
+        "sha256": "16ec00f9c2a7374dcc5a04c961eb0981cd6ba24ce383585523fba230a1defb08"
+      },
+      {
+        "artifact": "failure-control/run.log",
+        "bytes": 197,
+        "sha256": "16ec00f9c2a7374dcc5a04c961eb0981cd6ba24ce383585523fba230a1defb08"
+      },
+      {
+        "artifact": "format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "artifact": "hosted-final.json",
+        "bytes": 24277,
+        "sha256": "51f5560e8d655e1042eaafcad7fca8479c1454f9e9601f77042868bd570ae256"
+      },
+      {
+        "artifact": "hosted-intermediate.json",
+        "bytes": 26905,
+        "sha256": "499ea10b68aeef53e75ae61c39c689c5614e6cb1a967c95acfdda9d103a8aaf3"
+      },
+      {
+        "artifact": "native-initial-publication.json",
+        "bytes": 1827,
+        "sha256": "2536cbad8d91e53a0c47924af9bae189f2bcd8b98fc5ea95c483d72bbd9893f4"
+      },
+      {
+        "artifact": "nonauthor-failure-control-review.json",
+        "bytes": 861,
+        "sha256": "5da406860e5ec059685f16f47fa6e3909c559ce4ca4c7621332e42cfaeb82b7d"
+      },
+      {
+        "artifact": "nonauthor-review.json",
+        "bytes": 1650,
+        "sha256": "574731bf75f0befb8eefd286ca11adba1a8a5df529ab3a426fcf0450e2dbe8ef"
+      },
+      {
+        "artifact": "oracle.log",
+        "bytes": 81,
+        "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45"
+      },
+      {
+        "artifact": "prepublication-artifacts.json",
+        "bytes": 6355,
+        "sha256": "6f78f697ed80935f7116243ad9467a72859a42e48e1b5dba66aaf1e00b990162"
+      },
+      {
+        "artifact": "publication.log",
+        "bytes": 61,
+        "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb"
+      },
+      {
+        "artifact": "record-scan/docs/development/evidence/phase1d-minimization-cycle03-20261003.json",
+        "bytes": 36907,
+        "sha256": "f30e2ca024e2e70f74900844a8c73ef9ae3e8414c2e217b275b5385297c8a744"
+      },
+      {
+        "artifact": "record-scan/docs/development/synthetic-mcp-local-harness.md",
+        "bytes": 5052,
+        "sha256": "6f4fa8ec9f085fa1f19fb27c8b9b769c18c749b4e8031f5c57f8870110087c7e"
+      },
+      {
+        "artifact": "record-scan/plans/active/local-pilot-phase1d-minimization-verification-cycle03.md",
+        "bytes": 5818,
+        "sha256": "bff3bde6d2d8a659cd64ffaad0e2d4cc44c8ec4efc50a2ec32ff8aec1726ddfe"
+      },
+      {
+        "artifact": "record-scan/specs/003-health-assessment/evidence-index.md",
+        "bytes": 65828,
+        "sha256": "1f4c323886648f1a928ed237702c63afe47fb495e2b10e8ee523af513ca87feb"
+      },
+      {
+        "artifact": "record-scan/specs/003-health-assessment/implementation-plan.md",
+        "bytes": 155348,
+        "sha256": "10737dbaf3920dcefb355b7f27386c3f72262eb056467cc214d90e01132bd0e6"
+      },
+      {
+        "artifact": "record-scan/specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "bytes": 5631,
+        "sha256": "8c86ef740b8b51ed8f9e35eac2530930523d71d7b83f987a7610e600fe9f6ac9"
+      },
+      {
+        "artifact": "record-scan/specs/003-health-assessment/status.md",
+        "bytes": 95451,
+        "sha256": "10d7b2428c239a3b369c3bea8b9d67baacd23def386b06540cd2e48d3cff8914"
+      },
+      {
+        "artifact": "record-scan/tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md",
+        "bytes": 7818,
+        "sha256": "86d757bb4aa1cbcefbf01ca487f5da4ce237f31a40402c54b0e58521f1fc3709"
+      },
+      {
+        "artifact": "restore-native.json",
+        "bytes": 13200,
+        "sha256": "c6fcd2318c33ce878a33a741890c87eaadaa9ded700283680ca7313c90fde87c"
+      },
+      {
+        "artifact": "secrets.log",
+        "bytes": 81,
+        "sha256": "6ed70fe096ebcc8f964f0889319aece66d3cf53f56afb5ec5da8f677d8ef9501"
+      },
+      {
+        "artifact": "site-1440.png",
+        "bytes": 288173,
+        "sha256": "8d235df394b0113bfea1c46d906fe6255ee41ef653dc52cf5d8795af740e7957"
+      },
+      {
+        "artifact": "site-320.png",
+        "bytes": 117199,
+        "sha256": "40e0b2e349badea40fff13bc90077e04f164118f543c9a93c885b8544de1b2d6"
+      },
+      {
+        "artifact": "site-390.png",
+        "bytes": 135745,
+        "sha256": "31b2a2cb6024cb3e5b977add882da02ba8b333aa0d51c783f2bab69cd1a9bc37"
+      },
+      {
+        "artifact": "site-before.html",
+        "bytes": 109311,
+        "sha256": "cf49e52e59bb38667b9e68141717172e961cd6d6d03d6b4a195959ccc1649c3e"
+      },
+      {
+        "artifact": "site-initial.tar.gz",
+        "bytes": 27276,
+        "sha256": "0de749cd8d3131f4d42df3d49d642685d514d586d40579b3f596b24d796b1984"
+      },
+      {
+        "artifact": "site-preservation.json",
+        "bytes": 638,
+        "sha256": "0e9761a64d4662bb2b6035e841eab3d9686888666b76001c18804e169b5cee6e"
+      },
+      {
+        "artifact": "site-qa.json",
+        "bytes": 580,
+        "sha256": "40c046015090805f443935d21b9b12a6d9134e173b72a800d1b59160bd4b5542"
+      },
+      {
+        "artifact": "site-qa.mjs",
+        "bytes": 4268,
+        "sha256": "9fec1c2bc3b9966c770b1fa3302b85334f6c60aca5e4d64e1071f57528d0e013"
+      },
+      {
+        "artifact": "site-task-1440.png",
+        "bytes": 370659,
+        "sha256": "031f5a83bc2ccb15e241af99047826fd5bc24f4eee5287d859a247e1212c9406"
+      },
+      {
+        "artifact": "site-task-320.png",
+        "bytes": 87062,
+        "sha256": "66a614ab3d28b797244e87fe8c5728db00a51dca68598dc086f17ba173ba886c"
+      },
+      {
+        "artifact": "site-task-390.png",
+        "bytes": 101080,
+        "sha256": "3572fd151fa3779a286024241415cce48c01abe71c923014b0bb5082843e2021"
+      },
+      {
+        "artifact": "source-preservation.json",
+        "bytes": 1007,
+        "sha256": "7e69c2bb156880c7f44cc0c92552484802d62ae6360c0ef91e000c6adffac1a8"
+      },
+      {
+        "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.cs",
+        "bytes": 17881,
+        "sha256": "aaab221cb3e0f66b7e9fc7fb63b80d2bff644ca13b6a19f9712d8ef43a5865eb"
+      },
+      {
+        "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md",
+        "bytes": 7818,
+        "sha256": "86d757bb4aa1cbcefbf01ca487f5da4ce237f31a40402c54b0e58521f1fc3709"
+      },
+      {
+        "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/Program.cs",
+        "bytes": 46704,
+        "sha256": "50502cd5ae39e9fc6cb4f00397bf4a1bfc2c9b7256ed4f122eb9d28c5ed79245"
+      },
+      {
+        "artifact": "worker/MinimizationProbe.cs",
+        "bytes": 150,
+        "sha256": "70f0dde2dd8c5294f8db6aa8623b08e46b2fd41d9ae6b21f14423ae4f21d61ba"
+      },
+      {
+        "artifact": "worker/MinimizationProbe.targets",
+        "bytes": 358,
+        "sha256": "bdba4e513a5025611f123953e2e85f831157cb3e199af4e422b95ac0346f22ce"
+      },
+      {
+        "artifact": "worker/build-final.json",
+        "bytes": 486,
+        "sha256": "7d7006397c4c238c2b4ed29f396a7094fb0ea047b225cceb422e02ac2b20cc71"
+      },
+      {
+        "artifact": "worker/build-initial.txt",
+        "bytes": 351,
+        "sha256": "a85fcbda3bf1cd37ba6b8aba4a844cd3ec8ac7da1c2836406d2473c609e96cda"
+      },
+      {
+        "artifact": "worker/evidence-hashes.json",
+        "bytes": 1302,
+        "sha256": "63b26356686e973f948ecbd238e34b6e8542930d771208b56ac97621781f804d"
+      },
+      {
+        "artifact": "worker/fixture-oracle.json",
+        "bytes": 301,
+        "sha256": "3f3f59e919a313e251493991370e7f8f3e78ccf52463eec4f8d0b2ad23ebc745"
+      },
+      {
+        "artifact": "worker/format-final.json",
+        "bytes": 356,
+        "sha256": "a91072232c283bc8643d8662b87cc63decaa7c9b06e319a47b4579c2de0e8004"
+      },
+      {
+        "artifact": "worker/format-initial.txt",
+        "bytes": 1329,
+        "sha256": "e78a4a772ad1b9ca4f966f0ee60b16aa92ef3cc7d6194a6672c90fcd9ac2876e"
+      },
+      {
+        "artifact": "worker/handoff.json",
+        "bytes": 841,
+        "sha256": "a2d2e30be8172681b5e72f626daf872b1cc3c127d87158a92c4c0c69fa20e24d"
+      },
+      {
+        "artifact": "worker/oracle-before-production.json",
+        "bytes": 2321,
+        "sha256": "187e62e02bcf46aecdf7eeac0193fb584630eb5cc53505d20ce51dc0e03b620d"
+      },
+      {
+        "artifact": "worker/oracle-initial-note.md",
+        "bytes": 3253,
+        "sha256": "ffa1a80fc3d3b3226e34f84d659eaa6d480fcd7241b22b15f20129f1f11eac10"
+      },
+      {
+        "artifact": "worker/original-suite-final.json",
+        "bytes": 258,
+        "sha256": "74d5dec3629606c1d3a4f3bf67a47ff125f6191edce34639368e995b2b4f6a46"
+      },
+      {
+        "artifact": "worker/originalFormat.json",
+        "bytes": 1536,
+        "sha256": "81e6540ea34559865820db5500e9715509a622a2298ec75106b7bf9968abde1e"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.Tests",
+        "bytes": 124712,
+        "sha256": "c3c8ca37613e285db0a625f995993cd6915ae1c963b6b0bce95631968a654b99"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.Tests.deps.json",
+        "bytes": 797,
+        "sha256": "290695616edb392a2a1d49b2180bca010411234851a4642b325754fd616cbb8a"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.Tests.dll",
+        "bytes": 107520,
+        "sha256": "0474aea6bb4bb03f612781c4baf60b92651f297eb22873d84e515a418e3f89ea"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.Tests.pdb",
+        "bytes": 28152,
+        "sha256": "31f895c4db73ae86d9f7bbf38d4872f1d1eac465f12c8973891c74ec1f578e85"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.Tests.runtimeconfig.json",
+        "bytes": 330,
+        "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.deps.json",
+        "bytes": 408,
+        "sha256": "765c23e636fe12377890350ba87e1b97e50a4d69fadb90d12dad1bddb5f68eba"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.dll",
+        "bytes": 77312,
+        "sha256": "bc177550d25c9e6f3febd4e6b252b4f9ec4410c2e8d964c92a0f68be05679ce9"
+      },
+      {
+        "artifact": "worker/probe-bin/SyntheticMcp.pdb",
+        "bytes": 24716,
+        "sha256": "b5c3c7385f2156d39cc43b11a20b9f6f9ee11d5b0b0be4b32801b82a3b17f629"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/author_oracle.py",
+        "bytes": 5342,
+        "sha256": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/denial-corpus.json",
+        "bytes": 7798,
+        "sha256": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/golden-hashes.json",
+        "bytes": 1203,
+        "sha256": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/manifest.json",
+        "bytes": 2472,
+        "sha256": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-coverage-a.json",
+        "bytes": 159,
+        "sha256": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-coverage-b.json",
+        "bytes": 135,
+        "sha256": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-finding-a.json",
+        "bytes": 237,
+        "sha256": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-finding-b.json",
+        "bytes": 242,
+        "sha256": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-finding-c.json",
+        "bytes": 237,
+        "sha256": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-rec-a.json",
+        "bytes": 230,
+        "sha256": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-rec-b.json",
+        "bytes": 230,
+        "sha256": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-rec-c.json",
+        "bytes": 230,
+        "sha256": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-ref-a.json",
+        "bytes": 92,
+        "sha256": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-ref-b.json",
+        "bytes": 92,
+        "sha256": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-score.json",
+        "bytes": 104,
+        "sha256": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10"
+      },
+      {
+        "artifact": "worker/probe-bin/fixtures/syn-status.json",
+        "bytes": 148,
+        "sha256": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef"
+      },
+      {
+        "artifact": "worker/probe-run.txt",
+        "bytes": 248,
+        "sha256": "60f30aec1e90c1a184e71e6dbbd5604dc3fe84c649a68e3b7b706821e21160f3"
+      },
+      {
+        "artifact": "worker/restore.txt",
+        "bytes": 282,
+        "sha256": "891f724f9f6e8a61c506981067351292799d8fa56b8ae7359b96eb06e7e21b7f"
+      }
+    ]
+  }
 }
