@@ -35,7 +35,7 @@
   "diagnosis": "Deterministically reproduced in isolated owned PostgreSQL18.4 fixture: a frozen timestamp ending in nine ticks is rounded by the SQL timestamp cast one tick into its future; production admission correctly rejects it. Initial and sampled synthetic clocks need PostgreSQL microsecond precision.",
   "repairScope": "Isolated fixture-only author and independent reviewer; no production policy, SQL, API, dependency, ingress or cloud change authorized",
   "repairResult": {
-    "status": "LOCAL VERIFIED; hosted rerun pending",
+    "status": "LOCAL VERIFIED; hosted repair verification SUCCESS at ba2f447",
     "workerCommit": "31bb30bf059e8f8998f13627ce442d5bcbd6bc1a",
     "workerAssertions": [
       644,
@@ -129,5 +129,88 @@
       "path": "specs/003-health-assessment/evidence-index.md",
       "sha256": "9e11573e5690eb74851af112e02bb998e80f7093f9ac34d64ff6589dadbb77c4"
     }
-  ]
+  ],
+  "hostedRepairVerification": {
+    "testedCommit": "ba2f44740fc96eacf98f1635d64574633de35e47",
+    "recordedAtUtc": "2026-10-03T03:23:12.409548+00:00",
+    "bootstrap": {
+      "run": 37091900841,
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 111113825748,
+          "name": "dotnet-bootstrap",
+          "conclusion": "SUCCESS",
+          "successfulStepsIncludingCleanup": 61,
+          "actualPostgreSqlCompositionAssertions": 643,
+          "authorityAssertions": 120,
+          "auditAssertions": 81,
+          "realHttpsSharedPostgreSqlAssertions": 84,
+          "scope": "All configured Linux build/unit/integration/database/browser/dependency/infrastructure steps, including disabled HTTPS template validation, executed successfully"
+        },
+        {
+          "id": 111113825976,
+          "name": "collector-windows windows-2022",
+          "conclusion": "SUCCESS",
+          "successfulStepsIncludingCleanup": 19
+        },
+        {
+          "id": 111113826012,
+          "name": "collector-windows windows-2025",
+          "conclusion": "SUCCESS",
+          "successfulStepsIncludingCleanup": 19
+        }
+      ]
+    },
+    "package": {
+      "run": 37091900865,
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 111113825943,
+          "name": "bootstrap-package",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 111113826092,
+          "name": "bff-disabled-package",
+          "conclusion": "SUCCESS"
+        }
+      ]
+    },
+    "sourceBoundary": "Results bind testedCommit. Any subsequent receipt-only commit must preserve all runtime/test/infrastructure/workflow/project blobs; no later run is inferred as passing.",
+    "retainedFailure": "Original33f4b47 failure above is historical and unchanged",
+    "limits": "Configured workflows are partial pilot gates. No Entra/Graph/FIC/live identity, Azure topology, public admission, image promotion or production release proof; GitGuardian human disposition and private publisher block unchanged",
+    "canonicalBindings": [
+      {
+        "path": "plans/active/https-pilot-portal-preparation.md",
+        "sha256": "ed0615ed8a07d24c8788e79326a83eacef91af5097cd4eefba1ddcbe4e5a5e67"
+      },
+      {
+        "path": "specs/003-health-assessment/status.md",
+        "sha256": "d25c13b37294a1526b1249c401d3b6a6824e4cb9ab5f19c55bb7ca60efbc5adc"
+      },
+      {
+        "path": "specs/003-health-assessment/implementation-plan.md",
+        "sha256": "5c0881e540084219c139f251499c72fe79d61d0e0503431bf8505fcbb8b57bf6"
+      },
+      {
+        "path": "specs/003-health-assessment/evidence-index.md",
+        "sha256": "6677b8df89eb3e9a857a1694aab808ddc61cc885c56d9ca5cb19fc672c634dc9"
+      }
+    ],
+    "receiptReview": {
+      "reviewer": "package_hosting",
+      "result": "PASS",
+      "scope": "Five receipt-only documents; actual canonical hashes verified; no runtime/cloud rerun"
+    },
+    "receiptChecks": {
+      "markdownTargets": 281,
+      "headingAnchors": 12,
+      "officialIconByteChecks": 6,
+      "jsonProseAndDiff": "PASS",
+      "wholeCheckoutGitleaks": "PASS",
+      "runtimeTestsInfrastructureSqlWorkflowProjectsDiffFromTestedCommit": "EMPTY"
+    }
+  }
 }
