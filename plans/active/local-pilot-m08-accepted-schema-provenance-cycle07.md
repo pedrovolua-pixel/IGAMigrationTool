@@ -1,6 +1,6 @@
 # Milestone08 cycle07 — owning accepted-schema provenance
 
-Status: RUNNING frozen local engineering; runtime checks not yet executed
+Status: VERIFIED bounded local engineering; hosted/private publication and preservation pending
 Date: 2026-10-03
 Owner: Phase1C coordinator
 Stable source: 3551fe5693196ab371282c38bae53d2f9ed23f19
@@ -15,10 +15,10 @@ Expose actual accepted AI schema provenance through an additive metadata-only po
 | Source/policy/dependency audits | Three read-only workers; committed source and native reports only | VERIFIED |
 | Exact contract/test preparation | cycle05_source_audit in isolated coordinator checkout; two new accepted-schema contract/test documents only | VERIFIED |
 | Contract review, literal expectations and freeze | cycle05_policy_audit / cycle05_independent, coordinator freeze receipt and this plan | VERIFIED |
-| Owning reader and new readiness library | cycle05_source_audit in isolated writer worktree after freeze; new owning partial file, declaration keyword, new integration module and focused new tests | READY |
-| Independent consumer | cycle05_independent in separate isolated worktree after freeze; new independent tests only | READY |
-| Shared project/solution/CI and combined verification | Coordinator; additive exact entries only | NOT READY |
-| Canonical records/private Site/preservation | Coordinator; additive records preserving foreign dirty work and existing private Site/task board | NOT READY |
+| Owning reader and new readiness library | cycle05_source_audit in isolated writer worktree after freeze; new owning partial file, declaration keyword, new integration module and focused new tests | VERIFIED |
+| Independent consumer | cycle05_independent in separate isolated worktree after freeze; new independent tests only | VERIFIED |
+| Shared project/solution/CI and combined verification | Coordinator; additive exact entries only | VERIFIED locally; hosted pending |
+| Canonical records/private Site/preservation | Coordinator; additive records preserving foreign dirty work and existing private Site/task board | RUNNING |
 
 ## Requirements and controls
 
@@ -30,7 +30,7 @@ Preserve the current owning Read admission and integrity/fence path. The compose
 
 - [x] Source/policy/non-author dependency audits executed against exact stable source, with native SHA256 receipts.
 - [x] Exact contract/test/literal expectations independently reviewed and frozen before runtime code.
-- [ ] Author and separate independent consumer pass actual guarded PostgreSQL/portable tests and nonauthor review.
+- [x] Author and separate independent consumer pass actual guarded PostgreSQL/portable tests and nonauthor review.
 - [ ] Applicable audited locked restore, format, build, old/new unit/integration/e2e, security/architecture/compatibility and configured hosted checks executed with source/log hashes.
 - [ ] Canonical status/implementation/evidence updated and existing owner-private Site/task board published and natively confirmed.
 - [ ] Native evidence/source/runtime preserved; clean owned temporary worktrees removed.
@@ -40,3 +40,9 @@ Rollout is an unactivated internal library and explicit fictional fixtures. Roll
 Disk availability is constrained. Verified cycle06/cycle03 temporary duplicate evidence copies were replaced with links to retained identical native evidence. Downloadable NuGet HTTP cache was removed while installed packages remained. Receipts record these bounded reclamations. Do not remove unrelated work or immutable evidence without verified preservation.
 
 Engineering freeze [receipt](../../docs/development/evidence/m08-accepted-schema-provenance-engineering-freeze-20261003.json) binds independently reviewed design d6056f0 and complete preimplementation literals. Both nonauthor reviews passed; F01 preserves existing action/category allowances and F02 freezes fresh database name guards. All runtime cases remain unexecuted at freeze. Historical storage failure is retained; actual write/fsync and available capacity returned before implementation, so bounded work may proceed.
+
+## Executed local checkpoint
+
+53 portable,389 author PostgreSQL and574 independent PostgreSQL assertions pass. The combined31 applicable local checks pass, including locked audited restore, whole-solution format/zero-warning Release build, original population/capture/AI/outcome/CSV/evaluation and ordinary MCP entrypoints, four Python oracles, architecture, owned diff and default-rule secret scan. The first seven checks and documentation-only source bridge are bound in the [native receipt](../../docs/development/evidence/m08-accepted-schema-provenance-cycle07-20261003.json). Initial sparse-resource, namespace, fixture and scanner observations remain preserved. A separately owned Phase1D plan has an historical whole-diff blankEOF diagnostic; it was not edited by this packet.
+
+Accepted normal/mixed/empty outputs each supply actual saved schema provenance and14 bound / 9 missing fields. No accepted output preserves13/10. The other nine bindings and CompleteSamplingReady=false remain unchanged. Independent review closes the internal alias/reference consistency findings and validates real writer lock waits and successful caller COMMIT whole-table nonmutation. Three synthetic-hash derivation assertions and four scanner controls substantiate the exact fixture classification; default rules remain active. No migration, new package version, configuration default or live activation. Direct lost-response and known older/nonSucceeded/nonResponse accepted-row injections were not separately executed; infrastructure failure propagation was reviewed statically. Counts do not close all 14 future cases, TP-HAS-012/019 or full M08/Phase1C.
