@@ -15,7 +15,7 @@ internal static class Program
     private static void Check(bool condition, string label) { checks++; if (!condition) throw new Exception(label); }
     private static async Task<int> Main()
     {
-        try { if (Environment.GetEnvironmentVariable("IGA_EVALUATION_BOOTSTRAP_PROBE") == "1") await BootstrapProbe(); else await Run(); Console.WriteLine($"PASS {checks} synthetic evaluation workflow PostgreSQL18 assertions."); return 0; }
+        try { if (Environment.GetEnvironmentVariable("IGA_EVALUATION_BOOTSTRAP_PROBE") == "1") await BootstrapProbe(); else if (Environment.GetEnvironmentVariable("IGA_EVALUATION_BOOTSTRAP_PROBE") == "legacycheck") await LegacyCheckProbe(); else await Run(); Console.WriteLine($"PASS {checks} synthetic evaluation workflow PostgreSQL18 assertions."); return 0; }
         catch (Exception e) { Console.Error.WriteLine(e); return 1; }
     }
     private static EvaluationWorkflowCommand Command(EvaluationWorkflowSnapshot workspace, string member,
@@ -76,6 +76,25 @@ internal static class Program
             Assignments = registry.Assignments.Select(a => assignment?.Invoke(a) ?? a).ToArray(),
             Members = registry.Members.Select(m => member?.Invoke(m) ?? m).ToArray()
         };
+    }
+    private static async Task LegacyCheckProbe()
+    {
+        var existing = await Scalar("SELECT count(*)::text FROM pg_namespace WHERE nspname='synthetic_evaluation_workflow'");
+        if (existing == "0")
+        {
+            await new SyntheticEvaluationWorkflowStore(Connection).InitializeAsync();
+            await Sql("ALTER TABLE synthetic_evaluation_workflow.schema_migrations ADD CONSTRAINT legacy_extra_check CHECK(length(script_digest)>0)");
+            await using var c = new NpgsqlConnection(Connection); await c.OpenAsync(); await using var t = await c.BeginTransactionAsync();
+            var method = typeof(SyntheticEvaluationWorkflowStore).Assembly.GetType("SyntheticEvaluationWorkflow.SyntheticEvaluationWorkflowMigration")!
+                .GetMethod("Fingerprint", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)!;
+            var fingerprint = await (Task<string>)method.Invoke(null, [c, t, CancellationToken.None])!;
+            await using var update = new NpgsqlCommand("UPDATE synthetic_evaluation_workflow.schema_migrations SET schema_fingerprint=@fingerprint", c, t);
+            update.Parameters.AddWithValue("fingerprint", fingerprint); await update.ExecuteNonQueryAsync(); await t.CommitAsync();
+        }
+        var rejected = false;
+        try { await new SyntheticEvaluationWorkflowStore(Connection).InitializeAsync(); }
+        catch (WorkflowInvalidException e) { rejected = e.Issue == EvaluationWorkflowIssue.MigrationDrift; }
+        Check(rejected, "self-consistent legacy extra CHECK baseline MUST be refused");
     }
     private static async Task BootstrapProbe()
     {
