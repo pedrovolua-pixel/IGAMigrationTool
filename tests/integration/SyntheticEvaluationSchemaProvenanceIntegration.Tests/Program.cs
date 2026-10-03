@@ -158,6 +158,10 @@ internal static class Program
         await using var c = new NpgsqlConnection(Connection); await c.OpenAsync();
         await using (var t = await c.BeginTransactionAsync())
         {
+            var foreign = new SyntheticAiExecutionStore(new NpgsqlConnectionStringBuilder(Connection) { Database = "iga_synthetic_phase1b_schema07_author_foreign_config" }.ConnectionString);
+            Check((await foreign.ReadAcceptedSchemaInTransactionAsync(c, t, Consultant, run, digest)).Issue == AiIssue.WrongScope, "configured owning store mismatch closed before source access");
+            Check((await ai.ReadAcceptedSchemaInTransactionAsync(c, t, null!, run, digest)).Issue == AiIssue.WrongScope, "owner null authority preserves current policy issue");
+            Check((await adapter.CaptureAsync(c, t, run, null!, OutcomeConsultant)).Issue == Phase1BAcceptedSchemaIssue.Denied, "composer null authority denied before metadata");
             foreach (var wrong in new[] { "", new string('A', 64), "bad" }) Check((await ai.ReadAcceptedSchemaInTransactionAsync(c, t, Consultant, run, wrong)).Issue == AiIssue.InvalidInput, "malformed expected snapshot digest");
             Check((await ai.ReadAcceptedSchemaInTransactionAsync(c, t, Consultant, Guid.Empty, digest)).Issue == AiIssue.InvalidInput, "empty owner run");
             Check((await ai.ReadAcceptedSchemaInTransactionAsync(c, t, Consultant, run, new string('a', 64))).Issue == AiIssue.SourceConflict, "stale expected owning digest source conflict");
@@ -186,8 +190,24 @@ internal static class Program
         await using var c = new NpgsqlConnection(Connection); await c.OpenAsync(); await using var t = await c.BeginTransactionAsync();
         var result = await adapter.CaptureAsync(c, t, run, Consultant, OutcomeConsultant); Check(result.HasReadiness, "capture held in caller transaction for real writer exclusion");
         var content = OutcomePriorityCanonical.Seal(new OutcomeContentVersion("schema-fence", 1, "SECURITY", "Fictional fence", "Fictional trace", OutcomeOrigin.Documented, [DemoPhase1BCatalog.DeterministicPlan.ExpectedKeys.First()], [], [], null, ""));
-        var writer = Tx(Guid.Empty, (next, tx) => outcomes.ApplyOutcomeAsync(next, tx, OutcomeConsultant, new(Guid.NewGuid(), OutcomeKind.CreateDraft, content.OutcomeId, 1, 0, content.ContentDigest, 0, null, content, "Fictional capture fence test")));
-        await Task.Delay(150); Check(!writer.IsCompleted, "participating actual registry writer waits on held ordered source fences");
+        var started = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        async Task<OutcomeApplyResult> Write()
+        {
+            await using var next = new NpgsqlConnection(Connection); await next.OpenAsync(); await using var tx = await next.BeginTransactionAsync();
+            started.SetResult(next.ProcessID);
+            await SyntheticOutcomePriorityStore.AcquireRegistryFenceAsync(next, tx, OutcomeScope.Fixed);
+            var changed = await outcomes.ApplyOutcomeAsync(next, tx, OutcomeConsultant, new(Guid.NewGuid(), OutcomeKind.CreateDraft, content.OutcomeId, 1, 0, content.ContentDigest, 0, null, content, "Fictional capture fence test"));
+            await tx.CommitAsync(); return changed;
+        }
+        var writer = Write(); var pid = await started.Task.WaitAsync(TimeSpan.FromSeconds(15)); var waiting = false;
+        var deadline = DateTime.UtcNow.AddSeconds(10);
+        while (!waiting && !writer.IsCompleted && DateTime.UtcNow < deadline)
+        {
+            await using var observe = new NpgsqlCommand("SELECT EXISTS(SELECT 1 FROM pg_stat_activity WHERE pid=@pid AND wait_event_type='Lock' AND wait_event='advisory')", c, t);
+            observe.Parameters.AddWithValue("pid", pid); waiting = (bool)(await observe.ExecuteScalarAsync())!;
+            if (!waiting) await Task.Delay(25);
+        }
+        Check(waiting && !writer.IsCompleted, "actual writer backend observed in pg_stat_activity advisory lock wait");
         await t.RollbackAsync(); Check((await writer.WaitAsync(TimeSpan.FromSeconds(15))).Issue is null, "caller release permits participating writer");
         Check(result.Readiness!.VersionBindings.Count == 23 && AiExecutionCanonical.Hash(result.Readiness.CanonicalJson) == result.Readiness.ContentDigest, "detached readiness remains exact after rollback/later writer");
     }
