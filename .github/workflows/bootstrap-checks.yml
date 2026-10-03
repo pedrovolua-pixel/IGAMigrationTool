@@ -95,6 +95,11 @@ jobs:
           dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
           IGA_EVALUATION_SOURCE_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
           IGA_EVALUATION_SOURCE_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIndependent.Tests -c Release --no-build
+      - name: Check saved Phase1B population and truthful provenance readiness
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationPopulationIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_POPULATION_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_pop06_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationPopulationIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_POPULATION_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_pop06_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationPopulationIndependent.Tests -c Release --no-build
       - name: Check assessment coverage reconciliation
         run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
       - name: Check assessment capability locks
@@ -498,6 +503,10 @@ jobs:
       - name: Check Windows saved-source capture canonical contracts
         run: |
           dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows population provenance canonical contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationPopulationIntegration.Tests -c Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows isolated evaluation workflow
         run: |

@@ -10,6 +10,7 @@
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/SyntheticEvaluationPopulationIntegration/SyntheticEvaluationPopulationIntegration.csproj" />
     <Project Path="src/server/modules/SyntheticOutcomePriority/SyntheticOutcomePriority.csproj" />
     <Project Path="src/server/modules/SyntheticAiExecution/SyntheticAiExecution.csproj" />
     <Project Path="src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj" />
@@ -41,6 +42,8 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/SyntheticEvaluationPopulationIntegration.Tests/SyntheticEvaluationPopulationIntegration.Tests.csproj" />
+    <Project Path="tests/integration/SyntheticEvaluationPopulationIndependent.Tests/SyntheticEvaluationPopulationIndependent.Tests.csproj" />
     <Project Path="tests/integration/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
     <Project Path="tests/integration/Phase1BCompound.Tests/Phase1BCompound.Tests.csproj" />
     <Project Path="tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
@@ -60,6 +63,7 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/SyntheticEvaluationPopulationIntegration.Tests/SyntheticEvaluationPopulationIntegration.Tests.csproj" />
     <Project Path="tests/unit/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
     <Project Path="tests/unit/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
