@@ -101,3 +101,7 @@ Matching owner-private publication succeeded; the final docs-only COMPLETE snaps
 | Evidence | Scope | Result and limit |
 | --- | --- | --- |
 | [Cycle13 plan](../../plans/active/local-pilot-artifact-review-cycle-13.md), [AR13 proposal](local-artifact-review-contract-proposal.md), [bounded tests](local-artifact-review-test-plan.md), [source/check metadata](../../docs/development/evidence/local-pilot-cycle13-preparation.json) | Committed-source requirement/decision audit, concrete proposal and traceable parallel packets, documentary checks and non-author review | Preparation only. Human AR13-01–05 decision PENDING; implementation BLOCKED. No runtime test, migration, permission, production/public contract or signed gate bundle. Cycle12 results retain their own immutable source; full Milestone7/local completion/UAT/G1–G9 remain NOT VERIFIED. Matching owner-private board publication is required in this same cycle. |
+
+## Cycle13 owner contract decision
+
+[Approval record](local-artifact-review-approval.md): explicit repository-owner “Approved” response to named AR13-01–05 local synthetic proposal at `d897b1d`, exact original SHA256 `c243feb9aa705bdddd69a9c8ee476b25b6dc647bbbea938298a0f02ee1af90f6`. This is contract authority, not executed runtime or signed gate evidence. Preparation results remain historical; implementation evidence is recorded separately after actual runs. All full Milestone7/local completion/UAT/G1–G9 remain NOT VERIFIED.

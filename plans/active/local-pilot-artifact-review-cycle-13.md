@@ -1,18 +1,18 @@
 # Local pilot consultant artifact review — Cycle13
 
-Status: AWAITING HUMAN CONTRACT DECISION — preparation reviewed; implementation not started
+Status: RUNNING — AR13-01–05 approved; internal contracts being settled before writing packets
 Owner: Coordinator
 Last updated: 2026-10-02
 Source checkpoint: `874c653a495921dbf20f628715b4ce70f3ecc030`
 Product/technical authority: approved feature003 specifications and approved local synthetic build
-Required decision: [AR13-01 through AR13-05](../../specs/003-health-assessment/local-artifact-review-contract-proposal.md#requested-decision)
+Approved decision: [AR13-01 through AR13-05](../../specs/003-health-assessment/local-artifact-review-contract-proposal.md#requested-decision)
 Test plan: [bounded artifact-review tests](../../specs/003-health-assessment/local-artifact-review-test-plan.md)
 
 ## Intended outcome and boundary
 
 After approval, a consultant can explicitly review or withdraw review of individual fixed fictional artifacts in one new opt-in localhost profile, with exact-source attestation, durable attributable history, stale-source invalidation and unchanged generated originals. Review means Reviewed for planning; it does not establish correctness, supported remediation or execution safety. Existing nine profiles remain unchanged.
 
-Cycle13 currently prepares the missing contract, work packets, acceptance tests and independent review. It does not implement artifact approval/history, change a permission or declare the broader pilot ready. Material decisions cannot be inferred from Next cycle. Task conversion/workflow/CSV/priority/effort/customer objectives, artifact editing/execution, publication, real source/provider, production identity, production/customer migration activation and release are outside this cycle.
+The owner explicitly approved the exact AR13-01–05 proposal; [the source-bound decision](../../specs/003-health-assessment/local-artifact-review-approval.md) closes its human dependency. Cycle13 now implements that bounded local behavior. It does not declare the broader pilot ready. Task conversion/workflow/CSV/priority/effort/customer objectives, artifact editing/execution, publication, real source/provider, production identity, production/customer migration activation and release are outside this cycle.
 
 ## Requirement traceability
 
@@ -28,21 +28,21 @@ Cycle13 currently prepares the missing contract, work packets, acceptance tests 
 - [x] Audited committed feature specifications and Cycle11/12 boundaries, separately from concurrent BFF/UI proposals.
 - [x] Identified missing artifact authority/attestation/invalidation and durable workflow decisions; task-export role discrepancy remains separately open.
 - [x] Prepared exact AR13 proposal, traceable implementation packets and bounded positive/negative test plan.
-- [ ] Recorded authorized human approval of the exact AR13 contract revision.
-- [ ] Implementation begins only after that decision; engineering review cannot replace it.
+- [x] Recorded authorized human approval of the exact AR13 contract revision.
+- [x] Human decision recorded before implementation; engineering review cannot replace it.
 
 Preparation evidence is [metadata only](../../docs/development/evidence/local-pilot-cycle13-preparation.json). It records documentary checks and independent reviews, never runtime PASS.
 
-## Parallel implementation packets — blocked pending approval
+## Parallel implementation packets — internal contract checkpoint
 
 All writing packets start in separate `codex/` worktrees from the same coordinator-approved contract/configuration checkpoint. Worker count may be reduced for dependencies. No worker writes shared canonical records or operates the private Site. Each returns immutable commit/patch, touched paths, requirement coverage, actual commands/results, migrations/config implications and unresolved cases. A worker other than the author reviews each packet.
 
 | Packet | Exact intended ownership | Dependency and acceptance | State |
 | --- | --- | --- | --- |
-| A13 domain/store | New `src/server/modules/SyntheticFixReview/*.cs`, module README; new `tests/unit/SyntheticFixReview.Tests` except project/lock; no shared configuration | Approved AR13 contract, settled schema/source concurrency fence; immutable originals, authority, source binding, append-only event/current/receipt transaction, replay/conflict/restart; T01–T06/T12 | BLOCKED — human decision |
-| B13 presentation | New `src/web/src/ArtifactReviewPanel.tsx/.css`; new `tests/unit/ArtifactReviewComponent.Tests` except project/lock | Approved closed overlay DTO and exact action schemas; independent component states/text/hostile content/source fences/focus/reflow; no host/backend edits | BLOCKED — human decision, then DTO |
-| V13 verification | New `tests/integration/LocalArtifactReview.Tests` except project/lock; new `tests/e2e/artifact-review` | Independent literal/source/authority/state/concurrency oracles before reading author conclusions; later actual owned PG/host/browser composition, historical regressions, non-author reviews | BLOCKED — human decision |
-| Coordinator | Projects/locks/solution/workflow; AssessmentRuns/LocalConsultantDemo private integration; narrow `RecommendationGuidanceBuilder.cs`/`DraftSnapshotBuilder.cs` source validators; `contracts/local-demo`, type generation, `api.ts`/`AnalysisView.tsx`/`FixPackagePreview.tsx` strict profile/lock/coherence guards, canonical records, integration and existing private Site | Preserve unrelated workspace edits; separate new profile/input locks; combined applicable checks, exact evidence, reviews, cleanup and confirmed owner-private publication | PREPARATION READY — implementation blocked |
+| A13 domain/store | New `src/server/modules/SyntheticFixReview/*.cs`, module README; new `tests/unit/SyntheticFixReview.Tests` except project/lock; no shared configuration | Approved AR13 contract, settled schema/source concurrency fence; immutable originals, authority, source binding, append-only event/current/receipt transaction, replay/conflict/restart; T01–T06/T12 | READY — approved; oracle/source contract preparation |
+| B13 presentation | New `src/web/src/ArtifactReviewPanel.tsx/.css`; new `tests/unit/ArtifactReviewComponent.Tests` except project/lock | Approved closed overlay DTO and exact action schemas; independent component states/text/hostile content/source fences/focus/reflow; no host/backend edits | READY — approved; awaits settled DTO |
+| V13 verification | New `tests/integration/LocalArtifactReview.Tests` except project/lock; new `tests/e2e/artifact-review` | Independent literal/source/authority/state/concurrency oracles before reading author conclusions; later actual owned PG/host/browser composition, historical regressions, non-author reviews | READY — approved; oracle/source contract preparation |
+| Coordinator | Projects/locks/solution/workflow; AssessmentRuns/LocalConsultantDemo private integration; narrow `RecommendationGuidanceBuilder.cs`/`DraftSnapshotBuilder.cs` source validators; `contracts/local-demo`, type generation, `api.ts`/`AnalysisView.tsx`/`FixPackagePreview.tsx` strict profile/lock/coherence guards, canonical records, integration and existing private Site | Preserve unrelated workspace edits; separate new profile/input locks; combined applicable checks, exact evidence, reviews, cleanup and confirmed owner-private publication | RUNNING — internal source/DTO/schema contract and shared configuration |
 
 Before coding, record an exact compatibility checkpoint for the new profile/application/contract lock through saved inputs, source validators, captured guidance/draft/package reads and strict web guards. New-profile acceptance is explicit; historical nine-profile byte checks and old eleven/twelve-field locks remain strict. Shared source-concurrency/schema/API contracts are settled before dependent code, never through competing worker assumptions. Workers request cross-owner edits from the coordinator. No new third-party dependency is currently justified.
 
@@ -59,7 +59,7 @@ No check is checked because it is listed here. Full Milestone7, TP-HAS-018, loca
 
 ## Migration, rollout and rollback proposal
 
-AR13 approval would allow one new isolated synthetic schema and new opt-in profile, not migration of a customer data plane. Before application, validate exact schema digest, dedicated fictional DB ownership and additive compatibility. Preserve existing review/history/assessment schemas and protected fixtures. Rollback disables new profile/actions while retaining compatible read access and append-only data; never delete events to restore an older binary. Production retention, real identity and deployment need their own existing gates.
+Recorded AR13 approval allows one new isolated synthetic schema and new opt-in profile, not migration of a customer data plane. Before application, validate exact schema digest, dedicated fictional DB ownership and additive compatibility. Preserve existing review/history/assessment schemas and protected fixtures. Rollback disables new profile/actions while retaining compatible read access and append-only data; never delete events to restore an older binary. Production retention, real identity and deployment need their own existing gates.
 
 ## Resume instruction
 
