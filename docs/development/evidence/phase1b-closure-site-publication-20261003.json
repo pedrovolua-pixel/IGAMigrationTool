@@ -1,0 +1,53 @@
+{
+  "schema": "phase1b-closure-private-site-publication-v1",
+  "deployment": {
+    "id": "appgdep_6ac1181369108191b007af063d90c286",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_86aa0f724dc08191b45439972a1a0a81",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T14:58:34.069602+00:00"
+  },
+  "source": {
+    "commit_sha": "f462c04d378d67b65634d56251bd55425d704d2b",
+    "archive": "/private/tmp/iga-phase1b-site.tar.gz"
+  },
+  "canonicalSnapshot": "0cbd2ce0b255e01ea048dfa8fbde10e905fe5173",
+  "access": {
+    "version": 92,
+    "role": "owner",
+    "accessMode": "custom",
+    "allowedUsers": 1,
+    "externalVisitors": 0,
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+  },
+  "phase1b": "IN PROGRESS; owner decision pending",
+  "qa": {
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "tasks": 13,
+    "phase1cExistingTaskCardsPreserved": 12,
+    "noOverflowErrorsOrExternalRequests": true,
+    "actualHumanTasksAnchorAndSevenNewSourceLinksVerified": true,
+    "sixFinalCapturesInspected": true,
+    "initialOverflowCorrectionPreserved": true,
+    "browserCacheLaunchCorrection": "Explicit previously installed Playwright browser cache used; no dependency installed"
+  },
+  "archiveProof": {
+    "path": "work/phase1b-closure-evidence/site-archive-proof.json",
+    "sha256": "80e866674be1a1b3ed5215de10dc9003d59c744973250c7384f59fca4c3fafbf",
+    "exactDeclaredPayloads": 2,
+    "bundledMacMetadataRecords": 4
+  },
+  "rawEvidenceArchive": "work/phase1b-closure-evidence"
+}
