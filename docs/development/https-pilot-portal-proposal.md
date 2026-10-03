@@ -78,3 +78,8 @@ The current `src/server/hosts/BffFoundation/BffHostingContracts.cs` contract def
 ## Attributed local approval and execution
 
 The owner explicitly approved the presented ADR-0011 Option A local template/test request against `50cf4fd`. [The frozen packet](https-pilot-portal-approval.md) authorizes HTTPS-P01 in an isolated author checkout with non-author verification. The target topology does not authorize public admission, a production host, grants or spending. Earlier preparation-only observations above retain their original checkpoint; implementation evidence is recorded after execution.
+
+
+## Approved local scaffold implementation
+
+HTTPS-P01 now stores the [guarded environment composition](../../infra/bicep/pilot-https-portal.bicep), [prospective module](../../infra/bicep/modules/pilot-https-container-apps-environment.bicep) and [configuration/input tests](../../tests/infrastructure/HttpsPortal/README.md). The packet includes no application; origin, proxy and production runtime bindings remain unresolved. The root accepts only `deployEnvironment:false`; its prospective environment has public access disabled. No Azure operation follows from successful local tests. [The active plan](../../plans/active/https-pilot-portal-preparation.md) records executed evidence and publication limits; [the next packet handoff](https-pilot-portal-next-packet.md) describes the outstanding production contracts.

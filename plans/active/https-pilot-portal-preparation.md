@@ -1,6 +1,6 @@
 # HTTPS pilot portal: active preparation
 
-Status: APPROVED LOCAL IMPLEMENTATION — HTTPS-P01 READY; paid/public session and live gates remain separate
+Status: APPROVED LOCAL IMPLEMENTATION — HTTPS-P01 LOCAL VERIFIED; paid/public session and live gates remain separate
 Date: 2026-10-03 UTC
 Owner: Azure/BFF coordinator
 Product/technical basis: approved feature003 and existing identity/session controls; [approved local technical/test addendum](../../docs/development/https-pilot-portal-proposal.md); [Accepted local ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md)
@@ -16,7 +16,7 @@ HTTPS-P01 is approved under [the frozen packet](../../docs/development/https-pil
 | Packet | Owner / scope | Entry condition and completion evidence | State |
 |---|---|---|---|
 | HTTPS-P00 | Coordinator plus read-only architecture/review worker; ADR/proposal/diagram/current records | Current primary Microsoft research, exact proposal, documentary checks and non-author review; attributable owner direction | VERIFIED — preparation only |
-| HTTPS-P01 | Platform writer: proposed `infra/bicep/modules/pilot-https-container-apps-environment.bicep`, `pilot-https-portal.bicep`, protected-input template and `tests/infrastructure/HttpsPortal/`; coordinator owns shared inventory | Exact ADR-0011/local technical/test approval before authoring; fixed separate external environment, disabled public app ingress/live sign-in, private backends and exact protected inputs; pinned compile/lint/format and negative/composition evidence | READY — approved isolated author and non-author review |
+| HTTPS-P01 | Platform writer: proposed `infra/bicep/modules/pilot-https-container-apps-environment.bicep`, `pilot-https-portal.bicep`, protected-input template and `tests/infrastructure/HttpsPortal/`; coordinator owns shared inventory | Exact ADR-0011/local technical/test approval before authoring; fixed separate external environment, disabled public app ingress/live sign-in, private backends and exact protected inputs; pinned compile/lint/format and negative/composition evidence | LOCAL VERIFIED — environment/input subset; no app or live proof |
 | HTTPS-P02 | Coordinator + separately scoped BFF implementation workers | Approved production provider/key/audit contracts and isolated packets; actual production composition, SQL role negatives, shared keys, provider observation/federation and durable audit-outage proof; reviewed image/private build/signing acceptance | BLOCKED — contracts/live prerequisites |
 | HTTPS-P03 | Coordinator/platform/identity/operations, protected inputs only | Full fresh price/spend/capacity/what-if, fixed generated origin/proxy/private paths, users/role/CA/federation proof, exact public synthetic session and preservation/disposal authorization | NOT READY |
 | HTTPS-P04 | Non-author verifier + coordinator, approved actual environment | HTTPS-T01–T08 actual evidence, affected configured checks/CI and safe closure; distinguish engineering results from G1–G9/human acceptance | NOT VERIFIED |
@@ -30,6 +30,7 @@ HTTPS-P01 is approved under [the frozen packet](../../docs/development/https-pil
 | Complete exact user admission | Identity/product owner | [Protected binding template](../../docs/development/bff-production-bindings-template.json), [approved role matrix](../../docs/security/health-assessment-authorization-matrix.md): immutable organizational/B2B proof, selected customer role/scope and CA/licensing; no email-only authority |
 | Resolve production audit/provider/key authority | Technical/security/platform owners | [Existing production proposal](../../docs/development/bff-production-authority-hosting-proposal.md): real adapter contracts, durable audit-outage preservation, scoped key/SQL/provider evidence |
 | Review exact Azure/public session | Repository/operations owner, after local preparation | [HTTPS proposal](../../docs/development/https-pilot-portal-proposal.md#cost-and-operations): current complete quote, full reserve under allowance, exact resources/ownership/public boundary and preservation/disposal |
+| Publish approved local packet to GitHub | Repository owner | [Publication dependency](#publication-dependencies): explicit authorization to upload the exact reviewed local commit to the existing public repository/draft branch; then confirmed remote source and fresh CI |
 | Restore private board publication | Repository owner | [Site maintenance](../../docs/development/pilot-status-site.md): separately rejected publisher credential/network action still needs its exact authorization and confirmed deployment |
 
 Bsv2 support authorization, VM quota/image/disk/browser/RDP/desktop egress tasks are **SUPERSEDED for the active path**. Do not mark their technical results successful. Keep original evidence and publisher block separate. User grants, network exposure and production release remain disabled.
@@ -46,4 +47,19 @@ The coordinator rendered and visually inspected the new diagram at3200×2000, va
 
 ## Approved execution packet — 2026-10-03 UTC
 
-The repository owner explicitly approved the reviewed request. [Approval and exact source/path ownership](../../docs/development/https-pilot-portal-approval.md), [original-source metadata](../../docs/development/evidence/https-pilot-portal-approval-20261003.json) and the approved local tests close the local decision dependency. HTTPS-P01 is READY for its isolated writer and separate reviewer. Public admission/live sign-in/grants/spending remain disabled; other contracts and G1–G9/Milestone2 are unchanged.
+The repository owner explicitly approved the reviewed request. [Approval and exact source/path ownership](../../docs/development/https-pilot-portal-approval.md), [original-source metadata](../../docs/development/evidence/https-pilot-portal-approval-20261003.json) and the approved local tests close the local decision dependency. HTTPS-P01 completed its bounded environment/input scaffold with non-author review. Public admission/live sign-in/grants/spending remain disabled; other contracts and G1–G9/Milestone2 are unchanged.
+
+
+## HTTPS-P01 executed local closure
+
+The environment-only packet is stored and independently reviewed at worker `e796c36`, integrated as `6690955`. Pinned Bicep0.47.16 build/lint passed for all23 templates with zero diagnostics; both new templates match formatter output. New tests passed38 compiled unsafe mutations,50 invalid provider/input cases and51 actual CLI denials with values suppressed. The reviewer independently repeated these checks and denied four additional probes. The root remains false-only; no app, identity, secret, grant or public admission is present.
+
+Combined74-project locked restore, formatting and Release build passed with zero build warnings/errors. All28 unit/architecture projects and three portable integration projects passed, including308 actual synthetic HTTPS transport checks and60 local hosting/key-seam checks. Thirteen configured existing infrastructure policy commands passed. These runs do not re-execute PostgreSQL integration, frontend/browser end-to-end, Windows collector or container-package checks; fresh hosted CI is unavailable while upload is blocked. Historical results remain source-bound and are not relabeled as current combined execution. HTTPS-T01 has local environment/input evidence only; HTTPS-T02–T08, G1–G9/Milestone2 remain NOT VERIFIED.
+
+[Execution metadata](../../docs/development/evidence/https-pilot-portal-implementation-20261003.json) records source bindings and limits. [HTTPS-P02A handoff](../../docs/development/https-pilot-portal-next-packet.md) is preparation for the next separately approved production specification/test packet, not runtime implementation authority.
+
+### Publication dependencies
+
+Automatic approval review rejected uploading the combined source to GitHub because destination ownership/privacy and exact export authorization were not established. Subsequent read-only metadata confirms the signed-in account owns/administers the existing repository, whose visibility is **public**. The approved local source is committed in the isolated coordinator checkout; uploading it to the existing draft branch requires explicit owner approval for public publication. Do not bypass the rejection through a different publisher. No new hosted CI run or remote PR update is claimed.
+
+Private status-board publication remains separately blocked by the earlier rejected credential/network publisher action. Its last confirmed BFF/access snapshot4346e0f predates this local packet; preserve unrelated later Cycle13 publications. The board is stale for HTTPS approval/implementation. Prepared board delta: close local topology approval; mark HTTPS-P01 local environment/input verified; keep production BFF/audit/provider/key, exact user/role/CA proof, ingress evidence, fresh priced public session and publisher authorization open. The canonical repository remains authoritative.

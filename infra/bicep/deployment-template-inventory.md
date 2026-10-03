@@ -72,4 +72,16 @@ The reviewed [`../containers/bff-development.Dockerfile`](../containers/bff-deve
 
 ## HTTPS replacement direction — 2026-10-03 UTC
 
-The owner now selects HTTPS instead of Bastion. [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [the active plan](../../plans/active/https-pilot-portal-preparation.md) replace the desktop deployment path. Existing optional Bastion templates remain stored, locally verified and undeployed. The current internal environment module is not convertible to public ingress. Separate optional HTTPS sources and compiled policy checks are proposed after exact local approval; no HTTPS template is claimed implemented or deployable by this record. All environment-building templates remain repository sources with protected bindings outside Git.
+The owner now selects HTTPS instead of Bastion. [Accepted local ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [the active plan](../../plans/active/https-pilot-portal-preparation.md) replace the desktop deployment path. Existing optional Bastion templates remain stored, locally verified and undeployed. The current internal environment module is not convertible to public ingress. The approved local HTTPS-P01 sources are now stored separately. The required false-only root guard prevents deployment; public network admission is hard disabled in its prospective module. No application is included. All environment-building templates remain repository sources with protected bindings outside Git.
+
+
+## HTTPS-P01 stored environment scaffold (not deployed)
+
+| Source | Purpose |
+|---|---|
+| [Guarded composition](pilot-https-portal.bicep) | Required false-only `deployEnvironment`; no app or outputs. |
+| [External environment module](modules/pilot-https-container-apps-environment.bicep) | East US 2, external Consumption profile, public network access disabled, existing exact dedicated subnet and Standard NAT guards, no log export. |
+| [Incomplete protected-input example](environments/pilot-dev-https-portal.parameters.example.json) | Six null values; intentionally rejected by preflight. |
+| [Compiled and input checks](../../tests/infrastructure/HttpsPortal/README.md) | Negative template mutations and value-suppressed protected provider/input CLI; no Azure calls. |
+
+These files were not used in either historical Azure session. No app, identity, secret, grant or resource is deployed. The historical foundation is disposed; existing reviewed network prerequisites are not restored by this scaffold. [Current execution plan](../../plans/active/https-pilot-portal-preparation.md) and [production dependency handoff](../../docs/development/https-pilot-portal-next-packet.md) retain the real BFF, provider/key/audit, ingress proof and separately priced/public session prerequisites. A direct module invocation is not authorized by local verification.

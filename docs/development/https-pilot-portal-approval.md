@@ -26,3 +26,8 @@ Exact paid/public session, what-if/capacity, user/role/CA/federation/provider/SQ
 ## Source binding
 
 Original approved SHA256 values are in [approval metadata](evidence/https-pilot-portal-approval-20261003.json). This attribution is human decision evidence, not an executed runtime test or signed gate bundle.
+
+
+## Implementation scope clarification
+
+The approved HTTPS-P01 packet uses an environment-only scaffold. It contains no diagnostic app or runtime configuration. The required false-only root guard and hard-disabled public network property remain in source. Any production app composition belongs to the separately gated HTTPS-P02 packet.

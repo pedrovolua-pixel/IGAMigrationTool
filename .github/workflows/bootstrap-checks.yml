@@ -363,6 +363,19 @@ jobs:
           python3 tests/infrastructure/PrivateBrowserDns/environment_inputs.py --self-test
           python3 tests/infrastructure/PrivateBrowserDns/test_composition_inputs.py
 
+      - name: Validate disabled HTTPS environment preparation
+        run: |
+          for source in infra/bicep/modules/pilot-https-container-apps-environment.bicep infra/bicep/pilot-https-portal.bicep; do
+            "$RUNNER_TEMP/bicep" format "$source" --stdout > "$RUNNER_TEMP/https-formatted.bicep"
+            cmp "$source" "$RUNNER_TEMP/https-formatted.bicep"
+          done
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-https-container-apps-environment.bicep --outfile "$RUNNER_TEMP/pilot-https-environment.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-https-container-apps-environment.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-https-portal.bicep --outfile "$RUNNER_TEMP/pilot-https-composition.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-https-portal.bicep
+          python3 tests/infrastructure/HttpsPortal/template-policy.py "$RUNNER_TEMP/pilot-https-environment.json" "$RUNNER_TEMP/pilot-https-composition.json"
+          python3 tests/infrastructure/HttpsPortal/test-inputs.py
+
   collector-windows:
     strategy:
       matrix:
