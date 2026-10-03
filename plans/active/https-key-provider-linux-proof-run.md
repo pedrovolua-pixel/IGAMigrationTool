@@ -1,6 +1,6 @@
 # Exact shared-key artifact Linux proof run
 
-Status: CHECKPOINT COMPLETE — failed approved run reviewed; changed-byte publication pending owner approval
+Status: RUNNING — owner authorized exact correction publication and repeat Linux proof
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: f8fb332114aa8a52696caae8f4b264075e900d55
@@ -35,3 +35,7 @@ Coordinator may prepare a reversible test-only correction in test_download_archi
 KV-L01 PASS: exact approved public head/base/seven paths/draft PR3 and sole job verified. KV-L02 NOT VERIFIED: no actual archive acquisition or signature execution. KV-L03 PARTIAL: actual Setup runner2.337.0/Ubuntu24.04.5/image20260927.320.1 observed; SDK/architecture/selected trust/artifact integrity not verified. KV-L04 PASS for honest bounded failure/canonical reporting; private BFF/HTTPS board remains stale under the separate publisher rejection. KV-L05 PASS local correction only:17 supplied downloader mocks+18 unchanged verifier mocks; non-author17 downloader mocks+6 independent secure/unsafe connection controls with sockets forbidden, unchanged six public files, AST/whitespace and scoped secret checks.
 
 [Failure/correction/next exact approval](../../docs/development/https-key-provider-linux-run-result.md) and [source-bound receipt](../../docs/development/evidence/https-key-provider-linux-proof-run-20261003.json) preserve run37139568768/job111251011962 and local candidatecefd8354d69e00eb372f8efff457e9b175d3a6eb. This checkpoint is not a Linux-signature PASS. Candidate remains local/unpublished; further remote execution waits for exact changed-byte approval. No production implementation, Azure call or unchanged C#/PG regression rerun.
+
+## Owner correction-run authorization — 2026-10-03 UTC
+
+Owner said “Run it” after the exact reviewed correction and Linux signature rerun were identified as the next step. This authorizes publishing only candidatecefd8354d69e00eb372f8efff457e9b175d3a6eb by normal fast-forward of existing public proof branch/PR3 and the same sole diagnostic workflow. Candidate/parent/one-file hash/patch and public main/old pilot/proof branch heads were reconfirmed. Existing frozen proof evidence criteria and non-author review still apply. No merge, provider harness, dependencies, trust bypass, paid Azure session, grants, portal activation or publisher retry is authorized.
