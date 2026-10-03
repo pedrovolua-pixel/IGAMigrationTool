@@ -18,7 +18,7 @@ Requirements: FR-HAS-51–53, AC-HAS-12/19, bounded TP-HAS-012/019, and Mileston
 | --- | --- | --- |
 | S02 sampling/regression proposal | New `specs/003-health-assessment/local-evaluation-sampling-contract-proposal.md` and `local-evaluation-sampling-test-plan.md`; isolated `codex/m08-sampling-proposal` | READY |
 | R02 reviewer procedure proposal | New `specs/003-health-assessment/local-evaluation-reviewer-contract-proposal.md` and `local-evaluation-reviewer-test-plan.md`; isolated `codex/m08-reviewer-proposal` | READY |
-| Coordinator | Combined decision packet, this plan, canonical records/evidence, integration and existing private Site | PUBLICATION PENDING |
+| Coordinator | Combined decision packet, this plan, canonical records/evidence, integration and existing private Site | VERIFIED PREPARATION |
 
 Writers start from the same committed checkpoint. They do not edit accepted specs/ADRs, authorization matrix, source code, shared configuration or canonical records. Each proposal receives non-author review before presentation. Agent review does not grant approval.
 
@@ -33,7 +33,11 @@ Reviewer proposal must retain existing Consultant/qualified-customer-reviewer ro
 - [x] Exact proposals and tests independently reviewed; confirmed documentary findings closed.
 - [x] Combined requested owner decision links immutable proposal bytes/digests and names all consequential choices.
 - [x] Link/source/whitespace/secret and requirement/test traceability checks executed, with source-bound evidence; no runtime PASS claim.
-- [ ] Canonical plan/status/evidence and the existing private board updated; matching owner-only deployment confirmed. The prior evaluation task is refined, not duplicated or closed.
-- [ ] Original source/reviews preserved before clean temporary worker removal.
+- [x] Canonical plan/status/evidence and the existing private board updated; matching owner-only deployment confirmed. The prior evaluation task is refined, not duplicated or closed.
+- [x] Original source/reviews preserved before clean temporary worker removal.
 
 Implementation remains BLOCKED on the exact policy decision. Full Milestone08, Phase1C/UAT, supported manual/live checks and G1–G9 remain NOT VERIFIED. No migration/dependency/configuration change. Continue only independently settled work until approval; no repeat approval is needed for later routine engineering details implementing an approved packet.
+
+## Preparation closure and next dependency
+
+Exact proposal/test and combined-packet reviews are closed; documentary checks passed. Source/native evidence is archived and rehashed under ignored work/m08-cycle02-evidence before clean temporary worker removal. [Private publication receipt](../../docs/development/evidence/m08-evaluation-policy-site-cycle02-20261003.json) confirms version94/source000e400547775bb8202cc2cfbedc1d619a865261, succeeded deployment, owner-only access and12 preserved open tasks. The previous Phase1B publication was reconciled before updating; its approved decision remains closed. Exact policy approval is PENDING; this completes preparation only.

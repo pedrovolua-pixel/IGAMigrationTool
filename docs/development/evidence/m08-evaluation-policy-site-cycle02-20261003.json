@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-03",
+  "cycle": "M08-cycle02",
+  "status": "CONFIRMED",
+  "canonicalCommit": "c7525837ad8955e05e8a1e27b715daa7b558364d",
+  "siteBase": "eb4db8538fd926253df14b43d2d34d20d7a28608",
+  "siteCommit": "000e400547775bb8202cc2cfbedc1d619a865261",
+  "version": 94,
+  "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_2d8e3f28f9348191ae30a105ea03f335",
+  "deployment": "appgdep_6ac1210567b8819188161cec484caa9a",
+  "deploymentStatus": "succeeded",
+  "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+  "access": {
+    "role": "owner",
+    "mode": "custom",
+    "allowedUsers": 1,
+    "groups": 0,
+    "externalVisitors": 0
+  },
+  "board": {
+    "openTasks": 12,
+    "evaluationTask": "refined to EV02-S01-S04 and EV02-R01-R03; remains OPEN",
+    "phase1bDecision": "recorded approval preserved; remains CLOSED",
+    "earlierDependencies": "eleven preserved"
+  },
+  "verification": {
+    "nativeVersionAndDeployment": "exact source and saved version match; succeeded",
+    "archiveByteEquality": "PASS against pushed HTML and hosting source",
+    "publishedArchiveHash": "sha256:f351f2797338ada8ef26f7f4a60ec0fe3749628d1a630868fa2c149b6e94fc34",
+    "compressedArchiveHash": "97d00d5688e8bc6922acaaa18537306865857e7b85dea73db880459a2d535cd6",
+    "htmlHash": "3ecd79f9f97ecae8055fb8150a975fbc0e49a437ba1a6a15d8a1df213c83673a",
+    "desktopAndMobile": "PASS1440/390/320;12 cards,roles/completion,anchors/repository source links,no overflow/pageerrors;viewport images inspected",
+    "secretScan": "PASS;no suppression"
+  },
+  "limitations": [
+    "Documentary decision preparation only;40 proposed runtime cases not executed",
+    "Exact owner approval PENDING;no implementation/live/gate acceptance",
+    "Site claims are dated to canonical commit;publication receipt does not change status"
+  ],
+  "preservation": "23 noncanonical original files and all shared preintegration bytes preserved;original author/coordinator/source/evidence archives retained under work/m08-cycle02-evidence"
+}

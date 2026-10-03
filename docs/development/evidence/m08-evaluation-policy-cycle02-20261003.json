@@ -22,7 +22,7 @@
     "scope": "documentary only; no policy approval or runtime proof"
   },
   "executedChecks": {
-    "documentaryLinks": "PASS,39 links before generated evidence target; final links rechecked",
+    "documentaryLinks": "PASS,40 local links including generated evidence target; source/anchor checks",
     "whitespace": "PASS",
     "traceability": "PASS,7 decision IDs and40 future test IDs",
     "independentProposedAllocationExamples": "PASS,4 examples; documentary arithmetic only",
@@ -31,7 +31,10 @@
   "corrections": [
     "Writer Markdown trailing whitespace corrected before commits.",
     "Baseline/candidate correction cutoffs can differ; preserve immutable baseline and version later candidate reviews.",
-    "Combined example now states four lower strata; allocation depends on stratum count."
+    "Combined example now states four lower strata; allocation depends on stratum count.",
+    "Non-executed initial orchestration syntax error corrected.",
+    "Site snapshot reconciled concurrent version93 before editing; badge/task-count prose corrected and accidental unrelated milestone label restored before final QA/publication.",
+    "A proposed local tar-container/server saved-hash identity assertion failed; container equality is not claimed. Local packaged asset bytes match exact pushed source; native version/source/deployment verified separately."
   ],
   "unexecuted": [
     "All40 proposed runtime tests",
@@ -48,6 +51,7 @@
     "productionRelease": false
   },
   "nextDependency": "Attributable EV02-S01-S04 and EV02-R01-R03 exact policy approval, followed by bounded engineering freeze.",
-  "sitePublication": "Separate m08-evaluation-policy-site-cycle02-20261003.json receipt; pending until confirmed",
-  "originalEvidence": "Preserved under ignored work/m08-cycle02-evidence before removal of own clean temporary worktrees."
+  "sitePublication": "CONFIRMED version94; exact separate m08-evaluation-policy-site-cycle02-20261003.json receipt",
+  "originalEvidence": "Preserved under ignored work/m08-cycle02-evidence before removal of own clean temporary worktrees.",
+  "preservation": "PASS,23 original noncanonical files and all shared prior bytes retained;49 rehashed source/native artifacts"
 }
