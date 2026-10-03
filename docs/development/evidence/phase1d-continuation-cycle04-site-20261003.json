@@ -101,5 +101,105 @@
       "visualQa": "390px task screenshot inspected; readable linked role/completion"
     }
   },
-  "completionPublication": "Pending full hosted cycle closure; initial private version112 is confirmed"
+  "completionPublication": {
+    "date": "2026-10-03",
+    "stage": "Completed synthetic cycle; complete hosted checks passed",
+    "deployment": {
+      "id": "appgdep_6ac18e467a148191a79906a64568a355",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_92d792da68988191ba3da72df1b8efd2",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T23:22:53.010855+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_92d792da68988191ba3da72df1b8efd2",
+      "number": 113,
+      "source": {
+        "commit_sha": "43bfa747074c8597bf79ee37282dfbfa45a1f91d"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_00000000092481f588d291c6861606ea",
+        "content_hash": "sha256:06fb17ed063a97463b46da0b73fe03ac19cc551d57219454b2b52de8726b5f54",
+        "size_bytes": 122880,
+        "file_count": 2
+      }
+    },
+    "audience": {
+      "role": "owner",
+      "mode": "custom",
+      "users": 1,
+      "groups": 0,
+      "externalVisitors": 0,
+      "revision": 1
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-review",
+      "commit_sha": "43bfa747074c8597bf79ee37282dfbfa45a1f91d",
+      "archive": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle04-evidence/site-final.tar.gz"
+    },
+    "canonicalSnapshot": "1a4f0c1a3d656db4c5f65388881e079dd0966a5f",
+    "archiveQualification": "Native tar hash/file count reported by version tool; local gzip/archive HTML provenance independently checked. Server repacked tar bytes not independently retrieved/equated.",
+    "qa": {
+      "status": "PASS",
+      "results": [
+        {
+          "width": 1440,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 390,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 320,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        }
+      ]
+    },
+    "preservation": {
+      "status": "PASS",
+      "unownedBytesIdentical": true,
+      "allHumanTaskCardsIdentical": true,
+      "baselineHtmlSha256": "0708d1dd51deffe2178f20c11edc5a250182e043c02fa7d99ea52d3fc4b000c2",
+      "finalHtmlSha256": "53bac050b3d725589397e0622f4152f5eb4dbeea417ea3252dbb21bed03ad2a4",
+      "canonicalSnapshot": "1a4f0c1a3d656db4c5f65388881e079dd0966a5f",
+      "openingSiteSource": "22f310a783e02c6affed9d1a394da0500cb5f8c1",
+      "pushedSiteSource": "43bfa747074c8597bf79ee37282dfbfa45a1f91d",
+      "archiveSourceHtmlByteIdentical": true,
+      "localGzipSha256": "c2ac026009b33ad894118225107a332e73d0ffd280b0d247947302c5bf4a2e30",
+      "humanTaskCardsPreserved": 13
+    },
+    "checks": {
+      "siteSecretScan": {
+        "status": "PASS",
+        "scannedBytes": 119386,
+        "findings": 0
+      },
+      "diffWhitespace": "PASS",
+      "visualQa": "390px screenshot inspected; no mobile overflow. Task roles/completion and links verified at1440/390/320."
+    }
+  },
+  "status": "COMPLETED_SYNTHETIC_CYCLE_PRIVATE_BOARD_CURRENT"
 }

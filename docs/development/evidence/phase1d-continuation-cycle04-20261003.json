@@ -2040,7 +2040,8 @@
     "sourceBranchAndGitObjectsRetained": true,
     "runtimeAndAuthorEvidencePreserved": true,
     "localGeneratedObjReduction": "Only own coordinator-created unrelated obj directories removed; sparse source reduction retained Git objects",
-    "ownBuildServersShutdown": true
+    "ownBuildServersShutdown": true,
+    "ownStatusPreviewStopped": true
   },
   "coordinatorOriginalDiagnostics": [
     "Full checkout/parallel whole restore/tempfile/log writes failed intermittently on disk allocation; sparse/reduced serial scope succeeded",
@@ -2049,5 +2050,50 @@
     "Expired Site credential renewed for same project; helper tar locale warnings retained; exact pushed/archive/local HTML verified",
     "Erroneous documentary patch context did not match and made no changes",
     "Final documentary secret scan classified public scan-status string PASS119379bytes/noLeaks under siteSecretScan as generic-api-key; redacted report retained. Represented the same executed result as structured status/byte/findings fields; rescanned without exclusions."
-  ]
+  ],
+  "completionSiteReceipt": {
+    "path": "docs/development/evidence/phase1d-continuation-cycle04-site-20261003.json",
+    "version": 113,
+    "deploymentStatus": "succeeded",
+    "ownerOnlyConfirmed": true,
+    "siteSource": "43bfa747074c8597bf79ee37282dfbfa45a1f91d",
+    "canonicalSnapshot": "1a4f0c1a3d656db4c5f65388881e079dd0966a5f"
+  },
+  "finalPreservation": {
+    "status": "PASS",
+    "initialArtifactsRehashed": 63,
+    "existingSourcePathsRehashed": 332,
+    "testedPathsExact": {
+      "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.cs": "587a84eb682f4f7bbd7b84ed3de21f3ad461514e2537bf53f2546b6a4b5e5f28",
+      "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md": "cdfa9bd57fb3b0de26d161054592d5509f75afa3547228540c3c9f00ca377959",
+      "tests/integration/SyntheticMcp.Tests/Program.cs": "be5ba0fd67ab0e1690f28b9753f6d91888cecdba33ff33db459b2f4f2c575c0d"
+    },
+    "site": {
+      "status": "PASS",
+      "unownedBytesIdentical": true,
+      "allHumanTaskCardsIdentical": true,
+      "baselineHtmlSha256": "0708d1dd51deffe2178f20c11edc5a250182e043c02fa7d99ea52d3fc4b000c2",
+      "finalHtmlSha256": "53bac050b3d725589397e0622f4152f5eb4dbeea417ea3252dbb21bed03ad2a4",
+      "canonicalSnapshot": "1a4f0c1a3d656db4c5f65388881e079dd0966a5f",
+      "openingSiteSource": "22f310a783e02c6affed9d1a394da0500cb5f8c1",
+      "pushedSiteSource": "43bfa747074c8597bf79ee37282dfbfa45a1f91d",
+      "archiveSourceHtmlByteIdentical": true,
+      "localGzipSha256": "c2ac026009b33ad894118225107a332e73d0ffd280b0d247947302c5bf4a2e30",
+      "humanTaskCardsPreserved": 13
+    }
+  },
+  "finalArtifactManifest": {
+    "path": ".sites-work/phase1d-cycle04-evidence/final-artifact-manifest.json",
+    "artifacts": 93,
+    "sha256": "12cb30ecb595826b516592ee665f4a57ce1e589f5b64a893b901a5c6512b7980"
+  },
+  "finalReceiptChecks": {
+    "jsonParsing": "PASS",
+    "whitespace": "PASS",
+    "secretScan": {
+      "status": "PASS",
+      "findings": 0,
+      "scannedBytesBeforeCleanupProvenance": 78701
+    }
+  }
 }
