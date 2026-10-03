@@ -78,14 +78,14 @@ internal static class SyntheticEvaluationWorkflowMigration
             if (index != expected.Length) throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
         }
         await using var metadata = new NpgsqlCommand("""
-          SELECT count(*),coalesce(string_agg(pg_get_constraintdef(n.oid),''),'')
+          SELECT count(*),coalesce(string_agg(pg_get_constraintdef(n.oid),''),'')||'|'||coalesce(string_agg(n.conname,''),'')
           FROM pg_constraint n JOIN pg_class c ON c.oid=n.conrelid JOIN pg_namespace s ON s.oid=c.relnamespace
-          WHERE s.nspname='synthetic_evaluation_workflow' AND c.relname='schema_migrations' AND n.contype='p'
+          WHERE s.nspname='synthetic_evaluation_workflow' AND c.relname='schema_migrations' AND n.contype<>'n'
           """, c, t);
         await using (var r = await metadata.ExecuteReaderAsync(ct))
         {
             await r.ReadAsync(ct);
-            if (r.GetInt64(0) != 1 || r.GetString(1) != "PRIMARY KEY (migration_id)")
+            if (r.GetInt64(0) != 1 || r.GetString(1) != "PRIMARY KEY (migration_id)|schema_migrations_pkey")
                 throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
         }
     }
