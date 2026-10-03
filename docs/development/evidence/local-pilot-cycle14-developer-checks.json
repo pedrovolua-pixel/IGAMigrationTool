@@ -1,6 +1,6 @@
 {
   "schema": "local-pilot-cycle14-developer-checks-v1",
-  "status": "VERIFIED_DEVELOPER_CHECKS_PRIVATE_PUBLICATION_PENDING",
+  "status": "COMPLETE_BOUNDED_DEVELOPER_CYCLE",
   "recordedUtc": "2026-10-03T05:09:09.506411+00:00",
   "scope": "Owner-approved TC14-01\u201306 local fictional Consultant planning task only; future CSV role wording corrected, no export implementation. Full Milestone7/TP018/localpilot/UAT/G1\u2013G9 NOT VERIFIED.",
   "approvedProposalSha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839",
@@ -7492,8 +7492,10 @@
     "commandSupplement": "docs/development/evidence/cycle14/legacy-artifact-browser-command-preservation.json"
   },
   "privateSite": {
-    "status": "PUBLICATION_PENDING_IN_THIS_CYCLE",
-    "lastConfirmedVersion": 88,
+    "status": "CONFIRMED_OWNER_PRIVATE",
+    "version": 89,
+    "sourceCommit": "7b7a8289aa254803bcdd151ca6a5c55ed5fe5fa5",
+    "deploymentId": "appgdep_6ac09068f86c8191a9cbaf4f9405a370",
     "publicationReceipt": "docs/development/evidence/local-pilot-cycle14-completion-site.json"
   }
 }

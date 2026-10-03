@@ -1,0 +1,45 @@
+{
+  "schema": "cycle14-private-site-completion-v1",
+  "status": "CONFIRMED",
+  "version": 89,
+  "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_26eda9f9e1fc8191b347f6867c048d2e",
+  "deploymentId": "appgdep_6ac09068f86c8191a9cbaf4f9405a370",
+  "sourceCommit": "7b7a8289aa254803bcdd151ca6a5c55ed5fe5fa5",
+  "canonicalCommit": "835f5e0596bf5213511899287f5377b583fa678d",
+  "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+  "ownerPrivate": true,
+  "externalVisitors": 0,
+  "archiveStorage": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_0000000067f081f58baec490b44cc5f1",
+    "content_hash": "sha256:3040c7375799e5c35b86fb6f240070e077d362e96ecfdf70d40fb4d2732b2d69",
+    "size_bytes": 81920,
+    "file_count": 2
+  },
+  "recordedUtc": "2026-10-03T05:22:45.681793+00:00",
+  "qa": {
+    "metadata": "/private/tmp/iga-cycle14-completion-site-final-qa.json",
+    "sha256": "3da2f5edc4e4041b36f0c44b92018cb18fa4e045ac23db64a4ec0d3b133313b9",
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "humanTasks": 11,
+    "noOverflowOrPageErrors": true,
+    "actualTaskBoardScrollAndHashVerified": true,
+    "sixViewportCapturesInspected": true,
+    "originalWeakNavigationGenerationRetained": "/private/tmp/iga-cycle14-completion-site-initial-navigation"
+  },
+  "archiveProof": {
+    "result": "PASS",
+    "source": "7b7a8289aa254803bcdd151ca6a5c55ed5fe5fa5",
+    "archive": "/private/tmp/iga-cycle14-completion-site.tar.gz",
+    "archiveSha256": "fae0e23df0e64217920f6ccd24197a81bb685ab85a45f5039f77289e3a1c480a",
+    "indexGitBytesEqual": true,
+    "hostingGitBytesEqual": true,
+    "packagerMetadataPath": "dist/.openai/hosting.json",
+    "initialCheckLimit": "Initial verifier assumed archive-root config path; corrected to actual supported packager layout before final confirmation",
+    "backendStorageHashDistinct": "Server returns its normalized saved tar hash; no raw local gzip/decompressed-tar byte equality is claimed."
+  }
+}

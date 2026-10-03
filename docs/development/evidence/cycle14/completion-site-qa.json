@@ -1,0 +1,233 @@
+[
+  {
+    "name": "desktop",
+    "width": 1440,
+    "height": 1000,
+    "status": "PASS",
+    "headline": "Consultant planning tasks are verified locally.",
+    "overflow": false,
+    "tasks": [
+      {
+        "title": "Reconcile A build and complete B source facts",
+        "role": "Requested from: One Identity SME with the repository owner",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Confirm source queries, fields and fixtures",
+        "role": "Requested from: One Identity SME; technical and security reviewers",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Authorize the read-only database plan",
+        "role": "Requested from: Customer database owner",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Settle collector delivery and installer contracts",
+        "role": "Requested from: Technical, security, operations and quality owners; customer collector administrator and evidence-policy authorizer",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Approve production run operations and cancellation",
+        "role": "Requested from: Technical and security owners, with the identity administrator",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Provide hosted workloads and live foundation evidence",
+        "role": "Requested from: Platform engineer, technical/security owners and identity administrator",
+        "done": true,
+        "links": 8
+      },
+      {
+        "title": "Supply protected BFF deployment bindings",
+        "role": "Requested from: Azure/identity owner, database and network owners, technical/security and operations reviewers",
+        "done": true,
+        "links": 5
+      },
+      {
+        "title": "Configure the approved Entra identity path",
+        "role": "Requested from: Identity administrator and platform owner",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Approve the exact real rule catalog",
+        "role": "Requested from: One Identity SME, product and technical owners; security owner for security rules",
+        "done": true,
+        "links": 1
+      },
+      {
+        "title": "Verify the OpenAI pilot project",
+        "role": "Requested from: API project owner, technical/evaluation owner and security reviewer",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Supply PDF license and review environment",
+        "role": "Requested from: Pilot owner and accessibility reviewer",
+        "done": true,
+        "links": 2
+      }
+    ],
+    "missingAnchors": 0
+  },
+  {
+    "name": "mobile",
+    "width": 390,
+    "height": 844,
+    "status": "PASS",
+    "headline": "Consultant planning tasks are verified locally.",
+    "overflow": false,
+    "tasks": [
+      {
+        "title": "Reconcile A build and complete B source facts",
+        "role": "Requested from: One Identity SME with the repository owner",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Confirm source queries, fields and fixtures",
+        "role": "Requested from: One Identity SME; technical and security reviewers",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Authorize the read-only database plan",
+        "role": "Requested from: Customer database owner",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Settle collector delivery and installer contracts",
+        "role": "Requested from: Technical, security, operations and quality owners; customer collector administrator and evidence-policy authorizer",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Approve production run operations and cancellation",
+        "role": "Requested from: Technical and security owners, with the identity administrator",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Provide hosted workloads and live foundation evidence",
+        "role": "Requested from: Platform engineer, technical/security owners and identity administrator",
+        "done": true,
+        "links": 8
+      },
+      {
+        "title": "Supply protected BFF deployment bindings",
+        "role": "Requested from: Azure/identity owner, database and network owners, technical/security and operations reviewers",
+        "done": true,
+        "links": 5
+      },
+      {
+        "title": "Configure the approved Entra identity path",
+        "role": "Requested from: Identity administrator and platform owner",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Approve the exact real rule catalog",
+        "role": "Requested from: One Identity SME, product and technical owners; security owner for security rules",
+        "done": true,
+        "links": 1
+      },
+      {
+        "title": "Verify the OpenAI pilot project",
+        "role": "Requested from: API project owner, technical/evaluation owner and security reviewer",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Supply PDF license and review environment",
+        "role": "Requested from: Pilot owner and accessibility reviewer",
+        "done": true,
+        "links": 2
+      }
+    ],
+    "missingAnchors": 0
+  },
+  {
+    "name": "reflow",
+    "width": 320,
+    "height": 844,
+    "status": "PASS",
+    "headline": "Consultant planning tasks are verified locally.",
+    "overflow": false,
+    "tasks": [
+      {
+        "title": "Reconcile A build and complete B source facts",
+        "role": "Requested from: One Identity SME with the repository owner",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Confirm source queries, fields and fixtures",
+        "role": "Requested from: One Identity SME; technical and security reviewers",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Authorize the read-only database plan",
+        "role": "Requested from: Customer database owner",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Settle collector delivery and installer contracts",
+        "role": "Requested from: Technical, security, operations and quality owners; customer collector administrator and evidence-policy authorizer",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Approve production run operations and cancellation",
+        "role": "Requested from: Technical and security owners, with the identity administrator",
+        "done": true,
+        "links": 3
+      },
+      {
+        "title": "Provide hosted workloads and live foundation evidence",
+        "role": "Requested from: Platform engineer, technical/security owners and identity administrator",
+        "done": true,
+        "links": 8
+      },
+      {
+        "title": "Supply protected BFF deployment bindings",
+        "role": "Requested from: Azure/identity owner, database and network owners, technical/security and operations reviewers",
+        "done": true,
+        "links": 5
+      },
+      {
+        "title": "Configure the approved Entra identity path",
+        "role": "Requested from: Identity administrator and platform owner",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Approve the exact real rule catalog",
+        "role": "Requested from: One Identity SME, product and technical owners; security owner for security rules",
+        "done": true,
+        "links": 1
+      },
+      {
+        "title": "Verify the OpenAI pilot project",
+        "role": "Requested from: API project owner, technical/evaluation owner and security reviewer",
+        "done": true,
+        "links": 2
+      },
+      {
+        "title": "Supply PDF license and review environment",
+        "role": "Requested from: Pilot owner and accessibility reviewer",
+        "done": true,
+        "links": 2
+      }
+    ],
+    "missingAnchors": 0
+  }
+]
