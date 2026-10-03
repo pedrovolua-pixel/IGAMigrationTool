@@ -145,3 +145,10 @@ Private Site version91 publication is confirmed in [the source/deployment receip
 ## Phase 1B closure decision preparation — 2026-10-03
 
 [Combined decision packet](local-phase1b-closure-decision-packet.md), [closure plan](../../plans/active/local-pilot-phase1b-closure.md) and [preparation metadata](../../docs/development/evidence/phase1b-closure-preparation-20261003.json). Proposal/test bytes are SHA256-bound; independent author/reviewer references are retained. Documentary checks passed. Executed prior-source baseline checks and64-project source composition are distinct from proposed-runtime tests. No desired-outcome/priority/automatic-AI/CSV runtime, owned-PG/new-browser/hosted/manual/live or Phase1B/feature/G1–G9 PASS is inferred. Owner decision is PENDING, including proposed residual FR12/15 phase allocation. Private-site publication has a separate exact record.
+
+
+## Phase 1B exact closure packet approved — 2026-10-03
+
+The repository owner stated “Approved 1B packet”, approving OP1B-01–06, AI1B-01–07, CSV1B-01–07 and P1B-SCOPE-01 without amendment. [Attributable approval and exact SHA256 bindings](local-phase1b-approval.md) supersede the immutable proposals’ pending labels. All seven reviewed files were hash-verified unchanged.
+
+[Closure execution](../../plans/active/local-pilot-phase1b-closure.md) is RUNNING: bounded isolated writers prepare the shared engineering contract and remaining desired-outcome/priority-effort, automatic fictional AI and safe task CSV implementation. Approval grants no runtime PASS or closure. Residual FR-HAS-12/15 collaboration beyond existing Confirm/Reject/Defer/comment/presentation is allocated to Phase 1C; requirements/full Milestone5 stay open. Preserve the separate Phase1C agent’s work. Human UAT, live G1–G9, production/provider/source authority and full milestones remain separately gated. The combined packet owner task is closed by this approval; twelve earlier human dependencies remain open.

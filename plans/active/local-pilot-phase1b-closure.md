@@ -1,16 +1,16 @@
 # Local pilot Phase 1B closure
 
-Status: RUNNING — reviewed decision preparation; implementation of unresolved contracts awaits exact owner decision
+Status: RUNNING — exact owner packet approved; shared engineering contract and implementation underway
 Owner: Phase 1B coordinator
 Last updated: 2026-10-03
-Baseline: `0185a6c` on `codex/pilot-foundation`
+Baseline: `d7d493e` on `codex/pilot-foundation`; preserves parallel Milestone08 composition
 Authority: repository owner's 2026-10-03 instruction to work until Phase 1B closes, approved local build and feature 003 product/technical/implementation/test plans
 
 ## Closure boundary
 
 Close the local synthetic Phase 1B engineering checkpoint with one coherent deterministic-plus-fake-AI assessment, exact approved desired-outcome locks, reproducible health/quality/maturity, traceable recommendation priority/effort, inert reviewed fix packages, consultant planning tasks and safe authorized CSV. Local completion does not grant human acceptance, UAT readiness, production release or G1–G9. Real provider/source/customer authority remains disabled.
 
-The other agent owns Phase 1C. Do not implement risk acceptance, validated remediation closure, recurrence/reassessment, evaluation, immutable publication, PDF, report share links or Phase 1D MCP here. Protected CSV task/finding navigation remains in Phase 1B. Residual finding collaboration and dispositions under FR-HAS-12/15 remain required Phase 1B/Milestone5 work unless the owner explicitly approves the P1B-SCOPE-01 local sequencing allocation in the [combined decision packet](../../specs/003-health-assessment/local-phase1b-closure-decision-packet.md). Do not silently omit or duplicate those paths.
+The other agent owns Phase 1C. Do not implement risk acceptance, validated remediation closure, recurrence/reassessment, evaluation, immutable publication, PDF, report share links or Phase 1D MCP here. Protected CSV task/finding navigation remains in Phase 1B. The owner approved P1B-SCOPE-01 in the [exact approval record](../../specs/003-health-assessment/local-phase1b-approval.md): residual finding collaboration and dispositions under FR-HAS-12/15 beyond existing Confirm/Reject/Defer/comment/presentation are allocated to Phase 1C. Their requirements and full Milestone5 criteria remain open until implemented and verified. Do not duplicate that agent’s work.
 
 The existing workspace has concurrent UI/BFF/research edits. Use isolated `codex/` worktrees from the baseline; integrate only owned paths. Preserve every historical profile, migration, input and golden byte. Do not restart shared PostgreSQL or change its configuration, role or another agent's databases.
 
@@ -49,7 +49,7 @@ Writing packets return commits, executed documentary checks and requirements/dec
 
 ## Completion criteria
 
-- [ ] Required exact owner decisions recorded; no consequential unresolved choice silently implemented.
+- [x] Required exact owner decisions recorded in `local-phase1b-approval.md`; reviewed packet and six bound files hash-verified unchanged.
 - [ ] Every Phase 1B requirement mapped to executed local PASS or an explicit approved phase allocation; no required local path omitted.
 - [ ] One synthetic baseline/run exercises deterministic and fake-AI findings, outcomes, coherent scores/maturity, priority/effort, inert packages, planning tasks and CSV.
 - [ ] Negative authority/isolation/input/injection/failure/replay/concurrency cases pass; old profiles retain exact bytes.
@@ -57,3 +57,16 @@ Writing packets return commits, executed documentary checks and requirements/dec
 - [ ] Canonical records/handoff updated and matching owner-private site deployment confirmed.
 
 No item is completed merely by this plan. Full local pilot, Phase 1C, human accessibility/UAT and G1–G9 remain open.
+
+## Approved implementation packets — 2026-10-03
+
+Owner statement: “Approved 1B packet”. OP1B-01–06, AI1B-01–07, CSV1B-01–07 and P1B-SCOPE-01 approved without amendment. All writers start from `d7d493e`; coordinator applies the repository implement-feature workflow. Runtime work begins only after the combined engineering contract freeze.
+
+| Packet | Isolated branch / worktree | Owned paths | State |
+| --- | --- | --- | --- |
+| OP implementation | `codex/phase1b-outcomes-implementation` / `/private/tmp/iga-phase1b-closure-contract` | New SyntheticOutcomePriority module, its migration/unit/integration tests | RUNNING — engineering design |
+| AI implementation | `codex/phase1b-ai-implementation` / `/private/tmp/iga-phase1b-ai-contract` | New SyntheticAiExecution module, its migration/unit/integration tests | RUNNING — engineering design |
+| CSV implementation | `codex/phase1b-csv-implementation` / `/private/tmp/iga-phase1b-csv-contract` | New SyntheticTaskCsv module/renderer/migration/tests; additive typed export capture in SyntheticPlanningTasks and SyntheticFixReview | RUNNING — engineering design |
+| Coordinator integration | `codex/phase1b-integration` / `/private/tmp/iga-phase1b-coordinator` | Shared contracts/config/solution, AssessmentRuns, host, frontend, integration/browser/compatibility, canonical evidence/site | RUNNING |
+
+Registry fence precedes run fence in compound operations. Runtime stores join the supplied connection/transaction; provider and renderer execute outside transactions. Each writer returns exact executed evidence and receives non-author review. Dedicated databases use `iga_synthetic_phase1b_`; no shared cluster, other databases or concurrent root UI/BFF/Phase1C work is changed. Historical compatibility and disabled live paths remain explicit completion conditions.
