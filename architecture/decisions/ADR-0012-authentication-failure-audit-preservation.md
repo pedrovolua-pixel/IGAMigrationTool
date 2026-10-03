@@ -1,6 +1,6 @@
 # ADR-0012: Authentication failure audit preservation
 
-Status: Proposed — no decision accepted
+Status: Accepted for bounded local Option A protocol prototype only; production outage decision remains open
 Date: 2026-10-03 UTC
 Decision owners: Technical/security, data-governance and operations owners
 Scope: HTTPS production dependency review; no implementation, deployment, grant or policy amendment
@@ -49,7 +49,7 @@ Ordinary logs, memory queues, queue publish without durable receipt and containe
 
 ## Decision
 
-Unresolved. Recommend Option A only for a bounded local protocol prototype after exact technical/test approval. Its acceptance would permit local synthetic persistence/concurrency/reconciliation tests, not public admission or a policy amendment. Decide correlated total-audit outage handling separately before any live activation. Do not claim private Blob alone meets every production audit requirement.
+Repository owner accepted the recommended Option A for a bounded local protocol prototype on 2026-10-03 UTC after packet `d518d25`. Its acceptance would permit local synthetic persistence/concurrency/reconciliation tests, not public admission or a policy amendment. Decide correlated total-audit outage handling separately before any live activation. Do not claim private Blob alone meets every production audit requirement.
 
 ## Security, operations and cost impact
 
@@ -73,5 +73,6 @@ Microsoft sources checked2026-10-03 UTC; provider facts do not prove this applic
 
 ## Approval
 
-Accepted by: Pending human decision
-Date: Pending
+Accepted by: Repository owner, reply “Approved” after PC-D01–PC-D05 review packet
+Date: 2026-10-03 UTC
+Scope: Local Option A prototype and proposed linked source-occurrence interpretation only; no total-outage policy exception, live compliance, grants or release. [Approval and dependencies](../../plans/active/https-production-local-cycle01.md).
