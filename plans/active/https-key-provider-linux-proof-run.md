@@ -1,6 +1,6 @@
 # Exact shared-key artifact Linux proof run
 
-Status: RUNNING — owner authorized exact correction publication and repeat Linux proof
+Status: REMOTE RUN SUCCESS — independent artifact receipt acceptance pending manual ZIP
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: f8fb332114aa8a52696caae8f4b264075e900d55
@@ -39,3 +39,9 @@ KV-L01 PASS: exact approved public head/base/seven paths/draft PR3 and sole job 
 ## Owner correction-run authorization — 2026-10-03 UTC
 
 Owner said “Run it” after the exact reviewed correction and Linux signature rerun were identified as the next step. This authorizes publishing only candidatecefd8354d69e00eb372f8efff457e9b175d3a6eb by normal fast-forward of existing public proof branch/PR3 and the same sole diagnostic workflow. Candidate/parent/one-file hash/patch and public main/old pilot/proof branch heads were reconfirmed. Existing frozen proof evidence criteria and non-author review still apply. No merge, provider harness, dependencies, trust bypass, paid Azure session, grants, portal activation or publisher retry is authorized.
+
+## Corrected execution checkpoint
+
+Normal fast-forward to exactcefd835 succeeded. PR3 draft/2commits/7files/base31c61ea retained. Run37145824111/job111269428858 all12stepsSUCCESS; actual35mocks passed. KV-L01 updated public/source/run identity PASS. KV-L02 actual execution reported SUCCESS but37individual receipt acceptance NOT VERIFIED. KV-L03 log setup/SDK-install metadata PARTIAL; actual ZIP integrity/full SDK/config/source/selected-trust receipts unavailable. KV-L04 PASS bounded accurate reporting/manual artifact handoff; site remains stale. KV-L05 prior reviewed local correction remains historical PASS, executed again in hosted35mocks.
+
+Artifact11281169753 digestfbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395 is metadata only until bytes obtained. ConnectorHTTP403 and automatically rejected alternate browser download block retrieval; no further routes/bypass. Owner manual ZIP request remains pending. [Current result](../../docs/development/https-key-provider-linux-run-result.md) and [rerun receipt](../../docs/development/evidence/https-key-provider-linux-proof-rerun-20261003.json) bind this checkpoint. No public packet or Azure change beyond the approved exact correction. Dependent provider integration remains blocked until independent receipt/platform proof.

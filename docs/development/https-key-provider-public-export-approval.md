@@ -1,6 +1,6 @@
 # Exact public signature-proof export approval
 
-Status: OWNER APPROVED — exact packet published; Linux run failed before signatures
+Status: OWNER APPROVED — exact correction published; rerun SUCCESS with artifact review pending
 Date: 2026-10-03 UTC
 Authority: [cycle04](../../plans/active/https-production-local-cycle04.md); [self-contained proof contract](https-key-provider-ci-proof-packet.md)
 
@@ -41,3 +41,7 @@ Owner replied “Approved” after the exact seven-file packet publication, sepa
 ## Execution outcome
 
 Exact branch/draft PR3 published and attached. Run37139568768 failed in a portable TLS safety-test assertion before SDK/download/signatures; no artifact exists. [Failure and exact local one-file correction](https-key-provider-linux-run-result.md) preserve the public packet and request separate changed-byte publication approval. No integrity/trust bypass or retry of unchanged bytes.
+
+## Authorized correction outcome
+
+Owner “Run it” authorized exactcefd835 one-file correction and same diagnostic job. Corrected run37145824111 succeeded; the required independent artifact receipt/trust review awaits manually supplied ZIP after connectorHTTP403 and automatic browser download workaround rejection. [Current execution result](https-key-provider-linux-run-result.md) supersedes the pending changed-byte approval state. No further publication/run, merge, trust or production/Azure authority is inferred.

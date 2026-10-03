@@ -1,10 +1,10 @@
 # Exact Linux signature proof — failed attempt and correction
 
-Status: FAILED BEFORE SIGNATURE EXECUTION; reviewed local correction pending public approval
+Status: CORRECTED REMOTE RUN PASSED — independent signature receipt review awaits manually supplied artifact
 Date: 2026-10-03 UTC
 Authority: [exact export approval](https-key-provider-public-export-approval.md), [execution plan](../../plans/active/https-key-provider-linux-proof-run.md), frozen [proof contract](https-key-provider-ci-proof-packet.md).
 
-## Actual public execution
+## First attempt — retained failure
 
 [Draft PR3](https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/3) has approved head4fadf7ced8b6c6b978e326e2fae6d925001fdb26 and base31c61eaf17a2abbc3b4b87a674b057d0b2b75651, one commit/seven exact paths. The branch was pushed normally and the draft PR attached to the current task. The connector could not create the PR (integration403); the authorized signed-in browser created it. No default/existing pilot branch change or merge occurred.
 
@@ -18,7 +18,7 @@ Only [test_download_archives.py](../../tests/infrastructure/HttpsKeyProviders/te
 
 Coordinator17 corrected downloader+18 unchanged verifier mocked tests pass. Python AST and whitespace pass. These remain local no-network checks, not actual Linux signatures. The non-author review receipt supplies separate reproduction, unsafe-context and no-socket evidence. No full C#/PostgreSQL regression rerun applies because application code/configuration/dependencies/schema/IaC remain unchanged.
 
-## Exact next publication requested
+## Reviewed correction publication request — historical
 
 A local candidatecefd8354d69e00eb372f8efff457e9b175d3a6eb has sole parent4fadf7ced8b6c6b978e326e2fae6d925001fdb26 and changes only that existing public test file (34 additions/2 deletions). Corrected file SHA2564683991a12264e8b34e96cb8062db5019f17100bf89870c5ac1d25453a707c56; binary diff SHA2561d3db54d8d64d73c163b3f14bda9508ede0f338131a1fb379e01f0712d520fe0. No coordinator ancestry enters this candidate.
 
@@ -29,3 +29,15 @@ Approve a normal fast-forward of the existing codex/https-cycle04-public-proof b
 KV-L01 publication PASS. KV-L02 actual signatures NOT VERIFIED. KV-L03 runner setup observed only; SDK/architecture/selected trust/artifact integrity NOT VERIFIED. KV-L04 honest failure/canonical reporting and KV-L05 local correction review are recorded in the execution receipt. All six linked [human tasks](https-production-test-packet.md#human-tasks-and-completion-conditions) remain open; shared-key task now requests the exact one-file correction publication/run before supported-platform proof. Production decisions/ARL cases/G1–G9/Milestone2 remain open.
 
 The prepared private-board delta is this failed attempt, reviewed local correction and those six linked roles/completion conditions. BFF/HTTPS site remains stale: last confirmed snapshot4346e0f at2026-10-02T19:50:45.775370+00:00. Automatic approval review rejected the separate credential/network publisher proxy-bypass action; no retry/bypass occurred, and unrelated confirmed Cycle14 updates remain preserved.
+
+## Authorized corrected run — 2026-10-03 UTC
+
+Owner said “Run it” after the reviewed one-file correction/run was identified. Candidatecefd8354d69e00eb372f8efff457e9b175d3a6eb was normally fast-forwarded to the existing proof branch after exact parent/file/patch/default/old-branch checks. PR3 remains draft,2commits/7files, base31c61ea unchanged, synthetic mergee7e5f70ea67068fb20fe4f7c3a89a6c18e6d6b12. No further publication approval is pending for these bytes.
+
+[Corrected run37145824111](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37145824111), attempt1/job111269428858, completed SUCCESS: all12 reported steps passed, including actual SDK setup, acquisition, signature command execution, machine validation and diagnostic upload. The18 verifier+17 corrected downloader mocks passed on the runner. Logs bind exact merge checkout, runner2.337.0, Ubuntu24.04.5/image20260927.320.1, read-only Contents and all three pinned actions. Setup reports SDK10.0.401 already installed; full selected SDK/config/source/trust binding still needs artifact receipts. Platform forced pinned checkout/setup actions from Node20 to Node24 and issued a deprecation warning; no action pin or trust change was made.
+
+Artifact11281169753 is https-key-provider-signatures-37145824111-1,85352bytes, GitHub metadata digestsha256:fbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395, created2026-10-03T18:53:31Z/expires2027-01-01T18:52:18Z. These observe roughly90-day diagnostic expiry, not repository configuration or product retention. The ZIP bytes have not been obtained or independently hashed. Job SUCCESS is actual execution evidence; it alone is not independent acceptance of all37 direct exits/raw logs/archive hashes/SDK/config/source/trust.
+
+The connector's reusable file transfer returned HTTP403. Signed-in GitHub download did not supply an accessible file; the blank download-tab read was blocked by browser URL policy, and automatic approval review rejected the alternate documented browser download API as a prohibited workaround. No further download route, security/proxy/trust bypass or retry was attempted. The owner has been asked to manually download that exact diagnostic ZIP from the run and attach it here. Upon receipt, safely inspect the bounded allowlisted ZIP, match the remote digest, independently verify every receipt/raw log/config/source/SDK/normal selected trust chain, then decide the artifact prerequisite. **Signature receipt acceptance remains NOT VERIFIED until then.**
+
+[Corrected-run metadata receipt](evidence/https-key-provider-linux-proof-rerun-20261003.json) retains executed checks, source/artifact metadata and independent partial review. All six human tasks and deployment/production gates remain open. The shared-key task now requests manual artifact intake/review, then provider dispatch/lifecycle and protected key inputs. No Azure operation, paid session, grant, dependency integration/provider harness, merge or portal activation occurred. Prepared private-board delta reflects remote SUCCESS with incomplete proof; BFF/HTTPS publisher/snapshot block remains as recorded above.
