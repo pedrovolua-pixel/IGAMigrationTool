@@ -57,6 +57,9 @@ public sealed class Phase1BAcceptedSchemaSourceAdapter
                 AiExecutionCanonical.Serialize(a.GetProperty("runLock")) != AiExecutionCanonical.Serialize(proof.RunLock))
                 return Deny(Phase1BAcceptedSchemaIssue.IntegrityMismatch);
             var nativeScope = c.GetProperty("scope");
+            if (p.GetProperty("scopeId").GetString() != SchemaReference.Native(proof.RunLock.Scope, "scope") ||
+                p.GetProperty("environmentId").GetString() != SchemaReference.Native(proof.RunLock.Scope, "environment", proof.RunLock.Scope.EnvironmentId))
+                return Deny(Phase1BAcceptedSchemaIssue.IntegrityMismatch);
             if (nativeScope.GetProperty("customerId").GetString() != proof.RunLock.Scope.CustomerId || nativeScope.GetProperty("projectId").GetString() != proof.RunLock.Scope.ProjectId ||
                 nativeScope.GetProperty("environmentId").GetString() != proof.RunLock.Scope.EnvironmentId || proof.Works.Count != a.GetProperty("works").GetArrayLength() ||
                 proof.Works.Select(w => w.WorkId).Distinct(StringComparer.Ordinal).Count() != proof.Works.Count)
@@ -101,6 +104,14 @@ public sealed class Phase1BAcceptedSchemaSourceAdapter
                 bindings.Where(b => b.Kind != SamplingVersionKind.AiSchema).Any(b => b.State == Phase1BPopulationBindingState.SourceBound && (b.Reference is null || b.ValueJson is null || b.MissingReason is not null) ||
                     b.State == Phase1BPopulationBindingState.Missing && (b.Reference is not null || b.ValueJson is not null || string.IsNullOrEmpty(b.MissingReason))))
                 return Deny(Phase1BAcceptedSchemaIssue.IntegrityMismatch);
+            var references = new Dictionary<string, string>(StringComparer.Ordinal);
+            foreach (var binding in bindings.Where(b => b.State == Phase1BPopulationBindingState.SourceBound))
+            {
+                if (binding.Reference is null || binding.ValueJson is null) return Deny(Phase1BAcceptedSchemaIssue.IntegrityMismatch);
+                var native = AiExecutionCanonical.Serialize(new { binding.Kind, binding.ValueJson });
+                if (references.TryGetValue(binding.Reference, out var prior) && prior != native) return Deny(Phase1BAcceptedSchemaIssue.IntegrityMismatch);
+                references[binding.Reference] = native;
+            }
             return new(null, new(runId, runRevision, p.GetProperty("scopeId").GetString()!, p.GetProperty("environmentId").GetString()!,
                 populationCanonicalJson, populationContentDigest, proof.CanonicalJson, proof.ContentDigest, bindings));
         }
