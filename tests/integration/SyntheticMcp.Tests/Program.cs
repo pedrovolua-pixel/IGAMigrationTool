@@ -30,6 +30,12 @@ internal static class Program
         await T01(); await T02(); await T03(); await T04(); await T05(); await T06();
         await T07(); await T08(); await T09(); await T10(); await T11();
         Console.WriteLine($"PASS independent SyntheticMcp integration: {checks} assertions; P1D-T01–11 executable coverage; T12 coordinator source-bound checks");
+        try { await MinimizationCrossProduct.RunAsync(); }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine("FAIL cycle03 minimization: " + exception.Message);
+            Environment.ExitCode = 1;
+        }
     }
     internal static void Check(bool value, string name)
     {
