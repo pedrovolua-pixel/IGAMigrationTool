@@ -87,6 +87,7 @@ foreach (var exception in new Exception[] { new TimeoutException(), new IOExcept
 { source.Failure = exception; Check(await reader.ReadAsync(enrollment, 1, 1) is null, "Synthetic unavailable/timeout/error cannot manufacture freshness"); }
 source.Failure = null; source.User = null;
 Check(await reader.ReadAsync(enrollment, 1, 1) is null, "Synthetic404/null provider response denies");
+checks += await GraphProviderProjectionChecks.RunAsync();
 Console.WriteLine($"PASS {checks} closed authority/provider assertions");
 
 sealed class MutableClock : TimeProvider
