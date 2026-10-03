@@ -68,7 +68,8 @@ internal static partial class Program
         Check(after.Results.SequenceEqual(beforeRun.Results) && after.CheckpointSequence == beforeRun.CheckpointSequence, "aborted compound result leaves no owning coverage checkpoint");
         await Commit(service, engine, after, fixture.Generation, fixture.Recovery, receipt);
         var ai = await Ai(service, fixture.Run.RunId); var run = await Current(engine, fixture.Run.RunId);
-        Check(ai.Works.Single().Outcomes.All(o => run.Results.Contains(SyntheticPhase1BAnalysisAdapter.Coverage(o))), "result/gap and exact owning coverage become durable together");
+        ExactAiPartition(ai, run, "result/gap partition committed together");
+        Check(ai.Works.Single().State == (gap ? AiWorkState.Failed : AiWorkState.Succeeded), "exact success or terminal-gap work state recorded");
         if (!gap)
         {
             Check(ai.Works.Single().Outcomes.All(o => o.Finding?.State == "Proposed" && o.Finding.ConfidencePercent == 80m), "automatic AI originals remain Proposed with frozen confidence");
@@ -90,9 +91,21 @@ internal static partial class Program
             var terminal = typeof(DemoPhase1BWorker).GetMethod("TerminalRecovery", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)!;
             await (Task)terminal.Invoke(worker, [completed.Snapshot!, Token])!;
             var reconciled = await Ai(service, run.RunId);
+            ExactAiPartition(reconciled, await Current(engine, run.RunId), "late billing preserves exact original gap partition");
             Check(!reconciled.Works.Single().Attempts.Single().Held && reconciled.Works.Single().Outcomes.All(o => o.State == AssessmentCoverage.CoverageState.Error), "actual terminal worker reconciles known usage without promoting unknown-gap findings");
             Check((await Current(engine, run.RunId)).Results.SequenceEqual(completed.Snapshot!.Results), "late billing leaves immutable coverage unchanged");
         }
+    }
+    internal static void ExactAiPartition(AiExecutionSnapshot ai, SyntheticRunSnapshot run, string label)
+    {
+        var outcomes = ai.Works.Single().Outcomes;
+        Check(outcomes.Length == 2 && outcomes.Length == DemoPhase1BCatalog.AiKeys.Count &&
+            outcomes.Select(o => o.Key).Distinct().Count() == outcomes.Length &&
+            outcomes.Select(o => o.Key).ToHashSet().SetEquals(DemoPhase1BCatalog.AiKeys), label + " has literal two distinct exact planned AI keys");
+        var expected = outcomes.Select(SyntheticPhase1BAnalysisAdapter.Coverage).ToArray();
+        var actual = run.Results.Where(r => DemoPhase1BCatalog.AiKeys.Contains(r.Key)).ToArray();
+        Check(actual.Length == expected.Length && actual.Select(r => r.Key).Distinct().Count() == actual.Length &&
+            actual.ToHashSet().SetEquals(expected), label + " has exact once-only mapped owning coverage, without generic missing-input substitutes");
     }
     private static async Task StaleLease(DemoPhase1BService service, SyntheticDurableRunEngine engine, InjectedObserver observer, ImmutableArray<OutcomeSelection> selected)
     {

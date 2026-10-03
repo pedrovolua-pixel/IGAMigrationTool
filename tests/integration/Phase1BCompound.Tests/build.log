@@ -1,0 +1,27 @@
+  AssessmentCoverage -> /private/tmp/iga-phase1b-coordinator/src/server/modules/AssessmentCoverage/bin/Release/net10.0/AssessmentCoverage.dll
+  SyntheticSourceFence -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticSourceFence/bin/Release/net10.0/SyntheticSourceFence.dll
+  RecommendationGuidance -> /private/tmp/iga-phase1b-coordinator/src/server/modules/RecommendationGuidance/bin/Release/net10.0/RecommendationGuidance.dll
+  ReportDrafts -> /private/tmp/iga-phase1b-coordinator/src/server/modules/ReportDrafts/bin/Release/net10.0/ReportDrafts.dll
+  AssessmentMaturity -> /private/tmp/iga-phase1b-coordinator/src/server/modules/AssessmentMaturity/bin/Release/net10.0/AssessmentMaturity.dll
+  SyntheticTaskCsv -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticTaskCsv/bin/Release/net10.0/SyntheticTaskCsv.dll
+  SyntheticAiValidation -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  AssessmentOrchestration -> /private/tmp/iga-phase1b-coordinator/src/server/modules/AssessmentOrchestration/bin/Release/net10.0/AssessmentOrchestration.dll
+  DeterministicAnalysis -> /private/tmp/iga-phase1b-coordinator/src/server/modules/DeterministicAnalysis/bin/Release/net10.0/DeterministicAnalysis.dll
+  AssessmentScoring -> /private/tmp/iga-phase1b-coordinator/src/server/modules/AssessmentScoring/bin/Release/net10.0/AssessmentScoring.dll
+  SyntheticAiPreview -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticAiPreview/bin/Release/net10.0/SyntheticAiPreview.dll
+  SyntheticFixPackages -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticFixPackages/bin/Release/net10.0/SyntheticFixPackages.dll
+  FindingReview -> /private/tmp/iga-phase1b-coordinator/src/server/modules/FindingReview/bin/Release/net10.0/FindingReview.dll
+  SyntheticFixReview -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticFixReview/bin/Release/net10.0/SyntheticFixReview.dll
+  SyntheticAiExecution -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticAiExecution/bin/Release/net10.0/SyntheticAiExecution.dll
+  SyntheticPlanningTasks -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticPlanningTasks/bin/Release/net10.0/SyntheticPlanningTasks.dll
+  SyntheticOutcomePriority -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticOutcomePriority/bin/Release/net10.0/SyntheticOutcomePriority.dll
+  SyntheticTaskCsvIntegration -> /private/tmp/iga-phase1b-coordinator/src/server/modules/SyntheticTaskCsvIntegration/bin/Release/net10.0/SyntheticTaskCsvIntegration.dll
+  AssessmentRuns -> /private/tmp/iga-phase1b-coordinator/src/server/modules/AssessmentRuns/bin/Release/net10.0/AssessmentRuns.dll
+  LocalConsultantDemo -> /private/tmp/iga-phase1b-coordinator/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll
+  Phase1BCompound.Tests -> /private/tmp/iga-phase1b-csv-contract/tests/integration/Phase1BCompound.Tests/bin/Release/net10.0/Phase1BCompound.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.36

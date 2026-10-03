@@ -105,6 +105,7 @@ internal static partial class Program
         var receipt = new FakeAiProvider().Dispatch(fixture.Recovery);
         await Commit(service, engine, fixture.Run, fixture.Generation, fixture.Recovery, receipt);
         var current = await Current(engine, fixture.Run.RunId);
+        ExactAiPartition(await Ai(service, current.RunId), current, "completed fixture original partition");
         var complete = await engine.CompleteCoverageAsync(current.Scope, current.RunId, fixture.Generation, current.Revision); Check(complete.Succeeded, "actual full union coverage reaches Scoring");
         return complete.Snapshot!;
     }

@@ -30,7 +30,9 @@ PASS actual owning run read succeeds
 PASS aborted compound result leaves no owning coverage checkpoint
 PASS actual owning AI proof read succeeds
 PASS actual owning run read succeeds
-PASS result/gap and exact owning coverage become durable together
+PASS result/gap partition committed together has literal two distinct exact planned AI keys
+PASS result/gap partition committed together has exact once-only mapped owning coverage, without generic missing-input substitutes
+PASS exact success or terminal-gap work state recorded
 PASS automatic AI originals remain Proposed with frozen confidence
 PASS owning exact accepted AI receipt replay is recognized
 PASS owning exact accepted checkpoint replay is recognized
@@ -52,10 +54,15 @@ PASS actual owning run read succeeds
 PASS aborted compound result leaves no owning coverage checkpoint
 PASS actual owning AI proof read succeeds
 PASS actual owning run read succeeds
-PASS result/gap and exact owning coverage become durable together
+PASS result/gap partition committed together has literal two distinct exact planned AI keys
+PASS result/gap partition committed together has exact once-only mapped owning coverage, without generic missing-input substitutes
+PASS exact success or terminal-gap work state recorded
 PASS unknown terminal gap retains hold and error coverage
 PASS unknown gap completes union coverage without findings
 PASS actual owning AI proof read succeeds
+PASS actual owning run read succeeds
+PASS late billing preserves exact original gap partition has literal two distinct exact planned AI keys
+PASS late billing preserves exact original gap partition has exact once-only mapped owning coverage, without generic missing-input substitutes
 PASS actual terminal worker reconciles known usage without promoting unknown-gap findings
 PASS actual owning run read succeeds
 PASS late billing leaves immutable coverage unchanged
@@ -81,6 +88,9 @@ PASS actual owning AI proof read succeeds
 PASS actual AI reservation committed before dispatch
 PASS actual dispatch journal committed before pure provider
 PASS actual owning run read succeeds
+PASS actual owning AI proof read succeeds
+PASS completed fixture original partition has literal two distinct exact planned AI keys
+PASS completed fixture original partition has exact once-only mapped owning coverage, without generic missing-input substitutes
 PASS actual full union coverage reaches Scoring
 PASS actual selected artifact review saved under compound fence
 PASS actual selected artifact review saved under compound fence
@@ -119,4 +129,4 @@ PASS successful delivery has no fabricated interruption marker
 PASS actual host Execute observes response write cancellation
 PASS actual Auditor delivery cancellation preserves authorization and appends one typed interruption marker
 PASS actual interrupted transfer marker retains original snapshot/output/count metadata
-PASS 121 compound integration assertions; actual owning PostgreSQL and coordinator host APIs.
+PASS 131 compound integration assertions; actual owning PostgreSQL and coordinator host APIs.
