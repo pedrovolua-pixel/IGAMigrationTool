@@ -28,10 +28,19 @@ const check = (actual, wanted, name) => {
 };
 const sha = (text) => createHash("sha256").update(text, "utf8").digest("hex");
 const api = await request.newContext({ baseURL: url });
+let browser;
 const keys = (value) => Object.keys(value).sort();
 async function wrapper(response, status, issue = null) {
   check(response.status(), status, "HTTP status");
-  check(response.headers()["cache-control"], "no-store", "no cache");
+  check(
+    response
+      .headers()
+      ["cache-control"].split(",")
+      .map((v) => v.trim())
+      .includes("no-store"),
+    true,
+    "no-store directive",
+  );
   check(response.headers()["x-content-type-options"], "nosniff", "nosniff");
   const body = await response.json();
   check(
@@ -161,6 +170,11 @@ try {
     400,
     "InvalidInput",
   );
+  const loneSurrogate = JSON.stringify({
+    ...command,
+    reason: "SURROGATE",
+  }).replace('"SURROGATE"', '"\\ud800"');
+  await wrapper(await post(loneSurrogate), 400, "InvalidInput");
   await wrapper(
     await post(
       JSON.stringify(command).replace("{", `{"eventId":"${command.eventId}",`),
@@ -237,7 +251,7 @@ try {
     "history exactly one accepted event",
   );
 
-  const browser = await chromium.launch({
+  browser = await chromium.launch({
     executablePath:
       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     headless: true,
@@ -282,7 +296,7 @@ try {
   await page.keyboard.press("Enter");
   const rationale =
     "Independent keyboard review <script>window.injected = true</script>";
-  await page.getByLabel("Rationale", { exact: true }).focus();
+  await page.getByLabel("Rationale").focus();
   await page.keyboard.insertText(rationale);
   await page.getByRole("checkbox").first().focus();
   await page.keyboard.press("Space");
@@ -384,5 +398,6 @@ try {
     `Independent guarded HTTP/browser checks passed ${checks} assertions.\n`,
   );
 } finally {
+  await browser?.close();
   await api.dispose();
 }
