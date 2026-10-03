@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-03",
+  "cycle": "M08-cycle02",
+  "status": "DECISION READY; OWNER APPROVAL PENDING",
+  "base": "d7d493e299718abf7bfc89f2854b32c608f7be8b",
+  "authority": "Owner Next cycle; preparation only",
+  "proposals": {
+    "specs/003-health-assessment/local-evaluation-sampling-test-plan.md": "ac6ce96f4bfc7ff9b5d0046fbd85a1e307f1f40282b962d954f1273acf0b2487",
+    "specs/003-health-assessment/local-evaluation-reviewer-test-plan.md": "0afcbcd8143e221c1a9028beb89eb5c6c14a93c288a4d85d5e2ea5cda6771363",
+    "specs/003-health-assessment/local-evaluation-reviewer-contract-proposal.md": "15c0189e921bf76248360eb5aa5d0cc06bd1ae7c6fdd1a9ba3add266d6019494",
+    "specs/003-health-assessment/local-evaluation-sampling-contract-proposal.md": "fbcc7125f80a411f4c964dfb10afc84d9829f725113404ed7455edc33ec87d35",
+    "specs/003-health-assessment/local-evaluation-policy-decision-packet.md": "df0854b65eb6b7711591cec869a5aedb7c35fb3c8c6825a243301640378cfcf0"
+  },
+  "reviews": {
+    "samplingAuthor": "9c0bb2940a1783cc88597bf879d91b918d56c0be",
+    "samplingCorrection": "2d1b318",
+    "reviewerAuthor": "5f9e5909a655f99ccd0369be63168e7b07ed50fe",
+    "nonauthorReviewer": "evaluation_integration_review",
+    "samplingNonauthorReviewer": "reviewer_policy_proposal",
+    "reviewerNonauthorReviewer": "sampling_policy_proposal",
+    "result": "PASS after cutoff correction; final combined example clarified to four strata",
+    "scope": "documentary only; no policy approval or runtime proof"
+  },
+  "executedChecks": {
+    "documentaryLinks": "PASS,39 links before generated evidence target; final links rechecked",
+    "whitespace": "PASS",
+    "traceability": "PASS,7 decision IDs and40 future test IDs",
+    "independentProposedAllocationExamples": "PASS,4 examples; documentary arithmetic only",
+    "gitleaks": "PASS v8.30.1, no suppression; final publication receipt scanned separately"
+  },
+  "corrections": [
+    "Writer Markdown trailing whitespace corrected before commits.",
+    "Baseline/candidate correction cutoffs can differ; preserve immutable baseline and version later candidate reviews.",
+    "Combined example now states four lower strata; allocation depends on stratum count."
+  ],
+  "unexecuted": [
+    "All40 proposed runtime tests",
+    "New unit/integration/end-to-end/security-enforcement/build/hosted checks: no runtime or configuration change",
+    "Actual qualified independent human review, real identity/customer policy, provider/source use, supported manual UAT",
+    "Full M08/Phase1C/G1-G9 acceptance"
+  ],
+  "changes": {
+    "code": false,
+    "dependencies": false,
+    "migrations": false,
+    "runtimeConfiguration": false,
+    "permissions": false,
+    "productionRelease": false
+  },
+  "nextDependency": "Attributable EV02-S01-S04 and EV02-R01-R03 exact policy approval, followed by bounded engineering freeze.",
+  "sitePublication": "Separate m08-evaluation-policy-site-cycle02-20261003.json receipt; pending until confirmed",
+  "originalEvidence": "Preserved under ignored work/m08-cycle02-evidence before removal of own clean temporary worktrees."
+}
