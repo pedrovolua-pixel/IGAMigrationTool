@@ -43,7 +43,7 @@ Microsoft.Identity.Web.Certificateless/TokenCache already require MSAL4.90.0 in 
 
 ## Exact resolved package and archive inventory
 
-`contentHash` is the **actual lock's value**, corresponding to signature-content hashing; raw SHA256 hashes each retained `.nupkg` file including signatures. These are different integrity representations. Provider source binding remains `c88fa3e69af1cec1bcdf3302338fcd642ac0baa5`; the earlier audit's immutable public source links cover both unchanged provider versions and their Blob12.26/KeyVault4.10 guard dependencies. Microsoft [Blob1.5.4](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs/1.5.4) and [Keys1.6.4](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys/1.6.4) archives were selected exactly. Every selected archive and its nuspec repository/license/dependency metadata was read; all declare MIT or include the MIT license file. No binary/source reproducibility or distribution-notice approval is claimed.
+`contentHash` is the **NuGet-generated lock value, distinct from raw archiveSHA256**. Raw SHA256 hashes each retained `.nupkg` file including signatures; no algorithm or normalization claim is made for the generated lock value. Provider source binding remains `c88fa3e69af1cec1bcdf3302338fcd642ac0baa5`; the earlier audit's immutable public source links cover both unchanged provider versions and their Blob12.26/KeyVault4.10 guard dependencies. Microsoft [Blob1.5.4](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Blobs/1.5.4) and [Keys1.6.4](https://www.nuget.org/packages/Azure.Extensions.AspNetCore.DataProtection.Keys/1.6.4) archives were selected exactly. Every selected archive and its nuspec repository/license/dependency metadata was read; all declare MIT or include the MIT license file. No binary/source reproducibility or distribution-notice approval is claimed.
 
 | Package | Resolved version | Lock contentHash | Raw archive SHA256 |
 |---|---|---|---|
@@ -87,7 +87,7 @@ Microsoft.Identity.Web.Certificateless/TokenCache already require MSAL4.90.0 in 
 
 ### Actual dependency edges
 
-The following are the actual lock edges after SDK pruning; direct refs include exact requested ranges above. Empty means no remaining package edge in this resolved target. This table and the hashes bind the host-specific graph rather than the previous minimum manifest traversal.
+The following are dependency lower-bound constraints recorded by the actual lock after SDK pruning. Here `Package=version` preserves the lock notation and means `Package >= version`, not the selected resolved version of that edge; selected package versions are in the inventory above. Direct references retain their exact requested ranges stated above. Empty means no remaining package edge in this resolved target. This table and the hashes bind the host-specific graph rather than the previous minimum manifest traversal.
 
 | Package | Actual remaining dependency version constraints |
 |---|---|
