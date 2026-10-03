@@ -53,7 +53,7 @@ function Harness(){
   const status=window.probe.mode==='uncertain'?'uncertain':'committed';return {status,eventId:window.probe.mode==='mismatch'?'wrong-event':command.eventId,contextKey:context};};
  const workspaceContext='workspace/'+actor+'/'+run;
  return <><h1>Phase 1B component verification</h1><Phase1BSetup contextKey={'setup/'+actor} actorLabel={actor} registryRevision={registry} entries={[approved,draft,reviewed]} availableCoverageKeys={[{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'},{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'},{inventoryId:'det-guard',evidenceCategory:'SYN-OTHER',categoryId:'SECURITY'},{inventoryId:'synthetic-ai-retry',evidenceCategory:'configuration',categoryId:'OPERATIONS'}]} canManage={!denied&&actor==='Consultant'} canApprove={!denied&&actor==='FictionalCustomer'} canStart={!denied} onOutcomeCommand={perform('outcome','setup/'+actor)} onStartRun={perform('start','setup/'+actor)}/>
- <Phase1BWorkspace runId={run} contextKey={'workspace/'+actor} actorLabel={actor} lockedOutcomes={[{outcomeId:'access-governance',version:1,contentDigest:digest,revision:3,approvalEventId:approval}]} outcomeLockDigest={digest} sourceDigest={sourceDigest} entries={[planning,unavailable]} canPlan={!denied&&actor==='Consultant'} canOverrideBudget={!denied&&actor==='Consultant'} budget={{revision:1,runAllowance:600,categoryAllowances:{SECURITY:600,OPERATIONS:600},counters:[{key:'run',charged:480,held:0,allowance:600}],history:[]}} works={[{workId:'ai-retry',category:'OPERATIONS',state:terminal?'Failed':'Pending',reasonCodes:[],attempts:[{attemptId:'20000000-0000-4000-8000-000000000001',ordinal:1,state:'Unknown',held:true,inputUnits:null,outputUnits:null,receiptId:null}]}]} onPlanningCommand={perform('planning',workspaceContext)} onBudgetOverride={perform('budget',workspaceContext)}/></>;
+ <section aria-label="Phase 1B combined assessment"><p>Read-only source reference <code>{digest}</code></p><details><summary>Controller-style immutable reference</summary><code>{digest}</code></details><Phase1BWorkspace runId={run} contextKey={'workspace/'+actor} actorLabel={actor} lockedOutcomes={[{outcomeId:'access-governance',version:1,contentDigest:digest,revision:3,approvalEventId:approval}]} outcomeLockDigest={digest} sourceDigest={sourceDigest} entries={[planning,unavailable]} canPlan={!denied&&actor==='Consultant'} canOverrideBudget={!denied&&actor==='Consultant'} budget={{revision:1,runAllowance:600,categoryAllowances:{SECURITY:600,OPERATIONS:600},counters:[{key:'run',charged:480,held:0,allowance:600}],history:[]}} works={[{workId:'ai-retry',category:'OPERATIONS',state:terminal?'Failed':'Pending',reasonCodes:[],attempts:[{attemptId:'20000000-0000-4000-8000-000000000001',ordinal:1,state:'Unknown',held:true,inputUnits:null,outputUnits:null,receiptId:null}]}]} onPlanningCommand={perform('planning',workspaceContext)} onBudgetOverride={perform('budget',workspaceContext)}/></section><section className="history"><div className="table-scroll" role="region" aria-label="Synthetic wide table"><table style={{minWidth:600}}><caption>Wide saved-run metadata</caption><thead><tr><th scope="col">Baseline</th><th scope="col">Profile</th><th scope="col">State</th></tr></thead><tbody><tr><td>Fictional baseline</td><td>Fictional profile</td><td>Scoring</td></tr></tbody></table></div></section></>;
 }
 createRoot(document.getElementById('root')).render(<Harness/>);
 `,
@@ -495,6 +495,23 @@ createRoot(document.getElementById('root')).render(<Harness/>);
   check(
     await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     'mobile layout fits viewport without horizontal page overflow',
+  );
+  check(
+    await page.evaluate(() => {
+      const reference = document.querySelector(
+        'section[aria-label="Phase 1B combined assessment"] > p code',
+      );
+      const scroll = document.querySelector('[aria-label="Synthetic wide table"]');
+      scroll.scrollLeft = 100;
+      return (
+        reference.getBoundingClientRect().right <= innerWidth &&
+        scroll.scrollWidth > scroll.clientWidth &&
+        scroll.scrollLeft > 0 &&
+        getComputedStyle(document.body).overflowX !== 'hidden' &&
+        document.documentElement.scrollWidth <= innerWidth
+      );
+    }),
+    'controller references wrap while wide metadata tables retain their own usable horizontal scrolling',
   );
   await page.getByText('Exact locked outcome versions (1)', { exact: true }).click();
   check(

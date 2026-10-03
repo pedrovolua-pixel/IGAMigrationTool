@@ -1,3 +1,11 @@
+section[aria-label='Phase 1B combined assessment'] {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+section[aria-label='Phase 1B combined assessment'] code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .phase1b-values {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
@@ -35,5 +43,7 @@
   background: #eaf1f6;
 }
 .phase1b-table-scroll {
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
 }
