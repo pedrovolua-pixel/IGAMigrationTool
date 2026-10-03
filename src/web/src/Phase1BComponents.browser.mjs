@@ -42,6 +42,7 @@ const approved = { outcomeId:'access-governance',version:1,categoryId:'SECURITY'
 const draft = {...approved,outcomeId:'pending-goal',title:'Draft fictional goal',state:'Draft',revision:1,reviewEventId:null,approvalEventId:null,history:[]};
 const reviewed={...approved,outcomeId:'reviewed-goal',title:'Reviewed fictional goal',state:'ConsultantReviewed',revision:2,approvalEventId:null,history:[]};
 const planning = {optionId:'option-a',findingId:'finding-a',categoryId:'OPERATIONS',revision:2,originalContext:{guidanceDigest:digest,assumptions:['Fictional internal exposure'],prerequisites:['Fixture prerequisite'],sourceReferences:['guidance-option-a'],objectiveMapVersion:'synthetic-objectives-v1',objectiveMapDigest:'c'.repeat(64),objectives:[{objectiveId:'access-governance',weight:1}],matchedObjectiveIds:['access-governance']},originalPriority:{policyVersion:'synthetic-priority-policy-v1',rawPriority:68,displayPriority:68,originalBand:'High',missingInputs:[],contributions:[{factor:'severity',normalized:.64,weight:.3,points:19.2}]},effectivePriority:'High',originalEffort:{size:'M',minimumPersonHours:8,maximumPersonHours:24},effectiveEffort:{size:'M',minimumPersonHours:8,maximumPersonHours:24},effortApproval:'Proposed',hasPriorityOverride:false,hasEffortOverride:false,history:[]};
+const unavailable={...planning,optionId:'option-missing',findingId:'finding-missing',originalContext:undefined,originalPriority:{policyVersion:'synthetic-priority-policy-v1',rawPriority:null,displayPriority:null,originalBand:null,missingInputs:['exposure','effort'],contributions:[]},effectivePriority:null,originalEffort:null,effectiveEffort:null};
 window.probe={commands:[],mode:'uncertain',aborted:0,injection:false,validText:phase1BValidText};
 function Harness(){
  const [run,setRun]=useState('run-a'),[actor,setActor]=useState('Consultant'),[registry,setRegistry]=useState(6),[denied,setDenied]=useState(false),[terminal,setTerminal]=useState(false),[sourceDigest,setSourceDigest]=useState(digest);
@@ -51,7 +52,7 @@ function Harness(){
   const status=window.probe.mode==='uncertain'?'uncertain':'committed';return {status,eventId:window.probe.mode==='mismatch'?'wrong-event':command.eventId,contextKey:context};};
  const workspaceContext='workspace/'+actor+'/'+run;
  return <><h1>Phase 1B component verification</h1><Phase1BSetup contextKey={'setup/'+actor} actorLabel={actor} registryRevision={registry} entries={[approved,draft,reviewed]} availableCoverageKeys={[{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'},{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'},{inventoryId:'det-guard',evidenceCategory:'SYN-OTHER',categoryId:'SECURITY'},{inventoryId:'synthetic-ai-retry',evidenceCategory:'configuration',categoryId:'OPERATIONS'}]} canManage={!denied&&actor==='Consultant'} canApprove={!denied&&actor==='FictionalCustomer'} canStart={!denied} onOutcomeCommand={perform('outcome','setup/'+actor)} onStartRun={perform('start','setup/'+actor)}/>
- <Phase1BWorkspace runId={run} contextKey={'workspace/'+actor} actorLabel={actor} lockedOutcomes={[{outcomeId:'access-governance',version:1,contentDigest:digest,revision:3,approvalEventId:approval}]} outcomeLockDigest={digest} sourceDigest={sourceDigest} entries={[planning]} canPlan={!denied&&actor==='Consultant'} canOverrideBudget={!denied&&actor==='Consultant'} budget={{revision:1,runAllowance:600,categoryAllowances:{SECURITY:600,OPERATIONS:600},counters:[{key:'run',charged:480,held:0,allowance:600}],history:[]}} works={[{workId:'ai-retry',category:'OPERATIONS',state:terminal?'Failed':'Pending',reasonCodes:[],attempts:[{attemptId:'20000000-0000-4000-8000-000000000001',ordinal:1,state:'Unknown',held:true,inputUnits:null,outputUnits:null,receiptId:null}]}]} onPlanningCommand={perform('planning',workspaceContext)} onBudgetOverride={perform('budget',workspaceContext)}/></>;
+ <Phase1BWorkspace runId={run} contextKey={'workspace/'+actor} actorLabel={actor} lockedOutcomes={[{outcomeId:'access-governance',version:1,contentDigest:digest,revision:3,approvalEventId:approval}]} outcomeLockDigest={digest} sourceDigest={sourceDigest} entries={[planning,unavailable]} canPlan={!denied&&actor==='Consultant'} canOverrideBudget={!denied&&actor==='Consultant'} budget={{revision:1,runAllowance:600,categoryAllowances:{SECURITY:600,OPERATIONS:600},counters:[{key:'run',charged:480,held:0,allowance:600}],history:[]}} works={[{workId:'ai-retry',category:'OPERATIONS',state:terminal?'Failed':'Pending',reasonCodes:[],attempts:[{attemptId:'20000000-0000-4000-8000-000000000001',ordinal:1,state:'Unknown',held:true,inputUnits:null,outputUnits:null,receiptId:null}]}]} onPlanningCommand={perform('planning',workspaceContext)} onBudgetOverride={perform('budget',workspaceContext)}/></>;
 }
 createRoot(document.getElementById('root')).render(<Harness/>);
 `,
@@ -76,7 +77,7 @@ createRoot(document.getElementById('root')).render(<Harness/>);
   const address = server.httpServer.address();
   await page.goto(`http://127.0.0.1:${address.port}`);
   await page.getByRole('heading', { name: 'Phase 1B outcome setup' }).waitFor();
-  await page.getByText('Original estimate context and provenance', { exact: true }).click();
+  await page.getByText('Original estimate context and provenance', { exact: true }).first().click();
   check(
     (await page.getByText('Prerequisites: Fixture prerequisite', { exact: true }).count()) === 1 &&
       (await page
@@ -87,7 +88,7 @@ createRoot(document.getElementById('root')).render(<Harness/>);
         .count()) === 1,
     'bound original assumptions prerequisites source references and objective proof render read-only',
   );
-  await page.getByText('Six-factor calculation', { exact: true }).click();
+  await page.getByText('Six-factor calculation', { exact: true }).first().click();
   check(
     (await page.getByText('Unrounded priority: 68.', { exact: true }).count()) === 1,
     'original unrounded priority and policy remain visible',
@@ -236,6 +237,32 @@ createRoot(document.getElementById('root')).render(<Harness/>);
   check(
     await page.getByRole('button', { name: 'Apply reasoned AI allowance override' }).isDisabled(),
     'terminal work cannot be reopened by allowance override',
+  );
+  await page
+    .getByLabel('Reason for option-missing', { exact: true })
+    .fill('Explicit reasoned label despite unavailable formula');
+  await page.getByRole('button', { name: 'Override priority option-missing', exact: true }).click();
+  const missingOverride = await page.evaluate(() => window.probe.commands.at(-1).command);
+  check(
+    missingOverride.kind === 'OverridePriority' &&
+      missingOverride.optionId === 'option-missing' &&
+      missingOverride.priorityOverride === 'Medium',
+    'verified source with unavailable original formula permits a reasoned label without fake score',
+  );
+  check(
+    await page.getByRole('button', { name: 'Approve original effort option-missing' }).isDisabled(),
+    'unavailable original effort cannot be approved as original',
+  );
+  await page
+    .getByLabel('Effort assumptions for option-missing (one per line)')
+    .fill('Explicit fictional estimate prerequisite');
+  await page.getByRole('button', { name: 'Approve replacement effort option-missing' }).click();
+  const missingReplacement = await page.evaluate(() => window.probe.commands.at(-1).command);
+  check(
+    missingReplacement.kind === 'ReplaceEffort' &&
+      missingReplacement.replacementSize === 'M' &&
+      missingReplacement.assumptions.length === 1,
+    'verified source with unavailable original effort permits explicit assumed replacement',
   );
   await page
     .getByLabel('Reason for option-a', { exact: true })

@@ -327,10 +327,7 @@ function PlanningCard({
           />
         </label>
         <div className="phase1b-actions">
-          <button
-            disabled={!valid || entry.originalPriority.originalBand === null}
-            onClick={() => issue('OverridePriority')}
-          >
+          <button disabled={!valid} onClick={() => issue('OverridePriority')}>
             Override priority {entry.optionId}
           </button>
           <button
@@ -353,7 +350,6 @@ function PlanningCard({
           <button
             disabled={
               !valid ||
-              !entry.originalEffort ||
               lines.length === 0 ||
               lines.length > 64 ||
               !lines.every((value) => phase1BValidText(value))
