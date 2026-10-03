@@ -171,7 +171,7 @@ internal static class Program
         using var envelope = JsonDocument.Parse(capture.CanonicalJson);
         var root = envelope.RootElement;
         string[] fields = ["schemaVersion", "scope", "runId", "runRevision", "checkpointSequence", "inputDigest", "baselineId", "profileId", "runState", "cancelRequested", "runUpdatedAtUtc", "observedAtDatabaseUtc", "frozenInputsJson", "aiRunLockJson", "aiSnapshotJson", "aiSnapshotDigest", "lockedOutcomeSetJson", "outcomeLockDigest", "analysisDigest", "members", "gaps"];
-        Check(root.EnumerateObject().Select(p => p.Name).Order(StringComparer.Ordinal).SequenceEqual(fields.Order(StringComparer.Ordinal)), "exact closed22-field canonical envelope");
+        Check(root.EnumerateObject().Select(p => p.Name).Order(StringComparer.Ordinal).SequenceEqual(fields.Order(StringComparer.Ordinal)), "exact closed21-field canonical envelope");
         Check(root.GetProperty("runState").GetString() == "Scoring" && root.GetProperty("schemaVersion").GetString() == "synthetic-phase1b-evaluation-source-v1", "literal envelope schema/state");
         Check(root.GetProperty("observedAtDatabaseUtc").GetDateTimeOffset() == capture.ObservedAtDatabaseUtc, "observation timestamp bound");
         await Tx(run.RunId, async (c, t) =>
@@ -210,9 +210,9 @@ internal static class Program
     private static async Task AuthorityMatrix(SyntheticRunSnapshot run)
     {
         var before = await Rows();
-        AiAuthority[] deniedAi = [ConsultantAi with { Authenticated = false }, ConsultantAi with { Active = false }, ConsultantAi with { AssignmentActive = false }, ConsultantAi with { Revoked = true }, ConsultantAi with { AiPolicyAllowed = false }, ConsultantAi with { ResourceState = AiResourceState.Published }, ConsultantAi with { ResourceState = AiResourceState.Deleted }, ConsultantAi with { Categories = ["SECURITY"] }, ConsultantAi with { Actions = [] }, ConsultantAi with { Scope = AiScope.Fixed with { EnvironmentId = "synthetic-other" } }, ConsultantAi with { Roles = [AiRole.Auditor] }, ConsultantAi with { Roles = [AiRole.Reviewer] }, ConsultantAi with { Roles = [AiRole.Worker] }, ConsultantAi with { ActorId = "synthetic-other" }, ConsultantAi with { Roles = [AiRole.Consultant, AiRole.Worker] }];
+        AiAuthority[] deniedAi = [ConsultantAi with { Authenticated = false }, ConsultantAi with { Active = false }, ConsultantAi with { AssignmentActive = false }, ConsultantAi with { Revoked = true }, ConsultantAi with { AiPolicyAllowed = false }, ConsultantAi with { ResourceState = AiResourceState.Published }, ConsultantAi with { ResourceState = AiResourceState.Deleted }, ConsultantAi with { Categories = ["SECURITY"] }, ConsultantAi with { Actions = [] }, ConsultantAi with { Scope = AiScope.Fixed with { EnvironmentId = "synthetic-other" } }, ConsultantAi with { Roles = [AiRole.Auditor] }, ConsultantAi with { Roles = [AiRole.Reviewer] }, ConsultantAi with { Roles = [AiRole.Worker] }, ConsultantAi with { ActorId = "synthetic-other" }, ConsultantAi with { Roles = [AiRole.Consultant, AiRole.Worker] }, ConsultantAi with { Roles = default }, ConsultantAi with { Roles = [(AiRole)999] }];
         foreach (var ai in deniedAi) Denied(await Capture(run.RunId, ai), Phase1BEvaluationSourceIssue.Denied, "exact AI-authority denial with null capture");
-        OutcomeAuthority[] deniedOutcome = [ConsultantOutcome with { Authenticated = false }, ConsultantOutcome with { Active = false }, ConsultantOutcome with { AssignmentActive = false }, ConsultantOutcome with { Revoked = true }, ConsultantOutcome with { ResourceState = OutcomeResourceState.Expired }, ConsultantOutcome with { Categories = ["OPERATIONS"] }, ConsultantOutcome with { Actions = [] }, ConsultantOutcome with { AssignedScope = OutcomeScope.Fixed with { ProjectId = "synthetic-other" } }, ConsultantOutcome with { Roles = [OutcomeRole.Auditor] }, ConsultantOutcome with { Roles = [OutcomeRole.QualifiedReviewer] }, ConsultantOutcome with { Roles = [OutcomeRole.CustomerOutcomeApprover] }, ConsultantOutcome with { ActorId = "synthetic-other" }, ConsultantOutcome with { Roles = [OutcomeRole.Consultant, OutcomeRole.CustomerOutcomeApprover] }];
+        OutcomeAuthority[] deniedOutcome = [ConsultantOutcome with { Authenticated = false }, ConsultantOutcome with { Active = false }, ConsultantOutcome with { AssignmentActive = false }, ConsultantOutcome with { Revoked = true }, ConsultantOutcome with { ResourceState = OutcomeResourceState.Expired }, ConsultantOutcome with { Categories = ["OPERATIONS"] }, ConsultantOutcome with { Actions = [] }, ConsultantOutcome with { AssignedScope = OutcomeScope.Fixed with { ProjectId = "synthetic-other" } }, ConsultantOutcome with { Roles = [OutcomeRole.Auditor] }, ConsultantOutcome with { Roles = [OutcomeRole.QualifiedReviewer] }, ConsultantOutcome with { Roles = [OutcomeRole.CustomerOutcomeApprover] }, ConsultantOutcome with { ActorId = "synthetic-other" }, ConsultantOutcome with { Roles = [OutcomeRole.Consultant, OutcomeRole.CustomerOutcomeApprover] }, ConsultantOutcome with { Roles = default }, ConsultantOutcome with { Roles = [(OutcomeRole)999] }];
         foreach (var outcome in deniedOutcome) Denied(await Capture(run.RunId, outcome: outcome), Phase1BEvaluationSourceIssue.Denied, "exact outcome-authority denial with null capture");
         Check(before == await Rows(), "denied authority never writes or partial payload");
     }
@@ -233,6 +233,8 @@ internal static class Program
         Denied(await Adapter.CaptureAsync(closed, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BEvaluationSourceIssue.InvalidInput, "closed connection closes");
         await t.RollbackAsync();
         Denied(await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BEvaluationSourceIssue.InvalidInput, "completed transaction closes");
+        await t.DisposeAsync();
+        Denied(await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BEvaluationSourceIssue.InvalidInput, "disposed transaction closes");
         var wrong = new NpgsqlConnectionStringBuilder(Database) { Database = "postgres" };
         await using var wrongConnection = await Open(wrong.ConnectionString);
         await using var wrongTransaction = await wrongConnection.BeginTransactionAsync();
@@ -350,7 +352,7 @@ internal static class Program
         await using var c = await Open(b.ConnectionString);
         await using var t = await c.BeginTransactionAsync();
         var registry = await Outcomes.ReadRegistryAsync(c, t, ConsultantOutcome);
-        var content = OutcomePriorityCanonical.Seal(new OutcomeContentVersion("independent-objective", 1, "OPERATIONS", "Fictional independent objective", "Fictional source stability", OutcomeOrigin.Documented, [], ["synthetic-reference"], [], null, ""));
+        var content = OutcomePriorityCanonical.Seal(new OutcomeContentVersion("independent-objective", 1, "OPERATIONS", "Fictional independent objective", "Fictional source stability", OutcomeOrigin.Documented, [new("synthetic-ai-schedule", "configuration")], ["synthetic-reference"], [], null, ""));
         var result = await Outcomes.ApplyOutcomeAsync(c, t, ConsultantOutcome, new(Guid.NewGuid(), OutcomeKind.CreateDraft, content.OutcomeId, 1, 0, content.ContentDigest, registry.Snapshot!.Revision, null, content, "Fictional independent fence check"));
         await t.CommitAsync();
         return result;
