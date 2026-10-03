@@ -53,7 +53,7 @@ Before coding, record an exact compatibility checkpoint for the new profile/appl
 - [x] New actual-browser scenarios and all prior applicable owned-host browser suites run against frozen combined source; inspect desktop/mobile/320 capture and focus behavior.
 - [x] Configured Linux, Windows2022/2025 and container checks run; distinguish their exact source/environment/counts from local evidence.
 - [x] Non-author findings close without weakened assertions; original executed worker source, binary closures, consumed fixtures, logs and review proofs are retained and rehashed before clean checkout removal.
-- [ ] Canonical implementation/status/evidence/operations handoff updated; existing owner-private Site status and human board published and confirmed.
+- [x] Canonical implementation/status/evidence/operations handoff updated; existing owner-private Site status and human board published and confirmed.
 
 No check is checked because it is listed here. Full Milestone7, TP-HAS-018, local build completion, UAT, deployed sandbox/identity, supported manual accessibility and G1–G9 remain NOT VERIFIED. The known default-Mac startup limitation remains open; any temporary test-only workaround is separately disclosed.
 
@@ -80,3 +80,7 @@ The only additive migration is `migrations/fix-review/001-initial.sql` (SHA256 `
 Original source/runtime/consumed fixtures/logs were preserved and rehashed. A13 original265 bindings were independently checked before a whitespace rebuild;254 were retained afterward, with11 generated obj intermediates unavailable and explicitly recorded. Original executed source and Release runtime remain available. Initial A13/B13 failed-generation provenance limitations remain disclosed. Root UI/BFF/research changes were preserved; their separate composed build is bounded evidence.
 
 The next substantial slice needs an exact task/conversion/priority/effort contract and resolution of the Auditor CSV-role discrepancy. This cycle does not authorize those choices. Full Milestone7/TP-HAS-018, local build completion, UAT, G1–G9, real source/provider and customer/production activation remain NOT VERIFIED. Supported manual accessibility, default Mac startup and shared-cluster restart are also unverified. Local host tests used the disclosed test-only configuration-watch override. No hard-kill mid-commit result is claimed.
+
+## Confirmed private publication
+
+Private status Site version86 deployed successfully at2026-10-03T02:00:28Z, exact source `caec0c357348bfd849c907ccdbbd899bd4ce3e43` summarizing canonical snapshot `d0a9754db173ed10cd25e0b264bbf995494906b2`. Owner-private access remains one owner, zero external visitors/groups. All11 human tasks remain unchanged;69 immutable repository links/anchors and actual desktop/mobile320 layout/navigation checks passed. [Deployment/source receipt](../../docs/development/evidence/local-pilot-cycle13-site-publication.json) records the confirmed version separately from executed code804d71a.

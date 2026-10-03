@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "concurrentFiles": 51,
+  "reversalExactlyMatchesPreclosure": true,
+  "priorOriginalProof": "/private/tmp/iga-cycle13-root-code-preservation-proof.json",
+  "scope": [
+    "docs/development/evidence/cycle13/a13-original-preservation.json",
+    "docs/development/evidence/cycle13/a13-review-by-b13.json",
+    "docs/development/evidence/cycle13/a13-style-review.json",
+    "docs/development/evidence/cycle13/coordinator-source-review-by-b13.json",
+    "docs/development/evidence/cycle13/generated-secret-classification.json",
+    "docs/development/evidence/cycle13/root-code-preservation-proof.json",
+    "docs/development/evidence/cycle13/v13-parent-archive-recheck.json",
+    "docs/development/evidence/cycle13/v13-preservation.json",
+    "docs/development/evidence/cycle13/v13-review-by-a13.json",
+    "docs/development/evidence/cycle13/v13-review-by-b13.json",
+    "docs/development/evidence/local-pilot-cycle13-developer-checks.json",
+    "plans/active/local-pilot-artifact-review-cycle-13.md",
+    "plans/active/one-identity-local-pilot-build.md",
+    "specs/003-health-assessment/evidence-index.md",
+    "specs/003-health-assessment/implementation-plan.md",
+    "specs/003-health-assessment/local-artifact-review-test-plan.md",
+    "specs/003-health-assessment/status.md"
+  ]
+}

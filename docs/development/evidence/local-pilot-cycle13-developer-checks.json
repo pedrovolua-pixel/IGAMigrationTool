@@ -6617,7 +6617,7 @@
   },
   "cleanup": {
     "workerWorktrees": "Executed clean removal of A13/B13/V13 after source/runtime/fixture archive verification and independent final reviews.",
-    "coordinator": "Retained until canonical/private publication is confirmed.",
+    "coordinator": "Source/evidence archive retained; clean checkout removal follows this publication receipt.",
     "otherWorktrees": "Untouched.",
     "databases": "Preserved; none dropped."
   },
@@ -7330,9 +7330,20 @@
     }
   },
   "sitePublication": {
-    "status": "PENDING_CANONICAL_PUBLICATION",
-    "priorVerifiedVersion": 85,
-    "priorSource": "6ea066b315c1105127965bc979c4fc8d8a803ed6",
-    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+    "status": "CONFIRMED_OWNER_PRIVATE_DEPLOYMENT",
+    "version": 86,
+    "source": "caec0c357348bfd849c907ccdbbd899bd4ce3e43",
+    "deployment": "appgdep_6ac061b53f708191a5b785fffda9b023",
+    "confirmedUtc": "2026-10-03T02:00:28.178110+00:00",
+    "canonicalSnapshot": "d0a9754db173ed10cd25e0b264bbf995494906b2",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "access": {
+      "currentRole": "owner",
+      "mode": "custom",
+      "allowedUsers": 1,
+      "externalVisitors": 0,
+      "allowedGroups": 0
+    },
+    "proof": "docs/development/evidence/local-pilot-cycle13-site-publication.json"
   }
 }
