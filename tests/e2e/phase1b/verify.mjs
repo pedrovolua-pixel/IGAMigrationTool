@@ -126,7 +126,17 @@ async function scan(label) {
     impact: value.impact,
     targets: value.nodes.map((node) => node.target),
   }));
-  scans.push({ label, version: result.testEngine.version, violations });
+  const incomplete = result.incomplete.map((value) => ({
+    id: value.id,
+    impact: value.impact,
+    targets: value.nodes.map((node) => node.target),
+  }));
+  scans.push({
+    label,
+    version: result.testEngine.version,
+    violations,
+    incomplete,
+  });
   equal(violations, [], `WCAG scan ${label}`);
 }
 // One real commit is intentionally delivered as a lost response. Retry must use the same UUID/body.
