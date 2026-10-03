@@ -1,0 +1,179 @@
+{
+  "deployment": {
+    "id": "appgdep_6ac1630423748191b8cfcf882e42b882",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_f1a4f8f448488191bc0425e3199d4193",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T20:18:18.909415+00:00"
+  },
+  "access": {
+    "version": 105,
+    "role": "owner",
+    "mode": "custom",
+    "users": 1,
+    "groups": 0,
+    "visitors": 0,
+    "revision": 1
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_f1a4f8f448488191bc0425e3199d4193",
+    "version_number": 105,
+    "source": {
+      "commit_sha": "979dbaf34a9bc839bde706e7a8d7a46ff09bbfbf"
+    }
+  },
+  "hostedObservation": {
+    "workflow_runs": [
+      {
+        "id": 37150936195,
+        "name": "Bootstrap checks (partial gate)",
+        "status": "in_progress",
+        "conclusion": null,
+        "run_number": 209,
+        "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936195/jobs",
+        "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936195/logs",
+        "workflow_id": 370675336
+      },
+      {
+        "id": 37150936031,
+        "name": "Azure development package (partial checks)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_number": 119,
+        "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936031/jobs",
+        "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936031/logs",
+        "workflow_id": 372721003
+      }
+    ]
+  },
+  "siteQa": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "preservation": {
+    "baseSiteSource": "201706e9b28c52c7d72f28bab2a7a0523e8a7a24",
+    "canonicalSnapshot": "c02b945",
+    "preservedPanels": 22,
+    "preservedHumanCards": 13,
+    "unchangedRawSha256": [
+      "4efec6f8632b9e70c4595839588828f70f4a068ab1fd4c3aaf24f23f0ea57fbd",
+      "040411fef5e69b350b2bb064a9d5ddda98f0974f9b2082829fa5344a34358257",
+      "f32c095d527b91a44b536ab4428c078ade0d80534d0b843cd32787db6503b33e",
+      "cf493a81727b26ecebb1447cc65246b243dd1014368b3d932f01c5e3cd328167",
+      "bd511695a7db79a7fdb07f677a45a3170e82e90c3de06c105f2b5b9fb2e6f6d7",
+      "da88f20d1244ad39c8972370279ab591beebaabfbc7e06848c476b192446bc2b",
+      "32ed86539102454215cd37dd4363b754c445f6ee6a4adc4504820379cc5db1f5",
+      "f61c305374118ad25def2185c0058fe47f64768aa47ae1b5590769fa334d382f",
+      "e45b730d74b41b1c6dc38a319a0b1ce3b382a1e38ada381bf847be17c9bb2113",
+      "6cc1f4bd9e4776fd7d60417931dde1ef3ba61b91a4b4006fc04df9df1e4fb3e1",
+      "127130fd1723aa9872f18a6560656c9d1e98d012192d2a307ce7f98df3362687",
+      "ec77998afade242c17b267337b4954f49e99f7cf37abf18abdc00f581f97b23d",
+      "7045d58c76b0e1921d089d15a34e0bccddba61263d73499beab2bf61d172b884",
+      "81e484f612b4313854c65f088ebb44c6152c5f859d78fa15c9088c5a7db22bba",
+      "791970a14bd0b3a58f88a114b5489cd4fc1284f7df07df3413f55825b3decfbf",
+      "d782ebb2eaa9f4b259e67734d2accd2a6bffebcf81f66447da5f4166500cf0c8",
+      "63bfed7ab5ec25d635463ca1413e72dfbefff435b12a227437ac2276bd0e0e1b",
+      "4181781281364abffe2ce984a8e32aa651e34d3b976794e2bb1ed4641d44bd74",
+      "cbf5000076fa854e9d4d2857c39f1ebadcbc181dc9d08a5447d3465cda81c974",
+      "c9eb4adb47f820229a6adead843c4a8959850a21fe77a80915a1cc84d7e63741",
+      "76b409f3479920b756522712be46a19c4fc0348b925070388fa3502f7d734833",
+      "834b01dd323d08afdc9164a1919fe472d826c7251c0451acc7130076544fd691",
+      "28e29b28474e8ff7e3ebe0542b5a366f4b1f17688eef5ea01f20d7aa4ca663f0",
+      "88a21d88fd636a7ec6ba850160a82ec06e30272ad89d5a64edfdbe0806115c79",
+      "647568c2b00531f151a6ae9cea04ffc2faefec3e3e91cb790e6bb746d3ee5147",
+      "a8a2e17da13a71e2f17c81a74b917848525029090fe6697d3f76a27c236e41e3",
+      "af5aefd45451c317f59ce3807ab3692343023c5d2d0afb508a1867077caf2cc4",
+      "071e3441c4ac7e13819c0beca88f97a583aa0c2e1328df6cb059cb2fc682cef9",
+      "211cf0d06ab0be48d399d11027ee1450541fb3f8813f27db72daa741699278ff",
+      "b20a39259dc521054d1c34c27f62e5a9c3935ba04c4944567c92cb535c25006d",
+      "e0dacd264ae5365bafee3f69ffe457f909ced83cf1bf180e33d56124eecd4f11",
+      "0c76e4d000f819f6d378287a000e2cb3d46acab296539c1f79077519d4e3c09d",
+      "d7ba98eea5c6d3ff181aff39ae2077f272ba06e304665293489665482e111c40",
+      "7cb73e48b9ac7e4b3f7c422ff44129f79e3b35fd17e88627960e62bebe28683b",
+      "c8946bc8c8b72e1f9080cd3455fad8c3fad0978e6f7ba4579857b838d2a0845b"
+    ],
+    "afterHtmlSha256": "0e585c94dd4b65d72fc371941f0ea7fc5e75b61635f0080ed188f6403310988f"
+  },
+  "archiveVerification": {
+    "sourceCommit": "979dbaf34a9bc839bde706e7a8d7a46ff09bbfbf",
+    "archiveSha256": "a5fe07a4b72ee57fda7d725455d80ca0900bce2829dff5b5007db4f7f3ae5c71",
+    "verifiedFiles": [
+      {
+        "sourcePath": "dist/index.html",
+        "archivePath": "dist/index.html",
+        "bytes": 104739,
+        "sha256": "0e585c94dd4b65d72fc371941f0ea7fc5e75b61635f0080ed188f6403310988f"
+      },
+      {
+        "sourcePath": ".openai/hosting.json",
+        "archivePath": "dist/.openai/hosting.json",
+        "bytes": 106,
+        "sha256": "3921792c6d3b60f8c5a4747efd9b14a3fd21d51f556a6c92c8cdcc5ab9188fb4"
+      }
+    ],
+    "status": "PASS",
+    "initialVerifierFailure": "Verifier initially looked for hosting manifest at archive root; helper correctly packages under static dist/.openai. Corrected verifier mapping, archive/source unchanged."
+  },
+  "cleanup": {
+    "recordedAtUtc": "2026-10-03T20:19:42.740557+00:00",
+    "ownWorktrees": [
+      {
+        "worktree": "/private/tmp/iga-m08-cycle05-source",
+        "retainedCommit": "cc64c809d3e6350d6675bbcfbb8d2ef21b8aba98",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-m08-cycle05-independent",
+        "retainedCommit": "81229ea782844318cd65a307777ffbeb1b0e1bfe",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-m08-cycle05-coordinator",
+        "retainedCommit": "7536776dc542f51a931b013ea0acbfc6eab4e3b2",
+        "removed": true
+      }
+    ],
+    "preservationManifestSha256": "70fd5cf885c5a13df9e7cacf45d0ed75cd43ffe1425a625f699253b24a1ae816",
+    "verifiedRetainedFiles": 158,
+    "failedProcessObservation": "  PID  PPID STAT COMMAND\n43181 73695 UEs  /private/tmp/iga-dotnet-10.0.401/dotnet tests/integration/SyntheticEvaluationSourceIndependent.Tests/bin/Release/net10.0/SyntheticEvaluationSourceIndependent.Tests.dll\n48502     1 UE   /private/tmp/iga-m08-cycle05-coordinator/tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests\n",
+    "failedProcessTermination": "NOT CONFIRMED; UEs/UE macOS crash handling remained despite earlier targeted termination; unrelated tool-server/processes untouched",
+    "localSiteQaServer": "stopped with successful exit0",
+    "branchesAndEvidenceDatabases": "retained; no destructive reset"
+  },
+  "canonicalSnapshot": "c02b945ad50789dd9c6b92ff15a5a02ff12dd08a",
+  "sourceRuntime": "146d6dff42727f37a46436228f5c1d65181a030f",
+  "limits": "Bounded capture only; full M08/Phase1C/TP-HAS-012/019/G1-G9 and actual sampling/reviewer integration remain open. Bootstrap CI pending at this native observation. Failed OS process termination unconfirmed."
+}

@@ -1,6 +1,6 @@
 # Milestone08 cycle05 — Phase1B evaluation source capture
 
-Status: VERIFIED — bounded local capture implementation; private publication and preservation closure pending
+Status: CLOSED — bounded local capture, private publication and own worktree preservation; failed OS-process cleanup unresolved
 Owner: Phase1C coordinator
 Date: 2026-10-03
 Stable source: a6c3375a8ccdf562333d4b9487811c3cd8ec0f09
@@ -27,8 +27,8 @@ No worker writes shared source/configuration or another owner's paths. Dependent
 - [x] Actual source/policy/architecture inventories identify valid source content and deferred integration bindings.
 - [x] Exact capture contract and paired tests trace approved requirements; coordinator freeze recorded before code.
 - [x] Capture implementation and nonauthor review complete; applicable formatting/build/type/unit/PostgreSQL/architecture/security/compatibility checks executed and retained.
-- [ ] Canonical plan/status/evidence updated with exact pending dependency.
-- [ ] Existing private site status/human board published and confirmed; native evidence retained and own temporary worktree cleaned after preservation.
+- [x] Canonical plan/status/evidence updated with exact pending dependency.
+- [x] Existing private site status/human board published and confirmed; native evidence retained and own temporary worktree cleaned after preservation.
 
 Source-backed sampling/reviewer commits, actual source/reviewer security boundaries and actual end-to-end evaluation remain NOT VERIFIED. This preparation cannot close M08, Phase1C, TP-HAS-012/019 or G1–G9.
 
@@ -41,3 +41,8 @@ Rollout is a library reference and explicit focused test invocation only. No exi
 ## Executed outcome
 
 The reviewed final freeze8b70c02 preceded code. Final integrated source146d6df includes the independent literal consumer and exact capture source tested at60ec238;90 original owning files and19 capture files are byte-verified. Unit168/author PG95/independent PG208 pass. Whole solution locked restore/format/zero-warning build, relevant compatibility and Python oracles, architecture, diff and secret scans pass. [Verification dispositions](../../specs/003-health-assessment/local-phase1b-evaluation-source-verification.md) and [native receipt](../../docs/development/evidence/m08-source-capture-cycle05-20261003.json) retain initial failures, nonauthor closures and exact limits. Shared Phase1D tests pass after their owner correction; prior failed Mac processes could not be confirmed terminated. Current-cycle hosted observation, publication and own worktree preservation/cleanup follow separately. This bounded implementation does not close full M08 or Phase1C.
+
+
+## Bounded closure receipt
+
+[Native private publication and preservation receipt](../../docs/development/evidence/m08-source-capture-cycle05-site-20261003.json) confirms version105/source979dbaf, succeeded deployment, owner-only audience, exact pushed HTML/manifest/archive and1440/390/320 QA. All22 previous panels and13 open human cards remain byte-identical.158 retained native/source/runtime/log files and two large native source archives were rehashed before removing only three own clean worktrees. Branches and evidence databases remain. The local QA server exited0. Two earlier failed test processes remain in macOS uninterruptible crash handling after targeted termination; unrelated tool-server/processes were not touched. This unresolved OS cleanup is explicitly excluded from engineering success. Container/package CI passed; bootstrap remains pending in this historical observation. Later hosted observations are additive. Full milestone/phase/live gates and the next source-backed sampling/reviewer dependency remain open.

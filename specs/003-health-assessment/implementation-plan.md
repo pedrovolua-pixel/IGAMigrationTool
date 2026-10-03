@@ -791,3 +791,8 @@ No migration, new package/version, host/UI/API activation, source-backed samplin
 
 
 The bounded Phase1D plan closes after executed local checks, independent findings/T12 proof review and owner-private104 deployment. The final completed-plan Site source is confirmed by its separate native receipt. Full Milestone11 and actual publication/client/identity/distributed acceptance remain open.
+
+
+### Cycle05 bounded capture publication and preservation confirmed
+
+[The native closure receipt](../../docs/development/evidence/m08-source-capture-cycle05-site-20261003.json) confirms owner-private version105/source979dbaf, succeeded deployment reflecting canonicalc02b945, exact pushed archive bytes and1440/390/320 QA. All22 previous panels and13 open human cards are preserved.158 native/source/runtime/log files and two large native archives were rehashed before removing three own clean worktrees; branches/evidence databases remain. Two failed earlier dotnet processes still show macOS crash handling despite targeted termination; their cleanup is NOT CONFIRMED. Container/package CI passed; bootstrap is pending at this historical observation. The bounded capture checkpoint is closed with this explicit OS limitation; actual source-backed sampling/reviewer integration, full M08/Phase1C and live/manual gates remain open.

@@ -379,3 +379,8 @@ No migration, new package/version, host/UI/API activation, source-backed samplin
 
 
 Phase1D bounded cycle closure: owner-private104/source201706e9 successfully reconciled exact local approval and the separate later integration task. All twelve other task cards/eighteen named panels and concurrent work were preserved; three-view reflow/link QA and exact archive proof passed. The local implementation plan is COMPLETED, with final native source reconciliation recorded separately. Linux MCP and both complete Windows jobs passed; broader Linux regression observation remains separate. Full Phase1D/Milestone11/UAT/G1–G9 are NOT VERIFIED.
+
+
+### Cycle05 bounded capture publication and preservation confirmed
+
+[The native closure receipt](../../docs/development/evidence/m08-source-capture-cycle05-site-20261003.json) confirms owner-private version105/source979dbaf, succeeded deployment reflecting canonicalc02b945, exact pushed archive bytes and1440/390/320 QA. All22 previous panels and13 open human cards are preserved.158 native/source/runtime/log files and two large native archives were rehashed before removing three own clean worktrees; branches/evidence databases remain. Two failed earlier dotnet processes still show macOS crash handling despite targeted termination; their cleanup is NOT CONFIRMED. Container/package CI passed; bootstrap is pending at this historical observation. The bounded capture checkpoint is closed with this explicit OS limitation; actual source-backed sampling/reviewer integration, full M08/Phase1C and live/manual gates remain open.
