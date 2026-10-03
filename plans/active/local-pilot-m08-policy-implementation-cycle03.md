@@ -1,6 +1,6 @@
 # Milestone08 cycle03 — approved local evaluation policy foundation
 
-Status: IMPLEMENTED — local checks verified; publication/archive closure pending
+Status: COMPLETE — approved bounded local synthetic foundation; full Milestone08/live gates remain open
 Owner: Phase1C coordinator
 Date: 2026-10-03
 Base:433ee023f3c3132220f24a43d286e71a59cc4d5a
@@ -19,7 +19,7 @@ Requirements: FR-HAS-51–53, bounded FR-HAS-11/13/15/50 policy representation, 
 | S03 | New SamplingContracts.cs and EvaluationSampler.cs under SyntheticEvaluation; own tests/unit/SyntheticEvaluationSampling.Tests/Program.cs, README.md, oracle.py; own synthetic-evaluation-sampling-v1-contract.md | Exact internal API/byte freeze first; then sampling and independent expected goldens/properties; IMPLEMENTED and independently reviewed |
 | G03 | New RegressionContracts.cs, EvaluationRegressionBuilder.cs and EvaluationWarningBuilder.cs under SyntheticEvaluation; own tests/unit/SyntheticEvaluationRegression.Tests/Program.cs, README.md; own synthetic-evaluation-regression-v1-contract.md | Exact internal API freeze first; warning/count/compatibility/safety/coverage comparison; IMPLEMENTED and independently reviewed |
 | R03 | New ReviewerContracts.cs and EvaluationReviewerPolicy.cs under SyntheticEvaluation; own tests/unit/SyntheticEvaluationReviewer.Tests/Program.cs, README.md; own synthetic-evaluation-reviewer-v1-contract.md | Exact fixture registry/request/denial freeze first; current-policy independent eligibility decisions only; IMPLEMENTED and independently reviewed |
-| Coordinator | Shared project/locks/solution/workflows, existing module README, composed integration host, canonical records/evidence, nonauthor reviews and existing private Site | Local checks verified; canonical/publication closure pending |
+| Coordinator | Shared project/locks/solution/workflows, existing module README, composed integration host, canonical records/evidence, nonauthor reviews and existing private Site | Complete local source/evidence integration and private publication; live gates open |
 
 All writing workers use isolated codex/ worktrees from the same checkpoint. Each first commits exact engineering contracts and independent expected cases, asks for coordinator engineering review, and waits before dependent code. This routine freeze implements the already approved policy; agent review is not additional human authority. Shared composition uses existing immutable accuracy projections plus detached member metadata; workers must not depend on another unimplemented worker's runtime type.
 
@@ -40,7 +40,11 @@ No application registration or activation. Consumers opt in only by direct synth
 - [x] Exact internal engineering freezes and independent expectations reviewed before code.
 - [x] Scoped behavior implemented; focused/composed/regression checks executed; nonauthor reviews closed.
 - [x] Configuration/architecture/security/dependency boundaries checked; original accuracy behavior preserved.
-- [ ] Canonical source and executed evidence published; concurrent work preserved.
-- [ ] Matching owner-private status publication confirmed; source/runtime/log closures rehashed; clean own worktrees removed.
+- [x] Canonical source and executed evidence published; concurrent work preserved.
+- [x] Matching owner-private status publication confirmed; source/runtime/log closures rehashed; clean own worktrees removed.
 
 Full Milestone08, Phase1C, TP-HAS-012/019, supported manual/live UAT and G1–G9 remain NOT VERIFIED.
+
+## Executed closure
+
+[Exact source, local/hosted result distinctions, independent review, private publication and archive closure](../../docs/development/evidence/m08-evaluation-policy-cycle03-closure-20261003.json) bind published code8b44a27. Owner-private version95/sourceeba7bd85 deployed successfully; final docs-complete board refresh follows in this same cycle. Four clean own worktrees were removed only after original consumed source/runtime/log closure reread and rehash. Both Windows jobs and the new Linux policy step passed; the remaining historical Linux browser/infrastructure run was still active at this checkpoint. No full operational or human gate completion follows.
