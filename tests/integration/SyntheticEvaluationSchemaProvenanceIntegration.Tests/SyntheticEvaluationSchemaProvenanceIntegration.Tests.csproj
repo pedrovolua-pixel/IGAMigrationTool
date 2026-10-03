@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><AssemblyName>SyntheticEvaluationSchemaProvenanceIntegration.IntegrationTests</AssemblyName></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticEvaluationSchemaProvenanceIntegration/SyntheticEvaluationSchemaProvenanceIntegration.csproj" /></ItemGroup>
+</Project>

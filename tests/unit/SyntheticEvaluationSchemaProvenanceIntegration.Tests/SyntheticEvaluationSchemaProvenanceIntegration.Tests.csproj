@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><AssemblyName>SyntheticEvaluationSchemaProvenanceIntegration.UnitTests</AssemblyName></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticEvaluationSchemaProvenanceIntegration/SyntheticEvaluationSchemaProvenanceIntegration.csproj" /></ItemGroup>
+  <ItemGroup><None Update="*.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>
