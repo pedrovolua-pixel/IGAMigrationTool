@@ -1,0 +1,603 @@
+{
+  "date": "2026-10-03",
+  "status": "LOCAL_VERIFIED_SYNTHETIC_ONLY",
+  "baseline": "cb2d66c5609152738f95bf5cbceca15f27bbee78",
+  "authorCommit": "d5bcf52cd395d625dfce89f4767cae8898b94ffe",
+  "testedCoordinatorCommit": "ab0459ca45bd53793582236ec7c21675baba2cfd",
+  "equivalentPushedCodeCommit": "cb38bb69483e3983a1ccb84734001915cdbadb6f",
+  "authority": "Owner Next cycle and closed P1D-D01\u201303 approval; bounded P1D-T03/05/11/12 verification. No native/client contract approval.",
+  "newGuard": {
+    "requests": 10060,
+    "assertions": 92904,
+    "partitions": {
+      "main": 8448,
+      "mandatoryOmission": 576,
+      "additionalOverlay": 1024,
+      "unknownField": 12
+    },
+    "oracle": "Pinned original fixture/schema/digest; no production projection helpers. Partial-reference redaction interpretation amended after implementation inspection and independently confirmed; original note retained."
+  },
+  "oldSuites": {
+    "publication": 260,
+    "boundary": 10444,
+    "integration": 2849,
+    "countCaveat": "Assertions overlap across repeated paths and suites; not unique requirement totals."
+  },
+  "restore": {
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "restore",
+      "IgaMigrationTool.slnx",
+      "--locked-mode"
+    ],
+    "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+    "initialOutput": "Determining projects to restore...",
+    "chunk_id": "20ee44",
+    "wall_time_seconds": 1.4208e-05,
+    "exit_code": 0,
+    "original_token_count": 3184,
+    "output": "  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj (in 65 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj (in 65 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticAiPreviewHtml.Tests/SyntheticAiPreviewHtml.Tests.csproj (in 65 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticMcpBoundary.Tests/SyntheticMcpBoundary.Tests.csproj (in 65 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticEvaluation.Tests/SyntheticEvaluation.Tests.csproj (in 65 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj (in 65 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj (in 65 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj (in 4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/ReportDrafts/ReportDrafts.csproj (in 0.6 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj (in 0.4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/EvidenceGovernance/EvidenceGovernance.csproj (in 0.5 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj (in 0.8 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/AssessmentScoring/AssessmentScoring.csproj (in 0.7 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticEvaluationWorkflowIndependent.Tests/SyntheticEvaluationWorkflowIndependent.Tests.csproj (in 631 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/FindingReview/FindingReview.csproj (in 616 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj (in 714 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj (in 607 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticEvaluationWorkflowStore.Tests/SyntheticEvaluationWorkflowStore.Tests.csproj (in 631 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticAiExecution/SyntheticAiExecution.csproj (in 621 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj (in 714 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticEvaluationSourceIndependent.Tests/SyntheticEvaluationSourceIndependent.Tests.csproj (in 627 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj (in 633 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticMcp/SyntheticMcp.csproj (in 0.9 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticOutcomePriority/SyntheticOutcomePriority.csproj (in 8 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj (in 8 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTasks.csproj (in 4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/collector/CollectorHost/CollectorHost.csproj (in 756 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticEvaluation/SyntheticEvaluation.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/ReviewMaturity.Tests/ReviewMaturity.Tests.csproj (in 13 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/ReportDrafts.Tests/ReportDrafts.Tests.csproj (in 13 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticEvaluationWorkflow/SyntheticEvaluationWorkflow.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj (in 13 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/Phase1BCompound.Tests/Phase1BCompound.Tests.csproj (in 14 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj (in 14 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticEvaluationSourceIntegration/SyntheticEvaluationSourceIntegration.csproj (in 7 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/ArtifactReviewComponent.Tests/ArtifactReviewComponent.Tests.csproj (in 0.8 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticTaskCsv.Tests/Probe/Probe.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj (in 4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj (in 0.7 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/hosts/LocalEvaluationDemo/LocalEvaluationDemo.csproj (in 4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj (in 8 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/collector/CollectorSafety/CollectorSafety.csproj (in 4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/FindingReview.Tests/FindingReview.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/AssessmentRuns/AssessmentRuns.csproj (in 7 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/AssessmentScoring.Tests/AssessmentScoring.Tests.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/DeterministicAnalysis.Tests/DeterministicAnalysis.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/PlanningTasksComponent.Tests/PlanningTasksComponent.Tests.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/infrastructure/NetworkEgressPolicy/NetworkEgressPolicy.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj (in 5 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj (in 4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/infrastructure/EvidenceStorePolicy/EvidenceStorePolicy.csproj (in 0.6 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/architecture/BoundaryChecks/BoundaryChecks.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/workers/SyntheticCsvRenderer/SyntheticCsvRenderer.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj (in 10 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticEvaluationPolicy.Tests/SyntheticEvaluationPolicy.Tests.csproj (in 0.7 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/AnalysisScoring.Tests/AnalysisScoring.Tests.csproj (in 5 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/DurableAssessment.Tests/DurableAssessment.Tests.csproj (in 4 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj (in 9 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj (in 1 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/src/server/modules/SyntheticTaskCsvIntegration/SyntheticTaskCsvIntegration.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/integration/LocalArtifactReview.Tests/LocalArtifactReview.Tests.csproj (in 9 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticMcpPublication.Tests/SyntheticMcpPublication.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticPlanningTasks.Tests/SyntheticPlanningTasks.Tests.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj (in 8 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticEvaluationRegression.Tests/SyntheticEvaluationRegression.Tests.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticFixPackageHtml.Tests/SyntheticFixPackageHtml.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticEvaluationWorkflow.Tests/SyntheticEvaluationWorkflow.Tests.csproj (in 2 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticEvaluationSampling.Tests/SyntheticEvaluationSampling.Tests.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticEvaluationReviewer.Tests/SyntheticEvaluationReviewer.Tests.csproj (in 3 ms).\n  Restored /private/tmp/iga-p1d-cycle03-coordinator/tests/unit/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj (in 7 ms).\n"
+  },
+  "combinedChecks": {
+    "sourceCommit": "ab0459ca45bd53793582236ec7c21675baba2cfd",
+    "checks": [
+      {
+        "name": "format",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "format",
+          "IgaMigrationTool.slnx",
+          "--verify-no-changes",
+          "--no-restore"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 22.56,
+        "artifact": "format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "build",
+          "IgaMigrationTool.slnx",
+          "-c",
+          "Release",
+          "--no-restore"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 9.77,
+        "artifact": "build.log",
+        "sha256": "2127d68577b2c0a22e980acd2e503e410e7275f6a880cb2a1c49b52e9c8a4b7a"
+      },
+      {
+        "name": "oracle",
+        "command": [
+          "python3",
+          "tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py",
+          "--verify"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 0.04,
+        "artifact": "oracle.log",
+        "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45"
+      },
+      {
+        "name": "publication",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticMcpPublication.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 0.7,
+        "artifact": "publication.log",
+        "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb"
+      },
+      {
+        "name": "boundary",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticMcpBoundary.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 6.84,
+        "artifact": "boundary.log",
+        "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6"
+      },
+      {
+        "name": "composed",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/integration/SyntheticMcp.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 4.44,
+        "artifact": "composed.log",
+        "sha256": "216ff548639be7c2dd414172e9a7729cd08ff70c87fa1ce1c500882e4bc6b73f"
+      },
+      {
+        "name": "architecture",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/architecture/BoundaryChecks",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 0.44,
+        "artifact": "architecture.log",
+        "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+      },
+      {
+        "name": "secrets",
+        "command": [
+          "/private/tmp/iga-parallel-tools/gitleaks",
+          "dir",
+          "--no-banner",
+          "--redact=100",
+          "."
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 1.67,
+        "artifact": "secrets.log",
+        "sha256": "6ed70fe096ebcc8f964f0889319aece66d3cf53f56afb5ec5da8f677d8ef9501"
+      },
+      {
+        "name": "dependency-audit",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "list",
+          "IgaMigrationTool.slnx",
+          "package",
+          "--vulnerable",
+          "--include-transitive",
+          "--format",
+          "json"
+        ],
+        "cwd": "/private/tmp/iga-p1d-cycle03-coordinator",
+        "exitCode": 0,
+        "seconds": 13.2,
+        "artifact": "dependency-audit.log",
+        "sha256": "2836ba46d67ca3d7d451e853d279037d6c3f4143ab98c1f818697004434eb217"
+      }
+    ]
+  },
+  "sourcePreservation": {
+    "status": "PASS",
+    "sourceCommit": "ab0459ca45bd53793582236ec7c21675baba2cfd",
+    "originalWorkingSourceFiles": 294,
+    "cleanProductionHostUiContractMigrationFilesUnchanged": 294,
+    "unchangedOriginalFixtureFiles": 16,
+    "testOnlyChangedPaths": [
+      "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.cs",
+      "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md",
+      "tests/integration/SyntheticMcp.Tests/Program.cs"
+    ],
+    "lockedDependencyAuditProjects": 94,
+    "vulnerablePackageFindings": 0,
+    "workerEvidenceCopied": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/worker",
+    "priorCycleAllTrackedSourceWorkingFilesReverified": 323,
+    "countPrecision": "Cycle03 initial server/web/contracts/migrations subset has294 paths; prior whole-source cycle02 baseline has323. Initial coordinator console label323 described prior total, not this cycle subset. Both exact metadata counts are preserved and independently verified."
+  },
+  "failureControl": {
+    "status": "PASS_EXPECTED_FAILURE_EXIT",
+    "sourceCommit": "ab0459ca45bd53793582236ec7c21675baba2cfd",
+    "buildCommand": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "build",
+      "tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj",
+      "-c",
+      "Release",
+      "--no-restore",
+      "-p:CustomAfterMicrosoftCommonTargets=/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/failure-control/MinimizationFailureControl.targets",
+      "-p:OutputPath=/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/failure-control/bin"
+    ],
+    "buildExit": 0,
+    "runCommand": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/failure-control/bin/SyntheticMcp.Tests.dll"
+    ],
+    "expectedAndObservedExit": 1,
+    "originalConsolePassed": 2849,
+    "newFailureLabelObserved": true,
+    "newProbePassAbsent": true,
+    "scope": "External test-only Compile substitution of new probe class; actual existing Program wrapper and production module unchanged. Output isolated from ordinary source-bound build. No repository source edits."
+  },
+  "nonauthorReview": {
+    "date": "2026-10-03",
+    "reviewer": "/root/p1d_c03_review",
+    "source": "ab0459ca45bd53793582236ec7c21675baba2cfd",
+    "baseline": "cb2d66c5609152738f95bf5cbceca15f27bbee78",
+    "status": "CLOSED_NO_UNRESOLVED_ACTIONABLE_FINDINGS",
+    "scope": "Read-only oracle/probe/coordinator entry-point review against approved P1D-D01/02 and T03/05/11.",
+    "observations": [
+      "Existing selected category/field checks do not enumerate combined grant subsets; bounded test-only cross-product is justified.",
+      "Exact diff contains only new probe/oracle note and six-line console entry point. No production/fixture/golden/contracts/dependencies/config changes.",
+      "Independent expected outputs use fixture bytes and explicit contract rules, not production Projection APIs.",
+      "Partial referenceIds redaction is explicit in returned and redacted name unions; original note and amendment provenance preserved.",
+      "10,060 distinct requests and92,904 assertions separate from original2849 checks.",
+      "Coordinator wrapper sets exit code1 on failure; new probe prints PASS only after final count assertion."
+    ],
+    "reviewerExecuted": [
+      "Read-only diff and whitespace inspection",
+      "14 original fixture hashes verified",
+      "14 preserved worker evidence hashes verified",
+      "Author and integrated probe/oracle bytes verified"
+    ],
+    "reviewerNotExecuted": [
+      "Runtime tests",
+      "Hosted CI",
+      "Private publication"
+    ],
+    "limits": [
+      "Fictional fixture verification only; actual publication/client intake and full acceptance remain open.",
+      "No production free-text sanitizer/authorization/distributed-controls evidence."
+    ]
+  },
+  "documentaryChecks": {
+    "status": "PASS",
+    "documents": 4,
+    "localLinks": 19,
+    "initialSourceHashCount": 294,
+    "canonicalRecordsScoped": 3,
+    "checks": [
+      "UTF8/LF/trailing-whitespace/final-newline",
+      "local Markdown targets",
+      "source-bound source-hash invariants",
+      "canonical append-only separation"
+    ],
+    "links": [
+      {
+        "from": "plans/active/local-pilot-phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/local-phase1d-test-plan.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-minimization-verification-cycle03.md",
+        "to": "docs/development/evidence/phase1d-minimization-cycle03-20261003.json"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/local-phase1d-implementation-contract.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/local-phase1d-test-plan.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "to": "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "to": "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "to": "docs/development/evidence/phase1d-minimization-cycle03-20261003.json"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-implementation-contract.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-test-plan.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-implementation-verification.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/phase1d-integration-contract-checklist.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md"
+      }
+    ]
+  },
+  "workerHandoff": {
+    "baseline": "cb2d66c5609152738f95bf5cbceca15f27bbee78",
+    "commit": "d5bcf52cd395d625dfce89f4767cae8898b94ffe",
+    "integration": "standalone external startup wrapper only; normal entry point awaits coordinator call",
+    "oldConsole": {
+      "assertions": 2849,
+      "exitCode": 0
+    },
+    "originalFailures": [
+      {
+        "check": "owned class formatting",
+        "exitCode": 2,
+        "result": "four whitespace diagnostics; fixed only new class"
+      },
+      {
+        "check": "incidental shasum",
+        "exitCode": 9,
+        "result": "Perl locale unavailable; Python SHA256 substituted"
+      }
+    ],
+    "probe": {
+      "assertions": 92904,
+      "exitCode": 0,
+      "partitions": {
+        "main": 8448,
+        "mandatoryOmissions": 576,
+        "overlay": 1024,
+        "unknownField": 12
+      },
+      "requests": 10060
+    },
+    "runtimeDefectsObserved": []
+  },
+  "originalDiagnostics": {
+    "worker": "Initial format exit2/four whitespace corrections in new class; incidental shasum exit9/locale corrected with Python hashes.",
+    "coordinator": {
+      "originalExit": 1,
+      "originalDiagnostic": "TypeError: PosixPath object is not subscriptable in preservation script root[path]",
+      "scope": "Coordinator documentary preservation script; no runtime test failed.",
+      "correction": "Corrected Path joining to root/path; integrated bytes and294 hashes pass.",
+      "finalExit": 0
+    }
+  },
+  "codeArtifacts": [
+    {
+      "artifact": "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.cs",
+      "sha256": "aaab221cb3e0f66b7e9fc7fb63b80d2bff644ca13b6a19f9712d8ef43a5865eb"
+    },
+    {
+      "artifact": "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md",
+      "sha256": "86d757bb4aa1cbcefbf01ca487f5da4ce237f31a40402c54b0e58521f1fc3709"
+    },
+    {
+      "artifact": "tests/integration/SyntheticMcp.Tests/Program.cs",
+      "sha256": "50502cd5ae39e9fc6cb4f00397bf4a1bfc2c9b7256ed4f122eb9d28c5ed79245"
+    }
+  ],
+  "nativeArtifacts": [
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb",
+      "bytes": 116
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/baseline-commit.txt",
+      "sha256": "5f3623a283e017fc34c9ef7038ee5f17489d0e681f6df2b550c9204d7e9d85c0",
+      "bytes": 41
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/baseline-source-hashes.json",
+      "sha256": "2334c371cca3a27dc8228ae3cf1e3f4b35a7193ac89be397f8ce8f1857e39340",
+      "bytes": 48601
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/boundary.log",
+      "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6",
+      "bytes": 116
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/build.log",
+      "sha256": "2127d68577b2c0a22e980acd2e503e410e7275f6a880cb2a1c49b52e9c8a4b7a",
+      "bytes": 15130
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/canonical-additions.json",
+      "sha256": "def5ac76305fa4bdc6083bf1bc281d07ee2720f2d023d8a8b55fd6cdcaedf4ef",
+      "bytes": 6399
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/checks.json",
+      "sha256": "05b895968ca131b68b9a9686761264f3e8e5338009ea9902d19e0f3e0bdadc9d",
+      "bytes": 4181
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/composed.log",
+      "sha256": "216ff548639be7c2dd414172e9a7729cd08ff70c87fa1ce1c500882e4bc6b73f",
+      "bytes": 378
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/coordinator-proof-correction.json",
+      "sha256": "6572117a73ad03a53cf7c13045c0d53f57c74ca45c9b429bfbd84db04aa5546f",
+      "bytes": 328
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/dependency-audit.log",
+      "sha256": "2836ba46d67ca3d7d451e853d279037d6c3f4143ab98c1f818697004434eb217",
+      "bytes": 13495
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/documentary-checks.json",
+      "sha256": "53923c2fc105f2b0e5e46b55cedeac5306d6869c716810ea6d3c09efb58acf4c",
+      "bytes": 3588
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/hosted-intermediate.json",
+      "sha256": "499ea10b68aeef53e75ae61c39c689c5614e6cb1a967c95acfdda9d103a8aaf3",
+      "bytes": 26905
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/nonauthor-review.json",
+      "sha256": "574731bf75f0befb8eefd286ca11adba1a8a5df529ab3a426fcf0450e2dbe8ef",
+      "bytes": 1650
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/oracle.log",
+      "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45",
+      "bytes": 81
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/publication.log",
+      "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb",
+      "bytes": 61
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/restore-native.json",
+      "sha256": "c6fcd2318c33ce878a33a741890c87eaadaa9ded700283680ca7313c90fde87c",
+      "bytes": 13200
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/secrets.log",
+      "sha256": "6ed70fe096ebcc8f964f0889319aece66d3cf53f56afb5ec5da8f677d8ef9501",
+      "bytes": 81
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/source-preservation.json",
+      "sha256": "7e69c2bb156880c7f44cc0c92552484802d62ae6360c0ef91e000c6adffac1a8",
+      "bytes": 1007
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/MinimizationProbe.cs",
+      "sha256": "70f0dde2dd8c5294f8db6aa8623b08e46b2fd41d9ae6b21f14423ae4f21d61ba",
+      "bytes": 150
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/MinimizationProbe.targets",
+      "sha256": "bdba4e513a5025611f123953e2e85f831157cb3e199af4e422b95ac0346f22ce",
+      "bytes": 358
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/build-final.json",
+      "sha256": "7d7006397c4c238c2b4ed29f396a7094fb0ea047b225cceb422e02ac2b20cc71",
+      "bytes": 486
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/build-initial.txt",
+      "sha256": "a85fcbda3bf1cd37ba6b8aba4a844cd3ec8ac7da1c2836406d2473c609e96cda",
+      "bytes": 351
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/evidence-hashes.json",
+      "sha256": "63b26356686e973f948ecbd238e34b6e8542930d771208b56ac97621781f804d",
+      "bytes": 1302
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/fixture-oracle.json",
+      "sha256": "3f3f59e919a313e251493991370e7f8f3e78ccf52463eec4f8d0b2ad23ebc745",
+      "bytes": 301
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/format-final.json",
+      "sha256": "a91072232c283bc8643d8662b87cc63decaa7c9b06e319a47b4579c2de0e8004",
+      "bytes": 356
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/format-initial.txt",
+      "sha256": "e78a4a772ad1b9ca4f966f0ee60b16aa92ef3cc7d6194a6672c90fcd9ac2876e",
+      "bytes": 1329
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/handoff.json",
+      "sha256": "a2d2e30be8172681b5e72f626daf872b1cc3c127d87158a92c4c0c69fa20e24d",
+      "bytes": 841
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/oracle-before-production.json",
+      "sha256": "187e62e02bcf46aecdf7eeac0193fb584630eb5cc53505d20ce51dc0e03b620d",
+      "bytes": 2321
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/oracle-initial-note.md",
+      "sha256": "ffa1a80fc3d3b3226e34f84d659eaa6d480fcd7241b22b15f20129f1f11eac10",
+      "bytes": 3253
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/original-suite-final.json",
+      "sha256": "74d5dec3629606c1d3a4f3bf67a47ff125f6191edce34639368e995b2b4f6a46",
+      "bytes": 258
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/originalFormat.json",
+      "sha256": "81e6540ea34559865820db5500e9715509a622a2298ec75106b7bf9968abde1e",
+      "bytes": 1536
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/probe-run.txt",
+      "sha256": "60f30aec1e90c1a184e71e6dbbd5604dc3fe84c649a68e3b7b706821e21160f3",
+      "bytes": 248
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle03-evidence/worker/restore.txt",
+      "sha256": "891f724f9f6e8a61c506981067351292799d8fa56b8ae7359b96eb06e7e21b7f",
+      "bytes": 282
+    }
+  ],
+  "hosted": "Intermediate native jobs preserved; final observed source-bound results appended before closure. No unobserved full-bootstrap pass inferred.",
+  "applicability": "Whole-solution restore/format/build, original oracle, two unit suites, composed integration/new regression, architecture, dependency/secret checks executed. Local ordinary-host/browser/manual/PDF/customer/provider/retention/distributed tests not rerun or invented: no production/host/UI/API changes. Configured hosted regression outcomes reported separately.",
+  "changes": {
+    "testFiles": 3,
+    "runtime": 0,
+    "dependencies": 0,
+    "migrations": 0,
+    "projectLocksAndCi": 0,
+    "publicContracts": 0,
+    "registrations": 0
+  },
+  "limits": [
+    "Synthetic closed-text fixture only, fixed nonempty descriptor groups; genuine empty collection semantics stay separately covered.",
+    "No new raw/business-write spy ports; observed source/overlay reads and byte-preservation/architecture evidence only.",
+    "No persisted publication, native reader/client/token/identity/transport or production free-text sanitization proof.",
+    "No production durable/distributed audit/limits/revocation/retention or end-to-end synchronous-audit deadline proof.",
+    "Cycle02 I01\u2013I11 remain open;P02-T01\u201318 proposed/not executed.",
+    "Full Milestone11/Phase1D/UAT/G1\u2013G9 NOT VERIFIED.",
+    "Private publication confirmed only by separate native receipt."
+  ]
+}
