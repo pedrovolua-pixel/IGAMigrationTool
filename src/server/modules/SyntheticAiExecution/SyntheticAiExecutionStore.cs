@@ -9,7 +9,7 @@ using AssessmentCoverage;
 
 namespace SyntheticAiExecution;
 
-public sealed class SyntheticAiExecutionStore
+public sealed partial class SyntheticAiExecutionStore
 {
     public static readonly Guid RegistryFenceId = Guid.Parse("1b000000-0000-4000-8000-000000000001");
     private readonly string connectionString;
