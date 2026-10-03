@@ -22,7 +22,7 @@ Closed records and property order:
     enum EvaluationWorkflowIssue {
       InvalidInput, Denied, NotFound, RevisionConflict, RegistryConflict,
       SourceConflict, EventConflict, IntegrityMismatch, MigrationDrift,
-      NotInitialized, SeedConflict, RevisionOverflow, ClockConflict
+      NotInitialized, SeedConflict, RevisionOverflow, ClockConflict, WorkflowLimit
     }
     record EvaluationWorkflowCorrection(string? Severity, string? Category,
       string? RootCause, string? Recommendation);
@@ -58,7 +58,7 @@ Closed records and property order:
       EvaluationReviewOutcome Outcome,
       EvaluationOriginClassification? OriginatingClassification,
       bool CanReview, bool CanCorrectPresentation, bool AuthorizedContextSufficient,
-      IReadOnlyList<EvaluationWorkflowEvent> History);
+      EvaluationWorkflowCorrection? CurrentCorrection);
     record EvaluationWorkflowVersion(long Version,
       DateTimeOffset CorrectionCutoffUtc, long LastEventSequence,
       string RegistryVersionId, string RegistryDigest, string VersionManifestJson,
@@ -70,7 +70,15 @@ Closed records and property order:
       string PopulationDigest, string SampleDigest,
       DateTimeOffset SampleCorrectionCutoffUtc,
       IReadOnlyList<EvaluationWorkflowMember> Members,
-      IReadOnlyList<EvaluationWorkflowVersion> Versions);
+      IReadOnlyList<EvaluationWorkflowVersionSummary> Versions);
+    record EvaluationWorkflowVersionSummary(long Version,
+      DateTimeOffset CorrectionCutoffUtc, long LastEventSequence,
+      string RegistryVersionId, string ContentDigest, string? PredecessorDigest);
+    record EvaluationWorkflowHistory(string MemberId, long AggregateRevision,
+      long MemberRevision, string RegistryVersionId,
+      IReadOnlyList<EvaluationWorkflowEvent> Events, long? NextAfterSequence);
+    record EvaluationWorkflowHistoryReadResult(EvaluationWorkflowIssue? Issue,
+      EvaluationWorkflowHistory? History);
     record EvaluationWorkflowReadResult(EvaluationWorkflowIssue? Issue,
       EvaluationWorkflowSnapshot? Snapshot);
     record EvaluationWorkflowApplyResult(EvaluationWorkflowIssue? Issue,
@@ -83,7 +91,14 @@ Closed records and property order:
     record EvaluationWorkflowVersionReadResult(EvaluationWorkflowIssue? Issue,
       EvaluationWorkflowVersion? Version);
 
-SyntheticEvaluationWorkflowStore(connectionString, observer=null) exposes InitializeAsync(), SeedAsync(seed), ReadAsync(actor), ReadMemberAsync(memberId,actor), ReadVersionAsync(version,actor), ApplyAsync(command,actor), all optional CancellationToken. Coordinator trusted actor is fixed server-side, never supplied in body/header/query. Original/history access requires CURRENT RelatedHistory grant independent of review eligibility. Whole workspace/version requires current history authorization for ALL100 members, otherwise deny whole response; member read resolves one exact member/assignment. Action flags use current separate ScoredReview/PresentationCorrection decisions. Context=true only if current scored-review authorized sufficient context; denied flag does not grant content. Workflow member revision differs from registry resource revisions. Denial results contain issue and null substantive DTO/metadata, no input echo or write. Host maps closed issues/statuses without reasons/SQL/details.
+SyntheticEvaluationWorkflowStore(connectionString, observer=null) exposes InitializeAsync(), SeedAsync(seed), ReadAsync(actor), ReadMemberAsync(memberId,actor), ReadVersionAsync(version,actor), ReadHistoryAsync(memberId,afterSequence,actor), ApplyAsync(command,actor), all optional CancellationToken. Exact filenames anticipated: EvaluationWorkflowContracts.cs, EvaluationWorkflowCanonical.cs, EvaluationWorkflowPolicy.cs, SyntheticEvaluationWorkflowStore.cs, SyntheticEvaluationWorkflowMigration.cs. Coordinator trusted actor fixed server-side, never supplied in body/header/query.
+
+Current source/member presentation requires CURRENT ScoredReview OR PresentationCorrection eligibility for each included member, in addition to current RelatedHistory where versions/history are included. ReadAsync returns all100 current original/member projections and version summaries only when ALL100 have both source-presentation eligibility and separate RelatedHistory permission; otherwise whole Denied, no partial aggregate leakage. ReadMemberAsync requires exact member source presentation plus RelatedHistory, no other member content. Action flags are current separate decisions, context=true only if current ScoredReview permits sufficient context. Workflow member revision differs from registry resource revisions.
+
+ReadHistoryAsync is a distinct MINIMAL member endpoint requiring current RelatedHistory only, no source-presentation action. It returns memberId, current aggregate/member revision, registryVersionId and ordered attributed event metadata/rationale/correction/refs; NEVER generated original/source text, OriginMetadata, selected cohort, other members, score aggregates or mutation flags. Ref metadata does not grant source/evidence retrieval. ReadVersionAsync requires current RelatedHistory for ALL100 but no current source grant because it contains only frozen derived accuracy/warning canonical JSON and workflow version metadata, no source originals or rationale. Former review permission never grants historical access.
+
+Reads have no effects. History page fixed maximum50 events, afterSequence safe-JS >=0, NextAfterSequence last returned sequence if later records exist else null; no gaps/duplication, no metadata of unauthorized members. Workspace never embeds history or full version canonical bytes. Local workflow maximum1000 aggregate revisions after initial0 (including registry updates), maximum1000 review events,1001 snapshots/registry records, then WorkflowLimit denies without writes; this engineering bound is not retention or deletion. Response serialized UTF8 maximum2MiB, coordinator enforces closed error if exceeded; bound JSON text and fixture originals enough to fit100 current members (each original field≤2000, refs≤16),50historyevents and one full accuracy/warning version. No silent truncation. All canonical hashes verified on full raw bytes before parsing, historical/frozen accuracy computed with unchanged originals. All denial results issue+null substantive DTO/metadata, no input echo. Host status issue mapping closed.
+
 
 ## Command and correction semantics
 
@@ -95,7 +110,7 @@ PresentationCorrection requires separately granted action; null submitted outcom
 
 One advisory transaction lock734021014 covers migration, seed, all reads/current-policy/integrity, writes and server-only registry updates. ReadCommitted transactions acquire lock BEFORE mutable reads; all operations same ordering. No registry cache. Registry stored in same database/transaction, no cross-database source-fence claim.
 
-Command order: cheap closed admission; open/lock/migration verify; reconstruct persisted seed/registry/events/projections/versions; resolve trusted actor/member/exact assignment; CURRENT action authorization; look up EventId. Exact actor+canonical semantic command match returns original receipt AlreadyApplied=true without writing even if supplied original revision/registry expectations now old, PROVIDED CURRENT action still authorized. Altered payload/actor EventConflict with null receipt. Revoked actor cannot receive former receipt. No prior event: compare frozen source/sample, expected current registry version, expected aggregate/member revisions, overflow; derive event DB UTC, member projection, new immutable snapshot; observer; recheck registry authorization/integrity before commit; commit. Typed denial/exception/cancellation/timeout rollback all pending rows. Lost response may leave committed state; exact retry reconciles under current policy. No transport token included in semantic digest; every command field including expected revisions IS included.
+Command order: cheap closed admission; open/lock/migration verify; reconstruct persisted seed/registry/events/projections/versions; resolve trusted actor/member/exact assignment; CURRENT action authorization; look up EventId. Exact actor+canonical semantic command match returns original receipt AlreadyApplied=true without writing even if supplied original revision/registry expectations now old, PROVIDED CURRENT action still authorized. Altered payload/actor EventConflict with null receipt. Revoked actor cannot receive former receipt. No prior event: compare frozen source/sample, expected current registry version, expected aggregate/member revisions, overflow/capacity; derive event DB UTC, member projection, new immutable snapshot; observer; recheck registry authorization/integrity before commit; commit. Typed denial/exception/cancellation/timeout rollback all pending rows. Lost response may leave committed state; exact retry reconciles under current policy. No transport token included in semantic digest; every command field including expected revisions IS included.
 
 Trusted server/test-only UpdateRegistryAsync(expectedRegistryVersionId,replacementRegistry) has no HTTP route. Validate capture and frozen exact identity/assignment/member IDs/scopes/categories/role/qualification/grant structure, while permitting fixture version/revision/status/context/resource/customer/lifecycle/conflict changes. Append registry version, increment aggregate, keep workflow member revisions/eventsequence, append1 outcome version. Revision starts1, increments1; stale expected version conflict. Same lock linearizes revoke/write: review committed before revoke stays history; revoke before review denies. ISyntheticEvaluationWorkflowCommitObserver.BeforeCommitAsync(operation,eventId?,CancellationToken) supports injected failure only; deterministic revoke-before-commit uses separately documented trusted in-transaction registry test hook and recheck. Observer must not call separate store method while lock held. No arbitrary SQL/authority supplied by observer. Queue cancellation is unimplemented.
 
