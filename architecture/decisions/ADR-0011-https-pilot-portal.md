@@ -1,6 +1,6 @@
 # ADR-0011: HTTPS pilot portal with organizational login
 
-Status: Proposed
+Status: Accepted for bounded local disabled templates and tests only
 Date: 2026-10-03 UTC
 Decision owners: Repository owner acting as technical/security owner; platform and operations owners
 
@@ -33,9 +33,9 @@ Advantages: retains a private origin and provides an edge suitable for a separat
 
 Preserves accepted local ADR-0010 templates, but fails the owner's new customer-browser preference and retains failed VM quota/image/desktop prerequisites. Removed from the active path; stored templates and executed evidence are retained.
 
-## Proposed decision
+## Accepted local decision
 
-Approve **Option A for local, disabled-by-default preparation only**, under [the exact technical proposal](../../docs/development/https-pilot-portal-proposal.md) and [conditional work plan](../../plans/active/https-pilot-portal-preparation.md). This is a proposal, not acceptance. Public reachability, real sign-in, user grants, paid resources and production release require their separately bound review and authorization. No new data access, roles, enrollment, consumer identity, audit retention or key deletion policy is proposed.
+Accepted **Option A for local, disabled-by-default preparation only**, under [the exact technical proposal](../../docs/development/https-pilot-portal-proposal.md) and [conditional work plan](../../plans/active/https-pilot-portal-preparation.md). The repository owner accepted this exact local scope on2026-10-03 against immutable source `50cf4fd`; see [the approval packet](../../docs/development/https-pilot-portal-approval.md). Public reachability, real sign-in, user grants, paid resources and production release require their separately bound review and authorization. No new data access, roles, enrollment, consumer identity, audit retention or key deletion policy is proposed.
 
 ## Rationale
 
@@ -82,6 +82,6 @@ Execute the proposal's HTTPS-T01–T08 matrix on the exact source and, separatel
 
 ## Approval
 
-Accepted by: Pending
-Date: Pending
-Requested scope: Option A local disabled templates and review preparation. Actual public exposure, identity/grants, spending and release remain separate.
+Accepted by: Repository owner, explicit approval in active session
+Date: 2026-10-03 UTC
+Accepted scope: Option A local disabled templates and review preparation. Actual public exposure, identity/grants, spending and release remain separate.

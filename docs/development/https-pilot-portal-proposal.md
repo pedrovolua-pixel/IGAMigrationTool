@@ -1,9 +1,9 @@
 # HTTPS pilot portal: technical and test proposal
 
-Status: PROPOSED — owner direction recorded; exact public architecture/local implementation not yet approved
+Status: APPROVED for bounded local disabled templates/tests only — Azure/public session and live production composition remain gated
 Date: 2026-10-03 UTC
 Product basis: [approved feature003](../../specs/003-health-assessment/product-spec.md), [technical spec](../../specs/003-health-assessment/technical-spec.md), [test plan](../../specs/003-health-assessment/test-plan.md)
-Owner: Azure/BFF coordinator; technical/security owner decides [ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md)
+Owner: Azure/BFF coordinator; technical/security owner accepted local [ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md)
 
 ## Customer experience and scope
 
@@ -11,7 +11,7 @@ The owner chooses HTTPS instead of Bastion now. The proposed customer opens one 
 
 This changes the proposed access topology and scheduling, not feature scope. Existing FR-HAS-40–46 presentation/publication, FR-HAS-50 lifecycle, AC-HAS-9 isolation and TP-HAS-009/013/015 plus approved BFF identity/session controls remain authoritative. It does not add consumer login, self-registration, public reports, new roles or customer-system connectivity.
 
-## Exact proposed topology
+## Accepted local design / gated target topology
 
 1. A **new** external, VNet-integrated Azure Container Apps workload-profiles environment in the selected East US2 pilot development region, using only its Consumption profile and a separately bound dedicated delegated subnet. Verify regional/subscription capacity before deployment. Do not convert the current internal module.
 2. One portal/BFF app receives built-in HTTP ingress, `allowInsecure: false`, no public TCP/additional ports, exact generated Azure HTTPS hostname initially, and one fixed canonical origin. No custom domain purchase or extra edge service is selected. Do not create environment-level HTTP routes to internal apps. Workers remain without ingress.
@@ -45,7 +45,7 @@ Retain the existing USD50 monthly development allowance. No new paid session is 
 
 Before an Azure execution proposal, refresh complete rates and current spend, cap replica/session scope, include the platform-managed group and cleanup/residual storage, and name deployment/incident/cleanup owners. An alert budget is not a hard spending cap. Present a bounded synthetic test session and its complete reserve for explicit approval; do not carry the expired USD25/24-hour approval into this topology. Key/audit preservation cannot be replaced by disposable vault deletion defaults.
 
-## Proposed test plan (all runtime/live cases NOT VERIFIED)
+## Approved local test plan (all runtime/live cases NOT VERIFIED)
 
 | Case | Mapping | Required evidence |
 |---|---|---|
@@ -62,7 +62,7 @@ Local fixtures do not prove provider, TLS, live networking, CA, browser accessib
 
 ## Decisions and inputs to complete
 
-- **Technical/security owner — now:** accept/replace/reject ADR-0011 Option A for local disabled template preparation and this proposed topology/test packet. This is required by AGENTS.md because it replaces the private browser trust boundary. Completion is an attributed exact decision; no paid deployment is included.
+- **Technical/security owner — closed:** accepted ADR-0011 Option A for local disabled templates/tests in [the exact approval](https-pilot-portal-approval.md); no paid deployment or public activation is included.
 - **Engineering/platform — next:** approved local templates plus production BFF/provider/key/audit composition, observed proxy/host/network/capacity and private builder/image proof. Some production authority decisions are separately unresolved; no implementation authority is manufactured by this proposal.
 - **Identity/product owner — before real access:** protected immutable users/home-organization proof, exact customer roles/scopes, licensing/CA, provider consent and federated trust. Existing intake is reused; account details remain outside Git/site.
 - **Repository/operations owner — before Azure/public access:** exact full priced synthetic session, disposal/preservation, operations/abuse controls and public exposure authorization. Production/customer-evidence release retains all existing gates.
@@ -74,3 +74,7 @@ Only architecture research and documentation/diagram preparation were performed 
 ## Research constraint: actual ingress seam
 
 The current `src/server/hosts/BffFoundation/BffHostingContracts.cs` contract defaults `ForwardClientAddress` to false and rejects any `X-Forwarded-For` header in that mode. Azure ingress supplies that header. Its reviewed true mode accepts one IP and one exact immediate peer; benign ACA traffic and client-injected multi-address chains must be tested against the actual deployed configuration. Do not claim compatibility from TLS reachability or a public IP readback. Public ingress traverses platform infrastructure, so an app-subnet NSG alone cannot enforce the internet application boundary. Sources: [ingress headers](https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview), [custom VNet infrastructure](https://learn.microsoft.com/en-us/azure/container-apps/custom-virtual-networks).
+
+## Attributed local approval and execution
+
+The owner explicitly approved the presented ADR-0011 Option A local template/test request against `50cf4fd`. [The frozen packet](https-pilot-portal-approval.md) authorizes HTTPS-P01 in an isolated author checkout with non-author verification. The target topology does not authorize public admission, a production host, grants or spending. Earlier preparation-only observations above retain their original checkpoint; implementation evidence is recorded after execution.

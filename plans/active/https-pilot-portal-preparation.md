@@ -1,22 +1,22 @@
 # HTTPS pilot portal: active preparation
 
-Status: PREPARATION — owner selects HTTPS now; exact ADR/local implementation approval pending
+Status: APPROVED LOCAL IMPLEMENTATION — HTTPS-P01 READY; paid/public session and live gates remain separate
 Date: 2026-10-03 UTC
 Owner: Azure/BFF coordinator
-Product/technical basis: approved feature003 and existing identity/session controls; [proposed technical/test addendum](../../docs/development/https-pilot-portal-proposal.md); [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md)
+Product/technical basis: approved feature003 and existing identity/session controls; [approved local technical/test addendum](../../docs/development/https-pilot-portal-proposal.md); [Accepted local ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md)
 
 ## Owner direction and supersession
 
-“Let’s move to the https instead of bastion” replaces the Bastion customer-browser path and the post-pilot scheduling preference. HTTPS preparation begins now; pilot completion is not claimed. The owner has not selected a concrete public architecture or approved a new paid/public session. Retain accepted ADR-0010/local templates and failed automatic quota evidence as historical optional work. Do not pursue the pending separate VM support request or re-request its approval while this direction stands. No VM/Bastion exists to remove.
+“Let’s move to the https instead of bastion” replaces the Bastion customer-browser path and the post-pilot scheduling preference. HTTPS preparation begins now; pilot completion is not claimed. The owner accepted Option A for bounded local disabled templates/tests against `50cf4fd`; no new paid/public session is approved. Retain accepted ADR-0010/local templates and failed automatic quota evidence as historical optional work. Do not pursue the pending separate VM support request or re-request its approval while this direction stands. No VM/Bastion exists to remove.
 
 ## Conditional packets and ordering
 
-These are proposal packets, not authorization to code through unresolved boundaries. The coordinator owns canonical/shared files and integration; writing workers receive isolated worktrees after exact path/contract approval. Use the approved [parallel workflow](../../docs/development/parallel-agent-workflow.md), one bounded platform worker and one non-author reviewer when work is independent.
+HTTPS-P01 is approved under [the frozen packet](../../docs/development/https-pilot-portal-approval.md); other unresolved boundaries remain gated. The coordinator owns canonical/shared files and integration; writing workers receive isolated worktrees after exact path/contract approval. Use the approved [parallel workflow](../../docs/development/parallel-agent-workflow.md), one bounded platform worker and one non-author reviewer when work is independent.
 
 | Packet | Owner / scope | Entry condition and completion evidence | State |
 |---|---|---|---|
 | HTTPS-P00 | Coordinator plus read-only architecture/review worker; ADR/proposal/diagram/current records | Current primary Microsoft research, exact proposal, documentary checks and non-author review; attributable owner direction | VERIFIED — preparation only |
-| HTTPS-P01 | Platform writer: proposed `infra/bicep/modules/pilot-https-container-apps-environment.bicep`, `pilot-https-portal.bicep`, protected-input template and `tests/infrastructure/HttpsPortal/`; coordinator owns shared inventory | Exact ADR-0011/local technical/test approval before authoring; fixed separate external environment, disabled public app ingress/live sign-in, private backends and exact protected inputs; pinned compile/lint/format and negative/composition evidence | BLOCKED — exact local decision pending |
+| HTTPS-P01 | Platform writer: proposed `infra/bicep/modules/pilot-https-container-apps-environment.bicep`, `pilot-https-portal.bicep`, protected-input template and `tests/infrastructure/HttpsPortal/`; coordinator owns shared inventory | Exact ADR-0011/local technical/test approval before authoring; fixed separate external environment, disabled public app ingress/live sign-in, private backends and exact protected inputs; pinned compile/lint/format and negative/composition evidence | READY — approved isolated author and non-author review |
 | HTTPS-P02 | Coordinator + separately scoped BFF implementation workers | Approved production provider/key/audit contracts and isolated packets; actual production composition, SQL role negatives, shared keys, provider observation/federation and durable audit-outage proof; reviewed image/private build/signing acceptance | BLOCKED — contracts/live prerequisites |
 | HTTPS-P03 | Coordinator/platform/identity/operations, protected inputs only | Full fresh price/spend/capacity/what-if, fixed generated origin/proxy/private paths, users/role/CA/federation proof, exact public synthetic session and preservation/disposal authorization | NOT READY |
 | HTTPS-P04 | Non-author verifier + coordinator, approved actual environment | HTTPS-T01–T08 actual evidence, affected configured checks/CI and safe closure; distinguish engineering results from G1–G9/human acceptance | NOT VERIFIED |
@@ -26,7 +26,7 @@ These are proposal packets, not authorization to code through unresolved boundar
 
 | Task | Requested role | Source / completion |
 |---|---|---|
-| Choose direct managed HTTPS topology for local preparation | Repository technical/security owner | [ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md): explicit Option A local disabled-template decision; no paid/public grant |
+| Direct managed HTTPS local topology | Repository technical/security owner — CLOSED | [Exact approval](../../docs/development/https-pilot-portal-approval.md): Option A local disabled templates/tests accepted against50cf4fd; no paid/public grant |
 | Complete exact user admission | Identity/product owner | [Protected binding template](../../docs/development/bff-production-bindings-template.json), [approved role matrix](../../docs/security/health-assessment-authorization-matrix.md): immutable organizational/B2B proof, selected customer role/scope and CA/licensing; no email-only authority |
 | Resolve production audit/provider/key authority | Technical/security/platform owners | [Existing production proposal](../../docs/development/bff-production-authority-hosting-proposal.md): real adapter contracts, durable audit-outage preservation, scoped key/SQL/provider evidence |
 | Review exact Azure/public session | Repository/operations owner, after local preparation | [HTTPS proposal](../../docs/development/https-pilot-portal-proposal.md#cost-and-operations): current complete quote, full reserve under allowance, exact resources/ownership/public boundary and preservation/disposal |
@@ -42,4 +42,8 @@ Canonical feature implementation/status/evidence records are updated in this cyc
 
 ## Executed preparation checkpoint
 
-The coordinator rendered and visually inspected the new diagram at3200×2000, validated source/link/JSON/SVG/heading targets and six unmodified official icon embeds, ran added-prose protected-identifier checks, whole-checkout Gitleaks and `git diff --check`. Non-author final review passed with no remaining material findings after adding ADR-0010's current-direction notice and the evidence record. [Sanitized evidence](../../docs/development/evidence/https-pilot-portal-preparation-20261003.json) binds exact changed sources and check results. No runtime/IaC change occurred; runtime/live cases and gates remain NOT VERIFIED. Exact local architecture approval remains the next dependency.
+The coordinator rendered and visually inspected the new diagram at3200×2000, validated source/link/JSON/SVG/heading targets and six unmodified official icon embeds, ran added-prose protected-identifier checks, whole-checkout Gitleaks and `git diff --check`. Non-author final review passed with no remaining material findings after adding ADR-0010's current-direction notice and the evidence record. [Sanitized evidence](../../docs/development/evidence/https-pilot-portal-preparation-20261003.json) binds exact changed sources and check results. No runtime/IaC change occurred; runtime/live cases and gates remain NOT VERIFIED. This is the historical preparation checkpoint; the owner subsequently accepted the local packet as recorded below.
+
+## Approved execution packet — 2026-10-03 UTC
+
+The repository owner explicitly approved the reviewed request. [Approval and exact source/path ownership](../../docs/development/https-pilot-portal-approval.md), [original-source metadata](../../docs/development/evidence/https-pilot-portal-approval-20261003.json) and the approved local tests close the local decision dependency. HTTPS-P01 is READY for its isolated writer and separate reviewer. Public admission/live sign-in/grants/spending remain disabled; other contracts and G1–G9/Milestone2 are unchanged.

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T02:10:13.795463+00:00",
+  "ownerInstruction": "Approved",
+  "scope": "ADR-0011 Option A and HTTPS-P01 local disabled IaC/input/policy preparation only",
+  "approvedSource": "50cf4fdfdabf83fd9aa5e92db7196ae26f5437fc",
+  "sourceBindings": [
+    {
+      "path": "architecture/decisions/ADR-0011-https-pilot-portal.md",
+      "sha256": "5c612a92f34dfe26b0fd227f230a96fd3db85c8e6889be65db33748a0368e9a4"
+    },
+    {
+      "path": "docs/development/https-pilot-portal-proposal.md",
+      "sha256": "99ce0230a3e47d8c0c6f81deff7ab4953e7546c79706c7ec05fd16e4743989e1"
+    },
+    {
+      "path": "plans/active/https-pilot-portal-preparation.md",
+      "sha256": "a894891c396d7fe024b9e730f5e12f2458f87f1904f2b42e3778b20b1809a42b"
+    }
+  ],
+  "publicActivationApproved": false,
+  "paidSessionApproved": false,
+  "grantsApproved": false,
+  "productionReleaseApproved": false,
+  "implementationEvidence": "PENDING"
+}
