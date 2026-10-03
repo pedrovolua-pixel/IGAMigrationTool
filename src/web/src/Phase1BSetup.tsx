@@ -275,7 +275,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
         expectedRevision: entry.revision,
         expectedContentDigest: entry.contentDigest,
         expectedRegistryRevision: props.registryRevision,
-        expectedReviewEventId: entry.reviewEventId,
+        expectedReviewEventId: kind === 'Approve' ? entry.reviewEventId : null,
         content: null,
         reason,
       },

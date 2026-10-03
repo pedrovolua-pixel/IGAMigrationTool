@@ -167,7 +167,8 @@ createRoot(document.getElementById('root')).render(<Harness/>);
   await page.getByRole('button', { name: 'Retry same event' }).waitFor();
   const first = await page.evaluate(() => window.probe.commands.at(-1));
   check(
-    first.command.expectedRevision === 1 &&
+    first.command.expectedReviewEventId === null &&
+      first.command.expectedRevision === 1 &&
       first.command.expectedRegistryRevision === 7 &&
       first.command.expectedContentDigest === 'a'.repeat(64),
     'lifecycle command binds exact content and both revisions',
@@ -184,6 +185,27 @@ createRoot(document.getElementById('root')).render(<Harness/>);
   check(
     JSON.stringify(first) === JSON.stringify(retry),
     'uncertain lifecycle retry preserves UUID actor and exact payload',
+  );
+  await page.evaluate(() => {
+    window.probe.mode = 'uncertain';
+  });
+  await page.getByRole('button', { name: 'Retire reviewed-goal v1' }).click();
+  await page.getByRole('button', { name: 'Retry same event' }).waitFor();
+  const reviewedRetirement = await page.evaluate(() => window.probe.commands.at(-1));
+  check(
+    reviewedRetirement.command.kind === 'Retire' &&
+      reviewedRetirement.command.expectedReviewEventId === null &&
+      reviewedRetirement.command.expectedRevision === 2,
+    'Consultant retirement of a reviewed version carries no approval review-event argument',
+  );
+  await page.evaluate(() => {
+    window.probe.mode = 'committed';
+  });
+  await page.getByRole('button', { name: 'Retry same event' }).click();
+  check(
+    JSON.stringify(reviewedRetirement) ===
+      JSON.stringify(await page.evaluate(() => window.probe.commands.at(-1))),
+    'reviewed retirement retry retains exact UUID actor and null review-event payload',
   );
   await page.getByText('Create an immutable draft version', { exact: true }).click();
   check(
@@ -420,10 +442,26 @@ createRoot(document.getElementById('root')).render(<Harness/>);
       customerApproval.expectedRevision === 2,
     'fictional customer approval binds exact Consultant review and content revision',
   );
+  await page.evaluate(() => {
+    window.probe.mode = 'uncertain';
+  });
   await page.getByRole('button', { name: 'Retire access-governance v1' }).click();
+  await page.getByRole('button', { name: 'Retry same event' }).waitFor();
+  const approvedRetirement = await page.evaluate(() => window.probe.commands.at(-1));
   check(
-    (await page.evaluate(() => window.probe.commands.at(-1).command)).kind === 'Retire',
-    'fictional customer actor can request approved-version retirement preserving history',
+    approvedRetirement.command.kind === 'Retire' &&
+      approvedRetirement.command.expectedReviewEventId === null &&
+      approvedRetirement.command.expectedRevision === 3,
+    'fictional customer approved retirement preserves exact content revision with null review-event argument',
+  );
+  await page.evaluate(() => {
+    window.probe.mode = 'committed';
+  });
+  await page.getByRole('button', { name: 'Retry same event' }).click();
+  check(
+    JSON.stringify(approvedRetirement) ===
+      JSON.stringify(await page.evaluate(() => window.probe.commands.at(-1))),
+    'approved retirement retry retains exact UUID fictional customer and null review-event payload',
   );
   await page.evaluate(() => window.probe.deny());
   await page.waitForFunction(
