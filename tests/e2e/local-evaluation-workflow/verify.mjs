@@ -360,7 +360,7 @@ try {
   const originalBytes = JSON.stringify(
     beforeCorrection.members.at(-1).original,
   );
-  await page.getByLabel("Outcome", { exact: true }).selectOption("Corrected");
+  await page.getByLabel(/^Outcome/).selectOption("Corrected");
   await page.getByLabel("Originating classification").selectOption("Rejected");
   await page
     .getByLabel("Rationale")
@@ -407,9 +407,7 @@ try {
   const scoredCounts = JSON.parse(scored.warningCanonicalJson).summaries
     .generalAi;
   await memberSelector.selectOption(correctedMemberId);
-  await page
-    .getByLabel("Action", { exact: true })
-    .selectOption("PresentationCorrection");
+  await page.getByLabel(/^Action/).selectOption("PresentationCorrection");
   await page
     .getByLabel("Rationale")
     .fill("Independent browser presentation-only revision");
@@ -480,8 +478,9 @@ try {
   await page.keyboard.press("Home");
   await page.keyboard.press("Enter");
   await page
-    .getByText("Historical outcome version — review actions are unavailable.", {
-      exact: true,
+    .getByRole("status")
+    .filter({
+      hasText: "Historical outcome version — review actions are unavailable.",
     })
     .waitFor();
   check(
