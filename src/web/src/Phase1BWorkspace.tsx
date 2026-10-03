@@ -587,7 +587,7 @@ export function Phase1BWorkspace(props: Phase1BWorkspaceProps) {
       {!props.entries.length && <p>No verified planning options are available.</p>}
       {props.entries.map((entry) => (
         <PlanningCard
-          key={`${props.runId}/${entry.optionId}/${props.sourceDigest}`}
+          key={`${context}/${entry.optionId}/${props.sourceDigest}`}
           entry={entry}
           sourceDigest={props.sourceDigest}
           disabled={disabled || !props.canPlan}

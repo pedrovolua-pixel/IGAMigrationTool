@@ -332,10 +332,25 @@ createRoot(document.getElementById('root')).render(<Harness/>);
     (await page.getByLabel('Reason for option-a', { exact: true }).inputValue()) === '',
     'run switch clears planning drafts',
   );
+  await page.getByLabel('Reason for option-a', { exact: true }).fill('Old Consultant draft');
+  await page
+    .getByLabel('Effort assumptions for option-a (one per line)')
+    .fill('Old Consultant assumptions');
   await page.evaluate(() => {
     window.probe.mode = 'committed';
     window.probe.changeActor();
   });
+  await page.getByText('FictionalCustomer', { exact: true }).first().waitFor();
+  check(
+    (await page.getByLabel('Reason for option-a', { exact: true }).inputValue()) === '' &&
+      (await page.getByLabel('Effort assumptions for option-a (one per line)').inputValue()) === '',
+    'actor context change clears prior actor planning drafts',
+  );
+  check(
+    (await page.getByLabel('Stable outcome ID').inputValue()) === '' &&
+      (await page.getByLabel('Desired behavior').inputValue()) === '',
+    'actor context change clears prior actor outcome draft content',
+  );
   await page.getByText('FictionalCustomer', { exact: true }).first().waitFor();
   check(
     await page.getByRole('button', { name: 'Consultant review pending-goal v1' }).isDisabled(),

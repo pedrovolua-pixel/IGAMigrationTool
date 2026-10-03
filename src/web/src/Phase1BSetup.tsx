@@ -255,6 +255,13 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
     setSelected([]);
     setLinks([]);
     setReason('');
+    setOutcomeId('');
+    setTitle('');
+    setBehavior('');
+    setReferences('');
+    setAssumptions('');
+    setCategory('SECURITY');
+    setOrigin('Documented');
   }, [props.contextKey]);
   const command = (entry: Phase1BOutcomeVersion, kind: Phase1BOutcomeCommand['kind']) =>
     action.send(
