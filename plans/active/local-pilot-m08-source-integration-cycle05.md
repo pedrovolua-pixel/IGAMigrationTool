@@ -1,6 +1,6 @@
 # Milestone08 cycle05 — Phase1B evaluation source capture
 
-Status: RUNNING — bounded local capture contract preparation; implementation requires coordinator engineering freeze
+Status: VERIFIED — bounded local capture implementation; private publication and preservation closure pending
 Owner: Phase1C coordinator
 Date: 2026-10-03
 Stable source: a6c3375a8ccdf562333d4b9487811c3cd8ec0f09
@@ -12,21 +12,21 @@ Implement a narrow read-only capture for actual saved synthetic Phase1B source a
 
 | Packet | Permitted paths / source | Owner | State |
 | --- | --- | --- | --- |
-| Source audit | Read-only committed Phase1B source at stable SHA; native audit only | cycle05_source_audit | VERIFIED documentary |
-| Policy audit | Read-only committed approved evaluation/ADR records at stable SHA; native audit only | cycle05_policy_audit | RUNNING |
-| Coordinator contracts/configuration | /private/tmp/iga-m08-cycle05-coordinator; cycle05 contracts/freeze/test/shared configuration and this plan | Coordinator | RUNNING |
-| Independent capture review | Read-only exact draft/runtime commits; native review only | cycle05_policy_audit | REVIEW |
-| Source implementation | NEW SyntheticEvaluationSourceIntegration module and focused tests, only after freeze | cycle05_source_audit | READY |
-| Independent verification | Separate worktree, new independent consumer tests only, assigned after freeze | cycle05_independent | READY |
-| Canonical integration/site | Owned additive records only; existing owner-private site | Coordinator | READY |
+| Source audit | Read-only committed Phase1B source at stable SHA; native audit only | cycle05_source_audit | VERIFIED |
+| Policy audit | Read-only committed approved evaluation/ADR records at stable SHA; native audit only | cycle05_policy_audit | VERIFIED |
+| Coordinator contracts/configuration | /private/tmp/iga-m08-cycle05-coordinator; cycle05 contracts/freeze/test/shared configuration and this plan | Coordinator | VERIFIED |
+| Independent capture review | Read-only exact draft/runtime commits; native review only | cycle05_policy_audit | VERIFIED |
+| Source implementation | NEW SyntheticEvaluationSourceIntegration module and focused tests, only after freeze | cycle05_source_audit | VERIFIED |
+| Independent verification | Separate worktree, new independent consumer tests only, assigned after freeze | cycle05_independent | VERIFIED |
+| Canonical integration/site | Owned additive records only; existing owner-private site | Coordinator | VERIFIED |
 
 No worker writes shared source/configuration or another owner's paths. Dependent capture code waits for coordinator engineering freeze and nonauthor review. Source-backed sampling/review commands remain outside this cycle until their provenance/authority integration is settled. The approved parallel workflow permits these read-only independent audits and nonauthor review.
 
 ## Completion evidence
 
-- [ ] Actual source/policy/architecture inventories identify valid source content and deferred integration bindings.
-- [ ] Exact capture contract and paired tests trace approved requirements; coordinator freeze recorded before code.
-- [ ] Capture implementation and nonauthor review complete; applicable formatting/build/type/unit/PostgreSQL/architecture/security/compatibility checks executed and retained.
+- [x] Actual source/policy/architecture inventories identify valid source content and deferred integration bindings.
+- [x] Exact capture contract and paired tests trace approved requirements; coordinator freeze recorded before code.
+- [x] Capture implementation and nonauthor review complete; applicable formatting/build/type/unit/PostgreSQL/architecture/security/compatibility checks executed and retained.
 - [ ] Canonical plan/status/evidence updated with exact pending dependency.
 - [ ] Existing private site status/human board published and confirmed; native evidence retained and own temporary worktree cleaned after preservation.
 
@@ -37,3 +37,7 @@ Source-backed sampling/reviewer commits, actual source/reviewer security boundar
 FR-HAS-11/13/50–53, bounded AC-HAS-12/19 and TP-HAS-012/019 trace to EV05-S001–S014 in the paired source-capture test plan. Build only the read-only internal capture and focused author/independent consumers, after the exact engineering freeze. Reuse public owning APIs under one supplied guarded transaction with registry→run ordering. Two actual AI finding groups and terminal gaps retain native identities/provenance; no sampler aliases/23-binding substitutes, reviewer writes, HTTP/UI activation or new authority. New source/sample/reviewer integration is the later outcome, not an unfinished prerequisite to this capture.
 
 Rollout is a library reference and explicit focused test invocation only. No existing host references or activates the adapter. Rollback removes the new consumer reference; no stored data rollback, destructive migration or new configuration default. Coordinator owns the solution and CI additions. No new package versions/dependencies are introduced. Author and independent workers own only their new assigned projects; frozen contract amendments require nonauthor review before implementation.
+
+## Executed outcome
+
+The reviewed final freeze8b70c02 preceded code. Final integrated source146d6df includes the independent literal consumer and exact capture source tested at60ec238;90 original owning files and19 capture files are byte-verified. Unit168/author PG95/independent PG208 pass. Whole solution locked restore/format/zero-warning build, relevant compatibility and Python oracles, architecture, diff and secret scans pass. [Verification dispositions](../../specs/003-health-assessment/local-phase1b-evaluation-source-verification.md) and [native receipt](../../docs/development/evidence/m08-source-capture-cycle05-20261003.json) retain initial failures, nonauthor closures and exact limits. Shared Phase1D tests pass after their owner correction; prior failed Mac processes could not be confirmed terminated. Current-cycle hosted observation, publication and own worktree preservation/cleanup follow separately. This bounded implementation does not close full M08 or Phase1C.
