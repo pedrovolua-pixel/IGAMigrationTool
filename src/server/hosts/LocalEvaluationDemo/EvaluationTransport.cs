@@ -13,7 +13,7 @@ internal static class EvaluationTransport
         PropertyNameCaseInsensitive = false,
         UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
         MaxDepth = 16,
-        Converters = { new JsonStringEnumConverter(allowIntegerValues: false) }
+        Converters = { new UtcRoundtripConverter(), new JsonStringEnumConverter(allowIntegerValues: false) }
     };
 
     internal static IResult Reply(object payload, string? csrfToken = null, bool? alreadyApplied = null) =>
@@ -100,6 +100,13 @@ internal static class EvaluationTransport
     internal static bool TryRevision(string? text, out long revision) => long.TryParse(text, NumberStyles.None, CultureInfo.InvariantCulture, out revision)
         && revision is >= 0 and <= 9007199254740991 && revision.ToString(CultureInfo.InvariantCulture) == text;
     private sealed record Envelope(int SchemaVersion, bool DemoOnly, string? CsrfToken, string? Issue, object? Payload, bool? AlreadyApplied);
+    private sealed class UtcRoundtripConverter : JsonConverter<DateTimeOffset>
+    {
+        public override DateTimeOffset Read(ref Utf8JsonReader reader, Type type, JsonSerializerOptions options) =>
+            DateTimeOffset.ParseExact(reader.GetString()!, "O", CultureInfo.InvariantCulture);
+        public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options) =>
+            writer.WriteStringValue(value.ToUniversalTime().ToString("O", CultureInfo.InvariantCulture));
+    }
     private sealed class BufferedJsonResult(byte[] bytes, int status) : IResult
     {
         public async Task ExecuteAsync(HttpContext context)
