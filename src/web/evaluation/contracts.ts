@@ -1,3 +1,4 @@
+import { selectedMemberIds } from './selected-members.ts';
 export const POPULATION_DIGEST = '069dd6f848250dfa46be775b382d563f7979e15e6349a29f59d4770a55955aa1';
 export const SAMPLE_DIGEST = '5a372640cd648d266cf0112f69e2510aa3751cc81d6e61c3321870461d0ea110';
 export const MAX_RESPONSE_BYTES = 16 * 1024 * 1024;
@@ -223,7 +224,8 @@ export function utc(value: unknown): string {
   const s = string(value, 40);
   if (
     !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?(?:\+00:00|Z)$/.test(s) ||
-    !Number.isFinite(Date.parse(s))
+    !Number.isFinite(Date.parse(s)) ||
+    new Date(s).toISOString().slice(0, 19) !== s.slice(0, 19)
   )
     return reject();
   return s;
@@ -405,6 +407,25 @@ export function parseWorkspace(value: unknown): Workspace {
   )
     reject();
   ordered(w.members.map((m) => m.original.memberId));
+  w.members.forEach((m, i) => {
+    const id = selectedMemberIds[i];
+    const n = Number(id?.slice(-6));
+    const env = n < 60 ? 'synthetic-env-a' : 'synthetic-env-b';
+    const severity = n < 20 ? 'Critical' : n < 40 ? 'High' : 'Medium';
+    if (
+      m.original.memberId !== id ||
+      m.originMetadata.originSeverity !== severity ||
+      m.originMetadata.environmentId !== env ||
+      m.originMetadata.moduleId !== 'synthetic-module' ||
+      m.originMetadata.categoryId !== 'synthetic-category' ||
+      m.originMetadata.ruleId !== 'synthetic-rule' ||
+      m.originMetadata.modelPromptId !== 'synthetic-model' ||
+      m.originMetadata.confidenceBandId !== 'synthetic-confidence' ||
+      m.assignmentId !== `${env}-assignment` ||
+      m.revision > w.aggregateRevision
+    )
+      reject();
+  });
   w.versions.forEach((v, i) => {
     if (
       v.version !== i ||
