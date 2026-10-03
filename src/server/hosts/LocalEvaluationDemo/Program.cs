@@ -34,9 +34,17 @@ foreach (var path in Directory.EnumerateFiles(assetRoot, "*", SearchOption.AllDi
     if (type is not null) assets.Add(Path.GetRelativePath(assetRoot, path).Replace(Path.DirectorySeparatorChar, '/'), (path, type));
 }
 var store = new SyntheticEvaluationWorkflowStore(connection);
-await store.InitializeAsync();
-var seed = await store.SeedAsync(FictionalEvaluationFixture.BuildSeed());
-if (seed.Issue is not null) throw new InvalidOperationException("The dedicated synthetic evaluation seed could not be verified.");
+try
+{
+    await store.InitializeAsync();
+    var seed = await store.SeedAsync(FictionalEvaluationFixture.BuildSeed());
+    if (seed.Issue is not null) throw new InvalidOperationException();
+}
+catch (Exception exception) when (exception is not OperationCanceledException)
+{
+    // Startup also suppresses database/provider exception details; no inner payload is retained.
+    throw new InvalidOperationException("The dedicated synthetic evaluation store could not be verified.");
+}
 var actor = new EvaluationWorkflowActor("synthetic-reviewer");
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { Args = [], EnvironmentName = "SyntheticEvaluationWorkflow" });
 builder.Logging.ClearProviders();
