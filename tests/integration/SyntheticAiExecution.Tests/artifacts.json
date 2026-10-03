@@ -1,0 +1,491 @@
+{
+  "schemaVersion": "synthetic-phase1b-ai-executed-evidence-v1",
+  "status": "PASS",
+  "implementationCommit": "831ee21f20f9abd9306146a3860cf9d21e498bf9",
+  "sdk": "10.0.401",
+  "database": "iga_synthetic_phase1b_ai_tests",
+  "postgres": "existing loopback127.0.0.1:55433, useriga_synthetic; no cluster/role/config changes",
+  "commands": [
+    {
+      "name": "restore-unit",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "--locked-mode",
+        "-p:NuGetAudit=true",
+        "-p:NuGetAuditMode=all",
+        "-p:NuGetAuditLevel=low"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "restore-integration",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "--locked-mode",
+        "-p:NuGetAudit=true",
+        "-p:NuGetAuditMode=all",
+        "-p:NuGetAuditLevel=low"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "format-2",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "src/server/modules/SyntheticAiExecution/SyntheticAiExecution.csproj",
+        "--verify-no-changes",
+        "--no-restore",
+        "--include",
+        "src/server/modules/SyntheticAiExecution/AiExecutionCanonical.cs",
+        "src/server/modules/SyntheticAiExecution/AiExecutionContracts.cs",
+        "src/server/modules/SyntheticAiExecution/AiExecutionMigration.cs",
+        "src/server/modules/SyntheticAiExecution/AiExecutionPolicy.cs",
+        "src/server/modules/SyntheticAiExecution/FakeAiProvider.cs",
+        "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "format-3",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "--verify-no-changes",
+        "--no-restore",
+        "--include",
+        "tests/unit/SyntheticAiExecution.Tests/AiFixtures.cs",
+        "tests/unit/SyntheticAiExecution.Tests/Program.cs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "format-4",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "--verify-no-changes",
+        "--no-restore",
+        "--include",
+        "tests/integration/SyntheticAiExecution.Tests/Program.cs"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "build-unit",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "--no-restore",
+        "--configuration",
+        "Release",
+        "--disable-build-servers",
+        "-p:UseSharedCompilation=false",
+        "-m:1"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "build-integration",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "--no-restore",
+        "--configuration",
+        "Release",
+        "--disable-build-servers",
+        "-p:UseSharedCompilation=false",
+        "-m:1"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "unit",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "integration",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "secrets-10",
+      "command": [
+        "/private/tmp/iga-parallel-tools/gitleaks",
+        "dir",
+        "src/server/modules/SyntheticAiExecution",
+        "--no-banner",
+        "--redact"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "secrets-11",
+      "command": [
+        "/private/tmp/iga-parallel-tools/gitleaks",
+        "dir",
+        "migrations/synthetic-ai-execution",
+        "--no-banner",
+        "--redact"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "secrets-12",
+      "command": [
+        "/private/tmp/iga-parallel-tools/gitleaks",
+        "dir",
+        "tests/unit/SyntheticAiExecution.Tests",
+        "--no-banner",
+        "--redact"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "secrets-13",
+      "command": [
+        "/private/tmp/iga-parallel-tools/gitleaks",
+        "dir",
+        "tests/integration/SyntheticAiExecution.Tests",
+        "--no-banner",
+        "--redact"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "sourceBinding": [
+    {
+      "path": "Directory.Build.props",
+      "sha256": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e"
+    },
+    {
+      "path": "global.json",
+      "sha256": "9969064a379ad96f0fd9358b4133bf2652018a32c60d44f37a0638168381a90d"
+    },
+    {
+      "path": "migrations/synthetic-ai-execution/001-initial.sql",
+      "sha256": "99fbed715e73f1b4350ab13da4b84b54dbf1f3018ef66269902e06dd256ed4ee"
+    },
+    {
+      "path": "migrations/synthetic-ai-execution/002-integrity-proof.sql",
+      "sha256": "338d602dff6b45a4d5e7d57c83b696cd81c840e25e03b8c341cd3d98a3ee67bf"
+    },
+    {
+      "path": "migrations/synthetic-ai-execution/003-history-truncate-guards.sql",
+      "sha256": "f43ca6a7c8ae334690cf5e14b90728974da342d100b06a0000fc16202604fb2e"
+    },
+    {
+      "path": "specs/003-health-assessment/local-phase1b-ai-contract-proposal.md",
+      "sha256": "471fdcb92780bac8f552366c988eab7d4f7498a123e1625aacc1dd2ecaf49af5"
+    },
+    {
+      "path": "specs/003-health-assessment/local-phase1b-ai-test-plan.md",
+      "sha256": "c98ac0f08ae9194c72d4dc995de48877f4ad3e9bed90f53ed82e66baa52abb43"
+    },
+    {
+      "path": "specs/003-health-assessment/local-phase1b-approval.md",
+      "sha256": "41c07e5ead8b8355d675d5a68b0da9e03ee2c37b3940f63d7f90d3204b63d637"
+    },
+    {
+      "path": "specs/003-health-assessment/local-phase1b-engineering-contract.md",
+      "sha256": "68021adee1db8ce00d5d3542d342446c690474076d31baf306c305a206409586"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageCompletionProjector.cs",
+      "sha256": "e8bddf89169cfb3dac7b3b13c8a66910a014e7d755bc40572ffd85c3e4285ea3"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageCountProjector.cs",
+      "sha256": "579e2f0f89da45e317ec97eb4db242ff23aba9f7c9124d4712ffe15c25e16df1"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageLimitationProjector.cs",
+      "sha256": "b77c0ace8ea2704da0b8a4797d9f6e0febfb04bc8dccbc66181ecca5104f92a5"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageProgressProjector.cs",
+      "sha256": "2a0f0a568f0f1e7bc69d3eca9da551f48baca4ae6f4b9134163fa305d968a89b"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/CoverageReconciler.cs",
+      "sha256": "f68953b4bbc89666b09c3026ae6e9f84c51abfc6f20469c4514800d16dc77bdb"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/ExecutableCoverageProjector.cs",
+      "sha256": "54ab78919bb052b32b7c27a14c6cec5e341d3c5a509f53648921e34bcf028543"
+    },
+    {
+      "path": "src/server/modules/AssessmentCoverage/packages.lock.json",
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/AssessmentScoring.csproj",
+      "sha256": "7eefcc78004c01aeaeeef3fce1670be213d2cf3599b535c277790550f1b1f81b"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/PilotHealthScorer.cs",
+      "sha256": "4108969453ec3f3eec338cef4ab6c6b9d9470dbf3e0ad400ea1082003c0e3d1a"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/README.md",
+      "sha256": "7647df5a2da81da15b3d5e7e02ebbcdcfbc8ad56d3c9452833b1f321fe145128"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/ScoringContracts.cs",
+      "sha256": "2f0e2a8849074f0643bf1a5d371cf73cbb765da130408a66db5504cdb2cae6cc"
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/packages.lock.json",
+      "sha256": "574ec40030e331c16f3dc160141e85d09947a49b67b84d7d6a9c8890c394f3eb"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/AiExecutionCanonical.cs",
+      "sha256": "53a4ade0773515aea73642dce3fc91a3b6cff6c3a4ddb66463e84b090958f4b8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/AiExecutionContracts.cs",
+      "sha256": "251323a67d8eab140538592b9c50ee8966128ced91b987be247f2bab5e5cdf3d"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/AiExecutionMigration.cs",
+      "sha256": "4e122d2caa6a71dfb303d6bbe2d8978dfe191614edd14ea6f132a84a922ad830"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/AiExecutionPolicy.cs",
+      "sha256": "0b7a267b740b96299d5dc3aada1ba203159b389b515602ca326d11ff4d7d1c4c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/FakeAiProvider.cs",
+      "sha256": "607e02ef68e32739ea38c71dddaad8d796391eafc55b7db667e8bf0c9a1764fd"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/README.md",
+      "sha256": "2c376b745e2ac9feb0b97c6d10bc6b2e8d9329d4e1e2374b563d918adddff473"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/SyntheticAiExecution.csproj",
+      "sha256": "3b71fffcf86aa666b313c7f577240b5925a3f838fa657bb61a8ee11b6c423758"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs",
+      "sha256": "50e1abaff330fe13618682aa4633d23243bb397146524932dafe45ef23d09f5f"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiExecution/packages.lock.json",
+      "sha256": "1c60469a6a7a6020076ef8e324bd6a9bd7dd7868263d09ca48714e961ef1aefb"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/FixtureJson.cs",
+      "sha256": "6b0f1b2c71e9e424ddba4bb9868b9d83bc85ef787c7f4c93478b579de331b32c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuildResult.cs",
+      "sha256": "71a6f828f1a0e41c35a9e8a1decc70ff9aecb081b883811bef5bbb724801f2d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuilder.cs",
+      "sha256": "972a884e4bc0fef605a975f4e59a1a888c2aba93174eccf283b2c7388e1ae8d8"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalContracts.cs",
+      "sha256": "2874bf68aa17345d6e585095cdd99069f57ede4b5f24a9f113d44b79fc1d074c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalValidator.cs",
+      "sha256": "26b727544d4a5b70c79c4d366af1d963bee1c8863e6d199a43c1b97a34e5388c"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/README.md",
+      "sha256": "582fa3ff9e6610da8f3b85fcb8a032dc8aa2b2596946ad4f239cc848f6679c16"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiPacket.cs",
+      "sha256": "6a4d50e62857082c6867589644e4ff8b17fbfd68d4ee3656c31c705cddddb0e6"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/packages.lock.json",
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "src/server/modules/SyntheticSourceFence/README.md",
+      "sha256": "0e6617cf0c85b17ecb53b6474edbd750ba081d2f054d9179dff9fd25c89160ae"
+    },
+    {
+      "path": "src/server/modules/SyntheticSourceFence/SyntheticRunSourceFence.cs",
+      "sha256": "32b42c6a8d48185ed110d58d2e06cec7beff5f9ed773c0f92e48a54a4e43468c"
+    },
+    {
+      "path": "src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "path": "src/server/modules/SyntheticSourceFence/packages.lock.json",
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/Program.cs",
+      "sha256": "52eef39dd065c06374726028fceff0a1cb051849fb7388c13ea4f51a677985c2"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/README.md",
+      "sha256": "dd4cffbaa1f8c6f0f48314af4e47e1c06c6c51a3e020d40bc94e7ae50e5d83d0"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+      "sha256": "9a3d4d31a3e8098172df1fd19164a933f0c86c896fe1e6e3f2bd8227d62d297e"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/packages.lock.json",
+      "sha256": "738e065f4072c79ed19de0486399b4eb7d0012ad81766b3193815aaeb2459987"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/verify.py",
+      "sha256": "ea10fa4c36ac74f23e04d9b7442241e578864a779e2b569ccadb29ad872a17ff"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/AiFixtures.cs",
+      "sha256": "b368e975aae3bd7708781d67aea6d89b386f6a8af433116aee7de8709312ce8f"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/Program.cs",
+      "sha256": "75abb5d196c2f8b17b0348d5e9f3daabdefce9df2a30e49d7fd749a910f1ec3b"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+      "sha256": "15c8e2631791f4e4f8108f2b5ee7d32a7bf691fdea5a1c51a6789e05b4f1600e"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/packages.lock.json",
+      "sha256": "4b466fad435334bd8dae194652857ce505649f9de1ca338462cd2155b3fd5e6c"
+    }
+  ],
+  "executedBinaryBinding": [
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/AssessmentCoverage.dll",
+      "sha256": "0bc62636f8434cbffc9e9d03f04edaf950f1b2cafbf5a329036a3ac277f31237"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+      "sha256": "7c97c4463fe0fc11d1f22f4d160b2bd2288981adf1de2717a6ff3fb993ddf294"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/Microsoft.Extensions.Logging.Abstractions.dll",
+      "sha256": "a76a735b63e6ef3b0bf41ff92423cbd16103b8952e8306140a9bd650346034dc"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/Npgsql.dll",
+      "sha256": "e2bcafe1660fe4543fe9dfcabed972ec8d32259e5ea8009462ce1de23c7034c2"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.deps.json",
+      "sha256": "ca77a9f90fc7b49bd52d7a8262a6ba2bf646c8dc4db117ecb63cf8d3fea6b001"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll",
+      "sha256": "5b0cb58a930fa8635fc7743f07bc8911f84078f682459428156c13ca11e8c3e6"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.runtimeconfig.json",
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.dll",
+      "sha256": "d448f83ffd7da4cd7e650746e6f948e5403caf33b7c1b9cbf7108e72577bacb8"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiValidation.dll",
+      "sha256": "c5240cde04c5713280d21b21e58fece4bc9dc72449c737ccb6ae227a82b3d980"
+    },
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticSourceFence.dll",
+      "sha256": "a86b2b9ae2c9e43f1c0f9a41cd6c1eb0a2432c9800b12b5205db8294506ff166"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/AssessmentCoverage.dll",
+      "sha256": "0bc62636f8434cbffc9e9d03f04edaf950f1b2cafbf5a329036a3ac277f31237"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/AssessmentScoring.dll",
+      "sha256": "22973c066ba086688edbb93df2545fa97b0f5abd45abbd639232449c7ecb3ae0"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+      "sha256": "7c97c4463fe0fc11d1f22f4d160b2bd2288981adf1de2717a6ff3fb993ddf294"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/Microsoft.Extensions.Logging.Abstractions.dll",
+      "sha256": "a76a735b63e6ef3b0bf41ff92423cbd16103b8952e8306140a9bd650346034dc"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/Npgsql.dll",
+      "sha256": "e2bcafe1660fe4543fe9dfcabed972ec8d32259e5ea8009462ce1de23c7034c2"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.deps.json",
+      "sha256": "861ff097f7cfda25eab58f2cf47a32a71750504519a084953a672961aea99b73"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll",
+      "sha256": "9ffcbdaab3aa813bdc81da537cdb0c9c51bb1dc50a55d102b05d355321c5c767"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.runtimeconfig.json",
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.dll",
+      "sha256": "d448f83ffd7da4cd7e650746e6f948e5403caf33b7c1b9cbf7108e72577bacb8"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiValidation.dll",
+      "sha256": "c5240cde04c5713280d21b21e58fece4bc9dc72449c737ccb6ae227a82b3d980"
+    },
+    {
+      "path": "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticSourceFence.dll",
+      "sha256": "a86b2b9ae2c9e43f1c0f9a41cd6c1eb0a2432c9800b12b5205db8294506ff166"
+    }
+  ],
+  "transcriptBinding": [
+    {
+      "path": "tests/integration/SyntheticAiExecution.Tests/verification.log",
+      "sha256": "9eae0377916e03ae7a2cc22aa1ac05be1ae9adc6c5f1031f313471429d4d4bce"
+    }
+  ],
+  "limitations": [
+    "Bounded local synthetic fake provider only; no network/provider credentials/customer evidence",
+    "Coordinator owns combined host/checkpoint/UI/export integration and all historical profile closure",
+    "G1\u2013G9 and production identity/scale/provider/accessibility/latency remain separately unverified"
+  ]
+}
