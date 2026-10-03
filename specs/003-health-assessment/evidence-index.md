@@ -138,3 +138,5 @@ The configured Linux replay separately passed 10,617 artifact-review and 13,654 
 ## Milestone08 evaluation accuracy foundation
 
 Bounded FR-HAS-51–53 / AC-HAS-12 / TP-HAS-012 arithmetic and detached synthetic outcome capture only. Canonical scope: [execution plan](../../plans/active/local-pilot-m08-evaluation-foundation.md) and [engineering contract](synthetic-evaluation-accuracy-contract.md). [Executed local evidence](../../docs/development/evidence/m08-evaluation-foundation-20261003.json) binds 64-project build/format/locked audited restore, 23,550 independent assertions, 14 portable regressions, architecture/secret checks and non-author reviews. Hosted and private-publication evidence are separate; no gate or full test-plan PASS follows.
+
+Private Site version91 publication is confirmed in [the source/deployment receipt](../../docs/development/evidence/m08-evaluation-site-publication-20261003.json); owner-only access and twelve source-backed tasks are verified. Hosted checks remain NOT VERIFIED.

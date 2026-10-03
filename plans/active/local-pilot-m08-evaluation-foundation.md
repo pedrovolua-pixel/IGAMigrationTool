@@ -1,6 +1,6 @@
 # Milestone08 synthetic evaluation accuracy foundation
 
-Status: RUNNING — approved local implementation, bounded arithmetic subset
+Status: LOCAL FOUNDATION VERIFIED — full Milestone08 open; follow-on evaluation decisions pending
 Owner: Milestone08 coordinator
 Started: 2026-10-03
 Known base: `0185a6c`
@@ -18,8 +18,8 @@ The approved evaluation plan leaves exact insufficient-budget stratum allocation
 
 | Packet | Permitted paths | Outcome/state |
 | --- | --- | --- |
-| E08 domain worker | New `src/server/modules/SyntheticEvaluation/*.cs`, module README only | Exact internal contract; immutable capture, membership validation, canonicalization and arithmetic; RUNNING after contract freeze |
-| V08 verifier | New `tests/unit/SyntheticEvaluation.Tests/Program.cs` and test README only | Independent arithmetic/property/byte goldens, denial and mutation tests; RUNNING after contract freeze |
+| E08 domain worker | New `src/server/modules/SyntheticEvaluation/*.cs`, module README only | Exact internal contract; immutable capture, membership validation, canonicalization and arithmetic; VERIFIED — executed evidence and non-author review closed |
+| V08 verifier | New `tests/unit/SyntheticEvaluation.Tests/Program.cs` and test README only | Independent arithmetic/property/byte goldens, denial and mutation tests; VERIFIED — executed evidence and non-author review closed |
 | Coordinator | New project/lock files, solution/CI additions, integration, canonical records/evidence, private Site | Freeze contract, isolate workers from same commit, obtain non-author reviews, execute applicable combined checks |
 
 Each writer uses a separate `codex/` worktree. Workers cannot edit shared files, canonical records, active BFF/task/UI work or operate the Site. Domain and verification workers independently review the other packet before integration. Source/evidence is preserved before clean worktree removal.
@@ -31,7 +31,7 @@ Each writer uses a separate `codex/` worktree. Workers cannot edit shared files,
 - [x] Missing/extra/duplicate members/reviews, invalid enum/reference/source locks and unapproved desired outcomes deny without payload.
 - [x] Pinned locked audited restore, formatting, zero-warning Release build, focused tests and architecture checks; applicable secret/dependency/license checks.
 - [x] Existing unchanged modules compile; no host/browser/DB/source paths change. Runtime integration, browser, database and live checks are not applicable to this pure module; no prior check is relabeled.
-- [ ] Non-author reviews closed; executed evidence/current records and confirmed owner-private publication.
+- [x] Non-author reviews closed; executed evidence/current records and confirmed owner-private publication.
 
 No dependency, migration, runtime flag, production permission or deployment topology is introduced. Rollback removes the unused module/test registrations while preserving source/evidence. Full Milestone08, TP-HAS-012/019, Phase1C, UAT and G1–G9 remain NOT VERIFIED.
 
@@ -45,4 +45,8 @@ Completion condition: an attributable approved decision and amended exact evalua
 
 ## Local executed checkpoint
 
-Final 64-project locked audited restore/format/Release build passed with zero warnings/errors; 23,550 independently authored assertions, 14 portable regression hosts and architecture checks passed. Non-author domain/test/integration reviews closed. Initial test indentation and scanner prose false-positive failures are preserved; final checks pass without changed assertions/scanner policy. [Exact evidence](../../docs/development/evidence/m08-evaluation-foundation-20261003.json) records limitations. Hosted checks remain NOT VERIFIED. Private publication remains pending.
+Final 64-project locked audited restore/format/Release build passed with zero warnings/errors; 23,550 independently authored assertions, 14 portable regression hosts and architecture checks passed. Non-author domain/test/integration reviews closed. Initial test indentation and scanner prose false-positive failures are preserved; final checks pass without changed assertions/scanner policy. [Exact evidence](../../docs/development/evidence/m08-evaluation-foundation-20261003.json) records limitations. Hosted checks remain NOT VERIFIED. Private publication is confirmed below.
+
+## Confirmed private publication
+
+The existing owner-private Site version 91 deployed successfully at 2026-10-03T14:37:45Z from exact source 37240557936bb0b17bdd1be39a33b80959f56706, summarizing code/canonical snapshot ab678bb. Desktop 1440/mobile 390/reflow 320 navigation, overflow, twelve task roles/completion conditions and repository links passed; final captures were inspected. The eleven prior human tasks remain open; the new evaluation-policy/reviewer dependency is source-linked. Owner-only access remains one owner, zero external visitors/groups. [Receipt](../../docs/development/evidence/m08-evaluation-site-publication-20261003.json) records exact deployment/source separately from code verification.

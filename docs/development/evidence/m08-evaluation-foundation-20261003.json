@@ -1,7 +1,7 @@
 {
   "schema": "synthetic-evaluation-foundation-evidence-v1",
   "scope": "Milestone08 bounded FR-HAS-51\u201353/AC-HAS-12/TP-HAS-012 arithmetic and detached outcomes only",
-  "status": "LOCAL_VERIFIED_SITE_PUBLICATION_PENDING",
+  "status": "LOCAL_FOUNDATION_VERIFIED_PRIVATE_SITE_CONFIRMED",
   "base": "0185a6c",
   "domainCommit": "9e589941a2a4f59efce4f3b58c79b3be1b6e6e65",
   "verifierCommits": [
@@ -343,5 +343,64 @@
     "domain": "Non-author V08 review: no confirmed scoped defect.",
     "verifier": "Non-author E08 review: no semantic issue; indentation-only formatter correction independently confirmed.",
     "integration": "Independent read-only review: no actionable findings in configuration/scope/canonical delta; ordinary contract prose false positive classified independently."
+  },
+  "codeSnapshot": "ab678bb2e8343b5cc91333285302d259a0fa6fb9",
+  "sitePublication": {
+    "deployment": {
+      "id": "appgdep_6ac11333e1fc81918b5d635f10d300dd",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_77fbdf8e430c81918e332fd545654c3f",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T14:37:45.937014+00:00"
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/private/tmp/iga-m08-site",
+      "commit_sha": "37240557936bb0b17bdd1be39a33b80959f56706",
+      "archive": "/private/tmp/iga-m08-evidence/site.tar.gz"
+    },
+    "canonicalSnapshot": "ab678bb2e8343b5cc91333285302d259a0fa6fb9",
+    "access": {
+      "currentRole": "owner",
+      "mode": "custom",
+      "version": 91,
+      "allowedUsers": 1,
+      "externalVisitors": 0,
+      "allowedGroups": 0
+    }
+  },
+  "concurrentPreservation": {
+    "status": "PASS",
+    "concurrentFiles": 26,
+    "unchangedNoncanonicalFiles": 23,
+    "canonicalReverseRestoresExactOriginalBytes": true,
+    "codeSnapshot": "ab678bb"
+  },
+  "dependencyLicenseChange": "New locks contain project reference only; no external package or license footprint added.",
+  "preservation": "Original domain/verifier source, consumed source/configuration, compiled runtimes and native logs archived and rehashed; clean writing checkouts removed after verification.",
+  "siteChecks": {
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "openHumanTasks": 12,
+    "elevenEarlierTasksRetained": true,
+    "roleCompletionAndLinks": "PASS",
+    "pageErrors": 0,
+    "overflow": false,
+    "imagesInspected": [
+      "desktop1440",
+      "newTask320",
+      "overview320"
+    ]
   }
 }
