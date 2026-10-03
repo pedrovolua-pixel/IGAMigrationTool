@@ -292,6 +292,7 @@ try
     await Refused(() => { AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, Entries().GetAwaiter().GetResult(), Receipts().GetAwaiter().GetResult()); return Task.CompletedTask; }, "Restored duplicate deleted event accepted");
     await Sql("DELETE FROM security_audit.events WHERE event_id IN(SELECT event_id FROM security_audit.tombstones)");
     AuditIntegrityVerifier.Verify(binding, checkpoint, head.Sequence, head.Digest, await Entries(), await Receipts()); count++;
+    count += await AnonymousOutcomeReceiptChecks.RunAsync(owner, supplied);
     Console.WriteLine($"PASS: {count} real PostgreSQL atomic audit/restricted-role/receipt/head-wait/lifecycle/witness checks.");
     Console.WriteLine("NOT VERIFIED: live SQL roles, independently retained witness, production audit outage preservation, actual retention/backup execution or Azure/provider activation.");
 }
