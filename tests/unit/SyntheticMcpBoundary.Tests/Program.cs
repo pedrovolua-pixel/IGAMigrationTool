@@ -18,6 +18,7 @@ foreach (var alter in new Func<ReadGrant, ReadGrant?>[] { _ => null, g => g with
     var fixture = new Fixture { ChangeGrant = alter };
     Denied(await fixture.Read(), McpOutcome.Unavailable, "distinct-action-deny");
     Check(fixture.ManifestReads == 0 && fixture.ItemReads == 0 && fixture.Events.Count == 1, "deny-before-content-once");
+    Check(fixture.Events[0].Scope is null, "denied-flags-do-not-audit-scope");
 }
 foreach (var kind in new[] { IdentityKind.Anonymous, IdentityKind.ShareLink, IdentityKind.Support, IdentityKind.Workload, (IdentityKind)99 })
 {
@@ -36,9 +37,11 @@ foreach (var alter in new Func<ReadGrant, ReadGrant>[] { g => g with { Scope = n
     var fixture = new Fixture { ChangeGrant = g => alter(g) };
     Denied(await fixture.Read(), McpOutcome.DependencyUnavailable, "invalid-trusted-binding");
     Check(fixture.ManifestReads == 0 && !JsonSerializer.Serialize(fixture.Events).Contains("protected-sentinel", StringComparison.Ordinal), "invalid-port-safe");
+    Check(fixture.Events[0].Scope is null, "invalid-port-does-not-audit-scope");
 }
 var legitimate = new Fixture();
 Check((await legitimate.Read()).Outcome == McpOutcome.Success, "nonblocking-retention-read");
+Check(legitimate.Events[0].Scope == legitimate.Scope, "authorized-success-audits-scope");
 var empty = new Fixture(0);
 Check(Ids(await empty.Read()).Length == 0, "authorized-empty-collection");
 var validText = Encoding.UTF8.GetString(Fixture.Request());
@@ -96,6 +99,7 @@ Denied(await timed.Read(Fixture.Request(size: 1, cursor: timedPage.NextCursor)),
 var identityBudget = new Fixture { ChangeGrant = g => g with { ActionAllowed = false } };
 for (var i = 0; i < 60; i++) Denied(await identityBudget.Read(), McpOutcome.Unavailable, "denied-consumes-budget");
 Denied(await identityBudget.Read(), McpOutcome.Limited, "identity-plus-one");
+Check(identityBudget.Events[^1].Scope is null, "denied-limited-does-not-audit-scope");
 identityBudget.Time = TimeSpan.FromSeconds(59.999);
 Denied(await identityBudget.Read(), McpOutcome.Limited, "rolling-before-edge");
 identityBudget.Time = TimeSpan.FromSeconds(60);

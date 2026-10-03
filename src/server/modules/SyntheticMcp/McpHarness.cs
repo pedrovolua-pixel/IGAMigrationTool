@@ -217,10 +217,11 @@ public sealed class McpHarness
         catch { elapsed = 0; clockAvailable = false; outcome = McpOutcome.DependencyUnavailable; Signal(OperationalFailure.ClockUnavailable, invocation.Caller.CorrelationId); }
         var caller = invocation.Caller;
         var safeIdentity = Enum.IsDefined(caller.Kind) && PublicationCodec.IsId(caller.IdentityId);
+        var authorizedScope = grant is not null && ValidFields(grant) && Allowed(grant) ? grant.Scope : null;
         try
         {
             invocation.AuditSucceeded = audit.Complete(new McpAuditEvent(safeIdentity ? caller.Kind : null, safeIdentity ? caller.IdentityId : null,
-                grant?.Scope, invocation.Kind, outcome, caller.CorrelationId, elapsed, returned, redacted));
+                authorizedScope, invocation.Kind, outcome, caller.CorrelationId, elapsed, returned, redacted));
         }
         catch { invocation.AuditSucceeded = false; }
         if (!invocation.AuditSucceeded) Signal(OperationalFailure.AuditUnavailable, caller.CorrelationId);
