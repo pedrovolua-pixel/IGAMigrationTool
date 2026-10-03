@@ -1,0 +1,21 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Independently verified cycle07 synthetic logical and root-cause SHA256 fixture fields"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "match"
+paths = [
+  '(^|/)tests/unit/SyntheticEvaluationSchemaProvenanceIntegration\.Tests/(bin/(Debug|Release)/net10\.0/)?(normal-proof-canonical-preimplementation|normal-readiness-canonical-representative-preimplementation)\.json$',
+  '(^|/)tests/integration/SyntheticEvaluationSchemaProvenanceIndependent\.Tests/(bin/(Debug|Release)/net10\.0/)?(normal-proof-golden|normal-readiness-representative-golden|schema-literals)\.json$',
+]
+regexes = [
+  '^\.accepted\.attempt\.logicalKey":"3dcf8adeb48563410e353cb057a7a1829e875601d0952565fa33e8414961a8aa"$',
+  '^RootCauseKey":"809bb94c8136fbfbddfad6073018a60814b9747d73cd1820cfb45790e8a122d9"$',
+  '^RootCauseKey":"e3003bf710a58e5af23e1a1af61f3af16dd9496bbc7ef146b4c88f734428100d"$',
+  '^logicalKey":\ "3dcf8adeb48563410e353cb057a7a1829e875601d0952565fa33e8414961a8aa"$',
+  '^logicalKey":\ "5f11ce79fe62358f8a9c34b6ddfb48d2e7e0959e7cd1c457ca27678ae2bc3a5d"$',
+  '^logicalKey":\ "71f4b8bec239a014e470a09aa4c82f2be02cf0a45e4e56730b8fff03832ce931"$',
+  '^logicalKey":"3dcf8adeb48563410e353cb057a7a1829e875601d0952565fa33e8414961a8aa"$',
+]
