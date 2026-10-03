@@ -242,9 +242,9 @@ export function Phase1BSetupController({
       registryRevision={data.registry.revision}
       entries={entries}
       availableCoverageKeys={data.fixture.availableCoverageKeys}
-      canManage={data.fixture.canManageOutcomes}
-      canApprove={data.fixture.canSimulateCustomerApproval}
-      canStart={data.fixture.canStart}
+      canManage={data.fixture.canManageOutcomes && !failure}
+      canApprove={data.fixture.canSimulateCustomerApproval && !failure}
+      canStart={data.fixture.canStart && !failure}
       unavailableReason={failure || undefined}
       onOutcomeCommand={outcome}
       onStartRun={start}
@@ -308,8 +308,13 @@ export function Phase1BRunController({ run, csrfToken }: { run: RunDetail; csrfT
   const [refreshing, setRefreshing] = useState(false);
   useEffect(() => {
     const c = new AbortController();
+    const generation = readGeneration.current + 1;
     void refresh(c.signal).catch((e) => {
-      if (!c.signal.aborted && current.current === runToken) {
+      if (
+        !c.signal.aborted &&
+        current.current === runToken &&
+        generation === readGeneration.current
+      ) {
         setFailure(e.message);
         setRefreshing(false);
       }
@@ -338,7 +343,7 @@ export function Phase1BRunController({ run, csrfToken }: { run: RunDetail; csrfT
       setLedger(next);
       setFailure('');
       setRefreshing(false);
-      return;
+      return next;
     }
     const next = await request<Workspace>(`${prefix}/runs/${run.runId}/workspace`, signal);
     if (signal.aborted || current.current !== runToken || generation !== readGeneration.current)
@@ -397,11 +402,13 @@ export function Phase1BRunController({ run, csrfToken }: { run: RunDetail; csrfT
       if (signal.aborted || current.current !== operationToken)
         throw new Error('Response context changed; refresh before retrying the same event.');
       const updated = await refresh(signal);
-      if (!updated && !budget)
+      if (!updated)
         throw new Error('A newer source must be verified before accepting the response.');
       if (!budget) {
+        if (!('priority' in updated))
+          throw new Error('The current planning source could not be verified.');
         const c = command as Phase1BPlanningCommand;
-        const event = updated!.priority.entries
+        const event = updated.priority.entries
           .find((e) => e.original.optionId === c.optionId)
           ?.history.find((h) => h.eventId === c.eventId);
         if (!event || event.kind !== c.kind || event.sourceDigest !== c.expectedSourceDigest)
