@@ -36,12 +36,19 @@ public static class OutcomePriorityCanonical
     };
     public static Phase1BPlanningSource Seal(Phase1BPlanningSource source)
     {
-        var sorted = source with { SourceDigest = "", Options = source.Options.OrderBy(o => o.OptionId, StringComparer.Ordinal).Select(o => o with { Factors = o.Factors with
+        var sorted = source with
         {
-            AffectedObjectIds = o.Factors.AffectedObjectIds.IsDefault ? default : o.Factors.AffectedObjectIds.Order(StringComparer.Ordinal).ToImmutableArray(),
-            Objectives = o.Factors.Objectives.IsDefault ? default : o.Factors.Objectives.OrderBy(v => v.ObjectiveId, StringComparer.Ordinal).ToImmutableArray(),
-            MatchedObjectiveIds = o.Factors.MatchedObjectiveIds.IsDefault ? default : o.Factors.MatchedObjectiveIds.Order(StringComparer.Ordinal).ToImmutableArray()
-        } }).ToImmutableArray() };
+            SourceDigest = "",
+            Options = source.Options.OrderBy(o => o.OptionId, StringComparer.Ordinal).Select(o => o with
+            {
+                Factors = o.Factors with
+                {
+                    AffectedObjectIds = o.Factors.AffectedObjectIds.IsDefault ? default : o.Factors.AffectedObjectIds.Order(StringComparer.Ordinal).ToImmutableArray(),
+                    Objectives = o.Factors.Objectives.IsDefault ? default : o.Factors.Objectives.OrderBy(v => v.ObjectiveId, StringComparer.Ordinal).ToImmutableArray(),
+                    MatchedObjectiveIds = o.Factors.MatchedObjectiveIds.IsDefault ? default : o.Factors.MatchedObjectiveIds.Order(StringComparer.Ordinal).ToImmutableArray()
+                }
+            }).ToImmutableArray()
+        };
         return sorted with { SourceDigest = Digest(sorted) };
     }
     private static void CheckDuplicates(JsonElement value)
@@ -59,7 +66,8 @@ public static class OutcomePriorityCanonical
         switch (value.ValueKind)
         {
             case JsonValueKind.Object:
-                writer.WriteStartObject(); foreach (var p in value.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal)) { writer.WritePropertyName(p.Name); Write(writer, p.Value); } writer.WriteEndObject(); break;
+                writer.WriteStartObject(); foreach (var p in value.EnumerateObject().OrderBy(p => p.Name, StringComparer.Ordinal)) { writer.WritePropertyName(p.Name); Write(writer, p.Value); }
+                writer.WriteEndObject(); break;
             case JsonValueKind.Array:
                 writer.WriteStartArray(); foreach (var child in value.EnumerateArray()) Write(writer, child); writer.WriteEndArray(); break;
             case JsonValueKind.Number:

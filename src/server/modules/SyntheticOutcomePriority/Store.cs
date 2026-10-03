@@ -33,6 +33,8 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
     {
         Transaction(c, t);
         if (OutcomePriorityPolicy.Authorize(a, scope, action) is { } denied) return denied;
+        // These APIs capture complete registry/planning snapshots, not category-filtered partial views.
+        if (!a.Categories.Contains("SECURITY") || !a.Categories.Contains("OPERATIONS")) return OutcomePriorityIssue.Denied;
         return await OutcomePriorityMigration.VerifyAsync(c, t, scope, ct);
     }
     public async Task<OutcomeRegistryResult> ReadRegistryAsync(NpgsqlConnection c, NpgsqlTransaction t, OutcomeAuthority a, CancellationToken ct = default)
@@ -41,6 +43,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
         await RegistryFence(c, t, ct);
         try { return new(null, await LoadRegistry(c, t, a, ct)); }
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (PostgresException e) when (e.SqlState == PostgresErrorCodes.UniqueViolation) { return new(OutcomePriorityIssue.EventConflict, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
     public async Task<OutcomeApplyResult> ApplyOutcomeAsync(NpgsqlConnection c, NpgsqlTransaction t, OutcomeAuthority a, OutcomeCommand command, CancellationToken ct = default)
@@ -92,7 +95,6 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             if (prior?.Revision == OutcomePriorityContract.MaximumRevision) return new(OutcomePriorityIssue.RevisionOverflow, null);
             var now = await Now(c, t, ct);
             var ev = new OutcomeEvent(command.EventId, command.OutcomeId, command.Version, (entry?.Revision ?? 0) + 1, command.Kind, next.Value, a.ActorId, a.Roles[0], now, command.Reason, command.ExpectedContentDigest, command.Kind == OutcomeKind.Approve ? command.ExpectedReviewEventId : null, null);
-            if (observer is not null) await observer.BeforeWriteAsync("outcome", command.EventId, ct);
             if (command.Kind == OutcomeKind.CreateDraft) await Sql(c, t, "INSERT INTO synthetic_outcome_priority.outcome_versions VALUES(@id,@version,@json,@digest)", ct, ("id", command.OutcomeId), ("version", command.Version), ("json", OutcomePriorityCanonical.Json(command.Content)), ("digest", command.ExpectedContentDigest));
             await AddOutcomeEvent(c, t, ev, ct);
             if (next == OutcomeState.CustomerApproved)
@@ -103,10 +105,12 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             }
             await Sql(c, t, "UPDATE synthetic_outcome_priority.registry_current SET revision=revision+1 WHERE singleton=true", ct);
             var receipt = new OutcomeReceipt("synthetic-outcome-receipt-v1", command.EventId, a.ActorId, command.OutcomeId, command.Version, ev.Revision, now, ev.ContentDigest);
+            if (observer is not null) await observer.BeforeWriteAsync("outcome", command.EventId, ct);
             await SaveReceipt(c, t, command.EventId, a.ActorId, digest, "outcome", receipt, ct);
             return new(null, receipt);
         }
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (PostgresException e) when (e.SqlState == PostgresErrorCodes.UniqueViolation) { return new(OutcomePriorityIssue.EventConflict, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
     public async Task<OutcomeLockResult> LockOutcomesAsync(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, OutcomeAuthority a, ImmutableArray<OutcomeSelection> selections, CancellationToken ct = default)
@@ -139,6 +143,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             return new(null, result);
         }
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (PostgresException e) when (e.SqlState == PostgresErrorCodes.UniqueViolation) { return new(OutcomePriorityIssue.EventConflict, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
     public async Task<OutcomeLockResult> ReadLockedAsync(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, OutcomeAuthority a, CancellationToken ct = default)
@@ -148,6 +153,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
         await RegistryFence(c, t, ct); await RunFence(c, t, runId, ct);
         try { var result = await LoadLock(c, t, runId, a, ct); return new(result is null ? OutcomePriorityIssue.NotFound : null, result); }
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (PostgresException e) when (e.SqlState == PostgresErrorCodes.UniqueViolation) { return new(OutcomePriorityIssue.EventConflict, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
     public async Task<PlanningReadResult> ReadPlanningAsync(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, OutcomeAuthority a, CancellationToken ct = default)
@@ -162,6 +168,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             return new(null, await LoadPlanning(c, t, source.Source, a, ct));
         }
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (PostgresException e) when (e.SqlState == PostgresErrorCodes.UniqueViolation) { return new(OutcomePriorityIssue.EventConflict, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
     public async Task<PlanningApplyResult> ApplyPlanningAsync(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, OutcomeAuthority a, PlanningCommand command, CancellationToken ct = default)
@@ -187,15 +194,16 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             if (!PlanningTransition(entry, command.Kind)) return new(OutcomePriorityIssue.InvalidState, null);
             var now = await Now(c, t, ct);
             var ev = new PlanningEvent(command.EventId, entry.Revision + 1, command.Kind, a.ActorId, now, command.Reason, source.SourceDigest, command.PriorityOverride, command.ReplacementSize, command.Assumptions);
-            if (observer is not null) await observer.BeforeWriteAsync("planning", command.EventId, ct);
             await Sql(c, t, "INSERT INTO synthetic_outcome_priority.planning_sources VALUES(@run,@digest,@json) ON CONFLICT DO NOTHING", ct, ("run", runId), ("digest", source.SourceDigest), ("json", OutcomePriorityCanonical.Json(source)));
             await Sql(c, t, "INSERT INTO synthetic_outcome_priority.planning_events VALUES(@run,@option,@revision,@json,@digest)", ct, ("run", runId), ("option", command.OptionId), ("revision", ev.Revision), ("json", OutcomePriorityCanonical.Json(ev)), ("digest", OutcomePriorityCanonical.Digest(ev)));
             await Sql(c, t, "INSERT INTO synthetic_outcome_priority.planning_current VALUES(@run,@option,@revision) ON CONFLICT(run_id,option_id) DO UPDATE SET revision=excluded.revision", ct, ("run", runId), ("option", command.OptionId), ("revision", ev.Revision));
             var receipt = new PlanningReceipt("synthetic-planning-receipt-v1", command.EventId, runId, command.OptionId, ev.Revision, a.ActorId, now, source.SourceDigest);
+            if (observer is not null) await observer.BeforeWriteAsync("planning", command.EventId, ct);
             await SaveReceipt(c, t, command.EventId, a.ActorId, digest, "planning", receipt, ct);
             return new(null, receipt);
         }
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (PostgresException e) when (e.SqlState == PostgresErrorCodes.UniqueViolation) { return new(OutcomePriorityIssue.EventConflict, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
     public async Task<OutcomeExportProofResult> VerifyLockedForExportInTransactionAsync(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, OutcomeExportAuthority authority, CancellationToken ct = default)
@@ -211,6 +219,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             return result is null ? new(OutcomePriorityIssue.NotFound, null) : new(null, new(runId, result.ContentDigest, result.ContractDigest, result.Outcomes.Length));
         }
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (PostgresException e) when (e.SqlState == PostgresErrorCodes.UniqueViolation) { return new(OutcomePriorityIssue.EventConflict, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
     private bool ExportAllowed(OutcomeExportAuthority? a, string? category = null) => scope == OutcomeScope.Fixed && a is not null && OutcomePriorityPolicy.Id(a.ActorId) && a.Authenticated && a.Active && !a.Revoked && a.AssignmentActive && a.AssignedScope == scope && a.ResourceState == OutcomeResourceState.Mutable && a.TaskExportGrant && a.CustomerExportPolicy && a.Role is OutcomeRole.Consultant or OutcomeRole.Auditor && (a.Role != OutcomeRole.Auditor || a.ScopedAuditorExportGrant) && !a.Categories.IsDefaultOrEmpty && a.Categories.All(OutcomePriorityPolicy.Category) && a.Categories.Distinct(StringComparer.Ordinal).Count() == a.Categories.Length && (category is null || a.Categories.Contains(category));
@@ -257,6 +266,17 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             entries.Add(new(content, events[^1].State, events[^1].Revision, events));
         }
         commands = eventIds.Count;
+        var targets = entries.SelectMany(e => e.History).Where(e => e.State != OutcomeState.Superseded).ToArray();
+        if (targets.Select(e => e.EventId).Distinct().Count() != targets.Length) throw new OutcomeIntegrityException();
+        foreach (var ev in targets)
+        {
+            var receipt = await VerifyReceipt<OutcomeReceipt>(c, t, ev.EventId, "outcome", ct);
+            if (receipt.SchemaVersion != "synthetic-outcome-receipt-v1" || receipt.EventId != ev.EventId || receipt.ActorId != ev.ActorId || receipt.OutcomeId != ev.OutcomeId || receipt.Version != ev.Version || receipt.Revision != ev.Revision || receipt.RecordedAtUtc != ev.RecordedAtUtc || receipt.ContentDigest != ev.ContentDigest) throw new OutcomeIntegrityException();
+        }
+        foreach (var ev in entries.SelectMany(e => e.History).Where(e => e.State == OutcomeState.Superseded))
+            if (!targets.Any(target => target.EventId == ev.EventId && target.State == OutcomeState.CustomerApproved && target.OutcomeId == ev.OutcomeId && target.Version == ev.SuccessorVersion && target.ActorId == ev.ActorId && target.Reason == ev.Reason && target.RecordedAtUtc == ev.RecordedAtUtc)) throw new OutcomeIntegrityException();
+        await using (var count = Query(c, t, "SELECT (SELECT count(*) FROM synthetic_outcome_priority.outcome_current),(SELECT count(*) FROM synthetic_outcome_priority.receipts WHERE receipt_kind='outcome')"))
+        await using (var r = await count.ExecuteReaderAsync(ct)) if (!await r.ReadAsync(ct) || r.GetInt64(0) != contents.Count || r.GetInt64(1) != targets.Length) throw new OutcomeIntegrityException();
         var waters = ImmutableArray.CreateBuilder<OutcomeHighWater>();
         foreach (var group in entries.GroupBy(e => e.Content.OutcomeId))
         {
@@ -270,8 +290,11 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             if (!versions.SequenceEqual(Enumerable.Range(1, versions.Length).Select(i => (long)i))) throw new OutcomeIntegrityException();
         }
         await using var revision = Query(c, t, "SELECT revision FROM synthetic_outcome_priority.registry_current WHERE singleton=true");
-        var rev = Convert.ToInt64(await revision.ExecuteScalarAsync(ct), CultureInfo.InvariantCulture);
+        var scalar = await revision.ExecuteScalarAsync(ct);
+        if (scalar is null) throw new OutcomeIntegrityException();
+        var rev = Convert.ToInt64(scalar, CultureInfo.InvariantCulture);
         if (rev != commands) throw new OutcomeIntegrityException();
+        await using (var count = Query(c, t, "SELECT count(*) FROM synthetic_outcome_priority.outcome_highwater")) if (Convert.ToInt64(await count.ExecuteScalarAsync(ct), CultureInfo.InvariantCulture) != waters.Count) throw new OutcomeIntegrityException();
         var snapshot = new OutcomeRegistrySnapshot(scope, rev, entries.ToImmutable(), waters.ToImmutable(), "");
         return snapshot with { ContentDigest = OutcomePriorityCanonical.Digest(snapshot) };
     }
@@ -327,6 +350,11 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
         return true;
     }
     public static ImmutableArray<ScoringOutcome>? ToScoringOutcomes(LockedOutcomeSet l) => ValidLock(l) ? l.Outcomes.Select(o => new ScoringOutcome(o.Content.OutcomeId, true)).ToImmutableArray() : null;
+    public static ImmutableArray<ScoringUnit>? ApplyOutcomeLinks(LockedOutcomeSet locked, IReadOnlyCollection<ScoringUnit> units, IReadOnlyCollection<CoverageKey> expectedKeys)
+    {
+        if (ValidateApplicability(locked, expectedKeys) is not null || units is null || units.Count != expectedKeys.Count || units.Any(u => u is null || !expectedKeys.Contains(u.Key)) || units.Select(u => u.Key).Distinct().Count() != units.Count) return null;
+        return units.Select(u => u with { OutcomeIds = locked.Outcomes.Where(o => o.Content.UnitLinks.Contains(u.Key)).Select(o => o.Content.OutcomeId).Order(StringComparer.Ordinal).ToImmutableArray() }).ToImmutableArray();
+    }
     public static OutcomePriorityIssue? ValidateApplicability(LockedOutcomeSet l, IReadOnlyCollection<CoverageKey> expectedKeys) => !ValidLock(l) || expectedKeys is null || expectedKeys.Distinct().Count() != expectedKeys.Count || l.Outcomes.SelectMany(o => o.Content.UnitLinks).Any(k => !expectedKeys.Contains(k)) ? OutcomePriorityIssue.IntegrityMismatch : null;
     private static bool SameSelections(LockedOutcomeSet l, ImmutableArray<OutcomeSelection> selections) => l.Outcomes.Length == selections.Length && l.Outcomes.All(o => selections.Any(s => s.OutcomeId == o.Content.OutcomeId && s.Version == o.Content.Version && s.ContentDigest == o.Content.ContentDigest && s.Revision == o.Approval.Revision && s.ApprovalEventId == o.Approval.EventId));
     private async Task<PlanningSnapshot> LoadPlanning(NpgsqlConnection c, NpgsqlTransaction t, Phase1BPlanningSource source, OutcomeAuthority a, CancellationToken ct)
@@ -352,6 +380,12 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             if (!OutcomePriorityPolicy.Command(cmd) || !PlanningTransition(projected, ev.Kind)) throw new OutcomeIntegrityException();
             list.Add(ev);
         }
+        foreach (var pair in histories)
+            foreach (var ev in pair.Value)
+            {
+                var receipt = await VerifyReceipt<PlanningReceipt>(c, t, ev.EventId, "planning", ct);
+                if (receipt.SchemaVersion != "synthetic-planning-receipt-v1" || receipt.EventId != ev.EventId || receipt.RunId != source.RunId || receipt.OptionId != pair.Key || receipt.Revision != ev.Revision || receipt.ActorId != ev.ActorId || receipt.RecordedAtUtc != ev.RecordedAtUtc || receipt.SourceDigest != ev.SourceDigest) throw new OutcomeIntegrityException();
+            }
         var currents = new Dictionary<string, long>(StringComparer.Ordinal);
         await using (var q = Query(c, t, "SELECT option_id,revision FROM synthetic_outcome_priority.planning_current WHERE run_id=@run", ("run", source.RunId)))
         await using (var r = await q.ExecuteReaderAsync(ct)) while (await r.ReadAsync(ct)) currents.Add(r.GetString(0), r.GetInt64(1));
@@ -382,6 +416,16 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
     {
         await Sql(c, t, "INSERT INTO synthetic_outcome_priority.outcome_events VALUES(@id,@version,@revision,@json,@digest)", ct, ("id", ev.OutcomeId), ("version", ev.Version), ("revision", ev.Revision), ("json", OutcomePriorityCanonical.Json(ev)), ("digest", OutcomePriorityCanonical.Digest(ev)));
         await Sql(c, t, "INSERT INTO synthetic_outcome_priority.outcome_current VALUES(@id,@version,@revision,@state) ON CONFLICT(outcome_id,version) DO UPDATE SET revision=excluded.revision,state=excluded.state", ct, ("id", ev.OutcomeId), ("version", ev.Version), ("revision", ev.Revision), ("state", ev.State.ToString()));
+    }
+    private static async Task<T> VerifyReceipt<T>(NpgsqlConnection c, NpgsqlTransaction t, Guid id, string kind, CancellationToken ct) where T : class
+    {
+        await using var q = Query(c, t, "SELECT actor_id,command_digest,receipt_kind,receipt_json,receipt_digest FROM synthetic_outcome_priority.receipts WHERE event_id=@event", ("event", id));
+        await using var r = await q.ExecuteReaderAsync(ct);
+        if (!await r.ReadAsync(ct) || !OutcomePriorityPolicy.Id(r.GetString(0)) || !OutcomePriorityPolicy.ValidDigest(r.GetString(1)) || r.GetString(2) != kind || OutcomePriorityCanonical.Hash(r.GetString(3)) != r.GetString(4)) throw new OutcomeIntegrityException();
+        var result = OutcomePriorityCanonical.Parse<T>(r.GetString(3));
+        var recordedActor = result is OutcomeReceipt outcome ? outcome.ActorId : result is PlanningReceipt planning ? planning.ActorId : null;
+        if (recordedActor != r.GetString(0)) throw new OutcomeIntegrityException();
+        return result;
     }
     private static async Task<(OutcomePriorityIssue? Issue, T? Receipt)> Receipt<T>(NpgsqlConnection c, NpgsqlTransaction t, Guid id, string actor, string semantic, string kind, CancellationToken ct) where T : class
     {

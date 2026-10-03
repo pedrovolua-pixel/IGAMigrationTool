@@ -47,7 +47,7 @@ public static class OutcomePriorityPolicy
 }
 public static class PriorityProjector
 {
-    public static bool Valid(PriorityFactorVector f) => f is not null && Enum.IsDefined(f.Severity) && (f.Exposure is null || Enum.IsDefined(f.Exposure.Value)) && !f.AffectedObjectIds.IsDefault && f.AffectedObjectIds.Length <= 100_000 && f.AffectedObjectIds.All(OutcomePriorityPolicy.Id) && f.AffectedObjectIds.Distinct(StringComparer.Ordinal).Count() == f.AffectedObjectIds.Length &&
+    public static bool Valid(PriorityFactorVector f) => f is not null && Enum.IsDefined(f.Severity) && (f.Exposure is null || Enum.IsDefined(f.Exposure.Value)) && (f.AffectedObjectIds.IsDefault || f.AffectedObjectIds.Length <= 100_000 && f.AffectedObjectIds.All(OutcomePriorityPolicy.Id) && f.AffectedObjectIds.Distinct(StringComparer.Ordinal).Count() == f.AffectedObjectIds.Length) &&
         (f.Dependency is null || Enum.IsDefined(f.Dependency.Value)) && (f.OriginalEffort is null || Enum.IsDefined(f.OriginalEffort.Value)) &&
         (f.Objectives.IsDefault || f.Objectives.Length <= 64 && f.Objectives.All(o => o is not null && OutcomePriorityPolicy.Id(o.ObjectiveId) && o.Weight is >= 0 and <= 1) && f.Objectives.Select(o => o.ObjectiveId).Distinct(StringComparer.Ordinal).Count() == f.Objectives.Length) &&
         !f.MatchedObjectiveIds.IsDefault && f.MatchedObjectiveIds.Length <= 64 && f.MatchedObjectiveIds.All(OutcomePriorityPolicy.Id) && f.MatchedObjectiveIds.Distinct(StringComparer.Ordinal).Count() == f.MatchedObjectiveIds.Length &&
@@ -56,6 +56,7 @@ public static class PriorityProjector
     {
         if (!Valid(factors)) return null;
         var missing = ImmutableArray.CreateBuilder<string>();
+        if (factors.AffectedObjectIds.IsDefault) missing.Add("affectedObjects");
         if (factors.Exposure is null) missing.Add("exposure"); if (factors.Dependency is null) missing.Add("dependency"); if (factors.OriginalEffort is null) missing.Add("effort"); if (factors.Objectives.IsDefault) missing.Add("objectives");
         if (missing.Count != 0) return new("synthetic-priority-policy-v1", null, null, null, missing.ToImmutable(), []);
         decimal severity = factors.Severity switch { ScoringSeverity.Critical => 1m, ScoringSeverity.High => .8m, ScoringSeverity.Medium => .45m, ScoringSeverity.Low => .2m, _ => 0m };
@@ -70,6 +71,11 @@ public static class PriorityProjector
     public static PriorityBand Band(decimal raw) => raw >= 80 ? PriorityBand.Immediate : raw >= 60 ? PriorityBand.High : raw >= 40 ? PriorityBand.Medium : PriorityBand.Low;
     public static EffortEstimate Estimate(EffortSize size) => size switch
     {
-        EffortSize.XS => new("synthetic-effort-policy-v1", size, 1, 2), EffortSize.S => new("synthetic-effort-policy-v1", size, 2, 8), EffortSize.M => new("synthetic-effort-policy-v1", size, 8, 24), EffortSize.L => new("synthetic-effort-policy-v1", size, 24, 80), EffortSize.XL => new("synthetic-effort-policy-v1", size, 80, 160), _ => throw new ArgumentException("Invalid fictional effort size.")
+        EffortSize.XS => new("synthetic-effort-policy-v1", size, 1, 2),
+        EffortSize.S => new("synthetic-effort-policy-v1", size, 2, 8),
+        EffortSize.M => new("synthetic-effort-policy-v1", size, 8, 24),
+        EffortSize.L => new("synthetic-effort-policy-v1", size, 24, 80),
+        EffortSize.XL => new("synthetic-effort-policy-v1", size, 80, 160),
+        _ => throw new ArgumentException("Invalid fictional effort size.")
     };
 }

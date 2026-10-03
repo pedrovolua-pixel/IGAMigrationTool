@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  Restored /private/tmp/iga-phase1b-closure-contract/src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj (in 57 ms).
+  Restored /private/tmp/iga-phase1b-closure-contract/src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj (in 57 ms).
+  Restored /private/tmp/iga-phase1b-closure-contract/src/server/modules/AssessmentScoring/AssessmentScoring.csproj (in 60 ms).
+  Restored /private/tmp/iga-phase1b-closure-contract/src/server/modules/SyntheticOutcomePriority/SyntheticOutcomePriority.csproj (in 85 ms).
+  Restored /private/tmp/iga-phase1b-closure-contract/tests/unit/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj (in 85 ms).
