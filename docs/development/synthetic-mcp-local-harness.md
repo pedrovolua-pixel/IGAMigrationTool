@@ -37,3 +37,7 @@ Local cursor/rate/concurrency registries are bounded and ephemeral. Each new har
 Rollback removes the additive SyntheticMcp module, its three console projects and portable CI steps. There is no migration or persisted business state and no normal-host capability flag to toggle. Keep original oracle/golden bytes and evidence after cleanup.
 
 The [follow-on checklist](../../specs/003-health-assessment/phase1d-integration-contract-checklist.md) asks the reporting/technical/security owners for the actual immutable publication reader and external client/identity contract. Actual production policy/field filtering, distributed cursor/limit/audit/retention and deployed cross-customer isolation remain unverified. Full Milestone11/Phase1D/UAT/G1–G9 stay open.
+
+## Cycle03 minimization regression
+
+The ordinary `dotnet run --project tests/integration/SyntheticMcp.Tests -c Release --no-build` command now also runs the independent field/category/identity cross-product. [Cycle03 verification](../../specs/003-health-assessment/phase1d-minimization-verification-cycle03.md) and the [pinned oracle](../../tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md) describe10,060 requests/92,904 assertions separately from the original2849 checks. The guard uses the unchanged fictional fixture only, verifies exact read IDs/canonical responses/audit schema names, and exits nonzero on failure. It adds no host, option, package or runtime capability. Actual integration and all prior operational limits remain open.
