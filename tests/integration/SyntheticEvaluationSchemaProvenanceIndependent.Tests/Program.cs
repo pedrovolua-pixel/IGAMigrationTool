@@ -1,0 +1,460 @@
+using System.Collections;
+using System.Collections.Immutable;
+using System.Data;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using AssessmentCoverage;
+using AssessmentRuns;
+using DeterministicAnalysis;
+using Npgsql;
+using SyntheticAiExecution;
+using SyntheticEvaluationPopulationIntegration;
+using SyntheticEvaluationSchemaProvenanceIntegration;
+using SyntheticEvaluation;
+using SyntheticOutcomePriority;
+using SyntheticSourceFence;
+
+internal static partial class Program
+{
+    private static string Database = "";
+    private static SyntheticDurableRunEngine Runs = null!;
+    private static SyntheticAiExecutionStore Ai = null!;
+    private static SyntheticOutcomePriorityStore Outcomes = null!;
+    private static Phase1BAcceptedSchemaSourceAdapter Adapter = null!;
+    private static readonly AiAuthority ConsultantAi = new("synthetic-consultant", AiScope.Fixed, [AiRole.Consultant], [AiAction.Read], ["SECURITY", "OPERATIONS"]);
+    private static readonly AiAuthority Worker = new("synthetic-worker", AiScope.Fixed, [AiRole.Worker], [AiAction.Read, AiAction.Dispatch, AiAction.Reconcile], ["SECURITY", "OPERATIONS"]);
+    private static readonly OutcomeAuthority ConsultantOutcome = new("synthetic-consultant", true, true, false, true, OutcomeScope.Fixed, [OutcomeRole.Consultant], ["SECURITY", "OPERATIONS"], [OutcomeAction.ReadOutcome, OutcomeAction.ManageOutcome], OutcomeResourceState.Mutable);
+    private static int Checks;
+    internal static void Check(bool value, string label)
+    {
+        if (!value) throw new InvalidOperationException(label);
+        Checks++;
+        Console.WriteLine("PASS " + label);
+    }
+    private static async Task<int> Main()
+    {
+        try { await Verify(); return 0; }
+        catch (Exception error) { Console.Error.WriteLine(error.GetType().Name + ": " + error.Message); return 1; }
+    }
+    private static async Task Verify()
+    {
+        Database = Environment.GetEnvironmentVariable("IGA_ACCEPTED_SCHEMA_INDEPENDENT_DATABASE") ?? "Host=127.0.0.1;Port=55433;Username=iga_synthetic;Database=" + Prefix + Guid.NewGuid().ToString("N")[..20];
+        PortableGoldens();
+        await GuardCases();
+        await CreateFreshDatabase();
+        Runs = new(Database, DemoFixtureCatalog.Scope, new(TimeSpan.FromMinutes(2), 3));
+        Ai = new(Database);
+        Outcomes = new(OutcomeScope.Fixed);
+        Adapter = new(Runs, Ai, Outcomes);
+        await Uninitialized();
+        await Runs.InitializeAsync();
+        await Ai.InitializeAsync();
+        await using (var c = await Open()) await Outcomes.InitializeAsync(c);
+
+        var normal = await Finished(2, fixedNormal: true);
+        await ExactSource(normal);
+        await AuthorityMatrix(normal);
+        await DirectOwnerMatrix(normal);
+        await InputMatrix(normal);
+        await DirectInputMatrix(normal);
+        await ClosedSources();
+        await NoAccepted();
+        await GapSource(0);
+        await GapSource(1);
+        await RetrySource();
+        await Tamper(normal);
+        await AcceptedTamper(normal);
+        await Drift(normal);
+        await Concurrency(normal);
+        Console.WriteLine($"PASS {Checks} independent assertions; actual owning PostgreSQL; no existing database reset.");
+    }
+    private const string Prefix = "iga_synthetic_phase1b_schema07_independent_";
+    private static int CatalogLookups, DatabaseCreates;
+    private static async Task CreateFreshDatabase(string? supplied = null)
+    {
+        var b = new NpgsqlConnectionStringBuilder(supplied ?? Database);
+        if (b.Host is not ("localhost" or "127.0.0.1") || b.Port != 55433 || b.Username != "iga_synthetic" ||
+            b.Database is null || !b.Database.StartsWith(Prefix, StringComparison.Ordinal) || b.Database.Length > 63 ||
+            b.Database.Any(ch => !char.IsAsciiLetterOrDigit(ch) && ch != '_')) throw new InvalidOperationException("Dedicated independent synthetic database required.");
+        var name = b.Database;
+        CatalogLookups++;
+        b.Database = "postgres";
+        await using var c = new NpgsqlConnection(b.ConnectionString);
+        await c.OpenAsync();
+        await using var exists = new NpgsqlCommand("SELECT EXISTS(SELECT 1 FROM pg_database WHERE datname=@name)", c);
+        exists.Parameters.AddWithValue("name", name);
+        if ((bool)(await exists.ExecuteScalarAsync())!) throw new InvalidOperationException("Independent database must be fresh; existing data preserved.");
+        await using var create = new NpgsqlCommand("CREATE DATABASE \"" + name + "\"", c);
+        await create.ExecuteNonQueryAsync();
+        DatabaseCreates++;
+    }
+    private static async Task<NpgsqlConnection> Open(string? connection = null)
+    {
+        var c = new NpgsqlConnection(connection ?? Database);
+        await c.OpenAsync();
+        return c;
+    }
+    private static async Task<T> Tx<T>(Guid run, Func<NpgsqlConnection, NpgsqlTransaction, Task<T>> action)
+    {
+        await using var c = await Open();
+        await using var t = await c.BeginTransactionAsync();
+        await SyntheticOutcomePriorityStore.AcquireRegistryFenceAsync(c, t, OutcomeScope.Fixed);
+        if (run != Guid.Empty) await SyntheticRunSourceFence.AcquireAsync(c, t, "synthetic-customer", "synthetic-project", "synthetic-environment", run);
+        var value = await action(c, t);
+        await t.CommitAsync();
+        return value;
+    }
+    private static async Task<SyntheticRunSnapshot> Started(Guid? fixedId = null)
+    {
+        var id = fixedId ?? Guid.NewGuid();
+        return await Tx(id, async (c, t) =>
+        {
+            var locked = await Outcomes.LockOutcomesAsync(c, t, id, ConsultantOutcome, []);
+            Check(locked.Issue is null, "owning empty desired-outcome lock saved");
+            var request = DemoPhase1BCatalog.CreateStartRequest(id.ToString("D"), DemoPhase1BAiFixture.Locks(id, locked.Lock!.ContentDigest), AiExecutionPolicy.PolicyVersion, AiExecutionPolicy.PromptVersion, AiExecutionPolicy.ProviderVersion);
+            var started = await Runs.StartInTransactionAsync(c, t, request, id);
+            Check(started.Succeeded, "actual owning Phase1B start");
+            var ai = await Ai.EnsureRunAsync(c, t, Worker, DemoPhase1BAiFixture.RunLock(started.Snapshot!), DemoPhase1BAiFixture.Works(id));
+            Check(ai.Succeeded, "actual owning AI frozen work saved");
+            return started.Snapshot!;
+        });
+    }
+    private sealed record FixtureExpected(string? AcceptedCanonical, string OutputDigest, string ReceiptId, int Proposals, int Attempts);
+    private static readonly Dictionary<Guid, FixtureExpected> Fixtures = [];
+    private static async Task<SyntheticRunSnapshot> Finished(int proposals, bool retry = false, bool fixedNormal = false)
+    {
+        var started = await Started(fixedNormal ? Guid.Parse("51cc48e7-65d7-4052-a247-dde748012f38") : null);
+        var lease = await Runs.AcquireLeaseAsync(started.Scope, started.RunId, "synthetic-independent-worker");
+        Check(lease.Succeeded, "owning coverage lease");
+        var run = lease.Snapshot!; var generation = run.Lease!.Generation;
+        var deterministic = DemoPhase1BCatalog.DeterministicPlan.ExpectedResults.ToArray();
+        Check(deterministic.Length == 10, "literal10 deterministic excluded keys");
+        var begin = await Runs.BeginWorkAsync(run.Scope, run.RunId, generation, run.Revision, deterministic.Select(x => x.Key).ToArray());
+        Check(begin.Succeeded, "owning deterministic work begun");
+        var checkpoint = await Runs.CheckpointAsync(run.Scope, run.RunId, generation, begin.Snapshot!.Revision, deterministic);
+        Check(checkpoint.Succeeded, "owning deterministic checkpoint");
+        run = checkpoint.Snapshot!;
+        var work = DemoPhase1BAiFixture.Works(run.RunId).Single();
+        long revision = 1;
+        AiProviderReceipt finalReceipt = null!;
+        AiCompletion finalCompletion = null!;
+        var attempts = retry ? 3 : 1;
+        for (var ordinal = 1; ordinal <= attempts; ordinal++)
+        {
+            var id = fixedNormal ? Guid.Parse("b50aa02f-6e30-4f64-af00-b0ba1042a7fa") : Guid.NewGuid();
+            var reserved = await Tx(run.RunId, (c, t) => Ai.ReserveAsync(c, t, Worker, run.RunId, work.WorkId, id, revision));
+            Check(reserved.Succeeded, "actual owning attempt reservation");
+            var dispatched = await Tx(run.RunId, (c, t) => Ai.MarkDispatchedAsync(c, t, Worker, run.RunId, work.WorkId, reserved.Value!.Key, reserved.Value.WorkRevision));
+            Check(dispatched.Succeeded, "actual owning dispatch marker");
+            // Existing pure fake provider supplies test receipts outside a transaction, never during tested reads.
+            var receipt = new FakeAiProvider().Dispatch(new(dispatched.Value!.Key, retry ? AiScenario.RetryTwice : work.Scenario, work.PacketInputJson, work.Units, false));
+            if (ordinal == attempts && proposals != 2)
+            {
+                var node = JsonNode.Parse(receipt.OutputJson!)!;
+                if (proposals < 0) node["schemaVersion"] = "synthetic-invalid-output";
+                else { var array = node["proposals"]!.AsArray(); while (array.Count > proposals) array.RemoveAt(array.Count - 1); }
+                var output = node.ToJsonString();
+                // Valid zero-billed rejection fixture keeps shared period budget within its unchanged hard ceiling.
+                receipt = proposals < 0 ? receipt with
+                {
+                    OutputJson = output,
+                    OutputDigest = Hash(output),
+                    InputUse = 0,
+                    OutputUse = 0,
+                    ReceiptId = FakeAiProvider.ReceiptIdentity(receipt.Attempt, receipt.Outcome, 0, 0)
+                } : receipt with { OutputJson = output, OutputDigest = Hash(output) };
+            }
+            var completed = await Tx(run.RunId, (c, t) => Ai.CompleteAsync(c, t, Worker, run.RunId, work.WorkId, dispatched.Value.Key, receipt));
+            Check(completed.Succeeded, "actual owning receipt completed");
+            if (ordinal < attempts)
+            {
+                Check(completed.Value!.Outcomes.Length == 0, "retry failure has no accepted or terminal units");
+                var read = await Tx(run.RunId, (c, t) => Ai.ReadInTransactionAsync(c, t, Worker, run.RunId));
+                revision = read.Value!.Works.Single().Revision;
+            }
+            else { finalReceipt = receipt; finalCompletion = completed.Value!; }
+        }
+        string? accepted = null;
+        if (proposals >= 0)
+        {
+            // Independent normalized fixture expectation: explicit snapshot schema/status, same originating fields;
+            // fixed fake proposal ID/citation vectors already ordinal, independent of any new producer output.
+            var node = JsonNode.Parse(finalReceipt.OutputJson!)!;
+            node["schemaVersion"] = "synthetic-ai-proposal-snapshot-v1"; node["status"] = "Proposed";
+            accepted = Canonical(JsonSerializer.SerializeToElement(node));
+        }
+        Fixtures.Add(run.RunId, new(accepted, finalReceipt.OutputDigest!, finalReceipt.ReceiptId, Math.Max(0, proposals), attempts));
+        Check(finalCompletion.Outcomes.Length == 2, "actual final2-unit terminal partition");
+        begin = await Runs.BeginWorkAsync(run.Scope, run.RunId, generation, run.Revision, DemoPhase1BCatalog.AiKeys.ToArray());
+        Check(begin.Succeeded, "owning AI coverage work begun");
+        var saved = await Runs.CheckpointAsync(run.Scope, run.RunId, generation, begin.Snapshot!.Revision, finalCompletion.Outcomes.Select(SyntheticPhase1BAnalysisAdapter.Coverage).ToArray());
+        Check(saved.Succeeded, "actual saved AI terminal coverage");
+        var final = await Runs.CompleteCoverageAsync(run.Scope, run.RunId, generation, saved.Snapshot!.Revision);
+        Check(final.Succeeded && final.Snapshot!.State == SyntheticRunState.Scoring, "actual complete12-key Scoring source");
+        return final.Snapshot!;
+    }
+    private static async Task<Phase1BAcceptedSchemaResult> Capture(Guid id, AiAuthority? ai = null, OutcomeAuthority? outcome = null)
+    {
+        await using var c = await Open();
+        await using var t = await c.BeginTransactionAsync();
+        var captured = await Adapter.CaptureAsync(c, t, id, ai ?? ConsultantAi, outcome ?? ConsultantOutcome);
+        Check(t.Connection == c && c.State == ConnectionState.Open, "caller transaction remains active");
+        await t.RollbackAsync();
+        return captured;
+    }
+    private static void Denied(Phase1BAcceptedSchemaResult result, Phase1BAcceptedSchemaIssue issue, string label) => Check(result.Issue == issue && result.Readiness is null && !result.HasReadiness, label);
+    private static async Task ExactSource(SyntheticRunSnapshot run)
+    {
+        var before = await Rows();
+        await using (var c = await Open())
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            var result = await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome);
+            Check(result.HasReadiness, "successful actual schema readiness");
+            await VerifyReadiness(result.Readiness!, run, c, t);
+            foreach (var value in new object[] { result.Readiness!.VersionBindings, result.Readiness.MissingVersionKinds, result.Readiness.VersionBindings[0].OriginPaths })
+            { var list = (IList)value; Check(list.IsReadOnly, "new collection readonly"); try { list.Clear(); throw new InvalidOperationException("mutable"); } catch (NotSupportedException) { Check(true, "new collection mutation refused"); } }
+            Check(result.Readiness.GetType().GetProperties().All(p => p.SetMethod is null), "readiness public properties get-only");
+            await t.CommitAsync();
+        }
+        Check(before == await Rows(), "successful public capture caller COMMIT leaves entire owning-table footprint unchanged");
+        Check(!before.Contains("synthetic_review.", StringComparison.Ordinal), "no review or evaluation schema initialized");
+    }
+    private static async Task AuthorityMatrix(SyntheticRunSnapshot run)
+    {
+        var before = await Rows();
+        AiAuthority[] deniedAi = [ConsultantAi with { Authenticated = false }, ConsultantAi with { Active = false }, ConsultantAi with { AssignmentActive = false }, ConsultantAi with { Revoked = true }, ConsultantAi with { AiPolicyAllowed = false }, ConsultantAi with { ResourceState = AiResourceState.Published }, ConsultantAi with { ResourceState = AiResourceState.Deleted }, ConsultantAi with { Categories = ["SECURITY"] }, ConsultantAi with { Actions = [] }, ConsultantAi with { Scope = AiScope.Fixed with { EnvironmentId = "synthetic-other" } }, ConsultantAi with { Roles = [AiRole.Auditor] }, ConsultantAi with { Roles = [AiRole.Reviewer] }, ConsultantAi with { Roles = [AiRole.Worker] }, ConsultantAi with { ActorId = "synthetic-other" }, ConsultantAi with { Roles = [AiRole.Consultant, AiRole.Worker] }, ConsultantAi with { Roles = default }, ConsultantAi with { Roles = [(AiRole)999] }];
+        foreach (var ai in deniedAi) Denied(await Capture(run.RunId, ai), Phase1BAcceptedSchemaIssue.Denied, "exact AI-authority denial with null capture");
+        OutcomeAuthority[] deniedOutcome = [ConsultantOutcome with { Authenticated = false }, ConsultantOutcome with { Active = false }, ConsultantOutcome with { AssignmentActive = false }, ConsultantOutcome with { Revoked = true }, ConsultantOutcome with { ResourceState = OutcomeResourceState.Expired }, ConsultantOutcome with { Categories = ["OPERATIONS"] }, ConsultantOutcome with { Actions = [] }, ConsultantOutcome with { AssignedScope = OutcomeScope.Fixed with { ProjectId = "synthetic-other" } }, ConsultantOutcome with { Roles = [OutcomeRole.Auditor] }, ConsultantOutcome with { Roles = [OutcomeRole.QualifiedReviewer] }, ConsultantOutcome with { Roles = [OutcomeRole.CustomerOutcomeApprover] }, ConsultantOutcome with { ActorId = "synthetic-other" }, ConsultantOutcome with { Roles = [OutcomeRole.Consultant, OutcomeRole.CustomerOutcomeApprover] }, ConsultantOutcome with { Roles = default }, ConsultantOutcome with { Roles = [(OutcomeRole)999] }];
+        foreach (var outcome in deniedOutcome) Denied(await Capture(run.RunId, outcome: outcome), Phase1BAcceptedSchemaIssue.Denied, "exact outcome-authority denial with null capture");
+        Check(before == await Rows(), "denied authority never writes or partial payload");
+    }
+    private static async Task InputMatrix(SyntheticRunSnapshot run)
+    {
+        await using var c = await Open();
+        await using var other = await Open();
+        await using var t = await c.BeginTransactionAsync();
+        Denied(await Adapter.CaptureAsync(c, t, Guid.Empty, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "empty runUUID closes");
+        Denied(await Adapter.CaptureAsync(other, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "foreign transaction binding closes");
+        Denied(await Adapter.CaptureAsync(c, t, run.RunId, null!, ConsultantOutcome), Phase1BAcceptedSchemaIssue.Denied, "null AIauthority closes");
+        Denied(await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, null!), Phase1BAcceptedSchemaIssue.Denied, "null outcomeauthority closes");
+        var foreignConfigured = new NpgsqlConnectionStringBuilder(Database) { Database = Prefix + "uncreated" };
+        var foreignEngine = new SyntheticDurableRunEngine(foreignConfigured.ConnectionString, DemoFixtureCatalog.Scope, new(TimeSpan.FromMinutes(2), 3));
+        var foreignAdapter = new Phase1BAcceptedSchemaSourceAdapter(foreignEngine, Ai, Outcomes);
+        Denied(await foreignAdapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "configured owning connection mismatch closes without opening another database");
+        await using var closed = new NpgsqlConnection(Database);
+        Denied(await Adapter.CaptureAsync(closed, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "closed connection closes");
+        await t.RollbackAsync();
+        Denied(await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "completed transaction closes");
+        await t.DisposeAsync();
+        Denied(await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "disposed transaction closes");
+        var wrong = new NpgsqlConnectionStringBuilder(Database) { Database = "postgres" };
+        await using var wrongConnection = await Open(wrong.ConnectionString);
+        await using var wrongTransaction = await wrongConnection.BeginTransactionAsync();
+        Denied(await Adapter.CaptureAsync(wrongConnection, wrongTransaction, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "other namespace guard closes");
+        try { _ = new Phase1BAcceptedSchemaSourceAdapter(null!, Ai, Outcomes); throw new InvalidOperationException("null owner accepted"); }
+        catch (ArgumentNullException) { Check(true, "null owning dependency rejected"); }
+    }
+    private static async Task ClosedSources()
+    {
+        Denied(await Capture(Guid.NewGuid()), Phase1BAcceptedSchemaIssue.NotFound, "absent saved run closes");
+        var planned = await Started();
+        OwnerDenied(await OwnerRead(planned.RunId, await SourceDigest(planned.RunId)), AiIssue.InvalidState, "owning pending work is not terminal proof");
+        Denied(await Capture(planned.RunId), Phase1BAcceptedSchemaIssue.SourceUnavailable, "Planned neverpartial source");
+        var lease = await Runs.AcquireLeaseAsync(planned.Scope, planned.RunId, "synthetic-independent-worker");
+        Denied(await Capture(planned.RunId), Phase1BAcceptedSchemaIssue.SourceUnavailable, "Running neverpartial source");
+        var cancelled = await Runs.RequestCancelAsync(planned.Scope, planned.RunId, lease.Snapshot!.Revision);
+        Check(cancelled.Succeeded, "actual source cancellation requested");
+        var final = await Runs.FinalizeCancellationAsync(planned.Scope, planned.RunId, cancelled.Snapshot!.Revision, lease.Snapshot.Lease!.Generation);
+        Check(final.Succeeded, "actual source cancellation finalized");
+        Denied(await Capture(planned.RunId), Phase1BAcceptedSchemaIssue.SourceUnavailable, "Cancelled neverpartial source");
+        var legacyRequest = DemoFixtureCatalog.CreateStartRequest(DemoFixtureCatalog.Baselines[0].Id, DemoFixtureCatalog.Profiles[0].Id, Guid.NewGuid().ToString("D"));
+        var legacy = await Runs.StartAsync(legacyRequest);
+        Check(legacy.Succeeded, "actual historical profile saved");
+        Denied(await Capture(legacy.Snapshot!.RunId), Phase1BAcceptedSchemaIssue.SourceUnavailable, "historical profile not Phase1B no fallback");
+    }
+    private static async Task GapSource(int proposals)
+    {
+        var run = await Finished(proposals);
+        var before = await Rows();
+        await using var c = await Open(); await using var t = await c.BeginTransactionAsync();
+        var result = await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome);
+        Check(result.HasReadiness, "actual accepted empty/mixed schema source");
+        await VerifyReadiness(result.Readiness!, run, c, t);
+        using var population = JsonDocument.Parse(result.Readiness!.PopulationCanonicalJson);
+        Check(population.RootElement.GetProperty("members").GetArrayLength() == proposals && population.RootElement.GetProperty("gaps").GetArrayLength() == 2 - proposals, "exact2/1/0 members and distinct gaps");
+        foreach (var gap in population.RootElement.GetProperty("gaps").EnumerateArray())
+            Check(gap.GetProperty("state").GetString() == "NotAssessed" && gap.GetProperty("reasonCode").GetString() == "AI_NO_VALIDATED_CONCLUSION" && gap.GetProperty("stage").GetString() == "AI", "original terminal gap kept separate");
+        await t.CommitAsync();
+        Check(before == await Rows(), "accepted empty/mixed caller COMMIT nonmutation");
+    }
+    private static async Task Tamper(SyntheticRunSnapshot run)
+    {
+        foreach (var (table, sql, issue) in new[]
+        {
+            ("synthetic_ai_execution.current_state", "UPDATE synthetic_ai_execution.current_state SET digest=repeat('0',64) WHERE run_id=@run", Phase1BAcceptedSchemaIssue.IntegrityMismatch),
+            ("synthetic_ai_execution.event_proof", "UPDATE synthetic_ai_execution.event_proof SET digest=repeat('0',64) WHERE event_id IN (SELECT event_id FROM synthetic_ai_execution.events WHERE run_id=@run)", Phase1BAcceptedSchemaIssue.IntegrityMismatch),
+            ("synthetic_outcome_priority.run_locks", "UPDATE synthetic_outcome_priority.run_locks SET lock_digest=repeat('0',64) WHERE run_id=@run", Phase1BAcceptedSchemaIssue.IntegrityMismatch),
+            ("synthetic_assessment.runs", "UPDATE synthetic_assessment.runs SET input_digest=repeat('0',64) WHERE run_id=@run", Phase1BAcceptedSchemaIssue.IntegrityMismatch)
+        })
+        {
+            var before = await Rows();
+            await using var c = await Open();
+            await using var t = await c.BeginTransactionAsync();
+            await using (var q = new NpgsqlCommand("ALTER TABLE " + table + " DISABLE TRIGGER USER; " + sql + "; ALTER TABLE " + table + " ENABLE TRIGGER USER", c, t))
+            {
+                q.Parameters.AddWithValue("run", run.RunId);
+                await q.ExecuteNonQueryAsync();
+            }
+            Denied(await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome), issue, "owning source tamper denied " + table);
+            await t.RollbackAsync();
+            Check(before == await Rows(), "tamper transaction rollback preserves original bytes");
+        }
+    }
+    private static async Task Drift(SyntheticRunSnapshot run)
+    {
+        var before = await Rows();
+        await using var c = await Open();
+        await using var t = await c.BeginTransactionAsync();
+        await using (var q = new NpgsqlCommand("ALTER TABLE synthetic_ai_execution.current_state ADD COLUMN independent_drift text", c, t)) await q.ExecuteNonQueryAsync();
+        Denied(await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.MigrationDrift, "physical source schema drift closes");
+        await t.RollbackAsync();
+        Check(before == await Rows(), "schema drift rolled back exact original rows");
+    }
+    private static async Task Concurrency(SyntheticRunSnapshot normal)
+    {
+        await using (var c = await Open())
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            Check((await Adapter.CaptureAsync(c, t, normal.RunId, ConsultantAi, ConsultantOutcome)).Readiness is not null, "successful capture holds registry/runfences");
+            var writer = RegistryWriter();
+            var runWriterDatabase = new NpgsqlConnectionStringBuilder(Database) { ApplicationName = "synthetic-schema07-successful-run-writer" };
+            var runWriterEngine = new SyntheticDurableRunEngine(runWriterDatabase.ConnectionString, DemoFixtureCatalog.Scope, new(TimeSpan.FromMinutes(2), 3));
+            var runWriter = runWriterEngine.RequestCancelAsync(normal.Scope, normal.RunId, normal.Revision);
+            await WaitForAdvisory("synthetic-independent-registry-writer");
+            Check(!writer.IsCompleted, "actual registry owner writer blocks while successful capture lives");
+            await WaitForAdvisory("synthetic-schema07-successful-run-writer");
+            Check(!runWriter.IsCompleted, "actual run owner writer blocks while successful Scoring population capture lives");
+            await t.RollbackAsync();
+            Check((await writer).Issue is null, "registry writer proceeds commits after caller rollback");
+            Check((await runWriter).Issue == SyntheticRunIssue.InvalidState, "successful-capture run writer resumes with native Scoring cancellation denial");
+        }
+        var planned = await Started();
+        await using (var c = await Open())
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            Denied(await Adapter.CaptureAsync(c, t, planned.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.SourceUnavailable, "Planned capture denied but caller owns heldfences");
+            var writerDatabase = new NpgsqlConnectionStringBuilder(Database) { ApplicationName = "synthetic-independent-run-writer" };
+            var engine = new SyntheticDurableRunEngine(writerDatabase.ConnectionString, DemoFixtureCatalog.Scope, new(TimeSpan.FromMinutes(2), 3));
+            var writer = engine.RequestCancelAsync(planned.Scope, planned.RunId, planned.Revision);
+            await WaitForAdvisory("synthetic-independent-run-writer");
+            Check(!writer.IsCompleted, "actual run source writer blocked by run fence");
+            await t.RollbackAsync();
+            Check((await writer).Succeeded, "run owner cancellation commits after capture rollback");
+        }
+        await using (var c = await Open())
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            await SyntheticRunSourceFence.AcquireAsync(c, t, "synthetic-customer", "synthetic-project", "synthetic-environment", normal.RunId);
+            Denied(await Adapter.CaptureAsync(c, t, normal.RunId, ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.InvalidInput, "reversed run-before-registry rejected no deadlock");
+            await t.RollbackAsync();
+        }
+        await using (var c = await Open())
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            using var cancelled = new CancellationTokenSource();
+            cancelled.Cancel();
+            try { await Adapter.CaptureAsync(c, t, normal.RunId, ConsultantAi, ConsultantOutcome, cancelled.Token); throw new InvalidOperationException("cancellation ignored"); }
+            catch (OperationCanceledException) { Check(true, "cancelled capture propagates cancellation"); }
+            await t.RollbackAsync();
+        }
+        await using (var holder = await Open())
+        await using (var held = await holder.BeginTransactionAsync())
+        {
+            await SyntheticRunSourceFence.AcquireAsync(holder, held, "synthetic-customer", "synthetic-project", "synthetic-environment", normal.RunId);
+            var waitingDatabase = new NpgsqlConnectionStringBuilder(Database) { ApplicationName = "synthetic-schema07-cancelled-capture" };
+            await using var waiting = await Open(waitingDatabase.ConnectionString);
+            await using var waitingTransaction = await waiting.BeginTransactionAsync();
+            using var cancellation = new CancellationTokenSource();
+            var capture = Adapter.CaptureAsync(waiting, waitingTransaction, normal.RunId, ConsultantAi, ConsultantOutcome, cancellation.Token);
+            await WaitForAdvisory("synthetic-schema07-cancelled-capture");
+            Check(!capture.IsCompleted, "capture actually waits acquiring held source run fence");
+            cancellation.Cancel();
+            try { await capture.WaitAsync(TimeSpan.FromSeconds(10)); throw new InvalidOperationException("blocked capture ignored cancellation"); }
+            catch (OperationCanceledException) { Check(true, "blocked source acquisition propagates cancellation without partial readiness"); }
+            await waitingTransaction.RollbackAsync();
+            await held.RollbackAsync();
+        }
+        Check((await Capture(normal.RunId)).Readiness is not null, "source remains coherent/readable after concurrent writers and cancellation");
+    }
+    private static async Task<OutcomeApplyResult> RegistryWriter()
+    {
+        var b = new NpgsqlConnectionStringBuilder(Database) { ApplicationName = "synthetic-independent-registry-writer" };
+        await using var c = await Open(b.ConnectionString);
+        await using var t = await c.BeginTransactionAsync();
+        var registry = await Outcomes.ReadRegistryAsync(c, t, ConsultantOutcome);
+        var content = OutcomePriorityCanonical.Seal(new OutcomeContentVersion("independent-objective", 1, "OPERATIONS", "Fictional independent objective", "Fictional source stability", OutcomeOrigin.Documented, [new("synthetic-ai-schedule", "configuration")], ["synthetic-reference"], [], null, ""));
+        var result = await Outcomes.ApplyOutcomeAsync(c, t, ConsultantOutcome, new(Guid.NewGuid(), OutcomeKind.CreateDraft, content.OutcomeId, 1, 0, content.ContentDigest, registry.Snapshot!.Revision, null, content, "Fictional independent fence check"));
+        await t.CommitAsync();
+        return result;
+    }
+    private static async Task WaitForAdvisory(string application)
+    {
+        var deadline = DateTime.UtcNow.AddSeconds(10);
+        while (DateTime.UtcNow < deadline)
+        {
+            await using var c = await Open();
+            await using var q = new NpgsqlCommand("SELECT EXISTS(SELECT 1 FROM pg_stat_activity WHERE application_name=@application AND wait_event_type='Lock' AND wait_event='advisory')", c);
+            q.Parameters.AddWithValue("application", application);
+            if ((bool)(await q.ExecuteScalarAsync())!) { Check(true, "actual PostgreSQL advisory wait observed"); return; }
+            await Task.Delay(25);
+        }
+        throw new InvalidOperationException("expected source writer advisory wait not observed");
+    }
+    private static async Task<string> Rows()
+    {
+        await using var c = await Open();
+        var tables = new List<(string Schema, string Table)>();
+        await using (var q = new NpgsqlCommand("SELECT table_schema,table_name FROM information_schema.tables WHERE table_schema LIKE 'synthetic_%' AND table_type='BASE TABLE' ORDER BY table_schema,table_name", c))
+        await using (var r = await q.ExecuteReaderAsync()) while (await r.ReadAsync()) tables.Add((r.GetString(0), r.GetString(1)));
+        var values = new StringBuilder();
+        foreach (var (schema, table) in tables)
+        {
+            var identifier = '"' + schema.Replace("\"", "\"\"") + "\".\"" + table.Replace("\"", "\"\"") + '"';
+            await using var q = new NpgsqlCommand("SELECT row_to_json(t)::text FROM " + identifier + " t ORDER BY row_to_json(t)::text COLLATE \"C\"", c);
+            await using var r = await q.ExecuteReaderAsync();
+            values.Append(schema).Append('.').Append(table).Append('\n');
+            while (await r.ReadAsync()) values.Append(r.GetString(0)).Append('\n');
+        }
+        return values.ToString();
+    }
+    internal static string Hash(string value) => Convert.ToHexStringLower(SHA256.HashData(Encoding.UTF8.GetBytes(value)));
+    internal static string Canonical(JsonElement element)
+    {
+        using var stream = new MemoryStream();
+        using (var writer = new Utf8JsonWriter(stream)) Write(writer, element);
+        return Encoding.UTF8.GetString(stream.ToArray());
+    }
+    private static void Write(Utf8JsonWriter writer, JsonElement value)
+    {
+        switch (value.ValueKind)
+        {
+            case JsonValueKind.Object:
+                writer.WriteStartObject();
+                foreach (var item in value.EnumerateObject().OrderBy(x => x.Name, StringComparer.Ordinal)) { writer.WritePropertyName(item.Name); Write(writer, item.Value); }
+                writer.WriteEndObject();
+                break;
+            case JsonValueKind.Array:
+                writer.WriteStartArray();
+                foreach (var item in value.EnumerateArray()) Write(writer, item);
+                writer.WriteEndArray();
+                break;
+            case JsonValueKind.Number:
+                writer.WriteRawValue(value.GetDecimal().ToString("G29", System.Globalization.CultureInfo.InvariantCulture));
+                break;
+            default: value.WriteTo(writer); break;
+        }
+    }
+}
