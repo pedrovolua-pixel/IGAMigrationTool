@@ -58,5 +58,10 @@
     "Hosted Linux isolated-container smoke",
     "Shared solution/configuration/canonical plan/status/evidence index/private site publication"
   ],
-  "limits": "DefaultHttpContext response streams exercise actual IResult.ExecuteAsync and host WriteAsync catch; no claim of live Kestrel/socket/browser/hosted/production authentication evidence"
+  "limits": "DefaultHttpContext response streams exercise actual IResult.ExecuteAsync and host WriteAsync catch; no claim of live Kestrel/socket/browser/hosted/production authentication evidence",
+  "finalCoordinatorSourceBinding": {
+    "commit": "6f706088e6259940102a12fbf0d51e993901de5b",
+    "readSourceHashMatch": "PASS all11 recorded coordinator source hashes match immutable committed files",
+    "executedCodeBinding": "Actual executed copied binaries are separately hashed above; final root source review and independent test review remain required."
+  }
 }
