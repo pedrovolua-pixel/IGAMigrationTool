@@ -307,3 +307,8 @@ The owner requested the next cycle after bounded Cycle13 closure. Independent co
 ## Cycle14 owner approval — 2026-10-02
 
 The repository owner explicitly approved TC14-01–06 against proposal revision `2b565945be99c4c674cf00b08caa6fc581b99ffd` and SHA256 `fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839`. Decision record: `specs/003-health-assessment/local-planning-task-approval.md`. The bounded Cycle14 plan/test plan are approved for local synthetic implementation. Engineering checkpoint and implementation are RUNNING; no new runtime PASS, applied migration, permission, full milestone or live gate acceptance is claimed. Future CSV wording is reconciled under TC14-06; export remains deferred. The planning-task decision dependency is closed; eleven prior human tasks remain open. Private board publication will follow the committed approval snapshot and be recorded separately.
+
+
+## Approved HTTPS source publication — 2026-10-03 UTC
+
+The owner explicitly approved public GitHub publication of reviewed `af31cba`, and that exact commit was pushed to existing draft PR2 successfully. The earlier export block is CLOSED. [Publication evidence](../../docs/development/evidence/https-pilot-portal-publication-20261003.json) records the approval, push and documentation-only integration of the already-public advanced Cycle14 target at `3fec237`. Both canonical histories are preserved; application/IaC/test/project/workflow source remains unchanged. Hosted CI results are separate and not inferred from the push. No Azure deployment/login/grant/migration/spend or gate acceptance is authorized. The private BFF/HTTPS board remains stale under its separate publisher block; unrelated confirmed Cycle14 publication is preserved.
