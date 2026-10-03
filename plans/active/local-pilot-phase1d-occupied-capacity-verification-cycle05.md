@@ -18,10 +18,10 @@ C05-V nonauthor read-only reviewer owns gap selection and independent review/exe
 
 ## Acceptance cases
 
-- [ ] Sixteen scenarios: NamedUser/Service × Findings/Recommendations × identity128/customer512 ceilings × audit false/throw, original three-item groups, page size1, explicit partial fields. Expected typed values and original scalar bindings/digest derive from original bytes without production projection helpers.
-- [ ] Occupy exactly cap−1 using successful original-fixture pages, below unrelated rate/concurrency/expiry limits. Fail continuation of an existing handle while its successor would occupy the final slot: DependencyUnavailable, no envelope/new cursor, one attempted Success audit, no accepted completion and safe AuditUnavailable.
-- [ ] Retry the same original handle with unchanged authority before original expiry. It returns exact item b and a new successor, filling the ceiling. The next cursor-producing call returns Limited with an accepted Limited audit; expected source reads are observed rather than forbidden because capacity admission occurs during terminal commit.
-- [ ] Final-page successor returns exact item c/null cursor at full registry. Preserve occupied handles and bindings; verify spare identity quota in the same customer for identity ceiling and another identity’s retained final-page handle for customer ceiling. This is quota fairness/handle preservation, not new cross-customer isolation proof. Original fixture files stay unchanged.
+- [x] Sixteen scenarios: NamedUser/Service × Findings/Recommendations × identity128/customer512 ceilings × audit false/throw, original three-item groups, page size1, explicit partial fields. Expected typed values and original scalar bindings/digest derive from original bytes without production projection helpers.
+- [x] Occupy exactly cap−1 using successful original-fixture pages, below unrelated rate/concurrency/expiry limits. Fail continuation of an existing handle while its successor would occupy the final slot: DependencyUnavailable, no envelope/new cursor, one attempted Success audit, no accepted completion and safe AuditUnavailable.
+- [x] Retry the same original handle with unchanged authority before original expiry. It returns exact item b and a new successor, filling the ceiling. The next cursor-producing call returns Limited with an accepted Limited audit; expected source reads are observed rather than forbidden because capacity admission occurs during terminal commit.
+- [x] Final-page successor returns exact item c/null cursor at full registry. Preserve occupied handles and bindings; verify spare identity quota in the same customer for identity ceiling and another identity’s retained final-page handle for customer ceiling. This is quota fairness/handle preservation, not new cross-customer isolation proof. Original fixture files stay unchanged.
 - [ ] Independent review/execution closes and exact combined source passes applicable locked restore/format/build, original/new MCP, oracle/architecture, source-secret/dependency and configured hosted checks. Original failures and skipped scope remain recorded.
 - [ ] Preserve unrelated working changes and original fixture/production/host/UI/contract bytes. Update canonical plan/status/evidence and publish the existing private board with native source/audience confirmation.
 
@@ -31,5 +31,5 @@ No global4096 quota duplication, exhaustive cleanup proof, production scale/SLO,
 
 ## Evidence
 
-Execution/review/remaining checks will be recorded in this plan and a source-bound verification receipt.
+The [executed verification](../../specs/003-health-assessment/phase1d-occupied-capacity-verification-cycle05.md) passes16scenarios/5200invocations/88562assertions on coordinatore0d6a67, equivalent pushed413bd13. Nonauthor review independently executed the final DLL. Full local restore/format/zero-warning build, original/new MCP, oracle/architecture, dependency/source-secret checks pass. Initial coordinatorCS8803 and authororacle arithmetic corrections are preserved. Exactly3testpaths change;332sourcepins/16fixtures/priorguards unchanged. Both ownclean worktrees removed after preservation. Package140 passed; full hosted bootstrap230 and private publication remain pending.
 
