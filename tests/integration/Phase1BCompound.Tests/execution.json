@@ -1,0 +1,62 @@
+{
+  "recordedAtUtc": "2026-10-03T17:03:32.728216+00:00",
+  "scope": "Approved disposable synthetic Phase1B compound test fixture only; actual host and owning PostgreSQL APIs; no production/live/provider/customer data",
+  "sdk": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+  "database": {
+    "name": "iga_synthetic_phase1b_compound_tests",
+    "endpoint": "127.0.0.1:55433",
+    "role": "iga_synthetic",
+    "creation": "Created only this absent database; test startup checks/creates absent exact name",
+    "cleanup": "Explicitly coordinator authorized reset of only seven synthetic fixture schemas in this exact guarded disposable database; no other DB/schema/config/role touched"
+  },
+  "execution": {
+    "command": "PATH=/private/tmp/iga-dotnet-10.0.401:$PATH /private/tmp/iga-dotnet-10.0.401/dotnet run --project tests/integration/Phase1BCompound.Tests/Phase1BCompound.Tests.csproj -c Release -p:Phase1BHostProject=/private/tmp/iga-phase1b-coordinator/src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+    "result": "PASS",
+    "assertions": 121,
+    "releaseBuild": "PASS0 warnings/errors",
+    "scopedFormatWhitespaceVerification": "PASS",
+    "gitDiffCheck": "PASS",
+    "nugetIncludeTransitiveVulnerableQuery": "PASS no vulnerable packages reported for host override dependency graph",
+    "logSha256": "07c59a68098e8a94a94f9444f76578d66d1117b0aed459e7bc26fde449f0ceb3"
+  },
+  "testSourceSha256": {
+    "AtomicCases.cs": "95b33d8251feb2c9ca45236b3a262ae46ad1f3fee8dc36d79160bb9b9e5d3643",
+    "CaptureCsvCases.cs": "1bcd85794e185c1d5f2b72374efc9781dc784ebbbb68029036a967a45d6a4a79",
+    "Program.cs": "1ec2fe2a453184006706e54ef20d74a0561ed13a09bb8189518f536f6bb415f0"
+  },
+  "executedCopiedBinarySha256": {
+    "Phase1BCompound.Tests.dll": "feb141fd124499288dede8c0d122d506978456397baa88233e9ce9bb2e2ca1c0",
+    "LocalConsultantDemo.dll": "0a9788231aab851d0d59c331eeed1bd8d28e600a85352e758bb8780d26f7677a",
+    "AssessmentRuns.dll": "3c6a9141994572dd0e742f3a6972a10b018b55521683785fd871b70e9574b6f5",
+    "SyntheticAiExecution.dll": "2d0dcd17cd4f0c9ea5aa0639c75629197b1724736f5f8360d4dbb814d66b6c76",
+    "SyntheticOutcomePriority.dll": "f55df2f1444545f4a742898a9190888f7dd0f7c8edc653ce875628ba84430c31",
+    "SyntheticTaskCsvIntegration.dll": "7d0409e48f0282d87c11a3e6dcd93e0e3c4cd35b67112416a093b9bfd93131a4",
+    "SyntheticTaskCsv.dll": "be567975f338db2016340d047e583ccaeaf9ce485b7c9f852bb7136a2d5a86b6",
+    "FindingReview.dll": "9c23242c5bae2b28323b07b5a9acd48c037901786ea5ec8abb07dfd9e30cbc27",
+    "SyntheticSourceFence.dll": "d63a48222a474223652cd55d54ad4443382a08ab358065afc33efa8079b0f40c"
+  },
+  "coordinatorReadSnapshot": {
+    "head": "3424beb6fbcdfd415934b4c4492e66794d4ceb58",
+    "state": "Coordinator implementation still includes uncommitted owned source. These hashes identify the source read snapshot; copied binary hashes identify actual executed code. Final coordinator commit binding/rereview remains required.",
+    "fileSha256": {
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BService.cs": "04b81fae26588d6276c33e82cb56caed1036a7dfdd1c8321472d789e4c48a462",
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BWorker.cs": "951ceaa574e3f4d290bfd7ae4bb1597b6f7201fbd984f34743efd730d06f0e64",
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BCsv.cs": "7f0cfc447359cfcef24c29a2987cb58065c41efa6865a5b9390423d197fb5cc8",
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BRoutes.cs": "c0dac8f502de1ea6052d2bb21946d917ac47b458af9bfffec4db9705432a66ec",
+      "src/server/hosts/LocalConsultantDemo/Program.cs": "47b1475bfbef030989b6378c7cdc1852ea833f8b71f56c44386a39c932f37b4a",
+      "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs": "e34340f03cfc6d26d63c455e0200b7f56457b970946587c8120936b4d1d28c41",
+      "src/server/modules/AssessmentRuns/SyntheticPhase1BAnalysisAdapter.cs": "9fe46db9aeb2e984a048eb51eab11c5285e3390b12ebf7369650185aafc16800",
+      "src/server/modules/AssessmentRuns/DemoPhase1BCatalog.cs": "65fe5f9902ea455367dc047bebcc1c23293a1ca2670bb8a2903bf61800de6e73",
+      "src/server/modules/AssessmentRuns/DemoPhase1BAiFixture.cs": "5b2af23181ebfee7c796ec47a174732e6fe9504b1c28b8bd9ea72f8ff402a23f",
+      "src/server/modules/FindingReview/SyntheticReviewExportCapture.cs": "17a43cbb52baf339753e0684ea76b419ca784ea8c46e033a195ec73b90f88ee9",
+      "src/server/modules/SyntheticSourceFence/SyntheticRunSourceFence.cs": "7f3c9410b02c3ab7e94a1768939d2fb8cfa197906052fa6499b290c04c95d8c8"
+    }
+  },
+  "remaining": [
+    "Coordinator final immutable integration commit binding and independent review of these tests",
+    "Kestrel socket-level cancellation/abort and browser protected-link/task/outcome/budget flows",
+    "Hosted Linux isolated-container smoke",
+    "Shared solution/configuration/canonical plan/status/evidence index/private site publication"
+  ],
+  "limits": "DefaultHttpContext response streams exercise actual IResult.ExecuteAsync and host WriteAsync catch; no claim of live Kestrel/socket/browser/hosted/production authentication evidence"
+}

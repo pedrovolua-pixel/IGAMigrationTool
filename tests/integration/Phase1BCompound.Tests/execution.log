@@ -1,0 +1,122 @@
+PASS reset only guarded owned disposable compound test schemas
+PASS real outcome draft recorded
+PASS actual distinct customer approval authority used
+PASS injected owning Start observer aborts compound transaction
+PASS failed compound Start exposes no engine run
+PASS failed compound Start rolls back immutable outcome lock
+PASS failed compound Start rolls back owning event
+PASS failed compound Start leaves no AI lock
+PASS same requested ID succeeds after complete rollback
+PASS accepted compound Start exact replay is stable
+PASS accepted start atomically owns one outcome and AI lock
+PASS late owning AI ensure observer aborts actual compound Start
+PASS actual AI ensure write was reached after owning engine Start returned
+PASS late failed Start rolls back persisted owning run
+PASS late failed Start rolls back both immutable module locks
+PASS late failed Start publishes no owning events
+PASS same requested ID can be accepted after late all-module rollback
+PASS real run lease acquired
+PASS real deterministic work begun
+PASS real deterministic coverage saved
+PASS actual owning AI proof read succeeds
+PASS actual AI reservation committed before dispatch
+PASS actual dispatch journal committed before pure provider
+PASS actual owning AI proof read succeeds
+PASS actual owning run read succeeds
+PASS successful AI result checkpoint observer aborts
+PASS actual owning AI proof read succeeds
+PASS accepted result/original/usage journal fully rolls back
+PASS actual owning run read succeeds
+PASS aborted compound result leaves no owning coverage checkpoint
+PASS actual owning AI proof read succeeds
+PASS actual owning run read succeeds
+PASS result/gap and exact owning coverage become durable together
+PASS automatic AI originals remain Proposed with frozen confidence
+PASS owning exact accepted AI receipt replay is recognized
+PASS owning exact accepted checkpoint replay is recognized
+PASS actual owning AI proof read succeeds
+PASS actual owning run read succeeds
+PASS completed receipt replay adds neither charge nor checkpoint
+PASS real run lease acquired
+PASS real deterministic work begun
+PASS real deterministic coverage saved
+PASS actual owning AI proof read succeeds
+PASS actual AI reservation committed before dispatch
+PASS actual dispatch journal committed before pure provider
+PASS actual owning AI proof read succeeds
+PASS actual owning run read succeeds
+PASS unknown gap checkpoint observer aborts
+PASS actual owning AI proof read succeeds
+PASS gap/unknown/hold journal fully rolls back
+PASS actual owning run read succeeds
+PASS aborted compound result leaves no owning coverage checkpoint
+PASS actual owning AI proof read succeeds
+PASS actual owning run read succeeds
+PASS result/gap and exact owning coverage become durable together
+PASS unknown terminal gap retains hold and error coverage
+PASS unknown gap completes union coverage without findings
+PASS actual owning AI proof read succeeds
+PASS actual terminal worker reconciles known usage without promoting unknown-gap findings
+PASS actual owning run read succeeds
+PASS late billing leaves immutable coverage unchanged
+PASS real run lease acquired
+PASS real deterministic work begun
+PASS real deterministic coverage saved
+PASS actual owning AI proof read succeeds
+PASS actual AI reservation committed before dispatch
+PASS actual dispatch journal committed before pure provider
+PASS actual owning AI proof read succeeds
+PASS lease expiry after owning write denies compound commit
+PASS actual owning AI proof read succeeds
+PASS stale lease rolls back accepted original and usage
+PASS actual owning run read succeeds
+PASS stale lease leaves no AI owning coverage
+PASS expired lease can be recovered by fresh generation
+PASS actual owning AI proof read succeeds
+PASS same dispatched attempt recovers under fresh lease without redispatch
+PASS real run lease acquired
+PASS real deterministic work begun
+PASS real deterministic coverage saved
+PASS actual owning AI proof read succeeds
+PASS actual AI reservation committed before dispatch
+PASS actual dispatch journal committed before pure provider
+PASS actual owning run read succeeds
+PASS actual full union coverage reaches Scoring
+PASS actual selected artifact review saved under compound fence
+PASS actual selected artifact review saved under compound fence
+PASS actual selected artifact review saved under compound fence
+PASS actual guidance/review/source yields exactly three reviewed task attestations
+PASS actual task creation joins full coherent source transaction
+PASS actual compound task status StartProgress
+PASS actual compound task status Complete
+PASS real completed task remains in current immutable export snapshot
+PASS minimized capture binds reviewed artifacts and actual finding revisions
+PASS host supplies genuine Auditor authority without Consultant impersonation
+PASS genuine authorized Auditor captures all same minimized task metadata
+PASS Auditor cannot enter Consultant protected workspace
+PASS Auditor cannot mutate task through export permissions
+PASS Auditor protected navigation returns read-only metadata without comments/history
+PASS unavailable protected task navigation denied
+PASS actual full export denies corrupted outcome proof without empty fallback with exact IntegrityMismatch
+PASS actual compound projection denies corrupted outcome proof with exact IntegrityMismatch
+PASS actual full export denies corrupted ai proof without empty fallback with exact IntegrityMismatch
+PASS actual compound projection denies corrupted ai proof with exact IntegrityMismatch
+PASS actual full export denies corrupted review proof without empty fallback with exact IntegrityMismatch
+PASS actual compound projection denies corrupted review proof with exact IntegrityMismatch
+PASS actual full export denies corrupted artifact proof without empty fallback with exact IntegrityMismatch
+PASS actual full export denies corrupted task proof without empty fallback with exact IntegrityMismatch
+PASS all controlled corruption rollbacks restore exact immutable capture
+PASS source change after render before Execute denies delivery
+PASS controlled pre-Execute source conflict writes zero response bytes
+PASS source conflict records terminal metadata Denial before any delivery
+PASS changed review/guidance produces stale preserved completed metadata
+PASS actual PostgreSQL source mutation waits on session fence during response write
+PASS authorization audit committed while first output write holds source exclusion
+PASS fenced host delivers exact immutable CSV bytes despite waiting source mutation
+PASS actual response sets no-store and exact bounded byte length
+PASS source mutation commits only after response write releases fence
+PASS successful delivery has no fabricated interruption marker
+PASS actual host Execute observes response write cancellation
+PASS actual Auditor delivery cancellation preserves authorization and appends one typed interruption marker
+PASS actual interrupted transfer marker retains original snapshot/output/count metadata
+PASS 121 compound integration assertions; actual owning PostgreSQL and coordinator host APIs.
