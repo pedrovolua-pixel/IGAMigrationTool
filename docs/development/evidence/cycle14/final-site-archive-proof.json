@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "source": "3540cadafe86da910361078b09ee46e676a70fae",
+  "archive": "/private/tmp/iga-cycle14-completion-site90.tar.gz",
+  "archiveSha256": "c8d2e24c6f1b7648d30768cc2faa1c553577ae5d1d58472e7ed61d54dc4a0479",
+  "indexGitBytesEqual": true,
+  "hostingGitBytesEqual": true,
+  "serverNormalizedArchiveStorageByteEqualityClaimed": false
+}
