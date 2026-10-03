@@ -41,3 +41,7 @@ The [follow-on checklist](../../specs/003-health-assessment/phase1d-integration-
 ## Cycle03 minimization regression
 
 The ordinary `dotnet run --project tests/integration/SyntheticMcp.Tests -c Release --no-build` command now also runs the independent field/category/identity cross-product. [Cycle03 verification](../../specs/003-health-assessment/phase1d-minimization-verification-cycle03.md) and the [pinned oracle](../../tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md) describe10,060 requests/92,904 assertions separately from the original2849 checks. The guard uses the unchanged fictional fixture only, verifies exact read IDs/canonical responses/audit schema names, and exits nonzero on failure. It adds no host, option, package or runtime capability. Actual integration and all prior operational limits remain open.
+
+## Cycle04 continuation recovery regression
+
+The same ordinary integration command also executes [cycle04 continuation verification](../../specs/003-health-assessment/phase1d-continuation-verification-cycle04.md): 24 deterministic scenarios, 112 invocations and 1,011 assertions. Its [fixture-derived oracle](../../tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md) verifies overlapping repeatable pages, cancellation/deadline/audit-failure retry and stale-revision/regrant denial. Barrier and audit records are in-memory test observations; they do not prove durable audit or real publication. No additional option, dependency, migration, configuration or listener is introduced.

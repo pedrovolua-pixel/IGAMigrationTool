@@ -1,6 +1,6 @@
 # Phase 1D cycle04 continuation recovery verification
 
-Status: RUNNING — approved synthetic verification only
+Status: LOCAL VERIFIED — hosted/private closure pending
 Owner: Phase1D coordinator
 Date: 2026-10-03
 Baseline: 3551fe5693196ab371282c38bae53d2f9ed23f19
@@ -18,13 +18,17 @@ Independent review identified a composed-test gap: existing replay is sequential
 
 ## Required cases and completion
 
-- [ ] Original page-one cursor continues to the exact ordinal item with unchanged manifest digest/scalar bindings; expected item data derives from original fixture bytes and explicit field policy, not production projection helpers.
-- [ ] Selected-item barriers deterministically overlap two invocations of the same handle. Both succeed with the same item/bindings, distinct opaque successor handles, separate policy evaluations and completion attempts. Compare stable content rather than random envelope bytes.
-- [ ] Continuation cancellation, exact request deadline, audit false and audit throw expose no content/new handle. Before original expiry, unchanged-authority retry of the original cursor succeeds. Failed audit is an attempt, not a durable completed event.
-- [ ] Revision change after cursor resolution/item load denies at the trusted emission fence with generic scope-free stale audit. Regrant cannot restore the old cursor; a fresh initial page uses current authority. Exercise both approved identity kinds and the resource groups that actually have successor pages in the original fixture, with exact source-call observations.
+- [x] Original page-one cursor continues to the exact ordinal item with unchanged manifest digest/scalar bindings; expected item data derives from original fixture bytes and explicit field policy, not production projection helpers.
+- [x] Selected-item barriers deterministically overlap two invocations of the same handle. Both succeed with the same item/bindings, distinct opaque successor handles, separate policy evaluations and completion attempts. Compare stable content rather than random envelope bytes.
+- [x] Continuation cancellation, exact request deadline, audit false and audit throw expose no content/new handle. Before original expiry, unchanged-authority retry of the original cursor succeeds. Failed audit is an attempt, not a durable completed event.
+- [x] Revision change after cursor resolution/item load denies at the trusted emission fence with generic scope-free stale audit. Regrant cannot restore the old cursor; a fresh initial page uses current authority. Exercise both approved identity kinds and the resource groups that actually have successor pages in the original fixture, with exact source-call observations.
 - [ ] Nonauthor review closes; applicable pinned restore/format/build/oracle/MCP/architecture/security/dependency checks execute on frozen combined source. Hosted results are separately source-bound; pending checks remain NOT VERIFIED.
 - [ ] Original production/host/UI/contracts/migrations, original fixtures and cycle03 guard remain unchanged. Preserve original failures/logs/runtime evidence; update canonical records and confirm the existing private board deployment in this cycle.
 
 ## Limits
 
 No expiry-during-emission policy is chosen; the test retry stays before original cursor expiry. No production free-text sanitizer, real identity/grant, native publisher/reader, SDK, transport, client selection, durable/distributed limits/cursors/audit, migration, dependency, setting or live release is added. The frozen synchronous terminal audit deadline limitation is unchanged. A verification finding is reported for separately scoped correction; no runtime fix is authorized by this packet. Full Milestone11/Phase1D/UAT/G1–G9 and actual-reader P02 cases remain NOT VERIFIED.
+
+## Local result
+
+The [executed verification](../../specs/003-health-assessment/phase1d-continuation-verification-cycle04.md) passes 24 scenarios/112 invocations/1,011 assertions on coordinator1899ca0, equivalent pushed codebe5a82e. Nonauthor final review independently executed the DLL and closed all findings. Scoped local checks pass; original full-solution restore/checkout/tempfile failures and six corrected format diagnostics are retained. The intermediate pushed checkpoint e065747 failed Linux formatting; final exact source has fresh hosted runs. Full hosted/private closure remains pending; no production behavior or actual integration is added.
