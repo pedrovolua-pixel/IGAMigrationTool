@@ -777,3 +777,11 @@ test('successfulreceiptrequires matchingfreshversionchain; oldread cannot masque
   assert.equal(flow.state.workspace, null);
   flow.destroy();
 });
+
+test('dedicatedbuildroot uses platformfilepath ratherthanrawURLpathname', async () => {
+  const config = (await import('./vite.config.ts')).default;
+  const { fileURLToPath } = await import('node:url');
+  assert.equal(config.root, fileURLToPath(new URL('.', import.meta.url)));
+  assert.equal(config.base, '/');
+  assert.equal(config.build.outDir, 'dist');
+});

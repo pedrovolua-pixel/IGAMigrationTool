@@ -1,6 +1,6 @@
 # Local synthetic evaluation workspace
 
-This isolated React workspace consumes the frozen cycle04 loopback host only. It does not change the existing consultant app or package/lock. All source/configuration/tests are beneath this directory. Use pinned Node24.21.0/npm11.20.0 and the unchanged `../package-lock.json` dependencies. No new package was added.
+This isolated React workspace consumes the frozen cycle04 loopback host only. It does not change the existing consultant app or package/lock. All source/configuration/tests are beneath this directory. Use pinned Node24.21.0/npm11.20.0 and the unchanged `../package-lock.json` dependencies. No new package was added. The dedicated Vite config uses Node’s builtin fileURLToPath for platform paths; its local build-only declaration avoids adding Node browser types. Native Windows execution remains a separate hosted check.
 
 From repository root, with `src/web/node_modules` installed from the parent lock:
 
