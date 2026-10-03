@@ -80,7 +80,7 @@ internal static class SyntheticEvaluationWorkflowMigration
         await using var metadata = new NpgsqlCommand("""
           SELECT count(*),coalesce(string_agg(pg_get_constraintdef(n.oid),''),'')
           FROM pg_constraint n JOIN pg_class c ON c.oid=n.conrelid JOIN pg_namespace s ON s.oid=c.relnamespace
-          WHERE s.nspname='synthetic_evaluation_workflow' AND c.relname='schema_migrations'
+          WHERE s.nspname='synthetic_evaluation_workflow' AND c.relname='schema_migrations' AND n.contype='p'
           """, c, t);
         await using (var r = await metadata.ExecuteReaderAsync(ct))
         {
