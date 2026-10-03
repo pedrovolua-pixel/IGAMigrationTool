@@ -101,4 +101,5 @@ AuditRefused(() => AuditIntegrityVerifier.Verify(binding, checkpoint, 1, checkpo
 AuditRefused(() => AuditIntegrityVerifier.Verify(binding, checkpoint, 1, checkpoint.EventSha256, [entry], [receipt with { SecurityVersion = 1 }]));
 AuditRefused(() => AuditIntegrityVerifier.Verify(binding, checkpoint, 1, checkpoint.EventSha256, [entry], [receipt with { NewSessionReference = Guid.NewGuid() }]));
 AuditRefused(() => AuditIntegrityVerifier.Verify(binding, checkpoint, 1, checkpoint.EventSha256, [entry], []));
+count += await AuthenticationFailureJournalChecks.RunAsync();
 Console.WriteLine($"PASS: {count} total session and closed audit/canonical/receipt/witness checks.");
