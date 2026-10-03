@@ -1,0 +1,39 @@
+.phase1b-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.75rem;
+}
+.phase1b-values div {
+  background: #f3f7fa;
+  padding: 0.7rem;
+  border-radius: 0.35rem;
+}
+.phase1b-values dt {
+  font-weight: 700;
+}
+.phase1b-values dd {
+  margin: 0.45rem 0 0;
+}
+.phase1b-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.7rem 0;
+}
+.phase1b-panel caption {
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.phase1b-panel th,
+.phase1b-panel td {
+  padding: 0.6rem;
+  text-align: left;
+  border: 1px solid #c4d0db;
+  overflow-wrap: anywhere;
+}
+.phase1b-panel thead {
+  background: #eaf1f6;
+}
+.phase1b-table-scroll {
+  overflow-x: auto;
+}

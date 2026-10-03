@@ -1,0 +1,116 @@
+.phase1b-panel {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  border: 1px solid #bac8d6;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #182b40;
+}
+.phase1b-panel h2,
+.phase1b-panel h3,
+.phase1b-panel h4 {
+  color: #153f64;
+}
+.phase1b-panel label {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.75rem 0;
+  font-weight: 600;
+}
+.phase1b-panel input,
+.phase1b-panel select,
+.phase1b-panel textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 0.6rem;
+  border: 1px solid #7e91a5;
+  border-radius: 0.35rem;
+  color: #182b40;
+  background: #fff;
+}
+.phase1b-panel textarea {
+  min-height: 5rem;
+  resize: vertical;
+}
+.phase1b-panel button {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid #275579;
+  border-radius: 0.35rem;
+  background: #17466c;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.phase1b-panel button:disabled {
+  background: #e3e9ef;
+  color: #516173;
+  border-color: #b0bcc9;
+  cursor: default;
+}
+.phase1b-panel :focus-visible {
+  outline: 3px solid #b1610e;
+  outline-offset: 3px;
+}
+.phase1b-panel fieldset {
+  margin: 1rem 0;
+  border: 1px solid #bac8d6;
+  border-radius: 0.35rem;
+  padding: 0.9rem;
+  min-width: 0;
+}
+.phase1b-panel legend {
+  font-weight: 700;
+  padding: 0 0.3rem;
+}
+.phase1b-panel details {
+  margin: 0.75rem 0;
+}
+.phase1b-panel summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.phase1b-panel .phase1b-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  overflow-wrap: anywhere;
+}
+.phase1b-checkbox input {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+}
+.phase1b-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.8rem;
+}
+.phase1b-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.9rem 0;
+}
+.phase1b-card {
+  border: 1px solid #d1dce5;
+  border-left: 4px solid #3d739c;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.phase1b-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.phase1b-digest,
+.phase1b-panel code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.phase1b-pending {
+  background: #fff4da;
+  border: 1px solid #b78a36;
+  border-radius: 0.4rem;
+  padding: 0.85rem;
+}
