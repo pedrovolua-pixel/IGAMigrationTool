@@ -229,3 +229,6 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 
 
 - [Later complete Cycle04 hosted receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-hosted-20261003.json): bootstrap37145211463/Linux/Windows2022/2025 and package37145211465 success on associated16fac34; all new workflow and historical configured steps passed. Original pending snapshots and manual/live/full limits remain preserved.
+
+
+- [Cycle04 hosted private publication receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-hosted-site-20261003.json): version103/source0728d979, succeeded deployment, later-source reconciliation, thirteen current human cards/eighteen unowned panels preserved, exact archive and three viewport QA passed. Native hosted logs/observations and original failures remain under work/m08-cycle04-evidence.
