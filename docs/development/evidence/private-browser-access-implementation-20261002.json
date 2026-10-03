@@ -119,7 +119,9 @@
     "localYamlParser": "Unavailable; hosted workflow validation pending",
     "projectEntries": 69,
     "independentMergeReview": "PASS: exact union of both parent canonical paragraphs and 69 projects; 131 BFF changed/302 upstream changed/557 shared source blobs preserved; both workflow check sets retained",
-    "initialLocalFormat": "Initial sandbox Roslyn named-pipe bind denied; exact verify-no-changes retry with IPC permission PASS"
+    "initialLocalFormat": "Initial sandbox Roslyn named-pipe bind denied; exact verify-no-changes retry with IPC permission PASS",
+    "concurrentMetadataBaseRef": "7fdf9d6169536004b5e37ed70a68cb51bbed64f9",
+    "concurrentMetadataUpdate": "Eight approved Cycle13 documentation files only; both parent canonical paragraphs preserved; no runtime/template/project/workflow changes"
   },
   "notExecuted": [
     "Azure resource deployment or role assignment",

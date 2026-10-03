@@ -1,6 +1,6 @@
 # Test plan: bounded local consultant artifact review
 
-Status: Draft — tied to pending AR13-01 through AR13-05; no runtime evidence yet
+Status: Approved for bounded local execution through AR13-01–05 owner decision; no runtime evidence yet
 Owner: Quality owner / independent verifier
 Last updated: 2026-10-02
 Contract: [exact local proposal](local-artifact-review-contract-proposal.md)
@@ -36,7 +36,7 @@ Measure actual source/record bounds, deterministic ordering, complete captured s
 
 Run current pinned locked restore/dependency audit, solution formatting/Release build, frontend lint/type/format/build/audit, new and historical unit/portable/PG integrations, module architecture/secret/infrastructure/collector checks and actual-browser regressions. Configured hosted Linux/Windows/container checks bind exact code commits. Existing dependency audit evidence is reusable only when exact dependency inputs and required freshness remain unchanged; do not claim a new audit that was blocked or unrun.
 
-The preparation-only Cycle13 change runs documentary link/decision/traceability/whitespace/source-scope/secret checks and independent proposal review. Runtime tests above, migrations, build and hosted implementation checks are **NOT RUN — implementation blocked by human decision**; historical Cycle12 evidence is not relabeled as Cycle13 evidence.
+The preparation-only Cycle13 change runs documentary link/decision/traceability/whitespace/source-scope/secret checks and independent proposal review. At the preparation checkpoint runtime tests, migrations, build and hosted implementation checks were NOT RUN. The [owner approval](local-artifact-review-approval.md) now permits implementation and planned execution; actual results will be recorded separately. historical Cycle12 evidence is not relabeled as Cycle13 evidence.
 
 ## Evidence and completion
 

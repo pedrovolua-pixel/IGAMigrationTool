@@ -1,15 +1,15 @@
 # Local consultant artifact review — contract proposal
 
-Status: Draft — human decision required; no implementation or authority granted
+Status: Approved by repository owner on 2026-10-02 — local synthetic implementation only; no production authority
 Owner: Repository owner with product, technical and security responsibility
 Last updated: 2026-10-02
 Source audited: `874c653a495921dbf20f628715b4ce70f3ecc030`
 
 ## Requested decision
 
-Approve AR13-01 through AR13-05 together for **local synthetic implementation only**, or record specific amendments. Approval must name these IDs and the exact reviewed document revision/commit. The repository owner may record the decision in chat; the coordinator transcribes the actual decision, never inferred approval. No customer use, production permission, artifact execution, report publication, task creation or export follows.
+The repository owner approved **AR13-01 through AR13-05 together for local synthetic implementation only** in direct response to the coordinator’s exact decision request. [The approval record](local-artifact-review-approval.md) binds the reviewed revision/digest and actual response. No amendments were supplied. No customer use, production permission, artifact execution, report publication, task creation or export follows.
 
-| ID | Proposed choice | Why a human decision is required |
+| ID | Approved choice | Why an explicit human decision was required |
 | --- | --- | --- |
 | AR13-01 | Only the assigned synthetic Consultant can mark an individual artifact **Reviewed for planning** or withdraw that attestation. Qualified customer reviewers cannot mark artifacts reviewed in this slice; their existing finding actions remain unchanged. | The approved matrix allows customer reviewers to comment/review generally, while FR-HAS-37 names consultant-reviewed artifacts. The exact artifact authority is absent. This intentionally narrow local subset does not amend the production role matrix. |
 | AR13-02 | Review is a digest-bound attestation to the exact artifact and complete source package. It acknowledges inspection for planning; it establishes neither supported One Identity remediation, correctness, execution safety, validated recovery nor remediation. Generated originals always retain **Unverified**. | The existing specifications do not define what removal of the unreviewed label means or how it relates to generated originals and finding decisions. |
@@ -23,9 +23,9 @@ The approved [product specification](product-spec.md) FR-HAS-35/37/42 and AC-HAS
 
 [AGENTS.md](../../AGENTS.md) controls 1, 2 and 8 prohibit unapproved substantial behavior, invented permissions and un-escalated material ambiguity. Its rule that human approval is required for product scope and consequential security decisions applies to these exact choices. Agent review establishes proposal quality, not approval. Existing ADR-0001/0002/0003/0004 remain accepted and unchanged.
 
-## Proposed internal implementation contract
+## Approved internal implementation contract
 
-These details become the bounded execution contract only after the recorded human decision. They are neither public endpoints nor production schemas.
+The human decision is recorded; these details govern the bounded implementation. They are neither public endpoints nor production schemas.
 
 ### Exact source and immutable originals
 
@@ -65,7 +65,7 @@ Owned-host/database reconnect and process restart must preserve event identity/c
 
 ### Opt-in and presentation
 
-Proposed profile ID `synthetic-review-maturity-fix-review-equal-v1`, label `Synthetic consultant artifact review · equal weights`, application version `synthetic-fix-review-app-v1`. It reuses the exact approved fixed fictional baseline/presets and templates; AI remains disabled. Add nullable `FixReviewContractDigest` only for this profile, omitted from every historical frozen input. The digest binds the finalized approved implementation contract bytes; technical review records the exact recipe and value before coding. Existing nine profiles and their application versions/locks/projections remain byte-compatible. Old profile reads have no artifact-review overlay and keep current Unverified artifacts.
+Approved profile ID `synthetic-review-maturity-fix-review-equal-v1`, label `Synthetic consultant artifact review · equal weights`, application version `synthetic-fix-review-app-v1`. It reuses the exact approved fixed fictional baseline/presets and templates; AI remains disabled. Add nullable `FixReviewContractDigest` only for this profile, omitted from every historical frozen input. The digest binds the finalized approved implementation contract bytes; technical review records the exact recipe and value before coding. Existing nine profiles and their application versions/locks/projections remain byte-compatible. Old profile reads have no artifact-review overlay and keep current Unverified artifacts.
 
 A closed internal overlay DTO includes availability, full source/version bindings, current per-artifact review revision/label, and ordered immutable attributable history. It does not put mutable review state into generated-original canonical payloads. Transport/body-size/schema limits and exact synthetic paths are reviewed internal details under the existing loopback-only host; no production operation path or BFF capability is added.
 
@@ -77,6 +77,6 @@ Task conversion/ownership/status/comments, priority/effort overrides and CSV are
 
 ## Approval record
 
-Decision: **PENDING**. AR13-01 through AR13-05 are proposals, not accepted defaults.
-Authorized human, date, exact document revision/commit, approved IDs, amendments: **not supplied**.
-The [Cycle13 plan](../../plans/active/local-pilot-artifact-review-cycle-13.md) and [specific test plan](local-artifact-review-test-plan.md) remain blocked at this decision. No requirement, milestone, UAT readiness or G1–G9 gate is accepted by preparing this proposal.
+Decision: **APPROVED** for AR13-01 through AR13-05, without amendments.
+Authorized human: Repository owner; date: 2026-10-02. [Exact revision/digest and response](local-artifact-review-approval.md#exact-decision) are recorded.
+The [Cycle13 plan](../../plans/active/local-pilot-artifact-review-cycle-13.md) and [specific test plan](local-artifact-review-test-plan.md) may proceed. No requirement, milestone, UAT readiness or G1–G9 gate is accepted by contract approval.
