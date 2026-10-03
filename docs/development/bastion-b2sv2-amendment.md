@@ -1,6 +1,6 @@
 # Bastion B2s v2 amendment and quota request
 
-Status: LOCAL AMENDMENT VERIFIED — automatic quota request UNSUCCESSFUL; support action BLOCKED
+Status: SUPERSEDED FOR ACTIVE ACCESS — historical evidence retained; HTTPS preparation replaces the desktop path
 Date: 2026-10-03 UTC
 Owner: Azure/BFF coordinator
 
@@ -41,3 +41,9 @@ The authorized Azure Quotas request was submitted for exactly 2 vCPUs in the sel
 ### Prior preflight hosted result
 
 On exact source `40f7306`, [Azure package 37086070370](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37086070370) passed; [bootstrap 37086070371](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37086070371) failed the Linux fictional fix-package browser step with `keyboard-fragment-navigation` / `AssertionError` after 2811 checks. Later infrastructure/Bastion steps were skipped; both Windows collector jobs passed. This remains a failed hosted result, separate from the executed local amendment checks. The unrelated browser implementation was not modified, no root cause or flaky-test diagnosis is asserted, and no new hosted pass is claimed before execution.
+
+## Owner switches the active access path to HTTPS — 2026-10-03 UTC
+
+The repository owner now requests “Let’s move to the https instead of bastion.” The [active HTTPS preparation plan](../../plans/active/https-pilot-portal-preparation.md), [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [technical/test proposal](https-pilot-portal-proposal.md) replace the Bastion browser path and post-pilot timing preference. Prior template approvals and failed quota evidence remain historical. VM quota/support/image/desktop/RDP prerequisites are SUPERSEDED for this path, not technically resolved. No VM/Bastion was deployed or removed; no support ticket is pursued.
+
+The recommended candidate is a new external VNet-integrated Consumption-profile Container Apps environment exposing only the portal/BFF through built-in HTTPS, with Entra organizational login and private protected services. Exact architecture/local disabled-template approval, real BFF/provider/key/audit composition, reviewed users/roles/CA, full priced public session and live verification remain required. No public ingress, resource, invitation, grant, migration, live sign-in or new spending was performed. G1–G9/Milestone2 remain NOT VERIFIED. Private-board publication remains blocked by the separately rejected publisher credential/network action; its BFF/access snapshot is stale. Historical sections below or above retain their original time-bound state.

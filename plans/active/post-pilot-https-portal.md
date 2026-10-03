@@ -1,11 +1,15 @@
 # Post-pilot HTTPS portal with login
 
-Status: DEFERRED — planning requested; implementation and public exposure not approved
+Status: SUPERSEDED SEQUENCE — HTTPS preparation is now active; historical deferred plan retained
 Owner: Repository owner and Azure/BFF coordinator
 Date: 2026-10-02
-Trigger: pilot completion accepted by the owner with required gate evidence
+Current trigger: owner requests HTTPS now; follow [the active preparation plan](https-pilot-portal-preparation.md). Exact architecture/public deployment approval remains separate.
 
-## Request and customer experience
+## Latest direction — 2026-10-03 UTC
+
+“Let’s move to the https instead of bastion” removes pilot completion as the scheduling prerequisite for preparation. PP01 is superseded as that ordering dependency, not passed: no pilot gate is accepted. [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [the technical/test proposal](../../docs/development/https-pilot-portal-proposal.md) now govern the proposed alternative. Bastion/support work is removed from the active path; prior results remain history. No public deployment or paid session is approved.
+
+## Historical request and customer experience
 
 On2026-10-02 the owner requested: “Move forward with bastion but plan Https portal with login after pilot is done.” During the pilot, [ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md) authorizes an owner-operated synthetic development desktop. After the pilot, the intended customer experience is an ordinary browser opening a public HTTPS portal URL and completing organizational sign-in; customers should not need Bastion or a VM login. Bastion remains an operator development tool.
 

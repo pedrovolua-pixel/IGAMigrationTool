@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T01:58:43.938253+00:00",
+  "status": "PROPOSED_HTTPS_ACCESS_PREPARATION_ONLY",
+  "baselineRef": "e629d13d9c5abe8e5e32388406d19359d8793eac",
+  "ownerDirection": {
+    "instruction": "Let’s move to the https instead of bastion",
+    "scope": "Replace Bastion access and post-pilot scheduling preference with HTTPS preparation now; exact architecture/local implementation/public session approval remains separate"
+  },
+  "proposedDecision": "ADR-0011 Option A: new external VNet-integrated workload-profiles ACA with Consumption profile, public portal/BFF HTTPS and private backend services",
+  "architectureAccepted": false,
+  "templatesImplemented": false,
+  "publicAccessEnabled": false,
+  "liveSignInEnabled": false,
+  "azureResourcesCreated": false,
+  "grantsCreated": false,
+  "paidSessionApproved": false,
+  "productionReleaseApproved": false,
+  "supersededHumanTasks": [
+    "Bsv2 support authorization",
+    "VM family quota",
+    "Windows image/disk/browser/RDP/desktop egress for Bastion path",
+    "wait until pilot completion to prepare HTTPS"
+  ],
+  "preservedHistory": "Accepted ADR-0010/local templates and failed automatic quota result retained; no claim of quota success or resource deletion",
+  "remainingInputs": [
+    "exact ADR/local preparation decision",
+    "deployable real BFF/provider/shared-key composition",
+    "durable audit-outage preservation contract",
+    "exact ingress peer/header compatibility",
+    "reviewed users/customer roles/home-origin/licensing/CA/federation",
+    "private builder/images/signing/SQL authority",
+    "complete refreshed price/capacity/what-if/exact public synthetic-session authority",
+    "existing live gates and production release"
+  ],
+  "documentaryChecks": {
+    "scope": "documentation_and_new_vector_diagram_only",
+    "localMarkdownTargets": 416,
+    "checkedHeadingAnchors": 12,
+    "xmlAndUnmodifiedEmbeddedIcons": 6,
+    "diffCheck": "PASS",
+    "protectedEmailUuidAddedProse": "PASS",
+    "errors": [],
+    "resolvedInitialFailure": "First staged diff guard caught Markdown two-space line endings in 3 new files omitted by the initial unstaged-only check; spaces removed and combined HEAD diff check rerun PASS. No commit created before correction."
+  },
+  "diagram": {
+    "path": "architecture/diagrams/06-proposed-https-pilot-portal.svg",
+    "preview": "architecture/diagrams/previews/06-proposed-https-pilot-portal.png",
+    "renderer": "bundled Node sharp at density144",
+    "dimensions": [
+      3200,
+      2000
+    ],
+    "visualInspection": "PASS: viewed rendered PNG; readable labels/arrows, no clipping/overlap; official embedded icons retain aspect ratios"
+  },
+  "independentReview": {
+    "reviewer": "auth_transport non-author worker",
+    "result": "PASS",
+    "findingsOpen": 0,
+    "resolvedObservations": [
+      "Add ADR-0010 current-direction notice preserving historical local acceptance",
+      "Create linked sanitized preparation evidence before closure"
+    ],
+    "executed": "414 local file targets; JSON/SVG parse; test ID and existing requirement-reference checks; 6 byte-identical official SVG embeds; git diff --check; reviewed existing exact-peer/default-XFF seam and current primary Microsoft docs",
+    "notExecuted": "render/visual/Gitleaks/runtime/CI/cloud; coordinator separately executed render/visual/Gitleaks"
+  },
+  "runtimeAndLiveChecks": "NOT RUN: documentation/diagram proposal only; all HTTPS-T01–T08 runtime/live cases remain NOT VERIFIED",
+  "historicalCiRisk": "Prior unrelated bootstrap keyboard-fragment-navigation failure remains unresolved; e629d13 workflow fetch returned no PR-triggered runs observed",
+  "privateBoard": {
+    "status": "STALE_FOR_BFF_ACCESS_CHANGE",
+    "lastConfirmedBffSnapshot": "4346e0f",
+    "reason": "Automatic approval review rejected publisher credential/network action for managed-proxy bypass; separately requested exact authorization still pending; unrelated newer pilot publications preserved"
+  },
+  "gateState": "G1–G9/Milestone2 NOT VERIFIED",
+  "sources": [
+    "https://learn.microsoft.com/en-us/azure/container-apps/networking",
+    "https://learn.microsoft.com/en-us/azure/container-apps/ingress-overview",
+    "https://learn.microsoft.com/en-us/azure/container-apps/custom-virtual-networks",
+    "https://learn.microsoft.com/en-us/azure/container-apps/billing",
+    "https://learn.microsoft.com/en-us/azure/container-apps/how-to-integrate-with-azure-front-door"
+  ],
+  "sourceBindings": [
+    {
+      "path": "architecture/decisions/ADR-0010-private-pilot-browser-access.md",
+      "sha256": "524c2c6f87c13f74919d4b2e2a920544ac5cb8df45d52324039328866398014b"
+    },
+    {
+      "path": "architecture/decisions/ADR-0011-https-pilot-portal.md",
+      "sha256": "5c612a92f34dfe26b0fd227f230a96fd3db85c8e6889be65db33748a0368e9a4"
+    },
+    {
+      "path": "architecture/diagrams/06-proposed-https-pilot-portal.svg",
+      "sha256": "a6bc8bd10c5c7a5fbc6edc0e154d287029f21f6bcf74f63c7fdec7c43fade73c"
+    },
+    {
+      "path": "architecture/diagrams/README.md",
+      "sha256": "185e40d546362051f9651313aa5a8a4971c0ed0c802e62eebd0f66c68e9985e2"
+    },
+    {
+      "path": "architecture/diagrams/previews/06-proposed-https-pilot-portal.png",
+      "sha256": "35328c2bbe03a18e14e102de6b2a6445cbcafde32d9207738fab2127ceb83b64"
+    },
+    {
+      "path": "docs/development/azure-bff-next-session-preflight.md",
+      "sha256": "979bee5499765142fa7af9eeb66376513cc6d7c674c6e7889e5805a691a9adcb"
+    },
+    {
+      "path": "docs/development/bastion-b2sv2-amendment.md",
+      "sha256": "5813dee32d1e93fbfdc4c55d3073079aeba40cc39f1dc8df6206417c2ea3fc38"
+    },
+    {
+      "path": "docs/development/bastion-bsv2-support-request.md",
+      "sha256": "020aabe70ea08a61261384f5a0dce15aa9da25b9e2d30194f976f9a2a7952194"
+    },
+    {
+      "path": "docs/development/bastion-deployment-session-preflight.md",
+      "sha256": "ea4ee897d6f0437eab5d5b58986f5bd9a6e68103e2b827525ada42fd08ae5768"
+    },
+    {
+      "path": "docs/development/bastion-development-access.md",
+      "sha256": "3fc07d40ea652dbd4b9484a02eb985886c12c34e929c73a87e4736022e456a71"
+    },
+    {
+      "path": "docs/development/https-pilot-portal-proposal.md",
+      "sha256": "99ce0230a3e47d8c0c6f81deff7ab4953e7546c79706c7ec05fd16e4743989e1"
+    },
+    {
+      "path": "infra/bicep/deployment-template-inventory.md",
+      "sha256": "bb71574d73190d865d802123b0aa6f6acb366c346051f3423c6ff226f98973ca"
+    },
+    {
+      "path": "plans/active/bff-azure-deployment-preparation.md",
+      "sha256": "9a5d0cb43200f8e03d9c9a6e72bc68b355be11d430480c6516c4f4f602bac4d0"
+    },
+    {
+      "path": "plans/active/https-pilot-portal-preparation.md",
+      "sha256": "a894891c396d7fe024b9e730f5e12f2458f87f1904f2b42e3778b20b1809a42b"
+    },
+    {
+      "path": "plans/active/post-pilot-https-portal.md",
+      "sha256": "13b5a3aee2d152d2f380d57430a170207234a4300ca3aaf492e0826a75eaa8b7"
+    },
+    {
+      "path": "plans/active/private-pilot-browser-access-preparation.md",
+      "sha256": "0756fef438437ed3f5c15834642fc0e7709530fce0efcc87d23ea080dc2a271e"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "2e68e9dbf336814d003ab182e5f7ce66332069cdc3ffa8390268521230e1b9b6"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "c3f5b0b50d3e0679406804710d943805f96339accf8a297944b4d98664071c22"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "7d8212fc0c5340c98631524832aec23c6ebd44083fdb61547097e99b95f2e54a"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "4abffdb66040f3be27b60a6cf7bc17dd5a3e4b9886199d2834e4a0118a65c4df"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "d6268d8ecb09ab5654a4bdad396352beadb8db9fcffc97ca7a30e0f0cb40923d"
+    }
+  ],
+  "secretScan": {
+    "tool": "Gitleaks",
+    "version": "8.30.1",
+    "scope": "whole coordinator checkout directory",
+    "result": "PASS",
+    "bytesScanned": 23544502,
+    "findings": 0
+  }
+}

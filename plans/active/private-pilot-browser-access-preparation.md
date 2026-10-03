@@ -1,6 +1,6 @@
 # Private pilot browser access: preparation and proposed execution
 
-Status: LOCAL TEMPLATES VERIFIED — PA01 and local PA02 complete; configured hosted checks PASS on0dc58e8; B2s v2 amendment verified; PA03 automatic quota request unsuccessful; support authorization and protected inputs remain blocking
+Status: SUPERSEDED FOR ACTIVE ACCESS — local templates/evidence retained; HTTPS preparation replaces PA03/desktop dependencies
 Owner: Azure/BFF coordinator
 Date: 2026-10-02
 Approved product/technical basis: [feature003](../../specs/003-health-assessment/product-spec.md), [technical specification](../../specs/003-health-assessment/technical-spec.md), [test plan](../../specs/003-health-assessment/test-plan.md), accepted ADR-0004/0009.
@@ -111,3 +111,9 @@ Azure's submitted Bsv2-family limit-2 request returned Unsuccessful; refreshed u
 ### Prior preflight hosted result
 
 On exact source `40f7306`, [Azure package 37086070370](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37086070370) passed; [bootstrap 37086070371](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37086070371) failed the Linux fictional fix-package browser step with `keyboard-fragment-navigation` / `AssertionError` after 2811 checks. Later infrastructure/Bastion steps were skipped; both Windows collector jobs passed. This remains a failed hosted result, separate from the executed local amendment checks. The unrelated browser implementation was not modified, no root cause or flaky-test diagnosis is asserted, and no new hosted pass is claimed before execution.
+
+## Owner switches the active access path to HTTPS — 2026-10-03 UTC
+
+The repository owner now requests “Let’s move to the https instead of bastion.” The [active HTTPS preparation plan](https-pilot-portal-preparation.md), [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [technical/test proposal](../../docs/development/https-pilot-portal-proposal.md) replace the Bastion browser path and post-pilot timing preference. Prior template approvals and failed quota evidence remain historical. VM quota/support/image/desktop/RDP prerequisites are SUPERSEDED for this path, not technically resolved. No VM/Bastion was deployed or removed; no support ticket is pursued.
+
+The recommended candidate is a new external VNet-integrated Consumption-profile Container Apps environment exposing only the portal/BFF through built-in HTTPS, with Entra organizational login and private protected services. Exact architecture/local disabled-template approval, real BFF/provider/key/audit composition, reviewed users/roles/CA, full priced public session and live verification remain required. No public ingress, resource, invitation, grant, migration, live sign-in or new spending was performed. G1–G9/Milestone2 remain NOT VERIFIED. Private-board publication remains blocked by the separately rejected publisher credential/network action; its BFF/access snapshot is stale. Historical sections below or above retain their original time-bound state.

@@ -1,6 +1,6 @@
 # Bastion deployment session: provider preflight and VM decision
 
-Status: READ-ONLY PREFLIGHT COMPLETE — VM decision and live deployment blocked
+Status: SUPERSEDED FOR ACTIVE ACCESS — historical evidence retained; HTTPS preparation replaces the desktop path
 Recorded: 2026-10-03 UTC (2026-10-02 local)
 Owner: Azure/BFF coordinator; repository owner decides SKU and quota request
 Authority: [accepted ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md), [PA03 plan](../../plans/active/private-pilot-browser-access-preparation.md), [operator handoff](bastion-development-access.md)
@@ -87,3 +87,9 @@ The private BFF status board remains stale for this update: automatic approval r
 ## Current amended candidate and request outcome — 2026-10-03 UTC
 
 [The owner-approved B2s v2 amendment](bastion-b2sv2-amendment.md) supersedes the prior pending SKU decision. The template is locally verified; the automatic quota request failed and refreshed quota remains zero. [The prepared separate support action](bastion-bsv2-support-request.md) was blocked by automatic approval review and needs explicit authorization. No ticket or paid resource was created. Other exact image/network/BFF/access/cost prerequisites remain open; earlier observations above are historical.
+
+## Owner switches the active access path to HTTPS — 2026-10-03 UTC
+
+The repository owner now requests “Let’s move to the https instead of bastion.” The [active HTTPS preparation plan](../../plans/active/https-pilot-portal-preparation.md), [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [technical/test proposal](https-pilot-portal-proposal.md) replace the Bastion browser path and post-pilot timing preference. Prior template approvals and failed quota evidence remain historical. VM quota/support/image/desktop/RDP prerequisites are SUPERSEDED for this path, not technically resolved. No VM/Bastion was deployed or removed; no support ticket is pursued.
+
+The recommended candidate is a new external VNet-integrated Consumption-profile Container Apps environment exposing only the portal/BFF through built-in HTTPS, with Entra organizational login and private protected services. Exact architecture/local disabled-template approval, real BFF/provider/key/audit composition, reviewed users/roles/CA, full priced public session and live verification remain required. No public ingress, resource, invitation, grant, migration, live sign-in or new spending was performed. G1–G9/Milestone2 remain NOT VERIFIED. Private-board publication remains blocked by the separately rejected publisher credential/network action; its BFF/access snapshot is stale. Historical sections below or above retain their original time-bound state.

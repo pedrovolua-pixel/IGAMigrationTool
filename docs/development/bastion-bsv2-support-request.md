@@ -1,6 +1,6 @@
 # Azure Bsv2 quota support request: prepared scope
 
-Status: PREPARED — opening the separate support workflow awaits explicit owner authorization
+Status: SUPERSEDED FOR ACTIVE ACCESS — historical evidence retained; HTTPS preparation replaces the desktop path
 Date: 2026-10-03 UTC
 Requested role: Repository owner / selected subscription owner
 Canonical authority: [approved SKU and quota amendment](bastion-b2sv2-amendment.md)
@@ -24,3 +24,9 @@ The selected subscription identifier is supplied by the authenticated Azure port
 ## Completion and remaining limits
 
 This human dependency closes when the owner explicitly authorizes the separate Azure support action and the coordinator records the actual submitted ticket/result, or the owner supplies a protected submitted-ticket reference. A sent ticket does not prove quota approval. A granted quota does not prove VM allocation, exact-image disk/browser compatibility or effective network isolation. Full priced deployment and the image/network/BFF/key/audit/identity prerequisites remain open.
+
+## Owner switches the active access path to HTTPS — 2026-10-03 UTC
+
+The repository owner now requests “Let’s move to the https instead of bastion.” The [active HTTPS preparation plan](../../plans/active/https-pilot-portal-preparation.md), [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [technical/test proposal](https-pilot-portal-proposal.md) replace the Bastion browser path and post-pilot timing preference. Prior template approvals and failed quota evidence remain historical. VM quota/support/image/desktop/RDP prerequisites are SUPERSEDED for this path, not technically resolved. No VM/Bastion was deployed or removed; no support ticket is pursued.
+
+The recommended candidate is a new external VNet-integrated Consumption-profile Container Apps environment exposing only the portal/BFF through built-in HTTPS, with Entra organizational login and private protected services. Exact architecture/local disabled-template approval, real BFF/provider/key/audit composition, reviewed users/roles/CA, full priced public session and live verification remain required. No public ingress, resource, invitation, grant, migration, live sign-in or new spending was performed. G1–G9/Milestone2 remain NOT VERIFIED. Private-board publication remains blocked by the separately rejected publisher credential/network action; its BFF/access snapshot is stale. Historical sections below or above retain their original time-bound state.

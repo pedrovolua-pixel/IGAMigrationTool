@@ -4,6 +4,10 @@ Status: Accepted for bounded local development design and templates; live deploy
 Date: 2026-10-02
 Decision owners: Repository owner; platform/network/identity/operations reviewers
 
+## Current direction — 2026-10-03 UTC
+
+The owner now requests “Let’s move to the https instead of bastion.” This ADR's accepted local templates and prior decision remain historical optional sources, while the desktop deployment/quota/support path is superseded by [active HTTPS preparation](../../plans/active/https-pilot-portal-preparation.md) and [Proposed ADR-0011](ADR-0011-https-pilot-portal.md). The private-access preference and post-pilot timing below describe the earlier decision. No Bastion/VM was deployed or removed; no public architecture, paid session or live exposure is accepted by this notice.
+
 ## Context
 
 The owner keeps the application private and requests the easiest development access. The approved foundation is an internal East US 2 Container Apps environment and protected private services; the historical synthetic session was disposed. Mac/home browser reachability has no approved binding. The source collector remains outbound HTTPS and provides no human browser route. Actual customer role/home-origin proof, production composition, audit-outage preservation and refreshed paid session remain open.
