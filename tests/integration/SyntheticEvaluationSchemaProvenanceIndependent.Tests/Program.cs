@@ -52,7 +52,7 @@ internal static partial class Program
         await Runs.InitializeAsync();
         await Ai.InitializeAsync();
         await using (var c = await Open()) await Outcomes.InitializeAsync(c);
-        
+
         var normal = await Finished(2, fixedNormal: true);
         await ExactSource(normal);
         await AuthorityMatrix(normal);
@@ -144,9 +144,9 @@ internal static partial class Program
         for (var ordinal = 1; ordinal <= attempts; ordinal++)
         {
             var id = fixedNormal ? Guid.Parse("b50aa02f-6e30-4f64-af00-b0ba1042a7fa") : Guid.NewGuid();
-            var reserved = await Tx(run.RunId, (c,t) => Ai.ReserveAsync(c,t,Worker,run.RunId,work.WorkId,id,revision));
+            var reserved = await Tx(run.RunId, (c, t) => Ai.ReserveAsync(c, t, Worker, run.RunId, work.WorkId, id, revision));
             Check(reserved.Succeeded, "actual owning attempt reservation");
-            var dispatched = await Tx(run.RunId, (c,t) => Ai.MarkDispatchedAsync(c,t,Worker,run.RunId,work.WorkId,reserved.Value!.Key,reserved.Value.WorkRevision));
+            var dispatched = await Tx(run.RunId, (c, t) => Ai.MarkDispatchedAsync(c, t, Worker, run.RunId, work.WorkId, reserved.Value!.Key, reserved.Value.WorkRevision));
             Check(dispatched.Succeeded, "actual owning dispatch marker");
             // Existing pure fake provider supplies test receipts outside a transaction, never during tested reads.
             var receipt = new FakeAiProvider().Dispatch(new(dispatched.Value!.Key, retry ? AiScenario.RetryTwice : work.Scenario, work.PacketInputJson, work.Units, false));
@@ -157,15 +157,21 @@ internal static partial class Program
                 else { var array = node["proposals"]!.AsArray(); while (array.Count > proposals) array.RemoveAt(array.Count - 1); }
                 var output = node.ToJsonString();
                 // Valid zero-billed rejection fixture keeps shared period budget within its unchanged hard ceiling.
-                receipt = proposals < 0 ? receipt with { OutputJson = output, OutputDigest = Hash(output), InputUse = 0, OutputUse = 0,
-                    ReceiptId = FakeAiProvider.ReceiptIdentity(receipt.Attempt, receipt.Outcome, 0, 0) } : receipt with { OutputJson = output, OutputDigest = Hash(output) };
+                receipt = proposals < 0 ? receipt with
+                {
+                    OutputJson = output,
+                    OutputDigest = Hash(output),
+                    InputUse = 0,
+                    OutputUse = 0,
+                    ReceiptId = FakeAiProvider.ReceiptIdentity(receipt.Attempt, receipt.Outcome, 0, 0)
+                } : receipt with { OutputJson = output, OutputDigest = Hash(output) };
             }
-            var completed = await Tx(run.RunId, (c,t) => Ai.CompleteAsync(c,t,Worker,run.RunId,work.WorkId,dispatched.Value.Key,receipt));
+            var completed = await Tx(run.RunId, (c, t) => Ai.CompleteAsync(c, t, Worker, run.RunId, work.WorkId, dispatched.Value.Key, receipt));
             Check(completed.Succeeded, "actual owning receipt completed");
             if (ordinal < attempts)
             {
                 Check(completed.Value!.Outcomes.Length == 0, "retry failure has no accepted or terminal units");
-                var read = await Tx(run.RunId, (c,t) => Ai.ReadInTransactionAsync(c,t,Worker,run.RunId));
+                var read = await Tx(run.RunId, (c, t) => Ai.ReadInTransactionAsync(c, t, Worker, run.RunId));
                 revision = read.Value!.Works.Single().Revision;
             }
             else { finalReceipt = receipt; finalCompletion = completed.Value!; }
@@ -181,11 +187,11 @@ internal static partial class Program
         }
         Fixtures.Add(run.RunId, new(accepted, finalReceipt.OutputDigest!, finalReceipt.ReceiptId, Math.Max(0, proposals), attempts));
         Check(finalCompletion.Outcomes.Length == 2, "actual final2-unit terminal partition");
-        begin = await Runs.BeginWorkAsync(run.Scope,run.RunId,generation,run.Revision,DemoPhase1BCatalog.AiKeys.ToArray());
+        begin = await Runs.BeginWorkAsync(run.Scope, run.RunId, generation, run.Revision, DemoPhase1BCatalog.AiKeys.ToArray());
         Check(begin.Succeeded, "owning AI coverage work begun");
-        var saved = await Runs.CheckpointAsync(run.Scope,run.RunId,generation,begin.Snapshot!.Revision,finalCompletion.Outcomes.Select(SyntheticPhase1BAnalysisAdapter.Coverage).ToArray());
+        var saved = await Runs.CheckpointAsync(run.Scope, run.RunId, generation, begin.Snapshot!.Revision, finalCompletion.Outcomes.Select(SyntheticPhase1BAnalysisAdapter.Coverage).ToArray());
         Check(saved.Succeeded, "actual saved AI terminal coverage");
-        var final = await Runs.CompleteCoverageAsync(run.Scope,run.RunId,generation,saved.Snapshot!.Revision);
+        var final = await Runs.CompleteCoverageAsync(run.Scope, run.RunId, generation, saved.Snapshot!.Revision);
         Check(final.Succeeded && final.Snapshot!.State == SyntheticRunState.Scoring, "actual complete12-key Scoring source");
         return final.Snapshot!;
     }
@@ -205,16 +211,16 @@ internal static partial class Program
         await using (var c = await Open())
         await using (var t = await c.BeginTransactionAsync())
         {
-            var result = await Adapter.CaptureAsync(c,t,run.RunId,ConsultantAi,ConsultantOutcome);
+            var result = await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome);
             Check(result.HasReadiness, "successful actual schema readiness");
-            await VerifyReadiness(result.Readiness!,run,c,t);
+            await VerifyReadiness(result.Readiness!, run, c, t);
             foreach (var value in new object[] { result.Readiness!.VersionBindings, result.Readiness.MissingVersionKinds, result.Readiness.VersionBindings[0].OriginPaths })
-            { var list=(IList)value; Check(list.IsReadOnly,"new collection readonly"); try { list.Clear(); throw new InvalidOperationException("mutable"); } catch(NotSupportedException) { Check(true,"new collection mutation refused"); } }
-            Check(result.Readiness.GetType().GetProperties().All(p=>p.SetMethod is null),"readiness public properties get-only");
+            { var list = (IList)value; Check(list.IsReadOnly, "new collection readonly"); try { list.Clear(); throw new InvalidOperationException("mutable"); } catch (NotSupportedException) { Check(true, "new collection mutation refused"); } }
+            Check(result.Readiness.GetType().GetProperties().All(p => p.SetMethod is null), "readiness public properties get-only");
             await t.CommitAsync();
         }
-        Check(before == await Rows(),"successful public capture caller COMMIT leaves entire owning-table footprint unchanged");
-        Check(!before.Contains("synthetic_review.",StringComparison.Ordinal),"no review or evaluation schema initialized");
+        Check(before == await Rows(), "successful public capture caller COMMIT leaves entire owning-table footprint unchanged");
+        Check(!before.Contains("synthetic_review.", StringComparison.Ordinal), "no review or evaluation schema initialized");
     }
     private static async Task AuthorityMatrix(SyntheticRunSnapshot run)
     {
@@ -271,18 +277,18 @@ internal static partial class Program
     }
     private static async Task GapSource(int proposals)
     {
-        var run=await Finished(proposals);
-        var before=await Rows();
-        await using var c=await Open(); await using var t=await c.BeginTransactionAsync();
-        var result=await Adapter.CaptureAsync(c,t,run.RunId,ConsultantAi,ConsultantOutcome);
-        Check(result.HasReadiness,"actual accepted empty/mixed schema source");
-        await VerifyReadiness(result.Readiness!,run,c,t);
-        using var population=JsonDocument.Parse(result.Readiness!.PopulationCanonicalJson);
-        Check(population.RootElement.GetProperty("members").GetArrayLength()==proposals && population.RootElement.GetProperty("gaps").GetArrayLength()==2-proposals,"exact2/1/0 members and distinct gaps");
-        foreach(var gap in population.RootElement.GetProperty("gaps").EnumerateArray())
-            Check(gap.GetProperty("state").GetString()=="NotAssessed" && gap.GetProperty("reasonCode").GetString()=="AI_NO_VALIDATED_CONCLUSION" && gap.GetProperty("stage").GetString()=="AI","original terminal gap kept separate");
+        var run = await Finished(proposals);
+        var before = await Rows();
+        await using var c = await Open(); await using var t = await c.BeginTransactionAsync();
+        var result = await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome);
+        Check(result.HasReadiness, "actual accepted empty/mixed schema source");
+        await VerifyReadiness(result.Readiness!, run, c, t);
+        using var population = JsonDocument.Parse(result.Readiness!.PopulationCanonicalJson);
+        Check(population.RootElement.GetProperty("members").GetArrayLength() == proposals && population.RootElement.GetProperty("gaps").GetArrayLength() == 2 - proposals, "exact2/1/0 members and distinct gaps");
+        foreach (var gap in population.RootElement.GetProperty("gaps").EnumerateArray())
+            Check(gap.GetProperty("state").GetString() == "NotAssessed" && gap.GetProperty("reasonCode").GetString() == "AI_NO_VALIDATED_CONCLUSION" && gap.GetProperty("stage").GetString() == "AI", "original terminal gap kept separate");
         await t.CommitAsync();
-        Check(before==await Rows(),"accepted empty/mixed caller COMMIT nonmutation");
+        Check(before == await Rows(), "accepted empty/mixed caller COMMIT nonmutation");
     }
     private static async Task Tamper(SyntheticRunSnapshot run)
     {
@@ -363,6 +369,23 @@ internal static partial class Program
             try { await Adapter.CaptureAsync(c, t, normal.RunId, ConsultantAi, ConsultantOutcome, cancelled.Token); throw new InvalidOperationException("cancellation ignored"); }
             catch (OperationCanceledException) { Check(true, "cancelled capture propagates cancellation"); }
             await t.RollbackAsync();
+        }
+        await using (var holder = await Open())
+        await using (var held = await holder.BeginTransactionAsync())
+        {
+            await SyntheticRunSourceFence.AcquireAsync(holder, held, "synthetic-customer", "synthetic-project", "synthetic-environment", normal.RunId);
+            var waitingDatabase = new NpgsqlConnectionStringBuilder(Database) { ApplicationName = "synthetic-schema07-cancelled-capture" };
+            await using var waiting = await Open(waitingDatabase.ConnectionString);
+            await using var waitingTransaction = await waiting.BeginTransactionAsync();
+            using var cancellation = new CancellationTokenSource();
+            var capture = Adapter.CaptureAsync(waiting, waitingTransaction, normal.RunId, ConsultantAi, ConsultantOutcome, cancellation.Token);
+            await WaitForAdvisory("synthetic-schema07-cancelled-capture");
+            Check(!capture.IsCompleted, "capture actually waits acquiring held source run fence");
+            cancellation.Cancel();
+            try { await capture.WaitAsync(TimeSpan.FromSeconds(10)); throw new InvalidOperationException("blocked capture ignored cancellation"); }
+            catch (OperationCanceledException) { Check(true, "blocked source acquisition propagates cancellation without partial readiness"); }
+            await waitingTransaction.RollbackAsync();
+            await held.RollbackAsync();
         }
         Check((await Capture(normal.RunId)).Readiness is not null, "source remains coherent/readable after concurrent writers and cancellation");
     }

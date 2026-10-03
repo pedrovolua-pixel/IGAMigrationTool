@@ -70,10 +70,17 @@ internal static partial class Program
         try { await CreateFreshDatabase(); throw new InvalidOperationException("empty existing DB admitted"); }
         catch (InvalidOperationException x) when (x.Message == "Independent database must be fresh; existing data preserved.")
         { Check(DatabaseCreates == creates, "existing empty selected database preserved and refused"); }
-        await using var c = await Open(); await using var t = await c.BeginTransactionAsync();
-        OwnerDenied(await Ai.ReadAcceptedSchemaInTransactionAsync(c, t, ConsultantAi, Guid.NewGuid(), new string('0', 64)), AiIssue.NotInitialized, "uninitialized owning schema reader closed");
-        Denied(await Adapter.CaptureAsync(c, t, Guid.NewGuid(), ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.NotInitialized, "uninitialized composed capture closed");
-        await t.RollbackAsync();
+        await using var c = await Open();
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            OwnerDenied(await Ai.ReadAcceptedSchemaInTransactionAsync(c, t, ConsultantAi, Guid.NewGuid(), new string('0', 64)), AiIssue.NotInitialized, "uninitialized owning schema reader closed");
+            await t.RollbackAsync();
+        }
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            Denied(await Adapter.CaptureAsync(c, t, Guid.NewGuid(), ConsultantAi, ConsultantOutcome), Phase1BAcceptedSchemaIssue.NotInitialized, "uninitialized composed capture closed");
+            await t.RollbackAsync();
+        }
     }
     private static void OwnerDenied(AiOperationResult<AiAcceptedSchemaProof> result, AiIssue issue, string label) => Check(result.Issue == issue && result.Value is null, label);
     private static async Task<string> SourceDigest(Guid run)
