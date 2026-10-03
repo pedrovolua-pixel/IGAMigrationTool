@@ -106,4 +106,8 @@
   <Folder Name="/tests/integration/SyntheticTaskCsv.Tests/">
     <Project Path="tests/integration/SyntheticTaskCsv.Tests/Probe/Probe.csproj" />
   </Folder>
+  <Project Path="src/server/modules/SyntheticMcp/SyntheticMcp.csproj" />
+  <Project Path="tests/unit/SyntheticMcpPublication.Tests/SyntheticMcpPublication.Tests.csproj" />
+  <Project Path="tests/unit/SyntheticMcpBoundary.Tests/SyntheticMcpBoundary.Tests.csproj" />
+  <Project Path="tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj" />
 </Solution>
