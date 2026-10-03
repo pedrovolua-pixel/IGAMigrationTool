@@ -41,6 +41,33 @@ try
     }
     Check(await f.Number("SELECT count(*) FROM pg_roles WHERE rolname='icom_owner' AND NOT rolcanlogin AND NOT rolsuper") == 1,
         "Distinct function owner must be NONLOGIN and nonsuperuser.");
+    Check(f.Clock.GetUtcNow().UtcTicks % 10 == 0, "Frozen fixture clock starts at PostgreSQL microsecond precision.");
+    // Exercise every possible submicrosecond remainder through the real JSON
+    // provider publication path. Future rounding remains denied by production.
+    for (var remainder = 1; remainder < 10; remainder++)
+    {
+        f.Clock.Advance(TimeSpan.FromTicks(remainder));
+        var precisionSubject = await f.Enroll();
+        await using var precision = f.Operator.CreateCommand("SELECT provider_checked_at FROM identity_sessions.subjects WHERE tenant_id=$1 AND object_id=$2");
+        precision.Parameters.AddWithValue(precisionSubject.TenantId); precision.Parameters.AddWithValue(precisionSubject.ObjectId);
+        var stored = new DateTimeOffset((DateTime)(await precision.ExecuteScalarAsync())!);
+        var now = f.Clock.GetUtcNow();
+        Check(stored.UtcTicks % 10 == 0 && Math.Abs(stored.UtcTicks - now.UtcTicks) < 10,
+            "Actual provider JSON timestamp cast quantizes submicrosecond input to PostgreSQL precision.");
+        if (remainder == 9)
+            Check(stored > now, "Nine-tick reproduction yields a future provider timestamp.");
+        var precisionVersion = await f.Version(precisionSubject);
+        if (stored > now)
+            await Refused(() => first.StoreAsync(f.Ticket(precisionSubject, precisionVersion)), "Rounded future provider time remains fail-closed.");
+        f.Clock.Advance(TimeSpan.FromTicks(10 - remainder));
+        // A fresh aligned subject avoids moving an existing observation back in
+        // time. No sleep/retry or relaxed production time comparison is used.
+        var alignedSubject = await f.Enroll();
+        var precisionKey = await first.StoreAsync(f.Ticket(alignedSubject, await f.Version(alignedSubject)));
+        Check(await second.RetrieveAsync(precisionKey) is not null,
+            "Microsecond-aligned observation admits across real store instances.");
+        await first.RemoveAsync(precisionKey);
+    }
     var a = await f.Enroll(); var other = await f.Enroll();
     var v = await f.Version(a); var before = await Counts();
     var ticket = f.Ticket(a, v);
@@ -357,6 +384,7 @@ try
     // The advanced synthetic clock stays behind wall time, so PostgreSQL's
     // future-event guard cannot be the reason this admission is refused.
     f.Clock.SampleWallClock();
+    Check(f.Clock.GetUtcNow().UtcTicks % 10 == 0, "Resampled fixture wall clock retains PostgreSQL precision.");
     var expiring = await f.Enroll(publish: false);
     var nearExpiry = await f.Observation(expiring);
     nearExpiry = nearExpiry with { Observation = nearExpiry.Observation with { StartedAtUtc = f.Clock.GetUtcNow().AddMinutes(-15).AddSeconds(2) } };

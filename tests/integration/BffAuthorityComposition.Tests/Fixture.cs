@@ -9,10 +9,13 @@ using NpgsqlTypes;
 
 sealed class Clock : TimeProvider
 {
-    private long ticks = DateTimeOffset.UtcNow.AddSeconds(-1).UtcTicks;
+    // PostgreSQL timestamptz stores microseconds; frozen authority observations
+    // must not round forward beyond the clock used by fail-closed admission.
+    private long ticks = PostgreSqlTicks(DateTimeOffset.UtcNow.AddSeconds(-1));
+    private static long PostgreSqlTicks(DateTimeOffset value) => value.UtcTicks / 10 * 10;
     public override DateTimeOffset GetUtcNow() => new(Interlocked.Read(ref ticks), TimeSpan.Zero);
     public void Advance(TimeSpan span) => Interlocked.Add(ref ticks, span.Ticks);
-    public void SampleWallClock() => Interlocked.Exchange(ref ticks, DateTimeOffset.UtcNow.AddMilliseconds(-100).UtcTicks);
+    public void SampleWallClock() => Interlocked.Exchange(ref ticks, PostgreSqlTicks(DateTimeOffset.UtcNow.AddMilliseconds(-100)));
 }
 
 sealed class Fixture : IAsyncDisposable
