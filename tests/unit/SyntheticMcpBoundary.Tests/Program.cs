@@ -115,6 +115,27 @@ Denied(await ingress.Read(), McpOutcome.Limited, "ingress-plus-one");
 ingress.ChangeGrant = g => g with { ActionAllowed = false };
 Denied(await ingress.Read(), McpOutcome.Unavailable, "resolved-customer-independent-ingress");
 
+var ingressConcurrency = new Fixture { ChangeGrant = _ => null, AuditGate = new(false), AuditsEntered = new(16) };
+var ingressTasks = Enumerable.Range(0, 16).Select(i =>
+{
+    var done = new TaskCompletionSource<McpResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+    new Thread(() => { try { done.SetResult(ingressConcurrency.Read().GetAwaiter().GetResult()); } catch (Exception error) { done.SetException(error); } }).Start();
+    return done.Task;
+}).ToArray();
+try
+{
+    Check(ingressConcurrency.AuditsEntered.Wait(TimeSpan.FromSeconds(3)) && ingressTasks.All(t => !t.IsCompleted), "sixteen-ingress-active-real-tasks");
+    Denied(await ingressConcurrency.Read(), McpOutcome.Limited, "ingress-concurrency-plus-one");
+}
+finally { ingressConcurrency.AuditGate.Set(); }
+foreach (var result in await Task.WhenAll(ingressTasks)) Denied(result, McpOutcome.Unavailable, "ingress-lease-completion");
+
+var bucketCapacity = new Fixture { ChangeGrant = g => g with { Scope = g.Scope with { CustomerId = g.IdentityId }, ActionAllowed = false } };
+for (var i = 0; i < 4096; i++) Denied(await bucketCapacity.Read(caller: bucketCapacity.Caller with { IdentityId = $"syn-bucket-{i}" }), McpOutcome.Unavailable, "bounded-active-buckets");
+Denied(await bucketCapacity.Read(caller: bucketCapacity.Caller with { IdentityId = "syn-bucket-over" }), McpOutcome.Limited, "bucket-cap-plus-one");
+bucketCapacity.Time = TimeSpan.FromSeconds(60);
+Denied(await bucketCapacity.Read(caller: bucketCapacity.Caller with { IdentityId = "syn-bucket-over" }), McpOutcome.Unavailable, "inactive-bucket-pruning");
+
 // Real blocked tasks establish simultaneous reads, not counters fabricated by the test.
 var concurrent = new Fixture { Block = new(TaskCreationOptions.RunContinuationsAsynchronously) };
 using (var cancel = new CancellationTokenSource())
@@ -171,6 +192,22 @@ for (var i = 0; i < 512; i++)
     Check((await customerCapacity.Read(Fixture.Request(size: 1), customerCapacity.Caller with { IdentityId = $"syn-cursor-{i % 5}" })).Outcome == McpOutcome.Success, "cursor-customer-capacity");
 }
 Denied(await customerCapacity.Read(Fixture.Request(size: 1), customerCapacity.Caller with { IdentityId = "syn-cursor-fresh" }), McpOutcome.Limited, "cursor-customer-plus-one");
+var globalCapacity = new Fixture();
+globalCapacity.ChangeGrant = g =>
+{
+    var number = int.Parse(g.IdentityId.AsSpan("syn-global-".Length));
+    var customer = $"syn-global-customer-{number % 9}";
+    return g with { Scope = g.Scope with { CustomerId = customer }, ManifestDigest = globalCapacity.ForCustomer(customer).Digest };
+};
+for (var i = 0; i < 4096; i++)
+{
+    if (i == 2250) globalCapacity.Time = TimeSpan.FromSeconds(60);
+    // 450 identities avoid identity cursor/rate caps; 9 customers avoid customer cursor/rate caps.
+    Check((await globalCapacity.Read(Fixture.Request(size: 1), globalCapacity.Caller with { IdentityId = $"syn-global-{i % 450}" })).Outcome == McpOutcome.Success, "cursor-global-capacity");
+}
+Denied(await globalCapacity.Read(Fixture.Request(size: 1), globalCapacity.Caller with { IdentityId = "syn-global-451" }), McpOutcome.Limited, "cursor-global-plus-one");
+globalCapacity.Time = TimeSpan.FromSeconds(300);
+Check((await globalCapacity.Read(Fixture.Request(size: 1), globalCapacity.Caller with { IdentityId = "syn-global-451" })).Outcome == McpOutcome.Success, "global-expired-capacity-reclaimed");
 var chain = new Fixture(5);
 var chainFirst = await chain.Read(Fixture.Request(size: 1));
 chain.Time = TimeSpan.FromSeconds(299);
