@@ -206,3 +206,8 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 ### Phase 1B local checkpoint CLOSED — publication and cleanup confirmed
 
 [The final native closure receipt](../../docs/development/evidence/phase1b-local-closure-site-20261003.json) confirms owner-private version98/sourcecb3e893 and succeeded deployment reflecting canonical283a293 and exact frozen runtime/tests6b7a5f2. Reconciliation preserved the newer shared site/source97, all twelve human cards and sixteen unowned panels.1440/390/320 QA and exact HTML/archive inspection passed. Four finished own worktrees were removed after native/source/runtime/log evidence was copied and rehashed; retained branches, databases and unrelated/concurrent work are preserved. All scoped [Phase1B completion criteria](../../plans/active/local-pilot-phase1b-closure.md) are fulfilled. Separate Phase1C, FR-HAS-53 accuracy, manual accessibility/default Mac startup, full milestones/UAT/G1–G9 and production release remain open.
+
+
+### Phase 1B final closed-snapshot publication provenance
+
+[The final native private receipt](../../docs/development/evidence/phase1b-final-closed-site-20261003.json) confirms succeeded owner-private version99/source8f2b5a5 reflecting the completed canonical closure commit0f78830. The board explicitly marks the local engineering checkpoint closed and links its confirmed receipt. Repeated1440/390/320 QA, exact pushed HTML/archive inspection and preservation of all twelve human cards/sixteen unowned panels passed. This records publication provenance only: scoped closure, separate Phase1C, all human dependencies and NOT VERIFIED/live/production boundaries are unchanged.
