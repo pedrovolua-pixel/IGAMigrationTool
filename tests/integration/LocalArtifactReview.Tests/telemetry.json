@@ -1,0 +1,9 @@
+{
+  "schema": "v13-original-host-telemetry-absence-v1",
+  "status": "PASS",
+  "reasonValuesChecked": 9,
+  "artifactValuesChecked": 30,
+  "hostLogBytes": 15492,
+  "hostLogSha256": "9ba1a79ecc95ae189797109654a9143901ab0e0bf5acf656707b7982e9400f0b",
+  "scope": "Exact recorded fictional reason and original artifact text absence; no production/audit-provider claim"
+}
