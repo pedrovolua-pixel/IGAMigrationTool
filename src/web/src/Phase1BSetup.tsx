@@ -212,6 +212,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
   const [outcomeId, setOutcomeId] = useState(''),
     [title, setTitle] = useState(''),
     [behavior, setBehavior] = useState('');
+  const [coverageFilter, setCoverageFilter] = useState<'All' | Phase1BCategory>('All');
   const [category, setCategory] = useState<Phase1BCategory>('SECURITY'),
     [origin, setOrigin] = useState<'Documented' | 'Inferred'>('Documented');
   const [references, setReferences] = useState(''),
@@ -261,6 +262,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
     setReferences('');
     setAssumptions('');
     setCategory('SECURITY');
+    setCoverageFilter('All');
     setOrigin('Documented');
   }, [props.contextKey]);
   const command = (entry: Phase1BOutcomeVersion, kind: Phase1BOutcomeCommand['kind']) =>
@@ -285,9 +287,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
     phase1BValidText(behavior) &&
     phase1BValidText(reason) &&
     links.length <= 256 &&
-    availableKeys.some(
-      (link) => link.categoryId === category && links.includes(coverageKey(link)),
-    ) &&
+    availableKeys.some((link) => links.includes(coverageKey(link))) &&
     (previous !== null || new Set(props.entries.map((entry) => entry.outcomeId)).size < 64) &&
     (previous?.version ?? 0) < Number.MAX_SAFE_INTEGER &&
     lines(references).length <= 256 &&
@@ -337,9 +337,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
               title,
               behavior,
               origin,
-              unitLinks: availableKeys.filter(
-                (link) => link.categoryId === category && links.includes(coverageKey(link)),
-              ),
+              unitLinks: availableKeys.filter((link) => links.includes(coverageKey(link))),
               referenceIds: lines(references),
               assumptions: lines(assumptions),
               predecessorVersion: previous?.version ?? null,
@@ -379,7 +377,6 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
                 disabled={locked}
                 onChange={(event) => {
                   setCategory(event.target.value as Phase1BCategory);
-                  setLinks([]);
                 }}
               >
                 <option>SECURITY</option>
@@ -423,8 +420,22 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
           </label>
           <fieldset disabled={locked}>
             <legend>Explicit applicable coverage units</legend>
+            <p>The display filter preserves all selected exact pairs across health categories.</p>
+            <label>
+              Applicability display filter
+              <select
+                value={coverageFilter}
+                onChange={(event) =>
+                  setCoverageFilter(event.target.value as 'All' | Phase1BCategory)
+                }
+              >
+                <option value="All">All health categories</option>
+                <option>SECURITY</option>
+                <option>OPERATIONS</option>
+              </select>
+            </label>
             {availableKeys
-              .filter((link) => link.categoryId === category)
+              .filter((link) => coverageFilter === 'All' || link.categoryId === coverageFilter)
               .map((link) => (
                 <label className="phase1b-checkbox" key={coverageKey(link)}>
                   <input

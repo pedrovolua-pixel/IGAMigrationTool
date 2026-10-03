@@ -183,6 +183,16 @@ createRoot(document.getElementById('root')).render(<Harness/>);
   await page.getByLabel('Desired behavior').fill('<svg onload="window.injection=true">');
   await page.getByRole('checkbox', { name: 'det-guard · SYN-GUARD · SECURITY' }).check();
   await page.getByRole('checkbox', { name: 'det-guard · SYN-OTHER · SECURITY' }).check();
+  await page.getByLabel('Applicability display filter').selectOption('OPERATIONS');
+  await page
+    .getByRole('checkbox', { name: 'synthetic-ai-retry · configuration · OPERATIONS' })
+    .check();
+  await page.getByLabel('Applicability display filter').selectOption('SECURITY');
+  check(
+    (await page.getByRole('checkbox', { name: 'det-guard · SYN-GUARD · SECURITY' }).isChecked()) &&
+      (await page.getByRole('checkbox', { name: 'det-guard · SYN-OTHER · SECURITY' }).isChecked()),
+    'display filter preserves explicit selections across both health categories',
+  );
   await page
     .getByLabel('Reference IDs (one per line)')
     .fill('fixture-reference\nfixture-reference');
@@ -197,8 +207,10 @@ createRoot(document.getElementById('root')).render(<Harness/>);
     draft.kind === 'CreateDraft' &&
       draft.version === 1 &&
       draft.content.predecessorVersion === null &&
-      draft.content.unitLinks.length === 2 &&
-      draft.content.unitLinks.every((link) => link.inventoryId === 'det-guard') &&
+      draft.content.unitLinks.length === 3 &&
+      draft.content.unitLinks.slice(0, 2).every((link) => link.inventoryId === 'det-guard') &&
+      draft.content.unitLinks[2].inventoryId === 'synthetic-ai-retry' &&
+      draft.content.unitLinks[2].evidenceCategory === 'configuration' &&
       draft.content.unitLinks[0].evidenceCategory === 'SYN-GUARD' &&
       draft.content.unitLinks[1].evidenceCategory === 'SYN-OTHER',
     'draft preserves two distinct inventory/evidence keys and immutable successor metadata',
