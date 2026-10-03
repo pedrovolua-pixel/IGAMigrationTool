@@ -33,9 +33,10 @@ foreach (var path in Directory.EnumerateFiles(assetRoot, "*", SearchOption.AllDi
     };
     if (type is not null) assets.Add(Path.GetRelativePath(assetRoot, path).Replace(Path.DirectorySeparatorChar, '/'), (path, type));
 }
-var store = new SyntheticEvaluationWorkflowStore(connection);
+SyntheticEvaluationWorkflowStore store;
 try
 {
+    store = new SyntheticEvaluationWorkflowStore(connection);
     await store.InitializeAsync();
     var seed = await store.SeedAsync(FictionalEvaluationFixture.BuildSeed());
     if (seed.Issue is not null) throw new InvalidOperationException();
