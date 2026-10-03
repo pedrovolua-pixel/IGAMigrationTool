@@ -158,7 +158,7 @@ internal static partial class Program
         await t.RollbackAsync();
         return captured;
     }
-    private static void Denied(Phase1BPopulationResult result, Phase1BPopulationIssue issue, string label) => Check(result.Issue == issue && result.Population is null, label);
+    private static void Denied(Phase1BPopulationResult result, Phase1BPopulationIssue issue, string label) => Check(result.Issue == issue && result.Population is null && !result.HasPopulation, label);
     private static async Task ExactSource(SyntheticRunSnapshot run)
     {
         var before = await Rows();

@@ -91,7 +91,14 @@ internal static partial class Program
         using var plan = JsonDocument.Parse(population.RunPlanJson);
         var roots = new Dictionary<string, List<(string Pointer, JsonElement Node)>>
         {
-            ["C"] = [("C", capture)], ["F"] = [("F", frozen.RootElement)], ["L"] = [("L", locked.RootElement)], ["A"] = [("A", ai.RootElement)], ["P"] = [("P", plan.RootElement)], ["I"] = [], ["O"] = [], ["G"] = []
+            ["C"] = [("C", capture)],
+            ["F"] = [("F", frozen.RootElement)],
+            ["L"] = [("L", locked.RootElement)],
+            ["A"] = [("A", ai.RootElement)],
+            ["P"] = [("P", plan.RootElement)],
+            ["I"] = [],
+            ["O"] = [],
+            ["G"] = []
         };
         var decoded = new List<JsonDocument>();
         try
