@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <EvaluationPopulationProject Condition="'$(EvaluationPopulationProject)' == ''">../../../src/server/modules/SyntheticEvaluationPopulationIntegration/SyntheticEvaluationPopulationIntegration.csproj</EvaluationPopulationProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(EvaluationPopulationProject)" />
+    <None Update="*-literals.json;inventory.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
