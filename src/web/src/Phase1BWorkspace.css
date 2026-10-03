@@ -47,3 +47,12 @@ section[aria-label='Phase 1B combined assessment'] code {
   max-width: 100%;
   overflow-x: auto;
 }
+
+.phase1b-protected-reference {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.phase1b-protected-reference code {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}

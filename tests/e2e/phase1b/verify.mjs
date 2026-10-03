@@ -261,6 +261,17 @@ async function navigation(capture) {
       "Auditor navigation has metadata only",
     );
   await scan("protected-task");
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    check(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      `protected task ${width}px reference has no horizontal page overflow`,
+    );
+    await scan(`protected-task-${width}`);
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(row.findingLink);
   await page.getByText(row.findingId, { exact: true }).waitFor();
   check(true, "finding link performs fresh authorized lookup");

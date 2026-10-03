@@ -1033,7 +1033,7 @@ export function Phase1BProtectedNavigation({
     return () => c.abort();
   }, [context, runId, view, id]);
   return (
-    <main className="app">
+    <main className="app phase1b-protected-reference">
       <h1>Protected fictional planning reference</h1>
       <p role={value ? 'status' : 'alert'}>{message}</p>
       {value && (
