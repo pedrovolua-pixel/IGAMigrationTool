@@ -1,0 +1,24 @@
+# Cycle06 population/provenance paired test plan
+
+Status: DRAFT preimplementation expectations; source inventory/nonauthor review/freeze pending
+Date: 2026-10-03
+Contract: local-phase1b-population-provenance-contract.md; FR-HAS-11/13/50–53, bounded AC-HAS-12/19 and TP-HAS-012/019. Engineering checks do not pass live gates.
+
+| ID | Expected executable evidence |
+| --- | --- |
+| EV06-P001 | Independent literal reference bytes/hash for every kind; exact native scope/kind/part-count/length encoding. Case/whitespace/Unicode/type/order differences do not collapse; malformed UTF16 rejected. No hash injection/collision fabrication. |
+| EV06-P002 | Detached canonical new envelope with ordinal properties, declared enum/decimal/date/null recipes, all raw native strings/digests and both observation UTCs bound. Literal golden/native hash parity and caller/output mutation/culture checks. |
+| EV06-P003 | Actual saved normal Phase1B source yields2 native mapped groups with High/Medium, OPERATIONS/SyntheticOperations, confidence80 and native fixed-band text, exact originals/evidence/attempts/root keys. No deterministic members or120/100 replacement. |
+| EV06-P004 | Legitimate terminal zero2gaps and mixed1finding/1gap preserve native gap states/reasons/stages with no pseudo-member or reviewer outcome. |
+| EV06-P005 | Supplementary same-transaction run read follows successful capture only. Exact plan/capability/frozen input/run/state/checkpoint/scope/update coherence and public recomputed input digest; differing observed timestamps accepted and retained. No arbitrary earlier capture factory. |
+| EV06-P006 | All23 declared kinds in order with independently expected complete source bundles/paths and exact missing reasons. Every Missing has null Version reference/value; related facts never fulfill missing required semantics. No sampler call/projection/complete-v1 manifest or reviewer authority. |
+| EV06-P007 | Distinct capability and packet normalization/catalog/build values retained with separate origins, native model field distinguished from provider, maturity digest not mislabeled algorithm, policy/budget not complete settings. Confidence label preserved without classification thresholds. |
+| EV06-P008 | Exact same-actor Consultant owner grants positive; malformed/default/unknown/mixed roles, revoked/inactive/no assignment/scope/category/action denials return null population without payload/metadata. Existing source/owner authorities unchanged. |
+| EV06-P009 | Connection/transaction/run guard negatives including closed/wrong namespace/foreign store/completed/disposed/reversed-order/empty ID; cancellation propagates. No caller ownership transfer/new transactions or connections. |
+| EV06-P010 | Whole owning table footprints unchanged, absent review schema unseeded, no initializer/provider/SQL/DML; caller commit/rollback/disposal succeeds. No literal source permission becomes review context/history/export. |
+| EV06-P011 | Actual participating registry and run writer waits while population transaction holds fences, release then coherent subsequent observation. Independent bounded wait barriers; no cross-store/current-revocation/production throughput claim. |
+| EV06-P012 | Selected existing corruption/schema drift/owner failure closes; no partial population. Internal coherence/duplicate/mixed tuple negatives may use friend-only validators but never unsafe public source construction. Preserve native failures/dedicated DBs; no repair/reset. |
+| EV06-P013 | Every old source/capture/evaluation/sampling/reviewer/workflow encoder, frozen contracts and120/100 fixture/golden byte-identical. Relevant old unit/oracle/architecture checks continue passing in final integration. |
+| EV06-P014 | Author/independent locked restore/format/zero-warning Release build, focused unit and actual PG checks, coordinator full solution/security/CI. Exact commands/source/log/native failures preserved; nonauthor review before integration. |
+
+Use only existing approved saved fictional Phase1B owner APIs and dedicated fresh iga_synthetic_phase1b_* databases at127.0.0.1:55433/iga_synthetic. Do not precreate/reset shared databases, change roles/cluster, touch customer evidence or call a provider. New fixtures self-create and refuse existing names. Architecture/compatibility/diff/secret scans and independent review required. Library-only UI/e2e/a11y not applicable; generic scale/manual/live/current-policy/source-backed review and complete sampling remain NOT VERIFIED. Literal precode expectations are evidence, not inferred runtime PASS. Preserve source/runtime/native records before removing only own clean worktrees.
