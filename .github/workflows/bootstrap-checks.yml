@@ -68,6 +68,20 @@ jobs:
           dotnet run --project tests/unit/SyntheticEvaluationRegression.Tests --configuration Release --no-build
           dotnet run --project tests/unit/SyntheticEvaluationReviewer.Tests --configuration Release --no-build
           dotnet run --project tests/integration/SyntheticEvaluationPolicy.Tests --configuration Release --no-build
+      - name: Check isolated synthetic evaluation workflow
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationWorkflow.Tests -c Release --no-build
+          python3 tests/integration/SyntheticEvaluationWorkflowIndependent.Tests/oracle.py
+          for db in domain independent tamper migration; do
+            docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic "iga_synthetic_evaluation_ci_$db"
+          done
+          IGA_EVALUATION_TEST_CONNECTION='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_domain;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationWorkflowStore.Tests -c Release --no-build
+          export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_independent;Username=iga_synthetic'
+          dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build
+          export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_tamper;Username=iga_synthetic'
+          dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build -- --tamper-only
+          export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_migration;Username=iga_synthetic'
+          dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build -- --migration-only
       - name: Check assessment coverage reconciliation
         run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
       - name: Check assessment capability locks
@@ -196,6 +210,13 @@ jobs:
           node "$npm_cli" run format:check
           node "$npm_cli" run build
           node "$npm_cli" audit --audit-level=low
+      - name: Build isolated evaluation workspace
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          node src/web/node_modules/typescript/bin/tsc --project src/web/evaluation/tsconfig.json --noEmit
+          node --test src/web/evaluation/workflow.test.ts
+          node src/web/node_modules/prettier/bin/prettier.cjs --check src/web/evaluation --ignore-path src/web/evaluation/.prettierignore
+          node src/web/node_modules/vite/bin/vite.js build --config src/web/evaluation/vite.config.ts
       - name: Check independent offline AI preview component
         run: |
           export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
@@ -230,6 +251,23 @@ jobs:
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
           node tests/e2e/consultant-demo/verify.mjs
+      - name: Check isolated evaluation HTTP and browser flow
+        env:
+          IGA_SYNTHETIC_EVALUATION_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_host;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_evaluation_ci_host
+          export IGA_SYNTHETIC_EVALUATION_ASSETS="$GITHUB_WORKSPACE/src/web/evaluation/dist"
+          export WF04_EVIDENCE="$RUNNER_TEMP/evaluation-browser"
+          dotnet src/server/hosts/LocalEvaluationDemo/bin/Release/net10.0/LocalEvaluationDemo.dll --enable-synthetic-evaluation-workflow > "$RUNNER_TEMP/evaluation-host.log" 2>&1 &
+          evaluation_host_pid=$!
+          trap 'kill "$evaluation_host_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:5184/local-evaluation/v1/workspace > /dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:5184/local-evaluation/v1/workspace > /dev/null
+          node tests/e2e/local-evaluation-workflow/verify.mjs
       - name: Check analysis findings, scoring and browser read recovery
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic
@@ -433,6 +471,10 @@ jobs:
           dotnet run --project tests/unit/SyntheticEvaluationReviewer.Tests --configuration Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet run --project tests/integration/SyntheticEvaluationPolicy.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows isolated evaluation workflow
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationWorkflow.Tests -c Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows fictional fix-package workspace sources
         run: |
