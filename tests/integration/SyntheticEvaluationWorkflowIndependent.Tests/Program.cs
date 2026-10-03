@@ -120,6 +120,41 @@ internal static class Program
         var seed = FictionalEvaluationFixture.BuildSeed();
         currentRegistry = seed.Registry;
         var store = new SyntheticEvaluationWorkflowStore(connection);
+        if (args.Contains("--migration-only") || args.Contains("--migration-recheck"))
+        {
+            await using var migrationConnection = new NpgsqlConnection(connection);
+            await migrationConnection.OpenAsync();
+            if (args.Contains("--migration-only"))
+            {
+                await using var prepare = new NpgsqlCommand("""
+                CREATE SCHEMA synthetic_evaluation_workflow;
+                CREATE TABLE synthetic_evaluation_workflow.schema_migrations (
+                    migration_id text PRIMARY KEY, script_digest text NOT NULL,
+                    schema_fingerprint text NOT NULL, applied_at timestamptz NOT NULL,
+                    unexpected text DEFAULT 'independent-untracked-metadata');
+                """, migrationConnection);
+                await prepare.ExecuteNonQueryAsync();
+            }
+            var rejected = false;
+            try { await store.InitializeAsync(); }
+            catch (WorkflowInvalidException e) { rejected = e.Issue == EvaluationWorkflowIssue.MigrationDrift; }
+            Check(rejected, "initialization refuses untracked metadata instead of establishing baseline");
+            await using var inspect = new NpgsqlCommand("""
+                SELECT (SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+                        WHERE n.nspname='synthetic_evaluation_workflow' AND c.relkind='r'),
+                       (SELECT count(*) FROM synthetic_evaluation_workflow.schema_migrations),
+                       (SELECT count(*) FROM information_schema.columns
+                        WHERE table_schema='synthetic_evaluation_workflow' AND table_name='schema_migrations'
+                        AND column_name='unexpected' AND column_default IS NOT NULL)
+                """, migrationConnection);
+            await using var inspection = await inspect.ExecuteReaderAsync();
+            await inspection.ReadAsync();
+            Check(inspection.GetInt64(0) == 1, "denied initialization creates no workflow tables");
+            Check(inspection.GetInt64(1) == 0, "denied initialization records no accepted migration baseline");
+            Check(inspection.GetInt64(2) == 1, "denied initialization preserves original unexpected default");
+            Console.WriteLine($"Independent migration checks passed {checks} assertions.");
+            return;
+        }
         await store.InitializeAsync();
         Check((await store.SeedAsync(seed)).Issue is null, "trusted initial seed");
         if (args.Contains("--tamper-only"))
