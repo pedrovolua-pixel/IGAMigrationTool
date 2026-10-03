@@ -1,0 +1,26 @@
+{
+  "status": "FROZEN routine approved internal engineering; dependent implementation authorized",
+  "date": "2026-10-03",
+  "reviewedCommit": "a4197f2ae9c5bc0c19dbc61b636be34011a418f6",
+  "review": "PASS nonauthor cycle05_policy_audit",
+  "nativeReview": "work/m08-cycle06-evidence/design-review/review-final.md",
+  "reviewSha256": "e5be1df7c3d9345af3780dde53c0c5a869033b7f3efcae27850f2edebf81115d",
+  "approvedAuthority": "EV02 and owner Next cycle; no new product/security/release approval",
+  "files": [
+    {
+      "path": "specs/003-health-assessment/local-phase1b-population-provenance-contract.md",
+      "sha256": "1e335179a977671cfc914d3d2f00d05d694f0fe22d076a10725c964d97ac4fc6"
+    },
+    {
+      "path": "specs/003-health-assessment/local-phase1b-population-provenance-test-plan.md",
+      "sha256": "fe2a2036618855866a537f0d0b6fc74b8052dc1b52cd7b6a69eee8ae9b9a0e4b"
+    },
+    {
+      "path": "specs/003-health-assessment/local-phase1b-population-provenance-inventory.json",
+      "sha256": "e70af8ae204d139da2e0ecf247d50079710bceb31bbb2797ea6cc240beef792d"
+    }
+  ],
+  "scope": "Unactivated same-transaction actual saved fictional source population;13bound10missing; no complete sampler/reviewer/provider/currentaccess/publicAPI",
+  "independentPrecode": "work/m08-cycle06-evidence/independent/reference-literals-reviewed-schema-preimplementation.json",
+  "baseline": "06903b77119863f5d9fb07f1d6962fd8c43840e4"
+}

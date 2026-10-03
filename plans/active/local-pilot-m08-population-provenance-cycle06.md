@@ -1,6 +1,6 @@
 # Milestone08 cycle06 — saved-source population and provenance readiness
 
-Status: RUNNING — source/policy audits; exact engineering contract and paired test freeze required before code
+Status: RUNNING — exact contract/test/inventory independently reviewed and frozen; isolated implementation and verification
 Date: 2026-10-03
 Owner: Phase1C coordinator
 Stable source: 06903b77119863f5d9fb07f1d6962fd8c43840e4
@@ -12,11 +12,11 @@ Connect the verified sealed Phase1B capture to a detached native-provenance-back
 
 | Packet | Owner / permitted paths | State |
 | --- | --- | --- |
-| Source inventory | cycle05_source_audit; committed source read-only, native report only | RUNNING |
-| Policy inventory | cycle05_policy_audit; approved committed specifications read-only, native report only | RUNNING |
+| Source inventory | cycle05_source_audit; committed source read-only, native report only | VERIFIED |
+| Policy inventory | cycle05_policy_audit; approved committed specifications read-only, native report only | VERIFIED |
 | Contract/test/freeze/shared configuration | Coordinator in isolated cycle06 checkout; only new cycle06 docs/projects and additive shared entries | RUNNING |
-| New population implementation | Assigned isolated worker after reviewed freeze; new module and focused tests only | READY |
-| Independent actual-source verification | Separate isolated worker after freeze; new independent consumer only | READY |
+| New population implementation | cycle05_source_audit in /private/tmp/iga-m08-cycle06-population; new module and focused tests only | RUNNING |
+| Independent actual-source verification | cycle05_independent in /private/tmp/iga-m08-cycle06-independent; new independent consumer only | RUNNING |
 | Canonical records/private Site | Coordinator; additive owned records, isolated staging index, preserve concurrent work | READY |
 
 ## Requirements and controls
@@ -27,11 +27,13 @@ Rollout is an unactivated internal library and explicit fictional tests. No new 
 
 ## Completion evidence
 
-- [ ] Source and approved policy audit identify every native mapping and all23 binding origins/gaps.
-- [ ] Exact contract/test expectations receive nonauthor review and engineering freeze before code.
+- [x] Source and approved policy audit identify every native mapping and all23 binding origins/gaps.
+- [x] Exact contract/test expectations receive nonauthor review and engineering freeze before code.
 - [ ] New population/readiness library and focused actual-source tests pass independent review.
 - [ ] Applicable locked restore, format, build, unit/PostgreSQL, architecture/security, historical compatibility and configured CI checks execute with source/log hashes.
 - [ ] Canonical status/evidence and private Site/task board updated and native deployment confirmed.
 - [ ] Own source/runtime/native evidence preserved and clean temporary worktrees removed.
 
 Complete v1 source-backed sampling, reviewer/source security integration and actual end-to-end evaluation remain NOT VERIFIED where required bindings are absent. This cycle cannot close full M08, Phase1C, TP-HAS-012/019/UAT/G1–G9.
+
+Engineering freeze [receipt](../../docs/development/evidence/m08-population-provenance-engineering-freeze-20261003.json) binds reviewed source. Nonauthor review corrected the initial14/9 assumption: returned accepted OutputJson is always null, so all fixed scenarios have13source-bound/10missing including AiSchema. This is a source dependency, not authority to invent values. Implementation worker owns only new module + new unit/integration paths; independent worker owns only new independent integration consumer; coordinator owns shared solution/CI and records.
