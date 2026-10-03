@@ -6,7 +6,7 @@ using SyntheticSourceFence;
 namespace SyntheticFixReview;
 
 /// <summary>Append-only local fictional attestations; no customer identity or remediation authority.</summary>
-public sealed class SyntheticFixReviewStore
+public sealed partial class SyntheticFixReviewStore
 {
     private readonly string connectionString;
     private readonly ArtifactReviewSourceReader readSource;
