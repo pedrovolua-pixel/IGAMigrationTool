@@ -28,15 +28,21 @@ internal static class GraphProviderProjectionChecks
         byte[] Utf8(string text) => Encoding.UTF8.GetBytes(text);
         string User(string cutoff = "2026-10-03T11:00:00Z") => JsonSerializer.Serialize(new
         {
-            id = subject.ObjectId.ToString("D"), accountEnabled = true, userType = "Member", externalUserState = (string?)null,
+            id = subject.ObjectId.ToString("D"),
+            accountEnabled = true,
+            userType = "Member",
+            externalUserState = (string?)null,
             signInSessionsValidFromDateTime = cutoff
         });
         string Metadata(string json, string value = "https://graph.microsoft.com/v1.0/$metadata")
             => json[..^1] + ",\"@odata.context\":" + JsonSerializer.Serialize(value) + "}";
         string Row(int index = 0, string? assignment = null) => JsonSerializer.Serialize(new
         {
-            id = assignment ?? "opaque_not_a_guid/" + index, appRoleId = roles[index].AppRoleId.ToString("D"),
-            principalId = subject.ObjectId.ToString("D"), principalType = "User", resourceId = binding.ResourceServicePrincipalId.ToString("D")
+            id = assignment ?? "opaque_not_a_guid/" + index,
+            appRoleId = roles[index].AppRoleId.ToString("D"),
+            principalId = subject.ObjectId.ToString("D"),
+            principalType = "User",
+            resourceId = binding.ResourceServicePrincipalId.ToString("D")
         });
         string Page(string[] rows, string? next = null) => "{\"value\":[" + string.Join(',', rows) + "]"
             + (next is null ? "}" : ",\"@odata.nextLink\":" + JsonSerializer.Serialize(next) + "}");
