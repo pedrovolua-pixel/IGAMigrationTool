@@ -95,6 +95,11 @@ jobs:
           dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
           IGA_EVALUATION_SOURCE_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
           IGA_EVALUATION_SOURCE_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIndependent.Tests -c Release --no-build
+      - name: Check owning accepted-schema provenance and additive readiness
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationSchemaProvenanceIntegration.Tests -c Release --no-build
+          IGA_ACCEPTED_SCHEMA_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_schema07_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSchemaProvenanceIntegration.Tests -c Release --no-build
+          IGA_ACCEPTED_SCHEMA_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_schema07_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSchemaProvenanceIndependent.Tests -c Release --no-build
       - name: Check saved Phase1B population and truthful provenance readiness
         run: |
           dotnet run --project tests/unit/SyntheticEvaluationPopulationIntegration.Tests -c Release --no-build
@@ -503,6 +508,10 @@ jobs:
       - name: Check Windows saved-source capture canonical contracts
         run: |
           dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows accepted-schema canonical contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationSchemaProvenanceIntegration.Tests -c Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows population provenance canonical contracts
         run: |
