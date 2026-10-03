@@ -36,7 +36,7 @@ internal static class RequestParser
             }
             return new ReadRequest(kind, assessment!, report!, pageSize, cursor);
         }
-        catch (Exception exception) when (exception is JsonException or DecoderFallbackException or ArgumentException) { return null; }
+        catch (Exception exception) when (exception is JsonException or DecoderFallbackException or ArgumentException or InvalidOperationException) { return null; }
     }
 
     private static bool String(JsonElement root, string name, out string? value)

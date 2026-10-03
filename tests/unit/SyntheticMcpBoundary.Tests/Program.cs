@@ -46,6 +46,13 @@ var empty = new Fixture(0);
 Check(Ids(await empty.Read()).Length == 0, "authorized-empty-collection");
 var validText = Encoding.UTF8.GetString(Fixture.Request());
 var hostile = new List<byte[]> { Array.Empty<byte>(), new byte[] { 0xff }, Encoding.UTF8.GetBytes("[]"), new byte[16385] };
+foreach (var surrogate in new[] { @"\uD800", @"\uDC00" })
+{
+    foreach (var value in new[] { "Coverage", "synthetic-published-health-read-v1", "syn-assessment", "syn-report" })
+        hostile.Add(Encoding.UTF8.GetBytes(validText.Replace(value, surrogate, StringComparison.Ordinal)));
+    hostile.Add(Encoding.UTF8.GetBytes(validText[..^1] + $",\"cursor\":\"{surrogate}\"}}"));
+    hostile.Add(Encoding.UTF8.GetBytes(validText[..^1] + $",\"{surrogate}\":\"value\"}}"));
+}
 foreach (var method in new[] { "start", "run", "cancel", "resume", "acknowledgment", "publish", "comment", "export", "link", "task", "remediate", "migrate", "raw", "tool", "coverage", "0", "6", "ProtectedReferences.read", "https://protected-sentinel" })
     hostile.Add(Encoding.UTF8.GetBytes(validText.Replace("Coverage", method, StringComparison.Ordinal)));
 foreach (var extra in new[] { "method", "scope", "customerId", "role", "url", "path", "raw", "storage", "page_size", "ResourceKind", "contractVersion" })
