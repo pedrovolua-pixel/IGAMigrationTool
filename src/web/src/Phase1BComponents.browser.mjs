@@ -37,6 +37,7 @@ import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Phase1BSetup, phase1BValidText } from '/@fs/${source}/Phase1BSetup.tsx';
 import { Phase1BWorkspace } from '/@fs/${source}/Phase1BWorkspace.tsx';
+import '/@fs/${source}/styles.css';
 const digest = 'a'.repeat(64), approval = '10000000-0000-4000-8000-000000000001';
 const approved = { outcomeId:'access-governance',version:1,categoryId:'SECURITY',title:'Approved fictional goal',behavior:'<img src=x onerror="window.injection=true">',origin:'Documented',unitLinks:[{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'}],referenceIds:[],assumptions:[],predecessorVersion:null,contentDigest:digest,state:'CustomerApproved',revision:3,reviewEventId:'10000000-0000-4000-8000-000000000002',approvalEventId:approval,history:[{eventId:approval,kind:'Approve',actorId:'fictional-customer',recordedAtUtc:'2026-10-03T12:00:00Z',reason:'<script>window.injection=true</script>'}] };
 const draft = {...approved,outcomeId:'pending-goal',title:'Draft fictional goal',state:'Draft',revision:1,reviewEventId:null,approvalEventId:null,history:[]};
@@ -117,6 +118,17 @@ createRoot(document.getElementById('root')).render(<Harness/>);
     'approved versions are never silently selected',
   );
   await page.getByRole('checkbox', { name: /access-governance v1/ }).check();
+  const startButton = page.getByRole('button', {
+    name: 'Start combined Phase 1B run with selected versions',
+  });
+  await startButton.hover();
+  check(
+    await startButton.evaluate((button) => {
+      const style = getComputedStyle(button);
+      return style.backgroundColor === 'rgb(18, 57, 85)' && style.color === 'rgb(255, 255, 255)';
+    }),
+    'enabled hovered button preserves high contrast with the real global application stylesheet',
+  );
   await page.evaluate(() => {
     window.probe.mode = 'committed';
   });

@@ -42,6 +42,11 @@
   font: inherit;
   cursor: pointer;
 }
+.phase1b-panel button:hover:not(:disabled) {
+  background: #123955;
+  color: #fff;
+  border-color: #123955;
+}
 .phase1b-panel button:disabled {
   background: #e3e9ef;
   color: #516173;
