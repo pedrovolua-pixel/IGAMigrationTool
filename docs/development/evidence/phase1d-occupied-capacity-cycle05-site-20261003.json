@@ -1,1 +1,111 @@
-{"date":"2026-10-03","status":"PENDING_INITIAL_PRIVATE_PUBLICATION","lastVerifiedVersion":113,"qualification":"Canonical local verification snapshot will be reconciled and published in this cycle; no current-board claim before native deployment."}
+{
+  "date": "2026-10-03",
+  "status": "INITIAL_LOCAL_CHECKPOINT_PRIVATE_CONFIRMED_FULL_LINUX_PENDING",
+  "initial": {
+    "date": "2026-10-03",
+    "stage": "Localverified completeWindows/package; broaderLinux pending",
+    "deployment": {
+      "id": "appgdep_6ac194c973008191bb45ea9cb42ce65a",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_05c54fb903cc8191a1939a127369e74f",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T23:50:39.735339+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_05c54fb903cc8191a1939a127369e74f",
+      "number": 114,
+      "source": {
+        "commit_sha": "991297c49128fa08a31c49e241ee7d61451fc99f"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_000000008b9c81f585ab1dde3667c4ae",
+        "content_hash": "sha256:c620ca46aae79cba13842080f968bf9bd3be123bfa1c16ffab75c3d410eac7d2",
+        "size_bytes": 133120,
+        "file_count": 2
+      }
+    },
+    "audience": {
+      "role": "owner",
+      "mode": "custom",
+      "users": 1,
+      "groups": 0,
+      "externalVisitors": 0,
+      "revision": 1
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-review",
+      "commit_sha": "991297c49128fa08a31c49e241ee7d61451fc99f",
+      "archive": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle05-evidence/site-initial.tar.gz"
+    },
+    "canonicalSnapshot": "9f02a30d7e9d232b2451e809242463497177106c",
+    "archiveQualification": "Native storedtar hash/filecount are server metadata; exactlocal/pushed/archive HTML checked separately. Server-repacked archivebytes not independently retrieved or equated.",
+    "qa": {
+      "status": "PASS",
+      "results": [
+        {
+          "width": 1440,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 390,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 320,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        }
+      ]
+    },
+    "preservation": {
+      "status": "PASS",
+      "canonicalSnapshot": "9f02a30d7e9d232b2451e809242463497177106c",
+      "openingSiteSource": "43bfa747074c8597bf79ee37282dfbfa45a1f91d",
+      "allUnownedHtmlByteIdentical": true,
+      "entireHumanTaskSectionByteIdentical": true,
+      "openHumanTasks": 13,
+      "beforeHtmlSha256": "53bac050b3d725589397e0622f4152f5eb4dbeea417ea3252dbb21bed03ad2a4",
+      "afterHtmlSha256": "067485c7232b8904d44376820cc21a714e19600de15b3f13ac1da607736040c6",
+      "pushedSiteSource": "991297c49128fa08a31c49e241ee7d61451fc99f",
+      "archiveSourceHtmlByteIdentical": true,
+      "localGzipSha256": "f624c271f3d5afe42f7e5e061f22acef04941197e16d00de79835f227aa6095d"
+    },
+    "checks": {
+      "siteSecretScan": {
+        "status": "PASS",
+        "scannedBytes": 122627,
+        "findings": 0
+      },
+      "diffWhitespace": "PASS",
+      "visualQa": "390px linked human task screenshot inspected; desktop/mobile/reflow complete",
+      "cleanupDiagnostic": {
+        "firstQa": "PASS all3viewport/task/link checks; browser cleanup delayed",
+        "ownBrowserCleanup": "TERM/KILL requested for owned Chrome child after parent verification; first run eventually exited0",
+        "guardedRetryPreparation": "No edit occurred: original node already ended before ps guard; accidental same-input QA retry also exited0",
+        "qualification": "No product/source change or ignored assertion; final native QA receipt records all executed checks"
+      }
+    }
+  },
+  "completionPublication": "Pending full hostedcycle closure; initial version114 owner-only confirmed"
+}

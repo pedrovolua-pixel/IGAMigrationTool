@@ -1245,5 +1245,24 @@
     "No runtime/configuration/dependency/migration/public contract changes; full Milestone11/Phase1D/UAT/G1\u2013G9 and18 actual-source tests remain NOT VERIFIED.",
     "PostgreSQL/browser/Windows/Linux container/infrastructure broader checks not executed locally in this cycle; configured hosted results recorded separately.",
     "Independent hashes prove preservedbytes, not independently observed chronology of model inspection."
+  ],
+  "initialSiteReceipt": {
+    "path": "docs/development/evidence/phase1d-occupied-capacity-cycle05-site-20261003.json",
+    "version": 114,
+    "source": "991297c49128fa08a31c49e241ee7d61451fc99f",
+    "canonicalSnapshot": "9f02a30d7e9d232b2451e809242463497177106c",
+    "ownerOnlyConfirmed": true
+  },
+  "documentaryChecks": {
+    "status": "PASS",
+    "localLinks": 24,
+    "jsonParsing": true,
+    "preexistingCanonicalDiffHunksPreserved": true,
+    "comparisonQualification": "Ignore changed Git index blob headers; every unowned diff hunk identical"
+  },
+  "originalCoordinatorDocumentDiagnostics": [
+    "First canonical diff comparison incorrectly included changed Git index hashes; normalized comparison proves every unowned hunk identical before commit.",
+    "Initial own verification document extra EOFblankline corrected after executed whitespacecheck; finalcheck passed.",
+    "Site packaging tar locale warning retained; exactsource/archive/local HTML independently matched."
   ]
 }
