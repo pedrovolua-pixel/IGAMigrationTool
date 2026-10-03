@@ -66,3 +66,7 @@ The private board update is blocked: automatic approval review rejected sending 
 ## Bastion decision and deferred customer portal — 2026-10-02
 
 The owner accepted [bounded ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md) and local PA01–PA02 templates: one private owner-operated synthetic Windows test desktop through Bastion Developer. [The handoff](bastion-development-access.md) records exact inputs/negative checks and live provider/network/credential/cost prerequisites. This closes the local design decision, not live access, BFF deployment or a new paid session. The [HTTPS login portal plan](../../plans/active/post-pilot-https-portal.md) is deferred until attributed pilot completion and separate public-boundary/release review. No public ingress, user grant or new Azure resource occurred.
+
+## Current provider discovery — 2026-10-03 UTC
+
+[The next Bastion preflight](bastion-deployment-session-preflight.md) records actual selected-subscription VM availability/quota restrictions, an exact image candidate and current public cost worksheet. It requires a VM/capacity decision before local template amendment or a quota/support request. No live deployment or paid-session approval follows; the existing accepted template remains unchanged.

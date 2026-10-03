@@ -1,6 +1,6 @@
 # Private pilot browser access: preparation and proposed execution
 
-Status: LOCAL TEMPLATES VERIFIED — PA01 and local PA02 complete; configured hosted checks PASS on0dc58e8; PA03/live deployment gated
+Status: LOCAL TEMPLATES VERIFIED — PA01 and local PA02 complete; configured hosted checks PASS on0dc58e8; PA03 provider preflight complete; live blocked by VM availability/quota and protected inputs
 Owner: Azure/BFF coordinator
 Date: 2026-10-02
 Approved product/technical basis: [feature003](../../specs/003-health-assessment/product-spec.md), [technical specification](../../specs/003-health-assessment/technical-spec.md), [test plan](../../specs/003-health-assessment/test-plan.md), accepted ADR-0004/0009.
@@ -94,3 +94,9 @@ Scope and output checker findings were corrected and independently reprobed befo
 ## Hosted verification closure — 2026-10-02
 
 Configured [bootstrap37080912801](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37080912801) and [package37080912872](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37080912872) are terminal PASS on immutable combined source `0dc58e8fe69eb501510a9a5b183bd32f48f66f63`, including Linux infrastructure/optional Bastion and both Windows collector jobs. The earlier pending observations describe their recording checkpoints. No runtime/template change is made by this evidence closure. The clean completed writing checkout was removed after its reviewed source was preserved in the integrated commits and retained branch. Historical GitGuardian digest incidents still need human disposition before merge; no scanner result was suppressed. Live PA03/G1–G9/Milestone2 remain NOT VERIFIED. Private BFF board publication remains blocked by the separately pending automatic-review credential/network action; canonical records are authoritative.
+
+## Bastion provider preflight and capacity decision — 2026-10-03 UTC
+
+The [next provider preflight](../../docs/development/bastion-deployment-session-preflight.md) and [sanitized evidence](../../docs/development/evidence/bastion-deployment-preflight-20261003.json) refresh the selected subscription, empty pilot inventory and USD 0.22 recorded pilot cost. `Standard_B2s` is Location-restricted despite 0/10 family quota. `Standard_B2s_v2` is a proposed nonzonal alternative with restricted zones and 0/0 exact `standardBsv2Family` quota. Owner approval for the SKU amendment and authorization to request 2 vCPU are pending. The exact WindowsServer image candidate `20348.5622.260906` is Active/x64/V2; disk and browser readiness remain unverified.
+
+The 21 public retail bindings produce a preliminary fixed infrastructure reserve subtotal of USD 37.9092. Unbound BFF/build/key/usage/preview and delayed costs prevent a complete paid-session quote. No quota/support request, SKU/template/permission change or paid deployment occurred. Configured source `1468303` bootstrap `37082060723` and package `37082060721` are terminal PASS. PA03/G1–G9/Milestone2 remain NOT VERIFIED, and the post-pilot portal remains deferred. Private BFF board publication remains blocked by its separately pending automatic-review credential/network action; canonical records are authoritative.

@@ -40,3 +40,7 @@ Disconnect and clear persona state; deallocate the Azure VM through the control 
 ## Completion limits
 
 Current executed local evidence is recorded in the [access plan](../../plans/active/private-pilot-browser-access-preparation.md). No live VM, Bastion connection, Windows routine account, app HTTPS/TLS, effective firewall, role grant, provider what-if, priced session or gate verification is claimed. The private board publication remains blocked by automatic approval review of the official helper credential/network action; its last confirmed BFF snapshot is stale and repository records are authoritative.
+
+## Current provider discovery — 2026-10-03 UTC
+
+[The next Bastion preflight](bastion-deployment-session-preflight.md) records actual selected-subscription VM availability/quota restrictions, an exact image candidate and current public cost worksheet. It requires a VM/capacity decision before local template amendment or a quota/support request. No live deployment or paid-session approval follows; the existing accepted template remains unchanged.
