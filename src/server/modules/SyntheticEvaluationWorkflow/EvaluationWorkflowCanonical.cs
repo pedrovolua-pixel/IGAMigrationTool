@@ -50,9 +50,23 @@ internal static class EvaluationWorkflowCanonical
     }
     internal static string EventJson(EvaluationWorkflowEvent e) => Json(new
     {
-        e.EventId, e.Sequence, e.AggregateRevision, e.MemberRevision, e.MemberId, e.Kind, e.ActorId,
-        e.AssignmentId, e.RegistryVersionId, e.RegistryDigest, e.RecordedAtUtc, e.RecordedOutcome,
-        e.OriginatingClassification, e.Reason, e.EvidenceReferenceIds, e.Correction, e.CommandDigest,
+        e.EventId,
+        e.Sequence,
+        e.AggregateRevision,
+        e.MemberRevision,
+        e.MemberId,
+        e.Kind,
+        e.ActorId,
+        e.AssignmentId,
+        e.RegistryVersionId,
+        e.RegistryDigest,
+        e.RecordedAtUtc,
+        e.RecordedOutcome,
+        e.OriginatingClassification,
+        e.Reason,
+        e.EvidenceReferenceIds,
+        e.Correction,
+        e.CommandDigest,
         e.PreviousEventDigest
     });
     internal static EvaluationWorkflowVersion Version(WorkflowSource source, SamplingProjection sample,
@@ -61,14 +75,19 @@ internal static class EvaluationWorkflowCanonical
     {
         var manifest = Json(new
         {
-            schemaVersion = "synthetic-evaluation-workflow-version-v1", version = revision, sourceDigest,
-            populationDigest = sample.PopulationDigest, sampleDigest = sample.ContentDigest,
+            schemaVersion = "synthetic-evaluation-workflow-version-v1",
+            version = revision,
+            sourceDigest,
+            populationDigest = sample.PopulationDigest,
+            sampleDigest = sample.ContentDigest,
             originalSampleVersionManifestDigest = sample.VersionManifestDigest,
             originalSampleCorrectionCutoffUtc = sample.Versions.CorrectionCutoffUtc,
-            registryVersionId = registry.Input.VersionId, registryDigest = registry.Digest,
+            registryVersionId = registry.Input.VersionId,
+            registryDigest = registry.Digest,
             lastEventSequence = (long)events.Count,
             eventsDigest = Hash(Json(events.Select(e => e.Event.ContentDigest).ToArray())),
-            correctionCutoffUtc = cutoff, predecessorDigest = predecessor
+            correctionCutoffUtc = cutoff,
+            predecessorDigest = predecessor
         });
         var accuracy = EvaluationAccuracyBuilder.Build(new(new("synthetic-workflow-version-" + revision.ToString(CultureInfo.InvariantCulture),
                 source.ScopeId, sample.PopulationDigest, sample.ContentDigest, Hash(manifest), cutoff),
@@ -81,7 +100,8 @@ internal static class EvaluationWorkflowCanonical
         var json = Json(new
         {
             schemaVersion = "synthetic-evaluation-workflow-snapshot-v1",
-            versionManifestJson = manifest, accuracyCanonicalJson = accuracy.CanonicalJson,
+            versionManifestJson = manifest,
+            accuracyCanonicalJson = accuracy.CanonicalJson,
             warningCanonicalJson = warning.CanonicalJson
         });
         return new(revision, cutoff, events.Count, registry.Input.VersionId, registry.Digest, manifest, Hash(manifest),

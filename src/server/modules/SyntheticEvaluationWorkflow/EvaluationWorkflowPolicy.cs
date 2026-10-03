@@ -15,13 +15,13 @@ internal static class EvaluationWorkflowPolicy
     internal static bool Text(string? value) => value is { Length: >= 1 and <= 2000 } && !string.IsNullOrWhiteSpace(value) && !value.Contains('\0') && ValidUtf16(value);
     private static bool ValidUtf16(string value)
     {
-        for(var i=0;i<value.Length;i++)
+        for (var i = 0; i < value.Length; i++)
         {
-            if(char.IsHighSurrogate(value[i]))
+            if (char.IsHighSurrogate(value[i]))
             {
-                if(i+1>=value.Length || !char.IsLowSurrogate(value[++i])) return false;
+                if (i + 1 >= value.Length || !char.IsLowSurrogate(value[++i])) return false;
             }
-            else if(char.IsLowSurrogate(value[i])) return false;
+            else if (char.IsLowSurrogate(value[i])) return false;
         }
         return true;
     }
@@ -125,9 +125,9 @@ internal static class EvaluationWorkflowPolicy
     }
     internal static bool Context(EvaluationWorkflowCommand command, EvaluationReviewerDecision decision)
     {
-        if(!decision.IsAuthorized) return false;
-        if(command.Kind==EvaluationWorkflowCommandKind.PresentationCorrection) return true;
-        return decision.AuthorizedContextSufficient==(command.Outcome!=EvaluationReviewOutcome.Indeterminate);
+        if (!decision.IsAuthorized) return false;
+        if (command.Kind == EvaluationWorkflowCommandKind.PresentationCorrection) return true;
+        return decision.AuthorizedContextSufficient == (command.Outcome != EvaluationReviewOutcome.Indeterminate);
     }
     internal static WorkflowCurrent Apply(WorkflowCurrent prior, EvaluationWorkflowCommand command)
     {

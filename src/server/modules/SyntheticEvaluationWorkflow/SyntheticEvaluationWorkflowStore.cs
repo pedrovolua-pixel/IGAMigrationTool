@@ -118,7 +118,11 @@ public sealed class SyntheticEvaluationWorkflowStore
     private static async Task<State> Load(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct)
     {
         try { return await Reconstruct(c, t, ct); }
-        catch (WorkflowInvalidException e) when(e.Issue==EvaluationWorkflowIssue.InvalidInput) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
+        catch (WorkflowInvalidException e) when (e.Issue != EvaluationWorkflowIssue.NotInitialized && e.Issue != EvaluationWorkflowIssue.IntegrityMismatch) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
+        catch (NullReferenceException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
+        catch (KeyNotFoundException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
+        catch (IndexOutOfRangeException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
+        catch (OverflowException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
         catch (JsonException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
         catch (FormatException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
         catch (ArgumentException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.IntegrityMismatch); }
@@ -236,8 +240,16 @@ public sealed class SyntheticEvaluationWorkflowStore
                     current.Revision == r.GetInt64(1) && J(current) == r.GetString(2));
             }
         Require(seen.Count == 100);
-        return new() { Source = source, Sample = sample, SourceDigest = sourceDigest, Registries = registries,
-            Events = stored, Versions = versions, Members = members };
+        return new()
+        {
+            Source = source,
+            Sample = sample,
+            SourceDigest = sourceDigest,
+            Registries = registries,
+            Events = stored,
+            Versions = versions,
+            Members = members
+        };
     }
     private static EvaluationWorkflowEvent MakeEvent(EvaluationWorkflowCommand command, string actor, WorkflowRegistry registry,
         WorkflowCurrent updated, long aggregate, IReadOnlyList<WorkflowStoredEvent> events, DateTimeOffset at)
