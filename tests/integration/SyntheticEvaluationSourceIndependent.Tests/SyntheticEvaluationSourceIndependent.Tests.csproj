@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <EvaluationSourceProject Condition="'$(EvaluationSourceProject)' == ''">../../../src/server/modules/SyntheticEvaluationSourceIntegration/SyntheticEvaluationSourceIntegration.csproj</EvaluationSourceProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(EvaluationSourceProject)" />
+  </ItemGroup>
+</Project>
