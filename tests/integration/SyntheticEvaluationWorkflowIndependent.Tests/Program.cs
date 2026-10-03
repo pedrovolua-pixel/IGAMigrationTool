@@ -9,6 +9,7 @@ using SyntheticEvaluationWorkflowFixtures;
 internal static class Program
 {
     private static int checks;
+    private static EvaluationReviewerRegistryInput? currentRegistry;
     private static readonly EvaluationWorkflowActor Actor = new("synthetic-reviewer");
     private static void Check(bool condition, string name)
     {
@@ -70,16 +71,38 @@ internal static class Program
     private static EvaluationReviewerRegistryInput Registry(EvaluationWorkflowSeed seed, string version,
         Func<EvaluationFixtureAssignment, EvaluationFixtureAssignment>? assignment = null,
         Func<EvaluationFixtureMember, EvaluationFixtureMember>? member = null,
-        Func<EvaluationFixtureIdentity, EvaluationFixtureIdentity>? identity = null) => seed.Registry with {
-        VersionId = version,
-        Assignments = seed.Registry.Assignments.Select(a => assignment?.Invoke(a) ?? a).ToArray(),
-        Members = seed.Registry.Members.Select(m => member?.Invoke(m) ?? m).ToArray(),
-        Identities = seed.Registry.Identities.Select(i => identity?.Invoke(i) ?? i).ToArray()
-    };
+        Func<EvaluationFixtureIdentity, EvaluationFixtureIdentity>? identity = null)
+    {
+        var previous = currentRegistry ?? seed.Registry;
+        static bool Equal<T>(T a, T b) => JsonSerializer.Serialize(a) == JsonSerializer.Serialize(b);
+        return seed.Registry with
+        {
+            VersionId = version,
+            Assignments = seed.Registry.Assignments.Select(a =>
+            {
+                var p = previous.Assignments.Single(x => x.Id == a.Id);
+                var desired = (assignment?.Invoke(a) ?? a) with { Revision = p.Revision };
+                return Equal(desired, p) ? desired : desired with { Revision = p.Revision + 1 };
+            }).ToArray(),
+            Members = seed.Registry.Members.Select(m =>
+            {
+                var p = previous.Members.Single(x => x.Id == m.Id);
+                var desired = (member?.Invoke(m) ?? m) with { Revision = p.Revision };
+                return Equal(desired, p) ? desired : desired with { Revision = p.Revision + 1 };
+            }).ToArray(),
+            Identities = seed.Registry.Identities.Select(i =>
+            {
+                var p = previous.Identities.Single(x => x.Id == i.Id);
+                var desired = (identity?.Invoke(i) ?? i) with { Revision = p.Revision };
+                return Equal(desired, p) ? desired : desired with { Revision = p.Revision + 1 };
+            }).ToArray()
+        };
+    }
     private static async Task Update(SyntheticEvaluationWorkflowStore store, string expected, EvaluationReviewerRegistryInput registry)
     {
         var r = await store.UpdateRegistryAsync(expected, registry);
         Check(r.Issue is null, "trusted registry version update");
+        currentRegistry = registry;
     }
     private static async Task Denial(SyntheticEvaluationWorkflowStore store, EvaluationWorkflowCommand command, EvaluationWorkflowIssue issue)
     {
@@ -89,15 +112,27 @@ internal static class Program
         var after = await Read(store);
         Check(before.AggregateRevision == after.AggregateRevision && before.Versions.Count == after.Versions.Count, "denial no revision/version write");
     }
-    public static async Task Main()
+    public static async Task Main(string[] args)
     {
         var connection = Environment.GetEnvironmentVariable("IGA_SYNTHETIC_EVALUATION_DATABASE")
             ?? "Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_wf04_verifier;Username=iga_synthetic";
         using var expected = JsonDocument.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "expected-v1.json")));
         var seed = FictionalEvaluationFixture.BuildSeed();
+        currentRegistry = seed.Registry;
         var store = new SyntheticEvaluationWorkflowStore(connection);
         await store.InitializeAsync();
         Check((await store.SeedAsync(seed)).Issue is null, "trusted initial seed");
+        if (args.Contains("--tamper-only"))
+        {
+            await using var tamperConnection = new NpgsqlConnection(connection);
+            await tamperConnection.OpenAsync();
+            await using var tamper = new NpgsqlCommand("UPDATE synthetic_evaluation_workflow.members SET revision=1 WHERE member_id='synthetic-item-000000'", tamperConnection);
+            await tamper.ExecuteNonQueryAsync();
+            var corrupt = await store.ReadAsync(Actor);
+            Check(corrupt.Issue == EvaluationWorkflowIssue.IntegrityMismatch && corrupt.Snapshot is null, "direct current projection tamper detected");
+            Console.WriteLine($"Independent preserved tamper fixture passed {checks} assertions.");
+            return;
+        }
         var initial = await Read(store);
         Check(initial.AggregateRevision == 0 && initial.Members.Count == 100, "fresh dedicated DB");
         Check(initial.PopulationDigest == expected.RootElement.GetProperty("populationDigest").GetString() &&
@@ -114,13 +149,18 @@ internal static class Program
         Check(v1.PredecessorDigest == v0.ContentDigest, "v1 predecessor frozen v0");
         await Apply(store, Command(await Read(store), 1, EvaluationReviewOutcome.Rejected));
         Counts(await Version(store, 2), 1, 1, 0, 98, 0, 2);
-        var corrected = Command(await Read(store), 2, EvaluationReviewOutcome.Corrected) with {
+        var corrected = Command(await Read(store), 2, EvaluationReviewOutcome.Corrected) with
+        {
             OriginatingClassification = EvaluationOriginClassification.Rejected,
-            Correction = new(null, null, "Fictional corrected root cause", "Fictional recommendation <script> text") };
+            Correction = new(null, null, "Fictional corrected root cause", "Fictional recommendation <script> text")
+        };
         await Apply(store, corrected); Counts(await Version(store, 3), 1, 2, 0, 97, 1, 3);
-        var presentation = Command(await Read(store), 0) with {
-            Kind = EvaluationWorkflowCommandKind.PresentationCorrection, Outcome = null,
-            Correction = new("Fictional presentation severity", null, null, null) };
+        var presentation = Command(await Read(store), 0) with
+        {
+            Kind = EvaluationWorkflowCommandKind.PresentationCorrection,
+            Outcome = null,
+            Correction = new("Fictional presentation severity", null, null, null)
+        };
         await Apply(store, presentation); Counts(await Version(store, 4), 1, 2, 0, 97, 2, 3);
         var state = await Read(store);
         Check(state.Members[0].Outcome == EvaluationReviewOutcome.Corrected &&
@@ -155,23 +195,65 @@ internal static class Program
         Check(didThrow, "observer controlled failure surfaced");
         Check((await Read(store)).AggregateRevision == beforeRollback.AggregateRevision, "observer all pending writes rolled back");
         var contextTarget = beforeRollback.Members[8].Original.MemberId;
-        var contextChanged = Registry(seed, "synthetic-final-context", member: m => m.Id == contextTarget ? m with {
-            Revision = m.Revision + 1, AuthorizedContextSufficient = false } : m);
+        var contextChanged = Registry(seed, "synthetic-final-context", member: m => m.Id == contextTarget ? m with
+        {
+            Revision = m.Revision + 1,
+            AuthorizedContextSufficient = false
+        } : m);
         var contextResult = await store.ApplyWithRegistryReplacementForTestAsync(Command(beforeRollback, 8), Actor, contextChanged, CancellationToken.None);
         Check(contextResult.Issue == EvaluationWorkflowIssue.Denied && contextResult.Receipt is null, "final context true to false cannot commit Confirmed");
         Check((await Read(store)).RegistryVersionId == beforeRollback.RegistryVersionId &&
             (await Read(store)).AggregateRevision == beforeRollback.AggregateRevision, "context simulation rolls back registry and review");
 
-        var noSource = Registry(seed, "synthetic-history-only", assignment: a => a with {
-            Revision = a.Revision + 1, ScoredReviewGranted = false, PresentationCorrectionGranted = false });
-        await Update(store, beforeRollback.RegistryVersionId, noSource);
+        var insufficient = Registry(seed, "synthetic-context-insufficient", member: m => m.Id == contextTarget ? m with { AuthorizedContextSufficient = false } : m);
+        await Update(store, (await Read(store)).RegistryVersionId, insufficient);
+        var insufficientState = await Read(store);
+        Check(!insufficientState.Members[8].AuthorizedContextSufficient && insufficientState.Members[8].CanReview, "authorized insufficient context distinct from denial");
+        var indeterminate = Command(insufficientState, 8, EvaluationReviewOutcome.Indeterminate) with { EvidenceReferenceIds = Array.Empty<string>() };
+        var nowSufficient = Registry(seed, "synthetic-final-context-sufficient");
+        var reverseContext = await store.ApplyWithRegistryReplacementForTestAsync(indeterminate, Actor, nowSufficient, CancellationToken.None);
+        Check(reverseContext.Issue == EvaluationWorkflowIssue.Denied && reverseContext.Receipt is null, "final context false to true cannot commit Indeterminate");
+        Check((await Read(store)).AggregateRevision == insufficientState.AggregateRevision &&
+            (await Read(store)).RegistryVersionId == insufficient.VersionId, "reverse context simulation all writes rollback");
+        await Apply(store, indeterminate);
+        Check((await Read(store)).Members[8].Outcome == EvaluationReviewOutcome.Indeterminate, "authorized context limitation recorded excluded");
+
+        var blocker = new BlockingObserver();
+        var blockedStore = new SyntheticEvaluationWorkflowStore(connection, blocker);
+        var beforeLinear = await Read(store);
+        var admittedWrite = blockedStore.ApplyAsync(Command(beforeLinear, 9), Actor);
+        await blocker.Entered.Task.WaitAsync(TimeSpan.FromSeconds(15));
+        var concurrentRevoke = Registry(seed, "synthetic-concurrent-revoke", identity: i => i with { State = EvaluationFixtureState.Revoked });
+        var revokeTask = store.UpdateRegistryAsync(beforeLinear.RegistryVersionId, concurrentRevoke);
+        await Task.Delay(100);
+        Check(!revokeTask.IsCompleted, "registry revocation waits for review transaction lock");
+        blocker.Release.TrySetResult();
+        Check((await admittedWrite).Issue is null, "held authorized review commits before waiting revocation");
+        Check((await revokeTask).Issue is null && (await store.ReadAsync(Actor)).Snapshot is null, "durable subsequent revoke denies current read");
+        currentRegistry = concurrentRevoke;
+        var afterConcurrentRestore = Registry(seed, "synthetic-after-concurrent-restore");
+        await Update(store, concurrentRevoke.VersionId, afterConcurrentRestore);
+        Check((await Version(store, beforeLinear.AggregateRevision + 1)).LastEventSequence ==
+            beforeLinear.Versions[^1].LastEventSequence + 1, "committed pre-revoke review retained in immutable history");
+
+        var noSource = Registry(seed, "synthetic-history-only", assignment: a => a with
+        {
+            Revision = a.Revision + 1,
+            ScoredReviewGranted = false,
+            PresentationCorrectionGranted = false
+        });
+        await Update(store, (await Read(store)).RegistryVersionId, noSource);
         Check((await store.ReadAsync(Actor)).Issue == EvaluationWorkflowIssue.Denied &&
             (await store.ReadMemberAsync(first.MemberId, Actor)).Member is null, "history grant alone no current source");
         var history = await store.ReadHistoryAsync(first.MemberId, 0, Actor);
         Check(history.Issue is null && history.History is not null && history.History.Events.Count == 2, "scoped history-only retains attributed events");
         Check((await store.ReadVersionAsync(0, Actor)).Version!.SnapshotCanonicalJson == v0.SnapshotCanonicalJson, "history-only immutable version read");
-        var oneHistory = noSource with { VersionId = "synthetic-one-environment-history", Assignments = noSource.Assignments.Select(a =>
-            a.Scope.EnvironmentId == "synthetic-env-b" ? a with { Revision = a.Revision + 1, RelatedHistoryGranted = false } : a).ToArray() };
+        var oneHistory = noSource with
+        {
+            VersionId = "synthetic-one-environment-history",
+            Assignments = noSource.Assignments.Select(a =>
+            a.Scope.EnvironmentId == "synthetic-env-b" ? a with { Revision = a.Revision + 1, RelatedHistoryGranted = false } : a).ToArray()
+        };
         await Update(store, noSource.VersionId, oneHistory);
         Check((await store.ReadVersionAsync(0, Actor)).Issue == EvaluationWorkflowIssue.Denied, "no whole aggregate with denied environment");
         Check((await store.ReadHistoryAsync(first.MemberId, 0, Actor)).Issue is null, "independent permitted environment narrow history");
@@ -206,5 +288,15 @@ internal static class Program
     {
         public Task BeforeCommitAsync(string operation, Guid? eventId, CancellationToken cancellationToken) =>
             Task.FromException(new InjectedFailure());
+    }
+    private sealed class BlockingObserver : ISyntheticEvaluationWorkflowCommitObserver
+    {
+        internal readonly TaskCompletionSource Entered = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        internal readonly TaskCompletionSource Release = new(TaskCreationOptions.RunContinuationsAsynchronously);
+        public async Task BeforeCommitAsync(string operation, Guid? eventId, CancellationToken cancellationToken)
+        {
+            Entered.TrySetResult();
+            await Release.Task.WaitAsync(cancellationToken);
+        }
     }
 }
