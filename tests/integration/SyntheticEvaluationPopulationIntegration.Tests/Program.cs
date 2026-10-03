@@ -17,7 +17,7 @@ using SyntheticSourceFence;
 internal static class Program
 {
     private static readonly string Connection = Environment.GetEnvironmentVariable("IGA_EVALUATION_POPULATION_TEST_DATABASE") ??
-        $"Host=127.0.0.1;Port=55433;Username=iga_synthetic;Database=iga_synthetic_phase1b_pop06_author_{Guid.NewGuid():N}";
+        $"Host=127.0.0.1;Port=55433;Username=iga_synthetic;Database=iga_synthetic_phase1b_pop06_author_{Guid.NewGuid().ToString("N")[..20]}";
     private static int checks;
     private static readonly AiAuthority Worker = new("synthetic-worker", AiScope.Fixed, [AiRole.Worker], [AiAction.Read, AiAction.Dispatch, AiAction.Reconcile], ["SECURITY", "OPERATIONS"]);
     private static readonly AiAuthority Consultant = new("synthetic-consultant", AiScope.Fixed, [AiRole.Consultant], [AiAction.Read], ["SECURITY", "OPERATIONS"]);
@@ -40,9 +40,9 @@ internal static class Program
     {
         var guard = new NpgsqlConnectionStringBuilder(Connection);
         if (guard.Host != "127.0.0.1" || guard.Port != 55433 || guard.Username != "iga_synthetic" || guard.Database is null ||
-            !guard.Database.StartsWith("iga_synthetic_phase1b_pop06_author_", StringComparison.Ordinal) || !guard.Database.All(c => char.IsAsciiLetterOrDigit(c) || c == '_'))
+            guard.Database.Length > 63 || !guard.Database.StartsWith("iga_synthetic_phase1b_pop06_author_", StringComparison.Ordinal) || !guard.Database.All(c => char.IsAsciiLetterOrDigit(c) || c == '_'))
             throw new InvalidOperationException("Fresh author database guard.");
-        Console.WriteLine("Source capture author database " + guard.Database);
+        Console.WriteLine("Population author database " + guard.Database);
         await using (var admin = new NpgsqlConnection("Host=127.0.0.1;Port=55433;Username=iga_synthetic;Database=postgres"))
         {
             await admin.OpenAsync(); await using var exists = new NpgsqlCommand("SELECT count(*) FROM pg_database WHERE datname=@name", admin); exists.Parameters.AddWithValue("name", guard.Database);
