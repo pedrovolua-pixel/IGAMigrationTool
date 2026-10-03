@@ -106,4 +106,8 @@
   <Folder Name="/tests/integration/SyntheticTaskCsv.Tests/">
     <Project Path="tests/integration/SyntheticTaskCsv.Tests/Probe/Probe.csproj" />
   </Folder>
+  <Project Path="src/server/modules/SyntheticEvaluationSourceIntegration/SyntheticEvaluationSourceIntegration.csproj" />
+  <Project Path="tests/unit/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
+  <Project Path="tests/integration/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
+  <Project Path="tests/integration/SyntheticEvaluationSourceIndependent.Tests/SyntheticEvaluationSourceIndependent.Tests.csproj" />
 </Solution>

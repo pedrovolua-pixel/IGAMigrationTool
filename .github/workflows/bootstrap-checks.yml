@@ -84,6 +84,13 @@ jobs:
           dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build -- --tamper-only
           export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_migration;Username=iga_synthetic'
           dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build -- --migration-only
+      - name: Check actual saved Phase1B evaluation source capture
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_evalsource_author_ci
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_evalsource_independent_ci
+          dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_SOURCE_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_SOURCE_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIndependent.Tests -c Release --no-build
       - name: Check assessment coverage reconciliation
         run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
       - name: Check assessment capability locks
@@ -473,6 +480,10 @@ jobs:
           dotnet run --project tests/unit/SyntheticEvaluationReviewer.Tests --configuration Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet run --project tests/integration/SyntheticEvaluationPolicy.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows saved-source capture canonical contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows isolated evaluation workflow
         run: |
