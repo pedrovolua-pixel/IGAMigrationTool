@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <ProjectReference Include="../SyntheticSourceFence/SyntheticSourceFence.csproj" />
     <PackageReference Include="Npgsql" Version="10.0.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
     <EmbeddedResource Include="../../../../migrations/finding-review/001-initial.sql" LogicalName="FindingReview.001-initial.sql" />

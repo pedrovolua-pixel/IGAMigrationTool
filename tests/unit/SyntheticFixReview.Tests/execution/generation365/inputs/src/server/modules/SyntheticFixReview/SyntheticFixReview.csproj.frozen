@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../SyntheticFixPackages/SyntheticFixPackages.csproj" />
+    <ProjectReference Include="../SyntheticSourceFence/SyntheticSourceFence.csproj" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.12" />
+    <EmbeddedResource Include="../../../../migrations/fix-review/001-initial.sql" LogicalName="SyntheticFixReview.001-initial.sql" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,52 @@
+{
+  "schema": "v13-independent-technical-supplement-v1",
+  "priorPacketSha256": "6cc8c175d66a024556c5438565ca7f66aa46d195cb77dfc2d643dba35e6bd581",
+  "priorReviewSha256": "d0144aaaeff68d58266374f4512d9dc58c2da0b7baba25135776162cbd284ebe",
+  "contractSha256": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+  "initialArtifactRevision": 0,
+  "maximumHttpRevision": 9007199254740991,
+  "eventIdNamespace": "trusted scope/run/artifact nonempty D UUID",
+  "reason": "nonblank <=2000 UTF16; exact original retained in JSON text including escaped NUL/CR/Unicode",
+  "commandFields": [
+    "eventId",
+    "kind",
+    "expectedRevision",
+    "expectedSourceDigest",
+    "reason"
+  ],
+  "independentExpectedRecipes": "Prior independently authored literal guidance and full package recipes, explicit new profile/application/13th lock, binding from complete expected package, ordered original artifact/text digest vector. No A13/B13 implementation inspected.",
+  "commandPrivateVersion": "synthetic-fix-review-command-v1",
+  "commandSemanticShape": {
+    "schemaVersion": "synthetic-fix-review-command-v1",
+    "scope": {
+      "customerId": "trusted",
+      "projectId": "trusted",
+      "environmentId": "trusted"
+    },
+    "runId": "lowercase D UUID",
+    "artifactId": "route lowerhex64",
+    "actorId": "trusted actor",
+    "command": {
+      "eventId": "lowercase D UUID",
+      "kind": "ReviewForPlanning|WithdrawReview",
+      "expectedRevision": "original integer",
+      "expectedSourceDigest": "original digest",
+      "reason": "exact original string"
+    }
+  },
+  "sourceArtifactOrder": [
+    "findingId",
+    "artifactId"
+  ],
+  "httpArtifactOrder": [
+    "artifactId"
+  ],
+  "illFormedUtf16Reason": "InvalidInput; valid NUL/CR/LF/tab/emoji/combining are preserved exactly",
+  "databaseGenerations": {
+    "firstSuccessfulSource": "619555a8ac47c35f6cc0d2c62d152d64cb5c1c5d",
+    "firstDatabase": "iga_synthetic_cycle13_v13",
+    "preservedUnmodified": true,
+    "finalDatabase": "iga_synthetic_cycle13_v13_v2",
+    "reason": "Final source fingerprint now includes complete precision/collation. Prior initialized fingerprint is deliberately rejected; no schema/history rewrite."
+  }
+}

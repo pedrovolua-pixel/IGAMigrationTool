@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <ProjectReference Include="../SyntheticSourceFence/SyntheticSourceFence.csproj" />
     <ProjectReference Include="../AssessmentOrchestration/AssessmentOrchestration.csproj" />
     <ProjectReference Include="../DeterministicAnalysis/DeterministicAnalysis.csproj" />
     <ProjectReference Include="../AssessmentScoring/AssessmentScoring.csproj" />

@@ -1,0 +1,11 @@
+  RecommendationGuidance -> /private/tmp/iga-cycle13-a13/src/server/modules/RecommendationGuidance/bin/Release/net10.0/RecommendationGuidance.dll
+  SyntheticFixPackages -> /private/tmp/iga-cycle13-a13/src/server/modules/SyntheticFixPackages/bin/Release/net10.0/SyntheticFixPackages.dll
+  SyntheticSourceFence -> /private/tmp/iga-cycle13-a13/src/server/modules/SyntheticSourceFence/bin/Release/net10.0/SyntheticSourceFence.dll
+  SyntheticFixReview -> /private/tmp/iga-cycle13-a13/src/server/modules/SyntheticFixReview/bin/Release/net10.0/SyntheticFixReview.dll
+  SyntheticFixReview.Tests -> /private/tmp/iga-cycle13-a13/tests/unit/SyntheticFixReview.Tests/bin/Release/net10.0/SyntheticFixReview.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.07

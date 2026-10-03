@@ -1100,6 +1100,16 @@
               "type": "null"
             }
           ]
+        },
+        "artifactReview": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -1127,7 +1137,8 @@
         "reportDraft",
         "recommendationGuidance",
         "aiPreview",
-        "fixPackages"
+        "fixPackages",
+        "artifactReview"
       ]
     },
     "ReviewKind": {
@@ -1818,6 +1829,10 @@
         },
         "fixPackageTemplateDigest": {
           "const": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+        },
+        "fixReviewContractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
         }
       }
     },
@@ -3255,7 +3270,10 @@
           "type": "string"
         },
         "profileId": {
-          "const": "synthetic-review-maturity-fix-packages-equal-v1"
+          "enum": [
+            "synthetic-review-maturity-fix-packages-equal-v1",
+            "synthetic-review-maturity-fix-review-equal-v1"
+          ]
         },
         "status": {
           "enum": ["Ready", "Unavailable"]
@@ -3291,6 +3309,457 @@
         "status",
         "reasonCode",
         "snapshot"
+      ]
+    },
+    "ArtifactReviewKind": {
+      "enum": ["ReviewForPlanning", "WithdrawReview"]
+    },
+    "ArtifactReviewState": {
+      "enum": ["Unverified", "ReviewedForPlanning", "NeedsReview"]
+    },
+    "ArtifactReviewIssue": {
+      "enum": [
+        "InvalidInput",
+        "Denied",
+        "WrongScope",
+        "InvalidState",
+        "NotFound",
+        "RevisionConflict",
+        "SourceConflict",
+        "EventConflict",
+        "SeedConflict",
+        "IntegrityMismatch",
+        "MigrationDrift",
+        "NotInitialized",
+        "SourceUnavailable",
+        "RevisionOverflow"
+      ]
+    },
+    "ArtifactReviewScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "environmentId": {
+          "type": "string"
+        }
+      },
+      "required": ["customerId", "projectId", "environmentId"]
+    },
+    "ArtifactReviewFindingRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "findingId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["findingId", "revision"]
+    },
+    "ArtifactReviewSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "$ref": "#/$defs/ArtifactReviewScope"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "const": "synthetic-review-maturity-fix-review-equal-v1"
+        },
+        "applicationVersion": {
+          "const": "synthetic-fix-review-app-v1"
+        },
+        "contractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "guidanceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "findingReviewDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "templateVersion": {
+          "const": "fictional-fix-templates-v1"
+        },
+        "templateDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "findingRevisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReviewFindingRevision"
+          },
+          "maxItems": 100000
+        }
+      },
+      "required": [
+        "scope",
+        "runId",
+        "runRevision",
+        "runInputDigest",
+        "baselineId",
+        "profileId",
+        "applicationVersion",
+        "contractDigest",
+        "sourceDigest",
+        "guidanceDigest",
+        "findingReviewDigest",
+        "templateVersion",
+        "templateDigest",
+        "findingRevisions"
+      ]
+    },
+    "ArtifactReviewEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "kind": {
+          "$ref": "#/$defs/ArtifactReviewKind"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "const": "Consultant"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "recordedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "source": {
+          "$ref": "#/$defs/ArtifactReviewSourceBinding"
+        },
+        "recordedState": {
+          "enum": ["ReviewedForPlanning", "Unverified"]
+        }
+      },
+      "required": [
+        "eventId",
+        "revision",
+        "kind",
+        "actorId",
+        "actorRoles",
+        "recordedAtUtc",
+        "reason",
+        "source",
+        "recordedState"
+      ]
+    },
+    "ArtifactReviewEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "findingId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "packageId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "scopedOptionId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "artifactId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": ["Configuration", "Script", "Sql"]
+        },
+        "artifactTextDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "state": {
+          "$ref": "#/$defs/ArtifactReviewState"
+        },
+        "canReview": {
+          "type": "boolean"
+        },
+        "canWithdraw": {
+          "type": "boolean"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReviewEvent"
+          },
+          "maxItems": 100000
+        }
+      },
+      "required": [
+        "findingId",
+        "packageId",
+        "scopedOptionId",
+        "artifactId",
+        "categoryId",
+        "templateId",
+        "kind",
+        "artifactTextDigest",
+        "revision",
+        "state",
+        "canReview",
+        "canWithdraw",
+        "history"
+      ]
+    },
+    "ArtifactReviewReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-fix-review-receipt-v1"
+        },
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "artifactId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "$ref": "#/$defs/ArtifactReviewKind"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "recordedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "eventId",
+        "runId",
+        "artifactId",
+        "kind",
+        "revision",
+        "actorId",
+        "recordedAtUtc",
+        "sourceDigest"
+      ]
+    },
+    "ArtifactReviewCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "kind": {
+          "$ref": "#/$defs/ArtifactReviewKind"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "expectedSourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "eventId",
+        "kind",
+        "expectedRevision",
+        "expectedSourceDigest",
+        "reason"
+      ]
+    },
+    "ArtifactReviewDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "enum": [
+                "artifact_review_source_unavailable",
+                "artifact_review_integrity_denied",
+                "artifact_review_denied"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewSourceBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actorId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReviewEntry"
+          },
+          "maxItems": 100000
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "status",
+        "reasonCode",
+        "source",
+        "actorId",
+        "artifacts"
+      ]
+    },
+    "ArtifactReviewResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "issue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewIssue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "alreadyApplied": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "issue",
+        "alreadyApplied",
+        "receipt"
       ]
     }
   }

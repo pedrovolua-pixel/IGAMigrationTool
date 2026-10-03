@@ -97,6 +97,19 @@ jobs:
           dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-build
           dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-build -- --portable
           dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-build
+      - name: Check synthetic artifact review contracts and independent durable source
+        env:
+          IGA_A13_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle13_a13_ci;Username=iga_synthetic
+          IGA_ARTIFACT_REVIEW_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle13_v13_v2;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle13_a13_ci
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle13_v13_v2
+          python3 tests/unit/SyntheticFixReview.Tests/independent-oracle.py --verify
+          python3 tests/integration/LocalArtifactReview.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticFixReview.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticFixReview.Tests --configuration Release --no-build -- --database
+          dotnet run --project tests/integration/LocalArtifactReview.Tests --configuration Release --no-build -- --portable
+          dotnet run --project tests/integration/LocalArtifactReview.Tests --configuration Release --no-build
       - name: Check canonical unverified recommendation guidance
         run: dotnet run --project tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build
       - name: Check independent recommendation identities, originals and saved review bridge
@@ -155,6 +168,11 @@ jobs:
           export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           python3 tests/unit/FixPackagePreview.Tests/oracle.py --verify
           node tests/unit/FixPackagePreview.Tests/verify.mjs
+      - name: Check independent artifact review component
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/unit/ArtifactReviewComponent.Tests/oracle.py --verify
+          node tests/unit/ArtifactReviewComponent.Tests/verify.mjs
       - name: Check consultant browser flow and recovery
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic
@@ -235,6 +253,16 @@ jobs:
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
           export IGA_PLAYWRIGHT_MODULE="$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
           node tests/e2e/local-fix-packages/verify.mjs
+      - name: Check opt-in artifact review browser history and recovery
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle13_v13_v2;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          export IGA_PLAYWRIGHT_MODULE="$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+          node tests/e2e/artifact-review/verify.mjs
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check collector host contract
@@ -332,6 +360,12 @@ jobs:
         run: |
           dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-restore
           dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-restore -- --portable
+      - name: Check Windows portable artifact review and independent source
+        run: |
+          python tests/unit/SyntheticFixReview.Tests/independent-oracle.py --verify
+          python tests/integration/LocalArtifactReview.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticFixReview.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/LocalArtifactReview.Tests --configuration Release --no-restore -- --portable
       - name: Check Windows collector host and protected key behavior
         run: dotnet run --project tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-build
       - name: Publish self-contained collector

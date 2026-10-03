@@ -9,6 +9,7 @@ import type {
 } from './demo-contract.generated';
 import { DemoRequestError, request } from './api';
 import { AnalysisView } from './AnalysisView';
+import type { ArtifactReviewDraft } from './ArtifactReviewPanel';
 
 const states: Record<RunState, string> = {
   Planned: 'Planned',
@@ -57,6 +58,7 @@ export function App() {
   const [error, setError] = useState<{ message: string; focus: boolean } | null>(null);
   const [announcement, setAnnouncement] = useState('');
   const [connected, setConnected] = useState(false);
+  const artifactDrafts = useRef<Record<string, ArtifactReviewDraft>>({});
   const errorRef = useRef<HTMLDivElement>(null);
   const detailRef = useRef<HTMLElement>(null);
   const currentSelection = useRef<string | null>(selectedId);
@@ -645,7 +647,12 @@ export function App() {
                     </p>
                   )}
                 </section>
-                <AnalysisView key={run.runId} run={run} csrfToken={catalog?.csrfToken ?? ''} />
+                <AnalysisView
+                  key={run.runId}
+                  run={run}
+                  csrfToken={catalog?.csrfToken ?? ''}
+                  artifactDrafts={artifactDrafts}
+                />
                 <details className="locked-inputs">
                   <summary>Locked input versions and digests</summary>
                   <p className="field-note">

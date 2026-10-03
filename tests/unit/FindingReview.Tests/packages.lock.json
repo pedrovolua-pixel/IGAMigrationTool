@@ -27,8 +27,12 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[10.0.12, )",
-          "Npgsql": "[10.0.3, )"
+          "Npgsql": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
         }
+      },
+      "syntheticsourcefence": {
+        "type": "Project"
       }
     }
   }

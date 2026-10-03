@@ -151,6 +151,9 @@
         "dependencies": {
           "AssessmentCoverage": "[1.0.0, )"
         }
+      },
+      "syntheticsourcefence": {
+        "type": "Project"
       }
     }
   }

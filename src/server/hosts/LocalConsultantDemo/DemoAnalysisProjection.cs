@@ -6,9 +6,13 @@ using AssessmentRuns;
 using AssessmentScoring;
 using FindingReview;
 
+internal sealed record DemoAnalysisCapture(SyntheticRunSnapshot Run, DemoReviewContext? Review, JsonObject Analysis, DemoFixPackageDetail? FixPackages);
+
 internal static class DemoAnalysisProjection
 {
-    internal static object Detail(SyntheticRunSnapshot run, DemoReviewContext? review = null)
+    internal static object Detail(SyntheticRunSnapshot run, DemoReviewContext? review = null) => Capture(run, review).Analysis;
+
+    internal static DemoAnalysisCapture Capture(SyntheticRunSnapshot run, DemoReviewContext? review = null)
     {
         var reviewProfile = DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId);
         var states = review?.Snapshot?.Findings.ToDictionary(finding => finding.Seed.FindingId,
@@ -119,11 +123,13 @@ internal static class DemoAnalysisProjection
         var guidance = reviewProfile ? DemoRecommendationGuidanceProjection.Detail(run, response, review) : null;
         node["recommendationGuidance"] = JsonSerializer.SerializeToNode(guidance,
             DemoReportDraftProjection.JsonOptions);
-        node["fixPackages"] = JsonSerializer.SerializeToNode(DemoFixPackageProjection.Detail(run, guidance, review),
+        var fixPackages = DemoFixPackageProjection.Detail(run, guidance, review);
+        node["fixPackages"] = JsonSerializer.SerializeToNode(fixPackages,
             DemoReportDraftProjection.JsonOptions);
         node["aiPreview"] = JsonSerializer.SerializeToNode(DemoAiPreviewProjection.Detail(run),
             DemoReportDraftProjection.JsonOptions);
-        return node;
+        node["artifactReview"] = null;
+        return new(run, review, node, fixPackages);
     }
     private static object Measure(HealthMeasure score) => new
     {

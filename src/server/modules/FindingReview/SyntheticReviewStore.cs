@@ -50,6 +50,8 @@ public sealed class SyntheticReviewStore
         if (Identity(authority, scope, SyntheticReviewAction.Review) is { } reviewIdentityIssue) return new(reviewIdentityIssue);
         await using var connection = await Open(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(connection, transaction,
+            scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
         if (await SyntheticReviewMigration.VerifyAsync(connection, transaction, scope, cancellationToken) is { } issue) return new(issue);
         await SyntheticReviewMigration.Execute(connection, transaction, "SELECT pg_advisory_xact_lock(734021006)", cancellationToken);
         SyntheticReviewRunSeed? existing;
@@ -109,6 +111,8 @@ public sealed class SyntheticReviewStore
         if (Identity(authority, scope, action) is { } identityIssue) return new(identityIssue, null);
         await using var connection = await Open(cancellationToken);
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(connection, transaction,
+            scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
         if (await SyntheticReviewMigration.VerifyAsync(connection, transaction, scope, cancellationToken) is { } issue) return new(issue, null);
         try
         {

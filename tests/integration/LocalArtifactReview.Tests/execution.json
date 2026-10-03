@@ -1,0 +1,32 @@
+{
+  "schema": "v13-verification-checkpoint-v1",
+  "status": "SOURCE_CHECKPOINT_FINAL_EXECUTION_PENDING",
+  "frozenContractSha256": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+  "priorPacketSha256": "6cc8c175d66a024556c5438565ca7f66aa46d195cb77dfc2d643dba35e6bd581",
+  "independentOracles": {
+    "pythonFrozenFiles": 33,
+    "javascriptCrossLanguageChecks": 20,
+    "status": "PASS"
+  },
+  "firstExecutedGeneration": {
+    "dependencyHead": "619555a8ac47c35f6cc0d2c62d152d64cb5c1c5d",
+    "database": "iga_synthetic_cycle13_v13",
+    "portable": 218,
+    "combinedPostgres": 908,
+    "status": "PASS",
+    "originalClosure": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/.native/first-success"
+  },
+  "finalExecution": "PENDING",
+  "finalDatabase": "iga_synthetic_cycle13_v13_v2",
+  "browserExecuted": false,
+  "historicalCountsNotRelabeled": {
+    "V12Portable": 137,
+    "V12Postgres": 691,
+    "V12Browser": 3538
+  },
+  "findings": [
+    "B aggregate history cap accepted; corrected source must be consumed/rechecked.",
+    "Coordinator run-switch draft retention accepted and corrected.",
+    "Coordinator pre-fence fallback accepted; corrected host must be consumed/rechecked."
+  ]
+}

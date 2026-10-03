@@ -12,7 +12,7 @@ var wrong = scope with { CustomerId = "synthetic-other-customer" };
 
 Check("SYN-D3-001 fixed catalog explicit outcome digest", () =>
 {
-    Require(DemoFixtureCatalog.Baselines.Count == 9 && DemoFixtureCatalog.Profiles.Count == 9);
+    Require(DemoFixtureCatalog.Baselines.Count == 9 && DemoFixtureCatalog.Profiles.Count == 10);
     Require(DemoFixtureCatalog.Profiles.Select(item => item.Id).Take(4).SequenceEqual(new[]
         { "profile-standard", "profile-comparison", "synthetic-analysis-equal-v1", "synthetic-analysis-operations-v1" }));
     Require(DemoFixtureCatalog.Baselines.Where(item => !DemoAnalysisCatalog.IsAnalysisBaseline(item.Id)).Select(item => item.Id)

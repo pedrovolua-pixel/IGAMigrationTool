@@ -146,7 +146,8 @@
           "DeterministicAnalysis": "[1.0.0, )",
           "Microsoft.EntityFrameworkCore": "[10.0.12, )",
           "Microsoft.EntityFrameworkCore.Relational": "[10.0.12, )",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
         }
       },
       "assessmentscoring": {
@@ -165,13 +166,17 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "[10.0.12, )",
-          "Npgsql": "[10.0.3, )"
+          "Npgsql": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
         }
       },
       "recommendationguidance": {
         "type": "Project"
       },
       "reportdrafts": {
+        "type": "Project"
+      },
+      "syntheticsourcefence": {
         "type": "Project"
       }
     }

@@ -234,6 +234,7 @@ export type AnalysisDetail = {
   readonly recommendationGuidance: RecommendationGuidance | null;
   readonly aiPreview: AiPreviewDetail | null;
   readonly fixPackages: FixPackageDetail | null;
+  readonly artifactReview: ArtifactReviewDetail | null;
 };
 
 export type ReviewKind = "Confirm" | "Reject" | "Defer" | "Comment" | "EditPresentation";
@@ -369,6 +370,7 @@ export type DraftFrozenVersions = {
   readonly maturityFixtureDigest: string;
   readonly desiredOutcomeVersion: string | null;
   readonly fixPackageTemplateDigest?: "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669";
+  readonly fixReviewContractDigest?: string;
 };
 
 export type DraftModuleVersion = {
@@ -708,8 +710,108 @@ export type FixPackageDetail = {
   readonly runRevision: number;
   readonly runInputDigest: string;
   readonly baselineId: string;
-  readonly profileId: "synthetic-review-maturity-fix-packages-equal-v1";
+  readonly profileId: "synthetic-review-maturity-fix-packages-equal-v1" | "synthetic-review-maturity-fix-review-equal-v1";
   readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly snapshot: FixPackageSnapshot | null;
+};
+
+export type ArtifactReviewKind = "ReviewForPlanning" | "WithdrawReview";
+
+export type ArtifactReviewState = "Unverified" | "ReviewedForPlanning" | "NeedsReview";
+
+export type ArtifactReviewIssue = "InvalidInput" | "Denied" | "WrongScope" | "InvalidState" | "NotFound" | "RevisionConflict" | "SourceConflict" | "EventConflict" | "SeedConflict" | "IntegrityMismatch" | "MigrationDrift" | "NotInitialized" | "SourceUnavailable" | "RevisionOverflow";
+
+export type ArtifactReviewScope = {
+  readonly customerId: string;
+  readonly projectId: string;
+  readonly environmentId: string;
+};
+
+export type ArtifactReviewFindingRevision = {
+  readonly findingId: string;
+  readonly revision: number;
+};
+
+export type ArtifactReviewSourceBinding = {
+  readonly scope: ArtifactReviewScope;
+  readonly runId: string;
+  readonly runRevision: number;
+  readonly runInputDigest: string;
+  readonly baselineId: string;
+  readonly profileId: "synthetic-review-maturity-fix-review-equal-v1";
+  readonly applicationVersion: "synthetic-fix-review-app-v1";
+  readonly contractDigest: string;
+  readonly sourceDigest: string;
+  readonly guidanceDigest: string;
+  readonly findingReviewDigest: string;
+  readonly templateVersion: "fictional-fix-templates-v1";
+  readonly templateDigest: string;
+  readonly findingRevisions: ReadonlyArray<ArtifactReviewFindingRevision>;
+};
+
+export type ArtifactReviewEvent = {
+  readonly eventId: string;
+  readonly revision: number;
+  readonly kind: ArtifactReviewKind;
+  readonly actorId: string;
+  readonly actorRoles: ReadonlyArray<"Consultant">;
+  readonly recordedAtUtc: string;
+  readonly reason: string;
+  readonly source: ArtifactReviewSourceBinding;
+  readonly recordedState: "ReviewedForPlanning" | "Unverified";
+};
+
+export type ArtifactReviewEntry = {
+  readonly findingId: string;
+  readonly packageId: string;
+  readonly scopedOptionId: string;
+  readonly artifactId: string;
+  readonly categoryId: string;
+  readonly templateId: string;
+  readonly kind: "Configuration" | "Script" | "Sql";
+  readonly artifactTextDigest: string;
+  readonly revision: number;
+  readonly state: ArtifactReviewState;
+  readonly canReview: boolean;
+  readonly canWithdraw: boolean;
+  readonly history: ReadonlyArray<ArtifactReviewEvent>;
+};
+
+export type ArtifactReviewReceipt = {
+  readonly schemaVersion: "synthetic-fix-review-receipt-v1";
+  readonly eventId: string;
+  readonly runId: string;
+  readonly artifactId: string;
+  readonly kind: ArtifactReviewKind;
+  readonly revision: number;
+  readonly actorId: string;
+  readonly recordedAtUtc: string;
+  readonly sourceDigest: string;
+};
+
+export type ArtifactReviewCommand = {
+  readonly eventId: string;
+  readonly kind: ArtifactReviewKind;
+  readonly expectedRevision: number;
+  readonly expectedSourceDigest: string;
+  readonly reason: string;
+};
+
+export type ArtifactReviewDetail = {
+  readonly schemaVersion: 1;
+  readonly demoOnly: true;
+  readonly status: "Ready" | "Unavailable";
+  readonly reasonCode: "artifact_review_source_unavailable" | "artifact_review_integrity_denied" | "artifact_review_denied" | null;
+  readonly source: ArtifactReviewSourceBinding | null;
+  readonly actorId: string | null;
+  readonly artifacts: ReadonlyArray<ArtifactReviewEntry>;
+};
+
+export type ArtifactReviewResult = {
+  readonly schemaVersion: 1;
+  readonly demoOnly: true;
+  readonly issue: ArtifactReviewIssue | null;
+  readonly alreadyApplied: boolean;
+  readonly receipt: ArtifactReviewReceipt | null;
 };

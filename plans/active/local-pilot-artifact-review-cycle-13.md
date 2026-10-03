@@ -1,6 +1,6 @@
 # Local pilot consultant artifact review — Cycle13
 
-Status: RUNNING — AR13-01–05 approved; internal contracts being settled before writing packets
+Status: RUNNING — AR13-01–05 approved; reviewed internal contract/configuration checkpoint
 Owner: Coordinator
 Last updated: 2026-10-02
 Source checkpoint: `874c653a495921dbf20f628715b4ce70f3ecc030`
@@ -39,10 +39,10 @@ All writing packets start in separate `codex/` worktrees from the same coordinat
 
 | Packet | Exact intended ownership | Dependency and acceptance | State |
 | --- | --- | --- | --- |
-| A13 domain/store | New `src/server/modules/SyntheticFixReview/*.cs`, module README; new `tests/unit/SyntheticFixReview.Tests` except project/lock; no shared configuration | Approved AR13 contract, settled schema/source concurrency fence; immutable originals, authority, source binding, append-only event/current/receipt transaction, replay/conflict/restart; T01–T06/T12 | READY — approved; oracle/source contract preparation |
-| B13 presentation | New `src/web/src/ArtifactReviewPanel.tsx/.css`; new `tests/unit/ArtifactReviewComponent.Tests` except project/lock | Approved closed overlay DTO and exact action schemas; independent component states/text/hostile content/source fences/focus/reflow; no host/backend edits | READY — approved; awaits settled DTO |
-| V13 verification | New `tests/integration/LocalArtifactReview.Tests` except project/lock; new `tests/e2e/artifact-review` | Independent literal/source/authority/state/concurrency oracles before reading author conclusions; later actual owned PG/host/browser composition, historical regressions, non-author reviews | READY — approved; oracle/source contract preparation |
-| Coordinator | Projects/locks/solution/workflow; AssessmentRuns/LocalConsultantDemo private integration; narrow `RecommendationGuidanceBuilder.cs`/`DraftSnapshotBuilder.cs` source validators; `contracts/local-demo`, type generation, `api.ts`/`AnalysisView.tsx`/`FixPackagePreview.tsx` strict profile/lock/coherence guards, canonical records, integration and existing private Site | Preserve unrelated workspace edits; separate new profile/input locks; combined applicable checks, exact evidence, reviews, cleanup and confirmed owner-private publication | RUNNING — internal source/DTO/schema contract and shared configuration |
+| A13 domain/store | New `src/server/modules/SyntheticFixReview/*.cs`, module README, `migrations/fix-review/001-initial.sql`; new `tests/unit/SyntheticFixReview.Tests` except project/lock; no shared configuration | Approved AR13 contract, settled schema/source concurrency fence; immutable originals, authority, source binding, append-only event/current/receipt transaction, replay/conflict/restart; T01–T06/T12 | READY — reviewed contract and source oracle settled |
+| B13 presentation | New `src/web/src/ArtifactReviewPanel.tsx/.css`; new `tests/unit/ArtifactReviewComponent.Tests` except project/lock | Approved closed overlay DTO and exact action schemas; independent component states/text/hostile content/source fences/focus/reflow; no host/backend edits | READY — reviewed closed DTO settled |
+| V13 verification | New `tests/integration/LocalArtifactReview.Tests` except project/lock; new `tests/e2e/artifact-review` | Independent literal/source/authority/state/concurrency oracles before reading author conclusions; later actual owned PG/host/browser composition, historical regressions, non-author reviews | READY — reviewed contract and source oracle settled |
+| Coordinator | Projects/locks/solution/workflow; AssessmentRuns/LocalConsultantDemo private integration; narrow `RecommendationGuidanceBuilder.cs`/`DraftSnapshotBuilder.cs` source validators; `contracts/local-demo`, type generation, `api.ts`/`App.tsx`/`AnalysisView.tsx`/`useArtifactReview.ts`/`FixPackagePreview.tsx` strict profile/lock/coherence guards, canonical records, integration and existing private Site | Preserve unrelated workspace edits; separate new profile/input locks; combined applicable checks, exact evidence, reviews, cleanup and confirmed owner-private publication | RUNNING — internal source/DTO/schema contract and shared configuration |
 
 Before coding, record an exact compatibility checkpoint for the new profile/application/contract lock through saved inputs, source validators, captured guidance/draft/package reads and strict web guards. New-profile acceptance is explicit; historical nine-profile byte checks and old eleven/twelve-field locks remain strict. Shared source-concurrency/schema/API contracts are settled before dependent code, never through competing worker assumptions. Workers request cross-owner edits from the coordinator. No new third-party dependency is currently justified.
 
@@ -64,3 +64,7 @@ Recorded AR13 approval allows one new isolated synthetic schema and new opt-in p
 ## Resume instruction
 
 Read the actual human decision and finalized contract first. If AR13 choices are amended, update this plan/test/DTO/schema before dispatch. Start A13 and independent V13 oracle design together; B13 can implement the approved component contract once settled. Coordinator integrates after non-author review, runs the combined checks and publishes the existing private board. No recurring job or unattended agent was started by this preparation checkpoint.
+
+## Frozen implementation checkpoint
+
+The [reviewed internal contract](../../specs/003-health-assessment/local-artifact-review-implementation-contract.md) has SHA256 `a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f` (exact UTF8/LF/final-newline bytes). A13/B13/V13 reviewed it before implementation. V13 preserved its independent oracle first. Shared framework-only run fence and project configuration belong to the coordinator; A13 owns only its additive new migration. All current source writers join the same fence before row locks; old migration/input bytes remain unchanged. Writing worktrees branch from the coordinator checkpoint containing this exact contract/configuration.

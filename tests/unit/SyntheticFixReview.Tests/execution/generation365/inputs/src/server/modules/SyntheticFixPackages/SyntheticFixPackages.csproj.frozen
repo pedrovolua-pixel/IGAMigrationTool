@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../RecommendationGuidance/RecommendationGuidance.csproj" />
+  </ItemGroup>
+</Project>

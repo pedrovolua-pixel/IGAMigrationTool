@@ -367,6 +367,9 @@ public sealed class SyntheticDurableRunEngine
         var bindingIssue = await BindingIssueAsync(db, cancellationToken);
         if (bindingIssue is not null) return Deny(bindingIssue.Value);
         await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
+        if (runId == Guid.Empty) return Deny(SyntheticRunIssue.NotFound);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(db.Database.GetDbConnection(),
+            transaction.GetDbTransaction(), scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
         var run = await db.Runs.FromSqlInterpolated($"SELECT * FROM synthetic_assessment.runs WHERE run_id={runId} AND customer_id={trustedScope.CustomerId} AND project_id={trustedScope.ProjectId} AND environment_id={trustedScope.EnvironmentId} FOR UPDATE").SingleOrDefaultAsync(cancellationToken);
         if (run is null) return Deny(SyntheticRunIssue.NotFound);
         try
@@ -466,7 +469,9 @@ public sealed class SyntheticDurableRunEngine
         (versions.AiPreviewFixtureDigest is null || versions.AiPreviewFixtureDigest is { Length: 64 } &&
             versions.AiPreviewFixtureDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
         (versions.FixPackageTemplateDigest is null || versions.FixPackageTemplateDigest is { Length: 64 } &&
-            versions.FixPackageTemplateDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
+            versions.FixPackageTemplateDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
+        (versions.FixReviewContractDigest is null || versions.FixReviewContractDigest is { Length: 64 } &&
+            versions.FixReviewContractDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
     private static bool LiveLease(RunRow run, Guid generation, DateTimeOffset now) => generation != Guid.Empty &&
         run.LeaseGeneration == generation && run.LeaseExpiresAt > now;
     private static SyntheticRunIssue? Guard(RunRow run, Guid generation, long? revision, DateTimeOffset now, bool allowCancellation)

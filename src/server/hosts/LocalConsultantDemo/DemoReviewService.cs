@@ -11,11 +11,11 @@ internal sealed class DemoReviewService(SyntheticReviewStore store)
         SyntheticReviewScope.Fixed, [SyntheticReviewRole.Consultant], ["SECURITY", "OPERATIONS"],
         [SyntheticReviewAction.Read, SyntheticReviewAction.Review, SyntheticReviewAction.AddComment, SyntheticReviewAction.EditPresentation]);
 
-    internal async Task<DemoReviewContext> ReadAsync(SyntheticRunSnapshot run)
+    private static SyntheticReviewRunSeed? ExpectedSeed(SyntheticRunSnapshot run)
     {
-        if (!DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId)) return new("review_profile_required", null);
+        if (!DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId)) return null;
         var original = SyntheticDemoAnalysisAdapter.Project(run);
-        if (!original.IsAvailable) return new(original.ReasonCode, null);
+        if (!original.IsAvailable) return null;
         var analysis = original.Projection!.Analysis;
         var seeds = analysis.Groups.Select(group =>
         {
@@ -28,11 +28,26 @@ internal sealed class DemoReviewService(SyntheticReviewStore store)
                 members.Select(member => new SyntheticOccurrenceReference(member.OccurrenceId, member.ObjectId,
                     member.Provenance.RuleId, member.Provenance.RuleVersion, member.GeneratedOriginalDigest)).ToImmutableArray());
         }).OrderBy(seed => seed.FindingId, StringComparer.Ordinal).ToImmutableArray();
-        var seed = new SyntheticReviewRunSeed(SyntheticReviewScope.Fixed, run.RunId, run.InputDigest,
+        return new SyntheticReviewRunSeed(SyntheticReviewScope.Fixed, run.RunId, run.InputDigest,
             analysis.ContentDigest, SyntheticReviewResourceState.Mutable, seeds);
-        var seeded = await store.SeedAsync(seed, Authority);
+    }
+
+    internal async Task<DemoReviewContext> ReadAsync(SyntheticRunSnapshot run, CancellationToken cancellationToken = default)
+    {
+        if (!DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId)) return new("review_profile_required", null);
+        var seed = ExpectedSeed(run);
+        if (seed is null) return new(SyntheticDemoAnalysisAdapter.Project(run).ReasonCode, null);
+        var seeded = await store.SeedAsync(seed, Authority, cancellationToken);
         if (!seeded.Succeeded) return new("review_input_denied", null);
-        var read = await store.ReadAsync(SyntheticReviewScope.Fixed, run.RunId, Authority);
+        return await ReadExistingAsync(run, cancellationToken);
+    }
+
+    // Called under the run source fence; never seed on another connection here.
+    internal async Task<DemoReviewContext> ReadExistingAsync(SyntheticRunSnapshot run, CancellationToken cancellationToken = default)
+    {
+        var seed = ExpectedSeed(run);
+        if (seed is null) return new("review_input_denied", null);
+        var read = await store.ReadAsync(SyntheticReviewScope.Fixed, run.RunId, Authority, cancellationToken);
         if (!read.Succeeded || SyntheticReviewDigest.Compute(read.Snapshot!.RunSeed) != SyntheticReviewDigest.Compute(seed))
             return new("review_input_denied", null);
         return new(null, read.Snapshot);

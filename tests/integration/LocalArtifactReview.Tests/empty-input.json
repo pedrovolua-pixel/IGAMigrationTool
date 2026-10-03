@@ -1,0 +1,83 @@
+{
+  "source": {
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "runRevision": 17,
+    "runState": "Scoring",
+    "runInputDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "baselineId": "synthetic-analysis-mixed-v1",
+    "profileId": "synthetic-review-maturity-fix-review-equal-v1",
+    "frozenVersions": {
+      "profileVersion": "synthetic-profile-v1",
+      "desiredOutcomeVersion": null,
+      "scoringAlgorithmVersion": "pilot-health-v1",
+      "aiPolicyVersion": "synthetic-ai-disabled-v1",
+      "promptVersion": "synthetic-prompt-disabled-v1",
+      "modelVersion": "synthetic-model-disabled-v1",
+      "applicationVersion": "synthetic-fix-review-app-v1",
+      "workSchemaVersion": "synthetic-run-work-v1",
+      "scriptedResultsDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "analysisFixtureDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "maturityFixtureDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "fixPackageTemplateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669",
+      "fixReviewContractDigest": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f"
+    },
+    "capabilityLock": {
+      "matrixVersion": "synthetic-analysis-matrix-v1",
+      "stateAtLock": "FixtureVerified",
+      "productBuild": "fixture-product-v1",
+      "databaseSchemaBuild": "fixture-facts-v1",
+      "hotfixSetDigest": "synthetic-hotfix-digest",
+      "sqlServerBuild": "synthetic-sql-build",
+      "compatibilityLevel": 160,
+      "modules": [
+        {
+          "id": "SyntheticOperations",
+          "version": "synthetic-module-v1"
+        },
+        {
+          "id": "SyntheticSecurity",
+          "version": "synthetic-module-v1"
+        }
+      ],
+      "queryPackVersion": "synthetic-query-pack-v1",
+      "normalizationSchemaVersion": "synthetic-normalization-v1",
+      "ruleCatalogVersion": "synthetic-analysis-catalog-v1",
+      "lockDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "analysisLock": {
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "packVersion": "synthetic-analysis-pack-v1",
+      "packDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "presetId": "synthetic-analysis-mixed-v1",
+      "presetVersion": "synthetic-evidence-v1",
+      "evidenceDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "catalogVersion": "synthetic-analysis-catalog-v1",
+      "catalogDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "profileId": "synthetic-analysis-equal-v1",
+      "profileVersion": "synthetic-profile-v1",
+      "profileDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "compatibility": {
+        "sourceProduct": "SYNTHETIC-ONLY",
+        "productVersion": "fixture-product-v1",
+        "evidenceSchemaVersion": "fixture-facts-v1",
+        "ruleLanguageVersion": "count-predicate-v1"
+      }
+    },
+    "analysisFixtureDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "analysisContentDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "savedCoverageDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "reviewRunId": "12345678-1234-4234-8234-123456789abc",
+    "reviewRunRevision": 17,
+    "reviewSnapshotDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "findings": []
+}

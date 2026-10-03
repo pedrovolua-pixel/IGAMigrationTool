@@ -1,0 +1,26 @@
+{
+  "empty": {
+    "canonicalBytes": 6127,
+    "contentDigest": "42c1086ec76356466521751373f17553f8ec4e471a8ea89ab9582a8cd4b6f4b3",
+    "guidanceDigest": "3cedb2cfe788faeb337412387435fbf1166d407a49123e9e3f64771313e79950",
+    "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+  },
+  "hostile": {
+    "canonicalBytes": 8968,
+    "contentDigest": "d9c7c251795b0b1e1f6d24dad55193e633a7541ba4aeaca58a8ffc3e8fc1495a",
+    "guidanceDigest": "7a8406bd2b0c9c7faf3b5d8cf9984b8287222931feb1213caa01461c584408d5",
+    "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+  },
+  "multi": {
+    "canonicalBytes": 12282,
+    "contentDigest": "7db3b1147a2fc50b7b9d5827c02a207a489588c77ad2885babc0aa3d9da444b2",
+    "guidanceDigest": "5d68cbe86261d02481e5309676bfd66d7e5da45c246ae17fbc3c68e7385c64d2",
+    "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+  },
+  "normal": {
+    "canonicalBytes": 8422,
+    "contentDigest": "40eabf9671c35ed2e60736af0c583a9c20e3f862776c60db76d1403e7b590ebf",
+    "guidanceDigest": "ee3b25d3201273d1d6b667d6d56e02242490f93427db606f7fd473f4d0645fed",
+    "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+  }
+}

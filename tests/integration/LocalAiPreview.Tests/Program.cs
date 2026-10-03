@@ -34,7 +34,7 @@ internal static class Program
                         Check.That(denied, "dedicated-opt-in-compatibility-denial");
                     }
                 }
-            Check.Equal(DemoFixtureCatalog.Profiles.Count, 9, "six-historical-plus-two-offline-ai-plus-one-fix-profile");
+            Check.Equal(DemoFixtureCatalog.Profiles.Count, 10, "six-original-plus-two-offline-ai-plus-fix-preview-and-artifact-review");
             Check.Equal(DemoFixtureCatalog.Baselines.Count, 9, "eight-historical-plus-one-configuration-baseline");
             Check.Group("V10-001 independent whole-template/literal-proposal/six-old-lock/opt-in contracts");
             if (args.Contains("--postgres", StringComparer.Ordinal)) await DatabaseCases.Run();
