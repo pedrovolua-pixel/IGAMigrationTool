@@ -92,8 +92,6 @@ jobs:
           dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build -- --migration-only
       - name: Check actual saved Phase1B evaluation source capture
         run: |
-          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_evalsource_author_ci
-          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_evalsource_independent_ci
           dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
           IGA_EVALUATION_SOURCE_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
           IGA_EVALUATION_SOURCE_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIndependent.Tests -c Release --no-build
