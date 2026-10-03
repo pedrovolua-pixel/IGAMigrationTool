@@ -439,6 +439,7 @@ try {
       "keyboard-source-anchor",
     );
     await page.keyboard.press("Enter");
+    await page.waitForURL(base + "/hostile.html#source", { timeout: 5_000 });
     eq(new URL(page.url()).hash, "#source", "keyboard-source-navigation");
     // Source hash navigation changes the browser's sequential focus starting point.
     // Begin a separate keyboard-only path from document start for Proposals.
@@ -453,6 +454,7 @@ try {
       "keyboard-proposals-anchor",
     );
     await page.keyboard.press("Enter");
+    await page.waitForURL(base + "/hostile.html#proposals", { timeout: 5_000 });
     eq(new URL(page.url()).hash, "#proposals", "keyboard-proposals-navigation");
     await page.locator("article").first().scrollIntoViewIfNeeded();
     const viewportPath = join(output, viewport.name + "-viewport.png");
