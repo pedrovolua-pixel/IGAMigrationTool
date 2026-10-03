@@ -52,3 +52,7 @@ public interface IAiExecutionCommitObserver
     Task BeforeWriteAsync(string operation, Guid runId, CancellationToken cancellationToken);
 }
 public sealed record AiRecovery(AiAttemptKey Attempt, AiScenario Scenario, string? PacketInputJson, ImmutableArray<AiUnitMapping> Units, bool BillingOnly);
+public sealed record AiExportAuthority(string ActorId, AiScope Scope, ImmutableArray<AiRole> Roles, ImmutableArray<string> Categories,
+    bool Authenticated, bool Active, bool AssignmentActive, bool Revoked, bool ExportGranted, bool CustomerExportAllowed, bool AuditorScopedGrant, AiResourceState ResourceState);
+public sealed record AiExportUnitBinding(CoverageKey Key, CoverageState State, string? ReasonCode, string? OccurrenceId, string? OriginalDigest, string? PacketDigest, string? ProposalDigest, AiAttemptKey? Attempt);
+public sealed record AiExportVerification(AiRunLock RunLock, ImmutableArray<AiExportUnitBinding> Units, string SourceDigest);
