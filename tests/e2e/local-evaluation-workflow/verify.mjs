@@ -297,8 +297,7 @@ try {
   await memberSelector.focus();
   await page.keyboard.press("End");
   await page.keyboard.press("Enter");
-  const rationale =
-    "Independent keyboard review <script>window.injected = true</script>";
+  const rationale = `Independent keyboard review ${randomUUID()} <script>window.injected = true</script>`;
   await page.getByLabel("Rationale").focus();
   await page.keyboard.insertText(rationale);
   await page.getByRole("checkbox").first().focus();
