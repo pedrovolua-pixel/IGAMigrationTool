@@ -41,6 +41,20 @@ jobs:
         run: dotnet format IgaMigrationTool.slnx --verify-no-changes --no-restore
       - name: Build
         run: dotnet build IgaMigrationTool.slnx --configuration Release --no-restore
+      - name: Check approved Phase1B portable and owning PostgreSQL contracts
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_ai_tests
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_csv_tests
+          dotnet run --project tests/unit/SyntheticOutcomePriority.Tests -c Release --no-build
+          dotnet run --project tests/unit/SyntheticAiExecution.Tests -c Release --no-build
+          dotnet run --project tests/unit/SyntheticTaskCsv.Tests -c Release --no-build
+          dotnet run --project tests/integration/SyntheticOutcomePriority.Tests -c Release --no-build
+          dotnet tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll
+      - name: Execute Linux isolated CSV renderer and adversarial boundary probes
+        run: |
+          docker pull mcr.microsoft.com/dotnet/runtime:10.0.12
+          python3 tests/security/phase1b-csv-linux/run.py --evidence "$RUNNER_TEMP/phase1b-csv-linux-verification.json"
+          python3 -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/phase1b-csv-linux-verification.json")); assert p["linuxStatus"]=="PASS" and len(p["cases"])==18'
       - name: Run synthetic artifact-integrity checks
         run: dotnet run --project tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj --configuration Release --no-build
       - name: Check synthetic evaluation accuracy
@@ -370,6 +384,11 @@ jobs:
           global-json-file: global.json
       - name: Restore locked dependencies
         run: dotnet restore IgaMigrationTool.slnx --locked-mode
+      - name: Check approved Phase1B Windows portable contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticOutcomePriority.Tests -c Release --no-restore
+          dotnet run --project tests/unit/SyntheticAiExecution.Tests -c Release --no-restore
+          dotnet run --project tests/unit/SyntheticTaskCsv.Tests -c Release --no-restore
       - name: Check Windows offline synthetic AI packets
         run: dotnet run --project tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj --configuration Release --no-restore
       - name: Check Windows offline synthetic proposed output
