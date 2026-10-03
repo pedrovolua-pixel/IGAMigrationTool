@@ -4,7 +4,7 @@ Status: RUNNING — exact engineering freeze before dependent implementation
 Owner: Phase1C coordinator
 Date: 2026-10-03
 Stable base:9eab6bc4afb72eb242bda3bd5ee783f78989dfec
-Authority: repository owner's “Do it” after the concrete next-slice recommendation to connect sampling/eligibility to local reviewer assignments, recorded outcomes/corrections and immutable history, beginning with exact storage/API/UI contracts and tests; approved feature003 product/technical/test plans, EV02-S01–S04/R01–R03 and accepted ADR0001–0003.
+Authority: repository owner's “Do it” after the concrete next-slice recommendation to connect sampling/eligibility to local reviewer assignments, recorded outcomes/corrections and immutable history, beginning with exact storage/API/UI contracts and tests; approved feature003 product/technical/test plans, EV02-S01–S04/R01–R03 and accepted ADR0001–0004.
 
 ## Bounded outcome and ownership
 
