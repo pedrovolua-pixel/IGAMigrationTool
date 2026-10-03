@@ -24,3 +24,8 @@ Use the [production binding template](bff-production-bindings-template.json) in 
 After local production contracts and implementation are reviewed, prepare the complete refreshed Azure quote and exact bounded public synthetic session. Include all network/platform-managed, registry, database, storage, backup and private-endpoint costs. The historical disposable session approval does not authorize this topology. Public exposure, paid resources, user invitations/enrollment, provider consent, SQL/key grants and production release need their separate exact authorization. HTTPS-T02–T08, G1–G9 and Milestone2 remain NOT VERIFIED.
 
 The immediate next engineering action is to prepare the production dependency specifications and test packet for human review. Do not turn on the environment-only template, promote the diagnostic image, or grant access from this document.
+
+
+## Prepared review packet — 2026-10-03 UTC
+
+[Production composition](https-production-contract-proposal.md), [provider](https-production-provider-contract-proposal.md), [shared keys](https-production-key-contract-proposal.md), [ADR-0012](../../architecture/decisions/ADR-0012-authentication-failure-audit-preservation.md) and [68 proposed acceptance cases/human tasks](https-production-test-packet.md) now provide the review packet. [Preparation ownership and review](../../plans/active/https-production-contract-preparation.md) remain distinct from implementation approval. PC-D01–PC-D05 and focused unresolved decisions need exact acceptance; no new production implementation or live authorization follows.
