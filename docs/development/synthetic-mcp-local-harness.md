@@ -45,3 +45,7 @@ The ordinary `dotnet run --project tests/integration/SyntheticMcp.Tests -c Relea
 ## Cycle04 continuation recovery regression
 
 The same ordinary integration command also executes [cycle04 continuation verification](../../specs/003-health-assessment/phase1d-continuation-verification-cycle04.md): 24 deterministic scenarios, 112 invocations and 1,011 assertions. Its [fixture-derived oracle](../../tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md) verifies overlapping repeatable pages, cancellation/deadline/audit-failure retry and stale-revision/regrant denial. Barrier and audit records are in-memory test observations; they do not prove durable audit or real publication. No additional option, dependency, migration, configuration or listener is introduced.
+
+## Cycle05 occupied cursor capacity regression
+
+The ordinary integration command also executes [cycle05 verification](../../specs/003-health-assessment/phase1d-occupied-capacity-verification-cycle05.md):16scenarios/5,200invocations/88,562assertions. It verifies failed terminal audit at an occupied final slot, same-handle recovery, actual Limited audit and representative terminal pages at full identity/customer quotas. Original fixture bytes and explicit typed expectations are pinned by the [oracle](../../tests/integration/SyntheticMcp.Tests/OccupiedCursorCapacity.oracle.md). Quota/rate/expiry parameters remain fictional; no additional runtime capability, dependency, configuration or migration is introduced.
