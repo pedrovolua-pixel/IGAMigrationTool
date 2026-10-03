@@ -84,4 +84,9 @@
   <Project Path="tests/unit/SyntheticEvaluationRegression.Tests/SyntheticEvaluationRegression.Tests.csproj" />
   <Project Path="tests/unit/SyntheticEvaluationReviewer.Tests/SyntheticEvaluationReviewer.Tests.csproj" />
   <Project Path="tests/integration/SyntheticEvaluationPolicy.Tests/SyntheticEvaluationPolicy.Tests.csproj" />
+  <Project Path="src/server/modules/SyntheticEvaluationWorkflow/SyntheticEvaluationWorkflow.csproj" />
+  <Project Path="src/server/hosts/LocalEvaluationDemo/LocalEvaluationDemo.csproj" />
+  <Project Path="tests/unit/SyntheticEvaluationWorkflow.Tests/SyntheticEvaluationWorkflow.Tests.csproj" />
+  <Project Path="tests/integration/SyntheticEvaluationWorkflowStore.Tests/SyntheticEvaluationWorkflowStore.Tests.csproj" />
+  <Project Path="tests/integration/SyntheticEvaluationWorkflowIndependent.Tests/SyntheticEvaluationWorkflowIndependent.Tests.csproj" />
 </Solution>

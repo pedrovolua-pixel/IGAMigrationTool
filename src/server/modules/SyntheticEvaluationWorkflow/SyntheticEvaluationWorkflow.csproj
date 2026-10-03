@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <ProjectReference Include="../SyntheticEvaluation/SyntheticEvaluation.csproj" />
+    <EmbeddedResource Include="../../../../migrations/synthetic-evaluation-workflow/001-initial.sql" LogicalName="SyntheticEvaluationWorkflow.001-initial.sql" />
+  </ItemGroup>
+</Project>

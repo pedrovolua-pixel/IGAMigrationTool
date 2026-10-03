@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../modules/SyntheticEvaluationWorkflow/SyntheticEvaluationWorkflow.csproj" />
+    <Compile Include="../../fixtures/SyntheticEvaluationWorkflowFixture.cs" Link="FictionalEvaluationFixture.cs" />
+  </ItemGroup>
+</Project>
