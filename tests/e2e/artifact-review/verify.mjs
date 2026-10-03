@@ -1614,6 +1614,45 @@ try {
     .getByRole("button", { name: "Add comment", exact: true })
     .first()
     .click();
+  // The pending retry was already visible before the asynchronous finding save.
+  // Wait for the actual saved source and its coherent DOM replacement, so retry
+  // deliberately uses the new source epoch rather than racing that replacement.
+  const refreshedUncertain = await until(
+    () => analysis(normal.runId),
+    (d) =>
+      d.reviewSnapshotDigest !== commitObserved.reviewSnapshotDigest &&
+      d.artifactReview.source.sourceDigest !==
+        commitObserved.artifactReview.source.sourceDigest &&
+      d.review.findings.some((f) =>
+        f.history.some(
+          (e) =>
+            e.kind === "Comment" &&
+            e.text ===
+              "Fictional refresh while original artifact command remains uncertain",
+        ),
+      ),
+    "finding-save-before-original-command-retry",
+  );
+  equal(
+    refreshedUncertain.runRevision,
+    commitObserved.runRevision,
+    "finding-refresh-keeps-same-run-revision",
+  );
+  await until(
+    () =>
+      rows(
+        overlay(page)
+          .locator("details")
+          .filter({
+            has: page.getByText("Current review source", { exact: true }),
+          })
+          .first(),
+      ),
+    (value) =>
+      JSON.stringify(value) ===
+      JSON.stringify(sourceValues(refreshedUncertain.artifactReview.source)),
+    "saved-finding-source-visible-before-original-command-retry",
+  );
   await article(page, target)
     .getByRole("button", { name: "Retry same artifact command", exact: true })
     .waitFor();
