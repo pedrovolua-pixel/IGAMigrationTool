@@ -1,0 +1,384 @@
+{
+  "schema": "phase1b-closure-preparation-v1",
+  "recordedUtc": "2026-10-03T14:44:25.279650+00:00",
+  "phase1b": "IN PROGRESS \u2014 exact owner decision pending",
+  "runtimeImplementation": "NOT IMPLEMENTED for new Phase1B paths",
+  "decisionPacket": "specs/003-health-assessment/local-phase1b-closure-decision-packet.md",
+  "decisionPacketSha256": "32ee7da8a74f4a1d68e4183cb61cac11e2063a88cf92c556b6dc1faa9e1563f9",
+  "ownerDecision": "PENDING; async request presented in current task",
+  "decisions": [
+    "OP1B-01\u201306",
+    "AI1B-01\u201307",
+    "CSV1B-01\u201307",
+    "P1B-SCOPE-01"
+  ],
+  "proposalAndTestHashes": {
+    "specs/003-health-assessment/local-phase1b-csv-test-plan.md": "64395ba1607702089e73a40d34cd6fd241577ac416a2a834e1d5b0670727e579",
+    "specs/003-health-assessment/local-phase1b-csv-contract-proposal.md": "108537455b4f4beac92b0cb24c526d261385662f8ff64dc6af1c5c172ef7ecc7",
+    "specs/003-health-assessment/local-phase1b-closure-decision-packet.md": "32ee7da8a74f4a1d68e4183cb61cac11e2063a88cf92c556b6dc1faa9e1563f9",
+    "specs/003-health-assessment/local-phase1b-outcomes-priority-test-plan.md": "f21727d7c91429549c98ea7ceba97f1902458e590b563777665adecf173bd714",
+    "specs/003-health-assessment/local-phase1b-outcomes-priority-contract-proposal.md": "f7775ef74297f0b2e563c01d435bf4800fd07a71ea9ce18558cca95a3c7af5b8",
+    "specs/003-health-assessment/local-phase1b-ai-contract-proposal.md": "471fdcb92780bac8f552366c988eab7d4f7498a123e1625aacc1dd2ecaf49af5",
+    "specs/003-health-assessment/local-phase1b-ai-test-plan.md": "c98ac0f08ae9194c72d4dc995de48877f4ad3e9bed90f53ed82e66baa52abb43"
+  },
+  "baselineCode": "0185a6c1cce38581fddf2153228aa86c7cba176f",
+  "parallel1CSource": "ab678bb",
+  "currentSolutionProjects": 64,
+  "baselineChecks": {
+    "lockedAuditedRestore": "PASS",
+    "format": "PASS",
+    "releaseBuild": "PASS; 0 warnings/errors",
+    "frontendInstallFormatGeneratedContractTypesBuild": "PASS",
+    "npmAudit": "PASS; 0 vulnerabilities",
+    "portableUnitComponentHosts": "24 PASS; PostgreSQL not executed",
+    "portableIntegrationHosts": "7 PASS; PostgreSQL not executed",
+    "architecture": "PASS;7 policy +4 project-scan cases",
+    "gitleaks": "PASS; no leaks"
+  },
+  "composed64Checks": {
+    "restore": "PASS",
+    "format": "PASS",
+    "build": "PASS; 0 warnings/errors"
+  },
+  "independentReviews": [
+    {
+      "packet": "OutcomesPriority",
+      "authorFinalCommit": "cf923e74ce72afd18967e0eba61ba892479b4594",
+      "reviewer": "phase1b_requirements_audit",
+      "result": "No remaining scoped documentary blocker",
+      "fixed": [
+        "approval high-water after retirement",
+        "effort withdrawal approval state",
+        "whole-compound score denial on invalid locked proof",
+        "one combined profile"
+      ]
+    },
+    {
+      "packet": "AI",
+      "authorFinalCommit": "76e5f554d08c976429eb0b67d00ac340e275c309",
+      "reviewer": "phase1b_outcomes_priority_contract",
+      "result": "No remaining scoped documentary blocker",
+      "fixed": [
+        "disjoint actual object/category coverage keys",
+        "exactly one matching ScoringInput including gaps",
+        "single fenced source/review/ledger compound read",
+        "exact logical+attempt-bound reconciliation"
+      ]
+    },
+    {
+      "packet": "CSV",
+      "authorFinalCommit": "4a30e941bb00a8bf0e94f3a7f222a4f72adb9113",
+      "reviewer": "phase1b_technical_audit",
+      "result": "No remaining scoped documentary blocker",
+      "fixed": [
+        "Auditor read-only export capture in supplied transaction",
+        "trusted configured absolute protected navigation origin",
+        "separate input/output hashes with complete byte/cell parity"
+      ]
+    },
+    {
+      "packet": "Combined",
+      "reviewer": "phase1b_requirements_audit",
+      "result": "No remaining scoped documentary blocker",
+      "fixed": [
+        "residual FR12/15 allocation is a new explicit owner choice",
+        "CSV protected navigation versus report sharing",
+        "all6 exact hashes match and8 root/coordinator owned files identical"
+      ]
+    }
+  ],
+  "preservedCorrections": [
+    "Initial frontend log redirection used wrong relative path; command did not run; corrected install passed",
+    "Initial LocalFixPackages DLL filename ignored its AssemblyName; invocation failed; correct LocalFixPackages.UnitTests.dll passed569 assertions",
+    "Author AI initial Markdown whitespace corrected before final proposal freeze",
+    "O/P amended commit was a replacement; cherry-pick add/add conflict resolved using exact final owned bytes",
+    "Divergent existing site checkout preserved; existing published source opened into separate ignored checkout"
+  ],
+  "unexecuted": [
+    "New Phase1B desired outcome/priority/AI/CSV runtime acceptance",
+    "Owned PostgreSQL closure checks",
+    "New and historical browser closure replays for future implementation",
+    "Hosted Linux/Windows/container closure checks",
+    "Supported manual accessibility/UAT",
+    "Real customer/source/provider/deployment/G1\u2013G9"
+  ],
+  "changes": {
+    "newDependency": false,
+    "migrationApplied": false,
+    "runtimeConfiguration": false,
+    "productionPermission": false,
+    "realProviderOrSourceAccess": false
+  },
+  "workspacePreservation": "51 existing concurrent root files hashed before integrating owned docs; Phase1C committed source rebased into coordinator; no shared DB restart/configuration or existing local Site history overwrite",
+  "rawEvidence": {
+    "directory": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence",
+    "files": [
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticAiProposals.log",
+        "bytes": 41,
+        "sha256": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticFixReview.log",
+        "bytes": 62,
+        "sha256": "d54e493eb5b97ef64f1b78e6386fd56d51d178382ae849e1bc2714fb3eccfd1a"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-ReportMarkdown.log",
+        "bytes": 439,
+        "sha256": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-AssessmentOrchestration.log",
+        "bytes": 202,
+        "sha256": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticAiPreview.log",
+        "bytes": 382,
+        "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-ArtifactReviewComponent.log",
+        "bytes": 61,
+        "sha256": "17c10997be4aa9e621318c84cfe6255ce2b330a7bb407e6b7e067b6df9da09e6"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-LocalAiPreview.log",
+        "bytes": 70,
+        "sha256": "aeff314faa2d3964faa677e5cf51d99e340bec1fa17c45d5ebcfa5af1a3af19c"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-frontend-install.log",
+        "bytes": 143,
+        "sha256": "a111020b6edc3c4ab062f42b53128b6f8d74e4f48c4328b38b5d2959dd85e132"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-LocalAiPreview.log",
+        "bytes": 434,
+        "sha256": "c87540f0390a21804fa4e9049ec139bbdcd4785b289796ca0e1457a054089849"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-SyntheticAiValidation.log",
+        "bytes": 632,
+        "sha256": "c5b12c228796e0b7f7fc9bfb788aea487373d18dc1ad4238a6a530186d548092"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticAiPreviewHtml.log",
+        "bytes": 194,
+        "sha256": "7ea394ff57b7d9a82dedf830d42de866d2606b1657da082d8d2b1b6c761799ff"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-LocalFixPackages-corrected.log",
+        "bytes": 88,
+        "sha256": "cd9d0b4cdf401aecea6821e44ea985e044145642a58ab22fb94417f3deb18ad6"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-results.json",
+        "bytes": 2979,
+        "sha256": "3d4ce494c2bd1b2242e155cfe60306ff9453e6011ca1db1810d85941df938571"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticFixPackages.log",
+        "bytes": 106,
+        "sha256": "d8f6f6e6655167200d8a8f61aca65874a8f6c5144a3c059e7fec89f985d4b4c1"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/composed64-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-LocalArtifactReview.log",
+        "bytes": 285,
+        "sha256": "abd68feaa38f1f39af1b56dd8d2f79971626ea7446e3f1d8875039953f975a3f"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/composed64-restore.log",
+        "bytes": 341,
+        "sha256": "77da4951a48f45f3abe2d85a2f527b7890658882a6ec622f1a3797e901efb516"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticAiPackets.log",
+        "bytes": 68,
+        "sha256": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticFixPackageHtml.log",
+        "bytes": 245,
+        "sha256": "10e2c339697c3a5fd8225a12b5dc34b68281eac5e271279e9e77988ab24c05af"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-AssessmentScoring.log",
+        "bytes": 114,
+        "sha256": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-ReportDrafts.log",
+        "bytes": 83,
+        "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-CollectorSafety.log",
+        "bytes": 392,
+        "sha256": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-AssessmentRuns.log",
+        "bytes": 77,
+        "sha256": "5e7be126948f7239778fb3b7b13af7d8f69e2f51c7d9e87b35ae3cafc7ae649b"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-build.log",
+        "bytes": 9367,
+        "sha256": "d62e2606d8761190d2204766eefb64c570f8bdcba8312687d98b75abb7fdfed3"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-AssessmentMaturity.log",
+        "bytes": 154,
+        "sha256": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-secret-scan.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-frontend-build.log",
+        "bytes": 638,
+        "sha256": "481b9cda948960278f3b517c6b67c31949a36227b7e14b0abd1ce0ff79f09f71"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-LocalPlanningTasks.log",
+        "bytes": 428,
+        "sha256": "25784c7acbb636e585fb03e6620efad6ea0c495c8bb67fb807a8606ec5d60d4b"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-LocalFixPackages.log",
+        "bytes": 460,
+        "sha256": "8a02f27ad47f874dccf979ad1c4088f92b2ce5318cce1ae122531d1c6f8def81"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/pre-integration-root-inventory.json",
+        "bytes": 9297,
+        "sha256": "4221ca869995dc3d245bfa42f865502959c2390dacbc11c7e1eb7d11e15557ce"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-SyntheticAiPreview.log",
+        "bytes": 457,
+        "sha256": "10dd67090ce4a8f5eeac0f272078f3607149c9d34cd9827f1dc9536db7f49927"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-frontend-format.log",
+        "bytes": 167,
+        "sha256": "da4f2e13f41f369319f3e04fc48a598dbea94a21ce7d7efea7f738e1b00afcd4"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-EvidenceGovernance.log",
+        "bytes": 479,
+        "sha256": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-format.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-DeterministicAnalysis.log",
+        "bytes": 138,
+        "sha256": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-AssessmentCoverage.log",
+        "bytes": 259,
+        "sha256": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-CollectorHost.log",
+        "bytes": 245,
+        "sha256": "a62c02b8c6072da43abe9a120ccdbc16cdb96515b2d2d2faa8af3b8f92079c5c"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-LocalFixPackages.log",
+        "bytes": 232,
+        "sha256": "38f3bf6142c34277a3f1ad7db77876a7f79e7776950638901bfb32efc75986d1"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-PlanningTasksComponent.log",
+        "bytes": 75,
+        "sha256": "9177e9cf735a1f84c42617b4b1c26c0904ef19302271595046299d8d4d9b9e25"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-unit-results.json",
+        "bytes": 8679,
+        "sha256": "fdd31fbbb57a90d19a0c5f3db56c4446d867b5844b63dae0a1738e8a8d304d62"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-frontend-audit.log",
+        "bytes": 24,
+        "sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-RecommendationGuidance.log",
+        "bytes": 44,
+        "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-restore.log",
+        "bytes": 7939,
+        "sha256": "9122aa9ed141ac9709090e366b334961433ca078873646a138b7a1951adb4ddb"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-secret-scan.log",
+        "bytes": 83,
+        "sha256": "1c6c7466a97731f1a14c270c0e01bf4852d5957b9d45e5aa495e344ab5309a6d"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-SyntheticPlanningTasks.log",
+        "bytes": 63,
+        "sha256": "1729aa07170453730e221fbbc718bb865043e1962d8b32bb9966faf864da639e"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/baseline-integration-SyntheticPilotFlow.log",
+        "bytes": 3563,
+        "sha256": "18510532dd9313379f2215c2fa62411aedfb149b47e6d8bedd8e3f585dd7658c"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/composed64-build.log",
+        "bytes": 9667,
+        "sha256": "1e08d4c1d8018306863486272e6aae766a6aee21d5119cc8a19c0223fcd8b366"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/generated-planning-component/receipt-dependency.mjs",
+        "bytes": 8105,
+        "sha256": "bf3f843530f2b858ece16758f199e5804a0642cadf967775d162ac0c0043dbd5"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/generated-planning-component/FixPackagePreview.mjs",
+        "bytes": 37407,
+        "sha256": "230083438a417646943b5360572ce69025e3e75cb048eb0a696233c8d2d112c5"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/generated-planning-component/results.json",
+        "bytes": 606,
+        "sha256": "79699c2a0bf21ad7d6ccb7d9bb408f9ed02fa4a3ab3dab2042b02a5aa27b13ea"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/generated-planning-component/preservation.json",
+        "bytes": 1363,
+        "sha256": "165bf7f7d6c5b133309a15a03be09e865c1bf7711fa1e832518b45199fc5818d"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/generated-planning-component/PlanningTasksPanel.mjs",
+        "bytes": 35644,
+        "sha256": "86befc1e96abf84b3fec9cffbb0eca6e29f0baf7245ed9dfee7fecdc2b454fd4"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/generated-planning-component/ArtifactReviewPanel.mjs",
+        "bytes": 20339,
+        "sha256": "6e4a6f89bc0ed260dc0b1d05aee638f77aa63fb4258e3d50d918c42944869a4e"
+      }
+    ]
+  },
+  "privateSite": "PENDING separate native deployment proof; last read version91 includes Phase1C foundation"
+}

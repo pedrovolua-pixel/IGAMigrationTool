@@ -140,3 +140,8 @@ The configured Linux replay separately passed 10,617 artifact-review and 13,654 
 Bounded FR-HAS-51–53 / AC-HAS-12 / TP-HAS-012 arithmetic and detached synthetic outcome capture only. Canonical scope: [execution plan](../../plans/active/local-pilot-m08-evaluation-foundation.md) and [engineering contract](synthetic-evaluation-accuracy-contract.md). [Executed local evidence](../../docs/development/evidence/m08-evaluation-foundation-20261003.json) binds 64-project build/format/locked audited restore, 23,550 independent assertions, 14 portable regressions, architecture/secret checks and non-author reviews. Hosted and private-publication evidence are separate; no gate or full test-plan PASS follows.
 
 Private Site version91 publication is confirmed in [the source/deployment receipt](../../docs/development/evidence/m08-evaluation-site-publication-20261003.json); owner-only access and twelve source-backed tasks are verified. Hosted checks remain NOT VERIFIED.
+
+
+## Phase 1B closure decision preparation — 2026-10-03
+
+[Combined decision packet](local-phase1b-closure-decision-packet.md), [closure plan](../../plans/active/local-pilot-phase1b-closure.md) and [preparation metadata](../../docs/development/evidence/phase1b-closure-preparation-20261003.json). Proposal/test bytes are SHA256-bound; independent author/reviewer references are retained. Documentary checks passed. Executed prior-source baseline checks and64-project source composition are distinct from proposed-runtime tests. No desired-outcome/priority/automatic-AI/CSV runtime, owned-PG/new-browser/hosted/manual/live or Phase1B/feature/G1–G9 PASS is inferred. Owner decision is PENDING, including proposed residual FR12/15 phase allocation. Private-site publication has a separate exact record.
