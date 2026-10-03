@@ -72,6 +72,15 @@ async function read(path) {
     200,
     `read ${path.replace(/[0-9a-f-]{36}/g, "<run>")}`,
   );
+  if (path === "/local-demo/v1/catalog") {
+    const policy = response.headers()["content-security-policy"] ?? "";
+    check(
+      policy.includes("script-src 'self'") &&
+        !policy.includes("'unsafe-inline'") &&
+        !policy.includes("'unsafe-eval'"),
+      "real host CSP permits only same-origin scripts without inline or eval allowances",
+    );
+  }
   const value = await response.json();
   check(
     value.schemaVersion === 1 && value.demoOnly === true,
@@ -101,7 +110,9 @@ async function workspace() {
   return read(`${prefix}/runs/${runId}/workspace`);
 }
 async function scan(label) {
-  await page.addScriptTag({ content: axeSource });
+  // Playwright evaluates the test scanner through its automation execution context.
+  // The application CSP remains active; this does not add an inline script element.
+  await page.evaluate(axeSource);
   const result = await page.evaluate(async () =>
     window.axe.run(document, {
       runOnly: {
