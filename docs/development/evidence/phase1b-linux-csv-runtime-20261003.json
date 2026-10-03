@@ -1,0 +1,457 @@
+{
+  "cases": [
+    {
+      "case": "renderer-parity",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.298,
+      "exitCode": 0,
+      "imageId": "sha256:fd5067f82dbc526577d9859b45822a60e7a79e7bb7ba648f5c10de64373f5832",
+      "mode": "renderer",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "renderer-header-parity",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.298,
+      "exitCode": 0,
+      "imageId": "sha256:fd5067f82dbc526577d9859b45822a60e7a79e7bb7ba648f5c10de64373f5832",
+      "mode": "renderer",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 283,
+      "stdoutSha256": "2e1c6fedadd38cb870c4d6ef25dbd44f806fdc16f6c10ed3c20293c8a9f4b603",
+      "violations": []
+    },
+    {
+      "case": "renderer-invalid",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.236,
+      "exitCode": 2,
+      "imageId": "sha256:fd5067f82dbc526577d9859b45822a60e7a79e7bb7ba648f5c10de64373f5832",
+      "mode": "renderer",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": []
+    },
+    {
+      "case": "renderer-input-limit",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.156,
+      "exitCode": 2,
+      "imageId": "sha256:fd5067f82dbc526577d9859b45822a60e7a79e7bb7ba648f5c10de64373f5832",
+      "mode": "renderer",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": []
+    },
+    {
+      "case": "identity",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.317,
+      "exitCode": 0,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "identity",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "environment",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.317,
+      "exitCode": 0,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "environment",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "network",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.317,
+      "exitCode": 0,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "network",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "write-app",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.296,
+      "exitCode": 0,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "write-app",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "write-temp",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.298,
+      "exitCode": 0,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "write-temp",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "untrusted-read",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.317,
+      "exitCode": 0,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "untrusted-read",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "fork",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.297,
+      "exitCode": 0,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "fork",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 1239,
+      "stdoutSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+      "violations": []
+    },
+    {
+      "case": "wall",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 10.096,
+      "exitCode": 137,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "wall",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": [
+        "wall"
+      ]
+    },
+    {
+      "case": "stdout",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 5.345,
+      "exitCode": 3,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "stdout",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 4194305,
+      "stdoutSha256": "95e441ca65cd41fa01b2a71799e79fd60db59ed34f13af32a91e85f90378676c",
+      "violations": [
+        "stdout"
+      ]
+    },
+    {
+      "case": "stderr",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.309,
+      "exitCode": 3,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "stderr",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 16385,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": [
+        "stderr"
+      ]
+    },
+    {
+      "case": "cpu",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 3.132,
+      "exitCode": 137,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "cpu",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": []
+    },
+    {
+      "case": "managed-memory",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.337,
+      "exitCode": 2,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "managed-memory",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": []
+    },
+    {
+      "case": "native-memory",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.377,
+      "exitCode": 137,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "native-memory",
+      "oomKilled": true,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": []
+    },
+    {
+      "case": "pids",
+      "effectiveLimits": {
+        "IpcMode": "none",
+        "Memory": 402653184,
+        "MemorySwap": 402653184,
+        "NanoCpus": 1000000000,
+        "NetworkMode": "none",
+        "PidsLimit": 32,
+        "ReadonlyRootfs": true
+      },
+      "elapsedSeconds": 0.317,
+      "exitCode": 2,
+      "imageId": "sha256:1beffca106ba291aa80d34c2c3794e0b5a54db3ab4f98284393bf69f2cb2e33f",
+      "mode": "pids",
+      "oomKilled": false,
+      "status": "PASS",
+      "stderrBytes": 0,
+      "stdoutBytes": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "violations": []
+    }
+  ],
+  "dockerVersion": "28.0.4",
+  "dockerfileSha256": "d04851df401ccbab081b9c85870798cdf23ba31ccb5ff4bb2d0d9e04ebc69513",
+  "fixtureSha256": "585639bbc2ab1a08fac0b2da325e3846cf89e9708e45e50d020a8324de261a05",
+  "goldenSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+  "limits": {
+    "cpuHardSeconds": 3,
+    "cpuSoftSeconds": 2,
+    "heapBytes": 268435456,
+    "input": 1048576,
+    "memoryBytes": 402653184,
+    "nanoCpus": 1000000000,
+    "output": 4194304,
+    "pids": 32,
+    "stderr": 16384,
+    "wallSeconds": 10
+  },
+  "linuxStatus": "PASS",
+  "nativeParity": "PASS",
+  "nativeParityAssertions": 4,
+  "probeClosure": {
+    "SyntheticCsvRenderer.deps.json": "564786966330eb4d185e299780d05248306ad7b8fb5e09c90e89dc09f921a873",
+    "SyntheticCsvRenderer.dll": "7429b97593025c7a9fe8a1b0cd23d94a5a3687e529ae7108a846626eb9479c06",
+    "SyntheticCsvRenderer.runtimeconfig.json": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+    "SyntheticTaskCsv.dll": "6d422a18e58c37f628184650519f4a3518aae93779beafdb270d4b37dd9971dc"
+  },
+  "rendererClosure": {
+    "SyntheticCsvRenderer.deps.json": "564786966330eb4d185e299780d05248306ad7b8fb5e09c90e89dc09f921a873",
+    "SyntheticCsvRenderer.dll": "d36a70e5cfdff769ec5d35e208bd174f01ddf8968efb24242fbe29a5980c848d",
+    "SyntheticCsvRenderer.runtimeconfig.json": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+    "SyntheticTaskCsv.dll": "6d422a18e58c37f628184650519f4a3518aae93779beafdb270d4b37dd9971dc"
+  },
+  "runnerSha256": "dfd83e30215a2c8bee6e01d5ff49df6b1f0ee73a8f1e80e24fa1efaef5e3b4fc",
+  "runtimeImageId": "sha256:035254495d0f9d66764b17f26d08b70d5c61b5257273f4e8d3d44068642967c1",
+  "runtimeImageRepoDigests": [
+    "mcr.microsoft.com/dotnet/runtime@sha256:b89586dc17781f25531909993658aa8161205ae38b8cec8847df4a8221a403d5"
+  ],
+  "schema": "phase1b-csv-linux-verification-v1",
+  "sdk": "10.0.401",
+  "seccompSha256": "949ea33c1229417b6b6ce887423bc997b9465c4f6e664947221e9308d9c1b2e0",
+  "sourceCommit": "10cebe45904e991f639205cc61eb13d4fb434b68",
+  "sourceFiles": {
+    "Directory.Build.props": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e",
+    "src/server/modules/SyntheticTaskCsv/CsvCanonical.cs": "56bea6365fe78b2bcb19c45ae09aefd475de7e52e3ce4c430b535b6ac54bafa8",
+    "src/server/modules/SyntheticTaskCsv/CsvCodec.cs": "59e1e083a1221f4d0d0c908197efe50e40f3951f4242ab6ac8949d17921d55f0",
+    "src/server/modules/SyntheticTaskCsv/CsvContracts.cs": "d25893b2244b8c8807704eedf982c126563e61588e61091ebb1c000e7ff964e4",
+    "src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+    "src/server/modules/SyntheticTaskCsv/packages.lock.json": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb",
+    "src/server/workers/SyntheticCsvRenderer/Program.cs": "f39c050a06b28e174b4a2148d6d0a47c4691ee222604686805431da9391886aa",
+    "src/server/workers/SyntheticCsvRenderer/SyntheticCsvRenderer.csproj": "e21710dfe483b8ce1c379f1575d2bd2131f90355838b173c7279c6758bd92168",
+    "src/server/workers/SyntheticCsvRenderer/packages.lock.json": "aba235b67e838fa08e0ba141e0e3e8df8e8fb89a6276be9e9a93ec7dfbbcb2d9"
+  }
+}
