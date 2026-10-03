@@ -10,6 +10,7 @@
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/SyntheticEvaluation/SyntheticEvaluation.csproj" />
     <Project Path="src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj" />
     <Project Path="src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj" />
     <Project Path="src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj" />
@@ -50,6 +51,7 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/SyntheticEvaluation.Tests/SyntheticEvaluation.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj" />
     <Project Path="tests/unit/ArtifactReviewComponent.Tests/ArtifactReviewComponent.Tests.csproj" />
     <Project Path="tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />

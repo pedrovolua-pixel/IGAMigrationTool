@@ -133,3 +133,8 @@ Independent reviews closed with no remaining scoped findings. 736 portable/1249 
 The additive synthetic task schema initializes only with the explicit flag in a fresh dedicated Cycle14 loopback database; no customer/production migration or dependency was added. Rollback disables new actions while preserving compatible readers/history. Full Milestone7/TP-HAS-018/localpilot completion/UAT/G1–G9, manual supported accessibility, deployed isolation, default Mac startup and hard-kill/shared-cluster recovery remain NOT VERIFIED. Eleven prior human dependencies remain open. Matching owner-private publication is confirmed in this same cycle; its exact source, deployment and QA are recorded in docs/development/evidence/local-pilot-cycle14-completion-site.json.
 
 The configured Linux replay separately passed 10,617 artifact-review and 13,654 planning-task browser assertions on the final code. Those are distinct from local macOS and controlled investigation counts; none are summed.
+
+
+## Milestone08 evaluation accuracy foundation
+
+Bounded FR-HAS-51–53 / AC-HAS-12 / TP-HAS-012 arithmetic and detached synthetic outcome capture only. Canonical scope: [execution plan](../../plans/active/local-pilot-m08-evaluation-foundation.md) and [engineering contract](synthetic-evaluation-accuracy-contract.md). [Executed local evidence](../../docs/development/evidence/m08-evaluation-foundation-20261003.json) binds 64-project build/format/locked audited restore, 23,550 independent assertions, 14 portable regressions, architecture/secret checks and non-author reviews. Hosted and private-publication evidence are separate; no gate or full test-plan PASS follows.

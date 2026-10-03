@@ -43,6 +43,8 @@ jobs:
         run: dotnet build IgaMigrationTool.slnx --configuration Release --no-restore
       - name: Run synthetic artifact-integrity checks
         run: dotnet run --project tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj --configuration Release --no-build
+      - name: Check synthetic evaluation accuracy
+        run: dotnet run --project tests/unit/SyntheticEvaluation.Tests --configuration Release --no-build
       - name: Check assessment coverage reconciliation
         run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
       - name: Check assessment capability locks
@@ -385,6 +387,8 @@ jobs:
         run: |
           dotnet run --project tests/unit/LocalAiPreview.Tests --configuration Release --no-restore
           dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-restore
+      - name: Check Windows synthetic evaluation accuracy
+        run: dotnet run --project tests/unit/SyntheticEvaluation.Tests --configuration Release --no-restore
       - name: Check Windows fictional fix-package workspace sources
         run: |
           dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-restore

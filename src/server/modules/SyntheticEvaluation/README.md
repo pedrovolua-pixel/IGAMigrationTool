@@ -1,0 +1,9 @@
+# Synthetic evaluation accuracy
+
+This dependency-free module implements the [frozen internal contract](../../../../specs/003-health-assessment/synthetic-evaluation-accuracy-contract.md) for the bounded Milestone08 evaluation foundation. It accepts only synthetic references and caller-supplied fixture locks, explicit sample members and exactly one review per member. Invalid inputs return an enum issue with no projection or input echo.
+
+Successful results capture detached immutable values, ordinally sorted canonical JSON and its lowercase SHA256 digest. Corrected reviews retain their originating confirmed/rejected classification and separately count as an overlapping subset. General AI and customer-approved desired-outcome fixture counts stay separate. Indeterminate and unreviewed outcomes are visible but excluded from accuracy denominators. General AI uses the exact strict integer comparison above80%; desired-outcome results have no threshold. Zero denominators have unavailable ratios.
+
+The supplied source/sample/version digests and CustomerApproved classification are opaque fixture metadata. They establish no live sampling correctness, reviewer or customer authority, persistent immutability or acceptance. No sample-selection policy, low-sample warning cutoff, regression rule, UI, host integration, database, provider access or full acceptance PASS/FAIL is introduced. Durable integration must preserve prior records and create new evaluation versions for later corrections. Full Milestone08 and pilot acceptance remain unverified.
+
+The independently authored `tests/unit/SyntheticEvaluation.Tests` host verifies the arithmetic, complete canonical-byte/digest golden, input-order invariance, detached mutation resistance and closed denial boundaries. The coordinator records executed checks, reviews and integration evidence in the canonical Milestone08 plan.
