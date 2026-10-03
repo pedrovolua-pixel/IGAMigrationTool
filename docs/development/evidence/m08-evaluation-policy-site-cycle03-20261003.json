@@ -1,0 +1,131 @@
+{
+  "date": "2026-10-03",
+  "status": "CONFIRMED owner-private completed-scope snapshot; no phase/milestone/human/gate change from dd1db9e",
+  "canonicalSnapshotCommit": "dd1db9e09aaad3e203daa9e3b2e69b1e6ddc3b01",
+  "publication": {
+    "deployment": {
+      "id": "appgdep_6ac135a5e06c8191b428fa25e6150c2d",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_9917cc34e49081918b2ce899340293d1",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T17:04:44.603413+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_9917cc34e49081918b2ce899340293d1",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "version_number": 96,
+      "source": {
+        "commit_sha": "8fea2c2a4513221d5159f5c40172bb52bee00e2a"
+      },
+      "archive_storage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_0000000023c881f5b2da092d5758ba41",
+        "content_hash": "sha256:2b51fa31a8ff26b269ba43c745379c17617cec496037a6e3b24d9fe512072b5e",
+        "size_bytes": 102400,
+        "file_count": 2
+      },
+      "deployment_id": "appgdep_6ac135a5e06c8191b428fa25e6150c2d"
+    },
+    "access": {
+      "mode": "custom",
+      "role": "owner",
+      "users": 1,
+      "groups": 0,
+      "external": 0,
+      "revision": 1
+    },
+    "repositoryCommit": "dd1db9e09aaad3e203daa9e3b2e69b1e6ddc3b01",
+    "siteArchive": "site-complete.tar.gz",
+    "snapshot": "Bounded approved local implementation complete; original full Linux failure disclosed; two-line test synchronization locally verified; corrected full hosted Linux NOT VERIFIED."
+  },
+  "renderingQa": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 12,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 12,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 12,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "sourceArchive": {
+    "localContainerHash": {
+      "algorithm": "sha256",
+      "hex": "6367f6b1e9bdfb86a800b9526081cb77b552feb6a378143376353f0365c7c624"
+    },
+    "exactPushedAssetAndHostingBytes": true,
+    "nativeNormalizedTarHashRecordedSeparately": true
+  },
+  "preservation": {
+    "elevenPriorTaskCardsByteIdentical": true,
+    "openTasks": 12,
+    "originalUnrelatedFiles": 23,
+    "originalNoncanonicalHashes": {
+      "docs/development/azure-bff-next-session-preflight.md": "be9da66390bdd2ded87404b33e2f3277047be5e5d0504e4ddf7edb15aa38ad2c",
+      "docs/development/bff-production-contract-proposal.md": "d19f3218b9e39e7e0a39980901591cf21079d95219843fa15fe49192cd72194c",
+      "docs/development/evidence/assessment-workspace-ui-20261002.json": "4d356cb8303911619bc2d7aff2b338b5f2e05e276d50738e6d6e0938844e951f",
+      "docs/development/evidence/bff-deployment-preparation-20261002.json": "dd009faba412921a99ed61f1e19d485ededdcb7d5588d0ea383fa2887219b05d",
+      "docs/development/evidence/finding-evidence-ui-20261002.json": "91f219522ed5fd7ed52320c0e4a2b981ebcb10518a1f61cde40b338935d4d5ab",
+      "plans/active/bff-azure-deployment-preparation.md": "0a2c04bf739dc165b34b10e606d26eae3ec14acf59dce2c6c3a48b607adfa6cc",
+      "plans/completed/local-pilot-assessment-workspace-ui.md": "4001e5946ed69d230408c7a7cf29cb4e8145cb97f2847f95eac0cc87206005f6",
+      "plans/completed/local-pilot-finding-evidence-ui.md": "f4d93e166d7fd44e6122a7b3485f057c0577d4ddb217e9442d0497951a3ac817",
+      "product/research/ui-reference-review-2026-10-01.md": "52a3c61e08720bfaaa0c7bd5bc6f91f07bfc1eaf2d8dba3b3344c03b9005a2b0",
+      "src/web/src/FindingsExplorer.css": "2750e4b304c8ad39808fefa0710c233879daa450a12ce8bff59f42978a026896",
+      "src/web/src/FindingsExplorer.tsx": "6a92662aa20b39de007928d77098c183ad9ad8eceb483da28872c0604626842e",
+      "src/web/src/WorkspaceNavigation.tsx": "c41f26a55c05198f55c9ecc473d24ce52e708a1311ce12dc0aca8ac072a91b64",
+      "src/web/src/workspace.css": "5303693dd832311b58b87b54efbc23a4158944def1f5f8c08228cd02ed2ee233",
+      "tests/e2e/assessment-workspace/README.md": "c83a12ee1c4c77cd20d7477b2c4a428abc5dee9f78e1f4fda0e87761e5d8175d",
+      "tests/e2e/assessment-workspace/preview.mjs": "1b6501e7cbb81694d6be29daa892178ecdcf75885fa465ec547682d447eda597",
+      "tests/e2e/assessment-workspace/verify.mjs": "ca7bf5a84a7cf85314a98f610adcdbb42c9545421ec4ed5173f47b4390874054",
+      "tests/e2e/finding-evidence/README.md": "2287f73134ad4080cf4aa8afc3369539fd1e6c31da3b07f0e3bd166db731ad8a",
+      "tests/e2e/finding-evidence/host-harness.mjs": "a68c099a4820930955d93830eaab199a06eff1d05c45c5d0f00046107115bd46",
+      "tests/e2e/finding-evidence/verify.mjs": "0e4253a3d7b61465284fe81cfbe8e99c3f8d98095e76cdf4e52bd5288d3f06f1",
+      "infra/bicep/deployment-template-inventory.md": "51dd5ce3a8dab2c31d497adfef72f93ed4353d82d7887b55b6974c6bb0f690b6",
+      "src/web/src/AnalysisView.tsx": "d6f3b6bd0f0cd299c24d4935455a519126b68a9d6a7b6b8d72b21e9f07aaa2de",
+      "src/web/src/App.tsx": "091c6eb258cf70d0d9ab2f003ddb4dbe4006117cf701289aa71a68d09cd5e50c",
+      "src/web/src/ReviewPanel.tsx": "a9726033e4d7cc178386f3bbc64c0c3c2301d97badce283d1f431702a5d23f30"
+    },
+    "ownGeneratedBrowserArtifactsArchivedThenPriorCleanBytesRestored": true,
+    "sharedCanonicalAppendsOnly": true,
+    "fourCleanOwnWorktreesArchivedRehashedRemoved": true,
+    "siteCheckoutClean": true
+  },
+  "artifacts": {
+    "location": "work/m08-cycle03-evidence",
+    "count": 304,
+    "manifestContentHash": {
+      "algorithm": "sha256",
+      "hex": "e248b42a2dc16b4f20ba142ef04f216076e32de29c13f2dc612bfaef8ab9be3f"
+    }
+  },
+  "checks": "Local68-project restore/format/build and policy/oracle/regression/architecture/secrets passed; both originalWindows jobs and Linuxpolicy step passed. Original wholeLinux failed in legacy browser navigation. Two-line reviewed test synchronization passed local440; corrected wholeLinux run37139005524 remains RUNNING/NOT VERIFIED at this receipt.",
+  "noNewDependenciesMigrationsRuntimeSettingsOrProductionActivation": true,
+  "limits": "Full M08/Phase1C/TP012/019/UAT/G1-G9 and actual reviewer/live/durable operational enforcement remain NOT VERIFIED. This receipt confirms publication provenance only."
+}
