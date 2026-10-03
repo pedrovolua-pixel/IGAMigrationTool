@@ -96,6 +96,7 @@ let checks = 0,
   artifactHold = null,
   dropArtifact = false,
   receiptMutation = null;
+const ownedHostLogChunks = [];
 const artifactPosts = [],
   artifactIds = new Set();
 let actualBrowserVersion = "not-launched";
@@ -183,8 +184,8 @@ async function launch(enabled = true) {
     },
   );
   host.on("error", () => faults.push("owned-host-spawn-error"));
-  host.stdout.on("data", () => {});
-  host.stderr.on("data", () => {});
+  host.stdout.on("data", (data) => ownedHostLogChunks.push(data.toString()));
+  host.stderr.on("data", (data) => ownedHostLogChunks.push(data.toString()));
   await until(
     async () => {
       check(
@@ -1119,7 +1120,8 @@ try {
     .fill("Fictional explicit browser planning review");
   await a
     .getByRole("button", { name: "Review for planning", exact: true })
-    .click();
+    .focus();
+  await page.keyboard.press("Enter");
   await waitCurrent(page, normal, target, "ReviewedForPlanning", 1);
   detail = await analysis(normal.runId);
   await fullVisible(page, normal, detail);
@@ -1163,7 +1165,8 @@ try {
     .fill("Fictional explicit browser withdrawal");
   await article(page, target)
     .getByRole("button", { name: "Withdraw planning review", exact: true })
-    .click();
+    .focus();
+  await page.keyboard.press("Enter");
   await waitCurrent(page, normal, target, "Unverified", 2);
   detail = await analysis(normal.runId);
   await visibleOverlay(page, normal, detail);
@@ -2175,6 +2178,23 @@ try {
   detail = await analysis(normal.runId);
   await fullVisible(page, normal, detail);
   await visibleOverlay(page, normal, detail);
+  await mkdir(path.join(directory, ".host/observed"), { recursive: true });
+  await writeFile(
+    path.join(directory, ".host/observed/final-saved-source-and-replay.json"),
+    JSON.stringify(
+      {
+        schema: "v13-observed-browser-synthetic-values-v1",
+        savedRun: normal,
+        finalAnalysis: detail,
+        originalCommand: command,
+        originalReceipt: receipt,
+        preRestartAnalysis: preRestart,
+        afterRestartAnalysis: afterRestart,
+      },
+      null,
+      2,
+    ) + "\n",
+  );
   for (const [name, width, height] of [
     ["desktop", 1440, 1000],
     ["mobile", 390, 844],
@@ -2237,13 +2257,27 @@ try {
     );
     await inertOverlay(page);
     const targetPath = path.join(directory, `${name}.png`);
-    await r.screenshot({ path: targetPath });
+    await r.screenshot({ path: targetPath, caret: "initial" });
     screenshots.push(targetPath);
     await page.locator("#artifact-review-heading").scrollIntoViewIfNeeded();
     const viewportPath = path.join(directory, `${name}-viewport.png`);
-    await page.screenshot({ path: viewportPath });
+    await page.screenshot({ path: viewportPath, caret: "initial" });
     screenshots.push(viewportPath);
   }
+  const actualHostLogs = ownedHostLogChunks.join("");
+  check(
+    ![
+      command.reason,
+      savedReason,
+      sameRunReason,
+      "Fictional malformed committed receipt",
+    ].some((value) => actualHostLogs.includes(value)),
+    "actual-host-logs-no-fixture-reason-payloads",
+  );
+  await writeFile(
+    path.join(directory, ".host/host-runtime.log"),
+    actualHostLogs,
+  );
   equal(blocked.length, 0, "zero-unexpected-or-external-request-attempts");
   equal(dialogs.length, 0, "zero-injected-dialogs");
   equal(faults.length, 0, "zero-browser-or-owned-host-faults");
