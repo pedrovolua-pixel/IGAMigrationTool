@@ -981,14 +981,16 @@ try {
       404,
       "denied stale approved proof creates no run",
     );
-    await page.setViewportSize({ width: 390, height: 844 });
-    check(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
-      "actual app mobile viewport has no horizontal page overflow",
-    );
-    await scan("registry-retired-mobile");
+    for (const width of [390, 320]) {
+      await page.setViewportSize({ width, height: 844 });
+      check(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= innerWidth,
+        ),
+        `actual app ${width}px viewport has no horizontal page overflow`,
+      );
+      await scan(`registry-retired-mobile-${width}`);
+    }
   }
   equal(errors, [], "actual application has no browser runtime errors");
   await mkdir(output, { recursive: true });
