@@ -9,7 +9,7 @@ public sealed class FakeAiProvider
     public AiProviderReceipt Dispatch(AiRecovery recovery)
     {
         if (recovery.BillingOnly || recovery.PacketInputJson is null) throw new ArgumentException("Fake dispatch requires eligible fixture work.");
-        if (recovery.Scenario is AiScenario.LostResponse or AiScenario.PermanentUnknown) return Unknown(recovery.Attempt);
+        if (recovery.Scenario is AiScenario.LostResponse or AiScenario.PermanentUnknown || recovery.Scenario == AiScenario.RetryThenLostResponse && recovery.Attempt.Ordinal == 2) return Unknown(recovery.Attempt);
         return Known(recovery);
     }
     public AiProviderReceipt Lookup(AiRecovery recovery) => recovery.Scenario == AiScenario.PermanentUnknown ? Unknown(recovery.Attempt) : Known(recovery);
@@ -18,7 +18,7 @@ public sealed class FakeAiProvider
     private static AiProviderReceipt Unknown(AiAttemptKey attempt) => new(ReceiptIdentity(attempt, AiProviderOutcome.Unknown, null, null), attempt, AiProviderOutcome.Unknown, null, null, null, null);
     private static AiProviderReceipt Known(AiRecovery recovery)
     {
-        var retry = recovery.Scenario == AiScenario.RetryTwice && recovery.Attempt.Ordinal < 3;
+        var retry = recovery.Scenario == AiScenario.RetryTwice && recovery.Attempt.Ordinal < 3 || recovery.Scenario == AiScenario.RetryThenLostResponse && recovery.Attempt.Ordinal == 1;
         var outcome = retry ? AiProviderOutcome.RetryableFailure : AiProviderOutcome.Response;
         var input = 80; var outputUse = retry ? 0 : 160;
         if (recovery.BillingOnly || retry) return new(ReceiptIdentity(recovery.Attempt, outcome, input, outputUse), recovery.Attempt, outcome, input, outputUse, null, null);

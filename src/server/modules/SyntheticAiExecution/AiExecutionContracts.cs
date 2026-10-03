@@ -11,7 +11,7 @@ public enum AiRole { Consultant, Worker, Auditor, Reviewer, Executive, Support }
 public enum AiAction { Read, Dispatch, Reconcile, Override }
 public enum AiResourceState { Mutable, Published, Deleted, Cancelled }
 public enum AiSeverity { Critical, High, Medium, Low, Informational }
-public enum AiScenario { Benign, Empty, RetryTwice, InvalidOutput, InvalidCitation, LostResponse, PermanentUnknown }
+public enum AiScenario { Benign, Empty, RetryTwice, InvalidOutput, InvalidCitation, LostResponse, PermanentUnknown, RetryThenLostResponse }
 public enum AiWorkState { Pending, Reserved, Dispatched, Unknown, Retryable, Succeeded, Failed, Cancelled }
 public enum AiProviderOutcome { Response, RetryableFailure, Unknown }
 public enum AiIssue { InvalidInput, Denied, WrongScope, NotInitialized, MigrationDrift, IntegrityMismatch, SeedConflict, NotFound, RevisionConflict, EventConflict, InvalidState, BudgetExhausted, RetryExhausted, InvalidReceipt, OutputRejected, SourceConflict, Overflow }

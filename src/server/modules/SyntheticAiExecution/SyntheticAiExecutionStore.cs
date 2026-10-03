@@ -39,14 +39,23 @@ public sealed class SyntheticAiExecutionStore
     private sealed record Event(Guid Id, string Actor, string CommandDigest, string Receipt);
     private sealed class IntegrityException : Exception { }
     private static AiOperationResult<T> Deny<T>(AiIssue issue) => new(issue, default);
-    private static async Task<AiIssue?> Prepare(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, CancellationToken ct)
+    private async Task<AiIssue?> Prepare(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, CancellationToken ct)
     {
         if (c.State != System.Data.ConnectionState.Open || t.Connection != c || runId == Guid.Empty) return AiIssue.InvalidInput;
-        Guard(new NpgsqlConnectionStringBuilder(c.ConnectionString));
+        var supplied = new NpgsqlConnectionStringBuilder(c.ConnectionString); var configured = new NpgsqlConnectionStringBuilder(connectionString);
+        if (supplied.Host != configured.Host || supplied.Port != configured.Port || supplied.Database != configured.Database || supplied.Username != configured.Username) return AiIssue.WrongScope;
+        await using (var order = new NpgsqlCommand("SELECT EXISTS(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=pg_backend_pid() AND objsubid=1 AND ((classid::bigint << 32) | objid::bigint)=@run),EXISTS(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=pg_backend_pid() AND objsubid=1 AND ((classid::bigint << 32) | objid::bigint)=@registry)", c, t))
+        {
+            order.Parameters.AddWithValue("run", SourceFenceKey(runId)); order.Parameters.AddWithValue("registry", SourceFenceKey(RegistryFenceId));
+            await using var reader = await order.ExecuteReaderAsync(ct);
+            if (await reader.ReadAsync(ct) && reader.GetBoolean(0) && !reader.GetBoolean(1)) return AiIssue.InvalidInput;
+        }
         await SyntheticRunSourceFence.AcquireAsync(c, t, AiScope.Fixed.CustomerId, AiScope.Fixed.ProjectId, AiScope.Fixed.EnvironmentId, RegistryFenceId, ct);
         await SyntheticRunSourceFence.AcquireAsync(c, t, AiScope.Fixed.CustomerId, AiScope.Fixed.ProjectId, AiScope.Fixed.EnvironmentId, runId, ct);
         return await AiExecutionMigration.Verify(c, t, ct);
     }
+    private static long SourceFenceKey(Guid runId) => BinaryPrimitives.ReadInt64BigEndian(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(new
+    { schemaVersion = "synthetic-source-fence-v1", customerId = AiScope.Fixed.CustomerId, projectId = AiScope.Fixed.ProjectId, environmentId = AiScope.Fixed.EnvironmentId, runId = runId.ToString("D") })));
     private static async Task BudgetFence(NpgsqlConnection c, NpgsqlTransaction t, string epoch, CancellationToken ct)
     {
         var value = AiExecutionCanonical.Digest(new { schemaVersion = "synthetic-ai-budget-fence-v1", scope = AiScope.Fixed, epoch });
@@ -71,6 +80,38 @@ public sealed class SyntheticAiExecutionStore
         "period:" + locked.Epoch, "user:" + locked.Epoch + ":" + locked.InitiatingConsultantId];
     private static int Allowance(State state, string key) => key.StartsWith("run:", StringComparison.Ordinal) ? state.RunAllowance :
         key.StartsWith("category:", StringComparison.Ordinal) ? state.CategoryAllowances[key[(key.LastIndexOf(':') + 1)..]] : 1200;
+    private static string EventProof(Guid runId, long revision, Guid eventId, string actor, string kind, string command, string before, string after, string receipt, DateTime recorded) =>
+        AiExecutionCanonical.Digest(new { schemaVersion = "synthetic-ai-event-proof-v1", runId, revision, eventId, actor, kind, commandDigest = command, beforeDigest = before, afterDigest = after, receiptCanonical = receipt, recordedAtUtc = new DateTimeOffset(recorded, TimeSpan.Zero) });
+    internal static async Task BackfillProofs(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct)
+    {
+        var rows = new List<(Guid Run, long Revision, Guid Event, string Actor, string Kind, string Command, string Before, string After, string Canonical, string Receipt, DateTime Recorded)>();
+        await using (var command = new NpgsqlCommand("SELECT run_id,revision,event_id,actor_id,kind,command_digest,before_digest,after_digest,after_canonical,receipt_canonical,recorded_at FROM synthetic_ai_execution.events ORDER BY run_id,revision", c, t))
+        { await using var reader = await command.ExecuteReaderAsync(ct); while (await reader.ReadAsync(ct)) rows.Add((reader.GetGuid(0), reader.GetInt64(1), reader.GetGuid(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetDateTime(10))); }
+        foreach (var row in rows)
+        {
+            if (AiExecutionCanonical.Hash(row.Canonical) != row.After) throw new IntegrityException();
+            var state = AiExecutionCanonical.Parse<State>(row.Canonical);
+            if (state.Revision != row.Revision || state.Seed.RunLock.RunId != row.Run || AiExecutionPolicy.ValidateRun(state.Seed.RunLock, state.Seed.Works) is not null) throw new IntegrityException();
+            await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.event_proof VALUES(@id,@digest)", ct, ("id", row.Event), ("digest", EventProof(row.Run, row.Revision, row.Event, row.Actor, row.Kind, row.Command, row.Before, row.After, row.Receipt, row.Recorded)));
+            foreach (var work in state.Works.Where(x => x.State == AiWorkState.Succeeded))
+            {
+                var attempt = work.Attempts.Last();
+                var canonical = AiExecutionCanonical.Serialize(new
+                {
+                    schemaVersion = "synthetic-ai-fixture-output-v1",
+                    runId = row.Run.ToString("D"),
+                    packetDigest = attempt.Key.PacketDigest,
+                    proposals = work.Outcomes.Where(x => x.Finding is not null).Select(x => JsonSerializer.Deserialize<JsonElement>(x.Finding!.ProposalCanonicalJson)).ToArray()
+                });
+                var packet = SyntheticAiPacketBuilder.Build(work.Work.PacketInputJson); var accepted = SyntheticAiProposalValidator.Validate(packet.Packet, canonical);
+                var mapped = AiExecutionPolicy.Map(state.Seed.RunLock, work.Work, attempt.Key, canonical);
+                if (!accepted.Succeeded || !mapped.Succeeded || attempt.Receipt?.OutputDigest != AiExecutionCanonical.Hash(canonical) ||
+                    AiExecutionCanonical.Serialize(mapped.Value) != AiExecutionCanonical.Serialize(work.Outcomes)) throw new IntegrityException();
+                await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.accepted_snapshot VALUES(@id,@canonical,@digest,@source) ON CONFLICT(attempt_id) DO NOTHING", ct,
+                    ("id", attempt.Key.AttemptId), ("canonical", accepted.Snapshot!.CanonicalJson), ("digest", accepted.Snapshot.ContentDigest), ("source", canonical));
+            }
+        }
+    }
     private static async Task<State?> Load(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, CancellationToken ct)
     {
         string? seedJson = null; string? stateJson = null; string? stateDigest = null; long revision = 0;
@@ -86,11 +127,12 @@ public sealed class SyntheticAiExecutionStore
             seed.RunLock.RunId != runId || AiExecutionCanonical.Serialize(state.Seed) != seedJson || AiExecutionCanonical.Hash(stateJson) != stateDigest ||
             AiExecutionCanonical.Serialize(state) != stateJson || state.Revision != revision || revision < 1 || revision > AiExecutionPolicy.MaximumRevision) throw new IntegrityException();
         var previous = ""; long expected = 1;
-        await using var events = new NpgsqlCommand("SELECT revision,before_digest,after_digest,after_canonical,receipt_canonical FROM synthetic_ai_execution.events WHERE run_id=@run ORDER BY revision", c, t);
+        await using var events = new NpgsqlCommand("SELECT e.revision,e.before_digest,e.after_digest,e.after_canonical,e.receipt_canonical,e.event_id,e.actor_id,e.kind,e.command_digest,e.recorded_at,p.digest FROM synthetic_ai_execution.events e LEFT JOIN synthetic_ai_execution.event_proof p ON p.event_id=e.event_id WHERE e.run_id=@run ORDER BY e.revision", c, t);
         events.Parameters.AddWithValue("run", runId); await using (var reader = await events.ExecuteReaderAsync(ct))
             while (await reader.ReadAsync(ct))
             {
                 if (reader.GetInt64(0) != expected++ || reader.GetString(1) != previous || AiExecutionCanonical.Hash(reader.GetString(3)) != reader.GetString(2)) throw new IntegrityException();
+                if (reader.IsDBNull(10) || reader.GetString(10) != EventProof(runId, reader.GetInt64(0), reader.GetGuid(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(1), reader.GetString(2), reader.GetString(4), reader.GetDateTime(9))) throw new IntegrityException();
                 var historical = AiExecutionCanonical.Parse<State>(reader.GetString(3));
                 if (historical.Revision != expected - 1 || AiExecutionCanonical.Serialize(historical.Seed) != seedJson || AiExecutionCanonical.Serialize(historical) != reader.GetString(3)) throw new IntegrityException();
                 using var receipt = JsonDocument.Parse(reader.GetString(4));
@@ -116,6 +158,18 @@ public sealed class SyntheticAiExecutionStore
                 if (!Enum.IsDefined(result.State) || result.State == CoverageState.Finding && (result.Finding is null || result.Finding.State != "Proposed" ||
                     result.Finding.OriginalDigest != AiExecutionCanonical.Digest(result.Finding with { OriginalDigest = "" })) ||
                     result.State != CoverageState.Finding && result.Finding is not null) throw new IntegrityException();
+            foreach (var attempt in work.Attempts)
+            {
+                await using var saved = new NpgsqlCommand("SELECT canonical,digest,source_json FROM synthetic_ai_execution.accepted_snapshot WHERE attempt_id=@attempt", c, t); saved.Parameters.AddWithValue("attempt", attempt.Key.AttemptId);
+                string? acceptedJson = null; string? acceptedDigest = null; string? sourceJson = null;
+                await using (var reader = await saved.ExecuteReaderAsync(ct)) if (await reader.ReadAsync(ct)) { acceptedJson = reader.GetString(0); acceptedDigest = reader.GetString(1); sourceJson = reader.GetString(2); }
+                if (acceptedJson is null) { if (work.State == AiWorkState.Succeeded && attempt == work.Attempts[^1]) throw new IntegrityException(); continue; }
+                var packet = SyntheticAiPacketBuilder.Build(work.Work.PacketInputJson); var validated = SyntheticAiProposalValidator.Validate(packet.Packet, sourceJson);
+                var mapped = AiExecutionPolicy.Map(seed.RunLock, work.Work, attempt.Key, sourceJson);
+                if (work.State != AiWorkState.Succeeded || attempt != work.Attempts[^1] || attempt.Receipt?.Outcome != AiProviderOutcome.Response ||
+                    !validated.Succeeded || acceptedJson != validated.Snapshot!.CanonicalJson || acceptedDigest != validated.Snapshot.ContentDigest || AiExecutionCanonical.Hash(sourceJson!) != attempt.Receipt.OutputDigest || !mapped.Succeeded ||
+                    AiExecutionCanonical.Serialize(mapped.Value) != AiExecutionCanonical.Serialize(work.Outcomes)) throw new IntegrityException();
+            }
         }
         return state;
     }
@@ -124,15 +178,22 @@ public sealed class SyntheticAiExecutionStore
         var ids = new List<Guid>(); await using (var command = new NpgsqlCommand("SELECT run_id FROM synthetic_ai_execution.run_lock ORDER BY run_id", c, t))
         { await using var reader = await command.ExecuteReaderAsync(ct); while (await reader.ReadAsync(ct)) ids.Add(reader.GetGuid(0)); }
         var expected = new Dictionary<string, (int Charged, int Held)>(StringComparer.Ordinal);
+        var expectedSnapshots = new HashSet<Guid>();
         foreach (var id in ids)
         {
             var state = await Load(c, t, id, ct) ?? throw new IntegrityException();
+            foreach (var work in state.Works.Where(x => x.State == AiWorkState.Succeeded)) if (!expectedSnapshots.Add(work.Attempts[^1].Key.AttemptId)) throw new IntegrityException();
             foreach (var pair in Totals(state)) { var old = expected.GetValueOrDefault(pair.Key); expected[pair.Key] = (checked(old.Charged + pair.Value.Charged), checked(old.Held + pair.Value.Held)); }
         }
         var actual = new Dictionary<string, (int Charged, int Held)>(StringComparer.Ordinal);
         await using (var command = new NpgsqlCommand("SELECT counter_key,charged,held,digest FROM synthetic_ai_execution.counter ORDER BY counter_key FOR UPDATE", c, t))
         { await using var reader = await command.ExecuteReaderAsync(ct); while (await reader.ReadAsync(ct)) { var key = reader.GetString(0); var charged = reader.GetInt32(1); var held = reader.GetInt32(2); if (AiExecutionCanonical.Digest(new { key, charged, held }) != reader.GetString(3)) throw new IntegrityException(); actual.Add(key, (charged, held)); } }
         if (actual.Count != expected.Count || expected.Any(x => !actual.TryGetValue(x.Key, out var count) || count != x.Value)) throw new IntegrityException();
+        await using (var snapshots = new NpgsqlCommand("SELECT attempt_id FROM synthetic_ai_execution.accepted_snapshot ORDER BY attempt_id", c, t))
+        {
+            var actualSnapshots = new HashSet<Guid>(); await using var reader = await snapshots.ExecuteReaderAsync(ct); while (await reader.ReadAsync(ct)) actualSnapshots.Add(reader.GetGuid(0));
+            if (!actualSnapshots.SetEquals(expectedSnapshots)) throw new IntegrityException();
+        }
         return actual;
     }
     private static async Task<Event?> FindEvent(NpgsqlConnection c, NpgsqlTransaction t, Guid eventId, CancellationToken ct)
@@ -149,6 +210,12 @@ public sealed class SyntheticAiExecutionStore
         var canonical = AiExecutionCanonical.Serialize(state); var digest = AiExecutionCanonical.Hash(canonical);
         await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.events VALUES(@run,@revision,@event,@actor,@kind,@command,@before,@after,@canonical,@receipt,clock_timestamp())", ct,
             ("run", state.Seed.RunLock.RunId), ("revision", state.Revision), ("event", eventId), ("actor", actor), ("kind", kind), ("command", commandDigest), ("before", before), ("after", digest), ("canonical", canonical), ("receipt", AiExecutionCanonical.Serialize(receipt)));
+        await using (var clock = new NpgsqlCommand("SELECT recorded_at FROM synthetic_ai_execution.events WHERE event_id=@event", c, t))
+        {
+            clock.Parameters.AddWithValue("event", eventId); var recorded = (DateTime)(await clock.ExecuteScalarAsync(ct) ?? throw new IntegrityException());
+            await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.event_proof VALUES(@id,@digest)", ct, ("id", eventId),
+                ("digest", EventProof(state.Seed.RunLock.RunId, state.Revision, eventId, actor, kind, commandDigest, before, digest, AiExecutionCanonical.Serialize(receipt), recorded)));
+        }
         await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.current_state VALUES(@run,@revision,@canonical,@digest) ON CONFLICT(run_id) DO UPDATE SET revision=EXCLUDED.revision,canonical=EXCLUDED.canonical,digest=EXCLUDED.digest", ct,
             ("run", state.Seed.RunLock.RunId), ("revision", state.Revision), ("canonical", canonical), ("digest", digest));
         var expected = new Dictionary<string, (int Charged, int Held)>(StringComparer.Ordinal);
@@ -215,7 +282,13 @@ public sealed class SyntheticAiExecutionStore
             await BudgetFence(c, t, state.Seed.RunLock.Epoch, ct); var counters = await VerifyCounters(c, t, ct);
             var commandDigest = AiExecutionCanonical.Digest(new { authority.ActorId, runId, workId, kind, command });
             var old = await FindEvent(c, t, eventId, ct);
-            if (old is not null) return old.Actor == authority.ActorId && old.CommandDigest == commandDigest ? new(null, AiExecutionCanonical.Parse<T>(old.Receipt), true) : Deny<T>(AiIssue.EventConflict);
+            if (old is not null)
+            {
+                if (old.Actor != authority.ActorId || old.CommandDigest != commandDigest) return Deny<T>(AiIssue.EventConflict);
+                var replay = AiExecutionCanonical.Parse<T>(old.Receipt);
+                if (billingOnly && replay is AiCompletion completion) replay = (T)(object)new AiCompletion([], true, completion.ReceiptId);
+                return new(null, replay, true);
+            }
             var before = AiExecutionCanonical.Digest(state); var result = await apply(state, work, counters);
             if (!result.Succeeded) return result;
             await Save(c, t, state, before, eventId, authority.ActorId, kind, commandDigest, result.Value!, ct); return result;
@@ -262,12 +335,12 @@ public sealed class SyntheticAiExecutionStore
     }
     public Task<AiOperationResult<AiCompletion>> CompleteAsync(NpgsqlConnection c, NpgsqlTransaction t, AiAuthority authority, Guid runId, string workId, AiAttemptKey key, AiProviderReceipt receipt, CancellationToken ct = default) =>
         Mutate(c, t, authority, runId, workId, AiAction.Reconcile, authority.ResourceState != AiResourceState.Mutable || !authority.AiPolicyAllowed,
-            EventId(key, "Complete"), "Complete", new { key, receipt }, (state, work, _) =>
+            EventId(key, "Complete"), "Complete", new { key, receipt }, async (state, work, _) =>
         {
-            var index = Array.FindIndex(work.Attempts.ToArray(), x => x.Key == key); if (index < 0) return Task.FromResult(Deny<AiCompletion>(AiIssue.InvalidReceipt));
+            var index = Array.FindIndex(work.Attempts.ToArray(), x => x.Key == key); if (index < 0) return Deny<AiCompletion>(AiIssue.InvalidReceipt);
             var attempt = work.Attempts[index]; var billingOnly = work.State is AiWorkState.Succeeded or AiWorkState.Failed or AiWorkState.Cancelled || authority.ResourceState != AiResourceState.Mutable || !authority.AiPolicyAllowed;
-            if (ValidateReceipt(key, receipt, billingOnly) is { } error) return Task.FromResult(Deny<AiCompletion>(error));
-            if (!attempt.Held || attempt.Receipt is not null || attempt.State == AiWorkState.Reserved) return Task.FromResult(Deny<AiCompletion>(AiIssue.InvalidState));
+            if (ValidateReceipt(key, receipt, billingOnly) is { } error) return Deny<AiCompletion>(error);
+            if (!attempt.Held || attempt.Receipt is not null || attempt.State == AiWorkState.Reserved) return Deny<AiCompletion>(AiIssue.InvalidState);
             var storedReceipt = receipt with { OutputJson = null };
             var outcomes = work.Outcomes; var next = work.State;
             if (!billingOnly)
@@ -279,19 +352,38 @@ public sealed class SyntheticAiExecutionStore
                     var mapped = AiExecutionPolicy.Map(state.Seed.RunLock, work.Work, key, receipt.OutputJson);
                     outcomes = mapped.Succeeded ? mapped.Value : AiExecutionPolicy.Gaps(work.Work, CoverageState.Error, "AI_OUTPUT_REJECTED");
                     next = mapped.Succeeded ? AiWorkState.Succeeded : AiWorkState.Failed;
+                    if (mapped.Succeeded)
+                    {
+                        var accepted = SyntheticAiProposalValidator.Validate(SyntheticAiPacketBuilder.Build(work.Work.PacketInputJson).Packet, receipt.OutputJson).Snapshot!;
+                        await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.accepted_snapshot VALUES(@id,@canonical,@digest,@source)", ct,
+                            ("id", key.AttemptId), ("canonical", accepted.CanonicalJson), ("digest", accepted.ContentDigest), ("source", receipt.OutputJson!));
+                    }
                 }
             }
             attempt = attempt with { Held = false, Receipt = storedReceipt, State = next, WorkRevision = work.Revision + 1 };
             Replace(state, work with { State = next, Revision = work.Revision + 1, Attempts = work.Attempts.SetItem(index, attempt), Outcomes = outcomes });
-            return Task.FromResult(new AiOperationResult<AiCompletion>(null, new(billingOnly ? [] : outcomes, billingOnly, receipt.ReceiptId)));
+            return new AiOperationResult<AiCompletion>(null, new(billingOnly ? [] : outcomes, billingOnly, receipt.ReceiptId));
         }, ct);
     public Task<AiOperationResult<ImmutableArray<AiUnitOutcome>>> RecordTerminalGapAsync(NpgsqlConnection c, NpgsqlTransaction t, AiAuthority authority, Guid runId, string workId,
         long expectedRevision, CoverageState state, string reason, CancellationToken ct = default) =>
-        Mutate(c, t, authority, runId, workId, AiAction.Dispatch, false, new Guid(Convert.FromHexString(AiExecutionCanonical.Digest(new { runId, workId, expectedRevision, state, reason })).AsSpan(0, 16)), "Gap", new { expectedRevision, state, reason }, (stored, work, _) =>
+        Mutate(c, t, authority, runId, workId, AiAction.Reconcile, !authority.AiPolicyAllowed && reason is "AI_DISABLED" or "AI_EXCLUDED_SOURCE", new Guid(Convert.FromHexString(AiExecutionCanonical.Digest(new { runId, workId, expectedRevision, state, reason })).AsSpan(0, 16)), "Gap", new { expectedRevision, state, reason }, (stored, work, counters) =>
         {
             if (Revision(work, expectedRevision) is { } error) return Task.FromResult(Deny<ImmutableArray<AiUnitOutcome>>(error));
-            if (work.State is AiWorkState.Succeeded or AiWorkState.Failed or AiWorkState.Cancelled || state is CoverageState.Pass or CoverageState.Finding or CoverageState.NotApplicable ||
-                !Enum.IsDefined(state) || reason is not ("AI_BUDGET_EXHAUSTED" or "AI_UNKNOWN_OUTCOME" or "AI_DISABLED" or "AI_INSUFFICIENT_SOURCE" or "AI_UNSUPPORTED_SOURCE" or "AI_INACCESSIBLE_SOURCE" or "AI_REDACTED_SOURCE" or "AI_EXCLUDED_SOURCE"))
+            var expectedState = reason switch
+            {
+                "AI_BUDGET_EXHAUSTED" => CoverageState.NotAssessed,
+                "AI_UNKNOWN_OUTCOME" => CoverageState.Error,
+                "AI_DISABLED" or "AI_EXCLUDED_SOURCE" => CoverageState.Excluded,
+                "AI_INSUFFICIENT_SOURCE" or "AI_CONFLICTING_SOURCE" => CoverageState.InsufficientEvidence,
+                "AI_UNSUPPORTED_SOURCE" => CoverageState.Unsupported,
+                "AI_INACCESSIBLE_SOURCE" => CoverageState.Inaccessible,
+                "AI_REDACTED_SOURCE" => CoverageState.Redacted,
+                _ => (CoverageState?)null
+            };
+            if (expectedState != state || authority.ResourceState != AiResourceState.Mutable ||
+                (reason == "AI_UNKNOWN_OUTCOME" ? work.State is not (AiWorkState.Dispatched or AiWorkState.Unknown) : work.State is not (AiWorkState.Pending or AiWorkState.Retryable)) ||
+                reason == "AI_BUDGET_EXHAUSTED" && !Keys(stored.Seed.RunLock, work.Work.Category).Any(key =>
+                { var value = counters.GetValueOrDefault(key); return checked(value.Charged + value.Held + 300) > Allowance(stored, key); }))
                 return Task.FromResult(Deny<ImmutableArray<AiUnitOutcome>>(AiIssue.InvalidState));
             var outcomes = AiExecutionPolicy.Gaps(work.Work, state, reason); Replace(stored, work with { State = AiWorkState.Failed, Revision = work.Revision + 1, Outcomes = outcomes });
             return Task.FromResult(new AiOperationResult<ImmutableArray<AiUnitOutcome>>(null, outcomes));

@@ -6,6 +6,13 @@ namespace SyntheticAiExecution;
 internal static class AiExecutionMigration
 {
     internal const string Id = "synthetic-ai-execution-001";
+    internal const string ProofId = "synthetic-ai-execution-002";
+    internal static string ProofScript => ReadScript("002-integrity-proof.sql");
+    private static string ReadScript(string name)
+    {
+        using var stream = typeof(AiExecutionMigration).Assembly.GetManifestResourceStream("SyntheticAiExecution." + name) ?? throw new InvalidOperationException("AI migration unavailable.");
+        using var reader = new StreamReader(stream); return reader.ReadToEnd();
+    }
     internal static string Script
     {
         get
@@ -19,7 +26,7 @@ internal static class AiExecutionMigration
         await using var transaction = await connection.BeginTransactionAsync(ct);
         await Execute(connection, transaction, "SELECT pg_advisory_xact_lock(734021015)", ct);
         await Execute(connection, transaction, "CREATE SCHEMA IF NOT EXISTS synthetic_ai_execution; CREATE TABLE IF NOT EXISTS synthetic_ai_execution.schema_migrations (migration_id text PRIMARY KEY,digest text NOT NULL,fingerprint text NOT NULL)", ct);
-        await using var read = new NpgsqlCommand("SELECT migration_id,digest,fingerprint FROM synthetic_ai_execution.schema_migrations", connection, transaction);
+        await using var read = new NpgsqlCommand("SELECT migration_id,digest,fingerprint FROM synthetic_ai_execution.schema_migrations ORDER BY migration_id", connection, transaction);
         var history = new List<(string, string, string)>();
         await using (var reader = await read.ExecuteReaderAsync(ct)) while (await reader.ReadAsync(ct)) history.Add((reader.GetString(0), reader.GetString(1), reader.GetString(2)));
         if (history.Count == 0)
@@ -30,8 +37,15 @@ internal static class AiExecutionMigration
             await Execute(connection, transaction, "INSERT INTO synthetic_ai_execution.scope VALUES(true,@c,@p,@e)", ct, ("c", AiScope.Fixed.CustomerId), ("p", AiScope.Fixed.ProjectId), ("e", AiScope.Fixed.EnvironmentId));
             await Execute(connection, transaction, "INSERT INTO synthetic_ai_execution.schema_migrations VALUES(@id,@d,@f)", ct, ("id", Id), ("d", AiExecutionCanonical.Hash(Script)), ("f", await Fingerprint(connection, transaction, ct)));
         }
-        else if (history.Count != 1 || history[0].Item1 != Id || history[0].Item2 != AiExecutionCanonical.Hash(Script) || history[0].Item3 != await Fingerprint(connection, transaction, ct))
+        else if (history.Count is < 1 or > 2 || history[0].Item1 != Id || history[0].Item2 != AiExecutionCanonical.Hash(Script) ||
+            history[^1].Item3 != await Fingerprint(connection, transaction, ct) || history.Count == 2 && (history[1].Item1 != ProofId || history[1].Item2 != AiExecutionCanonical.Hash(ProofScript)))
             throw new InvalidOperationException("AI migration drift denied.");
+        if (history.Count < 2)
+        {
+            await Execute(connection, transaction, ProofScript, ct);
+            await SyntheticAiExecutionStore.BackfillProofs(connection, transaction, ct);
+            await Execute(connection, transaction, "INSERT INTO synthetic_ai_execution.schema_migrations VALUES(@id,@d,@f)", ct, ("id", ProofId), ("d", AiExecutionCanonical.Hash(ProofScript)), ("f", await Fingerprint(connection, transaction, ct)));
+        }
         if (await Verify(connection, transaction, ct) is not null) throw new InvalidOperationException("AI scope/drift denied.");
         await transaction.CommitAsync(ct);
     }
@@ -39,10 +53,11 @@ internal static class AiExecutionMigration
     {
         try
         {
-            await using var check = new NpgsqlCommand("SELECT migration_id,digest,fingerprint FROM synthetic_ai_execution.schema_migrations", c, t);
+            await using var check = new NpgsqlCommand("SELECT migration_id,digest,fingerprint FROM synthetic_ai_execution.schema_migrations ORDER BY migration_id", c, t);
             await using (var reader = await check.ExecuteReaderAsync(ct))
             {
                 if (!await reader.ReadAsync(ct) || reader.GetString(0) != Id || reader.GetString(1) != AiExecutionCanonical.Hash(Script)) return AiIssue.MigrationDrift;
+                if (!await reader.ReadAsync(ct) || reader.GetString(0) != ProofId || reader.GetString(1) != AiExecutionCanonical.Hash(ProofScript)) return AiIssue.MigrationDrift;
                 var fingerprint = reader.GetString(2); if (await reader.ReadAsync(ct)) return AiIssue.MigrationDrift;
                 await reader.CloseAsync();
                 if (fingerprint != await Fingerprint(c, t, ct)) return AiIssue.MigrationDrift;
@@ -59,10 +74,10 @@ internal static class AiExecutionMigration
         const string sql = """
             SELECT v FROM (
               SELECT 'col|'||table_name||'|'||column_name||'|'||ordinal_position||'|'||udt_name||'|'||is_nullable||'|'||coalesce(column_default,'') v FROM information_schema.columns WHERE table_schema='synthetic_ai_execution'
-              UNION ALL SELECT 'rel|'||c.relname||'|'||c.relkind||'|'||c.relrowsecurity::text||'|'||c.relforcerowsecurity::text FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='synthetic_ai_execution'
+              UNION ALL SELECT 'rel|'||c.relname||'|'||c.relkind::text||'|'||c.relrowsecurity::text||'|'||c.relforcerowsecurity::text FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='synthetic_ai_execution'
               UNION ALL SELECT 'constraint|'||r.relname||'|'||c.conname||'|'||pg_get_constraintdef(c.oid) FROM pg_constraint c JOIN pg_class r ON r.oid=c.conrelid JOIN pg_namespace n ON n.oid=r.relnamespace WHERE n.nspname='synthetic_ai_execution'
               UNION ALL SELECT 'index|'||indexdef FROM pg_indexes WHERE schemaname='synthetic_ai_execution'
-              UNION ALL SELECT 'trigger|'||pg_get_triggerdef(t.oid)||'|'||t.tgenabled FROM pg_trigger t JOIN pg_class r ON r.oid=t.tgrelid JOIN pg_namespace n ON n.oid=r.relnamespace WHERE n.nspname='synthetic_ai_execution' AND NOT t.tgisinternal
+              UNION ALL SELECT 'trigger|'||pg_get_triggerdef(t.oid)||'|'||t.tgenabled::text FROM pg_trigger t JOIN pg_class r ON r.oid=t.tgrelid JOIN pg_namespace n ON n.oid=r.relnamespace WHERE n.nspname='synthetic_ai_execution' AND NOT t.tgisinternal
               UNION ALL SELECT 'function|'||pg_get_functiondef(p.oid) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='synthetic_ai_execution'
             ) q ORDER BY v
             """;
