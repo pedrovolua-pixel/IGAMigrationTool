@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T01:36:47.139016+00:00",
+  "status": "LOCAL_SKU_AMENDMENT_VERIFIED_AUTOMATIC_QUOTA_REQUEST_FAILED_SUPPORT_BLOCKED",
+  "ownerDecision": {
+    "attribution": "Repository owner",
+    "instruction": "Do it",
+    "proposalRef": "40f7306ffdb6787068419b385609f8453efb9cad",
+    "scope": "Standard_B2s_v2 local template amendment and submission of2vCPU standardBsv2Family EastUS2 Subscription1 quota request; no paid deployment"
+  },
+  "workerRef": "f321f81a7cdb0d31d5aafb28fd1c6e177b9d814b",
+  "integratedRuntimeSource": "a5093d673a3b20873ce2d96760d86eda7c2ae8cd",
+  "sourceBindings": [
+    {
+      "path": "infra/bicep/modules/pilot-development-private-browser-access.bicep",
+      "sha256": "5860bd132e73e1c7919ae92b6bebefbe2d48f0d681d3fdd9efbeb00a47e914ef"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserAccess/template-policy.py",
+      "sha256": "2754e7e4f23cfcbb99f9500b43f5389e207d8306f3d7e974cef7ba2fd121f6e7"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserAccess/README.md",
+      "sha256": "36b97a1ef0c7c9ddf4d6a509b2ea348e872554190b36eff76c67d0582a107dc9"
+    }
+  ],
+  "executedCoordinatorChecks": {
+    "version": "Bicep CLI version 0.47.16 (3f73e1a234)",
+    "buildLint": "PASS: three affected module/DNS/composition files; zero diagnostics",
+    "format": "PASS: changed Bicep matches pinned formatter",
+    "workstation": "PASS: compiled private browser baseline and 50 unsafe template mutations\nLocal policy evidence only; provider, image compatibility, network, TLS, identity and spending tests remain NOT VERIFIED",
+    "input": "PASS: 2 synthetic baselines and 48 unsafe parameter/review/flow cases rejected\nSynthetic fixtures are not deployable bindings or real network/image evidence",
+    "dnsComposition": "PASS: baseline and 16 unsafe mutations rejected\nPASS: baseline and 16 unsafe mutations rejected\nLocal structural checks only; metadata freshness, TLS and effective network behavior NOT VERIFIED.",
+    "providerMetadata": "PASS: synthetic provider binding and 19 negative cases",
+    "combinedInputs": "PASS: actual combined validator CLI, 17 denied cases with suppressed values",
+    "pythonCompilation": "PASS"
+  },
+  "negativeCases": {
+    "workstationCompiled": 50,
+    "input": 48,
+    "dns": 16,
+    "composition": 16,
+    "providerMetadata": 19,
+    "actualCombinedCliDenials": 17,
+    "total": 166
+  },
+  "independentWorkerReview": {
+    "reviewer": "auth_transport",
+    "exactRef": "f321f81a7cdb0d31d5aafb28fd1c6e177b9d814b",
+    "result": "PASS",
+    "executed": "Immutable3file diff; Bicep0.47.16 module build/lint0diagnostics,50compiled mutations,2positivebaselines48inputnegativecases",
+    "limits": "No cloud/provider/secret checks by reviewer; no human gate acceptance"
+  },
+  "azureQuota": {
+    "subscription": "Owner-selected Subscription1",
+    "region": "eastus2",
+    "family": "standardBsv2Family",
+    "requestedTotalLimit": 2,
+    "priorUsed": 0,
+    "priorLimit": 0,
+    "submitted": true,
+    "result": "UNSUCCESSFUL",
+    "successfulRequests": 0,
+    "partialRequests": 0,
+    "unsuccessfulRequests": 1,
+    "refreshedUsed": 0,
+    "refreshedLimit": 0,
+    "receiptLimitInterpretation": "0 of2 on requestreceipt is requestedcapacity, not grantedquota",
+    "protectedProof": "Owner-local browser screenshot outsideGit; no private identifiers or screenshot committed"
+  },
+  "supportAction": {
+    "status": "BLOCKED_AUTOMATIC_APPROVAL_REVIEW",
+    "action": "Open Create a support request in Azure portal for this failed quota adjustment",
+    "reason": "Separate external support workflow requires explicit authorization beyond automatic quota submission",
+    "formOpened": false,
+    "ticketSent": false,
+    "proposal": "docs/development/bastion-bsv2-support-request.md"
+  },
+  "resourceDeployment": false,
+  "roleOrCredentialActions": false,
+  "paidCommitments": false,
+  "protectedIntakeRef": "LOCAL-INTAKE-20261002-01",
+  "gates": "PA03/G1-G9/Milestone2 NOT_VERIFIED; image/network/foundation/BFF/key/audit/identity/fullcost remain unbound",
+  "privateBoard": {
+    "status": "BLOCKED_AUTOMATIC_APPROVAL_REVIEW",
+    "lastConfirmedBffRef": "4346e0f",
+    "reason": "Official publisher credential/network action remains rejected/pending; unrelated newer pilot publications preserved"
+  },
+  "metadataChecks": {
+    "status": "PASS",
+    "scope": "12 coordinator documentation/evidence files; no additional runtime changes",
+    "localMarkdownLinks": 283,
+    "json": "PASS",
+    "sourceHashes": "PASS: three worker source bindings",
+    "negativeCount": "PASS:166",
+    "protectedIdentifierExclusion": "PASS",
+    "diffCheck": "PASS",
+    "wholeCheckoutGitleaks": "PASS: executed8.30.1 dir scan, no leaks, exit0"
+  },
+  "review": {
+    "reviewer": "auth_transport",
+    "result": "PASS: no material consistency findings",
+    "scope": "Read-only 12 coordinator documentation/evidence files",
+    "executed": "JSON,3sourceSHA256bindings,166negativecase arithmetic,B2sv2rates,283localMarkdown targets,git diff --check",
+    "limits": "No cloud or broad runtime checks repeated; coordinator secret scan distinct"
+  },
+  "hostedPriorPreflight": {
+    "sourceRef": "40f7306ffdb6787068419b385609f8453efb9cad",
+    "package37086070370": "PASS",
+    "bootstrap37086070371": "FAIL",
+    "linuxJobId": 111096531023,
+    "failedStep": "Check actual inert fictional fix-package browser",
+    "logResult": "FAIL V11 browser; code=keyboard-fragment-navigation; checks=2811; exception=AssertionError",
+    "laterInfrastructureSteps": "SKIPPED after browser failure, not PASS",
+    "windows2022": "PASS",
+    "windows2025": "PASS",
+    "limits": "Existing browser implementation unchanged by this SKU packet; no cause or fix inferred; exact new amendment hosted runs await publication"
+  },
+  "compiledBindings": [
+    {
+      "sourcePath": "infra/bicep/modules/pilot-development-private-browser-access.bicep",
+      "sha256": "44d85435baf73cafae5de09623d9e2529a25c08dec018330826fda9f5324169a"
+    },
+    {
+      "sourcePath": "infra/bicep/modules/pilot-development-browser-dns.bicep",
+      "sha256": "93bb9e4cdacd02a12686fb2039b4dceaade46552a05e55d0336e6376d285967d"
+    },
+    {
+      "sourcePath": "infra/bicep/pilot-development-private-browser-access.bicep",
+      "sha256": "ca99a0ef89af3f27b256cd91f870a9d4ef14b5f691c5b14ee93a113ba0f3d692"
+    }
+  ],
+  "workerPreservation": {
+    "commit": "f321f81a7cdb0d31d5aafb28fd1c6e177b9d814b",
+    "status": "Clean completed temporary writing checkout removed; retained branch and reviewed integrated commit preserved"
+  }
+}

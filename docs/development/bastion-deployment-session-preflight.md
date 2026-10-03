@@ -83,3 +83,7 @@ No capacity or architecture amendment resolves the other rows. [The post-pilot H
 Configured bootstrap 37082060723 and package 37082060721 passed on source 1468303. This documentation/preflight packet changes no runtime, template, migration or Azure policy; no new runtime test is claimed. Scoped document/JSON/link/price arithmetic/secret checks and non-author review are recorded in the evidence before closure.
 
 The private BFF status board remains stale for this update: automatic approval review rejected the specific official publishing helper credential/network action for managed-proxy bypass. Its separately requested approval is pending. Last confirmed BFF snapshot 4346e0f is historical; unrelated newer pilot publications remain preserved. Canonical records are authoritative.
+
+## Current amended candidate and request outcome — 2026-10-03 UTC
+
+[The owner-approved B2s v2 amendment](bastion-b2sv2-amendment.md) supersedes the prior pending SKU decision. The template is locally verified; the automatic quota request failed and refreshed quota remains zero. [The prepared separate support action](bastion-bsv2-support-request.md) was blocked by automatic approval review and needs explicit authorization. No ticket or paid resource was created. Other exact image/network/BFF/access/cost prerequisites remain open; earlier observations above are historical.

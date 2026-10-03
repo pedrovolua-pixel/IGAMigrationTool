@@ -70,3 +70,7 @@ The owner accepted [bounded ADR-0010](../../architecture/decisions/ADR-0010-priv
 ## Current provider discovery — 2026-10-03 UTC
 
 [The next Bastion preflight](bastion-deployment-session-preflight.md) records actual selected-subscription VM availability/quota restrictions, an exact image candidate and current public cost worksheet. It requires a VM/capacity decision before local template amendment or a quota/support request. No live deployment or paid-session approval follows; the existing accepted template remains unchanged.
+
+## Current amended candidate and request outcome — 2026-10-03 UTC
+
+[The owner-approved B2s v2 amendment](bastion-b2sv2-amendment.md) supersedes the prior pending SKU decision. The template is locally verified; the automatic quota request failed and refreshed quota remains zero. [The prepared separate support action](bastion-bsv2-support-request.md) was blocked by automatic approval review and needs explicit authorization. No ticket or paid resource was created. Other exact image/network/BFF/access/cost prerequisites remain open; earlier observations above are historical.
