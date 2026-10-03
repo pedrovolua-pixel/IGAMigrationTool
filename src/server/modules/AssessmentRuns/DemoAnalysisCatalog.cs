@@ -19,7 +19,9 @@ public static class DemoAnalysisCatalog
         _ => id
     };
     public static bool IsAnalysisProfile(string id) => SyntheticAnalysisFixturePack.Profiles.Any(item => item.Id == AnalysisProfileId(id));
-    public static bool Compatible(string baselineId, string profileId) => baselineId == DemoAiPreviewCatalog.BaselineId || DemoAiPreviewCatalog.IsProfile(profileId)
+    public static bool Compatible(string baselineId, string profileId) => baselineId == DemoPhase1BCatalog.BaselineId || DemoPhase1BCatalog.IsProfile(profileId)
+        ? baselineId == DemoPhase1BCatalog.BaselineId && DemoPhase1BCatalog.IsProfile(profileId)
+        : baselineId == DemoAiPreviewCatalog.BaselineId || DemoAiPreviewCatalog.IsProfile(profileId)
         ? baselineId == DemoAiPreviewCatalog.BaselineId && DemoAiPreviewCatalog.IsProfile(profileId)
         : IsAnalysisBaseline(baselineId) == IsAnalysisProfile(profileId);
     public static SyntheticAnalysisLock Freeze(string baselineId, string profileId) =>
@@ -75,12 +77,15 @@ public static class DemoAnalysisCatalog
                 capability, inventory, Array.AsReadOnly(planned.ExpectedResults.ToArray()));
         }
     }
-    public static IReadOnlyList<CoverageItem> WorkResults(SyntheticRunSnapshot run) => IsAnalysisBaseline(run.BaselineCatalogId)
+    public static IReadOnlyList<CoverageItem> WorkResults(SyntheticRunSnapshot run) => DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId)
+        ? DemoPhase1BCatalog.DeterministicPlan.ExpectedResults
+        : IsAnalysisBaseline(run.BaselineCatalogId)
         ? SyntheticAnalysisEngine.Plan(Freeze(run.BaselineCatalogId, run.ProfileCatalogId)).ExpectedResults
         : DemoFixtureCatalog.Baselines.Single(item => item.Id == run.BaselineCatalogId).ScriptedResults;
 
     public static bool MatchesFrozenFixture(SyntheticRunSnapshot run)
     {
+        if (DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId)) return DemoPhase1BCatalog.MatchesFrozenFixture(run);
         if (run.Scope != DemoFixtureCatalog.Scope ||
             !DemoFixtureCatalog.Baselines.Any(item => item.Id == run.BaselineCatalogId) ||
             !DemoFixtureCatalog.Profiles.Any(item => item.Id == run.ProfileCatalogId)) return false;

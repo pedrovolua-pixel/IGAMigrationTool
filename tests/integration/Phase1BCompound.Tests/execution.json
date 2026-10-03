@@ -1,0 +1,68 @@
+{
+  "recordedAtUtc": "2026-10-03T17:21:09.632653+00:00",
+  "scope": "Approved disposable synthetic Phase1B compound test fixture only; actual host and owning PostgreSQL APIs; no production/live/provider/customer data",
+  "sdk": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+  "database": {
+    "name": "iga_synthetic_phase1b_compound_tests",
+    "endpoint": "127.0.0.1:55433",
+    "role": "iga_synthetic",
+    "creation": "Created only this absent database; test startup checks/creates absent exact name",
+    "cleanup": "Explicitly coordinator authorized reset of only seven synthetic fixture schemas in this exact guarded disposable database; no other DB/schema/config/role touched"
+  },
+  "execution": {
+    "command": "PATH=/private/tmp/iga-dotnet-10.0.401:$PATH /private/tmp/iga-dotnet-10.0.401/dotnet run --project tests/integration/Phase1BCompound.Tests/Phase1BCompound.Tests.csproj -c Release -p:Phase1BHostProject=/private/tmp/iga-phase1b-coordinator/src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+    "result": "PASS",
+    "assertions": 131,
+    "releaseBuild": "PASS 0 warnings/errors",
+    "scopedFormatWhitespaceVerification": "PASS",
+    "gitDiffCheck": "PASS",
+    "nugetIncludeTransitiveVulnerableQuery": "PASS no vulnerable packages reported for host override dependency graph",
+    "logSha256": "c1f16c5dc30ec9c325aa9b14c45471f26ce304204abd7be0d9c2cdbe229e035f",
+    "buildLogSha256": "bd7e63c52d40e14716c33a8edf78f01c4b84540fa7d7d1662d6afcea2b2aa6cf"
+  },
+  "testSourceSha256": {
+    "AtomicCases.cs": "fecfc6c062c0271a99e96b69c9c226a85aa02d23f963ce51b41e3e5234312258",
+    "CaptureCsvCases.cs": "1bcd85794e185c1d5f2b72374efc9781dc784ebbbb68029036a967a45d6a4a79",
+    "Program.cs": "c76958564704a55473e7cb5dd91a1b6e39b2a87fcd5746f868f75b3c41dede37"
+  },
+  "executedCopiedBinarySha256": {
+    "Phase1BCompound.Tests.dll": "359e46ddb28b1beb377141854ca7ff374efbb88c9c9fd65555d92d78059ab157",
+    "LocalConsultantDemo.dll": "dbb0d2c0e6d53c70e529d3ed7aa320d9077699805d7fad7936c17da87edf6372",
+    "AssessmentRuns.dll": "6ae28d7658fc938cac8cc01ffefbab0d480d764d9ff502022834f94ac669ab3b",
+    "SyntheticAiExecution.dll": "ca348ee2f2daf8f47eca0f907eb1649b76015a739bf2f8c2a890de278598449d",
+    "SyntheticOutcomePriority.dll": "badc14963ecfc73546e26382c75b4574a56bb0b9e829df98df6392ec2781c031",
+    "SyntheticTaskCsvIntegration.dll": "3e93efd27fc5069b4db9d0b570ca90386d7ab631fb52a75cd3964d99dd5f4abd",
+    "SyntheticTaskCsv.dll": "3612ebfe404591cf8bd98ba765b6fa6da7c082ede968c85d39d7253a79f99349",
+    "FindingReview.dll": "063782f3745776f8bb6477db25ea495b0235a7d98640619cf6b67582aa5d3a24",
+    "SyntheticSourceFence.dll": "5b170771abcaadee46cc436da2bce5a03ce062bb648ce2e181dd04815ec45e9c"
+  },
+  "coordinatorReadSnapshot": {
+    "head": "3424beb6fbcdfd415934b4c4492e66794d4ceb58",
+    "state": "Original author execution snapshot was recorded before the coordinator commit. All eleven recorded read-source hashes subsequently matched immutable coordinator commit 6f706088e6259940102a12fbf0d51e993901de5b. The strengthened 131-assertion rerun uses the separately hashed copied binaries above.",
+    "fileSha256": {
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BService.cs": "04b81fae26588d6276c33e82cb56caed1036a7dfdd1c8321472d789e4c48a462",
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BWorker.cs": "951ceaa574e3f4d290bfd7ae4bb1597b6f7201fbd984f34743efd730d06f0e64",
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BCsv.cs": "7f0cfc447359cfcef24c29a2987cb58065c41efa6865a5b9390423d197fb5cc8",
+      "src/server/hosts/LocalConsultantDemo/DemoPhase1BRoutes.cs": "c0dac8f502de1ea6052d2bb21946d917ac47b458af9bfffec4db9705432a66ec",
+      "src/server/hosts/LocalConsultantDemo/Program.cs": "47b1475bfbef030989b6378c7cdc1852ea833f8b71f56c44386a39c932f37b4a",
+      "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs": "e34340f03cfc6d26d63c455e0200b7f56457b970946587c8120936b4d1d28c41",
+      "src/server/modules/AssessmentRuns/SyntheticPhase1BAnalysisAdapter.cs": "9fe46db9aeb2e984a048eb51eab11c5285e3390b12ebf7369650185aafc16800",
+      "src/server/modules/AssessmentRuns/DemoPhase1BCatalog.cs": "65fe5f9902ea455367dc047bebcc1c23293a1ca2670bb8a2903bf61800de6e73",
+      "src/server/modules/AssessmentRuns/DemoPhase1BAiFixture.cs": "5b2af23181ebfee7c796ec47a174732e6fe9504b1c28b8bd9ea72f8ff402a23f",
+      "src/server/modules/FindingReview/SyntheticReviewExportCapture.cs": "17a43cbb52baf339753e0684ea76b419ca784ea8c46e033a195ec73b90f88ee9",
+      "src/server/modules/SyntheticSourceFence/SyntheticRunSourceFence.cs": "7f3c9410b02c3ab7e94a1768939d2fb8cfa197906052fa6499b290c04c95d8c8"
+    }
+  },
+  "remaining": [
+    "Kestrel socket-level cancellation/abort and browser protected-link/task/outcome/budget flows",
+    "Hosted Linux isolated-container smoke",
+    "Shared solution/configuration/canonical plan/status/evidence index/private site publication"
+  ],
+  "limits": "DefaultHttpContext response streams exercise actual IResult.ExecuteAsync and host WriteAsync catch; no claim of live Kestrel/socket/browser/hosted/production authentication evidence",
+  "finalCoordinatorSourceBinding": {
+    "commit": "6f706088e6259940102a12fbf0d51e993901de5b",
+    "readSourceHashMatch": "PASS all11 recorded coordinator source hashes match immutable committed files",
+    "executedCodeBinding": "Actual strengthened rerun copied binaries are separately hashed above. Final root source review found no remaining scoped runtime blocker on this commit; independent compound test review found the vacuity gap closed."
+  },
+  "independentReviewCorrection": "Replaces vacuous AI outcome All/membership assertions with literal two distinct exact planned AI keys, exact once-only mapped owning coverage, and explicit Succeeded/Failed terminal-gap state; success, unknown gap, late billing and Finish execute the partition assertions. Author rerun PASS 131; independent reviewer source-read closure pending this final commit binding."
+}

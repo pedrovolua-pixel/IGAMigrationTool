@@ -66,6 +66,32 @@ public sealed class SyntheticDurableRunEngine
     {
         if (request is null) return Deny(SyntheticRunIssue.InvalidInput);
         if (!MatchesScope(request.Scope)) return Deny(SyntheticRunIssue.WrongScope);
+        if (!ValidText(request.IdempotencyKey) || !ValidText(request.BaselineCatalogId) || !ValidText(request.ProfileCatalogId) || !ValidVersions(request.Versions))
+            return Deny(SyntheticRunIssue.InvalidInput);
+        if (!SyntheticBaselineInventoryPlanner.Plan(request.Capability, request.Baseline, trustedScope).HasPlan)
+            return Deny(SyntheticRunIssue.InvalidPlan);
+        await using var db = CreateDb();
+        await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
+        var result = await StartCoreAsync(db, request, null, cancellationToken);
+        if (result.Succeeded) await transaction.CommitAsync(cancellationToken);
+        return result;
+    }
+
+    /// <summary>Owning start within a caller transaction. The returned result is pending caller commit; never opens or commits a nested transaction.</summary>
+    public async Task<SyntheticRunCommandResult> StartInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+        SyntheticStartRequest request, Guid requestedRunId, CancellationToken cancellationToken = default)
+    {
+        if (requestedRunId == Guid.Empty || !ValidSharedConnection(connection, transaction)) return Deny(SyntheticRunIssue.InvalidInput);
+        await using var db = SharedDb(connection);
+        await db.Database.UseTransactionAsync(transaction, cancellationToken);
+        return await StartCoreAsync(db, request, requestedRunId, cancellationToken);
+    }
+
+    private async Task<SyntheticRunCommandResult> StartCoreAsync(SyntheticRunDbContext db, SyntheticStartRequest request,
+        Guid? requestedRunId, CancellationToken cancellationToken)
+    {
+        if (request is null) return Deny(SyntheticRunIssue.InvalidInput);
+        if (!MatchesScope(request.Scope)) return Deny(SyntheticRunIssue.WrongScope);
         if (!ValidText(request.IdempotencyKey) || !ValidText(request.BaselineCatalogId) || !ValidText(request.ProfileCatalogId) ||
             !ValidVersions(request.Versions)) return Deny(SyntheticRunIssue.InvalidInput);
         var planned = SyntheticBaselineInventoryPlanner.Plan(request.Capability, request.Baseline, trustedScope);
@@ -73,10 +99,8 @@ public sealed class SyntheticDurableRunEngine
         var planJson = JsonSerializer.Serialize(planned.Plan!);
         var versionsJson = JsonSerializer.Serialize(request.Versions);
         var digest = InputDigest(planJson, versionsJson, request.BaselineCatalogId, request.ProfileCatalogId);
-        await using var db = CreateDb();
         var bindingIssue = await BindingIssueAsync(db, cancellationToken);
         if (bindingIssue is not null) return Deny(bindingIssue.Value);
-        await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
         await db.Database.ExecuteSqlRawAsync("SELECT pg_advisory_xact_lock(734021004)", cancellationToken);
         var existing = await db.Runs.FromSqlInterpolated($"SELECT * FROM synthetic_assessment.runs WHERE project_id={trustedScope.ProjectId} AND idempotency_key={request.IdempotencyKey} FOR UPDATE")
             .SingleOrDefaultAsync(cancellationToken);
@@ -86,10 +110,11 @@ public sealed class SyntheticDurableRunEngine
             var original = await SnapshotAsync(db, existing, cancellationToken);
             return new(null, original, true);
         }
+        if (requestedRunId is { } chosenId && await db.Runs.AnyAsync(row => row.RunId == chosenId, cancellationToken)) return Deny(SyntheticRunIssue.IdempotencyConflict);
         var now = await ClockAsync(db, cancellationToken);
         var run = new RunRow
         {
-            RunId = Guid.NewGuid(),
+            RunId = requestedRunId ?? Guid.NewGuid(),
             CustomerId = trustedScope.CustomerId,
             ProjectId = trustedScope.ProjectId,
             EnvironmentId = trustedScope.EnvironmentId,
@@ -118,7 +143,6 @@ public sealed class SyntheticDurableRunEngine
         await db.SaveChangesAsync(cancellationToken);
         var snapshot = await SnapshotAsync(db, run, cancellationToken);
         await BeforeCommitAsync("start", run.RunId, cancellationToken);
-        await transaction.CommitAsync(cancellationToken);
         return new(null, snapshot);
     }
 
@@ -223,43 +247,55 @@ public sealed class SyntheticDurableRunEngine
 
     public Task<SyntheticRunCommandResult> CheckpointAsync(SyntheticAuthorizedScope scope, Guid runId, Guid leaseGeneration,
         long expectedRevision, IReadOnlyCollection<CoverageItem> results, CancellationToken cancellationToken = default) =>
-        MutateAsync(scope, runId, "checkpoint", async (db, run, now) =>
+        MutateAsync(scope, runId, "checkpoint", (db, run, now) =>
+            CheckpointCoreAsync(db, run, now, runId, leaseGeneration, expectedRevision, results, cancellationToken), cancellationToken);
+
+    /// <summary>Atomic owning coverage write with other module writes; caller must commit only a successful compound result or roll back.</summary>
+    public Task<SyntheticRunCommandResult> CheckpointInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+        SyntheticAuthorizedScope scope, Guid runId, Guid leaseGeneration, long expectedRevision,
+        IReadOnlyCollection<CoverageItem> results, CancellationToken cancellationToken = default) =>
+        MutateInTransactionAsync(connection, transaction, scope, runId, "checkpoint", (db, run, now) =>
+            CheckpointCoreAsync(db, run, now, runId, leaseGeneration, expectedRevision, results, cancellationToken), cancellationToken);
+
+    private async Task<(SyntheticRunIssue? Issue, bool AlreadyApplied)> CheckpointCoreAsync(SyntheticRunDbContext db,
+        RunRow run, DateTimeOffset now, Guid runId, Guid leaseGeneration, long expectedRevision,
+        IReadOnlyCollection<CoverageItem> results, CancellationToken cancellationToken)
+    {
+        var issue = Guard(run, leaseGeneration, null, now, true);
+        if (issue is not null) return (issue, false);
+        if (results is null || results.Count == 0 || results.Count > policy.MaxCheckpointItems) return (SyntheticRunIssue.InvalidInput, false);
+        var supplied = results.ToArray();
+        var existing = await db.Results.Where(row => row.RunId == runId).ToListAsync(cancellationToken);
+        var plan = ReadPlan(run);
+        if (!CoverageProgressProjector.Project(plan.ExpectedKeys, supplied).HasProjection) return (SyntheticRunIssue.InvalidCoverage, false);
+        var fresh = new List<CoverageItem>();
+        foreach (var item in supplied)
         {
-            var issue = Guard(run, leaseGeneration, null, now, true);
-            if (issue is not null) return (issue, false);
-            if (results is null || results.Count == 0 || results.Count > policy.MaxCheckpointItems) return (SyntheticRunIssue.InvalidInput, false);
-            var supplied = results.ToArray();
-            var existing = await db.Results.Where(row => row.RunId == runId).ToListAsync(cancellationToken);
-            var plan = ReadPlan(run);
-            if (!CoverageProgressProjector.Project(plan.ExpectedKeys, supplied).HasProjection) return (SyntheticRunIssue.InvalidCoverage, false);
-            var fresh = new List<CoverageItem>();
-            foreach (var item in supplied)
+            var previous = existing.SingleOrDefault(row => row.InventoryId == item.Key.InventoryId && row.CategoryId == item.Key.EvidenceCategory);
+            if (previous is not null)
             {
-                var previous = existing.SingleOrDefault(row => row.InventoryId == item.Key.InventoryId && row.CategoryId == item.Key.EvidenceCategory);
-                if (previous is not null)
-                {
-                    if (previous.ResultDigest != ResultDigest(item)) return (SyntheticRunIssue.ResultConflict, false);
-                }
-                else fresh.Add(item);
+                if (previous.ResultDigest != ResultDigest(item)) return (SyntheticRunIssue.ResultConflict, false);
             }
-            if (fresh.Count == 0) return (null, true);
-            if (run.Revision != expectedRevision) return (SyntheticRunIssue.RevisionConflict, false);
-            var active = ReadActive(run);
-            if (run.CancelRequested && fresh.Any(item => !active.Contains(item.Key))) return (SyntheticRunIssue.CancellationRequested, false);
-            if (!CoverageProgressProjector.Project(plan.ExpectedKeys, existing.Select(Item).Concat(fresh).ToArray()).HasProjection)
-                return (SyntheticRunIssue.InvalidCoverage, false);
-            foreach (var item in fresh)
-            {
-                var attempts = await db.Attempts.CountAsync(row => row.RunId == runId && row.InventoryId == item.Key.InventoryId && row.CategoryId == item.Key.EvidenceCategory, cancellationToken);
-                if (attempts >= policy.MaxAttempts) return (SyntheticRunIssue.InvalidState, false);
-                db.Results.Add(Result(runId, item));
-                db.Attempts.Add(Attempt(runId, item.Key, attempts + 1, SyntheticAttemptOutcome.Succeeded, null, leaseGeneration, now));
-            }
-            run.ActiveWorkJson = JsonSerializer.Serialize(active.Where(key => !fresh.Any(item => item.Key == key)).ToArray());
-            run.CheckpointSequence++;
-            Advance(db, run, "checkpoint", now);
-            return (null, false);
-        }, cancellationToken);
+            else fresh.Add(item);
+        }
+        if (fresh.Count == 0) return (null, true);
+        if (run.Revision != expectedRevision) return (SyntheticRunIssue.RevisionConflict, false);
+        var active = ReadActive(run);
+        if (run.CancelRequested && fresh.Any(item => !active.Contains(item.Key))) return (SyntheticRunIssue.CancellationRequested, false);
+        if (!CoverageProgressProjector.Project(plan.ExpectedKeys, existing.Select(Item).Concat(fresh).ToArray()).HasProjection)
+            return (SyntheticRunIssue.InvalidCoverage, false);
+        foreach (var item in fresh)
+        {
+            var attempts = await db.Attempts.CountAsync(row => row.RunId == runId && row.InventoryId == item.Key.InventoryId && row.CategoryId == item.Key.EvidenceCategory, cancellationToken);
+            if (attempts >= policy.MaxAttempts) return (SyntheticRunIssue.InvalidState, false);
+            db.Results.Add(Result(runId, item));
+            db.Attempts.Add(Attempt(runId, item.Key, attempts + 1, SyntheticAttemptOutcome.Succeeded, null, leaseGeneration, now));
+        }
+        run.ActiveWorkJson = JsonSerializer.Serialize(active.Where(key => !fresh.Any(item => item.Key == key)).ToArray());
+        run.CheckpointSequence++;
+        Advance(db, run, "checkpoint", now);
+        return (null, false);
+    }
 
     public Task<SyntheticRunCommandResult> RecordAttemptFailureAsync(SyntheticAuthorizedScope scope, Guid runId, Guid leaseGeneration,
         long expectedRevision, CoverageKey key, string reasonCode, CancellationToken cancellationToken = default) =>
@@ -427,6 +463,53 @@ public sealed class SyntheticDurableRunEngine
         catch (DbUpdateConcurrencyException) { return Deny(SyntheticRunIssue.RevisionConflict); }
     }
 
+    private bool ValidSharedConnection(NpgsqlConnection connection, NpgsqlTransaction transaction)
+    {
+        if (connection is null || transaction is null || transaction.Connection != connection || connection.State != System.Data.ConnectionState.Open) return false;
+        var expected = new NpgsqlConnectionStringBuilder(trustedConnectionString);
+        var actual = new NpgsqlConnectionStringBuilder(connection.ConnectionString);
+        return actual.Host == expected.Host && actual.Port == expected.Port && actual.Database == expected.Database && actual.Username == expected.Username;
+    }
+
+    private static SyntheticRunDbContext SharedDb(NpgsqlConnection connection) => new(
+        new DbContextOptionsBuilder<SyntheticRunDbContext>().UseNpgsql(connection,
+            provider => provider.CommandTimeout(15)).EnableSensitiveDataLogging(false).Options);
+
+    private async Task<SyntheticRunCommandResult> MutateInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+        SyntheticAuthorizedScope scope, Guid runId, string operation,
+        Func<SyntheticRunDbContext, RunRow, DateTimeOffset, Task<(SyntheticRunIssue? Issue, bool AlreadyApplied)>> action,
+        CancellationToken cancellationToken)
+    {
+        if (!MatchesScope(scope)) return Deny(SyntheticRunIssue.WrongScope);
+        if (runId == Guid.Empty || !ValidSharedConnection(connection, transaction)) return Deny(SyntheticRunIssue.InvalidInput);
+        await using var db = SharedDb(connection);
+        await db.Database.UseTransactionAsync(transaction, cancellationToken);
+        if (await BindingIssueAsync(db, cancellationToken) is { } binding) return Deny(binding);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(connection, transaction,
+            scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
+        var run = await db.Runs.FromSqlInterpolated($"SELECT * FROM synthetic_assessment.runs WHERE run_id={runId} AND customer_id={trustedScope.CustomerId} AND project_id={trustedScope.ProjectId} AND environment_id={trustedScope.EnvironmentId} FOR UPDATE").SingleOrDefaultAsync(cancellationToken);
+        if (run is null) return Deny(SyntheticRunIssue.NotFound);
+        try
+        {
+            ValidateInputDigest(run);
+            var originalGeneration = run.LeaseGeneration;
+            var originalExpiry = run.LeaseExpiresAt;
+            var now = await ClockAsync(db, cancellationToken);
+            var outcome = await action(db, run, now);
+            if (outcome.Issue is { } issue) return Deny(issue);
+            if (!outcome.AlreadyApplied)
+            {
+                run.UpdatedAt = now;
+                await db.SaveChangesAsync(cancellationToken);
+                await BeforeCommitAsync(operation, runId, cancellationToken);
+                if (originalGeneration is null || originalExpiry <= await ClockAsync(db, cancellationToken)) return Deny(SyntheticRunIssue.StaleLease);
+            }
+            return new(null, await SnapshotAsync(db, run, cancellationToken), outcome.AlreadyApplied);
+        }
+        catch (SyntheticRunIntegrityException) { return Deny(SyntheticRunIssue.InputIntegrityMismatch); }
+        catch (DbUpdateConcurrencyException) { return Deny(SyntheticRunIssue.RevisionConflict); }
+    }
+
     private async Task<SyntheticRunSnapshot> SnapshotAsync(SyntheticRunDbContext db, RunRow run, CancellationToken cancellationToken)
     {
         ValidateInputDigest(run);
@@ -497,7 +580,9 @@ public sealed class SyntheticDurableRunEngine
         (versions.FixReviewContractDigest is null || versions.FixReviewContractDigest is { Length: 64 } &&
             versions.FixReviewContractDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
         (versions.PlanningTaskContractDigest is null || versions.PlanningTaskContractDigest is { Length: 64 } &&
-            versions.PlanningTaskContractDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
+            versions.PlanningTaskContractDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
+        (versions.ApplicationVersion == DemoPhase1BCatalog.ApplicationVersion
+            ? DemoPhase1BCatalog.ValidLocks(versions.Phase1BLocks) : versions.Phase1BLocks is null);
     private static bool LiveLease(RunRow run, Guid generation, DateTimeOffset now) => generation != Guid.Empty &&
         run.LeaseGeneration == generation && run.LeaseExpiresAt > now;
     private static SyntheticRunIssue? Guard(RunRow run, Guid generation, long? revision, DateTimeOffset now, bool allowCancellation)

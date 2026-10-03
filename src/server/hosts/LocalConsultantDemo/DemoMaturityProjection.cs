@@ -5,7 +5,7 @@ internal static class DemoMaturityProjection
 {
     internal static MaturityResult Project(SyntheticRunSnapshot run)
     {
-        var fixture = DemoAnalysisCatalog.FreezeMaturity(run.BaselineCatalogId, run.ProfileCatalogId);
+        var fixture = DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId) ? DemoPhase1BCatalog.Maturity : DemoAnalysisCatalog.FreezeMaturity(run.BaselineCatalogId, run.ProfileCatalogId);
         return fixture.ContentDigest == run.FrozenInputs.MaturityFixtureDigest
             ? PilotMaturityProjector.Project(fixture.Input) : new MaturityResult(MaturityIssue.InvalidInput, null);
     }

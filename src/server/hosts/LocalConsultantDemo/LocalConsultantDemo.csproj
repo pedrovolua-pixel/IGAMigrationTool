@@ -10,4 +10,5 @@
     <ProjectReference Include="../../modules/FindingReview/FindingReview.csproj" />
   </ItemGroup>
   <ItemGroup><ProjectReference Include="../../modules/SyntheticPlanningTasks/SyntheticPlanningTasks.csproj" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="../../modules/SyntheticTaskCsvIntegration/SyntheticTaskCsvIntegration.csproj" /></ItemGroup>
 </Project>

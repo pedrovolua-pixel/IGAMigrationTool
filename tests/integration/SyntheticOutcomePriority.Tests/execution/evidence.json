@@ -1,0 +1,90 @@
+{
+  "status": "executed developer subset; independent review/combined browser pending",
+  "source_base": "9bf057de2f56c342b3ee0ff0a726809a4990eb9c",
+  "sdk": "10.0.401",
+  "unit_assertions": 71,
+  "postgres_assertions": 139,
+  "database": "iga_synthetic_phase1b_op_tests",
+  "checks": {
+    "locked_audited_restore": "PASS both test projects",
+    "release_build": "PASS 0 warnings/errors both test projects",
+    "format_verify": "PASS module/unit/integration",
+    "unit": "PASS",
+    "owned_postgresql": "PASS including child kill and source/registry barriers",
+    "architecture": "PASS7policy+4projectscan",
+    "gitleaks": "NOT RUN: executable unavailable in worker PATH; coordinator full check pending",
+    "browser_historical_profiles": "NOT RUN worker scope; coordinator owns",
+    "manual_accessibility": "NOT VERIFIED"
+  },
+  "failures_preserved": "README failure-history documents initial compilation/default-array and authored inventory typo; subsequent source corrected",
+  "consumed_sources": [
+    {
+      "path": "migrations/synthetic-outcome-priority/001-initial.sql",
+      "sha256": "1787504794770674eec1edcd9b4522d4b22341e43f7e3389d1334ad9cf8ae570"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/Canonical.cs",
+      "sha256": "0b69be455377f8adcc685adad08e5e92e81a2b2d5b224089603bc637495e2801"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/Contracts.cs",
+      "sha256": "1dd22a71446563305160bd63989f37d604f1bdd776b7149fc4bfe87cf7300428"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/Migration.cs",
+      "sha256": "d750a1f440f1f797293fe335786803f56c9bb403d481e451177589c680326e97"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/Policy.cs",
+      "sha256": "ea1ccb2156507dd757f2410d054f6ee4d56ca8ac0136eb62921e1a63c12ba6c8"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/README.md",
+      "sha256": "3e8b2125eb05e82e0f757bd93e78e31bcf8052feb34fbbd9cf7a3a7589b8a0e4"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/Store.cs",
+      "sha256": "2122989cc0bb0ffb7c2f2ba8416599da6b753a4424bf1681608237bb277c91b7"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/SyntheticOutcomePriority.csproj",
+      "sha256": "b390114a0a4e46124259f332cd97a483151094234501723ee0a955e5c97abbaa"
+    },
+    {
+      "path": "src/server/modules/SyntheticOutcomePriority/packages.lock.json",
+      "sha256": "dd1a00e8f1ff4758ddbe304d1d460876b0a941f71f5459cd144457f4ae81b8b8"
+    },
+    {
+      "path": "tests/integration/SyntheticOutcomePriority.Tests/Program.cs",
+      "sha256": "2000a4827fcf3ccac4a4600f790755fa4e93b1e6ca9a496462ce906c9b3a6363"
+    },
+    {
+      "path": "tests/integration/SyntheticOutcomePriority.Tests/README.md",
+      "sha256": "7aff0f311f88ffe7fd662dae26f9727440b12d24b76c53b8ca8b4f8ba93ffdd9"
+    },
+    {
+      "path": "tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj",
+      "sha256": "9e05e06af09bfed62f5d90316191121cbd7e1579ba5c3523cc46b1f66ff7f809"
+    },
+    {
+      "path": "tests/integration/SyntheticOutcomePriority.Tests/packages.lock.json",
+      "sha256": "1b3b7dead819b9226e7c7725a142f922dd478cd6f8f9d261b191493f940f9fa8"
+    },
+    {
+      "path": "tests/unit/SyntheticOutcomePriority.Tests/Fixtures.cs",
+      "sha256": "c8bf47ea443c53f23892ca932fc8cd19757244efc858bedf611752cb8544a98b"
+    },
+    {
+      "path": "tests/unit/SyntheticOutcomePriority.Tests/Program.cs",
+      "sha256": "85ef213f0daa0f98a0255c58f388d1b2b9e33d06cc86249b3e595a379ca6c0a7"
+    },
+    {
+      "path": "tests/unit/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj",
+      "sha256": "bbf3a54e04954d7d0cc91c09137db24e417b91c277e6fe877a96d0161d962875"
+    },
+    {
+      "path": "tests/unit/SyntheticOutcomePriority.Tests/packages.lock.json",
+      "sha256": "1b3b7dead819b9226e7c7725a142f922dd478cd6f8f9d261b191493f940f9fa8"
+    }
+  ]
+}

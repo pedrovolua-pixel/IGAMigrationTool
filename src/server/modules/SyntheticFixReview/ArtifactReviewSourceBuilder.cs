@@ -31,11 +31,13 @@ public static class ArtifactReviewSourceBuilder
             var scope = new ArtifactReviewScope(source.Scope.CustomerId, source.Scope.ProjectId, source.Scope.EnvironmentId);
             if (scope != ArtifactReviewScope.Fixed) return new(ArtifactReviewIssue.WrongScope, null);
             var versions = source.FrozenVersions;
-            var planningTasks = source.ProfileId == PlanningTaskProfileId;
-            var expectedApplication = planningTasks ? PlanningTaskApplicationVersion : ApplicationVersion;
+            var phase1b = source.ProfileId == Phase1BExportCompatibility.ProfileId;
+            var planningTasks = source.ProfileId == PlanningTaskProfileId || phase1b;
+            var expectedApplication = phase1b ? Phase1BExportCompatibility.ApplicationVersion : planningTasks ? PlanningTaskApplicationVersion : ApplicationVersion;
             if ((!planningTasks && source.ProfileId != ProfileId) || source.RunState != "Scoring" || source.RunId == Guid.Empty || source.ReviewRunId != source.RunId ||
                 source.RunRevision < 0 || source.RunRevision > ArtifactReviewPolicy.MaximumRevision || source.ReviewRunRevision != source.RunRevision ||
-                versions.ValueKind != JsonValueKind.Object || versions.EnumerateObject().Count() != (planningTasks ? 14 : 13) ||
+                versions.ValueKind != JsonValueKind.Object || versions.EnumerateObject().Count() != (phase1b ? 15 : planningTasks ? 14 : 13) ||
+                phase1b && !Phase1BExportCompatibility.ValidFrozenVersions(versions) ||
                 versions.GetProperty("applicationVersion").GetString() != expectedApplication ||
                 planningTasks && versions.GetProperty("planningTaskContractDigest").GetString() != PlanningTaskContractDigest ||
                 versions.GetProperty("fixReviewContractDigest").GetString() != ContractDigest ||

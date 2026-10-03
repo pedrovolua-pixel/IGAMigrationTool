@@ -30,7 +30,8 @@ public static class PlanningTaskSourceBuilder
             if (!upstream.Succeeded) return new(PlanningTaskIssue.SourceUnavailable, null);
             var source = upstream.Source!;
             var frozen = verified.Guidance.Source.FrozenVersions;
-            if (source.Binding.ProfileId != ProfileId || source.Binding.ApplicationVersion != ApplicationVersion || frozen.EnumerateObject().Count() != 14 ||
+            var phase1b = source.Binding.ProfileId == Phase1BExportCompatibility.ProfileId;
+            if ((phase1b ? source.Binding.ApplicationVersion != Phase1BExportCompatibility.ApplicationVersion || !Phase1BExportCompatibility.ValidFrozenVersions(frozen) : source.Binding.ProfileId != ProfileId || source.Binding.ApplicationVersion != ApplicationVersion || frozen.EnumerateObject().Count() != 14) ||
                 frozen.GetProperty("planningTaskContractDigest").GetString() != ContractDigest ||
                 PlanningTaskCanonical.Json(artifacts.Source) != PlanningTaskCanonical.Json(source.Binding) || string.IsNullOrWhiteSpace(artifacts.ActorId) || artifacts.Entries.IsDefault ||
                 artifacts.Entries.Length != source.Artifacts.Length) return new(PlanningTaskIssue.IntegrityMismatch, null);

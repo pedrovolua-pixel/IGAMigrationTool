@@ -66,6 +66,8 @@
           "Microsoft.EntityFrameworkCore": "[10.0.12, )",
           "Microsoft.EntityFrameworkCore.Relational": "[10.0.12, )",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "[10.0.3, )",
+          "SyntheticAiExecution": "[1.0.0, )",
+          "SyntheticOutcomePriority": "[1.0.0, )",
           "SyntheticSourceFence": "[1.0.0, )"
         }
       },
@@ -94,6 +96,15 @@
       "reportdrafts": {
         "type": "Project"
       },
+      "syntheticaiexecution": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )",
+          "Npgsql": "[10.0.3, )",
+          "SyntheticAiValidation": "[1.0.0, )",
+          "SyntheticSourceFence": "[1.0.0, )"
+        }
+      },
       "syntheticaipreview": {
         "type": "Project",
         "dependencies": {
@@ -117,6 +128,15 @@
           "SyntheticSourceFence": "[1.0.0, )"
         }
       },
+      "syntheticoutcomepriority": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )",
+          "AssessmentScoring": "[1.0.0, )",
+          "Npgsql": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
+        }
+      },
       "syntheticplanningtasks": {
         "type": "Project",
         "dependencies": {
@@ -128,6 +148,16 @@
       },
       "syntheticsourcefence": {
         "type": "Project"
+      },
+      "synthetictaskcsv": {
+        "type": "Project"
+      },
+      "synthetictaskcsvintegration": {
+        "type": "Project",
+        "dependencies": {
+          "SyntheticPlanningTasks": "[1.0.0, )",
+          "SyntheticTaskCsv": "[1.0.0, )"
+        }
       }
     }
   }

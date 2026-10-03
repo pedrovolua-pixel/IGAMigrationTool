@@ -6,19 +6,22 @@ using SyntheticSourceFence;
 namespace SyntheticPlanningTasks;
 
 /// <summary>Scoped fictional planning records only; never remediation, execution or customer authority.</summary>
-public sealed class SyntheticPlanningTaskStore
+public sealed partial class SyntheticPlanningTaskStore
 {
     private readonly string connectionString;
     private readonly PlanningTaskScope scope;
     private readonly PlanningTaskSourceReader readSource;
     private readonly ISyntheticPlanningTaskCommitObserver? observer;
     public SyntheticPlanningTaskStore(string connectionString, PlanningTaskScope trustedScope, PlanningTaskSourceReader readSource, ISyntheticPlanningTaskCommitObserver? observer = null)
+        : this(connectionString, trustedScope, readSource, observer, false) { }
+    private SyntheticPlanningTaskStore(string connectionString, PlanningTaskScope trustedScope, PlanningTaskSourceReader readSource, ISyntheticPlanningTaskCommitObserver? observer, bool phase1b)
     {
         if (trustedScope != PlanningTaskScope.Fixed) throw new ArgumentException("Only the fixed fictional scope is supported.", nameof(trustedScope));
         ArgumentNullException.ThrowIfNull(readSource);
         var connection = new NpgsqlConnectionStringBuilder(connectionString);
-        if (connection.Host is not ("127.0.0.1" or "localhost" or "::1") || connection.Database is null || !connection.Database.StartsWith("iga_synthetic_cycle14_", StringComparison.Ordinal))
+        if (connection.Host is not ("127.0.0.1" or "localhost" or "::1") || connection.Database is null || !connection.Database.StartsWith(phase1b ? "iga_synthetic_phase1b_" : "iga_synthetic_cycle14_", StringComparison.Ordinal))
             throw new ArgumentException("Planning tasks require a loopback iga_synthetic_cycle14_ database.", nameof(connectionString));
+        if (phase1b && (connection.Port != 55433 || connection.Username != "iga_synthetic")) throw new ArgumentException("Phase1B requires fixed local synthetic database identity.", nameof(connectionString));
         connection.CommandTimeout = 15; this.connectionString = connection.ConnectionString;
         scope = trustedScope; this.readSource = readSource; this.observer = observer;
     }
@@ -184,7 +187,7 @@ public sealed class SyntheticPlanningTaskStore
                 !Equal(actual.History.Take(previous.History.Length).ToImmutableArray(), previous.History)) return false;
         return true;
     }
-    private async Task<Loaded> Load(NpgsqlConnection connection, NpgsqlTransaction transaction, Guid runId, PlanningTaskAuthority authority, CancellationToken ct)
+    private async Task<Loaded> Load(NpgsqlConnection connection, NpgsqlTransaction transaction, Guid runId, PlanningTaskAuthority? authority, CancellationToken ct, PlanningTaskExportAuthority? exportAuthority = null)
     {
         var seeds = new List<(PlanningTaskIdentity Identity, string Actor, string Proof)>();
         await using (var command = Query(connection, transaction, "SELECT task_id,identity_json,identity_digest,assignee_id,creation_proof_digest FROM synthetic_planning_tasks.task_seeds WHERE run_id=@run ORDER BY task_id COLLATE \"C\"", runId))
@@ -192,11 +195,11 @@ public sealed class SyntheticPlanningTaskStore
             while (await reader.ReadAsync(ct))
             {
                 // Immutable seed ownership is checked before task-owned source/history content or UUID dispatch.
-                if (reader.GetString(3) != authority.ActorId) throw new TaskAuthorizationException();
+                if (exportAuthority is null && reader.GetString(3) != authority!.ActorId) throw new TaskAuthorizationException();
                 var identity = PlanningTaskCanonical.Parse<PlanningTaskIdentity>(reader.GetString(1));
                 if (identity.TaskId != reader.GetString(0) || reader.GetString(1) != PlanningTaskCanonical.Json(identity) || reader.GetString(2) != PlanningTaskCanonical.Digest(identity) ||
                     string.IsNullOrWhiteSpace(reader.GetString(3))) throw new PlanningTaskIntegrityException();
-                if (PlanningTaskPolicy.Authorize(authority, scope, category: identity.CategoryId) is not null) throw new TaskAuthorizationException();
+                if ((exportAuthority is null ? PlanningTaskPolicy.Authorize(authority, scope, category: identity.CategoryId) : PlanningTaskExportPolicy.Authorize(exportAuthority, scope, identity.CategoryId)) is not null) throw new TaskAuthorizationException();
                 seeds.Add((identity, reader.GetString(3), reader.GetString(4)));
             }
         var versions = new Dictionary<string, PlanningTaskSource>(StringComparer.Ordinal);

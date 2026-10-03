@@ -149,7 +149,8 @@ foreach (var (profile, name) in new[] { (DemoAiPreviewCatalog.ProfileId, "normal
     Denied(run with { Plan = alteredPlan, InputDigest = SyntheticDurableRunEngine.ComputeInputDigest(alteredPlan, run.FrozenInputs, baseline.Id, profile) }, name + " internally relocked altered capability");
     Denied(run with { Plan = run.Plan with { Scope = run.Scope with { CustomerId = "other" } } }, name + " plan scope");
     Denied(run with { Plan = run.Plan with { Objects = run.Plan.Objects.Reverse().ToArray() } }, name + " changed plan object order");
-    foreach (var property in typeof(SyntheticRunInputVersions).GetProperties())
+    Denied(run with { FrozenInputs = run.FrozenInputs with { Phase1BLocks = DemoPhase1BAiFixture.Locks(run.RunId, new string('a', 64)) } }, name + " additive Phase1B locks denied on historical profile");
+    foreach (var property in typeof(SyntheticRunInputVersions).GetProperties().Where(p => p.Name != nameof(SyntheticRunInputVersions.Phase1BLocks)))
     {
         var node = JsonSerializer.SerializeToNode(run.FrozenInputs)!.AsObject();
         node[property.Name] = property.Name.EndsWith("Digest", StringComparison.Ordinal) ? new string('0', 64) : "changed";

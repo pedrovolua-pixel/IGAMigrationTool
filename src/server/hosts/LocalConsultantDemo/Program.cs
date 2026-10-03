@@ -18,6 +18,15 @@ if (!args.Contains("--synthetic-local-demo", StringComparer.Ordinal))
     throw new InvalidOperationException("This host requires --synthetic-local-demo and supports synthetic loopback use only.");
 var connection = Environment.GetEnvironmentVariable("IGA_SYNTHETIC_DATABASE")
     ?? "Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle03;Username=iga_synthetic";
+var phase1bEnabled = args.Contains("--enable-synthetic-phase1b", StringComparer.Ordinal);
+var phase1bAuditor = args.Contains("--synthetic-phase1b-auditor", StringComparer.Ordinal);
+if (phase1bEnabled)
+{
+    var phaseDb = new Npgsql.NpgsqlConnectionStringBuilder(connection);
+    if (phaseDb.Host is not ("127.0.0.1" or "localhost") || phaseDb.Port != 55433 || phaseDb.Username != "iga_synthetic" || phaseDb.Database?.StartsWith("iga_synthetic_phase1b_", StringComparison.Ordinal) != true)
+        throw new InvalidOperationException("Phase1B requires an explicitly selected dedicated fictional database before initialization.");
+}
+if (phase1bAuditor && !phase1bEnabled) throw new InvalidOperationException("Auditor fixture requires Phase1B opt-in.");
 var planningTasksEnabled = args.Contains("--enable-synthetic-planning-tasks", StringComparer.Ordinal);
 if (planningTasksEnabled && !new Npgsql.NpgsqlConnectionStringBuilder(connection).Database!.StartsWith("iga_synthetic_cycle14_", StringComparison.Ordinal))
     throw new InvalidOperationException("Planning tasks require an explicitly selected dedicated Cycle14 synthetic database.");
@@ -34,11 +43,13 @@ var artifactReviewService = new DemoArtifactReviewService(connection, engine, re
 if (artifactReviewEnabled || planningTasksEnabled) await artifactReviewService.InitializeAsync();
 var planningTaskService = new DemoPlanningTaskService(connection, engine, reviewService);
 if (planningTasksEnabled) await planningTaskService.InitializeAsync();
+DemoPhase1BService? phase1b = phase1bEnabled ? new(connection, engine, reviewStore, phase1bAuditor) : null;
+if (phase1b is not null) { await phase1b.InitializeAsync(); await phase1b.InitializeCsv(); }
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { Args = Array.Empty<string>(), EnvironmentName = "SyntheticLocalDemo" });
 builder.WebHost.ConfigureKestrel(server =>
 {
     server.Listen(IPAddress.Loopback, port);
-    server.Limits.MaxRequestBodySize = 16384;
+    server.Limits.MaxRequestBodySize = 65536;
 });
 builder.Logging.SetMinimumLevel(LogLevel.Warning);
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
@@ -52,11 +63,13 @@ builder.Services.AddAntiforgery(options =>
 builder.Services.AddSingleton(engine);
 if (!args.Contains("--pause-synthetic-worker", StringComparer.Ordinal))
     builder.Services.AddHostedService<SyntheticDemoWorker>();
+if (phase1b is not null && !args.Contains("--pause-synthetic-worker", StringComparer.Ordinal))
+{ builder.Services.AddSingleton(phase1b); builder.Services.AddHostedService<DemoPhase1BWorker>(); }
 var app = builder.Build();
 app.Use(async (context, next) =>
 {
     var bodyLimit = context.Features.Get<Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature>();
-    if (bodyLimit is { IsReadOnly: false }) bodyLimit.MaxRequestBodySize = context.Request.Path.Value?.Contains("/planning-tasks/", StringComparison.Ordinal) == true ? 16384 : 4096;
+    if (bodyLimit is { IsReadOnly: false }) bodyLimit.MaxRequestBodySize = context.Request.Path.StartsWithSegments("/local-demo/v1/phase1b") ? 65536 : context.Request.Path.Value?.Contains("/planning-tasks/", StringComparison.Ordinal) == true ? 16384 : 4096;
     var host = context.Request.Host.Value;
     if (context.Connection.RemoteIpAddress is null || !IPAddress.IsLoopback(context.Connection.RemoteIpAddress) ||
         (host != $"127.0.0.1:{port}" && host != $"localhost:{port}"))
@@ -70,6 +83,10 @@ app.Use(async (context, next) =>
     if (context.Request.Path.StartsWithSegments("/local-demo")) context.Response.Headers.CacheControl = "no-store";
     try
     {
+        if (phase1bAuditor && context.Request.Path.StartsWithSegments("/local-demo") &&
+            !(context.Request.Method == "GET" && (context.Request.Path == "/local-demo/v1/catalog" || context.Request.Path == "/local-demo/v1/phase1b/fixture" || context.Request.Path.Value!.EndsWith("/csv", StringComparison.Ordinal) || context.Request.Path.Value.EndsWith("/navigation", StringComparison.Ordinal)) ||
+              context.Request.Method == "POST" && context.Request.Path.Value!.StartsWith("/local-demo/v1/phase1b/runs/", StringComparison.Ordinal) && context.Request.Path.Value.EndsWith("/csv", StringComparison.Ordinal)))
+            throw new Phase1BDeniedException("Denied");
         if (context.Request.Method == "POST")
         {
             if (context.Request.Headers.Origin != $"http://{host}" ||
@@ -82,6 +99,11 @@ app.Use(async (context, next) =>
             await antiforgery.ValidateRequestAsync(context);
         }
         await next();
+    }
+    catch (Phase1BDeniedException error)
+    {
+        var status = error.Message == "InvalidInput" ? 400 : error.Message is "Denied" or "WrongScope" or "NotFound" ? 403 : 409;
+        await DemoProjection.Error(error.Message, "This fictional operation is unavailable or its saved source changed. Refresh before a new action.", status).ExecuteAsync(context);
     }
     catch (AntiforgeryValidationException)
     {
@@ -103,7 +125,7 @@ app.Use(async (context, next) =>
     }
 });
 app.MapGet("/local-demo/v1/catalog", (HttpContext context, IAntiforgery antiforgery) =>
-    Results.Json(DemoProjection.Catalog(antiforgery.GetAndStoreTokens(context).RequestToken!)));
+    Results.Json(DemoProjection.Catalog(antiforgery.GetAndStoreTokens(context).RequestToken!, phase1bEnabled)));
 app.MapGet("/local-demo/v1/runs", async () => Results.Json(new
 {
     schemaVersion = 1,
@@ -116,6 +138,8 @@ app.MapGet("/local-demo/v1/runs/{runId:guid}", async (Guid runId) =>
 app.MapGet("/local-demo/v1/runs/{runId:guid}/analysis", async (HttpContext context, Guid runId) =>
 {
     var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
+    if (read.Succeeded && DemoPhase1BCatalog.IsProfile(read.Snapshot!.ProfileCatalogId))
+        return phase1b is null ? DemoProjection.Error("Denied", "Phase1B requires its dedicated fictional host.", 403) : Results.Json((await phase1b.Workspace(runId, context.RequestAborted)), DemoPhase1BRoutes.Json);
     if (read.Succeeded && DemoPlanningTaskCatalog.IsProfile(read.Snapshot!.ProfileCatalogId))
     {
         if (!planningTasksEnabled) return DemoProjection.Error("Denied", "Start the dedicated Cycle14 synthetic host to use planning tasks.", 403);
@@ -159,6 +183,9 @@ app.MapPost("/local-demo/v1/runs/{runId:guid}/findings/{findingId}/events", asyn
         return DemoProjection.Error("InvalidInput", "Supply only the bounded fields for the selected review action.", 400);
     var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
     if (!read.Succeeded) return DemoProjection.Result(read);
+    if (DemoPhase1BCatalog.IsProfile(read.Snapshot!.ProfileCatalogId))
+        return phase1b is null ? DemoProjection.Error("Denied", "Phase1B is disabled.", 403)
+            : Results.Json(await phase1b.Review(runId, findingId, command, context.RequestAborted), DemoPhase1BRoutes.Json);
     var review = await reviewService.ReadAsync(read.Snapshot!);
     if (review.Snapshot is null) return DemoProjection.Error("Denied", "Review is unavailable for this saved run.", 403);
     var applied = await reviewService.ApplyAsync(runId, findingId, command);
@@ -304,6 +331,7 @@ if (!Directory.Exists(webRoot)) throw new InvalidOperationException("Build src/w
 var files = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(webRoot);
 app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = files });
 app.UseStaticFiles(new StaticFileOptions { FileProvider = files });
+if (phase1b is not null) DemoPhase1BRoutes.Map(app, phase1b);
 await app.RunAsync();
 
 internal static class DemoProjection
@@ -404,12 +432,12 @@ internal static class DemoProjection
         return Error(result.Issue.ToString()!, "The run changed or the requested operation is unavailable. Refresh before retrying.", status, result.Snapshot?.Revision);
     }
 
-    internal static object Catalog(string csrfToken) => new
+    internal static object Catalog(string csrfToken, bool phase1b = false) => new
     {
         schemaVersion = 1,
         demoOnly = true,
         scopes = new[] { new { id = "demo-scope", label = "Synthetic One Identity environment" } },
-        baselines = DemoFixtureCatalog.Baselines.Select(item => new
+        baselines = (phase1b ? DemoFixtureCatalog.Baselines.Concat([DemoPhase1BCatalog.CreateBaseline()]) : DemoFixtureCatalog.Baselines).Select(item => new
         {
             id = item.Id,
             label = item.Name,
@@ -417,7 +445,7 @@ internal static class DemoProjection
             version = SyntheticBaselineVersion,
             warnings = Warnings(item.Id)
         }),
-        profiles = DemoFixtureCatalog.Profiles.Select(item => new { id = item.Id, label = item.Name, version = item.Versions.ProfileVersion, baselineIds = DemoFixtureCatalog.Baselines.Where(baseline => DemoAnalysisCatalog.Compatible(baseline.Id, item.Id)).Select(baseline => baseline.Id) }),
+        profiles = (phase1b ? DemoFixtureCatalog.Profiles.Concat([DemoPhase1BCatalog.CreateProfile()]) : DemoFixtureCatalog.Profiles).Select(item => new { id = item.Id, label = item.Name, version = item.Versions.ProfileVersion, baselineIds = (phase1b ? DemoFixtureCatalog.Baselines.Concat([DemoPhase1BCatalog.CreateBaseline()]) : DemoFixtureCatalog.Baselines).Where(baseline => DemoAnalysisCatalog.Compatible(baseline.Id, item.Id)).Select(baseline => baseline.Id) }),
         csrfToken
     };
     private const string SyntheticBaselineVersion = "synthetic-baseline-inventory-v1";
@@ -426,9 +454,9 @@ internal static class DemoProjection
         scopeId = "demo-scope",
         scopeLabel = "Synthetic One Identity environment",
         baselineId = run.BaselineCatalogId,
-        baselineLabel = DemoFixtureCatalog.Baselines.Single(item => item.Id == run.BaselineCatalogId).Name,
+        baselineLabel = run.BaselineCatalogId == DemoPhase1BCatalog.BaselineId ? DemoPhase1BCatalog.CreateBaseline().Name : DemoFixtureCatalog.Baselines.Single(item => item.Id == run.BaselineCatalogId).Name,
         profileId = run.ProfileCatalogId,
-        profileLabel = DemoFixtureCatalog.Profiles.Single(item => item.Id == run.ProfileCatalogId).Name
+        profileLabel = DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId) ? DemoPhase1BCatalog.CreateProfile().Name : DemoFixtureCatalog.Profiles.Single(item => item.Id == run.ProfileCatalogId).Name
     };
     private static object Progress(SyntheticRunSnapshot run) => new
     {
@@ -513,7 +541,7 @@ internal static class DemoProjection
             }
         };
     }
-    private static object[] Warnings(string baselineId) => PermissionWarnings(DemoFixtureCatalog.Baselines.Single(item => item.Id == baselineId).Inventory.Permission == AssessmentOrchestration.SyntheticBaselinePermission.EligibleWithWarning);
+    private static object[] Warnings(string baselineId) => PermissionWarnings((baselineId == DemoPhase1BCatalog.BaselineId ? DemoPhase1BCatalog.CreateBaseline() : DemoFixtureCatalog.Baselines.Single(item => item.Id == baselineId)).Inventory.Permission == AssessmentOrchestration.SyntheticBaselinePermission.EligibleWithWarning);
     private static object[] PermissionWarnings(bool warning) => warning
         ? [new { code = "synthetic_permission_warning", message = "This synthetic preset carries an explicit baseline permission warning." }]
         : [];
@@ -531,7 +559,7 @@ internal sealed class SyntheticDemoWorker(SyntheticDurableRunEngine engine, ILog
             {
                 foreach (var listed in await engine.ListAsync(DemoFixtureCatalog.Scope, stoppingToken))
                 {
-                    if (listed.State is not (SyntheticRunState.Planned or SyntheticRunState.Running)) continue;
+                    if (DemoPhase1BCatalog.IsProfile(listed.ProfileCatalogId) || listed.State is not (SyntheticRunState.Planned or SyntheticRunState.Running)) continue;
                     var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, listed.RunId, stoppingToken);
                     if (!read.Succeeded) continue;
                     var run = read.Snapshot!;

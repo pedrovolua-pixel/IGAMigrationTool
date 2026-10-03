@@ -9,6 +9,11 @@ import type {
 } from './demo-contract.generated';
 import { DemoRequestError, request } from './api';
 import { AnalysisView } from './AnalysisView';
+import {
+  Phase1BSetupController,
+  Phase1BRunController,
+  Phase1BProtectedNavigation,
+} from './Phase1BController';
 import type { ArtifactReviewDraft } from './ArtifactReviewPanel';
 import type { PlanningTaskDraft } from './PlanningTasksPanel';
 
@@ -39,6 +44,8 @@ const selectionName = (selection: Selection) =>
   `${selection.baselineLabel} / ${selection.profileLabel}`;
 
 function rememberedRun(): string | null {
+  const queryRun = new URLSearchParams(window.location.search).get('run');
+  if (queryRun && uuid.test(queryRun)) return queryRun;
   try {
     const value = sessionStorage.getItem(storageKey);
     return value && uuid.test(value) ? value : null;
@@ -48,6 +55,30 @@ function rememberedRun(): string | null {
 }
 
 export function App() {
+  const query = new URLSearchParams(window.location.search);
+  if (query.has('view') || query.has('task') || query.has('finding')) {
+    const runId = query.get('run') ?? '',
+      view = query.get('view') ?? '',
+      id = query.get(view === 'tasks' ? 'task' : 'finding') ?? '';
+    const expected = ['run', 'view', view === 'tasks' ? 'task' : 'finding'];
+    if (
+      !uuid.test(runId) ||
+      !['tasks', 'findings'].includes(view) ||
+      !/^[a-f0-9]{64}$/.test(id) ||
+      [...query.keys()].length !== 3 ||
+      expected.some((k) => query.getAll(k).length !== 1)
+    )
+      return (
+        <main>
+          <h1>Protected fictional planning reference</h1>
+          <p role="alert">This protected link is unavailable.</p>
+        </main>
+      );
+    return <Phase1BProtectedNavigation runId={runId} view={view} id={id} />;
+  }
+  return <ConsultantApp />;
+}
+function ConsultantApp() {
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [scopeId, setScopeId] = useState('');
   const [baselineId, setBaselineId] = useState('');
@@ -73,6 +104,7 @@ export function App() {
   const selectedBaseline = baselines.find((item) => item.id === baselineId);
   const canStart =
     !!catalog &&
+    profileId !== 'synthetic-phase1b-combined-v1' &&
     baselines.some((item) => item.id === baselineId) &&
     profiles.some((item) => item.id === profileId);
 
@@ -454,6 +486,26 @@ export function App() {
                 and recovery.
               </p>
             </form>
+            {profileId === 'synthetic-phase1b-combined-v1' && catalog && (
+              <Phase1BSetupController
+                csrfToken={catalog.csrfToken}
+                onStarted={(next) => {
+                  setRun(next);
+                  setSelectedId(next.runId);
+                  setHistory((previous) =>
+                    previous
+                      ? {
+                          ...previous,
+                          runs: [next, ...previous.runs.filter((r) => r.runId !== next.runId)],
+                        }
+                      : previous,
+                  );
+                  setAnnouncement(
+                    'The approved fictional Phase 1B run is saved. Automatic local work is underway.',
+                  );
+                }}
+              />
+            )}
           </section>
           <section
             className="panel run-detail"
@@ -649,13 +701,21 @@ export function App() {
                     </p>
                   )}
                 </section>
-                <AnalysisView
-                  key={run.runId}
-                  run={run}
-                  csrfToken={catalog?.csrfToken ?? ''}
-                  artifactDrafts={artifactDrafts}
-                  planningTaskDrafts={planningTaskDrafts}
-                />
+                {run.selection.profileId === 'synthetic-phase1b-combined-v1' ? (
+                  <Phase1BRunController
+                    key={run.runId}
+                    run={run}
+                    csrfToken={catalog?.csrfToken ?? ''}
+                  />
+                ) : (
+                  <AnalysisView
+                    key={run.runId}
+                    run={run}
+                    csrfToken={catalog?.csrfToken ?? ''}
+                    artifactDrafts={artifactDrafts}
+                    planningTaskDrafts={planningTaskDrafts}
+                  />
+                )}
                 <details className="locked-inputs">
                   <summary>Locked input versions and digests</summary>
                   <p className="field-note">
