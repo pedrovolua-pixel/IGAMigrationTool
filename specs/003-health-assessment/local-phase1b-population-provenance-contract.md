@@ -1,6 +1,6 @@
 # Cycle06 saved Phase1B population/provenance engineering contract
 
-Status: REVIEW — exact source inventory attached; nonauthor engineering review required before freeze
+Status: FROZEN — routine engineering review passed; exact reviewed bytes and approval are bound by [the freeze receipt](../../docs/development/evidence/m08-population-provenance-engineering-freeze-20261003.json).
 Date: 2026-10-03
 Authority: approved product/technical/evaluation specifications, EV02 approval and owner's next-cycle instruction. Trace FR-HAS-11/13/50–53, bounded AC-HAS-12/19 and TP-HAS-012/019. Accepted ADR0001–0004 and cycle05 capture remain unchanged. This is routine internal engineering, not a new product/security decision.
 

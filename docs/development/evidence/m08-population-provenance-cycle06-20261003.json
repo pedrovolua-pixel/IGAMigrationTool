@@ -1,0 +1,528 @@
+{
+  "schemaVersion": "m08-population-provenance-cycle06-v1",
+  "date": "2026-10-03",
+  "status": "VERIFIED bounded local engineering; hosted/private-site completion recorded separately",
+  "sourceCommit": "2d7f1020219fef07f174d45b39d22b946415ffa0",
+  "testedRuntimeSource": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+  "documentationOnlyBridge": [
+    "docs/development/evidence/phase1d-minimization-cycle03-20261003.json",
+    "docs/development/evidence/phase1d-minimization-cycle03-site-20261003.json",
+    "plans/active/local-pilot-phase1d-minimization-verification-cycle03.md",
+    "specs/003-health-assessment/evidence-index.md",
+    "specs/003-health-assessment/implementation-plan.md",
+    "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md",
+    "specs/003-health-assessment/status.md"
+  ],
+  "freezeCommit": "c27cb20",
+  "authorFinalCommit": "6fcd6d714e31f7c1c9da2dff8c97e49125c12e6b",
+  "independentTestedCommit": "43407f11b6e25bd33a2ded5c48aeb914a813dedc",
+  "independentFinalDocs": "96498d5d7c5bc201e908469c0e753be4be250e99",
+  "assertions": {
+    "portable": 145,
+    "authorPostgres": 365,
+    "independentPostgres": 534,
+    "additionalFreshNameRefusals": 2
+  },
+  "inventory": {
+    "sourceBound": 13,
+    "missing": [
+      "ReassessmentBaseline",
+      "Collection",
+      "Maturity",
+      "AiSchema",
+      "AiSettings",
+      "Reviewer",
+      "ReviewerEligibility",
+      "Instruction",
+      "Conflict",
+      "ReviewEvents"
+    ],
+    "allFixedScenarios": true,
+    "completeSamplingReady": false
+  },
+  "combinedChecks": {
+    "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+    "results": [
+      {
+        "name": "restore",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "restore",
+          "IgaMigrationTool.slnx",
+          "--locked-mode"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 1.13,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/restore.log",
+        "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+      },
+      {
+        "name": "format",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "format",
+          "IgaMigrationTool.slnx",
+          "--verify-no-changes",
+          "--no-restore"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 22.94,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "build",
+          "IgaMigrationTool.slnx",
+          "-c",
+          "Release",
+          "--no-restore"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 3.78,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/build.log",
+        "sha256": "c88858ca927f8c48825e9a80d7f58ce6c4c2659f60903848a31159fe6193cc56"
+      },
+      {
+        "name": "population-unit",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticEvaluationPopulationIntegration.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.49,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/population-unit.log",
+        "sha256": "7b263c1d20c9d0f97a21e75b6a480c1a02635598b44afc2caa53a1e1509b4c2e"
+      },
+      {
+        "name": "population-author-pg",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/integration/SyntheticEvaluationPopulationIntegration.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 2.55,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/population-author-pg.log",
+        "sha256": "da1de0388c2dc62283de3d64d150e224ea96117e2c131d9a221e1e47850e3e61"
+      },
+      {
+        "name": "population-independent-pg",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/integration/SyntheticEvaluationPopulationIndependent.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 2.44,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/population-independent-pg.log",
+        "sha256": "935baaa6c53897e08c6ab50f90ea6c5f97643c023b3272252ed9101177c05825"
+      },
+      {
+        "name": "capture-unit",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticEvaluationSourceIntegration.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.45,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/capture-unit.log",
+        "sha256": "c8a7e7e2c2f2ed71731340d77fbdb0e39e87038d66fde68cc0056360266db3da"
+      },
+      {
+        "name": "capture-author-pg",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/integration/SyntheticEvaluationSourceIntegration.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 2.41,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/capture-author-pg.log",
+        "sha256": "3e544c22cc1129f03dc9c39a6479132326977d9fae23a0ce72474500e5b57b82"
+      },
+      {
+        "name": "capture-independent-pg",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/integration/SyntheticEvaluationSourceIndependent.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 2.35,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/capture-independent-pg.log",
+        "sha256": "2760e3474f74bcf682f4884cea2fced513a7d23ed99a1d954fc57206b0064baf"
+      },
+      {
+        "name": "architecture",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/architecture/BoundaryChecks",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.44,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/architecture.log",
+        "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+      },
+      {
+        "name": "old-ai",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticAiExecution.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.47,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/old-ai.log",
+        "sha256": "fadcbb0fec4132e0ad38d53ced1c7f9f6a5a8d8bcfc9109cbe2d581b0879d713"
+      },
+      {
+        "name": "old-outcome",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticOutcomePriority.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.46,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/old-outcome.log",
+        "sha256": "5e52a4168196268ec29ffd2fc7991bf6277a108991a41289faca2a6a23acdbc2"
+      },
+      {
+        "name": "old-csv",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticTaskCsv.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.46,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/old-csv.log",
+        "sha256": "49f1774bda25e9fcf2d8dcbb976052ee723dc8d1dda3965ae85ce574665cfbc4"
+      },
+      {
+        "name": "accuracy",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticEvaluation.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.92,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/accuracy.log",
+        "sha256": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1"
+      },
+      {
+        "name": "sampling",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticEvaluationSampling.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 1.76,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/sampling.log",
+        "sha256": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8"
+      },
+      {
+        "name": "regression",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticEvaluationRegression.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 3.54,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/regression.log",
+        "sha256": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1"
+      },
+      {
+        "name": "reviewer",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticEvaluationReviewer.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.76,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/reviewer.log",
+        "sha256": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+      },
+      {
+        "name": "policy-compose",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/integration/SyntheticEvaluationPolicy.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.46,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/policy-compose.log",
+        "sha256": "c679515e0b92fbe97f0f28f50c3168c4fb2f00dc2da842f2e8fa22ecf5c502f4"
+      },
+      {
+        "name": "workflow-unit",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticEvaluationWorkflow.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.48,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/workflow-unit.log",
+        "sha256": "ccc15e771ea70f15c8b1ea05031cc756d85f475754e26f4261e0344e23401947"
+      },
+      {
+        "name": "parallel-mcp-publication",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "run",
+          "--project",
+          "tests/unit/SyntheticMcpPublication.Tests",
+          "-c",
+          "Release",
+          "--no-build"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.53,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/parallel-mcp-publication.log",
+        "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb"
+      },
+      {
+        "name": "parallel-mcp-boundary",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "/private/tmp/iga-m08-cycle06-evidence/coordinator/entrypoint-wrapper/bin/Release/net10.0/Wrapper.dll",
+          "/private/tmp/iga-m08-cycle06-coordinator/tests/unit/SyntheticMcpBoundary.Tests/bin/Release/net10.0/SyntheticMcpBoundary.Tests.dll"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 6.44,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/parallel-mcp-boundary.log",
+        "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6"
+      },
+      {
+        "name": "parallel-mcp-integration",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "/private/tmp/iga-m08-cycle06-evidence/coordinator/entrypoint-wrapper/bin/Release/net10.0/Wrapper.dll",
+          "/private/tmp/iga-m08-cycle06-coordinator/tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests.dll"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 1,
+        "seconds": 0.04,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/parallel-mcp-integration.log",
+        "sha256": "e8cee69fdce56a13ce024dca56756fbaf9315bee146d4cec9976cb0bad6e0339"
+      },
+      {
+        "name": "sampling-oracle",
+        "command": [
+          "python3",
+          "tests/unit/SyntheticEvaluationSampling.Tests/oracle.py"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.02,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/sampling-oracle.log",
+        "sha256": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7"
+      },
+      {
+        "name": "policy-oracle",
+        "command": [
+          "python3",
+          "tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.02,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/policy-oracle.log",
+        "sha256": "dc68fa3844b695510513bc0e7000e255ebe5b08d6333d4647b11a34a944c54e1"
+      },
+      {
+        "name": "workflow-oracle",
+        "command": [
+          "python3",
+          "tests/integration/SyntheticEvaluationWorkflowIndependent.Tests/oracle.py"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.02,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/workflow-oracle.log",
+        "sha256": "425938e2aa6519c7fd4fec2e2fe4f187d81a931b86200c0c5524d0c8d6e9c283"
+      },
+      {
+        "name": "diff",
+        "command": [
+          "git",
+          "diff",
+          "cb38bb6",
+          "--check"
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 0.03,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/diff.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "secrets",
+        "command": [
+          "/private/tmp/iga-parallel-tools/gitleaks",
+          "dir",
+          "--no-banner",
+          "--redact=100",
+          "."
+        ],
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "seconds": 1.67,
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/final/secrets.log",
+        "sha256": "df328db1ed6cebc92de442796450049f6320b4b1c9719de1f4c3c81de9e8a029"
+      },
+      {
+        "name": "parallel-mcp-integration-fixtures-bound",
+        "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+        "exitCode": 0,
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "/private/tmp/iga-m08-cycle06-evidence/coordinator/entrypoint-wrapper/bin/Release/net10.0/Wrapper.dll",
+          "/private/tmp/iga-m08-cycle06-coordinator/tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests.dll"
+        ],
+        "log": "/private/tmp/iga-m08-cycle06-evidence/coordinator/parallel-mcp-integration-guarded-final.log",
+        "sha256": "216ff548639be7c2dd414172e9a7729cd08ff70c87fa1ce1c500882e4bc6b73f",
+        "supersedes": "parallel-mcp-integration missing AppContext fixture-copy setup; exact16compiledfileshashverified separately"
+      }
+    ],
+    "status": "PASS final applicable checks; preserved setup failures separately superseded",
+    "limitations": [
+      "Initial direct macOS historical MCP boundary apphost entered UE; actual immutable entry point runs passed via native exception-catching wrapper; own stuck child3142 termination not confirmed, unrelated processes untouched",
+      "One wrapper missing-resource setup failure corrected by16byte-identical original compiled fixture files; no test expectation/source changes",
+      "Final newPG nameguard changes are test-only; exact final whole-source check builds/runs them"
+    ]
+  },
+  "sourceEquivalence": {
+    "source": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
+    "immutableBase": "06903b77119863f5d9fb07f1d6962fd8c43840e4",
+    "verifiedOldPaths": 304,
+    "mismatches": [],
+    "sourceImpact": "Only new population module under src/server; old evaluation fixture/encoders/contracts remain unchanged",
+    "concurrentImportedDocsOnly": "da53804 vs cb38bb6 changes7 documentation paths; imported before finalchecks"
+  },
+  "reviewReceipts": [
+    "runtime-review/receipt-initial.json",
+    "runtime-review/author-test-review.json",
+    "runtime-review/author-guard-closure.json",
+    "runtime-review/consumer-review.json",
+    "design-review/receipt-final.json",
+    "design-review/shared-integration-review.json"
+  ],
+  "nativeEvidenceRoot": "work/m08-cycle06-evidence",
+  "changes": "New unactivated saved-source population/readiness library and explicit fictional consumers; no new package version, migration, config default, host/UI/API, provider or production activation",
+  "preservedCorrections": [
+    "Returned accepted OutputJson absent: initial14/9 inventory corrected to13/10 before engineering freeze",
+    "Exact native bundle/API/canonical byte shape frozen before code",
+    "Writer cancellation expectation corrected to native Scoring InvalidState without changing owning policy",
+    "Successful caller COMMIT added to prove no hidden pending DML",
+    "Test DB truncation guard corrected to20hex suffix/max63ASCII length with exact existing-name refusal",
+    "Whole-solution formatting miss corrected; earlier filtered verify superseded",
+    "Independent author receipt corrected to exact tested f431 blobs, later formatting snapshot separate",
+    "Mac direct historical boundary apphost entered UE; actual unchanged compiled entry point passed via native exception-catching wrapper",
+    "Wrapper fixture-copy setup failure corrected with16exact compiled fixture files; original attempt retained"
+  ],
+  "limits": [
+    "No complete source-backed SamplingInput/projection/cohort; ten required bindings explicitly missing",
+    "No source-backed reviewer qualification/context/grant/vote, human assignments or current evidence-access proof",
+    "No hash collision injection or exhaustive transient/internal forged-source/coherence mutation testing",
+    "Fictional-only; full M08/Phase1C/TP-HAS-012/019/UAT/G1-G9 remain open",
+    "Historical direct Mac apphost child3142 termination not confirmed; actual guarded entrypoint passed and unrelated processes preserved"
+  ]
+}

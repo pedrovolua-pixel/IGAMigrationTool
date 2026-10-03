@@ -1,6 +1,6 @@
 # Cycle06 population/provenance paired test plan
 
-Status: DRAFT preimplementation expectations; source inventory/nonauthor review/freeze pending
+Status: FROZEN — routine engineering review passed; exact reviewed bytes and approval are bound by [the freeze receipt](../../docs/development/evidence/m08-population-provenance-engineering-freeze-20261003.json).
 Date: 2026-10-03
 Contract: local-phase1b-population-provenance-contract.md; FR-HAS-11/13/50–53, bounded AC-HAS-12/19 and TP-HAS-012/019. Engineering checks do not pass live gates.
 
