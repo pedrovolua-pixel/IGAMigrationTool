@@ -200,6 +200,13 @@ export function object(value: unknown, keys: string[]): Record<string, unknown> 
 export function string(value: unknown, max = 2000): string {
   if (typeof value !== 'string' || value.length > max || !value.trim() || value.includes('\0'))
     return reject();
+  for (let i = 0; i < value.length; i++) {
+    const unit = value.charCodeAt(i);
+    if (unit >= 0xd800 && unit <= 0xdbff) {
+      const next = value.charCodeAt(++i);
+      if (!(next >= 0xdc00 && next <= 0xdfff)) return reject();
+    } else if (unit >= 0xdc00 && unit <= 0xdfff) return reject();
+  }
   return value;
 }
 export function reference(value: unknown): string {

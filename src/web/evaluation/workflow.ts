@@ -2,6 +2,7 @@ import {
   MAX_COMMAND_BYTES,
   MAX_RESPONSE_BYTES,
   array,
+  object,
   parseHistory,
   parseReceipt,
   parseVersion,
@@ -36,6 +37,7 @@ export interface Client {
   history(id: string, after: number, signal: AbortSignal): Promise<Wrapper<History>>;
   apply(body: string, csrf: string, signal: AbortSignal): Promise<Wrapper<Receipt>>;
 }
+export class ResponseAdmissionError extends Error {}
 export class FetchClient implements Client {
   private async request<T>(
     route: string,
@@ -67,10 +69,10 @@ export class FetchClient implements Client {
       ) ||
       !response.body
     )
-      throw new Error('Unavailable');
+      throw new ResponseAdmissionError('Unavailable');
     const length = response.headers.get('content-length');
     if (length !== null && (!/^\d+$/.test(length) || Number(length) > MAX_RESPONSE_BYTES))
-      throw new Error('Unavailable');
+      throw new ResponseAdmissionError('Unavailable');
     const reader = response.body.getReader();
     const decoder = new TextDecoder('utf-8', { fatal: true });
     let count = 0;
@@ -80,15 +82,28 @@ export class FetchClient implements Client {
         const part = await reader.read();
         if (part.done) break;
         count += part.value.byteLength;
-        if (count > MAX_RESPONSE_BYTES) throw new Error('Unavailable');
-        raw += decoder.decode(part.value, { stream: true });
+        if (count > MAX_RESPONSE_BYTES) throw new ResponseAdmissionError('Unavailable');
+        try {
+          raw += decoder.decode(part.value, { stream: true });
+        } catch {
+          throw new ResponseAdmissionError('Unavailable');
+        }
       }
-      raw += decoder.decode();
-    } catch {
+      try {
+        raw += decoder.decode();
+      } catch {
+        throw new ResponseAdmissionError('Unavailable');
+      }
+    } catch (error) {
       await reader.cancel().catch(() => undefined);
-      throw new Error('Unavailable');
+      throw error;
     }
-    const wrapper = parseWrapper(strictJson(raw), parse, operation);
+    let wrapper: Wrapper<T>;
+    try {
+      wrapper = parseWrapper(strictJson(raw), parse, operation);
+    } catch {
+      throw new ResponseAdmissionError('Unavailable');
+    }
     const status: Partial<Record<Issue, number>> = {
       InvalidInput: 400,
       Denied: 403,
@@ -102,7 +117,7 @@ export class FetchClient implements Client {
         ? response.status !== 200
         : response.status !== (status[wrapper.issue] ?? 503)
     )
-      throw new Error('Unavailable');
+      throw new ResponseAdmissionError('Unavailable');
     return wrapper;
   }
   workspace(signal: AbortSignal) {
@@ -150,6 +165,13 @@ export function prepare(
   eventId: string,
   epoch: number,
 ): Prepared {
+  object(d, ['kind', 'outcome', 'origin', 'reason', 'evidenceReferenceIds', 'correction']);
+  if (
+    !['Review', 'PresentationCorrection'].includes(d.kind) ||
+    !['Confirmed', 'Rejected', 'Indeterminate', 'Corrected'].includes(d.outcome) ||
+    !['Confirmed', 'Rejected'].includes(d.origin)
+  )
+    throw new Error('Check the selected review action.');
   const isReview = d.kind === 'Review';
   if (isReview ? !m.canReview : !m.canCorrectPresentation)
     throw new Error('Review unavailable under the current assignment.');
@@ -340,7 +362,7 @@ export class Workflow {
         return;
       }
       const fresh = current.payload;
-      if (fresh.sourceDigest !== w.sourceDigest) throw new Error('Unavailable');
+      if (fresh.sourceDigest !== w.sourceDigest) throw new ResponseAdmissionError('Unavailable');
       const response = await this.client.version(n, this.readAbort.signal);
       if (epoch !== this.epoch) return;
       if (response.issue !== null || !response.payload) {
@@ -442,9 +464,13 @@ export class Workflow {
           (r.aggregateRevision !== p.command.expectedAggregateRevision + 1 ||
             r.memberRevision !== p.command.expectedMemberRevision + 1))
       )
-        throw new Error('Unavailable');
+        throw new ResponseAdmissionError('Unavailable');
       await this.refreshAfterRecord(r);
-    } catch {
+    } catch (error) {
+      if (epoch === this.epoch && error instanceof ResponseAdmissionError) {
+        this.fail();
+        return;
+      }
       if (epoch === this.epoch)
         this.set({
           ...this.state,
@@ -456,7 +482,19 @@ export class Workflow {
   }
   private async refreshAfterRecord(receipt: Receipt) {
     this.set({ ...this.state, mode: 'ready', prepared: null });
+    const sourceDigest = this.state.workspace?.sourceDigest;
     await this.refresh();
+    if (
+      this.state.mode === 'ready' &&
+      (this.state.workspace?.sourceDigest !== sourceDigest ||
+        this.state.workspace?.versions.find((v) => v.version === receipt.version)?.contentDigest !==
+          receipt.snapshotDigest ||
+        (this.state.workspace?.members.find((m) => m.original.memberId === receipt.memberId)
+          ?.revision ?? -1) < receipt.memberRevision)
+    ) {
+      this.fail();
+      return;
+    }
     if (this.state.mode === 'ready')
       this.set({
         ...this.state,
@@ -494,7 +532,7 @@ export class Workflow {
         current.payload.aggregateRevision !== w.aggregateRevision ||
         current.payload.registryVersionId !== w.registryVersionId
       )
-        throw new Error('Unavailable');
+        throw new ResponseAdmissionError('Unavailable');
       const result = await this.client.history(memberId, after, this.historyAbort.signal);
       if (epoch !== this.epoch || hEpoch !== this.historyEpoch) return;
       if (result.issue !== null || !result.payload) {
@@ -507,9 +545,21 @@ export class Workflow {
         h.aggregateRevision !== w.aggregateRevision ||
         h.registryVersionId !== w.registryVersionId ||
         h.memberRevision !== w.members.find((m) => m.original.memberId === memberId)?.revision ||
-        h.events.some((e) => e.sequence <= after)
+        h.events.some(
+          (e) =>
+            e.sequence <= after ||
+            e.actorId !== w.actorId ||
+            e.assignmentId !==
+              w.members.find((m) => m.original.memberId === memberId)?.assignmentId ||
+            e.evidenceReferenceIds.some(
+              (ref) =>
+                !w.members
+                  .find((m) => m.original.memberId === memberId)
+                  ?.original.evidenceReferenceIds.includes(ref),
+            ),
+        )
       )
-        throw new Error('Unavailable');
+        throw new ResponseAdmissionError('Unavailable');
       this.set({
         ...this.state,
         mode: 'ready',
