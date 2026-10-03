@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "status": "PASS all configured jobs and steps",
+  "associatedImplementationSource": "16fac348b753d43ded4b1365619479811aace891",
+  "bootstrapRun": 37145211463,
+  "bootstrapConclusion": "success",
+  "jobs": [
+    {
+      "id": 111267613736,
+      "name": "dotnet-bootstrap",
+      "conclusion": "success"
+    },
+    {
+      "id": 111267613943,
+      "name": "collector-windows (windows-2022)",
+      "conclusion": "success"
+    },
+    {
+      "id": 111267613955,
+      "name": "collector-windows (windows-2025)",
+      "conclusion": "success"
+    }
+  ],
+  "azurePackageRun": 37145211465,
+  "azurePackageConclusion": "success",
+  "newWorkflowSteps": "Linux guarded store/bootstrap/legacy/tamper/migration, isolated UI build/21cases and actual HTTP/browser; Windows2022/2025 unit74. All original wider Linux/browser/recovery/collector/Bicep steps also passed.",
+  "native": "work/m08-cycle04-evidence/hosted-final-native.json",
+  "nativeSha256": "8d763d41c699c0c588ef7c1ca0dbd5cffd46289daa94acd94f39c8da1ab2b827",
+  "laterHeadAtObservation": "1840f3948b6f841a9cb806fc79d47e5b5caa3993",
+  "onlyDocumentationChangedAfterImplementation": [
+    "docs/development/evidence/m08-evaluation-workflow-cycle04-20261003.json",
+    "docs/development/evidence/m08-evaluation-workflow-cycle04-closure-20261003.json",
+    "docs/development/evidence/phase1d-preparation-20261003.json",
+    "docs/development/evidence/phase1d-preparation-site-20261003.json",
+    "plans/active/local-pilot-m08-evaluation-workflow-cycle04.md",
+    "plans/active/local-pilot-phase1d-preparation.md",
+    "specs/003-health-assessment/evidence-index.md",
+    "specs/003-health-assessment/implementation-plan.md",
+    "specs/003-health-assessment/local-evaluation-workflow-verification.md",
+    "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+    "specs/003-health-assessment/local-phase1d-decision-packet.md",
+    "specs/003-health-assessment/local-phase1d-test-plan.md",
+    "specs/003-health-assessment/status.md"
+  ],
+  "limits": "GitHub PR-associated immutable workflow evidence, no live/provider/customer/manual/native-select/capacity-stress or full milestone acceptance. Original pending snapshots remain in prior commits and preserved artifacts."
+}

@@ -55,3 +55,7 @@ Full Milestone08/Phase1C/TP-HAS-012/019/UAT/G1–G9 remain NOT VERIFIED. Agent r
 ## Publication and cleanup closure
 
 [The final closure receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-closure-20261003.json) confirms owner-private version100/source0ccfaa435 and succeeded deployment reflecting canonical16fac34.1440/390/320 link/reflow/task QA passed; all12human cards and16unowned panels were byte-preserved. Source/runtime/native original/final failures were copied and rehashed before four own worktrees were removed; branches and deliberately changed evidence databases remain. No current-cycle hosted/manual/live/full gate completion is claimed.
+
+## Later hosted execution observation
+
+[Hosted execution evidence](../../docs/development/evidence/m08-evaluation-workflow-cycle04-hosted-20261003.json) confirms complete bootstrap37145211463/Linux/Windows2022/2025 and package37145211465 success on associated implementation16fac34. All new workflow and historical configured steps passed. Later committed changes through72181e4 are documentation only. This closes hosted verification for the bounded code; original pending snapshots and all live/manual/full acceptance limits remain preserved.

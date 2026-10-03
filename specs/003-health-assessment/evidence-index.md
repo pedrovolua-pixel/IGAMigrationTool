@@ -226,3 +226,6 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 ## Phase 1D preparation evidence — 2026-10-03
 
 [Preparation evidence](../../docs/development/evidence/phase1d-preparation-20261003.json) binds the proposal/test/decision documents, independent documentary corrections and executed scoped checks. [Private publication receipt](../../docs/development/evidence/phase1d-preparation-site-20261003.json) records exact pushed Site source, native deployment/access and card/link/reflow preservation checks separately. This is document-preparation evidence only; P1D-D01–03 approval is PENDING, no runtime suite ran, and full Milestone11/Phase1D/UAT/G1–G9 remain NOT VERIFIED.
+
+
+- [Later complete Cycle04 hosted receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-hosted-20261003.json): bootstrap37145211463/Linux/Windows2022/2025 and package37145211465 success on associated16fac34; all new workflow and historical configured steps passed. Original pending snapshots and manual/live/full limits remain preserved.

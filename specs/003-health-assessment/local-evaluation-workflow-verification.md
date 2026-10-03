@@ -14,3 +14,5 @@ Use the [local operations guide](../../docs/development/local-evaluation-workflo
 Next dependency: define and approve a concrete actual Phase1B source adapter and live reviewer/evidence/authority contract before implementing those boundaries. The separate [approved evaluation procedure](evaluation-plan.md) remains open. Residual collaboration remains in Phase1C under P1B-SCOPE-01.
 
 [Final publication/preservation receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-closure-20261003.json) confirms private version100, preserved tasks/panels, exact archive/source binding and removal of the four own finished worktrees. Full milestone/live/manual/hosted limits above remain unchanged.
+
+Later observation: [complete hosted verification](../../docs/development/evidence/m08-evaluation-workflow-cycle04-hosted-20261003.json) passed all configured Linux/Windows2022/2025/package steps on associated implementation16fac34, including the new workflow and original browser/infrastructure regressions. Prior pending documentation describes its original snapshot. Real/manual/full acceptance remains open.
