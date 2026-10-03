@@ -105,3 +105,9 @@ Matching owner-private publication succeeded; the final docs-only COMPLETE snaps
 ## Cycle13 owner contract decision
 
 [Approval record](local-artifact-review-approval.md): explicit repository-owner “Approved” response to named AR13-01–05 local synthetic proposal at `d897b1d`, exact original SHA256 `c243feb9aa705bdddd69a9c8ee476b25b6dc647bbbea938298a0f02ee1af90f6`. This is contract authority, not executed runtime or signed gate evidence. Preparation results remain historical; implementation evidence is recorded separately after actual runs. All full Milestone7/local completion/UAT/G1–G9 remain NOT VERIFIED.
+
+## Cycle13 bounded artifact-review execution
+
+| Evidence | Executed result | Limit |
+| --- | --- | --- |
+| [Exact source/check/archive/review metadata](../../docs/development/evidence/local-pilot-cycle13-developer-checks.json), [cycle record](../../plans/active/local-pilot-artifact-review-cycle-13.md), [native independent evidence](../../tests/integration/LocalArtifactReview.Tests/execution.json), [actual browser](../../tests/e2e/artifact-review/execution.json) | Local source-bound store/UI/host review, withdrawal, history/replay, stale-source/concurrency/recovery/authorization and historical regressions passed; non-author reviews closed. New10564 browser checks and3axe records0violations/0incomplete. Hosted code804d71a results recorded separately. | Bounded fictional developer subset only. No full Milestone7/TP018/local build/UAT/G1–G9 acceptance. Original failures/provenance gaps retained; manual/defaultMac/shared-cluster/deployed-sandbox cases remain NOT VERIFIED. |

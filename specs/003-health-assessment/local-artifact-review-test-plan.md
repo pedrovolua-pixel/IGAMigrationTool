@@ -1,6 +1,6 @@
 # Test plan: bounded local consultant artifact review
 
-Status: Approved for bounded local execution through AR13-01–05 owner decision; no runtime evidence yet
+Status: Executed bounded synthetic subset — exact results/limits in Cycle13 developer evidence
 Owner: Quality owner / independent verifier
 Last updated: 2026-10-02
 Contract: [exact local proposal](local-artifact-review-contract-proposal.md)
@@ -41,3 +41,7 @@ The preparation-only Cycle13 change runs documentary link/decision/traceability/
 ## Evidence and completion
 
 Record each ID PASS/FAIL/NOT VERIFIED with exact executed commands, source digest, native environment and output bindings. Preserve failures/corrections, original author/independent/coordinator outputs and any unverified environment. An engineering reviewer cannot approve AR13 choices, Milestone7, UAT readiness or G1–G9. Publish status/dependency changes to the existing owner-private board in the same work cycle.
+
+## Executed result
+
+All twelve groups have source-bound bounded execution evidence in [the developer record](../../docs/development/evidence/local-pilot-cycle13-developer-checks.json) and [independent native matrix](../../tests/integration/LocalArtifactReview.Tests/execution.json). PASS_BOUNDED_EXECUTED_SUBSET does not accept the full product test plan. Supported manual accessibility, deployed isolation, default Mac startup and full milestones/gates remain NOT VERIFIED. Actual controlled rollback/cancellation, reconnect and owned stop/restart were executed; no hard-kill mid-commit claim. Original failed harness runs and unavailable earlier provenance remain retained/disclosed.

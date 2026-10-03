@@ -1,0 +1,171 @@
+{
+  "schema": "v13-final-non-author-review-by-a13-v1",
+  "reviewedSeal": "9712d8204b1427c267538619422bc78b0ba01f00",
+  "repository": "/private/tmp/iga-cycle13-v13",
+  "remainingScopedFindings": [],
+  "findingClosure": {
+    "fullEnvironmentInheritance": "CLOSED closed entry allowlist before dynamic fixture/Playwright load; no marker bypass",
+    "duplicateConnectionKeys": "CLOSED exact four-key ownership parser rejects duplicate/extra keys",
+    "heldOperationCleanup": "CLOSED immediate outer release/cancel finally around held operations",
+    "schemaChildKillBypassesFinally": "CLOSED independently guarded outer recovery process and exact O verification; native7+1 success verified; forced helper-kill path itself not executed by reviewer",
+    "provenanceVersionLabelsAndPendingReadme": "CLOSED final source and documentation correctly qualify superseded states"
+  },
+  "staticReview": {
+    "independentExpectedRecipes": "Python/C#/JS own canonical fixed registry/identity/source/vector/state/command recipes; no author canonical helper for expected values",
+    "acceptedInputs": "Actual GuidanceBuilder to FixBuilder to SourceBuilder; reflection rejection only",
+    "currentSourceFences": "Captured saved run/current finding review exactly once under run fence; all3 real writers checked at advisory barrier",
+    "replayAndAntiRollback": "Original metadata-only receipt actor/source binding, no restoration of old overlay; cross-artifact high-water checks and equal-vector/different-source denial",
+    "databasePreservation": "Exact owned loopback database, no cluster/role/foreign DB changes; append-only probe/trigger finally and separate parent recovery",
+    "browserIsolation": "Intercept before navigation; allowlisted assets/known routes, abort unexpected/external requests; nested owned child/browser cleanup",
+    "finalDelta": "ae4e422 adds real Enter action, native telemetry/observed capture and screenshot caret option; no weakened existing assertions"
+  },
+  "reviewerExecutedChecks": {
+    "frozenPythonOracle": {
+      "status": "PASS",
+      "files": 33
+    },
+    "manualReadOnlyAllManifestHashes": {
+      "status": "PASS",
+      "bindings": 1533,
+      "copiedFixtureEqualities": 45
+    },
+    "sealedGitOwnedBlobs": {
+      "status": "PASS",
+      "count": 79
+    },
+    "runtimeArchiveCopies": {
+      "status": "PASS",
+      "closures": [
+        "integration-release",
+        "host-release",
+        "frontend-dist"
+      ]
+    },
+    "consumed093SourceArchiveEqualsCurrentCompileInputs": {
+      "status": "PASS",
+      "files": 101
+    },
+    "browserExecutedSourceHash": {
+      "status": "PASS",
+      "sha256": "ca0e2e1cabf845bad09180ea33388655bb6f2cedef635740b086c2f274159644"
+    },
+    "nativeOutputCountsAndBuildSummary": {
+      "status": "PASS"
+    },
+    "telemetryAbsenceReadOnly": {
+      "status": "PASS",
+      "reasonValues": 9,
+      "artifactValues": 30
+    },
+    "viewportImagesViewed": [
+      "desktop1440",
+      "mobile390",
+      "narrow320"
+    ]
+  },
+  "authorExecutionEvidenceVerifiedNotRerun": {
+    "portable": 218,
+    "combinedOwnedPostgresIncludesPortable": 911,
+    "actualBrowser": 10564,
+    "hostSchemaDenial": 7,
+    "independentOuterRestoration": 1,
+    "axeRecords": 3,
+    "axeViolations": 0,
+    "axeIncomplete": 0
+  },
+  "limitations": [
+    "Reviewer did not run PG/browser/host/build/network/audit and did not mutate original author artifacts.",
+    "Recovery kill-before-finally path inspected; actual native helper7/recovery1 succeeds, no reviewer forced kill.",
+    "No hard-kill mid-commit executed; controlled cancellation/failure/reconnect/owned stop-restart evidence is explicit subset.",
+    "Viewport visual review covers recorded visible source/warning portions, not full screen-reader or every historical expanded artifact.",
+    "Default macOS startup NOT VERIFIED with disclosed temporary reloadConfigOnChange=false; Windows/manual/deployed sandbox/production identity/UAT/Milestone7/G1\u2013G9 NOT VERIFIED.",
+    "No human/product/security approval granted by review."
+  ],
+  "evidenceBindings": [
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/artifact-bindings.json",
+      "bytes": 482946,
+      "sha256": "8361fee77d8a6b620ca1acd1647d17aec3af7af9416c917cbd31a15a03f44b21"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/execution.json",
+      "bytes": 9983,
+      "sha256": "5a169eeb81194512710c6d9a884611603c1cbb07e00cabb0d169fecf82edcb56"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/verify.mjs",
+      "bytes": 72927,
+      "sha256": "ca0e2e1cabf845bad09180ea33388655bb6f2cedef635740b086c2f274159644"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/execution.json",
+      "bytes": 3479,
+      "sha256": "58f8afe0a5e5fc48edbfb2592657abf64fa396d7291f1252fca3dda2d6967a55"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/telemetry.json",
+      "bytes": 365,
+      "sha256": "d96b34474dd4c53326c6b7b840059ddd6bf72d3795f824abb1fc4a0785968b6a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/.frozen/consumed-source-checkpoint09330b5.tar",
+      "bytes": 1157120,
+      "sha256": "3c07f7856992e42a11867fef945bb50eee823232eb4261c54deec3bc37d9bf03"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/.native/portable-seal.log",
+      "bytes": 285,
+      "sha256": "0bb290a8aae25f8acad5f62d9a318762697c0a61ed49ccf7dd808ed56ffc2967"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/.native/postgres-seal.log",
+      "bytes": 356,
+      "sha256": "21e864a7c9a6d97236a24eb6c4074b8bdb5c418fe5564d2edd74c073cc805b4e"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/browser-seal.log",
+      "bytes": 1806,
+      "sha256": "cd15e6ec52aefbfb1d51af8e120e44cde1f5ae7677567fffd4afefc8d20096e1"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/.host/schema-denial.log",
+      "bytes": 149,
+      "sha256": "271304221dd22091d0b8c306a7f49e55f63e5c076459eb4d1e36de79f9369209"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/integration/LocalArtifactReview.Tests/.native/build-seal.log",
+      "bytes": 2261,
+      "sha256": "cb7adb3f3ae27f0143ddb49e115d2aafa6efb253c1c862643e67c5c425060814"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop.png",
+      "bytes": 5730445,
+      "sha256": "97e95cf575c5003ea09aca4ec50d6fa618be86fcbb4266eb10b6f77ee5a9d9f4"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop-viewport.png",
+      "bytes": 148012,
+      "sha256": "4d4c2b142c64725254e28e79c6a7b8702d59dc9c93c6320d209f990ff49b3c3f"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile.png",
+      "bytes": 5662372,
+      "sha256": "1cd209dd3c35ec490cff346b05bd2f98347b50ba63c56c8cabe8998d8924bc4a"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile-viewport.png",
+      "bytes": 72827,
+      "sha256": "a22ea39bfc195d304be1b20eb4b9b3489d7b33bca34a78f4bb0a51844cfaea21"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow.png",
+      "bytes": 5755591,
+      "sha256": "d64ba578fd2014d18445d616ceb0e6d5b7c696997830db688a59bfcdb841c832"
+    },
+    {
+      "path": "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow-viewport.png",
+      "bytes": 60698,
+      "sha256": "eff431ea1381af5b9abc72d8eb19911aef41e389a5514aaa24f3cd4f696ce2a6"
+    }
+  ]
+}
