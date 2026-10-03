@@ -24,20 +24,22 @@ public sealed class Phase1BEvaluationSourceAdapter
     public async Task<Phase1BEvaluationSourceResult> CaptureAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
         Guid runId, AiAuthority aiAuthority, OutcomeAuthority outcomeAuthority, CancellationToken cancellationToken = default)
     {
-        if (connection is null || transaction is null || runId == Guid.Empty || connection.State != ConnectionState.Open || transaction.Connection != connection)
+        if (runId == Guid.Empty || !ActiveTransaction(connection, transaction))
             return Deny(Phase1BEvaluationSourceIssue.InvalidInput);
         var supplied = new NpgsqlConnectionStringBuilder(connection.ConnectionString);
         if (supplied.Host is not ("127.0.0.1" or "localhost") || supplied.Port != 55433 || supplied.Username != "iga_synthetic" ||
             supplied.Database?.StartsWith("iga_synthetic_phase1b_", StringComparison.Ordinal) != true)
             return Deny(Phase1BEvaluationSourceIssue.InvalidInput);
-        if (aiAuthority is null || outcomeAuthority is null || !aiAuthority.Roles.SequenceEqual([AiRole.Consultant]) ||
+        if (aiAuthority is null || outcomeAuthority is null || aiAuthority.Roles.IsDefaultOrEmpty || outcomeAuthority.Roles.IsDefaultOrEmpty ||
+            !aiAuthority.Roles.SequenceEqual([AiRole.Consultant]) ||
             !outcomeAuthority.Roles.SequenceEqual([OutcomeRole.Consultant]) || aiAuthority.ActorId != outcomeAuthority.ActorId ||
             AiExecutionPolicy.Authorize(aiAuthority, AiAction.Read) is not null ||
             OutcomePriorityPolicy.Authorize(outcomeAuthority, OutcomeScope.Fixed, OutcomeAction.ReadOutcome) is not null)
             return Deny(Phase1BEvaluationSourceIssue.Denied);
         try
         {
-            await SyntheticOutcomePriorityStore.AcquireRegistryFenceAsync(connection, transaction, OutcomeScope.Fixed, cancellationToken);
+            try { await SyntheticOutcomePriorityStore.AcquireRegistryFenceAsync(connection, transaction, OutcomeScope.Fixed, cancellationToken); }
+            catch (ArgumentException) { return Deny(Phase1BEvaluationSourceIssue.InvalidInput); }
             await SyntheticRunSourceFence.AcquireAsync(connection, transaction, AiScope.Fixed.CustomerId, AiScope.Fixed.ProjectId,
                 AiScope.Fixed.EnvironmentId, runId, cancellationToken);
             var readRun = await runs.ReadInTransactionAsync(connection, transaction, DemoFixtureCatalog.Scope, runId, cancellationToken);
@@ -58,6 +60,17 @@ public sealed class Phase1BEvaluationSourceAdapter
         }
         catch (PostgresException exception) when (exception.SqlState is PostgresErrorCodes.UndefinedTable or PostgresErrorCodes.InvalidSchemaName)
         { return Deny(Phase1BEvaluationSourceIssue.NotInitialized); }
+    }
+    private static bool ActiveTransaction(NpgsqlConnection? connection, NpgsqlTransaction? transaction)
+    {
+        try
+        {
+            if (connection is null || transaction is null || connection.State != ConnectionState.Open || transaction.Connection != connection) return false;
+            // Assignment validates Npgsql's completed/disposed transaction state without executing SQL.
+            using var admission = new NpgsqlCommand { Connection = connection, Transaction = transaction };
+            return true;
+        }
+        catch (Exception exception) when (exception is InvalidOperationException or ArgumentException) { return false; }
     }
     internal static Phase1BEvaluationSourceResult Build(SyntheticRunSnapshot run, AiExecutionSnapshot ai,
         LockedOutcomeSet locked, SyntheticAnalysisResult analysis)
