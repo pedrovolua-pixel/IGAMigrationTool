@@ -110,4 +110,8 @@
   <Project Path="tests/unit/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
   <Project Path="tests/integration/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
   <Project Path="tests/integration/SyntheticEvaluationSourceIndependent.Tests/SyntheticEvaluationSourceIndependent.Tests.csproj" />
+  <Project Path="src/server/modules/SyntheticMcp/SyntheticMcp.csproj" />
+  <Project Path="tests/unit/SyntheticMcpPublication.Tests/SyntheticMcpPublication.Tests.csproj" />
+  <Project Path="tests/unit/SyntheticMcpBoundary.Tests/SyntheticMcpBoundary.Tests.csproj" />
+  <Project Path="tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj" />
 </Solution>

@@ -232,3 +232,8 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 
 
 - [Cycle04 hosted private publication receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-hosted-site-20261003.json): version103/source0728d979, succeeded deployment, later-source reconciliation, thirteen current human cards/eighteen unowned panels preserved, exact archive and three viewport QA passed. Native hosted logs/observations and original failures remain under work/m08-cycle04-evidence.
+
+
+## Phase 1D local approval — 2026-10-03
+
+[Exact receipt](local-phase1d-approval.md) records the human P1D-D01–03 local-scope approval against unchanged proposal/test/decision bytes. Internal document/signature review is engineering evidence only. [Implementation plan](../../plans/active/local-pilot-phase1d-implementation.md) maintains execution; future source-bound runtime/private-publication receipts must distinguish the harness from full Milestone11/Phase1D/live gate proof.

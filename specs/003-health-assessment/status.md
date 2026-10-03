@@ -357,3 +357,8 @@ The owner authorized [bounded Phase1D preparation](../../plans/active/local-pilo
 
 
 Cycle04 hosted observation publication is confirmed by [private version103/source0728d979](../../docs/development/evidence/m08-evaluation-workflow-cycle04-hosted-site-20261003.json). The later Phase1D snapshot was reconciled without overwriting its thirteen human tasks or eighteen unowned panels.1440/390/320 task/link/reflow and exact archive checks passed. All configured implementation checks and the later documentation-only rerun passed; live/manual/full milestone limits remain unchanged.
+
+
+## Phase 1D exact local approval and implementation — 2026-10-03
+
+The owner responded “Approved” to P1D-D01–03. [The attributable receipt](local-phase1d-approval.md) pins unchanged proposal/test/decision bytes and supersedes their historical pending labels for local implementation. [The active cycle](../../plans/active/local-pilot-phase1d-implementation.md) freezes a framework-only internal contract and shared signatures after non-author review; isolated A/B writers and independent V fixtures implement the bounded in-process synthetic harness. No public transport, actual publication adapter, live grant/registration or gate activation is authorized. Full Milestone11/Phase1D/UAT/G1–G9 remain NOT VERIFIED. Private board approval-task reconciliation is due in this work cycle; publication is confirmed only by its separate native receipt.

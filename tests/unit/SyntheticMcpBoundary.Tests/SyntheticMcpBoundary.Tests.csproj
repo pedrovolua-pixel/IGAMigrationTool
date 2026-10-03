@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticMcp/SyntheticMcp.csproj" /></ItemGroup>
+  <ItemGroup><None Include="fixtures/**" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>
