@@ -1,6 +1,6 @@
 # Synthetic Phase 1D local harness
 
-Status: Implementation in progress — executed closure evidence will supersede this label
+Status: LOCAL ENGINEERING VERIFIED — bounded synthetic scope
 Authority: [exact local approval](../../specs/003-health-assessment/local-phase1d-approval.md)
 Contract: [frozen internal contract](../../specs/003-health-assessment/local-phase1d-implementation-contract.md)
 Test matrix: [P1D-T01–12](../../specs/003-health-assessment/local-phase1d-test-plan.md)
@@ -22,7 +22,7 @@ dotnet run --project tests/integration/SyntheticMcp.Tests -c Release --no-build
 dotnet run --project tests/architecture/BoundaryChecks -c Release --no-build
 ```
 
-No successful check is claimed by these instructions. The cycle's source-bound verification receipt records commands actually run, original failures, review fixes and unexecuted follow-on cases. A matching fictional golden proves fixture compatibility, not a persisted ReportVersion, live policy or protocol implementation.
+The [source-bound verification](../../specs/003-health-assessment/local-phase1d-implementation-verification.md) records commands actually run, original failures, review fixes and unexecuted follow-on cases. A matching fictional golden proves fixture compatibility, not a persisted ReportVersion, live policy or protocol implementation.
 
 ## Local state and failure handling
 
