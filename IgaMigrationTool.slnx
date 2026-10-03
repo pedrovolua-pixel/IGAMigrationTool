@@ -10,6 +10,10 @@
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/SyntheticOutcomePriority/SyntheticOutcomePriority.csproj" />
+    <Project Path="src/server/modules/SyntheticAiExecution/SyntheticAiExecution.csproj" />
+    <Project Path="src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj" />
+    <Project Path="src/server/modules/SyntheticTaskCsvIntegration/SyntheticTaskCsvIntegration.csproj" />
     <Project Path="src/server/modules/SyntheticEvaluation/SyntheticEvaluation.csproj" />
     <Project Path="src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj" />
     <Project Path="src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj" />
@@ -37,6 +41,9 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
+    <Project Path="tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
+    <Project Path="tests/integration/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj" />
     <Project Path="tests/integration/LocalArtifactReview.Tests/LocalArtifactReview.Tests.csproj" />
     <Project Path="tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
     <Project Path="tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
@@ -51,6 +58,9 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
+    <Project Path="tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
+    <Project Path="tests/unit/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj" />
     <Project Path="tests/unit/SyntheticEvaluation.Tests/SyntheticEvaluation.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj" />
     <Project Path="tests/unit/ArtifactReviewComponent.Tests/ArtifactReviewComponent.Tests.csproj" />
@@ -84,4 +94,10 @@
   <Project Path="tests/unit/SyntheticEvaluationRegression.Tests/SyntheticEvaluationRegression.Tests.csproj" />
   <Project Path="tests/unit/SyntheticEvaluationReviewer.Tests/SyntheticEvaluationReviewer.Tests.csproj" />
   <Project Path="tests/integration/SyntheticEvaluationPolicy.Tests/SyntheticEvaluationPolicy.Tests.csproj" />
+  <Folder Name="/src/server/workers/">
+    <Project Path="src/server/workers/SyntheticCsvRenderer/SyntheticCsvRenderer.csproj" />
+  </Folder>
+  <Folder Name="/tests/integration/SyntheticTaskCsv.Tests/">
+    <Project Path="tests/integration/SyntheticTaskCsv.Tests/Probe/Probe.csproj" />
+  </Folder>
 </Solution>

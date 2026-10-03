@@ -31,7 +31,10 @@ public sealed record SyntheticRunInputVersions(
     [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
     string? FixReviewContractDigest = null,
     [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
-    string? PlanningTaskContractDigest = null);
+    string? PlanningTaskContractDigest = null,
+    [property: System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull)]
+    [property: System.Text.Json.Serialization.JsonPropertyName("phase1bLocks")]
+    SyntheticPhase1BInputLocks? Phase1BLocks = null);
 
 public sealed record SyntheticStartRequest(
     SyntheticAuthorizedScope Scope, string IdempotencyKey, string BaselineCatalogId, string ProfileCatalogId,
@@ -76,3 +79,8 @@ public interface ISyntheticRunCommitObserver
 {
     Task BeforeCommitAsync(string operation, Guid runId, CancellationToken cancellationToken);
 }
+
+/// <summary>Closed additive locks for the single opt-in approved fictional Phase1B profile. Omitted from all historical envelopes.</summary>
+public sealed record SyntheticPhase1BInputLocks(string SchemaVersion, string OutcomeContractDigest,
+    string PriorityPolicyVersion, string AiContractDigest, string CsvContractDigest, string OutcomeLockDigest,
+    string AiFixtureDigest, string AiMappingDigest, string AiPacketDigest, string FixtureEpoch);

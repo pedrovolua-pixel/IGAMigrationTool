@@ -12,14 +12,15 @@ internal static class DemoAnalysisProjection
 {
     internal static object Detail(SyntheticRunSnapshot run, DemoReviewContext? review = null) => Capture(run, review).Analysis;
 
-    internal static DemoAnalysisCapture Capture(SyntheticRunSnapshot run, DemoReviewContext? review = null)
+    internal static DemoAnalysisCapture Capture(SyntheticRunSnapshot run, DemoReviewContext? review = null, SyntheticDemoAnalysisResponse? compound = null)
     {
-        var reviewProfile = DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId);
+        var phase1b = DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId);
+        var reviewProfile = DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId) || phase1b;
         var states = review?.Snapshot?.Findings.ToDictionary(finding => finding.Seed.FindingId,
             finding => Enum.Parse<ScoringFindingState>(finding.Current.State.ToString()), StringComparer.Ordinal);
-        var response = reviewProfile && review?.Snapshot is null
+        var response = compound ?? (reviewProfile && review?.Snapshot is null
             ? new SyntheticDemoAnalysisResponse(review?.ReasonCode ?? "review_input_denied", null)
-            : SyntheticDemoAnalysisAdapter.Project(run, states, review?.Snapshot?.SnapshotDigest);
+            : SyntheticDemoAnalysisAdapter.Project(run, states, review?.Snapshot?.SnapshotDigest));
         var data = response.Projection;
         var analysis = data?.Analysis;
         var scoring = data?.Scoring;
@@ -43,7 +44,7 @@ internal static class DemoAnalysisProjection
                 state = current?.State.ToString() ?? first.InitialDisposition.ToString(),
                 method = first.DetectionMethod,
                 reviewRequired = (current?.State.ToString() ?? first.InitialDisposition.ToString()) == "Proposed" &&
-                    first.Severity is DeterministicAnalysis.SyntheticSeverity.Critical or DeterministicAnalysis.SyntheticSeverity.High,
+                    (first.DetectionMethod == "AI" || first.Severity is DeterministicAnalysis.SyntheticSeverity.Critical or DeterministicAnalysis.SyntheticSeverity.High),
                 ruleId = first.Provenance.RuleId,
                 ruleVersion = first.Provenance.RuleVersion,
                 baselineId = first.Provenance.BaselineId,
@@ -88,7 +89,7 @@ internal static class DemoAnalysisProjection
             fixtureDigest = scoring is null ? null : run.FrozenInputs.AnalysisFixtureDigest,
             contentDigest = scoring?.ContentDigest,
             reviewSnapshotDigest = scoring is null ? null : review?.Snapshot?.SnapshotDigest,
-            review = reviewProfile ? DemoReviewService.Detail(run, review ?? new("review_input_denied", null)) : null,
+            review = reviewProfile ? DemoReviewService.Detail(run, review ?? new("review_input_denied", null), analysis) : null,
             maturity = maturityResponse is null ? null : DemoMaturityProjection.Detail(maturityResponse),
             provisional = scoring is null ? null : Measure(scoring.Provisional.Overall),
             publishableCurrent = scoring is null ? null : Measure(scoring.PublishableCurrent.Overall),
@@ -117,13 +118,13 @@ internal static class DemoAnalysisProjection
         };
         var node = JsonSerializer.SerializeToNode(detail, DemoReportDraftProjection.JsonOptions)!.AsObject();
         var sourceContent = JsonSerializer.SerializeToElement(detail, DemoReportDraftProjection.JsonOptions);
-        node["reportDraft"] = JsonSerializer.SerializeToNode(reviewProfile
+        node["reportDraft"] = JsonSerializer.SerializeToNode(reviewProfile && !phase1b
             ? DemoReportDraftProjection.Detail(run, response, review, maturityResponse, sourceContent) : null,
             DemoReportDraftProjection.JsonOptions);
         var guidance = reviewProfile ? DemoRecommendationGuidanceProjection.Detail(run, response, review) : null;
         node["recommendationGuidance"] = JsonSerializer.SerializeToNode(guidance,
             DemoReportDraftProjection.JsonOptions);
-        var fixPackages = DemoFixPackageProjection.Detail(run, guidance, review);
+        var fixPackages = DemoFixPackageProjection.Detail(run, guidance, review, analysis);
         node["fixPackages"] = JsonSerializer.SerializeToNode(fixPackages,
             DemoReportDraftProjection.JsonOptions);
         node["aiPreview"] = JsonSerializer.SerializeToNode(DemoAiPreviewProjection.Detail(run),

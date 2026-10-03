@@ -17,10 +17,14 @@ internal static class DemoRecommendationGuidanceProjection
 {
     internal static DemoRecommendationGuidanceDetail Detail(SyntheticRunSnapshot run, SyntheticDemoAnalysisResponse response, DemoReviewContext? review)
     {
-        var analysis = response.Projection?.Analysis;
+        if (!response.IsAvailable) return Deny("guidance_source_unavailable");
+        return FromVerifiedAnalysis(run, response.Projection!.Analysis, review);
+    }
+    internal static DemoRecommendationGuidanceDetail FromVerifiedAnalysis(SyntheticRunSnapshot run, SyntheticAnalysisResult analysis, DemoReviewContext? review)
+    {
         var snapshot = review?.Snapshot;
-        if (!response.IsAvailable || analysis is null || snapshot is null ||
-            run.Scope != DemoFixtureCatalog.Scope || !DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId) ||
+        if (analysis is null || snapshot is null ||
+            run.Scope != DemoFixtureCatalog.Scope || !(DemoAnalysisCatalog.IsReviewMaturityProfile(run.ProfileCatalogId) || DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId)) ||
             analysis.RunId != run.RunId || snapshot.RunSeed.RunId != run.RunId ||
             snapshot.RunSeed.Scope != SyntheticReviewScope.Fixed || snapshot.RunSeed.ResourceState != SyntheticReviewResourceState.Mutable ||
             snapshot.RunSeed.RunInputDigest != run.InputDigest || snapshot.RunSeed.AnalysisDigest != analysis.ContentDigest ||

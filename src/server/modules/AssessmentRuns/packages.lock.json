@@ -152,6 +152,27 @@
           "AssessmentCoverage": "[1.0.0, )"
         }
       },
+      "syntheticaiexecution": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )",
+          "Npgsql": "[10.0.3, )",
+          "SyntheticAiValidation": "[1.0.0, )",
+          "SyntheticSourceFence": "[1.0.0, )"
+        }
+      },
+      "syntheticaivalidation": {
+        "type": "Project"
+      },
+      "syntheticoutcomepriority": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )",
+          "AssessmentScoring": "[1.0.0, )",
+          "Npgsql": "[10.0.3, )",
+          "SyntheticSourceFence": "[1.0.0, )"
+        }
+      },
       "syntheticsourcefence": {
         "type": "Project"
       }

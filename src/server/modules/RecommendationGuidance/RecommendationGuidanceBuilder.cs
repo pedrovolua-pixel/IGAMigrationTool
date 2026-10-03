@@ -6,7 +6,7 @@ using System.Text.Json;
 namespace RecommendationGuidance;
 
 /// <summary>Detached current fictional guidance; no authority, raw resolver, storage, network or executor.</summary>
-public static class RecommendationGuidanceBuilder
+public static partial class RecommendationGuidanceBuilder
 {
     public const string SchemaVersion = "synthetic-recommendation-guidance-v1";
     public const string Status = "SyntheticUnverified";
@@ -77,6 +77,7 @@ public static class RecommendationGuidanceBuilder
 
     private static GuidanceIssue? ValidateSource(GuidanceSourceBinding source)
     {
+        if (source.ProfileId == "synthetic-phase1b-combined-v1") return ValidatePhase1BSource(source);
         if (source.Scope != new GuidanceScope("synthetic-customer", "synthetic-project", "synthetic-environment")) return GuidanceIssue.WrongScope;
         if (source.RunId == Guid.Empty || source.RunRevision < 0 || source.RunState != "Scoring") return GuidanceIssue.InvalidSource;
         if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1" or "synthetic-review-maturity-fix-packages-equal-v1" or "synthetic-review-maturity-planning-tasks-equal-v1" or "synthetic-review-maturity-fix-review-equal-v1") ||

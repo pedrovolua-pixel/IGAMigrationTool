@@ -8,7 +8,7 @@ namespace FindingReview;
 public sealed class SyntheticReviewIntegrityException(string message) : Exception(message);
 
 /// <summary>Bounded local synthetic history, not production identity, review authority or a customer route.</summary>
-public sealed class SyntheticReviewStore
+public sealed partial class SyntheticReviewStore
 {
     private readonly string connectionString;
     private readonly ISyntheticReviewCommitObserver? observer;
@@ -177,6 +177,103 @@ public sealed class SyntheticReviewStore
         }
         catch (SyntheticReviewIntegrityException) { return new(SyntheticReviewIssue.IntegrityMismatch, null); }
         catch (JsonException) { return new(SyntheticReviewIssue.IntegrityMismatch, null); }
+    }
+
+    /// <summary>Owning write on a supplied transaction; returned result is pending caller commit. Never opens or commits a nested transaction.</summary>
+    public async Task<SyntheticReviewSeedResult> SeedInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, SyntheticReviewRunSeed? input, SyntheticReviewAuthority authority,
+        CancellationToken cancellationToken = default)
+    {
+        if (!ValidSharedConnection(connection, transaction)) return new(SyntheticReviewIssue.InvalidInput);
+        if (input is null) return new(SyntheticReviewIssue.InvalidInput);
+        if (input.Scope != SyntheticReviewScope.Fixed) return new(SyntheticReviewIssue.WrongScope);
+        var seed = input is null ? null : Normalize(input);
+        if (seed is null) return new(SyntheticReviewIssue.InvalidInput);
+        var scope = seed.Scope;
+        var runId = seed.RunId;
+        if (scope != SyntheticReviewScope.Fixed) return new(SyntheticReviewIssue.WrongScope);
+        if (authority is null || authority.Roles.IsDefault || !authority.Roles.Contains(SyntheticReviewRole.Consultant)) return new(SyntheticReviewIssue.Denied);
+        foreach (var finding in seed.Findings)
+        {
+            if (SyntheticReviewPolicy.Authorize(authority, scope, finding.CategoryId, SyntheticReviewAction.Read, seed.ResourceState) is { } readIssue) return new(readIssue);
+            if (SyntheticReviewPolicy.Authorize(authority, scope, finding.CategoryId, SyntheticReviewAction.Review, seed.ResourceState) is { } reviewIssue) return new(reviewIssue);
+        }
+        if (Identity(authority, scope, SyntheticReviewAction.Read) is { } readIdentityIssue) return new(readIdentityIssue);
+        if (Identity(authority, scope, SyntheticReviewAction.Review) is { } reviewIdentityIssue) return new(reviewIdentityIssue);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(connection, transaction,
+            scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
+        if (await SyntheticReviewMigration.VerifyAsync(connection, transaction, scope, cancellationToken) is { } issue) return new(issue);
+        await SyntheticReviewMigration.Execute(connection, transaction, "SELECT pg_advisory_xact_lock(734021006)", cancellationToken);
+        SyntheticReviewRunSeed? existing;
+        try { existing = await ReadSeed(connection, transaction, scope, runId, cancellationToken); }
+        catch (SyntheticReviewIntegrityException) { return new(SyntheticReviewIssue.IntegrityMismatch); }
+        catch (JsonException) { return new(SyntheticReviewIssue.IntegrityMismatch); }
+        if (existing is not null) return SyntheticReviewDigest.Compute(existing) == SyntheticReviewDigest.Compute(seed)
+            ? new(null, true) : new(SyntheticReviewIssue.SeedConflict);
+        await SyntheticReviewMigration.Execute(connection, transaction,
+            "INSERT INTO synthetic_review.run_seeds VALUES (@run,@customer,@project,@environment,@json,@digest,clock_timestamp())", cancellationToken,
+            ("run", runId), ("customer", scope.CustomerId), ("project", scope.ProjectId), ("environment", scope.EnvironmentId),
+            ("json", JsonSerializer.Serialize(seed)), ("digest", SyntheticReviewDigest.Compute(seed)));
+        foreach (var finding in seed.Findings)
+        {
+            await SyntheticReviewMigration.Execute(connection, transaction, "INSERT INTO synthetic_review.finding_seeds VALUES (@run,@finding,@json,@digest)", cancellationToken,
+                ("run", runId), ("finding", finding.FindingId), ("json", JsonSerializer.Serialize(finding)), ("digest", SyntheticReviewDigest.Compute(finding)));
+            await SyntheticReviewMigration.Execute(connection, transaction, "INSERT INTO synthetic_review.finding_current VALUES (@run,@finding,0,@json)", cancellationToken,
+                ("run", runId), ("finding", finding.FindingId), ("json", JsonSerializer.Serialize(Initial(finding))));
+        }
+        await BeforeCommit("seed", runId, null, cancellationToken);
+        return new(null);
+    }
+
+    /// <summary>Owning write on a supplied transaction; returned result is pending caller commit. Never opens or commits a nested transaction.</summary>
+    public async Task<SyntheticReviewApplyResult> ApplyInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, SyntheticReviewScope scope, Guid runId, string findingId,
+        SyntheticReviewAuthority authority, SyntheticReviewCommand command, CancellationToken cancellationToken = default)
+    {
+        if (!ValidSharedConnection(connection, transaction)) return new(SyntheticReviewIssue.InvalidInput, null);
+        if (runId == Guid.Empty || !SyntheticReviewPolicy.ValidDigest(findingId) || SyntheticReviewPolicy.ValidateCommand(command) is not null)
+            return new(SyntheticReviewIssue.InvalidInput, null);
+        var action = SyntheticReviewPolicy.ActionFor(command.Kind);
+        if (Identity(authority, scope, action) is { } identityIssue) return new(identityIssue, null);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(connection, transaction,
+            scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
+        if (await SyntheticReviewMigration.VerifyAsync(connection, transaction, scope, cancellationToken) is { } issue) return new(issue, null);
+        try
+        {
+            var seed = await ReadSeed(connection, transaction, scope, runId, cancellationToken);
+            if (seed is null || !seed.Findings.Any(finding => finding.FindingId == findingId)) return new(SyntheticReviewIssue.NotFound, null);
+            var original = seed.Findings.Single(finding => finding.FindingId == findingId);
+            if (SyntheticReviewPolicy.Authorize(authority, scope, original.CategoryId, action, seed.ResourceState) is { } denied) return new(denied, null);
+            var finding = await ReadFinding(connection, transaction, seed, findingId, true, cancellationToken);
+            var payloadDigest = PayloadDigest(scope, runId, findingId, authority.ActorId, command);
+            var replay = finding.History.SingleOrDefault(item => item.EventId == command.EventId);
+            if (replay is not null)
+                return PayloadDigest(scope, runId, findingId, replay.ActorId, replay.Command) == payloadDigest
+                    ? new(null, replay.Outcome, true) : new(SyntheticReviewIssue.EventConflict, null);
+            if (finding.Current.Revision != command.ExpectedRevision) return new(SyntheticReviewIssue.RevisionConflict, finding.Current);
+            if (SyntheticReviewPolicy.ValidateTransition(finding.Current, command) is { } transitionIssue) return new(transitionIssue, finding.Current);
+            var next = SyntheticReviewPolicy.Next(finding.Current, command);
+            await using var clock = new NpgsqlCommand("SELECT clock_timestamp()", connection, transaction);
+            var now = (DateTime)(await clock.ExecuteScalarAsync(cancellationToken))!;
+            var historyEvent = new SyntheticReviewEvent(command.EventId, authority.ActorId,
+                authority.Roles.Distinct().Order().ToImmutableArray(), command, new DateTimeOffset(now), next);
+            var afterJson = JsonSerializer.Serialize(next);
+            await SyntheticReviewMigration.Execute(connection, transaction, "INSERT INTO synthetic_review.events VALUES (@run,@finding,@event,@expected,@revision,@payload,@json,@digest,@after,@time)", cancellationToken,
+                ("run", runId), ("finding", findingId), ("event", command.EventId), ("expected", command.ExpectedRevision), ("revision", next.Revision),
+                ("payload", payloadDigest), ("json", JsonSerializer.Serialize(historyEvent)), ("digest", SyntheticReviewDigest.Compute(historyEvent)), ("after", afterJson), ("time", now));
+            await SyntheticReviewMigration.Execute(connection, transaction, "UPDATE synthetic_review.finding_current SET revision=@revision,current_json=@json WHERE run_id=@run AND finding_id=@finding", cancellationToken,
+                ("revision", next.Revision), ("json", afterJson), ("run", runId), ("finding", findingId));
+            await BeforeCommit("apply", runId, command.EventId, cancellationToken);
+            return new(null, next);
+        }
+        catch (SyntheticReviewIntegrityException) { return new(SyntheticReviewIssue.IntegrityMismatch, null); }
+        catch (JsonException) { return new(SyntheticReviewIssue.IntegrityMismatch, null); }
+    }
+
+    private bool ValidSharedConnection(NpgsqlConnection connection, NpgsqlTransaction transaction)
+    {
+        if (connection is null || transaction is null || transaction.Connection != connection || connection.State != ConnectionState.Open) return false;
+        var expected = new NpgsqlConnectionStringBuilder(connectionString);
+        var actual = new NpgsqlConnectionStringBuilder(connection.ConnectionString);
+        return actual.Host == expected.Host && actual.Port == expected.Port && actual.Database == expected.Database && actual.Username == expected.Username;
     }
 
     private async Task<NpgsqlConnection> Open(CancellationToken cancellationToken)

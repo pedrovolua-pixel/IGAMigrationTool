@@ -26,8 +26,12 @@ public static class CsvCodec
         try
         {
             if (input is null || input.Rows.IsDefault || input.SelectedAttestations.IsDefault) return new(CsvIssue.InvalidInput, null);
-            var blank = input with { SnapshotDigest = "", Rows = input.Rows.IsDefault ? [] : input.Rows.Select(row => row with { ExportSnapshotDigest = "" }).OrderBy(row => row.TaskId, StringComparer.Ordinal).ToImmutableArray(),
-                SelectedAttestations = input.SelectedAttestations.IsDefault ? [] : input.SelectedAttestations.OrderBy(item => item.ArtifactId, StringComparer.Ordinal).ThenBy(item => item.TaskId, StringComparer.Ordinal).ToImmutableArray() };
+            var blank = input with
+            {
+                SnapshotDigest = "",
+                Rows = input.Rows.IsDefault ? [] : input.Rows.Select(row => row with { ExportSnapshotDigest = "" }).OrderBy(row => row.TaskId, StringComparer.Ordinal).ToImmutableArray(),
+                SelectedAttestations = input.SelectedAttestations.IsDefault ? [] : input.SelectedAttestations.OrderBy(item => item.ArtifactId, StringComparer.Ordinal).ThenBy(item => item.TaskId, StringComparer.Ordinal).ToImmutableArray()
+            };
             if (Validate(blank, false) is { } issue) return new(issue, null);
             var digest = CsvCanonical.Hash(CsvCanonical.Bytes(blank));
             var frozen = blank with { SnapshotDigest = digest, Rows = blank.Rows.Select(row => row with { ExportSnapshotDigest = digest }).ToImmutableArray() };

@@ -16,19 +16,19 @@ internal sealed record DemoFixPackageDetail(string SchemaVersion, Guid RunId, lo
 internal static class DemoFixPackageProjection
 {
     internal static DemoFixPackageDetail? Detail(SyntheticRunSnapshot run,
-        DemoRecommendationGuidanceDetail? capturedGuidance, DemoReviewContext? capturedReview)
+        DemoRecommendationGuidanceDetail? capturedGuidance, DemoReviewContext? capturedReview, SyntheticAnalysisResult? compoundAnalysis = null)
     {
-        if (!DemoFixPackageCatalog.IsProfile(run.ProfileCatalogId) && !DemoArtifactReviewCatalog.IsProfile(run.ProfileCatalogId) && !DemoPlanningTaskCatalog.IsProfile(run.ProfileCatalogId)) return null;
+        if (!DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId) && !DemoFixPackageCatalog.IsProfile(run.ProfileCatalogId) && !DemoArtifactReviewCatalog.IsProfile(run.ProfileCatalogId) && !DemoPlanningTaskCatalog.IsProfile(run.ProfileCatalogId)) return null;
         DemoFixPackageDetail Result(string? reason, FixPackageSnapshot? snapshot = null) => new(
             "synthetic-fix-package-demo-v1", run.RunId, run.Revision, run.InputDigest,
             run.BaselineCatalogId, run.ProfileCatalogId, snapshot is null ? "Unavailable" : "Ready", reason, snapshot);
         try
         {
-            if (!(DemoFixPackageCatalog.MatchesFrozenFixture(run) || DemoArtifactReviewCatalog.MatchesFrozenFixture(run) || DemoPlanningTaskCatalog.MatchesFrozenFixture(run)) || !Complete(run))
+            if (!(DemoFixPackageCatalog.MatchesFrozenFixture(run) || DemoArtifactReviewCatalog.MatchesFrozenFixture(run) || DemoPlanningTaskCatalog.MatchesFrozenFixture(run) || DemoPhase1BCatalog.MatchesFrozenFixture(run)) || !Complete(run))
                 return Result("fix_packages_source_unavailable");
             if (capturedGuidance is not { Status: "Ready", ReasonCode: null, Snapshot: not null } ||
                 capturedReview is not { ReasonCode: null, Snapshot: not null } ||
-                !MatchesCapture(run, capturedGuidance.Snapshot, capturedReview.Snapshot))
+                !MatchesCapture(run, capturedGuidance.Snapshot, capturedReview.Snapshot, compoundAnalysis))
                 return Result("fix_packages_capture_mismatch");
             var packages = FixPackageBuilder.Build(capturedGuidance.Snapshot);
             if (!packages.Succeeded || packages.Snapshot!.TemplateVersion != DemoFixPackageCatalog.TemplateVersion ||
@@ -47,7 +47,7 @@ internal static class DemoFixPackageProjection
         if (run.State != SyntheticRunState.Scoring || run.CancelRequested || run.Lease is not null ||
             run.CheckpointSequence < 1 || run.InFlightKeys is null || run.InFlightKeys.Count != 0 ||
             run.Results is null || run.CoverageSummary is null) return false;
-        var expected = DemoAnalysisCatalog.WorkResults(run);
+        var expected = DemoPhase1BCatalog.IsProfile(run.ProfileCatalogId) ? run.Results : DemoAnalysisCatalog.WorkResults(run);
         if (run.Results.Count != expected.Count || run.Results.Any(item => item?.Key is null)) return false;
         static IEnumerable<CoverageItem> Ordered(IEnumerable<CoverageItem> values) => values
             .OrderBy(item => item.Key.InventoryId, StringComparer.Ordinal).ThenBy(item => item.Key.EvidenceCategory, StringComparer.Ordinal);
@@ -61,11 +61,11 @@ internal static class DemoFixPackageProjection
         return JsonSerializer.Serialize(run.CoverageSummary) == JsonSerializer.Serialize(summary);
     }
 
-    private static bool MatchesCapture(SyntheticRunSnapshot run, GuidanceSnapshot guidance, SyntheticReviewSnapshot review)
+    private static bool MatchesCapture(SyntheticRunSnapshot run, GuidanceSnapshot guidance, SyntheticReviewSnapshot review, SyntheticAnalysisResult? compoundAnalysis = null)
     {
         var analysisResponse = SyntheticDemoAnalysisAdapter.Project(run);
-        var analysis = analysisResponse.Projection?.Analysis;
-        if (!analysisResponse.IsAvailable || analysis is null || review.RunSeed is null ||
+        var analysis = compoundAnalysis ?? analysisResponse.Projection?.Analysis;
+        if (compoundAnalysis is null && !analysisResponse.IsAvailable || analysis is null || review.RunSeed is null ||
             review.Findings.IsDefault || review.RunSeed.Findings.IsDefault || guidance.Findings.IsDefault ||
             review.RunSeed.Scope != SyntheticReviewScope.Fixed || review.RunSeed.ResourceState != SyntheticReviewResourceState.Mutable ||
             review.RunSeed.RunId != run.RunId || review.RunSeed.RunInputDigest != run.InputDigest ||

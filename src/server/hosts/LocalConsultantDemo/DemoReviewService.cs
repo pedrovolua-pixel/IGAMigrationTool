@@ -67,9 +67,9 @@ internal sealed class DemoReviewService(SyntheticReviewStore store)
     internal Task<SyntheticReviewApplyResult> ApplyAsync(Guid runId, string findingId, SyntheticReviewCommand command) =>
         store.ApplyAsync(SyntheticReviewScope.Fixed, runId, findingId, Authority, command);
 
-    internal static object Detail(SyntheticRunSnapshot run, DemoReviewContext context)
+    internal static object Detail(SyntheticRunSnapshot run, DemoReviewContext context, DeterministicAnalysis.SyntheticAnalysisResult? verifiedAnalysis = null)
     {
-        var analysis = SyntheticDemoAnalysisAdapter.Project(run).Projection?.Analysis;
+        var analysis = verifiedAnalysis ?? SyntheticDemoAnalysisAdapter.Project(run).Projection?.Analysis;
         return new
         {
             schemaVersion = 1,
