@@ -38,10 +38,10 @@ import { createRoot } from 'react-dom/client';
 import { Phase1BSetup, phase1BValidText } from '/@fs/${source}/Phase1BSetup.tsx';
 import { Phase1BWorkspace } from '/@fs/${source}/Phase1BWorkspace.tsx';
 const digest = 'a'.repeat(64), approval = '10000000-0000-4000-8000-000000000001';
-const approved = { outcomeId:'access-governance',version:1,categoryId:'SECURITY',title:'Approved fictional goal',behavior:'<img src=x onerror="window.injection=true">',origin:'Documented',unitLinks:[{inventoryId:'det-guard',categoryId:'SECURITY'}],referenceIds:[],assumptions:[],predecessorVersion:null,contentDigest:digest,state:'CustomerApproved',revision:3,reviewEventId:'10000000-0000-4000-8000-000000000002',approvalEventId:approval,history:[{eventId:approval,kind:'Approve',actorId:'fictional-customer',recordedAtUtc:'2026-10-03T12:00:00Z',reason:'<script>window.injection=true</script>'}] };
+const approved = { outcomeId:'access-governance',version:1,categoryId:'SECURITY',title:'Approved fictional goal',behavior:'<img src=x onerror="window.injection=true">',origin:'Documented',unitLinks:[{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'}],referenceIds:[],assumptions:[],predecessorVersion:null,contentDigest:digest,state:'CustomerApproved',revision:3,reviewEventId:'10000000-0000-4000-8000-000000000002',approvalEventId:approval,history:[{eventId:approval,kind:'Approve',actorId:'fictional-customer',recordedAtUtc:'2026-10-03T12:00:00Z',reason:'<script>window.injection=true</script>'}] };
 const draft = {...approved,outcomeId:'pending-goal',title:'Draft fictional goal',state:'Draft',revision:1,reviewEventId:null,approvalEventId:null,history:[]};
 const reviewed={...approved,outcomeId:'reviewed-goal',title:'Reviewed fictional goal',state:'ConsultantReviewed',revision:2,approvalEventId:null,history:[]};
-const planning = {optionId:'option-a',findingId:'finding-a',categoryId:'OPERATIONS',revision:2,originalPriority:{displayPriority:68,originalBand:'High',missingInputs:[],contributions:[{factor:'severity',normalized:.64,weight:.3,points:19.2}]},effectivePriority:'High',originalEffort:{size:'M',minimumPersonHours:8,maximumPersonHours:24},effectiveEffort:{size:'M',minimumPersonHours:8,maximumPersonHours:24},effortApproval:'Proposed',hasPriorityOverride:false,hasEffortOverride:false,history:[]};
+const planning = {optionId:'option-a',findingId:'finding-a',categoryId:'OPERATIONS',revision:2,originalContext:{guidanceDigest:digest,assumptions:['Fictional internal exposure'],prerequisites:['Fixture prerequisite'],sourceReferences:['guidance-option-a'],objectiveMapVersion:'synthetic-objectives-v1',objectiveMapDigest:'c'.repeat(64),objectives:[{objectiveId:'access-governance',weight:1}],matchedObjectiveIds:['access-governance']},originalPriority:{policyVersion:'synthetic-priority-policy-v1',rawPriority:68,displayPriority:68,originalBand:'High',missingInputs:[],contributions:[{factor:'severity',normalized:.64,weight:.3,points:19.2}]},effectivePriority:'High',originalEffort:{size:'M',minimumPersonHours:8,maximumPersonHours:24},effectiveEffort:{size:'M',minimumPersonHours:8,maximumPersonHours:24},effortApproval:'Proposed',hasPriorityOverride:false,hasEffortOverride:false,history:[]};
 window.probe={commands:[],mode:'uncertain',aborted:0,injection:false,validText:phase1BValidText};
 function Harness(){
  const [run,setRun]=useState('run-a'),[actor,setActor]=useState('Consultant'),[registry,setRegistry]=useState(6),[denied,setDenied]=useState(false),[terminal,setTerminal]=useState(false),[sourceDigest,setSourceDigest]=useState(digest);
@@ -50,7 +50,7 @@ function Harness(){
   if(window.probe.mode==='delay')return await new Promise((resolve,reject)=>{signal.addEventListener('abort',()=>{window.probe.aborted++;reject(Error('abort'));});window.probe.late=()=>resolve({status:'committed',eventId:command.eventId,contextKey:context,message:'LATE OLD RUN'});});
   const status=window.probe.mode==='uncertain'?'uncertain':'committed';return {status,eventId:window.probe.mode==='mismatch'?'wrong-event':command.eventId,contextKey:context};};
  const workspaceContext='workspace/'+actor+'/'+run;
- return <><h1>Phase 1B component verification</h1><Phase1BSetup contextKey={'setup/'+actor} actorLabel={actor} registryRevision={registry} entries={[approved,draft,reviewed]} availableCoverageKeys={[{inventoryId:'det-guard',categoryId:'SECURITY'},{inventoryId:'synthetic-ai-retry',categoryId:'OPERATIONS'}]} canManage={!denied&&actor==='Consultant'} canApprove={!denied&&actor==='FictionalCustomer'} canStart={!denied} onOutcomeCommand={perform('outcome','setup/'+actor)} onStartRun={perform('start','setup/'+actor)}/>
+ return <><h1>Phase 1B component verification</h1><Phase1BSetup contextKey={'setup/'+actor} actorLabel={actor} registryRevision={registry} entries={[approved,draft,reviewed]} availableCoverageKeys={[{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'},{inventoryId:'det-guard',evidenceCategory:'SYN-GUARD',categoryId:'SECURITY'},{inventoryId:'det-guard',evidenceCategory:'SYN-OTHER',categoryId:'SECURITY'},{inventoryId:'synthetic-ai-retry',evidenceCategory:'configuration',categoryId:'OPERATIONS'}]} canManage={!denied&&actor==='Consultant'} canApprove={!denied&&actor==='FictionalCustomer'} canStart={!denied} onOutcomeCommand={perform('outcome','setup/'+actor)} onStartRun={perform('start','setup/'+actor)}/>
  <Phase1BWorkspace runId={run} contextKey={'workspace/'+actor} actorLabel={actor} lockedOutcomes={[{outcomeId:'access-governance',version:1,contentDigest:digest,revision:3,approvalEventId:approval}]} outcomeLockDigest={digest} sourceDigest={sourceDigest} entries={[planning]} canPlan={!denied&&actor==='Consultant'} canOverrideBudget={!denied&&actor==='Consultant'} budget={{revision:1,runAllowance:600,categoryAllowances:{SECURITY:600,OPERATIONS:600},counters:[{key:'run',charged:480,held:0,allowance:600}],history:[]}} works={[{workId:'ai-retry',category:'OPERATIONS',state:terminal?'Failed':'Pending',reasonCodes:[],attempts:[{attemptId:'20000000-0000-4000-8000-000000000001',ordinal:1,state:'Unknown',held:true,inputUnits:null,outputUnits:null,receiptId:null}]}]} onPlanningCommand={perform('planning',workspaceContext)} onBudgetOverride={perform('budget',workspaceContext)}/></>;
 }
 createRoot(document.getElementById('root')).render(<Harness/>);
@@ -76,6 +76,22 @@ createRoot(document.getElementById('root')).render(<Harness/>);
   const address = server.httpServer.address();
   await page.goto(`http://127.0.0.1:${address.port}`);
   await page.getByRole('heading', { name: 'Phase 1B outcome setup' }).waitFor();
+  await page.getByText('Original estimate context and provenance', { exact: true }).click();
+  check(
+    (await page.getByText('Prerequisites: Fixture prerequisite', { exact: true }).count()) === 1 &&
+      (await page
+        .getByText('Fictional objective map: synthetic-objectives-v1.', { exact: true })
+        .count()) === 1 &&
+      (await page
+        .getByText('Exact option matches: access-governance.', { exact: true })
+        .count()) === 1,
+    'bound original assumptions prerequisites source references and objective proof render read-only',
+  );
+  await page.getByText('Six-factor calculation', { exact: true }).click();
+  check(
+    (await page.getByText('Unrounded priority: 68.', { exact: true }).count()) === 1,
+    'original unrounded priority and policy remain visible',
+  );
   check(
     await page.evaluate(
       () =>
@@ -157,10 +173,15 @@ createRoot(document.getElementById('root')).render(<Harness/>);
     'uncertain lifecycle retry preserves UUID actor and exact payload',
   );
   await page.getByText('Create an immutable draft version', { exact: true }).click();
+  check(
+    (await page.getByRole('checkbox', { name: 'det-guard · SYN-GUARD · SECURITY' }).count()) === 1,
+    'applicability choices deduplicate the exact inventory/evidence pair only',
+  );
   await page.getByLabel('Stable outcome ID').fill('new-fictional-goal');
   await page.getByLabel('Title', { exact: true }).fill('Fictional documented behavior');
   await page.getByLabel('Desired behavior').fill('<svg onload="window.injection=true">');
-  await page.getByRole('checkbox', { name: 'det-guard · SECURITY' }).check();
+  await page.getByRole('checkbox', { name: 'det-guard · SYN-GUARD · SECURITY' }).check();
+  await page.getByRole('checkbox', { name: 'det-guard · SYN-OTHER · SECURITY' }).check();
   await page
     .getByLabel('Reference IDs (one per line)')
     .fill('fixture-reference\nfixture-reference');
@@ -175,8 +196,11 @@ createRoot(document.getElementById('root')).render(<Harness/>);
     draft.kind === 'CreateDraft' &&
       draft.version === 1 &&
       draft.content.predecessorVersion === null &&
-      draft.content.unitLinks[0].inventoryId === 'det-guard',
-    'draft sends explicit applicability and immutable successor metadata',
+      draft.content.unitLinks.length === 2 &&
+      draft.content.unitLinks.every((link) => link.inventoryId === 'det-guard') &&
+      draft.content.unitLinks[0].evidenceCategory === 'SYN-GUARD' &&
+      draft.content.unitLinks[1].evidenceCategory === 'SYN-OTHER',
+    'draft preserves two distinct inventory/evidence keys and immutable successor metadata',
   );
   check(
     draft.content.behavior.startsWith('<svg') && !('contentDigest' in draft.content),

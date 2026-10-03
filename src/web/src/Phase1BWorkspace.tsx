@@ -14,13 +14,27 @@ export interface Phase1BEffort {
   size: Phase1BEffortSize;
   minimumPersonHours: number;
   maximumPersonHours: number;
+  policyVersion?: string;
+}
+export interface Phase1BOriginalContext {
+  guidanceDigest: string;
+  assumptions: readonly string[];
+  prerequisites: readonly string[];
+  sourceReferences: readonly string[];
+  objectiveMapVersion: string;
+  objectiveMapDigest: string;
+  objectives: readonly { objectiveId: string; weight: number }[];
+  matchedObjectiveIds: readonly string[];
 }
 export interface Phase1BPlanningEntry {
   optionId: string;
   findingId: string;
   categoryId: Phase1BCategory;
   revision: number;
+  originalContext?: Phase1BOriginalContext;
   originalPriority: {
+    policyVersion?: string;
+    rawPriority?: number | null;
     displayPriority: number | null;
     originalBand: Phase1BPriorityBand | null;
     missingInputs: readonly string[];
@@ -202,7 +216,52 @@ function PlanningCard({
         </p>
       )}
       <details>
+        <summary>Original estimate context and provenance</summary>
+        <p>
+          Effort policy: {entry.originalEffort?.policyVersion ?? 'synthetic-effort-policy-v1'}.
+          Priority policy: {entry.originalPriority.policyVersion ?? 'synthetic-priority-policy-v1'}.
+        </p>
+        {entry.originalContext ? (
+          <>
+            <p className="phase1b-digest">
+              Original guidance proof: <code>{entry.originalContext.guidanceDigest}</code>
+            </p>
+            <p className="phase1b-text">
+              Assumptions: {entry.originalContext.assumptions.join('\n') || 'None recorded'}
+            </p>
+            <p className="phase1b-text">
+              Prerequisites: {entry.originalContext.prerequisites.join('\n') || 'None recorded'}
+            </p>
+            <p className="phase1b-text">
+              Source references:{' '}
+              {entry.originalContext.sourceReferences.join('\n') || 'None recorded'}
+            </p>
+            <p>Fictional objective map: {entry.originalContext.objectiveMapVersion}.</p>
+            <p className="phase1b-digest">
+              Map proof: <code>{entry.originalContext.objectiveMapDigest}</code>
+            </p>
+            <ul>
+              {entry.originalContext.objectives.map((objective) => (
+                <li key={objective.objectiveId}>
+                  {objective.objectiveId} · weight {objective.weight}
+                </li>
+              ))}
+            </ul>
+            <p>
+              Exact option matches: {entry.originalContext.matchedObjectiveIds.join(', ') || 'None'}
+              .
+            </p>
+          </>
+        ) : (
+          <p>
+            Resolve the original exact option and finding against its verified guidance source.
+            Current guidance must not replace historical context.
+          </p>
+        )}
+      </details>
+      <details>
         <summary>Six-factor calculation</summary>
+        <p>Unrounded priority: {entry.originalPriority.rawPriority ?? 'Unavailable'}.</p>
         <table>
           <caption>Versioned fictional priority contributions</caption>
           <thead>

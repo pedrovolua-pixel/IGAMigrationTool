@@ -4,8 +4,10 @@ import './Phase1BSetup.css';
 export type Phase1BCategory = 'SECURITY' | 'OPERATIONS';
 export type Phase1BOutcomeState =
   'Draft' | 'ConsultantReviewed' | 'CustomerApproved' | 'Superseded' | 'Retired';
+/** Exact scorer identity is inventoryId/evidenceCategory. categoryId is trusted display/filter metadata only. */
 export interface Phase1BCoverageKey {
   inventoryId: string;
+  evidenceCategory: string;
   categoryId: Phase1BCategory;
 }
 export interface Phase1BHistoryEvent {
@@ -220,7 +222,12 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
   const [selectionRevision, setSelectionRevision] = useState(props.registryRevision);
   const key = (entry: { outcomeId: string; version: number }) =>
     `${entry.outcomeId}/${entry.version}`;
-  const coverageKey = (entry: Phase1BCoverageKey) => `${entry.inventoryId}/${entry.categoryId}`;
+  const coverageKey = (entry: Phase1BCoverageKey) =>
+    `${entry.inventoryId}/${entry.evidenceCategory}`;
+  const availableKeys = props.availableCoverageKeys.filter(
+    (link, index, values) =>
+      values.findIndex((value) => coverageKey(value) === coverageKey(link)) === index,
+  );
   const lines = (value: string) =>
     value
       .split('\n')
@@ -271,7 +278,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
     phase1BValidText(behavior) &&
     phase1BValidText(reason) &&
     links.length <= 256 &&
-    props.availableCoverageKeys.some(
+    availableKeys.some(
       (link) => link.categoryId === category && links.includes(coverageKey(link)),
     ) &&
     (previous !== null || new Set(props.entries.map((entry) => entry.outcomeId)).size < 64) &&
@@ -323,7 +330,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
               title,
               behavior,
               origin,
-              unitLinks: props.availableCoverageKeys.filter(
+              unitLinks: availableKeys.filter(
                 (link) => link.categoryId === category && links.includes(coverageKey(link)),
               ),
               referenceIds: lines(references),
@@ -409,7 +416,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
           </label>
           <fieldset disabled={locked}>
             <legend>Explicit applicable coverage units</legend>
-            {props.availableCoverageKeys
+            {availableKeys
               .filter((link) => link.categoryId === category)
               .map((link) => (
                 <label className="phase1b-checkbox" key={coverageKey(link)}>
@@ -424,7 +431,7 @@ export function Phase1BSetup(props: Phase1BSetupProps) {
                       )
                     }
                   />
-                  {link.inventoryId} · {link.categoryId}
+                  {link.inventoryId} · {link.evidenceCategory} · {link.categoryId}
                 </label>
               ))}
           </fieldset>
