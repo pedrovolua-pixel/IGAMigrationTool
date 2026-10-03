@@ -508,3 +508,7 @@ Approved by: Repository owner
 Date: 2026-09-28  
 
 Only an authorized human reviewer may change `Status` to `Approved`.
+
+## Approved local evaluation policy foundation — 2026-10-03
+
+FR-HAS-51–53 / bounded FR-HAS-11/13/15/50 / AC-HAS-12/19: [EV02 exact approval](local-evaluation-policy-approval.md) is implemented only as dependency-free internal synthetic values under [cycle03](../../plans/active/local-pilot-m08-policy-implementation-cycle03.md). [Sampling](synthetic-evaluation-sampling-v1-contract.md), [warning/regression](synthetic-evaluation-regression-v1-contract.md), and [reviewer fixture](synthetic-evaluation-reviewer-v1-contract.md) freeze separately versioned canonical/detached contracts while accuracy-v1 remains unchanged. Scope is deterministic frozen synthetic selection, supplied outcome arithmetic/regression and pure eligibility against current trusted fixture state. Denials do not project payload. No host/API/UI/database/authentication integration, schema/dependency/retention/permission change or real provider access follows. Durable event uniqueness, atomic authorization/history/queue checks, actual safety/qualification proof and full evaluation gates require later scoped integration evidence.

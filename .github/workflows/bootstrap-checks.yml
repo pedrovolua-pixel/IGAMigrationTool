@@ -45,6 +45,14 @@ jobs:
         run: dotnet run --project tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj --configuration Release --no-build
       - name: Check synthetic evaluation accuracy
         run: dotnet run --project tests/unit/SyntheticEvaluation.Tests --configuration Release --no-build
+      - name: Check approved synthetic evaluation policy
+        run: |
+          python3 tests/unit/SyntheticEvaluationSampling.Tests/oracle.py
+          python3 tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticEvaluationSampling.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticEvaluationRegression.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticEvaluationReviewer.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/SyntheticEvaluationPolicy.Tests --configuration Release --no-build
       - name: Check assessment coverage reconciliation
         run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
       - name: Check assessment capability locks
@@ -389,6 +397,20 @@ jobs:
           dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-restore
       - name: Check Windows synthetic evaluation accuracy
         run: dotnet run --project tests/unit/SyntheticEvaluation.Tests --configuration Release --no-restore
+      - name: Check Windows approved synthetic evaluation policy
+        run: |
+          python tests/unit/SyntheticEvaluationSampling.Tests/oracle.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticEvaluationSampling.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticEvaluationRegression.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticEvaluationReviewer.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/SyntheticEvaluationPolicy.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows fictional fix-package workspace sources
         run: |
           dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-restore

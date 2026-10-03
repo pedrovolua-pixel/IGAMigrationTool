@@ -331,3 +331,9 @@ Security owner: Repository owner
 Accessibility reviewer: Repository owner  
 Product owner: Repository owner  
 Date: 2026-09-28
+
+## Bounded automated evaluation policy mapping — 2026-10-03
+
+The [approved EV02 packet](local-evaluation-policy-approval.md) and [cycle03](../../plans/active/local-pilot-m08-policy-implementation-cycle03.md) map TP-HAS-012/019 to local foundations, not full acceptance. Sampling host covers TP-EV02-S001–010/S020 selection, canonical/rank, quota/strata/budget/denial/immutable properties; regression host covers S011–020 warnings, exact denominators, safety fixture declarations, coverage attribution and compatibility. Reviewer host covers RT01–08/10 and bounded current-fixture parts of RT14/15, role/scope/category/conflict/admission/revocation/detachment. Original accuracy and composed hosts cover bounded RT11/13/17/18 arithmetic/frozen outcomes and same-selected-item context/unavailability/correction/decline/coverage flow.
+
+RT09 assignment/adjudication workflow, RT11–13 real rationale/per-dimension correction/durable history, RT14–16 real identity/history/atomic commit/queue/concurrency, RT19 operational owner exception and RT20 audit/lifecycle remain NOT VERIFIED. Pure fixture decisions cannot prove server integration; actual UI/API/evidence redaction/customer grants, real qualified independent reviews, two eligible environments, recurrence/score explanations and manual/live UAT remain unrun. All40 proposed cases are not relabeled as complete. Actual final local counts/native source-bound results and hosted-check limits are in cycle03 evidence; only executed checks may be reported passed.

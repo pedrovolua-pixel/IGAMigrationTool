@@ -80,4 +80,8 @@
   <Project Path="tests/unit/SyntheticPlanningTasks.Tests/SyntheticPlanningTasks.Tests.csproj" />
   <Project Path="tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj" />
   <Project Path="tests/unit/PlanningTasksComponent.Tests/PlanningTasksComponent.Tests.csproj" />
+  <Project Path="tests/unit/SyntheticEvaluationSampling.Tests/SyntheticEvaluationSampling.Tests.csproj" />
+  <Project Path="tests/unit/SyntheticEvaluationRegression.Tests/SyntheticEvaluationRegression.Tests.csproj" />
+  <Project Path="tests/unit/SyntheticEvaluationReviewer.Tests/SyntheticEvaluationReviewer.Tests.csproj" />
+  <Project Path="tests/integration/SyntheticEvaluationPolicy.Tests/SyntheticEvaluationPolicy.Tests.csproj" />
 </Solution>

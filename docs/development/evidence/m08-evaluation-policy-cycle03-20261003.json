@@ -1,0 +1,2427 @@
+{
+  "date": "2026-10-03",
+  "status": "VERIFIED bounded local synthetic implementation; private publication pending separate receipt",
+  "baseCommit": "433ee023f3c3132220f24a43d286e71a59cc4d5a",
+  "executedCodeCommit": "79b10cb6e42e6b0de213aed7265bf7a7ec07148c",
+  "authorCommits": {
+    "S03": "2d0b00e133638999b4692313578d174d229d638f",
+    "G03": "002d8ee99a6cd750c4f6cb4acb459afead851c19",
+    "R03": "90422252516630aac1efb8604f75f027516917be"
+  },
+  "authority": "specs/003-health-assessment/local-evaluation-policy-approval.md; EV02-S01-S04/R01-R03 owner Approved; no real reviewer grant or live gate proof",
+  "sourceHashes": {
+    ".github/workflows/bootstrap-checks.yml": "2775b243c4570294c1b77ba34e42d8b05a070b717a0824088fa2944fbf314ae4",
+    "IgaMigrationTool.slnx": "fe75ecbbde1fbb5498f6ed63c44ef8036e9661b26a459ff3e7f883390ad11dee",
+    "src/server/modules/SyntheticEvaluation/EvaluationRegressionBuilder.cs": "0da5ef4040d95e3f1d164346eaa1546a7894a18e7e1be395d52ae18900b8622a",
+    "src/server/modules/SyntheticEvaluation/EvaluationReviewerPolicy.cs": "82e957a84e84e2e2df624ecd627c65c1d55fa0bcbc51f64042697003995171a4",
+    "src/server/modules/SyntheticEvaluation/EvaluationSampler.cs": "7cf77b3024f7ca4d6f265a71b73bcf47d6d831fdf1fc26db4974d0e3f4164074",
+    "src/server/modules/SyntheticEvaluation/EvaluationWarningBuilder.cs": "f11285efe5ee072d1a422f24ca7da18d26f8960cfd55693c43480a821593ed96",
+    "src/server/modules/SyntheticEvaluation/RegressionContracts.cs": "ec8915edc567e3c88a463b9e73e85bd6a158d3ce07819cfb0e914b089526ee1f",
+    "src/server/modules/SyntheticEvaluation/ReviewerContracts.cs": "46e607df632c6359876cc8aae9ea55318109d2584dee353a988e005d226c360a",
+    "src/server/modules/SyntheticEvaluation/SamplingContracts.cs": "991aacbed8ad9e059277e8fca17bddd9d05c62c760c7e244b5df347a7c6df3f4",
+    "tests/integration/SyntheticEvaluationPolicy.Tests/Program.cs": "dd28edc2d33ef9f2dfa47207d59e391287fc99583915545b969b52a2d79b482b",
+    "tests/integration/SyntheticEvaluationPolicy.Tests/SyntheticEvaluationPolicy.Tests.csproj": "611a2de0b9cc4dd3c16cb6f0e63a768ee2148f619da881752d6cb7cec3aaff43",
+    "tests/integration/SyntheticEvaluationPolicy.Tests/expected-v1.json": "cba700b1109ffe2c64281140034963e0cbc12c19a204d0a44bb7388ff5084eb5",
+    "tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py": "0e754e3bc893cf7f29f03237bd4a1000f9a63708f8698e9f41ceece2bc505d6d",
+    "tests/integration/SyntheticEvaluationPolicy.Tests/packages.lock.json": "44d589f8a0900de8ed627b670b21668c27a4777c24641b5ebb5afe5d55d747eb",
+    "tests/unit/SyntheticEvaluationRegression.Tests/Program.cs": "ca79d2f983f3d448ad5d50454162539d6e71c4f27c1eb8646809942564f3c9b8",
+    "tests/unit/SyntheticEvaluationRegression.Tests/SyntheticEvaluationRegression.Tests.csproj": "b3a7a4ac14dc86e4e822a4dd896b8c936434916962164082860bbf5d54149f43",
+    "tests/unit/SyntheticEvaluationRegression.Tests/packages.lock.json": "44d589f8a0900de8ed627b670b21668c27a4777c24641b5ebb5afe5d55d747eb",
+    "tests/unit/SyntheticEvaluationReviewer.Tests/Program.cs": "a997cf495a2d8f81b4928336b8709a70916d9452bfc59ca5f696efdc0ef3d5d1",
+    "tests/unit/SyntheticEvaluationReviewer.Tests/SyntheticEvaluationReviewer.Tests.csproj": "b3a7a4ac14dc86e4e822a4dd896b8c936434916962164082860bbf5d54149f43",
+    "tests/unit/SyntheticEvaluationReviewer.Tests/packages.lock.json": "44d589f8a0900de8ed627b670b21668c27a4777c24641b5ebb5afe5d55d747eb",
+    "tests/unit/SyntheticEvaluationSampling.Tests/Program.cs": "d42c947d4ad492146197cef4a314f68a5265e94e8f39a365f4a0bd6d589a68fd",
+    "tests/unit/SyntheticEvaluationSampling.Tests/SyntheticEvaluationSampling.Tests.csproj": "b3a7a4ac14dc86e4e822a4dd896b8c936434916962164082860bbf5d54149f43",
+    "tests/unit/SyntheticEvaluationSampling.Tests/oracle.py": "3fa3a23dc5e67fc428ac4f5d70f86103326b0ebd031b995e0439034b2467218d",
+    "tests/unit/SyntheticEvaluationSampling.Tests/packages.lock.json": "44d589f8a0900de8ed627b670b21668c27a4777c24641b5ebb5afe5d55d747eb"
+  },
+  "finalEngineeringContractHashes": {
+    "specs/003-health-assessment/synthetic-evaluation-regression-v1-contract.md": "7b87131ce35a547140c7a66c16b784556f01773e15dd4f244f067281563903db",
+    "specs/003-health-assessment/synthetic-evaluation-reviewer-v1-contract.md": "a8ad094ba1c9f8c22589aac8d71a3a1318da5f0d834915c435b47d174d2205eb",
+    "specs/003-health-assessment/synthetic-evaluation-sampling-v1-contract.md": "af4ba3d0c87c108b88073bf2b404d3eb664be47d309e583b376f19ae64d69668"
+  },
+  "unchangedOriginalAndApprovedSourceHashes": {
+    "src/server/modules/SyntheticEvaluation/EvaluationContracts.cs": "c91dc5135b8fe69aabd2a0e822e871eb3108e96907447fcd0bab8d48d949b647",
+    "src/server/modules/SyntheticEvaluation/EvaluationAccuracyBuilder.cs": "8dd87bb0a9cbc1e14d7934fa794cdda57cb9a9a941947181607865d415d72212",
+    "tests/unit/SyntheticEvaluation.Tests/Program.cs": "e88c00507f7059e63e30c7300330711a62f48ae5d1afdc860b2792f52c56e6e3",
+    "specs/003-health-assessment/local-evaluation-policy-decision-packet.md": "df0854b65eb6b7711591cec869a5aedb7c35fb3c8c6825a243301640378cfcf0",
+    "specs/003-health-assessment/local-evaluation-sampling-contract-proposal.md": "fbcc7125f80a411f4c964dfb10afc84d9829f725113404ed7455edc33ec87d35",
+    "specs/003-health-assessment/local-evaluation-sampling-test-plan.md": "ac6ce96f4bfc7ff9b5d0046fbd85a1e307f1f40282b962d954f1273acf0b2487",
+    "specs/003-health-assessment/local-evaluation-reviewer-contract-proposal.md": "15c0189e921bf76248360eb5aa5d0cc06bd1ae7c6fdd1a9ba3add266d6019494",
+    "specs/003-health-assessment/local-evaluation-reviewer-test-plan.md": "0afcbcd8143e221c1a9028beb89eb5c6c14a93c288a4d85d5e2ea5cda6771363"
+  },
+  "checks": [
+    {
+      "name": "restore-final",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "IgaMigrationTool.slnx",
+        "--locked-mode",
+        "--disable-parallel"
+      ],
+      "exitCode": 0,
+      "seconds": 0.944,
+      "log": "work/m08-cycle03-evidence/coordinator/restore-final.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "name": "format-final",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "IgaMigrationTool.slnx",
+        "--verify-no-changes",
+        "--no-restore"
+      ],
+      "exitCode": 0,
+      "seconds": 17.834,
+      "log": "work/m08-cycle03-evidence/coordinator/format-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "build-final",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "IgaMigrationTool.slnx",
+        "--configuration",
+        "Release",
+        "--no-restore",
+        "-m:1",
+        "-nodeReuse:false",
+        "-p:UseSharedCompilation=false"
+      ],
+      "exitCode": 0,
+      "seconds": 47.537,
+      "log": "work/m08-cycle03-evidence/coordinator/build-final.log",
+      "sha256": "e949d59e6cfb58c0590a59f60ee1a322c245908c71c5c43b70e2e95a0447bc1c"
+    },
+    {
+      "name": "sampling-oracle-final",
+      "command": [
+        "python3",
+        "tests/unit/SyntheticEvaluationSampling.Tests/oracle.py"
+      ],
+      "exitCode": 0,
+      "seconds": 0.028,
+      "log": "work/m08-cycle03-evidence/coordinator/sampling-oracle-final.log",
+      "sha256": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7"
+    },
+    {
+      "name": "composed-oracle-final",
+      "command": [
+        "python3",
+        "tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py"
+      ],
+      "exitCode": 0,
+      "seconds": 0.022,
+      "log": "work/m08-cycle03-evidence/coordinator/composed-oracle-final.log",
+      "sha256": "dc68fa3844b695510513bc0e7000e255ebe5b08d6333d4647b11a34a944c54e1"
+    },
+    {
+      "name": "focused-final-SyntheticEvaluationSampling",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticEvaluationSampling.Tests/bin/Release/net10.0/SyntheticEvaluationSampling.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 1.443,
+      "log": "work/m08-cycle03-evidence/coordinator/focused-final-SyntheticEvaluationSampling.log",
+      "sha256": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8"
+    },
+    {
+      "name": "focused-final-SyntheticEvaluationRegression",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticEvaluationRegression.Tests/bin/Release/net10.0/SyntheticEvaluationRegression.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 3.303,
+      "log": "work/m08-cycle03-evidence/coordinator/focused-final-SyntheticEvaluationRegression.log",
+      "sha256": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1"
+    },
+    {
+      "name": "focused-final-SyntheticEvaluationReviewer",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticEvaluationReviewer.Tests/bin/Release/net10.0/SyntheticEvaluationReviewer.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.402,
+      "log": "work/m08-cycle03-evidence/coordinator/focused-final-SyntheticEvaluationReviewer.log",
+      "sha256": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+    },
+    {
+      "name": "focused-final-SyntheticEvaluation",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticEvaluation.Tests/bin/Release/net10.0/SyntheticEvaluation.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.62,
+      "log": "work/m08-cycle03-evidence/coordinator/focused-final-SyntheticEvaluation.log",
+      "sha256": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1"
+    },
+    {
+      "name": "composed-final",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/integration/SyntheticEvaluationPolicy.Tests/bin/Release/net10.0/SyntheticEvaluationPolicy.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.074,
+      "log": "work/m08-cycle03-evidence/coordinator/composed-final.log",
+      "sha256": "c679515e0b92fbe97f0f28f50c3168c4fb2f00dc2da842f2e8fa22ecf5c502f4"
+    },
+    {
+      "name": "regression-EvidenceGovernance",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/EvidenceGovernance.Tests/bin/Release/net10.0/EvidenceGovernance.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 1.423,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-EvidenceGovernance.log",
+      "sha256": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40"
+    },
+    {
+      "name": "regression-AssessmentCoverage",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/AssessmentCoverage.Tests/bin/Release/net10.0/AssessmentCoverage.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.143,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-AssessmentCoverage.log",
+      "sha256": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd"
+    },
+    {
+      "name": "regression-AssessmentOrchestration",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/AssessmentOrchestration.Tests/bin/Release/net10.0/AssessmentOrchestration.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.27,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-AssessmentOrchestration.log",
+      "sha256": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5"
+    },
+    {
+      "name": "regression-AssessmentScoring",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/AssessmentScoring.Tests/bin/Release/net10.0/AssessmentScoring.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.485,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-AssessmentScoring.log",
+      "sha256": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0"
+    },
+    {
+      "name": "regression-AssessmentMaturity",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/AssessmentMaturity.Tests/bin/Release/net10.0/AssessmentMaturity.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 2.785,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-AssessmentMaturity.log",
+      "sha256": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698"
+    },
+    {
+      "name": "regression-DeterministicAnalysis",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/DeterministicAnalysis.Tests/bin/Release/net10.0/DeterministicAnalysis.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.105,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-DeterministicAnalysis.log",
+      "sha256": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af"
+    },
+    {
+      "name": "regression-ReportDrafts",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/ReportDrafts.Tests/bin/Release/net10.0/ReportDrafts.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.185,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-ReportDrafts.log",
+      "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4"
+    },
+    {
+      "name": "regression-ReportMarkdown",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/ReportMarkdown.Tests/bin/Release/net10.0/ReportMarkdown.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.091,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-ReportMarkdown.log",
+      "sha256": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef"
+    },
+    {
+      "name": "regression-RecommendationGuidance",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/RecommendationGuidance.Tests/bin/Release/net10.0/RecommendationGuidance.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.111,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-RecommendationGuidance.log",
+      "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325"
+    },
+    {
+      "name": "regression-SyntheticAiPackets",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticAiPackets.Tests/bin/Release/net10.0/SyntheticAiPackets.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.066,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-SyntheticAiPackets.log",
+      "sha256": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d"
+    },
+    {
+      "name": "regression-SyntheticAiProposals",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticAiProposals.Tests/bin/Release/net10.0/SyntheticAiProposals.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.061,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-SyntheticAiProposals.log",
+      "sha256": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408"
+    },
+    {
+      "name": "regression-SyntheticAiPreview",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.137,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-SyntheticAiPreview.log",
+      "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0"
+    },
+    {
+      "name": "regression-SyntheticFixPackages",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 1.985,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-SyntheticFixPackages.log",
+      "sha256": "d8f6f6e6655167200d8a8f61aca65874a8f6c5144a3c059e7fec89f985d4b4c1"
+    },
+    {
+      "name": "regression-CollectorSafety",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/unit/CollectorSafety.Tests/bin/Release/net10.0/CollectorSafety.Tests.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.198,
+      "log": "work/m08-cycle03-evidence/coordinator/regression-CollectorSafety.log",
+      "sha256": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61"
+    },
+    {
+      "name": "architecture-final",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/architecture/BoundaryChecks/bin/Release/net10.0/BoundaryChecks.dll"
+      ],
+      "exitCode": 0,
+      "seconds": 0.047,
+      "log": "work/m08-cycle03-evidence/coordinator/architecture-final.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    }
+  ],
+  "assertions": {
+    "sampling": 7717,
+    "regression": 6144,
+    "reviewer": 300626,
+    "originalAccuracy": 23550,
+    "composed": 128,
+    "counts": "independent host assertions, overlapping checks; do not sum"
+  },
+  "reviews": {
+    "sampling": "reviewer/nonauthor-review-sampling-corrected.json",
+    "regression": "regression/nonauthor-sampling-review.json",
+    "reviewer": "reviewer-nonauthor/final/review.json",
+    "composed": "reviewer/nonauthor-review-composition-final.json",
+    "formatter": "reviewer/format-independent-token-review.json",
+    "result": "All scoped findings CLOSED, independently replayed; no human acceptance implied"
+  },
+  "oracleLineage": [
+    "Sampling and composed full-byte expectations committed before dependent module implementation inspection; Python CI replays assert committed literals.",
+    "Regression two empty envelopes committed before code; two expanded nonempty independent Python expectations added afterward without using product output; nonauthor independently reconstructed all four.",
+    "Cryptographic rank collision tie branch source-reviewed; no fabricated hash injection or claim of executed collision."
+  ],
+  "corrections": [
+    "Initial sampling plus-offset golden escaping corrected before code; binding cap before copy and CI literal oracle assertions fixed after nonauthor review.",
+    "Reviewer current policy indexes expanded to detached per-assignment category sets and verified at 100000 members/categories.",
+    "Composed CI oracle/context/unavailability missing coverage and a vacuous assertion fixed before final128 replay.",
+    "Initial formatter failures corrected in owned C# files. A git diff -w semantic-check assertion failed because layout newlines persist; command continued to commit. Independent exact token streams including string/char/comment literals verified no semantic changes; final solution formatter rerun passed.",
+    "Disk recovery used sparse owned worktrees and lossless prior-own source-container deduplication; original source-view bytes/modes/path digests retained.",
+    "Initial Site helper invocation included an unsupported open argument and exited64 before action; corrected helper invocation used documented JSON stdin.",
+    "Canonical metadata filename-as-key hashes triggered nine generic-api-key heuristics. All nine actual native artifact digests independently reproduced; original failed scan retained. Explicit path/contentHash/algorithm metadata replaces ambiguous notation; scanner unchanged and unignored final scan rerun."
+  ],
+  "configuration": {
+    "projects": 68,
+    "addedProjects": 4,
+    "packages": "none; project-only lockfiles",
+    "databaseMigrations": "none",
+    "runtimeFlags": "none",
+    "productionOrProviderChanges": "none",
+    "workflow": "Linux/Windows focused and composed hosts plus independent sampling/composed Python oracles",
+    "architecture": "existing module boundaries; no host/UI/database registration",
+    "finalWorkflowCorrection": "After runtime checks at79b10cb, nonauthor config review found Windows multiline native exit masking. Explicit LASTEXITCODE guards added after all six new calls and independently source-verified; no C#/fixture/project change; actual hosted Windows execution NOT VERIFIED."
+  },
+  "rollback": "Stop calling new pure APIs; original accuracy-v1 source and canonical bytes preserved. No durable data migration/deletion.",
+  "notVerified": [
+    "Hosted checks on final published source until an exact run is observed",
+    "All40 proposed operational cases as a complete matrix",
+    "Real identities/customer grants/current-policy server enforcement and protected history/redaction",
+    "Named qualified independent human reviewers and real two-environment evaluation",
+    "Atomic commit/queues/reassignment/adjudication/durable correction/history/audit/retention",
+    "UI/API/browser/database/end-to-end live integration and manual accessibility",
+    "Recurrence/reassessment/score explanations and residual FR-HAS-12/15 contracts",
+    "Full M08/Phase1C/TP-HAS-012/019/UAT/G1-G9"
+  ],
+  "preservation": "Original source/runtime/log archives and rehashed manifest preserved under work/m08-cycle03-evidence before clean owned-worktree removal; final closure receipt records actual result.",
+  "documentChecks": {
+    "status": "PASS",
+    "relativeMarkdownLinks": 244,
+    "links": [
+      [
+        "plans/active/local-pilot-m08-policy-implementation-cycle03.md",
+        "../../specs/003-health-assessment/local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/evaluation-plan.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/evaluation-plan.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-durable-consultant-cycle-03.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/e2e/consultant-demo/execution.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-durable-consultant-cycle-03.md#confirmed-closure"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-analysis-scoring-cycle-04.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle04-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/integration/AnalysisScoring.Tests/evidence.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-parallel-cycle-02.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-parallel-cycle-01.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/azure-pilot-development-setup.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/azure-pilot-development-setup.md#first-test-proposal-and-executed-preflight--2026-10-01"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/azure-pilot-spike-20261001.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/azure-development-foundation-cycle.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/azure-pilot-foundation-20261001.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/azure-development-foundation-cycle.md#approved-foundation-execution--2026-10-01-edt--2026-10-02-utc"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/azure-application-package-cycle.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/azure-application-package-20261001.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-review-maturity-cycle-05.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle05-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/integration/ReviewMaturity.Tests/evidence.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/e2e/review-maturity/artifacts.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/bff-identity-session-20261002.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/bff-identity-session-cycle.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-draft-report-cycle-06.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle06-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-recommendation-guidance-cycle-07.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle07-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-synthetic-ai-cycle-08.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "synthetic-ai-fixture-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle08-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/unit/SyntheticAiPackets.Tests/evidence.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/unit/SyntheticAiProposals.Tests/execution.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/integration/SyntheticAiValidation.Tests/artifacts.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/integration/SyntheticAiValidation.Tests/reviewed-source.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-ai-preview-cycle-09.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "synthetic-ai-preview-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle09-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-ai-workspace-cycle-10.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle10-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-fix-packages-cycle-11.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle11-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/completed/local-pilot-fix-workspace-cycle-12.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle12-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-artifact-review-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-artifact-review-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle13-preparation.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-artifact-review-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle13-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/integration/LocalArtifactReview.Tests/execution.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../tests/e2e/artifact-review/execution.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-planning-task-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-planning-tasks-cycle-14.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-planning-task-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle14-preparation.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-planning-tasks-cycle-14.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/local-pilot-cycle14-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-m08-evaluation-foundation.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "synthetic-evaluation-accuracy-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/m08-evaluation-foundation-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/m08-evaluation-site-publication-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-phase1b-closure-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-phase1b-closure.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/phase1b-closure-preparation-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-phase1b-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-phase1b-closure.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-m08-evaluation-policy-cycle02.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-evaluation-policy-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/m08-evaluation-policy-cycle02-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-phase1b-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/m08-evaluation-policy-site-cycle02-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-evaluation-policy-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "../../docs/development/evidence/m08-evaluation-policy-cycle03-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "evaluation-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/evidence-index.md",
+        "local-evaluation-reviewer-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/one-identity-local-pilot-build.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/azure-pilot-development-setup.md#approved-deployment-execution--2026-10-01"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../001-data-ingestion/one-identity-environment-a-sme-response.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../001-data-ingestion/one-identity-environment-a-sme-response.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/one-identity-local-pilot-build.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/azure-pilot-spike-20261001.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-parallel-cycle-02.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-parallel-cycle-01.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-durable-consultant-cycle-03.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/azure-development-foundation-cycle.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/azure-foundation-session-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-durable-consultant-cycle-03.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-analysis-scoring-cycle-04.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-analysis-scoring-cycle-04.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/deterministic-catalog-review.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/azure-application-package-cycle.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/azure-application-package.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-review-maturity-cycle-05.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-review-maturity-cycle-05.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/bff-identity-session-20261002.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/bff-foundation-review-20261002.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/bff-identity-session-foundation.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-draft-report-cycle-06.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-draft-report-cycle-06.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-recommendation-guidance-cycle-07.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-synthetic-ai-cycle-08.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "synthetic-ai-fixture-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/local-pilot-cycle08-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-ai-preview-cycle-09.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "synthetic-ai-preview-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/local-pilot-cycle09-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-ai-workspace-cycle-10.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/local-pilot-cycle10-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-fix-packages-cycle-11.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/local-pilot-cycle11-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/completed/local-pilot-fix-workspace-cycle-12.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/local-pilot-cycle12-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-artifact-review-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-artifact-review-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-artifact-review-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/local-pilot-cycle13-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-planning-tasks-cycle-14.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-planning-task-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-planning-tasks-cycle-14.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/local-pilot-cycle14-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-m08-evaluation-foundation.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "synthetic-evaluation-accuracy-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/m08-evaluation-foundation-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/m08-evaluation-site-publication-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-phase1b-closure.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-phase1b-closure-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/phase1b-closure-preparation-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-phase1b-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-phase1b-closure.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-m08-evaluation-policy-cycle02.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-evaluation-policy-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/m08-evaluation-policy-cycle02-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-phase1b-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/m08-evaluation-policy-site-cycle02-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-evaluation-policy-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "../../docs/development/evidence/m08-evaluation-policy-cycle03-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "evaluation-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/implementation-plan.md",
+        "local-evaluation-reviewer-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/local-evaluation-policy-approval.md",
+        "local-evaluation-policy-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/local-evaluation-policy-approval.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-recommendation-guidance-cycle-07.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-draft-report-cycle-06.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-review-maturity-cycle-05.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-analysis-scoring-cycle-04.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-durable-consultant-cycle-03.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-parallel-cycle-02.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-parallel-cycle-01.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/azure-pilot-development-setup.md#approved-deployment-execution--2026-10-01"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/one-identity-local-pilot-build.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../001-data-ingestion/one-identity-environment-a-sme-response.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../001-data-ingestion/collector-delivery-and-installer-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/one-identity-local-pilot-build.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/azure-pilot-foundation-20261001.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/azure-development-foundation-cycle.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/azure-application-package-cycle.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/azure-application-package.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/bff-identity-session-20261002.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/bff-foundation-review-20261002.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/bff-identity-session-foundation.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-synthetic-ai-cycle-08.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle08-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-ai-preview-cycle-09.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle09-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-ai-workspace-cycle-10.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle10-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-fix-packages-cycle-11.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle11-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/completed/local-pilot-fix-workspace-cycle-12.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle12-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-artifact-review-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-artifact-review-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle13-preparation.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-artifact-review-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-artifact-review-cycle-13.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle13-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-planning-task-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-planning-tasks-cycle-14.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-planning-task-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-planning-tasks-cycle-14.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/local-pilot-cycle14-developer-checks.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-m08-evaluation-foundation.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "synthetic-evaluation-accuracy-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/m08-evaluation-foundation-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/m08-evaluation-site-publication-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-phase1b-closure.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-phase1b-closure-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/phase1b-closure-preparation-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-phase1b-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-phase1b-closure.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-m08-evaluation-policy-cycle02.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-evaluation-policy-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/m08-evaluation-policy-cycle02-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-phase1b-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/m08-evaluation-policy-site-cycle02-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-evaluation-policy-decision-packet.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "../../docs/development/evidence/m08-evaluation-policy-cycle03-20261003.json"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "evaluation-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/status.md",
+        "local-evaluation-reviewer-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-regression-v1-contract.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-regression-v1-contract.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-reviewer-v1-contract.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-reviewer-v1-contract.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-reviewer-v1-contract.md",
+        "local-evaluation-reviewer-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-reviewer-v1-contract.md",
+        "local-evaluation-reviewer-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-sampling-v1-contract.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-sampling-v1-contract.md",
+        "local-evaluation-sampling-contract-proposal.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-sampling-v1-contract.md",
+        "local-evaluation-sampling-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-sampling-v1-contract.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/synthetic-evaluation-sampling-v1-contract.md",
+        "../../tests/unit/SyntheticEvaluationSampling.Tests/oracle.py"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "../../docs/development/assessment-coverage.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "../../plans/completed/local-pilot-parallel-cycle-02.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "../../docs/development/assessment-coverage.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "../../plans/completed/local-pilot-parallel-cycle-01.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "local-planning-task-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "synthetic-evaluation-sampling-v1-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "synthetic-evaluation-regression-v1-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/technical-spec.md",
+        "synthetic-evaluation-reviewer-v1-contract.md"
+      ],
+      [
+        "specs/003-health-assessment/test-plan.md",
+        "human-uat-test-plan.md"
+      ],
+      [
+        "specs/003-health-assessment/test-plan.md",
+        "local-evaluation-policy-approval.md"
+      ],
+      [
+        "specs/003-health-assessment/test-plan.md",
+        "../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "src/server/modules/SyntheticEvaluation/README.md",
+        "../../../../specs/003-health-assessment/local-evaluation-policy-approval.md"
+      ],
+      [
+        "src/server/modules/SyntheticEvaluation/README.md",
+        "../../../../specs/003-health-assessment/synthetic-evaluation-accuracy-contract.md"
+      ],
+      [
+        "src/server/modules/SyntheticEvaluation/README.md",
+        "../../../../specs/003-health-assessment/synthetic-evaluation-sampling-v1-contract.md"
+      ],
+      [
+        "src/server/modules/SyntheticEvaluation/README.md",
+        "../../../../specs/003-health-assessment/synthetic-evaluation-regression-v1-contract.md"
+      ],
+      [
+        "src/server/modules/SyntheticEvaluation/README.md",
+        "../../../../specs/003-health-assessment/synthetic-evaluation-reviewer-v1-contract.md"
+      ],
+      [
+        "src/server/modules/SyntheticEvaluation/README.md",
+        "../../../../tests/integration/SyntheticEvaluationPolicy.Tests/README.md"
+      ],
+      [
+        "src/server/modules/SyntheticEvaluation/README.md",
+        "../../../../plans/active/local-pilot-m08-policy-implementation-cycle03.md"
+      ],
+      [
+        "tests/unit/SyntheticEvaluationReviewer.Tests/README.md",
+        "../../../specs/003-health-assessment/synthetic-evaluation-reviewer-v1-contract.md"
+      ]
+    ],
+    "ciBothPlatformsFocusedComposedAndOracles": true,
+    "traceability": "FR/AC/TP and exact EV02 authority present",
+    "whitespace": "git diff --check exit0"
+  },
+  "nativeArtifacts": [
+    {
+      "path": "check-final.py",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "a4b9ea8f6655440e583324fd0a2c61e60c029189b73075fb924a8d224551f61e"
+      }
+    },
+    {
+      "path": "coordinator/accuracy-baseline.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "8cd482d8560b1a493b41141fd622c8985d32967301beb0fb8064729c2ebd6014"
+      }
+    },
+    {
+      "path": "coordinator/accuracy-baseline.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1"
+      }
+    },
+    {
+      "path": "coordinator/architecture-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+      }
+    },
+    {
+      "path": "coordinator/build-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e949d59e6cfb58c0590a59f60ee1a322c245908c71c5c43b70e2e95a0447bc1c"
+      }
+    },
+    {
+      "path": "coordinator/build-initial.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "1b35db09abca17a3a2a80383eb6b4187073c887d211a9334f4c333d386907cb3"
+      }
+    },
+    {
+      "path": "coordinator/build-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "edbe1455a47cc14478b7d90624316c4d4170e0229c39cb26733fd6652eb36c0d"
+      }
+    },
+    {
+      "path": "coordinator/composed-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c679515e0b92fbe97f0f28f50c3168c4fb2f00dc2da842f2e8fa22ecf5c502f4"
+      }
+    },
+    {
+      "path": "coordinator/composed-initial.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d5c7706a5bd991fc04700f056e61f3fd9cafe6c1d7ce61235cd94448f433a7c5"
+      }
+    },
+    {
+      "path": "coordinator/composed-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c679515e0b92fbe97f0f28f50c3168c4fb2f00dc2da842f2e8fa22ecf5c502f4"
+      }
+    },
+    {
+      "path": "coordinator/composed-oracle-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "dc68fa3844b695510513bc0e7000e255ebe5b08d6333d4647b11a34a944c54e1"
+      }
+    },
+    {
+      "path": "coordinator/final-checks.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "580de40c4b1bc92782029a87d7126cc75b185bd7b599b2aa361c45c1a41dcac5"
+      }
+    },
+    {
+      "path": "coordinator/focused-final-SyntheticEvaluation.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1"
+      }
+    },
+    {
+      "path": "coordinator/focused-final-SyntheticEvaluationRegression.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1"
+      }
+    },
+    {
+      "path": "coordinator/focused-final-SyntheticEvaluationReviewer.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+      }
+    },
+    {
+      "path": "coordinator/focused-final-SyntheticEvaluationSampling.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8"
+      }
+    },
+    {
+      "path": "coordinator/format-apply.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "coordinator/format-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "coordinator/format-initial.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4f0dd66a26885f48e6864cb95de83c7c2c202ddebdfe7bac2dae1ad8bfc24805"
+      }
+    },
+    {
+      "path": "coordinator/format-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d50e987e4b619339a89731c9201e1ec8f98b91b540d7f28ae2fbdc03d12d7ab3"
+      }
+    },
+    {
+      "path": "coordinator/format-token-verification.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "3942a7d4498875651cd1e9125e17f0a6b2c5b1f3e4a9a2e81375436bf32334a5"
+      }
+    },
+    {
+      "path": "coordinator/regression-AssessmentCoverage.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd"
+      }
+    },
+    {
+      "path": "coordinator/regression-AssessmentMaturity.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698"
+      }
+    },
+    {
+      "path": "coordinator/regression-AssessmentOrchestration.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5"
+      }
+    },
+    {
+      "path": "coordinator/regression-AssessmentScoring.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0"
+      }
+    },
+    {
+      "path": "coordinator/regression-CollectorSafety.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61"
+      }
+    },
+    {
+      "path": "coordinator/regression-DeterministicAnalysis.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af"
+      }
+    },
+    {
+      "path": "coordinator/regression-EvidenceGovernance.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40"
+      }
+    },
+    {
+      "path": "coordinator/regression-RecommendationGuidance.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325"
+      }
+    },
+    {
+      "path": "coordinator/regression-ReportDrafts.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4"
+      }
+    },
+    {
+      "path": "coordinator/regression-ReportMarkdown.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef"
+      }
+    },
+    {
+      "path": "coordinator/regression-SyntheticAiPackets.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d"
+      }
+    },
+    {
+      "path": "coordinator/regression-SyntheticAiPreview.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0"
+      }
+    },
+    {
+      "path": "coordinator/regression-SyntheticAiProposals.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408"
+      }
+    },
+    {
+      "path": "coordinator/regression-SyntheticFixPackages.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d8f6f6e6655167200d8a8f61aca65874a8f6c5144a3c059e7fec89f985d4b4c1"
+      }
+    },
+    {
+      "path": "coordinator/restore-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+      }
+    },
+    {
+      "path": "coordinator/restore-initial.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9912f53f68a492856771d06fc9d6fbe115712bb04734106e9196bd7b57545f57"
+      }
+    },
+    {
+      "path": "coordinator/restore-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "adf1957595ffe2b5aac1689aa7d7e242324478ce8be99b84cda1f709f4cf9539"
+      }
+    },
+    {
+      "path": "coordinator/restore-locked.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "bb3c3767a1cd3ae581a9cb4b0e1b388421d52338f1622113065f81c1f241fca9"
+      }
+    },
+    {
+      "path": "coordinator/restore-locked.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "f3e25ff7744a5636c8c9105db26de9c4cf62c97e05805667c324e945fa5fe8e2"
+      }
+    },
+    {
+      "path": "coordinator/sampling-oracle-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7"
+      }
+    },
+    {
+      "path": "deduplicate-old-source.py",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "da7dc93fe68deee8c79a160d814eed78a16f362bac88c2cca6060833635c0ceb"
+      }
+    },
+    {
+      "path": "finalize-docs.py",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "7c7443a2d74094941cdf810138bca014ae064ff590180ef984aae31eb76ff27c"
+      }
+    },
+    {
+      "path": "regression/NonemptyRegression-oracle.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c9dac851389d64933cf918b93008a82bc8c90c7c58325793baefc4ab34abb628"
+      }
+    },
+    {
+      "path": "regression/NonemptyWarning-oracle.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "afcea306c62268e49c3a202e5f8e67fdb02d150f71a12ba21ab89bc3707ae6e3"
+      }
+    },
+    {
+      "path": "regression/Regression-oracle.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "cfb40972af45fdaffd27fadc1ec4d35533dfd73efbef0f4299522c8ccc052ad1"
+      }
+    },
+    {
+      "path": "regression/Warning-oracle.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "766f4cc46f78306849d5be0577554b34b43816101f111e6d499612bfb2c1da4e"
+      }
+    },
+    {
+      "path": "regression/accuracy-build.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "fef760ac801104daf549c796e01c5dc5d9bcb88c6f38af118263642fa6c02d9a"
+      }
+    },
+    {
+      "path": "regression/accuracy-restore.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "54d5b392095bdb924bb88eaffd4a1e4aac86cd0dcf11dce33cc326ea9d58b903"
+      }
+    },
+    {
+      "path": "regression/accuracy-runtime.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1"
+      }
+    },
+    {
+      "path": "regression/build-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "1f4d5a0bb24a60f75e1ac3e1b21cee4dc66b85447f959467f948f1690ca28343"
+      }
+    },
+    {
+      "path": "regression/build-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "cf05f53577c1eee2057149cc86a7762d5cd96a87059bd18d639cca85ba8e206b"
+      }
+    },
+    {
+      "path": "regression/canonical-oracle-inputs.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "25d2d2b21e363d9bdf1d552ff28e487144682d571f97f86b39f6da47a7c4ecd1"
+      }
+    },
+    {
+      "path": "regression/canonical-oracle-results.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "459b7172ccbc8307dc0bde283e8834b0d9e7a6b282d2a2aa59c1a5ec151e77ab"
+      }
+    },
+    {
+      "path": "regression/canonical-oracle.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9dbbb13e8433ff6575b53052fdc7fb33b8a9490c8b5e96c89505509883066776"
+      }
+    },
+    {
+      "path": "regression/canonical-oracle.py",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9bd4dfe94e83aa4f595dd20b2e8aad6c692161d60b37a0e9645a9a8943b13655"
+      }
+    },
+    {
+      "path": "regression/format-expanded-failure.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "bbcdafb1d3bfd245bb64446252b399b5bf9ccae927c2337d123843afa3184a0d"
+      }
+    },
+    {
+      "path": "regression/format-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "regression/format-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "regression/format-repair.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "regression/gitleaks.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      }
+    },
+    {
+      "path": "regression/gitleaks.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "8152aba6de9e6f13438bde9175ec04891b59bae6e7694007ce7bd86c8485b205"
+      }
+    },
+    {
+      "path": "regression/nonauthor-four-envelope-oracle.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4f6406602bf8cc7587eb5868c6aeb731f4947a5d6f848ddf0d8a3fecaae5694f"
+      }
+    },
+    {
+      "path": "regression/nonauthor-four-envelope-oracle.py",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d14d3ddce230894556cc8cb9e792c69a9675e0b2131e40d9c44c016bd65eb77c"
+      }
+    },
+    {
+      "path": "regression/nonauthor-sampling-review-replay.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1"
+      }
+    },
+    {
+      "path": "regression/nonauthor-sampling-review.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "bc7082eee9950c59fed904bef52f507ee3fbb86e9fb5a6d26430fd70a06331ab"
+      }
+    },
+    {
+      "path": "regression/packet-evidence.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4c00009e99bf42dbdaccd2e0c2e49dca40bb4307bf3bbf7303ea50aee4a94bd3"
+      }
+    },
+    {
+      "path": "regression/restore-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c500088a2cbf1711f8eac3c5f42b4de66d1b0bc4eb784a2cc1c94777666475ac"
+      }
+    },
+    {
+      "path": "regression/runtime-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1"
+      }
+    },
+    {
+      "path": "regression/runtime-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "cdde82b1b4dcf00e3c2f0ce7e37b82980df9387ac48d1a5f572945acb327c516"
+      }
+    },
+    {
+      "path": "reviewer/author-handoff-final.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "a27e57b831ddc8790623b31f6f55a370187f3e913e9ed2cdec11993c66f5e0ab"
+      }
+    },
+    {
+      "path": "reviewer/author-handoff-index.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "19c12a8fa719ff51e4bc8cdf00a58da78bfa3668222db94f7d4b2bff51a34d51"
+      }
+    },
+    {
+      "path": "reviewer/author-handoff.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "eec9d3cdd0c8dcd61fdbd3756c433a2a1d532e1f43efe1ba6c177947a9aa2d6e"
+      }
+    },
+    {
+      "path": "reviewer/build-category-index.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d27929cc9762b18e67f49324fe2e3dd1f28cd888ae97948c435fcdf1b87480f0"
+      }
+    },
+    {
+      "path": "reviewer/build-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "6b892ad64709361799e86843e04bc4fd5527bf9efc4b3559ff6cb08c6f5b2641"
+      }
+    },
+    {
+      "path": "reviewer/build-index.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c437d0908062b14d228b1f748fbacfdf7780b9130fe2efa9f6246433ecb1c8f2"
+      }
+    },
+    {
+      "path": "reviewer/build.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "dcaa41a727027474c2f9d90325758998e359697e9c2f4efe6d09c24fae6dbbf5"
+      }
+    },
+    {
+      "path": "reviewer/composition-final-independent-runtime.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c679515e0b92fbe97f0f28f50c3168c4fb2f00dc2da842f2e8fa22ecf5c502f4"
+      }
+    },
+    {
+      "path": "reviewer/format-category-index-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer/format-category-index.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer/format-independent-token-review.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "3f0ffd405bf92f314b0a4707af1a285eb40beb7058d16df241984e3d78624c08"
+      }
+    },
+    {
+      "path": "reviewer/format-index-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer/format-index.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer/format-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer/format.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer/nonauthor-review-composition-corrected.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "fb8024d8487aa715de5949c56af6a2a2538f88ff0988b9712cfcb6f0f83652d9"
+      }
+    },
+    {
+      "path": "reviewer/nonauthor-review-composition-final.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "7f95b2246b0fba7fedece0c18d237e05883425b362758afb52118cb663a35c19"
+      }
+    },
+    {
+      "path": "reviewer/nonauthor-review-initial.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4d8def328137001167db30884c6bfc9ba4c255d791a4430dc638b23c4f4e98cb"
+      }
+    },
+    {
+      "path": "reviewer/nonauthor-review-sampling-corrected.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "47de12ff6410dc53de529855c49da4ed6d28c8ef4a33d9c9aee4ecba4615b8bd"
+      }
+    },
+    {
+      "path": "reviewer/nonauthor-sampling-review-replay.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+      }
+    },
+    {
+      "path": "reviewer/nonauthor-sampling-review.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9dbb0b0ee49db9378774af6b9c38af1be0b98933007f980977b109d82f27b8d3"
+      }
+    },
+    {
+      "path": "reviewer/restore.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "a3409e99fffe1b5eacc827eb503e5a4578608923f385b0b583a04167b8c97232"
+      }
+    },
+    {
+      "path": "reviewer/sampling-review-build.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0ac454548e9961f31088ca04a321e835f55c73ece860c807df08cf47fd1e4af8"
+      }
+    },
+    {
+      "path": "reviewer/sampling-review-corrected-build.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "adc95f64fcf3f6f1eefb5800cd3b1bbded26e0b02d0f881ba73ad1348ff7b2eb"
+      }
+    },
+    {
+      "path": "reviewer/sampling-review-corrected-oracle.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7"
+      }
+    },
+    {
+      "path": "reviewer/sampling-review-corrected-unit.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8"
+      }
+    },
+    {
+      "path": "reviewer/sampling-review-negative-oracle.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4294433068b0c4e4e6b431364ad1f695f315f664f764462fd96e7cd8b3cb33d5"
+      }
+    },
+    {
+      "path": "reviewer/sampling-review-oracle.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7"
+      }
+    },
+    {
+      "path": "reviewer/sampling-review-unit.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "951d21a85bfc8d21b23919a40c8c605c7d1f17ec64dffd58692df5fb9bbfa691"
+      }
+    },
+    {
+      "path": "reviewer/secrets-category-index-module.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d05a11f87e61445f908ee6df1a3fc6c8b51fdcea9d14aa5501ed3add673a6eb6"
+      }
+    },
+    {
+      "path": "reviewer/secrets-category-index-test.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0313ade748baec80077bc5a1579f97adcd8f1bbb49057e778577a7e7950315c9"
+      }
+    },
+    {
+      "path": "reviewer/secrets-index-module.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "075f1b853ae4b8044d4b977cd06068c41fe38c1522d3755ec9addaca484b1be8"
+      }
+    },
+    {
+      "path": "reviewer/secrets-index-test.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0cfdf043cf9d8b90fa372bc6aa6c3938155e1c18efe268c93e5d9d27a4f137cc"
+      }
+    },
+    {
+      "path": "reviewer/secrets-module.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c3af4d232be073ab3f3fd4bbf44311964c9779c006a4eec7c1f8a5603ad6a872"
+      }
+    },
+    {
+      "path": "reviewer/secrets-test.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "30d088611c9bc28a35ab093557a6e6a9c03c0bfff65a305c4a11ae9f5d0abdfa"
+      }
+    },
+    {
+      "path": "reviewer/unit-category-index.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+      }
+    },
+    {
+      "path": "reviewer/unit-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0d8ba988d6f2af515304d9a2bfc48653f4a416b8143ac5647e3e98f203441b2e"
+      }
+    },
+    {
+      "path": "reviewer/unit-index.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+      }
+    },
+    {
+      "path": "reviewer/unit.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0d8ba988d6f2af515304d9a2bfc48653f4a416b8143ac5647e3e98f203441b2e"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/build.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "16ee5a25b23d47925a79dc4e34503d16c9ebe9ee939af96de466130a471124d7"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/final/build.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d27929cc9762b18e67f49324fe2e3dd1f28cd888ae97948c435fcdf1b87480f0"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/final/format.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/final/restore.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/final/review.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "24456989020410bae48b93d717cd9a06b8e6282b82e1323bf7ce0baa324a65ca"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/final/review.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "97107fb28187032fadfc23fb60053ce3fb0228ceca1c786d39acd5077e8c710c"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/final/runtime.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/format.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/restore.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/review.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "bd1fd6df1c611d4a3262032aee83882e0f352c801059494c8026c72ac67194db"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/review.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "2e434bae3dc1acc420778ea3886c223fb669c276f2870cc9fd5cbad091fd1c74"
+      }
+    },
+    {
+      "path": "reviewer-nonauthor/runtime.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+      }
+    },
+    {
+      "path": "root-before.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "b0aaff5ad5c4664ecbd4ee385075ae6182ef321ed4f31f309cc14dadb091b761"
+      }
+    },
+    {
+      "path": "sampling/author-evidence-corrected.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "a3795d56231828fd5dc8f00e6ce4eda569a01fd10abc689d10f98d34b1b2e72b"
+      }
+    },
+    {
+      "path": "sampling/author-evidence.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4cf35febf6305de9faa5f25bc087d64e25b9dd5c31e3c3e35f86c8045d68373d"
+      }
+    },
+    {
+      "path": "sampling/build-corrected.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "a746e4815f8f114585eee2972b7ac57be18debc452d09e06e574d8479710b37e"
+      }
+    },
+    {
+      "path": "sampling/build-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "0ac454548e9961f31088ca04a321e835f55c73ece860c807df08cf47fd1e4af8"
+      }
+    },
+    {
+      "path": "sampling/build-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "a746e4815f8f114585eee2972b7ac57be18debc452d09e06e574d8479710b37e"
+      }
+    },
+    {
+      "path": "sampling/format-corrected-module-fix.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-corrected-module-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-corrected-test-fix.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-corrected-test-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-fix.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-full-module-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-full-test-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-module-fix.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-module-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/format-verify.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "sampling/oracle-corrected.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7"
+      }
+    },
+    {
+      "path": "sampling/oracle-final.json",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7"
+      }
+    },
+    {
+      "path": "sampling/oracle-negative-check.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "d7f6d71903bf28dde50ee3a9d741a707bfa4b4a2ab76526d656ff5f9807b81c3"
+      }
+    },
+    {
+      "path": "sampling/restore-locked-audit.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "756fdcfb75a3f9bf6897232fe3aa0e724b019b3b4d9d43633a4b0367366c467b"
+      }
+    },
+    {
+      "path": "sampling/restore.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "511f1d66fdc5e04fa985aa9fa6ea7510269088f18987a68f3244d3990dcf00ed"
+      }
+    },
+    {
+      "path": "sampling/secret-scan-corrected.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "bcf71ba2ba2e4593f7d4e119f18464b82a11c09669d4e9b33af4ae78f68256b2"
+      }
+    },
+    {
+      "path": "sampling/secret-scan-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "4096296d6a5e2f46d5644b3092539e3fdbf21919b202e6ade308aa318d7f5e21"
+      }
+    },
+    {
+      "path": "sampling/secret-scan.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "8b47fb3b7f3ea4ec42bde3da0f4ec527df713b4f9fd55731c4b67e78fc280f36"
+      }
+    },
+    {
+      "path": "sampling/test-corrected.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8"
+      }
+    },
+    {
+      "path": "sampling/test-final.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "951d21a85bfc8d21b23919a40c8c605c7d1f17ec64dffd58692df5fb9bbfa691"
+      }
+    },
+    {
+      "path": "sampling/test-initial.log",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "926da1d1df17c7840fcd6cf31bfec9206437efa4e922cb1e5a6bce52d071f490"
+      }
+    }
+  ],
+  "securityChecks": {
+    "tool": "gitleaks8.30.1",
+    "exitCode": 0,
+    "scope": "All own changed source/config/docs + canonical evidence; no ignores or changed scanner policy",
+    "log": "work/m08-cycle03-evidence/coordinator/gitleaks-final.log",
+    "sha256": "c4b9c07b29bff958a930e388bc3b651c6bd2fb35c3f0d9449030fd5dd87e69ff",
+    "findings": []
+  }
+}

@@ -121,7 +121,7 @@ The immutable report includes environments/builds/capabilities, locked versions,
 
 - PILOT-ENV-A and PILOT-ENV-B are unidentified and `NOT VERIFIED`.
 - No approved query pack, normalized schema, rule catalog, OpenAI API project/model configuration, prompt or implemented product exists; `gpt-6-sol` is selected but not yet configured or evaluated.
-- Reviewer eligibility and conflict-management procedure are not assigned.
+- Local reviewer eligibility/conflict semantics are approved in [EV02](local-evaluation-policy-approval.md); actual named qualified independent assignments, conflict decisions and real scoped enforcement remain NOT VERIFIED.
 - Reassessment timing depends on authorized later evidence collection.
 
 ## Approval
@@ -130,3 +130,7 @@ Product owner: Repository owner
 One Identity SME: Repository owner  
 Security owner: Repository owner  
 Date: 2026-09-28
+
+## Approved local semantic supplement — 2026-10-03
+
+[Exact owner EV02 approval](local-evaluation-policy-approval.md) settles S01–S04/R01–R03 for bounded local synthetic implementation. It supersedes the local policy ambiguity in lower quota when mandatory count reaches100, insufficient hard-budget handling, residual Hamilton/rank rules, warning below30 and comparative denominator/zero-baseline rules. The digest-bound sampling/reviewer proposals remain the reviewed bytes; three linked v1 engineering contracts freeze routine internal APIs. Local exact selection covers every nonempty lower stratum, and insufficient supplied hard budgets deny without a partial cohort. Reviewer procedure preserves qualified nonauthor independence, same-item retention, current permissions and originating correction history. This supplement grants no actual reviewer/customer/source authority or live gate acceptance; named assignments and all environment/reassessment proofs above remain open.
