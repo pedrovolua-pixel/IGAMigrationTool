@@ -666,3 +666,114 @@ test('textscalar admission preserves validpairs and replacementchar, rejects lon
     prepare(w, w.members[0]!, { ...draft, reason: 'reason\ud800' }, 'fictional-csrf', eventId, 0),
   );
 });
+
+test('literal95/100servercounts with correctedRejected overlap stays100denominator', async () => {
+  const f = fixture();
+  f.w.aggregateRevision = 100;
+  f.w.members.forEach((m, i) => {
+    m.revision = 1;
+    m.outcome = i < 95 ? 'Confirmed' : 'Rejected';
+  });
+  f.w.members[95]!.outcome = 'Corrected';
+  f.w.members[95]!.originatingClassification = 'Rejected';
+  f.w.members[95]!.currentCorrection = {
+    severity: 'Presentation only',
+    category: null,
+    rootCause: null,
+    recommendation: null,
+  };
+  const manifest = JSON.parse(f.v.versionManifestJson);
+  manifest.version = 100;
+  manifest.lastEventSequence = 100;
+  manifest.eventsDigest = hash('independent-fictional100events');
+  manifest.predecessorDigest = hash('independent-version99');
+  f.v.version = 100;
+  f.v.lastEventSequence = 100;
+  f.v.predecessorDigest = manifest.predecessorDigest;
+  f.v.versionManifestJson = JSON.stringify(manifest);
+  f.v.versionManifestDigest = hash(f.v.versionManifestJson);
+  const accuracy = JSON.parse(f.v.accuracyCanonicalJson);
+  accuracy.locks.evaluationId = 'synthetic-workflow-version-100';
+  accuracy.locks.versionManifestDigest = f.v.versionManifestDigest;
+  accuracy.reviews = f.w.members.map((m) => ({
+    memberId: m.original.memberId,
+    outcome: m.outcome,
+    originatingClassification: m.originatingClassification,
+  }));
+  f.v.accuracyCanonicalJson = JSON.stringify(accuracy);
+  f.v.accuracyDigest = hash(f.v.accuracyCanonicalJson);
+  const warning = JSON.parse(f.v.warningCanonicalJson);
+  warning.accuracyDigest = f.v.accuracyDigest;
+  warning.summaries.generalAi = {
+    selected: 100,
+    confirmed: 95,
+    rejected: 5,
+    indeterminate: 0,
+    unreviewed: 0,
+    corrected: 1,
+    denominator: 100,
+    lowSampleWarning: false,
+  };
+  f.v.warningCanonicalJson = JSON.stringify(warning);
+  f.v.warningDigest = hash(f.v.warningCanonicalJson);
+  f.v.snapshotCanonicalJson = JSON.stringify({
+    schemaVersion: 'synthetic-evaluation-workflow-snapshot-v1',
+    versionManifestJson: f.v.versionManifestJson,
+    accuracyCanonicalJson: f.v.accuracyCanonicalJson,
+    warningCanonicalJson: f.v.warningCanonicalJson,
+  });
+  f.v.contentDigest = hash(f.v.snapshotCanonicalJson);
+  f.w.versions = Array.from({ length: 101 }, (_, i) => ({
+    version: i,
+    correctionCutoffUtc: time,
+    lastEventSequence: i,
+    registryVersionId: 'synthetic-registry-v1',
+    contentDigest: i === 100 ? f.v.contentDigest : hash(`independent-version${i}`),
+    predecessorDigest: i === 0 ? null : hash(`independent-version${i - 1}`),
+  }));
+  const result = await verifyVersion(parseVersion(f.v), parseWorkspace(f.w));
+  assert.deepEqual(result.counts, {
+    selected: 100,
+    confirmed: 95,
+    rejected: 5,
+    indeterminate: 0,
+    unreviewed: 0,
+    corrected: 1,
+    denominator: 100,
+    lowSampleWarning: false,
+  });
+  assert.equal(
+    `${result.counts.confirmed} / ${result.counts.denominator} confirmed`,
+    '95 / 100 confirmed',
+  );
+  assert.equal(f.w.members[95]!.originMetadata.originSeverity, 'Medium');
+});
+
+test('successfulreceiptrequires matchingfreshversionchain; oldread cannot masqueradeasrecorded', async () => {
+  const client = new Mock();
+  const flow = new Workflow(client);
+  await flow.refresh();
+  flow.stage(draft);
+  const id = flow.state.prepared!.command.eventId;
+  client.applyResponse = Promise.resolve(
+    success(
+      {
+        eventId: id,
+        memberId: selectedMemberIds[0],
+        actorId: 'synthetic-reviewer',
+        aggregateRevision: 1,
+        memberRevision: 1,
+        version: 1,
+        snapshotDigest: 'd'.repeat(64),
+        recordedAtUtc: time,
+      },
+      null,
+      false,
+    ),
+  );
+  await flow.record();
+  assert.equal(flow.state.mode, 'unavailable');
+  assert.equal(flow.state.receipt, null);
+  assert.equal(flow.state.workspace, null);
+  flow.destroy();
+});
