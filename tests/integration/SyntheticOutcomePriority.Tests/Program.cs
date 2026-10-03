@@ -193,6 +193,46 @@ rowsBefore = await Rows();
 Check((await Plan(await PlanningCommand(PlanningKind.OverridePriority, PriorityBand.Immediate), target: faultPlanning)).Issue == OutcomePriorityIssue.IntegrityMismatch, "planningfinalwritefault");
 Check(await Rows() == rowsBefore, "planningpartialwritesrolledback");
 
+// Every owning runtime API rejects reversed caller lock order before acquiring registry or writing.
+var guardOutcome = await Command(OutcomeKind.CreateDraft, "access-governance", 6);
+var guardPlanning = await PlanningCommand(PlanningKind.OverridePriority, PriorityBand.Immediate);
+var guardRows = await Rows();
+foreach (var operation in new Func<NpgsqlConnection, NpgsqlTransaction, Task<object>>[] {
+    async (c,t) => await store.ReadRegistryAsync(c,t,Consultant),
+    async (c,t) => await store.ApplyOutcomeAsync(c,t,Consultant,guardOutcome),
+    async (c,t) => await store.LockOutcomesAsync(c,t,Guid.NewGuid(),Consultant,[]),
+    async (c,t) => await store.ReadLockedAsync(c,t,Run,Consultant),
+    async (c,t) => await store.ReadPlanningAsync(c,t,Run,Consultant),
+    async (c,t) => await store.ApplyPlanningAsync(c,t,Run,Consultant,guardPlanning),
+    async (c,t) => await store.VerifyLockedForExportInTransactionAsync(c,t,Run,export) })
+{
+    await using var c = await Open(); await using var t = await c.BeginTransactionAsync();
+    await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(c, t, OutcomeScope.Fixed.CustomerId, OutcomeScope.Fixed.ProjectId, OutcomeScope.Fixed.EnvironmentId, Guid.NewGuid());
+    var result = await operation(c, t);
+    var issue = result switch { OutcomeApplyResult r => r.Issue, PlanningApplyResult r => r.Issue, OutcomeLockResult r => r.Issue, OutcomeRegistryResult r => r.Issue, PlanningReadResult r => r.Issue, OutcomeExportProofResult r => r.Issue, _ => null };
+    Check(issue == OutcomePriorityIssue.InvalidInput, "reversedcallerfencedenied" + result.GetType().Name);
+    await using var locks = new NpgsqlCommand("SELECT count(*) FROM pg_locks WHERE locktype='advisory' AND pid=pg_backend_pid() AND granted AND objsubid=1", c, t);
+    Check(Convert.ToInt64(await locks.ExecuteScalarAsync()) == 1, "reversedcallerregistryneveracquired");
+    await t.RollbackAsync();
+}
+Check(await Rows() == guardRows, "reversedcallerallownedrowsunchanged");
+await using (var c = await Open())
+{
+    await using var t = await c.BeginTransactionAsync();
+    await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(c, t, OutcomeScope.Fixed.CustomerId, OutcomeScope.Fixed.ProjectId, OutcomeScope.Fixed.EnvironmentId, Run);
+    try { await SyntheticOutcomePriorityStore.AcquireRegistryFenceAsync(c, t, OutcomeScope.Fixed); Check(false, "helperreversedorder"); }
+    catch (ArgumentException) { Check(true, "helperreversedorderdenied"); }
+    await t.RollbackAsync();
+}
+await using (var c = await Open())
+{
+    await using var t = await c.BeginTransactionAsync();
+    await SyntheticOutcomePriorityStore.AcquireRegistryFenceAsync(c, t, OutcomeScope.Fixed);
+    await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(c, t, OutcomeScope.Fixed.CustomerId, OutcomeScope.Fixed.ProjectId, OutcomeScope.Fixed.EnvironmentId, Run);
+    Check((await store.ReadPlanningAsync(c, t, Run, Consultant)).Issue is null, "correctcallerregistryrunorderallowed");
+    await t.RollbackAsync();
+}
+
 // Corruption tests preserve and restore exact accepted bytes; no regenerating source from helpers.
 var lockJson = await Scalar<string>("SELECT lock_json FROM synthetic_outcome_priority.run_locks WHERE run_id=@run", ("run", Run));
 await Db("UPDATE synthetic_outcome_priority.run_locks SET lock_json='{}' WHERE run_id=@run", ("run", Run));

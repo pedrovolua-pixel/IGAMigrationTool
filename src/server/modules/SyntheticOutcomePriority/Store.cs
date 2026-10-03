@@ -1,4 +1,6 @@
 using System.Collections.Immutable;
+using System.Buffers.Binary;
+using System.Security.Cryptography;
 using System.Globalization;
 using System.Text.Json;
 using AssessmentCoverage;
@@ -18,8 +20,21 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
         if (scope != OutcomeScope.Fixed) throw new ArgumentException("Wrong synthetic outcome scope.");
         return OutcomePriorityMigration.InitializeAsync(connection, scope, cancellationToken);
     }
-    public static Task AcquireRegistryFenceAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, OutcomeScope scope, CancellationToken cancellationToken = default) =>
-        SyntheticRunSourceFence.AcquireAsync(connection, transaction, scope.CustomerId, scope.ProjectId, scope.EnvironmentId, OutcomePriorityContract.RegistryFenceId, cancellationToken);
+    public static async Task AcquireRegistryFenceAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, OutcomeScope scope, CancellationToken cancellationToken = default)
+    {
+        Transaction(connection, transaction);
+        if (await ReversedFenceOrder(connection, transaction, scope, cancellationToken)) throw new ArgumentException("Acquire the registry fence before a run or budget fence.");
+        await SyntheticRunSourceFence.AcquireAsync(connection, transaction, scope.CustomerId, scope.ProjectId, scope.EnvironmentId, OutcomePriorityContract.RegistryFenceId, cancellationToken);
+    }
+    private static async Task<bool> ReversedFenceOrder(NpgsqlConnection c, NpgsqlTransaction t, OutcomeScope s, CancellationToken ct)
+    {
+        var key = BinaryPrimitives.ReadInt64BigEndian(SHA256.HashData(JsonSerializer.SerializeToUtf8Bytes(new
+        { schemaVersion = "synthetic-source-fence-v1", customerId = s.CustomerId, projectId = s.ProjectId, environmentId = s.EnvironmentId, runId = OutcomePriorityContract.RegistryFenceId.ToString("D") })));
+        // The frozen local composition acquires the registry before every bigint advisory run/budget fence.
+        await using var q = Query(c, t, "SELECT EXISTS(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=pg_backend_pid() AND granted AND objsubid=1),EXISTS(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=pg_backend_pid() AND granted AND objsubid=1 AND ((classid::bigint << 32) | objid::bigint)=@key)", ("key", key));
+        await using var reader = await q.ExecuteReaderAsync(ct);
+        return await reader.ReadAsync(ct) && reader.GetBoolean(0) && !reader.GetBoolean(1);
+    }
     private Task RegistryFence(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct) => AcquireRegistryFenceAsync(c, t, scope, ct);
     private Task RunFence(NpgsqlConnection c, NpgsqlTransaction t, Guid run, CancellationToken ct) => SyntheticRunSourceFence.AcquireAsync(c, t, scope.CustomerId, scope.ProjectId, scope.EnvironmentId, run, ct);
     private static void Guard(NpgsqlConnection c)
@@ -35,6 +50,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
         if (OutcomePriorityPolicy.Authorize(a, scope, action) is { } denied) return denied;
         // These APIs capture complete registry/planning snapshots, not category-filtered partial views.
         if (!a.Categories.Contains("SECURITY") || !a.Categories.Contains("OPERATIONS")) return OutcomePriorityIssue.Denied;
+        if (await ReversedFenceOrder(c, t, scope, ct)) return OutcomePriorityIssue.InvalidInput;
         return await OutcomePriorityMigration.VerifyAsync(c, t, scope, ct);
     }
     public async Task<OutcomeRegistryResult> ReadRegistryAsync(NpgsqlConnection c, NpgsqlTransaction t, OutcomeAuthority a, CancellationToken ct = default)
@@ -160,7 +176,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
     {
         if (runId == Guid.Empty) return new(OutcomePriorityIssue.InvalidInput, null);
         if (await Prepare(c, t, a, OutcomeAction.ReadPlanning, ct) is { } denied) return new(denied, null);
-        await RunFence(c, t, runId, ct);
+        await RegistryFence(c, t, ct); await RunFence(c, t, runId, ct);
         try
         {
             var source = await Capture(c, t, runId, a, ct);
@@ -175,7 +191,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
     {
         if (runId == Guid.Empty || !OutcomePriorityPolicy.Command(command)) return new(OutcomePriorityIssue.InvalidInput, null);
         if (await Prepare(c, t, a, OutcomeAction.ManagePlanning, ct) is { } denied) return new(denied, null);
-        await RunFence(c, t, runId, ct);
+        await RegistryFence(c, t, ct); await RunFence(c, t, runId, ct);
         try
         {
             var captured = await Capture(c, t, runId, a, ct);
@@ -211,6 +227,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
         if (runId == Guid.Empty) return new(OutcomePriorityIssue.InvalidInput, null);
         Transaction(c, t);
         if (!ExportAllowed(authority)) return new(OutcomePriorityIssue.Denied, null);
+        if (await ReversedFenceOrder(c, t, scope, ct)) return new(OutcomePriorityIssue.InvalidInput, null);
         if (await OutcomePriorityMigration.VerifyAsync(c, t, scope, ct) is { } migration) return new(migration, null);
         await RegistryFence(c, t, ct); await RunFence(c, t, runId, ct);
         try
