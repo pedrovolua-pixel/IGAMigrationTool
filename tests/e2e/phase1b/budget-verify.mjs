@@ -202,6 +202,16 @@ try {
   before = await ledger();
   pending(before, "before override");
   equal(
+    before.ai.runLock.epoch,
+    "synthetic-phase1b-fixture-epoch-v1",
+    "shared counter keys use the literal frozen fixture epoch",
+  );
+  equal(
+    before.ai.runLock.initiatingConsultantId,
+    "synthetic-consultant",
+    "user counter keys use the literal trusted initiating Consultant",
+  );
+  equal(
     before.outcomes.outcomes,
     [],
     "run explicitly locks an empty approved-outcome set",
@@ -218,8 +228,8 @@ try {
   );
   equal(
     before.ai.budget.revision,
-    1,
-    "original budget revision is literal one",
+    0,
+    "original budget revision is literal zero before any override",
   );
   equal(before.ai.budget.history, [], "new budget has no manufactured history");
   equal(
@@ -237,15 +247,9 @@ try {
     .getByRole("heading", { name: "Combined Phase 1B workspace", exact: true })
     .waitFor();
   await visibleCounters(before);
-  await page
-    .getByLabel("Budget category", { exact: true })
-    .selectOption("OPERATIONS");
-  await page
-    .getByLabel("Run allowance target", { exact: true })
-    .selectOption("900");
-  await page
-    .getByLabel("Category allowance target", { exact: true })
-    .selectOption("900");
+  await page.getByLabel(/^Budget category/).selectOption("OPERATIONS");
+  await page.getByLabel(/^Run allowance target/).selectOption("900");
+  await page.getByLabel(/^Category allowance target/).selectOption("900");
   await page.getByLabel("Budget override reason", { exact: true }).fill(reason);
   const path = `${prefix}/runs/${runId}/ai/budget/events`;
   let first = true;
@@ -269,7 +273,7 @@ try {
       );
       equal(
         receipt.value.revision,
-        2,
+        1,
         "first real commit advances budget once",
       );
       await response.dispose();
@@ -305,7 +309,7 @@ try {
       command,
       {
         eventId: command.eventId,
-        expectedRevision: 1,
+        expectedRevision: 0,
         runTarget: 900,
         categoryTarget: 900,
         category: "OPERATIONS",
@@ -330,7 +334,7 @@ try {
     );
     equal(
       committedBeforeRetry.ai.budget.revision,
-      2,
+      1,
       "lost response already has one durable revision before retry",
     );
     const retryResponse = page.waitForResponse(
@@ -383,7 +387,7 @@ try {
   );
   equal(
     after.ai.budget.revision,
-    2,
+    1,
     "accepted retry leaves exactly one durable revision increment",
   );
   equal(
@@ -419,7 +423,7 @@ try {
     },
     {
       eventId: command.eventId,
-      revision: 2,
+      revision: 1,
       actorId: "synthetic-consultant",
       runTarget: 900,
       categoryTarget: 900,
