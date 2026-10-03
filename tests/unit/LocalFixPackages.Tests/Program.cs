@@ -183,7 +183,8 @@ foreach (var (preset, packages, occurrences) in new[]
     Denied(run with { CoverageSummary = run.CoverageSummary! with { Counts = [] } }, "summary counts");
     Denied(run with { CoverageSummary = run.CoverageSummary! with { ExecutableCoverage = new(0, 1) } }, "summary ratio");
     Denied(run with { CoverageSummary = run.CoverageSummary! with { Kind = run.CoverageSummary.Kind == CoverageCompletionKind.Complete ? CoverageCompletionKind.CompleteWithGaps : CoverageCompletionKind.Complete } }, "summary kind");
-    foreach (var property in typeof(SyntheticRunInputVersions).GetProperties())
+    Denied(run with { FrozenInputs = run.FrozenInputs with { Phase1BLocks = DemoPhase1BAiFixture.Locks(run.RunId, new string('a', 64)) } }, "additive Phase1B locks denied on historical profile");
+    foreach (var property in typeof(SyntheticRunInputVersions).GetProperties().Where(p => p.Name != nameof(SyntheticRunInputVersions.Phase1BLocks)))
     {
         var versions = JsonSerializer.SerializeToNode(run.FrozenInputs)!.AsObject();
         versions[property.Name] = property.Name.EndsWith("Digest", StringComparison.Ordinal) ? new string('0', 64) : "wrong";
