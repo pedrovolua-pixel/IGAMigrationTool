@@ -294,9 +294,13 @@ try {
     await wrapper(await api.get("/local-evaluation/v1/workspace"), 200)
   ).payload.aggregateRevision;
   const memberSelector = page.getByLabel("Choose one selected member");
-  await memberSelector.focus();
-  await page.keyboard.press("End");
-  await page.keyboard.press("Enter");
+  const chosenMemberId = expected.expectedSelectedIds.at(-1);
+  await memberSelector.selectOption(chosenMemberId);
+  check(
+    await memberSelector.inputValue(),
+    chosenMemberId,
+    "explicit selected member setup",
+  );
   const rationale = `Independent keyboard review ${randomUUID()} <script>window.injected = true</script>`;
   await page.getByLabel("Rationale").focus();
   await page.keyboard.insertText(rationale);
@@ -340,9 +344,7 @@ try {
     beforeKeyboard + 1,
     "uncertain keyboard retry one outcome version",
   );
-  await memberSelector.focus();
-  await page.keyboard.press("End");
-  await page.keyboard.press("Enter");
+  await memberSelector.selectOption(chosenMemberId);
   await page
     .getByRole("button", { name: "Open related history", exact: true })
     .focus();
@@ -356,11 +358,14 @@ try {
   const beforeCorrection = (
     await wrapper(await api.get("/local-evaluation/v1/workspace"), 200)
   ).payload;
-  const correctedMemberId = beforeCorrection.members.at(-1).original.memberId;
+  const correctedMemberId = chosenMemberId;
   const originalBytes = JSON.stringify(
-    beforeCorrection.members.at(-1).original,
+    beforeCorrection.members.find((m) => m.original.memberId === chosenMemberId)
+      .original,
   );
-  await page.getByLabel(/^Outcome/).selectOption("Corrected");
+  await page
+    .getByRole("combobox", { name: /^Outcome/ })
+    .selectOption("Corrected");
   await page.getByLabel("Originating classification").selectOption("Rejected");
   await page
     .getByLabel("Rationale")
@@ -407,7 +412,9 @@ try {
   const scoredCounts = JSON.parse(scored.warningCanonicalJson).summaries
     .generalAi;
   await memberSelector.selectOption(correctedMemberId);
-  await page.getByLabel(/^Action/).selectOption("PresentationCorrection");
+  await page
+    .getByRole("combobox", { name: /^Action/ })
+    .selectOption("PresentationCorrection");
   await page
     .getByLabel("Rationale")
     .fill("Independent browser presentation-only revision");
@@ -473,10 +480,15 @@ try {
       scoredCounts[field],
       "presentation-only no rescore " + field,
     );
-  const versionSelect = page.getByLabel(/outcome version/i);
-  await versionSelect.focus();
-  await page.keyboard.press("Home");
-  await page.keyboard.press("Enter");
+  const versionSelect = page.getByRole("combobox", {
+    name: /^Immutable outcome version/,
+  });
+  await versionSelect.selectOption("0");
+  check(
+    await versionSelect.inputValue(),
+    "0",
+    "explicit historical version setup",
+  );
   await page
     .getByRole("status")
     .filter({
