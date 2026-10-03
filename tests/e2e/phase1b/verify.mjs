@@ -627,11 +627,39 @@ try {
       inputLockDigest,
       "finding review preserves exact outcome run lock",
     );
+    const confirmedAi = confirmed.analysis.findings.find(
+      (f) => f.id === target.id,
+    );
+    check(
+      confirmedAi.method === "AI" &&
+        confirmedAi.initialState === "Proposed" &&
+        confirmedAi.state === "Confirmed" &&
+        !confirmedAi.reviewRequired &&
+        Number(confirmedAi.confidencePercent) === 80,
+      "explicit AI confirmation retains proposed original state and confidence while resolving required review",
+    );
+    equal(
+      confirmed.analysis.review.findings
+        .find((f) => f.id === target.id)
+        .history.filter((event) => event.eventId === confirmation.eventId)
+        .length,
+      1,
+      "response-loss confirmation retains exactly one saved finding event",
+    );
     await page.reload();
     await page
       .getByRole("heading", { name: "Combined fictional health assessment" })
       .waitFor();
     const entry = confirmed.priority.entries[0];
+    const confirmedReason = page.getByLabel(
+      `Reason for ${entry.original.optionId}`,
+      { exact: true },
+    );
+    await confirmedReason.waitFor();
+    check(
+      await confirmedReason.isVisible(),
+      "combined decoder accepts confirmed AI and exposes verified planning controls after reload",
+    );
     check(
       entry && digest(confirmed.priority.source.sourceDigest),
       "verified planning source and option are available",
@@ -865,7 +893,7 @@ try {
     await post(
       `${prefix}/runs/${runId}/csv`,
       { requestId: randomUUID(), snapshotDigest: inspected.snapshotDigest },
-      403,
+      409,
     );
     const changed = await read(`${prefix}/runs/${runId}/csv`);
     check(
@@ -946,7 +974,7 @@ try {
         selections: [selection],
         explicitlyNoOutcomes: false,
       },
-      403,
+      409,
     );
     equal(
       (await api.get(`/local-demo/v1/runs/${deniedRun}`)).status(),
