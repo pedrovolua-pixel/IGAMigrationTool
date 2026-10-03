@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType></PropertyGroup><ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticTaskCsvIntegration/SyntheticTaskCsvIntegration.csproj" /><Compile Remove="Probe/**" /></ItemGroup></Project>

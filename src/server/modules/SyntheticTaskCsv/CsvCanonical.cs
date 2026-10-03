@@ -8,7 +8,7 @@ namespace SyntheticTaskCsv;
 public static class CsvCanonical
 {
     internal static readonly UTF8Encoding Utf8 = new(false, true);
-    internal static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web) { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow };
+    internal static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web) { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow, PropertyNameCaseInsensitive = false, RespectRequiredConstructorParameters = true };
     public static byte[] Bytes<T>(T value)
     {
         using var stream = new MemoryStream();

@@ -1,0 +1,1 @@
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup><ProjectReference Include="../SyntheticTaskCsv/SyntheticTaskCsv.csproj" /><ProjectReference Include="../SyntheticPlanningTasks/SyntheticPlanningTasks.csproj" /><EmbeddedResource Include="../../../../migrations/synthetic-task-csv/001-initial.sql" LogicalName="SyntheticTaskCsvIntegration.001-initial.sql" /></ItemGroup></Project>

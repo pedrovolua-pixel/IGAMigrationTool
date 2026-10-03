@@ -64,7 +64,12 @@ public static class CsvCodec
             frozenVersions.ApplicationVersion != "synthetic-phase1b-app-v1" || frozenVersions.ScoringAlgorithmVersion != "pilot-health-v1" ||
             locks.SchemaVersion != "synthetic-phase1b-input-v1" || locks.CsvContractDigest != ContractDigest || locks.OutcomeContractDigest != "f7775ef74297f0b2e563c01d435bf4800fd07a71ea9ce18558cca95a3c7af5b8" ||
             locks.AiContractDigest != "471fdcb92780bac8f552366c988eab7d4f7498a123e1625aacc1dd2ecaf49af5" ||
-            locks.PriorityPolicyVersion != "synthetic-priority-policy-v1") return CsvIssue.VersionMismatch;
+            locks.PriorityPolicyVersion != "synthetic-priority-policy-v1" || locks.FixtureEpoch != "synthetic-phase1b-fixture-epoch-v1" ||
+            frozenVersions.AiPolicyVersion != "synthetic-automatic-ai-policy-v1" || frozenVersions.PromptVersion != "fixture-prompt-v1" ||
+            frozenVersions.ModelVersion != "synthetic-fixed-provider-v1" || frozenVersions.WorkSchemaVersion != "synthetic-run-work-v1" ||
+            frozenVersions.FixPackageTemplateDigest != "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669" ||
+            frozenVersions.FixReviewContractDigest != "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f" ||
+            frozenVersions.PlanningTaskContractDigest != "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2") return CsvIssue.VersionMismatch;
         if (new[] { versions.RunInputDigest, frozenVersions.ScriptedResultsDigest, frozenVersions.AnalysisFixtureDigest,
             frozenVersions.MaturityFixtureDigest, frozenVersions.FixPackageTemplateDigest, frozenVersions.FixReviewContractDigest,
             frozenVersions.PlanningTaskContractDigest, locks.OutcomeLockDigest, locks.AiFixtureDigest, locks.AiMappingDigest,
