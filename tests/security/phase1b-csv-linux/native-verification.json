@@ -1,0 +1,50 @@
+{
+  "cases": [],
+  "dockerfileSha256": "d04851df401ccbab081b9c85870798cdf23ba31ccb5ff4bb2d0d9e04ebc69513",
+  "fixtureSha256": "585639bbc2ab1a08fac0b2da325e3846cf89e9708e45e50d020a8324de261a05",
+  "goldenSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92",
+  "limits": {
+    "cpuHardSeconds": 3,
+    "cpuSoftSeconds": 2,
+    "heapBytes": 268435456,
+    "input": 1048576,
+    "memoryBytes": 402653184,
+    "nanoCpus": 1000000000,
+    "output": 4194304,
+    "pids": 32,
+    "stderr": 16384,
+    "wallSeconds": 10
+  },
+  "linuxStatus": "NOT_EXECUTED",
+  "nativeParity": "PASS",
+  "nativeParityAssertions": 4,
+  "probeClosure": {
+    "SyntheticCsvRenderer.deps.json": "564786966330eb4d185e299780d05248306ad7b8fb5e09c90e89dc09f921a873",
+    "SyntheticCsvRenderer.dll": "344d7b6a40434cd40ad7207c7789871e0d9c278270ecc431aef2c7ce2af76a14",
+    "SyntheticCsvRenderer.runtimeconfig.json": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+    "SyntheticTaskCsv.dll": "089fb9b9183249235c3ec0610252bc8b81b296c7f4941fbddde36f566b983b66"
+  },
+  "reason": "Docker CLI unavailable; Linux isolation not executed",
+  "rendererClosure": {
+    "SyntheticCsvRenderer.deps.json": "564786966330eb4d185e299780d05248306ad7b8fb5e09c90e89dc09f921a873",
+    "SyntheticCsvRenderer.dll": "ed00ef07a00a56e11cfc9fef45e23b2020243c62fd7f7c55d7d71d385f26934e",
+    "SyntheticCsvRenderer.runtimeconfig.json": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+    "SyntheticTaskCsv.dll": "089fb9b9183249235c3ec0610252bc8b81b296c7f4941fbddde36f566b983b66"
+  },
+  "runnerSha256": "dfd83e30215a2c8bee6e01d5ff49df6b1f0ee73a8f1e80e24fa1efaef5e3b4fc",
+  "schema": "phase1b-csv-linux-verification-v1",
+  "sdk": "10.0.401",
+  "seccompSha256": "949ea33c1229417b6b6ce887423bc997b9465c4f6e664947221e9308d9c1b2e0",
+  "sourceCommit": "01c6b4b188098053af353cfefef8d927bacad504",
+  "sourceFiles": {
+    "Directory.Build.props": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e",
+    "src/server/modules/SyntheticTaskCsv/CsvCanonical.cs": "56bea6365fe78b2bcb19c45ae09aefd475de7e52e3ce4c430b535b6ac54bafa8",
+    "src/server/modules/SyntheticTaskCsv/CsvCodec.cs": "f74b83ca4c6c051314d98f55aa4ba7efab6b533f7100d1f8034da79242119714",
+    "src/server/modules/SyntheticTaskCsv/CsvContracts.cs": "d25893b2244b8c8807704eedf982c126563e61588e61091ebb1c000e7ff964e4",
+    "src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+    "src/server/modules/SyntheticTaskCsv/packages.lock.json": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb",
+    "src/server/workers/SyntheticCsvRenderer/Program.cs": "f39c050a06b28e174b4a2148d6d0a47c4691ee222604686805431da9391886aa",
+    "src/server/workers/SyntheticCsvRenderer/SyntheticCsvRenderer.csproj": "e21710dfe483b8ce1c379f1575d2bd2131f90355838b173c7279c6758bd92168",
+    "src/server/workers/SyntheticCsvRenderer/packages.lock.json": "aba235b67e838fa08e0ba141e0e3e8df8e8fb89a6276be9e9a93ec7dfbbcb2d9"
+  }
+}
