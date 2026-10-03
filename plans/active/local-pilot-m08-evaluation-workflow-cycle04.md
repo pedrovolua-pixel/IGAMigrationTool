@@ -1,6 +1,6 @@
 # Milestone08 cycle04 — local evaluation review workflow
 
-Status: RUNNING — exact engineering freeze before dependent implementation
+Status: RUNNING — engineering frozen; bounded implementation authorized
 Owner: Phase1C coordinator
 Date: 2026-10-03
 Stable base:9eab6bc4afb72eb242bda3bd5ee783f78989dfec
@@ -15,9 +15,9 @@ This independent fixture workflow avoids existing Phase1B host/UI/source writers
 | Packet | Isolated checkout | Owned paths | State |
 | --- | --- | --- | --- |
 | Authority audit | Read-only stable source | Native audit/evidence only | VERIFIED documentary |
-| Domain | /private/tmp/iga-m08-cycle04-domain-contract | New evaluation-workflow engineering contract/test expectations, new SyntheticEvaluationWorkflow module/migration and own unit/domain integration tests after freeze | READY for exact contract |
-| Presentation | /private/tmp/iga-m08-cycle04-presentation-contract | New workflow presentation contract/test expectations and dedicated src/web/evaluation frontend/component tests after freeze | READY for exact contract |
-| Independent verification | Assigned after shared freeze | New independent storage/host/browser verification only; no implementation edits | Pending contract |
+| Domain | /private/tmp/iga-m08-cycle04-domain-contract | New evaluation-workflow engineering contract/test expectations, new SyntheticEvaluationWorkflow module/migration and own unit/domain integration tests after freeze | RUNNING — frozen contract |
+| Presentation | /private/tmp/iga-m08-cycle04-presentation-contract | New workflow presentation contract/test expectations and dedicated src/web/evaluation frontend/component tests after freeze | RUNNING — frozen contract |
+| Independent verification | Assigned after shared freeze | New independent storage/host/browser verification only; no implementation edits | READY — frozen contract |
 | Coordinator | /private/tmp/iga-m08-cycle04-coordinator | Authority receipt, active plan, shared contract review, dedicated host/source fixture, project/locks/solution/CI, composition, canonical records and private site | RUNNING |
 
 The coordinator freezes exact source/cohort/outcome-version relations, transactions/replay/current-policy ordering, closed HTTP DTOs/issues and UI concurrency with nonauthor review before coding. No dependent code is authorized before that freeze. Contract choices must remain engineering within approved policy; any material new product/authority decision returns to the spec/ADR process with concrete reviewed options.
@@ -40,7 +40,7 @@ Rollback disables the new local host/flag/profile and preserves compatible appen
 
 ## Completion gate
 
-- [ ] Exact internal engineering and independent expectations frozen/reviewed before dependent code.
+- [x] Exact internal engineering and independent expectations frozen/reviewed before dependent code.
 - [ ] Bounded domain/host/UI behavior and applicable checks executed; nonauthor findings closed.
 - [ ] Original policy modules/historical host/UI source compatibility and concurrent-work preservation verified.
 - [ ] Exact source/evidence, migration/flag implications and operational limitations recorded.

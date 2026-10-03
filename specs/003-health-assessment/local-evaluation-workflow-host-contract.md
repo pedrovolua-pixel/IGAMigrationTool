@@ -1,6 +1,6 @@
 # Local evaluation workflow host adapter
 
-Status: DRAFT engineering adapter — freeze with domain/UI contracts before code
+Status: FROZEN local engineering contract/expectations — nonauthor documentary review PASS; implementation authorized within cycle04
 Date: 2026-10-03
 Authority: [scope receipt](local-evaluation-workflow-authority.md), [cycle04 plan](../../plans/active/local-pilot-m08-evaluation-workflow-cycle04.md), accepted ADR0001–0004.
 

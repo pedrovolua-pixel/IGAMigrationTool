@@ -1,6 +1,6 @@
 # Local synthetic evaluation workflow UI test expectations
 
-Status: DRAFT — independent expected values before dependent implementation
+Status: FROZEN local engineering contract/expectations — nonauthor documentary review PASS; implementation authorized within cycle04
 Date: 2026-10-03
 Packet: WF04-UI; [presentation contract](local-evaluation-workflow-presentation-contract.md), [cycle04 plan](../../plans/active/local-pilot-m08-evaluation-workflow-cycle04.md).
 

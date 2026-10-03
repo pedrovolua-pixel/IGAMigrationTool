@@ -1,6 +1,6 @@
 # Local synthetic evaluation workflow presentation contract
 
-Status: DRAFT engineering contract — no dependent code until coordinator review/freeze
+Status: FROZEN local engineering contract/expectations — nonauthor documentary review PASS; implementation authorized within cycle04
 Date: 2026-10-03
 Packet: WF04-UI
 Authority: [cycle04 plan](../../plans/active/local-pilot-m08-evaluation-workflow-cycle04.md), the owner's “Do it” for this bounded workflow, [product specification](product-spec.md) FR-HAS-11/13/15/50–53, [approved local policies](local-evaluation-policy-approval.md), accepted ADR0001–0003.

@@ -1,6 +1,6 @@
 # Local synthetic evaluation workflow engineering contract v1
 
-Status: ENGINEERING FREEZE CANDIDATE — coordinator and nonauthor review required before dependent code
+Status: FROZEN local engineering contract/expectations — nonauthor documentary review PASS; implementation authorized within cycle04
 Date: 2026-10-03
 Authority: [cycle04 plan](../../plans/active/local-pilot-m08-evaluation-workflow-cycle04.md), [EV02 approval](local-evaluation-policy-approval.md), approved [product](product-spec.md), [technical specification](technical-spec.md), [reviewer policy](local-evaluation-reviewer-contract-proposal.md), [domain expectations](local-evaluation-workflow-domain-test-plan.md). Accepted ADR0001–0003 and existing authorization/history policy control. This bounded newly authorized engineering contract grants no customer/public API, new role, retention choice or production approval. Historical cycle03 no-persistence limits remain true for that completed packet.
 
