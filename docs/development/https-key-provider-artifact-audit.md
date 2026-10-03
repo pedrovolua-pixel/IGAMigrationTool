@@ -22,7 +22,12 @@ Both provider `.nuspec` repository records and verified GitHub release-tag refer
 | Blobs1.5.4,82940 bytes | `6c39822eddc5575a56d9c3c58b27edddaed3434a39aabe7d3d39c1e65608efc1` | First row of inventory; exact match to [Blob catalog](https://api.nuget.org/v3/catalog0/data/2026.08.18.03.28.16/azure.extensions.aspnetcore.dataprotection.blobs.1.5.4.json) |
 | Keys1.6.4,90014 bytes | `c832e18aad5d074e9bb3c711dc4a59c77c1ba20cc7e80cc9c28865bba375122a` | Second row; exact match to [Keys catalog](https://api.nuget.org/v3/catalog0/data/2026.08.18.03.26.54/azure.extensions.aspnetcore.dataprotection.keys.1.6.4.json) |
 
-The archive SHA512 below hashes downloaded `.nupkg` bytes. It must not be confused with `dotnet nuget verify`'s displayed signature-content hash: Blobs=`5D9McHLGA7riU1z2Mtpt3nPq9rAcsc11hIm3Cb/In+wB2w+Osyvd03EjAS08c3UqiNIFOsAXCo37srPT6NH8uA==`; Keys=`7uKgk1WzELt5Pbp09liae8HBL3XOe0x/+DGYYC5DCiCKGRxrGi0BfmVCqzvzXGMOxITL4THEYf1GklzmAuJRTQ==`. No generated lockfile content hash is claimed.
+The archive SHA512 below hashes downloaded `.nupkg` bytes. It must not be confused with `dotnet nuget verify`'s displayed signature-content hash. No generated lockfile content hash is claimed.
+
+| Provider | Verifier signature-content hash (not a credential) |
+|---|---|
+| Blobs1.5.4 | `5D9McHLGA7riU1z2Mtpt3nPq9rAcsc11hIm3Cb/In+wB2w+Osyvd03EjAS08c3UqiNIFOsAXCo37srPT6NH8uA==` |
+| Keys1.6.4 | `7uKgk1WzELt5Pbp09liae8HBL3XOe0x/+DGYYC5DCiCKGRxrGi0BfmVCqzvzXGMOxITL4THEYf1GklzmAuJRTQ==` |
 
 ## Candidate minimum dependency archive inventory
 
