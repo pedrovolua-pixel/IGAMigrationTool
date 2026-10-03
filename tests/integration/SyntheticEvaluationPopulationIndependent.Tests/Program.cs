@@ -183,6 +183,15 @@ internal static partial class Program
         Check(population.GetType().GetProperties().All(p => p.SetMethod is null), "population public properties get-only");
         Check(before == await Rows(), "all owning table rows unchanged after captures and owning reads");
         Check(!before.Contains("synthetic_review.", StringComparison.Ordinal), "population did not initialize or seed review schema");
+        // A rollback alone could conceal pending DML. Commit the actual successful operation and compare every owning row.
+        await using (var c = await Open())
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            var committed = await Adapter.CaptureAsync(c, t, run.RunId, ConsultantAi, ConsultantOutcome);
+            Check(committed.HasPopulation && t.Connection == c, "successful public population capture leaves caller-owned active transaction");
+            await t.CommitAsync();
+        }
+        Check(before == await Rows(), "successful population capture caller COMMIT preserves all owning table bytes");
     }
     private static async Task AuthorityMatrix(SyntheticRunSnapshot run)
     {
@@ -288,10 +297,16 @@ internal static partial class Program
         {
             Check((await Adapter.CaptureAsync(c, t, normal.RunId, ConsultantAi, ConsultantOutcome)).Population is not null, "successful capture holds registry/runfences");
             var writer = RegistryWriter();
+            var runWriterDatabase = new NpgsqlConnectionStringBuilder(Database) { ApplicationName = "synthetic-pop06-successful-run-writer" };
+            var runWriterEngine = new SyntheticDurableRunEngine(runWriterDatabase.ConnectionString, DemoFixtureCatalog.Scope, new(TimeSpan.FromMinutes(2), 3));
+            var runWriter = runWriterEngine.RequestCancelAsync(normal.Scope, normal.RunId, normal.Revision);
             await WaitForAdvisory("synthetic-independent-registry-writer");
             Check(!writer.IsCompleted, "actual registry owner writer blocks while successful capture lives");
+            await WaitForAdvisory("synthetic-pop06-successful-run-writer");
+            Check(!runWriter.IsCompleted, "actual run owner writer blocks while successful Scoring population capture lives");
             await t.RollbackAsync();
             Check((await writer).Issue is null, "registry writer proceeds commits after caller rollback");
+            Check((await runWriter).Issue == SyntheticRunIssue.InvalidState, "successful-capture run writer resumes with native Scoring cancellation denial");
         }
         var planned = await Started();
         await using (var c = await Open())

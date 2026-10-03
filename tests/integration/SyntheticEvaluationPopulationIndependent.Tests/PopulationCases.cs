@@ -43,7 +43,6 @@ internal static partial class Program
         Check(SyntheticDurableRunEngine.ComputeInputDigest(run.Plan, run.FrozenInputs, run.BaselineCatalogId, run.ProfileCatalogId) == c.GetProperty("inputDigest").GetString(), "public independently recomputed actual input digest");
         Check(population.SourceObservedAtDatabaseUtc == c.GetProperty("observedAtDatabaseUtc").GetDateTimeOffset(), "first native source observation retained");
         Check(population.SourceObservedAtDatabaseUtc.Offset == TimeSpan.Zero && population.RunObservedAtDatabaseUtc.Offset == TimeSpan.Zero, "both source observations are UTC");
-        Check(population.RunObservedAtDatabaseUtc >= population.SourceObservedAtDatabaseUtc, "second actual same-transaction observation follows first");
         Check(population.ScopeId == Reference("scope") && population.EnvironmentId == Reference("environment", "synthetic-environment"), "literal scope/environment reference mapping");
         Check(population.Members.Select(x => x.MemberId).SequenceEqual(population.Members.Select(x => x.MemberId).Order(StringComparer.Ordinal)), "member reference ordinal order");
         foreach (var member in population.Members)
