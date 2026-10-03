@@ -1,6 +1,6 @@
 # Exact shared-key artifact Linux proof run
 
-Status: REMOTE RUN SUCCESS — independent artifact receipt acceptance pending manual ZIP
+Status: VERIFIED EXACT LINUX ARTIFACT PREREQUISITE — no production/gate acceptance
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: f8fb332114aa8a52696caae8f4b264075e900d55
@@ -45,3 +45,7 @@ Owner said “Run it” after the exact reviewed correction and Linux signature 
 Normal fast-forward to exactcefd835 succeeded. PR3 draft/2commits/7files/base31c61ea retained. Run37145824111/job111269428858 all12stepsSUCCESS; actual35mocks passed. KV-L01 updated public/source/run identity PASS. KV-L02 actual execution reported SUCCESS but37individual receipt acceptance NOT VERIFIED. KV-L03 log setup/SDK-install metadata PARTIAL; actual ZIP integrity/full SDK/config/source/selected-trust receipts unavailable. KV-L04 PASS bounded accurate reporting/manual artifact handoff; site remains stale. KV-L05 prior reviewed local correction remains historical PASS, executed again in hosted35mocks.
 
 Artifact11281169753 digestfbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395 is metadata only until bytes obtained. ConnectorHTTP403 and automatically rejected alternate browser download block retrieval; no further routes/bypass. Owner manual ZIP request remains pending. [Current result](../../docs/development/https-key-provider-linux-run-result.md) and [rerun receipt](../../docs/development/evidence/https-key-provider-linux-proof-rerun-20261003.json) bind this checkpoint. No public packet or Azure change beyond the approved exact correction. Dependent provider integration remains blocked until independent receipt/platform proof.
+
+## Manual artifact closure
+
+Owner-supplied original ZIP matches remote artifact11281169753 SHAfbf6...;85members and37download/directexit receipts,78rawlogs,SDK/config/source/platform/selectednormaltrust independently PASS. KV-L01–03 PASS artifact-only; KV-L04 PASS bounded canonical reporting/private site STALE. Historical failures/downloadblocks retained, manual dependency closed without bypass. [Exact result](../../docs/development/https-key-provider-linux-run-result.md) and [manual receipt](../../docs/development/evidence/https-key-provider-linux-proof-manual-20261003.json) bind evidence. Next owner-authorized bounded local dispatch plan does not promote dependencies, fullKEY or Azure/live gates.

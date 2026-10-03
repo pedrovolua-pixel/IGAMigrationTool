@@ -1,6 +1,6 @@
 # Exact public signature-proof export approval
 
-Status: OWNER APPROVED — exact correction published; rerun SUCCESS with artifact review pending
+Status: OWNER APPROVED — exact correction published; supported Linux artifact proof verified
 Date: 2026-10-03 UTC
 Authority: [cycle04](../../plans/active/https-production-local-cycle04.md); [self-contained proof contract](https-key-provider-ci-proof-packet.md)
 
@@ -45,3 +45,7 @@ Exact branch/draft PR3 published and attached. Run37139568768 failed in a portab
 ## Authorized correction outcome
 
 Owner “Run it” authorized exactcefd835 one-file correction and same diagnostic job. Corrected run37145824111 succeeded; the required independent artifact receipt/trust review awaits manually supplied ZIP after connectorHTTP403 and automatic browser download workaround rejection. [Current execution result](https-key-provider-linux-run-result.md) supersedes the pending changed-byte approval state. No further publication/run, merge, trust or production/Azure authority is inferred.
+
+## Manual artifact closure
+
+Original ZIP supplied by owner matches the remote digest; coordinator/non-author completed exact37 signature/platform/receipt review. [Current result](https-key-provider-linux-run-result.md) closes the manual-artifact substep, with scope and limits preserved. No more public changes or cloud deployment authorized.

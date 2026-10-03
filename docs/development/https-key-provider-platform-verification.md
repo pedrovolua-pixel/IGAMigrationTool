@@ -1,6 +1,6 @@
 # AP-KV: supported-platform signature proof preparation
 
-Status: **LOCAL PREPARATION COMPLETE; SUPPORTED-PLATFORM INTEGRITY NOT VERIFIED**
+Status: **SUPPORTED LINUX ARTIFACT PREREQUISITE VERIFIED; production/runtime acceptance open**
 Date: 2026-10-03 UTC
 Authority: [approved cycle03 AP-KV/AP-KV01](../../plans/active/https-production-local-cycle03.md), following [actual cycle02 host graph evidence](https-key-provider-resolved-graph-evidence.md). This prepares a diagnostic CLI tool. It does not promote package pins/locks, install dependencies, approve a platform execution, grant access or complete KEY runtime acceptance.
 
@@ -72,3 +72,13 @@ python3 tests/infrastructure/HttpsKeyProviders/verify-signatures.py --archives <
 ```
 
 Retain manifest/source bindings, every direct process/log receipt, detailed chains and final37 hashes. Any supported-platform failure remains blocked; preserve evidence without automatically changing trust, versions or revocation mode. CLI signature success would only satisfy this artifact prerequisite. The actual platform restore/audit/build, dependency integration review and provider guard/SDK dispatch harness require their own authorized evidence. No full KEY, production readiness, Azure binding/grant, lifecycle/witness/deadline/outage or portal acceptance is implied.
+
+## Supported Linux artifact review complete — 2026-10-03 UTC
+
+Owner supplied the original ZIP and extracted diagnostic folder for run37145824111. Original ZIP85352bytes/SHA256fbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395 matches GitHub artifact11281169753. Coordinator and non-author independently checked all85 safe allowlisted ZIP entries, corresponding folder bytes,37 original archive-hash/official-download receipts,37 direct normal verifier exits0,78 raw log byte/hash bindings, SDK10.0.401/runtime10.0.12/Linux-x64, explicit empty NuGet config/global pin,7 approved source hashes/exact run/merge/head/base and actual Setup runner2.337.0/Ubuntu24.04.5/image20260927.320.1. All37 logs select the normal SDK code-signing/timestamp fallback bundles.
+
+ProtectedData4.5.0 now verifies normally on Linux with the unchanged original archiveSHA25667e5f5676944acb2fb627b768c5b3392eebf220ae780edd5d5b49f6530621487. Its detailed timestamps build through Symantec to the observed VeriSign Universal Root SHA2562399561127A57125DE8CEFEA610DDF2FA078B5C8067F4E828290BFB860E84B3C. Historical macOS failure remains recorded; no package/trust/verification/revocation change or tampering inference. Original archives/trust-bundle contents are intentionally absent from diagnostics; this is authenticated runner receipt evidence, not a local repeat of signature verification.
+
+[Manual artifact review receipt](evidence/https-key-provider-linux-proof-manual-20261003.json) binds the completed proof. Finder added .DS_Store after initial folder inspection; it is excluded from the authenticated ZIP/member review. Initial shell here-document inspection failed under disk pressure, then argument-based checks succeeded; no user files/evidence were deleted.
+
+This closes only the supported Linux artifact prerequisite. Owner “continue” starts the [bounded local SDK dispatch diagnostic](../../plans/active/https-key-provider-dispatch-diagnostic.md), preserving the experimental37 graph and no production dependency promotion. No full KEY, provider guard/lifecycle/witness/inventory policy, Azure roles/resources/spending/session, admission or release follows. The six [human tasks](https-production-test-packet.md#human-tasks-and-completion-conditions) remain open; the signature/manual-artifact substep is complete, and actual guard/SDK/inventory/lifecycle inputs remain. Prepared private-board delta changes that substep only; BFF/HTTPS snapshot4346e0f remains stale under the separate rejected credential/network publisher action, with no bypass and unrelated Cycle14 changes preserved.
