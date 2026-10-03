@@ -89,5 +89,113 @@
       "archiveLocalGzipSha256": "0de749cd8d3131f4d42df3d49d642685d514d586d40579b3f596b24d796b1984"
     }
   },
-  "completionPublication": "Follows completed canonical snapshot; initial successful private deployment109 is preserved."
+  "completionPublication": {
+    "date": "2026-10-03",
+    "stage": "Completed synthetic verification snapshot with final source-bound hosted success",
+    "deployment": {
+      "id": "appgdep_6ac1769ac4808191bab4b12999933c64",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_ca9e396101f481918d8f3acf6c6111e7",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T21:41:53.713682+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_ca9e396101f481918d8f3acf6c6111e7",
+      "number": 110,
+      "source": {
+        "commit_sha": "7a055365a5b65dcacf5bfdbf77f2b450decfd4b7"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_00000000ae8081f58c4c4b6a3f45968c",
+        "content_hash": "sha256:2cd585e2bf24c250535cd8ab5cc67d577a017e555fb60c5a3ad858e7bd2b9c24",
+        "size_bytes": 122880,
+        "file_count": 2
+      }
+    },
+    "audience": {
+      "role": "owner",
+      "mode": "custom",
+      "users": 1,
+      "groups": 0,
+      "externalVisitors": 0,
+      "revision": 1
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-review",
+      "commit_sha": "7a055365a5b65dcacf5bfdbf77f2b450decfd4b7",
+      "archive": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle03-evidence/site-final.tar.gz"
+    },
+    "canonicalSnapshot": "d92bd07f183b9f15189859a08b90925164af3787",
+    "qa": {
+      "status": "PASS",
+      "results": [
+        {
+          "width": 1440,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 390,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 320,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        }
+      ]
+    },
+    "preservation": {
+      "status": "PASS",
+      "canonicalSnapshot": "d92bd07f183b9f15189859a08b90925164af3787",
+      "openingSiteSource": "ec91b6ac0d170cbbe9070cf3fae086ff61935f54",
+      "all13TaskCardsByteIdentical": true,
+      "allUnownedHtmlByteIdentical": true,
+      "unownedHtmlSha256": "689fe484895e222fa5410dca64eecdef2cb9ebc74153d7e9468f61046605a472",
+      "beforeHtmlSha256": "b5dae928008f340bea2a517e28875da268fbb180378b8dce11893a0984b57ce2",
+      "afterHtmlSha256": "9801edbee34d3c613ecdd1fcc86981d24c798de65dd78c1c93e398a8dc7c17ee",
+      "pushedSiteSource": "7a055365a5b65dcacf5bfdbf77f2b450decfd4b7",
+      "archiveSourceHtmlByteIdentical": true,
+      "archiveLocalGzipSha256": "88e6177eb607c4e17f0b690258b8bb06e79832952ea3a99b803b4358ec58825a"
+    },
+    "checks": {
+      "secretScan": "PASS,112554 bytes, no leaks",
+      "diffWhitespace": "PASS",
+      "taskCards": 13,
+      "viewports": [
+        1440,
+        390,
+        320
+      ],
+      "visualQa": "390px task screenshot inspected; readable with role/completion/links"
+    },
+    "archiveQualification": "Native version reports its stored tar content hash/file count. Local pushed/archive HTML bytes match. Server tar repacking differs from local gzip/decompressed tar (local includes macOS metadata); stored native tar bytes were not independently retrieved or equated.",
+    "localDecompressedTarSha256": "63fad681d7bdf943f548645e5bead6ca61cf9b1550564399ad831e08298f2e96"
+  },
+  "status": "COMPLETED_SYNTHETIC_CYCLE_PRIVATE_BOARD_CURRENT",
+  "limits": [
+    "Full pilot/Phase1D/UAT/G1\u2013G9 remain NOT VERIFIED; actual publication and client contracts absent",
+    "Board task statuses/roles/completion/source links unchanged; all13 remain open",
+    "Native receipt adds provenance to the already-published canonical state; no status/gate change follows publication"
+  ]
 }
