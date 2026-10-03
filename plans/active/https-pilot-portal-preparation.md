@@ -72,3 +72,13 @@ The owner explicitly approved uploading reviewed `af31cba` to the existing owned
 The public target advanced to `cf8b320` with17 Cycle14 documentary changes only. Its three canonical append conflicts were resolved additively in `3fec237`, preserving both histories. Approved application/infrastructure/test/project/workflow source is unchanged. Fresh hosted CI is tracked separately; unfinished or absent jobs are not passing evidence. No target merge, release, paid Azure session, public application, login, enrollment, grants or migration follows from source publication.
 
 The private BFF/HTTPS board remains stale under its separate rejected publisher credential/network action. Public GitHub approval does not authorize that private publisher or change its audience. Preserve the independently confirmed Cycle14 board update.
+
+
+## Fresh hosted HTTPS verification — 2026-10-03 UTC
+
+Public source `33f4b47` triggered [bootstrap37090777603](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37090777603) and [package37090777612](https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37090777612). Both package jobs and Windows2022/2025 passed. Linux bootstrap failed at the first synthetic audited BFF composition ticket issuance after120 authority and81 audit assertions passed. Later PostgreSQL/session/frontend/browser/infrastructure steps were skipped and are NOT VERIFIED by this run. [CI record](../../docs/development/evidence/https-pilot-portal-ci-20261003.json) retains exact source/job evidence and confirmed fixture diagnosis and pending hosted rerun. No fresh complete CI success is claimed; prior local checks retain their actual limited scope. Public admission/login and all live gates remain disabled/unverified. The private BFF/HTTPS board remains stale under its separate publisher block.
+
+
+### Synthetic precision repair verified locally
+
+Worker `31bb30b` reproduced the original failure with a nine-tick frozen timestamp; PostgreSQL rounded provider state one tick into its future and the production guard correctly refused issuance. The fixture now captures wall time at PostgreSQL microsecond precision while retaining deliberate raw-tick injection. Nine real provider-publication remainder cases prove rounded-future denials and separate aligned successful issuance across stores. All prior cutoff/expiry/lock-contention tests remain present. Author643/644 and non-author644 real PostgreSQL assertions passed; the half-microsecond conditional assertion explains the one-count variation. Locked restore/Release build/format/diff passed; no production code, SQL, dependency, permission or retention policy changed. Hosted rerun remains separately pending. Original failure evidence is retained in the CI record.
