@@ -237,3 +237,8 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 ## Phase 1D local approval — 2026-10-03
 
 [Exact receipt](local-phase1d-approval.md) records the human P1D-D01–03 local-scope approval against unchanged proposal/test/decision bytes. Internal document/signature review is engineering evidence only. [Implementation plan](../../plans/active/local-pilot-phase1d-implementation.md) maintains execution; future source-bound runtime/private-publication receipts must distinguish the harness from full Milestone11/Phase1D/live gate proof.
+
+
+## Phase 1D executed local evidence — 2026-10-03
+
+[Source-bound execution receipt](../../docs/development/evidence/phase1d-implementation-20261003.json) records90-project restore/format/Release build,13,553 overlapping MCP assertions,14 independent golden artifacts/47 preserved denied requests,44 compatibility commands, architecture/security checks and279 unchanged working-file hashes. [Independent raw review/results](../../tests/integration/SyntheticMcp.Tests/evidence/verification.json) preserve scope/Unicode corrections and audit-time deadline/cancellation observations. [Verification and operations](local-phase1d-implementation-verification.md) distinguish local P1D-T01–12 coverage from open actual publication/protocol/live/manual/full acceptance. Native private deployment is recorded separately.
