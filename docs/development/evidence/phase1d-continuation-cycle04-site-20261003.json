@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-03",
+  "initial": {
+    "date": "2026-10-03",
+    "stage": "Local verified snapshot; broader Linux bootstrap pending at publication",
+    "deployment": {
+      "id": "appgdep_6ac18a4e01948191b72342604272c6d2",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_179040a363e4819182b2bff4bad3ac5c",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T23:05:56.805506+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_179040a363e4819182b2bff4bad3ac5c",
+      "number": 112,
+      "source": {
+        "commit_sha": "22f310a783e02c6affed9d1a394da0500cb5f8c1"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_000000006fd881f59c4b3b3547d46fcb",
+        "content_hash": "sha256:e6de6a24f2aa5196a6ee0fcd71b75551fb756cb7613826aaf7e3444d6cb82770",
+        "size_bytes": 122880,
+        "file_count": 2
+      }
+    },
+    "audience": {
+      "role": "owner",
+      "mode": "custom",
+      "users": 1,
+      "groups": 0,
+      "externalVisitors": 0,
+      "revision": 1
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-review",
+      "commit_sha": "22f310a783e02c6affed9d1a394da0500cb5f8c1",
+      "archive": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle04-evidence/site-initial.tar.gz"
+    },
+    "canonicalSnapshot": "6dbd47cf1937b4a049517ff5de1a5b850cbcbf69",
+    "archiveQualification": "Native tar hash/file count reported by version tool; local gzip/archive HTML provenance independently checked. Server repacked tar bytes not independently retrieved/equated.",
+    "qa": {
+      "status": "PASS",
+      "results": [
+        {
+          "width": 1440,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 390,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 320,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        }
+      ]
+    },
+    "preservation": {
+      "status": "PASS",
+      "canonicalSnapshot": "6dbd47cf1937b4a049517ff5de1a5b850cbcbf69",
+      "openingSiteSource": "2ce6398945b4cc81f2d5794ef0a607952e8ac4d9",
+      "allUnownedHtmlByteIdentical": true,
+      "otherTaskCardsByteIdentical": 12,
+      "openTaskCards": 13,
+      "unownedHtmlSha256": "a77941a600affe5f6dca8c8156dd8b9e7761fbc29e36dc05324909cde13531dc",
+      "beforeHtmlSha256": "8a97262309488801d197a2fb738dfb9e65732bf320c04d619d46ed0fe149e240",
+      "afterHtmlSha256": "0708d1dd51deffe2178f20c11edc5a250182e043c02fa7d99ea52d3fc4b000c2",
+      "pushedSiteSource": "22f310a783e02c6affed9d1a394da0500cb5f8c1",
+      "archiveSourceHtmlByteIdentical": true,
+      "localGzipSha256": "f92d5a60a944bfab878334eb2a00f846a605a83c00d63892d4e247881e8f47f7"
+    },
+    "checks": {
+      "siteSecretScan": {
+        "status": "PASS",
+        "scannedBytes": 119379,
+        "findings": 0
+      },
+      "diffWhitespace": "PASS",
+      "visualQa": "390px task screenshot inspected; readable linked role/completion"
+    }
+  },
+  "completionPublication": "Pending full hosted cycle closure; initial private version112 is confirmed"
+}
