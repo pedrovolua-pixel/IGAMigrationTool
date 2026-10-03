@@ -351,6 +351,128 @@ try {
     true,
     "hostile rationale remains inert",
   );
+  const beforeCorrection = (
+    await wrapper(await api.get("/local-evaluation/v1/workspace"), 200)
+  ).payload;
+  const correctedMemberId = beforeCorrection.members.at(-1).original.memberId;
+  const originalBytes = JSON.stringify(
+    beforeCorrection.members.at(-1).original,
+  );
+  await page.getByLabel("Outcome", { exact: true }).selectOption("Corrected");
+  await page.getByLabel("Originating classification").selectOption("Rejected");
+  await page
+    .getByLabel("Rationale")
+    .fill("Independent browser corrected origin");
+  await page
+    .getByLabel("Severity presentation")
+    .fill("Independent corrected severity");
+  await page.getByRole("checkbox").first().check();
+  await page
+    .getByRole("button", { name: "Prepare review", exact: true })
+    .click();
+  await page
+    .getByRole("heading", { name: "Prepared review", exact: true })
+    .waitFor();
+  await page
+    .getByRole("button", { name: "Record review", exact: true })
+    .click();
+  await page.getByText("Current workspace loaded", { exact: true }).waitFor();
+  const afterCorrection = (
+    await wrapper(await api.get("/local-evaluation/v1/workspace"), 200)
+  ).payload;
+  const corrected = afterCorrection.members.find(
+    (m) => m.original.memberId === correctedMemberId,
+  );
+  check(corrected.outcome, "Corrected", "actual browser corrected review");
+  check(
+    corrected.originatingClassification,
+    "Rejected",
+    "actual browser explicit corrected origin",
+  );
+  check(
+    JSON.stringify(corrected.original),
+    originalBytes,
+    "corrected presentation preserves original bytes",
+  );
+  const scored = (
+    await wrapper(
+      await api.get(
+        `/local-evaluation/v1/versions/${afterCorrection.aggregateRevision}`,
+      ),
+      200,
+    )
+  ).payload;
+  const scoredCounts = JSON.parse(scored.warningCanonicalJson).summaries
+    .generalAi;
+  await memberSelector.selectOption(correctedMemberId);
+  await page
+    .getByLabel("Action", { exact: true })
+    .selectOption("PresentationCorrection");
+  await page
+    .getByLabel("Rationale")
+    .fill("Independent browser presentation-only revision");
+  await page
+    .getByLabel("Severity presentation")
+    .fill("Independent presentation-only severity");
+  await page
+    .getByRole("button", { name: "Prepare review", exact: true })
+    .click();
+  await page
+    .getByRole("heading", { name: "Prepared review", exact: true })
+    .waitFor();
+  await page
+    .getByRole("button", { name: "Record review", exact: true })
+    .click();
+  await page.getByText("Current workspace loaded", { exact: true }).waitFor();
+  const afterPresentation = (
+    await wrapper(await api.get("/local-evaluation/v1/workspace"), 200)
+  ).payload;
+  const presented = afterPresentation.members.find(
+    (m) => m.original.memberId === correctedMemberId,
+  );
+  check(
+    presented.outcome,
+    "Corrected",
+    "presentation change preserves scored outcome",
+  );
+  check(
+    presented.originatingClassification,
+    "Rejected",
+    "presentation change preserves explicit origin",
+  );
+  check(
+    presented.currentCorrection.severity,
+    "Independent presentation-only severity",
+    "actual browser presentation update",
+  );
+  check(
+    JSON.stringify(presented.original),
+    originalBytes,
+    "presentation revision preserves original bytes",
+  );
+  const presentedVersion = (
+    await wrapper(
+      await api.get(
+        `/local-evaluation/v1/versions/${afterPresentation.aggregateRevision}`,
+      ),
+      200,
+    )
+  ).payload;
+  const presentedCounts = JSON.parse(presentedVersion.warningCanonicalJson)
+    .summaries.generalAi;
+  for (const field of [
+    "confirmed",
+    "rejected",
+    "indeterminate",
+    "unreviewed",
+    "corrected",
+    "denominator",
+  ])
+    check(
+      presentedCounts[field],
+      scoredCounts[field],
+      "presentation-only no rescore " + field,
+    );
   const versionSelect = page.getByLabel(/outcome version/i);
   await versionSelect.focus();
   await page.keyboard.press("Home");
@@ -371,6 +493,68 @@ try {
     path: `${evidence}/keyboard-history-old-version.png`,
     fullPage: true,
   });
+  // Browser-only adversarial transport mocks; real registry authority stays unchanged.
+  await page.route("**/local-evaluation/v1/workspace", async (route) => {
+    const response = await route.fetch();
+    const body = await response.json();
+    await route.fulfill({
+      response,
+      json: { ...body, unexpectedAuthority: true },
+    });
+  });
+  await page
+    .getByRole("button", { name: "Refresh workspace", exact: true })
+    .click();
+  await page
+    .getByText("Workspace unavailable. Refresh before reviewing.", {
+      exact: true,
+    })
+    .waitFor();
+  check(
+    await memberSelector.count(),
+    0,
+    "mock malformed closed wrapper clears protected cached cohort",
+  );
+  check(
+    await page
+      .getByText("100 selected · 120 source members", { exact: true })
+      .count(),
+    0,
+    "mock malformed closed wrapper hides cached total",
+  );
+  await page.unroute("**/local-evaluation/v1/workspace");
+  await page
+    .getByRole("button", { name: "Refresh workspace", exact: true })
+    .click();
+  await page.getByText("Current workspace loaded", { exact: true }).waitFor();
+  await page.route("**/local-evaluation/v1/versions/*", async (route) => {
+    const response = await route.fetch();
+    const body = await response.json();
+    body.payload.snapshotCanonicalJson += " ";
+    await route.fulfill({ response, json: body });
+  });
+  await versionSelect.selectOption("0");
+  await page
+    .getByText("Workspace unavailable. Refresh before reviewing.", {
+      exact: true,
+    })
+    .waitFor();
+  check(
+    await memberSelector.count(),
+    0,
+    "mock mismatched raw snapshot digest clears cached source",
+  );
+  check(
+    await page
+      .getByRole("button", { name: "Prepare review", exact: true })
+      .count(),
+    0,
+    "mock invalid version has no mutation control",
+  );
+  await page.screenshot({
+    path: `${evidence}/mock-invalid-version-closed.png`,
+    fullPage: true,
+  });
   check(errors, [], "no browser runtime errors");
   await browser.close();
   await writeFile(
@@ -379,6 +563,10 @@ try {
       {
         result: "PASS",
         checks,
+        browserMocks: [
+          "closed wrapper extra key",
+          "raw snapshot digest mismatch",
+        ],
         fixtureExpectation: sha(
           await readFile(
             new URL(
