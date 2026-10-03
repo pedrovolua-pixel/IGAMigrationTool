@@ -1,6 +1,6 @@
 # HTTPS production composition contract proposal
 
-Status: Proposed — human technical/security approval pending
+Status: Accepted local design — exact unresolved inputs and live gates remain open
 Date: 2026-10-03 UTC
 Product authority: [Approved health-assessment product](../../specs/003-health-assessment/product-spec.md)
 Owner/reviewers: Technical/security, identity/platform, operations and data-governance owners
@@ -83,7 +83,7 @@ Append denial/failure in an independent short PostgreSQL transaction after any f
 
 Compatibility gap: existing `OperationReceiptRequestV1` requires a non-null target and `OperationReceiptV1` requires a positive non-null security version; existing receipt v1 already supports denial/failure outcomes but cannot safely bind an unknown anonymous subject, so it cannot represent an unknown anonymous failure by inventing a subject. A proposed additive internal authentication-outcome receipt is keyed by exact trusted environment/writer/operation plus event descriptor digest; stored outcome is terminal event ID and canonical stream sequence/digest only. Unique binding, conflicting digest denial and receipt/event atomicity need actual restricted-role tests. Do not modify existing receipt v1 or use a synthetic target.
 
-## Outage journal/reconciliation candidate — not selected
+## Outage journal/reconciliation candidate — accepted for local prototype only
 
 Under ADR-0012 Option A, proposed `AuthenticationFailureJournalV1` is a closed internal object, not a public endpoint:
 
@@ -126,6 +126,11 @@ Conditional order: approve applicable exact contracts/test cases and dependency 
 
 ## Approval
 
-Approved by: Pending
-Date: Pending
+Approved by: Repository owner for the recommended bounded local design only
+Date: 2026-10-03 UTC
 [Acceptance tests and human tasks](https-production-test-packet.md) are proposed; no tests in that packet have run.
+
+
+## Owner approval and current implementation scope — 2026-10-03 UTC
+
+Repository owner replied “Approved” after exact review packet `d518d25` and PC-D01–PC-D05 were presented. This accepts the recommended local design and supporting tests; the earlier proposed-state descriptions are the preparation record. [Local cycle01](../../plans/active/https-production-local-cycle01.md) records the exact accepted scope, implementation/test sequence and dependencies. No unspecified quantity, inventory authority, public step-up/outage response, actual tenant/role/ingress proof, cloud deployment, spending or production release is supplied by this approval. External users and privileged routes remain denied until their independent evidence/contracts close. Only explicitly executed cases may be marked verified.

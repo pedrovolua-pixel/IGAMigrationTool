@@ -1,6 +1,6 @@
 # HTTPS-PC02: production shared protection key contract
 
-Status: **PROPOSED — implementation and live activation blocked**
+Status: **Accepted preferred local strategy — exact artifact/guard/inventory prerequisites and live activation remain blocked**
 
 Last updated: 2026-10-03 UTC
 
@@ -130,4 +130,9 @@ Before implementation approval, reviewers must close: exact package/runtime/sour
 
 After approval, local adapter tests precede independent review and any separately authorized Azure spike. Live roles, paid session, identity activation, public exposure and release each retain their existing authorization gates. This proposal alone leaves HTTPS-T02–T08, G1–G9 and Milestone2 **NOT VERIFIED**.
 
-Approval: pending named technical/platform/security/operations reviewers and repository owner; no production authorization inferred.
+Approval: Repository owner accepted the preferred local strategy on2026-10-03 UTC; exact artifact/guard/inventory inputs, named live reviews and production authorization remain unresolved.
+
+
+## Owner approval and current implementation scope — 2026-10-03 UTC
+
+Repository owner replied “Approved” after exact review packet `d518d25` and PC-D01–PC-D05 were presented. This accepts the recommended local design and supporting tests; the earlier proposed-state descriptions are the preparation record. [Local cycle01](../../plans/active/https-production-local-cycle01.md) records the exact accepted scope, implementation/test sequence and dependencies. No unspecified quantity, inventory authority, public step-up/outage response, actual tenant/role/ingress proof, cloud deployment, spending or production release is supplied by this approval. External users and privileged routes remain denied until their independent evidence/contracts close. Only explicitly executed cases may be marked verified.

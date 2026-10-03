@@ -3,7 +3,7 @@
 Status: Accepted for bounded local Option A protocol prototype only; production outage decision remains open
 Date: 2026-10-03 UTC
 Decision owners: Technical/security, data-governance and operations owners
-Scope: HTTPS production dependency review; no implementation, deployment, grant or policy amendment
+Scope: HTTPS production dependency review; no production implementation, deployment, grant or total-outage policy amendment
 
 ## Context
 
@@ -49,7 +49,7 @@ Ordinary logs, memory queues, queue publish without durable receipt and containe
 
 ## Decision
 
-Repository owner accepted the recommended Option A for a bounded local protocol prototype on 2026-10-03 UTC after packet `d518d25`. Its acceptance would permit local synthetic persistence/concurrency/reconciliation tests, not public admission or a policy amendment. Decide correlated total-audit outage handling separately before any live activation. Do not claim private Blob alone meets every production audit requirement.
+Repository owner accepted the recommended Option A for a bounded local protocol prototype on 2026-10-03 UTC after packet `d518d25`. This acceptance permits local synthetic persistence/concurrency/reconciliation tests, not public admission or a policy amendment. Decide correlated total-audit outage handling separately before any live activation. Do not claim private Blob alone meets every production audit requirement.
 
 ## Security, operations and cost impact
 
@@ -57,7 +57,7 @@ Exact create/read/list/delete/hold/signing permissions, private endpoints, write
 
 ## Migration and reversibility
 
-After separately approved local contracts, propose additive journal-source receipt metadata without rewriting existing migrations/canonical event v1. Reconciliation preserves source occurrence time separately because the existing audit appender stamps its ordered event after the stream lock. Do not backdate the canonical stream. Source-occurrence-based linked retention is a proposed interpretation requiring PC-D03 data-governance approval because the current canonical event timestamp is the reconciliation time; no lifecycle implementation or compliance claim until settled. Disable admission and preserve journal/canonical/witness/tombstone evidence during rollback. No destructive cleanup or key deletion is authorized.
+After separately approved local contracts, propose additive journal-source receipt metadata without rewriting existing migrations/canonical event v1. Reconciliation preserves source occurrence time separately because the existing audit appender stamps its ordered event after the stream lock. Do not backdate the canonical stream. Source-occurrence-based linked retention is the accepted local PC-D03 interpretation; canonical event timestamps remain the reconciliation time. Actual lifecycle metadata, read filtering, data-governance/live evidence and total-outage handling still need closure before lifecycle execution or a production compliance claim. Disable admission and preserve journal/canonical/witness/tombstone evidence during rollback. No destructive cleanup or key deletion is authorized.
 
 ## Validation
 

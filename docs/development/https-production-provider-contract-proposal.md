@@ -1,6 +1,6 @@
 # HTTPS-PC01: production provider contract proposal
 
-Status: PROPOSED — specification preparation only; implementation, consent and live admission blocked
+Status: Accepted local design — bounded response projection implementation approved; consent/live admission and exact unresolved inputs remain blocked
 Date: 2026-10-03 UTC
 Reviewers: Identity/platform and technical/security owners; independent non-author reviewer
 Baseline: `b065b51ad97eda9cd96dc08504802b974e819cd1`
@@ -135,3 +135,8 @@ All cases below are PLANNED, not executed here. LOCAL means deterministic fake t
 | PROVIDER-D06 | Coordinator/operations/security: production host/resource policy/privileged verifier, durable audit outage decision, shared-key recovery, ingress peer, immutable image and priced live session must close independently. |
 
 Implementation packet after approval: bounded provider HTTP/credential/projection seam, deterministic transport negatives, existing real SQL/session composition and independent review; coordinator owns solution/dependencies/canonical records. Protected live proof requires exact immutable bindings, least-permission consent and property/filter/pagination evidence, named test personas/operators and approved spending/access. No API was called against a tenant, no dependency was added and no runtime test was executed for this preparation. All Microsoft links above were checked against primary documentation on 2026-10-03 UTC; published examples are not proof of this tenant's actual access or response shape.
+
+
+## Owner approval and current implementation scope — 2026-10-03 UTC
+
+Repository owner replied “Approved” after exact review packet `d518d25` and PC-D01–PC-D05 were presented. This accepts the recommended local design and supporting tests; the earlier proposed-state descriptions are the preparation record. [Local cycle01](../../plans/active/https-production-local-cycle01.md) records the exact accepted scope, implementation/test sequence and dependencies. No unspecified quantity, inventory authority, public step-up/outage response, actual tenant/role/ingress proof, cloud deployment, spending or production release is supplied by this approval. External users and privileged routes remain denied until their independent evidence/contracts close. Only explicitly executed cases may be marked verified.

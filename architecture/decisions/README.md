@@ -28,6 +28,8 @@ ADRs are append-only decision history. Supersede an accepted ADR with a new ADR 
 - [ADR-0010-private-pilot-browser-access.md](ADR-0010-private-pilot-browser-access.md) — accepted owner-operated private test desktop design and local templates through Bastion Developer on2026-10-02; exact Azure access/spending and live gates remain separate.
 
 
-## Proposed production HTTPS audit decision
+## Accepted local HTTPS audit prototype; production outage decision open
 
-- [ADR-0012-authentication-failure-audit-preservation.md](ADR-0012-authentication-failure-audit-preservation.md) — compares durable authentication failure journal/service and exact policy amendment alternatives; no choice accepted or live audit-policy exception selected.
+- [ADR-0012-authentication-failure-audit-preservation.md](ADR-0012-authentication-failure-audit-preservation.md) — compares durable authentication failure journal/service and exact policy amendment alternatives; Option A accepted for bounded local prototype only; no live audit-policy exception selected.
+
+ADR-0012 Option A is now accepted for a bounded local prototype only; total-audit-outage policy and live acceptance remain open. [Owner approval scope](../../plans/active/https-production-local-cycle01.md).

@@ -1,6 +1,6 @@
 # HTTPS production local cycle 01
 
-Status: RUNNING — approved bounded local implementation
+Status: VERIFIED — bounded local response projection and artifact audit; production dependencies remain blocked
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Approved product: [Health assessment](../../specs/003-health-assessment/product-spec.md)
@@ -30,9 +30,9 @@ Trace: LP01 contributes to HTTPS-PROV-T03/05/07/08 and AC-HAS-9, TP-HAS-009, IP-
 
 | Packet | Owner / permitted write paths | Checks and state |
 |---|---|---|
-| LP01 | Isolated provider worker: `src/server/modules/IdentityAuthority/GraphProviderResponseProjection.cs`, `tests/unit/IdentityAuthority.Tests/GraphProviderProjectionChecks.cs`, and one call in existing `tests/unit/IdentityAuthority.Tests/Program.cs` | Existing authority suite plus independent hostile corpus, actual .NET10.0.401 locked restore/build/format and secret/whitespace; RUNNING |
-| LP02 | Isolated platform worker: only `docs/development/https-key-provider-artifact-audit.md` | Exact stable Microsoft package metadata, immutable source/artifact hashes and dependency/license/vulnerability evidence; no dependency install into repo, no production selection by assumption; RUNNING |
-| LP03 | Coordinator: canonical docs, configuration only if necessary, integration and full applicable checks | Non-author review of immutable candidates before integration; pending |
+| LP01 | Isolated provider worker: `src/server/modules/IdentityAuthority/GraphProviderResponseProjection.cs`, `tests/unit/IdentityAuthority.Tests/GraphProviderProjectionChecks.cs`, and one call in existing `tests/unit/IdentityAuthority.Tests/Program.cs` | Existing authority suite plus independent hostile corpus, actual .NET10.0.401 locked restore/build/format and secret/whitespace; VERIFIED — local parser and independent review only |
+| LP02 | Isolated platform worker: only `docs/development/https-key-provider-artifact-audit.md` | Exact stable Microsoft package metadata, immutable source/artifact hashes and dependency/license/vulnerability evidence; no dependency install into repo, no production selection by assumption; VERIFIED — documentary evidence only; integration remains BLOCKED |
+| LP03 | Coordinator: canonical docs, configuration only if necessary, integration and full applicable checks | Non-author review of immutable candidates before integration; VERIFIED — combined local checks and evidence |
 
 ## Verification, configuration and rollback
 
@@ -46,4 +46,12 @@ Owner design-review tasks close only for the local scopes above. Keep exact bind
 
 ## Completion record
 
-Candidate commits, independent reviews, executed checks, actual results, unmet cases and final source receipt: pending.
+LP01 author `a865cf8` plus formatting-only `9d34ec5`, integrated as `b21574b`/`5143403`, passed non-author `package_hosting` review. The initial candidate failed unfiltered test-project formatting; the formatting-only correction passed that exact gate. Reviewer reran212 authority assertions and29 independent hostile cases against the unchanged projector blob; no semantic/security blocker.
+
+LP02 author `e887f41`/`d008c8b`, integrated as `689a2bf`/`a3f9eb9`, passed independent `production_identity_proposal` review:32 raw archive hashes/manifests, five evidence digests, tags/catalogs/source dispatch, dated vulnerability ranges and signature results. Only source-supported feasibility is established. Five candidate-minimum signature checks failed in the recorded macOS verifier; no package tampering claim, trust bypass or installed host graph follows.
+
+Coordinator: full-solution locked audited restore, unfiltered full-solution formatting and Release build with zero warnings/errors passed. All12 applicable core suites passed, including212 authority,69 session/audit unit,2546 policy,188 foundation,308 public authentication HTTPS,60 hosting,11 architecture,120 PostgreSQL authority,81 audit,644 composition,126 shared-session and84 HTTPS/session-flow checks. These are scoped regressions, not all configured CI or live acceptance. A mistaken nonexistent standalone audit-unit path and two composition database-name guard refusals were corrected in the temporary runner without product changes; all actual final suites passed. Sandbox-only restore was stopped and PostgreSQL shared-memory initialization was retried with required runtime access.
+
+No new dependency, lock, SQL/schema, public contract, host wiring, permission, lifecycle job, infrastructure or Azure resource change. No migration/configuration step required. Rollback removes the unused additive projector/test call; existing stores and authority are unchanged. Full configured CI, frontend/browser accessibility, Windows/container, actual Graph/CA/RBAC/key/ingress/recovery and G1–G9 remain NOT VERIFIED for this cycle. Remaining anonymous audit persistence, SDK signature/actual graph/guards, inventory/lifecycle, exact resource/privileged/ingress/response inputs and live bindings are explicit next dependencies; owner design approval is not requested again.
+
+[Execution evidence](../../docs/development/evidence/https-production-local-cycle01-20261003.json) owns exact source and checks. Private site publication remains unavailable under the separate publisher block; six linked human task rows are updated in the acceptance packet. No worker is left running unattended.

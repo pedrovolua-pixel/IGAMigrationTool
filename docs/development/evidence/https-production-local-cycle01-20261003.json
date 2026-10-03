@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T05:32:48.690126+00:00",
+  "status": "VERIFIED_BOUNDED_LOCAL_SCOPE_ONLY",
+  "approvedPacket": "d518d25274956fbaf19f8cdff916bf0236394fc6",
+  "approvedPlan": "d8155ee899fa17db9e155a7c97048a69f4e7a552",
+  "testedRuntimeSource": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+  "sdk": "10.0.401",
+  "runtime": "10.0.12",
+  "postgres": "18.4",
+  "lp01": {
+    "authorCommits": [
+      "a865cf819b7b19e93c62e3a60efe10918f189cfd",
+      "9d34ec52b446df8f0d6899ab8d79dca7200cb396"
+    ],
+    "integratedCommits": [
+      "b21574b",
+      "5143403"
+    ],
+    "reviewer": "package_hosting",
+    "review": "PASS",
+    "authorityAssertions": 212,
+    "newProjectionAssertions": 125,
+    "independentHostileCases": 29,
+    "hostileCaseSource": "a865cf8 projector blob identical in final9d34ec5",
+    "rangeSha256": "09a5c2685ed4e165da9cb1fde7f0a9687b575f708abeaa48ce9648aad1bfd158",
+    "cases": "Partial local T03/T05/T07/T08 only; no complete live case accepted"
+  },
+  "lp02": {
+    "authorCommits": [
+      "e887f4154d81a751fc5bd524a0c479693a2f2a7a",
+      "d008c8b19d4ddbf940f01d83c8ac82de6d854450"
+    ],
+    "integratedCommits": [
+      "689a2bf",
+      "a3f9eb9"
+    ],
+    "reviewer": "production_identity_proposal",
+    "review": "PASS documentary/artifact/source evidence only",
+    "candidateArchives": 32,
+    "verifiedSignatures": 27,
+    "failedSignatures": 5,
+    "signatureAggregateExit": "NOT CAPTURED; no aggregate command success claimed",
+    "focusedSystemMemoryVerifyExit": 1,
+    "vulnerabilityMatches": 0,
+    "vulnerabilityBoundary": "Dated32-candidate feed only, not full installed host graph or future assurance",
+    "dependencyIntegration": "BLOCKED pending actual graph/signature and supported SDK guards/inventory/lifecycle evidence"
+  },
+  "coordinatorChecks": {
+    "lockedAuditedFullSolutionRestore": "PASS",
+    "unfilteredFullSolutionFormat": "PASS",
+    "releaseFullSolutionBuild": "PASS zero warnings/errors",
+    "regressionSuites": [
+      {
+        "case": "authority-unit",
+        "project": "tests/unit/IdentityAuthority.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:08.680361+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS 212 closed authority/provider assertions"
+        ],
+        "log": "/tmp/iga-https-lp01-execution/authority-unit.log",
+        "logSha256": "80c73e186b1c08474a83c6b8399444feb7d6a5aa41c21ec93a5c312f991e582c"
+      },
+      {
+        "case": "sessions-unit",
+        "project": "tests/unit/IdentitySessions.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:09.065587+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS: 27 session entropy/context/minimal-ticket checks; persistence verified separately.",
+          "PASS: 69 total session and closed audit/canonical/receipt/witness checks."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/sessions-unit.log",
+        "logSha256": "37337a34d4226cfde0c070faef0b978f5c7ed81c77d129071ce7cc2060b7e78b"
+      },
+      {
+        "case": "policy-unit",
+        "project": "tests/unit/IdentityPolicy.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:09.438126+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS: 2546 independent human policy matrix, refusal, boundary and overlap checks."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/policy-unit.log",
+        "logSha256": "4500b58739754411ebdefab901fb651fd046164ee932b49c9b852754fc71b8b7"
+      },
+      {
+        "case": "bff-foundation",
+        "project": "tests/unit/BffFoundation.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:09.806053+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS 116 actual HTTPS synthetic signed protocol assertions; no Entra/Graph/FIC proof",
+          "PASS 188 BFF foundation assertions; local middleware/options only, live OIDC/FIC unverified"
+        ],
+        "log": "/tmp/iga-https-lp01-execution/bff-foundation.log",
+        "logSha256": "6b4c379202a1e9ddd60c58a16decd48bebe6cd9ab6626dcb556ffff931b73544"
+      },
+      {
+        "case": "bff-auth-transport",
+        "project": "tests/integration/BffAuthenticationTransport.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:11.849483+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "BFF-PUBLIC-AUTH: 308 actual HTTPS checks passed; production/OIDC acceptance NOT VERIFIED."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/bff-auth-transport.log",
+        "logSha256": "ff56a569fb16c481f0cdeb807c3354d99124ef7a8e6cd9c046ac8cca81800b99"
+      },
+      {
+        "case": "bff-hosting",
+        "project": "tests/integration/BffHostingContracts.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:12.751419+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS BFF hosting contracts: 60 checks; actual HTTPS/framework DP, synthetic wrapping/repository only."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/bff-hosting.log",
+        "logSha256": "626f73a1a1298c725325bb894304d6143bf78768b1047b37890ea355a247b426"
+      },
+      {
+        "case": "architecture",
+        "project": "tests/architecture/BoundaryChecks",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:21.785166+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "7 architecture policy and 4 project-scan cases passed; repository ProjectReferences satisfy the checked boundaries."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/architecture.log",
+        "logSha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+      },
+      {
+        "case": "authority-postgres",
+        "project": "tests/integration/IdentityAuthority.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:22.284754+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS 120 actual PostgreSQL authority/audit/role/concurrency assertions"
+        ],
+        "log": "/tmp/iga-https-lp01-execution/authority-postgres.log",
+        "logSha256": "a13092c18b16ebb8e1d218eb190591bd84c42aeb322df75c5ae41cb757f084bf"
+      },
+      {
+        "case": "audit-postgres",
+        "project": "tests/integration/SecurityAudit.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:29:25.728593+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS case: actual PostgreSQL COMMIT followed by deterministic simulated acknowledgment loss; internal metadata-only receipt retry, no credential replay (not actual TCP interruption).",
+          "PASS: 81 real PostgreSQL atomic audit/restricted-role/receipt/head-wait/lifecycle/witness checks."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/audit-postgres.log",
+        "logSha256": "72349929dca34ef88dbfc64b877dbee37f2dd2958196a8a59fd469e56c7816ae"
+      },
+      {
+        "case": "composition-postgres",
+        "project": "tests/integration/BffAuthorityComposition.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:30:16.367049+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS: 644 independently authored real PostgreSQL authority/audit/session composition checks."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/composition-postgres.log",
+        "logSha256": "6cca5aa7a079945ea1691b6c53847bfa25c136c4ffda7dc18868e5d9cfe23efd"
+      },
+      {
+        "case": "sessions-postgres",
+        "project": "tests/integration/IdentitySessions.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:30:19.784098+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS: 126 real PostgreSQL shared-ticket/context/lifetime/rotation/revocation/race checks."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/sessions-postgres.log",
+        "logSha256": "9fbbf1bdfdbf835aa997d6012e2bf9c0114c1b14df41d040c1c8236b5204e9ed"
+      },
+      {
+        "case": "bff-https-postgres",
+        "project": "tests/integration/BffSessionFlow.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T05:30:20.489421+00:00",
+        "source": "a3f9eb99ea83894e359eaee6cf541347e380232e",
+        "summary": [
+          "PASS active idle renewal at minute 450: OK",
+          "PASS active idle renewal at minute 460: OK",
+          "PASS active idle renewal at minute 470: OK",
+          "PASS eight-hour absolute deadline remains fixed: Unauthorized",
+          "BFF-FLOW: 84 actual HTTPS/shared PostgreSQL checks passed; Entra/FIC NOT VERIFIED."
+        ],
+        "log": "/tmp/iga-https-lp01-execution/bff-https-postgres.log",
+        "logSha256": "53bc23bb0737cd5482667ed6df55ee03ce797d88d17e0216923dbae25c5e2381"
+      }
+    ],
+    "wholeCheckoutGitleaks": "PASS8.30.1",
+    "documentationChecks": {
+      "localTargets": 455,
+      "anchors": 16,
+      "unchangedOfficialIcons": 6,
+      "whitespaceProtectedProse": "PASS",
+      "errors": []
+    },
+    "fullConfiguredCi": "NOT RUN"
+  },
+  "failuresAndCorrections": [
+    "Initial independent unfiltered test-project formatting failed six diagnostics;9d34ec5 whitespace-only fix and exact final gate passed",
+    "Temporary runner attempted nonexistent standalone audit-unit project; actual unit audit coverage is in IdentitySessions.Tests",
+    "Two composition fixture database-name refusals; used exact named DB in new cycle-owned loopback cluster, all final12 suites passed",
+    "Sandbox-only restore stopped without proof; retried locked audited restore successfully with required runtime access",
+    "Sandbox PostgreSQL initialization denied shared memory; required-access initialization/start succeeded"
+  ],
+  "unchangedBoundaries": {
+    "newDependencies": 0,
+    "migrationSchemaChanges": 0,
+    "productionHostWiring": 0,
+    "azureOperations": 0,
+    "permissionsGranted": 0,
+    "paidSession": false,
+    "publicAdmission": false,
+    "gatesG1ToG9Milestone2": "NOT VERIFIED",
+    "gitGuardian": "Historical six digest findings still await human disposition; no suppression"
+  },
+  "privateBoard": {
+    "status": "STALE BFF/HTTPS",
+    "lastConfirmedSnapshot": "4346e0f",
+    "lastConfirmedPublicationUtc": "2026-10-02T19:50:45.775370+00:00",
+    "reason": "Separate automatic approval rejection of credential/network publisher proxy-bypass approach; this design approval does not resolve that action",
+    "unrelatedCycle14": "PRESERVED",
+    "delta": "Approved local design/verified cycle01 plus six linked exact remaining input/tasks in test packet"
+  },
+  "rollout": "No deployment; additive unused projector can be removed without state migration",
+  "temporaryTestCluster": "Owned isolated loopback cluster stopped successfully after final12 suites; data preserved in /tmp",
+  "sourceBindings": [
+    {
+      "path": "architecture/decisions/ADR-0012-authentication-failure-audit-preservation.md",
+      "sha256": "58c8d87fa831da1e76e1509a934a9cfbc132c4468414a09ccd2bd5f3987cfaf0"
+    },
+    {
+      "path": "architecture/decisions/README.md",
+      "sha256": "99625ab3a5439e60d9c498309da66c3ec8387e6809e077a1dad01dd25d2f05b9"
+    },
+    {
+      "path": "docs/development/https-key-provider-artifact-audit.md",
+      "sha256": "4e964d94ffcf7e64376b055c526464c1b84f83b29a4cf10146c4ca7ad4e414d9"
+    },
+    {
+      "path": "docs/development/https-pilot-portal-next-packet.md",
+      "sha256": "0b6727e264cf180f93531e8ae6453a18396e25530b922a48751884cc20799fd9"
+    },
+    {
+      "path": "docs/development/https-production-contract-proposal.md",
+      "sha256": "9da32bc7b810f546021ab3bb030431162685524ff283f0043cd5557adb146e5e"
+    },
+    {
+      "path": "docs/development/https-production-key-contract-proposal.md",
+      "sha256": "07b5f91f5174e0b36354cb510a3db0d6be64e37caff1fd9fe14e52ef664bd748"
+    },
+    {
+      "path": "docs/development/https-production-provider-contract-proposal.md",
+      "sha256": "3d1d07cba7e3f8a61d9faed7156ec087c1bfcaf8b701300dba9e6cfa91072f6d"
+    },
+    {
+      "path": "docs/development/https-production-test-packet.md",
+      "sha256": "61660ac61fcb53dc67538b9b63ecc7cdabfebdefb7ea8235c8824aac99a768eb"
+    },
+    {
+      "path": "plans/active/https-production-contract-preparation.md",
+      "sha256": "fa626bca01e905ccf912ea85e1a0ed2c3bdafe81b00898fe6ee371251c1b78e1"
+    },
+    {
+      "path": "plans/active/https-production-local-cycle01.md",
+      "sha256": "af20b68560add3b858553e376b7a2c3fcfd6ed2f4be9201bf6241c9ae8bf1ca8"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "7536416739c39d6bd5b526769fd6078f8d59e6c9a2e69c6b98a349f416027e71"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "e702ebd7882e890a356a6e4ce16bced0d7ab56dc668c701fa087c99e31dcd4bc"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "525c19eeaf61bbcda0ac3a971313c980d0c4f732c46911b17c55ec532128af4d"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "de7df430dace5233df33e40935b387493ae46cd01c6aee9f432220a3ac4d3ee8"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "0dabfaa0a62cdae1b1270f0c18f3ca4ae7f4039c828e3c45f4f2fb9ae0bf50f0"
+    },
+    {
+      "path": "src/server/modules/IdentityAuthority/GraphProviderResponseProjection.cs",
+      "sha256": "0af7e3966184a0a8afb8663e28f7ae4aed85781ddda94f5f01467fe49be0bd02"
+    },
+    {
+      "path": "tests/unit/IdentityAuthority.Tests/GraphProviderProjectionChecks.cs",
+      "sha256": "c2a6728315a8a1c579d64ef25e1a68eb2f7330f44d7867df7e26f21ca92232f3"
+    },
+    {
+      "path": "tests/unit/IdentityAuthority.Tests/Program.cs",
+      "sha256": "68148ad66711d540c9da41c9b9360d6c19c80dcbdafd5ee97604e035e64381d6"
+    }
+  ],
+  "finalNonAuthorRecordReview": {
+    "reviewer": "package_hosting",
+    "result": "PASS documentary/source/record compatibility only",
+    "executed": "18bindings,12log/result receipts,reviewed3codeblobs,exactSDKdocblob,455targets/16anchors/whitespace; no runtime/cloud rerun"
+  }
+}

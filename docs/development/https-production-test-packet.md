@@ -1,6 +1,6 @@
 # HTTPS production acceptance test packet
 
-Status: Proposed — no case executed; not an approved implementation plan
+Status: Accepted local test design — executable subset and actual results tracked in local cycle plan; live cases remain unverified
 Date: 2026-10-03 UTC
 Owner: Technical/security, identity/platform and operations reviewers
 Product: [Approved product](../../specs/003-health-assessment/product-spec.md)
@@ -75,11 +75,21 @@ Preserve existing authentication v1 and canonical audit/receipt v1 contracts, di
 
 | Task | Requested role | Needed information / completion source |
 |---|---|---|
-| Provider contract | Identity/security | Accept PC-D01 and the focused provider protocol; provide required-property and external-home trust evidence in an owner-only copy of [binding intake](bff-production-bindings-template.json). External admission remains denied without it. |
-| Shared-key contract | Platform/security/operations | Accept PC-D02 strategy, exact audited dependencies and bootstrap/runtime/rotation/recovery separation; complete private ring/key/historical-version/lifecycle inputs using [key proposal](https-production-key-contract-proposal.md). |
-| Failure audit | Technical/security/data-governance | Select PC-D03/[ADR-0012](../../architecture/decisions/ADR-0012-authentication-failure-audit-preservation.md); accept exact anonymous receipt/reconciliation/retention contract and both-store outage handling; name distinct witness/lifecycle owners. |
-| Host/resource and privileged proof | Technical/identity/security | PC-D05 exact resource-context/privileged verifier and public error/abuse/deadline contract; no inferred permissions. [Production proposal](https-production-contract-proposal.md) defines completion. |
+| Provider contract | Identity/security | Owner accepted the local PC-D01 protocol; close exact refresh/manifest inputs and provide required-property and external-home trust evidence in an owner-only copy of [binding intake](bff-production-bindings-template.json). External admission remains denied without it. |
+| Shared-key contract | Platform/security/operations | Owner accepted the preferred PC-D02 strategy; resolve the artifact audit and actual guarded dispatch/inventory/lifecycle evidence, and complete private ring/key/historical-version/lifecycle inputs using [key proposal](https-production-key-contract-proposal.md). |
+| Failure audit | Technical/security/data-governance | Owner accepted local Option A/[ADR-0012](../../architecture/decisions/ADR-0012-authentication-failure-audit-preservation.md) and the linked source-time interpretation; close exact witness/receipt/capacity/deadline and both-store outage handling; name distinct witness/lifecycle owners. |
+| Host/resource and privileged proof | Technical/identity/security | Owner accepted the PC-D05 local boundary; supply exact resource/CA evidence and close sidecar lifecycle, step-up/public error/abuse/deadline contracts; no inferred permissions. [Production proposal](https-production-contract-proposal.md) defines completion. |
 | Ingress/live deployment | Platform/operations/security | PC-D04 IN evidence and LV01–LV04 complete: exact approved proxy contract, image/private pull acceptance and fresh priced session. [Protected intake](bff-production-bindings-template.json) links evidence. |
 | Private status publisher | Repository owner | Separate exact credential/network publisher approval remains unresolved after automatic-review rejection; source publication approval does not authorize it. [Status-site maintenance](pilot-status-site.md) defines private readback completion. |
 
-The prepared private-board delta is these six linked tasks plus “production contract proposal ready for review”; implementation/live/gates remain blocked. Publication is unavailable under the existing publisher block, so the BFF/HTTPS snapshot remains stale. Unrelated confirmed Cycle14 board changes remain preserved.
+The prepared private-board delta is these six linked tasks plus the approved local implementation status from cycle01; exact unresolved implementation dependencies, live activation and gates remain blocked. Publication is unavailable under the existing publisher block, so the BFF/HTTPS snapshot remains stale. Unrelated confirmed Cycle14 board changes remain preserved.
+
+
+## Owner approval and current implementation scope — 2026-10-03 UTC
+
+Repository owner replied “Approved” after exact review packet `d518d25` and PC-D01–PC-D05 were presented. This accepts the recommended local design and supporting tests; the earlier proposed-state descriptions are the preparation record. [Local cycle01](../../plans/active/https-production-local-cycle01.md) records the exact accepted scope, implementation/test sequence and dependencies. No unspecified quantity, inventory authority, public step-up/outage response, actual tenant/role/ingress proof, cloud deployment, spending or production release is supplied by this approval. External users and privileged routes remain denied until their independent evidence/contracts close. Only explicitly executed cases may be marked verified.
+
+
+## Cycle01 executed subset
+
+[Cycle01 evidence](evidence/https-production-local-cycle01-20261003.json) verifies125 new local projector checks within212 authority assertions,29 independent hostile cases and12 applicable regressions. This contributes partial local T03/T05/T07/T08 coverage only; no complete production case or live gate is marked passed. The key-provider artifact audit records five verifier failures and source-only guard feasibility.
