@@ -1,0 +1,80 @@
+{
+  "status": "FROZEN_LOCAL_ENGINEERING",
+  "date": "2026-10-03",
+  "reviewedDesignCommit": "d6056f0cb389f785f1517583e14aee98e5bf6fbf",
+  "stableRuntimeSource": "3551fe5693196ab371282c38bae53d2f9ed23f19",
+  "authority": "Existing approved local Phase1B and EV02 scope plus owner Next cycle; routine internal engineering freeze after exact nonauthor review. This receipt supersedes design-stage DRAFT labels only for this bounded local implementation. It is not human approval of new product/security/architecture/live scope.",
+  "runtimeImplementedAtFreeze": false,
+  "sources": [
+    {
+      "path": "specs/003-health-assessment/local-phase1b-accepted-schema-provenance-contract.md",
+      "sha256": "19e7c6e737ad73c0267bb895e6f23ddaaba80a8a0a32a2e5b97d327c7f8eee6d",
+      "bytes": 17075
+    },
+    {
+      "path": "specs/003-health-assessment/local-phase1b-accepted-schema-provenance-test-plan.md",
+      "sha256": "8c44964a22818376e61da2c25dcf04c5b876be9be80364237a3b28aedb8d9615",
+      "bytes": 8171
+    },
+    {
+      "path": "plans/active/local-pilot-m08-accepted-schema-provenance-cycle07.md",
+      "sha256": "6a7c22a6b615d0e80d8440cf74488573f3eabeb30acfa9b7f4bcf9e4fc44cf91",
+      "bytes": 5333
+    }
+  ],
+  "nonauthorReviews": [
+    {
+      "path": "work/m08-cycle07-evidence/design-review/accepted-schema-design-review.json",
+      "sha256": "4f2f71576b54f94e637d9d90b9625000f19f172f86174aa14d49f24faf171497"
+    },
+    {
+      "path": "work/m08-cycle07-evidence/independent/precode-review.json",
+      "sha256": "3a6b90edc894285489b9fcfd83abc3123acf3091027ef280a676a4de50c930f5"
+    }
+  ],
+  "preimplementationLiterals": [
+    {
+      "path": "work/m08-cycle07-evidence/independent/preimplementation-expectations.md",
+      "sha256": "1b331600222552f06119a927d789fe4d5d1b9f2ab810fff13de93a4c0b183b5a",
+      "bytes": 2632
+    },
+    {
+      "path": "work/m08-cycle07-evidence/independent/saved-source-preimplementation.json",
+      "sha256": "39b5f6704d7d87d2326c6e22fa80fa81efe189e59a429fc878da6eaa30613e09",
+      "bytes": 34352
+    },
+    {
+      "path": "work/m08-cycle07-evidence/independent/canonical-alias-literals-preimplementation.json",
+      "sha256": "7c5239095d378f7e97c31fc20cdb44d4ae4868bb298839fa153b799aee2550a6",
+      "bytes": 6859
+    },
+    {
+      "path": "work/m08-cycle07-evidence/independent/normal-proof-canonical-preimplementation.json",
+      "sha256": "5037eb5895a42ab3491b3d403ece0123810b0580b6ee7a0051ae2ea82f36c3bd",
+      "bytes": 2015
+    },
+    {
+      "path": "work/m08-cycle07-evidence/independent/literal-generator-preimplementation.py",
+      "sha256": "36e78d4b6f7d36d694e77ccb7399409245a51280b9a266fc6c1c6aaa3bfe652f",
+      "bytes": 11324
+    },
+    {
+      "path": "work/m08-cycle07-evidence/independent/schema-literal-expectations-preimplementation.json",
+      "sha256": "33a9a0df8ab09dfca2e2e6a89c181f296d6794ebdb9fca18fe1cb62b9b2c7590",
+      "bytes": 4965
+    },
+    {
+      "path": "work/m08-cycle07-evidence/independent/normal-readiness-canonical-representative-preimplementation.json",
+      "sha256": "2aeb6d479336a6abab29b1ad3ceddbfd8f9ad66f7c7218466b0fb64fe23db134",
+      "bytes": 129579
+    }
+  ],
+  "permittedOldRuntimeEdit": "SyntheticAiExecutionStore declaration adds partial keyword only; all prior method bodies/contracts/serializers/fixtures preserved.",
+  "disabled": [
+    "raw accepted output exposure",
+    "sampling/reviewer/source authority activation",
+    "provider/customer/production operations",
+    "migration/dependency-version/settings changes"
+  ],
+  "storage": "Historical ENOSPC preserved; actual1MiB write/fsync passed and1881MiB returned before implementation. Monitor capacity, no inferred user response."
+}
