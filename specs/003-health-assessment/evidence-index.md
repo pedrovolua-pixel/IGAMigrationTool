@@ -111,3 +111,9 @@ Matching owner-private publication succeeded; the final docs-only COMPLETE snaps
 | Evidence | Executed result | Limit |
 | --- | --- | --- |
 | [Exact source/check/archive/review metadata](../../docs/development/evidence/local-pilot-cycle13-developer-checks.json), [cycle record](../../plans/active/local-pilot-artifact-review-cycle-13.md), [native independent evidence](../../tests/integration/LocalArtifactReview.Tests/execution.json), [actual browser](../../tests/e2e/artifact-review/execution.json) | Local source-bound store/UI/host review, withdrawal, history/replay, stale-source/concurrency/recovery/authorization and historical regressions passed; non-author reviews closed. New10564 browser checks and3axe records0violations/0incomplete. Hosted code804d71a results recorded separately. | Bounded fictional developer subset only. No full Milestone7/TP018/local build/UAT/G1–G9 acceptance. Original failures/provenance gaps retained; manual/defaultMac/shared-cluster/deployed-sandbox cases remain NOT VERIFIED. |
+
+## Cycle14 planning-task preparation — documentary evidence only
+
+| Evidence | Scope | Limit |
+| --- | --- | --- |
+| [TC14 decision proposal](local-planning-task-contract-proposal.md), [cycle packets](../../plans/active/local-pilot-planning-tasks-cycle-14.md), [test matrix](local-planning-task-test-plan.md), [source-bound preparation metadata](../../docs/development/evidence/local-pilot-cycle14-preparation.json) | Committed product/authority audit, concrete proposed semantics, traceability/link/whitespace/secret checks and independent review | Human TC14-01–06 decision PENDING; implementation BLOCKED. No code/migration/permission/runtime PASS or signed gate acceptance. CSV role reconciliation remains a proposal; exports/priority/effort/external tasks deferred. Cycle13 actual evidence retains its own source. Full Milestone7/TP018/local build/UAT/G1–G9 remain NOT VERIFIED. Matching private publication confirmed separately. |
