@@ -1,6 +1,6 @@
 # HTTPS production local cycle 02
 
-Status: RUNNING — approved local protocol implementation and isolated dependency evidence
+Status: VERIFIED BOUNDED LOCAL CHECKPOINT — AP01 protocol complete; AP02 graph evidence complete with integrity blocker
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: `b4232bb0b18e8292db5de5cfd7cc488362e205c6`
@@ -20,9 +20,9 @@ One attempt context allocates its own nonempty event/operation/correlation IDs, 
 
 | Packet | Isolated worker and exact permitted writes | Evidence / state |
 |---|---|---|
-| AP01 | Audit worker: only `src/server/modules/IdentitySessions/AuthenticationFailureJournal.cs`, `tests/unit/IdentitySessions.Tests/AuthenticationFailureJournalChecks.cs`, and one count/call in its existing `Program.cs` | Codec byte/negative/binding corpus, anonymous/coherent verified shape, original-time freeze, concurrent hook overlap, immutable IDs/hash; RUNNING |
-| AP02 | SDK worker: only `docs/development/https-key-provider-resolved-graph-evidence.md` | Restore an isolated immutable source copy with the two previously audited exact provider references, retain actual resolved graph/locks, audited restore/build/format facts, signature results for selected artifacts, supported API dispatch proof only if safe/available; RUNNING |
-| AP03 | Coordinator: canonical records/integration/full applicable checks | Independent non-author review, scoped checks and exact completion evidence; pending |
+| AP01 | Audit worker: only `src/server/modules/IdentitySessions/AuthenticationFailureJournal.cs`, `tests/unit/IdentitySessions.Tests/AuthenticationFailureJournalChecks.cs`, and one count/call in its existing `Program.cs` | Codec byte/negative/binding corpus, anonymous/coherent verified shape, original-time freeze, concurrent hook overlap, immutable IDs/hash; VERIFIED LOCAL212 new checks /146 independent checks |
+| AP02 | SDK worker: only `docs/development/https-key-provider-resolved-graph-evidence.md` | Restore an isolated immutable source copy with the two previously audited exact provider references, retain actual resolved graph/locks, audited restore/build/format facts, signature results for selected artifacts, 37 selected artifacts36PASS/1FAIL; SDK dispatch NOT EXECUTED; EVIDENCE COMPLETE WITH BLOCKER |
+| AP03 | Coordinator: canonical records/integration/full applicable checks | Independent non-author review PASS, full solution restore/format/build and12 regression suites PASS; COMPLETE LOCAL ONLY |
 
 AP02 may modify a disposable `/tmp` source copy for experimental restore; it must not install/update dependencies, locks, config or code in the repository or call Azure. Exact candidates remain Blobs1.5.4/Keys1.6.4. Do not invent a host-resolution algorithm, silently upgrade dependencies to avoid signature failure, alter trust stores, disable verification or infer signature/binary success from metadata. A successful restore without explicit verification is not proof of all signatures. Docker/Podman CLIs are unavailable locally; do not install a container runtime or claim Linux checks. No live credential, blob/vault/tenant call. Any actual SDK harness must use synthetic transport/resolver only, retained artifacts and normal verification; stop if unresolved integrity blocks it. This packet may finish with a documented unresolved verifier/SDK proof gap.
 
@@ -45,4 +45,8 @@ Owner design approval remains recorded; do not ask it again. Keep the six exact 
 
 ## Completion evidence
 
-Candidate commits, independent reviews, executed results/failures, source bindings and exact limits: pending.
+AP01 author `d133a1c43481ec241f1fb96742881c1b8f0c1de3`, integrated `ffd2278327000f0289e21c6b76946f0057df1444`: non-author package_hosting PASS,281 suite assertions plus146 independent cases. AP02 author `543679478076e5dcafd50e15e180e5e132dd01a9` plus precise documentary correction `a530449bd5e02c459cc592ccc3326f21f98b90ee`, integrated `e3ec3ab`/`37c3fb7`: non-author retained37-package/hash/graph and14-receipt verification PASS. Explicit normal verifier exit1 remains a BLOCKER; SDK build/format/harness was not run and dependencies were not promoted.
+
+Coordinator pinned SDK10.0.401/runtime10.0.12 full locked audited restore, actual unfiltered solution format and Release build (zero warnings/errors) passed; all12 applicable regression suites passed using a new owned PostgreSQL18.4 cluster with five UTF-8 synthetic databases. The cluster is stopped; data preserved. Initial author nullable compile diagnostics were corrected before the frozen candidate. The separate independent review used cached offline restore with NuGetAudit=false; it supplies no audited restore claim. Coordinator's own enabled all/low audit is current for the unchanged approved dependency graph.
+
+[Exact execution/source bindings](../../docs/development/evidence/https-production-local-cycle02-20261003.json) record counts, commands, log receipts and limits. No full AU/KEY/live acceptance, production wiring, persistence, cloud operation or release. The board delta is updated in the acceptance packet but private publication remains unavailable under the separate automatic-review publisher rejection.
