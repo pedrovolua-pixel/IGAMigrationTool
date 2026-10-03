@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T16:55:14.708256+00:00",
+  "status": "VERIFIED_LOCAL_PREPARATION_ONLY",
+  "baseline": "b2099783820123726579a113489d811fe682562f",
+  "ownerContinuation": "Approved after cycle03 next actual supported-platform signatures and production receipt/lifecycle review",
+  "planSource": "4f74b056feac5b20c1de8827cd740f614059a3a0",
+  "testedDiagnosticSource": "8ace6600473191c1e77888c85d03b02cfb243494",
+  "planScopeReview": {
+    "reviewer": "package_hosting",
+    "result": "PASS",
+    "originalPlanSha256": "df9b86f75fb2cf7807cc9cb79084a8ee57bc1aadda6fe1f23c75e93c9b949baa"
+  },
+  "apArl": {
+    "author": "b4b1c5df830f92988a65acb7ba91d511fb18bb5a",
+    "integrated": "d5a95cda09d268b0a859ba7b0cbced8897fedc4f",
+    "reviewer": "coordinator root (non-author)",
+    "review": "PASS source/policy consistency; docs only",
+    "productionDecisions": "ARL-D01-D09 OPEN/PROPOSED",
+    "productionCases": "ARL01-ARL18 PLANNED/NOT EXECUTED",
+    "localLinks": 27,
+    "anchors": 4,
+    "approvedPolicy": "12months / purge30additional days / rollingbackup35maximum unchanged",
+    "limitations": "No production identity/source/witness/schema/grant/lifecycle/restore proof or acceptance"
+  },
+  "apCi": {
+    "author": "3aa858c8b40e29bd291a7231d0a2172cc6fde9bd",
+    "integrated": "8ace6600473191c1e77888c85d03b02cfb243494",
+    "reviewer": "package_hosting",
+    "review": "PASS no material findings in preparation",
+    "authorMockedDownloader": 16,
+    "authorMockedVerifier": 18,
+    "independentSuppliedMockedDownloader": 16,
+    "independentSuppliedMockedVerifier": 18,
+    "independentAdditionalMockedHttpOutput": 10,
+    "coordinatorMockedDownloader": 16,
+    "coordinatorMockedVerifier": 18,
+    "workflowSyntax": "Psych3.1.0 YAML; duplicate/alias guards;5bash-n;2inlinePythonAST;4PythonSourceAST",
+    "workflowControls": "Exact PRpaths/manualdefaultbranch constraint;contentsread;3immutableactions;SDK10.0.401/cachefalse;no customsecrets/AzureOIDC;11allowlisteduploadpatterns/excludedarchives;failurecannotPASS",
+    "manifestSha256": "8ed2ffab1478d381cf310b62e7c6b198bf47595e8e7100c16d2738fc6a4fee42",
+    "existingThreeFiles": "BYTE_IDENTICAL",
+    "actualHttpDownload": "NOT EXECUTED",
+    "actualSdkSetup": "NOT EXECUTED",
+    "actualLinuxWindowsSignatures": "NOT EXECUTED",
+    "actualProviderHarness": "NOT EXECUTED",
+    "actualRunnerVersionTrustSelectionRetention": "UNOBSERVED",
+    "actionlintShellcheck": "UNAVAILABLE; executed YAML/syntax/static checks, no remote workflow claim"
+  },
+  "publicExport": {
+    "recordedAtUtc": "2026-10-03T16:51:36.183755+00:00",
+    "candidate": "4fadf7ced8b6c6b978e326e2fae6d925001fdb26",
+    "parent": "31c61eaf17a2abbc3b4b87a674b057d0b2b75651",
+    "branch": "codex/https-cycle04-public-proof",
+    "files": [
+      {
+        "path": ".github/workflows/https-key-provider-signatures.yml",
+        "sha256": "5f784c86d30013bcfb9a0e6675371fd584084644d738bb448a64f9859cf6f412",
+        "bytes": 12954
+      },
+      {
+        "path": "docs/development/https-key-provider-ci-proof-packet.md",
+        "sha256": "89f1b27e0ca92144f0112e4693e43fe27f9f0c81053ef26e5b55baaf2c9256ec",
+        "bytes": 11084
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviders/download-archives.py",
+        "sha256": "c1b7d61452946d7b662e973b67535d7d75090a0f30d570fc1c4785840251fff6",
+        "bytes": 7706
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviders/resolved-37-archives.json",
+        "sha256": "8ed2ffab1478d381cf310b62e7c6b198bf47595e8e7100c16d2738fc6a4fee42",
+        "bytes": 9290
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviders/test_download_archives.py",
+        "sha256": "aea7ebddf8215148f5139f8ce9ad9d6638ba89c575148aa15104d2edaa9d4fe7",
+        "bytes": 14025
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviders/test_verify_signatures.py",
+        "sha256": "5aaee4517f702b349a3ffbf98909c8e70fe132feb9894f17fadb26459bbc9d37",
+        "bytes": 14951
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviders/verify-signatures.py",
+        "sha256": "65d8256ed7f7d4d127838c89565efeeb6c2c6c864860108e64517e40db4b5af9",
+        "bytes": 11041
+      }
+    ],
+    "patchSha256": "ab907096ada28aeb7866c445a956b6e5dc5061cae7f87bf4372e00ce2a7501ba",
+    "publication": "NOT EXECUTED",
+    "exactOwnerApproval": "PENDING",
+    "independentReview": "package_hosting PASS; export-closure.log source-bound",
+    "actualLinuxSignatures": "NOT EXECUTED",
+    "review": "package_hosting AP-CI04 PASS; exact7file solepublicparent, no coordinator ancestry, hashes/metadata/links/whitespace/secrets checked",
+    "requestDocument": "docs/development/https-key-provider-public-export-approval.md"
+  },
+  "coordinatorChecks": {
+    "source": "8ace6600473191c1e77888c85d03b02cfb243494",
+    "results": [
+      {
+        "case": "download-tests",
+        "command": [
+          "python3",
+          "tests/infrastructure/HttpsKeyProviders/test_download_archives.py"
+        ],
+        "source": "8ace6600473191c1e77888c85d03b02cfb243494",
+        "startedAtUtc": "2026-10-03T16:47:07.366761+00:00",
+        "exitCode": 0,
+        "log": "/tmp/iga-https-cycle04-coordinator/download-tests.log",
+        "logSha256": "0b86d5a5d0bbf38e9ddd4ce3bcfa2317a59b6cfb81601d0effddfe7da9177708"
+      },
+      {
+        "case": "verifier-tests",
+        "command": [
+          "python3",
+          "tests/infrastructure/HttpsKeyProviders/test_verify_signatures.py"
+        ],
+        "source": "8ace6600473191c1e77888c85d03b02cfb243494",
+        "startedAtUtc": "2026-10-03T16:47:07.496080+00:00",
+        "exitCode": 0,
+        "log": "/tmp/iga-https-cycle04-coordinator/verifier-tests.log",
+        "logSha256": "9715808bf5c968e5122b15ba7d590abf92a7613e689c409d8cdf4242e87dcf81"
+      },
+      {
+        "case": "workflow-static",
+        "command": [
+          "/usr/bin/ruby",
+          "/tmp/iga-https-cycle04-coordinator/check-workflow.rb",
+          ".github/workflows/https-key-provider-signatures.yml",
+          "/tmp/iga-https-cycle04-coordinator/workflow-parsed.json"
+        ],
+        "source": "8ace6600473191c1e77888c85d03b02cfb243494",
+        "startedAtUtc": "2026-10-03T16:47:07.950689+00:00",
+        "exitCode": 0,
+        "log": "/tmp/iga-https-cycle04-coordinator/workflow-static.log",
+        "logSha256": "f1676b08f20406bd58064de121a1716cd44c03f201f1472d9bb042a9d6ed337d"
+      }
+    ],
+    "mockedDownloaderTests": 16,
+    "mockedVerifierTests": 18,
+    "inlinePythonAST": 2,
+    "pythonFilesAST": 4,
+    "yamlParser": "Ruby Psych3.1.0",
+    "uploadPatterns": 11,
+    "triggerPaths": 7,
+    "staticScope": "closed trigger,job permissions/actions,credential persistence,SDK/cache,always allowlisted upload/default retention and shell syntax",
+    "actualHTTPOrSDK": "NOT EXECUTED"
+  },
+  "scopeSecretScan": {
+    "exitCode": 0,
+    "source": "Exact changed files plus existing3 proof files copied/hashed for directory scan",
+    "log": {
+      "path": "/tmp/iga-https-cycle04-coordinator/final-gitleaks.log",
+      "sha256": "2f459f13fad0c22f501ab13d071e60d3e120d9334611e84bb3d36460b5779bf0"
+    },
+    "finalIncludingEvidence": {
+      "path": "/tmp/iga-https-cycle04-coordinator/final-with-evidence-gitleaks.log",
+      "sha256": "1b13918aa949d807d57b28590ec22e9d052c62b2417b53c232095bddb3e01c60",
+      "exitCode": 0
+    }
+  },
+  "runtimeChecks": "C#/PG source unchanged; no current restore/format/build/12-suite rerun. Historical executed cycle03 evidence retained, not current-cycle PASS",
+  "azureChanges": "NONE",
+  "paidAzureSession": "NONE",
+  "productionReleaseAndGates": "G1-G9/Milestone2/fullAU/KEY remain open",
+  "humanTasks": {
+    "source": "docs/development/https-production-test-packet.md#human-tasks-and-completion-conditions",
+    "open": 6,
+    "delta": "Shared-key adds exact public7fileapproval; failure-audit adds proposedARLcontract/testpacket. No task closed."
+  },
+  "privateBoard": {
+    "bffHttpsLastConfirmedSnapshot": "4346e0f",
+    "bffHttpsLastConfirmedAtUtc": "2026-10-02T19:50:45.775370+00:00",
+    "status": "STALE",
+    "blocker": "Automatic approval review rejected separate credential/network publisher proxy-bypass action",
+    "retriedOrBypassed": false,
+    "unrelatedCycle14Publications": "PRESERVED",
+    "preparedDelta": "Canonical cycle04 checkpoint and six source-linked human tasks; no customer/protected data"
+  },
+  "correctionsAndLimits": [
+    "Author fixed parentAU heading link before ARLvalidation",
+    "Root provisional observation led to downloader existingenvguard beforeHTTP and resolved nativeSDKpath before freeze; originalverifier does not reject executable symlinks itself",
+    "30s urllib socket guard is not totalrequestdeadline;150minjob guard remains bounded",
+    "Initial root two-positional Gitleaks invocation scanned broader15MB; final ARL exacttwofile and final scopedcopy scans independently passed",
+    "No local trust override reset, proxy bypass, package upgrade or actual signatures inferred from mocks"
+  ],
+  "executionArtifacts": [
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/scope-and-platform-metadata.json",
+      "sha256": "70ecf88a9bb2b5b4ccc497dff3a9f541379b4fff437bcfd8bff3161eea7bf6e7"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/audit-document-review.json",
+      "sha256": "f2accd9b1b27c4c6642dc306bd4bc2be70a24fb7e836e7c4db2952d404de3a22"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/audit-independent-review.json",
+      "sha256": "765cd44bf48ca5b8a5194e74f5a770ff51e503af36ebafaa1878db98bc160b17"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/audit-gitleaks.log",
+      "sha256": "b0a6d7913ef80e6c90bc98fe90407f602e5be63ffc34eb3e64241c8329d060eb"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/checks.json",
+      "sha256": "164a93d1668499b8b5f720eb49d467aa1aa4dba3aaaf9df0e30d2fee5a679589"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/download-tests.log",
+      "sha256": "0b86d5a5d0bbf38e9ddd4ce3bcfa2317a59b6cfb81601d0effddfe7da9177708"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/verifier-tests.log",
+      "sha256": "9715808bf5c968e5122b15ba7d590abf92a7613e689c409d8cdf4242e87dcf81"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/workflow-static.log",
+      "sha256": "f1676b08f20406bd58064de121a1716cd44c03f201f1472d9bb042a9d6ed337d"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/public-proof-inventory.json",
+      "sha256": "9418609437579b48dd51dce5038fbfefd646c67792cad8d54d0827717dff3209"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/public-proof.patch",
+      "sha256": "ab907096ada28aeb7866c445a956b6e5dc5061cae7f87bf4372e00ce2a7501ba"
+    },
+    {
+      "path": "/tmp/iga-cycle04-arl-author-checks-20261003.json",
+      "sha256": "26223caba497387006dd815cde1e13088c87d53267d5c74ca1220a6024d77f3a"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-ci-evidence/execution.json",
+      "sha256": "1de57dd5cc4e952164bd2942b6167ee34435c4baa810b186b3de7d1ca9bd2772"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-ci-evidence/download-tests.log",
+      "sha256": "b34ad0cab6060b8d292ec8db6e1f0735259dcdd8e784c5a618e39c1eb23a0db3"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-ci-evidence/verifier-tests.log",
+      "sha256": "9715808bf5c968e5122b15ba7d590abf92a7613e689c409d8cdf4242e87dcf81"
+    },
+    {
+      "path": "/tmp/iga-cycle04-ci-independent-review/download-tests.log",
+      "sha256": "9a5bcfd18611f616c98b2b624253daff76ea2e607221ce5c3df6222c673ad16e"
+    },
+    {
+      "path": "/tmp/iga-cycle04-ci-independent-review/verifier-tests.log",
+      "sha256": "16d34f9a3fcf431f38f92f64dc2296f3c9a785bbebfa58356b513e673300295d"
+    },
+    {
+      "path": "/tmp/iga-cycle04-ci-independent-review/independent-http.log",
+      "sha256": "69c1bed788d7a4b3f19c576f5c8b92dac45115a7d290da26191a35bd6ea7166c"
+    },
+    {
+      "path": "/tmp/iga-cycle04-ci-independent-review/static-review.log",
+      "sha256": "7da2ce1ba2f88e7cf0f4e16ec88c650451c1c14cc47d9133d29278866895ab4f"
+    },
+    {
+      "path": "/tmp/iga-cycle04-ci-independent-review/export-closure.log",
+      "sha256": "5aceff64186e882670cf33e63988ee105f31eb9f2c2be9ac4f0e4565d992d9ef"
+    },
+    {
+      "path": "/tmp/iga-cycle04-ci-independent-review/export-gitleaks.log",
+      "sha256": "f4b87ed944bc42d9b2891819716855c59ed10f0d4d200e6581135c1423e34716"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/final-gitleaks.log",
+      "sha256": "2f459f13fad0c22f501ab13d071e60d3e120d9334611e84bb3d36460b5779bf0"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/final-document-check.json",
+      "sha256": "6f7cbac01e7edb7e89a2b50e6b919383fa53197e4efe5dfc69d615a26dd6530d"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/export-document-check.json",
+      "sha256": "6a912735fd8da1a9d1b5fb2f83dc7a9f9be8303023c5460585d2f9ab1320f651"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/check-documents.py",
+      "sha256": "06c874915c260931728b1b271b8f803770d2a4725b62653af624f160e47a1772"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/check-workflow.rb",
+      "sha256": "c826ac91a9174088fc1a9bc9f122c0d6a95d670405583a46fad413ed8a7ef712"
+    },
+    {
+      "path": "/tmp/iga-https-cycle04-coordinator/final-with-evidence-gitleaks.log",
+      "sha256": "1b13918aa949d807d57b28590ec22e9d052c62b2417b53c232095bddb3e01c60"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": ".github/workflows/https-key-provider-signatures.yml",
+      "sha256": "5f784c86d30013bcfb9a0e6675371fd584084644d738bb448a64f9859cf6f412"
+    },
+    {
+      "path": "docs/development/https-key-provider-ci-proof-packet.md",
+      "sha256": "89f1b27e0ca92144f0112e4693e43fe27f9f0c81053ef26e5b55baaf2c9256ec"
+    },
+    {
+      "path": "docs/development/https-key-provider-public-export-approval.md",
+      "sha256": "f1fc74e17bf0c6214c3b255337494410be5355f8d0f52ac4533c768a60790c60"
+    },
+    {
+      "path": "docs/development/https-production-audit-receipt-lifecycle-proposal.md",
+      "sha256": "4d82fa85c9cfb3a46e79ef63c6a3faa66a7947bc71491897ff4e58ee5173b75a"
+    },
+    {
+      "path": "docs/development/https-production-audit-receipt-lifecycle-test-packet.md",
+      "sha256": "7cc06d6ef13f5a7deb95e38c77c9b7a47c389e302d75d2446b6e830f239bfe9b"
+    },
+    {
+      "path": "docs/development/https-production-test-packet.md",
+      "sha256": "c596d7368d4ae9e7a6a1ab5af9754d94e47ef48bb2f731480623d6637379e552"
+    },
+    {
+      "path": "plans/active/https-production-local-cycle04.md",
+      "sha256": "8f6e30c082265d80157ca8a22214cca9943e02d78a5dcf4550c067abd8c41cf3"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "11e1d073cbde49fe3bea5a060ef1c3e9b6d7799be5a954956ba683aefc44201f"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "aaa9b2044bf97e52c0a285fda5f1fe87d372fbacab16058b5e77681e1c27a90e"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "e4290802feceab7ac1a6a6f41b29e2ddaf952011bb21f01dbdaa42087abf73ee"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "7c8fcb5705e16043747e29c148866628e51ef27e59500e6e4965edea23165cfe"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "71dabaadbe47f518606a91dd3464e7bafee95deba4610f6dcf218b4a12048c4e"
+    },
+    {
+      "path": "tests/infrastructure/HttpsKeyProviders/download-archives.py",
+      "sha256": "c1b7d61452946d7b662e973b67535d7d75090a0f30d570fc1c4785840251fff6"
+    },
+    {
+      "path": "tests/infrastructure/HttpsKeyProviders/test_download_archives.py",
+      "sha256": "aea7ebddf8215148f5139f8ce9ad9d6638ba89c575148aa15104d2edaa9d4fe7"
+    }
+  ],
+  "documentChecks": {
+    "coordinator": {
+      "links": 486,
+      "anchors": 25,
+      "utf8JsonWhitespaceProtectedProse": "PASS"
+    },
+    "minimalExport": {
+      "links": 6,
+      "anchors": 0,
+      "utf8JsonWhitespaceProtectedProse": "PASS"
+    }
+  }
+}
