@@ -74,7 +74,7 @@ internal static class ContinuationRecovery
         {
             var attempts = world.Audit.Attempts.Where(a => a.CorrelationId == caller.CorrelationId).ToArray();
             var events = world.Audit.Events.Where(a => a.CorrelationId == caller.CorrelationId).ToArray();
-            Check(attempts.Length == 1 && events.Length == (completed ? 1 : 0), "one audit attempt/distinct durable completion");
+            Check(attempts.Length == 1 && events.Length == (completed ? 1 : 0), "one audit attempt/distinct accepted in-memory event");
             var audit = attempts.Single();
             Check(audit.Outcome == outcome && audit.IdentityKind == world.Identity && audit.IdentityId == world.IdentityId && audit.ResourceKind == world.Kind && audit.ElapsedMilliseconds >= 0, "typed trusted audit context");
             if (generic) Check(audit.Scope is null && audit.ReturnedFields.IsEmpty && audit.RedactedFields.IsEmpty, "stale generic scope-free empty-field audit");
@@ -336,10 +336,11 @@ internal static class ContinuationRecovery
         public async ValueTask<ImmutableArray<byte>?> ReadItemAsync(Scope scope, string reportVersionId, ResourceKind kind, string itemId, CancellationToken token)
         {
             Items.Enqueue(new(scope, reportVersionId, kind, itemId));
+            var payload = oracle.Payloads[itemId].ToImmutableArray();
             var selectedBarrier = barrier;
             if (selectedBarrier?.Id == itemId) await selectedBarrier.WaitAsync(token);
             token.ThrowIfCancellationRequested();
-            return oracle.Payloads[itemId].ToImmutableArray();
+            return payload;
         }
     }
     private sealed class Policy(IdentityKind identity, string identityId, ResourceKind kind) : IReadPolicy
