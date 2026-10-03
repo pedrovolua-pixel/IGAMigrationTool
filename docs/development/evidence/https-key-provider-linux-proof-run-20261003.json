@@ -106,6 +106,16 @@
   },
   "executionPlanCommit": "e7f7f15dbfd47a13a0f78d6620ba2c37d4875bd0",
   "failure": "Downloader safety test expected None instead of normal explicit SSLContext; SDK/provenance/acquisition/signature/machine steps skipped; secondary upload failed because no receipts exist",
+  "finalIndependentRecordReview": {
+    "artifactHashesChecked": 17,
+    "localLinksChecked": 478,
+    "path": "/tmp/iga-linux-proof-independent-review/final-record-review.json",
+    "productionGateAcceptance": false,
+    "sha256": "0f4c06a3aed72fdfdf400dbcb628c9fc11c8b39307755c13adfc9b7c76525cef",
+    "sourceBindingsChecked": 10,
+    "sourceCommit": "64f6b7d9b53cd66a1428a4578992701eefa238fb",
+    "status": "PASS_BOUNDED_FAILED_RUN_AND_LOCAL_CORRECTION_RECORDS_ONLY"
+  },
   "limits": [
     "Correction candidate local only; no further public push/run until exact approval",
     "No artifact ZIP obtained; no SDK/platform-selected trust/signature conclusion",
