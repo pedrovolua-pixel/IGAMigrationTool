@@ -1,0 +1,21 @@
+{
+  "schema": "cycle14-runtime-source-equivalence-v1",
+  "firstCode": "d42a4d59c7850b815637b7220052138efe78df5f",
+  "finalCode": "b10d7b28e10dccf379bd2922b04ac8a4eca8c0c2",
+  "executedArgv": [
+    "git",
+    "diff",
+    "--name-only",
+    "d42a4d59",
+    "b10d7b28e10dccf379bd2922b04ac8a4eca8c0c2",
+    "--",
+    "src",
+    "contracts",
+    "migrations",
+    "infra",
+    ".github"
+  ],
+  "changed": [],
+  "result": "PASS exact same runtime/contract/migration/infrastructure/CI bytes; legacyverifier barrier and finaltask evidence scripts/outputs are distinct follow-ons",
+  "recordedUtc": "2026-10-03T04:48:26.725962+00:00"
+}

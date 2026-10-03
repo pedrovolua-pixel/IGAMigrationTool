@@ -1,8 +1,8 @@
 # Test plan: local fictional consultant planning tasks
 
-Status: RUNNING — TC14-01–06 approved; frozen engineering contract and bounded execution underway
+Status: VERIFIED — executed bounded TC14-T01–T12 developer cases; full feature acceptance NOT VERIFIED
 Owner: Quality owner / independent verifier
-Last updated: 2026-10-02
+Last updated: 2026-10-03
 Contract: [TC14-01–06 approval](local-planning-task-approval.md) and [frozen implementation contract](local-planning-task-implementation-contract.md)
 Plan: [Cycle14](../../plans/active/local-pilot-planning-tasks-cycle-14.md)
 Authority: approved TP-HAS-002/003/009/013/014/017/018 subsets; no full acceptance
@@ -39,3 +39,9 @@ After exact decision/contract freeze: current pinned locked/audited restore, sol
 Preparation executes only documentary requirement/decision/traceability/source/link/whitespace/secret checks and independent review. Runtime, migrations, build and implementation CI are NOT RUN for this preparation. Historical Cycle13 checks retain their exact source and are not Cycle14 PASS.
 
 TC14-06, if approved, reconciles future CSV actor wording only. No export is implemented/tested/passed here. Before CSV code, a separate approved export contract must settle authorized data/view/version selection, formula-safe columns, protected-link resolution, customer policy, artifact lifecycle, immutable/audited access and ADR0001 sandboxed worker execution.
+
+## Executed evidence — 2026-10-03
+
+All twelve rows have bounded executed local developer evidence, independently authored literal/semantic oracles and non-author review, with exact source/runtime/consumed fixtures preserved in [Cycle14 execution evidence](../../docs/development/evidence/local-pilot-cycle14-developer-checks.json) and `tests/integration/LocalPlanningTasks.Tests/execution.json`. 736/1249 domain,737 component,702/2542 independent native and 13626 actual browser assertions are overlapping/inclusive, not additive. TC14-T10 now includes actual Enter/Space for all eight task actions, stale Comment/Reconfirm and saved-heading focus; three viewport axe audits reported zero violations/incomplete and nine captures were inspected. The configured exact-source Linux job also executes prior PostgreSQL/browser suites; Windows2022/2025 and container jobs pass separately.
+
+Controlled failure/cancellation, reconnect and owned-host stop/restart are verified subsets of T06; hard-kill/OS-powerloss/shared-cluster restart are NOT VERIFIED. The Mac browser uses a temporary test-only configuration-watch override; default Mac startup stays NOT VERIFIED. Human supported Windows/screenreader/zoom/accessibility, product-scale, live/customer/provider/identity, deployed isolation, full approved feature test plan/TP018/Milestone7/UAT/G1–G9 remain NOT VERIFIED. Preparation and earlier unsealed/missing-closure attempts are preserved distinctly; no old count or PASS is relabeled. TC14-06 remains documentary future export-role wording only.

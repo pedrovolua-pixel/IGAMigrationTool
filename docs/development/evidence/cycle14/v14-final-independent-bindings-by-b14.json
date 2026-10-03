@@ -1,0 +1,29 @@
+{
+  "seal": "c1f24a74421abc333c16fab05f56eb93d2d11b80",
+  "manifestSha256": "2a65ca23e0d7bbd05c74a4e65f5edfd758119b992a7ceb40518409e715852eff",
+  "bindings": 7510,
+  "boundBytes": 1087818752,
+  "consumedCopyEqualities": 43,
+  "linkTopology": 6,
+  "predecessorBindings": 7503,
+  "predecessorAliases": 6,
+  "originalFinalClosures": [
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/.frozen/final-corrected/closure.json",
+      "sha256": "00e95b52cfb0d075948527a432d9d9d9a50f4104a8a1bf13b3d39e9bd77a8793",
+      "bindingCount": 363,
+      "frozenSourceGitBlobsExact": 246
+    },
+    {
+      "path": "tests/e2e/planning-tasks/.frozen/browser-final-corrected/closure.json",
+      "sha256": "e872faa41bc1e4fc366bc6c7b9cdda47bfcbb56a1c505ec3c375496ae911506f",
+      "bindingCount": 428,
+      "frozenSourceGitBlobsExact": 251
+    }
+  ],
+  "ownedGitBlobsVerified": 90,
+  "finalBrowserSourceHash": "b86630e14f848ea57ca16e69e8d18bf453b60964c39873dc0eb887397f21b9b3",
+  "telemetryOriginalBindings": 2,
+  "telemetryVariants": 43,
+  "result": "PASS read-only file/Git/hash/oracle/telemetry assertions; no .NET/PG/host/browser/network execution"
+}

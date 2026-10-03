@@ -1,0 +1,19 @@
+{
+  "archive": "/private/tmp/iga-cycle14-preserved/legacy-investigation/command-supplement.tar.gz",
+  "archiveSha256": "322805c9b625a52133ed2338272f90bee36a86fa8ee475dc61fa20273e691376",
+  "allEntriesRehashed": 2,
+  "files": [
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation-command-proof.json",
+      "archivePath": "iga-cycle14-v14-legacy-investigation-command-proof.json",
+      "sha256": "8635e58b2d2e92f7dd329282b79483919802f7e0ebde97abf59f57c82fed0f8b",
+      "bytes": 376
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/executed-command.json",
+      "archivePath": "executed-command.json",
+      "sha256": "b507f6eb11fc6a1104d823980fda7a6be9532419dc39bcd5f8eb9a4ed7c969d9",
+      "bytes": 2336
+    }
+  ]
+}

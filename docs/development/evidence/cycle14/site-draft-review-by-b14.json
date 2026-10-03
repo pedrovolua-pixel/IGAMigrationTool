@@ -1,0 +1,34 @@
+{
+  "reviewType": "Read-only unpublished Site content review",
+  "reviewedFiles": [
+    {
+      "path": "/private/tmp/iga-cycle14-site-version88.html",
+      "sha256": "6a781b60ea305b482f7c5a200762f3897ccf6454b94d0cff33b50d4cf496f062"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-completion-site-draft.html",
+      "sha256": "35e64bf2915903222b9f6cb9ce4d34ca31cc1bbaac0cb2225dcfab5890574a47"
+    }
+  ],
+  "taskCards": {
+    "count": 11,
+    "exactOrderedRawHtmlPreserved": true,
+    "combinedSha256": "8a70416f3064fc4c80be58bce9d004279db6cdb5856d13662c7025cd10cf49c3"
+  },
+  "navigationScriptUnchanged": true,
+  "unresolvedPublicationPlaceholders": {
+    "CANONICAL_CYCLE14_SHA": 4,
+    "CANONICAL_SHORT_SHA": 1,
+    "FINAL_HOSTED_SUMMARY": 1
+  },
+  "findings": [],
+  "conclusion": "Draft content accurately describes bounded Cycle14 local developer verification, source freshness, append-only history, recovery/retry and actual eight-action keyboard coverage. Three automated accessibility checks are distinguished from open supported manual accessibility. Eleven human dependencies, full milestone/UAT readiness and G1\u2013G9 remain open. No new raw SQL, credentials, protected customer identifiers or customer evidence observed in added content.",
+  "publicationConditions": [
+    "Fill canonical SHA/short SHA from actual canonical closure and hosted summary only after final hosted PASS.",
+    "Coordinator confirms private deployment before reporting Site current."
+  ],
+  "limitations": [
+    "Local HTML content inspection and exact task/script comparisons only; no rendering, Site install, publication, runtime checks, network checks or final hosted-result attestation.",
+    "Existing governing-record links are preserved; new Cycle14 links contain deliberately unfilled placeholders."
+  ]
+}

@@ -1,0 +1,538 @@
+{
+  "schemaVersion": "cycle14-v14-non-author-final-review-v1",
+  "seal": "c1f24a74421abc333c16fab05f56eb93d2d11b80",
+  "executedSourceCommit": "5072dbe4cbb64c8dbc8b79dda53006c94702d84c",
+  "reviewer": "B14",
+  "checkout": "/private/tmp/iga-cycle14-task-verification",
+  "reviewedOwnedGitBindings": [
+    {
+      "path": "tests/e2e/planning-tasks/.gitignore",
+      "bytes": 39,
+      "sha256": "07764df400c2d405e7cac1f7ae7747347f02438639d3a0fcf19de56314a0bbf8"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/desktop-task-viewport.png",
+      "bytes": 229447,
+      "sha256": "730324bda29ed72b4d2e1d72b235b24b6a011cc4db7f61844864dcf23a2d1319"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/desktop-viewport.png",
+      "bytes": 104602,
+      "sha256": "e4676d227186266571f61e0cc1fb072d086e8fa115612c0b249e60a165ea1c4e"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/desktop.png",
+      "bytes": 9839971,
+      "sha256": "4ad2700fa56150c7d1398eaa8613d7a3b918621d6cbae91b2410d342b0f342f0"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/execution.json",
+      "bytes": 3501,
+      "sha256": "9f19631da3e74d1fe4dfee7b10af5f5e8301fecdecf5aca4704e82d46383fc58"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/expected.mjs",
+      "bytes": 11877,
+      "sha256": "51e539d6227ddde27a1e33ac57a52f4fa82fa99a04117fc33d17311f5ee03990"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/mobile-task-viewport.png",
+      "bytes": 84885,
+      "sha256": "b2f40096e3c73a98c202186b93de558294e6adf023d18d7457552818632642d6"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/mobile-viewport.png",
+      "bytes": 65765,
+      "sha256": "738db15d066e6f1fd76d0db4fa019b2faf213c65b7602f33afa0bf522890188d"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/mobile.png",
+      "bytes": 10108228,
+      "sha256": "3b4bda8760f281822340dcc01accc4bc6947fd36dcb4704617b4a6eb8e1d0f91"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/narrow-task-viewport.png",
+      "bytes": 58575,
+      "sha256": "e85f9381e9888b044b9b1a0571dfcf4917b06d4c60413a19918137a02e7c3f61"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/narrow-viewport.png",
+      "bytes": 50863,
+      "sha256": "698c36c92e481a4429c8626d0ad921d6011611448b5e9e6e9046e6fa27b04ddd"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/narrow.png",
+      "bytes": 10432827,
+      "sha256": "9c93b53b9536a277b8e9cc7d72cece060e1aebd5a758328f0f4f06fdda80f662"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/preauthor/browser-design.md",
+      "bytes": 4093,
+      "sha256": "290e058895bc1b8ffb92d56e3afaf04334826b241bfc07b8b6a447adb9ade969"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/telemetry.json",
+      "bytes": 964,
+      "sha256": "35c8605d581feb74a8dffe02c039bafd401a9c1aa9b0db40c42b42fc24c813aa"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/verify-oracles.mjs",
+      "bytes": 1940,
+      "sha256": "16b0bd8122412fcaa83beb91034326d50d9fbb69ec7a9c4956831e925af921f5"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/verify-telemetry.py",
+      "bytes": 2816,
+      "sha256": "153d5338e9a85e093e65dd763c2ad7a8e4d52c0876d4a8359dbfd3ed9ec01db5"
+    },
+    {
+      "path": "tests/e2e/planning-tasks/verify.mjs",
+      "bytes": 86881,
+      "sha256": "b86630e14f848ea57ca16e69e8d18bf453b60964c39873dc0eb887397f21b9b3"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/.gitignore",
+      "bytes": 38,
+      "sha256": "0c071ab9ea9203b200c96c4fb6b3673d08c1035c6608b7cda049befe753f1bf9"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/ConcurrencyRecoveryCases.cs",
+      "bytes": 8335,
+      "sha256": "7b02a2b64360fb2114b424196fb4feb7cf5c9b97d43e04dc8d5bdebec6df8b83"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/DatabaseCases.cs",
+      "bytes": 15241,
+      "sha256": "d24afbe4b641cd13d1578e22120c791837e9fd6d9b577c09dcdf8e81b2e64e9b"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/DomainFixture.cs",
+      "bytes": 7550,
+      "sha256": "390cd8733ebf00cb8a1fbc3d2fef3dc62f32819e016cb06e270623487ae262cb"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/Expected.cs",
+      "bytes": 13177,
+      "sha256": "b32f516ed37823fa301f8fd9778be2f2e9776a4fa41ffe14f37d4ec0b7302687"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/HostRecoveryCases.cs",
+      "bytes": 5628,
+      "sha256": "0de8660b18bfd4c9cfc79f434b2b95fba1ae30514609324ef330438fbb6a6a25"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj",
+      "bytes": 547,
+      "sha256": "c9cdf3b59c2d699a72557dc3ea7df79bc7380b0f40f07a50200cf3a0fd8d0668"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/OracleCases.cs",
+      "bytes": 3074,
+      "sha256": "1b78043874fe6ff5dc98cfc8a37ccfee52f4354c162015996fd1c74e3fe7d761"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/OwnedDatabase.cs",
+      "bytes": 4372,
+      "sha256": "8f140dc6fe4160fee495979ee824e15b51963cd3c1ade89395692c806ac87539"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/Policies.cs",
+      "bytes": 8921,
+      "sha256": "eade566eb8489b5627e5b7d9b352b4e574b1da1b985c9fa199f3c837f44a6471"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/PortableCases.cs",
+      "bytes": 2653,
+      "sha256": "4426f47fe8fb739e5cfb489644560724f7549985cd4c01eaca7e0a386be4c112"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/Program.cs",
+      "bytes": 2148,
+      "sha256": "2524faf0ed312fc4b622c7aa9c5811d48e903f88217a86f2bdfdf48d0d370581"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/README.md",
+      "bytes": 9271,
+      "sha256": "4e712a6335e8d33fcd1403a7b3e887c25db6001b6929e76f42114d2ba66aede9"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/SavedSourceCases.cs",
+      "bytes": 17935,
+      "sha256": "e6ece79fc7731d5e97414b6b4f4c072a637e790c48e58dddec2a0c72beb26a42"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/SourceBoundaryCases.cs",
+      "bytes": 5536,
+      "sha256": "abffda9999070f0940ea190fdd2dec91ab5238bc3716f043408a2f4676ca5bba"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/SourceTimelineCases.cs",
+      "bytes": 3019,
+      "sha256": "0f98403a987377310a76f2a930d003fe29f4297d11819c86f5430aa678423a3e"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/UuidAndIntegrityCases.cs",
+      "bytes": 4551,
+      "sha256": "27735b0d9cbed2f36ba1250150faf7418767510e356941d7cd6ff29f49ebc2a6"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/artifact-bindings.json",
+      "bytes": 2489388,
+      "sha256": "2a65ca23e0d7bbd05c74a4e65f5edfd758119b992a7ceb40518409e715852eff"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/bind-artifacts.py",
+      "bytes": 5179,
+      "sha256": "08311a838b99ffb6f07b478f71bbdaf85512b6f312885c076c0e3fee3992254e"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/command-golden.json",
+      "bytes": 29663,
+      "sha256": "81a36ac2a27a621982e6cb91bad1f6652ccdc11775cf9f013b7c06ed3fb62496"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/empty-artifact-binding-golden.json",
+      "bytes": 919,
+      "sha256": "934343a12d4fa4e6396c409d909c4b4bac5a9a413b34191d6737377ed0c5893e"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/empty-binding-golden.json",
+      "bytes": 1034,
+      "sha256": "4823dbc8b408927f2247df469a3fcf12bb2873cb1eb826f408af5af82b95e199"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/empty-fix-golden.json",
+      "bytes": 6225,
+      "sha256": "bd43532bc0d9fc7ec1e05cf8801a1333f369d626bd12f2db3f49fc5c46c9ee8a"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/empty-guidance-golden.json",
+      "bytes": 4442,
+      "sha256": "867f9dac559365077f13edb9b9703c4c17890e3c98e25c685324d03da31cbb7c"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/empty-input.json",
+      "bytes": 3955,
+      "sha256": "2963b66e7b0d58fd467f9c2f9abf80865884fa7446d74551e75ccd941b1c2e42"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/empty-options-golden.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/execution.json",
+      "bytes": 20014,
+      "sha256": "6a0ae69eda2960517a3bc1a3797514404e1d2fcffe92ef2da6885c8bb1ef9671"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/expected-manifest.json",
+      "bytes": 212979,
+      "sha256": "cab6b57e24331d7b6255e15be545987381d0857f6f9a9a6326ad46679ad7b9fb"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/freeze-runtime.py",
+      "bytes": 1692,
+      "sha256": "a585e8273af09e5674077b52c19d39101192bcf7be16a4e9232872b1ec8f3ec2"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/historical-six-locks.json",
+      "bytes": 5954,
+      "sha256": "0b651ddf271aca59236c151fc07ade3c193c0caa96dba59416ece48f4137dac2"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/hostile-artifact-binding-golden.json",
+      "bytes": 1106,
+      "sha256": "bc671d6e1fd712968a83abb87700446cd1e6292c4160f771cfdd3472d4c54638"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/hostile-binding-golden.json",
+      "bytes": 1221,
+      "sha256": "21c20f3270398ef9603454bece670b3010e0408d1fa62da385c80cd042f43846"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/hostile-fix-golden.json",
+      "bytes": 33320,
+      "sha256": "26372fe62a28b1ebdbc9e834379091957a7702028c4559a0e777c080a8f777aa"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/hostile-guidance-golden.json",
+      "bytes": 27637,
+      "sha256": "2c15950afcc20100c8eae2ce4d4a7c2f8fe905f2c954f767dea68647efb3953a"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/hostile-input.json",
+      "bytes": 23168,
+      "sha256": "6461c435a9b892643d9f55e314da2ee6a0f249329853f8c4234d05c60dd7e5f6"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/hostile-options-golden.json",
+      "bytes": 4531,
+      "sha256": "467ebcf8bf57e61e686f5639f6ab08f40bbda9fdf429340fe6d13478bc5136a0"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/identity-golden.json",
+      "bytes": 6569,
+      "sha256": "ad06805a35de31ffc9e608e499d1d228ddfa96d000294dce61bf18dc38247720"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/normal-artifact-binding-golden.json",
+      "bytes": 1106,
+      "sha256": "591beb26e70cd198c3ba8904abfc45eee18cf444c0fa97b88e3b5effbf2ba188"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/normal-binding-golden.json",
+      "bytes": 1221,
+      "sha256": "35b2f0555e8a4683add8c4ec646f91119bd3ff05a86bd15a585581b98c1946ab"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/normal-fix-golden.json",
+      "bytes": 13747,
+      "sha256": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/normal-guidance-golden.json",
+      "bytes": 8064,
+      "sha256": "3624038f1b37ebaf0f4382341f77ecf43059e7d7f023a106fc973e86fe29a566"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/normal-input.json",
+      "bytes": 8220,
+      "sha256": "24ae168f7292d939013fce768f562b8077ef05cc0e01a541bf3b59630634b2d3"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/normal-options-golden.json",
+      "bytes": 4531,
+      "sha256": "467ebcf8bf57e61e686f5639f6ab08f40bbda9fdf429340fe6d13478bc5136a0"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/oracle-provenance.json",
+      "bytes": 6736,
+      "sha256": "2dd4872ed7b45165819adda477318e2795a8c303e79fd7808e27f240cd288b1a"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/oracle.py",
+      "bytes": 20651,
+      "sha256": "dd5fab5466a9bc2ebb9e178aa664037e16fb5c796bb629dc488417cae7a50e69"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/packages.lock.json",
+      "bytes": 8499,
+      "sha256": "62f570c71aa4aac52c446215585363f6b8f779916c10422ed583e6acf6b3aafb"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/design-checkpoint.json",
+      "bytes": 1532,
+      "sha256": "01b8565b1eeba6d7ab2b8cb9209673115ee111fe68a33ce953958da618342ed2"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/design.md",
+      "bytes": 11864,
+      "sha256": "148ed302dd2ced05e156fd787bfbc65651a2ae203bcb3460106365aa5464bc7a"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/semantic-cases.json",
+      "bytes": 12174,
+      "sha256": "359424a0676be7323149781605042fc720d9ee10109e3db78c86af30e1e42d63"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/semantic-primitives.json",
+      "bytes": 2473,
+      "sha256": "f737a6257ac9d2551f4c9940e35be6291cef858f18b45d6580d7405549245cc3"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/source-bindings.json",
+      "bytes": 3503,
+      "sha256": "a5d8784eee047e124f8fa72c12604bacb99cdb66ff07210f64a593dfde655b44"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/record-execution.py",
+      "bytes": 7893,
+      "sha256": "eced2c44d06d682e833c380221854a1917669994e9c00dbd85d5c66e38a9d229"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/reviews/source-review.json",
+      "bytes": 8808,
+      "sha256": "ddee4fe46a53f8eddd785da05d610539f017f6fa104af73381bde42dc004b3ff"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/run-isolated.py",
+      "bytes": 1184,
+      "sha256": "84ec965846ea131652a52ba0744d0858a2754055546dd9679e203d26e7a936b0"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/run-later-artifact-binding-golden.json",
+      "bytes": 1106,
+      "sha256": "87f72089fafcc5406d1383f636ec21db9a39a9b851f2d52f01117247820c9698"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/run-later-binding-golden.json",
+      "bytes": 1221,
+      "sha256": "0b9ecd8d0aa0a4135f58a87f231b47a8903ba369663cb211a3a46371c12485ad"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/run-later-fix-golden.json",
+      "bytes": 13747,
+      "sha256": "f3d0af65b2777ac41efc2a41578aa0c283e31777fc2cb6a804faa0e08459f108"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/run-later-guidance-golden.json",
+      "bytes": 8064,
+      "sha256": "65a4f2a82905dcad9794a20ff5afb2ddf222bdffb1457d13f7a598fa8b888db3"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/run-later-input.json",
+      "bytes": 8220,
+      "sha256": "4499122f747fac51bbaa76843d26768dcd32e67a009e16fb8ca564cae3686f35"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/run-later-options-golden.json",
+      "bytes": 4531,
+      "sha256": "467ebcf8bf57e61e686f5639f6ab08f40bbda9fdf429340fe6d13478bc5136a0"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/selected-vector-golden.json",
+      "bytes": 4842,
+      "sha256": "1d64fbb402f0615e1257494d8e60c177426c3cd6f87aa17ede2cb1c717136ec5"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-b-artifact-binding-golden.json",
+      "bytes": 1106,
+      "sha256": "9de7e992c5fa50dc76d17e34abf1b84147555a04e677889a51f4c0f37c17de25"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-b-binding-golden.json",
+      "bytes": 1221,
+      "sha256": "450e7e2f38f931e95bf70cdd9da490794ecc56021aa70eb79685cb282d049bfb"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-b-fix-golden.json",
+      "bytes": 13750,
+      "sha256": "d4d4f214374490d333b4536d646676a9e6f641184283f8c8930b1794d9aa60f9"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-b-guidance-golden.json",
+      "bytes": 8067,
+      "sha256": "421676aa79f6ccd485d2acdec93e4c28a29228d6cc70aa5b1a253956fb28bc6e"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-b-input.json",
+      "bytes": 8223,
+      "sha256": "7f8675dec0500cda4046991d0f64bbc25fdb0c5aada67b8096a75cf1c64ec68e"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-b-options-golden.json",
+      "bytes": 4531,
+      "sha256": "467ebcf8bf57e61e686f5639f6ab08f40bbda9fdf429340fe6d13478bc5136a0"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-return-artifact-binding-golden.json",
+      "bytes": 1106,
+      "sha256": "939d318d0a97ecf70906621db9650e5b88dad7f4fc36403a684ce939393ed267"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-return-binding-golden.json",
+      "bytes": 1221,
+      "sha256": "86fe6d6d9a3d34e322d714ce766bf8917ffdb410f863ddd12c5f2f860be2cab6"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-return-fix-golden.json",
+      "bytes": 13747,
+      "sha256": "6b3450deb9dac4c7a438bab4dbebead840120bf3a0fe06eba9789400d0b3c557"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-return-guidance-golden.json",
+      "bytes": 8064,
+      "sha256": "fc79a81dab32821cb0b86614b7b6456eb1785ab026941cd2c3ad6fdf25acce9b"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-return-input.json",
+      "bytes": 8220,
+      "sha256": "59fa4bacd753139eeccbb7e27b35743d809729a9b7c23c2378505dae84d0c903"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/source-return-options-golden.json",
+      "bytes": 4531,
+      "sha256": "467ebcf8bf57e61e686f5639f6ab08f40bbda9fdf429340fe6d13478bc5136a0"
+    }
+  ],
+  "executedReadOnlyProof": {
+    "path": "/private/tmp/iga-cycle14-v14-review-by-b14/final-bindings-proof.json",
+    "sha256": "5f48d36780d83761ca6f605f24162af430d9b31661bb239013130dddd01db98a"
+  },
+  "executedIndependentOracles": [
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-b14/oracle-python.log",
+      "sha256": "853ab986e730e4b09e450281c5dd01f047d9f44c56e4da42b57b8116a978f486",
+      "result": "PASS41 expected-file recipes; no runtime acceptance"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-b14/oracle-javascript.log",
+      "sha256": "be8bcb4d9d5dc820040eafc87b8aa73a848d06e3b2f5175c2f325d42e5711bdc",
+      "result": "PASS56 independent cross-language byte/source/identity/command checks"
+    }
+  ],
+  "nativeLogBindings": [
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/.native/portable-final-corrected.log",
+      "sha256": "25784c7acbb636e585fb03e6620efad6ea0c495c8bb67fb807a8606ec5d60d4b",
+      "actualCount": 702
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/.native/postgres-final-corrected.log",
+      "sha256": "6020351e45a612bc517317ad7396b816176e858ade4a7943bcdf3a3bb1259d50",
+      "actualCount": 2542
+    }
+  ],
+  "originalExecutedChecks": {
+    "portable": 702,
+    "portablePlusOwnedPostgres": 2542,
+    "actualChromiumBrowser": 13626,
+    "axeAudits": 3,
+    "axeViolations": 0,
+    "axeIncomplete": 0,
+    "originalPng": 9,
+    "countsNotAdditive": true,
+    "reviewerNativeReplay": false
+  },
+  "findingsClosure": [
+    {
+      "issue": "ArtifactWriterFence await could skip owned writer on pending failure",
+      "status": "CLOSED",
+      "evidence": "Immediate try/finally releases hold; nested finally awaits writer."
+    },
+    {
+      "issue": "TC14-T10 keyboard workflow acceptance absent",
+      "status": "CLOSED",
+      "evidence": "Exact executed browser source activates all8 kinds via native Enter/Space, asserts current source/vector/revision/status/planning pointer/no-effect invariant and saved heading focus;13626 final report includes that group."
+    },
+    {
+      "issue": "Portable README implied actual artifact store/task-sourcebuilder composition",
+      "status": "CLOSED",
+      "evidence": "Final metadata-only follow-up accurately separates portable Guidance/Fix/recipe/policy from default PG actual artifact read/task source."
+    }
+  ],
+  "remainingScopedFindings": [],
+  "reviewedProperties": [
+    "Preauthor design and Python/C#/JavaScript literals precede producer output, use independent canonical/full package/source/identity/command recipes; observed captures never expected values",
+    "Actual saved sources use one same supplied connection/transaction and module-owned readers; real artifact/finding/assessment/seed writers block on shared run fence",
+    "Monotonic complete source/selected vectors, continuous workflow/planning pointers, identity/UUID/replay/duplicate precedence, current authority before contents, integrity/corruption/rollback/cancellation/restoration",
+    "Complete current/history/original UI field parity, held same-run review epoch/run-switch completion barriers and retained exact uncertain retries",
+    "Exact owned database duplicate-free guards, allowlisted process environment before tool loading, route interception before navigation, nested own-process cleanup",
+    "Actual invalid UTF16/UTF8/route bounds, React exact NUL/CR/Unicode text fidelity/inert resources, metadata-only unavailable transport distinguished from real native persisted-corruption recovery",
+    "Old10 profiles omit new member/lock; task actions do not mutate health/maturity/finding/guidance/artifact/report",
+    "Final source/native/browser/full toolchain binding closure and explicit preserved failure/provenance gaps; no old generation relabeled",
+    "Linux CI runs default own-PG+browser; Windows portable only; local macOS browser/override evidence does not claim hosted execution"
+  ],
+  "visualInspection": [
+    "Reviewer inspected narrow-task-viewport PNG: buttons/text wrap within320px; other8PNG hash verified; full9PNG visual review coordinator-owned"
+  ],
+  "limitations": [
+    "No reviewer .NET/database/host/browser/network execution; native/browser counts are exact original executed evidence, not reviewer reruns",
+    "Hosted CI outcome/whole-solution gates/canonical/site publication remain coordinator evidence; this source review establishes configured boundaries only",
+    "Default Mac startup/manual Windows/screen reader/zoom/customer/deployed sandbox/production identity/full product acceptance NOT VERIFIED",
+    "First two browser failure partial host stdout and interim pre-helper DLL unavailable are explicitly disclosed, not reconstructed",
+    "7500+ external/runtime bindings require verified coordinator archival before cleanup; manifests alone do not preserve tool/runtime bytes",
+    "Agent review is not human acceptance/production release"
+  ]
+}

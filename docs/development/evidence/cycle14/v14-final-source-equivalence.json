@@ -1,0 +1,82 @@
+{
+  "finalSeal": "c1f24a74421abc333c16fab05f56eb93d2d11b80",
+  "readOnlyFinalBindingRecompute": {
+    "bindings": 7510,
+    "copies": 43,
+    "aliases": 6
+  },
+  "sourceEquivalent": [
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskContracts.cs",
+      "ref": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+      "identical": true,
+      "sha256": "6ea5775b50f182e79bedb5a1b373cc68402f64d5aaca9f6355e92e7387602685"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskCanonical.cs",
+      "ref": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+      "identical": true,
+      "sha256": "9be27123708db86eaeb8188b8a9177cfdff4d62b1d66f43a4b768d57b55b2b4e"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskSourceBuilder.cs",
+      "ref": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+      "identical": true,
+      "sha256": "7f1c502fd0e2ba4e173dafa2b6a5fd5a01cbef497eaa78aca9116461e9be6a30"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskStore.cs",
+      "ref": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+      "identical": true,
+      "sha256": "6783c3f9c7fb744c43b46eb6a8b995ce3471f9d009da168c16b715fc5bb6f882"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskPolicy.cs",
+      "ref": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+      "identical": true,
+      "sha256": "274377876d74936d28ef3a0bfa104a54b4536df9b9e06081db95c0b245fd3c57"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskMigration.cs",
+      "ref": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+      "identical": true,
+      "sha256": "f5cea9e0c7b19d391c544c45e663fb0615d9bb9c842df342d409c4920d3f9560"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/hosts/LocalConsultantDemo/DemoPlanningTaskService.cs",
+      "ref": "d42a4d59c7850b815637b7220052138efe78df5f",
+      "identical": true,
+      "sha256": "fc51f2cd1e8b87d48741c002608278659b2caacb15a35d067f30935f43b24414"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/hosts/LocalConsultantDemo/Program.cs",
+      "ref": "d42a4d59c7850b815637b7220052138efe78df5f",
+      "identical": true,
+      "sha256": "6c29a28f11b9313f27991a223ddc65317346b5a5d4f4ece05bf011325feee2c9"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/usePlanningTasks.ts",
+      "ref": "d42a4d59c7850b815637b7220052138efe78df5f",
+      "identical": true,
+      "sha256": "33db1c8429165fa0db7c34a4d394ccb28500d8c09cf7b9c3b700d86cb8947d59"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/AnalysisView.tsx",
+      "ref": "d42a4d59c7850b815637b7220052138efe78df5f",
+      "identical": true,
+      "sha256": "35f6d3718f3cf24161892d4ecf55c7f4385ec468bf64d723d64e4bf7c0808e8d"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/App.tsx",
+      "ref": "d42a4d59c7850b815637b7220052138efe78df5f",
+      "identical": true,
+      "sha256": "168c1b07b01938aab9646d207abeaa0806abc49beb369808683998ce5533a9c8"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/PlanningTasksPanel.tsx",
+      "ref": "d42a4d59c7850b815637b7220052138efe78df5f",
+      "identical": true,
+      "sha256": "b77b4ee322f1522ed6b7a6a84972bffe99a39970b5146f4a524d14def7e5a1e7"
+    }
+  ]
+}

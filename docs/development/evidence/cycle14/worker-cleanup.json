@@ -1,0 +1,31 @@
+{
+  "schema": "cycle14-worker-cleanup-v1",
+  "recordedUtc": "2026-10-03T04:50:49.789201+00:00",
+  "archiveRehash": "/private/tmp/iga-cycle14-preserved/worker-cleanup-rehash.json",
+  "ownedHostsStopped": true,
+  "investigationLeaseReleased": true,
+  "checkouts": [
+    {
+      "checkout": "/private/tmp/iga-cycle14-task-domain",
+      "head": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+      "removedAfterRehash": true
+    },
+    {
+      "checkout": "/private/tmp/iga-cycle14-task-ui",
+      "head": "66e0071d0ef789318179a3ebd0e71b8d7872dfd3",
+      "removedAfterRehash": true
+    },
+    {
+      "checkout": "/private/tmp/iga-cycle14-task-verification",
+      "head": "c1f24a74421abc333c16fab05f56eb93d2d11b80",
+      "removedAfterRehash": true
+    }
+  ],
+  "retained": [
+    "coordinator",
+    "separate controlled-race packet",
+    "all preserved archives",
+    "global SDK/Node/Playwright/Chromium/PG tooling"
+  ],
+  "sharedPostgresRestarted": false
+}

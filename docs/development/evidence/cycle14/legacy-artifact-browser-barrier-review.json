@@ -1,0 +1,40 @@
+{
+  "schema": "cycle14-independent-legacy-artifact-harness-review-v1",
+  "result": "No scoped actionable finding in proposed source-bound barrier patch",
+  "reviewer": "V14",
+  "publishedRef": "d42a4d59c7850b815637b7220052138efe78df5f",
+  "coordinatorHead": "c222ca1a86fc81fc44f617dc7668361403e1c61d",
+  "patchSha256": "0132649937e1c66f55c4628f6cf6e556c8a1e42125e325e63b3790f04d7e1d28",
+  "bindings": [
+    {
+      "path": "/private/tmp/iga-cycle14-coordinator/tests/e2e/artifact-review/verify.mjs",
+      "sha256": "b7996a965f46caf4583a9f4a9edea63473a00a34d64c62e3573057ec95cb1350",
+      "bytes": 74284
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-coordinator/src/web/src/AnalysisView.tsx",
+      "sha256": "35f6d3718f3cf24161892d4ecf55c7f4385ec468bf64d723d64e4bf7c0808e8d",
+      "bytes": 31715
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-coordinator/src/web/src/useArtifactReview.ts",
+      "sha256": "21bf6729c0f4618478299ea3cc5ab401dba844539259b02b99b0be3f9380fbc8",
+      "bytes": 9058
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-coordinator/src/web/src/ReviewPanel.tsx",
+      "sha256": "93999eb45cab07024fbaf0945e4337173bc8367b5c225ea0e74d32db4ad32164",
+      "bytes": 10340
+    }
+  ],
+  "closedProperties": [
+    "Pending Retry control was already present, so mere visibility is not finding-save completion.",
+    "Actual saved finding history contains exact unique comment, both reviewSnapshotDigest and complete artifactSourceDigest advance, run revision remains unchanged.",
+    "Complete readable source rows must equal observed fresh source before original pending retry; preserves sourceEpoch guard, frozen command equality and no duplicate event assertions.",
+    "Production AnalysisView/useArtifactReview/ReviewPanel bytes unchanged versus published failure source."
+  ],
+  "executionLimits": [
+    "This receipt is independent read-only source review plus hosted native failure-log inspection, not an executed race reproduction or full legacy browser rerun.",
+    "Controlled fresh-database investigation is separately in preparation; sealed V14 originals untouched."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "cycle14-closure-document-checks-v1",
+  "result": "PASS",
+  "recordedUtc": "2026-10-03T05:14:33.617379+00:00",
+  "documents": [
+    "plans/active/local-pilot-planning-tasks-cycle-14.md",
+    "specs/003-health-assessment/local-planning-task-test-plan.md",
+    "specs/003-health-assessment/status.md",
+    "specs/003-health-assessment/implementation-plan.md",
+    "specs/003-health-assessment/evidence-index.md",
+    "plans/active/one-identity-local-pilot-build.md"
+  ],
+  "relativeLinksResolved": 194,
+  "allCycle14JsonParsed": true,
+  "secretCheck": {
+    "argv": [
+      "/private/tmp/iga-parallel-tools/gitleaks",
+      "dir",
+      ".",
+      "--redact",
+      "--no-banner",
+      "--exit-code",
+      "1"
+    ],
+    "result": "PASS no leaks",
+    "reportSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "scope": "Documentation and safe count metadata; code remains exact executed b10 runtime, private publication remains pending",
+  "correctedPreparationCheck": "First dated-document assertion identified an undated new overall-build closure heading; added explicit2026-10-03 before final PASS, no product behavior changed"
+}
