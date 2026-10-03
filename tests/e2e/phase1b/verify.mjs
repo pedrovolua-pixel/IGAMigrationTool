@@ -757,6 +757,34 @@ try {
       "only explicitly created task metadata is exported",
     );
     capture.rows.forEach(verifyLinks);
+    const currentPriority = taskRead.priority.entries.find(
+      (value) => value.original.optionId === entry.original.optionId,
+    );
+    await post(`${prefix}/runs/${runId}/planning/events`, {
+      eventId: randomUUID(),
+      kind: "OverridePriority",
+      optionId: currentPriority.original.optionId,
+      expectedRevision: currentPriority.revision,
+      expectedSourceDigest: taskRead.priority.source.sourceDigest,
+      priorityOverride: "Immediate",
+      replacementSize: null,
+      assumptions: [],
+      reason: "Fictional sidecar change after task creation",
+    });
+    const taskAfterSidecar = await workspace();
+    const preservedTask = taskAfterSidecar.analysis.planningTasks.entries.find(
+      (value) => value.identity.taskId === task.identity.taskId,
+    );
+    equal(
+      preservedTask,
+      task,
+      "priority sidecar does not rewrite the saved task or its history",
+    );
+    equal(
+      (await read(`${prefix}/runs/${runId}/csv`)).snapshotDigest,
+      capture.snapshotDigest,
+      "priority sidecar preserves the inspected task export snapshot",
+    );
     await page
       .getByRole("checkbox", {
         name: "I understand downloaded-copy handling and the protected-link warning.",
