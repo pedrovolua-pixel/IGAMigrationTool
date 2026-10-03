@@ -332,7 +332,7 @@ try {
     .getByRole("button", { name: "Retry same review", exact: true })
     .focus();
   await page.keyboard.press("Enter");
-  await page.getByText("Current workspace loaded", { exact: true }).waitFor();
+  await page.getByText(/^Review recorded in outcome version \d+\.$/).waitFor();
   check(bodies.length, 2, "two explicit attempts");
   check(bodies[0], bodies[1], "uncertain retry exact bytes and UUID");
   check(
@@ -379,7 +379,7 @@ try {
   await page
     .getByRole("button", { name: "Record review", exact: true })
     .click();
-  await page.getByText("Current workspace loaded", { exact: true }).waitFor();
+  await page.getByText(/^Review recorded in outcome version \d+\.$/).waitFor();
   const afterCorrection = (
     await wrapper(await api.get("/local-evaluation/v1/workspace"), 200)
   ).payload;
@@ -426,7 +426,7 @@ try {
   await page
     .getByRole("button", { name: "Record review", exact: true })
     .click();
-  await page.getByText("Current workspace loaded", { exact: true }).waitFor();
+  await page.getByText(/^Review recorded in outcome version \d+\.$/).waitFor();
   const afterPresentation = (
     await wrapper(await api.get("/local-evaluation/v1/workspace"), 200)
   ).payload;
