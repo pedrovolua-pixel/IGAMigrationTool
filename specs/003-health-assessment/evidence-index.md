@@ -211,3 +211,10 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 ### Phase 1B final closed-snapshot publication provenance
 
 [The final native private receipt](../../docs/development/evidence/phase1b-final-closed-site-20261003.json) confirms succeeded owner-private version99/source8f2b5a5 reflecting the completed canonical closure commit0f78830. The board explicitly marks the local engineering checkpoint closed and links its confirmed receipt. Repeated1440/390/320 QA, exact pushed HTML/archive inspection and preservation of all twelve human cards/sixteen unowned panels passed. This records publication provenance only: scoped closure, separate Phase1C, all human dependencies and NOT VERIFIED/live/production boundaries are unchanged.
+
+
+## Milestone08 cycle04 local evaluation workflow — 2026-10-03
+
+- [Immutable engineering freeze](../../docs/development/evidence/m08-evaluation-workflow-engineering-freeze-20261003.json), [bounded authority](local-evaluation-workflow-authority.md), [validation addendum](local-evaluation-workflow-engineering-addendum.md) and [verification dispositions](local-evaluation-workflow-verification.md).
+- [Exact executed local receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-20261003.json):74unit/187owning-database/218independent-store/21UI/296actualHTTP-browser, separate migration/tamper probes,86-project build/format/restore and historical compatibility. Native records/source/runtime and original failures are retained under local work/m08-cycle04-evidence; counts overlap, not independent totals.
+- Later native observation: corrected cycle03 bootstrap37139005524 and Azurepackage37139005723 success on dd1db9e. Prior failed/pending records remain unchanged. Current-cycle hosted/live/manual/full acceptance is NOT VERIFIED. Private publication/cleanup receipt follows separately.

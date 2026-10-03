@@ -1,6 +1,6 @@
 # Milestone08 cycle04 — local evaluation review workflow
 
-Status: RUNNING — engineering frozen; bounded implementation authorized
+Status: VERIFIED LOCALLY — private publication and own cleanup pending
 Owner: Phase1C coordinator
 Date: 2026-10-03
 Stable base:9eab6bc4afb72eb242bda3bd5ee783f78989dfec
@@ -15,10 +15,10 @@ This independent fixture workflow avoids existing Phase1B host/UI/source writers
 | Packet | Isolated checkout | Owned paths | State |
 | --- | --- | --- | --- |
 | Authority audit | Read-only stable source | Native audit/evidence only | VERIFIED documentary |
-| Domain | /private/tmp/iga-m08-cycle04-domain-contract | New evaluation-workflow engineering contract/test expectations, new SyntheticEvaluationWorkflow module/migration and own unit/domain integration tests after freeze | RUNNING — frozen contract |
-| Presentation | /private/tmp/iga-m08-cycle04-presentation-contract | New workflow presentation contract/test expectations and dedicated src/web/evaluation frontend/component tests after freeze | RUNNING — frozen contract |
-| Independent verification | Assigned after shared freeze | New independent storage/host/browser verification only; no implementation edits | READY — frozen contract |
-| Coordinator | /private/tmp/iga-m08-cycle04-coordinator | Authority receipt, active plan, shared contract review, dedicated host/source fixture, project/locks/solution/CI, composition, canonical records and private site | RUNNING |
+| Domain | /private/tmp/iga-m08-cycle04-domain-contract | New evaluation-workflow engineering contract/test expectations, new SyntheticEvaluationWorkflow module/migration and own unit/domain integration tests after freeze | VERIFIED locally |
+| Presentation | /private/tmp/iga-m08-cycle04-presentation-contract | New workflow presentation contract/test expectations and dedicated src/web/evaluation frontend/component tests after freeze | VERIFIED locally |
+| Independent verification | Assigned after shared freeze | New independent storage/host/browser verification only; no implementation edits | VERIFIED locally |
+| Coordinator | /private/tmp/iga-m08-cycle04-coordinator | Authority receipt, active plan, shared contract review, dedicated host/source fixture, project/locks/solution/CI, composition, canonical records and private site | VERIFIED locally; publication pending |
 
 The coordinator freezes exact source/cohort/outcome-version relations, transactions/replay/current-policy ordering, closed HTTP DTOs/issues and UI concurrency with nonauthor review before coding. No dependent code is authorized before that freeze. Contract choices must remain engineering within approved policy; any material new product/authority decision returns to the spec/ADR process with concrete reviewed options.
 
@@ -41,9 +41,13 @@ Rollback disables the new local host/flag/profile and preserves compatible appen
 ## Completion gate
 
 - [x] Exact internal engineering and independent expectations frozen/reviewed before dependent code.
-- [ ] Bounded domain/host/UI behavior and applicable checks executed; nonauthor findings closed.
-- [ ] Original policy modules/historical host/UI source compatibility and concurrent-work preservation verified.
-- [ ] Exact source/evidence, migration/flag implications and operational limitations recorded.
+- [x] Bounded domain/host/UI behavior and applicable checks executed; nonauthor findings closed.
+- [x] Original policy modules/historical host/UI source compatibility and concurrent-work preservation verified.
+- [x] Exact source/evidence, migration/flag implications and operational limitations recorded.
 - [ ] Matching private board publication confirmed; original closures rehashed; clean owned checkouts removed.
 
 Full Milestone08/Phase1C/TP-HAS-012/019/UAT/G1–G9 remain NOT VERIFIED. Agent review is engineering evidence only.
+
+## Executed local cycle — 2026-10-03
+
+[Verification disposition](../../specs/003-health-assessment/local-evaluation-workflow-verification.md) and [source-bound receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-20261003.json) record final74unit/187owning-PostgreSQL/218independent-PostgreSQL/21UI/296HTTP-browser proof and closed nonauthor findings.86-project composition passed locked restore/format/zero-warning build, pinned frontend/audit and original policy/regression compatibility. Initial failures are retained. Native Mac select navigation, manual accessibility, capacity/maximum response/clock stress and current-cycle hosted execution remain NOT VERIFIED. The six original frozen documents and preimplementation golden were rehashed unchanged. The separate Phase1B local closure remains preserved.

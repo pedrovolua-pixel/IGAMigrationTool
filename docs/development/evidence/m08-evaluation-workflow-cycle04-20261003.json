@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "status": "VERIFIED LOCALLY; private publication and cleanup pending",
+  "sourceCommit": "de1063d",
+  "baseCommit": "9eab6bc4afb72eb242bda3bd5ee783f78989dfec",
+  "authority": "specs/003-health-assessment/local-evaluation-workflow-authority.md",
+  "engineeringFreeze": "d82cf8dfc1f2e5d53343191b4d00221e88c84e45",
+  "domainSource": "a2ce1c46ae5f14f53acbfd9f02902d405fe80571",
+  "presentationSource": "b8189ed2b706e74e115cba45fd8ce7b3cdad1bc9",
+  "independentConsumerSource": "1dacda9",
+  "checks": [
+    {
+      "name": "composed86projects locked restore, format, Release build",
+      "result": "PASS zero warnings/errors"
+    },
+    {
+      "name": "domain unit",
+      "result": "PASS",
+      "assertions": 74
+    },
+    {
+      "name": "owning PostgreSQL18 store",
+      "result": "PASS",
+      "assertions": 187
+    },
+    {
+      "name": "fresh metadata and legacy CHECK denial probes",
+      "result": "PASS",
+      "assertions": 2
+    },
+    {
+      "name": "independent PostgreSQL consumer",
+      "result": "PASS",
+      "assertions": 218
+    },
+    {
+      "name": "separate deliberate tamper",
+      "result": "PASS",
+      "assertions": 2
+    },
+    {
+      "name": "separate preserved migration rejection",
+      "result": "PASS",
+      "assertions": 4
+    },
+    {
+      "name": "isolated UI Node cases",
+      "result": "PASS",
+      "cases": 21
+    },
+    {
+      "name": "actual HTTP/browser",
+      "result": "PASS",
+      "assertions": 296
+    },
+    {
+      "name": "parent contract/type/build/format and isolated type/build/format",
+      "result": "PASS"
+    },
+    {
+      "name": "pinned npm audit and scoped source secret/security/architecture checks",
+      "result": "PASS zero vulnerabilities/leaks"
+    },
+    {
+      "name": "original evaluation policies/oracles and14historical portable hosts",
+      "result": "PASS; original source bytes unchanged"
+    }
+  ],
+  "countsOverlap": true,
+  "reviews": "Domain/UI cyclic nonauthor reviews, authority audit and independent host/store/browser/CI source review closed; exact receipts retained in native evidence. Agent review is engineering evidence only.",
+  "corrections": "Initial timestamp interoperability, malformed escaped Unicode and migration bootstrap/catalog/legacy CHECK failures retained, followed by source-bound corrections. Browser verifier selector, receipt wait, retained duplicate rationale and native macOS select assumptions corrected without changing product runtime. Original inaccurate format invocation retained; repository format command honors generated-file ignore and passed.",
+  "migration": "Additive guarded synthetic_evaluation_workflow schema with six tables; existing namespace/metadata/immutability verified before adoption. No down migration or automatic repair.",
+  "configuration": "New explicitly enabled LocalEvaluationDemo loopback5184, guarded synthetic database and absolute isolated built assets; flag --enable-synthetic-evaluation-workflow. Default existing host/UI unchanged.",
+  "immutablePolicyAndFreeze": "All original SyntheticEvaluation bytes and six frozen document hashes reverified; legacy source-container views rehashed6400 members including overlap.",
+  "concurrentWork": "Owned source integrated by fast-forward while preserving31then-current foreign working-file bytes; later foreign canonical appends separately preserved via staged HEAD+owned additions.",
+  "hostedCurrentCycle": "NOT VERIFIED; new Linux store/browser and Windows unit steps configured and source reviewed. Previous corrected cycle03 bootstrap37139005524 and Azurepackage37139005723 success on dd1db9e; independent native observation retained. This does not validate cycle04.",
+  "limitations": [
+    "Actual Phase1B source adapter, real identities/grants/reviewer assignments and live evaluation",
+    "Queue/adjudication, residual finding collaboration, risk acceptance, reassessment/report publication and retention/restore",
+    "Full M08/Phase1C/TP-HAS-012/019/UAT/G1\u2013G9 and production release",
+    "Manual supported accessibility/native select navigation; no complete accessibility conformance claim",
+    "Maximum1000change capacity,16MiB response and clock rollback stress not executed"
+  ],
+  "preservation": "Native source/runtime/logs/initial failures preserved under work/m08-cycle04-evidence before own worktree cleanup; final content manifest and private publication receipt appended separately."
+}
