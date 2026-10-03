@@ -6,6 +6,8 @@ namespace SyntheticAiExecution;
 internal static class AiExecutionMigration
 {
     internal const string Id = "synthetic-ai-execution-001";
+    internal const string TruncateId = "synthetic-ai-execution-003";
+    internal static string TruncateScript => ReadScript("003-history-truncate-guards.sql");
     internal const string ProofId = "synthetic-ai-execution-002";
     internal static string ProofScript => ReadScript("002-integrity-proof.sql");
     private static string ReadScript(string name)
@@ -37,14 +39,19 @@ internal static class AiExecutionMigration
             await Execute(connection, transaction, "INSERT INTO synthetic_ai_execution.scope VALUES(true,@c,@p,@e)", ct, ("c", AiScope.Fixed.CustomerId), ("p", AiScope.Fixed.ProjectId), ("e", AiScope.Fixed.EnvironmentId));
             await Execute(connection, transaction, "INSERT INTO synthetic_ai_execution.schema_migrations VALUES(@id,@d,@f)", ct, ("id", Id), ("d", AiExecutionCanonical.Hash(Script)), ("f", await Fingerprint(connection, transaction, ct)));
         }
-        else if (history.Count is < 1 or > 2 || history[0].Item1 != Id || history[0].Item2 != AiExecutionCanonical.Hash(Script) ||
-            history[^1].Item3 != await Fingerprint(connection, transaction, ct) || history.Count == 2 && (history[1].Item1 != ProofId || history[1].Item2 != AiExecutionCanonical.Hash(ProofScript)))
+        else if (history.Count is < 1 or > 3 || history[0].Item1 != Id || history[0].Item2 != AiExecutionCanonical.Hash(Script) ||
+            history[^1].Item3 != await Fingerprint(connection, transaction, ct) || history.Count >= 2 && (history[1].Item1 != ProofId || history[1].Item2 != AiExecutionCanonical.Hash(ProofScript)) || history.Count == 3 && (history[2].Item1 != TruncateId || history[2].Item2 != AiExecutionCanonical.Hash(TruncateScript)))
             throw new InvalidOperationException("AI migration drift denied.");
         if (history.Count < 2)
         {
             await Execute(connection, transaction, ProofScript, ct);
-            await SyntheticAiExecutionStore.BackfillProofs(connection, transaction, ct);
+            await SyntheticAiExecutionStore.VerifyUnboundJournalEmpty(connection, transaction, ct);
             await Execute(connection, transaction, "INSERT INTO synthetic_ai_execution.schema_migrations VALUES(@id,@d,@f)", ct, ("id", ProofId), ("d", AiExecutionCanonical.Hash(ProofScript)), ("f", await Fingerprint(connection, transaction, ct)));
+        }
+        if (history.Count < 3)
+        {
+            await Execute(connection, transaction, TruncateScript, ct);
+            await Execute(connection, transaction, "INSERT INTO synthetic_ai_execution.schema_migrations VALUES(@id,@d,@f)", ct, ("id", TruncateId), ("d", AiExecutionCanonical.Hash(TruncateScript)), ("f", await Fingerprint(connection, transaction, ct)));
         }
         if (await Verify(connection, transaction, ct) is not null) throw new InvalidOperationException("AI scope/drift denied.");
         await transaction.CommitAsync(ct);
@@ -58,6 +65,7 @@ internal static class AiExecutionMigration
             {
                 if (!await reader.ReadAsync(ct) || reader.GetString(0) != Id || reader.GetString(1) != AiExecutionCanonical.Hash(Script)) return AiIssue.MigrationDrift;
                 if (!await reader.ReadAsync(ct) || reader.GetString(0) != ProofId || reader.GetString(1) != AiExecutionCanonical.Hash(ProofScript)) return AiIssue.MigrationDrift;
+                if (!await reader.ReadAsync(ct) || reader.GetString(0) != TruncateId || reader.GetString(1) != AiExecutionCanonical.Hash(TruncateScript)) return AiIssue.MigrationDrift;
                 var fingerprint = reader.GetString(2); if (await reader.ReadAsync(ct)) return AiIssue.MigrationDrift;
                 await reader.CloseAsync();
                 if (fingerprint != await Fingerprint(c, t, ct)) return AiIssue.MigrationDrift;

@@ -82,36 +82,12 @@ public sealed class SyntheticAiExecutionStore
         key.StartsWith("category:", StringComparison.Ordinal) ? state.CategoryAllowances[key[(key.LastIndexOf(':') + 1)..]] : 1200;
     private static string EventProof(Guid runId, long revision, Guid eventId, string actor, string kind, string command, string before, string after, string receipt, DateTime recorded) =>
         AiExecutionCanonical.Digest(new { schemaVersion = "synthetic-ai-event-proof-v1", runId, revision, eventId, actor, kind, commandDigest = command, beforeDigest = before, afterDigest = after, receiptCanonical = receipt, recordedAtUtc = new DateTimeOffset(recorded, TimeSpan.Zero) });
-    internal static async Task BackfillProofs(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct)
+    internal static async Task VerifyUnboundJournalEmpty(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct)
     {
-        var rows = new List<(Guid Run, long Revision, Guid Event, string Actor, string Kind, string Command, string Before, string After, string Canonical, string Receipt, DateTime Recorded)>();
-        await using (var command = new NpgsqlCommand("SELECT run_id,revision,event_id,actor_id,kind,command_digest,before_digest,after_digest,after_canonical,receipt_canonical,recorded_at FROM synthetic_ai_execution.events ORDER BY run_id,revision", c, t))
-        { await using var reader = await command.ExecuteReaderAsync(ct); while (await reader.ReadAsync(ct)) rows.Add((reader.GetGuid(0), reader.GetInt64(1), reader.GetGuid(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6), reader.GetString(7), reader.GetString(8), reader.GetString(9), reader.GetDateTime(10))); }
-        foreach (var row in rows)
-        {
-            if (AiExecutionCanonical.Hash(row.Canonical) != row.After) throw new IntegrityException();
-            var state = AiExecutionCanonical.Parse<State>(row.Canonical);
-            if (state.Revision != row.Revision || state.Seed.RunLock.RunId != row.Run || AiExecutionPolicy.ValidateRun(state.Seed.RunLock, state.Seed.Works) is not null) throw new IntegrityException();
-            await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.event_proof VALUES(@id,@digest)", ct, ("id", row.Event), ("digest", EventProof(row.Run, row.Revision, row.Event, row.Actor, row.Kind, row.Command, row.Before, row.After, row.Receipt, row.Recorded)));
-            foreach (var work in state.Works.Where(x => x.State == AiWorkState.Succeeded))
-            {
-                var attempt = work.Attempts.Last();
-                var canonical = AiExecutionCanonical.Serialize(new
-                {
-                    schemaVersion = "synthetic-ai-fixture-output-v1",
-                    runId = row.Run.ToString("D"),
-                    packetDigest = attempt.Key.PacketDigest,
-                    proposals = work.Outcomes.Where(x => x.Finding is not null).Select(x => JsonSerializer.Deserialize<JsonElement>(x.Finding!.ProposalCanonicalJson)).ToArray()
-                });
-                var packet = SyntheticAiPacketBuilder.Build(work.Work.PacketInputJson); var accepted = SyntheticAiProposalValidator.Validate(packet.Packet, canonical);
-                var mapped = AiExecutionPolicy.Map(state.Seed.RunLock, work.Work, attempt.Key, canonical);
-                if (!accepted.Succeeded || !mapped.Succeeded || attempt.Receipt?.OutputDigest != AiExecutionCanonical.Hash(canonical) ||
-                    AiExecutionCanonical.Serialize(mapped.Value) != AiExecutionCanonical.Serialize(work.Outcomes)) throw new IntegrityException();
-                await AiExecutionMigration.Execute(c, t, "INSERT INTO synthetic_ai_execution.accepted_snapshot VALUES(@id,@canonical,@digest,@source) ON CONFLICT(attempt_id) DO NOTHING", ct,
-                    ("id", attempt.Key.AttemptId), ("canonical", accepted.Snapshot!.CanonicalJson), ("digest", accepted.Snapshot.ContentDigest), ("source", canonical));
-            }
-        }
+        await using var command = new NpgsqlCommand("SELECT (SELECT count(*) FROM synthetic_ai_execution.run_lock)+(SELECT count(*) FROM synthetic_ai_execution.events)+(SELECT count(*) FROM synthetic_ai_execution.current_state)+(SELECT count(*) FROM synthetic_ai_execution.counter)", c, t);
+        if ((long)(await command.ExecuteScalarAsync(ct) ?? throw new IntegrityException()) != 0) throw new IntegrityException();
     }
+
     private static async Task<State?> Load(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, CancellationToken ct)
     {
         string? seedJson = null; string? stateJson = null; string? stateDigest = null; long revision = 0;

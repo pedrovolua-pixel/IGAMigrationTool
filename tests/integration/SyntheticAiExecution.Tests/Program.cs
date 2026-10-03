@@ -281,6 +281,18 @@ internal static class Program
             await t.RollbackAsync();
         }
         Check((await Read(run)).ContentDigest == before.ContentDigest, "bounded proof corruption restored by transaction rollback");
+        foreach (var table in new[] { "run_lock", "events", "event_proof", "accepted_snapshot", "scope" })
+        {
+            try { await using var truncate = new NpgsqlCommand("TRUNCATE synthetic_ai_execution." + table + " CASCADE", c); await truncate.ExecuteNonQueryAsync(); Check(false, "immutable truncate unexpectedly allowed"); }
+            catch (PostgresException error) when (error.SqlState == "P0001") { Check(true, "direct immutable TRUNCATE guard " + table); }
+        }
+        await using (var t = await c.BeginTransactionAsync())
+        {
+            var method = typeof(SyntheticAiExecutionStore).GetMethod("VerifyUnboundJournalEmpty", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)!;
+            try { await (Task)method.Invoke(null, [c, t, CancellationToken.None])!; Check(false, "unbound populated prototype unexpectedly blessed"); }
+            catch (Exception error) when (error.GetType().Name == "IntegrityException") { Check(true, "pre002 nonempty journal migration refuses unverifiable metadata"); }
+            await t.RollbackAsync();
+        }
         var empty = await Seed(AiScenario.Empty); await Call(empty, "work-0");
         await using var count = new NpgsqlCommand("SELECT count(*) FROM synthetic_ai_execution.accepted_snapshot p JOIN synthetic_ai_execution.current_state s ON s.canonical::jsonb #>> '{works,0,attempts,0,key,attemptId}'=p.attempt_id::text WHERE s.run_id=@run AND p.canonical::jsonb->'proposals'='[]'::jsonb", c);
         count.Parameters.AddWithValue("run", empty); Check((long)(await count.ExecuteScalarAsync() ?? 0L) == 1, "valid empty success full validator snapshot remains durable");
