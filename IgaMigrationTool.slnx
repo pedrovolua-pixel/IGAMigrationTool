@@ -41,6 +41,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/Phase1BCompound.Tests/Phase1BCompound.Tests.csproj" />
     <Project Path="tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
     <Project Path="tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
     <Project Path="tests/integration/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj" />
