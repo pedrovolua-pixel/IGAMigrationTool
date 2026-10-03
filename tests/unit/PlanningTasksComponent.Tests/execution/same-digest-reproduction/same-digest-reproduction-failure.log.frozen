@@ -1,0 +1,17 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: same current package digest with lower vector and changed source metadata
+    at check (file:///private/tmp/iga-cycle14-task-ui/tests/unit/PlanningTasksComponent.Tests/verify.mjs:120:12)
+    at deny (file:///private/tmp/iga-cycle14-task-ui/tests/unit/PlanningTasksComponent.Tests/verify.mjs:160:3)
+    at async file:///private/tmp/iga-cycle14-task-ui/tests/unit/PlanningTasksComponent.Tests/verify.mjs:720:1 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.21.0

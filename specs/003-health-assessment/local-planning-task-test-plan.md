@@ -1,9 +1,9 @@
 # Test plan: local fictional consultant planning tasks
 
-Status: Proposed — execution BLOCKED pending TC14-01–06 decision
+Status: RUNNING — TC14-01–06 approved; frozen engineering contract and bounded execution underway
 Owner: Quality owner / independent verifier
 Last updated: 2026-10-02
-Contract: [TC14-01–06 proposal](local-planning-task-contract-proposal.md)
+Contract: [TC14-01–06 approval](local-planning-task-approval.md) and [frozen implementation contract](local-planning-task-implementation-contract.md)
 Plan: [Cycle14](../../plans/active/local-pilot-planning-tasks-cycle-14.md)
 Authority: approved TP-HAS-002/003/009/013/014/017/018 subsets; no full acceptance
 

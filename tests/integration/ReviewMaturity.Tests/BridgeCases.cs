@@ -9,7 +9,7 @@ internal static class BridgeCases
 {
     internal static async Task Run(string[] args)
     {
-        Check.That(DemoFixtureCatalog.Profiles.Count == 10 && DemoFixtureCatalog.Profiles.Count(profile => !DemoAiPreviewCatalog.IsProfile(profile.Id)) == 8 && DemoFixtureCatalog.Profiles.Where(profile => DemoAnalysisCatalog.IsReviewMaturityProfile(profile.Id)).Select(profile => profile.Id)
+        Check.That(DemoFixtureCatalog.Profiles.Count == 11 && DemoFixtureCatalog.Profiles.Count(profile => !DemoPlanningTaskCatalog.IsProfile(profile.Id)) == 10 && DemoFixtureCatalog.Profiles.Count(profile => !DemoAiPreviewCatalog.IsProfile(profile.Id) && !DemoPlanningTaskCatalog.IsProfile(profile.Id)) == 8 && DemoFixtureCatalog.Profiles.Where(profile => DemoAnalysisCatalog.IsReviewMaturityProfile(profile.Id) && !DemoPlanningTaskCatalog.IsProfile(profile.Id)).Select(profile => profile.Id)
             .Order(StringComparer.Ordinal).SequenceEqual(new[] { "synthetic-review-maturity-equal-v1", "synthetic-review-maturity-fix-packages-equal-v1", "synthetic-review-maturity-fix-review-equal-v1", "synthetic-review-maturity-operations-v1" }), "historical review/maturity and earlier profiles retained alongside explicit fix preview and artifact review profiles");
         if (!args.Contains("--postgres", StringComparer.Ordinal)) { Console.WriteLine("NOT VERIFIED RM-BRIDGE: actual saved-run checks require --postgres."); return; }
         var connection = Environment.GetEnvironmentVariable("IGA_REVIEW_TEST_DATABASE") ?? "Host=127.0.0.1;Port=55433;Database=iga_synthetic_v5;Username=iga_synthetic";

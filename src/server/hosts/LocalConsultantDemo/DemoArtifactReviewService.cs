@@ -35,7 +35,7 @@ internal sealed class DemoArtifactReviewService(string connection, SyntheticDura
         if (runId == Guid.Empty || !ArtifactReviewPolicy.ValidDigest(artifactId) || ArtifactReviewPolicy.ValidateCommand(command) is not null)
             return new(ArtifactReviewIssue.InvalidInput, null);
         var current = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId, cancellationToken);
-        if (!current.Succeeded || !DemoArtifactReviewCatalog.MatchesFrozenFixture(current.Snapshot))
+        if (!current.Succeeded || !(DemoArtifactReviewCatalog.MatchesFrozenFixture(current.Snapshot) || DemoPlanningTaskCatalog.MatchesFrozenFixture(current.Snapshot)))
             return new(ArtifactReviewIssue.SourceUnavailable, null);
         var seeded = await reviews.ReadExistingAsync(current.Snapshot!, cancellationToken);
         if (seeded.Snapshot is null) return new(ArtifactReviewIssue.SourceUnavailable, null);
@@ -46,7 +46,7 @@ internal sealed class DemoArtifactReviewService(string connection, SyntheticDura
         ArtifactReviewScope.Fixed, async (runId, cancellationToken) =>
         {
             var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId, cancellationToken);
-            if (!read.Succeeded || !DemoArtifactReviewCatalog.MatchesFrozenFixture(read.Snapshot))
+            if (!read.Succeeded || !(DemoArtifactReviewCatalog.MatchesFrozenFixture(read.Snapshot) || DemoPlanningTaskCatalog.MatchesFrozenFixture(read.Snapshot)))
                 return new(ArtifactReviewIssue.SourceUnavailable, null);
             var review = await reviews.ReadExistingAsync(read.Snapshot!, cancellationToken);
             var value = DemoAnalysisProjection.Capture(read.Snapshot!, review);

@@ -110,7 +110,8 @@ internal static class PortableCases
             var plan = SyntheticBaselineInventoryPlanner.Plan(request.Capability, request.Baseline, request.Scope).Plan!;
             Check.Equal(Expected.InputDigest(JsonSerializer.Serialize(plan), versions, baseline, profile), entry.GetProperty("inputDigest").GetString(), "historical-six-exact-input-digests");
         }
-        Check.Equal(DemoFixtureCatalog.Profiles.Count, 10, "exact-nine-historical-plus-one-opt-in");
+        Check.Equal(DemoFixtureCatalog.Profiles.Count, 11, "eleventh-task-profile-explicit");
+        Check.Equal(DemoFixtureCatalog.Profiles.Count(p => !DemoPlanningTaskCatalog.IsProfile(p.Id)), 10, "exact-nine-historical-plus-one-opt-in");
         Check.Equal(DemoFixtureCatalog.Baselines.Count, 9, "no-new-baseline-authority");
         foreach (var baseline in Expected.Presets)
         {
@@ -121,7 +122,7 @@ internal static class PortableCases
             versions.Remove("FixReviewContractDigest"); versions["ApplicationVersion"] = "synthetic-fix-packages-app-v1";
             Check.Equal(Expected.Canonical(versions), Expected.Canonical(JsonSerializer.SerializeToNode(old.Versions)), "only-approved-profile-app-and-contract-input-delta");
         }
-        foreach (var old in DemoFixtureCatalog.Profiles.Where(p => p.Id != Expected.Profile))
+        foreach (var old in DemoFixtureCatalog.Profiles.Where(p => p.Id != Expected.Profile && !DemoPlanningTaskCatalog.IsProfile(p.Id)))
             Check.That(!JsonSerializer.Serialize(old.Versions).Contains("FixReviewContractDigest", StringComparison.Ordinal), "historical-nine-new-lock-omitted");
         Check.Group("AR13-T01/T03/T08 portable real composition independent literals and original invariants");
     }

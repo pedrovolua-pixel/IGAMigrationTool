@@ -1,0 +1,386 @@
+[
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234560",
+        "kind": "Create",
+        "expectedRevision": 0,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234560\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":0,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"Create\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "c2a4ae2558aa39d2dcd20e8e76d83495e06ca1ef8671b8dd0cef4b98e3a15b98"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234561",
+        "kind": "ReconfirmPlan",
+        "expectedRevision": 2,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234561\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":2,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"ReconfirmPlan\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "53616615a321ef9970176be5d1db9e9472868f8c4ca381552358e06927e65c9e"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234562",
+        "kind": "StartProgress",
+        "expectedRevision": 3,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234562\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":3,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"StartProgress\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "ccb09c2a69c1355a45fdcd9b6b07f0d4bed7d371141d6738f966a3e84c53d6a1"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234563",
+        "kind": "ReturnToPlanned",
+        "expectedRevision": 4,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234563\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":4,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"ReturnToPlanned\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "626cb193c7de83a40aac6e28924d4c4f68ebee055fddae7d107961a8f7af2d66"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234564",
+        "kind": "Complete",
+        "expectedRevision": 5,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234564\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":5,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"Complete\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "a78790d9365b2bc19bcb948763669caf6fc4249f0bc4457abc498fe6f044d1de"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234565",
+        "kind": "Cancel",
+        "expectedRevision": 6,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234565\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":6,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"Cancel\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "ada41cf656050de35263d5acc5821e445cca67cfe8ab0e3fb4e1042f0220ab52"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234566",
+        "kind": "Reopen",
+        "expectedRevision": 7,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234566\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":7,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"Reopen\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "fe011d8f768b75d24f8a35c134964b7f306b92ea9edd632521e50f1fcc8d5b48"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-planning-task-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234567",
+        "kind": "Comment",
+        "expectedRevision": 8,
+        "expectedSourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa",
+        "expectedAttestations": [
+          {
+            "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          },
+          {
+            "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+            "revision": 1,
+            "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+            "kind": "ReviewForPlanning",
+            "state": "ReviewedForPlanning",
+            "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+          }
+        ],
+        "reason": "  Fictional V14 reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234567\",\"expectedAttestations\":[{\"artifactId\":\"4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000001\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000002\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"},{\"artifactId\":\"adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86\",\"eventId\":\"aaaaaaaa-0000-4000-8000-000000000003\",\"kind\":\"ReviewForPlanning\",\"revision\":1,\"sourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"state\":\"ReviewedForPlanning\"}],\"expectedRevision\":8,\"expectedSourceDigest\":\"c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa\",\"kind\":\"Comment\",\"reason\":\"  Fictional V14 reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"taskId\":\"7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d\"}",
+    "digest": "0374ed3ab387618417f3c671c859c6d1e1643e2cacea68d565b8fae2ad44fb48"
+  }
+]

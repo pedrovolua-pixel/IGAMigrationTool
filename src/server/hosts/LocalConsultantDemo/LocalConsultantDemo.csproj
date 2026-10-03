@@ -9,4 +9,5 @@
     <ProjectReference Include="../../modules/AssessmentRuns/AssessmentRuns.csproj" />
     <ProjectReference Include="../../modules/FindingReview/FindingReview.csproj" />
   </ItemGroup>
+  <ItemGroup><ProjectReference Include="../../modules/SyntheticPlanningTasks/SyntheticPlanningTasks.csproj" /></ItemGroup>
 </Project>

@@ -102,6 +102,38 @@ public sealed class SyntheticReviewStore
         catch (JsonException) { return new(SyntheticReviewIssue.IntegrityMismatch, null); }
     }
 
+    /// <summary>Same-transaction trusted read; no seed, callback, new connection or commit.</summary>
+    public async Task<SyntheticReviewReadResult> ReadInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+        SyntheticReviewScope scope, Guid runId, SyntheticReviewAuthority authority, CancellationToken cancellationToken = default)
+    {
+        if (runId == Guid.Empty) return new(SyntheticReviewIssue.InvalidInput, null);
+        if (Identity(authority, scope, SyntheticReviewAction.Read) is { } denied) return new(denied, null);
+        var expected = new NpgsqlConnectionStringBuilder(connectionString);
+        var actual = new NpgsqlConnectionStringBuilder(connection.ConnectionString);
+        if (transaction.Connection != connection || connection.State != ConnectionState.Open || actual.Host != expected.Host ||
+            actual.Port != expected.Port || actual.Database != expected.Database || actual.Username != expected.Username)
+            return new(SyntheticReviewIssue.InvalidInput, null);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(connection, transaction,
+            scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
+        if (await SyntheticReviewMigration.VerifyAsync(connection, transaction, scope, cancellationToken) is { } issue) return new(issue, null);
+        try
+        {
+            var seed = await ReadSeed(connection, transaction, scope, runId, cancellationToken);
+            if (seed is null) return new(SyntheticReviewIssue.NotFound, null);
+            var findings = ImmutableArray.CreateBuilder<SyntheticReviewedFinding>();
+            foreach (var original in seed.Findings)
+            {
+                if (SyntheticReviewPolicy.Authorize(authority, scope, original.CategoryId, SyntheticReviewAction.Read, seed.ResourceState) is { } categoryDenied)
+                    return new(categoryDenied, null);
+                findings.Add(await ReadFinding(connection, transaction, seed, original.FindingId, false, cancellationToken));
+            }
+            var snapshot = new SyntheticReviewSnapshot(seed, findings.ToImmutable(), "");
+            return new(null, snapshot with { SnapshotDigest = SyntheticReviewDigest.Compute(snapshot) });
+        }
+        catch (SyntheticReviewIntegrityException) { return new(SyntheticReviewIssue.IntegrityMismatch, null); }
+        catch (JsonException) { return new(SyntheticReviewIssue.IntegrityMismatch, null); }
+    }
+
     public async Task<SyntheticReviewApplyResult> ApplyAsync(SyntheticReviewScope scope, Guid runId, string findingId,
         SyntheticReviewAuthority authority, SyntheticReviewCommand command, CancellationToken cancellationToken = default)
     {

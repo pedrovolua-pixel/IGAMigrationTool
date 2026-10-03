@@ -1110,6 +1110,16 @@
               "type": "null"
             }
           ]
+        },
+        "planningTasks": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
         }
       },
       "required": [
@@ -1833,6 +1843,9 @@
         "fixReviewContractDigest": {
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
+        },
+        "planningTaskContractDigest": {
+          "type": "string"
         }
       }
     },
@@ -3272,7 +3285,8 @@
         "profileId": {
           "enum": [
             "synthetic-review-maturity-fix-packages-equal-v1",
-            "synthetic-review-maturity-fix-review-equal-v1"
+            "synthetic-review-maturity-fix-review-equal-v1",
+            "synthetic-review-maturity-planning-tasks-equal-v1"
           ]
         },
         "status": {
@@ -3391,10 +3405,18 @@
           "type": "string"
         },
         "profileId": {
-          "const": "synthetic-review-maturity-fix-review-equal-v1"
+          "type": "string",
+          "enum": [
+            "synthetic-review-maturity-fix-review-equal-v1",
+            "synthetic-review-maturity-planning-tasks-equal-v1"
+          ]
         },
         "applicationVersion": {
-          "const": "synthetic-fix-review-app-v1"
+          "type": "string",
+          "enum": [
+            "synthetic-fix-review-app-v1",
+            "synthetic-planning-tasks-app-v1"
+          ]
         },
         "contractDigest": {
           "type": "string",
@@ -3761,6 +3783,607 @@
         "alreadyApplied",
         "receipt"
       ]
+    },
+    "PlanningTaskKind": {
+      "type": "string",
+      "enum": [
+        "Create",
+        "ReconfirmPlan",
+        "StartProgress",
+        "ReturnToPlanned",
+        "Complete",
+        "Cancel",
+        "Reopen",
+        "Comment"
+      ]
+    },
+    "PlanningTaskStatus": {
+      "type": "string",
+      "enum": ["Planned", "InProgress", "Completed", "Cancelled"]
+    },
+    "PlanningTaskFreshness": {
+      "type": "string",
+      "enum": ["CurrentPlan", "NeedsReconfirmation", "SourceUnavailable"]
+    },
+    "PlanningTaskIssue": {
+      "type": "string",
+      "enum": [
+        "InvalidInput",
+        "Denied",
+        "WrongScope",
+        "InvalidState",
+        "NotFound",
+        "RevisionConflict",
+        "SourceConflict",
+        "EventConflict",
+        "SeedConflict",
+        "IntegrityMismatch",
+        "MigrationDrift",
+        "NotInitialized",
+        "SourceUnavailable",
+        "RevisionOverflow"
+      ]
+    },
+    "PlanningTaskIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskId",
+        "findingId",
+        "categoryId",
+        "packageId",
+        "scopedOptionId",
+        "artifactIds"
+      ],
+      "properties": {
+        "taskId": {
+          "type": "string"
+        },
+        "findingId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "packageId": {
+          "type": "string"
+        },
+        "scopedOptionId": {
+          "type": "string"
+        },
+        "artifactIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PlanningTaskAttestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactId",
+        "revision",
+        "eventId",
+        "kind",
+        "state",
+        "sourceDigest"
+      ],
+      "properties": {
+        "artifactId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "eventId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewKind"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "state": {
+          "$ref": "#/$defs/ArtifactReviewState"
+        },
+        "sourceDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "PlanningTaskSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactSource", "planningTaskContractDigest"],
+      "properties": {
+        "artifactSource": {
+          "$ref": "#/$defs/ArtifactReviewSourceBinding"
+        },
+        "planningTaskContractDigest": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "findingState",
+        "currentAttestations",
+        "canCreate"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/PlanningTaskIdentity"
+        },
+        "findingState": {
+          "type": "string"
+        },
+        "currentAttestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskAttestation"
+          }
+        },
+        "canCreate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PlanningTaskCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "kind",
+        "expectedRevision",
+        "expectedSourceDigest",
+        "expectedAttestations",
+        "reason"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "expectedSourceDigest": {
+          "type": "string"
+        },
+        "expectedAttestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskAttestation"
+          }
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "revision",
+        "kind",
+        "actorId",
+        "actorRoles",
+        "recordedAtUtc",
+        "reason",
+        "source",
+        "attestations",
+        "recordedStatus",
+        "planningEventId"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recordedAtUtc": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/PlanningTaskSourceBinding"
+        },
+        "attestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskAttestation"
+          }
+        },
+        "recordedStatus": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "planningEventId": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "eventId",
+        "runId",
+        "taskId",
+        "kind",
+        "revision",
+        "actorId",
+        "recordedAtUtc",
+        "sourceDigest"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-planning-task-receipt-v1"
+        },
+        "eventId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "recordedAtUtc": {
+          "type": "string"
+        },
+        "sourceDigest": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "assigneeId",
+        "revision",
+        "status",
+        "freshness",
+        "creation",
+        "plan",
+        "history",
+        "canReconfirm",
+        "canStart",
+        "canReturnToPlanned",
+        "canComplete",
+        "canCancel",
+        "canReopen",
+        "canComment"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/PlanningTaskIdentity"
+        },
+        "assigneeId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "status": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "freshness": {
+          "$ref": "#/$defs/PlanningTaskFreshness"
+        },
+        "creation": {
+          "$ref": "#/$defs/PlanningTaskEvent"
+        },
+        "plan": {
+          "$ref": "#/$defs/PlanningTaskEvent"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskEvent"
+          }
+        },
+        "canReconfirm": {
+          "type": "boolean"
+        },
+        "canStart": {
+          "type": "boolean"
+        },
+        "canReturnToPlanned": {
+          "type": "boolean"
+        },
+        "canComplete": {
+          "type": "boolean"
+        },
+        "canCancel": {
+          "type": "boolean"
+        },
+        "canReopen": {
+          "type": "boolean"
+        },
+        "canComment": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PlanningTaskUnavailableHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "revision",
+        "kind",
+        "actorId",
+        "actorRoles",
+        "recordedAtUtc",
+        "recordedStatus",
+        "planningEventId"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recordedAtUtc": {
+          "type": "string"
+        },
+        "recordedStatus": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "planningEventId": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskUnavailableEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "assigneeId",
+        "revision",
+        "status",
+        "freshness",
+        "history"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/PlanningTaskIdentity"
+        },
+        "assigneeId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "status": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "freshness": {
+          "const": "SourceUnavailable"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskUnavailableHistory"
+          }
+        }
+      }
+    },
+    "PlanningTaskDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "status",
+        "reasonCode",
+        "source",
+        "actorId",
+        "options",
+        "entries",
+        "unavailableEntries"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Ready", "SourceUnavailable", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "planning_task_source_unavailable",
+                "planning_task_denied",
+                "planning_task_integrity_denied"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskSourceBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actorId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskOption"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskEntry"
+          }
+        },
+        "unavailableEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskUnavailableEntry"
+          }
+        }
+      }
+    },
+    "PlanningTaskResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "issue",
+        "alreadyApplied",
+        "receipt",
+        "alreadyExistsTaskId"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "issue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskIssue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "alreadyApplied": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "alreadyExistsTaskId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
     }
   }
 }

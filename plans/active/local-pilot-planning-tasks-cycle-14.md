@@ -1,6 +1,6 @@
 # Local pilot consultant planning tasks — Cycle14
 
-Status: RUNNING — TC14-01–06 approved; engineering contract checkpoint before dependent implementation
+Status: RUNNING — TC14-01–06 approved; engineering contract frozen; bounded implementation RUNNING
 Owner: Coordinator
 Last updated: 2026-10-02
 Audited source: `711e38d84ac1c626d3695a7a442f36053c2c9729`
@@ -34,14 +34,14 @@ Preparation audits the committed requirements and constructs the reviewable miss
 
 The canonical [preparation metadata](../../docs/development/evidence/local-pilot-cycle14-preparation.json) records documentary evidence only. No prior Cycle13 execution is relabeled as Cycle14 runtime evidence.
 
-## Parallel implementation packets — approved, engineering checkpoint pending
+## Parallel implementation packets — frozen engineering contract
 
 | Packet | Exact ownership after contract freeze | Acceptance/dependencies | State |
 | --- | --- | --- | --- |
-| A14 task domain/store | New `src/server/modules/SyntheticPlanningTasks/*.cs` and README; new additive `migrations/planning-tasks/001-initial.sql`; new `tests/unit/SyntheticPlanningTasks.Tests` except project/lock/config | Approved TC14 contract; frozen source/attestation callback, DTO, schema, identity and replay contract; atomic history/current/metadata receipt, policy/transition/integrity/recovery tests | READY — approved, frozen contract required |
-| B14 task presentation | New `src/web/src/PlanningTasksPanel.tsx/.css`; new `tests/unit/PlanningTasksComponent.Tests` except project/lock/config | Approved exact DTO and command forms; task status versus source freshness, original versus latest binding, inert full text/focus, frozen Retry and conflict behavior | READY — approved, frozen contract required |
-| V14 independent verification | New `tests/integration/LocalPlanningTasks.Tests` except project/lock/config; new `tests/e2e/planning-tasks` | Independent source/task/attestation/transition byte oracles authored before using author expectations; actual owned database/host/browser/concurrency/recovery; all historical regressions | READY — approved, frozen contract required |
-| Coordinator | Shared projects/locks/solution/CI; narrow owning-module transaction/capture APIs; profile/source/DTO/type integration; canonical records, integration/evidence/preservation and existing owner-private Site | Same known approved checkpoint; preserve concurrent root UI/BFF/research; scoped non-author review; executed combined checks and confirmed private publication | RUNNING — approval and engineering contract/integration |
+| A14 task domain/store | New `src/server/modules/SyntheticPlanningTasks/*.cs` and README; new additive `migrations/planning-tasks/001-initial.sql`; new `tests/unit/SyntheticPlanningTasks.Tests` except project/lock/config | Approved TC14 contract; frozen source/attestation callback, DTO, schema, identity and replay contract; atomic history/current/metadata receipt, policy/transition/integrity/recovery tests | RUNNING — approved and frozen |
+| B14 task presentation | New `src/web/src/PlanningTasksPanel.tsx/.css`; new `tests/unit/PlanningTasksComponent.Tests` except project/lock/config | Approved exact DTO and command forms; task status versus source freshness, original versus latest binding, inert full text/focus, frozen Retry and conflict behavior | RUNNING — approved and frozen |
+| V14 independent verification | New `tests/integration/LocalPlanningTasks.Tests` except project/lock/config; new `tests/e2e/planning-tasks` | Independent source/task/attestation/transition byte oracles authored before using author expectations; actual owned database/host/browser/concurrency/recovery; all historical regressions | RUNNING — approved and frozen |
+| Coordinator | Shared projects/locks/solution/CI; narrow owning-module transaction/capture APIs; profile/source/DTO/type integration; canonical records, integration/evidence/preservation and existing owner-private Site | Same known approved checkpoint; preserve concurrent root UI/BFF/research; scoped non-author review; executed combined checks and confirmed private publication | RUNNING — shared integration, evidence and private Site |
 
 Writing workers receive isolated `codex/` worktrees, explicit path lists and traceable packets. Read-only audits may share the committed coordinator source. Use fewer workers for dependent contracts; no separate chats, schedules or unattended agents are started. Workers do not edit canonical records or operate the Site.
 
@@ -71,3 +71,8 @@ No schema is applied by preparation. After approval, use only a fresh dedicated 
 ## Resume instruction
 
 The exact human decision is recorded in local-planning-task-approval.md. No amendments were supplied. Freeze the engineering checkpoint, start A14 and independent V14 oracle preparation, then B14 on the settled DTO. Coordinator integrates reviewed packets, executes combined evidence and updates the existing private board. A next-cycle request is not an unstated approval of TC14 decisions.
+
+
+## Frozen engineering checkpoint
+
+Contract SHA256 `f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2` at `specs/003-health-assessment/local-planning-task-implementation-contract.md` is frozen after A14/B14/V14 independent documentary reviews closed. Exact receipts are in `docs/development/evidence/local-pilot-cycle14-contract-freeze.json`. Approval board publication is confirmed owner-private version88; `local-pilot-cycle14-approval-site.json` records exact source/access. Four new project scaffolds restore with existing package versions only. Runtime implementation and migration checks remain pending; no historical test is relabeled.

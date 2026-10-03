@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "checks": 737,
+  "accepted": 30,
+  "denied": 209,
+  "environmentGuard": {
+    "active": true,
+    "fictionalCanaryWasPresent": true,
+    "fictionalCanaryRemoved": true,
+    "removedInheritedKeys": 7,
+    "retainedKeysOnlyAllowlist": true
+  },
+  "limitations": [
+    "SSR component checks only; no browser keyboard/reflow/network or database/hook execution.",
+    "Historical package bytes verified by server; client verifies reference coherence and actual available artifact histories.",
+    "Literal fixture/golden inputs authored independently before actual rendering."
+  ]
+}

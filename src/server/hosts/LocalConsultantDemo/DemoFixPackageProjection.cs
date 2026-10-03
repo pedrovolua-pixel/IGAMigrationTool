@@ -18,13 +18,13 @@ internal static class DemoFixPackageProjection
     internal static DemoFixPackageDetail? Detail(SyntheticRunSnapshot run,
         DemoRecommendationGuidanceDetail? capturedGuidance, DemoReviewContext? capturedReview)
     {
-        if (!DemoFixPackageCatalog.IsProfile(run.ProfileCatalogId) && !DemoArtifactReviewCatalog.IsProfile(run.ProfileCatalogId)) return null;
+        if (!DemoFixPackageCatalog.IsProfile(run.ProfileCatalogId) && !DemoArtifactReviewCatalog.IsProfile(run.ProfileCatalogId) && !DemoPlanningTaskCatalog.IsProfile(run.ProfileCatalogId)) return null;
         DemoFixPackageDetail Result(string? reason, FixPackageSnapshot? snapshot = null) => new(
             "synthetic-fix-package-demo-v1", run.RunId, run.Revision, run.InputDigest,
             run.BaselineCatalogId, run.ProfileCatalogId, snapshot is null ? "Unavailable" : "Ready", reason, snapshot);
         try
         {
-            if (!(DemoFixPackageCatalog.MatchesFrozenFixture(run) || DemoArtifactReviewCatalog.MatchesFrozenFixture(run)) || !Complete(run))
+            if (!(DemoFixPackageCatalog.MatchesFrozenFixture(run) || DemoArtifactReviewCatalog.MatchesFrozenFixture(run) || DemoPlanningTaskCatalog.MatchesFrozenFixture(run)) || !Complete(run))
                 return Result("fix_packages_source_unavailable");
             if (capturedGuidance is not { Status: "Ready", ReasonCode: null, Snapshot: not null } ||
                 capturedReview is not { ReasonCode: null, Snapshot: not null } ||

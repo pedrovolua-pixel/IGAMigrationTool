@@ -79,17 +79,19 @@ public static class RecommendationGuidanceBuilder
     {
         if (source.Scope != new GuidanceScope("synthetic-customer", "synthetic-project", "synthetic-environment")) return GuidanceIssue.WrongScope;
         if (source.RunId == Guid.Empty || source.RunRevision < 0 || source.RunState != "Scoring") return GuidanceIssue.InvalidSource;
-        if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1" or "synthetic-review-maturity-fix-packages-equal-v1" or "synthetic-review-maturity-fix-review-equal-v1") ||
+        if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1" or "synthetic-review-maturity-fix-packages-equal-v1" or "synthetic-review-maturity-planning-tasks-equal-v1" or "synthetic-review-maturity-fix-review-equal-v1") ||
             source.BaselineId is not ("synthetic-analysis-healthy-v1" or "synthetic-analysis-findings-v1" or "synthetic-analysis-mixed-v1" or "synthetic-analysis-gaps-v1")) return GuidanceIssue.UnknownVersion;
         if (source.ReviewRunId != source.RunId || source.ReviewRunRevision != source.RunRevision) return GuidanceIssue.SourceMismatch;
         foreach (var digest in new[] { source.RunInputDigest, source.AnalysisFixtureDigest, source.AnalysisContentDigest, source.SavedCoverageDigest, source.ReviewSnapshotDigest })
             if (!Digest(digest)) return GuidanceIssue.InvalidSource;
-        var artifactReview = source.ProfileId == "synthetic-review-maturity-fix-review-equal-v1";
+        var planningTasks = source.ProfileId == "synthetic-review-maturity-planning-tasks-equal-v1";
+        var artifactReview = planningTasks || source.ProfileId == "synthetic-review-maturity-fix-review-equal-v1";
         var fixPackages = artifactReview || source.ProfileId == "synthetic-review-maturity-fix-packages-equal-v1";
         var versions = source.FrozenVersions;
         if (artifactReview && String(versions, "fixReviewContractDigest") != "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f") return GuidanceIssue.UnknownVersion;
+        if (planningTasks && String(versions, "planningTaskContractDigest") != "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2") return GuidanceIssue.UnknownVersion;
         string[] versionFields = ["profileVersion", "desiredOutcomeVersion", "scoringAlgorithmVersion", "aiPolicyVersion", "promptVersion", "modelVersion", "applicationVersion", "workSchemaVersion", "scriptedResultsDigest", "analysisFixtureDigest", "maturityFixtureDigest"];
-        if (!Object(versions, artifactReview ? [.. versionFields, "fixPackageTemplateDigest", "fixReviewContractDigest"] : fixPackages ? [.. versionFields, "fixPackageTemplateDigest"] : versionFields)) return GuidanceIssue.InvalidSource;
+        if (!Object(versions, planningTasks ? [.. versionFields, "fixPackageTemplateDigest", "fixReviewContractDigest", "planningTaskContractDigest"] : artifactReview ? [.. versionFields, "fixPackageTemplateDigest", "fixReviewContractDigest"] : fixPackages ? [.. versionFields, "fixPackageTemplateDigest"] : versionFields)) return GuidanceIssue.InvalidSource;
         if (fixPackages && String(versions, "fixPackageTemplateDigest") != "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669") return GuidanceIssue.UnknownVersion;
         var expectedVersions = new Dictionary<string, string>
         {
@@ -98,7 +100,7 @@ public static class RecommendationGuidanceBuilder
             ["aiPolicyVersion"] = "synthetic-ai-disabled-v1",
             ["promptVersion"] = "synthetic-prompt-disabled-v1",
             ["modelVersion"] = "synthetic-model-disabled-v1",
-            ["applicationVersion"] = artifactReview ? "synthetic-fix-review-app-v1" : fixPackages ? "synthetic-fix-packages-app-v1" : "synthetic-review-maturity-app-v1",
+            ["applicationVersion"] = planningTasks ? "synthetic-planning-tasks-app-v1" : artifactReview ? "synthetic-fix-review-app-v1" : fixPackages ? "synthetic-fix-packages-app-v1" : "synthetic-review-maturity-app-v1",
             ["workSchemaVersion"] = "synthetic-run-work-v1"
         };
         if (expectedVersions.Any(pair => String(versions, pair.Key) != pair.Value) || versions.GetProperty("desiredOutcomeVersion").ValueKind != JsonValueKind.Null) return GuidanceIssue.UnknownVersion;

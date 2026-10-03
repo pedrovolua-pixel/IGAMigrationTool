@@ -10,6 +10,7 @@ import type {
 import { DemoRequestError, request } from './api';
 import { AnalysisView } from './AnalysisView';
 import type { ArtifactReviewDraft } from './ArtifactReviewPanel';
+import type { PlanningTaskDraft } from './PlanningTasksPanel';
 
 const states: Record<RunState, string> = {
   Planned: 'Planned',
@@ -59,6 +60,7 @@ export function App() {
   const [announcement, setAnnouncement] = useState('');
   const [connected, setConnected] = useState(false);
   const artifactDrafts = useRef<Record<string, ArtifactReviewDraft>>({});
+  const planningTaskDrafts = useRef<Record<string, PlanningTaskDraft>>({});
   const errorRef = useRef<HTMLDivElement>(null);
   const detailRef = useRef<HTMLElement>(null);
   const currentSelection = useRef<string | null>(selectedId);
@@ -652,6 +654,7 @@ export function App() {
                   run={run}
                   csrfToken={catalog?.csrfToken ?? ''}
                   artifactDrafts={artifactDrafts}
+                  planningTaskDrafts={planningTaskDrafts}
                 />
                 <details className="locked-inputs">
                   <summary>Locked input versions and digests</summary>

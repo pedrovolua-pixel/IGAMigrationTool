@@ -35,8 +35,9 @@ public static class DemoFixtureCatalog
                 AnalysisFixtureDigest = DemoAnalysisCatalog.IsAnalysisBaseline(baselineId) ? DemoAnalysisCatalog.FrozenDigest(baselineId, profileId) : null,
                 MaturityFixtureDigest = DemoAnalysisCatalog.IsReviewMaturityProfile(profileId) ? DemoAnalysisCatalog.FreezeMaturity(baselineId, profileId).ContentDigest : null,
                 AiPreviewFixtureDigest = DemoAiPreviewCatalog.IsProfile(profileId) ? DemoAiPreviewCatalog.FixtureDigest(profileId) : null,
-                FixPackageTemplateDigest = DemoFixPackageCatalog.IsProfile(profileId) || DemoArtifactReviewCatalog.IsProfile(profileId) ? DemoFixPackageCatalog.TemplateDigest : null,
-                FixReviewContractDigest = DemoArtifactReviewCatalog.IsProfile(profileId) ? DemoArtifactReviewCatalog.ContractDigest : null
+                FixPackageTemplateDigest = DemoFixPackageCatalog.IsProfile(profileId) || (DemoArtifactReviewCatalog.IsProfile(profileId) || DemoPlanningTaskCatalog.IsProfile(profileId)) ? DemoFixPackageCatalog.TemplateDigest : null,
+                FixReviewContractDigest = DemoArtifactReviewCatalog.IsProfile(profileId) || DemoPlanningTaskCatalog.IsProfile(profileId) ? DemoArtifactReviewCatalog.ContractDigest : null,
+                PlanningTaskContractDigest = DemoPlanningTaskCatalog.IsProfile(profileId) ? DemoPlanningTaskCatalog.ContractDigest : null
             });
     }
 

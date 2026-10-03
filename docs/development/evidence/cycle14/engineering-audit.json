@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "cycle09_scope / A14 read-only engineering audit",
+  "reviewedAtUtc": "2026-10-03T02:48:39.747166+00:00",
+  "repository": "/private/tmp/iga-cycle14-coordinator",
+  "head": "6314cdb88e48883ea949b1890cb1790a777a19ef",
+  "authority": {
+    "approvalRecord": "specs/003-health-assessment/local-planning-task-approval.md",
+    "decisions": "TC14-01 through TC14-06 explicitly owner-approved; proposal bytes remain original Proposed archival decision packet",
+    "approvalInferred": false
+  },
+  "method": "Static owning-module/source/proposal/test/plan review; external report only. No implementation, database, host, network, test or human acceptance claim.",
+  "sourceBindings": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "835cf98ff9dc277d0b2cf41ff80fdcafa2d52e6de2a2291f7ce76ddc0ab2c73f",
+      "bytes": 3911
+    },
+    {
+      "path": "skills/review-feature/SKILL.md",
+      "sha256": "6afb3d7e2eebe5abbba7708e371d9f6f8a6c55cfd8bb6ba27fafd9e4784059ee",
+      "bytes": 1160
+    },
+    {
+      "path": "skills/create-implementation-plan/SKILL.md",
+      "sha256": "15de1706864709ba7109a71d5d48fb45de2465890daf2b8c9dc0b5526429abef",
+      "bytes": 1243
+    },
+    {
+      "path": "specs/003-health-assessment/local-planning-task-approval.md",
+      "sha256": "5fcbbddaea305b02d8a0e16df7b89351bf486370c15756b31a7eaeb9ab5d8924",
+      "bytes": 3367
+    },
+    {
+      "path": "specs/003-health-assessment/local-planning-task-contract-proposal.md",
+      "sha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839",
+      "bytes": 16681
+    },
+    {
+      "path": "specs/003-health-assessment/local-planning-task-test-plan.md",
+      "sha256": "58dc6d59664b0d3d4d04b6836b074344b1e9fdd83e23fb67504e6b7cb0b9a58f",
+      "bytes": 7811
+    },
+    {
+      "path": "plans/active/local-pilot-planning-tasks-cycle-14.md",
+      "sha256": "f12e9a385939d495a4aa6c9f499b85eb8f2697b3d37184d601494dfcec43bb57",
+      "bytes": 8996
+    },
+    {
+      "path": "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+      "sha256": "fed0b5c92a7ee002d4835d88c3260fa63351f4e2ef40390c079dc3ccefd7e19b",
+      "bytes": 19006
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+      "sha256": "12d8a8532668e2214caf6c089b66e6145a111df4299f08f4e9c823ac47ba6dda",
+      "bytes": 39586
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+      "sha256": "55d67527cb258bf26619ba622fdf19e4031b58e6e9942e606b98981249739bd1",
+      "bytes": 4644
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoArtifactReviewCatalog.cs",
+      "sha256": "d0eed9d50fcf44c57db1e2aa7af15e71eb4e86b3b075c213aaae0da4513fb61b",
+      "bytes": 1477
+    },
+    {
+      "path": "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+      "sha256": "3a8f2dd1fed8d0a1175b17b0b8fcde32db273bdeaf13c5b4f197e8a20c3471b1",
+      "bytes": 21154
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+      "sha256": "68cb0926b833d70a125aee23edbf971579f287821687f66883a342d5ed389f84",
+      "bytes": 24614
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewMigration.cs",
+      "sha256": "31fb4582b37200aab14793b8801a7a684a7a398d22a554b6bb60e9f29b4d3d59",
+      "bytes": 10034
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/ArtifactReviewContracts.cs",
+      "sha256": "c3915ffe210de433b513ad16dc0b179ea837c05e885d78dc2343e65cc8417513",
+      "bytes": 4490
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/ArtifactReviewSourceBuilder.cs",
+      "sha256": "2ed8aa71e87649892426cba1caa724cd5aa9e8492210c7a879ef1186bdba1763",
+      "bytes": 5285
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/README.md",
+      "sha256": "3302a5ed385b6f7f6a7f0f41091920d6daababea8cc6bc797602c47c3807650c",
+      "bytes": 5086
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/GuidanceContracts.cs",
+      "sha256": "3de7f1ec79f6caf27dd809869b4cf2945ed62b9018dda2b42f7555f10ae72d19",
+      "bytes": 3614
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+      "sha256": "5eed8b2b8138d805705f51e4edf4d767c2619f78637eb0e99bb6d27b8d8ad4a0",
+      "bytes": 19924
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageContracts.cs",
+      "sha256": "12a55f6e33657aed31993d27cd24c5bb8557f73315662dba6a103d8a8e31a084",
+      "bytes": 2282
+    },
+    {
+      "path": "src/server/modules/ReportDrafts/DraftSnapshotBuilder.cs",
+      "sha256": "444c164accd6117be04c1383e041696571c79d3b1a1d9a8657e43aacc02203e4",
+      "bytes": 31720
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+      "sha256": "ea6b3ee82e13ef912ad98a0495a4ebae91d12e2a9cb3b32ec9e3de5b52206c2a",
+      "bytes": 7069
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+      "sha256": "5407c84858d57378f31acc8ee890aece4c2225cf430312ce8355158799d0e217",
+      "bytes": 10434
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoArtifactReviewService.cs",
+      "sha256": "23e260aba2a1840f70e1ff141b9bbfc29790b64bcf8af490f4cb6cbbef9180cb",
+      "bytes": 5726
+    },
+    {
+      "path": "src/web/src/ArtifactReviewPanel.tsx",
+      "sha256": "2bb6c16c889871d5839d15b7708887a743bc9dcfac71d79d696ec3f65a2f4e7b",
+      "bytes": 23169
+    },
+    {
+      "path": "src/web/src/FixPackagePreview.tsx",
+      "sha256": "06e853fe04f9e50ed8bc825fb5b6413ee415332b6ca18f0511580276146d272f",
+      "bytes": 41378
+    },
+    {
+      "path": "contracts/local-demo/demo-v1.schema.json",
+      "sha256": "ec196f0a5ef725ef011773ffee1ae7eeffa3df59ef3f5d031c4859d33739bc46",
+      "bytes": 83907
+    }
+  ],
+  "recommendation": {
+    "conclusion": "Admissible within approved bounded local synthetic scope after coordinator freezes independently reviewed exact engineering contract. No additional product permission or topology decision needed for these engineering APIs.",
+    "moduleBoundary": "Task store owns its connection and ReadCommitted transaction. Every capture uses that same supplied connection/transaction after the shared run fence and before module row locks. Each module reads only its own tables.",
+    "apis": [
+      {
+        "location": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs:123,406,439",
+        "signature": "Task<SyntheticRunCommandResult> ReadInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, SyntheticAuthorizedScope scope, Guid runId, CancellationToken cancellationToken = default)",
+        "implementation": "Reuse existing guarded connection/database/scope and full SnapshotAsync integrity reconstruction through a module-owned EF context attached to supplied connection/transaction. Context must not own connection; do not open, begin, commit or dispose external handles; no writes."
+      },
+      {
+        "location": "src/server/modules/FindingReview/SyntheticReviewStore.cs:79,193,208",
+        "signature": "Task<SyntheticReviewReadResult> ReadInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, SyntheticReviewScope scope, Guid runId, SyntheticReviewAuthority authority, CancellationToken cancellationToken = default)",
+        "implementation": "Reuse migration fingerprint, immutable seed, current/history/digest/category and authority verification. No seeding, second connection or transaction ownership."
+      },
+      {
+        "location": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs:35,145,153,177",
+        "signature": "Task<ArtifactReviewReadResult> ReadInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, Guid runId, ArtifactReviewAuthority authority, ArtifactReviewSource source, CancellationToken cancellationToken = default)",
+        "implementation": "Rebuild actual source.Packages within owning module and compare complete bytes, cached bytes/digests, current source and all event/receipt/current chains. Reuse existing ReadSources/ReadEntries/CheckSource. Do not invoke old delegate, seed, open/begin/commit/dispose another transaction."
+      },
+      {
+        "location": "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs:14,46",
+        "signature": "Task<DemoReviewContext> ReadExistingInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction, SyntheticRunSnapshot run, CancellationToken cancellationToken = default)",
+        "implementation": "Use real expected original finding seed derived from actual captured run/analysis; verify its digest against supplied-transaction finding read. No seed operation under fence."
+      },
+      {
+        "location": "new task module/host composition",
+        "signature": "delegate Task<PlanningTaskSourceResult> PlanningTaskSourceReader(NpgsqlConnection connection, NpgsqlTransaction transaction, Guid runId, PlanningTaskAuthority authority, CancellationToken cancellationToken)",
+        "implementation": "Invoke exactly once per fenced operation. Run read -> existing finding review read -> actual DemoAnalysisProjection.Capture once -> actual FixPackageSnapshot -> real ArtifactReviewSourceBuilder -> same-transaction artifact read -> real PlanningTaskSourceBuilder. Response reuses same captured values."
+      }
+    ],
+    "suppliedHandleChecks": [
+      "Connection open; transaction.Connection is the exact supplied connection; caller-owned handles stay open/undisposed.",
+      "Validate exact configured guarded loopback synthetic database/server/role and trusted scope/run.",
+      "Shared run fence acquired before reads/row locks; defensive reacquisition only same connection/transaction, never independent callback ReadAsync.",
+      "Migration/schema integrity must be verified by owning module; current authority checked before history/accepted UUID inspection."
+    ],
+    "originalReferenceDto": {
+      "minimalRequiredPublicFields": "Reuse each entry.identity plus creation and plan immutable events. Each event supplies eventId, revision, kind, actorId, actorRoles, recordedAtUtc, reason, source (complete metadata ArtifactReviewSourceBinding plus planningTaskContractDigest), selected attestation references and recordedStatus/planningEventId. This supplies original run/input/profile/application/template/package/guidance/finding-review/revision provenance without another historical package DTO.",
+      "originalContent": "Render current coherent existing GuidanceOption text/prerequisites/risk/recoveryGuidance, finding validationGuidance and selected actual three FixArtifacts from existing package response. Label creation/latest plan metadata as historical references backed by server verification. Do not label current text as creation-era text after a source change.",
+      "optionalCreationTextIfLaterExplicitlyNeeded": "Server may project only the creation source selected GuidanceOption and its selected three fixed fictional FixArtifacts, plus findingId/packageId/scopedOptionId/templateVersion/templateDigest already in metadata, from its verified immutable canonical package. Avoid whole historic guidance/findings/packages/evidence duplication. Current draft does not add this redundant content DTO.",
+      "history": "Metadata source references and selected accepted event/revision vector; complete historical packages stay server-owned and are reconstructed there. UI does not claim independent proof of historical canonical package bytes.",
+      "sourceUnavailable": "Public identity/assignee/revision/status and bounded metadata events only; source/vectors/reasons/original/current package content suppressed; no actions. No fallback full unfenced analysis."
+    },
+    "monotonicity": [
+      "Every successful event, including stale maintenance, stores observed current source and selected vector separately from creation/latest planning binding.",
+      "Verify all task histories across run and current artifact histories; current run/finding/per-artifact revisions dominate every recorded observed source/vector. Equal complete run/finding vectors with unequal full package digest deny.",
+      "Creation/reconfirmation changes plan event reference; comments/status never implicitly rebind or change finding/artifact/health/maturity.",
+      "Read/denial/AlreadyExists/replay do not write source seeds/high-water. Selected attestation changes invalidate plan; unselected changes do not alter selected freshness but recorded-proof rollback still denies."
+    ],
+    "schema": "Task-owned additive schema only, full immutable canonical source versions, seeds, continuous events, exact original semantic command inputs/digest, current and metadata receipts. Preserve original accepted command fields privately so replay semantic digest is independently reconstructible. Fingerprint includes full column/type modifier/collation and all trigger states including internal FK enforcement. Atomic source/event/current/receipt and rollback-on-observer failure.",
+    "canonical": "Default System.Text.Json escaping, recursively ordinal keys, significant immutable arrays, string enums, lowercase D UUIDs/hex, UTF8 no newline. Stable task hash excludes source/state/command IDs. Current selected vector exactly3 artifact IDs, complete event/revision/state/source references; no reason/content in vector.",
+    "limits": "Reuse source 100000-record and 32MiB limits; reasons/comments exact nonblank <=2000 UTF16 and valid Unicode roundtrip; JS-safe revisions; closed16384-byte command body. Do not infer customer retention, operational scale or arbitrary history pagination behavior.",
+    "compatibility": "Eleventh exact profile/application, fourteen exact frozen fields, unchanged artifact contract/template locks plus task contract lock. New nullable run lock omitted on ten prior profiles; strict validator branches only. Existing historical source/inputs/goldens/migrations unchanged. HTTP planningTasks=null is an intentional additional response field required by contract, not literally identical entire old wire JSON.",
+    "requiredIndependentEvidence": [
+      "TC14-T01 through TC14-T12, actual source composition and independent canonical/command/source oracles.",
+      "Same connection/transaction capture and barrier tests against actual artifact/finding/assessment writers; supplied-handle ownership and no nested fence.",
+      "All lifecycle/reconfirm/reopen/replay/duplicate precedence and all denied branches produce no writes.",
+      "Stale maintenance sourceB then rollbackA, cross-artifact/cross-task run high-water, original option/attestation membership.",
+      "Source unavailable authorized metadata-only/no actions; corrupt history/schema/authority payload-free.",
+      "Ten historical frozen envelopes and exact null/no-authority behavior; whole coherent current response and inert text/keyboard/reflow/late replies."
+    ]
+  },
+  "findings": [],
+  "implementationHazards": [
+    "Existing ArtifactReviewSourceBuilder binds old application constant; new conditional branch must emit actual new application while preserving old constants and thirteen-field behavior.",
+    "Do not silently broaden source validators or alter old fixed review migration bytes.",
+    "Source-unavailable task metadata must not restore existing DemoArtifactReviewService unfenced analysis fallback.",
+    "Persist original semantic command inputs privately; a digest alone is insufficient for complete reconstruction."
+  ],
+  "limitations": [
+    "Static design only; no runtime source API implementation inspected because not yet written.",
+    "No executed test/build/network/audit/host/database evidence.",
+    "No deployed security, customer data, CSV, retention or production release authority."
+  ]
+}

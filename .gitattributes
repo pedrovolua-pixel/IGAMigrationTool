@@ -36,3 +36,23 @@ tests/unit/ArtifactReviewComponent.Tests/empty-expected.html text eol=lf
 /tests/unit/SyntheticFixReview.Tests/execution/**/*.frozen -text
 /tests/unit/SyntheticFixReview.Tests/execution/**/*.txt -text
 /tests/integration/LocalArtifactReview.Tests/**/*.json text eol=lf
+
+# Cycle14 exact locked contract, additive migration and independent oracles.
+/specs/003-health-assessment/local-planning-task-implementation-contract.md text eol=lf
+/migrations/planning-tasks/001-initial.sql text eol=lf
+/tests/unit/SyntheticPlanningTasks.Tests/*.json text eol=lf
+/tests/unit/PlanningTasksComponent.Tests/*.json text eol=lf
+/tests/integration/LocalPlanningTasks.Tests/*.json text eol=lf
+
+# Exact Cycle14 component markup preserves intentional reason/control bytes.
+/tests/unit/PlanningTasksComponent.Tests/*-expected.html -text -whitespace
+
+# Preserve original Cycle14 worker source and native failure transcripts exactly.
+/tests/unit/SyntheticPlanningTasks.Tests/execution/**/*.frozen -text
+/tests/unit/SyntheticPlanningTasks.Tests/execution/**/*.log -text
+/tests/unit/PlanningTasksComponent.Tests/execution/**/*.frozen -text -whitespace
+/tests/unit/PlanningTasksComponent.Tests/execution/**/*.log -text
+/tests/integration/LocalPlanningTasks.Tests/execution/**/*.frozen -text
+/tests/integration/LocalPlanningTasks.Tests/execution/**/*.log -text
+
+/tests/unit/PlanningTasksComponent.Tests/artifacts/*.html -text -whitespace

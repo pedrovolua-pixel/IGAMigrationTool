@@ -21,6 +21,7 @@ public sealed class SyntheticDurableRunEngine
     public const string WorkSchemaVersion = "synthetic-run-work-v1";
     public const string MinimumWorkerVersion = "synthetic-worker-v1";
     private readonly DbContextOptions<SyntheticRunDbContext> options;
+    private readonly string trustedConnectionString;
     private readonly SyntheticAuthorizedScope trustedScope;
     private readonly SyntheticRunPolicy policy;
     private readonly ISyntheticRunCommitObserver? observer;
@@ -39,6 +40,7 @@ public sealed class SyntheticDurableRunEngine
             throw new ArgumentException("Only an explicitly named iga_synthetic_ database on loopback is permitted.", nameof(connectionString));
         options = new DbContextOptionsBuilder<SyntheticRunDbContext>().UseNpgsql(connection.ConnectionString,
             provider => provider.CommandTimeout(15)).EnableSensitiveDataLogging(false).Options;
+        trustedConnectionString = connection.ConnectionString;
         this.trustedScope = trustedScope;
         this.policy = policy;
         this.observer = observer;
@@ -127,6 +129,28 @@ public sealed class SyntheticDurableRunEngine
         var bindingIssue = await BindingIssueAsync(db, cancellationToken);
         if (bindingIssue is not null) return Deny(bindingIssue.Value);
         await using var transaction = await db.Database.BeginTransactionAsync(System.Data.IsolationLevel.RepeatableRead, cancellationToken);
+        var row = await ScopedRuns(db).AsNoTracking().SingleOrDefaultAsync(row => row.RunId == runId, cancellationToken);
+        if (row is null) return Deny(SyntheticRunIssue.NotFound);
+        try { return new(null, await SnapshotAsync(db, row, cancellationToken)); }
+        catch (SyntheticRunIntegrityException) { return Deny(SyntheticRunIssue.InputIntegrityMismatch); }
+    }
+
+    /// <summary>Owning-module read on an already guarded source transaction; never starts or commits it.</summary>
+    public async Task<SyntheticRunCommandResult> ReadInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+        SyntheticAuthorizedScope scope, Guid runId, CancellationToken cancellationToken = default)
+    {
+        if (!MatchesScope(scope)) return Deny(SyntheticRunIssue.WrongScope);
+        var expected = new NpgsqlConnectionStringBuilder(trustedConnectionString);
+        var actual = new NpgsqlConnectionStringBuilder(connection.ConnectionString);
+        if (runId == Guid.Empty || transaction.Connection != connection || connection.State != System.Data.ConnectionState.Open ||
+            actual.Host != expected.Host || actual.Port != expected.Port || actual.Database != expected.Database || actual.Username != expected.Username)
+            return Deny(SyntheticRunIssue.InvalidInput);
+        await SyntheticSourceFence.SyntheticRunSourceFence.AcquireAsync(connection, transaction, scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
+        var shared = new DbContextOptionsBuilder<SyntheticRunDbContext>().UseNpgsql(connection,
+            provider => provider.CommandTimeout(15)).EnableSensitiveDataLogging(false).Options;
+        await using var db = new SyntheticRunDbContext(shared);
+        await db.Database.UseTransactionAsync(transaction, cancellationToken);
+        if (await BindingIssueAsync(db, cancellationToken) is { } issue) return Deny(issue);
         var row = await ScopedRuns(db).AsNoTracking().SingleOrDefaultAsync(row => row.RunId == runId, cancellationToken);
         if (row is null) return Deny(SyntheticRunIssue.NotFound);
         try { return new(null, await SnapshotAsync(db, row, cancellationToken)); }
@@ -471,7 +495,9 @@ public sealed class SyntheticDurableRunEngine
         (versions.FixPackageTemplateDigest is null || versions.FixPackageTemplateDigest is { Length: 64 } &&
             versions.FixPackageTemplateDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
         (versions.FixReviewContractDigest is null || versions.FixReviewContractDigest is { Length: 64 } &&
-            versions.FixReviewContractDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
+            versions.FixReviewContractDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f')) &&
+        (versions.PlanningTaskContractDigest is null || versions.PlanningTaskContractDigest is { Length: 64 } &&
+            versions.PlanningTaskContractDigest.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f'));
     private static bool LiveLease(RunRow run, Guid generation, DateTimeOffset now) => generation != Guid.Empty &&
         run.LeaseGeneration == generation && run.LeaseExpiresAt > now;
     private static SyntheticRunIssue? Guard(RunRow run, Guid generation, long? revision, DateTimeOffset now, bool allowCancellation)

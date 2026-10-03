@@ -1,0 +1,35 @@
+{
+  "schema": "v14-independent-design-checkpoint-v1",
+  "stage": "Initial semantic preauthor design; before author implementation and expected output consumption",
+  "base": "84501e539350eef5986690b75a786acd98a1287b",
+  "engineeringReviewExternal": "/private/tmp/iga-cycle14-v14-contract-review.json",
+  "engineeringContractReviewedSha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2",
+  "bindings": [
+    {
+      "path": "tests/e2e/planning-tasks/preauthor/browser-design.md",
+      "bytes": 4093,
+      "sha256": "290e058895bc1b8ffb92d56e3afaf04334826b241bfc07b8b6a447adb9ade969"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/design.md",
+      "bytes": 11864,
+      "sha256": "148ed302dd2ced05e156fd787bfbc65651a2ae203bcb3460106365aa5464bc7a"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/semantic-cases.json",
+      "bytes": 12174,
+      "sha256": "359424a0676be7323149781605042fc720d9ee10109e3db78c86af30e1e42d63"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/semantic-primitives.json",
+      "bytes": 2473,
+      "sha256": "f737a6257ac9d2551f4c9940e35be6291cef858f18b45d6580d7405549245cc3"
+    },
+    {
+      "path": "tests/integration/LocalPlanningTasks.Tests/preauthor/source-bindings.json",
+      "bytes": 3503,
+      "sha256": "a5d8784eee047e124f8fa72c12604bacb99cdb66ff07210f64a593dfde655b44"
+    }
+  ],
+  "executed": "Documentary literal table/JSON syntax/hash/diff checks only; no runtime"
+}

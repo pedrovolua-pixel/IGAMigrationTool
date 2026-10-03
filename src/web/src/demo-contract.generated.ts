@@ -235,6 +235,7 @@ export type AnalysisDetail = {
   readonly aiPreview: AiPreviewDetail | null;
   readonly fixPackages: FixPackageDetail | null;
   readonly artifactReview: ArtifactReviewDetail | null;
+  readonly planningTasks?: PlanningTaskDetail | null;
 };
 
 export type ReviewKind = "Confirm" | "Reject" | "Defer" | "Comment" | "EditPresentation";
@@ -371,6 +372,7 @@ export type DraftFrozenVersions = {
   readonly desiredOutcomeVersion: string | null;
   readonly fixPackageTemplateDigest?: "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669";
   readonly fixReviewContractDigest?: string;
+  readonly planningTaskContractDigest?: string;
 };
 
 export type DraftModuleVersion = {
@@ -710,7 +712,7 @@ export type FixPackageDetail = {
   readonly runRevision: number;
   readonly runInputDigest: string;
   readonly baselineId: string;
-  readonly profileId: "synthetic-review-maturity-fix-packages-equal-v1" | "synthetic-review-maturity-fix-review-equal-v1";
+  readonly profileId: "synthetic-review-maturity-fix-packages-equal-v1" | "synthetic-review-maturity-fix-review-equal-v1" | "synthetic-review-maturity-planning-tasks-equal-v1";
   readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly snapshot: FixPackageSnapshot | null;
@@ -739,8 +741,8 @@ export type ArtifactReviewSourceBinding = {
   readonly runRevision: number;
   readonly runInputDigest: string;
   readonly baselineId: string;
-  readonly profileId: "synthetic-review-maturity-fix-review-equal-v1";
-  readonly applicationVersion: "synthetic-fix-review-app-v1";
+  readonly profileId: "synthetic-review-maturity-fix-review-equal-v1" | "synthetic-review-maturity-planning-tasks-equal-v1";
+  readonly applicationVersion: "synthetic-fix-review-app-v1" | "synthetic-planning-tasks-app-v1";
   readonly contractDigest: string;
   readonly sourceDigest: string;
   readonly guidanceDigest: string;
@@ -814,4 +816,136 @@ export type ArtifactReviewResult = {
   readonly issue: ArtifactReviewIssue | null;
   readonly alreadyApplied: boolean;
   readonly receipt: ArtifactReviewReceipt | null;
+};
+
+export type PlanningTaskKind = "Create" | "ReconfirmPlan" | "StartProgress" | "ReturnToPlanned" | "Complete" | "Cancel" | "Reopen" | "Comment";
+
+export type PlanningTaskStatus = "Planned" | "InProgress" | "Completed" | "Cancelled";
+
+export type PlanningTaskFreshness = "CurrentPlan" | "NeedsReconfirmation" | "SourceUnavailable";
+
+export type PlanningTaskIssue = "InvalidInput" | "Denied" | "WrongScope" | "InvalidState" | "NotFound" | "RevisionConflict" | "SourceConflict" | "EventConflict" | "SeedConflict" | "IntegrityMismatch" | "MigrationDrift" | "NotInitialized" | "SourceUnavailable" | "RevisionOverflow";
+
+export type PlanningTaskIdentity = {
+  readonly taskId: string;
+  readonly findingId: string;
+  readonly categoryId: string;
+  readonly packageId: string;
+  readonly scopedOptionId: string;
+  readonly artifactIds: ReadonlyArray<string>;
+};
+
+export type PlanningTaskAttestation = {
+  readonly artifactId: string;
+  readonly revision: number;
+  readonly eventId: string | null;
+  readonly kind: ArtifactReviewKind | null;
+  readonly state: ArtifactReviewState;
+  readonly sourceDigest: string | null;
+};
+
+export type PlanningTaskSourceBinding = {
+  readonly artifactSource: ArtifactReviewSourceBinding;
+  readonly planningTaskContractDigest: string;
+};
+
+export type PlanningTaskOption = {
+  readonly identity: PlanningTaskIdentity;
+  readonly findingState: string;
+  readonly currentAttestations: ReadonlyArray<PlanningTaskAttestation>;
+  readonly canCreate: boolean;
+};
+
+export type PlanningTaskCommand = {
+  readonly eventId: string;
+  readonly kind: PlanningTaskKind;
+  readonly expectedRevision: number;
+  readonly expectedSourceDigest: string;
+  readonly expectedAttestations: ReadonlyArray<PlanningTaskAttestation>;
+  readonly reason: string;
+};
+
+export type PlanningTaskEvent = {
+  readonly eventId: string;
+  readonly revision: number;
+  readonly kind: PlanningTaskKind;
+  readonly actorId: string;
+  readonly actorRoles: ReadonlyArray<string>;
+  readonly recordedAtUtc: string;
+  readonly reason: string;
+  readonly source: PlanningTaskSourceBinding;
+  readonly attestations: ReadonlyArray<PlanningTaskAttestation>;
+  readonly recordedStatus: PlanningTaskStatus;
+  readonly planningEventId: string;
+};
+
+export type PlanningTaskReceipt = {
+  readonly schemaVersion: "synthetic-planning-task-receipt-v1";
+  readonly eventId: string;
+  readonly runId: string;
+  readonly taskId: string;
+  readonly kind: PlanningTaskKind;
+  readonly revision: number;
+  readonly actorId: string;
+  readonly recordedAtUtc: string;
+  readonly sourceDigest: string;
+};
+
+export type PlanningTaskEntry = {
+  readonly identity: PlanningTaskIdentity;
+  readonly assigneeId: string;
+  readonly revision: number;
+  readonly status: PlanningTaskStatus;
+  readonly freshness: PlanningTaskFreshness;
+  readonly creation: PlanningTaskEvent;
+  readonly plan: PlanningTaskEvent;
+  readonly history: ReadonlyArray<PlanningTaskEvent>;
+  readonly canReconfirm: boolean;
+  readonly canStart: boolean;
+  readonly canReturnToPlanned: boolean;
+  readonly canComplete: boolean;
+  readonly canCancel: boolean;
+  readonly canReopen: boolean;
+  readonly canComment: boolean;
+};
+
+export type PlanningTaskUnavailableHistory = {
+  readonly eventId: string;
+  readonly revision: number;
+  readonly kind: PlanningTaskKind;
+  readonly actorId: string;
+  readonly actorRoles: ReadonlyArray<string>;
+  readonly recordedAtUtc: string;
+  readonly recordedStatus: PlanningTaskStatus;
+  readonly planningEventId: string;
+};
+
+export type PlanningTaskUnavailableEntry = {
+  readonly identity: PlanningTaskIdentity;
+  readonly assigneeId: string;
+  readonly revision: number;
+  readonly status: PlanningTaskStatus;
+  readonly freshness: "SourceUnavailable";
+  readonly history: ReadonlyArray<PlanningTaskUnavailableHistory>;
+};
+
+export type PlanningTaskDetail = {
+  readonly schemaVersion: 1;
+  readonly demoOnly: true;
+  readonly status: "Ready" | "SourceUnavailable" | "Unavailable";
+  readonly reasonCode: "planning_task_source_unavailable" | "planning_task_denied" | "planning_task_integrity_denied" | null;
+  readonly source: PlanningTaskSourceBinding | null;
+  readonly actorId: string | null;
+  readonly options: ReadonlyArray<PlanningTaskOption>;
+  readonly entries: ReadonlyArray<PlanningTaskEntry>;
+  readonly unavailableEntries: ReadonlyArray<PlanningTaskUnavailableEntry>;
+};
+
+export type PlanningTaskResult = {
+  readonly schemaVersion: 1;
+  readonly demoOnly: true;
+  readonly issue: PlanningTaskIssue | null;
+  readonly alreadyApplied: boolean;
+  readonly receipt: PlanningTaskReceipt | null;
+  readonly alreadyExistsTaskId: string | null;
 };

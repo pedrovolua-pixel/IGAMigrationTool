@@ -11,6 +11,9 @@ public static class ArtifactReviewSourceBuilder
     public const string ProfileId = "synthetic-review-maturity-fix-review-equal-v1";
     public const string ApplicationVersion = "synthetic-fix-review-app-v1";
     public const string ContractDigest = "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f";
+    public const string PlanningTaskProfileId = "synthetic-review-maturity-planning-tasks-equal-v1";
+    public const string PlanningTaskApplicationVersion = "synthetic-planning-tasks-app-v1";
+    public const string PlanningTaskContractDigest = "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2";
     public const string TemplateDigest = "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669";
     public static ArtifactReviewSourceResult Build(FixPackageSnapshot? packages)
     {
@@ -28,10 +31,13 @@ public static class ArtifactReviewSourceBuilder
             var scope = new ArtifactReviewScope(source.Scope.CustomerId, source.Scope.ProjectId, source.Scope.EnvironmentId);
             if (scope != ArtifactReviewScope.Fixed) return new(ArtifactReviewIssue.WrongScope, null);
             var versions = source.FrozenVersions;
-            if (source.ProfileId != ProfileId || source.RunState != "Scoring" || source.RunId == Guid.Empty || source.ReviewRunId != source.RunId ||
+            var planningTasks = source.ProfileId == PlanningTaskProfileId;
+            var expectedApplication = planningTasks ? PlanningTaskApplicationVersion : ApplicationVersion;
+            if ((!planningTasks && source.ProfileId != ProfileId) || source.RunState != "Scoring" || source.RunId == Guid.Empty || source.ReviewRunId != source.RunId ||
                 source.RunRevision < 0 || source.RunRevision > ArtifactReviewPolicy.MaximumRevision || source.ReviewRunRevision != source.RunRevision ||
-                versions.ValueKind != JsonValueKind.Object || versions.EnumerateObject().Count() != 13 ||
-                versions.GetProperty("applicationVersion").GetString() != ApplicationVersion ||
+                versions.ValueKind != JsonValueKind.Object || versions.EnumerateObject().Count() != (planningTasks ? 14 : 13) ||
+                versions.GetProperty("applicationVersion").GetString() != expectedApplication ||
+                planningTasks && versions.GetProperty("planningTaskContractDigest").GetString() != PlanningTaskContractDigest ||
                 versions.GetProperty("fixReviewContractDigest").GetString() != ContractDigest ||
                 versions.GetProperty("fixPackageTemplateDigest").GetString() != TemplateDigest ||
                 verified.TemplateDigest != TemplateDigest || verified.TemplateVersion != FixPackageBuilder.TemplateVersion)
@@ -39,7 +45,7 @@ public static class ArtifactReviewSourceBuilder
             var revisions = verified.Guidance.Findings.Select(finding => new ArtifactReviewFindingRevision(finding.FindingId, finding.FindingRevision)).ToImmutableArray();
             if (revisions.Any(item => item.Revision < 0 || item.Revision > ArtifactReviewPolicy.MaximumRevision)) return new(ArtifactReviewIssue.RevisionOverflow, null);
             var binding = new ArtifactReviewSourceBinding(scope, source.RunId, source.RunRevision, source.RunInputDigest, source.BaselineId,
-                source.ProfileId, ApplicationVersion, ContractDigest, verified.ContentDigest, verified.Guidance.ContentDigest, source.ReviewSnapshotDigest,
+                source.ProfileId, expectedApplication, ContractDigest, verified.ContentDigest, verified.Guidance.ContentDigest, source.ReviewSnapshotDigest,
                 verified.TemplateVersion, verified.TemplateDigest, revisions);
             var findings = verified.Guidance.Findings.ToDictionary(item => item.FindingId, StringComparer.Ordinal);
             var artifacts = verified.Packages.SelectMany(package => package.Options.SelectMany(option => option.Artifacts.Select(artifact =>

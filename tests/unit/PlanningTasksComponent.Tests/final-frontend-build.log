@@ -1,0 +1,22 @@
+
+> iga-synthetic-consultant-demo@0.1.0 build
+> npm run contract:check && npm run typecheck && vite build
+
+
+> iga-synthetic-consultant-demo@0.1.0 contract:check
+> node ../../contracts/local-demo/generate-types.mjs --check
+
+
+> iga-synthetic-consultant-demo@0.1.0 typecheck
+> tsc --noEmit
+
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 30 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.47 kB │ gzip:  0.31 kB
+dist/assets/index-BH44PMwt.css   16.29 kB │ gzip:  4.18 kB
+dist/assets/index-BeXaWnch.js   345.42 kB │ gzip: 98.66 kB
+
+✓ built in 88ms

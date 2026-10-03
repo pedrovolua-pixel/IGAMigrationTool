@@ -6,6 +6,7 @@ import type {
   AnalysisScore,
   AnalysisScoreRow,
   RunDetail,
+  PlanningTaskDetail,
 } from './demo-contract.generated';
 import { request } from './api';
 import { ReviewPanel } from './ReviewPanel';
@@ -16,15 +17,24 @@ import { AiProposalPreview, coherentAiPreview } from './AiProposalPreview';
 import { FixPackagePreview, coherentFixPackages } from './FixPackagePreview';
 import { ArtifactReviewPanel, coherentArtifactReview } from './ArtifactReviewPanel';
 import { useArtifactReview } from './useArtifactReview';
+import {
+  PlanningTasksPanel,
+  coherentPlanningTasks,
+  coherentUnavailablePlanningTasks,
+} from './PlanningTasksPanel';
+import type { PlanningTaskDraft } from './PlanningTasksPanel';
+import { usePlanningTasks } from './usePlanningTasks';
 
 export function AnalysisView({
   run,
   csrfToken,
   artifactDrafts,
+  planningTaskDrafts,
 }: {
   run: RunDetail;
   csrfToken: string;
   artifactDrafts: RefObject<Record<string, ArtifactReviewDraft>>;
+  planningTaskDrafts: RefObject<Record<string, PlanningTaskDraft>>;
 }) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
   const [failed, setFailed] = useState(false);
@@ -34,6 +44,23 @@ export function AnalysisView({
   const retryFocus = useRef<string | null>(null);
   const readEpoch = useRef(0);
   const artifactFocus = useRef<string | null>(null);
+  const taskFocus = useRef<string | null>(null);
+  const [unavailableTasks, setUnavailableTasks] = useState<PlanningTaskDetail | null>(null);
+  const taskControls = usePlanningTasks(
+    run,
+    csrfToken,
+    response,
+    readEpoch,
+    (message, taskId) => {
+      ++readEpoch.current;
+      setNotice(message);
+      taskFocus.current = taskId;
+      setResponse(null);
+      setUnavailableTasks(null);
+      setRetry((value) => value + 1);
+    },
+    planningTaskDrafts,
+  );
   const artifactControls = useArtifactReview(
     run,
     csrfToken,
@@ -44,6 +71,7 @@ export function AnalysisView({
       setNotice(message);
       artifactFocus.current = artifactId;
       setResponse(null);
+      setUnavailableTasks(null);
       setRetry((value) => value + 1);
     },
     artifactDrafts,
@@ -51,6 +79,7 @@ export function AnalysisView({
   useEffect(() => {
     retryFocus.current = null;
     artifactFocus.current = null;
+    taskFocus.current = null;
     setNotice(null);
   }, [run.runId]);
   useEffect(() => {
@@ -58,6 +87,27 @@ export function AnalysisView({
     const epoch = ++readEpoch.current;
     setResponse(null);
     setFailed(false);
+    setUnavailableTasks(null);
+    const unavailable = async () => {
+      if (controller.signal.aborted || epoch !== readEpoch.current) return;
+      retryFocus.current = null;
+      setFailed(true);
+      if (run.selection.profileId !== 'synthetic-review-maturity-planning-tasks-equal-v1') return;
+      try {
+        const detail = await request<PlanningTaskDetail>(
+          `/runs/${encodeURIComponent(run.runId)}/planning-tasks`,
+          controller.signal,
+        );
+        if (
+          (await coherentUnavailablePlanningTasks(detail, run)) &&
+          !controller.signal.aborted &&
+          epoch === readEpoch.current
+        )
+          setUnavailableTasks(detail);
+      } catch {
+        /* A missing or unverifiable fallback stays payload-free. */
+      }
+    };
     if (run.state === 'Scoring') {
       void request<AnalysisDetail>(
         `/runs/${encodeURIComponent(run.runId)}/analysis`,
@@ -78,25 +128,31 @@ export function AnalysisView({
             (await coherentAiPreview(value, run)) &&
             (await coherentFixPackages(value, run)) &&
             (await coherentArtifactReview(value, run)) &&
+            (await coherentPlanningTasks(value, run)) &&
             epoch === readEpoch.current &&
             !controller.signal.aborted
           )
             setResponse(value);
           else if (!controller.signal.aborted && epoch === readEpoch.current) {
-            retryFocus.current = null;
-            setFailed(true);
+            await unavailable();
           }
         })
-        .catch(() => {
-          if (!controller.signal.aborted && epoch === readEpoch.current) {
-            retryFocus.current = null;
-            setFailed(true);
-          }
+        .catch(async () => {
+          await unavailable();
         });
     }
     return () => controller.abort();
   }, [run.runId, run.revision, run.state, retry]);
   useEffect(() => {
+    if ((response || unavailableTasks) && taskFocus.current) {
+      const id = taskFocus.current;
+      (
+        document.getElementById(`planning-task-error-${id}`) ??
+        document.getElementById(`planning-task-${id}`) ??
+        document.getElementById('planning-tasks-heading')
+      )?.focus();
+      taskFocus.current = null;
+    }
     if (response && artifactFocus.current) {
       const target = document.getElementById(`artifact-review-${artifactFocus.current}`);
       const error = document.getElementById(`artifact-review-error-${artifactFocus.current}`);
@@ -113,29 +169,40 @@ export function AnalysisView({
       }
       retryFocus.current = null;
     }
-  }, [response]);
+  }, [response, unavailableTasks]);
   if (run.state !== 'Scoring') return null;
   if (!response || response.runId !== run.runId || response.runRevision !== run.revision) {
     return (
-      <div className="field-note" role="status">
-        <p>
-          {failed
-            ? 'Analysis could not be verified. Saved run inputs and results are unchanged.'
-            : 'Reading analysis from the saved run…'}
-        </p>
-        {failed && (
-          <button
-            onClick={() => {
-              retryFocus.current = run.runId;
-              ++readEpoch.current;
-              setResponse(null);
-              setRetry((value) => value + 1);
-            }}
-          >
-            Retry analysis
-          </button>
+      <>
+        <div className="field-note" role="status">
+          <p>
+            {failed
+              ? 'Analysis could not be verified. Saved run inputs and results are unchanged.'
+              : 'Reading analysis from the saved run…'}
+          </p>
+          {failed && (
+            <button
+              onClick={() => {
+                retryFocus.current = run.runId;
+                ++readEpoch.current;
+                setResponse(null);
+                setRetry((value) => value + 1);
+              }}
+            >
+              Retry analysis
+            </button>
+          )}
+        </div>
+        {unavailableTasks && (
+          <PlanningTasksPanel
+            analysis={null}
+            standaloneDetail={unavailableTasks}
+            run={run}
+            verified
+            {...taskControls}
+          />
         )}
-      </div>
+      </>
     );
   }
   if (response.status !== 'Ready') {
@@ -149,6 +216,7 @@ export function AnalysisView({
         <AiProposalPreview preview={response.aiPreview} run={run} />
         <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
         <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
+        <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
       </>
     );
   }
@@ -382,6 +450,7 @@ export function AnalysisView({
       <AiProposalPreview preview={response.aiPreview} run={run} />
       <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
       <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
+      <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
       {response.maturity && <MaturityView maturity={response.maturity} />}
       <details className="locked-inputs">
         <summary>Analysis versions and content digests</summary>

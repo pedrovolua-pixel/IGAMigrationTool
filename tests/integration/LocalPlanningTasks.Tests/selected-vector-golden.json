@@ -1,0 +1,132 @@
+{
+  "unreviewed": [
+    {
+      "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+      "revision": 0,
+      "eventId": null,
+      "kind": null,
+      "state": "Unverified",
+      "sourceDigest": null
+    },
+    {
+      "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+      "revision": 0,
+      "eventId": null,
+      "kind": null,
+      "state": "Unverified",
+      "sourceDigest": null
+    },
+    {
+      "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+      "revision": 0,
+      "eventId": null,
+      "kind": null,
+      "state": "Unverified",
+      "sourceDigest": null
+    }
+  ],
+  "reviewed": [
+    {
+      "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    }
+  ],
+  "withdrawn": [
+    {
+      "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+      "revision": 2,
+      "eventId": "bbbbbbbb-0000-4000-8000-000000000001",
+      "kind": "WithdrawReview",
+      "state": "Unverified",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    }
+  ],
+  "rereviewed": [
+    {
+      "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+      "revision": 3,
+      "eventId": "cccccccc-0000-4000-8000-000000000001",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+      "kind": "ReviewForPlanning",
+      "state": "ReviewedForPlanning",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    }
+  ],
+  "old-source-needs-review": [
+    {
+      "artifactId": "4c275c024746cdc667f883d38c4e5934738eecbae51bd8014dde75f3f3cab0a0",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000001",
+      "kind": "ReviewForPlanning",
+      "state": "NeedsReview",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "aa6479e7b888c98a22c8b703dab61eac85f5d7825c4af2479887bb9b11893acc",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000002",
+      "kind": "ReviewForPlanning",
+      "state": "NeedsReview",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    },
+    {
+      "artifactId": "adc9f80ca5d3566b987872cb744f6ad0a8b8bdb0676981e0c5aeafca56d1cc86",
+      "revision": 1,
+      "eventId": "aaaaaaaa-0000-4000-8000-000000000003",
+      "kind": "ReviewForPlanning",
+      "state": "NeedsReview",
+      "sourceDigest": "c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa"
+    }
+  ]
+}

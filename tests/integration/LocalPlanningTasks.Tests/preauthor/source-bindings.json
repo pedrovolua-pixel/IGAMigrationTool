@@ -1,0 +1,77 @@
+{
+  "schema": "v14-preauthor-source-bindings-v1",
+  "sourceCheckpoint": "84501e539350eef5986690b75a786acd98a1287b",
+  "stage": "Semantic design before reading engineering draft/author output",
+  "runtimeChecks": "NOT RUN",
+  "engineeringContract": "PENDING review/freeze",
+  "bindings": [
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/AGENTS.md",
+      "bytes": 3911,
+      "sha256": "835cf98ff9dc277d0b2cf41ff80fdcafa2d52e6de2a2291f7ce76ddc0ab2c73f"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/skills/verify-feature/SKILL.md",
+      "bytes": 1230,
+      "sha256": "c854c46cfebd391e85ebbfe8f368b7e396d764833c4cdb5c002c5fb558b44524"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/skills/review-feature/SKILL.md",
+      "bytes": 1160,
+      "sha256": "6afb3d7e2eebe5abbba7708e371d9f6f8a6c55cfd8bb6ba27fafd9e4784059ee"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/specs/003-health-assessment/local-planning-task-contract-proposal.md",
+      "bytes": 16681,
+      "sha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/specs/003-health-assessment/local-planning-task-test-plan.md",
+      "bytes": 7811,
+      "sha256": "58dc6d59664b0d3d4d04b6836b074344b1e9fdd83e23fb67504e6b7cb0b9a58f"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/plans/active/local-pilot-planning-tasks-cycle-14.md",
+      "bytes": 8773,
+      "sha256": "e48dc3eee58ea27168268af46a449c78ff300c0a5b588e370097f50d03915f06"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/architecture/decisions/README.md",
+      "bytes": 2090,
+      "sha256": "38eea29b353cf286aef8d6b54a888cce3e085e8ef3689cff32ea7ad1daa3d191"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/docs/security/health-assessment-authorization-matrix.md",
+      "bytes": 7599,
+      "sha256": "d88bf6dd89d26e0dc08abda455bfd9ae17c22573f5117e0d86d2366ff3204742"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/docs/security/health-assessment-audit-policy.md",
+      "bytes": 4190,
+      "sha256": "fcdf35ce926c4c93964d7165880f339b65f14d242d0480a3227ec2c25116e86d"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-coordinator/specs/003-health-assessment/local-planning-task-approval.md",
+      "bytes": 3367,
+      "sha256": "5fcbbddaea305b02d8a0e16df7b89351bf486370c15756b31a7eaeb9ab5d8924"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/preauthor/design.md",
+      "bytes": 11864,
+      "sha256": "148ed302dd2ced05e156fd787bfbc65651a2ae203bcb3460106365aa5464bc7a",
+      "kind": "independent preauthor design before draft or implementation consumption"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/preauthor/semantic-primitives.json",
+      "bytes": 2473,
+      "sha256": "f737a6257ac9d2551f4c9940e35be6291cef858f18b45d6580d7405549245cc3",
+      "kind": "independent preauthor design before draft or implementation consumption"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/preauthor/browser-design.md",
+      "bytes": 4093,
+      "sha256": "290e058895bc1b8ffb92d56e3afaf04334826b241bfc07b8b6a447adb9ade969",
+      "kind": "independent preauthor design before draft or implementation consumption"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "coordinate": "unchanged",
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "findingId": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "scopedOptionId": "75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51",
+    "canonical": "{\"findingId\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-identity-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"scopedOptionId\":\"75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51\"}",
+    "taskId": "7c3b9fa454351bfce87ca6e7d881c14eca6b39798a6b1e663edc47bb0923812d"
+  },
+  {
+    "coordinate": "customerId",
+    "scope": {
+      "customerId": "synthetic-customer-other",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "findingId": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "scopedOptionId": "75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51",
+    "canonical": "{\"findingId\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-identity-v1\",\"scope\":{\"customerId\":\"synthetic-customer-other\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"scopedOptionId\":\"75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51\"}",
+    "taskId": "1cf0cdf91c269a6b91bab8248fd58b941c311b0e3262b5708169137fca5e9f54"
+  },
+  {
+    "coordinate": "projectId",
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project-other",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "findingId": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "scopedOptionId": "75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51",
+    "canonical": "{\"findingId\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-identity-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project-other\"},\"scopedOptionId\":\"75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51\"}",
+    "taskId": "0eb0b699d1aa0897c4d044fe6ce1b4f2ad749a8f5c83e82da78f1c623deef7be"
+  },
+  {
+    "coordinate": "environmentId",
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment-other"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "findingId": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "scopedOptionId": "75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51",
+    "canonical": "{\"findingId\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-identity-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment-other\",\"projectId\":\"synthetic-project\"},\"scopedOptionId\":\"75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51\"}",
+    "taskId": "9ddd242748003595101200e8ce0435329ce1af90a21119fce02014efec2b00d0"
+  },
+  {
+    "coordinate": "runId",
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "87654321-4321-4321-8321-cba987654321",
+    "findingId": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "scopedOptionId": "75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51",
+    "canonical": "{\"findingId\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"runId\":\"87654321-4321-4321-8321-cba987654321\",\"schemaVersion\":\"synthetic-planning-task-identity-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"scopedOptionId\":\"75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51\"}",
+    "taskId": "019965bc01113ab727c06ff053b5c6b20799faf8a292e910bad31c3da5104f1c"
+  },
+  {
+    "coordinate": "findingId",
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "findingId": "9999999999999999999999999999999999999999999999999999999999999999",
+    "scopedOptionId": "75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51",
+    "canonical": "{\"findingId\":\"9999999999999999999999999999999999999999999999999999999999999999\",\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-identity-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"scopedOptionId\":\"75b3c0b653bda3ae879d8e34bdf7ee8f770c72fb74ddec32b24eee00d09eed51\"}",
+    "taskId": "4b942bcbcb9e0f52a32b8632970fec799458e5cdcfb8ccc24028acee4564b9d6"
+  },
+  {
+    "coordinate": "scopedOptionId",
+    "scope": {
+      "customerId": "synthetic-customer",
+      "projectId": "synthetic-project",
+      "environmentId": "synthetic-environment"
+    },
+    "runId": "12345678-1234-4234-8234-123456789abc",
+    "findingId": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "scopedOptionId": "8888888888888888888888888888888888888888888888888888888888888888",
+    "canonical": "{\"findingId\":\"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc\",\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-planning-task-identity-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"},\"scopedOptionId\":\"8888888888888888888888888888888888888888888888888888888888888888\"}",
+    "taskId": "051a2da8c555659624fb9b06cbd228e1623c80eb11831f5870cbc9a14a88024b"
+  }
+]

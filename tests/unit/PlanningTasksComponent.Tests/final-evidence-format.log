@@ -1,0 +1,4 @@
+Checking formatting...
+[warn] tests/unit/PlanningTasksComponent.Tests/execution-metadata.json
+[warn] tests/unit/PlanningTasksComponent.Tests/executed-checks.json
+[warn] Code style issues found in 2 files. Run Prettier with --write to fix.

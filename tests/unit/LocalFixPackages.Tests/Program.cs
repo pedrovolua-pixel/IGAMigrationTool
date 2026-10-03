@@ -29,8 +29,8 @@ var profileId = "synthetic-review-maturity-fix-packages-equal-v1";
 var templateDigest = "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669";
 Check(DemoFixPackageCatalog.ProfileId == profileId && DemoFixPackageCatalog.ApplicationVersion == "synthetic-fix-packages-app-v1" &&
     DemoFixPackageCatalog.TemplateVersion == "fictional-fix-templates-v1" && DemoFixPackageCatalog.TemplateDigest == templateDigest, "exact literal opt-in constants");
-Check(DemoFixtureCatalog.Baselines.Count == 9 && DemoFixtureCatalog.Profiles.Count == 10 &&
-    DemoFixtureCatalog.Profiles.Count(item => item.Id == profileId) == 1, "historical fix profile retained in current ten-profile inventory; no baseline added");
+Check(DemoFixtureCatalog.Baselines.Count == 9 && DemoFixtureCatalog.Profiles.Count == 11 && DemoFixtureCatalog.Profiles.Count(item => !DemoPlanningTaskCatalog.IsProfile(item.Id)) == 10 &&
+    DemoFixtureCatalog.Profiles.Count(item => item.Id == profileId) == 1, "historical fix profile retained in exact ten-profile historical inventory beside explicit eleventh task profile; no baseline added");
 Check(DemoFixtureCatalog.Profiles.Single(item => item.Id == profileId).Name == "Synthetic consultant review + fictional fix packages · equal weights", "literal profile label");
 Check(DemoAnalysisCatalog.AnalysisProfileId(profileId) == "synthetic-analysis-equal-v1", "explicit underlying mapping");
 Check(!DemoFixPackageCatalog.MatchesFrozenFixture(null), "null catalog source denied");
@@ -247,7 +247,7 @@ foreach (var baseline in DemoFixtureCatalog.Baselines)
         catch (ArgumentException) { Check(true, "incompatible start denied"); }
     }
 }
-foreach (var profile in DemoFixtureCatalog.Profiles.Where(item => item.Id != profileId && item.Id != DemoArtifactReviewCatalog.ProfileId))
+foreach (var profile in DemoFixtureCatalog.Profiles.Where(item => item.Id != profileId && item.Id != DemoArtifactReviewCatalog.ProfileId && !DemoPlanningTaskCatalog.IsProfile(item.Id)))
 {
     Check(profile.Versions.FixPackageTemplateDigest is null, "historical catalog optional digest absent " + profile.Id);
     var baseline = DemoFixtureCatalog.Baselines.First(item => DemoAnalysisCatalog.Compatible(item.Id, profile.Id));

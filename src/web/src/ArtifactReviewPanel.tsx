@@ -10,6 +10,8 @@ import type {
 import { coherentFixPackages } from './FixPackagePreview';
 import './ArtifactReviewPanel.css';
 
+const taskProfile = 'synthetic-review-maturity-planning-tasks-equal-v1';
+const taskContractDigest = 'f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2';
 const profile = 'synthetic-review-maturity-fix-review-equal-v1';
 const contractDigest = 'a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f';
 const templateDigest = 'a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669';
@@ -80,8 +82,11 @@ function source(s: ArtifactReviewSourceBinding): boolean {
     s.runRevision >= 1 &&
     digest(s.runInputDigest) &&
     text(s.baselineId) &&
-    s.profileId === profile &&
-    s.applicationVersion === 'synthetic-fix-review-app-v1' &&
+    [profile, taskProfile].includes(s.profileId) &&
+    s.applicationVersion ===
+      (s.profileId === taskProfile
+        ? 'synthetic-planning-tasks-app-v1'
+        : 'synthetic-fix-review-app-v1') &&
     s.contractDigest === contractDigest &&
     digest(s.sourceDigest) &&
     digest(s.guidanceDigest) &&
@@ -151,7 +156,7 @@ function structural(analysis: AnalysisDetail, run: RunDetail): boolean {
   )
     return false;
   const d = analysis.artifactReview;
-  if (run.selection.profileId !== profile)
+  if (![profile, taskProfile].includes(run.selection.profileId))
     return (
       [
         'profile-standard',
@@ -169,12 +174,18 @@ function structural(analysis: AnalysisDetail, run: RunDetail): boolean {
     );
   const lock = run.lockedInputs.find((l) => l.name === 'Artifact review contract');
   if (
-    run.lockedInputs.length !== 17 ||
-    new Set(run.lockedInputs.map((l) => l.name)).size !== 17 ||
+    run.lockedInputs.length !== (run.selection.profileId === taskProfile ? 18 : 17) ||
+    new Set(run.lockedInputs.map((l) => l.name)).size !==
+      (run.selection.profileId === taskProfile ? 18 : 17) ||
     !lock ||
     !shape(lock, ['name', 'version', 'sha256']) ||
     lock.version !== 'synthetic-fix-review-contract-v1' ||
     lock.sha256 !== contractDigest ||
+    (run.selection.profileId === taskProfile &&
+      (run.lockedInputs.find((l) => l.name === 'Planning task contract')?.sha256 !==
+        taskContractDigest ||
+        run.lockedInputs.find((l) => l.name === 'Planning task contract')?.version !==
+          'synthetic-planning-task-contract-v1')) ||
     !d ||
     !shape(d, [
       'schemaVersion',
@@ -235,9 +246,12 @@ function structural(analysis: AnalysisDetail, run: RunDetail): boolean {
     s.templateVersion !== packageSnapshot.templateVersion ||
     s.templateDigest !== packageSnapshot.templateDigest ||
     !same(s.scope, g.source.scope) ||
-    g.source.profileId !== profile ||
+    g.source.profileId !== run.selection.profileId ||
+    s.profileId !== run.selection.profileId ||
     g.source.frozenVersions.applicationVersion !== s.applicationVersion ||
     g.source.frozenVersions.fixReviewContractDigest !== contractDigest ||
+    (run.selection.profileId === taskProfile &&
+      g.source.frozenVersions.planningTaskContractDigest !== taskContractDigest) ||
     !same(
       s.findingRevisions,
       [...g.findings]
@@ -479,7 +493,7 @@ export function ArtifactReviewPanel({
   } catch {
     /* Fail closed for malformed transport data. */
   }
-  if (run.selection.profileId !== profile && valid) return null;
+  if (![profile, taskProfile].includes(run.selection.profileId) && valid) return null;
   if (!valid)
     return (
       <section aria-labelledby="artifact-review-heading" className="artifact-review">

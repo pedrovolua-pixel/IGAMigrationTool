@@ -1,0 +1,67 @@
+.planning-tasks {
+  margin-block: 1.5rem;
+  color: #172a3a;
+  background: #fff;
+  border: 1px solid #64748b;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.planning-tasks article {
+  border-top: 1px solid #64748b;
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+.planning-task-fields div {
+  margin-block: 0.5rem;
+}
+.planning-task-fields dt {
+  font-weight: 700;
+}
+.planning-task-fields dd {
+  margin-inline: 0;
+}
+.planning-tasks pre,
+.planning-task-reason {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.planning-tasks pre {
+  padding: 0.75rem;
+  background: #f1f5f9;
+}
+.planning-tasks summary {
+  cursor: pointer;
+  padding-block: 0.5rem;
+}
+.planning-tasks label {
+  display: block;
+  margin-block: 0.75rem 0.25rem;
+}
+.planning-tasks textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 6rem;
+  font: inherit;
+}
+.planning-tasks button {
+  margin-block: 0.5rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.planning-tasks :focus-visible {
+  outline: 3px solid #174ea6;
+  outline-offset: 3px;
+}
+@media (max-width: 400px) {
+  .planning-tasks {
+    padding: 0.75rem;
+  }
+  .planning-tasks ol,
+  .planning-tasks ul {
+    padding-inline-start: 1.25rem;
+  }
+}

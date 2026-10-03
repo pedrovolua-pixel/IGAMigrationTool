@@ -1,0 +1,185 @@
+{
+  "schema": "v14-independent-source-review-v1",
+  "reviewer": "V14",
+  "result": "No remaining scoped actionable finding in reviewed production sources",
+  "authority": "TC14-01\u201306 owner-approved exact f4d2 engineering contract; agent review is not human approval or release authority",
+  "checks": [
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskContracts.cs",
+      "immutableComparedRef": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+      "identical": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskCanonical.cs",
+      "immutableComparedRef": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+      "identical": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskSourceBuilder.cs",
+      "immutableComparedRef": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+      "identical": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskStore.cs",
+      "immutableComparedRef": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+      "identical": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskPolicy.cs",
+      "immutableComparedRef": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+      "identical": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskMigration.cs",
+      "immutableComparedRef": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+      "identical": true
+    },
+    {
+      "path": "migrations/planning-tasks/001-initial.sql",
+      "immutableComparedRef": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+      "identical": true
+    },
+    {
+      "path": "src/web/src/PlanningTasksPanel.tsx",
+      "immutableComparedRef": "66e0071",
+      "identical": true
+    },
+    {
+      "path": "src/web/src/PlanningTasksPanel.css",
+      "immutableComparedRef": "66e0071",
+      "identical": true
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoPlanningTaskService.cs",
+      "immutableComparedRef": "9ede79f",
+      "identical": true
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+      "immutableComparedRef": "9ede79f",
+      "identical": true
+    },
+    {
+      "path": "src/web/src/usePlanningTasks.ts",
+      "immutableComparedRef": "9ede79f",
+      "identical": true
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "immutableComparedRef": "9ede79f",
+      "identical": true
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "immutableComparedRef": "9ede79f",
+      "identical": true
+    }
+  ],
+  "bindings": [
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskContracts.cs",
+      "sha256": "6ea5775b50f182e79bedb5a1b373cc68402f64d5aaca9f6355e92e7387602685",
+      "bytes": 5649
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskCanonical.cs",
+      "sha256": "9be27123708db86eaeb8188b8a9177cfdff4d62b1d66f43a4b768d57b55b2b4e",
+      "bytes": 2467
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskSourceBuilder.cs",
+      "sha256": "7f1c502fd0e2ba4e173dafa2b6a5fd5a01cbef497eaa78aca9116461e9be6a30",
+      "bytes": 9770
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskStore.cs",
+      "sha256": "6783c3f9c7fb744c43b46eb6a8b995ce3471f9d009da168c16b715fc5bb6f882",
+      "bytes": 29066
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/PlanningTaskPolicy.cs",
+      "sha256": "274377876d74936d28ef3a0bfa104a54b4536df9b9e06081db95c0b245fd3c57",
+      "bytes": 5282
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskMigration.cs",
+      "sha256": "f5cea9e0c7b19d391c544c45e663fb0615d9bb9c842df342d409c4920d3f9560",
+      "bytes": 10117
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/migrations/planning-tasks/001-initial.sql",
+      "sha256": "2ac4f0cebcf290dc08aefc809103a84bc493da6ab61bd6ce4b041c94ad2c4853",
+      "bytes": 6155
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/PlanningTasksPanel.tsx",
+      "sha256": "b77b4ee322f1522ed6b7a6a84972bffe99a39970b5146f4a524d14def7e5a1e7",
+      "bytes": 40149
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/PlanningTasksPanel.css",
+      "sha256": "1972b7fad5300258f3abfdcda87242caf5413a078fab6e31b9eed46bdb0e7fc0",
+      "bytes": 1266
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/hosts/LocalConsultantDemo/DemoPlanningTaskService.cs",
+      "sha256": "fc51f2cd1e8b87d48741c002608278659b2caacb15a35d067f30935f43b24414",
+      "bytes": 8434
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/server/hosts/LocalConsultantDemo/Program.cs",
+      "sha256": "6c29a28f11b9313f27991a223ddc65317346b5a5d4f4ece05bf011325feee2c9",
+      "bytes": 38544
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/usePlanningTasks.ts",
+      "sha256": "33db1c8429165fa0db7c34a4d394ccb28500d8c09cf7b9c3b700d86cb8947d59",
+      "bytes": 10376
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/AnalysisView.tsx",
+      "sha256": "35f6d3718f3cf24161892d4ecf55c7f4385ec468bf64d723d64e4bf7c0808e8d",
+      "bytes": 31715
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/src/web/src/App.tsx",
+      "sha256": "168c1b07b01938aab9646d207abeaa0806abc49beb369808683998ce5533a9c8",
+      "bytes": 31316
+    }
+  ],
+  "closedFindings": [
+    {
+      "id": "V14-A-assignee-before-UUID",
+      "original": "Actual independent1691 FAIL Denied expected/EventConflict foreign actor",
+      "correction": "87c3f6f",
+      "verification": "Unchanged independent defaultPG authority corpus passes; added actual foreign Read denial before historical content; original and diagnostic closures retained."
+    },
+    {
+      "id": "V14-parent-source-decoding-fallback",
+      "original": "Read-only source review: malformed persisted dependency JSON escaped metadata fallback or appeared task-store integrity denial",
+      "correction": "9a1012c",
+      "verification": "Actual guarded malformed plan_json/versions_json host-service read preserves closed SourceUnavailable metadata; exact replay denied; originals and trigger restored."
+    }
+  ],
+  "reviewedProperties": [
+    "Exact canonical task/command/full-source recipes; closed default-escaped JSON and significant arrays",
+    "Full source plus selected event vector freshness, antirollback, read-only versus successful-command highwater registration",
+    "Owner/category/action authorization before historical contents and acceptedUUID dispatch",
+    "Continuous command/event/receipt/current proof equality, immutable creation/planning references and metadata-only unavailable projection",
+    "ReadCommitted caller connection/transaction plus shared run fence and owning module readers; cancellation/PG errors not remapped as source absence",
+    "Schema/script/object/column precision/collation/internal and explicit trigger state fingerprints; immutable originals and atomic current/event/receipt writes",
+    "Closed full current/history client guards and async pre/post digest run/review epoch fencing; exact frozen pending command retained in parent volatile drafts",
+    "Inert React literal fields, native disclosures, bounded accessible controls, exact receipt metadata validation and explicit retry",
+    "Correction cacb42b: complete historical artifact event prefix includes actor/roles/time/reason/full source, directed dominance combines complete package/finding binding with artifact history advance; retained pairwise comparability applies even SourceUnavailable and current proof checks all retained sources"
+  ],
+  "executedEvidence": [
+    "Independent702portable and2542inclusive dedicatedPG actual checks (inclusive not additive)",
+    "Browser intermediate groups execute same-run epoch/runswitch/exact retry/full current+history DOM parity; final browser in progress at review"
+  ],
+  "limitations": [
+    "Bounded source review plus own executed synthetic tests; no author counts relabeled",
+    "No production authority/customer execution/export/deployed-sandbox/Windows/manual accessibility claim",
+    "No original-author writing recorders/default database or browser rerun invoked by this review",
+    "cacb42b directed-prefix closure is source-reviewed here; earlier native/browser generations execute earlier source. Final corrected native/browser execution pending at this source checkpoint."
+  ]
+}

@@ -1,0 +1,759 @@
+import { coherentArtifactReview } from "./ArtifactReviewPanel.mjs";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "file:///private/tmp/iga-cycle14-task-ui/src/web/node_modules/react/jsx-runtime.js";
+const profile = "synthetic-review-maturity-planning-tasks-equal-v1";
+const application = "synthetic-planning-tasks-app-v1";
+const contract = "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2";
+const artifactContract = "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f";
+const template = "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669";
+const detailKeys = [
+	"schemaVersion",
+	"demoOnly",
+	"status",
+	"reasonCode",
+	"source",
+	"actorId",
+	"options",
+	"entries",
+	"unavailableEntries"
+];
+const sourceKeys = [
+	"scope",
+	"runId",
+	"runRevision",
+	"runInputDigest",
+	"baselineId",
+	"profileId",
+	"applicationVersion",
+	"contractDigest",
+	"sourceDigest",
+	"guidanceDigest",
+	"findingReviewDigest",
+	"templateVersion",
+	"templateDigest",
+	"findingRevisions"
+];
+const kinds = [
+	"Create",
+	"ReconfirmPlan",
+	"StartProgress",
+	"ReturnToPlanned",
+	"Complete",
+	"Cancel",
+	"Reopen",
+	"Comment"
+];
+const statuses = [
+	"Planned",
+	"InProgress",
+	"Completed",
+	"Cancelled"
+];
+const same = (a, b) => {
+	if (a === b) return true;
+	if (a === null || b === null || typeof a !== "object" || typeof b !== "object" || Array.isArray(a) !== Array.isArray(b)) return false;
+	const x = a, y = b;
+	return Object.keys(x).length === Object.keys(y).length && Object.keys(x).every((k) => Object.hasOwn(y, k) && same(x[k], y[k]));
+};
+const closed = (v, keys) => v !== null && typeof v === "object" && !Array.isArray(v) && Object.keys(v).length === keys.length && keys.every((k) => Object.hasOwn(v, k));
+const hex = (v) => typeof v === "string" && /^[a-f0-9]{64}$/.test(v);
+const revision = (v) => Number.isSafeInteger(v) && v >= 0;
+const uuid = (v) => typeof v === "string" && /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(v) && v !== "00000000-0000-0000-0000-000000000000";
+const array = (v) => Array.isArray(v);
+const ordered = (items, key) => items.every((v, i) => i === 0 || key(items[i - 1]) < key(v));
+function text(v, max = 16384) {
+	if (typeof v !== "string" || v.length > max || /^\p{White_Space}*$/u.test(v)) return false;
+	for (let i = 0; i < v.length; i++) {
+		const c = v.charCodeAt(i);
+		if (c >= 55296 && c <= 56319) {
+			const n = v.charCodeAt(++i);
+			if (!(n >= 56320 && n <= 57343)) return false;
+		} else if (c >= 56320 && c <= 57343) return false;
+	}
+	return true;
+}
+function utc(v) {
+	if (typeof v !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,7})?Z$/.test(v) || !Number.isFinite(Date.parse(v))) return false;
+	const normalized = v.replace(/(?:\.(\d{1,7}))?Z$/, (_, fraction) => `.${(fraction ?? "").padEnd(3, "0").slice(0, 3)}Z`);
+	return new Date(v).toISOString() === normalized;
+}
+function runLock(run) {
+	const versions = {
+		Baseline: run.selection.baselineId,
+		Profile: "synthetic-profile-v1",
+		"Rule catalog": "synthetic-analysis-catalog-v1",
+		Capability: "synthetic-analysis-matrix-v1",
+		"Desired outcomes": "disabled",
+		"Scoring algorithm": "pilot-health-v1",
+		"AI policy": "synthetic-ai-disabled-v1",
+		Prompt: "synthetic-prompt-disabled-v1",
+		Model: "synthetic-model-disabled-v1",
+		Application: application,
+		"Work schema": "synthetic-run-work-v1",
+		"Complete frozen input": "synthetic-input-lock-v1",
+		"Exact capability tuple": "synthetic-analysis-matrix-v1",
+		"Scripted result fixture": "synthetic-outcomes-v1",
+		"Frozen analysis contents": "synthetic-analysis-lock-v1",
+		"Fictional fix-package templates": "fictional-fix-templates-v1",
+		"Artifact review contract": "synthetic-fix-review-contract-v1",
+		"Planning task contract": "synthetic-planning-task-contract-v1"
+	};
+	return run.schemaVersion === 1 && run.demoOnly === true && uuid(run.runId) && revision(run.revision) && run.revision >= 1 && run.selection.scopeId === "demo-scope" && [
+		"synthetic-analysis-healthy-v1",
+		"synthetic-analysis-findings-v1",
+		"synthetic-analysis-mixed-v1",
+		"synthetic-analysis-gaps-v1"
+	].includes(run.selection.baselineId) && run.selection.profileId === profile && array(run.lockedInputs) && run.lockedInputs.length === 18 && new Set(run.lockedInputs.map((l) => l.name)).size === 18 && Object.keys(versions).every((name) => run.lockedInputs.some((l) => l.name === name && closed(l, [
+		"name",
+		"version",
+		"sha256"
+	]) && l.version === versions[name] && hex(l.sha256))) && run.lockedInputs.some((l) => l.name === "Planning task contract" && l.version === "synthetic-planning-task-contract-v1" && l.sha256 === contract) && run.lockedInputs.some((l) => l.name === "Artifact review contract" && l.version === "synthetic-fix-review-contract-v1" && l.sha256 === artifactContract) && run.lockedInputs.some((l) => l.name === "Application" && l.version === application) && run.lockedInputs.some((l) => l.name === "Fictional fix-package templates" && l.version === "fictional-fix-templates-v1" && l.sha256 === template);
+}
+function source(s) {
+	if (!closed(s, ["artifactSource", "planningTaskContractDigest"]) || s.planningTaskContractDigest !== contract || !closed(s.artifactSource, sourceKeys)) return false;
+	const a = s.artifactSource;
+	return closed(a.scope, [
+		"customerId",
+		"projectId",
+		"environmentId"
+	]) && same(a.scope, {
+		customerId: "synthetic-customer",
+		projectId: "synthetic-project",
+		environmentId: "synthetic-environment"
+	}) && uuid(a.runId) && revision(a.runRevision) && a.runRevision >= 1 && [
+		a.runInputDigest,
+		a.sourceDigest,
+		a.guidanceDigest,
+		a.findingReviewDigest
+	].every(hex) && text(a.baselineId) && a.profileId === profile && a.applicationVersion === application && a.contractDigest === artifactContract && a.templateVersion === "fictional-fix-templates-v1" && a.templateDigest === template && array(a.findingRevisions) && ordered(a.findingRevisions, (f) => f.findingId) && a.findingRevisions.every((f) => closed(f, ["findingId", "revision"]) && hex(f.findingId) && revision(f.revision));
+}
+function compatible(old, current) {
+	if (!source(old) || !source(current)) return false;
+	if (old.artifactSource.sourceDigest === current.artifactSource.sourceDigest) return same(old, current);
+	const { runRevision: ar, sourceDigest: ad, guidanceDigest: ag, findingReviewDigest: af, findingRevisions: av, ...a } = old.artifactSource;
+	const { runRevision: br, sourceDigest: bd, guidanceDigest: bg, findingReviewDigest: bf, findingRevisions: bv, ...b } = current.artifactSource;
+	return same(a, b) && ar <= br && av.length === bv.length && av.every((f, i) => f.findingId === bv[i].findingId && f.revision <= bv[i].revision) && (!(ar === br && same(av, bv)) || ad === bd && ag === bg && af === bf);
+}
+function identity(v) {
+	return closed(v, [
+		"taskId",
+		"findingId",
+		"categoryId",
+		"packageId",
+		"scopedOptionId",
+		"artifactIds"
+	]) && [
+		v.taskId,
+		v.findingId,
+		v.packageId,
+		v.scopedOptionId
+	].every(hex) && text(v.categoryId) && array(v.artifactIds) && v.artifactIds.length === 3 && v.artifactIds.every(hex) && ordered(v.artifactIds, (x) => x);
+}
+function vector(v, id) {
+	return array(v) && v.length === 3 && v.every((a, i) => closed(a, [
+		"artifactId",
+		"revision",
+		"eventId",
+		"kind",
+		"state",
+		"sourceDigest"
+	]) && a.artifactId === id.artifactIds[i] && revision(a.revision) && (a.revision === 0 ? a.eventId === null && a.kind === null && a.sourceDigest === null && a.state === "Unverified" : uuid(a.eventId) && ["ReviewForPlanning", "WithdrawReview"].includes(a.kind) && hex(a.sourceDigest) && [
+		"Unverified",
+		"ReviewedForPlanning",
+		"NeedsReview"
+	].includes(a.state)));
+}
+function basicDetail(d) {
+	return closed(d, detailKeys) && d.schemaVersion === 1 && d.demoOnly === true && array(d.options) && array(d.entries) && array(d.unavailableEntries);
+}
+function unavailable(d, run) {
+	if (!runLock(run) || !basicDetail(d) || d.status !== "SourceUnavailable" || d.reasonCode !== "planning_task_source_unavailable" || d.source !== null || !text(d.actorId) || d.options.length || d.entries.length || !ordered(d.unavailableEntries, (e) => e.identity.taskId)) return false;
+	const seen = new Set();
+	for (const e of d.unavailableEntries) {
+		if (!closed(e, [
+			"identity",
+			"assigneeId",
+			"revision",
+			"status",
+			"freshness",
+			"history"
+		]) || !identity(e.identity) || e.assigneeId !== d.actorId || !revision(e.revision) || e.revision < 1 || !statuses.includes(e.status) || e.freshness !== "SourceUnavailable" || !array(e.history) || e.history.length !== e.revision) return false;
+		let state = "Planned", plan = "";
+		for (const [i, h] of e.history.entries()) {
+			if (!closed(h, [
+				"eventId",
+				"revision",
+				"kind",
+				"actorId",
+				"actorRoles",
+				"recordedAtUtc",
+				"recordedStatus",
+				"planningEventId"
+			]) || !uuid(h.eventId) || seen.has(h.eventId) || h.revision !== i + 1 || h.actorId !== e.assigneeId || !same(h.actorRoles, ["Consultant"]) || !utc(h.recordedAtUtc) || !uuid(h.planningEventId) || !kinds.includes(h.kind)) return false;
+			const next = transition(h.kind, state, i);
+			if (next === null || next !== h.recordedStatus) return false;
+			if (h.kind === "Create" || h.kind === "ReconfirmPlan") plan = h.eventId;
+			if (h.planningEventId !== plan) return false;
+			state = next;
+			seen.add(h.eventId);
+		}
+		if (state !== e.status) return false;
+	}
+	return true;
+}
+function transition(kind, state, index) {
+	if (index === 0) return kind === "Create" ? "Planned" : null;
+	if (kind === "Comment") return state;
+	if (kind === "ReconfirmPlan") return ["Planned", "InProgress"].includes(state) ? state : null;
+	if (kind === "StartProgress") return state === "Planned" ? "InProgress" : null;
+	if (kind === "ReturnToPlanned") return state === "InProgress" ? "Planned" : null;
+	if (kind === "Complete") return state === "InProgress" ? "Completed" : null;
+	if (kind === "Cancel") return ["Planned", "InProgress"].includes(state) ? "Cancelled" : null;
+	if (kind === "Reopen") return ["Completed", "Cancelled"].includes(state) ? "Planned" : null;
+	return null;
+}
+function structural(analysis, run) {
+	if (analysis.schemaVersion !== 1 || analysis.demoOnly !== true || run.schemaVersion !== 1 || run.demoOnly !== true || !uuid(run.runId) || !revision(run.revision) || analysis.runId !== run.runId || analysis.runRevision !== run.revision) return false;
+	if (run.selection.profileId !== profile) return [
+		"profile-standard",
+		"profile-comparison",
+		"synthetic-analysis-equal-v1",
+		"synthetic-analysis-operations-v1",
+		"synthetic-review-maturity-equal-v1",
+		"synthetic-review-maturity-operations-v1",
+		"profile-ai-preview-v1",
+		"profile-ai-preview-empty-v1",
+		"synthetic-review-maturity-fix-packages-equal-v1",
+		"synthetic-review-maturity-fix-review-equal-v1"
+	].includes(run.selection.profileId) && !Object.hasOwn(analysis, "planningTasks") && !run.lockedInputs.some((l) => l.name === "Planning task contract");
+	const d = analysis.planningTasks;
+	if (!runLock(run) || analysis.runId !== run.runId || analysis.runRevision !== run.revision || !d || !basicDetail(d)) return false;
+	if (d.status === "Unavailable") return ["planning_task_denied", "planning_task_integrity_denied"].includes(d.reasonCode) && d.source === null && d.actorId === null && !d.options.length && !d.entries.length && !d.unavailableEntries.length;
+	if (d.status === "SourceUnavailable") return unavailable(d, run);
+	const ar = analysis.artifactReview, packages = analysis.fixPackages?.snapshot;
+	if (d.status !== "Ready" || d.reasonCode !== null || !d.source || !source(d.source) || !text(d.actorId) || d.unavailableEntries.length || ar?.status !== "Ready" || !packages || !same(d.source.artifactSource, ar.source) || d.actorId !== ar.actorId || !ordered(d.options, (o) => o.identity.taskId) || !ordered(d.entries, (e) => e.identity.taskId)) return false;
+	const current = d.source, members = packages.packages.flatMap((p) => p.options.map((o) => ({
+		p,
+		o,
+		f: packages.guidance.findings.find((f) => f.findingId === p.findingId)
+	})));
+	if (members.length !== d.options.length || members.length > 1e5) return false;
+	const byOption = new Map(members.map((m) => [m.o.scopedOptionId, m]));
+	const currentVector = (id) => id.artifactIds.map((artifactId) => {
+		const a = ar.artifacts.find((a) => a.artifactId === artifactId);
+		const h = a.history.at(-1);
+		return {
+			artifactId,
+			revision: a.revision,
+			eventId: h?.eventId ?? null,
+			kind: h?.kind ?? null,
+			state: a.state,
+			sourceDigest: h?.source.sourceDigest ?? null
+		};
+	});
+	for (const opt of d.options) {
+		if (!closed(opt, [
+			"identity",
+			"findingState",
+			"currentAttestations",
+			"canCreate"
+		]) || !identity(opt.identity)) return false;
+		const m = byOption.get(opt.identity.scopedOptionId);
+		if (!m?.f || opt.identity.findingId !== m.p.findingId || opt.identity.packageId !== m.p.packageId || opt.identity.categoryId !== m.f.categoryId || !same(opt.identity.artifactIds, m.o.artifacts.map((a) => a.artifactId).sort()) || opt.findingState !== m.f.currentState || !vector(opt.currentAttestations, opt.identity) || !same(opt.currentAttestations, currentVector(opt.identity)) || opt.canCreate !== (opt.findingState !== "Rejected" && opt.currentAttestations.every((a) => a.state === "ReviewedForPlanning") && !d.entries.some((e) => e.identity.taskId === opt.identity.taskId))) return false;
+	}
+	const seen = new Set(), sources = new Map(), sourceVectors = new Map();
+	for (const e of d.entries) {
+		if (!closed(e, [
+			"identity",
+			"assigneeId",
+			"revision",
+			"status",
+			"freshness",
+			"creation",
+			"plan",
+			"history",
+			"canReconfirm",
+			"canStart",
+			"canReturnToPlanned",
+			"canComplete",
+			"canCancel",
+			"canReopen",
+			"canComment"
+		]) || !identity(e.identity) || e.assigneeId !== d.actorId || !revision(e.revision) || e.revision < 1 || !array(e.history) || e.revision !== e.history.length) return false;
+		const opt = d.options.find((o) => same(o.identity, e.identity));
+		if (!opt) return false;
+		let state = "Planned", plan, previous;
+		for (const [i, h] of e.history.entries()) {
+			if (!closed(h, [
+				"eventId",
+				"revision",
+				"kind",
+				"actorId",
+				"actorRoles",
+				"recordedAtUtc",
+				"reason",
+				"source",
+				"attestations",
+				"recordedStatus",
+				"planningEventId"
+			]) || !uuid(h.eventId) || seen.has(h.eventId) || h.revision !== i + 1 || h.actorId !== e.assigneeId || !same(h.actorRoles, ["Consultant"]) || !utc(h.recordedAtUtc) || !text(h.reason, 2e3) || !h.source || !compatible(h.source, current) || previous && !compatible(previous.source, h.source) || !vector(h.attestations, e.identity) || !uuid(h.planningEventId)) return false;
+			const existing = sources.get(h.source.artifactSource.sourceDigest);
+			if (existing && !same(existing, h.source)) return false;
+			sources.set(h.source.artifactSource.sourceDigest, h.source);
+			const vectorKey = JSON.stringify({
+				runRevision: h.source.artifactSource.runRevision,
+				findingRevisions: h.source.artifactSource.findingRevisions
+			});
+			const vectorSource = sourceVectors.get(vectorKey);
+			if (vectorSource && !same(vectorSource, h.source)) return false;
+			sourceVectors.set(vectorKey, h.source);
+			const next = transition(h.kind, state, i);
+			if (next === null || next !== h.recordedStatus) return false;
+			for (const [j, a] of h.attestations.entries()) {
+				const actual = ar.artifacts.find((x) => x.artifactId === a.artifactId);
+				if (!actual || a.revision > actual.revision || previous && a.revision < previous.attestations[j].revision) return false;
+				if (a.revision > 0) {
+					const accepted = actual.history[a.revision - 1];
+					if (!compatible({
+						artifactSource: accepted.source,
+						planningTaskContractDigest: contract
+					}, h.source)) return false;
+					const derived = accepted.kind === "WithdrawReview" ? "Unverified" : accepted.source.sourceDigest === h.source.artifactSource.sourceDigest ? "ReviewedForPlanning" : "NeedsReview";
+					if (a.eventId !== accepted.eventId || a.kind !== accepted.kind || a.sourceDigest !== accepted.source.sourceDigest || a.state !== derived) return false;
+				}
+			}
+			const fresh = !!plan && same(h.source, plan.source) && same(h.attestations, plan.attestations);
+			if ((h.kind === "Create" || h.kind === "ReconfirmPlan") && !h.attestations.every((a) => a.state === "ReviewedForPlanning")) return false;
+			if (h.kind === "ReconfirmPlan" && fresh) return false;
+			if ((h.kind === "StartProgress" || h.kind === "Complete") && !fresh) return false;
+			if (h.kind === "Create" || h.kind === "ReconfirmPlan") plan = h;
+			if (h.planningEventId !== plan?.eventId) return false;
+			state = next;
+			previous = h;
+			seen.add(h.eventId);
+		}
+		if (!plan || !same(e.creation, e.history[0]) || !same(e.plan, plan) || e.status !== state) return false;
+		const fresh = same(plan.source, current) && same(plan.attestations, opt.currentAttestations), nonRejected = opt.findingState !== "Rejected", nonterminal = ["Planned", "InProgress"].includes(state);
+		if (e.freshness !== (fresh ? "CurrentPlan" : "NeedsReconfirmation") || e.canReconfirm !== (nonterminal && !fresh && nonRejected && opt.currentAttestations.every((a) => a.state === "ReviewedForPlanning")) || e.canStart !== (state === "Planned" && fresh && nonRejected) || e.canReturnToPlanned !== (state === "InProgress") || e.canComplete !== (state === "InProgress" && fresh && nonRejected) || e.canCancel !== nonterminal || e.canReopen !== (["Completed", "Cancelled"].includes(state) && nonRejected) || e.canComment !== true) return false;
+	}
+	return true;
+}
+async function taskId(id, run) {
+	// All identity strings are closed ASCII primitives; default JSON escaping is identical here.
+	const value = {
+		findingId: id.findingId,
+		runId: run.runId,
+		schemaVersion: "synthetic-planning-task-identity-v1",
+		scope: {
+			customerId: "synthetic-customer",
+			environmentId: "synthetic-environment",
+			projectId: "synthetic-project"
+		},
+		scopedOptionId: id.scopedOptionId
+	};
+	const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(JSON.stringify(value)));
+	return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+export async function coherentUnavailablePlanningTasks(detail, run) {
+	try {
+		if (!unavailable(detail, run)) return false;
+		const before = JSON.stringify({
+			detail,
+			run
+		});
+		for (const e of detail.unavailableEntries) if (e.identity.taskId !== await taskId(e.identity, run)) return false;
+		return before === JSON.stringify({
+			detail,
+			run
+		}) && unavailable(detail, run);
+	} catch {
+		return false;
+	}
+}
+export async function coherentPlanningTasks(analysis, run) {
+	try {
+		if (!structural(analysis, run)) return false;
+		const before = JSON.stringify({
+			analysis,
+			run
+		});
+		if (run.selection.profileId !== profile && !await coherentArtifactReview(analysis, run)) return false;
+		if (run.selection.profileId === profile) {
+			const d = analysis.planningTasks;
+			if (d.status === "SourceUnavailable") {
+				if (!await coherentUnavailablePlanningTasks(d, run)) return false;
+			} else {
+				if (!await coherentArtifactReview(analysis, run)) return false;
+				for (const o of d.options) if (o.identity.taskId !== await taskId(o.identity, run)) return false;
+			}
+		}
+		return before === JSON.stringify({
+			analysis,
+			run
+		}) && structural(analysis, run);
+	} catch {
+		return false;
+	}
+}
+const kindLabel = (s) => ({
+	Create: "Create planning task",
+	ReconfirmPlan: "Reconfirm plan",
+	StartProgress: "Start work",
+	ReturnToPlanned: "Return to planned",
+	Complete: "Complete",
+	Cancel: "Cancel",
+	Reopen: "Reopen",
+	Comment: "Comment"
+})[s] ?? s;
+const identityLabel = (s) => ({
+	taskId: "Task",
+	findingId: "Finding",
+	categoryId: "Category",
+	packageId: "Package",
+	scopedOptionId: "Recommendation option"
+})[s] ?? s;
+const statusLabel = (s) => ({
+	Planned: "Planned",
+	InProgress: "In progress",
+	Completed: "Completed",
+	Cancelled: "Cancelled"
+})[s] ?? s;
+const freshnessLabel = (s) => s === "CurrentPlan" ? "Current plan" : s === "NeedsReconfirmation" ? "Needs reconfirmation" : "Source unavailable";
+function Binding({ value }) {
+	const s = value.artifactSource;
+	return /* @__PURE__ */ _jsxs("dl", {
+		className: "planning-task-fields",
+		children: [
+			Object.entries(s).filter(([key]) => key !== "scope" && key !== "findingRevisions").map(([key, v]) => /* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: key }), /* @__PURE__ */ _jsx("dd", { children: v })] }, key)),
+			Object.entries(s.scope).map(([key, v]) => /* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: key }), /* @__PURE__ */ _jsx("dd", { children: v })] }, key)),
+			/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Planning task contract" }), /* @__PURE__ */ _jsx("dd", { children: value.planningTaskContractDigest })] }),
+			/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Finding revisions" }), /* @__PURE__ */ _jsx("dd", { children: /* @__PURE__ */ _jsx("ul", { children: s.findingRevisions.map((f) => /* @__PURE__ */ _jsxs("li", { children: [
+				f.findingId,
+				": ",
+				f.revision
+			] }, f.findingId)) }) })] })
+		]
+	});
+}
+function Identity({ value }) {
+	return /* @__PURE__ */ _jsxs("dl", {
+		className: "planning-task-fields",
+		children: [Object.entries(value).filter(([k]) => k !== "artifactIds").map(([k, v]) => /* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: identityLabel(k) }), /* @__PURE__ */ _jsx("dd", { children: v })] }, k)), /* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Selected artifacts" }), /* @__PURE__ */ _jsx("dd", { children: /* @__PURE__ */ _jsx("ul", { children: value.artifactIds.map((a) => /* @__PURE__ */ _jsx("li", { children: a }, a)) }) })] })]
+	});
+}
+function Vector({ value }) {
+	return /* @__PURE__ */ _jsx("ul", { children: value.map((a) => /* @__PURE__ */ _jsxs("li", { children: [
+		a.artifactId,
+		" · Revision ",
+		a.revision,
+		" · ",
+		a.state,
+		" · Event ",
+		a.eventId ?? "None",
+		" ·",
+		" ",
+		a.kind ?? "None",
+		" · Source ",
+		a.sourceDigest ?? "None"
+	] }, a.artifactId)) });
+}
+function History({ value }) {
+	return /* @__PURE__ */ _jsx("ol", { children: value.map((h) => /* @__PURE__ */ _jsxs("li", { children: [
+		/* @__PURE__ */ _jsxs("h4", { children: [
+			"Revision ",
+			h.revision,
+			" · ",
+			kindLabel(h.kind)
+		] }),
+		/* @__PURE__ */ _jsxs("p", { children: ["Event: ", h.eventId] }),
+		/* @__PURE__ */ _jsxs("p", { children: [
+			"Actor: ",
+			h.actorId,
+			" · Roles: ",
+			h.actorRoles.join(", ")
+		] }),
+		/* @__PURE__ */ _jsxs("p", { children: ["Recorded: ", /* @__PURE__ */ _jsx("time", { children: h.recordedAtUtc })] }),
+		/* @__PURE__ */ _jsxs("p", { children: ["Recorded status: ", statusLabel(h.recordedStatus)] }),
+		/* @__PURE__ */ _jsxs("p", { children: ["Planning event: ", h.planningEventId] }),
+		/* @__PURE__ */ _jsxs("p", {
+			className: "planning-task-reason",
+			children: ["Reason or comment: ", h.reason]
+		}),
+		/* @__PURE__ */ _jsxs("details", { children: [
+			/* @__PURE__ */ _jsx("summary", { children: "Recorded source · server-verified historical reference" }),
+			/* @__PURE__ */ _jsx(Binding, { value: h.source }),
+			/* @__PURE__ */ _jsx(Vector, { value: h.attestations })
+		] })
+	] }, h.eventId)) });
+}
+export function PlanningTasksPanel({ analysis, run, standaloneDetail, verified = false, drafts, onReasonChange, onAction, onRetry, onRefresh }) {
+	let valid = false;
+	try {
+		valid = standaloneDetail !== undefined ? analysis === null && unavailable(standaloneDetail, run) : analysis !== null && structural(analysis, run);
+	} catch {}
+	if (run.selection.profileId !== profile && valid) return null;
+	if (!valid) return /* @__PURE__ */ _jsxs("section", {
+		className: "planning-tasks",
+		"aria-labelledby": "planning-tasks-heading",
+		children: [/* @__PURE__ */ _jsx("h2", {
+			id: "planning-tasks-heading",
+			tabIndex: -1,
+			children: "Consultant planning tasks"
+		}), /* @__PURE__ */ _jsx("p", {
+			role: "alert",
+			children: "Planning task data is inconsistent. Refresh before continuing."
+		})]
+	});
+	const d = standaloneDetail ?? analysis.planningTasks;
+	return /* @__PURE__ */ _jsxs("section", {
+		className: "planning-tasks",
+		"aria-labelledby": "planning-tasks-heading",
+		children: [
+			/* @__PURE__ */ _jsx("h2", {
+				id: "planning-tasks-heading",
+				tabIndex: -1,
+				children: "Consultant planning tasks"
+			}),
+			/* @__PURE__ */ _jsx("p", { children: "Fictional planning work only. Completion does not confirm findings, validate remediation or change health, maturity or artifact review." }),
+			!verified ? /* @__PURE__ */ _jsx("p", {
+				role: "status",
+				children: "Verifying the current planning source…"
+			}) : d.status === "Unavailable" ? /* @__PURE__ */ _jsxs("p", {
+				role: "status",
+				children: ["Planning tasks unavailable: ", d.reasonCode]
+			}) : d.status === "SourceUnavailable" ? /* @__PURE__ */ _jsxs(_Fragment, { children: [/* @__PURE__ */ _jsx("p", {
+				role: "status",
+				children: "Current source unavailable. Historical task metadata is shown without content or actions."
+			}), d.unavailableEntries.map((e) => /* @__PURE__ */ _jsxs("article", { children: [
+				/* @__PURE__ */ _jsxs("h3", {
+					id: "planning-task-" + e.identity.taskId,
+					tabIndex: -1,
+					children: ["Planning task · ", e.identity.taskId]
+				}),
+				/* @__PURE__ */ _jsxs("p", { children: [
+					"Status: ",
+					statusLabel(e.status),
+					" · Source unavailable"
+				] }),
+				/* @__PURE__ */ _jsxs("p", { children: [
+					"Assignee: ",
+					e.assigneeId,
+					" · Revision ",
+					e.revision
+				] }),
+				/* @__PURE__ */ _jsx(Identity, { value: e.identity }),
+				/* @__PURE__ */ _jsxs("details", { children: [/* @__PURE__ */ _jsxs("summary", { children: [
+					"Verified task metadata history (",
+					e.history.length,
+					")"
+				] }), /* @__PURE__ */ _jsx("ol", { children: e.history.map((h) => /* @__PURE__ */ _jsxs("li", { children: [
+					/* @__PURE__ */ _jsxs("h4", { children: [
+						"Revision ",
+						h.revision,
+						" · ",
+						kindLabel(h.kind)
+					] }),
+					/* @__PURE__ */ _jsxs("p", { children: ["Event: ", h.eventId] }),
+					/* @__PURE__ */ _jsxs("p", { children: [
+						"Actor: ",
+						h.actorId,
+						" · Roles: ",
+						h.actorRoles.join(", ")
+					] }),
+					/* @__PURE__ */ _jsxs("p", { children: ["Recorded: ", /* @__PURE__ */ _jsx("time", { children: h.recordedAtUtc })] }),
+					/* @__PURE__ */ _jsxs("p", { children: ["Recorded status: ", statusLabel(h.recordedStatus)] }),
+					/* @__PURE__ */ _jsxs("p", { children: ["Planning event: ", h.planningEventId] })
+				] }, h.eventId)) })] })
+			] }, e.identity.taskId))] }) : /* @__PURE__ */ _jsxs(_Fragment, { children: [
+				/* @__PURE__ */ _jsxs("p", { children: ["Current consultant: ", d.actorId] }),
+				/* @__PURE__ */ _jsxs("details", { children: [/* @__PURE__ */ _jsx("summary", { children: "Current planning source" }), /* @__PURE__ */ _jsx(Binding, { value: d.source })] }),
+				d.options.length === 0 ? /* @__PURE__ */ _jsx("p", { children: "No recommendation options are available. Empty results do not establish health or remediation." }) : d.options.map((opt) => {
+					const id = opt.identity.taskId, entry = d.entries.find((e) => e.identity.taskId === id), draft = drafts[id], busy = draft?.busy === true, pending = draft?.pending !== null && draft?.pending !== undefined, blocked = busy || pending || draft?.requiresRefresh === true, reason = draft?.reason ?? "";
+					const packageValue = analysis.fixPackages.snapshot.packages.find((p) => p.packageId === opt.identity.packageId), option = packageValue.options.find((o) => o.scopedOptionId === opt.identity.scopedOptionId), finding = analysis.fixPackages.snapshot.guidance.findings.find((f) => f.findingId === opt.identity.findingId), originalOption = finding.options.find((o) => o.scopedOptionId === opt.identity.scopedOptionId);
+					const actions = entry ? [
+						[
+							"ReconfirmPlan",
+							"Reconfirm plan",
+							entry.canReconfirm
+						],
+						[
+							"StartProgress",
+							"Start work",
+							entry.canStart
+						],
+						[
+							"ReturnToPlanned",
+							"Return to planned",
+							entry.canReturnToPlanned
+						],
+						[
+							"Complete",
+							"Complete planning work",
+							entry.canComplete
+						],
+						[
+							"Cancel",
+							"Cancel task",
+							entry.canCancel
+						],
+						[
+							"Reopen",
+							"Reopen task",
+							entry.canReopen
+						],
+						[
+							"Comment",
+							"Add comment",
+							entry.canComment
+						]
+					] : [[
+						"Create",
+						"Create planning task",
+						opt.canCreate
+					]];
+					return /* @__PURE__ */ _jsxs("article", { children: [
+						/* @__PURE__ */ _jsxs("h3", {
+							id: "planning-task-" + id,
+							tabIndex: -1,
+							children: [
+								entry ? "Planning task" : "Recommendation option",
+								" · ",
+								id
+							]
+						}),
+						entry ? /* @__PURE__ */ _jsxs(_Fragment, { children: [/* @__PURE__ */ _jsxs("p", {
+							role: "status",
+							children: [
+								"Status: ",
+								statusLabel(entry.status),
+								" ·",
+								" ",
+								blocked ? "Plan verification withheld while this command or refresh is unresolved" : freshnessLabel(entry.freshness)
+							]
+						}), /* @__PURE__ */ _jsxs("p", { children: [
+							"Assignee: ",
+							entry.assigneeId,
+							" · Revision ",
+							entry.revision
+						] })] }) : /* @__PURE__ */ _jsx("p", {
+							role: "status",
+							children: "No task created. Explicit conversion requires all three current artifacts reviewed for planning."
+						}),
+						/* @__PURE__ */ _jsx(Identity, { value: opt.identity }),
+						/* @__PURE__ */ _jsxs("p", { children: [
+							"Current finding: ",
+							finding.presentationTitle,
+							" · ",
+							opt.findingState
+						] }),
+						["Proposed", "Deferred"].includes(opt.findingState) && /* @__PURE__ */ _jsxs("p", { children: [
+							"Warning: ",
+							opt.findingState,
+							" finding. Planning work does not confirm this finding."
+						] }),
+						/* @__PURE__ */ _jsxs("details", { children: [
+							/* @__PURE__ */ _jsx("summary", { children: "Current original recommendation and fictional artifacts" }),
+							/* @__PURE__ */ _jsxs("dl", {
+								className: "planning-task-fields",
+								children: [
+									/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Original finding title" }), /* @__PURE__ */ _jsx("dd", { children: finding.originalTitle })] }),
+									/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Rule" }), /* @__PURE__ */ _jsxs("dd", { children: [
+										finding.ruleId,
+										" · ",
+										finding.ruleVersion
+									] })] }),
+									/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Recommendation" }), /* @__PURE__ */ _jsx("dd", { children: originalOption.text })] }),
+									/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Prerequisites" }), /* @__PURE__ */ _jsx("dd", { children: originalOption.prerequisites })] }),
+									/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Risk" }), /* @__PURE__ */ _jsx("dd", { children: originalOption.risk })] }),
+									/* @__PURE__ */ _jsxs("div", { children: [/* @__PURE__ */ _jsx("dt", { children: "Recovery guidance" }), /* @__PURE__ */ _jsx("dd", { children: originalOption.recoveryGuidance })] })
+								]
+							}),
+							/* @__PURE__ */ _jsx("p", { children: "Validation guidance" }),
+							/* @__PURE__ */ _jsx("ul", { children: finding.validationGuidance.map((v, i) => /* @__PURE__ */ _jsx("li", { children: v }, i)) }),
+							option.artifacts.map((a) => /* @__PURE__ */ _jsxs("div", { children: [
+								/* @__PURE__ */ _jsxs("h4", { children: [
+									a.kind,
+									" · ",
+									a.artifactId
+								] }),
+								/* @__PURE__ */ _jsxs("p", { children: [
+									"Original generated status: ",
+									a.status,
+									" · Template ",
+									a.templateId
+								] }),
+								/* @__PURE__ */ _jsx("pre", { children: /* @__PURE__ */ _jsx("code", { children: a.text }) })
+							] }, a.artifactId))
+						] }),
+						/* @__PURE__ */ _jsxs("details", { children: [/* @__PURE__ */ _jsx("summary", { children: "Current selected planning attestations" }), /* @__PURE__ */ _jsx(Vector, { value: opt.currentAttestations })] }),
+						entry && /* @__PURE__ */ _jsxs(_Fragment, { children: [
+							/* @__PURE__ */ _jsx("p", { children: "Creation and latest plan are immutable historical metadata references verified by the server. Current recommendation text may differ from those earlier versions." }),
+							/* @__PURE__ */ _jsxs("details", { children: [
+								/* @__PURE__ */ _jsxs("summary", { children: ["Creation binding · Event ", entry.creation.eventId] }),
+								/* @__PURE__ */ _jsx(Binding, { value: entry.creation.source }),
+								/* @__PURE__ */ _jsx(Vector, { value: entry.creation.attestations })
+							] }),
+							/* @__PURE__ */ _jsxs("details", { children: [
+								/* @__PURE__ */ _jsxs("summary", { children: ["Latest plan binding · Event ", entry.plan.eventId] }),
+								/* @__PURE__ */ _jsx(Binding, { value: entry.plan.source }),
+								/* @__PURE__ */ _jsx(Vector, { value: entry.plan.attestations })
+							] }),
+							/* @__PURE__ */ _jsxs("details", { children: [/* @__PURE__ */ _jsxs("summary", { children: [
+								"Attributed task history (",
+								entry.history.length,
+								")"
+							] }), /* @__PURE__ */ _jsx(History, { value: entry.history })] })
+						] }),
+						draft?.error && /* @__PURE__ */ _jsx("p", {
+							role: "alert",
+							tabIndex: -1,
+							id: "planning-task-error-" + id,
+							children: draft.error
+						}),
+						/* @__PURE__ */ _jsxs("label", {
+							htmlFor: "planning-task-reason-" + id,
+							children: [
+								"Reason or comment for ",
+								id,
+								" (required, up to 2000 characters)"
+							]
+						}),
+						/* @__PURE__ */ _jsx("textarea", {
+							id: "planning-task-reason-" + id,
+							maxLength: 2e3,
+							value: reason,
+							disabled: blocked,
+							onChange: (e) => onReasonChange(id, e.target.value)
+						}),
+						busy ? /* @__PURE__ */ _jsx("p", {
+							role: "status",
+							children: "Saving planning command…"
+						}) : pending ? /* @__PURE__ */ _jsxs(_Fragment, { children: [
+							/* @__PURE__ */ _jsx("p", { children: "Outcome uncertain. Retry sends the exact original command and does not rebind it to the current source." }),
+							/* @__PURE__ */ _jsx("button", {
+								type: "button",
+								onClick: () => onRetry(id),
+								children: "Retry same planning command"
+							}),
+							/* @__PURE__ */ _jsx("button", {
+								type: "button",
+								onClick: () => onRefresh(id),
+								children: "Refresh planning source"
+							})
+						] }) : draft?.requiresRefresh ? /* @__PURE__ */ _jsxs(_Fragment, { children: [/* @__PURE__ */ _jsx("p", { children: "Refresh and inspect the current source before a new explicit command." }), /* @__PURE__ */ _jsx("button", {
+							type: "button",
+							onClick: () => onRefresh(id),
+							children: "Refresh planning source"
+						})] }) : actions.filter(([, , allowed]) => allowed).map(([kind, label]) => /* @__PURE__ */ _jsx("button", {
+							type: "button",
+							disabled: !text(reason, 2e3),
+							onClick: () => onAction(id, kind),
+							children: label
+						}, kind))
+					] }, id);
+				})
+			] })
+		]
+	});
+}
+
+export {structural as testOnlyStructural, utc as testOnlyUtc};

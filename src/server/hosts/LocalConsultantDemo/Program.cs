@@ -8,6 +8,8 @@ using System.Globalization;
 using AssessmentRuns;
 using FindingReview;
 using SyntheticFixReview;
+using SyntheticPlanningTasks;
+using System.Collections.Immutable;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.DataProtection;
 
@@ -16,6 +18,9 @@ if (!args.Contains("--synthetic-local-demo", StringComparer.Ordinal))
     throw new InvalidOperationException("This host requires --synthetic-local-demo and supports synthetic loopback use only.");
 var connection = Environment.GetEnvironmentVariable("IGA_SYNTHETIC_DATABASE")
     ?? "Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle03;Username=iga_synthetic";
+var planningTasksEnabled = args.Contains("--enable-synthetic-planning-tasks", StringComparer.Ordinal);
+if (planningTasksEnabled && !new Npgsql.NpgsqlConnectionStringBuilder(connection).Database!.StartsWith("iga_synthetic_cycle14_", StringComparison.Ordinal))
+    throw new InvalidOperationException("Planning tasks require an explicitly selected dedicated Cycle14 synthetic database.");
 var artifactReviewEnabled = args.Contains("--enable-synthetic-artifact-review", StringComparer.Ordinal);
 if (artifactReviewEnabled && !new Npgsql.NpgsqlConnectionStringBuilder(connection).Database!.StartsWith("iga_synthetic_cycle13_", StringComparison.Ordinal))
     throw new InvalidOperationException("Artifact review requires an explicitly selected dedicated Cycle13 synthetic database.");
@@ -26,12 +31,14 @@ var reviewStore = new SyntheticReviewStore(connection, SyntheticReviewScope.Fixe
 await reviewStore.InitializeAsync();
 var reviewService = new DemoReviewService(reviewStore);
 var artifactReviewService = new DemoArtifactReviewService(connection, engine, reviewService);
-if (artifactReviewEnabled) await artifactReviewService.InitializeAsync();
+if (artifactReviewEnabled || planningTasksEnabled) await artifactReviewService.InitializeAsync();
+var planningTaskService = new DemoPlanningTaskService(connection, engine, reviewService);
+if (planningTasksEnabled) await planningTaskService.InitializeAsync();
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { Args = Array.Empty<string>(), EnvironmentName = "SyntheticLocalDemo" });
 builder.WebHost.ConfigureKestrel(server =>
 {
     server.Listen(IPAddress.Loopback, port);
-    server.Limits.MaxRequestBodySize = 4096;
+    server.Limits.MaxRequestBodySize = 16384;
 });
 builder.Logging.SetMinimumLevel(LogLevel.Warning);
 builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
@@ -48,6 +55,8 @@ if (!args.Contains("--pause-synthetic-worker", StringComparer.Ordinal))
 var app = builder.Build();
 app.Use(async (context, next) =>
 {
+    var bodyLimit = context.Features.Get<Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature>();
+    if (bodyLimit is { IsReadOnly: false }) bodyLimit.MaxRequestBodySize = context.Request.Path.Value?.Contains("/planning-tasks/", StringComparison.Ordinal) == true ? 16384 : 4096;
     var host = context.Request.Host.Value;
     if (context.Connection.RemoteIpAddress is null || !IPAddress.IsLoopback(context.Connection.RemoteIpAddress) ||
         (host != $"127.0.0.1:{port}" && host != $"localhost:{port}"))
@@ -107,6 +116,12 @@ app.MapGet("/local-demo/v1/runs/{runId:guid}", async (Guid runId) =>
 app.MapGet("/local-demo/v1/runs/{runId:guid}/analysis", async (HttpContext context, Guid runId) =>
 {
     var read = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId);
+    if (read.Succeeded && DemoPlanningTaskCatalog.IsProfile(read.Snapshot!.ProfileCatalogId))
+    {
+        if (!planningTasksEnabled) return DemoProjection.Error("Denied", "Start the dedicated Cycle14 synthetic host to use planning tasks.", 403);
+        var capture = await planningTaskService.ReadAnalysisAsync(read.Snapshot!, context.RequestAborted);
+        return capture is null ? DemoProjection.Error("Unavailable", "The current planning source could not be verified. Refresh the run.", 503) : Results.Json(capture);
+    }
     if (read.Succeeded && DemoArtifactReviewCatalog.IsProfile(read.Snapshot!.ProfileCatalogId))
     {
         if (artifactReviewEnabled)
@@ -157,7 +172,10 @@ app.MapPost("/local-demo/v1/runs/{runId:guid}/findings/{findingId}/events", asyn
 });
 app.MapPost("/local-demo/v1/runs/{runId:guid}/artifacts/{artifactId}/review", async (HttpContext context, Guid runId, string artifactId) =>
 {
-    if (!artifactReviewEnabled) return DemoProjection.Error("Denied", "Artifact review is unavailable in this local host.", 403);
+    var selected = await engine.ReadAsync(DemoFixtureCatalog.Scope, runId, context.RequestAborted);
+    if (!selected.Succeeded || !(artifactReviewEnabled && DemoArtifactReviewCatalog.IsProfile(selected.Snapshot!.ProfileCatalogId) || planningTasksEnabled && DemoPlanningTaskCatalog.IsProfile(selected.Snapshot!.ProfileCatalogId)))
+        return DemoProjection.Error("Denied", "Artifact review is unavailable for this host and profile.", 403);
+    if (!artifactReviewEnabled && !planningTasksEnabled) return DemoProjection.Error("Denied", "Artifact review is unavailable in this local host.", 403);
     using var document = await DemoProjection.Body(context, ["eventId", "kind", "expectedRevision", "expectedSourceDigest", "reason"]);
     var body = document.RootElement;
     if (!Guid.TryParseExact(body.GetProperty("eventId").GetString(), "D", out var eventId) || eventId == Guid.Empty ||
@@ -187,6 +205,61 @@ app.MapPost("/local-demo/v1/runs/{runId:guid}/artifacts/{artifactId}/review", as
         receipt = DemoArtifactReviewService.Receipt(result.Receipt!)
     });
 });
+app.MapGet("/local-demo/v1/runs/{runId:guid}/planning-tasks", async (HttpContext context, Guid runId) =>
+{
+    if (!planningTasksEnabled) return DemoProjection.Error("Denied", "Planning tasks are disabled on this host.", 403);
+    var read = await planningTaskService.ReadAsync(runId, context.RequestAborted);
+    return Results.Json(DemoPlanningTaskService.Detail(read));
+});
+app.MapPost("/local-demo/v1/runs/{runId:guid}/planning-tasks/{taskId}/events", async (HttpContext context, Guid runId, string taskId) =>
+{
+    if (!planningTasksEnabled) return DemoProjection.Error("Denied", "Planning tasks are disabled on this host.", 403);
+    using var body = await DemoProjection.TaskBody(context);
+    var root = body.RootElement;
+    var kindText = root.GetProperty("kind").GetString();
+    if (!Guid.TryParseExact(root.GetProperty("eventId").GetString(), "D", out var eventId) || eventId == Guid.Empty ||
+        !root.GetProperty("expectedRevision").TryGetInt64(out var revision) || revision < 0 ||
+        !Enum.TryParse<PlanningTaskKind>(kindText, false, out var kind) || !Enum.IsDefined(kind) || kind.ToString() != kindText)
+        return DemoProjection.Error("InvalidInput", "Use the current planning task revision and a valid action.", 400);
+    var vectors = root.GetProperty("expectedAttestations");
+    if (vectors.ValueKind != JsonValueKind.Array || vectors.GetArrayLength() != 3) throw new JsonException();
+    var attestations = ImmutableArray.CreateBuilder<PlanningTaskAttestation>();
+    foreach (var item in vectors.EnumerateArray())
+    {
+        if (item.ValueKind != JsonValueKind.Object || item.EnumerateObject().Count() != 6 ||
+            item.EnumerateObject().Select(p => p.Name).Distinct(StringComparer.Ordinal).Count() != 6 ||
+            !new[] { "artifactId", "revision", "eventId", "kind", "state", "sourceDigest" }.All(name => item.TryGetProperty(name, out _))) throw new JsonException();
+        if (item.GetProperty("artifactId").ValueKind != JsonValueKind.String || item.GetProperty("revision").ValueKind != JsonValueKind.Number ||
+            !item.GetProperty("revision").TryGetInt64(out var artifactRevision) || item.GetProperty("state").ValueKind != JsonValueKind.String ||
+            item.GetProperty("eventId").ValueKind is not (JsonValueKind.String or JsonValueKind.Null) ||
+            item.GetProperty("kind").ValueKind is not (JsonValueKind.String or JsonValueKind.Null) ||
+            item.GetProperty("sourceDigest").ValueKind is not (JsonValueKind.String or JsonValueKind.Null)) throw new JsonException();
+        var artifactKind = item.GetProperty("kind");
+        ArtifactReviewKind? acceptedKind = null;
+        if (artifactKind.ValueKind != JsonValueKind.Null)
+        { if (!Enum.TryParse<ArtifactReviewKind>(artifactKind.GetString(), false, out var value) || !Enum.IsDefined(value) || value.ToString() != artifactKind.GetString()) throw new JsonException(); acceptedKind = value; }
+        if (!Enum.TryParse<ArtifactReviewState>(item.GetProperty("state").GetString(), false, out var state) || !Enum.IsDefined(state) || state.ToString() != item.GetProperty("state").GetString()) throw new JsonException();
+        var acceptedEvent = item.GetProperty("eventId");
+        Guid? acceptedId = null;
+        if (acceptedEvent.ValueKind != JsonValueKind.Null)
+        { if (!Guid.TryParseExact(acceptedEvent.GetString(), "D", out var id) || id == Guid.Empty) throw new JsonException(); acceptedId = id; }
+        attestations.Add(new(item.GetProperty("artifactId").GetString()!, artifactRevision, acceptedId, acceptedKind, state, item.GetProperty("sourceDigest").GetString()));
+    }
+    var command = new PlanningTaskCommand(eventId, kind, revision, root.GetProperty("expectedSourceDigest").GetString()!, attestations.ToImmutable(), root.GetProperty("reason").GetString()!);
+    var result = await planningTaskService.ApplyAsync(runId, taskId, command, context.RequestAborted);
+    if (!result.Succeeded)
+        return DemoProjection.Error(result.Issue.ToString()!, "The planning source changed or this action is unavailable. Refresh before a new action.", result.Issue switch
+        { PlanningTaskIssue.InvalidInput => 400, PlanningTaskIssue.Denied or PlanningTaskIssue.WrongScope => 403, PlanningTaskIssue.NotFound => 404, _ => 409 });
+    return Results.Json(new
+    {
+        schemaVersion = 1,
+        demoOnly = true,
+        issue = (string?)null,
+        result.AlreadyApplied,
+        receipt = result.Receipt is null ? null : DemoPlanningTaskService.Receipt(result.Receipt),
+        result.AlreadyExistsTaskId
+    });
+});
 app.MapPost("/local-demo/v1/runs", async (HttpContext context) =>
 {
     using var body = await DemoProjection.Body(context, ["scopeId", "baselineId", "profileId", "requestId"]);
@@ -198,6 +271,8 @@ app.MapPost("/local-demo/v1/runs", async (HttpContext context) =>
     var profileId = root.GetProperty("profileId").GetString();
     if (!DemoFixtureCatalog.Baselines.Any(item => item.Id == baselineId) || !DemoFixtureCatalog.Profiles.Any(item => item.Id == profileId) ||
         !DemoAnalysisCatalog.Compatible(baselineId!, profileId!)) return DemoProjection.Error("InvalidInput", "The selected demo presets are unavailable.", 400);
+    if (DemoPlanningTaskCatalog.IsProfile(profileId) && !planningTasksEnabled)
+        return DemoProjection.Error("Denied", "Start the dedicated Cycle14 synthetic host to use planning tasks.", 403);
     if (DemoArtifactReviewCatalog.IsProfile(profileId) && !artifactReviewEnabled)
         return DemoProjection.Error("Denied", "Start the dedicated Cycle13 synthetic host to use artifact review.", 403);
     var request = DemoFixtureCatalog.CreateStartRequest(baselineId!, profileId!, requestId!);
@@ -247,6 +322,50 @@ internal static class DemoProjection
             throw new JsonException("Unexpected review fields or values.");
         }
         return document;
+    }
+
+    internal static async Task<JsonDocument> TaskBody(HttpContext context)
+    {
+        var document = await JsonDocument.ParseAsync(context.Request.Body, new JsonDocumentOptions { MaxDepth = 4 });
+        try
+        {
+            var root = document.RootElement;
+            string[] fields = ["eventId", "kind", "expectedRevision", "expectedSourceDigest", "expectedAttestations", "reason"];
+            if (root.ValueKind != JsonValueKind.Object || !root.EnumerateObject().Select(p => p.Name).Order(StringComparer.Ordinal).SequenceEqual(fields.Order(StringComparer.Ordinal)))
+            { document.Dispose(); throw new JsonException(); }
+            foreach (var field in fields)
+            {
+                var expected = field == "expectedRevision" ? JsonValueKind.Number : field == "expectedAttestations" ? JsonValueKind.Array : JsonValueKind.String;
+                if (root.GetProperty(field).ValueKind != expected) { document.Dispose(); throw new JsonException(); }
+            }
+            ValidateTaskStrings(document.RootElement);
+        }
+        catch (Exception error) when (error is InvalidOperationException or ArgumentException)
+        {
+            document.Dispose();
+            throw new JsonException("Invalid task string encoding.");
+        }
+        return document;
+    }
+
+    private static void ValidateTaskStrings(JsonElement value)
+    {
+        if (value.ValueKind == JsonValueKind.String)
+        {
+            var text = value.GetString()!;
+            if (JsonSerializer.Deserialize<string>(JsonSerializer.Serialize(text)) != text)
+                throw new JsonException("Invalid task string encoding.");
+        }
+        else if (value.ValueKind == JsonValueKind.Object)
+            foreach (var property in value.EnumerateObject())
+            {
+                var name = property.Name;
+                if (JsonSerializer.Deserialize<string>(JsonSerializer.Serialize(name)) != name)
+                    throw new JsonException("Invalid task field encoding.");
+                ValidateTaskStrings(property.Value);
+            }
+        else if (value.ValueKind == JsonValueKind.Array)
+            foreach (var item in value.EnumerateArray()) ValidateTaskStrings(item);
     }
 
     internal static async Task<JsonDocument> Body(HttpContext context, string[] fields)
@@ -364,6 +483,7 @@ internal static class DemoProjection
                 .Append(new { name = "Complete frozen input", version = "synthetic-input-lock-v1", sha256 = run.InputDigest })
                 .Append(new { name = "Exact capability tuple", version = run.Plan.CapabilityLock.MatrixVersion, sha256 = run.Plan.CapabilityLock.LockDigest })
                 .Append(new { name = "Scripted result fixture", version = "synthetic-outcomes-v1", sha256 = versions.ScriptedResultsDigest })
+                .Concat(versions.PlanningTaskContractDigest is null ? [] : new[] { new { name = "Planning task contract", version = "synthetic-planning-task-contract-v1", sha256 = versions.PlanningTaskContractDigest } })
                 .Concat(versions.FixReviewContractDigest is null ? [] : new[] { new { name = "Artifact review contract", version = "synthetic-fix-review-contract-v1", sha256 = versions.FixReviewContractDigest } })
                 .Concat(versions.AnalysisFixtureDigest is null ? [] : new[] { new { name = "Frozen analysis contents", version = "synthetic-analysis-lock-v1", sha256 = versions.AnalysisFixtureDigest } })
                 .Concat(!DemoAiPreviewCatalog.IsProfile(run.ProfileCatalogId) || versions.AiPreviewFixtureDigest is null ? [] : new[]
@@ -371,7 +491,7 @@ internal static class DemoProjection
                     new { name = "Frozen offline AI contents", version = "synthetic-ai-demo-fixture-v1", sha256 = versions.AiPreviewFixtureDigest },
                     new { name = "Offline AI configuration template", version = "synthetic-ai-configuration-v1", sha256 = DemoAiPreviewCatalog.PacketTemplateDigest }
                 })
-                .Concat(!(DemoFixPackageCatalog.MatchesFrozenFixture(run) || DemoArtifactReviewCatalog.MatchesFrozenFixture(run)) || versions.FixPackageTemplateDigest is null ? [] : new[]
+                .Concat(!(DemoFixPackageCatalog.MatchesFrozenFixture(run) || DemoArtifactReviewCatalog.MatchesFrozenFixture(run) || DemoPlanningTaskCatalog.MatchesFrozenFixture(run)) || versions.FixPackageTemplateDigest is null ? [] : new[]
                 {
                     new { name = "Fictional fix-package templates", version = DemoFixPackageCatalog.TemplateVersion, sha256 = versions.FixPackageTemplateDigest }
                 }),

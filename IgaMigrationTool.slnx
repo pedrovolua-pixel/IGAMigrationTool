@@ -74,4 +74,8 @@
     <Project Path="tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj" />
     <Project Path="tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj" />
   </Folder>
+  <Project Path="src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTasks.csproj" />
+  <Project Path="tests/unit/SyntheticPlanningTasks.Tests/SyntheticPlanningTasks.Tests.csproj" />
+  <Project Path="tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj" />
+  <Project Path="tests/unit/PlanningTasksComponent.Tests/PlanningTasksComponent.Tests.csproj" />
 </Solution>

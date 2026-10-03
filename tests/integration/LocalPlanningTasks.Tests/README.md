@@ -1,0 +1,29 @@
+# V14 independent local planning-task verification
+
+Retained initial checkpoint: the original preauthor design and scaffolding preceded implementation and made no runtime acceptance claim. The paragraphs below describing intended CLI and pending execution are historical; the current source checkpoint is documented at the end.
+
+The immutable initial design `a27b30d57327bfbb59de4c6f72f35ad5dc898713` predates engineering/implementation consumption. The byte oracle pins approved engineering contract SHA256 `f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2`. Its fixed fictional template/guidance primitives descend from the prior independent V13 verifier recipe; new planning binding, seven isolated scoped identity cases, eight semantic command recipes and selected attestation vectors were authored before A14/B14 implementation or expected output was inspected. Production canonical helpers and observed actual outputs never provide expected values.
+
+Run the independently authored recipe check from the repository root:
+
+```sh
+python3 tests/integration/LocalPlanningTasks.Tests/oracle.py
+```
+
+The initial `--write` authored41 expected files, followed by exact independent recipe verification. Normal complete package13747bytes has SHA256 `c17763dea44e4cd2bc7d09f78f7004b2da6fdcabd784ffb3645fc1e0441898fa`. These are expected fictional fixture bytes, not execution output. `OracleCases.cs` cross-checks the Python literals using separately authored C# identity/canonical/template/command primitives; `PortableCases.cs` uses actual GuidanceBuilder→FixBuilder and full byte/permutation/invariance expectations. Those native tests have not yet been executed.
+
+The native temporary source scaffold accepts only `--portable`; default PostgreSQL mode explicitly exits2 with NOT VERIFIED until the task-store composition is implemented. Final intended CLI is `--portable` for portable checks and no argument for portable plus dedicated PostgreSQL checks. The intended test environment key is `IGA_PLANNING_TASK_TEST_DATABASE`, with exact owned domain database `iga_synthetic_cycle14_v14_domain`; browser owns a separate `iga_synthetic_cycle14_v14_browser`. No initialization or database connection has occurred.
+
+The isolated launcher uses an explicit environment allowlist, resolved SDK root and test-only configuration-watch override. Default Mac startup is NOT VERIFIED by that override. A syntax-only `py_compile` attempt could not write the inherited Python cache outside writable roots; an in-memory compile of both scripts then passed without cache writes. This was a preparation environment failure, not native/product test execution. Full source/runtime/consumed fixture binding, logs, observed synthetic captures, historical regressions, browser views and independent source review follow after actual execution. No new dependencies, provider/customer data, production release, export or human gate acceptance is included.
+
+## Formatted source checkpoint after reviewed corrections
+
+The real default PostgreSQL composition now executes domain/source/state/replay/withdrawal/authority/rollback/concurrency/recovery and historical input cases. Actual earlier independent execution passed 702 portable and 2,542 inclusive portable-plus-owned-PostgreSQL checks (not additive). The foreign-assignee failure at 1,691 and all original native closures are retained. Source composition calls the actual guidance, fix-package and artifact-review builders/readers before the task builder; no reflected accepted snapshot bypass is used. Negative reflected values are rejected-only fixtures.
+
+Five original browser generations are retained separately. The first four failures were bounded harness/transport expectation errors (disclosure list scoping; unique existing run selection; established oversized-body400 response; respecting the old artifact-profile activation guard). The fifth actual browser run passed11,461 checks against earlier domain source, including three zero-violation/zero-incomplete axe checks and six original screenshots. Its 416-bound immutable closure includes the complete host/integration Release outputs, source overlays, assets, observed inputs and logs. Current source adds actual Enter/Space workflow activation, exact next revisions/full source/selected vectors/planning references/focus and no-effect assertions. It awaits a final replay against corrected domain checkpoint `cacb42b53cb83c24cc3ef118788aa31555edf76b`; earlier counts are not attributed to that correction.
+
+The complete project formatter was executed without an include filter and formatted six owned source files. Earlier include-based formatter invocations returned success but did not select those files; they do not establish full formatting. One sandbox-IPC-stalled formatting attempt was stopped by exact owned PIDs and replayed with permitted IPC. No referenced production project was formatted by the verifier.
+
+The browser fixture CLI `--prepare-browser-fixture <absolute .host/historical-artifact-run.json>` creates a real completed historical artifact-profile run through the durable engine in the exact separate browser database. It avoids widening the new host's deliberate old-profile startup denial. Default mode uses `iga_synthetic_cycle14_v14_domain`; browser uses `iga_synthetic_cycle14_v14_browser`, both only127.0.0.1:55433/role iga_synthetic. Existing schemas/rows are never reset and shared cluster/roles/authentication are never changed.
+
+Default Mac configuration-watch startup, Windows/manual screen-reader/deployed sandbox/production identity and full product gates remain NOT VERIFIED. Fixed fictional oracles are independent expected values; observed synthetic captures are ignored executed evidence, never expected fixtures. Final source/runtime/telemetry binding and independent review follow final execution.

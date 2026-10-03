@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "cycle09_scope independent draft review",
+  "repository": "/private/tmp/iga-cycle14-coordinator",
+  "head": "6314cdb88e48883ea949b1890cb1790a777a19ef",
+  "source": {
+    "path": "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+    "sha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2",
+    "bytes": 19198
+  },
+  "authority": {
+    "approvalRecord": "specs/003-health-assessment/local-planning-task-approval.md",
+    "decisions": "TC14-01 through TC14-06 explicitly owner-approved; proposal bytes remain original Proposed archival decision packet",
+    "approvalInferred": false
+  },
+  "scope": "Exact current implementation draft against approved TC14-01\u201306 proposal/test/plan and actual existing module APIs; documentary/static only.",
+  "conclusion": "Corrected exact engineering draft reviewed: prior compatibility wording finding CLOSED; no remaining scoped actionable findings. Historical HTTP omission matches exact-byte compatibility; no product amendment inferred.",
+  "findings": [],
+  "checks": [
+    {
+      "kind": "Static semantic cross-check",
+      "result": "Approved eight command kinds implement exact TC14 lifecycle; reason serves comment text without extra permission or target-state input."
+    },
+    {
+      "kind": "Static command precedence",
+      "result": "Accepted exact replay/changed reuse precedes new source/vector checks; fresh duplicate Create has no UUID reservation/event/receipt and ignores existing task revision/status/new eligibility."
+    },
+    {
+      "kind": "Static source/history review",
+      "result": "Accepted event records observed source and vector; separate immutable creation/latest plan; public historical metadata server-backed, current source coherent."
+    },
+    {
+      "kind": "Static unavailable review",
+      "result": "Current source failure denies writes/replay and suppresses content/actions; separately authorized task-own metadata/history only after stored integrity, category/assignment checks."
+    },
+    {
+      "kind": "Full corrected current contract inspection",
+      "result": "Also inspected explicit source-missing selected identity -> SourceUnavailable, fixed UTCZ timestamps, exact unavailable history DTO, trusted actor equality/action grant mapping, nine detail fields and ordered arrays. No additional scoped findings."
+    }
+  ],
+  "recommendations": {
+    "privatePersistence": "Retain exact original accepted command inputs privately with semantic digest to make mandatory command-integrity verification reconstructible.",
+    "originalDto": {
+      "minimalRequiredPublicFields": "Reuse each entry.identity plus creation and plan immutable events. Each event supplies eventId, revision, kind, actorId, actorRoles, recordedAtUtc, reason, source (complete metadata ArtifactReviewSourceBinding plus planningTaskContractDigest), selected attestation references and recordedStatus/planningEventId. This supplies original run/input/profile/application/template/package/guidance/finding-review/revision provenance without another historical package DTO.",
+      "originalContent": "Render current coherent existing GuidanceOption text/prerequisites/risk/recoveryGuidance, finding validationGuidance and selected actual three FixArtifacts from existing package response. Label creation/latest plan metadata as historical references backed by server verification. Do not label current text as creation-era text after a source change.",
+      "optionalCreationTextIfLaterExplicitlyNeeded": "Server may project only the creation source selected GuidanceOption and its selected three fixed fictional FixArtifacts, plus findingId/packageId/scopedOptionId/templateVersion/templateDigest already in metadata, from its verified immutable canonical package. Avoid whole historic guidance/findings/packages/evidence duplication. Current draft does not add this redundant content DTO.",
+      "history": "Metadata source references and selected accepted event/revision vector; complete historical packages stay server-owned and are reconstructed there. UI does not claim independent proof of historical canonical package bytes.",
+      "sourceUnavailable": "Public identity/assignee/revision/status and bounded metadata events only; source/vectors/reasons/original/current package content suppressed; no actions. No fallback full unfenced analysis."
+    }
+  },
+  "limitations": [
+    "Static design only; no runtime source API implementation inspected because not yet written.",
+    "No executed test/build/network/audit/host/database evidence.",
+    "No deployed security, customer data, CSV, retention or production release authority."
+  ],
+  "runtimeExecuted": false,
+  "humanApprovalClaim": "Only references explicit owner approval record; this review does not approve product decisions.",
+  "reviewHistory": [
+    {
+      "source": {
+        "path": "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+        "sha256": "fed0b5c92a7ee002d4835d88c3260fa63351f4e2ef40390c079dc3ccefd7e19b",
+        "bytes": 19006
+      },
+      "findings": [
+        {
+          "id": "ENG14-COMPAT-WORDING",
+          "severity": "LOW",
+          "path": "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+          "lines": [
+            11,
+            81
+          ],
+          "finding": "Profile section says prior DTO bytes remain exact; HTTP section explicitly adds planningTasks=null on older profiles. Those statements cannot both describe whole old HTTP wire JSON.",
+          "impact": "Could cause false compatibility evidence claims although approved behavior is clear.",
+          "recommendation": "Qualify unchanged historical DTO bytes to existing fields/values/order and saved envelopes; explicitly acknowledge the sole additive nullable task response field. No product behavior change."
+        }
+      ],
+      "conclusion": "No consequential product/security/architecture departure found. Engineering draft incorporates same-transaction source capture, monotonic observed sources, exact replay/duplicate precedence, immutable original references, metadata-only unavailable presentation and exact new-profile boundary.",
+      "reportSha256BeforeClosure": "7c6423181c66f4c881d2655c338d83ed1ff0d1fd8cc116e7d0ac3640a8c75eee"
+    }
+  ],
+  "findingClosures": [
+    {
+      "id": "ENG14-COMPAT-WORDING",
+      "status": "CLOSED",
+      "originalFinding": {
+        "id": "ENG14-COMPAT-WORDING",
+        "severity": "LOW",
+        "path": "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+        "lines": [
+          11,
+          81
+        ],
+        "finding": "Profile section says prior DTO bytes remain exact; HTTP section explicitly adds planningTasks=null on older profiles. Those statements cannot both describe whole old HTTP wire JSON.",
+        "impact": "Could cause false compatibility evidence claims although approved behavior is clear.",
+        "recommendation": "Qualify unchanged historical DTO bytes to existing fields/values/order and saved envelopes; explicitly acknowledge the sole additive nullable task response field. No product behavior change."
+      },
+      "evidence": "Profile and HTTP sections both require planningTasks omitted for all ten historical profiles; generated field optional nullable; exact old-profile validation rejects task authority. This preserves whole old HTTP response bytes rather than introducing nullable siblings.",
+      "reviewedAtUtc": "2026-10-03T02:49:25.412248+00:00"
+    }
+  ]
+}

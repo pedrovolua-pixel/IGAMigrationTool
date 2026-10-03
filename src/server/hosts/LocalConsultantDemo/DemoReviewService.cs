@@ -53,6 +53,17 @@ internal sealed class DemoReviewService(SyntheticReviewStore store)
         return new(null, read.Snapshot);
     }
 
+    internal async Task<DemoReviewContext> ReadExistingInTransactionAsync(Npgsql.NpgsqlConnection connection,
+        Npgsql.NpgsqlTransaction transaction, SyntheticRunSnapshot run, CancellationToken cancellationToken = default)
+    {
+        var seed = ExpectedSeed(run);
+        if (seed is null) return new("review_input_denied", null);
+        var read = await store.ReadInTransactionAsync(connection, transaction, SyntheticReviewScope.Fixed, run.RunId, Authority, cancellationToken);
+        if (!read.Succeeded || SyntheticReviewDigest.Compute(read.Snapshot!.RunSeed) != SyntheticReviewDigest.Compute(seed))
+            return new("review_input_denied", null);
+        return new(null, read.Snapshot);
+    }
+
     internal Task<SyntheticReviewApplyResult> ApplyAsync(Guid runId, string findingId, SyntheticReviewCommand command) =>
         store.ApplyAsync(SyntheticReviewScope.Fixed, runId, findingId, Authority, command);
 

@@ -1,0 +1,8 @@
+{
+  "complete-fixture.json": "e17d10643e28fd2e439c9cde3ad52a6828a2dc6012eaef96ef9de1d4371bfeae",
+  "complete-expected.html": "58ffae0f8655fe131f4856e80247339c73b7a1960573847fa0578298522e4306",
+  "empty-fixture.json": "bfa7e9bf971d388251f14d6f15fdbb9f43c3977cc58c1f6827962aaa420b886d",
+  "empty-expected.html": "9e42e6be6170fbee0e470b56fc2ec56baa4f2bb1ecc4302f483e770820147ee2",
+  "unavailable-fixture.json": "958e586490a6763cc6c287680431c9d2a6ed84fc2cbbcc3800d3e341564c49cb",
+  "unavailable-expected.html": "e5becddc389d6f33cb99ed5cdb994b2d11627f2cbb800df8d2e87189e46d81dc"
+}

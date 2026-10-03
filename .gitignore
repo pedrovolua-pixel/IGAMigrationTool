@@ -8,3 +8,6 @@
 src/web/node_modules/
 src/web/dist/
 .sites-work/
+
+# Cycle14 original native task checks are archived separately from source.
+tests/unit/SyntheticPlanningTasks.Tests/execution/

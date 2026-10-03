@@ -51,6 +51,35 @@ public sealed class SyntheticFixReviewStore
         }
         catch (Exception exception) when (IntegrityFailure(exception)) { return new(ArtifactReviewIssue.IntegrityMismatch, null); }
     }
+    /// <summary>Owning attestation read within a caller's source transaction; never opens, starts, commits or invokes a callback.</summary>
+    public async Task<ArtifactReviewReadResult> ReadInTransactionAsync(NpgsqlConnection connection, NpgsqlTransaction transaction,
+        Guid runId, ArtifactReviewAuthority authority, ArtifactReviewSource source, CancellationToken cancellationToken = default)
+    {
+        if (runId == Guid.Empty || source is null) return new(ArtifactReviewIssue.InvalidInput, null);
+        if (ArtifactReviewPolicy.Authorize(authority, scope) is { } denied) return new(denied, null);
+        var expected = new NpgsqlConnectionStringBuilder(connectionString);
+        var actual = new NpgsqlConnectionStringBuilder(connection.ConnectionString);
+        if (transaction.Connection != connection || connection.State != System.Data.ConnectionState.Open || actual.Host != expected.Host ||
+            actual.Port != expected.Port || actual.Database != expected.Database || actual.Username != expected.Username)
+            return new(ArtifactReviewIssue.InvalidInput, null);
+        await SyntheticRunSourceFence.AcquireAsync(connection, transaction, scope.CustomerId, scope.ProjectId, scope.EnvironmentId, runId, cancellationToken);
+        if (await SyntheticFixReviewMigration.VerifyAsync(connection, transaction, scope, cancellationToken) is { } issue) return new(issue, null);
+        try
+        {
+            var rebuilt = ArtifactReviewSourceBuilder.Build(source.Packages);
+            if (!rebuilt.Succeeded || ArtifactReviewCanonical.Json(source.Binding) != ArtifactReviewCanonical.Json(rebuilt.Source!.Binding) ||
+                ArtifactReviewCanonical.Json(source.Artifacts) != ArtifactReviewCanonical.Json(rebuilt.Source.Artifacts))
+                return new(ArtifactReviewIssue.IntegrityMismatch, null);
+            if (source.Binding.Scope != scope) return new(ArtifactReviewIssue.WrongScope, null);
+            if (source.Binding.RunId != runId) return new(ArtifactReviewIssue.SourceConflict, null);
+            foreach (var finding in source.Packages.Guidance.Findings)
+                if (ArtifactReviewPolicy.Authorize(authority, scope, finding.CategoryId) is { } categoryDenied) return new(categoryDenied, null);
+            var entries = await ReadEntries(connection, transaction, rebuilt.Source, cancellationToken);
+            return new(null, new(source.Binding, authority.ActorId, entries.Select(item => item.Entry).ToImmutableArray()));
+        }
+        catch (Exception exception) when (IntegrityFailure(exception)) { return new(ArtifactReviewIssue.IntegrityMismatch, null); }
+    }
+
     public async Task<ArtifactReviewApplyResult> ApplyAsync(Guid runId, string artifactId, ArtifactReviewAuthority authority,
         ArtifactReviewCommand command, CancellationToken cancellationToken = default)
     {

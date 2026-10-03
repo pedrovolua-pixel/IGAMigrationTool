@@ -97,7 +97,8 @@
           "ReportDrafts": "[1.0.0, )",
           "SyntheticAiPreview": "[1.0.0, )",
           "SyntheticFixPackages": "[1.0.0, )",
-          "SyntheticFixReview": "[1.0.0, )"
+          "SyntheticFixReview": "[1.0.0, )",
+          "SyntheticPlanningTasks": "[1.0.0, )"
         }
       },
       "recommendationguidance": {
@@ -126,6 +127,15 @@
         "dependencies": {
           "Npgsql": "[10.0.3, )",
           "SyntheticFixPackages": "[1.0.0, )",
+          "SyntheticSourceFence": "[1.0.0, )"
+        }
+      },
+      "syntheticplanningtasks": {
+        "type": "Project",
+        "dependencies": {
+          "Npgsql": "[10.0.3, )",
+          "SyntheticFixPackages": "[1.0.0, )",
+          "SyntheticFixReview": "[1.0.0, )",
           "SyntheticSourceFence": "[1.0.0, )"
         }
       },

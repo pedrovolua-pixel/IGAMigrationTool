@@ -10,13 +10,17 @@ import type {
 import './FixPackagePreview.css';
 
 const profile = 'synthetic-review-maturity-fix-packages-equal-v1';
+const taskProfile = 'synthetic-review-maturity-planning-tasks-equal-v1';
+const taskContractDigest = 'f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2';
 const reviewProfile = 'synthetic-review-maturity-fix-review-equal-v1';
 const reviewContractDigest = 'a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f';
-const isFixProfile = (id: string) => id === profile || id === reviewProfile;
+const isFixProfile = (id: string) => id === profile || id === reviewProfile || id === taskProfile;
 const application = (run: RunDetail) =>
-  run.selection.profileId === reviewProfile
-    ? 'synthetic-fix-review-app-v1'
-    : fixedVersions.applicationVersion;
+  run.selection.profileId === taskProfile
+    ? 'synthetic-planning-tasks-app-v1'
+    : run.selection.profileId === reviewProfile
+      ? 'synthetic-fix-review-app-v1'
+      : fixedVersions.applicationVersion;
 const templateVersion = 'fictional-fix-templates-v1';
 const templateDigest = 'a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669';
 const maximumBytes = 32 * 1024 * 1024;
@@ -202,8 +206,11 @@ function locks(run: RunDetail): ReadonlyArray<readonly [string, string]> {
     ['Scripted result fixture', 'synthetic-outcomes-v1'],
     ['Frozen analysis contents', 'synthetic-analysis-lock-v1'],
     ['Fictional fix-package templates', templateVersion],
-    ...(run.selection.profileId === reviewProfile
+    ...([reviewProfile, taskProfile].includes(run.selection.profileId)
       ? [['Artifact review contract', 'synthetic-fix-review-contract-v1'] as const]
+      : []),
+    ...(run.selection.profileId === taskProfile
+      ? [['Planning task contract', 'synthetic-planning-task-contract-v1'] as const]
       : []),
   ];
 }
@@ -256,8 +263,10 @@ function bound(preview: FixPackageDetail, run: RunDetail): boolean {
     locks(run).every(([name, version]) => lock(name)?.version === version) &&
     preview.runInputDigest === lock('Complete frozen input')?.sha256 &&
     lock('Fictional fix-package templates')?.sha256 === templateDigest &&
-    (run.selection.profileId !== reviewProfile ||
-      lock('Artifact review contract')?.sha256 === reviewContractDigest)
+    (![reviewProfile, taskProfile].includes(run.selection.profileId) ||
+      lock('Artifact review contract')?.sha256 === reviewContractDigest) &&
+    (run.selection.profileId !== taskProfile ||
+      lock('Planning task contract')?.sha256 === taskContractDigest)
   );
 }
 function validSource(s: GuidanceSourceBinding, value: AnalysisDetail, run: RunDetail): boolean {
@@ -294,15 +303,20 @@ function validSource(s: GuidanceSourceBinding, value: AnalysisDetail, run: RunDe
       'analysisFixtureDigest',
       'maturityFixtureDigest',
       'fixPackageTemplateDigest',
-      ...(run.selection.profileId === reviewProfile ? ['fixReviewContractDigest'] : []),
+      ...([reviewProfile, taskProfile].includes(run.selection.profileId)
+        ? ['fixReviewContractDigest']
+        : []),
+      ...(run.selection.profileId === taskProfile ? ['planningTaskContractDigest'] : []),
     ]) ||
     !Object.entries({ ...fixedVersions, applicationVersion: application(run) }).every(
       ([key, fixed]) => v[key as keyof typeof fixedVersions] === fixed,
     ) ||
     v.desiredOutcomeVersion !== null ||
     v.fixPackageTemplateDigest !== templateDigest ||
-    (run.selection.profileId === reviewProfile &&
+    ([reviewProfile, taskProfile].includes(run.selection.profileId) &&
       v.fixReviewContractDigest !== reviewContractDigest) ||
+    (run.selection.profileId === taskProfile &&
+      v.planningTaskContractDigest !== taskContractDigest) ||
     !digest(v.scriptedResultsDigest) ||
     !digest(v.maturityFixtureDigest) ||
     v.analysisFixtureDigest !== s.analysisFixtureDigest ||
