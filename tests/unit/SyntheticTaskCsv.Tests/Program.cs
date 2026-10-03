@@ -34,6 +34,15 @@ Assert(!CsvCodec.Verify(envelope, expected, Guid.Empty).Succeeded, "receipt requ
 foreach (var state in new[] { "Planned", "InProgress", "Completed", "Cancelled" })
     Assert(CsvCodec.Freeze(envelope with { Rows = [envelope.Rows[0] with { TaskStatus = state }] }).Succeeded, "all task states retained");
 foreach (var freshness in new[] { "CurrentPlan", "NeedsReconfirmation" })
-    Assert(CsvCodec.Freeze(envelope with { Rows = [envelope.Rows[0] with { PlanFreshness = freshness }] }).Succeeded, "current and stale metadata retained");
+    Assert(CsvCodec.Freeze(envelope with { Rows = [envelope.Rows[0] with { PlanFreshness = freshness, PlannedSourceDigest = freshness == "CurrentPlan" ? envelope.Rows[0].CurrentSourceDigest : envelope.Rows[0].PlannedSourceDigest }] }).Succeeded, "current and stale metadata retained");
 Assert(!CsvCodec.Freeze(envelope with { Rows = [envelope.Rows[0] with { PlanFreshness = "SourceUnavailable" }] }).Succeeded, "unavailable source denies whole export");
+
+Assert(!CsvCodec.Freeze(envelope with { Rows = [envelope.Rows[0] with { CreatedAtUtc = "2026-10-01T12:00:00+01:00" }] }).Succeeded, "exact UTC timestamp only");
+Assert(!CsvCodec.Freeze(envelope with { Rows = [envelope.Rows[0] with { TaskRevision = CsvCodec.MaximumRevision + 1 }] }).Succeeded, "safe revision bound");
+Assert(!CsvCodec.Freeze(envelope with { SelectedAttestations = envelope.SelectedAttestations.SetItem(0, envelope.SelectedAttestations[0] with { Revision = 1 }) }).Succeeded,
+    "complete event proof required for positive artifact revision");
+Assert(!CsvCodec.Freeze(envelope with { Rows = Enumerable.Repeat(envelope.Rows[0], CsvCodec.MaximumRows + 1).ToImmutableArray() }).Succeeded, "row count bound");
+Assert(CsvCodec.ValidCell(new string('é', 1024)), "exact UTF8 cell byte boundary");
+Assert(!CsvCodec.Freeze(envelope with { Rows = [envelope.Rows[0] with { PlanFreshness = "CurrentPlan" }] }).Succeeded, "current plan requires same source digest");
+Assert(!CsvCodec.Freeze(envelope with { CurrentSourceBinding = envelope.CurrentSourceBinding with { FindingRevisions = [] } }).Succeeded, "row finding must exist in captured source vector");
 Console.WriteLine($"PASS {passed} CSV assertions; independent canonical/full literal/header/formula/cell/tamper/limit/state oracles.");

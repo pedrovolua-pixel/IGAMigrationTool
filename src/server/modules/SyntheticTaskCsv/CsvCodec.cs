@@ -84,6 +84,7 @@ public static class CsvCodec
         foreach (var row in envelope.Rows)
         {
             if (row is null || row.CsvContractVersion != ContractVersion || row.RunId != envelope.RunId.ToString("D") || new[] { row.TaskId, row.FindingId, row.PackageId, row.ScopedOptionId, row.CurrentSourceDigest, row.PlannedSourceDigest }.Any(value => !ValidDigest(value)) || row.CurrentSourceDigest != source.SourceDigest || row.TaskRevision < 1 || row.TaskRevision > MaximumRevision || row.AssigneeId is not { Length: > 0 and <= 128 } || !row.AssigneeId.All(c => c is >= 'a' and <= 'z' or >= '0' and <= '9' or '-')) return CsvIssue.InvalidInput;
+            if (!source.FindingRevisions.Any(item => item.FindingId == row.FindingId) || row.PlanFreshness == "CurrentPlan" && row.PlannedSourceDigest != row.CurrentSourceDigest || string.CompareOrdinal(row.CreatedAtUtc, row.PlannedAtUtc) > 0) return CsvIssue.InvalidInput;
             if (row.TaskStatus is not ("Planned" or "InProgress" or "Completed" or "Cancelled") || row.PlanFreshness is not ("CurrentPlan" or "NeedsReconfirmation") || !Timestamp(row.CreatedAtUtc) || !Timestamp(row.PlannedAtUtc)) return CsvIssue.InvalidInput;
             if (row.ExportSnapshotDigest != (requireDigest ? envelope.SnapshotDigest : "")) return CsvIssue.IntegrityMismatch;
             if (row.TaskLink != TaskLink(envelope.RunId, row.TaskId) || row.FindingLink != FindingLink(envelope.RunId, row.FindingId)) return CsvIssue.InvalidInput;

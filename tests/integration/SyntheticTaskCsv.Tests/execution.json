@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-03",
+  "scope": "Approved frozen synthetic Phase1B CSV worker paths only; no customer/provider/production data or contracts",
+  "sdk": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+  "database": "iga_synthetic_phase1b_csv_tests at127.0.0.1:55433, role iga_synthetic; only this own database created",
+  "schema": "new synthetic_task_csv migration001; original task/artifact migrations unchanged",
+  "executed": {
+    "pureUnitHost": "PASS45 assertions: independent canonical input and exact full CSV bytes; distinct input/output hashes; header; Unicode whitespace formula prefixes; quote/control/invalid Unicode; closed/missing/case/duplicate fields; caps; UTC/revision/finding/source consistency; all task states/current and stale metadata",
+    "integrationHost": "PASS64 assertions: actual nonroot mac sandbox full CSV parity and denied network/write/credential read/fork/secret env; ten-second timeout; input/output/stderr/managed/RSS limits; typed genuine Auditor capture in same caller tx; authorization before source; source unavailable full denial; no seed/commit; metadata proof JsonIgnore; adapter literal parity; PG append/replay/UUID conflict/rollback/concurrency/drift/corruption/unavailable/append guards/no-cache schema",
+    "historicalTaskPortableHost": "PASS736 actual assertions; PostgreSQL not executed by that host",
+    "historicalArtifactPortableHost": "PASS212 actual assertions; PostgreSQL not executed by that host",
+    "releaseBuilds": "PASS0 warnings/errors for pure renderer, probe, task module and integration host",
+    "scopedWhitespaceVerification": "PASS no changes in owned CSV/test/source paths",
+    "nugetAudit": "PASS renderer and integration include-transitive vulnerable package queries: none reported",
+    "independentPythonOracle": "PASS stdlib canonical/hash and RFC CSV/spreadsheet-literal interpretation; no implementation/helper consumption"
+  },
+  "golden": {
+    "headerBytes": 283,
+    "headerSha256": "2e1c6fedadd38cb870c4d6ef25dbd44f806fdc16f6c10ed3c20293c8a9f4b603",
+    "fullCsvBytes": 1239,
+    "snapshotDigest": "8f52e0d89b7a0b1eec69b5e3ed4156b96ed5db8813c973f78150508bd2f0edd6",
+    "outputSha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92"
+  },
+  "coordinatorVerificationRemaining": [
+    "Full combined real owning-source captures/mutations and seeded multi-task current/stale states",
+    "Fresh final fenced first-byte delivery/auth/policy/source conflict and link-open protected navigation browser races",
+    "Hosted Linux isolated-container smoke (local mac evidence does not claim hosted PASS)",
+    "Non-author implementation review and shared host/solution/config/frontend wiring"
+  ],
+  "canonicalAndSite": "Coordinator-owned; this worker has not edited canonical plans/status/site/shared configuration"
+}

@@ -15,7 +15,7 @@ public sealed class CsvAuditStore
     public CsvAuditStore(string connectionString)
     {
         var builder = new NpgsqlConnectionStringBuilder(connectionString);
-        if (builder.Host is not ("localhost" or "127.0.0.1") || builder.Database is null || !builder.Database.StartsWith("iga_synthetic_phase1b", StringComparison.Ordinal) ||
+        if (builder.Host is not ("localhost" or "127.0.0.1") || builder.Port != 55433 || builder.Database is null || !builder.Database.StartsWith("iga_synthetic_phase1b_", StringComparison.Ordinal) ||
             builder.Username != "iga_synthetic") throw new ArgumentException("Fixed fictional CSV database required.");
         this.connectionString = connectionString;
     }

@@ -21,6 +21,7 @@ public sealed partial class SyntheticPlanningTaskStore
         var connection = new NpgsqlConnectionStringBuilder(connectionString);
         if (connection.Host is not ("127.0.0.1" or "localhost" or "::1") || connection.Database is null || !connection.Database.StartsWith(phase1b ? "iga_synthetic_phase1b_" : "iga_synthetic_cycle14_", StringComparison.Ordinal))
             throw new ArgumentException("Planning tasks require a loopback iga_synthetic_cycle14_ database.", nameof(connectionString));
+        if (phase1b && (connection.Port != 55433 || connection.Username != "iga_synthetic")) throw new ArgumentException("Phase1B requires fixed local synthetic database identity.", nameof(connectionString));
         connection.CommandTimeout = 15; this.connectionString = connection.ConnectionString;
         scope = trustedScope; this.readSource = readSource; this.observer = observer;
     }
