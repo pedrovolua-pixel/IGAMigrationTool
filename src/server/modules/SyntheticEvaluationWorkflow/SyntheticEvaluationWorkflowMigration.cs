@@ -24,34 +24,31 @@ internal static class SyntheticEvaluationWorkflowMigration
     {
         await using var t = await c.BeginTransactionAsync(ct);
         await LockAsync(c, t, ct);
-        await Execute(c, t, "CREATE SCHEMA IF NOT EXISTS synthetic_evaluation_workflow; CREATE TABLE IF NOT EXISTS synthetic_evaluation_workflow.schema_migrations (migration_id text PRIMARY KEY,script_digest text NOT NULL,schema_fingerprint text NOT NULL,applied_at timestamptz NOT NULL)", ct);
-        var history = await History(c, t, ct);
-        if (history.Count > 1 || history.Count == 1 && (history[0].Id != Id || history[0].Digest != EvaluationWorkflowCanonical.Hash(Script)))
-            throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
-        if (history.Count == 0)
+        await using (var exists = new NpgsqlCommand("SELECT count(*) FROM pg_namespace WHERE nspname='synthetic_evaluation_workflow'", c, t))
         {
-            await using var objects = new NpgsqlCommand("""
-                SELECT (SELECT count(*) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
-                WHERE n.nspname='synthetic_evaluation_workflow' AND c.relname NOT IN ('schema_migrations','schema_migrations_pkey'))
-                +(SELECT count(*) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='synthetic_evaluation_workflow')
-                +(SELECT count(*) FROM pg_type ty JOIN pg_namespace n ON n.oid=ty.typnamespace WHERE n.nspname='synthetic_evaluation_workflow'
-                AND ty.typname NOT IN ('schema_migrations','_schema_migrations'))
-                """, c, t);
-            if (Convert.ToInt64(await objects.ExecuteScalarAsync(ct), CultureInfo.InvariantCulture) != 0)
-                throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
-            await Execute(c, t, Script, ct);
-            var fingerprint = await Fingerprint(c, t, ct);
-            await Execute(c, t, "INSERT INTO synthetic_evaluation_workflow.schema_migrations VALUES(@id,@digest,@fingerprint,clock_timestamp())", ct,
-                ("id", Id), ("digest", EvaluationWorkflowCanonical.Hash(Script)), ("fingerprint", fingerprint));
+            if (Convert.ToInt64(await exists.ExecuteScalarAsync(ct), CultureInfo.InvariantCulture) != 0)
+            {
+                try { await VerifyAsync(c, t, ct); }
+                catch (WorkflowInvalidException) { throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift); }
+                await t.CommitAsync(ct);
+                return;
+            }
         }
-        else if (history[0].Fingerprint != await Fingerprint(c, t, ct))
-            throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
+        await Execute(c, t, "CREATE SCHEMA synthetic_evaluation_workflow; CREATE TABLE synthetic_evaluation_workflow.schema_migrations (migration_id text PRIMARY KEY,script_digest text NOT NULL,schema_fingerprint text NOT NULL,applied_at timestamptz NOT NULL)", ct);
+        await Execute(c, t, Script, ct);
+        var fingerprint = await Fingerprint(c, t, ct);
+        await Execute(c, t, "INSERT INTO synthetic_evaluation_workflow.schema_migrations VALUES(@id,@digest,@fingerprint,clock_timestamp())", ct,
+            ("id", Id), ("digest", EvaluationWorkflowCanonical.Hash(Script)), ("fingerprint", fingerprint));
         await t.CommitAsync(ct);
     }
     internal static async Task VerifyAsync(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct)
     {
         try
         {
+            await using (var exists = new NpgsqlCommand("SELECT count(*) FROM pg_namespace WHERE nspname='synthetic_evaluation_workflow'", c, t))
+                if (Convert.ToInt64(await exists.ExecuteScalarAsync(ct), CultureInfo.InvariantCulture) == 0)
+                    throw new WorkflowInvalidException(EvaluationWorkflowIssue.NotInitialized);
+            await MetadataShape(c, t, ct);
             var history = await History(c, t, ct);
             if (history.Count != 1 || history[0].Id != Id || history[0].Digest != EvaluationWorkflowCanonical.Hash(Script)
                 || history[0].Fingerprint != await Fingerprint(c, t, ct))
@@ -59,6 +56,38 @@ internal static class SyntheticEvaluationWorkflowMigration
         }
         catch (PostgresException e) when (e.SqlState is PostgresErrorCodes.UndefinedTable or PostgresErrorCodes.InvalidSchemaName)
         { throw new WorkflowInvalidException(EvaluationWorkflowIssue.NotInitialized); }
+    }
+    private static async Task MetadataShape(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct)
+    {
+        await using var columns = new NpgsqlCommand("""
+          SELECT column_name,udt_name,is_nullable,column_default
+          FROM information_schema.columns WHERE table_schema='synthetic_evaluation_workflow'
+          AND table_name='schema_migrations' ORDER BY ordinal_position
+          """, c, t);
+        var expected = new[] { ("migration_id", "text"), ("script_digest", "text"), ("schema_fingerprint", "text"), ("applied_at", "timestamptz") };
+        await using (var r = await columns.ExecuteReaderAsync(ct))
+        {
+            var index = 0;
+            while (await r.ReadAsync(ct))
+            {
+                if (index >= expected.Length || r.GetString(0) != expected[index].Item1 || r.GetString(1) != expected[index].Item2 ||
+                    r.GetString(2) != "NO" || !r.IsDBNull(3))
+                    throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
+                index++;
+            }
+            if (index != expected.Length) throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
+        }
+        await using var metadata = new NpgsqlCommand("""
+          SELECT count(*),coalesce(string_agg(pg_get_constraintdef(n.oid),''),'')
+          FROM pg_constraint n JOIN pg_class c ON c.oid=n.conrelid JOIN pg_namespace s ON s.oid=c.relnamespace
+          WHERE s.nspname='synthetic_evaluation_workflow' AND c.relname='schema_migrations'
+          """, c, t);
+        await using (var r = await metadata.ExecuteReaderAsync(ct))
+        {
+            await r.ReadAsync(ct);
+            if (r.GetInt64(0) != 1 || r.GetString(1) != "PRIMARY KEY (migration_id)")
+                throw new WorkflowInvalidException(EvaluationWorkflowIssue.MigrationDrift);
+        }
     }
     private static async Task<List<(string Id, string Digest, string Fingerprint)>> History(NpgsqlConnection c, NpgsqlTransaction t, CancellationToken ct)
     {

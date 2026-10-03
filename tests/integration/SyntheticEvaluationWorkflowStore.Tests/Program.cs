@@ -15,7 +15,7 @@ internal static class Program
     private static void Check(bool condition, string label) { checks++; if (!condition) throw new Exception(label); }
     private static async Task<int> Main()
     {
-        try { await Run(); Console.WriteLine($"PASS {checks} synthetic evaluation workflow PostgreSQL18 assertions."); return 0; }
+        try { if (Environment.GetEnvironmentVariable("IGA_EVALUATION_BOOTSTRAP_PROBE") == "1") await BootstrapProbe(); else await Run(); Console.WriteLine($"PASS {checks} synthetic evaluation workflow PostgreSQL18 assertions."); return 0; }
         catch (Exception e) { Console.Error.WriteLine(e); return 1; }
     }
     private static EvaluationWorkflowCommand Command(EvaluationWorkflowSnapshot workspace, string member,
@@ -76,6 +76,20 @@ internal static class Program
             Assignments = registry.Assignments.Select(a => assignment?.Invoke(a) ?? a).ToArray(),
             Members = registry.Members.Select(m => member?.Invoke(m) ?? m).ToArray()
         };
+    }
+    private static async Task BootstrapProbe()
+    {
+        await using (var c = new NpgsqlConnection(Connection))
+        {
+            await c.OpenAsync();
+            await using var exists = new NpgsqlCommand("SELECT count(*) FROM pg_namespace WHERE nspname='synthetic_evaluation_workflow'", c);
+            if (Convert.ToInt64(await exists.ExecuteScalarAsync()) == 0)
+                await Sql("CREATE SCHEMA synthetic_evaluation_workflow; CREATE TABLE synthetic_evaluation_workflow.schema_migrations(migration_id text PRIMARY KEY,script_digest text NOT NULL,schema_fingerprint text NOT NULL,applied_at timestamptz NOT NULL,unexpected text DEFAULT 'extra')");
+        }
+        var rejected = false;
+        try { await new SyntheticEvaluationWorkflowStore(Connection).InitializeAsync(); }
+        catch (WorkflowInvalidException e) { rejected = e.Issue == EvaluationWorkflowIssue.MigrationDrift; }
+        Check(rejected, "preexisting unexpected migration metadata MUST be refused");
     }
     private static async Task Run()
     {
