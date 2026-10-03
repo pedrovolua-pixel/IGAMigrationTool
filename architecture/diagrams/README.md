@@ -51,3 +51,7 @@ Microsoft permits these icons in architecture diagrams, training materials and d
 - View 05: executed synthetic foundation configuration and cleanup evidence; live workload controls and G1 remain unverified. Rendered and visually inspected on 2026-10-01; official icon usage guidance rechecked.
 - Icon source and usage: official Microsoft packages; repository copies are unmodified.
 - Visual verification: all four SVGs were rendered at 2× resolution to aspect-ratio-preserving PNG previews and inspected on 2026-09-29.
+
+## View 06 — accepted local HTTPS design
+
+[`06-proposed-https-pilot-portal.svg`](./06-proposed-https-pilot-portal.svg) ([PNG preview](./previews/06-proposed-https-pilot-portal.png)) describes [ADR-0011 accepted for bounded local templates](../decisions/ADR-0011-https-pilot-portal.md), requested after the owner chooses HTTPS instead of Bastion. The future portal is not implemented or deployed. It embeds unmodified official Microsoft SVGs with preserved aspect ratios and original product labels. Accepted views and historical executed foundation remain unchanged. Original render/visual review is recorded in the [HTTPS preparation evidence](../../docs/development/evidence/https-pilot-portal-preparation-20261003.json); [current implementation evidence](../../docs/development/evidence/https-pilot-portal-implementation-20261003.json) records the updated approval caption, rendering and inspection.

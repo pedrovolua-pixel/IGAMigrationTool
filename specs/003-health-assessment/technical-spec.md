@@ -508,3 +508,34 @@ Approved by: Repository owner
 Date: 2026-09-28  
 
 Only an authorized human reviewer may change `Status` to `Approved`.
+
+## Accepted local BFF authentication contract — 2026-10-02
+
+The repository owner accepted exact D01/D02 in [the attributed decision](../../docs/development/bff-production-contract-proposal.md). [BFF authentication v1 OpenAPI](../../contracts/bff-authentication/bff-v1.openapi.json) governs only session/CSRF, native browser form sign-in and exact local sign-out. Framework callbacks retain supported code/PKCE/state/nonce/correlation and signed token validation. Authentication time is signed `auth_time` bound to a protected single-use challenge; current subject admission cannot supply another session's time or MFA. Each request checks the original authentication, exact stored session, current cutoff, roles and security version. Missing evidence denies; privileged verification stays default-denying.
+
+[The bounded implementation/test packet](../../plans/completed/bff-authentication-contract-cycle.md) records executed proof and limits. Additive control-plane migration002 introduces the explicit provider cutoff and pending challenges; existing null-cutoff rows deny until trusted administration supplies evidence. It is not a startup migration, enrollment permission or selected cleanup/retention policy. Reusable web types/helpers are unused by the synthetic consultant UI. The diagnostic executable remains permanently disabled. D03/D04 production authority, audit/key/proxy composition and D05 image/live activation remain separately reviewed dependencies; this local approval does not enable a provider or authorize a release.
+
+## Proposed production BFF addendum — 2026-10-02
+
+The [P01–P05 production authority/hosting proposal](../../docs/development/bff-production-authority-hosting-proposal.md) and [ADR-0009](../../architecture/decisions/ADR-0009-production-bff-authority-and-audit.md) supply candidate closed enrollment/assignment/external lifecycle/provider observations, one subject security version, direct-only initial role boundary, atomic session/audit functions, explicit proxy trust and shared protection keys. This was proposed at the preparation checkpoint. The following attributed owner acceptance now governs the exact local synthetic implementation; real bindings, audit-outage preservation, live provider/access and acceptance remain separate.
+
+## Approved BFF local authority/audit cycle — 2026-10-02
+
+The repository owner approved P01–P05 and ADR-0009 for local synthetic implementation against immutable reviewed packet `cacbe372ff8a9bc448033e6918308c5f820b4bfd`. [Execution plan](../../plans/active/bff-local-authority-audit-implementation.md) owns implementation, exact P01–P05 verification and independent review. Real provider/Azure/SQL grants, production activation, audit-outage preservation, paid deployment and G1–G9 remain separate. The approved local authority/audit/hosting seams are implemented and independently reviewed; exact executed results, immutable sources and remaining live limits are bound in [the execution evidence](../../docs/development/evidence/bff-local-authority-audit-20261002.json). Configured hosted verification/private publication close this bounded cycle; real production composition and gates remain separate.
+
+## Proposed HTTPS access addendum — 2026-10-03 UTC
+
+The owner changes the access preference and preparation sequence to HTTPS now. [Proposed ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [the proposed topology/test packet](../../docs/development/https-pilot-portal-proposal.md) require exact review before local implementation or public exposure. This addendum records the proposal only; it does not amend the approved technical/security baseline or authorize production sign-in, new roles, grants, migrations or spending. Approved product scope and G1–G9 remain unchanged.
+
+## HTTPS local implementation approved — 2026-10-03 UTC
+
+The repository owner explicitly approved [ADR-0011 Option A](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [the exact local HTTPS-P01 packet](../../docs/development/https-pilot-portal-approval.md) against immutable proposal50cf4fd. [Approval metadata](../../docs/development/evidence/https-pilot-portal-approval-20261003.json) binds the original design/technical/test/plan source. Separate optional disabled IaC and negative/input/composition checks are now authorized; the local approval task is CLOSED and implementation begins in an isolated worktree with non-author review. Public activation, real identity/permission/SQL/key/audit changes, new paid session and production release remain separately gated. No implementation pass or live evidence is claimed by approval; G1–G9/Milestone2 remain NOT VERIFIED. Private BFF/access board publication is still blocked by the separately rejected publisher credential/network action; its snapshot remains stale.
+
+
+## HTTPS-P01 environment scaffold — executed local closure, 2026-10-03 UTC
+
+The [approved bounded packet](../../docs/development/https-pilot-portal-approval.md) now stores separate optional HTTPS environment templates and input/compiled policies. Worker `e796c36` passed non-author review and is integrated as `6690955`; no application is supplied. Required false-only composition and hard-disabled public network access prevent activation. No Azure resources, public endpoint, identity/grant, migration, invitation or new paid session were created.
+
+[Executed evidence](../../docs/development/evidence/https-pilot-portal-implementation-20261003.json): all23 Bicep build/lint checks (zero diagnostics), both new format comparisons,38 unsafe template mutations,50 unsafe input cases and51 actual CLI denials passed. Combined74-project locked restore/format/Release build (zero warnings/errors),28 unit/architecture projects, three portable integration projects and13 existing infrastructure policy commands passed. Database/frontend/browser/Windows/package checks and fresh hosted CI were not rerun in this packet; their historical evidence is not current combined verification. No public runtime or gate acceptance follows.
+
+HTTPS-T01 has local environment/input evidence; HTTPS-T02–T08 and G1–G9/Milestone2 remain NOT VERIFIED. [The next production dependency handoff](../../docs/development/https-pilot-portal-next-packet.md) records unresolved contracts and protected proof. GitHub upload is blocked by automatic approval review pending exact public-repository publication approval; the private BFF/access board remains stale under its separate publisher block. [Active plan](../../plans/active/https-pilot-portal-preparation.md#publication-dependencies) records both dependencies and prepared board changes. Preserve unrelated Cycle13 canonical/publication evidence.

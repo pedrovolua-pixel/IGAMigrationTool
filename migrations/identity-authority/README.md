@@ -1,0 +1,7 @@
+# Additive local authority migration
+
+Execute identity-sessions001/002/003 first, then001-authority.sql with an explicit synthetic migration identity. No host startup runner or live seeding is present. This creates module-owned closed control-plane authority records, ownership FKs, fixed administration/provider functions, bound writer metadata and deferred event/receipt/deadline integrity checks. No LOGIN roles or production grants are created by the migration.
+
+Controlled provisioning must assign functions to a distinct nonlogin owner, restrict PUBLIC execution, populate exact approved role/writer/ownership bindings and give separate named identities only the necessary function execution. The owner alone needs authority/subject/ticket mutation and audit event/receipt verification privileges. Administrator, observation publisher and ordinary ticket runtime are distinct and cannot directly mutate tables. Actual environment scopes and permissions remain unverified; the isolated integration test explicitly creates fictional roles and proves denied bypasses.
+
+Existing identity-sessions001/002 are unchanged. Missing enrollment/provider/home/audit evidence denies. No cleanup/retention schedule, destructive rollback, real grants or customer assignments are selected. Preserve durable receipts/audit/revocation versions; rollback first disables admission and preserves records rather than lowering a version or dropping rows.

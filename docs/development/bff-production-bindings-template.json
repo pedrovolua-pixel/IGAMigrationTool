@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "bff-production-binding-intake-v1",
+  "status": "TEMPLATE_ONLY_NOT_DEPLOYABLE",
+  "instruction": "Complete a copy in the approved protected review location; keep actual identifiers, user details, network ranges and artifact contents out of Git and the status site. This intake does not grant access or activate a host.",
+  "proposalDecisionReference": null,
+  "environment": {
+    "protectedEnvironmentReference": null,
+    "region": null,
+    "fixedHttpsOrigin": null,
+    "namedReachabilityDesignReference": null,
+    "trustedIngressProofReference": null
+  },
+  "identity": {
+    "protectedTenantApplicationAndResourceServicePrincipalReference": null,
+    "exactRoleIdMappingReference": null,
+    "namedUserLicensingAndConditionalAccessReference": null,
+    "guestHomeOriginCurrentStateAndLifecycleReference": null,
+    "providerLeastPermissionPropertyAndRoleProofReference": null,
+    "dedicatedGraphReaderIdentityAndConsentReviewReference": null,
+    "dedicatedBffFederationIdentityAndExactTrustReference": null,
+    "knownChangeIncidentOwnerReference": null
+  },
+  "authorityAndAudit": {
+    "protectedEnrollmentAndAssignmentApprovalReference": null,
+    "controlPlaneDatabaseAndRoleFunctionScopeReference": null,
+    "trustedAdministrationMigrationAndLifecycleIdentityReference": null,
+    "atomicAuditAndCommitUnknownProofReference": null,
+    "restoreTombstoneAndSecurityVersionProofReference": null,
+    "protectedAuditIntegrityAndLifecycleEvidenceReference": null
+  },
+  "sharedKeysAndProxy": {
+    "applicationDiscriminator": null,
+    "privateBlobObjectAndExactRoleReference": null,
+    "versionlessVaultKeyUriAndExactRoleReference": null,
+    "oldWrappingVersionAndRecoveryPolicyReference": null,
+    "trustedProxyChainAddressAndHeaderContractReference": null,
+    "deployedSpoofingAndTwoReplicaKeyProofReference": null
+  },
+  "imageAndExecution": {
+    "registryManifestDigestReference": null,
+    "imageFindingsLicenseAcceptanceAndSignedProvenanceReference": null,
+    "restrictedRetainedEngineeringEvidenceReference": null,
+    "privateBuildPublishPullIdentityScopeReference": null,
+    "refreshedCostCapacityWhatIfAndPricedSessionApprovalReference": null,
+    "exactDisposableScopePreservationAndCleanupReference": null
+  },
+  "liveSignInEnabled": false,
+  "grantsApproved": false,
+  "paidSessionApproved": false,
+  "productionReleaseApproved": false
+}

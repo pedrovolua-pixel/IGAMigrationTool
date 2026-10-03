@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "targetPlatform": "linux/amd64",
+  "trivy": {
+    "version": "0.73.0",
+    "releaseCommit": "40c73e5d6166dcc0346a1ab4e94499d1572854e4",
+    "releasePublishedUtc": "2026-08-03T10:47:14Z",
+    "releaseUrl": "https://github.com/aquasecurity/trivy/releases/tag/v0.73.0",
+    "archiveUrl": "https://github.com/aquasecurity/trivy/releases/download/v0.73.0/trivy_0.73.0_Linux-64bit.tar.gz",
+    "archiveSha256": "2edd39da482bb4e9831962487b68f68e3928ec3137794757f54d00383d79547b",
+    "binarySha256": "5b3ebab0f98d95196c85efc3a9d31a01520c96fa342e4e611f56db64c516df1d",
+    "checksumsUrl": "https://github.com/aquasecurity/trivy/releases/download/v0.73.0/trivy_0.73.0_checksums.txt",
+    "checksumsSha256": "36890275ffdff13025e9bd9fe039724c6e36bf58e698499856b801f619046fe2",
+    "publisherBundleUrl": "https://github.com/aquasecurity/trivy/releases/download/v0.73.0/trivy_0.73.0_Linux-64bit.tar.gz.sigstore.json",
+    "publisherBundleSha256": "ca61b1a42a1ccd92cbdb7a94fbb4cba2b7aba0051d3d0fda4b5bcde63fa18fbd",
+    "publisherSignatureTrust": "NOT_VERIFIED",
+    "databaseRepository": "ghcr.io/aquasecurity/trivy-db:2",
+    "verification": "Official GitHub immutable release API hashes matched downloaded archive/checksum bytes, checksum entry and extracted binary; release commit GitHub signature reports verified. Publisher Sigstore bundle digest was checked, but its cryptographic trust chain has not been verified."
+  },
+  "securityReview": {
+    "checkedUtc": "2026-10-02",
+    "advisories": [
+      "https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23",
+      "https://github.com/aquasecurity/trivy/security/advisories/GHSA-mcj4-mphf-j9ff"
+    ],
+    "scope": "Direct immutable 0.73.0 binary, not compromised historical 0.69.4 or mutable Trivy Actions. Path traversal advisory affects versions before 0.71.1. Recheck official security advisories before changing the pin or release use. This is no blanket safety or release approval."
+  }
+}

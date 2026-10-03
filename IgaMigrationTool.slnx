@@ -6,10 +6,15 @@
   <Folder Name="/src/" />
   <Folder Name="/src/server/" />
   <Folder Name="/src/server/hosts/">
+    <Project Path="src/server/hosts/BffFoundation/BffFoundation.csproj" />
+    <Project Path="src/server/hosts/BffDevelopmentHost/BffDevelopmentHost.csproj" />
     <Project Path="src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj" />
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
   <Folder Name="/src/server/modules/">
+    <Project Path="src/server/modules/IdentityAuthority/IdentityAuthority.csproj" />
+    <Project Path="src/server/modules/IdentitySessions/IdentitySessions.csproj" />
+    <Project Path="src/server/modules/IdentityPolicy/IdentityPolicy.csproj" />
     <Project Path="src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj" />
     <Project Path="src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj" />
     <Project Path="src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj" />
@@ -36,6 +41,13 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj" />
+    <Project Path="tests/integration/SecurityAudit.Tests/SecurityAudit.Tests.csproj" />
+    <Project Path="tests/integration/BffAuthorityComposition.Tests/BffAuthorityComposition.Tests.csproj" />
+    <Project Path="tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj" />
+    <Project Path="tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
+    <Project Path="tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj" />
+    <Project Path="tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj" />
     <Project Path="tests/integration/LocalArtifactReview.Tests/LocalArtifactReview.Tests.csproj" />
     <Project Path="tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
     <Project Path="tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
@@ -50,6 +62,10 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj" />
+    <Project Path="tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
+    <Project Path="tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj" />
+    <Project Path="tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj" />
     <Project Path="tests/unit/ArtifactReviewComponent.Tests/ArtifactReviewComponent.Tests.csproj" />
     <Project Path="tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />

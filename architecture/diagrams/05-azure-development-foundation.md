@@ -60,3 +60,8 @@ Executed on 2026-10-01:
 - Secret scans of `architecture/diagrams` and `infra`: no leaks found. `git diff --check`: passed.
 
 Application tests and cloud deployment were not rerun for this documentation-only change. No canonical gate, phase, human dependency or feature status changed; the private status board did not require publication in this cycle.
+
+
+## Subsequent private development access (not deployed)
+
+The historical foundation diagram above remains the disposed session topology. [Accepted bounded ADR-0010](../decisions/ADR-0010-private-pilot-browser-access.md) and the [stored access templates](../../infra/bicep/deployment-template-inventory.md#optional-bastion-development-access-sources-not-deployed) add a separately gated owner-operated private Windows desktop through Bastion Developer and environment browser DNS. [The handoff](../../docs/development/bastion-development-access.md) records its network/OS/TLS/session prerequisites; no live workstation or app route is depicted as deployed. The [post-pilot public HTTPS portal plan](../../plans/active/post-pilot-https-portal.md) is deferred and changes no current topology.

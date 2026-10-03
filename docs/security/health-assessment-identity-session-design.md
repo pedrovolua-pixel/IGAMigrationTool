@@ -96,3 +96,16 @@ Security owner: Repository owner
 Date: 2026-09-29
 
 Initial tenancy, guest and MFA policy approved by Repository owner on 2026-09-28. Application-registration, workload and session defaults approved by Repository owner on 2026-09-29.
+
+## D01/D02 local contract addendum — 2026-10-02
+
+The owner accepted [D01/D02](../development/bff-production-contract-proposal.md) for local implementation. [Versioned authentication transport](../../contracts/bff-authentication/bff-v1.openapi.json) and [the implementation cycle](../../plans/completed/bff-authentication-contract-cycle.md) freeze the minimal session JSON, same-origin synchronizer checks, native form challenge and exact local session revocation. Subject eligibility is separate from signed original authentication bound to a protected, at-most-15-minute, single-use transaction. Protocol completion consumes it only after supported signature/issuer/audience/state/nonce/correlation validation. Exact session/cutoff/security version/roles remain checked on each request; another session's authentication or MFA cannot satisfy these checks. Unknown personal/guest-origin evidence and privileged authentication remain denied. Existing idle30-minute, absolute8-hour and provider-under15-minute limits remain unchanged.
+
+Additive migration002 leaves existing missing-cutoff subjects denied, without selecting pending-record cleanup/retention or executing a live migration. Production provider and app-role retrieval, guest evidence, audit atomicity, key/proxy composition and live acceptance remain deferred. Synthetic proofs do not establish live-provider behavior.
+
+
+## Accepted local authority and audit implementation — 2026-10-02
+
+The owner accepted P01–P05 and ADR-0009 for synthetic local implementation. [The execution plan](../../plans/active/bff-local-authority-audit-implementation.md) and [composition handoff](../development/bff-local-authority-audit-handoff.md) bind closed attributed authority commands, exact assignments, explicit external organizational lifecycle/home evidence, conservative direct-user provider seams and same-transaction audited session admission. Legacy synthetic admission APIs do not satisfy this restricted audited boundary. The opt-in BFF projection supplies eligibility/coarse roles and composite resource/home cutoff; it manufactures neither original authentication nor MFA.
+
+The fixed shared-key and one-hop proxy contracts remain local configuration seams. Real Microsoft Graph/property/home semantics, federation/Conditional Access, provider/SQL/key/Blob permissions, SDK storage concurrency, independently retained witness and operational backup/restore/outage preservation remain separately reviewed deployment proofs. No live grant, enrollment, host activation or new retention policy follows. The diagnostic package stays permanently disabled; privileged verification still defaults to denial. Integrated review and all configured checks are recorded by the execution cycle before its closure.

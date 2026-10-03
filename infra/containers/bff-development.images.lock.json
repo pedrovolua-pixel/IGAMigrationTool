@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "verifiedUtc": "2026-10-02T01:49:45Z",
+  "targetPlatform": "linux/amd64",
+  "sdk": {
+    "repository": "mcr.microsoft.com/dotnet/sdk",
+    "tag": "10.0.401-noble",
+    "manifestDigest": "sha256:35d40304542c8689331f8cab17c65926cdf48fe711e289321d71924b230a7d29"
+  },
+  "runtime": {
+    "repository": "mcr.microsoft.com/dotnet/aspnet",
+    "tag": "10.0.12-noble-chiseled-extra",
+    "manifestDigest": "sha256:6385dc0eaef704fad88d3f65c334e791a371bbe448f52ca39d83d2df49251e28"
+  },
+  "verification": "Microsoft Container Registry manifest-list GET bytes matched SHA256 and response Docker-Content-Digest; both lists include linux/amd64. These are base inputs, not the resulting application image digest."
+}

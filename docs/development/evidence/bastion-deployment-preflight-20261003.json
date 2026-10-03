@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T01:16:53.963393+00:00",
+  "status": "READ_ONLY_PROVIDER_PREFLIGHT_COMPLETE_LIVE_BLOCKED",
+  "baseSource": "1468303154b480444bb8f164a32763770a69603c",
+  "protectedIntakeRef": "LOCAL-INTAKE-20261002-01",
+  "authorization": "Owner requested move to next step; read-only deployment preflight and concrete proposals only; accepted ADR0010 size unchanged",
+  "portal": {
+    "subscriptionSelection": "Owner-selected Subscription1, Enabled",
+    "pilotResourceCount": 0,
+    "inventoryFilters": "Empty search, Typeall, Locationall; refreshed",
+    "pilotOctoberActualUsd": 0.22,
+    "pilotBudgetMonthlyUsd": 50,
+    "aggregateBudgetMonthlyUsd": 50,
+    "aggregateEvaluatedSpendUsd": 0,
+    "scopeLimits": "Delayed usage/budget evaluation, not remaining allowance or final invoice; no new subscription-total/forecast proof claimed"
+  },
+  "provider": {
+    "region": "eastus2",
+    "regionalVcpuQuota": {
+      "used": 0,
+      "limit": 10
+    },
+    "approvedB2s": {
+      "name": "Standard_B2s",
+      "familyQuota": {
+        "name": "standardBSFamily",
+        "used": 0,
+        "limit": 10
+      },
+      "restrictions": [
+        {
+          "type": "Location",
+          "reasonCode": "NotAvailableForSubscription",
+          "locations": [
+            "eastus2"
+          ]
+        },
+        {
+          "type": "Zone",
+          "reasonCode": "NotAvailableForSubscription",
+          "locations": [
+            "eastus2"
+          ],
+          "zones": [
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "result": "BLOCKED regardless of unused quota"
+    },
+    "alternative": {
+      "name": "Standard_B2s_v2",
+      "family": "standardBsv2Family",
+      "vcpus": 2,
+      "memoryGiB": 8,
+      "architecture": "x64",
+      "hyperVGenerations": [
+        "V1",
+        "V2"
+      ],
+      "restrictions": [
+        {
+          "type": "Zone",
+          "reasonCode": "NotAvailableForSubscription",
+          "locations": [
+            "eastus2"
+          ],
+          "zones": [
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      ],
+      "locationRestrictionReported": false,
+      "familyQuota": {
+        "used": 0,
+        "limit": 0
+      },
+      "result": "BLOCKED_BY_ZERO_FAMILY_QUOTA; nonzonal candidate only, allocation not proved; not selected or approved"
+    },
+    "imageCandidate": {
+      "urn": "MicrosoftWindowsServer:WindowsServer:2022-datacenter-g2:20348.5622.260906",
+      "location": "eastus2",
+      "architecture": "x64",
+      "hyperVGeneration": "V2",
+      "imageState": "Active",
+      "operatingSystem": "Windows",
+      "purchasePlan": null,
+      "diskMinimumGiB": "NOT_VERIFIED; imageGET exposes no size",
+      "desktopBrowser": "NOT_VERIFIED for exact image/build"
+    },
+    "bindingCorrection": "Initial shell default was another subscription; discarded its results. All retained provider reads explicitly target the protected selected subscription. Exact offerWindowsServer was filtered after broad CLI offer search also returnedWindowsServer2022."
+  },
+  "publicRetail": {
+    "readAtUtc": [
+      "2026-10-03T01:05:40.716971+00:00",
+      "2026-10-03T01:08:23.353787+00:00",
+      "2026-10-03T01:14:31.651933+00:00"
+    ],
+    "source": "https://prices.azure.com/api/retail/prices",
+    "selectedMeters": [
+      {
+        "meterId": "2f8e1105-47d0-4105-a934-b2175c766a71",
+        "productName": "Container Registry",
+        "meterName": "Premium Registry Unit",
+        "skuName": "Premium",
+        "armRegionName": "eastus2",
+        "retailPrice": 1.6666,
+        "unitOfMeasure": "1/Day",
+        "type": "Consumption",
+        "effectiveStartDate": "2018-01-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "1550a19c-e867-57ad-91d4-59559908c16f",
+        "productName": "Azure Database for PostgreSQL Flexible Server Burstable BS Series Compute",
+        "meterName": "B1MS",
+        "skuName": "B1MS",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.017,
+        "unitOfMeasure": "1 Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2021-12-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "606b5e1d-f393-5838-a363-6da21b79884d",
+        "productName": "Azure Database for PostgreSQL Flexible Server Backup Storage",
+        "meterName": "Backup Storage LRS Data Stored",
+        "skuName": "Backup Storage LRS",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.095,
+        "unitOfMeasure": "1 GB/Month",
+        "type": "Consumption",
+        "effectiveStartDate": "2021-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "9c150bf9-2bad-430e-a53c-c213804f49ef",
+        "productName": "IP Addresses",
+        "meterName": "Standard IPv4 Static Public IP",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.005,
+        "unitOfMeasure": "1 Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2018-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "9d0c5c5c-f0ff-48c2-8c68-9ee7ffd306af",
+        "productName": "Service Bus",
+        "meterName": "Standard Base Unit",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.013441,
+        "unitOfMeasure": "1/Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2018-05-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "d5034e45-00c1-48c6-8c00-c866f788e033",
+        "productName": "Service Bus",
+        "meterName": "Standard Base Unit",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "retailPrice": 10.0,
+        "unitOfMeasure": "1/Month",
+        "type": "Consumption",
+        "effectiveStartDate": "2018-05-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "18ba5751-fda4-558b-b9dc-9416e72b9a62",
+        "productName": "Azure Container Apps",
+        "meterName": "Standard vCPU Active Usage",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "retailPrice": 2.4e-05,
+        "unitOfMeasure": "1 Second",
+        "type": "Consumption",
+        "effectiveStartDate": "2022-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "ef6a0bec-4635-5e9c-8b2e-8b346b998acb",
+        "productName": "Azure Container Apps",
+        "meterName": "Standard Memory Active Usage",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "retailPrice": 3e-06,
+        "unitOfMeasure": "1 GiB Second",
+        "type": "Consumption",
+        "effectiveStartDate": "2022-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "5dbaed1b-c402-4016-a12c-973037fd29e3",
+        "productName": "Virtual Machines BS Series Windows",
+        "meterName": "B2s",
+        "skuName": "B2s",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.0496,
+        "unitOfMeasure": "1 Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2025-10-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "ce957933-8287-4f8b-83ee-53a5cbe056d9",
+        "productName": "Standard SSD Managed Disks",
+        "meterName": "E10 LRS Disk Operations",
+        "skuName": "E10 LRS",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.002,
+        "unitOfMeasure": "10K",
+        "type": "Consumption",
+        "effectiveStartDate": "2018-11-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "9a08b750-3a9b-450f-ab79-a01dbfaf3026",
+        "productName": "Standard SSD Managed Disks",
+        "meterName": "E10 LRS Disk",
+        "skuName": "E10 LRS",
+        "armRegionName": "eastus2",
+        "retailPrice": 9.6,
+        "unitOfMeasure": "1/Month",
+        "type": "Consumption",
+        "effectiveStartDate": "2018-11-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "a4ef4994-7ca5-5aca-b318-1ec805e4752d",
+        "productName": "Virtual Machines Bsv2 Series Windows",
+        "meterName": "B2s v2",
+        "skuName": "B2s v2",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.0924,
+        "unitOfMeasure": "1 Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2023-09-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "ad50239a-df4f-5c24-8955-066731709372",
+        "productName": "Azure Database for PostgreSQL Flex Server Storage",
+        "meterName": "Storage Data Stored",
+        "skuName": "Storage",
+        "armRegionName": "eastus2",
+        "retailPrice": 0.115,
+        "unitOfMeasure": "1 GB/Month",
+        "type": "Consumption",
+        "effectiveStartDate": "2021-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "ae30040a-67f5-485b-b0f4-a6ef50504d9c",
+        "productName": "NAT Gateway",
+        "meterName": "Standard Gateway",
+        "skuName": "Standard",
+        "armRegionName": "Global",
+        "retailPrice": 0.045,
+        "unitOfMeasure": "1 Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2020-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "d32b6352-b66b-4c4c-8f21-60e94058e04d",
+        "productName": "NAT Gateway",
+        "meterName": "Standard Data Processed",
+        "skuName": "Standard",
+        "armRegionName": "Global",
+        "retailPrice": 0.045,
+        "unitOfMeasure": "1 GB",
+        "type": "Consumption",
+        "effectiveStartDate": "2020-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "0b608a26-f611-4232-8192-ce81b6b57194",
+        "productName": "Azure DNS",
+        "meterName": "Private Zone",
+        "skuName": "Private",
+        "armRegionName": "",
+        "retailPrice": 0.5,
+        "unitOfMeasure": "1",
+        "type": "Consumption",
+        "effectiveStartDate": "2019-12-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "46cff9cb-4b15-4af0-bf41-25143827fef8",
+        "productName": "Azure DNS",
+        "meterName": "Private Queries",
+        "skuName": "Private",
+        "armRegionName": "",
+        "retailPrice": 0.4,
+        "unitOfMeasure": "1M",
+        "type": "Consumption",
+        "effectiveStartDate": "2019-12-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "27827eb0-7f60-4928-940b-f5fe15e7a4cb",
+        "productName": "Load Balancer",
+        "meterName": "Standard Included LB Rules and Outbound Rules",
+        "skuName": "Standard",
+        "armRegionName": "Global",
+        "retailPrice": 0.025,
+        "unitOfMeasure": "1 Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2018-04-11T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "e6ab7238-e433-4fe0-a2b2-2b2564df2cdb",
+        "productName": "Virtual Network Private Link",
+        "meterName": "Standard Private Endpoint",
+        "skuName": "Standard",
+        "armRegionName": "Global",
+        "retailPrice": 0.01,
+        "unitOfMeasure": "1 Hour",
+        "type": "Consumption",
+        "effectiveStartDate": "2020-02-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "10caa28b-6479-4852-9eb7-610870cb6417",
+        "productName": "Virtual Network Private Link",
+        "meterName": "Standard Data Processed - Ingress",
+        "skuName": "Standard",
+        "armRegionName": "Global",
+        "retailPrice": 0.01,
+        "unitOfMeasure": "1 GB",
+        "type": "Consumption",
+        "effectiveStartDate": "2021-11-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "e7f162f6-7cb8-4cea-ad4f-12cdb5dda25b",
+        "productName": "Virtual Network Private Link",
+        "meterName": "Standard Data Processed - Egress",
+        "skuName": "Standard",
+        "armRegionName": "Global",
+        "retailPrice": 0.01,
+        "unitOfMeasure": "1 GB",
+        "type": "Consumption",
+        "effectiveStartDate": "2021-11-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      }
+    ]
+  },
+  "costWorksheet": {
+    "status": "PRELIMINARY_FIXED_INFRASTRUCTURE_RESERVES_NOT_COMPLETE_QUOTE",
+    "assumedDurationHours": 24,
+    "rows": [
+      {
+        "candidateQuantity": "ACR Premium, one registry/day",
+        "reserveUsd": "1.6666"
+      },
+      {
+        "candidateQuantity": "NAT24h, staticIPv4 and1GB processing",
+        "reserveUsd": "1.245"
+      },
+      {
+        "candidateQuantity": "Service Bus monthly alternative and operation reserve",
+        "reserveUsd": "10.80"
+      },
+      {
+        "candidateQuantity": "Five private endpoints24h and traffic reserve",
+        "reserveUsd": "1.40"
+      },
+      {
+        "candidateQuantity": "Nine private zones, full first-tier month reserve",
+        "reserveUsd": "4.50"
+      },
+      {
+        "candidateQuantity": "At most1M DNS queries, retail reserve",
+        "reserveUsd": "0.40"
+      },
+      {
+        "candidateQuantity": "PostgreSQL B1ms24h plus32GB storage/backup reserve",
+        "reserveUsd": "0.80"
+      },
+      {
+        "candidateQuantity": "Managed load balancer and possible platformIPv4",
+        "reserveUsd": "0.72"
+      },
+      {
+        "candidateQuantity": "Vault/emptyBlob/disabled monitoring/bandwidth/contingency",
+        "reserveUsd": "4.36"
+      },
+      {
+        "candidateQuantity": "Candidate WindowsB2s_v2 compute24h",
+        "reserveUsd": "2.2176"
+      },
+      {
+        "candidateQuantity": "E10LRS disk, conservative full-month reserve",
+        "reserveUsd": "9.60"
+      },
+      {
+        "candidateQuantity": "Disk operation reserve",
+        "reserveUsd": "0.20"
+      }
+    ],
+    "subtotalUsd": "37.9092",
+    "limits": "Proposed conservative synthetic quantities/reserves, not selected deployment/offer quote. PostgreSQL storage/backup row assumes24h proration; disk andDNS reserve full months. ServiceBus monthly/hourly meters are alternatives, not additive. No grant/discount assumed. Missing deployableBFF sizing, private builder/key/operations, exact whatif inventory and delayed charges prevent final priced-session approval; no USD25 renewal or USD40/45 allowance requested."
+  },
+  "decisionProposal": {
+    "recommended": "Approve bounded local change to Standard_B2s_v2 and explicitly authorize submitting a2vCPU standardBsv2Family EastUS2 quota request in Subscription1; quota approval/actual capacity and all live gates remain separate",
+    "alternative": "Retain Standard_B2s and explicitly authorize seeking provider availability for the existing location restriction",
+    "status": "PENDING_OWNER_DECISION",
+    "noAction": "No quota/support request, SKU change, role grant or paid deployment performed"
+  },
+  "primaryResearch": {
+    "researcher": "bastion_template, read-only",
+    "sourceRef": "1468303154b480444bb8f164a32763770a69603c",
+    "developerSource": "No authoritative exact shared-pool source established; genericAzureBastionSubnet NSG instruction cannot bindDeveloper",
+    "imageMinimum": "Generic127GiB guidance does not establish this exact version minimum",
+    "egress": "NSGIP/port rules do not enforce hostname/applicationpurpose; WireServer exception and freshCDN/DNS/license proof remain open",
+    "closure": "StatefulNSG removal does not revoke established sessions; disconnect/revoke/deallocate required"
+  },
+  "notExecuted": [
+    "Quota/support request",
+    "VM-size/template amendment",
+    "Provider validate/whatif or allocation",
+    "BastionDeveloper source/effectiveNSG/OS/browser/TLS proof",
+    "Credential creation, invitation or role grant",
+    "Foundation/BFF/image/key/audit deployment",
+    "Public portal exposure",
+    "Exact paid-session approval/cleanup"
+  ],
+  "azureMutations": [],
+  "gates": "PA03/G1\u2013G9/Milestone2 NOT_VERIFIED",
+  "hostedBaseline": {
+    "sourceRef": "1468303154b480444bb8f164a32763770a69603c",
+    "bootstrap37082060723": "completed success",
+    "package37082060721": "completed success",
+    "scope": "Configured partial developer checks, not live or human acceptance"
+  },
+  "privateBoard": {
+    "status": "BLOCKED_AUTOMATIC_APPROVAL_REVIEW",
+    "lastConfirmedBffCanonicalRef": "4346e0f",
+    "reason": "Specific official publishing helper credential/network action still rejected/pending; unrelated newer pilot publications preserved"
+  },
+  "checks": {
+    "jsonAndDocumentationScope": "PASS: nine documentation/evidence files; no code, template or policy changes",
+    "priceBindings": "PASS: 21 unique composite USD records exactly match captured public API bodies",
+    "arithmetic": "PASS: subtotal37.9092; 24h compute2.2176 vs1.1904; delta1.0272",
+    "newSectionLocalLinks": "PASS: 17 existing targets",
+    "protectedIdentifierExclusion": "PASS: no email, subscription path or explicit subscription command in scoped files",
+    "gitDiffCheck": "PASS",
+    "wholeCheckoutGitleaks": "PASS: executed gitleaks dir scan; no leaks found; exit0; local redacted report outside Git",
+    "independentReview": {
+      "reviewer": "auth_transport",
+      "result": "PASS; no material findings",
+      "executed": "Read-only nine-file review, JSON/composite USD record matching, Decimal arithmetic, 253 local Markdown links, git diff --check",
+      "limits": "No independent cloud, runtime or secret scan performed; no human acceptance inferred"
+    },
+    "notRequired": "Runtime, Bicep and migration checks not rerun for documentation-only/read-only packet; prior exact-source hosted checks retained separately"
+  }
+}
