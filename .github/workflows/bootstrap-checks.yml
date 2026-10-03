@@ -72,10 +72,12 @@ jobs:
         run: |
           dotnet run --project tests/unit/SyntheticEvaluationWorkflow.Tests -c Release --no-build
           python3 tests/integration/SyntheticEvaluationWorkflowIndependent.Tests/oracle.py
-          for db in domain independent tamper migration; do
+          for db in domain independent tamper migration bootstrap legacycheck; do
             docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic "iga_synthetic_evaluation_ci_$db"
           done
           IGA_EVALUATION_TEST_CONNECTION='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_domain;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationWorkflowStore.Tests -c Release --no-build
+          IGA_EVALUATION_BOOTSTRAP_PROBE=1 IGA_EVALUATION_TEST_CONNECTION='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_bootstrap;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationWorkflowStore.Tests -c Release --no-build
+          IGA_EVALUATION_BOOTSTRAP_PROBE=legacycheck IGA_EVALUATION_TEST_CONNECTION='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_legacycheck;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationWorkflowStore.Tests -c Release --no-build
           export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_independent;Username=iga_synthetic'
           dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build
           export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_tamper;Username=iga_synthetic'
