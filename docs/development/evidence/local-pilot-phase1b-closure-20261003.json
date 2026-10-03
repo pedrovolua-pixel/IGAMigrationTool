@@ -1,7 +1,7 @@
 {
   "schema": "local-pilot-phase1b-closure-v1",
   "recordedUtc": "2026-10-03T18:22:06.855481+00:00",
-  "status": "VERIFIED local engineering; matching private publication pending",
+  "status": "VERIFIED; approved local synthetic Phase1B CLOSED",
   "frozenCode": "6b7a5f25d9d726af2ebbc3f45480dd1e23476d24",
   "coordinatorCode": "48acac234160e608277709a8df51ffd3d93593f3",
   "sourceEquivalence": "All owned Phase1B runtime/Controller/codec/CSS paths identical between root frozenCode and coordinator. Separate root uncommitted workspace UI is preserved and built, not substituted for committed browser proof. GitHub PR merge checkouts bound separately in native records.",
@@ -210,9 +210,10 @@
       "result": "PASS",
       "artifacts": [
         {
-          "path": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-op-pg-apphost.log",
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-op-pg-apphost.log",
           "bytes": 145,
-          "sha256": "9ffa5aa3214251b42d623e35d80a0cf9b54f430abf79d332e13f8de6c05dd194"
+          "sha256": "9ffa5aa3214251b42d623e35d80a0cf9b54f430abf79d332e13f8de6c05dd194",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-op-pg-apphost.log"
         }
       ],
       "command": "DOTNET_ROOT pinned; executable apphost tests/integration/SyntheticOutcomePriority.Tests/bin/Release/net10.0/SyntheticOutcomePriority.Tests"
@@ -222,9 +223,10 @@
       "result": "PASS",
       "artifacts": [
         {
-          "path": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-ai-pg.log",
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-ai-pg.log",
           "bytes": 61,
-          "sha256": "783ebdb63576e5cc721e996dacd6c20e4b2e6a47cf3a4126eb87bc854a32d0bf"
+          "sha256": "783ebdb63576e5cc721e996dacd6c20e4b2e6a47cf3a4126eb87bc854a32d0bf",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-ai-pg.log"
         }
       ],
       "command": "pinned dotnet tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll"
@@ -234,9 +236,10 @@
       "result": "PASS",
       "artifacts": [
         {
-          "path": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-csv-mac-pg.log",
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-csv-mac-pg.log",
           "bytes": 3831,
-          "sha256": "3516e2a585e644989584d23345bad0549bf15797cea7d25ae8fa5b925c086b44"
+          "sha256": "3516e2a585e644989584d23345bad0549bf15797cea7d25ae8fa5b925c086b44",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-csv-mac-pg.log"
         }
       ],
       "command": "pinned dotnet tests/integration/SyntheticTaskCsv.Tests/bin/Release/net10.0/SyntheticTaskCsv.Tests.dll"
@@ -355,19 +358,22 @@
       "result": "PASS",
       "artifacts": [
         {
-          "path": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-consultant-closure.log",
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-browser-consultant-closure.log",
           "bytes": 7323,
-          "sha256": "da96990a02aceb742c2d3ca58a13607b8c53cb6f40b92d039c8e04e18286934e"
+          "sha256": "da96990a02aceb742c2d3ca58a13607b8c53cb6f40b92d039c8e04e18286934e",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-consultant-closure.log"
         },
         {
-          "path": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-report.json",
+          "path": "work/phase1b-closure-evidence/preserved-external/consultant-report.json",
           "bytes": 11136,
-          "sha256": "a68576ee90d290f6f5433a0cd0237e1d66a13f23db582a2aaa21ead043f3d39c"
+          "sha256": "a68576ee90d290f6f5433a0cd0237e1d66a13f23db582a2aaa21ead043f3d39c",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-report.json"
         },
         {
-          "path": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-final.png",
+          "path": "work/phase1b-closure-evidence/preserved-external/consultant-final.png",
           "bytes": 4366540,
-          "sha256": "299858f864870cec777a6e91b56903da8240ef483a8b2aca1e57d2c25bf61a1e"
+          "sha256": "299858f864870cec777a6e91b56903da8240ef483a8b2aca1e57d2c25bf61a1e",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-final.png"
         }
       ],
       "command": "Pinned Node24 realChrome151 verify.mjs; normal Consultant then genuine Auditor host on same dedicated browser_closure_tests; no DB reset"
@@ -377,19 +383,22 @@
       "result": "PASS",
       "artifacts": [
         {
-          "path": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-auditor-closure.log",
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-browser-auditor-closure.log",
           "bytes": 2310,
-          "sha256": "dbc70e87fae6e121c4b95d58166f2bdfb2124b8ff615de85e07cb339db275e66"
+          "sha256": "dbc70e87fae6e121c4b95d58166f2bdfb2124b8ff615de85e07cb339db275e66",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-auditor-closure.log"
         },
         {
-          "path": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-report.json",
+          "path": "work/phase1b-closure-evidence/preserved-external/auditor-report.json",
           "bytes": 3039,
-          "sha256": "3d16333edf0350410e8f83818e4766f5a35da57aac9b0d62f48d485b63f512ec"
+          "sha256": "3d16333edf0350410e8f83818e4766f5a35da57aac9b0d62f48d485b63f512ec",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-report.json"
         },
         {
-          "path": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-final.png",
+          "path": "work/phase1b-closure-evidence/preserved-external/auditor-final.png",
           "bytes": 59473,
-          "sha256": "f356c9c4e841a3fd98d8bac3a243a205db554511e58878fe8d47c2fc99ceb7d8"
+          "sha256": "f356c9c4e841a3fd98d8bac3a243a205db554511e58878fe8d47c2fc99ceb7d8",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-final.png"
         }
       ],
       "command": "Pinned Node24 realChrome151 verify.mjs; normal Consultant then genuine Auditor host on same dedicated browser_closure_tests; no DB reset"
@@ -399,19 +408,22 @@
       "result": "PASS",
       "artifacts": [
         {
-          "path": "/private/tmp/iga-phase1b-budget-final.log",
+          "path": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-budget-final.log",
           "bytes": 5075,
-          "sha256": "8e726e4e04e8f18d57d51e0bc9d8394d41b35e178adedd04e5824e8c3b4029c0"
+          "sha256": "8e726e4e04e8f18d57d51e0bc9d8394d41b35e178adedd04e5824e8c3b4029c0",
+          "originalLocation": "/private/tmp/iga-phase1b-budget-final.log"
         },
         {
-          "path": "/private/tmp/iga-phase1b-budget-final-evidence/budget-report.json",
+          "path": "work/phase1b-closure-evidence/preserved-external/budget-report.json",
           "bytes": 5569,
-          "sha256": "de3be36d0b7bc493ecc66e33d45a2aa97414f4ec7cec5b1ebf268fdc213e2bf7"
+          "sha256": "de3be36d0b7bc493ecc66e33d45a2aa97414f4ec7cec5b1ebf268fdc213e2bf7",
+          "originalLocation": "/private/tmp/iga-phase1b-budget-final-evidence/budget-report.json"
         },
         {
-          "path": "/private/tmp/iga-phase1b-budget-final-evidence/budget-final.png",
+          "path": "work/phase1b-closure-evidence/preserved-external/budget-final.png",
           "bytes": 415194,
-          "sha256": "1b49806bbf7f7bc6fc6d92d51a21cf00fb1f35b95bbededea141e810f19d35c3"
+          "sha256": "1b49806bbf7f7bc6fc6d92d51a21cf00fb1f35b95bbededea141e810f19d35c3",
+          "originalLocation": "/private/tmp/iga-phase1b-budget-final-evidence/budget-final.png"
         }
       ],
       "command": "IGA_PHASE1B_PAUSED_HOST=1 pinned Node24/realChrome budget-verify.mjs; actual committed-response loss and exact UUID keyboardRetry"
@@ -421,14 +433,16 @@
       "result": "PASS",
       "artifacts": [
         {
-          "path": "/private/tmp/iga-phase1b-components-mobile.log",
+          "path": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-components-mobile.log",
           "bytes": 3673,
-          "sha256": "ee4bca869d1847c31a434c94779599ac1a6e3eb58ff1d0690f6c716efecfc1f8"
+          "sha256": "ee4bca869d1847c31a434c94779599ac1a6e3eb58ff1d0690f6c716efecfc1f8",
+          "originalLocation": "/private/tmp/iga-phase1b-components-mobile.log"
         },
         {
-          "path": "/private/tmp/iga-phase1b-mobile-independent.json",
+          "path": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-mobile-independent.json",
           "bytes": 567,
-          "sha256": "8b256f56846b538ce52e34e4d794a6c17cc46b413500ec5ef1c9594f62888cfc"
+          "sha256": "8b256f56846b538ce52e34e4d794a6c17cc46b413500ec5ef1c9594f62888cfc",
+          "originalLocation": "/private/tmp/iga-phase1b-mobile-independent.json"
         }
       ],
       "command": "Phase1BComponents.browser.mjs realChrome, globalCSS; separate non-mutating saved-run390/320 read without style injection"
@@ -557,6 +571,23 @@
         }
       ],
       "command": "gitleaks8.30.1 detect --no-git against all tracked files plus four new owned closure documents; exit0"
+    },
+    {
+      "name": "final-closed-canonical-documents-secret-scan",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/final-closure-docs-gitleaks.log",
+          "bytes": 146,
+          "sha256": "54ae931b44e26be6269a3305459ad65ae7cedd6c89503394eea1e4a118ebb006"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/final-closure-docs-gitleaks.json",
+          "bytes": 3,
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        }
+      ],
+      "command": "gitleaks8.30.1 detect --no-git ten owned closure/canonical/handoff files; exit0"
     }
   ],
   "frozenCodeManifest": {
@@ -1447,7 +1478,14 @@
     "FR-HAS-53 adherence accuracy; separate Phase1C evaluation",
     "Linux/Windows localhost CSV host export; Linux evidence is pure-renderer verification only"
   ],
-  "privatePublication": "PENDING matching native receipt; current Site96 reflects earlier approval+M08",
+  "privatePublication": {
+    "status": "succeeded",
+    "version": 98,
+    "siteSource": "cb3e893e0d00cdd3a94f65f8d2c05920c4095a92",
+    "deployment": "appgdep_6ac149bce7d08191b8bbdceae0a1f87c",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "receipt": "docs/development/evidence/phase1b-local-closure-site-20261003.json"
+  },
   "productionRelease": false,
   "customerProviderCredentials": false,
   "finalHostedReplay": {
@@ -1466,5 +1504,42 @@
       "bytes": 15357,
       "sha256": "14051216ad8c98eadd0fdc2dad798d74ed6f78ed0f2c77ff1576009d92d6135b"
     }
+  },
+  "cleanup": {
+    "ownedHostStopped": 75698,
+    "rawEvidenceCopiedAndRuntimeArchiveRetained": true,
+    "removed": [
+      {
+        "worktree": "/private/tmp/iga-phase1b-ai-contract",
+        "retainedBranch": "codex/phase1b-ai-implementation",
+        "retainedCommit": "c0b8f06452714e0d1200aabc04d380bcf8e9a44a",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-csv-contract",
+        "retainedBranch": "codex/phase1b-csv-implementation",
+        "retainedCommit": "465c10bbe5f87dbda0cf41b78dff4848b28da129",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-closure-contract",
+        "retainedBranch": "codex/phase1b-outcomes-implementation",
+        "retainedCommit": "53d7bfefd4a9b91188d1d46bc48d9d520f7b3073",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-coordinator",
+        "retainedBranch": "codex/phase1b-integration",
+        "retainedCommit": "48acac234160e608277709a8df51ffd3d93593f3",
+        "removed": true
+      }
+    ],
+    "unrelatedWorktreesPreserved": true,
+    "databasesPreserved": true
+  },
+  "preservedNativeFilesFinal": {
+    "path": "work/phase1b-closure-evidence/final-native-preservation-map.json",
+    "bytes": 4355,
+    "sha256": "17246a8624ccbb67fc07cc634a4a4685803a5cee664e932e4d73ef8d15930a02"
   }
 }

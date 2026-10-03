@@ -1,6 +1,6 @@
 # Local pilot Phase 1B closure
 
-Status: VERIFIED — local engineering and final hosted replay passed; matching private publication pending
+Status: VERIFIED — approved local synthetic Phase 1B CLOSED; owner-private publication confirmed
 Owner: Phase 1B coordinator
 Last updated: 2026-10-03
 Baseline: `d7d493e` on `codex/pilot-foundation`; preserves parallel Milestone08 composition
@@ -56,7 +56,7 @@ Writing packets return commits, executed documentary checks and requirements/dec
 - [x] One synthetic baseline/run exercises deterministic and fake-AI findings, outcomes, coherent scores/maturity, priority/effort, inert packages, planning tasks and CSV.
 - [x] Negative authority/isolation/input/injection/failure/replay/concurrency cases pass; old profiles retain exact bytes.
 - [x] Independent review closed; all applicable executed checks and limitations recorded against exact source.
-- [ ] Canonical records/handoff updated and matching owner-private site deployment confirmed.
+- [x] Canonical records/handoff updated and matching owner-private site deployment confirmed.
 
 No item is completed merely by this plan. Full local pilot, Phase 1C, human accessibility/UAT and G1–G9 remain open.
 
@@ -69,7 +69,7 @@ Owner statement: “Approved 1B packet”. OP1B-01–06, AI1B-01–07, CSV1B-01�
 | OP implementation | `codex/phase1b-outcomes-implementation` / `/private/tmp/iga-phase1b-closure-contract` | New SyntheticOutcomePriority module, its migration/unit/integration tests | VERIFIED — implementation and non-author review complete |
 | AI implementation | `codex/phase1b-ai-implementation` / `/private/tmp/iga-phase1b-ai-contract` | New SyntheticAiExecution module, its migration/unit/integration tests | VERIFIED — implementation and non-author review complete |
 | CSV implementation | `codex/phase1b-csv-implementation` / `/private/tmp/iga-phase1b-csv-contract` | New SyntheticTaskCsv module/renderer/migration/tests; additive typed export capture in SyntheticPlanningTasks and SyntheticFixReview | VERIFIED — implementation and non-author review complete |
-| Coordinator integration | `codex/phase1b-integration` / `/private/tmp/iga-phase1b-coordinator` | Shared contracts/config/solution, AssessmentRuns, host, frontend, integration/browser/compatibility, canonical evidence/site | VERIFIED — final checks; publication pending |
+| Coordinator integration | `codex/phase1b-integration` / `/private/tmp/iga-phase1b-coordinator` | Shared contracts/config/solution, AssessmentRuns, host, frontend, integration/browser/compatibility, canonical evidence/site | VERIFIED — final checks, evidence and publication closed |
 
 Registry fence precedes run fence in compound operations. Runtime stores join the supplied connection/transaction; provider and renderer execute outside transactions. Each writer returns exact executed evidence and receives non-author review. Dedicated databases use `iga_synthetic_phase1b_`; no shared cluster, other databases or concurrent root UI/BFF/Phase1C work is changed. Historical compatibility and disabled live paths remain explicit completion conditions.
 
@@ -80,4 +80,9 @@ Frozen runtime/test source `6b7a5f25d9d726af2ebbc3f45480dd1e23476d24` is integra
 
 Actual local checks passed:81-project locked audited restore/format/zero-warning Release build;32 unit hosts; OP158/AI463/CSV81 owning-PostgreSQL assertions; compound131; componentChrome50; actual Consultant121/genuineAuditor40/paused-budget81 browser checks;390/320 reflow; frontend contract/type/build/format/audit; architecture11; clean tracked-source secret scan. Counts overlap. Six additive migrations retain all four historical migration bytes. Whole-workspace scanner’s nine independently recomputed evidence-digest false positives and every corrected invocation/oracle/runtime/browser failure remain recorded. No new external package, shared cluster/role reset, customer/provider/production authority or live release.
 
-Configured full Linux/bootstrap, both Windows and container/package checks passed on3ecdfc6, including18 actual Linux CSV isolation probes and historical browser/collector/infrastructure flows. Final6b7a5f2 passed every configured Linux/bootstrap, Windows2022/2025 and container/package job (runs37142354919/37142354891), including all historical browser, collector and infrastructure steps. Matching private publication remains the last closure criterion. Automated axe violations are zero; two narrow Consultant color-contrast incomplete groups, supported manual Windows/AT/zoom, default Mac startup and all live/full milestone/UAT/G1–G9 acceptance remain NOT VERIFIED.
+Configured full Linux/bootstrap, both Windows and container/package checks passed on3ecdfc6, including18 actual Linux CSV isolation probes and historical browser/collector/infrastructure flows. Final6b7a5f2 passed every configured Linux/bootstrap, Windows2022/2025 and container/package job (runs37142354919/37142354891), including all historical browser, collector and infrastructure steps. Matching owner-private version98/sourcecb3e893 and succeeded deployment are confirmed in [the final receipt](../../docs/development/evidence/phase1b-local-closure-site-20261003.json). Automated axe violations are zero; two narrow Consultant color-contrast incomplete groups, supported manual Windows/AT/zoom, default Mac startup and all live/full milestone/UAT/G1–G9 acceptance remain NOT VERIFIED.
+
+
+## Local Phase 1B closure confirmed
+
+All six scoped completion criteria are fulfilled. Native version98 publication reflects canonical283a293 and preserves the latest concurrent source/version97, all twelve human tasks and sixteen unowned panels.1440/390/320 QA and archive inspection passed. Four finished own worktrees were removed after raw execution evidence, native files, runtime closure and branch commits were preserved and rehashed. The owned Auditor host stopped; databases, other agents, unfinished root UI/BFF/research and Phase1C worktrees are preserved. [Exact closure/publication/cleanup receipt](../../docs/development/evidence/phase1b-local-closure-site-20261003.json) supplies provenance; it grants no human UAT, full milestone or production acceptance.

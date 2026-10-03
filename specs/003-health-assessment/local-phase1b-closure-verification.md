@@ -1,6 +1,6 @@
 # Local Phase 1B verification and phase allocation
 
-Status: VERIFIED — local engineering and final configured hosted checks passed; matching private publication pending
+Status: VERIFIED — approved local synthetic Phase 1B CLOSED; final configured checks and owner-private publication confirmed
 Date: 2026-10-03
 Authority: [exact owner approval](local-phase1b-approval.md), [frozen engineering contract](local-phase1b-engineering-contract.md), and [maintained closure plan](../../plans/active/local-pilot-phase1b-closure.md)
 
@@ -38,3 +38,6 @@ The configured Linux bootstrap, both Windows jobs and container/package run on3e
 Preserved failures include initial wrong test-DLL/apphost invocations, the invalid-plan preflight regression found by hosted CI and restored before database access, the confirmed-AI UI decoder/retirement binding/mobile wrapping fixes, and two budget-test oracle/selector corrections. The final actual-host tests retain exact UUID retry and independent assertions; no fixture history, budget period or database was reset to force a pass. Final tests used separately created owned disposable databases, preserving earlier experimental sources.
 
 See [the operations handoff](../../docs/operations/local-phase1b-synthetic-handoff.md) for guarded activation, six additive migrations, fail-closed historical proof, restart/billing, renderer limits, downloaded-copy handling and rollback reader limitations. No new external package version, live provider/credential, customer access, production permission, public contract or release was introduced.
+
+
+[Final private publication and cleanup receipt](../../docs/development/evidence/phase1b-local-closure-site-20261003.json) confirms version98, exact pushed/archive source,1440/390/320 QA, preservation of concurrent site records and removal of four completed own worktrees after evidence preservation. This completes the local checkpoint; the NOT VERIFIED rows and separately owned Phase1C remain open.
