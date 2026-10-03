@@ -41,6 +41,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
     <Project Path="tests/integration/Phase1BCompound.Tests/Phase1BCompound.Tests.csproj" />
     <Project Path="tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
     <Project Path="tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
@@ -59,6 +60,7 @@
     <Project Path="tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj" />
   </Folder>
   <Folder Name="/tests/unit/">
+    <Project Path="tests/unit/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
     <Project Path="tests/unit/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
     <Project Path="tests/unit/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj" />
@@ -107,8 +109,6 @@
     <Project Path="tests/integration/SyntheticTaskCsv.Tests/Probe/Probe.csproj" />
   </Folder>
   <Project Path="src/server/modules/SyntheticEvaluationSourceIntegration/SyntheticEvaluationSourceIntegration.csproj" />
-  <Project Path="tests/unit/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
-  <Project Path="tests/integration/SyntheticEvaluationSourceIntegration.Tests/SyntheticEvaluationSourceIntegration.Tests.csproj" />
   <Project Path="tests/integration/SyntheticEvaluationSourceIndependent.Tests/SyntheticEvaluationSourceIndependent.Tests.csproj" />
   <Project Path="src/server/modules/SyntheticMcp/SyntheticMcp.csproj" />
   <Project Path="tests/unit/SyntheticMcpPublication.Tests/SyntheticMcpPublication.Tests.csproj" />
