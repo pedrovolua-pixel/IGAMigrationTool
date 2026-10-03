@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "recordedDate": "2026-10-02",
+  "status": "LOCAL_TEMPLATES_VERIFIED_LIVE_ACCESS_NOT_DEPLOYED",
+  "ownerApproval": {
+    "date": "2026-10-02",
+    "attribution": "Repository owner",
+    "instruction": "Move forward with bastion but plan Https portal with login after pilot is done",
+    "scope": "ADR-0010 bounded local design and PA01\u2013PA02 template/test work; post-pilot public portal planning only",
+    "approvalCheckpoint": "85431e6"
+  },
+  "sourceRef": "84b53ebef6928dad08d402befd0ef9c791fef4bd",
+  "workerFinalRef": "97cc60bb17940c373116214b6319be058d9a026c",
+  "reviewer": "auth_transport (non-author read-only engineering review)",
+  "mergedApprovedPilotBase": "d897b1d8cd27eea9a7f5225813626fd2e4f3dce0",
+  "sourceBindings": [
+    {
+      "path": "infra/bicep/pilot-development-private-browser-access.bicep",
+      "sha256": "e9fef77b5fc99d377f68e42435184987700e3bd43bf25fe2f6f59d831081ceee"
+    },
+    {
+      "path": "infra/bicep/modules/pilot-development-private-browser-access.bicep",
+      "sha256": "c9e278d3fa469772e1d30475d86caa4134e124b55e7c00ba47692cce2a7e1e14"
+    },
+    {
+      "path": "infra/bicep/modules/pilot-development-browser-dns.bicep",
+      "sha256": "3aaf3b39257acd7a806b556976dfe7f23b17fc377b3159a7563ee301086103f6"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserAccess/template-policy.py",
+      "sha256": "539e917e12803ecf3702dda847265a9f47cb9ca7dc30de2f4727f703ca735719"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserAccess/validate-inputs.py",
+      "sha256": "3488fba06f3d7b4eeb8a8540ef808c820590e4eff4cedb366654c53c01b6f778"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserAccess/test-inputs.py",
+      "sha256": "02b4804bb80e53ec76e7bfe57c6cf8ddba3806f6d6df2d16818e2258655cc7f9"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserDns/policy.py",
+      "sha256": "f45862ba72b83f22915f4c7ad1d210182132f8e8ecdd779d80953ae276f3c33c"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserDns/environment_inputs.py",
+      "sha256": "da89351e6e4aa5575563ef788339faabbb7e1dc4790217c22f0790dc5f008ef3"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserDns/validate_access_composition.py",
+      "sha256": "f586e2d86ff9f66d49ed0464bd089cef05f98890f56ff33265d1276a72545db3"
+    },
+    {
+      "path": "tests/infrastructure/PrivateBrowserDns/test_composition_inputs.py",
+      "sha256": "363feab206ea56dc92b48758adbc1ab45d38fdc0b9c5554baa40e749773dee57"
+    }
+  ],
+  "compiledBindings": [
+    {
+      "path": "infra/bicep/pilot-development-private-browser-access.bicep",
+      "sha256": "a4d79cf86a3ed62cc63a4fc7ba760ba94dbfd9a527f795830569c876e39d961a"
+    },
+    {
+      "path": "infra/bicep/modules/pilot-development-private-browser-access.bicep",
+      "sha256": "1ac64ddce02e76500fb9ceb400287533859b30cea66a3b8cfbca8803c8192f55"
+    },
+    {
+      "path": "infra/bicep/modules/pilot-development-browser-dns.bicep",
+      "sha256": "93bb9e4cdacd02a12686fb2039b4dceaade46552a05e55d0336e6376d285967d"
+    }
+  ],
+  "executedLocalChecks": {
+    "bicepVersion": "0.47.16",
+    "buildLintFiles": 21,
+    "buildLintDiagnostics": 0,
+    "negativeCases": {
+      "desktopCompiled": 49,
+      "desktopInputs": 48,
+      "dnsCompiled": 16,
+      "compositionCompiled": 16,
+      "providerMetadata": 19,
+      "combinedInputCli": 17
+    },
+    "totalNegativeCases": 165,
+    "syntheticBaselines": "PASS",
+    "affectedExistingFoundationPolicies": "PASS: private services, PostgreSQL, compute/monitor, composition and inactive Entra",
+    "pythonCompilation": "PASS with temporary cache",
+    "gitleaksVersion": "8.30.1",
+    "wholeCheckoutGitleaks": "PASS after merged canonical closure: no leaks across 22.03MB checkout",
+    "localMarkdownTargetsCheckedBeforeClosure": 104,
+    "changedJsonParsedBeforeClosure": 1,
+    "protectedAccountExclusion": "PASS",
+    "diffCheck": "PASS",
+    "combinedLockedRestore": "PASS, 69 projects, no dependency/advisory warning",
+    "localMarkdownTargetsCheckedAfterClosure": 226,
+    "combinedFormat": "PASS: 69-project solution verify-no-changes, no source formatting changes",
+    "combinedReleaseBuild": "PASS: 69-project solution, zero warnings/errors"
+  },
+  "independentReview": {
+    "status": "PASS",
+    "finalRef": "84b53ebef6928dad08d402befd0ef9c791fef4bd",
+    "executed": "49/48 PA01 negatives, 16/16 DNS/composition negatives,19 provider negatives,17 actual combined CLI denials; pinned DNS/root build/lint on eb4d2c7 unchanged by final policy-only correction",
+    "correctedFindings": [
+      "Bind complete provider VNet/subnet inventories and exact protected group/NAT scope",
+      "Exact resource names/parents/dependencies and outputs reject wrapped credentials",
+      "Exact DNS link/deployment scope/parameter maps reject foreign scope and overwrite"
+    ],
+    "independentExtraProbes": "wrong subnet target, resourceId-wrapped credential, unreviewed DNS link and foreign deployment group denied"
+  },
+  "integration": {
+    "conflictFiles": [
+      "IgaMigrationTool.slnx",
+      "specs/003-health-assessment/status.md",
+      "specs/003-health-assessment/implementation-plan.md",
+      "specs/003-health-assessment/evidence-index.md"
+    ],
+    "resolution": "Preserve both additive canonical sections and unique project entries; workflow auto-merge retains both approved check sets",
+    "combinedHostedChecks": "PENDING after nonmergeable draft base reconciliation; no pass claimed",
+    "localYamlParser": "Unavailable; hosted workflow validation pending",
+    "projectEntries": 69,
+    "independentMergeReview": "PASS: exact union of both parent canonical paragraphs and 69 projects; 131 BFF changed/302 upstream changed/557 shared source blobs preserved; both workflow check sets retained",
+    "initialLocalFormat": "Initial sandbox Roslyn named-pipe bind denied; exact verify-no-changes retry with IPC permission PASS"
+  },
+  "notExecuted": [
+    "Azure resource deployment or role assignment",
+    "provider validate/what-if/quota/image/disk capability",
+    "effective NSG/platform/DNS/egress proofs",
+    "Bastion/Windows credential or routine nonadministrator account handoff",
+    "live private HTTPS/TLS/canonical origin",
+    "production BFF/provider/key/audit/identity activation",
+    "complete priced session or cleanup",
+    "public portal exposure or production release"
+  ],
+  "protectedIntakeRef": "LOCAL-INTAKE-20261002-01",
+  "postPilotPortalPlan": "plans/active/post-pilot-https-portal.md",
+  "privateBoard": {
+    "status": "BLOCKED_AUTOMATIC_APPROVAL_REVIEW",
+    "reason": "Official publishing helper credential/network action rejected for bypassing managed network proxy; exact approval is still pending",
+    "lastConfirmedBffCanonicalRef": "4346e0f",
+    "staleFor": "Current Bastion/template/deferred portal records; unrelated newer pilot publications preserved"
+  },
+  "gates": "G1\u2013G9/Milestone2 and production release remain NOT VERIFIED"
+}

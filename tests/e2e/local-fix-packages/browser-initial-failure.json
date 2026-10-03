@@ -1,0 +1,27 @@
+{
+  "schema": "v12-browser-execution-v1",
+  "status": "FAIL",
+  "checks": 1265,
+  "last": "invalid-whole-analysis-no-old-package",
+  "errorType": "TimeoutError2",
+  "groups": [
+    "V12-BROWSER actual four-presets/full-source/complete-fields/empty-unavailable",
+    "V12-BROWSER actual saved review/current detached source/original artifacts",
+    "V12-BROWSER deny-foreign-run",
+    "V12-BROWSER deny-wrong-source-review",
+    "V12-BROWSER deny-changed-displayed-artifact",
+    "V12-BROWSER deny-forged-coherent-template",
+    "V12-BROWSER deny-wrong-artifact-status",
+    "V12-BROWSER deny-missing-field",
+    "V12-BROWSER deny-extra-field",
+    "V12-BROWSER deny-duplicate-canonical-key",
+    "V12-BROWSER deny-wrong-canonical-digest",
+    "V12-BROWSER deny-foreign-option",
+    "V12-BROWSER deny-stale-finding-revision"
+  ],
+  "blockedRequests": 0,
+  "pageFaults": 0,
+  "dialogs": 0,
+  "accessibility": [],
+  "screenshots": []
+}

@@ -1,0 +1,3 @@
+PASS V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants
+NOT VERIFIED V12-PG: --portable excludes saved PostgreSQL source/review checks.
+PASS V12 independent local fix packages; checks=137

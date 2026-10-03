@@ -1,0 +1,4 @@
+# Original dependency/source/runtime copies are external preservation evidence,
+# not owned implementation. Archive them before removing this worktree.
+execution/consumed-source*/
+__pycache__/

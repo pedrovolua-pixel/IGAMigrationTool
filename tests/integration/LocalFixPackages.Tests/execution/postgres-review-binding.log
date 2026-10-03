@@ -1,0 +1,3 @@
+PASS V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants
+PASS V12-PG source/current-review/reload/no-artifact-storage/original invariants
+FAIL V12; code=owned-original-row-restored; checks=561; exception=NullReferenceException; payload-suppressed

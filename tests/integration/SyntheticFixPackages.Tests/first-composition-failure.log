@@ -1,0 +1,2 @@
+DIAGNOSTIC V11 byte-mismatch; code=full-independent-html-canonical; offset=12169; actual-count=40906; expected-count=41296
+FAIL V11; code=full-independent-html-canonical; checks=151; exception=InvalidOperationException

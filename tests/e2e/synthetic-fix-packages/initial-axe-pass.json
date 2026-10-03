@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "v11-browser-execution-v1",
+  "result": "PASS",
+  "checks": 4576,
+  "groups": [
+    "V11-BROWSER-desktop",
+    "V11-BROWSER-mobile",
+    "V11-BROWSER-reflow"
+  ],
+  "browserVersion": "145.0.7632.6",
+  "nodeVersion": "v24.21.0",
+  "playwrightVersion": "1.62.1",
+  "harnessSha256": "ab8f5144e788c5dadcce036cf376e371ca2e147b59affe105ff731ed47226baa",
+  "inputManifestSha256": "dbf3a75f1b1973807ce1fe6d097677656048e62a64cd4fe656ca81263033d06e",
+  "axeVersion": "4.13.0",
+  "axeSourceSha256": "c24f097bd2f451d4f933e8bc7d8d539f8672a2ebcb5cc9f9f3eec8ca9470a0c1",
+  "accessibility": [
+    {
+      "viewport": "desktop",
+      "fixture": "normal.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "desktop",
+      "fixture": "hostile.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "desktop",
+      "fixture": "empty.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "mobile",
+      "fixture": "normal.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "mobile",
+      "fixture": "hostile.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "mobile",
+      "fixture": "empty.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "reflow",
+      "fixture": "normal.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "reflow",
+      "fixture": "hostile.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    },
+    {
+      "viewport": "reflow",
+      "fixture": "empty.html",
+      "violations": [],
+      "incomplete": [],
+      "passes": 20
+    }
+  ],
+  "environmentStrategy": "Self-reexec explicit OS-path environment allowlist before fixture/server/Playwright load; browser uses same whitelist; no application/PG/provider setting forwarded",
+  "forwardedEnvironmentNames": [
+    "HOME",
+    "PATH",
+    "TMPDIR"
+  ],
+  "servedCount": 9,
+  "blockedCount": 0,
+  "deniedCount": 0,
+  "normalization": "HtmlEncoder numeric references: NUL becomes U+FFFD; encoded CR and CRLF retained",
+  "screenshots": [
+    {
+      "viewport": "desktop",
+      "viewportPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/desktop-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/desktop-preview.png"
+    },
+    {
+      "viewport": "mobile",
+      "viewportPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/mobile-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/mobile-preview.png"
+    },
+    {
+      "viewport": "reflow",
+      "viewportPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/reflow-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/reflow-preview.png"
+    }
+  ],
+  "limitations": [
+    "Deployed ADR sandbox/customer authorization NOT VERIFIED",
+    "Supported Windows/manual screenreader/contrast/full accessibility NOT VERIFIED",
+    "Task/CSV/review/persistence/publication/execution absent"
+  ]
+}

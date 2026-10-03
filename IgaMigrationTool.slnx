@@ -15,6 +15,7 @@
     <Project Path="src/server/modules/IdentityAuthority/IdentityAuthority.csproj" />
     <Project Path="src/server/modules/IdentitySessions/IdentitySessions.csproj" />
     <Project Path="src/server/modules/IdentityPolicy/IdentityPolicy.csproj" />
+    <Project Path="src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj" />
     <Project Path="src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
     <Project Path="src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj" />
     <Project Path="src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj" />
@@ -45,6 +46,8 @@
     <Project Path="tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj" />
     <Project Path="tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj" />
+    <Project Path="tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
+    <Project Path="tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
     <Project Path="tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
     <Project Path="tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj" />
@@ -60,6 +63,9 @@
     <Project Path="tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
     <Project Path="tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj" />
     <Project Path="tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj" />
+    <Project Path="tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
+    <Project Path="tests/unit/SyntheticFixPackageHtml.Tests/SyntheticFixPackageHtml.Tests.csproj" />
+    <Project Path="tests/unit/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
     <Project Path="tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj" />
     <Project Path="tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj" />

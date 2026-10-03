@@ -1,0 +1,4 @@
+PASS V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants
+PASS V12-PG source/current-review/reload/no-artifact-storage/original invariants
+STACK-CODES <>c__DisplayClass7_0.<Detail>b__0/EnumerableSorter`2.ComputeKeys/OrderedIterator`2.MoveNext/IteratorSelectIterator`2.Fill/IteratorSelectIterator`2.PreallocatingToArray/IteratorSelectIterator`2.ToArray/DemoReviewService.Detail/DemoAnalysisProjection.Detail
+FAIL V12; code=persisted-coherent-source-analysis-projection; checks=561; exception=NullReferenceException; payload-suppressed

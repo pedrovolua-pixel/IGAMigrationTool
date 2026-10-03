@@ -1,0 +1,70 @@
+.fix-package-preview {
+  min-width: 0;
+  margin-block: 2rem;
+  color: #17212b;
+}
+.fix-package-preview :is(h3, h4, h5, p, dt, dd, summary, li, code) {
+  overflow-wrap: anywhere;
+}
+.fix-package-preview h3:focus {
+  outline: 3px solid #003f86;
+  outline-offset: 4px;
+}
+.fix-package-preview details {
+  min-width: 0;
+  margin-block: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #687787;
+  border-radius: 0.3rem;
+}
+.fix-package-preview summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+.fix-package-preview summary:focus-visible {
+  outline: 3px solid #003f86;
+  outline-offset: 4px;
+}
+.fix-package-preview dl > div {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  gap: 0.5rem 1rem;
+  margin-block: 0.75rem;
+}
+.fix-package-preview dt {
+  font-weight: 700;
+}
+.fix-package-preview dd {
+  min-width: 0;
+  margin: 0;
+  white-space: pre-wrap;
+}
+.fix-package-preview pre {
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  padding: 0.75rem;
+  background: #f1f4f7;
+}
+.fix-package-preview code {
+  font-size: 0.9rem;
+}
+.fix-package-warning,
+.fix-package-empty {
+  padding: 0.75rem;
+  border-left: 0.3rem solid #8a3500;
+  color: #17212b;
+  background: #fff5e8;
+}
+.fix-package-preview ul {
+  padding-left: 1.5rem;
+}
+.fix-package-artifact {
+  padding-block: 0.5rem;
+  border-top: 1px solid #687787;
+}
+@media (max-width: 480px) {
+  .fix-package-preview dl > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

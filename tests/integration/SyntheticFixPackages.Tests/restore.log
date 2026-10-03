@@ -1,0 +1,5 @@
+  Determining projects to restore...
+CSSM_ModuleLoad(): One or more parameters passed to a function were not valid.
+  Restored /private/tmp/iga-cycle11-v11/tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj (in 40 ms).
+  Restored /private/tmp/iga-cycle11-v11/src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj (in 1 ms).
+  Restored /private/tmp/iga-cycle11-v11/src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj (in 1 ms).

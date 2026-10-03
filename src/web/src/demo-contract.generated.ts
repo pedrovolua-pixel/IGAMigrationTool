@@ -233,6 +233,7 @@ export type AnalysisDetail = {
   readonly reportDraft: ReportDraft | null;
   readonly recommendationGuidance: RecommendationGuidance | null;
   readonly aiPreview: AiPreviewDetail | null;
+  readonly fixPackages: FixPackageDetail | null;
 };
 
 export type ReviewKind = "Confirm" | "Reject" | "Defer" | "Comment" | "EditPresentation";
@@ -367,6 +368,7 @@ export type DraftFrozenVersions = {
   readonly analysisFixtureDigest: string;
   readonly maturityFixtureDigest: string;
   readonly desiredOutcomeVersion: string | null;
+  readonly fixPackageTemplateDigest?: "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669";
 };
 
 export type DraftModuleVersion = {
@@ -658,4 +660,56 @@ export type AiPreviewDetail = {
   readonly status: "Ready" | "Unavailable";
   readonly reasonCode: string | null;
   readonly snapshot: AiPreviewSnapshot | null;
+};
+
+export type FixTemplate = {
+  readonly templateId: string;
+  readonly kind: "Configuration" | "Script" | "Sql";
+  readonly text: string;
+};
+
+export type FixArtifact = {
+  readonly artifactId: string;
+  readonly templateId: string;
+  readonly kind: "Configuration" | "Script" | "Sql";
+  readonly status: "Unverified";
+  readonly text: string;
+};
+
+export type FixOption = {
+  readonly scopedOptionId: string;
+  readonly artifacts: ReadonlyArray<FixArtifact>;
+};
+
+export type FixPackage = {
+  readonly packageId: string;
+  readonly findingId: string;
+  readonly options: ReadonlyArray<FixOption>;
+};
+
+export type FixPackageSnapshot = {
+  readonly schemaVersion: "synthetic-fix-package-preview-v1";
+  readonly status: "Unverified";
+  readonly disclaimer: "Fictional fix-package preview. Every artifact is unverified and review-only; these generic examples are not supported One Identity remediation. No execution or approval is authorized.";
+  readonly guidance: GuidanceSnapshot;
+  readonly templateVersion: "fictional-fix-templates-v1";
+  readonly templateDigest: "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669";
+  readonly templates: ReadonlyArray<FixTemplate>;
+  readonly packages: ReadonlyArray<FixPackage>;
+  readonly warnings: ReadonlyArray<string>;
+  readonly unavailableSections: ReadonlyArray<string>;
+  readonly canonicalJson: string;
+  readonly contentDigest: string;
+};
+
+export type FixPackageDetail = {
+  readonly schemaVersion: "synthetic-fix-package-demo-v1";
+  readonly runId: string;
+  readonly runRevision: number;
+  readonly runInputDigest: string;
+  readonly baselineId: string;
+  readonly profileId: "synthetic-review-maturity-fix-packages-equal-v1";
+  readonly status: "Ready" | "Unavailable";
+  readonly reasonCode: string | null;
+  readonly snapshot: FixPackageSnapshot | null;
 };

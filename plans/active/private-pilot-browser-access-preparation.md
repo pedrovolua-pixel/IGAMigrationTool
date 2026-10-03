@@ -1,6 +1,6 @@
 # Private pilot browser access: preparation and proposed execution
 
-Status: LOCAL IMPLEMENTATION RUNNING — ADR/design and PA01–PA02 local templates approved; live deployment/tests gated
+Status: LOCAL TEMPLATES VERIFIED — PA01 and local PA02 complete; composed hosted checks pending; PA03/live deployment gated
 Owner: Azure/BFF coordinator
 Date: 2026-10-02
 Approved product/technical basis: [feature003](../../specs/003-health-assessment/product-spec.md), [technical specification](../../specs/003-health-assessment/technical-spec.md), [test plan](../../specs/003-health-assessment/test-plan.md), accepted ADR-0004/0009.
@@ -73,12 +73,19 @@ Read-only non-author auth_transport review of packet checkpoint564e42e found one
 
 ## Accepted local execution ledger — 2026-10-02
 
-PA01 RUNNING: one isolated writing worker owns only the new workstation/Bastion module and `tests/infrastructure/PrivateBrowserAccess/`. Coordinator owns shared composition, workflow, DNS module, operations instructions and all canonical records. Non-author read-only review is required before integration.
+PA01 VERIFIED (bounded local scope): one isolated writing worker owns only the new workstation/Bastion module and `tests/infrastructure/PrivateBrowserAccess/`. Coordinator owns shared composition, workflow, DNS module, operations instructions and all canonical records. Non-author read-only review is required before integration.
 
-PA02 RUNNING (local portion only): optional standalone access composition references an existing approved VNet/NAT/internal environment; derive browser DNS from actual environment metadata. Do not modify/replay the disposed foundation, bootstrap ingress or BFF host. Parameter examples remain deliberately incomplete and must be rejected before live deployment. Provider/what-if/effective-network/TLS/runtime evidence remain NOT VERIFIED.
+PA02 VERIFIED (local portion only): optional standalone access composition references an existing approved VNet/NAT/internal environment; derive browser DNS from actual environment metadata. Do not modify/replay the disposed foundation, bootstrap ingress or BFF host. Parameter examples remain deliberately incomplete and must be rejected before live deployment. Provider/what-if/effective-network/TLS/runtime evidence remain NOT VERIFIED.
 
 Required local tests: pinned Bicep0.47.16 build/lint, compiled-resource policy plus unsafe mutations, protected input validation with synthetic fixtures, affected existing infrastructure checks, JSON/link checks, whole-checkout Gitleaks8.30.1 and diff scope. No public addresses, paid Bastion fallback, customer roles, VM extensions/credentials in outputs or broad outbound rules. Exact Developer source and necessary outbound IP/port inputs have no defaults; require review proof and reject broad rules. An input approval flag is not provider/network evidence.
 
 PA03 BLOCKED FOR LIVE: exact inputs, official pinned image/capacity, owner credential handoff, complete quoted session and cleanup approval, deployable BFF composition and live identity/key/audit gates. No Azure write is authorized by local template verification.
 
 The [post-pilot HTTPS portal plan](post-pilot-https-portal.md) is deferred until the pilot has an attributed completion decision; implementation/public exposure requires a separately reviewed product/technical/test packet and ADR.
+
+
+## Verified local execution checkpoint
+
+[Executed evidence](../../docs/development/evidence/private-browser-access-implementation-20261002.json) binds the final local source84b53eb, worker97cc60b and non-author auth_transport review. Build/lint of all21 Bicep files passed with zero diagnostics. New cases:49 workstation compiled mutations,48 input negatives,16 DNS mutations,16 composition mutations,19 provider metadata negatives and17 actual combined CLI denials =165; synthetic positive baselines passed. Existing private-services/PostgreSQL/compute/monitor/foundation-composition/inactive-Entra policies passed. JSON/local links, protected-account exclusion, diff and whole-checkout Gitleaks checks executed; final canonical closure repeats them. No new runtime dependency/migration or Azure action. Four additive draft/base conflicts are reconciled for configured combined CI; no hosted pass is claimed before execution.
+
+Scope and output checker findings were corrected and independently reprobed before VERIFIED. No Windows update/agent policy was invented; official image defaults require live patch/browser readiness proof. Required input validation does not authorize deployment or prove a string review reference. Exact provider/effective network/OS/DNS/TLS/cost/cleanup and BFF/identity/key/audit cases remain NOT VERIFIED. Original preparation evidence remains historical. The private board is stale for this checkpoint because its specific publishing action remains rejected/pending approval.

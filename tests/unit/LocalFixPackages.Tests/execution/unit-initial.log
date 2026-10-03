@@ -1,0 +1,4 @@
+Unhandled exception. System.InvalidOperationException: Nullable object must have a value.
+   at System.Nullable`1.get_Value()
+   at SavedFixture.Run(String baseline, String profile) in /private/tmp/iga-cycle12-a12/tests/unit/LocalFixPackages.Tests/SavedFixture.cs:line 15
+   at Program.<Main>$(String[] args) in /private/tmp/iga-cycle12-a12/tests/unit/LocalFixPackages.Tests/Program.cs:line 250

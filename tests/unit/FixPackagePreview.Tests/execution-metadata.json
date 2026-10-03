@@ -1,0 +1,857 @@
+{
+  "packet": "B12",
+  "baseCommit": "fe0a09e24a61dfcb7885c0989942a32ba0e22b71",
+  "branch": "codex/cycle12-workspace",
+  "worktree": "/private/tmp/iga-cycle12-b12",
+  "generatedDependencyCommit": "23cf85e93d2a32a87a503240ff4c3c532f833053",
+  "generatedTypesExcludedFromOwnedCommit": true,
+  "api": {
+    "component": "FixPackagePreview({preview: FixPackageDetail|null,run: RunDetail,analysis: AnalysisDetail})",
+    "fence": "coherentFixPackages(AnalysisDetail,RunDetail): Promise<boolean>",
+    "fixedHeadingId": "fix-package-preview-heading"
+  },
+  "report": {
+    "suite": "fix-package-preview-component-v1",
+    "checks": 519,
+    "accepted": 30,
+    "denied": 315,
+    "completeMarkupSha256": "6dc7fbc0e206bd1c7a686cb6100ec3ed23050f5cee7fd9392176e8784547b771",
+    "compiledSha256": "71f5a956b42a9634763fa8e1ff5e8ff6645b4b2457467f7c5b2fd6e6fd0a2ad0",
+    "result": "PASS",
+    "limitations": "Independent literal UI primitives and ReactDOMServer; actual saved input/host/browser/async request lifecycle and production/manual acceptance are outside this component host."
+  },
+  "tools": {
+    "node": "24.21.0",
+    "npm": "11.20.0",
+    "react": "19.3.0",
+    "reactDom": "19.3.0",
+    "vite": "8.3.1",
+    "prettier": "3.9.9",
+    "typescript": "7.0.2",
+    "gitleaks": "8.30.1"
+  },
+  "checks": {
+    "lockedNpmCi": "PASS --ignore-scripts",
+    "focusedPrettier": "PASS owned TSX/CSS/verifier; generated file not formatted",
+    "typecheck": "PASS actual pinned TypeScript",
+    "currentWorkerFrontendBuild": "PASS includes generated contract check/typecheck/Vite; parent integration not mounted in worker",
+    "independentFiveArtifactOracle": "PASS",
+    "componentTests": "PASS env -i PATH only",
+    "secretScan": "PASS owned textual snapshot",
+    "npmAudit": "NOT VERIFIED: initial registry DNS failure; subsequent automatic approval review rejected metadata transmission. No retry/workaround. Coordinator owns pre-existing unchanged-lock audit evidence."
+  },
+  "attemptHistory": [
+    "Initial setup/source redirections used wrong relative working directory and failed before source creation; empty directories removed; successful final source/type/component checks followed.",
+    "First actual component execution PASS498/21/312; initial transcript retained, expected HTML authored before execution and unchanged.",
+    "After additional completion/state/readonly/async-fence cases final519/30/315PASS with unchanged independent whole markup.",
+    "Rejected public audit action was never launched; exact reason recorded separately."
+  ],
+  "limitations": [
+    "Pure frontend placeholder source hashes are independently authored wire-fence fixtures, not proof of backend saved-input validity/authorization.",
+    "Component synchronous structural guard depends on parent-awaitable SHA/identity fence before complete analysis acceptance.",
+    "Compiled artifact imports the worker absolute React JSX runtime; relocating that import changes bytes. Preserve original component/runtime closure before cleanup.",
+    "Worker frontend build does not mount new component; actual combined host/browser/current review refresh/abort/Retry/320px/zero fetches belong to coordinator/V12.",
+    "SSR preserves text serialization; client DOM control-token fidelity not inferred.",
+    "No database/provider/customer/executor/export/production sandbox/manual/full OS browser/human approval/gate evidence."
+  ],
+  "bindings": [
+    {
+      "path": "src/web/src/FixPackagePreview.tsx",
+      "kind": "owned-source",
+      "bytes": 40359,
+      "sha256": "d6ae692832b06a1afaa6447b490bc1eb6ed5c5431f077c409d172658c1461d64"
+    },
+    {
+      "path": "src/web/src/FixPackagePreview.css",
+      "kind": "owned-source",
+      "bytes": 1448,
+      "sha256": "3dc3f16a2e0dee15c3cb3ca2922be0009510546c7ef5436bf6df515ab131ca26"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/README.md",
+      "kind": "owned-source",
+      "bytes": 4936,
+      "sha256": "9301cc8ea6733efba43af52f82e4f734c7334eda5d78e2c3d1bcdd953a6d2f95"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/complete-component.html",
+      "kind": "owned-source",
+      "bytes": 16816,
+      "sha256": "6dc7fbc0e206bd1c7a686cb6100ec3ed23050f5cee7fd9392176e8784547b771"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/complete-fixture.json",
+      "kind": "owned-source",
+      "bytes": 41025,
+      "sha256": "67166d0d2deb2ee5fd2ff5e30860f17a900484bd279d4cd7f16d728d5158605b"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/empty-component.html",
+      "kind": "owned-source",
+      "bytes": 10707,
+      "sha256": "42adde52e91bb6226572e7beaa328114bc396bf6cbd4aaa956f6d3b3aa4d71eb"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/empty-fixture.json",
+      "kind": "owned-source",
+      "bytes": 25713,
+      "sha256": "eb48d2c7fcfa0ebe9f925b31cf4418d4b192c56a061e5b8e83820068c4446650"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/oracle-hashes.json",
+      "kind": "owned-source",
+      "bytes": 534,
+      "sha256": "78655f3c77773a99ec67f8659c925b99766e9a1a6c7077e3c68b7e48d4ef8207"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/oracle.py",
+      "kind": "owned-source",
+      "bytes": 18802,
+      "sha256": "3580b1282b61c48933fc1c999e860ab9f6dd57789f292f5c28e439779690e289"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/verify-evidence.py",
+      "kind": "owned-source",
+      "bytes": 694,
+      "sha256": "78655af0a386512ae22257445984404fa5c55503d648f07b3d8b2a0c8889779d"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/verify.mjs",
+      "kind": "owned-source",
+      "bytes": 24487,
+      "sha256": "15e42c4fefd12d274b6f2155f3e5bf49aee1f577f7ad68af452a59b878be5d09"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/component-final.log",
+      "kind": "transcript",
+      "bytes": 467,
+      "sha256": "5a1413ee325c8b94ee51371c01dddbeb2871c274254151965cb4296dd9a52bee"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/component-initial.log",
+      "kind": "transcript",
+      "bytes": 467,
+      "sha256": "297f533c3c84c6fc6114009e8b68fce1e3f2d532fc22de85cd08faa21ac406ea"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/format-tests.log",
+      "kind": "transcript",
+      "bytes": 51,
+      "sha256": "afa60b4c7b19bb7e40f0f6b60bb0a80b3c0cb532adee5fe644ef3f6b0ff16a3c"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/format-verify.log",
+      "kind": "transcript",
+      "bytes": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/format-write.log",
+      "kind": "transcript",
+      "bytes": 129,
+      "sha256": "5ce113558881f81383aab9348e811f43c50029e7d624a535d5f350f3209466c2"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/gitleaks-version.log",
+      "kind": "transcript",
+      "bytes": 7,
+      "sha256": "c9fd9ccb6682c54b5fcb0363757b6c6873564e7c067f70b3b5581b611528b9f4"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/gitleaks.log",
+      "kind": "transcript",
+      "bytes": 81,
+      "sha256": "3fc6b5db5e6cf6e441dd61ebc0f933b9fff778fad736e9e2d48a202a390c2cc1"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/node-version.log",
+      "kind": "transcript",
+      "bytes": 9,
+      "sha256": "f2ec568164f99546161909b0189b57bb5be3e80f8e2ccd8a51a4aed8c4055a04"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/npm-audit-initial.json",
+      "kind": "transcript",
+      "bytes": 591,
+      "sha256": "ec80ed04e526574f8e711623f1c6cd2bd1dee55133297d13b1252f44af3201e1"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/npm-audit-review-rejection.log",
+      "kind": "transcript",
+      "bytes": 678,
+      "sha256": "e0b13a3beb7c777d0d268c48d79b861c9a7452699be95edd1a09027fde6d89cf"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/npm-ci.log",
+      "kind": "transcript",
+      "bytes": 93,
+      "sha256": "a966cd8e42127fb3aa9a80ca8e0cb06159c9e4a4526896b3d2f3dbe77b399ec8"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/npm-version.log",
+      "kind": "transcript",
+      "bytes": 8,
+      "sha256": "6784d6c924df1c8341f9f841f5b5b20c37255de3d34f923baebc0a557d5d5201"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/oracle.log",
+      "kind": "transcript",
+      "bytes": 68,
+      "sha256": "78cbd8a3c380b988d026ab807aa47dced22996d708c1f4cfa083ddbf85aabf0e"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/python-version.log",
+      "kind": "transcript",
+      "bytes": 13,
+      "sha256": "fd0fd4290ad100adc37e4a82e45f821faeacbecae70f4d3eba08e85be138c632"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/typecheck.log",
+      "kind": "transcript",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/evidence/web-build.log",
+      "kind": "transcript",
+      "bytes": 635,
+      "sha256": "883924ebd6f370d714bcf60e870ef54e6971bf6d0b9d6dd31a4091b0c10a3bd4"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/artifacts/actual-complete.html",
+      "kind": "artifact",
+      "bytes": 16816,
+      "sha256": "6dc7fbc0e206bd1c7a686cb6100ec3ed23050f5cee7fd9392176e8784547b771"
+    },
+    {
+      "path": "tests/unit/FixPackagePreview.Tests/artifacts/component.mjs",
+      "kind": "artifact",
+      "bytes": 35724,
+      "sha256": "71f5a956b42a9634763fa8e1ff5e8ff6645b4b2457467f7c5b2fd6e6fd0a2ad0"
+    },
+    {
+      "path": "src/web/src/demo-contract.generated.ts",
+      "kind": "shared-source",
+      "bytes": 22727,
+      "sha256": "47f5c7de69a3dee7718f7423e1bb08743f7b8b030f4ead522768d76b36ce02dd"
+    },
+    {
+      "path": "src/web/package-lock.json",
+      "kind": "shared-source",
+      "bytes": 40559,
+      "sha256": "baefd0a0d25052138b9b2f5b080285cd242f8a981fdf31469cb57389a1a25b1d"
+    },
+    {
+      "path": "src/web/package.json",
+      "kind": "shared-source",
+      "bytes": 900,
+      "sha256": "a52d363e3358d64520696bcada6d53a352022dcca5d1c1fb876cd54d110be95d"
+    },
+    {
+      "path": "src/web/tsconfig.json",
+      "kind": "shared-source",
+      "bytes": 403,
+      "sha256": "24bd9eec94129d13041a3e64a073bb052dcece65504ed545d2f26b8fe6853ebc"
+    },
+    {
+      "path": "contracts/local-demo/demo-v1.schema.json",
+      "kind": "shared-source",
+      "bytes": 73015,
+      "sha256": "5d086daf0e5c8c925a7ef8d67b45da9fb9fbb84b770aca62bcca6ea78d620c4a"
+    },
+    {
+      "path": "contracts/local-demo/generate-types.mjs",
+      "kind": "shared-source",
+      "bytes": 1668,
+      "sha256": "9ddc28c905635e6f3097e3529fd921d3881e54c828dc5ad5ad2e7dc386984ccf"
+    },
+    {
+      "path": "specs/003-health-assessment/local-fix-package-integration-contract.md",
+      "kind": "shared-source",
+      "bytes": 9665,
+      "sha256": "14d6c480622fd5ad2c668a1ff1efc9d3ff4e004ecc630286d468f6e8c672d099"
+    },
+    {
+      "path": "docs/development/cycle11-fictional-fix-package-contract.md",
+      "kind": "shared-source",
+      "bytes": 9287,
+      "sha256": "d1c198039a8af1ba16a163a61796ca1572a1462ff26fecb396dda7601349230d"
+    },
+    {
+      "path": "src/web/dist/assets/index-CLvlV8Tw.js",
+      "kind": "worker-build",
+      "bytes": 298839,
+      "sha256": "febf107337de6d545b470c033a14f22b3d24722de7609f7c85d7296494db959b"
+    },
+    {
+      "path": "src/web/dist/assets/index-CpOgb0VH.css",
+      "kind": "worker-build",
+      "bytes": 13888,
+      "sha256": "5abce47d3fce036d146659eb76a51efae915f323816a3a5ba7e5d5670491b87a"
+    },
+    {
+      "path": "src/web/dist/index.html",
+      "kind": "worker-build",
+      "bytes": 479,
+      "sha256": "5b591572c3a027d8a30d3e8907ed6529b34fe14dc920cbf81a28f725fb71a37c"
+    },
+    {
+      "path": "src/web/node_modules/react/LICENSE",
+      "kind": "runtime",
+      "bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "path": "src/web/node_modules/react/README.md",
+      "kind": "runtime",
+      "bytes": 1158,
+      "sha256": "faf7a5814bedadb9ecabcb8cf727a3477696bb0d3a5b57d5433110aa6094b85e"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-compiler-runtime.development.js",
+      "kind": "runtime",
+      "bytes": 1090,
+      "sha256": "7ae8fa77a54c404572cba7065e14fe599a3d8cc0b68d34d649d8acc776e4e096"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-compiler-runtime.production.js",
+      "kind": "runtime",
+      "bytes": 463,
+      "sha256": "f7d518f5c043cd008514b4fd8c665a9d2fa5686bd36c6e7d44d78187c0438700"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-compiler-runtime.profiling.js",
+      "kind": "runtime",
+      "bytes": 462,
+      "sha256": "821fc2969277b5bc7814965e0ac07f815aafb3880d8bca31bcb53ce5d875edd3"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-dev-runtime.development.js",
+      "kind": "runtime",
+      "bytes": 12420,
+      "sha256": "e2a2cafea5a317645d75aaad7ca10ac2ed07c178a162a7a675f17b38c6915dd8"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-dev-runtime.production.js",
+      "kind": "runtime",
+      "bytes": 387,
+      "sha256": "ba9b367119971ed746925a600256d342eb4cc3f2389de013f61e36ff1f3594a5"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-dev-runtime.profiling.js",
+      "kind": "runtime",
+      "bytes": 386,
+      "sha256": "c89fe850b7e66b6e1a10496321ea9d778a64512960d01dccf49ff0fd5d256b20"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-dev-runtime.react-server.development.js",
+      "kind": "runtime",
+      "bytes": 14009,
+      "sha256": "cb9e0b05ed482d79a1389e562cef51cc3470cc1646cdee1d200a1414769fd0df"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-dev-runtime.react-server.production.js",
+      "kind": "runtime",
+      "bytes": 1316,
+      "sha256": "c56f744270c8cd4d733575757eaf48de91edfa04d0f5e01ef5043bf9848263b3"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-runtime.development.js",
+      "kind": "runtime",
+      "bytes": 13032,
+      "sha256": "706e324b21fcd94fb728da71b374694d0727d0baee4126011cea583f54e09106"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-runtime.production.js",
+      "kind": "runtime",
+      "bytes": 976,
+      "sha256": "1e46f15002696985e80c61d47aaa30dabb03c954270a690f5f7dfbbacfa9002b"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-runtime.profiling.js",
+      "kind": "runtime",
+      "bytes": 975,
+      "sha256": "27b2fb3d04f9878687ab58717172592650e256de727e910366340be87e0f8352"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-runtime.react-server.development.js",
+      "kind": "runtime",
+      "bytes": 14005,
+      "sha256": "cde93bd719461c3a4c4bd5f68ed5a854525a79930f70071c893c6455deff54a7"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react-jsx-runtime.react-server.production.js",
+      "kind": "runtime",
+      "bytes": 1312,
+      "sha256": "44bdd0dbbf51d5d49ac46ece12e919151c7f27b7f5b174790c4ca6aef0b6a1eb"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react.development.js",
+      "kind": "runtime",
+      "bytes": 49165,
+      "sha256": "97bef56f30daa05320514ea220d7d03eb765635519ff2d5650c4887772aa5767"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react.production.js",
+      "kind": "runtime",
+      "bytes": 18040,
+      "sha256": "6b28feb9dbe9781ab1e1b64dea7b29a7c70f03d2dc10eaa966363053d8a9b4e5"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react.react-server.development.js",
+      "kind": "runtime",
+      "bytes": 31610,
+      "sha256": "fa524524548e8843f983aa83c561d85eae324bdcde54402b425f342242a75fa3"
+    },
+    {
+      "path": "src/web/node_modules/react/cjs/react.react-server.production.js",
+      "kind": "runtime",
+      "bytes": 13809,
+      "sha256": "e4a5f60506155dae5b5b6d781a6d81c0b8c0cee4aa1e3206afb5058791e915c0"
+    },
+    {
+      "path": "src/web/node_modules/react/compiler-runtime.js",
+      "kind": "runtime",
+      "bytes": 412,
+      "sha256": "5c00456a0180b7b6b2366348f7218b0ea2c3a85c7fefe24c18533ed54126f601"
+    },
+    {
+      "path": "src/web/node_modules/react/index.js",
+      "kind": "runtime",
+      "bytes": 186,
+      "sha256": "60caffdecbdc5db3bc4ec4e83df9488345ccb271d07533b9210bf5750918d97e"
+    },
+    {
+      "path": "src/web/node_modules/react/jsx-dev-runtime.js",
+      "kind": "runtime",
+      "bytes": 218,
+      "sha256": "486589120a962721c8281b5acec2f6d49e60ce5f9d908cc814ddfe71c6163ace"
+    },
+    {
+      "path": "src/web/node_modules/react/jsx-dev-runtime.react-server.js",
+      "kind": "runtime",
+      "bytes": 244,
+      "sha256": "29cbe21640848ed3e8aebfdc47af7ff24eddcaea57b29f98958dc2c3e8fd279d"
+    },
+    {
+      "path": "src/web/node_modules/react/jsx-runtime.js",
+      "kind": "runtime",
+      "bytes": 210,
+      "sha256": "b392951a77d0a2e6a6bd017e49d768481ae5b63c4109c6c31f622cf7b2433edc"
+    },
+    {
+      "path": "src/web/node_modules/react/jsx-runtime.react-server.js",
+      "kind": "runtime",
+      "bytes": 236,
+      "sha256": "47346212fa0ec5c7f3a9ab36c658cdce7bb02d4f66f00aa5e11cadc0ee258853"
+    },
+    {
+      "path": "src/web/node_modules/react/package.json",
+      "kind": "runtime",
+      "bytes": 1242,
+      "sha256": "6e003e4e9ed25afa7fdd55613f8aa877cefa9b359d9c13f81ee704030248e24e"
+    },
+    {
+      "path": "src/web/node_modules/react/react.react-server.js",
+      "kind": "runtime",
+      "bytes": 212,
+      "sha256": "ced6f228807a193b8a0ec436304b96ca44492bae8899c3e84c2a88162843dc14"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/LICENSE",
+      "kind": "runtime",
+      "bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/README.md",
+      "kind": "runtime",
+      "bytes": 1096,
+      "sha256": "80589e00067a57cb9b4fbc618afe7aff06ff1fec7b2840dda1c1165d8bd35080"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-client.development.js",
+      "kind": "runtime",
+      "bytes": 1182785,
+      "sha256": "c10b5e5ad37ca22c88b58bf4ada9a3b655ab79934c0b5cc6bad26f42c774584f"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-client.production.js",
+      "kind": "runtime",
+      "bytes": 625168,
+      "sha256": "8a8147c1cebdb19d82fd11bdb76391be9b20d00edf67cc8e8b30f44e850ce693"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-profiling.development.js",
+      "kind": "runtime",
+      "bytes": 1199917,
+      "sha256": "98cd96a073ddff85aaa7d900d26be6d908a885bca90d8652ed457c729097c046"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-profiling.profiling.js",
+      "kind": "runtime",
+      "bytes": 699916,
+      "sha256": "8a7db04afbb35f04c8eb05e352397409ae8878b96b2619cda49b7ebcbec63528"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server-legacy.browser.development.js",
+      "kind": "runtime",
+      "bytes": 421786,
+      "sha256": "dbb08ceb2375abe0d46ed0579ff2541da49937b0097a3057fbcaaa1fbf19badf"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server-legacy.browser.production.js",
+      "kind": "runtime",
+      "bytes": 258822,
+      "sha256": "5528f58d28f5e035dccbf0ebec7e593ed0b97cebae830b838756c27c100a8caa"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server-legacy.node.development.js",
+      "kind": "runtime",
+      "bytes": 421783,
+      "sha256": "14b43d302d520ad3ee2c8199a285e3858e7b7f34be9020beb315e7d8030bcb84"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js",
+      "kind": "runtime",
+      "bytes": 264184,
+      "sha256": "bb015a96ed358f4054869f91ba8741b00e28b720cda5a40ec8d4a8bbc36ab50c"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.browser.development.js",
+      "kind": "runtime",
+      "bytes": 451470,
+      "sha256": "7fcd669e6094719222ad340aca3c0266c54598af92e983a1e0dc2c9725a7bf90"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.browser.production.js",
+      "kind": "runtime",
+      "bytes": 286554,
+      "sha256": "3e201e0287f8b51028ce52684551b32ef8fa970766a51095e6a46bdbdb55a605"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.bun.development.js",
+      "kind": "runtime",
+      "bytes": 399427,
+      "sha256": "ea265c53e966d645d69614405730fd15643a6a3ba16f157839ef4798126181f5"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.bun.production.js",
+      "kind": "runtime",
+      "bytes": 287481,
+      "sha256": "7788965c961f704b5a33be0360ecd5c90f72fca254e6caa4b9a44ba11a2b8ba2"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.edge.development.js",
+      "kind": "runtime",
+      "bytes": 452252,
+      "sha256": "ebc6faffef703916a2d78a9230177983f5d5b255621525d7aead57d069233e8f"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.edge.production.js",
+      "kind": "runtime",
+      "bytes": 292617,
+      "sha256": "44700ca18ec5fc8a3594d291fef11041f19f48a9ec643bc7f5749fd9189ec80d"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.node.development.js",
+      "kind": "runtime",
+      "bytes": 458095,
+      "sha256": "d680cbb2844e9cf2465f108dcfdad717ce370be57d37a8039db6181431f13697"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-server.node.production.js",
+      "kind": "runtime",
+      "bytes": 300544,
+      "sha256": "26b08a8d2fea78cec643ec611b55eaa5d32bfb73e82b8a4d4a9888fc51ace46d"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-test-utils.development.js",
+      "kind": "runtime",
+      "bytes": 793,
+      "sha256": "a691b913756753dd769c1559b8efbd3d8157feb4c9368d2cb4b79eba67441841"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom-test-utils.production.js",
+      "kind": "runtime",
+      "bytes": 686,
+      "sha256": "d41ce0bee80299c8330fc080936da31afa5f307dfe4912bc8a6c68f9f566d344"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom.development.js",
+      "kind": "runtime",
+      "bytes": 18481,
+      "sha256": "e4ca31557a0d93a3750438e2f78905d0ce39eff1391a6ff6df12de3a2c332f11"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom.production.js",
+      "kind": "runtime",
+      "bytes": 7326,
+      "sha256": "fd016e2c887f97b82f466ca435ae259d08cf7d4e7fef37e087963336d4770c01"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom.react-server.development.js",
+      "kind": "runtime",
+      "bytes": 14614,
+      "sha256": "c6d4d2d243ca23f890f0bd5f23e679fd7d7ac88361a1eb975458942d3fa73480"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/cjs/react-dom.react-server.production.js",
+      "kind": "runtime",
+      "bytes": 5227,
+      "sha256": "1c5935e317543d9b58874e4be12a6a73093f5215d35f99abea64948b6d147ddc"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/client.js",
+      "kind": "runtime",
+      "bytes": 1373,
+      "sha256": "00e348ab3d6bc2eef908345d0bc4e008c95bcfecec060dfda5c4967953761396"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/client.react-server.js",
+      "kind": "runtime",
+      "bytes": 101,
+      "sha256": "93fc36199826bbc50a5c79944653a6685bd3acfb9f80b587110804e92c1c964b"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/index.js",
+      "kind": "runtime",
+      "bytes": 1359,
+      "sha256": "ba1a3e33489f868371561777607e3ee5091df0f7ea3f1a10f789d6b86e4c1505"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/package.json",
+      "kind": "runtime",
+      "bytes": 3054,
+      "sha256": "136d4af63de473392ea79d6a21932b0ed9eb37fe518ce70f4621250f3d79e9bb"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/profiling.js",
+      "kind": "runtime",
+      "bytes": 1378,
+      "sha256": "8ce82daa2079581a9127bdcf2947ec4c2c87a0f12aa5db04f80a0de650e12eea"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/profiling.react-server.js",
+      "kind": "runtime",
+      "bytes": 104,
+      "sha256": "aec5671628a9cd521026187569e2bd33e60783ab5b4b4fe6bb05ee1dbbd921a5"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/react-dom.react-server.js",
+      "kind": "runtime",
+      "bytes": 220,
+      "sha256": "cdd8a1f284daf7eff271da65863c2e504bda04fd33c3cb89ad17ed952488d811"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/server.browser.js",
+      "kind": "runtime",
+      "bytes": 563,
+      "sha256": "f759460eb3571d5bf1e1a9e5ef7cb033ec5c67f25d64a6bbf5a9ac43bd25831a"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/server.bun.js",
+      "kind": "runtime",
+      "bytes": 677,
+      "sha256": "05b36175a0a2a46ffe70e9fda56a6481f10ffd42172ad2d795b82f6b0b167fbe"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/server.edge.js",
+      "kind": "runtime",
+      "bytes": 561,
+      "sha256": "a631527404b0a7bbe10aa79db04852196fd7fd88a056c1bb84cf1a1885e1e934"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/server.js",
+      "kind": "runtime",
+      "bytes": 58,
+      "sha256": "8a05db291adfdedb4e9509e524e4f499adec95f6ffb6b8d2e04ea73aa2950684"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/server.node.js",
+      "kind": "runtime",
+      "bytes": 669,
+      "sha256": "f2dd93f6f91f983cd91232098d4ac55578596d33d680d7cb9438ea3b0a611b4b"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/server.react-server.js",
+      "kind": "runtime",
+      "bytes": 101,
+      "sha256": "0b18f1c65dae3eed74e6341930d31cc68f946afb75427b1fdc65fce26b5177f3"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/static.browser.js",
+      "kind": "runtime",
+      "bytes": 319,
+      "sha256": "34433b7ad1306a49a8c34995f505586fe0752acc0d7c94d2f8f53a1654e7cae0"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/static.edge.js",
+      "kind": "runtime",
+      "bytes": 313,
+      "sha256": "82f7d5be1d84db14a79291edef511d1a008ddbf62822d5969865f203a4fb79dc"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/static.js",
+      "kind": "runtime",
+      "bytes": 58,
+      "sha256": "2ed52da7c38592c3e0677b6a87ac08c3e74a365597ae7165b79231d446f11c31"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/static.node.js",
+      "kind": "runtime",
+      "bytes": 445,
+      "sha256": "39e134ed6dc903d8972b3ae5e2aa21a8772c6a53fed34457f4dc07f6b315727b"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/static.react-server.js",
+      "kind": "runtime",
+      "bytes": 101,
+      "sha256": "53220a11ec9a9212e3372912f4f704c6c6e12dea2ee008ea01f4f4690936892a"
+    },
+    {
+      "path": "src/web/node_modules/react-dom/test-utils.js",
+      "kind": "runtime",
+      "bytes": 216,
+      "sha256": "9fe1733413e1437d8602ed78ee14e932bebc8b4193657d2430f42ff0fc529cc1"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/LICENSE",
+      "kind": "runtime",
+      "bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/README.md",
+      "kind": "runtime",
+      "bytes": 346,
+      "sha256": "e2f3a22fb7e2e18f19e9ba386b925ad23b30db03caa031c3059941367a097225"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler-unstable_mock.development.js",
+      "kind": "runtime",
+      "bytes": 13687,
+      "sha256": "de31e2407f585fd6ba00efd420485bff8b84aa6ea3ebcb870289214d27ca34b8"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler-unstable_mock.production.js",
+      "kind": "runtime",
+      "bytes": 11990,
+      "sha256": "d49069c9cfea586989b09fe16fa2b7ebdf064fd60fb7c932e9a3799f7e95cabf"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler-unstable_post_task.development.js",
+      "kind": "runtime",
+      "bytes": 4639,
+      "sha256": "34171513f5d7662f42d42c479445c2536cc02161c245b0f5083ef595f88f0e20"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler-unstable_post_task.production.js",
+      "kind": "runtime",
+      "bytes": 3974,
+      "sha256": "88e667020933b71752478d18e3f94271e9e8eb44d6dfff95ba014b06b47329be"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler.development.js",
+      "kind": "runtime",
+      "bytes": 12144,
+      "sha256": "646eb671c8585382baff16daf92fe16a4cdd10dcf1a363c58b2ae1f6bf3a2b8d"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler.native.development.js",
+      "kind": "runtime",
+      "bytes": 12327,
+      "sha256": "26401a9da7b51e0db1f506c5d1e8579081302460212d007593acdd8c5968570b"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler.native.production.js",
+      "kind": "runtime",
+      "bytes": 10869,
+      "sha256": "f6e15b1a0f7912a8dbae536f037b9c059026742f3dfe740b37bd03fc7d816d65"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/cjs/scheduler.production.js",
+      "kind": "runtime",
+      "bytes": 10181,
+      "sha256": "679adff761d31e9426604f80c0e99be44a3e6f4c6834b0218ecf0312a67c171f"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/index.js",
+      "kind": "runtime",
+      "bytes": 194,
+      "sha256": "145965504d60007bc25486ab930b0367867dcd5d579ccd343c148d69349a7cfb"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/index.native.js",
+      "kind": "runtime",
+      "bytes": 208,
+      "sha256": "f1c2fea33a9252ccba1f7c7a9310ea7c0e82f3cff1bc7c693ff153bd54175b25"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/package.json",
+      "kind": "runtime",
+      "bytes": 558,
+      "sha256": "06290718f22bcd93f29eaa1ac8d2ec9a7592ba4fec12bf1230e7cdd9a871b324"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/unstable_mock.js",
+      "kind": "runtime",
+      "bytes": 222,
+      "sha256": "152be57d0705d6043d06bda4a5b35e7c03e4cbb2b4caf3d4ae6592db3f4c5bf8"
+    },
+    {
+      "path": "src/web/node_modules/scheduler/unstable_post_task.js",
+      "kind": "runtime",
+      "bytes": 232,
+      "sha256": "2aa725364b0efa1772c01cd978ac888b655711645768bdcf5e885a0c4e435ef2"
+    },
+    {
+      "path": "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+      "kind": "runtime",
+      "bytes": 122129232,
+      "sha256": "e4b5a3af0e05c75de2eae013904145f40fe7fc2a6e6f17510128bf45cca4e79b"
+    },
+    {
+      "path": "/private/tmp/iga-npm-11.20.0/node_modules/npm/bin/npm-cli.js",
+      "kind": "runtime",
+      "bytes": 54,
+      "sha256": "8e5f6f3429f8cdbe693cdc29904e9d5a7b127a494bd15c804bd54c7403bfcbe7"
+    },
+    {
+      "path": "/private/tmp/iga-parallel-tools/gitleaks",
+      "kind": "runtime",
+      "bytes": 21324882,
+      "sha256": "ba52fb1bfabbcde42f032afad3d6e0b19dff8ed105229a16e7caa338bbc0e84f"
+    },
+    {
+      "path": "src/web/node_modules/vite/dist/node/index.js",
+      "kind": "runtime",
+      "bytes": 2670,
+      "sha256": "f109fff88512ed5cf39503b7a4b2a1de1c95bff333cb1d3635454558e3bfefc7"
+    },
+    {
+      "path": "src/web/node_modules/typescript/bin/tsc",
+      "kind": "runtime",
+      "bytes": 44,
+      "sha256": "2219f428a7e55aaf1f7ad85b9b0f0cf5078aeb76ccc9a7c6036c92d48f492ffd"
+    },
+    {
+      "path": "src/web/node_modules/typescript/lib/tsc.js",
+      "kind": "runtime",
+      "bytes": 609,
+      "sha256": "cbdfbf11c26ed00dfc073155e316a42d6d6d8a387be61006b82fa9aa93ac572e"
+    },
+    {
+      "path": "src/web/node_modules/prettier/bin/prettier.cjs",
+      "kind": "runtime",
+      "bytes": 2628,
+      "sha256": "6e922134a3c76fd4de202959bb6aef50bde0c994148075003a15569b7197906e"
+    },
+    {
+      "path": "src/web/node_modules/@rolldown/binding-darwin-arm64/rolldown-binding.darwin-arm64.node",
+      "kind": "runtime",
+      "bytes": 16703408,
+      "sha256": "3d3a04898915d7dcd6809ca15c0f02d20fd07ab28b58863a3889e5f61d6620de"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "v12-coordinator-compiled-frontend-consumption-v1",
+  "authorizedCheckpoint": "b07195e1933f713c3dc5a3a4239f1fd89e37af6a",
+  "assets": [
+    {
+      "original": "/private/tmp/iga-cycle12-coordinator/src/web/dist/assets/index-C18uCdkl.js",
+      "consumed": "/private/tmp/iga-cycle12-v12/src/web/dist/assets/index-C18uCdkl.js",
+      "sha256": "62cb7b92eaa1420e062f68fe708221ab7ffcf9f1b66f9713335b0bf139f19fd8",
+      "bytes": 325306
+    },
+    {
+      "original": "/private/tmp/iga-cycle12-coordinator/src/web/dist/assets/index-C6Pp_Dqf.css",
+      "consumed": "/private/tmp/iga-cycle12-v12/src/web/dist/assets/index-C6Pp_Dqf.css",
+      "sha256": "e97830f3d4426eacd6a39313d0456dbe3132fa90031bd56c170dcf4cfb755c2c",
+      "bytes": 15090
+    },
+    {
+      "original": "/private/tmp/iga-cycle12-coordinator/src/web/dist/index.html",
+      "consumed": "/private/tmp/iga-cycle12-v12/src/web/dist/index.html",
+      "sha256": "05668516756b2457762f41d659fb529a23d986f355509c9f5f4bc2d331a2158a",
+      "bytes": 479
+    }
+  ]
+}

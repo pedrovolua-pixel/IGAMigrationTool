@@ -317,6 +317,10 @@ internal static class DemoProjection
                 {
                     new { name = "Frozen offline AI contents", version = "synthetic-ai-demo-fixture-v1", sha256 = versions.AiPreviewFixtureDigest },
                     new { name = "Offline AI configuration template", version = "synthetic-ai-configuration-v1", sha256 = DemoAiPreviewCatalog.PacketTemplateDigest }
+                })
+                .Concat(!DemoFixPackageCatalog.MatchesFrozenFixture(run) || versions.FixPackageTemplateDigest is null ? [] : new[]
+                {
+                    new { name = "Fictional fix-package templates", version = DemoFixPackageCatalog.TemplateVersion, sha256 = versions.FixPackageTemplateDigest }
                 }),
             warnings = PermissionWarnings(run.Plan.HasPermissionWarning),
             stateCounts = run.Progress.TerminalStateCounts.Select(item => new { state = item.State.ToString(), item.Count }),

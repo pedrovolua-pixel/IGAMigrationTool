@@ -1,6 +1,6 @@
 # Bastion development access handoff
 
-Status: LOCAL TEMPLATE WORK — live access not deployed or verified
+Status: LOCAL TEMPLATES VERIFIED — live access not deployed or verified
 Date: 2026-10-02
 Authority: [accepted bounded ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md) and [execution/test plan](../../plans/active/private-pilot-browser-access-preparation.md).
 

@@ -114,6 +114,19 @@ jobs:
           dotnet run --project tests/unit/LocalAiPreview.Tests --configuration Release --no-build
           dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-build
           dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-build -- --postgres
+      - name: Check fictional unverified fix packages and inert HTML
+        run: |
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+      - name: Check saved-source fictional fix-package workspace projection
+        env:
+          IGA_FIX_PACKAGE_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle12_v12;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle12_v12
+          dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-build -- --portable
+          dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-build
       - name: Check canonical unverified recommendation guidance
         run: dotnet run --project tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build
       - name: Check independent recommendation identities, originals and saved review bridge
@@ -154,7 +167,7 @@ jobs:
           test -n "$node_digest"
           echo "$node_digest  $RUNNER_TEMP/node.tar.gz" | sha256sum -c -
           tar -xzf "$RUNNER_TEMP/node.tar.gz" -C "$RUNNER_TEMP"
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           npm install --prefix "$RUNNER_TEMP/approved-npm" npm@11.20.0 --ignore-scripts --no-audit --no-fund
           npm_cli="$RUNNER_TEMP/approved-npm/node_modules/npm/bin/npm-cli.js"
           cd src/web
@@ -164,14 +177,19 @@ jobs:
           node "$npm_cli" audit --audit-level=low
       - name: Check independent offline AI preview component
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           python3 tests/unit/AiProposalPreview.Tests/oracle.py --verify
           node tests/unit/AiProposalPreview.Tests/verify.mjs
+      - name: Check independent fictional fix-package component
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/unit/FixPackagePreview.Tests/oracle.py --verify
+          node tests/unit/FixPackagePreview.Tests/verify.mjs
       - name: Check consultant browser flow and recovery
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           npm_cli="$RUNNER_TEMP/approved-npm/node_modules/npm/bin/npm-cli.js"
           docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_ci_demo
           node "$npm_cli" ci --prefix tests/e2e/consultant-demo --ignore-scripts
@@ -186,7 +204,7 @@ jobs:
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           export IGA_DOTNET="$(command -v dotnet)"
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
@@ -195,7 +213,7 @@ jobs:
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v5;Username=iga_synthetic
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           export IGA_DOTNET="$(command -v dotnet)"
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
@@ -204,7 +222,7 @@ jobs:
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v6;Username=iga_synthetic
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           export IGA_DOTNET="$(command -v dotnet)"
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
@@ -213,7 +231,7 @@ jobs:
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v7;Username=iga_synthetic
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           export IGA_DOTNET="$(command -v dotnet)"
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
@@ -222,7 +240,7 @@ jobs:
         env:
           IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v10;Username=iga_synthetic
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           export IGA_DOTNET="$(command -v dotnet)"
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
@@ -230,9 +248,24 @@ jobs:
           node tests/e2e/local-ai-preview/verify.mjs
       - name: Check actual inert offline AI preview browser
         run: |
-          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
           dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-build -- --write-previews "$RUNNER_TEMP/ai-preview"
           node tests/e2e/synthetic-ai-preview/verify.mjs --preview-directory "$RUNNER_TEMP/ai-preview" --playwright-module "$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright"
+      - name: Check actual inert fictional fix-package browser
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll --write-previews "$RUNNER_TEMP/fix-packages"
+          node tests/e2e/synthetic-fix-packages/verify.mjs --preview-directory "$RUNNER_TEMP/fix-packages" --playwright-module "$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+      - name: Check fictional fix packages in the consultant workspace
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle12_v12;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          export IGA_PLAYWRIGHT_MODULE="$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+          node tests/e2e/local-fix-packages/verify.mjs
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
       - name: Check collector host contract
@@ -327,12 +360,24 @@ jobs:
           dotnet run --project tests/unit/SyntheticAiPreview.Tests --configuration Release --no-restore
           dotnet run --project tests/unit/SyntheticAiPreviewHtml.Tests --configuration Release --no-restore
           dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-restore
+      - name: Check Windows fictional fix packages and inert HTML
+        run: |
+          dotnet build tests/unit/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+          dotnet build tests/unit/SyntheticFixPackageHtml.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
+          dotnet build tests/integration/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
       - name: Check Windows fixed offline AI workspace source
         run: |
           dotnet run --project tests/unit/LocalAiPreview.Tests --configuration Release --no-restore
           dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-restore
+      - name: Check Windows fictional fix-package workspace sources
+        run: |
+          dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-restore -- --portable
       - name: Check Windows collector host and protected key behavior
         run: dotnet run --project tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-build
       - name: Publish self-contained collector
