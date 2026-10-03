@@ -758,3 +758,8 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 ### Cycle04 closure confirmed
 
 [The exact closure receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-closure-20261003.json) closes the bounded plan after private version100 deployment, source/runtime/native preservation and removal of four own worktrees. The next real source/authority contract and all operational/full acceptance limits remain open.
+
+
+## Phase 1D preparation checkpoint — 2026-10-03
+
+[The bounded preparation plan](../../plans/active/local-pilot-phase1d-preparation.md) and [exact decision packet](local-phase1d-decision-packet.md) make IP-HAS-012/Milestone11's first local contract reviewable. The approved local track permits fictional published fixtures and authorization doubles; source drafts cannot be relabeled published. P1D-D01–03 remain proposed and dependent code is blocked on exact local technical/security-owner approval. This checkpoint changes no Milestone11 checkbox, public/client contract, production authorization or G1–G9 state. Actual Phase1C immutable reader and live MCP controls remain later integration/activation inputs.

@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-03",
+  "scope": "Phase1D documentary preparation only",
+  "files": {
+    "specs/003-health-assessment/local-phase1d-contract-proposal.md": {
+      "sha256": "ab5612319f198d83e9bdae129a83856072cf325f39ffadb58bdb91ace090badb",
+      "bytes": 13960
+    },
+    "specs/003-health-assessment/local-phase1d-test-plan.md": {
+      "sha256": "bef8b014485b5ff3ae5a679b5d415272e4034c4669484f77152d285ee1e063a1",
+      "bytes": 7328
+    },
+    "specs/003-health-assessment/local-phase1d-decision-packet.md": {
+      "sha256": "2a56077860efaf8020b45b661551c612b94970cb7987deadbe8aee7ac2709151",
+      "bytes": 3467
+    },
+    "plans/active/local-pilot-phase1d-preparation.md": {
+      "sha256": "bd7f321f4783c7e9347c910c87b62eb172db6a4beadcd363cfd72e63698cc7d0",
+      "bytes": 5979
+    }
+  },
+  "links": [
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "product-spec.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "technical-spec.md#phase-1d-mcp",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "../../docs/security/health-assessment-authorization-matrix.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "../../plans/active/one-identity-local-pilot-build.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "../../architecture/decisions/ADR-0001-pilot-application-shape.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "../../architecture/decisions/ADR-0002-pilot-tenant-isolation.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "../../architecture/decisions/ADR-0003-immutable-evidence-and-publication-storage.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "../../architecture/decisions/ADR-0004-azure-pilot-technology-platform.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "../../docs/security/health-assessment-audit-policy.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "local-phase1d-test-plan.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "target": "local-phase1d-decision-packet.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-test-plan.md",
+      "target": "local-phase1d-contract-proposal.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-test-plan.md",
+      "target": "test-plan.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-test-plan.md",
+      "target": "../../plans/active/local-pilot-phase1d-preparation.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-decision-packet.md",
+      "target": "local-phase1d-contract-proposal.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-decision-packet.md",
+      "target": "local-phase1d-test-plan.md",
+      "exists": true
+    },
+    {
+      "source": "specs/003-health-assessment/local-phase1d-decision-packet.md",
+      "target": "../../plans/active/local-pilot-phase1d-preparation.md",
+      "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../specs/003-health-assessment/local-phase1d-contract-proposal.md",
+      "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../specs/003-health-assessment/local-phase1d-test-plan.md",
+      "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../specs/003-health-assessment/local-phase1d-decision-packet.md",
+      "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../docs/development/parallel-agent-workflow.md",
+      "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../specs/003-health-assessment/local-phase1d-decision-packet.md",
+      "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../docs/development/evidence/phase1d-preparation-20261003.json",
+      "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../docs/development/evidence/phase1d-preparation-site-20261003.json",
+      "exists": true
+    }
+  ],
+  "testIds": [
+    "P1D-T01",
+    "P1D-T02",
+    "P1D-T03",
+    "P1D-T04",
+    "P1D-T05",
+    "P1D-T06",
+    "P1D-T07",
+    "P1D-T08",
+    "P1D-T09",
+    "P1D-T10",
+    "P1D-T11",
+    "P1D-T12"
+  ],
+  "unexecuted": "All P1D runtime tests; build/unit/integration/E2E/package/cloud not applicable to docs-only packet; full milestone/gates NOT VERIFIED",
+  "publication": "PENDING separate native receipt",
+  "checks": {
+    "localDocumentLinks": "PASS",
+    "testDecisionTraceability": "PASS",
+    "UTF8LFAndWhitespace": "PASS",
+    "runtime": "NOT RUN",
+    "gitleaks": {
+      "version": "8.30.1",
+      "result": "PASS",
+      "scope": "exact authored packet and additive canonical entries"
+    },
+    "gitDiffCheck": "PASS staged exact packet and owned canonical additions after removing Markdown trailing spaces"
+  },
+  "independentReview": {
+    "reviewer": "V-D1 / mcp_readiness_review",
+    "scope": "read-only approved prerequisites and four-document packet",
+    "initialFindings": [
+      "Read-blocking hold semantics",
+      "Separate current evidence availability from frozen publication hash",
+      "Retry audit per distinct invocation"
+    ],
+    "result": "All corrected; re-review no remaining actionable documentary findings",
+    "humanApproval": "PENDING; agent review grants no approval"
+  },
+  "originalCheckFailures": [
+    "Initial git diff --cached --check rejected Markdown two-space line breaks in new packet metadata; removed trailing spaces and reran."
+  ]
+}

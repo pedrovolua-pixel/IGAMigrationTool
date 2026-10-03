@@ -221,3 +221,8 @@ Residual FR-HAS-12/15 collaboration is allocated to the separately owned Phase1C
 
 
 - [Cycle04 final closure receipt](../../docs/development/evidence/m08-evaluation-workflow-cycle04-closure-20261003.json): succeeded owner-private version100, exact pushed Site source/archive, twelve preserved human tasks/sixteen unowned panels, three viewport checks, rehashed native source/runtime/failures and four own worktree removals. Full/hosted/manual/live limitations remain unverified.
+
+
+## Phase 1D preparation evidence — 2026-10-03
+
+[Preparation evidence](../../docs/development/evidence/phase1d-preparation-20261003.json) binds the proposal/test/decision documents, independent documentary corrections and executed scoped checks. [Private publication receipt](../../docs/development/evidence/phase1d-preparation-site-20261003.json) records exact pushed Site source, native deployment/access and card/link/reflow preservation checks separately. This is document-preparation evidence only; P1D-D01–03 approval is PENDING, no runtime suite ran, and full Milestone11/Phase1D/UAT/G1–G9 remain NOT VERIFIED.
