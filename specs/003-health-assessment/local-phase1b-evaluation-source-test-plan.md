@@ -1,7 +1,7 @@
 # Local Phase1B evaluation source capture test plan
 
-Status: DRAFT expectations before implementation — nonauthor review and coordinator freeze pending  
-Date: 2026-10-03  
+Status: DRAFT expectations before implementation — nonauthor review and coordinator freeze pending
+Date: 2026-10-03
 Contract: [capture-only contract](local-phase1b-evaluation-source-contract.md). Approved basis: [Phase1B approval](local-phase1b-approval.md), [evaluation plan](evaluation-plan.md), FR-HAS-11/13/50–53, bounded AC-HAS-12/19 and TP-HAS-012/019. Tests provide engineering evidence only.
 
 ## Literal expectations

@@ -1,8 +1,8 @@
 # Local Phase1B evaluation source capture contract
 
-Status: DRAFT engineering contract — dependent implementation awaits coordinator freeze and nonauthor review  
-Date: 2026-10-03  
-Scope: Cycle05 capture-only packet; approved Phase1B read boundaries, FR-HAS-11/13/50–53 and bounded AC-HAS-12/19/TP-HAS-012/019.  
+Status: DRAFT engineering contract — dependent implementation awaits coordinator freeze and nonauthor review
+Date: 2026-10-03
+Scope: Cycle05 capture-only packet; approved Phase1B read boundaries, FR-HAS-11/13/50–53 and bounded AC-HAS-12/19/TP-HAS-012/019.
 Authority: [Phase1B approval](local-phase1b-approval.md), [evaluation procedure](evaluation-plan.md), [cycle04 next dependency](local-evaluation-workflow-verification.md), accepted ADR0001–0004, [paired expectations](local-phase1b-evaluation-source-test-plan.md).
 
 This routine local engineering slice exposes a verified in-memory capture from the existing saved fictional Phase1B run. It is not the source-backed review workflow, sampling manifest, current reviewer/evidence authority integration or live adapter called for by cycle04. It creates no permission, host route, UI, migration, persistence, customer source or acceptance result. The immutable cycle04 120/100 population and contracts remain unchanged.
