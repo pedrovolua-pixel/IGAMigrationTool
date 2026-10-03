@@ -2,15 +2,17 @@
 import assert from "node:assert/strict";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { createHash, randomUUID } from "node:crypto";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import {
   chromium,
   request,
-} from "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/tests/e2e/consultant-demo/node_modules/playwright/index.mjs";
+} from "../consultant-demo/node_modules/playwright/index.mjs";
 
 const url = process.env.WF04_URL ?? "http://127.0.0.1:5184";
 const evidence =
   process.env.WF04_EVIDENCE ??
-  "/private/tmp/iga-m08-cycle04-evidence/verification";
+  join(tmpdir(), "iga-m08-cycle04-evidence", "verification");
 await mkdir(evidence, { recursive: true });
 const expected = JSON.parse(
   await readFile(
@@ -252,8 +254,9 @@ try {
   );
 
   browser = await chromium.launch({
-    executablePath:
-      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    ...(process.env.WF04_CHROMIUM_PATH
+      ? { executablePath: process.env.WF04_CHROMIUM_PATH }
+      : {}),
     headless: true,
   });
   const page = await browser.newPage();
