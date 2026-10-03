@@ -23,6 +23,9 @@ internal sealed class Fixture : IPublicationReader, IReadPolicy, IMcpAudit, IMon
     internal int ManifestReads, ItemReads, PolicyCalls;
     internal readonly List<McpAuditEvent> Events = new();
     internal readonly List<OperationalFailure> Failures = new();
+    internal readonly Dictionary<string, ManifestSource> ScopedManifests = new(StringComparer.Ordinal);
+    internal ManualResetEventSlim? AuditGate;
+    internal CountdownEvent? AuditsEntered;
     internal readonly McpHarness Harness;
 
     internal Fixture(int coverage = 3, int textRepeat = 1, bool unicode = false)
@@ -90,6 +93,17 @@ internal sealed class Fixture : IPublicationReader, IReadPolicy, IMcpAudit, IMon
         }
     }
     internal static string Hash(byte[] bytes) => Convert.ToHexStringLower(SHA256.HashData(bytes));
+    internal ManifestSource ForCustomer(string customer)
+    {
+        if (ScopedManifests.TryGetValue(customer, out var result)) return result;
+        using var original = JsonDocument.Parse(Manifest.Bytes.AsMemory());
+        var values = original.RootElement.EnumerateObject().ToDictionary(p => p.Name, p => (object?)p.Value.Clone(), StringComparer.Ordinal);
+        values["customerId"] = customer;
+        var bytes = Canonical(values);
+        result = new(bytes.ToImmutableArray(), Hash(bytes));
+        ScopedManifests.Add(customer, result);
+        return result;
+    }
     internal static byte[] Request(ResourceKind kind = ResourceKind.Coverage, int? size = null, string? cursor = null)
     {
         var value = new Dictionary<string, object?> { ["contractVersion"] = "synthetic-published-health-read-v1", ["resourceKind"] = kind.ToString(), ["assessmentId"] = "syn-assessment", ["reportVersionId"] = "syn-report" };
@@ -135,7 +149,7 @@ internal sealed class Fixture : IPublicationReader, IReadPolicy, IMcpAudit, IMon
         Interlocked.Increment(ref ManifestReads);
         if (Block is not null) await Block.Task; // Deliberately ignores cancellation to test boundary deadline/release.
         if (ThrowSource) throw new InvalidOperationException("protected-source-sentinel");
-        return MissingSource ? null : Manifest;
+        return MissingSource ? null : ScopedManifests.GetValueOrDefault(scope.CustomerId, Manifest);
     }
     public ValueTask<ImmutableArray<byte>?> ReadItemAsync(Scope scope, string reportVersionId, ResourceKind kind, string itemId, CancellationToken token)
     {
@@ -145,6 +159,11 @@ internal sealed class Fixture : IPublicationReader, IReadPolicy, IMcpAudit, IMon
     public bool Complete(McpAuditEvent auditEvent)
     {
         lock (Events) Events.Add(auditEvent);
+        if (auditEvent.Outcome == McpOutcome.Unavailable && AuditGate is not null)
+        {
+            AuditsEntered?.Signal();
+            AuditGate.Wait();
+        }
         if (ThrowAudit) throw new InvalidOperationException("protected-audit-sentinel");
         return AuditAvailable;
     }
