@@ -1,7 +1,7 @@
 {
   "schemaVersion": "m08-population-provenance-cycle06-v1",
   "date": "2026-10-03",
-  "status": "VERIFIED bounded local engineering; hosted/private-site completion recorded separately",
+  "status": "VERIFIED bounded local and hosted engineering; owner-private publication and preservation confirmed; full milestone open",
   "sourceCommit": "2d7f1020219fef07f174d45b39d22b946415ffa0",
   "testedRuntimeSource": "e0a3eb4f97267a5cea6e13bbae5ff09eff360b64",
   "documentationOnlyBridge": [
@@ -524,5 +524,10 @@
     "No hash collision injection or exhaustive transient/internal forged-source/coherence mutation testing",
     "Fictional-only; full M08/Phase1C/TP-HAS-012/019/UAT/G1-G9 remain open",
     "Historical direct Mac apphost child3142 termination not confirmed; actual guarded entrypoint passed and unrelated processes preserved"
-  ]
+  ],
+  "completionObservations": [
+    "docs/development/evidence/m08-population-provenance-cycle06-hosted-20261003.json",
+    "docs/development/evidence/m08-population-provenance-cycle06-site-20261003.json"
+  ],
+  "successfulFinalApplicableLocalChecks": 27
 }

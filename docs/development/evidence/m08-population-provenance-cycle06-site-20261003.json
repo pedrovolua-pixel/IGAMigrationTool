@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "m08-population-provenance-cycle06-site-v1",
+  "date": "2026-10-03",
+  "status": "CONFIRMED owner-private deployment; bounded engineering cycle complete",
+  "repositorySourceSnapshot": "e3590d6668fc124d6ff8d9388e22f35c0c8d09b2",
+  "deployment": {
+    "id": "appgdep_6ac17f59e7f481919fc35fd33c0b53a2",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_a37c4434f9dc8191acc504d6523c58e8",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T22:19:12.276878+00:00"
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_a37c4434f9dc8191acc504d6523c58e8",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "version_number": 111,
+    "source": {
+      "commit_sha": "2ce6398945b4cc81f2d5794ef0a607952e8ac4d9"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000192481f585dc479d9f4ffd7b",
+      "content_hash": "sha256:1b40db0234d126bf81105b4bf9c727f8b89181ddcc5d37a69dac5cd6ad7bac6d",
+      "size_bytes": 122880,
+      "file_count": 2
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6ac17f59e7f481919fc35fd33c0b53a2"
+  },
+  "siteSource": {
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "checkout_path": "/private/tmp/iga-m08-cycle03-site",
+    "commit_sha": "2ce6398945b4cc81f2d5794ef0a607952e8ac4d9",
+    "archive": "/private/tmp/iga-m08-cycle06-evidence/site/pilot-cycle06.tar.gz"
+  },
+  "audience": {
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "users": 1,
+    "groups": 0,
+    "externalVisitors": 0,
+    "revision": 1,
+    "preservedOwnerOnly": true
+  },
+  "localSiteQA": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "preservation": {
+    "openingSiteCommit": "7a055365a5b65dcacf5bfdbf77f2b450decfd4b7",
+    "beforeSha256": "9801edbee34d3c613ecdd1fcc86981d24c798de65dd78c1c93e398a8dc7c17ee",
+    "afterSha256": "8a97262309488801d197a2fb738dfb9e65732bf320c04d619d46ed0fe149e240",
+    "humanCards": 13,
+    "allHumanCardsByteIdentical": true,
+    "unownedPanelsByteIdentical": 25,
+    "ownPriorPhase1CParagraphUpdated": true,
+    "phase1DPanelAndTaskRecordsPreserved": true,
+    "finalHostedTextRecorded": true
+  },
+  "archiveVerification": {
+    "status": "PASS",
+    "commit": "2ce6398945b4cc81f2d5794ef0a607952e8ac4d9",
+    "members": [
+      "._dist",
+      "dist",
+      "dist/._index.html",
+      "dist/index.html",
+      "dist/._.openai",
+      "dist/.openai",
+      "dist/.openai/._hosting.json",
+      "dist/.openai/hosting.json"
+    ],
+    "sha256": "d2a76420753970fa425ea4527c2e92532f841f9b04829e249072a3c2450e7829",
+    "htmlSha256": "8a97262309488801d197a2fb738dfb9e65732bf320c04d619d46ed0fe149e240",
+    "manifestProjectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32"
+  },
+  "worktreeCleanup": {
+    "status": "PASS",
+    "coordinatorCleanCommit": "e3590d6668fc124d6ff8d9388e22f35c0c8d09b2",
+    "exactExecutedRuntimeArchiveSha256": "1115c215debe318a56308f27bd843ea2583c7a356e72b0e61dec5ab088fb77d4",
+    "coordinatorWorktreeRemoved": true,
+    "writingWorkerWorktreesRemoved": true,
+    "sourceBranchesAndDatabasesRetained": true,
+    "unrelatedWorktreesAndProcessesUntouched": true
+  },
+  "exactRuntimePreservation": [
+    {
+      "receipt": "preservation/source-runtime-preservation.json",
+      "sha256": "c4fd4cc37496373c7335062cbae2d259cdd7d6a47d336657c8d4a158f68781ff"
+    },
+    {
+      "receipt": "preservation/workers-runtime-preservation.json",
+      "sha256": "2d33f4a3011f0785f1eed2a914b5c190634be7234a6a766ba3a9b3e85c6ab7ab"
+    },
+    {
+      "receipt": "preservation/worktree-cleanup.json",
+      "sha256": "fddc7aab0e34245402114e9724e4501273f66c69d0b662af3a8c752bf68828f4"
+    }
+  ],
+  "independentClosureReview": {
+    "receipt": "runtime-review/closure-review.json",
+    "sha256": "05413c237a46de5c46f8da91c561f36328712d77d84db11f3bc084467660d9e6"
+  },
+  "nativeEvidenceRoot": "work/m08-cycle06-evidence",
+  "humanTasksOpen": 13,
+  "milestone08Phase1CAndLiveGates": "NOT VERIFIED; ten sampler bindings and actual reviewer qualification/context/access remain missing",
+  "sourceChanges": "No migration, new package version, configuration default, host/UI/API/provider or production activation"
+}
