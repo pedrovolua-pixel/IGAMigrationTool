@@ -23,8 +23,10 @@ internal static class Program
         [ResourceKind.Recommendations] = ["itemId", "category", "findingId", "summary", "options", "priority", "effort", "reviewLabel"],
         [ResourceKind.ProtectedReferences] = ["itemId", "category", "availability", "reason", "currentAvailability", "availabilityReason"]
     };
-    private static async Task Main()
+    private static async Task Main(string[] args)
     {
+        if (args.Contains("--audit-deadline-probe", StringComparer.Ordinal)) { var probe = new World(); probe.Audit.OnComplete = () => probe.Clock.Value = TimeSpan.FromSeconds(5); var observed = await probe.Host.ReadAsync(User, Request(size: 1)); Console.WriteLine($"OBSERVATION audit advances monotonic clock to deadline: {observed.Outcome}, content={!observed.Envelope.IsDefaultOrEmpty}, completion={probe.Audit.Events.Single().Outcome}"); return; }
+        if (args.Contains("--audit-cancellation-probe", StringComparer.Ordinal)) { var probe = new World(); using var token = new CancellationTokenSource(); probe.Audit.OnComplete = token.Cancel; var observed = await probe.Host.ReadAsync(User, Request(size: 1), token.Token); Console.WriteLine($"OBSERVATION cancellation after synchronous terminal completion begins: {observed.Outcome}, content={!observed.Envelope.IsDefaultOrEmpty}, completion={probe.Audit.Events.Single().Outcome}, tokenCancelled={token.IsCancellationRequested}"); return; }
         await T01(); await T02(); await T03(); await T04(); await T05(); await T06();
         await T07(); await T08(); await T09(); await T10(); await T11();
         Console.WriteLine($"PASS independent SyntheticMcp integration: {checks} assertions; P1D-T01–11 executable coverage; T12 coordinator source-bound checks");
@@ -105,6 +107,10 @@ internal static class Program
             Denied(await world.Host.ReadAsync(User, Request()), "T02 altered canonical binding " + field);
             Check(world.Source.ItemReads == 0, "T02 integrity precedes payload " + field);
         }
+        foreach (var field in new[] { "customerId", "projectId", "environmentId", "assessmentId", "reportVersionId" })
+        {
+            var world = new World(); var manifest = JsonNode.Parse(world.Source.Manifest)!; manifest[field] = "syn-wrong-scope"; world.Source.Manifest = Canonical(manifest); world.Rebind(); Denied(await world.Host.ReadAsync(User, Request()), "T02 semantically wrong trusted scope " + field); Check(world.Source.ItemReads == 0, "T02 scope mismatch before protected loads");
+        }
         foreach (var mutation in new Action<JsonNode>[] { n => n.AsObject().Remove("baselineVersion"), n => n["fixtureKind"] = "ReportDrafts", n => n["assessmentState"] = "Scoring", n => n["approvalState"] = "Pending", n => n["unknown"] = "PROTECTED-SENTINEL", n => n["items"]!.AsArray().Add(n["items"]![0]!.DeepClone()), n => n["collections"]![0] = "Scores" })
         {
             var world = new World(); var manifest = JsonNode.Parse(world.Source.Manifest)!; mutation(manifest); world.Source.Manifest = Canonical(manifest); world.Rebind();
@@ -114,17 +120,27 @@ internal static class Program
         {
             var world = new World(); change(world); Denied(await world.Host.ReadAsync(User, Request()), "T02 digest/noncanonical bytes");
         }
+        foreach (var (id, field, value, kind) in new[] { ("syn-status", "assessmentState", "Completed", ResourceKind.PublishedStatus), ("syn-status", "approvalState", "Pending", ResourceKind.PublishedStatus), ("syn-score", "reason", "Unavailable", ResourceKind.Scores), ("syn-finding-a", "severity", "PROTECTED-SENTINEL", ResourceKind.Findings), ("syn-finding-a", "reviewState", "Running", ResourceKind.Findings), ("syn-rec-a", "findingId", "syn-foreign-finding", ResourceKind.Recommendations) })
+        {
+            var world = new World(); var node = JsonNode.Parse(world.Source.Payloads[id])!; node[field] = value; world.UpdatePayload(id, node); Denied(await world.Host.ReadAsync(User, Request(kind)), "T02 semantic payload " + field);
+        }
+        var missingRef = new World(); var finding = JsonNode.Parse(missingRef.Source.Payloads["syn-finding-a"])!; finding["referenceIds"] = new JsonArray("syn-foreign-ref"); missingRef.UpdatePayload("syn-finding-a", finding); Denied(await missingRef.Host.ReadAsync(User, Request()), "T02 unproven reference linkage");
+        var tooLarge = new World(); var largeRec = JsonNode.Parse(tooLarge.Source.Payloads["syn-rec-a"])!; largeRec["options"] = new JsonArray(Enumerable.Repeat("Fictional option.", 5000).Select(value => JsonValue.Create(value)).ToArray()); tooLarge.UpdatePayload("syn-rec-a", largeRec); Check(tooLarge.Source.Payloads["syn-rec-a"].Length > 65536, "T02 payload bound independent size"); Denied(await tooLarge.Host.ReadAsync(User, Request(ResourceKind.Recommendations)), "T02 source payload size bound");
         var absent = new World(); absent.Source.Absent = true; Denied(await absent.Host.ReadAsync(User, Request()), "T02 absent source", McpOutcome.Unavailable); Check(absent.Source.ManifestReads == 1 && absent.Source.ItemReads == 0, "T02 no source fallback");
     }
     private static async Task T03()
     {
         foreach (var deny in new Action<Policy>[] { p => p.NullGrant = true, p => p.ActiveIdentity = false, p => p.ActiveAssignment = false, p => p.CustomerPolicy = false, p => p.ResourceAvailable = false, p => p.ReadBlocked = true, p => p.ActionAllowed = false })
         {
-            var world = new World(); deny(world.Policy); Denied(await world.Host.ReadAsync(User, Request()), "T03 denied authority", McpOutcome.Unavailable); Check(world.Source.ManifestReads == 0 && world.Source.ItemReads == 0, "T03 deny before reads");
+            var world = new World(); deny(world.Policy); Denied(await world.Host.ReadAsync(User, Request()), "T03 denied authority", McpOutcome.Unavailable); Check(world.Source.ManifestReads == 0 && world.Source.ItemReads == 0, "T03 deny before reads"); Check(world.Audit.Events.Count == 1 && world.Audit.Events[0].Scope is null, "T03 unauthorized denial audit scope omitted");
         }
         foreach (var kind in new[] { IdentityKind.Anonymous, IdentityKind.ShareLink, IdentityKind.Support, IdentityKind.Workload, (IdentityKind)999 })
         {
             var world = new World(); Denied(await world.Host.ReadAsync(User with { Kind = kind }, Request()), "T03 unsupported identity"); Check(world.Source.ManifestReads == 0, "T03 no inferred human role");
+        }
+        foreach (var malformed in new Func<ReadGrant, ReadGrant>[] { g => g with { IdentityKind = IdentityKind.Service }, g => g with { IdentityId = "PROTECTED-SENTINEL" }, g => g with { Scope = null! }, g => g with { Scope = new Scope("PROTECTED-SENTINEL", "syn-project-a", "syn-environment-a") }, g => g with { Revision = -1 }, g => g with { Kind = ResourceKind.Scores }, g => g with { AssessmentId = "syn-wrong-assessment" }, g => g with { ReportVersionId = "syn-wrong-report" }, g => g with { ManifestDigest = GoldenDigest.ToUpperInvariant() }, g => g with { Fields = null! }, g => g with { Categories = null! }, g => g with { Categories = ImmutableHashSet.Create((EvidenceCategory)999) } })
+        {
+            var world = new World(); world.Policy.GrantOverride = malformed; Denied(await world.Host.ReadAsync(User, Request()), "T03 malformed trusted grant", McpOutcome.DependencyUnavailable); Check(world.Source.ManifestReads == 0, "T03 malformed grant before reads"); Check(!world.Audit.Serialized().Contains("PROTECTED-SENTINEL", StringComparison.Ordinal), "T03 malformed grant no echo");
         }
         var categories = new World(); categories.Policy.Categories = ImmutableHashSet.Create(EvidenceCategory.Summary);
         var items = Success(await categories.Host.ReadAsync(User, Request()), "T03 category-filtered").GetProperty("items");
@@ -144,6 +160,16 @@ internal static class Program
         {
             var world = new World(); Denied(await world.Host.ReadAsync(User, Encoding.UTF8.GetBytes(request)), "T04 denial corpus", McpOutcome.InvalidRequest);
             Check(world.Source.ManifestReads == 0 && world.Source.ItemReads == 0, "T04 no source reads"); Check(!world.Audit.Serialized().Contains("PROTECTED-SENTINEL", StringComparison.Ordinal), "T04 no audit echo");
+        }
+        foreach (var field in new[] { "contractVersion", "resourceKind", "assessmentId", "reportVersionId", "cursor" })
+            foreach (var escape in new[] { @"\uD800", @"\uDC00", @"\uD800A", @"A\uDC00", @"\uD800\uD800", @"\uDC00\uDC00" })
+            {
+                var world = new World(); var node = JsonNode.Parse(Request())!; node[field] = "placeholder"; var text = Encoding.UTF8.GetString(Canonical(node)).Replace("\"placeholder\"", "\"" + escape + "\"", StringComparison.Ordinal);
+                Denied(await world.Host.ReadAsync(User, Encoding.UTF8.GetBytes(text)), "T04 unpaired surrogate " + field, McpOutcome.InvalidRequest); Check(world.Source.ManifestReads == 0 && world.Audit.Events.Count == 1, "T04 surrogate public shape before source and one audit");
+            }
+        foreach (var field in new[] { "contractVersion", "resourceKind", "assessmentId", "reportVersionId" })
+        {
+            var world = new World(); var node = JsonNode.Parse(Request())!; node[field] = "placeholder"; var text = Encoding.UTF8.GetString(Canonical(node)).Replace("\"placeholder\"", "\"" + @"\uD83D\uDE00" + "\"", StringComparison.Ordinal); Denied(await world.Host.ReadAsync(User, Encoding.UTF8.GetBytes(text)), "T04 wellformed unicode wrong grammar " + field, McpOutcome.InvalidRequest); Check(world.Source.ManifestReads == 0, "T04 unicode invalid grammar before source");
         }
         foreach (var bytes in new[] { new byte[] { 0xff, 0xfe }, new byte[16385] }) { var world = new World(); Denied(await world.Host.ReadAsync(User, bytes), "T04 bytes malformed", McpOutcome.InvalidRequest); }
     }
@@ -197,7 +223,8 @@ internal static class Program
     {
         var world = new World(); for (var i = 0; i < 60; i++) Check((await world.Host.ReadAsync(User, Request())).Outcome == McpOutcome.Success, "T08 identity admitted " + i);
         Denied(await world.Host.ReadAsync(User, Request()), "T08 identity rate61", McpOutcome.Limited); world.Clock.Value = TimeSpan.FromSeconds(60); Check((await world.Host.ReadAsync(User, Request())).Outcome == McpOutcome.Success, "T08 rate exact window reset");
-        var denied = new World(); denied.Policy.ActionAllowed = false; for (var i = 0; i < 60; i++) Check((await denied.Host.ReadAsync(User, Request())).Outcome == McpOutcome.Unavailable, "T08 admitted denials consume budget"); Denied(await denied.Host.ReadAsync(User, Request()), "T08 denied rate budget", McpOutcome.Limited);
+        var ingress = new World(); for (var i = 0; i < 600; i++) Check((await ingress.Host.ReadAsync(User with { Kind = IdentityKind.Anonymous, IdentityId = "syn-anonymous-" + i }, Request())).Outcome == McpOutcome.Unavailable, "T08 bounded unresolved ingress " + i); Denied(await ingress.Host.ReadAsync(User with { Kind = IdentityKind.Anonymous }, Request()), "T08 ingress601", McpOutcome.Limited); Check((await ingress.Host.ReadAsync(User, Request())).Outcome == McpOutcome.Success, "T08 resolved customer never charged against ingress");
+        var denied = new World(); denied.Policy.ActionAllowed = false; for (var i = 0; i < 60; i++) Check((await denied.Host.ReadAsync(User, Request())).Outcome == McpOutcome.Unavailable, "T08 admitted denials consume budget"); Denied(await denied.Host.ReadAsync(User, Request()), "T08 denied rate budget", McpOutcome.Limited); Check(denied.Audit.Events.All(entry => entry.Scope is null), "T08 denied grants including Limited never audit scope");
         var customers = new World(); for (var i = 0; i < 300; i++) Check((await customers.Host.ReadAsync(User with { IdentityId = "syn-user-" + i / 60 }, Request())).Outcome == McpOutcome.Success, "T08 customer rate " + i); Denied(await customers.Host.ReadAsync(User with { IdentityId = "syn-next" }, Request()), "T08 customer rate301", McpOutcome.Limited);
         var concurrent = new World(); concurrent.Source.Block = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously); var pending = Enumerable.Range(0, 4).Select(_ => concurrent.Host.ReadAsync(User, Request())).ToArray(); await concurrent.Source.Entered.Task.WaitAsync(TimeSpan.FromSeconds(2));
         Denied(await concurrent.Host.ReadAsync(User, Request()), "T08 identity concurrency5", McpOutcome.Limited); concurrent.Source.Block.SetResult(); await Task.WhenAll(pending); Check((await concurrent.Host.ReadAsync(User, Request())).Outcome == McpOutcome.Success, "T08 concurrency leases released");
@@ -207,8 +234,10 @@ internal static class Program
         saturated.AddCustomer("syn-isolated"); Check((await saturated.Host.ReadAsync(User with { IdentityId = "syn-isolated" }, Request())).Outcome == McpOutcome.Success, "T08 unrelated customer progresses under saturation");
         saturated.Source.Block.SetResult(); Check((await Task.WhenAll(customerPending)).All(r => r.Outcome == McpOutcome.Success), "T08 exact16 customer leases admitted");
         customers.AddCustomer("syn-next"); for (var i = 0; i < 60; i++) Check((await customers.Host.ReadAsync(User with { IdentityId = "syn-next" }, Request())).Outcome == McpOutcome.Success, "T08 failed paired customer quota did not consume identity " + i);
-        var registry = new World(); for (var i = 0; i < 128; i++) { registry.Clock.Value = TimeSpan.FromSeconds(i / 50 * 60); Check((await registry.Host.ReadAsync(User, Request(size: 1))).Outcome == McpOutcome.Success, "T08 cursor identity capacity " + i); } Denied(await registry.Host.ReadAsync(User, Request(size: 1)), "T08 cursor identity capacity129", McpOutcome.Limited);
-        var registryCustomer = new World(); for (var i = 0; i < 512; i++) { registryCustomer.Clock.Value = TimeSpan.FromSeconds(i / 200 * 60); Check((await registryCustomer.Host.ReadAsync(User with { IdentityId = "syn-cursor-" + i % 4 }, Request(size: 1))).Outcome == McpOutcome.Success, "T08 cursor customer capacity " + i); } Denied(await registryCustomer.Host.ReadAsync(User with { IdentityId = "syn-cursor-new" }, Request(size: 1)), "T08 cursor customer capacity513", McpOutcome.Limited);
+        var registry = new World(); for (var i = 0; i < 128; i++) { registry.Clock.Value = TimeSpan.FromSeconds(i / 50 * 60); Check((await registry.Host.ReadAsync(User, Request(size: 1))).Outcome == McpOutcome.Success, "T08 cursor identity capacity " + i); }
+        Denied(await registry.Host.ReadAsync(User, Request(size: 1)), "T08 cursor identity capacity129", McpOutcome.Limited);
+        var registryCustomer = new World(); for (var i = 0; i < 512; i++) { registryCustomer.Clock.Value = TimeSpan.FromSeconds(i / 200 * 60); Check((await registryCustomer.Host.ReadAsync(User with { IdentityId = "syn-cursor-" + i % 4 }, Request(size: 1))).Outcome == McpOutcome.Success, "T08 cursor customer capacity " + i); }
+        Denied(await registryCustomer.Host.ReadAsync(User with { IdentityId = "syn-cursor-new" }, Request(size: 1)), "T08 cursor customer capacity513", McpOutcome.Limited);
         registryCustomer.AddCustomer("syn-cursor-isolated"); Check((await registryCustomer.Host.ReadAsync(User with { IdentityId = "syn-cursor-isolated" }, Request(size: 1))).Outcome == McpOutcome.Success, "T08 other customer cursor progress");
         var cancel = new World(); cancel.Source.Block = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously); using var cts = new CancellationTokenSource(); var cancelled = cancel.Host.ReadAsync(User, Request(), cts.Token); await cancel.Source.Entered.Task.WaitAsync(TimeSpan.FromSeconds(2)); cts.Cancel(); Denied(await cancelled.WaitAsync(TimeSpan.FromSeconds(2)), "T08 cancellation", McpOutcome.Cancelled); cancel.Source.Block.SetResult(); Check((await cancel.Host.ReadAsync(User, Request())).Outcome == McpOutcome.Success, "T08 cancellation lease recovery");
         var failure = new World(); failure.Source.Throw = true; Denied(await failure.Host.ReadAsync(User, Request()), "T08 source throw", McpOutcome.DependencyUnavailable); failure.Source.Throw = false; Success(await failure.Host.ReadAsync(User, Request()), "T08 exception lease recovery");
@@ -221,18 +250,24 @@ internal static class Program
         var badClock = new World(); badClock.Clock.Throw = true; Denied(await badClock.Host.ReadAsync(User, Request()), "T09 clock throw", McpOutcome.DependencyUnavailable);
         foreach (var kind in new[] { ResourceKind.PublishedStatus, ResourceKind.Scores }) { var bad = new World(); Denied(await bad.Host.ReadAsync(User, Request(kind, 1)), "T09 singleton pagination", McpOutcome.InvalidRequest); }
         var deadline = new World(); deadline.Source.Block = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously); var pending = deadline.Host.ReadAsync(User, Request()); await deadline.Source.Entered.Task.WaitAsync(TimeSpan.FromSeconds(2)); deadline.Clock.Value = TimeSpan.FromSeconds(5); deadline.Source.Block.SetResult(); Denied(await pending, "T09 exact deadline", McpOutcome.DependencyUnavailable);
+        var fenceDeadline = new World(); fenceDeadline.Policy.BeforeCommit = () => fenceDeadline.Clock.Value = TimeSpan.FromSeconds(5); Denied(await fenceDeadline.Host.ReadAsync(User, Request(size: 1)), "T09 exact5s at terminal fence entry", McpOutcome.DependencyUnavailable); Check(fenceDeadline.Audit.Events.Single().Outcome == McpOutcome.DependencyUnavailable, "T09 no false success before deadline commit");
+        var fenceCancellation = new World(); using var fenceToken = new CancellationTokenSource(); fenceCancellation.Policy.BeforeCommit = fenceToken.Cancel; Denied(await fenceCancellation.Host.ReadAsync(User, Request(size: 1), fenceToken.Token), "T09 cancellation at terminal fence entry", McpOutcome.Cancelled); Check(fenceCancellation.Audit.Events.Single().Outcome == McpOutcome.Cancelled, "T09 no false success before cancellation commit");
         foreach (var target in new[] { 262143, 262144, 262145 })
         {
             var boundary = new World(); boundary.CoverageAtEnvelopeBytes(target); var actual = await boundary.Host.ReadAsync(User, Request(ResourceKind.Coverage, 100));
             if (target <= 262144) { Check(actual.Outcome == McpOutcome.Success && actual.Envelope.Length == target, "T09 independent exact UTF8 byte boundary " + target); using var bytesDoc = JsonDocument.Parse(actual.Envelope.AsMemory()); Check(bytesDoc.RootElement.GetProperty("items")[1].GetProperty("label").GetString()!.Contains("résumé", StringComparison.Ordinal), "T09 byte edge contains raw multibyte text"); }
             else Denied(actual, "T09 max plus1 byte cap");
         }
-        var oversized = new World(); oversized.AddCoverage(100, true); var result = await oversized.Host.ReadAsync(User, Request(ResourceKind.Coverage, 100)); Denied(result, "T09 UTF8 response cap"); Check(result.Outcome is McpOutcome.Limited or McpOutcome.Unavailable, "T09 oversize safe typed denial");
+        var oversized = new World(); oversized.AddCoverage(100, true); var result = await oversized.Host.ReadAsync(User, Request(ResourceKind.Coverage, 100)); Denied(result, "T09 UTF8 response cap");
     }
     private static async Task T10()
     {
         var world = new World(); world.Audit.Fail = true; Denied(await world.Host.ReadAsync(User, Request(size: 1)), "T10 audit unavailable", McpOutcome.DependencyUnavailable); Check(world.Audit.Failures.SequenceEqual([OperationalFailure.AuditUnavailable]), "T10 safe operational signal"); world.Audit.Fail = false; var first = await world.Host.ReadAsync(User, Request(size: 1)); Success(first, "T10 audit recovery");
         var throwing = new World(); throwing.Audit.Throw = true; Denied(await throwing.Host.ReadAsync(User, Request()), "T10 audit exception", McpOutcome.DependencyUnavailable); Check(throwing.Audit.Failures.Contains(OperationalFailure.AuditUnavailable), "T10 audit exception signal");
+        foreach (var fault in new Action<Policy>[] { p => p.ThrowGrant = true, p => p.ThrowCommit = true, p => p.ThrowOverlay = true }) { var faulty = new World(); fault(faulty.Policy); Denied(await faulty.Host.ReadAsync(User, Request(ResourceKind.ProtectedReferences)), "T10 policy dependency fault", McpOutcome.DependencyUnavailable); Check(faulty.Audit.Events.Count == 1 && !faulty.Audit.Serialized().Contains("PROTECTED-SENTINEL", StringComparison.Ordinal), "T10 policy fault one safe completion"); }
+        var invalidOverlay = new World(); invalidOverlay.Policy.Overlay = new((Availability)999, SafeReason.None); Denied(await invalidOverlay.Host.ReadAsync(User, Request(ResourceKind.ProtectedReferences)), "T10 invalid trusted overlay", McpOutcome.DependencyUnavailable);
+        var reservation = new World(); reservation.Audit.Fail = true; for (var i = 0; i < 129; i++) { reservation.Clock.Value = TimeSpan.FromSeconds(i / 50 * 60); Denied(await reservation.Host.ReadAsync(User, Request(size: 1)), "T10 audit failure cursor reservation " + i, McpOutcome.DependencyUnavailable); }
+        reservation.Audit.Fail = false; Check((await reservation.Host.ReadAsync(User, Request(size: 1))).Outcome == McpOutcome.Success, "T10 failed audit reservations do not leak cursor capacity");
         var retry = new World(); await retry.Host.ReadAsync(User, Request()); retry.Policy.Change(p => p.ActiveAssignment = false); Denied(await retry.Host.ReadAsync(User, Request()), "T10 retry rechecks", McpOutcome.Unavailable); Check(retry.Audit.Events.Count == 2 && retry.Audit.Events[0].Outcome == McpOutcome.Success && retry.Audit.Events[1].Outcome == McpOutcome.Unavailable, "T10 separate completion per retry");
         foreach (var audit in retry.Audit.Events) Check(audit.CorrelationId == User.CorrelationId && audit.ElapsedMilliseconds >= 0, "T10 trusted correlation and monotonic latency");
         var unknown = new World(); await unknown.Host.ReadAsync(User, Encoding.UTF8.GetBytes("{\"resourceKind\":\"PROTECTED-SENTINEL\"}")); Check(unknown.Audit.Events.Count == 1 && unknown.Audit.Events[0].ResourceKind is null && !unknown.Audit.Serialized().Contains("PROTECTED-SENTINEL", StringComparison.Ordinal), "T10 safe unknown operation");
@@ -254,18 +289,18 @@ internal static class Program
     internal sealed class Clock : IMonotonicClock { public TimeSpan Value; public bool Throw; public TimeSpan Elapsed => Throw ? throw new InvalidOperationException("PROTECTED-SENTINEL") : Value; }
     internal sealed class Audit : IMcpAudit
     {
-        public bool Fail, Throw; public List<McpAuditEvent> Events { get; } = []; public List<OperationalFailure> Failures { get; } = [];
-        public bool Complete(McpAuditEvent entry) { lock (Events) { if (Throw) throw new InvalidOperationException("PROTECTED-SENTINEL"); if (Fail) return false; Events.Add(entry); return true; } }
+        public bool Fail, Throw; public Action? OnComplete; public List<McpAuditEvent> Events { get; } = []; public List<OperationalFailure> Failures { get; } = [];
+        public bool Complete(McpAuditEvent entry) { lock (Events) { if (Throw) throw new InvalidOperationException("PROTECTED-SENTINEL"); if (Fail) return false; OnComplete?.Invoke(); Events.Add(entry); return true; } }
         public void OperationalFailure(OperationalFailure failure, Guid correlationId) { lock (Failures) Failures.Add(failure); }
         public string Serialized() => JsonSerializer.Serialize(Events);
     }
     internal sealed class Policy : IReadPolicy
     {
         private readonly object fence = new(); public Dictionary<string, Scope> IdentityScopes = []; public Dictionary<string, string> ScopeDigests = []; public long Revision; public string Digest = GoldenDigest; public bool NullGrant, ActiveIdentity = true, ActiveAssignment = true, CustomerPolicy = true, ResourceAvailable = true, ReadBlocked, ActionAllowed = true;
-        public ImmutableHashSet<EvidenceCategory> Categories = Enum.GetValues<EvidenceCategory>().ToImmutableHashSet(); public ImmutableHashSet<string>? FieldsOverride; public ReferenceOverlay Overlay = new(Availability.Available, SafeReason.None);
-        public ReadGrant? GetGrant(Caller caller, ReadRequest request) { lock (fence) return NullGrant ? null : new(caller.Kind, caller.IdentityId, Revision, IdentityScopes.GetValueOrDefault(caller.IdentityId, GoldenScope), request.Kind, request.AssessmentId, request.ReportVersionId, ScopeDigests.GetValueOrDefault(IdentityScopes.GetValueOrDefault(caller.IdentityId, GoldenScope).CustomerId, Digest), ActiveIdentity, ActiveAssignment, CustomerPolicy, ResourceAvailable, ReadBlocked, ActionAllowed, Categories, FieldsOverride ?? Schema[request.Kind].ToImmutableHashSet()); }
-        public ReferenceOverlay GetReferenceAvailability(ReadGrant grant, string itemId) { lock (fence) return Overlay; }
-        public bool TryCommit(ReadGrant grant, Action action) { lock (fence) { if (grant.Revision != Revision) return false; action(); return true; } }
+        public Func<ReadGrant, ReadGrant>? GrantOverride; public bool ThrowGrant, ThrowCommit, ThrowOverlay; public Action? BeforeCommit; public ImmutableHashSet<EvidenceCategory> Categories = Enum.GetValues<EvidenceCategory>().ToImmutableHashSet(); public ImmutableHashSet<string>? FieldsOverride; public ReferenceOverlay Overlay = new(Availability.Available, SafeReason.None);
+        public ReadGrant? GetGrant(Caller caller, ReadRequest request) { lock (fence) { if (ThrowGrant) throw new InvalidOperationException("PROTECTED-SENTINEL"); if (NullGrant) return null; var grant = new ReadGrant(caller.Kind, caller.IdentityId, Revision, IdentityScopes.GetValueOrDefault(caller.IdentityId, GoldenScope), request.Kind, request.AssessmentId, request.ReportVersionId, ScopeDigests.GetValueOrDefault(IdentityScopes.GetValueOrDefault(caller.IdentityId, GoldenScope).CustomerId, Digest), ActiveIdentity, ActiveAssignment, CustomerPolicy, ResourceAvailable, ReadBlocked, ActionAllowed, Categories, FieldsOverride ?? Schema[request.Kind].ToImmutableHashSet()); return GrantOverride?.Invoke(grant) ?? grant; } }
+        public ReferenceOverlay GetReferenceAvailability(ReadGrant grant, string itemId) { lock (fence) { if (ThrowOverlay) throw new InvalidOperationException("PROTECTED-SENTINEL"); return Overlay; } }
+        public bool TryCommit(ReadGrant grant, Action action) { lock (fence) { if (ThrowCommit) throw new InvalidOperationException("PROTECTED-SENTINEL"); BeforeCommit?.Invoke(); if (grant.Revision != Revision) return false; action(); return true; } }
         public void Change(Action<Policy> change) { lock (fence) { change(this); Revision++; } }
     }
     internal sealed class Source : IPublicationReader

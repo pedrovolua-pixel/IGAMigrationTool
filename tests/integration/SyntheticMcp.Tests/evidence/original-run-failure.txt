@@ -1,0 +1,12 @@
+2026-10-03 independent V-D2 first composed execution
+Source freeze54221c7238c5b0e51577239955ccdf29aea5503a; A c55cf7b picked6e45fe0; B f92cdac pickedcc319de; independent golden039fbdf and authored suiteabc0985 plus owned expansions.
+Command: /private/tmp/iga-dotnet-10.0.401/dotnet restore tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj --locked-mode
+Result: Restored module and test project, success.
+Command: /private/tmp/iga-dotnet-10.0.401/dotnet run --project tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj --no-restore
+Original output:
+Unhandled exception. System.InvalidOperationException: FAIL T09 oversize safe typed denial
+   at Program.Check(Boolean value, String name) in /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs:line 35
+   at Program.T09() in /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs:line 241
+   at Program.Main() in /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs:line 29
+   at Program.<Main>()
+Disposition: test expectation was stricter than frozen contract. Contract requires generic typed failure/no partial data but specifies no particular outcome for oversize. Runtime returned DependencyUnavailable; removed assumed Limited-or-Unavailable oracle. No runtime modification. Exact below/equal/above UTF8 edges already reached successfully before this unrelated extra assertion.
