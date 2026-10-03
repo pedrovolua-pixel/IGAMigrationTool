@@ -1,0 +1,397 @@
+{
+  "schema": "m08-cycle06-strict-enriched-source-version-audit-v1",
+  "sourceCommit": "06903b77119863f5d9fb07f1d6962fd8c43840e4",
+  "mode": "Static committed-source audit only; not implemented or executed. No repo edits/runtime/provider/DB operations.",
+  "meaning": "SourceBound means every listed required native fixture fact is actually returned by the coordinated same-transaction owner reads and preserved with origin/digest in the new readiness envelope. It is not complete production evaluation binding, eligibility, reviewer context, grant or decision. Missing always has requiredReference=null and explicit reason; associatedPartialFacts cannot satisfy the missing binding. No SamplingInput, sampling projection or partial selection in this cycle.",
+  "jsonPathNotation": "Aliases decode nested JSON string payloads. Brace expressions abbreviate separately named field paths; [*] denotes each actual element. Every source/plan/packet/receipt version tuple must retain scope and actual source digests in the lossless sidecar. P is a proposed representation only; actual returned typed owner records are the authority.",
+  "pathAliases": {
+    "C": "JSON parse of actual cycle05 capture.CanonicalJson; camelCase/named enums.",
+    "F": "JSON parse of C.$.frozenInputsJson (string); camelCase/named enums.",
+    "L": "JSON parse of C.$.aiRunLockJson (string); owning AI canonical camelCase/named enums.",
+    "A": "JSON parse of C.$.aiSnapshotJson (string); owning AI canonical camelCase/named enums.",
+    "I": "JSON parse of A.$.works[*].work.packetInputJson (string), per exact actual work. Historical attempts also retain A.$.works[*].attempts[*].packetInputJson; preserve/bind any semantically emitted alternate packet bytes.",
+    "U": "JSON parse of A.$.works[*].attempts[*].receipt.outputJson (string), only actual accepted/succeeded outputs; receipt may be null, output may be null/invalid/rejected. Bind receiptId, attempt, outputDigest and full raw output separately, never supply missing schema from constants.",
+    "O": "JSON parse of C.$.members[*].occurrences[*].originalJson (string); owning AI canonical camelCase/named enums.",
+    "G": "JSON parse of C.$.members[*].occurrences[*].generatedFindingJson (string); owning default serializer PascalCase/numeric enums; do not re-label embedded JSON casing/enum representation.",
+    "P": "Same-transaction owning run.Plan serialized with JsonSerializer.Serialize default (the owning persisted representation, PascalCase/numeric enums). These P paths describe the proposed detached plan addition; cycle05 capture does not contain P and its bytes stay unchanged."
+  },
+  "summary": {
+    "acceptedOutputSourceBound": 14,
+    "acceptedOutputMissing": 9,
+    "noAcceptedOutputSourceBoundMaximum": 13,
+    "noAcceptedOutputMissingMinimum": 10,
+    "conditionalKind": "AiSchema"
+  },
+  "kinds": [
+    {
+      "kind": "SourceBuild",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "ProductBuild",
+        "DatabaseSchemaBuild",
+        "HotfixSetDigest",
+        "SqlServerBuild",
+        "CompatibilityLevel",
+        "Modules"
+      ],
+      "sourcePaths": [
+        "P.$.CapabilityLock.ProductBuild",
+        "P.$.CapabilityLock.DatabaseSchemaBuild",
+        "P.$.CapabilityLock.HotfixSetDigest",
+        "P.$.CapabilityLock.SqlServerBuild",
+        "P.$.CapabilityLock.CompatibilityLevel",
+        "P.$.CapabilityLock.Modules[*].Id",
+        "P.$.CapabilityLock.Modules[*].Version"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "G.$.Provenance.Compatibility.{SourceProduct,ProductVersion,EvidenceSchemaVersion,RuleLanguageVersion}, when members exist. Retain independently: no substitution/equality between compatibility metadata and capability build fields."
+      ]
+    },
+    {
+      "kind": "EnvironmentEvidence",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "nativeScope",
+        "nativePacketSources",
+        "packetEvidence",
+        "packetDigest",
+        "sourceDigest"
+      ],
+      "sourcePaths": [
+        "C.$.scope.{customerId,projectId,environmentId}",
+        "L.$.scope.{customerId,projectId,environmentId}",
+        "I.$.source.{customerId,projectId,environmentId,runId,baselineDigest,profileDigest}",
+        "I.$.evidence[*].{evidenceId,classification,redactionCount,configurationKey,configurationValue}",
+        "O.$.evidenceIds[*]",
+        "O.$.packetDigest",
+        "F.$.phase1bLocks.aiPacketDigest",
+        "L.$.sourceDigest"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "Source-bound means actual fictional bytes; it establishes no eligible live environment, source-access/export grant, collection manifest, or qualified reviewer context."
+      ]
+    },
+    {
+      "kind": "Capability",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "entire actual CapabilityVersionLock"
+      ],
+      "sourcePaths": [
+        "P.$.CapabilityLock.{MatrixVersion,StateAtLock,ProductBuild,DatabaseSchemaBuild,HotfixSetDigest,SqlServerBuild,CompatibilityLevel,Modules,QueryPackVersion,NormalizationSchemaVersion,RuleCatalogVersion,LockDigest}"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "Retain native StateAtLock=FixtureVerified. No lifecycle promotion."
+      ]
+    },
+    {
+      "kind": "Baseline",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "run baseline ID",
+        "plan baseline ID",
+        "plan fixture version",
+        "AI baseline digest"
+      ],
+      "sourcePaths": [
+        "C.$.baselineId",
+        "P.$.BaselineId",
+        "P.$.FixtureVersion",
+        "L.$.baselineDigest",
+        "I.$.source.baselineDigest"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "G.$.Provenance.{BaselineId,BaselineVersion,EvidenceDigest,EvidenceReference,PackVersion,PackDigest}, when members exist. Preserve inherited deterministic baseline provenance separately from combined Phase1B baseline."
+      ]
+    },
+    {
+      "kind": "ReassessmentBaseline",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No saved predecessor/reassessment baseline ID/version/digest in these owning records.",
+      "associatedPartialFacts": [
+        "Current baseline, run revision and group stable root-cause ID do not establish a later baseline or reassessment chain."
+      ]
+    },
+    {
+      "kind": "Collection",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No source collection ID/version/manifest.",
+      "associatedPartialFacts": [
+        "P.$.FixtureVersion; F.$.workSchemaVersion; packet evidence bytes are source facts, not collection versions."
+      ]
+    },
+    {
+      "kind": "Query",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "QueryPackVersion"
+      ],
+      "sourcePaths": [
+        "P.$.CapabilityLock.QueryPackVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "synthetic-query-pack-v1 is a fixture value, not an approved live query pack."
+      ]
+    },
+    {
+      "kind": "Normalization",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "baseline normalization version",
+        "AI packet normalization version",
+        "AI packet redaction version"
+      ],
+      "sourcePaths": [
+        "P.$.CapabilityLock.NormalizationSchemaVersion",
+        "I.$.source.normalizationVersion",
+        "I.$.source.redactionVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "Exact distinct baseline=synthetic-normalization-v1; AI packet=fixture-normalization-v1; redaction=fixture-redaction-v1. Keep all origins; do not merge, require equality, or guess stages."
+      ]
+    },
+    {
+      "kind": "Catalog",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "capability catalog version",
+        "AI mapping digest",
+        "actual mapped rule IDs and versions"
+      ],
+      "sourcePaths": [
+        "P.$.CapabilityLock.RuleCatalogVersion",
+        "L.$.mappingDigest",
+        "F.$.phase1bLocks.aiMappingDigest",
+        "A.$.works[*].work.units[*].{ruleId,ruleVersion,proposalId,key,moduleId,severity,evidenceIds}"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "G.$.Provenance.{CatalogVersion,CatalogDigest,RuleId,RuleVersion,PackVersion,PackDigest}, when members exist. Inherited deterministic catalog and trusted AI mapping are distinct origins; missing generated provenance on gap-only runs stays absent."
+      ]
+    },
+    {
+      "kind": "Profile",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "run profile ID",
+        "frozen profile version",
+        "AI profile ID and digest"
+      ],
+      "sourcePaths": [
+        "C.$.profileId",
+        "F.$.profileVersion",
+        "L.$.profileId",
+        "L.$.profileDigest",
+        "I.$.source.profileDigest"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": []
+    },
+    {
+      "kind": "Scoring",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "ScoringAlgorithmVersion"
+      ],
+      "sourcePaths": [
+        "F.$.scoringAlgorithmVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": []
+    },
+    {
+      "kind": "Maturity",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "MaturityFixtureDigest identifies a locked artifact but no actual saved maturity algorithm/schema/catalog is returned by either owner read.",
+      "associatedPartialFacts": [
+        "F.$.maturityFixtureDigest is retained exactly. Do not load DemoPhase1BCatalog.Maturity and present its compiled contents as an observed saved source record."
+      ]
+    },
+    {
+      "kind": "AiProvider",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "ProviderVersion"
+      ],
+      "sourcePaths": [
+        "L.$.providerVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "synthetic-fixed-provider-v1 is a fictional fixed provider, not live provider configuration."
+      ]
+    },
+    {
+      "kind": "AiModel",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "declared fixture ModelVersion with owner origin"
+      ],
+      "sourcePaths": [
+        "F.$.modelVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "Exactly synthetic-fixed-provider-v1 in this fixture. It is the actual ModelVersion field, even though its value equals L.$.providerVersion. Do not derive ModelVersion from ProviderVersion or claim a separate real model/deployment."
+      ]
+    },
+    {
+      "kind": "AiPrompt",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "AI lock prompt version",
+        "frozen prompt version",
+        "packet prompt version"
+      ],
+      "sourcePaths": [
+        "L.$.promptVersion",
+        "F.$.promptVersion",
+        "I.$.source.promptVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": []
+    },
+    {
+      "kind": "AiSchema",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "all actual input schema versions",
+        "all actual accepted output schema versions"
+      ],
+      "sourcePaths": [
+        "I.$.schemaVersion",
+        "U.$.schemaVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "Input=synthetic-ai-fixture-input-v1; accepted output=synthetic-ai-fixture-output-v1. Conditional: if any required accepted output schema has no actual returned receipt, requiredReference=null, status=Missing, reason=AcceptedOutputSchemaNotSupplied; retain known inputs and invalid/unaccepted receipt raw bytes separately. Valid empty output still supplies output schema. Rejected output cannot provide accepted output schema. Do not infer from provider constants, fake provider source or proposal-only Original.ProposalCanonicalJson."
+      ]
+    },
+    {
+      "kind": "AiSettings",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No versioned relevant AI settings record is saved; policy/fixture/mapping and budget ledger cannot stand in for it.",
+      "associatedPartialFacts": [
+        "L.$.{policyVersion,fixtureVersion,mappingDigest,epoch}; F.$.aiPolicyVersion; F.$.phase1bLocks.{aiFixtureDigest,aiMappingDigest,fixtureEpoch,aiContractDigest}; A.$.works[*].work.{workId,category,scenario,units}; A.$.budget.{revision,runAllowance,categoryAllowances,counters,history}. Retain frozen policy separately from mutable allowance/override counters; no invented temperature/top-p/settings version."
+      ]
+    },
+    {
+      "kind": "Application",
+      "status": "SourceBound",
+      "requiredReference": "source-bound exact native bundle",
+      "requiredNativeBundle": [
+        "AI application version",
+        "frozen application version"
+      ],
+      "sourcePaths": [
+        "L.$.applicationVersion",
+        "F.$.applicationVersion"
+      ],
+      "missingReason": null,
+      "associatedPartialFacts": [
+        "Source commit is audit provenance, not substituted for declared application version."
+      ]
+    },
+    {
+      "kind": "Reviewer",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No independent evaluation reviewer identity/assignment record.",
+      "associatedPartialFacts": [
+        "L.$.initiatingConsultantId is a source initiator; supplied source read actor is a reader, not evaluation reviewer."
+      ]
+    },
+    {
+      "kind": "ReviewerEligibility",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No source-backed qualification, independence, assignment, lifecycle or review grant record.",
+      "associatedPartialFacts": [
+        "Source Consultant read authority is retained by existing policies; it is not reviewer authority."
+      ]
+    },
+    {
+      "kind": "Instruction",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No versioned evaluation review instruction record.",
+      "associatedPartialFacts": [
+        "G.$.ReviewPolicy is original assessment presentation text, not evaluation instruction version."
+      ]
+    },
+    {
+      "kind": "Conflict",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No evaluation conflict disclosure/clearance record.",
+      "associatedPartialFacts": [
+        "No inferred absence of conflict, no source initiator clearance, no reused unrelated fixture registry."
+      ]
+    },
+    {
+      "kind": "ReviewEvents",
+      "status": "Missing",
+      "requiredReference": null,
+      "requiredNativeBundle": null,
+      "sourcePaths": [],
+      "missingReason": "No source-backed quality-review events/version/cutoff record.",
+      "associatedPartialFacts": [
+        "No fabricated zero-event version; existing assessment disposition events are omitted by capture and are not quality votes."
+      ]
+    }
+  ],
+  "composition": "New module orchestrates CaptureAsync then second owning runs.ReadInTransactionAsync on identical existing connection/transaction, while registry/run/AI locks are retained. Compare exact runId/scope/revision/inputDigest/baseline/profile/frozenInputs with capture. Detach/encode actual Plan/CapabilityLock in new envelope; old capture bytes unchanged. Preserve distinct source observation timestamps; no DML/connection/commit/new permission. Do not accept arbitrary earlier capture as current source.",
+  "otherContextAbsent": "Explicit evaluation/population/sample identity, seed, predecessor, correction cutoff and evaluation date are not provided by these reads. Database observation timestamps are source observations, not evaluation dates.",
+  "sourcePointers": [
+    "Phase1BEvaluationSourceAdapter.cs:33-59,121-144",
+    "SourceCanonical.cs:10-13",
+    "SyntheticRunContracts.cs:19-37,51-58",
+    "SyntheticDurableRunEngine.cs:99-100,530-532,643-657",
+    "CapabilityStartGuard.cs:53-65",
+    "SyntheticBaselineInventoryPlanner.cs:65-73",
+    "DemoPhase1BCatalog.cs:41-46,60-73",
+    "AiExecutionContracts.cs:21-44",
+    "AiExecutionPolicy.cs:71-96",
+    "ai-preview-packet.json:2-12",
+    "SyntheticAnalysisContracts.cs:60-77"
+  ]
+}
