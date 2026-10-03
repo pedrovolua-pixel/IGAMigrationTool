@@ -87,9 +87,12 @@ internal static class ContinuationRecovery
             var actual = JsonNode.Parse(result.Envelope.AsSpan())!.AsObject();
             var expected = new JsonObject
             {
-                ["contractVersion"] = "synthetic-published-health-read-v1", ["resourceKind"] = world.Kind.ToString(),
-                ["manifestDigest"] = Digest, ["bindings"] = oracle.Bindings.DeepClone(),
-                ["items"] = new JsonArray(oracle.Row(world.Kind, ordinal, fields)), ["nextCursor"] = result.NextCursor
+                ["contractVersion"] = "synthetic-published-health-read-v1",
+                ["resourceKind"] = world.Kind.ToString(),
+                ["manifestDigest"] = Digest,
+                ["bindings"] = oracle.Bindings.DeepClone(),
+                ["items"] = new JsonArray(oracle.Row(world.Kind, ordinal, fields)),
+                ["nextCursor"] = result.NextCursor
             };
             Check(JsonNode.DeepEquals(actual, expected), "exact ordinal item/field set/typed data/original scalar bindings/digest/envelope schema");
             Audit(world, caller, McpOutcome.Success, true);
@@ -241,8 +244,11 @@ internal static class ContinuationRecovery
     {
         var request = new JsonObject
         {
-            ["contractVersion"] = "synthetic-published-health-read-v1", ["resourceKind"] = kind.ToString(),
-            ["assessmentId"] = "syn-assessment-a", ["reportVersionId"] = "syn-report-a", ["pageSize"] = 1
+            ["contractVersion"] = "synthetic-published-health-read-v1",
+            ["resourceKind"] = kind.ToString(),
+            ["assessmentId"] = "syn-assessment-a",
+            ["reportVersionId"] = "syn-report-a",
+            ["pageSize"] = 1
         };
         if (cursor is not null) request["cursor"] = cursor;
         return JsonSerializer.SerializeToUtf8Bytes(request);
