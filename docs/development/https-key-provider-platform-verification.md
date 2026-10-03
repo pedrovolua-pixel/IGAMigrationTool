@@ -1,6 +1,6 @@
 # AP-KV: supported-platform signature proof preparation
 
-Status: **SUPPORTED LINUX ARTIFACT PREREQUISITE VERIFIED; production/runtime acceptance open**
+Status: **SUPPORTED LINUX ARTIFACT AND BOUNDED SDK DISPATCH VERIFIED; production/runtime acceptance open**
 Date: 2026-10-03 UTC
 Authority: [approved cycle03 AP-KV/AP-KV01](../../plans/active/https-production-local-cycle03.md), following [actual cycle02 host graph evidence](https-key-provider-resolved-graph-evidence.md). This prepares a diagnostic CLI tool. It does not promote package pins/locks, install dependencies, approve a platform execution, grant access or complete KEY runtime acceptance.
 
@@ -82,3 +82,7 @@ ProtectedData4.5.0 now verifies normally on Linux with the unchanged original ar
 [Manual artifact review receipt](evidence/https-key-provider-linux-proof-manual-20261003.json) binds the completed proof. Finder added .DS_Store after initial folder inspection; it is excluded from the authenticated ZIP/member review. Initial shell here-document inspection failed under disk pressure, then argument-based checks succeeded; no user files/evidence were deleted.
 
 This closes only the supported Linux artifact prerequisite. Owner “continue” starts the [bounded local SDK dispatch diagnostic](../../plans/active/https-key-provider-dispatch-diagnostic.md), preserving the experimental37 graph and no production dependency promotion. No full KEY, provider guard/lifecycle/witness/inventory policy, Azure roles/resources/spending/session, admission or release follows. The six [human tasks](https-production-test-packet.md#human-tasks-and-completion-conditions) remain open; the signature/manual-artifact substep is complete, and actual guard/SDK/inventory/lifecycle inputs remain. Prepared private-board delta changes that substep only; BFF/HTTPS snapshot4346e0f remains stale under the separate rejected credential/network publisher action, with no bypass and unrelated Cycle14 changes preserved.
+
+## Bounded SDK diagnostic verified — 2026-10-03 UTC
+
+[Actual Microsoft provider diagnostic](https-key-provider-dispatch-evidence.md) now independently verifies27 cases on SDK10.0.401/runtime10.0.12 with37 archive/74 asset-entry checks, pinned scratch build0 warnings/errors and meaningful formatting controls. Earlier statements about unexecuted SDK/source-only feasibility describe their historical checkpoint. This closes only the [DISP01–08 plan](../../plans/active/https-key-provider-dispatch-diagnostic.md) mechanics; production graph/guard/parser/inventory/witness/lifecycle,403/real transport/diagnostics/composition/fullKEY/live and release remain open. No Azure/dependency promotion/policy/grant change; six human tasks and separately blocked private publisher persist.

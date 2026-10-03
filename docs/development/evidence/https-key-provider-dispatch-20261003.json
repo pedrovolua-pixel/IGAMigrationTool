@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "status": "VERIFIED_BOUNDED_LOCAL_DISP01_TO_08_ONLY",
+  "recordedAtUtc": "2026-10-03T23:40:07.636331+00:00",
+  "authority": "Owner review exact manual artifact and continue; accepted PC-D02 and frozen test-only diagnostic plan independently scope-reviewed before writing",
+  "baseline": "e646f9a",
+  "authorCandidate": "4ad759727b4700790412cc40ab9e1ce71539ba40",
+  "integratedRuntimeSource": "8db45d7d9aadc5dd46faa3ef813e96db248a7dfb",
+  "signaturePrerequisite": "docs/development/evidence/https-key-provider-linux-proof-manual-20261003.json at e646f9a",
+  "actualGraph": {
+    "assetsSHA256": "432f6c7796b7302a655eb65d0e3baa1bb1cb7c656c9fc05ec8ff16b7a8874a1f",
+    "lockSHA256": "2d726d936d5cb3b5d647ef77a3f62d56e16fb0a70b49738f483ab3c7b5eebe9f",
+    "manifestSHA256": "8ed2ffab1478d381cf310b62e7c6b198bf47595e8e7100c16d2738fc6a4fee42",
+    "packages": 37,
+    "selectedCompileRuntimeEntries": 74,
+    "SDK": "10.0.401",
+    "runtime": "10.0.12",
+    "source": "Actual retained NuGet-generated net10.0 target; no new dependency/TFM resolution or productionlock",
+    "dataProtection": "10.0.12 installed shared framework; not in37archive manifest"
+  },
+  "author": {
+    "actualCases": 27,
+    "runnerNegatives": 7,
+    "build": "0warnings0errors",
+    "format": "Whole scratchCSharp source verified; diagnostic discussed in independent appendix",
+    "sourceBindings": [
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/Program.cs",
+        "sha256": "ff8f9a5944b9a99c763ce80ab6bdc3542a258ecd20ec6d4c4587e1400c08aaea",
+        "bytes": 22064
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/run-experimental.py",
+        "sha256": "33692bc31ee08bbe9ee59d11a8f99d39fc3e29b20462128345c3bf9511d62cd4",
+        "bytes": 10139
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/README.md",
+        "sha256": "354b28388e6f8a21117899be2adcc53e94390a20de0e821456ce1e8abd0915de",
+        "bytes": 7861
+      }
+    ],
+    "receipt": {
+      "path": "/tmp/iga-key-provider-dispatch-author-evidence/final/receipt.json",
+      "bytes": 30554,
+      "sha256": "c25061d76530dc9325a1e6259417b651b404fb0dcbf53b2a63d4a41100e7d86a"
+    },
+    "focusedChecks": {
+      "path": "/tmp/iga-key-provider-dispatch-author-evidence/focused-checks.json",
+      "bytes": 5878,
+      "sha256": "bb433a54d7f66e75ba15947f32321d816a4ecfe4da9af94549afd317502e024e"
+    },
+    "summary": {
+      "path": "/tmp/iga-key-provider-dispatch-author-evidence/author-summary.json",
+      "bytes": 1385,
+      "sha256": "3bdd12c9884a9b79ed0419d9f091528ee597809ab820aade9446b18afc68442b"
+    }
+  },
+  "independent": {
+    "status": "PASS_BOUNDED_DISP01_TO_08_DIAGNOSTIC_ONLY",
+    "checks": {
+      "actualArchiveHashChecks": 37,
+      "actualCompileRuntimeDllEntryChecks": 74,
+      "sdk": "10.0.401",
+      "runtime": "10.0.12",
+      "frameworkOnlyEmptySourceRestore": "PASS_exit0_not_fresh_package_audit",
+      "releaseBuild": "PASS_0warnings_0errors",
+      "wholeScratchProjectFormatting": "PASS_exit0",
+      "actualCaseChecks": 27,
+      "caseLabels": [
+        "DISP02-legacy-instance",
+        "DISP02-legacy-factory",
+        "DISP02-modern-async-only-read",
+        "DISP02-modern-async-only-write",
+        "DISP03-read-denies-missing",
+        "DISP03-read-denies-empty",
+        "DISP03-read-denies-malformed",
+        "DISP03-read-denies-inventory",
+        "DISP03-read-denies-304",
+        "DISP03-validated-304",
+        "DISP04-no-read-create-denied",
+        "DISP04-unsafe-condition-11",
+        "DISP04-unsafe-condition-12",
+        "DISP04-unsafe-condition-13",
+        "DISP04-unsafe-condition-14",
+        "DISP04-lost-fixture-inventory",
+        "DISP05-conflict-then-missing",
+        "DISP05-repeated-conflicts",
+        "DISP05-terminal-error",
+        "DISP05-unguarded-missing-create-control",
+        "DISP06-versionless-new-wrap",
+        "DISP06-new-version-and-historical-unwrap",
+        "DISP06-invalid-historical-22",
+        "DISP06-invalid-historical-23",
+        "DISP06-invalid-historical-24",
+        "DISP06-invalid-resolved-25",
+        "DISP06-invalid-resolved-26"
+      ],
+      "independentRunnerGuardNegatives": 9,
+      "negativeResult": "All denied before any subprocess",
+      "loadedAssemblyHashChecks": 5,
+      "localReadmeLinks": 4,
+      "pythonAST": "PASS",
+      "gitDiffWhitespace": "PASS",
+      "cleanCandidate": "PASS",
+      "scopedGitleaks": "PASS_exit0_no_findings"
+    },
+    "receipt": {
+      "path": "/tmp/iga-key-provider-dispatch-independent-review/review-receipt.json",
+      "bytes": 7062,
+      "sha256": "453fe75c773f22786a14a2c9867168a673170542594878b895cb399e1a9347a2"
+    },
+    "formatValidationAppendix": {
+      "path": "/tmp/iga-key-provider-dispatch-independent-review/format-validation-receipt.json",
+      "bytes": 4630,
+      "sha256": "5bb69e852a06de253db2ece67feb71eb87cc5614b83823e613812f47380d2f4d"
+    },
+    "formatMeaning": "Originalprojectfilewarning preserved; independent cleanformat0, deliberateMainindentation removal format2 WHITESPACE, restoredidenticalsource format0; originalcasefilesunchanged; exactoriginalwarningcauseunobserved"
+  },
+  "coordinator": {
+    "status": "PASS_INTEGRATED_BOUNDED_DISP01_TO_08",
+    "sourceCommit": "8db45d7d9aadc5dd46faa3ef813e96db248a7dfb",
+    "sourceBindings": [
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/Program.cs",
+        "sha256": "ff8f9a5944b9a99c763ce80ab6bdc3542a258ecd20ec6d4c4587e1400c08aaea",
+        "bytes": 22064
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/README.md",
+        "sha256": "354b28388e6f8a21117899be2adcc53e94390a20de0e821456ce1e8abd0915de",
+        "bytes": 7861
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/run-experimental.py",
+        "sha256": "33692bc31ee08bbe9ee59d11a8f99d39fc3e29b20462128345c3bf9511d62cd4",
+        "bytes": 10139
+      }
+    ],
+    "rawCommandLogsChecked": 12,
+    "allCommandsExit0": true,
+    "actualCases": 27,
+    "archives": 37,
+    "selectedCompileRuntimeEntries": 74,
+    "loadedAssemblies": [
+      {
+        "assembly": "Azure.Storage.Blobs",
+        "sha256": "4483f43e7871d2aff8c748dd11488c90a1abc4040005d327441af29e902254e2"
+      },
+      {
+        "assembly": "Azure.Core",
+        "sha256": "9d728c1adb91fe9f6dff1ba1059d9e7e6500d13411399d2ce22978a26857a85e"
+      },
+      {
+        "assembly": "Microsoft.AspNetCore.DataProtection",
+        "sha256": "7a89ac53215fa5e59bbd2131c254ca178993d0f6a334fa657d3cf11ca6bcf83e"
+      },
+      {
+        "assembly": "Azure.Extensions.AspNetCore.DataProtection.Blobs",
+        "sha256": "02db27739464fc4429f6d7d4a2b8e38d79946e77b03a616aed30bb015bd608a1"
+      },
+      {
+        "assembly": "Azure.Extensions.AspNetCore.DataProtection.Keys",
+        "sha256": "92d55f38deb64f452c1fb7dcaa61589e50786d75dad8388f0548e7fc8d8891ff"
+      }
+    ],
+    "build": "0warnings0errors",
+    "pythonAST": "PASS",
+    "formatExit": 0,
+    "formatDiagnostic": "Could not format '/private/tmp/iga-key-provider-dispatch-coordinator-run/Dispatch.csproj'. Format currently supports only C# and Visual Basic projects.\n",
+    "limits": "Bounded synthetic dispatch only; no production/Azure/fullKEY acceptance",
+    "formatControl": "Independent misformattedCSharp exit2; clean/restoredexit0"
+  },
+  "coordinatorReceipt": {
+    "path": "/tmp/iga-key-provider-dispatch-coordinator-run/receipt.json",
+    "bytes": 30551,
+    "sha256": "416ec4ec34c22076e8d67fb1e0200ccb44446225a17bc71b80e1dc51afc0f65e"
+  },
+  "coordinatorRawCheckReceipt": {
+    "path": "/tmp/iga-key-provider-dispatch-coordinator-checks.json",
+    "bytes": 2059,
+    "sha256": "15de811a1647250b004c06ff6289d9271c1acc01e5306b6b1f029ec61af55fbf"
+  },
+  "cases": {
+    "DISP01": "PASS bounded synthetic mechanics; no fullKEY/production acceptance",
+    "DISP02": "PASS bounded synthetic mechanics; no fullKEY/production acceptance",
+    "DISP03": "PASS bounded synthetic mechanics; no fullKEY/production acceptance",
+    "DISP04": "PASS bounded synthetic mechanics; no fullKEY/production acceptance",
+    "DISP05": "PASS bounded synthetic mechanics; no fullKEY/production acceptance",
+    "DISP06": "PASS bounded synthetic mechanics; no fullKEY/production acceptance",
+    "DISP07": "PASS bounded synthetic mechanics; no fullKEY/production acceptance",
+    "DISP08": "PASS bounded synthetic mechanics; no fullKEY/production acceptance"
+  },
+  "caseCountMeaning": "27 focused case checks per run, not total assertion count; author7/reviewer9 separate inputguard negatives",
+  "initialFailures": [
+    "Run01 fixture ValueTask vs actual Task resolver interface failed build; corrected testdeclaration only",
+    "Runs02/03 initial ETagoracle compared constructedrepresentation; corrected to actualSDKResponse.Headers.ETag",
+    "Empty/malformed/inventory fixture content must flow through actualtestreadvalidator; corrected beforefinalPASS",
+    "IncidentalPerl shasum inheritedlocaleexit9; Python samehashcheck used, no locale/trustchange"
+  ],
+  "retainedInitialReceipts": [
+    {
+      "path": "/tmp/iga-key-provider-dispatch-author-evidence/run01-retained/receipt.json",
+      "bytes": 29018,
+      "sha256": "4c3a60b9946952b59a382395219f8a735c956ccae924c640de015ac9ffdf1299"
+    },
+    {
+      "path": "/tmp/iga-key-provider-dispatch-author-evidence/run02-retained/receipt.json",
+      "bytes": 30463,
+      "sha256": "73983048af9bbf94dbb956c93a90937dc8777c5ac50ae583655117a4f5e33c66"
+    },
+    {
+      "path": "/tmp/iga-key-provider-dispatch-author-evidence/run03-retained/receipt.json",
+      "bytes": 30463,
+      "sha256": "562a666453e8a6d65bd35acc89e82e0a4f64f8727ea8d915a32bbb6a13ca5c7f"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "docs/development/https-key-provider-artifact-audit.md",
+      "sha256": "55367777fd193635424a86a857005a9f7882a2372b4cc41a1be9d46ab309029e"
+    },
+    {
+      "path": "docs/development/https-key-provider-dispatch-evidence.md",
+      "sha256": "447d4d937f602af6ed26a5fd57b699b0a65610eeb2d47b9952404e4332525e32"
+    },
+    {
+      "path": "docs/development/https-key-provider-linux-run-result.md",
+      "sha256": "04c2338e4f14040e19465454a99c9bad6c875f860f0990b4c569b4e4a2e78354"
+    },
+    {
+      "path": "docs/development/https-key-provider-platform-verification.md",
+      "sha256": "02a3a7b7f3d5ef4223d1385f6b9c89092c870557a71f2f54ed06ea0bd330cdc9"
+    },
+    {
+      "path": "docs/development/https-key-provider-resolved-graph-evidence.md",
+      "sha256": "ca5720b4a82d4729f3f6413c5052fe7d7a28fab0459a67e10c862920ee81cc64"
+    },
+    {
+      "path": "docs/development/https-production-test-packet.md",
+      "sha256": "461dde7dcf395b3ebb1335acafdad22d619710ddca540e72af3e6abf4d4c989f"
+    },
+    {
+      "path": "plans/active/https-key-provider-dispatch-diagnostic.md",
+      "sha256": "432a531daab9a99829b8451aae6798184fcf2fceb478fb50eeed5627900eb322"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "984cf343c8e0aaca63f68a0f9565cc4de951e76250cff8f71fd39f058a4663c6"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "0f8e5ddb15664b0a22781c32a59a6e648e9008cd41f4cb22721e82e89b6b382d"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "12ceebe9dfa2f6612763da97d109267866c3097af6c3bf2c34238d7765d0232f"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "6b608edb61648d218d4a0a56150e329911526247e3b4815ee1a1bc9617fda7aa"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "bd532938b05d977f6386079ce436c5b6cb9d51559ef8bf09ac55d4373aeb25e5"
+    },
+    {
+      "path": "tests/infrastructure/HttpsKeyProviderDispatch/Program.cs",
+      "sha256": "ff8f9a5944b9a99c763ce80ab6bdc3542a258ecd20ec6d4c4587e1400c08aaea"
+    },
+    {
+      "path": "tests/infrastructure/HttpsKeyProviderDispatch/README.md",
+      "sha256": "354b28388e6f8a21117899be2adcc53e94390a20de0e821456ce1e8abd0915de"
+    },
+    {
+      "path": "tests/infrastructure/HttpsKeyProviderDispatch/run-experimental.py",
+      "sha256": "33692bc31ee08bbe9ee59d11a8f99d39fc3e29b20462128345c3bf9511d62cd4"
+    }
+  ],
+  "configurationChanges": "Three test-only source files; generatedframeworkproject/temp references outsideGit; no applicationPackageReference/lock/solution/workflow/runtimeconfiguration/schema/IaC/permissions",
+  "productRegression": "NOT RERUN unchanged product runtime/config/schema/dependencies; separate scratchrestore/build/format/cases only",
+  "privateStatus": {
+    "status": "STALE BFF/HTTPS snapshot4346e0f",
+    "confirmedAtUtc": "2026-10-02T19:50:45.775370+00:00",
+    "humanTasks": 6,
+    "preparedDelta": "Signaturemanualsubstep+bounded27caseSDKdiagnostic complete; productiongraph/guard/inventory/witness/lifecycle/privatebinding work remain",
+    "reason": "Separately automatic-review-rejected credential/network publisher proxy-bypass; no retry/bypass; unrelatedCycle14 updatespreserved"
+  },
+  "limits": [
+    "Actual supplied Microsoft DI/XML provider mechanics and deterministic subclass/resolver fixtures only; no production adapter or graph promotion.",
+    "Output credential=0 denotes absence of any credential object; no live credential calls instrumented or verified.",
+    "Modern/async-only read and write controls reach throwing transport once each; guard paths use zero transport; no real HTTP/network/Azure exercised.",
+    "27 cases are case checks, not total assertion count.",
+    "Historical decrypt uses distinct v1/v2 RSA synthetic material; algorithm/size/lifetime do not establish production key policy.",
+    "No full KEY,403 force-remote,real transport/range/stage diagnostics,witness,monotonic inventory,lifecycle,retention,production or gate acceptance.",
+    "Unchanged product tests not rerun; no repo/shared cache modifications, fresh restore graph or trust changes.",
+    "ActualMicrosoftpublicregistration/DI XMLrepository/encryptor/decryptor only; no copiedimplementation",
+    "Fixtureparser/keyIDs/RSA size/crypto/retryvalues are notproductionpolicy",
+    "No productiondependency promotion/newgraph/advisoryacceptance/realAzure/credential/http/revocation/diagnosticsexport evidence",
+    "FullKEY/ARL/G1-G9/Milestone2/productionliveadmission/release remainopen",
+    "No Azure resource/grant/session/spending/publicpush/workflowrun/publisher action occurred"
+  ],
+  "currentDocumentaryChecks": {
+    "status": "PASS",
+    "utf8JsonRelativeLinksAnchorsWhitespaceProtectedProse": "569links46anchors",
+    "scopedGitleaks": "PASS exit0 nofindings",
+    "evidence": [
+      {
+        "path": "/tmp/iga-key-provider-dispatch-current-document-check.json",
+        "bytes": 3937,
+        "sha256": "f9c3d212f524d1e4700f2e63df6c646c8d128da2ab4c52a969440592c1b57d38"
+      },
+      {
+        "path": "/tmp/iga-key-provider-dispatch-current-secrets.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      }
+    ],
+    "sourceBindingMeaning": "OwnJSON checker binding is historical pre-check-reference augmentation; MD/plan/source bindings unchanged; final independent review separately hashes current receipt"
+  },
+  "finalIndependentCanonicalReview": {
+    "status": "PASS_BOUNDED_DIAGNOSTIC_RECORDS_ONLY",
+    "path": "/tmp/iga-key-provider-dispatch-independent-review/final-canonical-review.json",
+    "bytes": 10392,
+    "sha256": "de2771faaa28485f4759d8ac9479ca584a272efc723564e47b5e404ae0f7ea3f",
+    "checks": "15sourcebindings,3identicaltestfiles,12retainedreceipt/checkbindings,coordinator12rawlogs,27actualcaselabels,569links46anchors,scopedsecretfindings empty,protectedproductconfigdiffempty,whitespace",
+    "receiptBindingMeaning": "Current canonical JSON independently hashed before this final review-reference augmentation"
+  }
+}

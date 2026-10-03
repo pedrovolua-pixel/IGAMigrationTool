@@ -1,6 +1,6 @@
 # Exact Microsoft key-provider dispatch diagnostic
 
-Status: PLANNED — Linux artifact prerequisite verified; bounded local execution next
+Status: VERIFIED — bounded DISP01–08 local diagnostic; production/live gates open
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: e0747de
@@ -36,3 +36,9 @@ Execute only after read-only non-author plan review. Writing worker reports exac
 Initial here-document read failed from disk pressure; Python argument-based evidence checks succeeded, and later free space increased to about1.9GiB. No user files or retained evidence were deleted. Preserve original ZIP/folder; Finder .DS_Store added after initial inventory is excluded from authenticated85-entry ZIP proof and never executed.
 
 Private BFF/HTTPS snapshot4346e0f at2026-10-02T19:50:45.775370+00:00 remains stale under the automatic-review-rejected credential/network publisher proxy-bypass; prepare six-task delta and preserve unrelated Cycle14 publications.
+
+## Executed checkpoint — 2026-10-03 UTC
+
+Author4ad759727b4700790412cc40ab9e1ce71539ba40 changes exactly the three assigned files. Independently reviewed and integrated as8db45d7d9aadc5dd46faa3ef813e96db248a7dfb with unchanged source hashes. Author, reviewer and coordinator each executed27 actual provider cases,37 raw archive hash checks,74 compile/runtime entry comparisons, pinned empty-source scratch restore, Release build0 warnings/errors and whole-project format. Seven author/nine reviewer runner negatives deny before subprocess. Meaningful formatter control rejects misformatted C# with exit2 and clean/restored controls exit0; original project-file diagnostic retained. Python AST, local docs/whitespace/scoped secret checks pass. [Detailed result](../../docs/development/https-key-provider-dispatch-evidence.md) and [source-bound receipt](../../docs/development/evidence/https-key-provider-dispatch-20261003.json) retain failures and precise limits.
+
+This closes only bounded API/fixture mechanics. Production guard/graph review and inventory/witness/lifecycle/private bindings plus403/real transport/diagnostics/composition/fullKEY/ARL/live/gates remain open. Six human tasks retain roles/links/completion conditions; private BFF/HTTPS board stays stale under separate publisher rejection with no retry/bypass. No production dependency/configuration/schema/grant/Azure/spending/admission/public publication changed.

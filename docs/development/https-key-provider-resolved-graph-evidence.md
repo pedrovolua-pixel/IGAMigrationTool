@@ -1,6 +1,6 @@
 # HTTPS-AP02: actual shared-key provider host graph evidence
 
-Status: **LOCAL RESTORE AND SUPPORTED LINUX ARTIFACT EVIDENCE COMPLETE; SDK dispatch next**
+Status: **LOCAL RESTORE, SUPPORTED LINUX ARTIFACT AND BOUNDED SDK DISPATCH VERIFIED; production acceptance open**
 Date: 2026-10-03 UTC; execution began `2026-10-03 14:18:05 UTC`
 Tracked source: `b186d121419236e15e7fa184a22c6bac4d2db939`
 Authority: [approved cycle02 AP02/AP-T04](../../plans/active/https-production-local-cycle02.md), preferred local PC-D02, [previous minimum artifact audit](https-key-provider-artifact-audit.md). This closes the actual graph observation only. It installs no dependency/configuration/lock/code into the repository, creates no Azure resource/grant, and approves no production package graph.
@@ -177,3 +177,7 @@ ProtectedData4.5.0 now verifies normally on Linux with the unchanged original ar
 [Manual artifact review receipt](evidence/https-key-provider-linux-proof-manual-20261003.json) binds the completed proof. Finder added .DS_Store after initial folder inspection; it is excluded from the authenticated ZIP/member review. Initial shell here-document inspection failed under disk pressure, then argument-based checks succeeded; no user files/evidence were deleted.
 
 This closes only the supported Linux artifact prerequisite. Owner “continue” starts the [bounded local SDK dispatch diagnostic](../../plans/active/https-key-provider-dispatch-diagnostic.md), preserving the experimental37 graph and no production dependency promotion. No full KEY, provider guard/lifecycle/witness/inventory policy, Azure roles/resources/spending/session, admission or release follows. The six [human tasks](https-production-test-packet.md#human-tasks-and-completion-conditions) remain open; the signature/manual-artifact substep is complete, and actual guard/SDK/inventory/lifecycle inputs remain. Prepared private-board delta changes that substep only; BFF/HTTPS snapshot4346e0f remains stale under the separate rejected credential/network publisher action, with no bypass and unrelated Cycle14 changes preserved.
+
+## Bounded SDK diagnostic verified — 2026-10-03 UTC
+
+[Actual Microsoft provider diagnostic](https-key-provider-dispatch-evidence.md) now independently verifies27 cases on SDK10.0.401/runtime10.0.12 with37 archive/74 asset-entry checks, pinned scratch build0 warnings/errors and meaningful formatting controls. Earlier statements about unexecuted SDK/source-only feasibility describe their historical checkpoint. This closes only the [DISP01–08 plan](../../plans/active/https-key-provider-dispatch-diagnostic.md) mechanics; production graph/guard/parser/inventory/witness/lifecycle,403/real transport/diagnostics/composition/fullKEY/live and release remain open. No Azure/dependency promotion/policy/grant change; six human tasks and separately blocked private publisher persist.
