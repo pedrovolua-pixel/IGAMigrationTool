@@ -1,0 +1,352 @@
+{
+  "schema": "cycle14-committed-product-scope-audit-v1",
+  "reviewedHead": "711e38d84ac1c626d3695a7a442f36053c2c9729",
+  "checkout": "/private/tmp/iga-cycle14-preparation",
+  "mode": "Read-only committed-source product/requirements/source-semantics audit; no implementation, tests, network, host, DB, root dirty proposals or Site",
+  "recommendation": "Prepare and obtain exact approval for smallest useful local fictional planning-task conversion/read/history/lifecycle/comment contract. Recommended bounded scope excludes CSV and priority/effort; implementation not yet authorized for unstated behavior.",
+  "requirements": [
+    "FR-HAS-35",
+    "FR-HAS-37",
+    "FR-HAS-40",
+    "FR-HAS-41",
+    "FR-HAS-42",
+    "FR-HAS-50",
+    "FR-HAS-20 no inferred remediation",
+    "FR-HAS-36 remains deferred",
+    "AC-HAS-13",
+    "AC-HAS-14",
+    "AC-HAS-18",
+    "IP-HAS-008",
+    "Milestone7",
+    "TP-HAS-002",
+    "TP-HAS-003",
+    "TP-HAS-009",
+    "TP-HAS-013",
+    "TP-HAS-014",
+    "TP-HAS-017",
+    "TP-HAS-018"
+  ],
+  "decisionRows": [
+    {
+      "id": "TASK14-D01",
+      "status": "PROPOSED_NOT_APPROVED",
+      "decision": "Choose task conversion unit/cardinality, eligibility across finding states, and required current artifact review coverage. Candidate one planning task per selected scoped recommendation option, binding its fixed three artifacts; decide whether all must be current ReviewedForPlanning or permit explicitly Unverified planning. No existing clause authorizes a review prerequisite automatically.",
+      "owner": "Product owner; security/technical review",
+      "references": [
+        {
+          "path": "specs/003-health-assessment/product-spec.md",
+          "line": 242
+        },
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-contract-proposal.md",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "id": "TASK14-D02",
+      "status": "PROPOSED_NOT_APPROVED",
+      "decision": "Define task read/create/comment/transition/assignment actions and authority independently from artifact Read/Review. Candidate sole trusted synthetic Consultant, creator as initial owner, no reassignment or extra reviewer roles in this first slice. Explicitly decide visibility and revoked/expired/deleted behavior. Creation grant does not settle lifecycle/ownership rights.",
+      "owner": "Product/security owners",
+      "references": [
+        {
+          "path": "docs/security/health-assessment-authorization-matrix.md",
+          "line": 9
+        },
+        {
+          "path": "docs/security/health-assessment-authorization-matrix.md",
+          "line": 35
+        },
+        {
+          "path": "specs/003-health-assessment/technical-spec.md",
+          "line": 184
+        }
+      ]
+    },
+    {
+      "id": "TASK14-D03",
+      "status": "PROPOSED_NOT_APPROVED",
+      "decision": "Define frozen conversion provenance versus current-source/attestation status after finding changes, withdrawn artifact review, source unavailable/backward, and prose returning. Preserve original task source/history; decide whether updates require re-review, block, or remain available with explicit stale warning, and whether rebinding/reconversion is allowed. Candidate no automatic rebind/reopen/new task/event on source read.",
+      "owner": "Product owner; technical/security review",
+      "references": [
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+          "line": 27
+        },
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+          "line": 29
+        },
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+          "line": 39
+        },
+        {
+          "path": "architecture/decisions/ADR-0003-immutable-evidence-and-publication-storage.md",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "id": "TASK14-D04",
+      "status": "PROPOSED_NOT_APPROVED",
+      "decision": "Approve exact task lifecycle and allowed transition table, terminal/reopen/cancel behavior, immutable title/summary versus editable fields, comment/reason semantics and bounds. Candidate minimal explicit planning lifecycle plus append-only comments; completion cannot close/validate finding, approve artifact, or change health/maturity. Do not reuse finding lifecycle as task states.",
+      "owner": "Product owner; technical/quality/security review",
+      "references": [
+        {
+          "path": "specs/003-health-assessment/technical-spec.md",
+          "line": 184
+        },
+        {
+          "path": "specs/003-health-assessment/technical-spec.md",
+          "line": 341
+        },
+        {
+          "path": "specs/003-health-assessment/product-spec.md",
+          "line": 172
+        },
+        {
+          "path": "specs/003-health-assessment/product-spec.md",
+          "line": 242
+        },
+        {
+          "path": "docs/security/health-assessment-audit-policy.md",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "id": "TASK14-D05",
+      "status": "PROPOSED_NOT_APPROVED",
+      "decision": "Choose durable task identity/deduplication unit, exact retry event namespace and actor-bound receipt behavior, repeated conversion with new request, conversion after cancellation/source refresh, expected task revision and source/attestation conflicts. Candidate one stable task identity per trusted run/scoped option; exact retries return original metadata receipt only, no current state resurrection. Technical contract must define full closed schema and atomicity before coding.",
+      "owner": "Product/technical owners; security/quality review",
+      "references": [
+        {
+          "path": "specs/003-health-assessment/technical-spec.md",
+          "line": 258
+        },
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+          "line": 37
+        },
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-contract-proposal.md",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "id": "TASK14-D06",
+      "status": "PROPOSED_NOT_APPROVED",
+      "decision": "Approve bounded opt-in synthetic rollout and compatibility: candidate dedicated new profile/application/task-contract lock and additive isolated task schema. Ten existing profile inputs/locks/generated outputs stay strict; no historical action promotion, old migration edits, production/customer activation, purge or new retention policy. Explicitly defer priority/effort/configurable conversion rules beyond this one unit, CSV/export, execution and external connectors to later contracts.",
+      "owner": "Repository/product/technical/security owners",
+      "references": [
+        {
+          "path": "plans/active/local-pilot-artifact-review-cycle-13.md",
+          "line": 66
+        },
+        {
+          "path": "plans/active/local-pilot-artifact-review-cycle-13.md",
+          "line": 78
+        },
+        {
+          "path": "plans/active/local-pilot-artifact-review-cycle-13.md",
+          "line": 82
+        },
+        {
+          "path": "specs/003-health-assessment/product-spec.md",
+          "line": 238
+        },
+        {
+          "path": "specs/003-health-assessment/implementation-plan.md",
+          "line": 374
+        }
+      ]
+    },
+    {
+      "id": "TASK14-D07",
+      "status": "CSV_BLOCKER_ONLY_IF_INCLUDED",
+      "decision": "Resolve Auditor explicit-export grant versus assigned Consultant only; if CSV remains in scope also settle exact column/classification/formula-neutralization/control encoding/link/version/filter/artifact creation-expiry/audit and isolated worker contracts. Recommend defer CSV in minimum slice, leaving this discrepancy open; never infer Auditor grant or narrow it silently.",
+      "owner": "Product/security/technical owners",
+      "references": [
+        {
+          "path": "docs/security/health-assessment-authorization-matrix.md",
+          "line": 36
+        },
+        {
+          "path": "specs/003-health-assessment/technical-spec.md",
+          "line": 303
+        },
+        {
+          "path": "specs/003-health-assessment/technical-spec.md",
+          "line": 302
+        },
+        {
+          "path": "architecture/decisions/ADR-0001-pilot-application-shape.md",
+          "line": 43
+        }
+      ]
+    }
+  ],
+  "settledExistingBoundaries": [
+    "Cycle13 artifact approval covers planning attestation only; generated originals stay byte-identical Unverified.",
+    "Full current saved run/input/profile/application/template/guidance/current finding review and monotonic vector define source, not supplied digest or displayed prose.",
+    "ReviewForPlanning/WithdrawReview history separate from immutable package; latest event determines exact-current state; replay historical receipt cannot restore overlay.",
+    "Module-owned relational schemas/APIs, run fence, append-only collaboration/current projections, server-side deny-by-default scope/category/action/resource policies; no cross-module direct table reads.",
+    "No product execution/customer DB connection/external tasks/ROI; task completion must not infer new validation or score benefit.",
+    "Business collaboration reasons/comments may persist only under approved task contract; payload-free audit/log rules and existing retention approval unchanged."
+  ],
+  "implementationHazards": [
+    {
+      "hazard": "Artifact withdrawal changes latest attestation without changing immutable package digest. Conversion needs complete current source plus selected artifact review revisions/latest event identities/state under a single fence.",
+      "references": [
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+          "line": 37
+        },
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "hazard": "Existing artifact ReadAsync opens its own connection/transaction and acquires run fence. Nesting it inside a task transaction already holding same lock on another connection can self-block. Settle module-owned already-fenced attestation read/transaction composition before dependent workers; never cache source/review before fence or read foreign module tables.",
+      "references": [
+        {
+          "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+          "line": 35
+        },
+        {
+          "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+          "line": 41
+        },
+        {
+          "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+          "line": 19
+        }
+      ]
+    }
+  ],
+  "minimumVerificationContract": [
+    "Independent frozen task/source/attestation/command oracles before author output; complete source/entity/cardinality and history fields.",
+    "Real PostgreSQL one-winner revision/dedupe, concurrent finding/artifact withdrawal conversion fence, source unavailable/rollback denial, immutable originals/old10profile envelopes, reads/denials no writes.",
+    "Actor/action/category/state assignment matrix; payload-free logs/receipts and comments absent from security telemetry.",
+    "Actual keyboard/inert Unicode/control UI, uncertain commit exact replay, stale async/run switch/current-source refresh and no implicit rebinding; no score/health/finding mutation.",
+    "Owned host reconnect/restart and cancellation/failed commit recovery, migration fingerprint/append-only protections, configured hosted compatibility, explicit unsupported/manual limits."
+  ],
+  "remainingHumanDependencies": "Exact later task scope/semantics/security/technical contract approval; CSV discrepancy only blocks export if explicitly included; existing full local-build/UAT/Milestone7/G1\u2013G9 external/manual gates remain open.",
+  "reviewLimitations": [
+    "Documentation/source inspection only; no checks executed or claimed.",
+    "Architecture interpreted against accepted ADR0001\u20130004; no new consequential architecture/security decision authorized.",
+    "Root concurrent UI/BFF/research edits not inspected as authority.",
+    "Candidate rows are recommendations for human review, not decisions or public contracts."
+  ],
+  "sourceBindings": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "835cf98ff9dc277d0b2cf41ff80fdcafa2d52e6de2a2291f7ce76ddc0ab2c73f",
+      "bytes": 3911
+    },
+    {
+      "path": "skills/create-implementation-plan/SKILL.md",
+      "sha256": "15de1706864709ba7109a71d5d48fb45de2465890daf2b8c9dc0b5526429abef",
+      "bytes": 1243
+    },
+    {
+      "path": "skills/review-feature/SKILL.md",
+      "sha256": "6afb3d7e2eebe5abbba7708e371d9f6f8a6c55cfd8bb6ba27fafd9e4784059ee",
+      "bytes": 1160
+    },
+    {
+      "path": "specs/003-health-assessment/product-spec.md",
+      "sha256": "6722765feb19d9a85d12add317733f9b941f7f10e1cc5a0f34628d6c00773102",
+      "bytes": 49111
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "0900dd3aa9038532ea1013a58552fdeb0d6c804e74e2ffa557453cfe1d03ae53",
+      "bytes": 56993
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "7fd81c1e87ba6d1fe1e5cf63e5918c049e3a37608b853c47ac08ac7f27f73b14",
+      "bytes": 30451
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "02e00fb74bb390a9b2b28eeb28e578f87997981e2b100e061db19c21ba0ddd4a",
+      "bytes": 120670
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "713622dd182bc1aed8ff65aa143a78c16af0c42528aa8a38036e075d5761b203",
+      "bytes": 57090
+    },
+    {
+      "path": "specs/003-health-assessment/local-artifact-review-contract-proposal.md",
+      "sha256": "a8039536aa1dfe934a0651a1d2842499c05892aa41e989e357c67dd18b5f895d",
+      "bytes": 14390
+    },
+    {
+      "path": "specs/003-health-assessment/local-artifact-review-approval.md",
+      "sha256": "b5729fb8eb41c0040a8f9cafb02a9f7d4be2db50ae953adf6074c972dc88b2dd",
+      "bytes": 3080
+    },
+    {
+      "path": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+      "sha256": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+      "bytes": 17383
+    },
+    {
+      "path": "plans/active/local-pilot-artifact-review-cycle-13.md",
+      "sha256": "ea3ed33848a2f69afbbb5d608944c15ee1f5842011277ed6d1e00ca25c39e2ec",
+      "bytes": 12606
+    },
+    {
+      "path": "plans/active/one-identity-local-pilot-build.md",
+      "sha256": "593fdec9d3a24ecb103349671933d64612dd14809e6f2d8b23286b06a7983762",
+      "bytes": 22659
+    },
+    {
+      "path": "docs/security/health-assessment-authorization-matrix.md",
+      "sha256": "d88bf6dd89d26e0dc08abda455bfd9ae17c22573f5117e0d86d2366ff3204742",
+      "bytes": 7599
+    },
+    {
+      "path": "docs/security/health-assessment-audit-policy.md",
+      "sha256": "fcdf35ce926c4c93964d7165880f339b65f14d242d0480a3227ec2c25116e86d",
+      "bytes": 4190
+    },
+    {
+      "path": "architecture/decisions/ADR-0001-pilot-application-shape.md",
+      "sha256": "e0926789644b267ee2f2f42de2f7b565a936269609a1acaa6edc2346ce96c021",
+      "bytes": 5735
+    },
+    {
+      "path": "architecture/decisions/ADR-0002-pilot-tenant-isolation.md",
+      "sha256": "eca6f911f7658cdd833bda2017881e27581fb1aada059cd86f8db0962ed3419f",
+      "bytes": 5636
+    },
+    {
+      "path": "architecture/decisions/ADR-0003-immutable-evidence-and-publication-storage.md",
+      "sha256": "f991bf601081c735c41c0f05cc26746ad8f6d96855416170c7408d9673eee5e5",
+      "bytes": 5859
+    },
+    {
+      "path": "architecture/decisions/ADR-0004-azure-pilot-technology-platform.md",
+      "sha256": "55efeca4bca51ae3c322cae114ad179a75197bb4ce1075bbcce0028cdf68a05b",
+      "bytes": 21393
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+      "sha256": "68cb0926b833d70a125aee23edbf971579f287821687f66883a342d5ed389f84",
+      "bytes": 24614
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoArtifactReviewService.cs",
+      "sha256": "23e260aba2a1840f70e1ff141b9bbfc29790b64bcf8af490f4cb6cbbef9180cb",
+      "bytes": 5726
+    }
+  ]
+}

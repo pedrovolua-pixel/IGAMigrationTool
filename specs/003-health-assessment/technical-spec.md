@@ -300,7 +300,7 @@ These are logical operation contracts. Concrete transport, paths, and public sch
 ### Export tasks CSV
 
 - Input: project and task filter, published/current version selection.
-- Authorization: assigned consultant with `task.export` and export policy.
+- Authorization: assigned Consultant with `task.export` and customer export policy; Auditor only with an explicit scoped export grant and the same applicable customer policy, category and resource checks. This wording is reconciled with the approved role matrix under [TC14-06](local-planning-task-approval.md); Cycle14 implements no CSV export.
 - Output: formula-injection-safe UTF-8 CSV containing stable IDs and protected links, not raw evidence.
 - Idempotency: an export request digest may reuse an unexpired identical artifact; creation/access is audited.
 

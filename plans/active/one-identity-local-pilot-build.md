@@ -103,3 +103,14 @@ Tasks/workflow/CSV and priority/effort remain separate. Product/security/technic
 ## Cycle13 bounded developer implementation closed
 
 [The approved individual artifact-review cycle](local-pilot-artifact-review-cycle-13.md) now has executed local/hosted evidence and closed independent reviews. Consultants can review or withdraw fictional artifacts without changing original bytes; full-source changes invalidate earlier attestations and exact replay retains historical receipts. [Canonical evidence](../../docs/development/evidence/local-pilot-cycle13-developer-checks.json) discloses source, counts, failures, migration/rollback, preserved records and unverified environments. The next task/conversion/priority/effort slice and CSV authorization discrepancy remain undecided. Existing human tasks, full build/Milestone7/TP018/UAT and G1–G9 stay open. Private status publication is verified separately.
+
+## Cycle14 planning-task decision preparation
+
+[The next bounded cycle](local-pilot-planning-tasks-cycle-14.md) prepares [TC14-01–06](../../specs/003-health-assessment/local-planning-task-contract-proposal.md) and [twelve test groups](../../specs/003-health-assessment/local-planning-task-test-plan.md) for traceable local planning tasks from currently reviewed fictional recommendation packages. Exact eligibility, source/review freshness, fixed owner, lifecycle/comments and duplicate/replay semantics are unresolved product choices, now explicitly proposed. Future CSV authorization wording is proposed to match the approved matrix, without implementing exports.
+
+The repository owner with product/security/technical responsibility must approve/amend the exact TC14 packet before implementation. General next-cycle authorization and agent review do not settle it. Prior ten profiles, Cycle13 evidence and concurrent BFF/UI/research remain preserved. Priority/effort, external tasks, exports, real identity/provider/source and production/customer activation remain later work; full local completion/UAT/Milestone7/G1–G9 stay open. The private board adds only this new source-backed decision task to the existing eleven dependencies.
+
+
+## Cycle14 owner approval — 2026-10-02
+
+The repository owner explicitly approved TC14-01–06 against proposal revision `2b565945be99c4c674cf00b08caa6fc581b99ffd` and SHA256 `fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839`. Decision record: `specs/003-health-assessment/local-planning-task-approval.md`. The bounded Cycle14 plan/test plan are approved for local synthetic implementation. Engineering checkpoint and implementation are RUNNING; no new runtime PASS, applied migration, permission, full milestone or live gate acceptance is claimed. Future CSV wording is reconciled under TC14-06; export remains deferred. The planning-task decision dependency is closed; eleven prior human tasks remain open. Private board publication will follow the committed approval snapshot and be recorded separately.
