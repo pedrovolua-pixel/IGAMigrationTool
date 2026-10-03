@@ -35,9 +35,13 @@
     "Concurrent rootUI/BFF/research not source authority;51file preservation baseline captured."
   ],
   "site": {
-    "status": "PENDING_UPDATE",
-    "lastVerifiedVersion": 86,
-    "lastVerifiedSource": "caec0c357348bfd849c907ccdbbd899bd4ce3e43"
+    "status": "CONFIRMED_PRIVATE_PUBLICATION",
+    "version": 87,
+    "source": "dd358edcf7058e6d80be734b7d35f9e3e1b46086",
+    "deploymentId": "appgdep_6ac068d1b4cc8191b9f1b8cd44211bbc",
+    "canonicalSnapshot": "2b565945be99c4c674cf00b08caa6fc581b99ffd",
+    "openHumanTasks": 12,
+    "receipt": "docs/development/evidence/local-pilot-cycle14-site-publication.json"
   },
   "proposalBinding": {
     "algorithm": "SHA256 exact UTF8/LF finalnewline bytes",
