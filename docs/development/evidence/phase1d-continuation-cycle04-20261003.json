@@ -1,0 +1,1178 @@
+{
+  "date": "2026-10-03",
+  "status": "LOCAL_VERIFIED_SYNTHETIC_ONLY_HOSTED_PRIVATE_PENDING",
+  "baseline": "3551fe5693196ab371282c38bae53d2f9ed23f19",
+  "authorCommits": [
+    "0477d63f40256ebe658fb2dc981bbd65327879e2",
+    "f65e469"
+  ],
+  "testedCoordinatorCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+  "equivalentPushedCodeCommit": "be5a82ed5593c12590af27108f1b8dcc266f8b85",
+  "newGuard": {
+    "scenarios": 24,
+    "invocations": 112,
+    "assertions": 1011,
+    "identities": [
+      "NamedUser",
+      "Service"
+    ],
+    "resources": [
+      "Findings",
+      "Recommendations"
+    ],
+    "cases": [
+      "overlapping repeatable continuation",
+      "cancel/deadline/audit false/audit throw and unchanged-authority retry",
+      "revision stale fence/revoke/regrant/current field grant"
+    ],
+    "sourceBarrier": "immutable payload snapshot before observable selected-item call barrier; no post-validation claim"
+  },
+  "oldSuites": {
+    "publicationAssertions": 260,
+    "boundaryAssertions": 10444,
+    "integrationAssertions": 2849,
+    "cycle03Requests": 10060,
+    "cycle03Assertions": 92904,
+    "architecturePolicyCases": 7,
+    "architectureScanCases": 4
+  },
+  "checks": [
+    {
+      "name": "publication-restore",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/unit/SyntheticMcpPublication.Tests",
+        "--locked-mode",
+        "--disable-parallel",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.32,
+      "artifact": "publication-restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "name": "boundary-restore",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/unit/SyntheticMcpBoundary.Tests",
+        "--locked-mode",
+        "--disable-parallel",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.32,
+      "artifact": "boundary-restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "name": "architecture-restore",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/architecture/BoundaryChecks",
+        "--locked-mode",
+        "--disable-parallel",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.31,
+      "artifact": "architecture-restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "name": "publication-build",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/unit/SyntheticMcpPublication.Tests",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 1.17,
+      "artifact": "publication-build.log",
+      "sha256": "d9987037c1b87afa0dd270114e21ce0c41c88e2d3f460e684e1ae183d118b729"
+    },
+    {
+      "name": "boundary-build",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/unit/SyntheticMcpBoundary.Tests",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.56,
+      "artifact": "boundary-build.log",
+      "sha256": "a302f360ae7bbd1db0aeaa310e83888995b4ff2e8700a6949f130e09bbd20c63"
+    },
+    {
+      "name": "architecture-build",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/architecture/BoundaryChecks",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.37,
+      "artifact": "architecture-build.log",
+      "sha256": "ac1308ae09f55c74a8ff440afdb3e7c9e1410cc3187c034c083b6368afd8e810"
+    },
+    {
+      "name": "oracle",
+      "command": [
+        "python3",
+        "tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py",
+        "--verify"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.02,
+      "artifact": "oracle.log",
+      "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45"
+    },
+    {
+      "name": "publication",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticMcpPublication.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.57,
+      "artifact": "publication.log",
+      "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb"
+    },
+    {
+      "name": "boundary",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticMcpBoundary.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 6.72,
+      "artifact": "boundary.log",
+      "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6"
+    },
+    {
+      "name": "architecture",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/architecture/BoundaryChecks",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.44,
+      "artifact": "architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "name": "mcp-format",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj",
+        "--verify-no-changes",
+        "--no-restore"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "sourceCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+      "exitCode": 0,
+      "seconds": 2.27,
+      "artifact": "mcp-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-build",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/integration/SyntheticMcp.Tests",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "sourceCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+      "exitCode": 0,
+      "seconds": 1.2,
+      "artifact": "integration-build.log",
+      "sha256": "cfb9bd9a50ee3878dcda88675ce2409d9d76b7a7de864e0eb44507281388e28d"
+    },
+    {
+      "name": "composed",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests.dll"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "sourceCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+      "exitCode": 0,
+      "seconds": 3.88,
+      "artifact": "composed.log",
+      "sha256": "d831be5870eedd8c8c7d9f481fe7886cccac898e90b4d172aace06706c121330"
+    },
+    {
+      "name": "mcp-dependency-audit",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "list",
+        "tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj",
+        "package",
+        "--vulnerable",
+        "--include-transitive",
+        "--format",
+        "json"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "sourceCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+      "exitCode": 0,
+      "seconds": 0.61,
+      "artifact": "mcp-dependency-audit.log",
+      "sha256": "5f70b2eced628d8b11308922af205643aa9c18d125ff4a462be19438d3368c97"
+    }
+  ],
+  "sourcePreservation": {
+    "status": "PASS",
+    "rootWorkingSourceHashes": 332,
+    "unchangedOriginalFixtureFiles": 16,
+    "cleanProductionHostUiContractMigrationDiffEmpty": true,
+    "unchangedCycle03Files": 2,
+    "onlyChangedTestPaths": [
+      "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.cs",
+      "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md",
+      "tests/integration/SyntheticMcp.Tests/Program.cs"
+    ],
+    "frozenCoordinatorCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+    "equivalentPushedCodeCommit": "be5a82ed5593c12590af27108f1b8dcc266f8b85",
+    "runtimePreserved": true
+  },
+  "nonauthorReview": {
+    "status": "CLOSED_NO_UNRESOLVED_FINDINGS",
+    "reviewer": "/root/p1d_c04_gap_review",
+    "sourceCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests.dll"
+    ],
+    "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+    "exitCode": 0,
+    "oldAssertions": 2849,
+    "cycle03Requests": 10060,
+    "cycle03Assertions": 92904,
+    "cycle04Scenarios": 24,
+    "cycle04Invocations": 112,
+    "cycle04Assertions": 1011,
+    "codeSha256": "587a84eb682f4f7bbd7b84ed3de21f3ad461514e2537bf53f2546b6a4b5e5f28",
+    "dllSha256": "2bb0d9f5bd34b9c4c5eb9ed3b9b3107be58463233ba8243afda19e994cc88289",
+    "finalFourCheckLogHashesMatch": true,
+    "originalReviewSource": "1948986e5a5fa2670f0038f54df479d912a2a4bc",
+    "formatCorrection": "six initializer line splits only; whitespace-stripped source matches prior review",
+    "preinspectionSnapshotMatchesInitialAuthorCommit": true,
+    "preinspectionSha256": "1ac07fd61044d052b19868613f017c51b21e0d7136d99bd3bfa4826a805f4e93",
+    "initialProvenanceSha256": "8c3ec17bb5e4eac88f2083ba5b5001f3056aba07efb4c835556bf42292782756",
+    "unamendedProvenancePathsMatched": 27,
+    "limits": [
+      "No reviewer build/format/writes",
+      "Hashes prove preserved bytes, not independent chronological model inspection",
+      "No durable audit, exhaustive capacity cleanup, native publication/production authorization/live integration claim"
+    ]
+  },
+  "authorHandoff": {
+    "author": "/root/p1d_c04_continuation",
+    "commits": [
+      "0477d63f40256ebe658fb2dc981bbd65327879e2",
+      "f65e469"
+    ],
+    "ownedPaths": [
+      "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.cs",
+      "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md"
+    ],
+    "authorExecutedSource": "1948986e5a5fa2670f0038f54df479d912a2a4bc",
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests.dll"
+    ],
+    "exitCode": 0,
+    "scenarios": 24,
+    "invocations": 112,
+    "assertions": 1011,
+    "nativeToolChunk": "cd4063",
+    "failedEvidenceSave": "zsh here-document tempfile allocation failed, toolchunkd537d5; subsequent read-only no-temp hashes passed c40c84",
+    "qualification": "Author run returned in tool output; this JSON is coordinator transcription of handoff, final coordinator filesystem log and independent reviewer execution separately preserved"
+  },
+  "directToolTranscriptions": {
+    "sourceCommit": "1948986e5a5fa2670f0038f54df479d912a2a4bc",
+    "checks": [
+      {
+        "name": "initial-integration-build",
+        "command": [
+          "/private/tmp/iga-dotnet-10.0.401/dotnet",
+          "build",
+          "tests/integration/SyntheticMcp.Tests",
+          "-c",
+          "Release",
+          "--no-restore",
+          "-m:1"
+        ],
+        "exitCode": 0,
+        "warnings": 0,
+        "errors": 0,
+        "toolChunk": "c14b34"
+      },
+      {
+        "name": "composed",
+        "exitCode": 0,
+        "toolChunks": [
+          "e183bf",
+          "783016"
+        ],
+        "counts": [
+          2849,
+          10060,
+          92904,
+          24,
+          112,
+          1011
+        ]
+      },
+      {
+        "name": "source-secrets",
+        "command": [
+          "/private/tmp/iga-parallel-tools/gitleaks",
+          "dir",
+          "--no-banner",
+          "--redact=100",
+          "."
+        ],
+        "exitCode": 0,
+        "scannedBytes": 31449868,
+        "noLeaks": true,
+        "toolChunks": [
+          "3f1bac",
+          "15e0e7"
+        ],
+        "scope": "clean image/PDF-excluded source checkout before MCP-only sparse reduction"
+      }
+    ],
+    "qualification": "Transcriptions of executed native tool outputs; final filesystem logs separately bound to final formatted1899 source"
+  },
+  "initialWholeRestore": {
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "restore",
+      "IgaMigrationTool.slnx",
+      "--locked-mode",
+      "-p:NuGetAudit=true"
+    ],
+    "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+    "exitCode": 1,
+    "seconds": 2.69,
+    "artifact": "restore.log",
+    "sha256": "ad0e67ddcebe8a2243f9491a6dd90adc48a200fc1d44929bbf4cc3db7e040eaa"
+  },
+  "initialFormat": [
+    {
+      "name": "integration-restore",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/integration/SyntheticMcp.Tests",
+        "--locked-mode",
+        "--disable-parallel",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 0,
+      "seconds": 0.34,
+      "artifact": "integration-restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "name": "mcp-format",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj",
+        "--verify-no-changes",
+        "--no-restore"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle04-continuation",
+      "exitCode": 2,
+      "seconds": 2.43,
+      "artifact": "mcp-format.log",
+      "sha256": "f4d634e3172ce7c79f13730f138f0ee5456affdfb5fd365f175e56cc57b696e9"
+    }
+  ],
+  "hosted": {
+    "finalSource": "be5a82ed5593c12590af27108f1b8dcc266f8b85",
+    "bootstrapRun": 37159920212,
+    "packageRun": 37159920192,
+    "status": "pending; final native observations appended before closure",
+    "intermediateSource": "e065747367d71f42fa8a9c018744939176b85b1f",
+    "intermediateBootstrapRun": 37159826185,
+    "intermediatePackageRun": 37159826184,
+    "observedInitialLinuxFailure": "Verify formatting; build/MCP and laterLinuxsteps skipped; Windows observations retained separately",
+    "observed": "Final MCP steps and both Windows jobs/package pass; broaderLinuxbootstrap in progress"
+  },
+  "artifacts": [
+    {
+      "artifact": "architecture-build.log",
+      "bytes": 211,
+      "sha256": "ac1308ae09f55c74a8ff440afdb3e7c9e1410cc3187c034c083b6368afd8e810"
+    },
+    {
+      "artifact": "architecture-restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "artifact": "architecture.log",
+      "bytes": 116,
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "artifact": "author/ContinuationRecovery.preinspection.oracle.md",
+      "bytes": 4697,
+      "sha256": "1ac07fd61044d052b19868613f017c51b21e0d7136d99bd3bfa4826a805f4e93"
+    },
+    {
+      "artifact": "author/source-fixture-hashes-initial.json",
+      "bytes": 4151,
+      "sha256": "8c3ec17bb5e4eac88f2083ba5b5001f3056aba07efb4c835556bf42292782756"
+    },
+    {
+      "artifact": "author-handoff.json",
+      "bytes": 964,
+      "sha256": "f36119fd209fb180705d4d32db9e5eed16e3000558052fd53161897930fb023f"
+    },
+    {
+      "artifact": "baseline-commit.txt",
+      "bytes": 41,
+      "sha256": "7d92376b3414d5b741829ddfb7d9e1c807afe1259f3100bf00ad8e93cda8da86"
+    },
+    {
+      "artifact": "baseline-source-hashes.json",
+      "bytes": 55027,
+      "sha256": "fe1ca1ad4696f66be39353af88235c0ad3693ffddcff3677d35bc8304f89c464"
+    },
+    {
+      "artifact": "boundary-build.log",
+      "bytes": 368,
+      "sha256": "a302f360ae7bbd1db0aeaa310e83888995b4ff2e8700a6949f130e09bbd20c63"
+    },
+    {
+      "artifact": "boundary-restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "artifact": "boundary.log",
+      "bytes": 116,
+      "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6"
+    },
+    {
+      "artifact": "composed-runtime/SyntheticMcp.Tests",
+      "bytes": 124712,
+      "sha256": "c3c8ca37613e285db0a625f995993cd6915ae1c963b6b0bce95631968a654b99"
+    },
+    {
+      "artifact": "composed-runtime/SyntheticMcp.Tests.deps.json",
+      "bytes": 797,
+      "sha256": "290695616edb392a2a1d49b2180bca010411234851a4642b325754fd616cbb8a"
+    },
+    {
+      "artifact": "composed-runtime/SyntheticMcp.Tests.dll",
+      "bytes": 138240,
+      "sha256": "2bb0d9f5bd34b9c4c5eb9ed3b9b3107be58463233ba8243afda19e994cc88289"
+    },
+    {
+      "artifact": "composed-runtime/SyntheticMcp.Tests.pdb",
+      "bytes": 33640,
+      "sha256": "954042cdfef2aa9aabffb73fc69424dacadaf9c803a4b920cf821083adcb19a6"
+    },
+    {
+      "artifact": "composed-runtime/SyntheticMcp.Tests.runtimeconfig.json",
+      "bytes": 330,
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    {
+      "artifact": "composed-runtime/SyntheticMcp.dll",
+      "bytes": 77312,
+      "sha256": "2c49b9f601c53f660c8da975c52a16f8b4d3a162a4fe993435bdbb9d421d05c8"
+    },
+    {
+      "artifact": "composed-runtime/SyntheticMcp.pdb",
+      "bytes": 24720,
+      "sha256": "0e5226b605b9e7fb0d9c541b98956a9037eb69fc11f2867b17f51dfb4e73b613"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/author_oracle.py",
+      "bytes": 5342,
+      "sha256": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/denial-corpus.json",
+      "bytes": 7798,
+      "sha256": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/golden-hashes.json",
+      "bytes": 1203,
+      "sha256": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/manifest.json",
+      "bytes": 2472,
+      "sha256": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-coverage-a.json",
+      "bytes": 159,
+      "sha256": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-coverage-b.json",
+      "bytes": 135,
+      "sha256": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-finding-a.json",
+      "bytes": 237,
+      "sha256": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-finding-b.json",
+      "bytes": 242,
+      "sha256": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-finding-c.json",
+      "bytes": 237,
+      "sha256": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-rec-a.json",
+      "bytes": 230,
+      "sha256": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-rec-b.json",
+      "bytes": 230,
+      "sha256": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-rec-c.json",
+      "bytes": 230,
+      "sha256": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-ref-a.json",
+      "bytes": 92,
+      "sha256": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-ref-b.json",
+      "bytes": 92,
+      "sha256": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-score.json",
+      "bytes": 104,
+      "sha256": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10"
+    },
+    {
+      "artifact": "composed-runtime/fixtures/syn-status.json",
+      "bytes": 148,
+      "sha256": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef"
+    },
+    {
+      "artifact": "composed.log",
+      "bytes": 546,
+      "sha256": "d831be5870eedd8c8c7d9f481fe7886cccac898e90b4d172aace06706c121330"
+    },
+    {
+      "artifact": "coordinator-final-checks.json",
+      "bytes": 2101,
+      "sha256": "2650926ada2719f1e6e13e02f33d84268c577a24d344c9610f5a27e088a410b8"
+    },
+    {
+      "artifact": "coordinator-focused-checks-original.json",
+      "bytes": 924,
+      "sha256": "840fc6a3fc34b560f4dec91a20dd1906fb802fea5002bd392cf858417fa20f6d"
+    },
+    {
+      "artifact": "coordinator-focused-checks.json",
+      "bytes": 924,
+      "sha256": "840fc6a3fc34b560f4dec91a20dd1906fb802fea5002bd392cf858417fa20f6d"
+    },
+    {
+      "artifact": "coordinator-opening-diagnostics.json",
+      "bytes": 656,
+      "sha256": "13e5b87924b8ca7f1d87ee0651c80bef0ace3828d3f2c817b778fc7eb538db6b"
+    },
+    {
+      "artifact": "coordinator-unit-checks.json",
+      "bytes": 4472,
+      "sha256": "88e9edbbab057298ac6b8c1f46e65eae559bb5dd8fdec3d4884681b781dbf46f"
+    },
+    {
+      "artifact": "direct-tool-check-transcriptions.json",
+      "bytes": 1249,
+      "sha256": "f9a16db0e6da332b512f5a1a61ec27e6db7dbb8d19e30d44395b82201bfd2a79"
+    },
+    {
+      "artifact": "hosted-initial-jobs.json",
+      "bytes": 21800,
+      "sha256": "11c38c63c5354cec2e931b12aa60ed0af2259268fa2572ceabe65b100d17db25"
+    },
+    {
+      "artifact": "hosted-initial-runs.json",
+      "bytes": 1081,
+      "sha256": "7e302dc568934bdf4192a1946d6665a0b5a70c4a99c9318d9ef0d6449c1b88f5"
+    },
+    {
+      "artifact": "integration-build.log",
+      "bytes": 351,
+      "sha256": "cfb9bd9a50ee3878dcda88675ce2409d9d76b7a7de864e0eb44507281388e28d"
+    },
+    {
+      "artifact": "integration-restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "artifact": "mcp-dependency-audit.log",
+      "bytes": 288,
+      "sha256": "5f70b2eced628d8b11308922af205643aa9c18d125ff4a462be19438d3368c97"
+    },
+    {
+      "artifact": "mcp-format-original.log",
+      "bytes": 1941,
+      "sha256": "f4d634e3172ce7c79f13730f138f0ee5456affdfb5fd365f175e56cc57b696e9"
+    },
+    {
+      "artifact": "mcp-format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "artifact": "nonauthor-review.json",
+      "bytes": 1479,
+      "sha256": "5a5891cd0f78539620e320a041fac2f8e3de8b68db85b9e1595aedeceabacfaf"
+    },
+    {
+      "artifact": "opening-status.txt",
+      "bytes": 1239,
+      "sha256": "cad51f054544abbfd55cf50fc00b0cb02ffe0b10e30f5845c35205955af4d8b1"
+    },
+    {
+      "artifact": "oracle.log",
+      "bytes": 81,
+      "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45"
+    },
+    {
+      "artifact": "publication-build.log",
+      "bytes": 377,
+      "sha256": "d9987037c1b87afa0dd270114e21ce0c41c88e2d3f460e684e1ae183d118b729"
+    },
+    {
+      "artifact": "publication-restore.log",
+      "bytes": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "artifact": "publication.log",
+      "bytes": 61,
+      "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb"
+    },
+    {
+      "artifact": "restore.json",
+      "bytes": 359,
+      "sha256": "70d220172024c34f57a21fc28f1d2296d08d60102dad52537bd713b01edca54f"
+    },
+    {
+      "artifact": "restore.log",
+      "bytes": 13062,
+      "sha256": "ad0e67ddcebe8a2243f9491a6dd90adc48a200fc1d44929bbf4cc3db7e040eaa"
+    },
+    {
+      "artifact": "source-preservation.json",
+      "bytes": 592,
+      "sha256": "77c83b2f932aa7f683c6eaead056bdb65b84e95458517777e206857312217180"
+    },
+    {
+      "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/ContinuationRecovery.cs",
+      "bytes": 24728,
+      "sha256": "587a84eb682f4f7bbd7b84ed3de21f3ad461514e2537bf53f2546b6a4b5e5f28"
+    },
+    {
+      "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md",
+      "bytes": 5305,
+      "sha256": "cdfa9bd57fb3b0de26d161054592d5509f75afa3547228540c3c9f00ca377959"
+    },
+    {
+      "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/Program.cs",
+      "bytes": 46941,
+      "sha256": "be5ba0fd67ab0e1690f28b9753f6d91888cecdba33ff33db459b2f4f2c575c0d"
+    }
+  ],
+  "limits": [
+    "Synthetic fixture only; accepted in-memory audit events, not durable audit",
+    "No expiry-at-emission policy or exhaustive cursor capacity claim",
+    "Sparse local source secret scan excluded images/PDF; later hosted checkout scan separate",
+    "Whole local restore failed on disk; full solution format/build/broader regressions depend on exact hosted run",
+    "No actual publisher/reader/client/identity/production changes; full Milestone11/Phase1D/UAT/G1\u2013G9 NOT VERIFIED"
+  ],
+  "documentaryChecks": {
+    "status": "PASS",
+    "documents": 4,
+    "localLinks": [
+      {
+        "from": "plans/active/local-pilot-phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/local-phase1d-test-plan.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/local-phase1d-implementation-contract.md"
+      },
+      {
+        "from": "plans/active/local-pilot-phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/local-phase1d-implementation-contract.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/local-phase1d-test-plan.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md",
+        "to": "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.cs"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md",
+        "to": "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md",
+        "to": "docs/development/evidence/phase1d-continuation-cycle04-20261003.json"
+      },
+      {
+        "from": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md",
+        "to": "specs/003-health-assessment/phase1d-integration-intake-cycle02.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-approval.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-implementation-contract.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-test-plan.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/local-phase1d-implementation-verification.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/phase1d-integration-contract-checklist.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/phase1d-minimization-verification-cycle03.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "tests/integration/SyntheticMcp.Tests/MinimizationCrossProduct.oracle.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "specs/003-health-assessment/phase1d-continuation-verification-cycle04.md"
+      },
+      {
+        "from": "docs/development/synthetic-mcp-local-harness.md",
+        "to": "tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md"
+      }
+    ],
+    "checks": [
+      "UTF8/LF/final newline/trailing whitespace",
+      "all local Markdown links",
+      "JSON parse",
+      "owned documentary secret scan"
+    ]
+  },
+  "preservedBeforeCleanup": {
+    "status": "PRESERVED_BEFORE_OWN_WORKTREE_REMOVAL",
+    "sourceCommit": "1899ca0e970df4cd1a3cab24b563767370719edc",
+    "artifacts": [
+      {
+        "artifact": "architecture-build.log",
+        "sha256": "ac1308ae09f55c74a8ff440afdb3e7c9e1410cc3187c034c083b6368afd8e810",
+        "bytes": 211
+      },
+      {
+        "artifact": "architecture-restore.log",
+        "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+        "bytes": 80
+      },
+      {
+        "artifact": "architecture.log",
+        "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb",
+        "bytes": 116
+      },
+      {
+        "artifact": "author/ContinuationRecovery.preinspection.oracle.md",
+        "sha256": "1ac07fd61044d052b19868613f017c51b21e0d7136d99bd3bfa4826a805f4e93",
+        "bytes": 4697
+      },
+      {
+        "artifact": "author/source-fixture-hashes-initial.json",
+        "sha256": "8c3ec17bb5e4eac88f2083ba5b5001f3056aba07efb4c835556bf42292782756",
+        "bytes": 4151
+      },
+      {
+        "artifact": "author-handoff.json",
+        "sha256": "f36119fd209fb180705d4d32db9e5eed16e3000558052fd53161897930fb023f",
+        "bytes": 964
+      },
+      {
+        "artifact": "baseline-commit.txt",
+        "sha256": "7d92376b3414d5b741829ddfb7d9e1c807afe1259f3100bf00ad8e93cda8da86",
+        "bytes": 41
+      },
+      {
+        "artifact": "baseline-source-hashes.json",
+        "sha256": "fe1ca1ad4696f66be39353af88235c0ad3693ffddcff3677d35bc8304f89c464",
+        "bytes": 55027
+      },
+      {
+        "artifact": "boundary-build.log",
+        "sha256": "a302f360ae7bbd1db0aeaa310e83888995b4ff2e8700a6949f130e09bbd20c63",
+        "bytes": 368
+      },
+      {
+        "artifact": "boundary-restore.log",
+        "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+        "bytes": 80
+      },
+      {
+        "artifact": "boundary.log",
+        "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6",
+        "bytes": 116
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests",
+        "sha256": "c3c8ca37613e285db0a625f995993cd6915ae1c963b6b0bce95631968a654b99",
+        "bytes": 124712
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.deps.json",
+        "sha256": "290695616edb392a2a1d49b2180bca010411234851a4642b325754fd616cbb8a",
+        "bytes": 797
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.dll",
+        "sha256": "2bb0d9f5bd34b9c4c5eb9ed3b9b3107be58463233ba8243afda19e994cc88289",
+        "bytes": 138240
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.pdb",
+        "sha256": "954042cdfef2aa9aabffb73fc69424dacadaf9c803a4b920cf821083adcb19a6",
+        "bytes": 33640
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.Tests.runtimeconfig.json",
+        "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+        "bytes": 330
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.dll",
+        "sha256": "2c49b9f601c53f660c8da975c52a16f8b4d3a162a4fe993435bdbb9d421d05c8",
+        "bytes": 77312
+      },
+      {
+        "artifact": "composed-runtime/SyntheticMcp.pdb",
+        "sha256": "0e5226b605b9e7fb0d9c541b98956a9037eb69fc11f2867b17f51dfb4e73b613",
+        "bytes": 24720
+      },
+      {
+        "artifact": "composed-runtime/fixtures/author_oracle.py",
+        "sha256": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9",
+        "bytes": 5342
+      },
+      {
+        "artifact": "composed-runtime/fixtures/denial-corpus.json",
+        "sha256": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c",
+        "bytes": 7798
+      },
+      {
+        "artifact": "composed-runtime/fixtures/golden-hashes.json",
+        "sha256": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f",
+        "bytes": 1203
+      },
+      {
+        "artifact": "composed-runtime/fixtures/manifest.json",
+        "sha256": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d",
+        "bytes": 2472
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-coverage-a.json",
+        "sha256": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f",
+        "bytes": 159
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-coverage-b.json",
+        "sha256": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60",
+        "bytes": 135
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-finding-a.json",
+        "sha256": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5",
+        "bytes": 237
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-finding-b.json",
+        "sha256": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2",
+        "bytes": 242
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-finding-c.json",
+        "sha256": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d",
+        "bytes": 237
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-rec-a.json",
+        "sha256": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277",
+        "bytes": 230
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-rec-b.json",
+        "sha256": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9",
+        "bytes": 230
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-rec-c.json",
+        "sha256": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4",
+        "bytes": 230
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-ref-a.json",
+        "sha256": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b",
+        "bytes": 92
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-ref-b.json",
+        "sha256": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b",
+        "bytes": 92
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-score.json",
+        "sha256": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10",
+        "bytes": 104
+      },
+      {
+        "artifact": "composed-runtime/fixtures/syn-status.json",
+        "sha256": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef",
+        "bytes": 148
+      },
+      {
+        "artifact": "composed.log",
+        "sha256": "d831be5870eedd8c8c7d9f481fe7886cccac898e90b4d172aace06706c121330",
+        "bytes": 546
+      },
+      {
+        "artifact": "coordinator-final-checks.json",
+        "sha256": "2650926ada2719f1e6e13e02f33d84268c577a24d344c9610f5a27e088a410b8",
+        "bytes": 2101
+      },
+      {
+        "artifact": "coordinator-focused-checks-original.json",
+        "sha256": "840fc6a3fc34b560f4dec91a20dd1906fb802fea5002bd392cf858417fa20f6d",
+        "bytes": 924
+      },
+      {
+        "artifact": "coordinator-focused-checks.json",
+        "sha256": "840fc6a3fc34b560f4dec91a20dd1906fb802fea5002bd392cf858417fa20f6d",
+        "bytes": 924
+      },
+      {
+        "artifact": "coordinator-opening-diagnostics.json",
+        "sha256": "13e5b87924b8ca7f1d87ee0651c80bef0ace3828d3f2c817b778fc7eb538db6b",
+        "bytes": 656
+      },
+      {
+        "artifact": "coordinator-unit-checks.json",
+        "sha256": "88e9edbbab057298ac6b8c1f46e65eae559bb5dd8fdec3d4884681b781dbf46f",
+        "bytes": 4472
+      },
+      {
+        "artifact": "direct-tool-check-transcriptions.json",
+        "sha256": "f9a16db0e6da332b512f5a1a61ec27e6db7dbb8d19e30d44395b82201bfd2a79",
+        "bytes": 1249
+      },
+      {
+        "artifact": "documentary-checks.json",
+        "sha256": "881e432b09eb9d3f61d5b107b1c5a18fa6ac981d6bef23ba854fac7142175816",
+        "bytes": 3620
+      },
+      {
+        "artifact": "hosted-initial-jobs.json",
+        "sha256": "11c38c63c5354cec2e931b12aa60ed0af2259268fa2572ceabe65b100d17db25",
+        "bytes": 21800
+      },
+      {
+        "artifact": "hosted-initial-runs-final.json",
+        "sha256": "b392c72155d895ca8da4dbf9d2cdbc20eea79b376cd50f1166fdc3a946db5243",
+        "bytes": 963
+      },
+      {
+        "artifact": "hosted-initial-runs.json",
+        "sha256": "7e302dc568934bdf4192a1946d6665a0b5a70c4a99c9318d9ef0d6449c1b88f5",
+        "bytes": 1081
+      },
+      {
+        "artifact": "hosted-intermediate.json",
+        "sha256": "80960f4f8be9cb77d4598f86ec0435b7563f08ba3d41fd026b618b4bdabaae95",
+        "bytes": 22760
+      },
+      {
+        "artifact": "integration-build.log",
+        "sha256": "cfb9bd9a50ee3878dcda88675ce2409d9d76b7a7de864e0eb44507281388e28d",
+        "bytes": 351
+      },
+      {
+        "artifact": "integration-restore.log",
+        "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+        "bytes": 80
+      },
+      {
+        "artifact": "mcp-dependency-audit.log",
+        "sha256": "5f70b2eced628d8b11308922af205643aa9c18d125ff4a462be19438d3368c97",
+        "bytes": 288
+      },
+      {
+        "artifact": "mcp-format-original.log",
+        "sha256": "f4d634e3172ce7c79f13730f138f0ee5456affdfb5fd365f175e56cc57b696e9",
+        "bytes": 1941
+      },
+      {
+        "artifact": "mcp-format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "artifact": "nonauthor-review.json",
+        "sha256": "5a5891cd0f78539620e320a041fac2f8e3de8b68db85b9e1595aedeceabacfaf",
+        "bytes": 1479
+      },
+      {
+        "artifact": "opening-status.txt",
+        "sha256": "cad51f054544abbfd55cf50fc00b0cb02ffe0b10e30f5845c35205955af4d8b1",
+        "bytes": 1239
+      },
+      {
+        "artifact": "oracle.log",
+        "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45",
+        "bytes": 81
+      },
+      {
+        "artifact": "publication-build.log",
+        "sha256": "d9987037c1b87afa0dd270114e21ce0c41c88e2d3f460e684e1ae183d118b729",
+        "bytes": 377
+      },
+      {
+        "artifact": "publication-restore.log",
+        "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+        "bytes": 80
+      },
+      {
+        "artifact": "publication.log",
+        "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb",
+        "bytes": 61
+      },
+      {
+        "artifact": "restore.json",
+        "sha256": "70d220172024c34f57a21fc28f1d2296d08d60102dad52537bd713b01edca54f",
+        "bytes": 359
+      },
+      {
+        "artifact": "restore.log",
+        "sha256": "ad0e67ddcebe8a2243f9491a6dd90adc48a200fc1d44929bbf4cc3db7e040eaa",
+        "bytes": 13062
+      },
+      {
+        "artifact": "source-preservation.json",
+        "sha256": "77c83b2f932aa7f683c6eaead056bdb65b84e95458517777e206857312217180",
+        "bytes": 592
+      },
+      {
+        "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/ContinuationRecovery.cs",
+        "sha256": "587a84eb682f4f7bbd7b84ed3de21f3ad461514e2537bf53f2546b6a4b5e5f28",
+        "bytes": 24728
+      },
+      {
+        "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/ContinuationRecovery.oracle.md",
+        "sha256": "cdfa9bd57fb3b0de26d161054592d5509f75afa3547228540c3c9f00ca377959",
+        "bytes": 5305
+      },
+      {
+        "artifact": "tested-source/tests/integration/SyntheticMcp.Tests/Program.cs",
+        "sha256": "be5ba0fd67ab0e1690f28b9753f6d91888cecdba33ff33db459b2f4f2c575c0d",
+        "bytes": 46941
+      }
+    ],
+    "authorEvidenceKept": "author/",
+    "runtimeKept": "composed-runtime/"
+  },
+  "ownCleanWorktreeRemoved": true
+}

@@ -36,6 +36,12 @@ internal static class Program
             Console.Error.WriteLine("FAIL cycle03 minimization: " + exception.Message);
             Environment.ExitCode = 1;
         }
+        try { await ContinuationRecovery.RunAsync(); }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine("FAIL cycle04 continuation: " + exception.Message);
+            Environment.ExitCode = 1;
+        }
     }
     internal static void Check(bool value, string name)
     {
