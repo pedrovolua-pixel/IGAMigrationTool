@@ -55,6 +55,7 @@ jobs:
           docker pull mcr.microsoft.com/dotnet/runtime:10.0.12
           python3 tests/security/phase1b-csv-linux/run.py --evidence "$RUNNER_TEMP/phase1b-csv-linux-verification.json"
           python3 -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/phase1b-csv-linux-verification.json")); assert p["linuxStatus"]=="PASS" and len(p["cases"])==18'
+          cat "$RUNNER_TEMP/phase1b-csv-linux-verification.json"
       - name: Run synthetic artifact-integrity checks
         run: dotnet run --project tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj --configuration Release --no-build
       - name: Check synthetic evaluation accuracy

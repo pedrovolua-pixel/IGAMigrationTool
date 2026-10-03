@@ -68,6 +68,8 @@ public sealed class SyntheticDurableRunEngine
         if (!MatchesScope(request.Scope)) return Deny(SyntheticRunIssue.WrongScope);
         if (!ValidText(request.IdempotencyKey) || !ValidText(request.BaselineCatalogId) || !ValidText(request.ProfileCatalogId) || !ValidVersions(request.Versions))
             return Deny(SyntheticRunIssue.InvalidInput);
+        if (!SyntheticBaselineInventoryPlanner.Plan(request.Capability, request.Baseline, trustedScope).HasPlan)
+            return Deny(SyntheticRunIssue.InvalidPlan);
         await using var db = CreateDb();
         await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
         var result = await StartCoreAsync(db, request, null, cancellationToken);
