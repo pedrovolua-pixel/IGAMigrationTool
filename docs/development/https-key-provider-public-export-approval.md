@@ -1,6 +1,6 @@
 # Exact public signature-proof export approval
 
-Status: OWNER APPROVED — publication and Linux execution authorized; results pending
+Status: OWNER APPROVED — exact packet published; Linux run failed before signatures
 Date: 2026-10-03 UTC
 Authority: [cycle04](../../plans/active/https-production-local-cycle04.md); [self-contained proof contract](https-key-provider-ci-proof-packet.md)
 
@@ -37,3 +37,7 @@ This approval closes only the public export/run prerequisite. The separately rev
 ## Exact owner authorization — 2026-10-03 UTC
 
 Owner replied “Approved” after the exact seven-file packet publication, separate draft PR and Linux verification request. Candidate4fadf7ced8b6c6b978e326e2fae6d925001fdb26 and all seven hashes were rechecked; public default/main31c61ea and existing pilot branchb065 remain unchanged; destination branch absent and repository still public. This authorizes only the stated export/run and evidence review. Production audit decisions and Azure activation remain open.
+
+## Execution outcome
+
+Exact branch/draft PR3 published and attached. Run37139568768 failed in a portable TLS safety-test assertion before SDK/download/signatures; no artifact exists. [Failure and exact local one-file correction](https-key-provider-linux-run-result.md) preserve the public packet and request separate changed-byte publication approval. No integrity/trust bypass or retry of unchanged bytes.

@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import io
 import json
+import ssl
 from pathlib import Path
 import tempfile
 import unittest
@@ -272,9 +273,40 @@ class DownloadTests(unittest.TestCase):
         opener = d.urllib.request.build_opener(d.NoRedirect())
         self.assertTrue(any(isinstance(h, d.urllib.request.HTTPSHandler) for h in opener.handlers))
         self.assertTrue(any(isinstance(h, d.NoRedirect) for h in opener.handlers))
-        # Proxy handler may be absent if the normal environment has no proxies.
         https = next(h for h in opener.handlers if isinstance(h, d.urllib.request.HTTPSHandler))
-        self.assertIsNone(https._context)  # urllib will use its normal verified default context.
+        self.assert_verified_https_connection(https)
+        # Construction only: a configured proxy must survive normal build_opener.
+        proxies = {"https": "http://proxy.example.invalid:8080"}
+        with patch.object(d.urllib.request, "getproxies", return_value=proxies):
+            configured = d.urllib.request.build_opener(d.NoRedirect())
+        proxy = next(h for h in configured.handlers if isinstance(h, d.urllib.request.ProxyHandler))
+        self.assertEqual(proxy.proxies, proxies)
+        self.assertTrue(any(isinstance(h, d.NoRedirect) for h in configured.handlers))
+
+    def assert_verified_https_connection(self, handler):
+        # Capture the real handler's connection arguments without opening a socket.
+        # Python may defer its default context or construct it in HTTPSHandler.
+        with patch.object(handler, "do_open") as do_open:
+            handler.https_open(d.urllib.request.Request(d.INDEX_URL))
+        connection_type = do_open.call_args.args[0]
+        connection = connection_type("api.nuget.org", **do_open.call_args.kwargs)
+        try:
+            self.assertEqual(connection._context.verify_mode, ssl.CERT_REQUIRED)
+            self.assertTrue(connection._context.check_hostname)
+            self.assertIsNone(connection.sock)
+        finally:
+            connection.close()
+
+    def test_https_connection_requires_certificates_and_hostname(self):
+        # Both normal default representations pass; insecure contexts must fail.
+        self.assert_verified_https_connection(d.urllib.request.HTTPSHandler())
+        self.assert_verified_https_connection(d.urllib.request.HTTPSHandler(context=ssl.create_default_context()))
+        for mode in (ssl.CERT_REQUIRED, ssl.CERT_NONE):
+            context = ssl.create_default_context()
+            context.check_hostname = False
+            context.verify_mode = mode
+            with self.assertRaises(AssertionError):
+                self.assert_verified_https_connection(d.urllib.request.HTTPSHandler(context=context))
 
 
 if __name__ == '__main__':
