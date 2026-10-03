@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <ProducerProject Condition="'$(ProducerProject)' == ''">../../../src/server/modules/SyntheticEvaluationSchemaProvenanceIntegration/SyntheticEvaluationSchemaProvenanceIntegration.csproj</ProducerProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(ProducerProject)" />
+    <None Update="*-golden.json;*-literals.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
