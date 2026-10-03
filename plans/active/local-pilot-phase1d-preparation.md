@@ -14,7 +14,7 @@ Prepare a reviewable Phase 1D [internal contract](../../specs/003-health-assessm
 
 | Packet | Paths / responsibility | State |
 | --- | --- | --- |
-| C-D1 coordinator | Three new proposal/test/decision documents, this plan; additive canonical status/plan/evidence entries; existing private Site | VERIFIED documents; publication pending |
+| C-D1 coordinator | Three new proposal/test/decision documents, this plan; additive canonical status/plan/evidence entries; existing private Site | VERIFIED preparation |
 | V-D1 non-author reviewer | Read-only approved specs/ADRs/auth/report source and proposed packet; no writes or worktree required | VERIFIED documentary review |
 | Future A-D1 source/projections | New isolated module/test-host paths only, chosen and frozen after D01–03 approval | BLOCKED — approval |
 | Future B-D1 policy/dispatch | New isolated policy/cursor/limit composition paths only; shared contracts/configuration remain coordinator-owned | BLOCKED — approval |
@@ -37,7 +37,7 @@ Future writing workers use isolated worktrees from one coordinator checkpoint, e
 - [x] Independent read-only prerequisite and combined-packet reviews completed; actionable documentary issues resolved.
 - [x] Scoped link/traceability/whitespace/secret checks executed with exact hashes/source evidence; no runtime PASS claim.
 - [x] Canonical status, Milestone11 note and evidence index updated additively, preserving concurrent work.
-- [ ] Private Site current source reconciled, new human task linked with role/completion condition, prior cards/panels preserved, desktop/mobile and links checked; exact pushed source deployment confirmed owner-only.
+- [x] Private Site current source reconciled, new human task linked with role/completion condition, prior cards/panels preserved, desktop/mobile and links checked; exact pushed source deployment confirmed owner-only.
 
 ## Approval, rollout and rollback
 
@@ -49,3 +49,8 @@ Runtime rollback after future local implementation removes the additive module/t
 ## Executed documentary review and next dependency
 
 Independent V-D1 prerequisite review found no conflicting approved MCP scope. Combined review corrected read-blocking versus retention holds, per-invocation retry audit and current evidence-availability overlays versus immutable hashes. Re-review closed all three findings with no remaining scoped issue. Local links, all12test/3decision traceability, UTF-8/LF/whitespace and Gitleaks8.30.1 scoped checks passed. These are document checks only; no runtime suite/build/migration/provider check was executed for this packet. [Exact preparation evidence](../../docs/development/evidence/phase1d-preparation-20261003.json) records source hashes and limits. [Separate Site receipt](../../docs/development/evidence/phase1d-preparation-site-20261003.json) governs publication status. Approval P1D-D01–03 remains PENDING.
+
+
+## Preparation checkpoint complete
+
+All preparation criteria are fulfilled. [Native publication receipt](../../docs/development/evidence/phase1d-preparation-site-20261003.json) confirms owner-private version101/source1db4154, succeeded deployment and13open tasks, with all12prior task cards and18unowned ID panels byte-preserved. Actual1440/390/320 QA, role/completion/anchor/repository-link checks and exact pushed HTML/archive proof passed. The original divergent Site checkout is untouched; current source was restored into a separate ignored checkout. Temporary local preview is stopped at teardown; reviewable source/evidence remains. This completes preparation only. P1D-D01–03 approval, runtime and real publication integration remain pending. The final docs-only checkpoint is summarized in the same work cycle; separate receipt records its publication provenance.

@@ -15,8 +15,8 @@
       "bytes": 3467
     },
     "plans/active/local-pilot-phase1d-preparation.md": {
-      "sha256": "bd7f321f4783c7e9347c910c87b62eb172db6a4beadcd363cfd72e63698cc7d0",
-      "bytes": 5979
+      "sha256": "e4d12fcd02e05e5c21b3198f524ad6d608773c2693e7898772c150ffb9d0b3db",
+      "bytes": 6837
     }
   },
   "links": [
@@ -139,6 +139,11 @@
       "source": "plans/active/local-pilot-phase1d-preparation.md",
       "target": "../../docs/development/evidence/phase1d-preparation-site-20261003.json",
       "exists": true
+    },
+    {
+      "source": "plans/active/local-pilot-phase1d-preparation.md",
+      "target": "../../docs/development/evidence/phase1d-preparation-site-20261003.json",
+      "exists": true
     }
   ],
   "testIds": [
@@ -156,7 +161,7 @@
     "P1D-T12"
   ],
   "unexecuted": "All P1D runtime tests; build/unit/integration/E2E/package/cloud not applicable to docs-only packet; full milestone/gates NOT VERIFIED",
-  "publication": "PENDING separate native receipt",
+  "publication": "CONFIRMED owner-private; exact source/native access and deployment in phase1d-preparation-site-20261003.json",
   "checks": {
     "localDocumentLinks": "PASS",
     "testDecisionTraceability": "PASS",

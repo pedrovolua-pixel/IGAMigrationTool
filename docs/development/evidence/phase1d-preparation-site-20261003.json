@@ -1,7 +1,68 @@
 {
   "date": "2026-10-03",
-  "status": "PENDING publication",
-  "priorVerifiedVersion": 100,
-  "priorSiteSource": "0ccfaa435b452b3bfa3ab91785b82eafe319f13a",
-  "milestoneAndGates": "NOT VERIFIED"
+  "status": "CONFIRMED owner-private preparation publication; exact local contract approval PENDING",
+  "repositorySnapshot": "72181e418ac33f2917cba46fd6ccb7921e92e3ed",
+  "deployment": {
+    "id": "appgdep_6ac152897b8c8191bb499f43e26598a5",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_d09ca9d4ca648191a90c3b55b41bce42",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T19:07:59.507919+00:00"
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_d09ca9d4ca648191a90c3b55b41bce42",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "version_number": 101,
+    "source": {
+      "commit_sha": "1db4154b5258cc300e1ee18bbfd9dd6ab9796c79"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000072e081f588c50d8237511c9a",
+      "content_hash": "sha256:0ab3d65e7b75de95d9c84e3d6718d0ea3532ee3cee7a42ea241fafdaa58ec6e3",
+      "size_bytes": 112640,
+      "file_count": 2
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6ac152897b8c8191bb499f43e26598a5"
+  },
+  "access": {
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "status": "active",
+    "mode": "custom",
+    "revision": 1,
+    "allowedUsers": 1,
+    "groups": 0,
+    "externalVisitors": 0,
+    "currentUserRole": "owner"
+  },
+  "qa": {
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "humanTasks": 13,
+    "priorHumanTasks": 12,
+    "priorCardsBytePreserved": true,
+    "unownedIdPanelsBytePreserved": 18,
+    "linksAndAnchors": "PASS local repository target validation",
+    "overflowAndPageErrors": "PASS",
+    "nativeEvidence": ".sites-work/phase1d-evidence/site-qa.json",
+    "archiveProof": ".sites-work/phase1d-evidence/archive-proof.json"
+  },
+  "originalWorkflowFailures": [
+    "Original Site checkout local/remote history diverged; retained it and restored current source into separate ignored checkout.",
+    "Initial scratch directory setup failed; created explicit absolute empty checkout and opened successfully.",
+    "First publishing attempt required renewed short-lived source credential; renewal and retry succeeded."
+  ],
+  "boundaries": "No runtime/registration/grant/client contract/production operation; Milestone11/Phase1D/UAT/G1–G9 NOT VERIFIED"
 }
