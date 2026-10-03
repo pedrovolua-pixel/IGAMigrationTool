@@ -82,6 +82,17 @@
     "tests/infrastructure/HttpsKeyProviders/test_verify_signatures.py": "5aaee4517f702b349a3ffbf98909c8e70fe132feb9894f17fadb26459bbc9d37",
     "tests/infrastructure/HttpsKeyProviders/verify-signatures.py": "65d8256ed7f7d4d127838c89565efeeb6c2c6c864860108e64517e40db4b5af9"
   },
+  "finalIndependentRecordReview": {
+    "expectedPublicFileHashes": 7,
+    "individualSignatureReceiptAcceptance": "NOT VERIFIED manualZIPpending",
+    "localLinks": 502,
+    "path": "/tmp/iga-linux-proof-rerun-independent-review/final-record-review.json",
+    "retainedMetadataAndCurrentCheckDigests": 11,
+    "sha256": "26101b44485f61c313ccaf16becbb290772c28e3c46ce01253dc4b813e9238f6",
+    "sourceCommit": "2c049f8683ac30faaab0d15ce753ba10a948444f",
+    "sourceHashes": 9,
+    "status": "PASS_REMOTE_METADATA_AND_CANONICAL_RECORDS_ONLY"
+  },
   "independentPartialReview": {
     "path": "/tmp/iga-linux-proof-rerun-independent-review/partial-review.json",
     "sha256": "0dd313dae474a70cdefc2f8f4616d4dbe614c250d8146e090194605380bd5220",
