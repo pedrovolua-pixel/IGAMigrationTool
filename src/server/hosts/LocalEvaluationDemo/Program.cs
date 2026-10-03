@@ -29,7 +29,10 @@ foreach (var path in Directory.EnumerateFiles(assetRoot, "*", SearchOption.AllDi
     }
     var type = Path.GetExtension(path) switch
     {
-        ".html" => "text/html; charset=utf-8", ".js" => "text/javascript; charset=utf-8", ".css" => "text/css; charset=utf-8", _ => null
+        ".html" => "text/html; charset=utf-8",
+        ".js" => "text/javascript; charset=utf-8",
+        ".css" => "text/css; charset=utf-8",
+        _ => null
     };
     if (type is not null) assets.Add(Path.GetRelativePath(assetRoot, path).Replace(Path.DirectorySeparatorChar, '/'), (path, type));
 }
