@@ -79,19 +79,43 @@ public sealed class Phase1BPopulationProjection
         CompleteSamplingReady = VersionBindings.Count == Enum.GetValues<SamplingVersionKind>().Length && MissingVersionKinds.Count == 0;
         CanonicalJson = PopulationCanonical.Json(new
         {
-            schemaVersion = "synthetic-phase1b-evaluation-population-v1", RunId, RunRevision, SourceCaptureDigest, SourceCanonicalJson,
-            RunPlanJson, CapabilityLockJson, FrozenInputsJson,
+            schemaVersion = "synthetic-phase1b-evaluation-population-v1",
+            RunId,
+            RunRevision,
+            SourceCaptureDigest,
+            SourceCanonicalJson,
+            RunPlanJson,
+            CapabilityLockJson,
+            FrozenInputsJson,
             sourceObservedAtDatabaseUtc = PopulationCanonical.Date(SourceObservedAtDatabaseUtc),
-            runObservedAtDatabaseUtc = PopulationCanonical.Date(RunObservedAtDatabaseUtc), ScopeId, EnvironmentId,
+            runObservedAtDatabaseUtc = PopulationCanonical.Date(RunObservedAtDatabaseUtc),
+            ScopeId,
+            EnvironmentId,
             members = Members.Select(m => new
             {
-                m.MemberId, m.ScopeId, m.EnvironmentId, m.PrimaryModuleId, m.CategoryId, m.RuleVersionId, m.ModelPromptVersionId,
-                m.ConfidenceBandId, m.Severity, m.NativeGroupId, m.NativeModuleId, m.NativeCategoryId, m.NativeRuleId, m.NativeRuleVersion,
-                m.NativeConfidenceBand, m.NativeConfidencePercent, m.AffectedObjectCount,
+                m.MemberId,
+                m.ScopeId,
+                m.EnvironmentId,
+                m.PrimaryModuleId,
+                m.CategoryId,
+                m.RuleVersionId,
+                m.ModelPromptVersionId,
+                m.ConfidenceBandId,
+                m.Severity,
+                m.NativeGroupId,
+                m.NativeModuleId,
+                m.NativeCategoryId,
+                m.NativeRuleId,
+                m.NativeRuleVersion,
+                m.NativeConfidenceBand,
+                m.NativeConfidencePercent,
+                m.AffectedObjectCount,
                 occurrences = m.Occurrences.Select(o => new { o.OccurrenceId, o.CoverageKey, o.OriginalJson, o.OriginalDigest, o.GeneratedFindingJson })
             }),
             gaps = Gaps.Select(g => new { g.CoverageKey, g.State, g.ReasonCode, g.Stage }),
-            VersionBindings, MissingVersionKinds, CompleteSamplingReady
+            VersionBindings,
+            MissingVersionKinds,
+            CompleteSamplingReady
         });
         ContentDigest = PopulationCanonical.Hash(CanonicalJson);
     }
