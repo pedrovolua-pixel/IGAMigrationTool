@@ -326,6 +326,66 @@ try {
       "Auditor export inspection omits outcome and AI source text",
     );
     await navigation(capture);
+    await page.goto(capture.rows[0].taskLink);
+    await page
+      .getByRole("button", {
+        name: "Inspect current CSV snapshot",
+        exact: true,
+      })
+      .click();
+    const warning = page.getByRole("checkbox", {
+      name: "I understand downloaded-copy handling and the protected-link warning.",
+      exact: true,
+    });
+    await warning.waitFor();
+    check(
+      await page
+        .getByRole("button", {
+          name: "Download this CSV snapshot",
+          exact: true,
+        })
+        .isDisabled(),
+      "genuine Auditor download requires protected-copy acknowledgement",
+    );
+    await page.setViewportSize({ width: 320, height: 844 });
+    check(
+      await page.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth,
+      ),
+      "genuine Auditor inspected snapshot wraps at 320px",
+    );
+    await scan("auditor-inspected-snapshot-320");
+    await warning.check();
+    const downloadPromise = page.waitForEvent("download");
+    await page
+      .getByRole("button", { name: "Download this CSV snapshot", exact: true })
+      .click();
+    const download = await downloadPromise;
+    const stream = await download.createReadStream(),
+      chunks = [];
+    for await (const chunk of stream) chunks.push(chunk);
+    const bytes = Buffer.concat(chunks);
+    const expected =
+      literalHeader +
+      capture.rows
+        .map((row) => rowKeys.map((key) => quote(row[key])).join(",") + "\r\n")
+        .join("");
+    equal(
+      bytes,
+      Buffer.from(expected, "utf8"),
+      "genuine Auditor receives exact independently specified metadata-only CSV bytes",
+    );
+    downloadedSha = hash(bytes);
+    await page
+      .getByText(
+        "CSV delivered. Handle your downloaded copy according to the stated export policy.",
+        { exact: true },
+      )
+      .waitFor();
+    check(
+      (await warning.count()) === 0,
+      "Auditor delivery clears snapshot acknowledgement and reusable download controls",
+    );
   } else {
     equal(
       fixture.actor,
