@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../AssessmentRuns/AssessmentRuns.csproj" />
+    <ProjectReference Include="../SyntheticAiExecution/SyntheticAiExecution.csproj" />
+    <ProjectReference Include="../SyntheticOutcomePriority/SyntheticOutcomePriority.csproj" />
+    <ProjectReference Include="../SyntheticSourceFence/SyntheticSourceFence.csproj" />
+  </ItemGroup>
+</Project>
