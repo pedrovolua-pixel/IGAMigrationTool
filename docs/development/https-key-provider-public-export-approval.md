@@ -1,6 +1,6 @@
 # Exact public signature-proof export approval
 
-Status: READY FOR OWNER APPROVAL — no publication or remote execution
+Status: OWNER APPROVED — publication and Linux execution authorized; results pending
 Date: 2026-10-03 UTC
 Authority: [cycle04](../../plans/active/https-production-local-cycle04.md); [self-contained proof contract](https-key-provider-ci-proof-packet.md)
 
@@ -33,3 +33,7 @@ Author and independent reviewer executed16 downloader+18 verifier mocked safety 
 If approved, use normal TLS/proxy/signature/revocation trust and unchanged37 archive hashes/SDK10.0.401. Preserve direct exits/raw-log hashes and partial failures; inspect actual Setup job runner version and selected normal trust chains, obtain artifacts and compare receipts independently. Do not change trust, silently retry/upgrade, promote dependencies or run the provider harness to make a failure pass. Standard Ubuntu runner only; no larger runner, account/billing changes, Azure spending/session, cloud permissions or portal activation. Artifact retention uses existing repository default; effective days remain unobserved until protected account/run evidence supplies them. Missing or failed platform evidence blocks dependent key-provider integration.
 
 This approval closes only the public export/run prerequisite. The separately reviewed [production audit proposal](https-production-audit-receipt-lifecycle-proposal.md) and [ARL tests](https-production-audit-receipt-lifecycle-test-packet.md) still require their precise production decisions/inputs. The six linked [human tasks](https-production-test-packet.md#human-tasks-and-completion-conditions), live Azure gates and BFF status-site publisher remain open.
+
+## Exact owner authorization — 2026-10-03 UTC
+
+Owner replied “Approved” after the exact seven-file packet publication, separate draft PR and Linux verification request. Candidate4fadf7ced8b6c6b978e326e2fae6d925001fdb26 and all seven hashes were rechecked; public default/main31c61ea and existing pilot branchb065 remain unchanged; destination branch absent and repository still public. This authorizes only the stated export/run and evidence review. Production audit decisions and Azure activation remain open.
