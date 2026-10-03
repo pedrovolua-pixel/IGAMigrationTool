@@ -1,6 +1,6 @@
 {
   "date": "2026-10-03",
-  "status": "LOCAL ENGINEERING VERIFIED; hosted/private closure tracked separately",
+  "status": "COMPLETED approved local engineering cycle; broader hosted observations distinguished",
   "approval": "specs/003-health-assessment/local-phase1d-approval.md",
   "testedSourceCommit": "8e9ada7016d2eac49d4847d965bdf655bcc8fd8f",
   "sdk": "10.0.401",
@@ -1233,7 +1233,14 @@
   "reviews": {
     "A": "No remaining actionable findings; external surrogate fix replay at1ce75da",
     "B": "A publication review no actionable findings",
-    "V": "Independent scope/Unicode findings fixed and replayed; terminal deadline limitation explicit;2849pass"
+    "V": "Independent scope/Unicode findings fixed and replayed; terminal deadline limitation explicit;2849pass",
+    "canonicalDocument": "V found and coordinator corrected two plan wording overclaims: authorization-denial loading vs later authorized-source failures; V executable T01\u201311 vs coordinator-owned T12. Nonauthor review closed.",
+    "T12IndependentReexecution": {
+      "status": "PASS",
+      "sha256": "cd1ed98feaa03585d75f6c352900be57b69dddbb98fdee7b3b177c8905a5f315",
+      "artifact": ".sites-work/phase1d-implementation-evidence/t12-nonauthor-review.json",
+      "summary": "279/279priorworkinghashes,26oldserverprojectsnoMCPref,4newprojects/lockszeroexternalpackages;oldruntime/host/UI/DTO/contract/migrationbyteproof"
+    }
   },
   "initialHosted": {
     "source": "1ce75dab8e9432f280bf7b21654c8d7f35a18545",
@@ -1518,9 +1525,10 @@
     "Local saved-source PostgreSQL/browser/Windows/container/infra checks not rerun except stated compound owning-database test; full configured hosted jobs pending.",
     "FullMilestone11/Phase1D/UAT/G1\u2013G9 remain NOT VERIFIED."
   ],
-  "privatePublication": "Prepared owner-only board; authoritative succeeded deployment is recorded by separate Site receipt.",
+  "privatePublication": "Owner-private104/source201706e9 deployment succeeded; final completed-plan source reconciled by separate phase1d-implementation-site-20261003.json receipt.",
   "originalCoordinatorRecordChecks": {
     "markdown": "Initial new verification doc had3 trailing hard-break spaces; removed and diffcheck passed",
     "secretScan": "Four metadata SHA256 values keyed by filenames containing secret were flagged by generic-api-key. No credential values were present. Receipt now uses separate artifact/sha256 fields; no allowlist or scanner policy changed. Original redacted findings retained in native evidence."
-  }
+  },
+  "compatibilitySourceCommit": "7ca9bbf61e497d44f4cbe9572d57d91610ef9cdb"
 }

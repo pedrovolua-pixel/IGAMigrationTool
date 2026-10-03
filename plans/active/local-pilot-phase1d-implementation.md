@@ -1,6 +1,6 @@
 # Phase 1D approved local implementation cycle
 
-Status: LOCAL ENGINEERING VERIFIED — private publication closure in progress
+Status: COMPLETED — approved bounded local engineering cycle
 Owner: Phase1D coordinator
 Date: 2026-10-03
 Approval: [P1D-D01–03](../../specs/003-health-assessment/local-phase1d-approval.md)
@@ -14,10 +14,10 @@ A dependency-free in-process fixture host validates exact synthetic immutable pu
 
 | Packet | Exclusive paths | Checks / state |
 | --- | --- | --- |
-| Coordinator | Approval/internal contract/shared Contracts.cs, module/test csproj+locks, solution/CI, canonical docs, integration/operations and existing private Site | Local checks verified; canonical/private closure in progress |
+| Coordinator | Approval/internal contract/shared Contracts.cs, module/test csproj+locks, solution/CI, canonical docs, integration/operations and existing private Site | VERIFIED; owner-private version104 deployed; final source reconciliation recorded separately |
 | A-D1 | SyntheticMcp/PublicationCodec.cs and Projection.cs; tests/unit/SyntheticMcpPublication.Tests source/fixtures only | P1D-T01/02/05/11; VERIFIED; executed source-bound checks and non-author review closed |
 | B-D1 | SyntheticMcp/McpHarness.cs, RequestParser.cs, LocalLimits.cs, CursorRegistry.cs; tests/unit/SyntheticMcpBoundary.Tests source/fixtures only | P1D-T03/04/06–10; VERIFIED; executed source-bound checks and non-author review closed |
-| V-D2 | tests/integration/SyntheticMcp.Tests source/fixtures/oracle only; read-only non-author code review | Independent P1D-T01–12; VERIFIED2,849 independent assertions; oracle preserved and findings closed |
+| V-D2 | tests/integration/SyntheticMcp.Tests source/fixtures/oracle only; read-only non-author code review | Independent P1D-T01–11; coordinator-owned T12 proof reviewed separately; VERIFIED2,849 independent assertions; oracle preserved and findings closed |
 
 Writers receive isolated codex/ worktrees from one exact checkpoint after signatures and contract review freeze. Coordinator owns shared configuration. Workers return commits, actual commands/counts/failures and limitations; receive non-author review before integration. Verifier preserves authored oracle/goldens before inspecting implementation. No separate persistent task or automation is created.
 
@@ -26,11 +26,11 @@ Writers receive isolated codex/ worktrees from one exact checkpoint after signat
 - [x] Exact approval recorded; internal contract and shared signatures non-author reviewed/frozen.
 - [x] Independent fixture golden and denial corpus preserved before implementation reads.
 - [x] A publication/resource tests pass with exact manifest/payload and hostile/protected text checks.
-- [x] B boundary/race/limits/cursor/audit tests pass; zero raw/source/business mutation access under denial.
+- [x] B boundary/race/limits/cursor/audit tests pass; authorization/capability denial before source loading; no raw/business-write surface.
 - [x] V independent integration/adversarial tests pass; actionable review findings resolved.
 - [x] Combined locked restore, format/build, architecture, all applicable local unit/portable regression and dependency/secret/CI checks executed. Unavailable checks recorded separately.
 - [x] Exact prior source/DTO/migration/normal-host/UI bytes preserved; no new dependency or runtime flag.
-- [ ] Documentation, canonical status/evidence/plan and operations updated; private Site closes approved local decision, shows separate remaining human dependencies, preserves concurrent work/cards and confirms exact owner-only deployment.
+- [x] Documentation, canonical status/evidence/plan and operations updated; private Site closes approved local decision, shows separate remaining human dependencies, preserves concurrent work/cards and confirms exact owner-only deployment.
 - [x] Native source/commands/original failures/reviews archived; clean own worker worktrees removed with branches/evidence retained.
 
 ## Integration, rollout and rollback
@@ -45,3 +45,7 @@ Add module and three test projects to solution and portable CI execution only. N
 ## Executed local checkpoint
 
 [Verification](../../specs/003-health-assessment/local-phase1d-implementation-verification.md) and [execution receipt](../../docs/development/evidence/phase1d-implementation-20261003.json) bind combined code8e9ada7,90-project restore/format/zero-warning build,260 publication/10,444 boundary/2,849 independent assertions,14 independently authored byte/hash artifacts,44 compatibility commands, architecture, secret/dependency checks and279 unchanged prior working-file hashes. Independent findings for denied audit scope and malformed surrogates are fixed/replayed. The terminal synchronous audit deadline limitation is explicit; no end-to-end5second/live reliability claim. Original native failures and clearly labeled transcript captures, owned source/runtime and command hashes are retained under ignored cycle evidence. Three clean worker worktrees were removed; branches and evidence are retained. Hosted/private closure is observed separately; full Phase1D/milestone/UAT/live gates remain open.
+
+## Private publication and bounded closure
+
+Owner-private version104/source201706e9 deployed successfully for canonicalba83d69.1440/390/320 task/link/reflow QA and exact pushed/packaged HTML passed; twelve other task cards and eighteen named panels are byte-identical. The exact local approval task is closed; a separate publication/client/identity integration task names the reporting/technical/security owners and its completion checklist. The final private source reconciliation receipt binds this completed plan and corrected V-T01–11/coordinator-T12 wording. Current Linux MCP step and both whole Windows jobs passed, with package success; the broader Linux/browser run remains separately observed. No full milestone/live acceptance is claimed.
