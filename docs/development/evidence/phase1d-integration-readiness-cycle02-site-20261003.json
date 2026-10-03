@@ -1,0 +1,199 @@
+{
+  "date": "2026-10-03",
+  "status": "SUCCEEDED_OWNER_PRIVATE",
+  "canonicalSnapshot": "176d17ea875004d9cb3efec23db6c93c4425af57",
+  "canonicalAppendProvenance": "Cycle02 canonical additions are present in shared b24b0da; packet source176d17e contains the exact reviewed documents. Concurrent Phase1C documentation is preserved.",
+  "native": {
+    "date": "2026-10-03",
+    "deployment": {
+      "id": "appgdep_6ac16ab9c4148191be5330cb47a967eb",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_fc34bc854b488191b1ca76c48b2a21d9",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T20:51:12.926835+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_fc34bc854b488191b1ca76c48b2a21d9",
+      "versionNumber": 108,
+      "source": {
+        "commit_sha": "daed78b0d5dc0e89f35f853889fc0ad2e9bab7a5"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_00000000c75481f59aa6dd7a015ef698",
+        "content_hash": "sha256:770a25bfe3d63181cffd3f5b07a0fa63dbb9e27344dbb281346ffcd85ff2a178",
+        "size_bytes": 112640,
+        "file_count": 2
+      },
+      "deploymentId": "appgdep_6ac16ab9c4148191be5330cb47a967eb"
+    },
+    "audience": {
+      "role": "owner",
+      "mode": "custom",
+      "allowedAccounts": 1,
+      "groups": 0,
+      "externalVisitors": 0,
+      "revision": 1
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-review",
+      "commit_sha": "daed78b0d5dc0e89f35f853889fc0ad2e9bab7a5",
+      "archive": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle02-evidence/site.tar.gz"
+    },
+    "canonicalSnapshot": "176d17ea875004d9cb3efec23db6c93c4425af57"
+  },
+  "qa": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "preservation": {
+    "status": "PASS",
+    "baselineSiteSource": "f6e3390c3be975805ff07591cf5c44f6dea03aad",
+    "canonicalSnapshot": "176d17ea875004d9cb3efec23db6c93c4425af57",
+    "unchangedOtherTaskCards": 12,
+    "unchangedUnownedNamedPanels": 19,
+    "beforeHtmlSha256": "2a744e7cd5330fccbd523f602209a29fecc07c3daa8c7fa05e3ed107dc3d60b5",
+    "afterHtmlSha256": "cf49e52e59bb38667b9e68141717172e961cd6d6d03d6b4a195959ccc1649c3e",
+    "taskCount": 13,
+    "initialValidationFailure": "First preservation assertion counted only ID-bearing cards (3), not all13 cards. Corrected full article selector validates all13; HTML unchanged by correction.",
+    "allUnownedHtmlByteIdentical": true,
+    "unownedHtmlSha256": "75154e27b82b0c2e4005d8e379ee5f27809d616cbda55c1b2cd589cb431c6f39",
+    "archiveSourceHtmlByteIdentical": true,
+    "archiveLocalSha256": "e359554638ed15de2ed1a8a2ac4f6545033d491f70dbb0f1111c2e718dcae987",
+    "archiveBytes": 26637
+  },
+  "preservedArtifacts": [
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/baseline-commit.txt",
+      "sha256": "d851e5afa5238d6bbc2aee1b35b68261152cd0c035e66108c8fe5a32fe55d9fb",
+      "bytes": 41
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/baseline-source-hashes.json",
+      "sha256": "1137ccfcc028160b641ea9b746f441a269fb0c06b422ed6fc44ae392e71c0125",
+      "bytes": 41644
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/canonical-additions.json",
+      "sha256": "fae1d6a5bc5c51249a561516d0ddd082c78bb739d2cec6f5c9de0c6b8c31cbfd",
+      "bytes": 4663
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/documentary-checks.json",
+      "sha256": "f4ca3d103e27cd7bbbfd9312ac5db853adf52cc269884765b51bf0bbf2140b14",
+      "bytes": 6348
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/native-private-publication.json",
+      "sha256": "f1a411cae8b28fb1a9cc6688bb96ced46868f2a7b73e1b5c2d20ea7b3f25ef90",
+      "bytes": 1810
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/read-only-reviews.json",
+      "sha256": "c028d6972dab9e10e893d7ccd3004fdb9547cfe5cd9e35c118fc3d76b5bb03a5",
+      "bytes": 1994
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-1440.png",
+      "sha256": "0bed1bdf7a21f67aa4b7f7fc164edc2fd34da34dfb22c129535c53e7847f7e67",
+      "bytes": 288192
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-320.png",
+      "sha256": "bd9f1ec1fa3c29104da3c0aa7a3e0fd8937b460444e22257871755ac9e3a867d",
+      "bytes": 115447
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-390.png",
+      "sha256": "fbad180f334f6d4f05ee4dc90179e05a5dee956f55195049e1633e71b547b289",
+      "bytes": 135743
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-before.html",
+      "sha256": "2a744e7cd5330fccbd523f602209a29fecc07c3daa8c7fa05e3ed107dc3d60b5",
+      "bytes": 105594
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-preservation.json",
+      "sha256": "4e73fb0d7fdf63c228baa3af5c13bf4f1a52c457010d1266e31f1e2fd01f8ab4",
+      "bytes": 908
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-qa.json",
+      "sha256": "40c046015090805f443935d21b9b12a6d9134e173b72a800d1b59160bd4b5542",
+      "bytes": 580
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-qa.mjs",
+      "sha256": "72f26f0f01b4128e15be458c74d1e5dcc4ac90ab47ce585012b327dc7cdc6deb",
+      "bytes": 4103
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-task-1440.png",
+      "sha256": "a769c954723fb765941726e857b840d974fdaf0b9589b49e3e58c6f6abcbbaa0",
+      "bytes": 368966
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-task-320.png",
+      "sha256": "8bc2880b51658c72b6182afcc287c7f73b7681ab67631b71b32324f259fadcbf",
+      "bytes": 86039
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site-task-390.png",
+      "sha256": "b037276c22111cab25afc4b65118a691cc0a2181a1f4812492d85ef3bc94958f",
+      "bytes": 99439
+    },
+    {
+      "artifact": ".sites-work/phase1d-cycle02-evidence/site.tar.gz",
+      "sha256": "e359554638ed15de2ed1a8a2ac4f6545033d491f70dbb0f1111c2e718dcae987",
+      "bytes": 26637
+    }
+  ],
+  "closureChecks": {
+    "originalPacketAndNativeReceiptHashes": "PASS",
+    "preexistingWorkingFilesUnchanged": 323,
+    "allUnownedSiteHtmlByteIdentical": true,
+    "pushedArchiveHtmlByteIdentical": true
+  },
+  "limits": [
+    "Documentary readiness preparation only. Actual immutable reader NOT READY.",
+    "11 owner inputs missing;18 proposed tests NOT EXECUTED; existing synthetic approval/policy unchanged.",
+    "Full Milestone11/Phase1D/UAT/G1\u2013G9 NOT VERIFIED.",
+    "No deployment audience, runtime, registration, schema, migration or dependency change.",
+    "Native stored normalized tar hash is distinct from the local gzip hash."
+  ]
+}
