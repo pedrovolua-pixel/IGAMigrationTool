@@ -584,11 +584,9 @@ try {
     );
     const originalDigests = [...target.originalDigests],
       inputLockDigest = ready.outcomes.contentDigest;
-    const reviewArticle = page
-      .locator(".review-finding")
-      .filter({
-        has: page.getByRole("heading", { name: target.title, exact: true }),
-      });
+    const reviewArticle = page.locator(".review-finding").filter({
+      has: page.getByRole("heading", { name: target.title, exact: true }),
+    });
     await reviewArticle.getByLabel("Review action").selectOption("Confirm");
     await reviewArticle
       .getByLabel("Review reason (optional)")
