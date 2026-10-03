@@ -57,7 +57,11 @@ export function verifyPhase1BAnalysis(
         !strings(f.originalDigests) ||
         !f.originalDigests.every(hex) ||
         !strings(f.objectIds) ||
-        (f.method === 'AI' && (f.confidencePercent !== '80' || !f.reviewRequired)),
+        (f.method === 'AI' &&
+          (f.confidencePercent !== '80' ||
+            f.initialState !== 'Proposed' ||
+            f.state === 'AutoConfirmed' ||
+            (f.state === 'Proposed' && !f.reviewRequired))),
     ) ||
     value.recommendationGuidance?.snapshot?.source.runId !== runId ||
     value.recommendationGuidance.snapshot.source.profileId !== 'synthetic-phase1b-combined-v1' ||
