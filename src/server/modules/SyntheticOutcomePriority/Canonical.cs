@@ -12,7 +12,7 @@ public static class OutcomePriorityCanonical
     private static readonly JsonSerializerOptions Options = new(JsonSerializerDefaults.Web)
     {
         UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
-        Converters = { new JsonStringEnumConverter(allowIntegerValues: false) }
+        Converters = { new JsonStringEnumConverter(allowIntegerValues: false), new DefaultImmutableArrayConverterFactory() }
     };
     public static string Json<T>(T value)
     {
@@ -66,5 +66,20 @@ public static class OutcomePriorityCanonical
                 if (value.TryGetDecimal(out var number)) writer.WriteRawValue(number.ToString("G29", CultureInfo.InvariantCulture)); else throw new JsonException("Nondecimal outcome number."); break;
             default: value.WriteTo(writer); break;
         }
+    }
+}
+
+internal sealed class DefaultImmutableArrayConverterFactory : JsonConverterFactory
+{
+    public override bool CanConvert(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ImmutableArray<>);
+    public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options) => (JsonConverter)Activator.CreateInstance(typeof(DefaultImmutableArrayConverter<>).MakeGenericType(type.GetGenericArguments()[0]))!;
+}
+internal sealed class DefaultImmutableArrayConverter<T> : JsonConverter<ImmutableArray<T>>
+{
+    public override ImmutableArray<T> Read(ref Utf8JsonReader reader, Type type, JsonSerializerOptions options) => reader.TokenType == JsonTokenType.Null ? default : JsonSerializer.Deserialize<T[]>(ref reader, options)!.ToImmutableArray();
+    public override void Write(Utf8JsonWriter writer, ImmutableArray<T> value, JsonSerializerOptions options)
+    {
+        if (value.IsDefault) { writer.WriteNullValue(); return; }
+        writer.WriteStartArray(); foreach (var item in value) JsonSerializer.Serialize(writer, item, options); writer.WriteEndArray();
     }
 }

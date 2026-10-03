@@ -82,3 +82,9 @@ public interface IOutcomePriorityWriteObserver
 {
     Task BeforeWriteAsync(string operation, Guid eventId, CancellationToken cancellationToken);
 }
+
+public sealed record OutcomeExportAuthority(string ActorId, bool Authenticated, bool Active, bool Revoked, bool AssignmentActive,
+    OutcomeScope AssignedScope, OutcomeRole Role, ImmutableArray<string> Categories, OutcomeResourceState ResourceState,
+    bool TaskExportGrant, bool CustomerExportPolicy, bool ScopedAuditorExportGrant);
+public sealed record OutcomeExportProof(Guid RunId, string OutcomeLockDigest, string ContractDigest, int OutcomeCount);
+public sealed record OutcomeExportProofResult(OutcomePriorityIssue? Issue, OutcomeExportProof? Proof);

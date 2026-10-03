@@ -46,7 +46,8 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
     public async Task<OutcomeApplyResult> ApplyOutcomeAsync(NpgsqlConnection c, NpgsqlTransaction t, OutcomeAuthority a, OutcomeCommand command, CancellationToken ct = default)
     {
         if (!OutcomePriorityPolicy.Command(command)) return new(OutcomePriorityIssue.InvalidInput, null);
-        var baseAction = command.Kind == OutcomeKind.Approve ? OutcomeAction.ApproveOutcome : command.Kind == OutcomeKind.Retire ? OutcomeAction.ReadOutcome : OutcomeAction.ManageOutcome;
+        if (a is null) return new(OutcomePriorityIssue.Denied, null);
+        var baseAction = command.Kind == OutcomeKind.Approve ? OutcomeAction.ApproveOutcome : command.Kind == OutcomeKind.Retire && !a.Roles.IsDefault && a.Roles.Contains(OutcomeRole.CustomerOutcomeApprover) ? OutcomeAction.ApproveOutcome : OutcomeAction.ManageOutcome;
         if (await Prepare(c, t, a, baseAction, ct) is { } denied) return new(denied, null);
         await RegistryFence(c, t, ct);
         try
@@ -55,7 +56,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             var entry = registry.Entries.SingleOrDefault(e => e.Content.OutcomeId == command.OutcomeId && e.Content.Version == command.Version);
             var category = entry?.Content.CategoryId ?? command.Content?.CategoryId;
             if (category is null) return new(OutcomePriorityIssue.NotFound, null);
-            var action = command.Kind == OutcomeKind.Retire && entry?.State == OutcomeState.CustomerApproved ? OutcomeAction.ApproveOutcome : baseAction == OutcomeAction.ReadOutcome ? OutcomeAction.ManageOutcome : baseAction;
+            var action = baseAction;
             if (OutcomePriorityPolicy.Authorize(a, scope, action, category) is { } invalid) return new(invalid, null);
             var digest = OutcomePriorityCanonical.Digest(new { schemaVersion = "synthetic-outcome-command-v1", scope, a.ActorId, command });
             var replay = await Receipt<OutcomeReceipt>(c, t, command.EventId, a.ActorId, digest, "outcome", ct);
@@ -84,7 +85,7 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
                 OutcomeKind.Retire when entry!.State is OutcomeState.Draft or OutcomeState.ConsultantReviewed or OutcomeState.CustomerApproved && command.ExpectedReviewEventId is null => OutcomeState.Retired,
                 _ => (OutcomeState?)null
             };
-            if (next is null) return new(OutcomePriorityIssue.InvalidState, null);
+            if (next is null || command.Kind == OutcomeKind.Retire && (entry!.State == OutcomeState.CustomerApproved ? baseAction != OutcomeAction.ApproveOutcome : baseAction != OutcomeAction.ManageOutcome)) return new(OutcomePriorityIssue.InvalidState, null);
             var high = registry.HighWater.SingleOrDefault(h => h.OutcomeId == command.OutcomeId)?.HighestApprovedVersion ?? 0;
             if (next == OutcomeState.CustomerApproved && command.Version <= high) return new(OutcomePriorityIssue.InvalidState, null);
             var prior = registry.Entries.SingleOrDefault(e => e.Content.OutcomeId == command.OutcomeId && e.State == OutcomeState.CustomerApproved);
@@ -197,6 +198,22 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
         catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
         catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
     }
+    public async Task<OutcomeExportProofResult> VerifyLockedForExportInTransactionAsync(NpgsqlConnection c, NpgsqlTransaction t, Guid runId, OutcomeExportAuthority authority, CancellationToken ct = default)
+    {
+        if (runId == Guid.Empty) return new(OutcomePriorityIssue.InvalidInput, null);
+        Transaction(c, t);
+        if (!ExportAllowed(authority)) return new(OutcomePriorityIssue.Denied, null);
+        if (await OutcomePriorityMigration.VerifyAsync(c, t, scope, ct) is { } migration) return new(migration, null);
+        await RegistryFence(c, t, ct); await RunFence(c, t, runId, ct);
+        try
+        {
+            var result = await LoadLock(c, t, runId, category => ExportAllowed(authority, category), ct);
+            return result is null ? new(OutcomePriorityIssue.NotFound, null) : new(null, new(runId, result.ContentDigest, result.ContractDigest, result.Outcomes.Length));
+        }
+        catch (OutcomeAccessException) { return new(OutcomePriorityIssue.Denied, null); }
+        catch (Exception e) when (Integrity(e)) { return new(OutcomePriorityIssue.IntegrityMismatch, null); }
+    }
+    private bool ExportAllowed(OutcomeExportAuthority? a, string? category = null) => scope == OutcomeScope.Fixed && a is not null && OutcomePriorityPolicy.Id(a.ActorId) && a.Authenticated && a.Active && !a.Revoked && a.AssignmentActive && a.AssignedScope == scope && a.ResourceState == OutcomeResourceState.Mutable && a.TaskExportGrant && a.CustomerExportPolicy && a.Role is OutcomeRole.Consultant or OutcomeRole.Auditor && (a.Role != OutcomeRole.Auditor || a.ScopedAuditorExportGrant) && !a.Categories.IsDefaultOrEmpty && a.Categories.All(OutcomePriorityPolicy.Category) && a.Categories.Distinct(StringComparer.Ordinal).Count() == a.Categories.Length && (category is null || a.Categories.Contains(category));
     private static bool PlanningTransition(PlanningEntry e, PlanningKind kind) => kind switch
     {
         PlanningKind.ApproveOriginalEffort => e.OriginalEffort is not null && !e.HasEffortOverride && e.EffortApproval == EffortApprovalState.Proposed,
@@ -285,14 +302,16 @@ public sealed class SyntheticOutcomePriorityStore(OutcomeScope scope, OutcomePri
             _ => false
         };
     }
-    private async Task<LockedOutcomeSet?> LoadLock(NpgsqlConnection c, NpgsqlTransaction t, Guid run, OutcomeAuthority a, CancellationToken ct)
+    private Task<LockedOutcomeSet?> LoadLock(NpgsqlConnection c, NpgsqlTransaction t, Guid run, OutcomeAuthority a, CancellationToken ct) =>
+        LoadLock(c, t, run, category => OutcomePriorityPolicy.Authorize(a, scope, OutcomeAction.ReadOutcome, category) is null, ct);
+    private async Task<LockedOutcomeSet?> LoadLock(NpgsqlConnection c, NpgsqlTransaction t, Guid run, Func<string, bool> categoryAllowed, CancellationToken ct)
     {
         await using var q = Query(c, t, "SELECT lock_json,lock_digest FROM synthetic_outcome_priority.run_locks WHERE run_id=@run", ("run", run));
         await using var r = await q.ExecuteReaderAsync(ct);
         if (!await r.ReadAsync(ct)) return null;
         var result = OutcomePriorityCanonical.Parse<LockedOutcomeSet>(r.GetString(0));
         if (!ValidLock(result) || result.RunId != run || result.Scope != scope || result.ContentDigest != r.GetString(1)) throw new OutcomeIntegrityException();
-        foreach (var item in result.Outcomes) if (OutcomePriorityPolicy.Authorize(a, scope, OutcomeAction.ReadOutcome, item.Content.CategoryId) is not null) throw new OutcomeAccessException();
+        foreach (var item in result.Outcomes) if (!categoryAllowed(item.Content.CategoryId)) throw new OutcomeAccessException();
         return result;
     }
     public static bool ValidLock(LockedOutcomeSet l)
