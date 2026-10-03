@@ -55,17 +55,29 @@ public static class Projection
             var bindings = manifest.Bindings;
             var frozen = new Dictionary<string, object?>
             {
-                ["contractVersion"] = bindings.ContractVersion, ["fixtureKind"] = bindings.FixtureKind,
-                ["customerId"] = bindings.Scope.CustomerId, ["projectId"] = bindings.Scope.ProjectId, ["environmentId"] = bindings.Scope.EnvironmentId,
-                ["assessmentId"] = bindings.AssessmentId, ["reportVersionId"] = bindings.ReportVersionId,
-                ["baselineVersion"] = bindings.BaselineVersion, ["catalogVersion"] = bindings.CatalogVersion,
-                ["scoringProfileVersion"] = bindings.ScoringProfileVersion, ["maturityProfileVersion"] = bindings.MaturityProfileVersion,
-                ["applicationVersion"] = bindings.ApplicationVersion, ["assessmentState"] = bindings.AssessmentState, ["approvalState"] = bindings.ApprovalState
+                ["contractVersion"] = bindings.ContractVersion,
+                ["fixtureKind"] = bindings.FixtureKind,
+                ["customerId"] = bindings.Scope.CustomerId,
+                ["projectId"] = bindings.Scope.ProjectId,
+                ["environmentId"] = bindings.Scope.EnvironmentId,
+                ["assessmentId"] = bindings.AssessmentId,
+                ["reportVersionId"] = bindings.ReportVersionId,
+                ["baselineVersion"] = bindings.BaselineVersion,
+                ["catalogVersion"] = bindings.CatalogVersion,
+                ["scoringProfileVersion"] = bindings.ScoringProfileVersion,
+                ["maturityProfileVersion"] = bindings.MaturityProfileVersion,
+                ["applicationVersion"] = bindings.ApplicationVersion,
+                ["assessmentState"] = bindings.AssessmentState,
+                ["approvalState"] = bindings.ApprovalState
             };
             var envelope = JsonSerializer.SerializeToElement(new Dictionary<string, object?>
             {
-                ["contractVersion"] = McpContract.Version, ["resourceKind"] = kind.ToString(), ["manifestDigest"] = manifest.Digest,
-                ["bindings"] = frozen, ["items"] = items.Select(x => x.Content).ToArray(), ["nextCursor"] = nextCursor
+                ["contractVersion"] = McpContract.Version,
+                ["resourceKind"] = kind.ToString(),
+                ["manifestDigest"] = manifest.Digest,
+                ["bindings"] = frozen,
+                ["items"] = items.Select(x => x.Content).ToArray(),
+                ["nextCursor"] = nextCursor
             });
             return PublicationCodec.CanonicalBytes(envelope).ToImmutableArray();
         }
