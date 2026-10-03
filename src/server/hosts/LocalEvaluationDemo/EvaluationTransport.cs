@@ -89,7 +89,15 @@ internal static class EvaluationTransport
         if (names.Length != expected.Length || names.Distinct(StringComparer.Ordinal).Count() != expected.Length ||
             names.Any(name => !expected.Contains(name, StringComparer.Ordinal))) throw new JsonException();
     }
-    private static string Text(JsonElement value) => value.ValueKind == JsonValueKind.String ? value.GetString()! : throw new JsonException();
+    private static string Text(JsonElement value)
+    {
+        if (value.ValueKind != JsonValueKind.String) throw new JsonException();
+        try { return value.GetString()!; }
+        catch (Exception exception) when (exception is InvalidOperationException or ArgumentException)
+        {
+            throw new JsonException();
+        }
+    }
     private static T EnumValue<T>(JsonElement value) where T : struct, Enum
     {
         var text = Text(value);
