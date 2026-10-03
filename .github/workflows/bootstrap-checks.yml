@@ -41,6 +41,12 @@ jobs:
         run: dotnet format IgaMigrationTool.slnx --verify-no-changes --no-restore
       - name: Build
         run: dotnet build IgaMigrationTool.slnx --configuration Release --no-restore
+      - name: Verify approved local Phase1D synthetic MCP boundaries
+        run: |
+          python3 tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py --verify
+          dotnet run --project tests/unit/SyntheticMcpPublication.Tests -c Release --no-build
+          dotnet run --project tests/unit/SyntheticMcpBoundary.Tests -c Release --no-build
+          dotnet run --project tests/integration/SyntheticMcp.Tests -c Release --no-build
       - name: Check approved Phase1B portable and owning PostgreSQL contracts
         run: |
           docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_ai_tests
@@ -461,6 +467,16 @@ jobs:
           python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
+      - name: Verify Windows local Phase1D synthetic MCP boundaries
+        run: |
+          python tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py --verify
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticMcpPublication.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticMcpBoundary.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/SyntheticMcp.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows fixed offline AI workspace source
         run: |
           dotnet run --project tests/unit/LocalAiPreview.Tests --configuration Release --no-restore
