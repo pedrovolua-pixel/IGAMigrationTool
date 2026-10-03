@@ -200,7 +200,7 @@ resource workstation 'Microsoft.Compute/virtualMachines@2024-11-01' = {
   location: location
   properties: {
     hardwareProfile: {
-      vmSize: 'Standard_B2s'
+      vmSize: 'Standard_B2s_v2'
     }
     storageProfile: {
       imageReference: {

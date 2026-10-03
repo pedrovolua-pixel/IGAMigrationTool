@@ -102,7 +102,7 @@ def policy(template):
     vm = resources['workstation']['properties']
     require(set(vm) == {'hardwareProfile', 'storageProfile', 'osProfile', 'networkProfile', 'diagnosticsProfile'},
             'No additional identity, provider, diagnostics or billing options')
-    require(vm['hardwareProfile'] == {'vmSize': 'Standard_B2s'}, 'Approved compute SKU only')
+    require(vm['hardwareProfile'] == {'vmSize': 'Standard_B2s_v2'}, 'Approved B2s v2 compute SKU only')
     require(vm['storageProfile'] == {'imageReference': {'publisher': 'MicrosoftWindowsServer', 'offer': 'WindowsServer',
              'sku': '2022-datacenter-g2', 'version': parameter('windowsImageVersion')},
              'osDisk': {'createOption': 'FromImage', 'diskSizeGB': 128, 'caching': 'ReadWrite', 'deleteOption': 'Delete',
@@ -188,6 +188,7 @@ def run(template):
       ('NIC second address', ['resources', 'workstationNic', 'properties', 'ipConfigurations'], []),
       ('NIC unbound DNS', ['resources', 'workstationNic', 'properties', 'dnsSettings'], {'dnsServers': []}),
       ('larger compute', ['resources', 'workstation', 'properties', 'hardwareProfile', 'vmSize'], 'Standard_D4s_v3'),
+      ('former restricted compute', ['resources', 'workstation', 'properties', 'hardwareProfile', 'vmSize'], 'Standard_B2s'),
       ('premium disk', ['resources', 'workstation', 'properties', 'storageProfile', 'osDisk', 'managedDisk', 'storageAccountType'], 'Premium_LRS'),
       ('shared disk', ['resources', 'workstation', 'properties', 'storageProfile', 'osDisk', 'managedDisk', 'maxShares'], 2),
       ('unapproved image', ['resources', 'workstation', 'properties', 'storageProfile', 'imageReference', 'publisher'], 'Other'),
