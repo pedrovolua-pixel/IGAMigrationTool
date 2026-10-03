@@ -7450,7 +7450,9 @@
     "workerCleanup": "docs/development/evidence/cycle14/worker-cleanup.json",
     "workerCleanupRehash": "docs/development/evidence/cycle14/worker-cleanup-rehash.json",
     "coordinatorReviewAndCorrection": "docs/development/evidence/cycle14/coordinator-review-correction-preservation.json",
-    "hostedLogs": "docs/development/evidence/cycle14/hosted-original-log-preservation.json"
+    "hostedLogs": "docs/development/evidence/cycle14/hosted-original-log-preservation.json",
+    "coordinatorFinalCheckout": "docs/development/evidence/cycle14/coordinator-final-checkout-preservation.json",
+    "coordinatorCleanup": "docs/development/evidence/cycle14/coordinator-cleanup.json"
   },
   "failuresAndCorrections": [
     "Final scope tests retain actual foreign-assignee-before-replay failure, whole-binding coherence failure, historical retained-prefix gap and scoped barrier-cleanup correction; assertions strengthened without golden regeneration.",

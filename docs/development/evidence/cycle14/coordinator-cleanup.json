@@ -1,0 +1,16 @@
+{
+  "schema": "cycle14-coordinator-cleanup-v1",
+  "result": "PASS",
+  "recordedUtc": "2026-10-03T05:39:58.129404+00:00",
+  "removedCheckout": "/private/tmp/iga-cycle14-coordinator",
+  "head": "0af278da297154b581e21af18786386c446fa8ef",
+  "preservation": "docs/development/evidence/cycle14/coordinator-final-checkout-preservation.json",
+  "archiveRehashedImmediatelyBeforeRemoval": true,
+  "sourceNativeFrontendFilesRehashedInArchive": 5724,
+  "originalExecutionDirectoriesRetained": true,
+  "preservedArchiveRootMode": "0700",
+  "globalToolsAndSharedPostgresRetained": true,
+  "ownedHostsStopped": true,
+  "rootConcurrentFilesPreserved": 51,
+  "siteVersion": 90
+}
