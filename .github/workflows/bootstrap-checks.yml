@@ -387,8 +387,11 @@ jobs:
       - name: Check approved Phase1B Windows portable contracts
         run: |
           dotnet run --project tests/unit/SyntheticOutcomePriority.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet run --project tests/unit/SyntheticAiExecution.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet run --project tests/unit/SyntheticTaskCsv.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows offline synthetic AI packets
         run: dotnet run --project tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj --configuration Release --no-restore
       - name: Check Windows offline synthetic proposed output
