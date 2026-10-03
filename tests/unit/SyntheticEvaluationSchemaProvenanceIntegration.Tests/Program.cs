@@ -2,6 +2,8 @@ using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using AssessmentRuns;
+using DeterministicAnalysis;
 using SyntheticAiExecution;
 using SyntheticEvaluation;
 using SyntheticEvaluationPopulationIntegration;
@@ -53,6 +55,25 @@ internal static class Program
         Check(projection.VersionBindings.Count == 23 && projection.MissingVersionKinds.Count == 9 && !projection.CompleteSamplingReady, "fourteen bound/nine missing never sampling-ready");
         Check(projection.PopulationCanonicalJson == oldJson && projection.PopulationContentDigest == oldDigest, "embedded old population strings untouched");
         using var old = JsonDocument.Parse(oldJson);
+        using (var source = JsonDocument.Parse(old.RootElement.GetProperty("sourceCanonicalJson").GetString()!))
+        {
+            using var snapshot = JsonDocument.Parse(source.RootElement.GetProperty("aiSnapshotJson").GetString()!);
+            var nativeWork = AiExecutionCanonical.Parse<AiWork>(snapshot.RootElement.GetProperty("works")[0].GetProperty("work").GetRawText());
+            Check(AiExecutionPolicy.LogicalKey(proof.RunLock, nativeWork) == proof.Works.Single().Accepted!.Attempt.LogicalKey, "scanner logicalKey fixture is an independently recomputed synthetic work digest");
+            foreach (var member in source.RootElement.GetProperty("members").EnumerateArray())
+            {
+                using var original = JsonDocument.Parse(member.GetProperty("occurrences")[0].GetProperty("originalJson").GetString()!); var o = original.RootElement;
+                var root = SyntheticCanonicalDigest.Compute(new
+                {
+                    schemaVersion = "synthetic-phase1b-ai-root-v1",
+                    Scope = DemoFixtureCatalog.Scope,
+                    RuleId = o.GetProperty("ruleId").GetString(),
+                    RuleVersion = o.GetProperty("ruleVersion").GetString(),
+                    RootCause = o.GetProperty("rootCause").GetString()
+                });
+                Check(root == member.GetProperty("groupId").GetString(), "scanner RootCauseKey fixture is an independently recomputed fictional grouping digest");
+            }
+        }
         foreach (var oldBinding in old.RootElement.GetProperty("versionBindings").EnumerateArray())
         {
             var kind = Enum.Parse<SamplingVersionKind>(oldBinding.GetProperty("kind").GetString()!);
