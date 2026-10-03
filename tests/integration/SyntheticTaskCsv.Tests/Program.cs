@@ -97,6 +97,52 @@ foreach (var (stage, index) in stages.Select((stage, index) => (stage, index)))
     Assert(await auditStore.AppendInTransactionAsync(connection, tx, audit with { ActorId = "other-consultant" }) == CsvIssue.IntegrityMismatch, "audit semantic UUID conflict");
     await tx.CommitAsync();
 }
+// A cancelled body write leaves the immutable authorization record intact and appends one bounded marker.
+var interrupted = new CsvAuditEvent(Guid.NewGuid(), request, golden.RunId, "synthetic-consultant", CsvScope.Fixed,
+    start.AddSeconds(1), CsvAuditStage.Denial, CsvAuditReason.TransferInterrupted, golden.SnapshotDigest, output, 1);
+using (var cancellation = new CancellationTokenSource())
+{
+    cancellation.Cancel();
+    try { await using var body = new MemoryStream(); await body.WriteAsync(rendered.Bytes!, cancellation.Token); throw new Exception("cancelled transfer accepted"); }
+    catch (OperationCanceledException) { Assert(true, "cancelled standalone body write triggers terminal audit path"); }
+}
+await using (var tx = await connection.BeginTransactionAsync())
+{
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted with { RequestId = Guid.NewGuid() }) == CsvIssue.IntegrityMismatch, "interruption denied before authorized Delivery");
+    foreach (var incomplete in new[] { interrupted with { SnapshotDigest = null }, interrupted with { OutputSha256 = null }, interrupted with { RowCount = null } })
+        Assert(await auditStore.AppendInTransactionAsync(connection, tx, incomplete) == CsvIssue.InvalidInput, "interruption requires all original metadata bindings");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted with { Reason = CsvAuditReason.Denied }) == CsvIssue.IntegrityMismatch, "ordinary denial cannot follow Delivery");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted with { SnapshotDigest = new string('f', 64) }) == CsvIssue.SourceConflict, "interruption rejects changed snapshot");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted with { OutputSha256 = new string('f', 64) }) == CsvIssue.IntegrityMismatch, "interruption rejects changed output");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted with { RowCount = 2 }) == CsvIssue.IntegrityMismatch, "interruption rejects changed row count");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted) is null, "single interrupted-transfer metadata marker appended after Delivery");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted) is null, "exact interrupted-transfer marker replay accepted");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted with { EventId = Guid.NewGuid() }) == CsvIssue.IntegrityMismatch, "second interrupted-transfer marker denied");
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted with { Reason = CsvAuditReason.SourceConflict }) == CsvIssue.IntegrityMismatch, "interrupted marker UUID content conflict denied");
+    await tx.CommitAsync();
+}
+await using (var count = new NpgsqlCommand("SELECT count(*),count(*) FILTER(WHERE stage='Delivery'),count(*) FILTER(WHERE reason='TransferInterrupted') FROM synthetic_task_csv.export_audit WHERE request_id=@request", connection))
+{
+    count.Parameters.AddWithValue("request", request); await using var reader = await count.ExecuteReaderAsync(); await reader.ReadAsync();
+    Assert(reader.GetInt64(0) == 5 && reader.GetInt64(1) == 1 && reader.GetInt64(2) == 1, "Delivery authorization remains with exactly one terminal interruption marker");
+}
+await using (var tx = await connection.BeginTransactionAsync())
+{
+    await using var corrupt = new NpgsqlCommand("ALTER TABLE synthetic_task_csv.export_audit DISABLE TRIGGER export_audit_immutable; UPDATE synthetic_task_csv.export_audit SET event_digest=repeat('0',64) WHERE request_id=@request AND stage='Delivery'; ALTER TABLE synthetic_task_csv.export_audit ENABLE TRIGGER export_audit_immutable", connection, tx);
+    corrupt.Parameters.AddWithValue("request", request); await corrupt.ExecuteNonQueryAsync();
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, interrupted) == CsvIssue.IntegrityMismatch, "interruption replay verifies prior Delivery proof");
+    await tx.RollbackAsync();
+}
+await using (var tx = await connection.BeginTransactionAsync())
+{
+    var changed = interrupted with { RecordedAtUtc = new DateTimeOffset(interrupted.RecordedAtUtc.Ticks - interrupted.RecordedAtUtc.Ticks % 10, TimeSpan.Zero), Reason = CsvAuditReason.Denied };
+    await using var corrupt = new NpgsqlCommand("ALTER TABLE synthetic_task_csv.export_audit DISABLE TRIGGER export_audit_immutable; UPDATE synthetic_task_csv.export_audit SET reason='Denied',event_digest=@digest WHERE event_id=@event; ALTER TABLE synthetic_task_csv.export_audit ENABLE TRIGGER export_audit_immutable", connection, tx);
+    corrupt.Parameters.AddWithValue("digest", CsvCanonical.Hash(CsvCanonical.Bytes(changed))); corrupt.Parameters.AddWithValue("event", interrupted.EventId); await corrupt.ExecuteNonQueryAsync();
+    Assert(await auditStore.AppendInTransactionAsync(connection, tx, changed) == CsvIssue.IntegrityMismatch, "rehashed ordinary denial after Delivery fails closed stage semantics");
+    await tx.RollbackAsync();
+}
+await using (var history = new NpgsqlCommand("SELECT count(*) FROM synthetic_task_csv.schema_migrations WHERE migration_id IN ('synthetic-task-csv-001','synthetic-task-csv-002')", connection))
+    Assert((long)(await history.ExecuteScalarAsync())! == 2, "additive interruption migration preserves original history and initializes idempotently");
 await using (var tx = await connection.BeginTransactionAsync())
 {
     var audit = new CsvAuditEvent(Guid.NewGuid(), Guid.NewGuid(), golden.RunId, "synthetic-consultant", CsvScope.Fixed, start, CsvAuditStage.Dispatch, CsvAuditReason.None, golden.SnapshotDigest, null, 1);

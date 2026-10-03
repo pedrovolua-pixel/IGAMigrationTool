@@ -9,17 +9,17 @@ public sealed class CsvAuditMigrationException(string message) : Exception(messa
 internal static class CsvAuditMigration
 {
     private static string Hash(string value) => CsvCanonical.Hash(Encoding.UTF8.GetBytes(value));
-    internal const string Id = "synthetic-task-csv-001";
-    private static string Script
+    private static readonly (string Id, string Resource)[] Migrations = [
+        ("synthetic-task-csv-001", "001-initial.sql"), ("synthetic-task-csv-002", "002-transfer-interrupted.sql")];
+    private static string Script(string resource)
     {
-        get
-        {
-            using var stream = typeof(CsvAuditMigration).Assembly.GetManifestResourceStream("SyntheticTaskCsvIntegration.001-initial.sql")
-                ?? throw new InvalidOperationException("Embedded planning task migration missing.");
-            using var reader = new StreamReader(stream);
-            return reader.ReadToEnd();
-        }
+        using var stream = typeof(CsvAuditMigration).Assembly.GetManifestResourceStream("SyntheticTaskCsvIntegration." + resource)
+            ?? throw new InvalidOperationException("Embedded CSV migration missing.");
+        using var reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
+    private static bool ValidHistory(List<(string Id, string Digest, string Fingerprint)> rows) =>
+        rows.Count <= Migrations.Length && rows.Select((row, index) => row.Id == Migrations[index].Id && row.Digest == Hash(Script(Migrations[index].Resource))).All(valid => valid);
     internal static async Task InitializeAsync(NpgsqlConnection connection, CsvScope scope, CancellationToken cancellationToken)
     {
         await using var transaction = await connection.BeginTransactionAsync(cancellationToken);
@@ -31,8 +31,7 @@ internal static class CsvAuditMigration
                 applied_at timestamptz NOT NULL);
             """, cancellationToken);
         var rows = await History(connection, transaction, cancellationToken);
-        var digest = Hash(Script);
-        if (rows.Count > 1 || rows.Count == 1 && (rows[0].Id != Id || rows[0].Digest != digest))
+        if (!ValidHistory(rows))
             throw new CsvAuditMigrationException("Task migration history/content drift refused.");
         if (rows.Count == 0)
         {
@@ -48,13 +47,16 @@ internal static class CsvAuditMigration
                 """, connection, transaction);
             if (Convert.ToInt64(await unknown.ExecuteScalarAsync(cancellationToken), CultureInfo.InvariantCulture) != 0)
                 throw new CsvAuditMigrationException("Unknown planning task schema objects refused.");
-            await Execute(connection, transaction, Script, cancellationToken);
+        }
+        else if (rows[^1].Fingerprint != await Fingerprint(connection, transaction, cancellationToken))
+            throw new CsvAuditMigrationException("CSV schema drift refused.");
+        foreach (var migration in Migrations.Skip(rows.Count))
+        {
+            await Execute(connection, transaction, Script(migration.Resource), cancellationToken);
             var fingerprint = await Fingerprint(connection, transaction, cancellationToken);
             await Execute(connection, transaction, "INSERT INTO synthetic_task_csv.schema_migrations VALUES (@id,@digest,@fingerprint,clock_timestamp())", cancellationToken,
-                ("id", Id), ("digest", digest), ("fingerprint", fingerprint));
+                ("id", migration.Id), ("digest", Hash(Script(migration.Resource))), ("fingerprint", fingerprint));
         }
-        else if (rows[0].Fingerprint != await Fingerprint(connection, transaction, cancellationToken))
-            throw new CsvAuditMigrationException("Task schema drift refused.");
         await Execute(connection, transaction, "INSERT INTO synthetic_task_csv.data_plane_scope VALUES (true,@customer,@project,@environment) ON CONFLICT DO NOTHING", cancellationToken,
             ("customer", scope.CustomerId), ("project", scope.ProjectId), ("environment", scope.EnvironmentId));
         if (await Binding(connection, transaction, scope, cancellationToken) is not null)
@@ -68,8 +70,8 @@ internal static class CsvAuditMigration
         try
         {
             var rows = await History(connection, transaction, cancellationToken);
-            if (rows.Count != 1 || rows[0].Id != Id || rows[0].Digest != Hash(Script) ||
-                rows[0].Fingerprint != await Fingerprint(connection, transaction, cancellationToken)) return CsvIssue.IntegrityMismatch;
+            if (rows.Count != Migrations.Length || !ValidHistory(rows) ||
+                rows[^1].Fingerprint != await Fingerprint(connection, transaction, cancellationToken)) return CsvIssue.IntegrityMismatch;
             return await Binding(connection, transaction, scope, cancellationToken);
         }
         catch (PostgresException exception) when (exception.SqlState is PostgresErrorCodes.UndefinedTable or PostgresErrorCodes.InvalidSchemaName)
@@ -89,7 +91,7 @@ internal static class CsvAuditMigration
     private static async Task<List<(string Id, string Digest, string Fingerprint)>> History(NpgsqlConnection connection, NpgsqlTransaction transaction, CancellationToken cancellationToken)
     {
         var records = new List<(string, string, string)>();
-        await using var command = new NpgsqlCommand("SELECT migration_id,digest,schema_fingerprint FROM synthetic_task_csv.schema_migrations", connection, transaction);
+        await using var command = new NpgsqlCommand("SELECT migration_id,digest,schema_fingerprint FROM synthetic_task_csv.schema_migrations ORDER BY migration_id", connection, transaction);
         await using var reader = await command.ExecuteReaderAsync(cancellationToken);
         while (await reader.ReadAsync(cancellationToken)) records.Add((reader.GetString(0), reader.GetString(1), reader.GetString(2)));
         return records;
