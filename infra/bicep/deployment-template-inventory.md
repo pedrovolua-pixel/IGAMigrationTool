@@ -56,3 +56,32 @@ Build/lint instructions and limits: [Bicep README](README.md). The [bootstrap wo
 ## Subsequent application-package templates (not deployed)
 
 [`pilot-development-bootstrap-apps.bicep`](pilot-development-bootstrap-apps.bicep),its[private hosting module](modules/pilot-development-bootstrap-apps.bicep) and [intentionally unresolved example](environments/pilot-dev-bootstrap.parameters.example.json) prepare inert diagnostic web/worker hosting. They were not used in the earlier foundation session and add no access grants. See[package handoff](../../docs/development/azure-application-package.md) for concrete image/private-pull/product dependencies.
+
+## BFF federation input template (not provisioned)
+
+[`../entra/pilot-bff.federated-credential.template.json`](../entra/pilot-bff.federated-credential.template.json) records the approved exact tenant issuer, dedicated BFF managed-identity principal subject and token-exchange audience. Its placeholders must be replaced in protected ephemeral inputs after deployment review. No federated credential, redirect endpoint or consent was created by the local [BFF foundation cycle](../../plans/active/bff-identity-session-cycle.md).
+
+## Disabled BFF container recipe and inventory tools (not deployed)
+
+The reviewed [`../containers/bff-development.Dockerfile`](../containers/bff-development.Dockerfile), [allowlisted context](../containers/bff-development.Dockerfile.dockerignore), [immutable image lock](../containers/bff-development.images.lock.json) and [build helper](../containers/build-bff-development.py) compose a permanently disabled diagnostic BFF executable. The [pinned collector](../containers/collect-image-evidence.py) and [tool lock](../containers/image-evidence-tools.lock.json) collect developer image inventories/SPDX; collection does not approve licenses/findings, establish signed build provenance or promote an image. No BFF container, image pull grant or registry artifact was deployed to Azure. [The bounded execution record](../../docs/development/evidence/bff-deployment-preparation-20261002.json) distinguishes actual CI collection from pending live controls.
+
+
+## Optional Bastion development access sources (not deployed)
+
+[Access entry point](pilot-development-private-browser-access.bicep), [desktop/Bastion module](modules/pilot-development-private-browser-access.bicep), [environment browser DNS module](modules/pilot-development-browser-dns.bicep) and [deliberately incomplete inputs](environments/pilot-dev-private-browser.parameters.example.json) implement the bounded local [ADR-0010](../../architecture/decisions/ADR-0010-private-pilot-browser-access.md) packet. They reference an existing approved VNet/NAT/internal environment and add only owner-operated synthetic development access. They were not used for either historical Azure session. No public application, role grant, production BFF, password, exact protected network binding or resource deployment is supplied. [Handoff and live prerequisites](../../docs/development/bastion-development-access.md) distinguish local source verification from future provider/live proof. The [post-pilot portal plan](../../plans/active/post-pilot-https-portal.md) is deferred and creates no resources.
+
+## HTTPS replacement direction — 2026-10-03 UTC
+
+The owner now selects HTTPS instead of Bastion. [Accepted local ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) and [the active plan](../../plans/active/https-pilot-portal-preparation.md) replace the desktop deployment path. Existing optional Bastion templates remain stored, locally verified and undeployed. The current internal environment module is not convertible to public ingress. The approved local HTTPS-P01 sources are now stored separately. The required false-only root guard prevents deployment; public network admission is hard disabled in its prospective module. No application is included. All environment-building templates remain repository sources with protected bindings outside Git.
+
+
+## HTTPS-P01 stored environment scaffold (not deployed)
+
+| Source | Purpose |
+|---|---|
+| [Guarded composition](pilot-https-portal.bicep) | Required false-only `deployEnvironment`; no app or outputs. |
+| [External environment module](modules/pilot-https-container-apps-environment.bicep) | East US 2, external Consumption profile, public network access disabled, existing exact dedicated subnet and Standard NAT guards, no log export. |
+| [Incomplete protected-input example](environments/pilot-dev-https-portal.parameters.example.json) | Six null values; intentionally rejected by preflight. |
+| [Compiled and input checks](../../tests/infrastructure/HttpsPortal/README.md) | Negative template mutations and value-suppressed protected provider/input CLI; no Azure calls. |
+
+These files were not used in either historical Azure session. No app, identity, secret, grant or resource is deployed. The historical foundation is disposed; existing reviewed network prerequisites are not restored by this scaffold. [Current execution plan](../../plans/active/https-pilot-portal-preparation.md) and [production dependency handoff](../../docs/development/https-pilot-portal-next-packet.md) retain the real BFF, provider/key/audit, ingress proof and separately priced/public session prerequisites. A direct module invocation is not authorized by local verification.

@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS_EXACT37_SUPPORTED_LINUX_SIGNATURE_ARTIFACT_PREREQUISITE_ONLY",
+  "recordedAtUtc": "2026-10-03T23:14:35.857095+00:00",
+  "authority": "Owner supplied exact manual diagnostic folder and original ZIP; review and continue authorizes bounded local SDK diagnostics",
+  "baseline": "e0747de",
+  "sourceCommitBeforeReceipt": "7964672ad59ff8923c46008bd53863d1c7040cb5",
+  "run": 37145824111,
+  "attempt": 1,
+  "job": 111269428858,
+  "artifact": 11281169753,
+  "head": "cefd8354d69e00eb372f8efff457e9b175d3a6eb",
+  "base": "31c61eaf17a2abbc3b4b87a674b057d0b2b75651",
+  "syntheticMerge": "e7e5f70ea67068fb20fe4f7c3a89a6c18e6d6b12",
+  "originalZip": {
+    "path": "/Users/pedrovolu/Downloads/https-key-provider-signatures-37145824111-1.zip",
+    "bytes": 85352,
+    "sha256": "fbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395",
+    "remoteDigestMatches": true,
+    "safeAllowlistedMembers": 85,
+    "uncompressedBytes": 356389
+  },
+  "coordinatorExecutedReceiptChecks": {
+    "OS": "Ubuntu24.04.5",
+    "allOriginalArchiveHashReceiptsMatch": true,
+    "architecture": "x86_64",
+    "archives": 37,
+    "containerAndFolderIntegrity": "PASS85allowlistedfiles",
+    "directVerifierExitsZero": 37,
+    "image": "20260927.320.1",
+    "limitations": [
+      "Original raw packages excluded from diagnostic ZIP; acquisition/hash receipts independently bound to original manifest and remote validator, not locally rehashed from ZIP",
+      "SDK trust bundle contents not uploaded; candidate byte hashes and actual selected paths observed",
+      "Normal revocation used with no override; no guarantee every CRL/OCSP endpoint contacted",
+      "Signature proof only; experimentalgraph notproductionlock; no provider dispatch/lifecycle/production/cloud acceptance"
+    ],
+    "protectedData": {
+      "archiveSHA256": "67e5f5676944acb2fb627b768c5b3392eebf220ae780edd5d5b49f6530621487",
+      "exitCode": 0,
+      "id": "System.Security.Cryptography.ProtectedData",
+      "stdoutSHA256": "c818d0451e471e26583750c985d9269ac2f40ae8dc5d4b045cc49376c39adcd9",
+      "timestampRootSHA256": "2399561127A57125DE8CEFEA610DDF2FA078B5C8067F4E828290BFB860E84B3C",
+      "version": "4.5.0"
+    },
+    "rawLogsChecked": 78,
+    "runner": "2.337.0",
+    "sdk": "10.0.401",
+    "selectedNormalTrust": [
+      {
+        "path": "/usr/share/dotnet/sdk/10.0.401/trustedroots/codesignctl.pem",
+        "present": true,
+        "sha256": "aab671f52e5229906b2100727370007ef4b6d2e360b23f2cf12a6d87773be611"
+      },
+      {
+        "path": "/usr/share/dotnet/sdk/10.0.401/trustedroots/timestampctl.pem",
+        "present": true,
+        "sha256": "5ccb03367b52f047099f07e1653160e8578a83711cb18560c979febb65f8cb5d"
+      }
+    ],
+    "sourceFilesChecked": 7,
+    "status": "PASS_EXACT37_SIGNATURE_ARTIFACT_PREREQUISITE_ONLY",
+    "zipDigest": "fbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395"
+  },
+  "independentExecutedReceiptChecks": {
+    "officialIndexAndDownloadReceipts": 37,
+    "originalManifestArchiveHashBindings": 37,
+    "normalVerifierDirectExitZero": 37,
+    "successPackageLogConclusions": 37,
+    "rawLogsByteCountAndHash": 78,
+    "sourceFileHashBindings": 7,
+    "closedDuplicateFreeJSONParsing": true,
+    "exactGlobalPinAndEmptyNuGetConfig": true,
+    "sdkVersionAndInfo": "10.0.401/runtime10.0.12/linux-x64",
+    "setupRunner": "2.337.0",
+    "os": "Ubuntu24.04.5",
+    "image": "20260927.320.1",
+    "architecture": "x86_64",
+    "selectedTrust": "All37 detailed logs selected original SDK codesignctl.pem and timestampctl.pem fallback bundles;system code-signing candidate absent",
+    "protectedData": "Normal supported Linux direct exit0 with detailed author/repository timestamp roots through Symantec CA to VeriSign Universal Root"
+  },
+  "inventoryNuance": "Initial supplied folder85files;Finder .DS_Store appeared during review causing strict final folder-inventory assertion to fail. Authenticated original ZIP remains exact85;each85 matching folder member byte-equal;extra Finder metadata excluded without deletion.",
+  "cases": {
+    "KV-L01": "PASS exact existing PR/head/base/merge/seven source files; no further publication",
+    "KV-L02": "PASS 37 original acquisition/archive-hash receipts,37 direct normal exit0 and78 raw log byte/hash bindings",
+    "KV-L03": "PASS exact SDK/runtime/config/pin/platform and actual normal selected SDK trust bundle paths/hashes",
+    "KV-L04": "PASS canonical artifact-only reporting; BFF/HTTPS private board stale",
+    "KV-L05": "Historical Linux35mocks and prior correction review retained; no new mocked runner execution"
+  },
+  "independentPlanReview": {
+    "status": "PASS_BOUNDED_LOCAL_DISPATCH_SCOPE",
+    "receipt": {
+      "path": "/tmp/iga-linux-proof-manual-independent-review/dispatch-plan-review.json",
+      "bytes": 2026,
+      "sha256": "a18561ac7b19c9fe3bbea14c05c723840d779bb35622c995e344c004cfede875"
+    },
+    "plan": "plans/active/https-key-provider-dispatch-diagnostic.md"
+  },
+  "retainedEvidence": [
+    {
+      "path": "/tmp/iga-https-linux-proof-manual/coordinator-receipt-review.json",
+      "bytes": 1830,
+      "sha256": "20de340c19336a7a0611bf158c2d6889d29d2a5bf09113f256d96c19c25f61dd"
+    },
+    {
+      "path": "/tmp/iga-https-linux-proof-manual/zip-inventory.json",
+      "bytes": 14877,
+      "sha256": "4b9a7e123ee77ee7b35c23fa849222b1853afac5dd141036753e760bf48284f4"
+    },
+    {
+      "path": "/tmp/iga-linux-proof-manual-independent-review/review-receipt.json",
+      "bytes": 16971,
+      "sha256": "dc03168258c69915dbb12feb4a73ef75a2625860c1622eff3352c17d03bae42c"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "path": "docs/development/https-key-provider-linux-run-result.md",
+      "sha256": "851d07ce103a2b679a456672e8d86fde8f352a217af28c5bb566daac5bbc0140"
+    },
+    {
+      "path": "docs/development/https-key-provider-platform-verification.md",
+      "sha256": "258f1a2b13e3944d0baac6faab31c53421020fc46b83e7aa2bbf99ea03cc8ec0"
+    },
+    {
+      "path": "docs/development/https-key-provider-public-export-approval.md",
+      "sha256": "8d669f565e9bf9e671412d4fb8b69a17ac93392b68bbd4935bcd5a2a0ec1cea3"
+    },
+    {
+      "path": "docs/development/https-key-provider-resolved-graph-evidence.md",
+      "sha256": "af49e890764d4dec430842717ccaa7254b9cb0f1747584a7be1f662540553017"
+    },
+    {
+      "path": "docs/development/https-production-test-packet.md",
+      "sha256": "618940c6b13068446c168e0341a2667f83111975a8bb71cd5e1f8cfc2e672d60"
+    },
+    {
+      "path": "plans/active/https-key-provider-linux-proof-run.md",
+      "sha256": "5fab7f4aab4f5b1531977c1e575f4ec57af06d3822ced383ab182f68a9404da7"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "e598646fc304c8b2a43f1e55a3e692530b80570d01be2150fd23a1d90ab13306"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "036e7fd74e89c6a846c84a06875873e3af0fcadeb1cd6661db9ca4080f21f223"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "c85f881c40b2c0757983171104a58c6e9a2064213f9f9ed55cc7de22f549253c"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "602744fdee658ace2cdcd9428ab70134c925dfd6029cfd53142331998f707005"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "950303736f5e186c6921ddc49f5bb905b26d02eccd5a39e1d55eecf1cbf62638"
+    },
+    {
+      "path": "plans/active/https-key-provider-dispatch-diagnostic.md",
+      "sha256": "acfb19d292d99703c001113f3957276780dd32cc5dfdee094948f7ef25865c5f"
+    }
+  ],
+  "next": "Bounded test-only actual Microsoft provider dispatch DISP01\u201308 with retained verified experimental assets; implementation and independent review pending",
+  "privateStatus": {
+    "BffHttpsSnapshot": "4346e0f",
+    "confirmedAtUtc": "2026-10-02T19:50:45.775370+00:00",
+    "status": "STALE",
+    "reason": "Separate automatic approval rejection of credential/network publisher proxy-bypass; no retry/bypass; unrelated Cycle14 publication preserved",
+    "humanTasks": 6,
+    "preparedDelta": "Signature/manual-artifact substep complete; local SDK diagnostic starts; guard/inventory/witness/lifecycle and protected production inputs remain"
+  },
+  "limits": [
+    "Original raw packages excluded from diagnostic ZIP; acquisition/hash receipts independently bound to original manifest and remote validator, not locally rehashed from ZIP",
+    "SDK trust bundle contents not uploaded; candidate byte hashes and actual selected paths observed",
+    "Normal revocation used with no override; no guarantee every CRL/OCSP endpoint contacted",
+    "Signature proof only; experimentalgraph notproductionlock; no provider dispatch/lifecycle/production/cloud acceptance",
+    "Artifact contains diagnostics not raw nupkg archives;approved actual runner hash receipts independently compared to original manifest,no local package rehash/re-execution",
+    "Linux artifact prerequisite only;not Windows/macOS acceptance,dependency integration/audit/build or provider dispatch/lifecycle/production proof",
+    "Roughly90day observed diagnostic expiry is not repository retention configuration or product policy",
+    "No network/trust changes/Azure/SDK/package or artifact code execution by reviewer",
+    "No Windows/macOS acceptance; unchanged macOS36PASS/1FAIL remains historical",
+    "No fullKEY/ARL/provider guard/witness/inventory/lifecycle/403/transport/diagnostic export/production/G1-G9/Milestone2 acceptance",
+    "No production dependency/lock/config/schema/IaC/permission/Azure resource/session/spending/admission change",
+    "Unchanged application C#/PG/restore/build/format/regressions not rerun for this receipt/document-only checkpoint; SDK diagnostic evidence remains pending"
+  ],
+  "currentRepositoryChecks": {
+    "utf8JsonLinksAnchorsWhitespace": "PASS545links40anchors",
+    "scopedGitleaks": "PASS exit0 noleaks",
+    "evidence": [
+      {
+        "path": "/tmp/iga-https-linux-proof-manual/current-document-check.json",
+        "bytes": 3243,
+        "sha256": "daec57feee182dfeb932dc8998b6dddb1d50d8415cc68ca7db36215070ea1631"
+      },
+      {
+        "path": "/tmp/iga-https-linux-proof-manual/scoped-secrets.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      }
+    ],
+    "applicationRegression": "NOT RERUN unchanged runtime/config/schema/dependencies; diagnosticnotyetimplemented",
+    "sourceBindingMeaning": "Checker ownJSON binding is historical pre-augmentation snapshot; MD/plan bindings and current canonical receipt independently verified in final reviewer receipt."
+  },
+  "finalIndependentCanonicalReview": {
+    "status": "PASS_DOCUMENTARY_CLOSURE_ONLY",
+    "path": "/tmp/iga-linux-proof-manual-independent-review/canonical-manual-closure-review.json",
+    "bytes": 5763,
+    "sha256": "927ea712c96f4de127e8da52742d9820937605cd1907536caaee22284c57251b",
+    "sourceBindings": "12 MD/plan bindings; current canonical receipt independently hashed before this review-reference augmentation",
+    "checks": "6 retained receipt/check hashes,545 local links,40 retained anchors,empty protected runtime/config diff,whitespace and scopedsecret findings"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "sdkVersion": "10.0.401",
+  "graphKind": "experimental-host-graph-not-production-lock",
+  "sourceCommit": "b186d121419236e15e7fa184a22c6bac4d2db939",
+  "experimentalLockSHA256": "2d726d936d5cb3b5d647ef77a3f62d56e16fb0a70b49738f483ab3c7b5eebe9f",
+  "packages": [
+    {
+      "id": "Azure.Core",
+      "version": "1.61.0",
+      "fileName": "azure.core.1.61.0.nupkg",
+      "archiveSHA256": "9d0aef39084d4cbfcbe01358df6db6dfc047873ddb7207222554173b3fd6bd0b"
+    },
+    {
+      "id": "Azure.Extensions.AspNetCore.DataProtection.Blobs",
+      "version": "1.5.4",
+      "fileName": "azure.extensions.aspnetcore.dataprotection.blobs.1.5.4.nupkg",
+      "archiveSHA256": "6c39822eddc5575a56d9c3c58b27edddaed3434a39aabe7d3d39c1e65608efc1"
+    },
+    {
+      "id": "Azure.Extensions.AspNetCore.DataProtection.Keys",
+      "version": "1.6.4",
+      "fileName": "azure.extensions.aspnetcore.dataprotection.keys.1.6.4.nupkg",
+      "archiveSHA256": "c832e18aad5d074e9bb3c711dc4a59c77c1ba20cc7e80cc9c28865bba375122a"
+    },
+    {
+      "id": "Azure.Identity",
+      "version": "1.17.2",
+      "fileName": "azure.identity.1.17.2.nupkg",
+      "archiveSHA256": "e51c0a7c9e0229242fcafdc74af668843d4fe1c69c7af63e717947ea628fe396"
+    },
+    {
+      "id": "Azure.Security.KeyVault.Certificates",
+      "version": "4.6.0",
+      "fileName": "azure.security.keyvault.certificates.4.6.0.nupkg",
+      "archiveSHA256": "59ce4ac19a8155c8e88bfd2bce8482f4acee95ca5286a5eed3ff9f0965a8e7f5"
+    },
+    {
+      "id": "Azure.Security.KeyVault.Keys",
+      "version": "4.10.0",
+      "fileName": "azure.security.keyvault.keys.4.10.0.nupkg",
+      "archiveSHA256": "c9c2b8a7017ea94fb10581bb0b57dc0656c99d922e189aa9e5a15a04c892da0a"
+    },
+    {
+      "id": "Azure.Security.KeyVault.Secrets",
+      "version": "4.6.0",
+      "fileName": "azure.security.keyvault.secrets.4.6.0.nupkg",
+      "archiveSHA256": "ef68b39294bf2879ee8a8b8bf426b86aeb9e07fd3ae9197fee9e0bc97a409134"
+    },
+    {
+      "id": "Azure.Storage.Blobs",
+      "version": "12.26.0",
+      "fileName": "azure.storage.blobs.12.26.0.nupkg",
+      "archiveSHA256": "27aefbe1613ac65aec9a192613575aa64ae12ba7450726314872ecd4e40f938f"
+    },
+    {
+      "id": "Azure.Storage.Common",
+      "version": "12.25.0",
+      "fileName": "azure.storage.common.12.25.0.nupkg",
+      "archiveSHA256": "e1e32fe283ae98ee85171d1532cb88afab16b68baee1fe806a379b4d08e18fd4"
+    },
+    {
+      "id": "Microsoft.AspNetCore.Authentication.JwtBearer",
+      "version": "10.0.0",
+      "fileName": "microsoft.aspnetcore.authentication.jwtbearer.10.0.0.nupkg",
+      "archiveSHA256": "5494448bfa610e69f6b682624efc856d43b4a971bf11fe10b5b7951cb349370d"
+    },
+    {
+      "id": "Microsoft.AspNetCore.Authentication.OpenIdConnect",
+      "version": "10.0.0",
+      "fileName": "microsoft.aspnetcore.authentication.openidconnect.10.0.0.nupkg",
+      "archiveSHA256": "d8063382616f5dcd5853fb1d43f73d7cba4cd86b3900cb196f122ab9535925bc"
+    },
+    {
+      "id": "Microsoft.Bcl.AsyncInterfaces",
+      "version": "10.0.9",
+      "fileName": "microsoft.bcl.asyncinterfaces.10.0.9.nupkg",
+      "archiveSHA256": "82bcf210d6c573b0add1d8265204a7d53af79dd3357dd9501a24812f362d0bd7"
+    },
+    {
+      "id": "Microsoft.Bcl.Cryptography",
+      "version": "10.0.2",
+      "fileName": "microsoft.bcl.cryptography.10.0.2.nupkg",
+      "archiveSHA256": "f8e62d716b1dd6a65c11769d61e038b7afa9c800e0d403d00b1a4a52d3f4d363"
+    },
+    {
+      "id": "Microsoft.Identity.Abstractions",
+      "version": "12.7.0",
+      "fileName": "microsoft.identity.abstractions.12.7.0.nupkg",
+      "archiveSHA256": "df72b634a36dfd5f46db8f75dc7a3fa141365b6a42b49f76959e01dd2a4696f8"
+    },
+    {
+      "id": "Microsoft.Identity.Client",
+      "version": "4.90.0",
+      "fileName": "microsoft.identity.client.4.90.0.nupkg",
+      "archiveSHA256": "f17744f920e9f890f0922ca9069256b13c1c35af4fc1fca8cb20ac140bb3c8cf"
+    },
+    {
+      "id": "Microsoft.Identity.Client.Extensions.Msal",
+      "version": "4.84.2",
+      "fileName": "microsoft.identity.client.extensions.msal.4.84.2.nupkg",
+      "archiveSHA256": "b9611017286cb42bbd5f3c6e55ddf6eca648fba8426d795f4030d6e10adf3c27"
+    },
+    {
+      "id": "Microsoft.Identity.Web",
+      "version": "4.15.0",
+      "fileName": "microsoft.identity.web.4.15.0.nupkg",
+      "archiveSHA256": "606a5c31d694b30c2fb9e0ff8aa3dccbf96f12e9992007b13cc4a48311c871ac"
+    },
+    {
+      "id": "Microsoft.Identity.Web.Certificate",
+      "version": "4.15.0",
+      "fileName": "microsoft.identity.web.certificate.4.15.0.nupkg",
+      "archiveSHA256": "948d3d328af9e6bef9899d4c80c8760bd2b8f0599b45f273a50b322943eb9219"
+    },
+    {
+      "id": "Microsoft.Identity.Web.Certificateless",
+      "version": "4.15.0",
+      "fileName": "microsoft.identity.web.certificateless.4.15.0.nupkg",
+      "archiveSHA256": "10769d28ec678bcc32390d3f6e094a17c1d0bc792e92ddab013d1bb3097780d6"
+    },
+    {
+      "id": "Microsoft.Identity.Web.Diagnostics",
+      "version": "4.15.0",
+      "fileName": "microsoft.identity.web.diagnostics.4.15.0.nupkg",
+      "archiveSHA256": "f6d5ff4759053088b24f0c89305685bd96a568004ec73228d43752325a08496a"
+    },
+    {
+      "id": "Microsoft.Identity.Web.TokenAcquisition",
+      "version": "4.15.0",
+      "fileName": "microsoft.identity.web.tokenacquisition.4.15.0.nupkg",
+      "archiveSHA256": "ffd723ebf7fd620eec95e57e6fc5a92c2130874d05fcb15170d49f9692cd6f56"
+    },
+    {
+      "id": "Microsoft.Identity.Web.TokenCache",
+      "version": "4.15.0",
+      "fileName": "microsoft.identity.web.tokencache.4.15.0.nupkg",
+      "archiveSHA256": "6829270e1c47504d8288e4f7cf6db5c9500d45034e6a4876a129a1a178103c94"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Abstractions",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.abstractions.8.22.0.nupkg",
+      "archiveSHA256": "edb0451dd621fe77ed497edda1d523d7b481d236f6866ba6c988a19f9de4640c"
+    },
+    {
+      "id": "Microsoft.IdentityModel.JsonWebTokens",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.jsonwebtokens.8.22.0.nupkg",
+      "archiveSHA256": "f135bce7ff1c1d465a42b55bebc618cef1779ba976d1a709f8908ea003f41512"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Logging",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.logging.8.22.0.nupkg",
+      "archiveSHA256": "c94b8b8eb35ffe4a957f55b6b71c7618a734b6a33a22a3a5709927a3ca5584ff"
+    },
+    {
+      "id": "Microsoft.IdentityModel.LoggingExtensions",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.loggingextensions.8.22.0.nupkg",
+      "archiveSHA256": "811f30e3f5a8c3d00f9f35f07c72dbe47b59cf07bb526bb10e2bc08e2183ae83"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Protocols",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.protocols.8.22.0.nupkg",
+      "archiveSHA256": "b54db36f452c32267243784424419332f29effba482c42a4dfe607a35a10e1dd"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Protocols.OpenIdConnect",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.protocols.openidconnect.8.22.0.nupkg",
+      "archiveSHA256": "8d9174dc5d6957c5e239d790183fed43c163f940fda8e73c36c8e4649d0eaebc"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Tokens",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.tokens.8.22.0.nupkg",
+      "archiveSHA256": "708dd5a0319d9678992f8c6cab4de1e7df5b0cbbbef2d95013d3db6d2ce1abc9"
+    },
+    {
+      "id": "Microsoft.IdentityModel.Validators",
+      "version": "8.22.0",
+      "fileName": "microsoft.identitymodel.validators.8.22.0.nupkg",
+      "archiveSHA256": "424eac991681210dd6964dcf6400672a211ef1efc5b80fe08581d4f24c307322"
+    },
+    {
+      "id": "Npgsql",
+      "version": "10.0.3",
+      "fileName": "npgsql.10.0.3.nupkg",
+      "archiveSHA256": "75d0970923a8c9fcbbd37e4ebe72fee0b10362a1e36723e86777df1b6728316d"
+    },
+    {
+      "id": "System.ClientModel",
+      "version": "1.15.0",
+      "fileName": "system.clientmodel.1.15.0.nupkg",
+      "archiveSHA256": "34eee2404aab29bed4c5755a98a6ba94d812980fd9559aed67bc1871b45e1b02"
+    },
+    {
+      "id": "System.IdentityModel.Tokens.Jwt",
+      "version": "8.22.0",
+      "fileName": "system.identitymodel.tokens.jwt.8.22.0.nupkg",
+      "archiveSHA256": "7ffcada814314a6dd7c736094eae1c2db982065f5d7df17cba89caefe93efaf0"
+    },
+    {
+      "id": "System.IO.Hashing",
+      "version": "8.0.0",
+      "fileName": "system.io.hashing.8.0.0.nupkg",
+      "archiveSHA256": "b33386b744cd068e9d11d0b781fe87f9ef585b7370d30a1ae949c218618ae5c1"
+    },
+    {
+      "id": "System.Memory.Data",
+      "version": "10.0.9",
+      "fileName": "system.memory.data.10.0.9.nupkg",
+      "archiveSHA256": "606fe3c0534308ff550f7e40a75f2d406c9098f95b49d03b52dde08a53128257"
+    },
+    {
+      "id": "System.Security.Cryptography.Pkcs",
+      "version": "10.0.10",
+      "fileName": "system.security.cryptography.pkcs.10.0.10.nupkg",
+      "archiveSHA256": "c2439050e4f3bd559f2978179fbd2e0815c673a4ee83da1cbaa0bad8dcff6b6f"
+    },
+    {
+      "id": "System.Security.Cryptography.ProtectedData",
+      "version": "4.5.0",
+      "fileName": "system.security.cryptography.protecteddata.4.5.0.nupkg",
+      "archiveSHA256": "67e5f5676944acb2fb627b768c5b3392eebf220ae780edd5d5b49f6530621487"
+    }
+  ]
+}

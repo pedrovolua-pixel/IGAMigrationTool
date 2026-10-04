@@ -1,0 +1,285 @@
+{
+  "status": "PASS \u2014 bounded local engineering packet complete; owner-private board published",
+  "packet": "UI-W2",
+  "date": "2026-10-02",
+  "toolchain": {
+    "node": "24.21.0",
+    "npm": "11.20.0",
+    "dotnet": "10.0.401",
+    "chrome": "154.0.8037.97",
+    "axe": "4.13.0"
+  },
+  "sourceSha256": {
+    "src/web/src/App.tsx": "3e5d51fdf1d323575c3f60774cff47d3f212aef2d17354f720c58c3d0a15e85e",
+    "src/web/src/AnalysisView.tsx": "b310708722f932ae5ab36065925c4a7f967c6b35e816990f4238d61cd3074635",
+    "src/web/src/ReviewPanel.tsx": "a9726033e4d7cc178386f3bbc64c0c3c2301d97badce283d1f431702a5d23f30",
+    "src/web/src/WorkspaceNavigation.tsx": "c41f26a55c05198f55c9ecc473d24ce52e708a1311ce12dc0aca8ac072a91b64",
+    "src/web/src/FindingsExplorer.tsx": "6a92662aa20b39de007928d77098c183ad9ad8eceb483da28872c0604626842e",
+    "src/web/src/FindingsExplorer.css": "2750e4b304c8ad39808fefa0710c233879daa450a12ce8bff59f42978a026896",
+    "src/web/src/workspace.css": "5303693dd832311b58b87b54efbc23a4158944def1f5f8c08228cd02ed2ee233",
+    "tests/e2e/finding-evidence/host-harness.mjs": "a68c099a4820930955d93830eaab199a06eff1d05c45c5d0f00046107115bd46",
+    "tests/e2e/finding-evidence/verify.mjs": "0e4253a3d7b61465284fe81cfbe8e99c3f8d98095e76cdf4e52bd5288d3f06f1",
+    "tests/e2e/assessment-workspace/verify.mjs": "ca7bf5a84a7cf85314a98f610adcdbb42c9545421ec4ed5173f47b4390874054"
+  },
+  "buildAssetsSha256": {
+    "/tmp/iga-uiw2-runtime/host/src/web/dist/index.html": "937702ae08667aecb026d481ed36ae0259bb06d88faa60cfa940a973545ed088",
+    "/tmp/iga-uiw2-runtime/host/src/web/dist/assets/index-D4pXL4Xi.js": "756138f8db55a25fe6b35dbf08702ee92cdc5d1a544710f3624a693f4a4cc839",
+    "/tmp/iga-uiw2-runtime/host/src/web/dist/assets/index-Bf-0u_Ya.css": "6a9777e39bcfd19c6d39839c13e2a36fba2aa699a04bad2aa0e5f83dda1fe0f0",
+    "/tmp/iga-uiw2-runtime/host/src/web/dist/assets/index-BeHD-Bsr.js": "2fc187f879981d217d7b6fd44d04ea5a47cefd6aa60fd237203f4db035952c27"
+  },
+  "executed": [
+    "Pinned frontend contract, format, typecheck and Vite build PASS",
+    "npm frontend audit zero vulnerabilities",
+    "Pinned synthetic host Release build --no-restore -p:UseSharedCompilation=false PASS zero warnings/errors",
+    "git diff --check PASS"
+  ],
+  "independentReview": {
+    "outcome": "No remaining findings",
+    "reviewer": "review_workspace non-author read-only",
+    "verifiedExplorerSha256": "6a92662aa20b39de007928d77098c183ad9ad8eceb483da28872c0604626842e",
+    "checks": [
+      "Open/Close/Escape and filtered-out return focus",
+      "Severity/mandatory counts; selected state/current-versus-original",
+      "Review/Evidence focus and coverage-only fallback",
+      "Hostile strings inert",
+      "1440/320/short1200 reflow, forced colors, selected-panel axe zero violations"
+    ],
+    "limitations": "Scanner injection used CSP bypass solely for automation; actual mutations/regressions are coordinator checks; Windows/manual/scale not accepted."
+  },
+  "corrections": [
+    "Explorer state hoisted without retaining stale payloads across loading; selected state option retained after last matching disposition; stable IDs restore close focus across remount.",
+    "Filtering test exposed duplicate sibling key with DraftReportView; unique explorer prefix fixes duplicate nodes.",
+    "Test canonical draft digest assertion corrected to actual canonicalContentDigest and verifies hash shape; final strengthened definition passed.",
+    "UI-W1 test waits for existing requestAnimationFrame selection focus before testing next navigation.",
+    "Initial sandbox PostgreSQL shared memory and build/audit/Git-network restrictions were retried under reviewed sandbox escalation."
+  ],
+  "regressions": [
+    {
+      "suite": "consultant-demo",
+      "status": "PASS",
+      "assertions": 391,
+      "executionSha256": "4315914a8550d060d5476d6ba550fe73c3f86b4e05eef1166720b0d84806bc7c",
+      "executionPath": "/tmp/iga-uiw2-runtime/shadow/tests/e2e/consultant-demo/execution.json",
+      "definitionSha256": "147eeea709baf95bdd8bd9f39b0d016c519afd012545b26f053c31d2412696a5",
+      "repositoryDefinitionMatchesShadow": true
+    },
+    {
+      "suite": "analysis-scoring",
+      "status": "PASS",
+      "assertions": 702,
+      "executionSha256": "02d7d8fd3c3c4b4e767cb1b1fb06add5d43aee9baa10c5111352edc3ed401b1c",
+      "executionPath": "/tmp/iga-uiw2-runtime/shadow/tests/e2e/analysis-scoring/execution.json",
+      "definitionSha256": "8f1e6bfa524b560cea1d40dfc7c569c94accf30abefc7624ba45028e5005ebff",
+      "repositoryDefinitionMatchesShadow": true
+    },
+    {
+      "suite": "review-maturity",
+      "status": "PASS",
+      "assertions": 2090,
+      "executionSha256": "07bc8ed3e8f7c5563e07e70d1d8867c5759fe81eef1ce0536ea20af10c24d09c",
+      "executionPath": "/tmp/iga-uiw2-runtime/shadow/tests/e2e/review-maturity/execution.json",
+      "definitionSha256": "fd013927356a6f056806037e45b0c2a455d441e499fff80ce09814133281e3cc",
+      "repositoryDefinitionMatchesShadow": true
+    },
+    {
+      "suite": "draft-reports",
+      "status": "PASS",
+      "assertions": 2095,
+      "executionSha256": "268f06a8c343e22cd7edd07fb23f0e64b43272a5e8a380f31e5b4a58691e6baa",
+      "executionPath": "/tmp/iga-uiw2-runtime/shadow/tests/e2e/draft-reports/execution.json",
+      "definitionSha256": "518e7c3c2c46d93c43dedf5449926c8a68aec5229db76ad329b734ec045c3eed",
+      "repositoryDefinitionMatchesShadow": true
+    },
+    {
+      "suite": "recommendation-guidance",
+      "status": "PASS",
+      "assertions": 2920,
+      "executionSha256": "024176d29799e4ebc0f81422ca55f7f8a22461f5a3c0f6411fd12b1e6853ea5a",
+      "executionPath": "/tmp/iga-uiw2-runtime/shadow/tests/e2e/recommendation-guidance/execution.json",
+      "definitionSha256": "86e470952dccc2e18b2bb7b58dbea5de8fb40189ef79184829da9753f5bbf8a8",
+      "repositoryDefinitionMatchesShadow": true
+    }
+  ],
+  "workspaceRegression": {
+    "completedAt": "2026-10-02T14:29:25.243Z",
+    "browser": "154.0.8037.97",
+    "checks": [
+      "No-run availability notice, honest fallback, keyboard settings and live notice clearing",
+      "All five destinations focus real mounted sections; visible fixture inputs and existing review/report content",
+      "Changing run clears previous section selection; coverage-only runs do not invent reports",
+      "Seven viewport sizes including 1200x350 and 320px; keyboard navigation and forced colors"
+    ],
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 900,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 1200,
+        "height": 350,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 900,
+        "height": 400,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 760,
+        "height": 700,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 320,
+        "height": 800,
+        "settingsFocus": true,
+        "overflow": false
+      }
+    ],
+    "scans": [
+      {
+        "label": "empty workspace",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": ["color-contrast"]
+      },
+      {
+        "label": "ready synthetic review and draft workspace",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": ["aria-prohibited-attr", "color-contrast"]
+      },
+      {
+        "label": "320px coverage workspace",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": ["color-contrast"]
+      },
+      {
+        "label": "320px forced colors",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": ["color-contrast"]
+      }
+    ],
+    "pageErrors": [],
+    "scope": "Final built React UI with read-only saved synthetic snapshots; no backend mutation/recovery regression or Windows/assistive-technology acceptance claimed."
+  },
+  "limitations": [
+    "No dependency, API, source permission, persistent saved-view/configuration or migration change. Existing synthetic migrations initialize only disposable test databases.",
+    "Protected raw evidence remains unavailable; supplied fixture references are inert.",
+    "Full supported Windows11/Edge/Chrome/Firefox ESR/NVDA/Narrator, manual contrast/ARIA, zoom and approved-scale acceptance not executed; G1-G9 unchanged."
+  ],
+  "finalFindingBrowser": {
+    "completedAt": "2026-10-02T14:35:06.220Z",
+    "browser": "154.0.8037.97",
+    "groups": [
+      "FE-001 combined search/severity/category/state/confidence, mandatory-review, no matches and clear; canonical digests unchanged",
+      "FE-002 adjacent original/current explanation and inert evidence/options; focus on open/close/Escape; selection retained outside filters with fallback focus",
+      "FE-003 actual Confirm and coherent refresh preserve selected identity/filters/originals; retained zero-match state option; unsaved editor text survives filters",
+      "FE-004 actually saved hostile presentation and context stay inert; immutable original title and provenance preserved",
+      "FE-005 desktop/short390320, forced colors and axe; historical coverage-only Evidence fallback; changed run resets panel and filters"
+    ],
+    "scans": [
+      {
+        "label": "320px selected finding",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": ["aria-prohibited-attr", "color-contrast"]
+      },
+      {
+        "label": "320px forced colors",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": ["aria-prohibited-attr", "color-contrast"]
+      },
+      {
+        "label": "desktop selected finding",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": ["aria-prohibited-attr", "color-contrast"]
+      }
+    ],
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "overflow": false
+      },
+      {
+        "width": 1200,
+        "height": 350,
+        "overflow": false
+      },
+      {
+        "width": 900,
+        "height": 400,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "overflow": false
+      },
+      {
+        "width": 320,
+        "height": 800,
+        "overflow": false
+      }
+    ],
+    "pageErrors": [],
+    "scope": "Actual task-owned synthetic PostgreSQL-backed host, final built React assets; Windows/manual/large-scale acceptance not claimed."
+  },
+  "totalRegressionAssertions": 8198,
+  "finalHostSha256": "ea61ac131fbf4769a8156f129e3d487d6ec80c61c9f9df57ca5d0dfc16eba3c3",
+  "artifactsSha256": {
+    "/tmp/iga-uiw2-evidence/finding-evidence-narrow.png": "7e757621d9786c858d9a123f797b93b146898ddbee31a4ed3fff2e1a2caf95d5",
+    "/tmp/iga-uiw2-evidence/finding-evidence-hostile-desktop.png": "f12d0185a9accb7e6ee972f875038c2dc4d87e8e728a96c5ae5ddfd2a6a94532",
+    "/tmp/iga-uiw2-evidence/finding-evidence-desktop.png": "3518f642ea1be865c049596d133143595f46429fa8b59aaa0c4547a0b73c3fa9",
+    "/tmp/iga-uiw2-evidence/execution.json": "55ec2cfb32e3e2ee1599eed439af81541bc17f223d6fec481e93a5c4b6880429",
+    "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/work/ui-review/finding-evidence-review.png": "52b7aa6e282d0d4e69be4d89b6da56ef7dfbf9efd61958fd51ff579b5f0342dd"
+  },
+  "privateStatusSite": {
+    "status": "succeeded",
+    "versionNumber": 64,
+    "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_44a2167e8d4c81919be1a37392b7b5c8",
+    "deploymentId": "appgdep_6abfc33d3a048191a7b9cc4eddc39ba8",
+    "commitSha": "fa36bf5f6a747e3087099028fb7087c25f4ed25b",
+    "confirmedAt": "2026-10-02T14:44:20.312651+00:00",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "audience": "existing owner-private; unchanged",
+    "archiveSha256": "4cc1facfc70f1844d20400e806dd2820e80a6344454256677bd169f95dfcd333"
+  },
+  "runtimeCleanup": {
+    "taskOwnedPostgreSqlStopped": true,
+    "testHostsStopped": true,
+    "readOnlyPreview": "http://127.0.0.1:5197",
+    "previewScope": "Frozen synthetic GET snapshots; mutations refused"
+  },
+  "siteQa": {
+    "viewports": ["1440x1000", "390x844", "320x800"],
+    "overflow": false,
+    "humanTaskCount": 11,
+    "anchorsResolve": true,
+    "externalLinksHttps": true,
+    "executionPath": "/tmp/iga-uiw2-site-qa.json"
+  }
+}

@@ -1,0 +1,1160 @@
+{
+  "schemaVersion": "bff-local-authority-audit-execution-v1",
+  "date": "2026-10-02",
+  "status": "COMPLETE_BOUNDED_LOCAL_AND_CONFIGURED_HOSTED",
+  "approval": {
+    "scope": "P01–P05 and ADR-0009 local synthetic implementation only",
+    "reviewedPacket": "cacbe372ff8a9bc448033e6918308c5f820b4bfd",
+    "recordedAtCommit": "487f6f7"
+  },
+  "source": {
+    "combinedCode": "ba8de419f867487abd56d0e6a9c4519131fe37f8",
+    "base": "7f46fdb339f9e05aa761aafcba7c32d5b74b645c",
+    "authorAuthority": [
+      "1e5ecb4cb7a29d61bb3e48babd147bf0f3dd5c07",
+      "0a7da14861bd75556c7cf1f0ab8ff751a4ef497e"
+    ],
+    "authorAudit": [
+      "64716f6f6859fa75aae456b3314e2a992cba9cfa",
+      "d9173e9f2568323eec4cddadf1089776a205f92a",
+      "970a1ab55aac6f31041985369be7544a2f1a8c6a"
+    ],
+    "bridge": "4202ab8",
+    "independentComposition": "58cb8a7 atop209c4ec and28efef9",
+    "verifiedLocalCheckpoint": "fd2285ec3317546529ba05321cbae6c16608397b",
+    "integratedApprovedPilotBase": "7b2a741146ca30718f33f6d27c5c3660675d5c90",
+    "auditFixtureCorrection": "a3208763057176e4058a6ad958585ce28e7ed483",
+    "changedFileSha256Snapshot": "ba8de419f867487abd56d0e6a9c4519131fe37f8",
+    "changedFileSha256Scope": "Changed runtime/contracts/tests/infra/shared configuration Git blobs since prior BFF checkpoint, including the approved additive pilot integration; canonical record edits excluded.",
+    "changedFiles": [
+      {
+        "path": ".gitattributes",
+        "sha256": "caa1e5b527f97aa5b21ff2257f42ed0f908112c84f8d6f33e5ade2a9280b7d2b"
+      },
+      {
+        "path": ".github/workflows/azure-application-package.yml",
+        "sha256": "929687a20cfd6eef07c45435c657c7ae683f6ceed9d0e8b4eae633c49090552a"
+      },
+      {
+        "path": ".github/workflows/bootstrap-checks.yml",
+        "sha256": "d49d097f7d982b74682a2599713de7c97dd34efbe7f3a7cb540924bf626ddc58"
+      },
+      {
+        "path": "IgaMigrationTool.slnx",
+        "sha256": "7c53da6faf77214f816961f422a8672a50cb9a42d99c057b8f6988e7f0e630b6"
+      },
+      {
+        "path": "contracts/local-demo/README.md",
+        "sha256": "aaa7f3db4f5365067734dc426d8c94f7198cb33756d9b4aab102fcf9c16fdcba"
+      },
+      {
+        "path": "contracts/local-demo/demo-v1.schema.json",
+        "sha256": "3f335f9ff7766b9d87b440fcfb158cf473f8df261aed9c5dc2409a5e575fddb2"
+      },
+      {
+        "path": "infra/containers/bff-development.Dockerfile",
+        "sha256": "546cc884e105c5b4ce61e4375cc3c36d17f3bbf34c2da638af9d7f4a7fbc808a"
+      },
+      {
+        "path": "infra/containers/bff-development.Dockerfile.dockerignore",
+        "sha256": "afc5731ea7d45c4c59d5f1b318a323fe692b8aff7c2d2ef5b897f1b312b2522f"
+      },
+      {
+        "path": "migrations/identity-authority/001-authority.sql",
+        "sha256": "ec59a49b0de6abd5b8532ef7ecdd65f348c25ba04cb6e26b90b83250f1284636"
+      },
+      {
+        "path": "migrations/identity-authority/README.md",
+        "sha256": "109634749ea52b35bcf39a167fdb9c5785b99c8f370d90343ac26fbab5a4311a"
+      },
+      {
+        "path": "migrations/identity-sessions/003-atomic-audit.sql",
+        "sha256": "62a85f01199eaf37ae1d82585a6a498eb97509ab7e6523e98891b9f166aaf2e2"
+      },
+      {
+        "path": "migrations/identity-sessions/README.md",
+        "sha256": "4ae8fe1c67ca45e8a2cb62b1be98a2327ac994cf6746015d05528490b6b25ae4"
+      },
+      {
+        "path": "src/server/hosts/BffDevelopmentHost/packages.lock.json",
+        "sha256": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/BffFoundation.csproj",
+        "sha256": "b8b0536294800119d99d63e1603685dcf82ec1b6bedc63530a603936a7faaa6c"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/BffHostingContracts.cs",
+        "sha256": "dfaeff1230d4f2192dab9afe6cabeb88795163dd3df2f272c098226b2880f5d8"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/PostgreSqlBffSubjectAuthority.cs",
+        "sha256": "4ff0512fb68d6b86aa0daff83ff7dec8a8076506148fccbed03efbb9375c9623"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/README.md",
+        "sha256": "1a2be55d3d21086e015ba94c49083025e8c7f2bbedcbed736e2997cf49ab646b"
+      },
+      {
+        "path": "src/server/hosts/BffFoundation/packages.lock.json",
+        "sha256": "402e3a15f2c1c920314d94785067882596467d93bc818a57e539ee4842f60a71"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoAiPreviewProjection.cs",
+        "sha256": "9cd65728a5ef3c939774a1f0d052f53f035adc8c394160a448d53e700a0cce59"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+        "sha256": "f634e53a7076bfc6bae528e9fedef1460823b12321cfcac2a05f7062a338f556"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+        "sha256": "8bcfd02b897f648b89ce6a05ba21aff67ab3d0532fec719f19ab291105987e34"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+        "sha256": "3f8a55390c217697fe8a5719d1251079c2643f443bf9012cd5207a1525f07d0f"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/packages.lock.json",
+        "sha256": "b18eae598eff231c649ba5ffe136c28ad51d29bf4713dd34ee5772263a721fda"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+        "sha256": "50a1bca2dd121bcfa7ed867d240a3f6e739ae059c9af5815604aec969004a353"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/DemoAiPreviewCatalog.cs",
+        "sha256": "d0da26761f1553241c76c2aa561642ba262f7fcb380aa3e6480b6b65410d711a"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+        "sha256": "e5fe727579c771525ceb0b0beb00591ba981361f936a820a679d6f228f3f7d95"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+        "sha256": "6632c8597ae3f8edc6c205dacd93ed53497828e1e138138a760b49e1917fc335"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+        "sha256": "56c338dbc0316d004076908e07cfda495c9421291d2e6ef6162e0f4a6981ac1a"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+        "sha256": "e8e2ce011dccd9790c5fd388856044af4311601feea55a0b459ce519131cc2a9"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-empty.json",
+        "sha256": "ca88cea9c3bfc0c03d9a538017f224463d5a5b39bb62a1d5ea2cf288d969f220"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-packet.json",
+        "sha256": "d4d584f5903957cd999fbf9adfbebaddb0be54d8393719b87932bf3890b596c4"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-proposals.json",
+        "sha256": "209f918a7d8b5602499ff74b180ffbc667404c0c1784cac0fe438d6083762011"
+      },
+      {
+        "path": "src/server/modules/IdentityAuthority/AuthorityCodec.cs",
+        "sha256": "960af4f3fe30b0e02b836ac8361118b1e620a4d9fed712311086a42cce08e3ba"
+      },
+      {
+        "path": "src/server/modules/IdentityAuthority/Contracts.cs",
+        "sha256": "f1f5dc1986aef570055d1de97cc1bfd9d5cad14df6341bcd8acff99224d901af"
+      },
+      {
+        "path": "src/server/modules/IdentityAuthority/IdentityAuthority.csproj",
+        "sha256": "5c1838921f30aff31a26950ea07670758552692e616d3708ca944e55b69cc62b"
+      },
+      {
+        "path": "src/server/modules/IdentityAuthority/PostgreSqlIdentityAuthority.cs",
+        "sha256": "2047895b9611b58b0e5b05401ea4259929ddfafa09102cb5a740442c0b1c81de"
+      },
+      {
+        "path": "src/server/modules/IdentityAuthority/README.md",
+        "sha256": "53d7138b17e647ef8ca35bb51f39c91259b866fefd02cedc5f00a263b0d55526"
+      },
+      {
+        "path": "src/server/modules/IdentityAuthority/SyntheticProviderReader.cs",
+        "sha256": "ca4ecb5070c60358a931c4ccbeb9bcd804e35589b6acc28b10e8a34e11144218"
+      },
+      {
+        "path": "src/server/modules/IdentityAuthority/packages.lock.json",
+        "sha256": "337324e07366c0b4a522d98c189b405cef7510e1dc522a02f7d53aefc15a89ef"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/AuditIntegrityVerifier.cs",
+        "sha256": "94ac0c2a3dbe841fc2bc45ef6ae5561589d727c9584e504c096167a20d29fd1f"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/ITransactionalSessionAdmissionPolicy.cs",
+        "sha256": "3ee8ddeb990f2fe8451703a3cf8427e8d4f223a15259b16007a546bd14a3e458"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/IdentitySessions.csproj",
+        "sha256": "13965df7324c102c4e6e025fe89ca4a22f17afe3ffd72a07e84b455d88f2fdef"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/PostgreSqlAuditedSessionAuthority.cs",
+        "sha256": "4a5b651e75c6cde95ea2b29e1e0a9504d241d365e894401118d8cf0930f0ce57"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/PostgreSqlSecurityAudit.cs",
+        "sha256": "b753820c5247b5af22cd6b22151c8ff873abf23fea8a3b7ad79f76185877dedf"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/PostgreSqlTicketStore.cs",
+        "sha256": "ea3904683d438b043fc9f609253467f5d396de2facb47a1a309a0cf0e34caf7e"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/README.md",
+        "sha256": "1f8f12b7655a1edd66fe5b057e879c4f038fec37a4a54d665fa9683c3d4f8246"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/SecurityAuditContracts.cs",
+        "sha256": "c481b90687c98e6753bbc8da8d032141fb82f88451021ca7355acb3611ec8d24"
+      },
+      {
+        "path": "src/server/modules/IdentitySessions/SessionDatabase.cs",
+        "sha256": "95cb82b0b8754fc18557785a736eda1a38fd544c5ea80ee9a77ce6c512fcb692"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiPreview/PreviewBuilder.cs",
+        "sha256": "944fd60053b4deb560fdb1ffa1d73236472c04d11cd0e3bb26263f5f66100990"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiPreview/PreviewCanonical.cs",
+        "sha256": "a546551b3b75daef11177ce7e5d74bf9b50f1d7e07ac3972cdebb2ef23e1e527"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiPreview/PreviewContracts.cs",
+        "sha256": "244be0394eeec4b3b26a3845724bbdb2e281fc507d2bd2593f64c3e3f80bfd8f"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiPreview/PreviewRenderer.cs",
+        "sha256": "309c9345c85b6d3d3e336c9e4629f9b3e1d1de682f1dee79a2c15d5dc902ec00"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj",
+        "sha256": "7b531ebaca9d5f7260ebc9b59feb9d2a742507d3dee1e5d39bae303934aae8db"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiPreview/packages.lock.json",
+        "sha256": "8af39d741896c7b887dbdbb611028462778e62f52deae9e2c19f4200dffe0893"
+      },
+      {
+        "path": "src/web/src/AiProposalPreview.css",
+        "sha256": "ca096222827fdada282393c834ab75f6210655c96aaf5a1c29565313c7682d6e"
+      },
+      {
+        "path": "src/web/src/AiProposalPreview.tsx",
+        "sha256": "8704ae4ec86cedcee181c6b7cd4a3d477363f4af9e9b3b76d6f5ee5fd97cabfe"
+      },
+      {
+        "path": "src/web/src/AnalysisView.tsx",
+        "sha256": "145434544385f223106dd3022caf29e6909cde3db36e833dbc03383756b34603"
+      },
+      {
+        "path": "src/web/src/demo-contract.generated.ts",
+        "sha256": "50dacdb48fa82eb1844546fca6b0f605d381435b68fe4355aae4601589bbbe24"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/README.md",
+        "sha256": "2005c59cc8bc5c140df9fe4c00d7e14a44dd7d46af18e89fa06da61c5e804026"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/artifacts.json",
+        "sha256": "44ae2147c73af8e6883b661236f0c4d2d1e135691ce634eddbdebfa8923e0b75"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/desktop-preview.png",
+        "sha256": "6c39da42c5f658d976a7823fba5ebe7904011235e9b02a02d47546712fbba0dc"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/empty-preview.png",
+        "sha256": "c7a53bc28ba0e13910cbdbb7d0374523bf1872aed2e0eaa855279bcf1e8592cc"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution.json",
+        "sha256": "a08bb07926f0b626abee8c2217423124b6a2674ce9df8609ee303b32f135a7ba"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/attempt-history.json",
+        "sha256": "1d6472942391442ee831b46521335d387760a39336ee5960be1eda0fb7f6e185"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/browser.log",
+        "sha256": "83db58eb90b98ffde5f7a913afe1262e32502a97f9a1e5b5b3b5620f3078c4cf"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/format-apply.log",
+        "sha256": "4df8bd269de37bc621bb8159c012203f8df99402ed0f7dfcdd2421774cf47278"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/format-equivalence.log",
+        "sha256": "307e8a519f36e11f6ed664ef68af465465b02d723cf73fff014b8f96b8898b40"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/format-only.diff",
+        "sha256": "8bc6195e347abdb7a31dcc4ef6ee5073a19758e69682068ace367326d3bedf97"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/format.log",
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/host-build.log",
+        "sha256": "22ee4d00dacaf86eb4567f8a7ab8b99d65ba95de574ebb5dffeb88c145c2c016"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/host-restore.log",
+        "sha256": "c2da335e820b63a4b43258a3a57bb5b4726eccf5e6ec808f58e0237428070032"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/secrets.log",
+        "sha256": "07133ff8ce07846a98aeeb3887c4daa1a5259ebfd56c7a2769df80bf4f2a3312"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/syntax.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/typecheck.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/verify.executed.txt",
+        "sha256": "644e16b3b2ca784896bc33bdb843df8ec8b34401a565cd769514178b2ebd62bd"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/execution/web-build.log",
+        "sha256": "b4d2b8ec0269b29879307a10efdcaca883f93346f1463839a838ae7328687153"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/expected.mjs",
+        "sha256": "db46f5930953c91fd52da34c907e360378d7b56e18da2c362685ee2cad307f5e"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/mobile-preview.png",
+        "sha256": "3d77774ea91b0dc31fc3a9a842d15ffb80f90313a15e3b31dab33be61c4c8af0"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/reflow-preview.png",
+        "sha256": "87f7b98e24bc75da66c6592aac72bd69b9ee704de10f6fe207e6ba02a5284f13"
+      },
+      {
+        "path": "tests/e2e/local-ai-preview/verify.mjs",
+        "sha256": "17d6a8965177355f41762a00cfad81a14c2f4a4ff8801247fe0f5aac406f6983"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/README.md",
+        "sha256": "d0eefa1308a390232588fde73549b8357b297b085d5ebeb1d8eb10fe77903627"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/desktop-preview.png",
+        "sha256": "588eb851216a0aaf56abdcc8193ca09802d439b8722997e79a1e331f60410477"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/desktop-viewport.png",
+        "sha256": "e73293cd4f74043fb7f0ea197ff2660ff9ed92ac0c6093233738395f86484e46"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/execution.json",
+        "sha256": "b2ed7b26b4d9055e3fac2ddd806b77f1e32b2a6f5e7272efb1a8f5fe3af7799a"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/execution.log",
+        "sha256": "653c6293056cd3a5e4af3f3c340dc5b49b39bb87d3b0e4116b52b63047776b8d"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/format.log",
+        "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/mobile-preview.png",
+        "sha256": "3b8e379794548761028a07b30011c332170e815a24d9980515f7cbb02429b5f0"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/mobile-viewport.png",
+        "sha256": "b315320ca085e2e6953342f3023c4bd08391a689fc61ff9e5d28597ddaf3ffe3"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/reflow-preview.png",
+        "sha256": "8cb5bf06fc349e0e8d07dc2d1cd88d282e2d2aac7773f50f4395291c15343d1d"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/reflow-viewport.png",
+        "sha256": "efad9aedc12d7decb729c8e03a27017a63b72cee6edb079f47b3ad26380239f8"
+      },
+      {
+        "path": "tests/e2e/synthetic-ai-preview/verify.mjs",
+        "sha256": "fb1f6d9141ef301ca01bb3429a6abd1577cf54f6d01774ab1d84eb277ff1e090"
+      },
+      {
+        "path": "tests/integration/BffAuthenticationTransport.Tests/packages.lock.json",
+        "sha256": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38"
+      },
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/BffAuthorityComposition.Tests.csproj",
+        "sha256": "011da98da3b1c4d30ef6064e33d21b06ae093d36f72333ec327f1a7ddd1b9cc3"
+      },
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/Fixture.cs",
+        "sha256": "216c19a3779a98224a202b7a3268090bb65c520caaa67b1e4899c6c1d04ff740"
+      },
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/Program.cs",
+        "sha256": "7bf4bea1e53e1f5e6f95b0c7fc6f29ea71e19be87e45394977d54ac899e36d4a"
+      },
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/README.md",
+        "sha256": "8306f7e93bf874cc411e58976efb001ebc4b80458544207c63eb163252c8450e"
+      },
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/packages.lock.json",
+        "sha256": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38"
+      },
+      {
+        "path": "tests/integration/BffDevelopmentHost/verify_inputs.py",
+        "sha256": "bd409d12ed2153c72f99d19b601e26e53757ae6c1f728d586f0efa0e1ae0931e"
+      },
+      {
+        "path": "tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj",
+        "sha256": "17ebb195d9cd5d275a2cb8c0b0e6a2f266242ab8adaf3aa4bb336537dc3fa0d3"
+      },
+      {
+        "path": "tests/integration/BffHostingContracts.Tests/Program.cs",
+        "sha256": "ce6c6d37ccbdf8af58d46135e95283d1bc3ce3235bfa3beb8665d4a590e74f35"
+      },
+      {
+        "path": "tests/integration/BffHostingContracts.Tests/packages.lock.json",
+        "sha256": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38"
+      },
+      {
+        "path": "tests/integration/BffSessionFlow.Tests/packages.lock.json",
+        "sha256": "1f89ce52b7a1e3fa087af42f563b58e179d063c5925a177cd55e39b47e3a7a38"
+      },
+      {
+        "path": "tests/integration/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj",
+        "sha256": "e69ce459278635007febe6c0b51d731f22b2077c38ea45ef1ee1be1f587b47a8"
+      },
+      {
+        "path": "tests/integration/IdentityAuthority.Tests/Program.cs",
+        "sha256": "7f03167c27559366914771ca6952c289303fa84099ade7299a6d41fa29214731"
+      },
+      {
+        "path": "tests/integration/IdentityAuthority.Tests/README.md",
+        "sha256": "ac08ee9c814cf28de05045f5e56339c85ed8767360702c50e0384b3501784278"
+      },
+      {
+        "path": "tests/integration/IdentityAuthority.Tests/packages.lock.json",
+        "sha256": "d08f970c2cae33e982d1e21cc82d94aa8c97ca7f617286d2a33175a4eb61a05c"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/CompositionCases.cs",
+        "sha256": "f2ce8ab7cc457be57587c65931587c661a9e15dfc6a1a9d34bd46c67d49e1879"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/DatabaseCases.cs",
+        "sha256": "e94bd68b78ee94a342382d4163f2af14569224805c8317d75bad5a7e893622bd"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/Expected.cs",
+        "sha256": "e638a7d74289b67aa039c091164b1990462ffcc562286b30dd91c8b583c6fdba"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/LegacyCapture.cs",
+        "sha256": "1f01ed7b8e4af95f4ca8b6b576218bd9fda84699fe629aa5bfa0b9de9c292c27"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj",
+        "sha256": "6ddf88a531414caa7f37b09207ee05c76d00dd9296402b54f3de8bb33bfdc51b"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/Program.cs",
+        "sha256": "a75980bb8b49f5aebf61c34b31383a0e3401cfe6cda5d40e95851065a3f0bfca"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/README.md",
+        "sha256": "83a9392b88cd3546819530235ea01b5fdf7fb90450fb775ac763a63c77bd3660"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/bind.py",
+        "sha256": "075a50f619c0a20e04a70dd5f258e61e23fe8819937b3b0daa059c86bfc0079a"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution.json",
+        "sha256": "9e456f0e10643b28d66632427547d58d0f2f50b98fd8b700e337df854ed9c0ca"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/build.log",
+        "sha256": "96dec7daab334547a04f2847d297315a15c94f844445de721185bf3054eb4cda"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/format-apply.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/legacy-capture.log",
+        "sha256": "58e9f15ba9ac748bfaf4178a018cfe1f3eddcdf4060da88593eab5ed579f1a49"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/restore.log",
+        "sha256": "41924e1faee4fe0636fe15b6e27850f099fa33015111aa35b698ddcd2a3156df"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/run-portable.log",
+        "sha256": "c676ca1a35ab1fc6fef7dd679e3fbbc26ad6c707cae163d6eb07f1661e340554"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/run-postgres.log",
+        "sha256": "23fef4f3cfc9e02f6248c501316b6f3c408d079c01fbb6208bbb743f251d6f17"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/execution/secrets.log",
+        "sha256": "1c30e331b214a82458a4a5a9fbd149341218a29467885a9a3ae92044f68f48c8"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/legacy-goldens.json",
+        "sha256": "0b651ddf271aca59236c151fc07ade3c193c0caa96dba59416ece48f4137dac2"
+      },
+      {
+        "path": "tests/integration/LocalAiPreview.Tests/packages.lock.json",
+        "sha256": "92953a1ccb3119ba843a2f5fcdcd50025f57c44cde6de280411f9b27a38f925c"
+      },
+      {
+        "path": "tests/integration/ReviewMaturity.Tests/BridgeCases.cs",
+        "sha256": "c15a1dd9405bc2bca3a9c0dc317502d7393042abe44977680aaac743e1844ad1"
+      },
+      {
+        "path": "tests/integration/SecurityAudit.Tests/Program.cs",
+        "sha256": "186c8d82690abc2b130209a68ab5566bf9361f7f099be4c1bbd1b9441f70687c"
+      },
+      {
+        "path": "tests/integration/SecurityAudit.Tests/README.md",
+        "sha256": "a2600925b1a618822777876db1239b69212e7d9ffe3866ea84185639a8b24982"
+      },
+      {
+        "path": "tests/integration/SecurityAudit.Tests/SecurityAudit.Tests.csproj",
+        "sha256": "05f8f3d320771945f1bd319800cad6ee82899f82e1213b2689b5369102abeb70"
+      },
+      {
+        "path": "tests/integration/SecurityAudit.Tests/packages.lock.json",
+        "sha256": "ddb0377a3f79d372d11f7125d27dca25343f7140c2e53b0d4e4d4f3fa05ae057"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/Program.cs",
+        "sha256": "47a429137396e91470a0fe4436f2e6b2beed9266331867ad61c6d7cbde4b9d8b"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/README.md",
+        "sha256": "e8b8f148950f3cf9143ba30ea3583f8d0cf8ccf8a95ae53f1e66f6c3d4ee6d69"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj",
+        "sha256": "e8cb6291dc790964c4a153ec2eadbdc07073ef01eff136edade3778e99d2f35d"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/artifacts.json",
+        "sha256": "c22fe6328be893e0a94d5a909a886d61515b390895992e779394ef2fd5ebd1b9"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/bind-artifacts.py",
+        "sha256": "76519c378bdf9fb60a86ab927c32fa239daebb5de4311fecb6ab847f3db79f77"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/build.log",
+        "sha256": "215c83a65f41de5f2f02e583e807f4a3b9c21c6295ab1b7a46737e5caf650962"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/execution.json",
+        "sha256": "9bac9015861877971bfc8e8ac8a9ab86fcf49a4ef32896683b6a90983b7548c5"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/execution.log",
+        "sha256": "287e10795246626124d4f213f3986d1b7aef3682f1f773fd486357259b5cf3c4"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/format-write.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/golden-oracle.py",
+        "sha256": "dc6853e0fedc473ec42f6e8cd715db4d4446f60e49e1365c6e19a79922bd6415"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/golden-provenance.json",
+        "sha256": "bcb1305bae63c677ba23bec611067f99a0745dbe9d41fa6e6d8bc65cff99a790"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/html-golden-provenance.json",
+        "sha256": "18a543c6011f6343c1419052719976e5cefa37c3475d016e022cafec1570f7af"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/html-oracle.py",
+        "sha256": "72920413e26e9dc8181cc12cf2a880b28dce6b93d1a814d7ce47821116517a35"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/packages.lock.json",
+        "sha256": "61f9f6e8443f279b178f19e82e2dc81836f76220f4aeae319a19a6692744ef03"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/packet-golden.json",
+        "sha256": "ddfa6758fdf5aead7b315579cf210952cbde8b9ae832e8e755df9a37f58a7fa0"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/packet-input.json",
+        "sha256": "b6fcc1ad68879ba80fcca1e19cfe1f05493d250008abc07ca7ac6e3c92c5e81c"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/preview-golden.html",
+        "sha256": "55fd622c1947684578c132f97a7150ae0158865c475087d69aa479a252502806"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/preview-golden.json",
+        "sha256": "0d7c49c25f11a8a61f76a6af0787f9ccbe9c9b9bfb1c268232835809448fad7e"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/proposal-golden.json",
+        "sha256": "7153e797474d619bc96bcb93581574b1fa7899d0642995bed188b55abd25fef9"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/provider-output.json",
+        "sha256": "f534e84d23a33d575c70f37ba6a772c6b4c4a96516e42510bf2e054b791308fc"
+      },
+      {
+        "path": "tests/integration/SyntheticAiPreview.Tests/restore.log",
+        "sha256": "0b542702c4c9466df4dfdc2473f4e6c3f086666c4a1d29065a89ceabbc565a9f"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/README.md",
+        "sha256": "bdf49bd7e30b600d80579acd42e0b70ca46cc60f979a138f36e00282c670e5b8"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/artifacts/actual-component.html",
+        "sha256": "1aae4d20776163739233c0506db492716bb4681e5abc1e3e420332a9a6ab41e7"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/artifacts/component.mjs",
+        "sha256": "f4e70b04798a164d0cf48c3c315f68c03e69320922de8d1bb84db06bee9ef721"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/execution.json",
+        "sha256": "391e7bb10f3fbc72c5b1718b16e057cf469868dc776ab1bb622cea4c67a83e71"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/execution/build-drift.log",
+        "sha256": "e8eac81d9cd53058e09439d77ce6f88228dd0a874802c752f8bfd1539e731394"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/execution/checks.log",
+        "sha256": "1d772cd3ac29693e0ef1b8305fdb126df125f9e8517dbbe43fa43bb291abbd13"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/execution/npm.log",
+        "sha256": "e260aa0acd4c548295536d1998ea93167864338bbad5b895b04d8dd5d5d0cd33"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/execution/secrets.log",
+        "sha256": "36c7d907967094cc9d3c76d21951d7d9cbba27a59c958c23c885d5486cbbfa23"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/fixture.json",
+        "sha256": "ddfe3f91dca52793501e3773712f8e3602a7855d39a699cf72a538eb9b997e99"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/golden-component.html",
+        "sha256": "1aae4d20776163739233c0506db492716bb4681e5abc1e3e420332a9a6ab41e7"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/golden-component.sha256",
+        "sha256": "680a23cfd808d827a9b7f9510fc11eafa5ef1d1b6d96da18e6d16e6c6dac923d"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/oracle.py",
+        "sha256": "54b7b22b463141948cab0cfec8520a863ff0d6382a29dce9bd1b86d6707f59c6"
+      },
+      {
+        "path": "tests/unit/AiProposalPreview.Tests/verify.mjs",
+        "sha256": "4b1a3a6a7b7922572a6fc6e2029005b85a02e36dac4314ef25562cf429f783db"
+      },
+      {
+        "path": "tests/unit/AssessmentRuns.Tests/Program.cs",
+        "sha256": "9b8db70b8ec469787aec14008aa3d2ba33f028f4ca84c0eb5cd73c5321e4727b"
+      },
+      {
+        "path": "tests/unit/BffFoundation.Tests/packages.lock.json",
+        "sha256": "d17404eea911f7dbacc039b72c57dc0bf7abddfdf2e57c95cfaef0f9622c74ab"
+      },
+      {
+        "path": "tests/unit/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj",
+        "sha256": "e69ce459278635007febe6c0b51d731f22b2077c38ea45ef1ee1be1f587b47a8"
+      },
+      {
+        "path": "tests/unit/IdentityAuthority.Tests/Program.cs",
+        "sha256": "7380224cdb9cfb0cebbbd1a84ca6f0ea149796dd0f64d5fdd622563d049c1627"
+      },
+      {
+        "path": "tests/unit/IdentityAuthority.Tests/README.md",
+        "sha256": "a97f9fcc23449b681aa6c17a08525a121f9c857eb4a844370dd4d67e1bcff0f3"
+      },
+      {
+        "path": "tests/unit/IdentityAuthority.Tests/packages.lock.json",
+        "sha256": "d08f970c2cae33e982d1e21cc82d94aa8c97ca7f617286d2a33175a4eb61a05c"
+      },
+      {
+        "path": "tests/unit/IdentitySessions.Tests/Program.cs",
+        "sha256": "106263227d80e30af60d5e98513d2e25df4b67a354c93ef20ca149ec6219a8b8"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj",
+        "sha256": "30ed34f50d062a51938b98c5a0767d175ebdc6a8e51e2577ef5d7d081c8ee7e6"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/Program.cs",
+        "sha256": "3ae97b487028f55493b9076aa9d56a7bb94be001c2f427dea00edca19d846374"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/README.md",
+        "sha256": "570421d5a1207306ae1f7fe712a0b77690e0496512928b347e9e6a4ed1237188"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution.json",
+        "sha256": "43b57dc7d5824d60a8d64aeffd0e779361b56715dc6b1f038084754723e65502"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/audit.log",
+        "sha256": "4a682240f1c3bc93c755d585ea879c2eb944d568ba8649dde77603e660ec5736"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/build.log",
+        "sha256": "441425be3f613a1f20534c73a97f69a569c012cfead95b9cc4b8d425085d2ffc"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/format-apply.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/oracle.log",
+        "sha256": "e5066b38d3c9b950b02b0563984e8250a1bacfd0e1778f932dec18d66c316161"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/restore.log",
+        "sha256": "4b3e2ec86ad546682669385ba47b2b5c53b2f542928be6e8e8729e9406fbcd59"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/run.log",
+        "sha256": "cc3df51c9366884c57d459d49bcfebf8afa969ff6711a2c551da6255316064fa"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/execution/secrets.log",
+        "sha256": "050312d95f3ba3093e3790e08972611c820e665ec3e8fdeba5a6c5fb997aa1c6"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-empty-preview.json",
+        "sha256": "5ac2bc21ecb5cb7ba36f72e9ab13f1dde6638071688aabdd021a6087a8e6c739"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-empty-versions.json",
+        "sha256": "6a0610c07a35d46943daeebeb1bf17b233c5e45f33396b1bd19477dc3624e1b3"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-historical-comparison.json",
+        "sha256": "ad033f5b93e1cd6f9445d2e4d8358a7d7fbf7492ddbdb1ea74c0279436f4c19e"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-historical-standard.json",
+        "sha256": "ed5be03d65fa30b32a7da1517365e394f411b711e2a323bf73af4bf69a2933d6"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-manifest.json",
+        "sha256": "90f1d16c648fa0903964ff423383c564c75dbee956c8db2d565d69e526cf2045"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-normal-preview.json",
+        "sha256": "3dcbeb6743661432d106d0753c6e7f130f2638a1dfc53ca9c72bd00b5e3ad7f3"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-normal-versions.json",
+        "sha256": "637d3d5749fdd8755bdc8c09a8ed7c700d2d0d5d7ba41cc6c10a9ea1e093b66d"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-plan.json",
+        "sha256": "2341b4938a76f90740dc22eb523c0f7edafa1c0bc9994a8d99b14950d167004a"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/golden-summary.json",
+        "sha256": "b8409c43a43fccd568067c58c275e8beb7907e790dc2a2b2e8318c1acc44e02e"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/oracle.py",
+        "sha256": "d1fb789fad89a54fcda763530d8e102ca8b00d2f64670577c267ec2e57f99248"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/packages.lock.json",
+        "sha256": "92953a1ccb3119ba843a2f5fcdcd50025f57c44cde6de280411f9b27a38f925c"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/Program.cs",
+        "sha256": "b88f436b05de5e45cd9dbdbbcdc9f25dc983a8c636c2d384465d03515a1ed24b"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/README.md",
+        "sha256": "6d4106978967be2239cbf30b0532533bcffa613635a6ad706fc42fc1ba5c7cda"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj",
+        "sha256": "ab5a256a484a9ab5093fdfbb0e5bf1b878f073a5e027212b573b10a0f425d083"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/execution.json",
+        "sha256": "b70f1550622b3b223f9a511e46001cd97c6f80749ca98d5a64f73de75cc0ab61"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/execution/build.log",
+        "sha256": "2698bc7f396aee6b73360fad34fbd1a0aecc1dc13d99d4943ea86cc24be3ee24"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/execution/format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/execution/restore.log",
+        "sha256": "3a42c4728abd8b4974744a9b8f96dc85d6853d8d700b2bc38380c1e2ac6097d7"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/execution/run.log",
+        "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/execution/secrets.log",
+        "sha256": "81d4e648bb87f0b80d2e3ddb60123682986974fa2da93ecab3a5410902f0e2fb"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/fake-output.json",
+        "sha256": "2df034bbb212614957453014733b044ed1ccc8c0356d3066e516448074ee1f20"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/golden-digest.txt",
+        "sha256": "1009115a62953adcaac3d939c8e4c7e2498af57d220993c281c6ade9cef5c949"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/golden-packet.json",
+        "sha256": "eaceb95394275e655328cf2033d3237a4f060234ad317f19643586e8e7077415"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/golden-preview.json",
+        "sha256": "c5439fef93a3c2c6e59efb5f54780ba79b4961ccf31a01dcaae414882a83a1dd"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/golden-proposal.json",
+        "sha256": "7a79c4d1dc2c75b6099f0fd9e213a8710c9c869ea2233f67157cd4acf348f9c0"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/packages.lock.json",
+        "sha256": "61f9f6e8443f279b178f19e82e2dc81836f76220f4aeae319a19a6692744ef03"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreview.Tests/packet-input.json",
+        "sha256": "86ddda99d6e325c47e494d417c35f3c6590c244f59988b9b17c1bfcff974d3ac"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/Program.cs",
+        "sha256": "98746232563e0a6412d1795c91e40eae79aa03382459e82d8786abe0440c76e6"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/README.md",
+        "sha256": "bb743028bc61acf52e0d55b5718d7349996a3d7512502e676ae4a7eee8f095ed"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/SyntheticAiPreviewHtml.Tests.csproj",
+        "sha256": "c3fcb3b5c18de0fd64087bcc45648a662e74ee63ee4baf66c515dcfea3556e0a"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/execution-checks.log",
+        "sha256": "514bc3d212b880573433a9e0f12a244157387d282885a44cea5769711360b12a"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/execution-format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/execution-secrets.log",
+        "sha256": "58cc4cbc260b49be6dbd9a3e4a99dd778e0f12a5731eeced03bb40993c00a3cc"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/execution.json",
+        "sha256": "21d299f6d649eea3bdb7a59a8baf6bf92279c99add696c370d36d66bbdd61f02"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.html",
+        "sha256": "91b9aa245a17ac8b3b4a279a0c0c34b7346ff35c93513f94ef34736e4cda292c"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.json",
+        "sha256": "7e885e2690b24304a2ab45b7ef51f5aa298d8be94a99aa1b1670653bab9c0f9d"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/golden-preview.sha256",
+        "sha256": "c71e0bdc96ede6420099eb252271fa410177bc2a298be7e79a095eb3c6631540"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/oracle.py",
+        "sha256": "5c480af892e0a8fd34d4852c118d1b55b174e0e3468fe60a725e4de62d4727ed"
+      },
+      {
+        "path": "tests/unit/SyntheticAiPreviewHtml.Tests/packages.lock.json",
+        "sha256": "61f9f6e8443f279b178f19e82e2dc81836f76220f4aeae319a19a6692744ef03"
+      }
+    ],
+    "bindingSerialization": "223 unchanged exact file/digest pairs represented as records; initial map associated secrets.log path labels with adjacent digests and triggered six generic-key false positives; scanner stays enabled with no exception"
+  },
+  "checks": {
+    "authorityUnit": {
+      "result": "PASS",
+      "count": 87,
+      "executor": "author"
+    },
+    "authorityPostgreSql": {
+      "result": "PASS",
+      "count": 120,
+      "executor": "author",
+      "engine": "PostgreSQL 18.4, separate restricted LOGINs"
+    },
+    "auditUnit": {
+      "result": "PASS",
+      "count": 69,
+      "executor": "author"
+    },
+    "auditPostgreSql": {
+      "result": "PASS",
+      "count": 81,
+      "executor": "author"
+    },
+    "existingSessionPostgreSql": {
+      "result": "PASS",
+      "count": 126,
+      "executor": "audit author before SQL-only followups"
+    },
+    "independentCompositionPostgreSql": {
+      "result": "PASS",
+      "count": 258,
+      "executor": "non-author",
+      "exactDependencies": "final authority/audit corrections + bridge4202ab8"
+    },
+    "hostingHttpsFrameworkProtection": {
+      "result": "PASS",
+      "count": 60,
+      "executor": "coordinator and independent reviewer",
+      "limits": "synthetic storage/wrapping, not Azure providers or conditional writes"
+    },
+    "solution": {
+      "result": "PASS",
+      "projects": 63,
+      "lockedAuditedRestore": true,
+      "wholeFormat": true,
+      "releaseBuildWarnings": 0,
+      "releaseBuildErrors": 0
+    },
+    "portableUnitsAndArchitecture": "PASS all integrated unit executables plus7 policy/4 scan architecture checks",
+    "inertHostProcess": {
+      "result": "PASS",
+      "count": 254,
+      "limits": "local actual process; Docker in hosted CI pending"
+    },
+    "imageCollectorFixtures": {
+      "result": "PASS",
+      "count": 14
+    },
+    "exactContainerInputs": "PASS including all embedded migrations and required sources/locks",
+    "secretScan": "PASS Gitleaks8.30.1 no leaks; redacted whole checkout",
+    "gitWhitespace": "PASS",
+    "hostedConfiguredChecks": "PASS full configured Linux, Windows2022/2025, actualPG/HTTPS/all browser/frontend/component/architecture/security/infrastructure, actualDocker/process/package/inventory checks",
+    "independentlyRepeatedAuditPostgreSql": {
+      "result": "PASS",
+      "count": 81,
+      "executor": "non-author repeat of author corpus, separate from own258 checks"
+    },
+    "postMergePortableUnitsAndArchitecture": "PASS all63-project integrated unit executables and architecture checks"
+  },
+  "review": {
+    "result": "PASS no remaining validated source findings",
+    "record": "bff-local-authority-audit-review-20261002.md",
+    "authorityNonAuthor": "production_hosting_proposal",
+    "auditAndBridgeNonAuthor": "production_identity_proposal",
+    "compositionAndHostNonAuthor": "auth_transport",
+    "additiveMerge": {
+      "result": "PASS",
+      "commit": "2e977394d180eee0a5527107cca2be8f0479e9d0",
+      "nonAuthor": "auth_transport",
+      "preservedBffBlobs": 113,
+      "preservedPilotBlobs": 550,
+      "configuration": "exact project union; existing steps preserved; only documented additive BFF frontend commands/ignore differ; dependencies and engines unchanged"
+    },
+    "auditFixtureCorrection": {
+      "result": "PASS source review; no runtime/policy change",
+      "nonAuthor": "auth_transport",
+      "execution": "author81PG + final hosted Linux81PG PASS"
+    }
+  },
+  "corrections": [
+    "same-transaction authority admission and consistent advisory/row/target/head lock order",
+    "post-head trusted timestamp and deadline resampling",
+    "strict enum/canonical field/byte/bounded64 receipt/event binding",
+    "SESSION_USER stream/action event and receipt authority",
+    "SQL command/provider digest recomputation",
+    "trusted nonfuture lifecycle/receipt/checkpoint timestamps",
+    "provider-callback compatibility under ingress contract",
+    "whole-solution formatting after ineffective include filters",
+    "prepared fixture async lambda and unsupported parameterized multiple statements",
+    "GitHub PR conflict against newly advanced approved pilot base: shared solution and canonical records require additive integration; configured CI not yet runnable",
+    "Linux audit positive lifecycle boundary was deterministically reproduced by forcing seventh fractional digit7. Fixture a320876 derives twelve-month ±one-microsecond and restored time from persisted PostgreSQL event_at_utc;81PG passed. Runtime/migration/retention policy unchanged."
+  ],
+  "calibration": [
+    "Fractional rounding allegation disproven: PostgreSQL text-to-bigint rejects fractions. Explicit guards/direct negatives retain closed-wire proof.",
+    "Simulated acknowledgment loss deliberately discards successful COMMIT response; actual TCP failure remains NOT VERIFIED."
+  ],
+  "migrations": [
+    "identity-sessions/003-atomic-audit.sql after001/002",
+    "identity-authority/001-authority.sql after sessions003; manual controlled executor only"
+  ],
+  "configuration": "Opt-in bridge and fixed proxy/key seams only. Disabled Program unchanged, no live grants/providers/enrollment/paid session/new retention policy.",
+  "hostedRuns": [
+    {
+      "id": 37052401010,
+      "result": "FAILED",
+      "scope": "Linux audit fixture exact12mo precision; Windows2022/2025 PASS",
+      "source": "2e977394d180eee0a5527107cca2be8f0479e9d0"
+    },
+    {
+      "id": 37052401131,
+      "result": "PASS",
+      "scope": "both actual bootstrap/BFF nonroot readonly Docker/process/templates and BFF pinned vulnerability/license/SPDX +14fixtures",
+      "source": "2e977394d180eee0a5527107cca2be8f0479e9d0"
+    },
+    {
+      "id": 37053078322,
+      "result": "PASS",
+      "scope": "full configured Linux/Windows2022/2025, PG/HTTPS, all browser/frontend/component/architecture/security/infrastructure gates",
+      "source": "ba8de419f867487abd56d0e6a9c4519131fe37f8"
+    },
+    {
+      "id": 37053078545,
+      "result": "PASS",
+      "scope": "both actual bootstrap/BFF Docker/process/templates/inventory checks",
+      "source": "ba8de419f867487abd56d0e6a9c4519131fe37f8"
+    }
+  ],
+  "privateSite": {
+    "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "status": "SUCCEEDED",
+    "audience": "existing owner only; one owner, zero groups/visitors",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "siteSource": "3c4a4f20cfbc699afab0eaf80cc1eeb8d95079b6",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_67de8bf82c28819180ac7c66b6a14e09",
+    "deploymentId": "appgdep_6ac00b0f39c08191b27245c26abc03b4",
+    "confirmedAt": "2026-10-02T19:50:45.775370+00:00",
+    "canonicalSnapshot": "4346e0f719e4ee1b0d3560c0c9b962bf87e05587",
+    "checks": "72 immutable Git blob link targets and historical-alert fragment PASS;11 cards and all concurrent Cycle11 content preserved; prior desktop/mobile/320px layout checks remain applicable to the same layout",
+    "concurrency": "initial push rejected; fresh source3c53c19 reopened, scoped delta reapplied, no history overwritten",
+    "reviewTask": "protected live bindings and technical/security disposition of six independently reproduced historical digest alerts before any future merge"
+  },
+  "notVerified": [
+    "live Graph/property/direct app-role/home origin semantics",
+    "licensed users/Conditional Access/federation",
+    "deployed private reachability/DNS/certificate/proxy",
+    "Azure shared keys, SDK conditional writes, managed identities/history/recovery",
+    "actual SQL ownership/grants/migration/negative tests",
+    "retained witness/lifecycle tombstone authority against privileged operator",
+    "durable audit-store-outage failure preservation",
+    "live retention/backup/restore and actual network unknown COMMIT",
+    "image finding/license acceptance/provenance/private pull/restricted evidence promotion",
+    "refreshed priced Azure session",
+    "Milestone2, G1–G9 and production release"
+  ],
+  "cleanup": {
+    "workerCheckouts": "three clean owned temporary checkouts removed after all commits integrated; branches/evidence preserved",
+    "postgres": "owned author/reviewer disposable clusters stopped, shared cluster untouched",
+    "remainingCheckout": "coordinator integration retained for human review",
+    "preview": "owned local preview tab closed, viewport reset and HTTP58561 stopped; coordinator checkout retained"
+  },
+  "metadataClosureChecks": {
+    "source": "64d497dcdebc0dfa8d8812f7f27406cbe3993495",
+    "initialMetadataSource": "02dc25b0898e5145802dc288b5e8fad9cb9b58ee",
+    "initialMetadataBootstrap": {
+      "run": 37054510685,
+      "result": "FAILED secrets scan only; all later Linux steps skipped; Windows passed"
+    },
+    "initialMetadataPackage": {
+      "run": 37054510809,
+      "result": "PASS"
+    },
+    "confirmedFalsePositiveLines": [
+      96,
+      147,
+      184,
+      208,
+      228,
+      241
+    ],
+    "gitGuardianIncidents": [
+      37821444,
+      37821442,
+      37821443,
+      37821441,
+      37821440,
+      37821445
+    ],
+    "classification": "All six reported locations are exact SHA256 digests of the named secrets.log Git blobs at ba8de41, independently recomputed. They are not credentials. File/digest records replace the map, preserving all223 original bindings with no scan exception or suppression. Historical provider incident status has not been changed.",
+    "local": "JSON/diff/whole-checkout Gitleaks8.30.1 PASS;223 exact Git blobs reproduced;137 affected doc links and71 final board immutable targets PASS",
+    "bootstrap": {
+      "run": 37055694762,
+      "result": "IN PROGRESS; Windows2022/2025 passed; Linux passed secrets, restore, format, build and local BFF actual PostgreSQL/HTTPS before browser regressions"
+    },
+    "package": {
+      "run": 37055694798,
+      "result": "PASS"
+    },
+    "remainingExternalCheck": "GitGuardian Security Checks110999704920 still fails on the six historical02dc25b digest occurrences. No incident suppression, history rewrite or security check bypass performed. Technical/security review must record their false-positive dispositions before any future merge; merge remains outside this local authorization."
+  },
+  "firstPrivatePublication": {
+    "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "status": "SUCCEEDED",
+    "audience": "existing owner only; one owner, zero groups/visitors",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "siteSource": "6c91a022eb2f0fbaca3bcaef483729aece79b9c4",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_ca08531ec7b08191b400edc816cd7b98",
+    "deploymentId": "appgdep_6ac00823db5c8191a6a63debb43e28f2",
+    "confirmedAt": "2026-10-02T19:38:18.614757+00:00",
+    "canonicalSnapshot": "02dc25b0898e5145802dc288b5e8fad9cb9b58ee",
+    "checks": "71 immutable repository link targets;11 task cards; desktop1365/mobile390/narrow320 no horizontal overflow; scoped BFF panel/task/snapshot only; all unrelated concurrent Cycle11 board content preserved",
+    "concurrency": "initial push rejected; fresh source3c53c19 reopened, scoped delta reapplied, no history overwritten"
+  },
+  "finalMetadataHostedChecks": {
+    "source": "d51349a0bedc5299f990ba2b759dc4bd3eb29242",
+    "bootstrap": {
+      "run": 37056853245,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "package": {
+      "run": 37056853227,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "scope": "Configured developer checks; does not accept live gates or external historical GitGuardian incidents"
+  }
+}

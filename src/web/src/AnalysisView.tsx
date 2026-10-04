@@ -9,7 +9,9 @@ import type {
   PlanningTaskDetail,
 } from './demo-contract.generated';
 import { request } from './api';
+import type { WorkspaceView } from './WorkspaceNavigation';
 import { ReviewPanel } from './ReviewPanel';
+import { FindingsExplorer, initialExploration } from './FindingsExplorer';
 import { MaturityView } from './MaturityView';
 import { DraftReportView } from './DraftReportView';
 import { RecommendationGuidanceView } from './RecommendationGuidanceView';
@@ -30,7 +32,9 @@ export function AnalysisView({
   csrfToken,
   artifactDrafts,
   planningTaskDrafts,
+  workspaceView = 'Assessments',
 }: {
+  workspaceView?: WorkspaceView;
   run: RunDetail;
   csrfToken: string;
   artifactDrafts: RefObject<Record<string, ArtifactReviewDraft>>;
@@ -40,6 +44,7 @@ export function AnalysisView({
   const [failed, setFailed] = useState(false);
   const [retry, setRetry] = useState(0);
   const [notice, setNotice] = useState<string | null>(null);
+  const [exploration, setExploration] = useState(initialExploration);
   const heading = useRef<HTMLHeadingElement>(null);
   const retryFocus = useRef<string | null>(null);
   const readEpoch = useRef(0);
@@ -81,7 +86,17 @@ export function AnalysisView({
     artifactFocus.current = null;
     taskFocus.current = null;
     setNotice(null);
+    setExploration(initialExploration);
   }, [run.runId]);
+  useEffect(() => {
+    if (response?.status === 'Ready')
+      setExploration((previous) =>
+        previous.selectedId &&
+        !response.findings.some((finding) => finding.id === previous.selectedId)
+          ? { ...previous, selectedId: null }
+          : previous,
+      );
+  }, [response]);
   useEffect(() => {
     const controller = new AbortController();
     const epoch = ++readEpoch.current;
@@ -144,24 +159,38 @@ export function AnalysisView({
     return () => controller.abort();
   }, [run.runId, run.revision, run.state, retry]);
   useEffect(() => {
+    const focusVisible = (target: HTMLElement | null | undefined) => {
+      const fallback = document.querySelector<HTMLElement>(
+        workspaceView === 'Settings'
+          ? '#configuration-heading'
+          : workspaceView === 'Reports'
+            ? '.draft-report'
+            : '#findings-heading',
+      );
+      const visible = target?.getClientRects().length ? target : fallback;
+      if (visible) {
+        visible.tabIndex = -1;
+        visible.focus();
+      }
+    };
     if ((response || unavailableTasks) && taskFocus.current) {
       const id = taskFocus.current;
-      (
+      focusVisible(
         document.getElementById(`planning-task-error-${id}`) ??
-        document.getElementById(`planning-task-${id}`) ??
-        document.getElementById('planning-tasks-heading')
-      )?.focus();
+          document.getElementById(`planning-task-${id}`) ??
+          document.getElementById('planning-tasks-heading'),
+      );
       taskFocus.current = null;
     }
     if (response && artifactFocus.current) {
       const target = document.getElementById(`artifact-review-${artifactFocus.current}`);
       const error = document.getElementById(`artifact-review-error-${artifactFocus.current}`);
-      (error ?? target ?? document.getElementById('artifact-review-heading'))?.focus();
+      focusVisible(error ?? target ?? document.getElementById('artifact-review-heading'));
       artifactFocus.current = null;
     }
     if (response && retryFocus.current) {
       if (response.runId === retryFocus.current) {
-        if (response.status === 'Ready') heading.current?.focus();
+        if (response.status === 'Ready') focusVisible(heading.current);
         else if (response.aiPreview)
           document.getElementById('ai-proposal-preview-heading')?.focus();
         else if (response.fixPackages)
@@ -169,7 +198,7 @@ export function AnalysisView({
       }
       retryFocus.current = null;
     }
-  }, [response, unavailableTasks]);
+  }, [response, unavailableTasks, workspaceView]);
   if (run.state !== 'Scoring') return null;
   if (!response || response.runId !== run.runId || response.runRevision !== run.revision) {
     return (
@@ -222,269 +251,265 @@ export function AnalysisView({
   }
   return (
     <section className="analysis-view subsection" aria-labelledby="analysis-heading">
-      <p className="eyebrow">Deterministic analysis · synthetic fixtures</p>
-      <h3 id="analysis-heading" tabIndex={-1} ref={heading}>
-        Findings and reproducible health calculations
-      </h3>
       {notice && (
         <p role="status" className="field-note">
           {notice}
         </p>
       )}
-      <p className="field-note">
-        These are local calculations from fixed synthetic evidence. The publishable-current
-        calculation is not a published report. Review and maturity, when available, use frozen
-        fictional fixtures; live assessment remains pending.
-      </p>
-      <div className="analysis-score-grid">
-        <Score label="Provisional health" score={response.provisional!} />
-        <Score label="Publishable-current health" score={response.publishableCurrent!} />
-      </div>
-      {!!response.warnings.length && (
-        <div className="warning-note" role="note">
-          <h4>Review and interpretation warnings</h4>
-          <ul>
-            {response.warnings.map((warning, index) => (
-              <li key={index}>{warning}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <p className="field-note">
-        Pass earns its full rule weight. Findings reduce health using the saved severity policy.
-        Proposed Critical/High findings affect only provisional health until reviewed. Gaps reduce
-        coverage, not default health. Categories without eligible units are not assessed; remaining
-        category weights are renormalized separately for each calculation.
-      </p>
-      <div
-        className="table-scroll"
-        tabIndex={0}
-        role="region"
-        aria-label="Category health calculations"
-      >
-        <table>
-          <caption>Category health and effective weights</caption>
-          <thead>
-            <tr>
-              <th scope="col">Category</th>
-              <th scope="col">Provisional</th>
-              <th scope="col">Publishable-current</th>
-              <th scope="col">Effective weights</th>
-            </tr>
-          </thead>
-          <tbody>
-            {response.categories.map((item) => (
-              <tr key={item.id}>
-                <th scope="row">{item.id}</th>
-                <td>{scoreText(item.provisional)}</td>
-                <td>{scoreText(item.publishableCurrent)}</td>
-                <td>
-                  {item.provisionalWeight ?? 'Not assessed'} /{' '}
-                  {item.publishableWeight ?? 'Not assessed'}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <details className="locked-inputs">
-        <summary>Health by module, object type and approved fixture outcome</summary>
-        <Dimension label="Installed modules" rows={response.modules} />
-        <Dimension label="Object types" rows={response.objectTypes} />
-        <Dimension label="Approved synthetic outcome fixtures" rows={response.outcomes} />
+      <div hidden={workspaceView !== 'Assessments'}>
+        <p className="eyebrow">Deterministic analysis · synthetic fixtures</p>
+        <h3 id="analysis-heading" tabIndex={-1} ref={heading}>
+          Findings and reproducible health calculations
+        </h3>
         <p className="field-note">
-          An outcome fixture flag demonstrates the approved scoring boundary; it does not record
-          customer approval. The same unit may appear in these views without being duplicated in
-          overall health.
+          These are local calculations from fixed synthetic evidence. The publishable-current
+          calculation is not a published report. Review and maturity, when available, use frozen
+          fictional fixtures; live assessment remains pending.
         </p>
-      </details>
-      {response.quality && (
-        <section className="subsection">
-          <h4>Separate assessment quality</h4>
-          <dl className="count-list">
-            <div>
-              <dt>Executed applicable units</dt>
-              <dd>{response.quality.executedUnits}</dd>
-            </div>
-            <div>
-              <dt>Explained gaps</dt>
-              <dd>{response.quality.gapUnits}</dd>
-            </div>
-            <div>
-              <dt>Not applicable</dt>
-              <dd>{response.quality.notApplicableUnits}</dd>
-            </div>
-            <div>
-              <dt>Finding occurrences</dt>
-              <dd>{response.quality.totalFindingUnits}</dd>
-            </div>
-            <div>
-              <dt>Occurrences awaiting mandatory review</dt>
-              <dd>{response.quality.proposedReviewUnits}</dd>
-            </div>
-          </dl>
-          <p className="field-note">
-            Quality is not blended into the health score. Gap reasons and executable coverage remain
-            visible above.
-          </p>
-        </section>
-      )}
-      <section className="subsection">
-        <h4>Generated findings</h4>
-        {!response.findings.length ? (
-          <p>
-            No findings were generated by the executed fixture rules. Check coverage and limitations
-            before interpreting this result.
-          </p>
-        ) : (
-          response.findings.map((finding) => (
-            <article
-              className={`analysis-finding severity-${finding.severity.toLowerCase()}`}
-              key={finding.id}
-            >
-              <h4>{finding.title}</h4>
-              <p>
-                <strong>{finding.severity}</strong> · Deterministic · Confidence{' '}
-                {finding.confidencePercent}% · {finding.confidenceBand} · {finding.state}
-                {finding.reviewRequired ? ' · Mandatory review pending' : ''}
-              </p>
-              <p className="field-note">
-                {finding.category} · {finding.objectIds.length} affected synthetic objects ·{' '}
-                {finding.ruleId} / {finding.ruleVersion}
-              </p>
-              <details>
-                <summary>Read generated original and provenance</summary>
-                <p>
-                  <strong>Original title</strong>: {finding.originalTitle} · Initial state:{' '}
-                  {finding.initialState}
-                </p>
-                <p>
-                  <strong>Observed facts</strong>
-                </p>
-                <ul>
-                  {finding.facts.map((fact, index) => (
-                    <li key={index}>{fact}</li>
-                  ))}
-                </ul>
-                <p>
-                  <strong>Inference</strong>:{' '}
-                  {finding.inferences.join('; ') || 'None supplied by this deterministic fixture.'}
-                </p>
-                <p>
-                  <strong>Assumptions</strong>: {finding.assumptions.join('; ') || 'None supplied.'}
-                </p>
-                <p>
-                  <strong>Impact</strong>: {finding.impact}
-                </p>
-                <p>
-                  <strong>Root cause</strong>: {finding.rootCause}
-                </p>
-                <p>
-                  <strong>Root-cause key</strong>: {finding.rootCauseKey}
-                </p>
-                <p>
-                  <strong>Affected objects</strong>: {finding.objectIds.join(', ')}
-                </p>
-                <p>
-                  <strong>Evidence baseline</strong>: {finding.baselineId}
-                </p>
-                <p>
-                  <strong>Evidence references</strong>: {finding.evidenceReferences.join(', ')}
-                </p>
-                <p>
-                  <strong>Recommendation options</strong>
-                </p>
-                <ul>
-                  {finding.recommendations.map((item, index) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-                <p>
-                  <strong>Validation guidance</strong>: {finding.validationGuidance}
-                </p>
-                <p>
-                  <strong>Fixture rule sources</strong>: {finding.sources.join('; ')}
-                </p>
-                <p>
-                  <strong>Likelihood</strong>: {finding.likelihood}
-                </p>
-                <p>
-                  <strong>Limitations</strong>: {finding.limitations.join('; ')}
-                </p>
-                <p>
-                  <strong>Approved outcome links</strong>:{' '}
-                  {finding.outcomeIds.join(', ') ||
-                    'None; no customer outcomes are approved by this demo.'}
-                </p>
-                <p>
-                  <strong>Generated original digests</strong>: {finding.originalDigests.join(', ')}
-                </p>
-
-                <p className="field-note">
-                  The generated original is read-only. Available synthetic review actions appear
-                  below. Risk acceptance and closure remain unavailable.
-                </p>
-              </details>
-            </article>
-          ))
+        <div className="analysis-score-grid">
+          <Score label="Provisional health" score={response.provisional!} />
+          <Score label="Publishable-current health" score={response.publishableCurrent!} />
+        </div>
+        {!!response.warnings.length && (
+          <div className="warning-note" role="note">
+            <h4>Review and interpretation warnings</h4>
+            <ul>
+              {response.warnings.map((warning, index) => (
+                <li key={index}>{warning}</li>
+              ))}
+            </ul>
+          </div>
         )}
-      </section>
-      {response.review && (
-        <ReviewPanel
+        <p className="field-note">
+          Pass earns its full rule weight. Findings reduce health using the saved severity policy.
+          Proposed Critical/High findings affect only provisional health until reviewed. Gaps reduce
+          coverage, not default health. Categories without eligible units are not assessed;
+          remaining category weights are renormalized separately for each calculation.
+        </p>
+        <div
+          className="table-scroll"
+          tabIndex={0}
+          role="region"
+          aria-label="Category health calculations"
+        >
+          <table>
+            <caption>Category health and effective weights</caption>
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">Provisional</th>
+                <th scope="col">Publishable-current</th>
+                <th scope="col">Effective weights</th>
+              </tr>
+            </thead>
+            <tbody>
+              {response.categories.map((item) => (
+                <tr key={item.id}>
+                  <th scope="row">{item.id}</th>
+                  <td>{scoreText(item.provisional)}</td>
+                  <td>{scoreText(item.publishableCurrent)}</td>
+                  <td>
+                    {item.provisionalWeight ?? 'Not assessed'} /{' '}
+                    {item.publishableWeight ?? 'Not assessed'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <details className="locked-inputs">
+          <summary>Health by module, object type and approved fixture outcome</summary>
+          <Dimension label="Installed modules" rows={response.modules} />
+          <Dimension label="Object types" rows={response.objectTypes} />
+          <Dimension label="Approved synthetic outcome fixtures" rows={response.outcomes} />
+          <p className="field-note">
+            An outcome fixture flag demonstrates the approved scoring boundary; it does not record
+            customer approval. The same unit may appear in these views without being duplicated in
+            overall health.
+          </p>
+        </details>
+        {response.quality && (
+          <section className="subsection">
+            <h4>Separate assessment quality</h4>
+            <dl className="count-list">
+              <div>
+                <dt>Executed applicable units</dt>
+                <dd>{response.quality.executedUnits}</dd>
+              </div>
+              <div>
+                <dt>Explained gaps</dt>
+                <dd>{response.quality.gapUnits}</dd>
+              </div>
+              <div>
+                <dt>Not applicable</dt>
+                <dd>{response.quality.notApplicableUnits}</dd>
+              </div>
+              <div>
+                <dt>Finding occurrences</dt>
+                <dd>{response.quality.totalFindingUnits}</dd>
+              </div>
+              <div>
+                <dt>Occurrences awaiting mandatory review</dt>
+                <dd>{response.quality.proposedReviewUnits}</dd>
+              </div>
+            </dl>
+            <p className="field-note">
+              Quality is not blended into the health score. Gap reasons and executable coverage
+              remain visible above.
+            </p>
+          </section>
+        )}
+      </div>
+      <div hidden={!['Assessments', 'Findings', 'Evidence'].includes(workspaceView)}>
+        <FindingsExplorer
+          key={`explorer-${response.runId}`}
+          runId={response.runId}
+          dedicated={workspaceView !== 'Assessments'}
+          evidenceView={workspaceView === 'Evidence'}
+          findings={response.findings}
           review={response.review}
-          csrfToken={csrfToken}
-          onReload={(message) => {
-            ++readEpoch.current;
-            setNotice(message ?? 'Saved analysis refreshed.');
-            retryFocus.current = run.runId;
-            setResponse(null);
-            setRetry((value) => value + 1);
-          }}
+          guidance={response.recommendationGuidance}
+          exploration={exploration}
+          onChange={setExploration}
+          renderOriginal={(finding) => (
+            <details>
+              <summary>Read generated original and provenance</summary>
+              <p>
+                <strong>Original title</strong>: {finding.originalTitle} · Initial state:{' '}
+                {finding.initialState}
+              </p>
+              <p>
+                <strong>Observed facts</strong>
+              </p>
+              <ul>
+                {finding.facts.map((fact, index) => (
+                  <li key={index}>{fact}</li>
+                ))}
+              </ul>
+              <p>
+                <strong>Inference</strong>:{' '}
+                {finding.inferences.join('; ') || 'None supplied by this deterministic fixture.'}
+              </p>
+              <p>
+                <strong>Assumptions</strong>: {finding.assumptions.join('; ') || 'None supplied.'}
+              </p>
+              <p>
+                <strong>Impact</strong>: {finding.impact}
+              </p>
+              <p>
+                <strong>Root cause</strong>: {finding.rootCause}
+              </p>
+              <p>
+                <strong>Root-cause key</strong>: {finding.rootCauseKey}
+              </p>
+              <p>
+                <strong>Affected objects</strong>: {finding.objectIds.join(', ')}
+              </p>
+              <p>
+                <strong>Evidence baseline</strong>: {finding.baselineId}
+              </p>
+              <p>
+                <strong>Evidence references</strong>: {finding.evidenceReferences.join(', ')}
+              </p>
+              <p>
+                <strong>Recommendation options</strong>
+              </p>
+              <ul>
+                {finding.recommendations.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+              <p>
+                <strong>Validation guidance</strong>: {finding.validationGuidance}
+              </p>
+              <p>
+                <strong>Fixture rule sources</strong>: {finding.sources.join('; ')}
+              </p>
+              <p>
+                <strong>Likelihood</strong>: {finding.likelihood}
+              </p>
+              <p>
+                <strong>Limitations</strong>: {finding.limitations.join('; ')}
+              </p>
+              <p>
+                <strong>Approved outcome links</strong>:{' '}
+                {finding.outcomeIds.join(', ') ||
+                  'None; no customer outcomes are approved by this demo.'}
+              </p>
+              <p>
+                <strong>Generated original digests</strong>: {finding.originalDigests.join(', ')}
+              </p>
+
+              <p className="field-note">
+                The generated original is read-only. Available synthetic review actions appear
+                below. Risk acceptance and closure remain unavailable.
+              </p>
+            </details>
+          )}
         />
-      )}
-      <DraftReportView key={response.runId} report={response.reportDraft} />
-      <RecommendationGuidanceView
-        key={`guidance-${response.runId}`}
-        guidance={response.recommendationGuidance}
-      />
-      <AiProposalPreview preview={response.aiPreview} run={run} />
-      <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
-      <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
-      <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
-      {response.maturity && <MaturityView maturity={response.maturity} />}
-      <details className="locked-inputs">
-        <summary>Analysis versions and content digests</summary>
-        <dl>
-          <div>
-            <dt>Health algorithm</dt>
-            <dd>{response.algorithmVersion}</dd>
-          </div>
-          <div>
-            <dt>Frozen fixture contents</dt>
-            <dd>
-              <code>{response.fixtureDigest}</code>
-            </dd>
-          </div>
-          <div>
-            <dt>Reproducible analysis result</dt>
-            <dd>
-              <code>{response.contentDigest}</code>
-            </dd>
-          </div>
-          {response.reviewSnapshotDigest && (
+      </div>
+      <div hidden={!['Assessments', 'Findings', 'Evidence'].includes(workspaceView)}>
+        {response.review && (
+          <ReviewPanel
+            review={response.review}
+            csrfToken={csrfToken}
+            onReload={(message) => {
+              ++readEpoch.current;
+              setNotice(message ?? 'Saved analysis refreshed.');
+              retryFocus.current = run.runId;
+              setResponse(null);
+              setRetry((value) => value + 1);
+            }}
+          />
+        )}
+      </div>
+      <div hidden={!['Assessments', 'Reports'].includes(workspaceView)}>
+        <DraftReportView key={response.runId} report={response.reportDraft} />
+      </div>
+      <div hidden={workspaceView !== 'Assessments'}>
+        <RecommendationGuidanceView
+          key={`guidance-${response.runId}`}
+          guidance={response.recommendationGuidance}
+        />
+        <AiProposalPreview preview={response.aiPreview} run={run} />
+        <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
+        <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
+        <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
+        {response.maturity && <MaturityView maturity={response.maturity} />}
+        <details className="locked-inputs">
+          <summary>Analysis versions and content digests</summary>
+          <dl>
             <div>
-              <dt>Reviewed snapshot</dt>
+              <dt>Health algorithm</dt>
+              <dd>{response.algorithmVersion}</dd>
+            </div>
+            <div>
+              <dt>Frozen fixture contents</dt>
               <dd>
-                <code>{response.reviewSnapshotDigest}</code>
+                <code>{response.fixtureDigest}</code>
               </dd>
             </div>
-          )}
-        </dl>
-        <p className="field-note">
-          Exact saved input locks and canonical coverage results determine this read-only analysis.
-          Later fixture changes are refused rather than substituted.
-        </p>
-      </details>
+            <div>
+              <dt>Reproducible analysis result</dt>
+              <dd>
+                <code>{response.contentDigest}</code>
+              </dd>
+            </div>
+            {response.reviewSnapshotDigest && (
+              <div>
+                <dt>Reviewed snapshot</dt>
+                <dd>
+                  <code>{response.reviewSnapshotDigest}</code>
+                </dd>
+              </div>
+            )}
+          </dl>
+          <p className="field-note">
+            Exact saved input locks and canonical coverage results determine this read-only
+            analysis. Later fixture changes are refused rather than substituted.
+          </p>
+        </details>
+      </div>
     </section>
   );
 }

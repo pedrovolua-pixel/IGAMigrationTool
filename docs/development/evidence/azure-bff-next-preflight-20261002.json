@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "azure-bff-preflight-v1",
+  "date": "2026-10-02",
+  "status": "READ_ONLY_PREFLIGHT_COMPLETE_LIVE_DEPLOYMENT_NOT_READY",
+  "reviewedRepositorySource": "d51349a0bedc5299f990ba2b759dc4bd3eb29242",
+  "readOnlyReview": {
+    "reviewer": "auth_transport",
+    "scope": "Exact-source readiness and stale canonical records; no runtime execution or cloud mutation",
+    "result": "Verified bounded local components; production host, adapters, bindings and BFF deployment composition absent"
+  },
+  "portalObservations": {
+    "currency": "USD",
+    "month": "2026-10",
+    "subscriptionActual": 0.35,
+    "subscriptionForecast": 5.09,
+    "pilotGroupActual": 0.22,
+    "pilotGroupResourceCount": 0,
+    "inventoryFilters": "Type=all; Location=all; empty search",
+    "providerManagedGroup": "Absent from displayed subscription scope list; soft-delete/provider state not comprehensively verified",
+    "pilotGroupBudget": {
+      "monthly": 50,
+      "evaluatedSpend": 0.22
+    },
+    "aggregatePilotBudget": {
+      "monthly": 50,
+      "evaluatedSpend": 0
+    },
+    "limitations": "Usage and budget evaluation delayed; subscription includes unrelated workloads; no remaining allowance or hard cap inferred; no budget edited",
+    "observedDateUtc": "2026-10-02",
+    "recordedAtUtc": "2026-10-02T21:13:02Z"
+  },
+  "publicRetailPrices": {
+    "source": "https://prices.azure.com/api/retail/prices",
+    "readAtUtc": "2026-10-02T21:02:41.856339+00:00",
+    "apiVersion": "2023-01-01-preview",
+    "region": "eastus2",
+    "selectedCandidateMeters": [
+      {
+        "meterId": "2f8e1105-47d0-4105-a934-b2175c766a71",
+        "productName": "Container Registry",
+        "meterName": "Premium Registry Unit",
+        "skuName": "Premium",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1/Day",
+        "retailPrice": 1.6666,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2018-01-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "1550a19c-e867-57ad-91d4-59559908c16f",
+        "productName": "Azure Database for PostgreSQL Flexible Server Burstable BS Series Compute",
+        "meterName": "B1MS",
+        "skuName": "B1MS",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1 Hour",
+        "retailPrice": 0.017,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2021-12-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "606b5e1d-f393-5838-a363-6da21b79884d",
+        "productName": "Azure Database for PostgreSQL Flexible Server Backup Storage",
+        "meterName": "Backup Storage LRS Data Stored",
+        "skuName": "Backup Storage LRS",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1 GB/Month",
+        "retailPrice": 0.095,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2021-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "9c150bf9-2bad-430e-a53c-c213804f49ef",
+        "productName": "IP Addresses",
+        "meterName": "Standard IPv4 Static Public IP",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1 Hour",
+        "retailPrice": 0.005,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2018-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "9d0c5c5c-f0ff-48c2-8c68-9ee7ffd306af",
+        "productName": "Service Bus",
+        "meterName": "Standard Base Unit",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1/Hour",
+        "retailPrice": 0.013441,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2018-05-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "d5034e45-00c1-48c6-8c00-c866f788e033",
+        "productName": "Service Bus",
+        "meterName": "Standard Base Unit",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1/Month",
+        "retailPrice": 10.0,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2018-05-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "18ba5751-fda4-558b-b9dc-9416e72b9a62",
+        "productName": "Azure Container Apps",
+        "meterName": "Standard vCPU Active Usage",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1 Second",
+        "retailPrice": 2.4e-05,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2022-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      },
+      {
+        "meterId": "ef6a0bec-4635-5e9c-8b2e-8b346b998acb",
+        "productName": "Azure Container Apps",
+        "meterName": "Standard Memory Active Usage",
+        "skuName": "Standard",
+        "armRegionName": "eastus2",
+        "unitOfMeasure": "1 GiB Second",
+        "retailPrice": 3e-06,
+        "currencyCode": "USD",
+        "effectiveStartDate": "2022-06-01T00:00:00Z",
+        "tierMinimumUnits": 0.0
+      }
+    ],
+    "limitations": "Partial candidate meter refresh, not a complete offer-specific quote. Billing tiers, included grants, actual usage, private builder, networking, storage, monitoring and key operations remain to bind. Service Bus monthly/hourly rows are alternatives, never additive."
+  },
+  "costConstraint": {
+    "premiumRegistry31DayRetailUsd": 51.6646,
+    "monthlyBudgetUsd": 50,
+    "conclusion": "Selected private registry alone exceeds allowance if retained for all October; cannot authorize an always-on full foundation"
+  },
+  "finalMetadataHostedChecks": {
+    "source": "d51349a0bedc5299f990ba2b759dc4bd3eb29242",
+    "bootstrap": {
+      "run": 37056853245,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "package": {
+      "run": 37056853227,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "scope": "Configured developer checks; does not accept live gates or external historical GitGuardian incidents"
+  },
+  "notVerified": [
+    "regional capacity and quota",
+    "exact deployment what-if",
+    "full priced session and delayed-charge reserve",
+    "protected input location and named licensed users",
+    "private browser route/DNS/certificate/fixed host/one exact proxy peer",
+    "live Graph/direct role/home proof",
+    "Azure key SDK and durable provider composition",
+    "dedicated key resources and least-scoped grants",
+    "production SQL/manual migration identities and audit-outage preservation",
+    "published manifest/accepted signed retained engineering evidence",
+    "private build/push/pull path",
+    "actual Azure sign-in and G1\u2013G9"
+  ],
+  "cloudMutationsPerformed": [],
+  "policyDecisionsMade": [],
+  "privateBoard": {
+    "status": "UPDATE_BLOCKED_BY_AUTOMATIC_APPROVAL_REVIEW",
+    "lastConfirmedBffSnapshot": "4346e0f",
+    "lastConfirmedBffPublicationAt": "2026-10-02T19:50:45.775370+00:00",
+    "reason": "Official publishing helper credential stdin to unsandboxed terminal rejected for managed network proxy bypass; exact approval requested; current read-only site ownership preserved"
+  },
+  "checks": {
+    "documentation": "PASS: two changed evidence JSON records parsed; 178 changed Markdown local targets exist; eight exact candidate rate bindings; preflight invariants and documentation-only scope",
+    "secrets": "PASS: whole-checkout Gitleaks8.30.1 no leaks",
+    "diff": "PASS: git diff --check",
+    "runtime": "UNCHANGED; configured final metadata CI observed terminal success; no new runtime check claimed",
+    "intake": "PASS: new private directory/files are current-user owned, modes0700/0600; no access-grant ACL entries; no credentials stored"
+  },
+  "suppliedIntake": {
+    "protectedReference": "LOCAL-INTAKE-20261002-01",
+    "date": "2026-10-02",
+    "location": "Owner-only local folder outside Git; directory0700/file0600 verified",
+    "organizationalAccountRequests": 2,
+    "roleRequests": [
+      "Consultant",
+      "customer detailed role unresolved"
+    ],
+    "externalPersonalAccount": "Feasibility request; current organizational policy and home-origin contract do not admit it",
+    "browserPreference": "Public authenticated application feasibility requested; no topology or public exposure approved",
+    "grantsPerformed": [],
+    "directoryLicensingConditionalAccess": "NOT_VERIFIED"
+  },
+  "intakeAdviceChecks": {
+    "result": "PASS",
+    "localMarkdownTargets": 160,
+    "json": "Changed JSON parsed",
+    "protectedData": "Supplied account strings absent from every changed Git file; actual values only in owner-only local intake",
+    "scope": "Documentation only; runtime, templates, provider policy and Azure unchanged",
+    "secrets": "PASS: whole-checkout Gitleaks8.30.1 no leaks",
+    "diff": "PASS: git diff --check"
+  },
+  "latestUserSteering": {
+    "date": "2026-10-02",
+    "hosting": "Keep private",
+    "externalAccount": "Organizational account request replaces personal request; actual value protected; home tenant unverified",
+    "nextPlan": "plans/active/private-pilot-browser-access-preparation.md",
+    "architectureDecision": "ADR-0010 Proposed",
+    "accessAndSpend": "Not performed or approved by this recommendation"
+  }
+}

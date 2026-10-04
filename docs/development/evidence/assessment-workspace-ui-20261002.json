@@ -1,0 +1,140 @@
+{
+  "completedAt": "2026-10-02T13:46:50.708Z",
+  "browser": "154.0.8037.97",
+  "checks": [
+    "No-run availability notice, honest fallback, keyboard settings and live notice clearing",
+    "All five destinations focus real mounted sections; visible fixture inputs and existing review/report content",
+    "Changing run clears previous section selection; coverage-only runs do not invent reports",
+    "Seven viewport sizes including 1200x350 and 320px; keyboard navigation and forced colors"
+  ],
+  "layouts": [
+    {
+      "width": 1440,
+      "height": 900,
+      "settingsFocus": true,
+      "overflow": false
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "settingsFocus": true,
+      "overflow": false
+    },
+    {
+      "width": 1200,
+      "height": 350,
+      "settingsFocus": true,
+      "overflow": false
+    },
+    {
+      "width": 900,
+      "height": 400,
+      "settingsFocus": true,
+      "overflow": false
+    },
+    {
+      "width": 760,
+      "height": 700,
+      "settingsFocus": true,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "settingsFocus": true,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "height": 800,
+      "settingsFocus": true,
+      "overflow": false
+    }
+  ],
+  "scans": [
+    {
+      "label": "empty workspace",
+      "version": "4.13.0",
+      "violations": [],
+      "incomplete": ["color-contrast"]
+    },
+    {
+      "label": "ready synthetic review and draft workspace",
+      "version": "4.13.0",
+      "violations": [],
+      "incomplete": ["aria-prohibited-attr", "color-contrast"]
+    },
+    {
+      "label": "320px coverage workspace",
+      "version": "4.13.0",
+      "violations": [],
+      "incomplete": ["color-contrast"]
+    },
+    {
+      "label": "320px forced colors",
+      "version": "4.13.0",
+      "violations": [],
+      "incomplete": ["color-contrast"]
+    }
+  ],
+  "pageErrors": [],
+  "scope": "Final built React UI with read-only saved synthetic snapshots; no backend mutation/recovery regression or Windows/assistive-technology acceptance claimed.",
+  "sourceSha256": {
+    "src/web/src/App.tsx": "3e5d51fdf1d323575c3f60774cff47d3f212aef2d17354f720c58c3d0a15e85e",
+    "src/web/src/WorkspaceNavigation.tsx": "02c9f0c50289cb3f7e25d82756ec2cd1fa9edbf8a5a5f03b542e0c41d2ee499f",
+    "src/web/src/workspace.css": "5303693dd832311b58b87b54efbc23a4158944def1f5f8c08228cd02ed2ee233",
+    "tests/e2e/assessment-workspace/preview.mjs": "1b6501e7cbb81694d6be29daa892178ecdcf75885fa465ec547682d447eda597",
+    "tests/e2e/assessment-workspace/verify.mjs": "fa7bc26a88dcb46067ede5780ee968ead18f70b1d8c44117b8b88126b8b29174"
+  },
+  "toolchain": {
+    "node": "24.21.0",
+    "npm": "11.20.0",
+    "dotnet": "10.0.401"
+  },
+  "executedChecks": [
+    "Frontend contract:check, typecheck, Vite build, format:check: PASS",
+    "Frontend and pinned browser-test npm audit: zero vulnerabilities",
+    "Additional UI packet/verification script Prettier check and git diff --check: PASS",
+    "Synthetic demo host Release build --no-restore: zero warnings/errors"
+  ],
+  "independentReview": {
+    "reviewer": "review_workspace (non-author, read-only)",
+    "outcome": "No remaining findings",
+    "resolved": [
+      "Current-section state across run changes",
+      "Settings access in short desktop viewports"
+    ],
+    "checks": [
+      "Ready section focus and coverage-only fallback",
+      "1440x900,320x800,900x400,1200x350 reflow and short-height sidebar scrolling",
+      "axe4.13.0 empty and ready: zero confirmed violations"
+    ],
+    "limitations": "Scanner used CSP bypass solely for injection. Windows/screen readers and backend mutation/recovery suites not executed by this reviewer."
+  },
+  "limitations": [
+    "One immediate-focus browser assertion raced UI processing; the verifier now waits for the expected focus state, and final source passed.",
+    "Shared 5183 host was in use by independent pilot work; the full legacy regression launch was interrupted and is not counted as a completed check. A dedicated isolated host launch refused the occupied port. No other task host or database was stopped.",
+    "A disposable task-owned PostgreSQL18 cluster was initialized only for attempted isolated test setup and shut down; this UI adds no migration, configuration, dependency or server contract.",
+    "Full supported browser/Windows/assistive-technology, color-contrast and aria-prohibited-attr manual checks, backend operation/recovery regressions and live/production gates are NOT VERIFIED for UI-W1."
+  ],
+  "privateStatusSite": {
+    "status": "UI-W1 update prepared, publication blocked",
+    "lastPublishedVersion": 60,
+    "lastPublishedSource": "67fe75069a9a6538c34d00d656ef6c9f8337b5ba",
+    "preparedCheckout": "/private/tmp/iga-ui-status-site",
+    "blocker": "Sites plugin publishing helper /Users/pedrovolu/.codex/plugins/cache/openai-curated-remote/sites/0.1.75/scripts/site-workflow.mjs disappeared during the session. Search found no replacement; source push/package/deploy were not performed. The remote board is stale for UI-W1.",
+    "resolution": {
+      "status": "succeeded",
+      "versionNumber": 64,
+      "projectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_44a2167e8d4c81919be1a37392b7b5c8",
+      "deploymentId": "appgdep_6abfc33d3a048191a7b9cc4eddc39ba8",
+      "commitSha": "fa36bf5f6a747e3087099028fb7087c25f4ed25b",
+      "confirmedAt": "2026-10-02T14:44:20.312651+00:00",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "audience": "existing owner-private; unchanged",
+      "archiveSha256": "4cc1facfc70f1844d20400e806dd2820e80a6344454256677bd169f95dfcd333"
+    }
+  },
+  "subsequentIntegratedRegressionEvidence": "finding-evidence-ui-20261002.json"
+}

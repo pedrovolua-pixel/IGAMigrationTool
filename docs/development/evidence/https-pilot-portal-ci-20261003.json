@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T03:02:47.448204+00:00",
+  "testedSource": "33f4b47e20307e8185df0cc1915171e8812ee6a3",
+  "bootstrapRun": 37090777603,
+  "bootstrapConclusion": "FAILURE",
+  "bootstrapJobs": [
+    {
+      "id": 111110452256,
+      "name": "dotnet-bootstrap",
+      "conclusion": "FAILURE",
+      "failedStep": "Check local identity authority and atomic audit composition",
+      "passedAuthorityAssertions": 120,
+      "passedAuditAssertions": 81,
+      "failure": "Current authoritative session admission is required at first StoreAsync in BffAuthorityComposition Program48",
+      "laterSteps": "SKIPPED; not verified by this hosted run"
+    },
+    {
+      "id": 111110452425,
+      "name": "collector-windows windows-2025",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "id": 111110452434,
+      "name": "collector-windows windows-2022",
+      "conclusion": "SUCCESS"
+    }
+  ],
+  "packageRun": 37090777612,
+  "packageConclusion": "SUCCESS",
+  "packageJobs": [
+    "bootstrap-package",
+    "bff-disabled-package"
+  ],
+  "diagnosis": "Deterministically reproduced in isolated owned PostgreSQL18.4 fixture: a frozen timestamp ending in nine ticks is rounded by the SQL timestamp cast one tick into its future; production admission correctly rejects it. Initial and sampled synthetic clocks need PostgreSQL microsecond precision.",
+  "repairScope": "Isolated fixture-only author and independent reviewer; no production policy, SQL, API, dependency, ingress or cloud change authorized",
+  "repairResult": {
+    "status": "LOCAL VERIFIED; hosted repair verification SUCCESS at ba2f447",
+    "workerCommit": "31bb30bf059e8f8998f13627ce442d5bcbd6bc1a",
+    "workerAssertions": [
+      644,
+      643
+    ],
+    "countVariation": "Half-microsecond PostgreSQL rounding conditionally adds one future-denial assertion; all cases and original scenarios run",
+    "independentReview": {
+      "status": "PASS",
+      "reviewer": "package_hosting",
+      "assertions": 644,
+      "postgresql": "18.4 reviewer-owned disposable cluster",
+      "lockedOfflineRestore": "PASS",
+      "releaseBuild": "PASS; zero warnings/errors",
+      "diffSha256": "073de5f8249d133c9896cf52814a3d0452366fdf1bd4a973ad6ab8a2623cfdca"
+    },
+    "workerRestoreBuildFormatDiff": "PASS; zero warnings/errors",
+    "scope": "Fixture clock precision captures, nine actual provider timestamp remainder/denial/positive regressions and README; no production/SQL/policy changes",
+    "integratedFixtureCommit": "e11f079b50177b8d72016e7ded655078c0367f71",
+    "sourceBindings": [
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/Fixture.cs",
+        "sha256": "ee5b569fea8a834703f8d0f2ffb4e480f85c8680c7d628bf441e377a95bdf847",
+        "matchesReviewedWorker": true
+      },
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/Program.cs",
+        "sha256": "6957a7aba83c449501baf9919917fd9728239edb2860b78ebeb90f872d3e2310",
+        "matchesReviewedWorker": true
+      },
+      {
+        "path": "tests/integration/BffAuthorityComposition.Tests/README.md",
+        "sha256": "8bba6d26e40ce3ed5cc5be2fd8c29b1ae763e4710ef396222df499a9ed8d4729",
+        "matchesReviewedWorker": true
+      }
+    ]
+  },
+  "githubDraft": "Open; no branch conflicts at33f4b47; no merge or release",
+  "gitGuardian": "Six historical digest findings remain open for human disposition; no suppressions",
+  "privateBoard": "STALE for BFF/HTTPS under separate publisher block; confirmed unrelated Cycle14 publication preserved",
+  "azureOperations": 0,
+  "publicAdmission": "Disabled; no portal application",
+  "gatesG1ToG9Milestone2": "NOT VERIFIED",
+  "originalReproduction": {
+    "result": "FAILURE reproduced before fix",
+    "clockPrecisionOffsetTicks": 9,
+    "databaseTimestampDeltaTicks": 1,
+    "exception": "Current authoritative session admission is required",
+    "ephemeralLogSha256": "61c09199b23571f30854e587481169ecccc2486f1caf13c427a14c8489455e19",
+    "fixtureBoundary": "Temporary diagnostic outside Git; no production/SQL changes",
+    "sourceFingerprints": [
+      {
+        "name": "Fixture.cs",
+        "sha256": "bce537e8ce94236811185aa7974a526109edcfe6195b2c15d4c372b375f2b1f0"
+      },
+      {
+        "name": "Program.cs",
+        "sha256": "9e8a2ac2f477a73ac74dc8da441e2988b4f367ce938ef489784b9059b00f16b7"
+      }
+    ],
+    "independentDatabaseProof": "Reviewer separately measured remainder6/7/8/9 rounding forward4/3/2/1 ticks on PG18.4; future-state production guard unchanged"
+  },
+  "documentReview": {
+    "reviewer": "package_hosting",
+    "result": "PASS",
+    "minorWordingCorrection": "Applied confirmed diagnosis and pending hosted rerun wording",
+    "scope": "Four canonical append records and this sanitized CI evidence record"
+  },
+  "coordinatorChecks": {
+    "markdownTargets": 277,
+    "markdownAnchors": 12,
+    "officialIconByteChecks": 6,
+    "jsonAndProseIdentifierCheck": "PASS",
+    "wholeCheckoutGitleaks": "PASS",
+    "diffWhitespace": "PASS",
+    "protectedRuntimeSqlWorkflowDiff": "EMPTY"
+  },
+  "canonicalBindings": [
+    {
+      "path": "plans/active/https-pilot-portal-preparation.md",
+      "sha256": "d476779db4eb43328799476884449e93bb98877b4601fb050b203dcfa7db3624"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "34ba077fe0108006628ac267fe2842ddbd53b92f85398b7468520e350265f258"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "9857200e36ed7e99cccd726cd360ab38ffe30c138e54b163bdfac4d708acd74b"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "9e11573e5690eb74851af112e02bb998e80f7093f9ac34d64ff6589dadbb77c4"
+    }
+  ],
+  "hostedRepairVerification": {
+    "testedCommit": "ba2f44740fc96eacf98f1635d64574633de35e47",
+    "recordedAtUtc": "2026-10-03T03:23:12.409548+00:00",
+    "bootstrap": {
+      "run": 37091900841,
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 111113825748,
+          "name": "dotnet-bootstrap",
+          "conclusion": "SUCCESS",
+          "successfulStepsIncludingCleanup": 61,
+          "actualPostgreSqlCompositionAssertions": 643,
+          "authorityAssertions": 120,
+          "auditAssertions": 81,
+          "realHttpsSharedPostgreSqlAssertions": 84,
+          "scope": "All configured Linux build/unit/integration/database/browser/dependency/infrastructure steps, including disabled HTTPS template validation, executed successfully"
+        },
+        {
+          "id": 111113825976,
+          "name": "collector-windows windows-2022",
+          "conclusion": "SUCCESS",
+          "successfulStepsIncludingCleanup": 19
+        },
+        {
+          "id": 111113826012,
+          "name": "collector-windows windows-2025",
+          "conclusion": "SUCCESS",
+          "successfulStepsIncludingCleanup": 19
+        }
+      ]
+    },
+    "package": {
+      "run": 37091900865,
+      "conclusion": "SUCCESS",
+      "jobs": [
+        {
+          "id": 111113825943,
+          "name": "bootstrap-package",
+          "conclusion": "SUCCESS"
+        },
+        {
+          "id": 111113826092,
+          "name": "bff-disabled-package",
+          "conclusion": "SUCCESS"
+        }
+      ]
+    },
+    "sourceBoundary": "Results bind testedCommit. Any subsequent receipt-only commit must preserve all runtime/test/infrastructure/workflow/project blobs; no later run is inferred as passing.",
+    "retainedFailure": "Original33f4b47 failure above is historical and unchanged",
+    "limits": "Configured workflows are partial pilot gates. No Entra/Graph/FIC/live identity, Azure topology, public admission, image promotion or production release proof; GitGuardian human disposition and private publisher block unchanged",
+    "canonicalBindings": [
+      {
+        "path": "plans/active/https-pilot-portal-preparation.md",
+        "sha256": "ed0615ed8a07d24c8788e79326a83eacef91af5097cd4eefba1ddcbe4e5a5e67"
+      },
+      {
+        "path": "specs/003-health-assessment/status.md",
+        "sha256": "d25c13b37294a1526b1249c401d3b6a6824e4cb9ab5f19c55bb7ca60efbc5adc"
+      },
+      {
+        "path": "specs/003-health-assessment/implementation-plan.md",
+        "sha256": "5c0881e540084219c139f251499c72fe79d61d0e0503431bf8505fcbb8b57bf6"
+      },
+      {
+        "path": "specs/003-health-assessment/evidence-index.md",
+        "sha256": "6677b8df89eb3e9a857a1694aab808ddc61cc885c56d9ca5cb19fc672c634dc9"
+      }
+    ],
+    "receiptReview": {
+      "reviewer": "package_hosting",
+      "result": "PASS",
+      "scope": "Five receipt-only documents; actual canonical hashes verified; no runtime/cloud rerun"
+    },
+    "receiptChecks": {
+      "markdownTargets": 281,
+      "headingAnchors": 12,
+      "officialIconByteChecks": 6,
+      "jsonProseAndDiff": "PASS",
+      "wholeCheckoutGitleaks": "PASS",
+      "runtimeTestsInfrastructureSqlWorkflowProjectsDiffFromTestedCommit": "EMPTY"
+    }
+  }
+}

@@ -1,0 +1,649 @@
+{
+  "packet": "UI-W3",
+  "date": "2026-10-03",
+  "status": "VERIFIED bounded local UI and confirmed owner-private checkpoint publication",
+  "approval": "Human approved reviewed internal UI after retaining existing landing on 2026-10-03",
+  "toolchain": {
+    "node": "24.21.0",
+    "npm": "11.20.0",
+    "dotnet": "10.0.401",
+    "chrome": "154.0.8037.97",
+    "axe": "4.13.0"
+  },
+  "sourceSha256": {
+    "src/web/src/App.tsx": "d1f4e427972d777580988775df2b34df174698e13b7325bef2b92c3a3cf1fa4d",
+    "src/web/src/AnalysisView.tsx": "49f47ab2f59989de25a13f91efddc74faaad62b3f3427bd54a11e6760ccbcf8f",
+    "src/web/src/WorkspaceNavigation.tsx": "0364a88758543194fc3e341e63dc0ed6bd24beeb676e807fb501b65ef6c2e70f",
+    "src/web/src/workspace.css": "431b1ff659dedc9f2f6147d239d23a4cf0b2d13728b5f7d53edd0ef0fe36c061",
+    "src/web/src/FindingsExplorer.tsx": "573c29265408b4b0ffab1ddbbe16b41324d9435b2acb4354c6594f101ddf733e",
+    "src/web/src/FindingsExplorer.css": "e16a7083d97e020be6a67525a9272b344376af8a874942f6e80993d6a4297c21",
+    "src/web/src/DraftReportView.tsx": "f6fe72146c6c7ab79b6740f274ec1dd5175614855906d7464e19510d82e50a52",
+    "tests/e2e/approved-workspace/verify.mjs": "3882c21e14c0efb1dc23908a5b7cdae61c678c3cbdb109ff34627003a59189af",
+    "tests/e2e/finding-evidence/verify.mjs": "f8a7ce8af8335a4699ae84f6b829f34131acfe57ced89c0ace4a35cbae04518a",
+    "tests/e2e/assessment-workspace/verify.mjs": "6250290902862c3eb5bd50e271e400e961bbdf9e87014813531e5ac614e18235"
+  },
+  "buildAssetsSha256": {
+    "src/web/dist/index.html": "e874af57ca15f92a1fee9e9ccadb899c864a2212cfcf0e530398c6e587500e99",
+    "src/web/dist/assets/index-BNnyKnwy.css": "00549e328a5fa3479c1dc7c9c85f3c9ab57492d2e782d7b47ef86697c8d665da",
+    "src/web/dist/assets/index-8cxLV1IU.js": "df77938f2d2a84f9334ea36382c7bed2648d28f4576b276c3a471c3d18b339c8"
+  },
+  "executed": [
+    "contract generation PASS",
+    "TypeScript typecheck PASS",
+    "Vite production build PASS",
+    "frontend and scoped E2E Prettier PASS",
+    "npm audit PASS zero vulnerabilities",
+    "git diff --check PASS",
+    "isolated synthetic host Release build PASS zero warnings/errors",
+    "Scoped gitleaks8.30.1 scan PASS no leaks"
+  ],
+  "independentReview": {
+    "reviewer": "review_ui non-author read-only",
+    "status": "No remaining new UI-W3 defects; two findings corrected and retested",
+    "runnerNode": "25.6.1; coordinator replayed with pinned Node24",
+    "reportSha256": "e355a866a5329349aa521d7a49c5dbc5dca1a45835ea5e9c94dea332f8947f26"
+  },
+  "dedicatedViewVerification": {
+    "base": "http://127.0.0.1:5198",
+    "runId": "2e5ca0f8-cb67-4752-9fdb-a3387fa06536",
+    "secondRun": "02c839a6-6c31-4a15-a510-0691ade065e7",
+    "groups": [
+      "UIW3-001 empty-run Findings/Reports fallback; Settings existing form focus; original landing title",
+      "UIW3-002 dedicated navigation hides irrelevant sections; mounted unsaved editor and filters/selection retained; Evidence restores Evidence disclosure from Recommendations",
+      "UIW3-003 canonical Reports and immutable Settings display; all UI navigation retains scoring/review/report digests",
+      "UIW3-004 320px list/detail visibility, Back and Escape focus, retained filter",
+      "UIW3-005 all five views avoid document overflow at 320/390/760/1024/1440px",
+      "UIW3-006 changing run returns to retained landing and clears prior finding filters/selection; no browser runtime errors",
+      "UIW3-007 actual fictional Confirm in Evidence preserves original digests, restores visible findings focus, and announces saved feedback"
+    ],
+    "scans": [
+      {
+        "label": "desktop dedicated Evidence",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "targets": [
+              [
+                "button[type=\"button\"]:nth-child(1) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(2) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[aria-current=\"location\"] > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(4) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "#_r_0_-detail"
+              ],
+              [
+                ".finding-detail > p"
+              ],
+              [
+                ".finding-detail > p > strong"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "label": "desktop dedicated Reports",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "targets": [
+              [
+                "button[type=\"button\"]:nth-child(1) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(2) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(3) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[aria-current=\"location\"] > span[aria-hidden=\"true\"]"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "label": "desktop dedicated Settings",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "targets": [
+              [
+                "button[type=\"button\"]:nth-child(1) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(2) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(3) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(4) > span[aria-hidden=\"true\"]"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "label": "320px mobile Findings list",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          {
+            "id": "color-contrast",
+            "targets": [
+              [
+                "button[type=\"button\"]:nth-child(1) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[aria-current=\"location\"] > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(3) > span[aria-hidden=\"true\"]"
+              ],
+              [
+                "button[type=\"button\"]:nth-child(4) > span[aria-hidden=\"true\"]"
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "faults": [],
+    "result": "PASS"
+  },
+  "findingEvidenceRegression": {
+    "completedAt": "2026-10-03T18:06:12.482Z",
+    "browser": "154.0.8037.97",
+    "groups": [
+      "FE-001 combined search/severity/category/state/confidence, mandatory-review, no matches and clear; canonical digests unchanged",
+      "FE-002 adjacent original/current explanation and inert evidence/options; focus on open/close/Escape; selection retained outside filters with fallback focus",
+      "FE-003 actual Confirm and coherent refresh preserve selected identity/filters/originals; retained zero-match state option; unsaved editor text survives filters",
+      "FE-004 actually saved hostile presentation and context stay inert; immutable original title and provenance preserved",
+      "FE-005 desktop/short390320, forced colors and axe; historical coverage-only Evidence fallback; changed run resets panel and filters"
+    ],
+    "scans": [
+      {
+        "label": "320px selected finding",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "label": "320px forced colors",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "label": "desktop selected finding",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      }
+    ],
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 1000,
+        "overflow": false
+      },
+      {
+        "width": 1200,
+        "height": 350,
+        "overflow": false
+      },
+      {
+        "width": 900,
+        "height": 400,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "overflow": false
+      },
+      {
+        "width": 320,
+        "height": 800,
+        "overflow": false
+      }
+    ],
+    "pageErrors": [],
+    "scope": "Actual task-owned synthetic PostgreSQL-backed host, final built React assets; Windows/manual/large-scale acceptance not claimed."
+  },
+  "workspaceRegression": {
+    "completedAt": "2026-10-03T18:10:03.239Z",
+    "browser": "154.0.8037.97",
+    "checks": [
+      "No-run availability notice, honest fallback, keyboard settings and live notice clearing",
+      "All five destinations focus real mounted sections; visible fixture inputs and existing review/report content",
+      "Changing run clears previous section selection; coverage-only runs do not invent reports",
+      "Seven viewport sizes including 1200x350 and 320px; keyboard navigation and forced colors"
+    ],
+    "layouts": [
+      {
+        "width": 1440,
+        "height": 900,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 1200,
+        "height": 350,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 900,
+        "height": 400,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 760,
+        "height": 700,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "settingsFocus": true,
+        "overflow": false
+      },
+      {
+        "width": 320,
+        "height": 800,
+        "settingsFocus": true,
+        "overflow": false
+      }
+    ],
+    "scans": [
+      {
+        "label": "empty workspace",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "label": "ready synthetic review and draft workspace",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "label": "320px coverage workspace",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      },
+      {
+        "label": "320px forced colors",
+        "version": "4.13.0",
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      }
+    ],
+    "pageErrors": [],
+    "scope": "Final built React UI with read-only saved synthetic snapshots; no backend mutation/recovery regression or Windows/assistive-technology acceptance claimed."
+  },
+  "historicalRegressions": [
+    {
+      "suite": "consultant-demo",
+      "executedResult": {
+        "status": "PASS",
+        "checks": 99,
+        "groups": [
+          "DEMO-001 strict transport and independent durable coverage golden",
+          "DEMO-002 actual keyboard start/progress/locks/reload/history/focus",
+          "DEMO-003 keyboard cancellation preserves incomplete durable results",
+          "DEMO-004 semantic/target/reflow/forced-colors engineering smoke",
+          "DEMO-005 unavailable coverage and focused denied-action error recovery"
+        ],
+        "accessibility": [
+          {
+            "label": "desktop gap coverage",
+            "version": "4.13.0",
+            "passes": 30,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          },
+          {
+            "label": "320px cancellation with expanded locks",
+            "version": "4.13.0",
+            "passes": 29,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          }
+        ],
+        "browser": "154.0.8037.97",
+        "node": "v24.21.0",
+        "base": "http://127.0.0.1:5198",
+        "limitations": [
+          "Automated Chromium engineering smoke only; supported Windows browser and NVDA/Narrator acceptance NOT VERIFIED",
+          "Production identity/customer isolation, live source, scoring, AI and ServiceBus NOT VERIFIED",
+          "Expired-lease browser resume NOT VERIFIED without explicitly owned host process"
+        ]
+      },
+      "evidenceSha256": "9c6682767c5fbdc4fd55409bc000d1db82211c01f47fa43cf705f806f26c020d"
+    },
+    {
+      "suite": "analysis-scoring",
+      "executedResult": {
+        "status": "PASS",
+        "assertions": 708,
+        "groups": [
+          "AS-API-001 real stored findings/provisional/publishable/quality/provenance precision goldens",
+          "AS-API-002 comparisons/mixed/gaps/explicit healthy/historical/cancelled",
+          "AS-API-003 hostile scope/weights/frozen lock/profile/origin/Host/unknown-resource",
+          "AS-UI-001 actual keyboard start/grouped original/reload/history immutable score",
+          "AS-UI-002 actual transient failure/keyboard read-only same-revision retry/stale projection denial",
+          "AS-UI-003 actual findings provenance/desktop390320/axe/forced-colors engineering smoke"
+        ],
+        "accessibility": [
+          {
+            "label": "desktop findings/original",
+            "version": "4.13.0",
+            "passes": 31,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          },
+          {
+            "label": "320px findings/original",
+            "version": "4.13.0",
+            "passes": 33,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          }
+        ],
+        "browser": "154.0.8037.97",
+        "node": "v24.21.0",
+        "limitations": [
+          "Synthetic internal scoring only; no actual rule promotion, review/risk grant, publication, maturity or AI enabled",
+          "Full supported Windows browser/NVDA/Narrator acceptance NOT VERIFIED",
+          "Axe desktop findings/original incomplete:color-contrast; those rules are NOT VERIFIED",
+          "Axe 320px findings/original incomplete:color-contrast; those rules are NOT VERIFIED"
+        ]
+      },
+      "evidenceSha256": "048258505a7b9bd14696a08bbe2daf05ae7db18c021ebadcaad7888b17cfa5b7"
+    },
+    {
+      "suite": "review-maturity",
+      "executedResult": {
+        "status": "PASS",
+        "assertions": 2317,
+        "groups": [
+          "RM-API-001 stored originals/current health/coherent snapshot/history/replay/maturity goldens",
+          "RM-API-002 defer penalty/health independence/mixed/gaps/historical read-only profile",
+          "RM-API-003 server-owned actor/scope/originals unsupported actions/body4KiB CSRF/Host/Origin",
+          "RM-UI-001 actual keyboard confirm/reject/comment/edit inert text/originals/history/reload",
+          "RM-UI-002 actual stale CAS focused recovery and cross-run response denial",
+          "RM-UI-005 committed-response-loss exact-event retry and delayed GET/POST selection races with visible score/history goldens",
+          "RM-UI-003 keyboard Defer and actual owned-host restart preserves durable history",
+          "RM-UI-004 desktop390320 expanded history/evidence/axe/forced-color engineering smoke"
+        ],
+        "accessibility": [
+          {
+            "label": "desktop review/history/maturity",
+            "version": "4.13.0",
+            "passes": 31,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          },
+          {
+            "label": "320px review/history/maturity",
+            "version": "4.13.0",
+            "passes": 33,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          }
+        ],
+        "browser": "154.0.8037.97",
+        "node": "v24.21.0",
+        "ownedHostRestartExecuted": false,
+        "limitations": [
+          "Fixed synthetic reviewer identity, fictional maturity indicators only; no customer risk acceptance/publication/production authority",
+          "Full supported Windows/NVDA/Narrator acceptance NOT VERIFIED",
+          "Axe desktop review/history/maturity incomplete:color-contrast; NOT VERIFIED",
+          "Axe 320px review/history/maturity incomplete:color-contrast; NOT VERIFIED"
+        ]
+      },
+      "evidenceSha256": "f76699c194fda161456234daaa44997feb88bb47b24735565d9c7b9fde1933c0"
+    },
+    {
+      "suite": "draft-reports",
+      "executedResult": {
+        "status": "PASS",
+        "assertions": 2089,
+        "groups": [
+          "DR-API-001 actual saved coherent draft, review change, immutable originals and hostile Markdown",
+          "DR-API-002 independent healthy/gap/mixed/weighted and historical profile literals",
+          "DR-UI-001 native summary/technical/inert Markdown, unique maturity, keyboard review refresh",
+          "DR-UI-002 source/version/digest/scope substitution refusal and same-revision retry",
+          "DR-UI-003 late old GET selection race remains bound to new run",
+          "DR-UI-004 actual process restart/reload reproducibility",
+          "DR-UI-005 desktop390320, expanded captured evidence, axe and native focus engineering checks"
+        ],
+        "accessibility": [
+          {
+            "label": "desktop expanded technical draft",
+            "version": "4.13.0",
+            "passes": 31,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          },
+          {
+            "label": "320px expanded technical draft",
+            "version": "4.13.0",
+            "passes": 33,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          }
+        ],
+        "browser": "154.0.8037.97",
+        "node": "v24.21.0",
+        "ownedHostRestartExecuted": true,
+        "substitutionCases": [
+          "schema",
+          "published",
+          "Markdown version",
+          "canonical digest",
+          "run",
+          "review revision",
+          "baseline",
+          "profile",
+          "input digest",
+          "capability tuple",
+          "scripted digest",
+          "application lock",
+          "desired outcomes",
+          "analysis fixture",
+          "scoring digest",
+          "maturity digest",
+          "wrong scope"
+        ],
+        "limitations": [
+          "Fixed synthetic scope only; no durable ReportVersion, publication/export/customer authority",
+          "Full supported Windows/NVDA/Narrator/manual WCAG acceptance NOT VERIFIED",
+          "axe desktop expanded technical draft incomplete:color-contrast; NOT VERIFIED",
+          "axe 320px expanded technical draft incomplete:color-contrast; NOT VERIFIED"
+        ]
+      },
+      "evidenceSha256": "a1dad820f640b627e0433c9165ac8bd75b585079db1321ddf6a691cc18db5459"
+    },
+    {
+      "suite": "recommendation-guidance",
+      "executedResult": {
+        "status": "PASS",
+        "assertions": 2923,
+        "groups": [
+          "RG-API-001 literal structured options/scoped IDs/canonical digest/captured review/immutable originals",
+          "RG-API-002 healthy/gaps/mixed/weighted and all four older-profile null compatibility",
+          "RG-UI-001 keyboard disclosure/actual finding review/focus/current-state/unverified complete visible options",
+          "RG-UI-002 source/content substitution refusal, focused same-revision retry and typed unavailable no fallback",
+          "RG-UI-003 held old response selection/abort/focus fence",
+          "RG-UI-003B post-GET async digest selection/abort/focus fence",
+          "RG-UI-004 actual owned host process restart and saved read reproducibility",
+          "RG-UI-005 hostile structured text, desktop390320, native table focus, forced colors and axe engineering evidence"
+        ],
+        "accessibility": [
+          {
+            "label": "desktop expanded guidance",
+            "version": "4.13.0",
+            "passes": 31,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          },
+          {
+            "label": "320px expanded guidance",
+            "version": "4.13.0",
+            "passes": 33,
+            "violations": [],
+            "incomplete": [
+              "color-contrast"
+            ]
+          }
+        ],
+        "browser": "154.0.8037.97",
+        "node": "v24.21.0",
+        "ownedHostRestartExecuted": true,
+        "substitutionCases": [
+          "schema",
+          "status",
+          "content digest shape",
+          "run",
+          "run revision",
+          "state",
+          "review run",
+          "review revision",
+          "review digest",
+          "scope",
+          "baseline",
+          "profile",
+          "input",
+          "analysis fixture",
+          "analysis content",
+          "coverage",
+          "capability",
+          "frozen version",
+          "analysis lock",
+          "finding group duplicate",
+          "original title",
+          "current title",
+          "current state",
+          "context",
+          "finding revision",
+          "original digest",
+          "evidence reference",
+          "object",
+          "object type",
+          "module",
+          "option reviewed",
+          "duplicate option",
+          "option text",
+          "recovery",
+          "validation",
+          "references",
+          "assumptions",
+          "limitations",
+          "scoped option identity",
+          "unknown original option identity",
+          "paired original digests",
+          "paired evidence references",
+          "paired occurrence identities",
+          "option payload identity pairing"
+        ],
+        "limitations": [
+          "Fixed synthetic read-only unverified guidance; no advice approval, task/export, execution or customer authority",
+          "Full supported Windows/NVDA/Narrator/manual WCAG/CSV/PDF acceptance NOT VERIFIED",
+          "axe desktop expanded guidance incomplete:color-contrast; NOT VERIFIED",
+          "axe 320px expanded guidance incomplete:color-contrast; NOT VERIFIED"
+        ]
+      },
+      "evidenceSha256": "59ffcdc2d15eec88ac8ec50677e1ecc994cf5dcc4dc9d52f6269de0a921be3c6"
+    }
+  ],
+  "corrections": [
+    "Close focus is immediate for visible rows and deferred for hidden mobile rows.",
+    "Prior shortcut tests now navigate dedicated views and mobile Back label.",
+    "Saved-action feedback and refresh focus target remain visible.",
+    "Evidence pane layout effect resolves Recommendations-to-Evidence focus race.",
+    "Internal metadata contrast and named report-control group semantics corrected."
+  ],
+  "fixtureIsolation": "Existing host5183 preserved. Own temporary host differs only const port5198; temporary historical harnesses substitute5183\u21925198. Own PostgreSQL18 loopback55439 dedicated uiw2/v6/v7 synthetic databases. GET-only snapshot proxy5207 refuses mutations. No production transport change.",
+  "limitations": [
+    "Axe: zero confirmed violations; incomplete color-contrast retained for manual review.",
+    "Historical review/maturity process restart skipped (ownedHostRestartExecuted=false); draft and guidance restart checks executed.",
+    "Windows11 Edge/Chrome/FirefoxESR, NVDA/Narrator, full manual/scale/live/gate acceptance NOT VERIFIED.",
+    "No server product behavior, migration, dependency, API, permission, settings contract or production release changed.",
+    "FE passed before final scoped spacing/color/layout-effect corrections; final pinned seven-group and workspace verification cover final assets.",
+    "Saved verifier received formatting-only cleanup after execution; semantic assertions unchanged."
+  ],
+  "originalFailures": [
+    "System runtime lacked pinned SDK and locale; recovered with existing pinned SDK and C locale.",
+    "Initial close timing assertion, mobile old-label and old section-jump assumptions failed and were corrected/replayed.",
+    "Axe caught metadata contrast; corrected and final scans passed.",
+    "Independent Evidence focus failure retained separately then corrected and all seven groups replayed.",
+    "Shadow schema path and harness ownership prerequisites corrected; original failures preserved in local logs."
+  ],
+  "secretScan": {
+    "result": "PASS",
+    "reportSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "scope": "Owned UI source, browser definitions, completed plan and execution metadata; 184602 bytes"
+  },
+  "cleanup": "Original worker patch archived in work/ui-review/2026-10-03/worker-ui-w3-findings.patch; own writing worktree removed after integration, other worktrees preserved.",
+  "publicationRecord": "approved-workspace-ui-site-20261003.json"
+}

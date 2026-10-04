@@ -1,0 +1,337 @@
+{
+  "artifactTransfer": {
+    "browser": "No accessible download file; blank download-tab URL read blocked by browser policy; alternate download API rejected by automatic approval review as prohibited workaround",
+    "connectorFileTransfer": "HTTP403 normal HTTPS/proxy",
+    "furtherRoutesAttempted": false,
+    "next": "Owner manually downloads exact artifact ZIP from run and attaches; bounded ZIP/digest/37receipts/SDK/source/trust review still required",
+    "zipBytesObtained": false
+  },
+  "authority": "Owner Run it: exactcefd835 one-file public correction and same sole diagnostic run",
+  "baseline": "cc4d680",
+  "cases": {
+    "KV-L01": "PASS exact corrected PR/head/base/seven-path/job/source readback",
+    "KV-L02": "REMOTE EXECUTION SUCCESS; individual37receipt/archivehash/directexit/rawlog acceptance NOT VERIFIED",
+    "KV-L03": "PARTIAL Setup/platform/SDK-install metadata observed; selectedSDK/config/source/trust/ZIP integrity NOT VERIFIED",
+    "KV-L04": "PASS bounded honest reporting/manual artifact intake; private board STALE",
+    "KV-L05": "35 supplied mocks actually passed on Linux; prior local/non-author fix review historical"
+  },
+  "coordinatorExecutedMetadataChecks": {
+    "OS": "Ubuntu24.04.5",
+    "artifactExpectedDigest": "sha256:fbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395",
+    "artifactZIPDownloaded": false,
+    "blockedTransfer": [
+      "Connector reusable file retrieval HTTP403",
+      "Browser download did not yield accessible file; alternate documented API rejected by automatic approval review as policy workaround; no bypass"
+    ],
+    "image": "20260927.320.1",
+    "mergeSource": "e7e5f70ea67068fb20fe4f7c3a89a6c18e6d6b12",
+    "mockedTests": 35,
+    "next": "Owner supplies exact diagnostic ZIP; verify before signature prerequisite PASS",
+    "runner": "2.337.0",
+    "signatureReceiptAcceptance": "NOT VERIFIED",
+    "source": "cefd8354d69e00eb372f8efff457e9b175d3a6eb",
+    "status": "PASS_REMOTE_JOB_AND_METADATA_ONLY",
+    "steps": 12,
+    "trustSelection": "NOT VERIFIED"
+  },
+  "currentRepositoryChecks": {
+    "applicationRegression": "NOT RERUN unchanged C#/PG/config/dependency/IaC/workflow/runtime",
+    "evidence": [
+      {
+        "path": "/tmp/iga-https-linux-proof-rerun/current-document-check.json",
+        "sha256": "810606f8907b5c45f2d7ae7e297c30dc05898e7ef82c41e536edc7de98cc19fd"
+      },
+      {
+        "path": "/tmp/iga-https-linux-proof-rerun/current-secret-check.log",
+        "sha256": "236368f3c7331783f680e8b0d5ef11de1c6b57016943e7960c801d333385c934"
+      }
+    ],
+    "scopedGitleaks": "PASS no findings",
+    "utf8JSONLocalLinksAnchorsWhitespace": "PASS 502 links32anchors"
+  },
+  "diagnosticArtifactMetadata": {
+    "artifacts": [
+      {
+        "archive_download_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/artifacts/11281169753/zip",
+        "created_at": "2026-10-03T18:53:31Z",
+        "digest": "sha256:fbf6baee29e156edcfac7e4f0ca4454bc188ae5fedd88cd5f071b65687e3b395",
+        "expired": false,
+        "expires_at": "2027-01-01T18:52:18Z",
+        "id": 11281169753,
+        "name": "https-key-provider-signatures-37145824111-1",
+        "size_in_bytes": 85352,
+        "updated_at": "2026-10-03T18:53:31Z",
+        "url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/artifacts/11281169753",
+        "workflow_run": {
+          "head_branch": "codex/https-cycle04-public-proof",
+          "head_repository_id": 1389857966,
+          "head_sha": "cefd8354d69e00eb372f8efff457e9b175d3a6eb",
+          "id": 37145824111,
+          "repository_id": 1389857966
+        }
+      }
+    ]
+  },
+  "executionAuthorityCommit": "bfb9a2bd60963c32d673ca6a557d545ec92e60f2",
+  "expectedApprovedSourceFileHashes": {
+    ".github/workflows/https-key-provider-signatures.yml": "5f784c86d30013bcfb9a0e6675371fd584084644d738bb448a64f9859cf6f412",
+    "docs/development/https-key-provider-ci-proof-packet.md": "89f1b27e0ca92144f0112e4693e43fe27f9f0c81053ef26e5b55baaf2c9256ec",
+    "tests/infrastructure/HttpsKeyProviders/download-archives.py": "c1b7d61452946d7b662e973b67535d7d75090a0f30d570fc1c4785840251fff6",
+    "tests/infrastructure/HttpsKeyProviders/resolved-37-archives.json": "8ed2ffab1478d381cf310b62e7c6b198bf47595e8e7100c16d2738fc6a4fee42",
+    "tests/infrastructure/HttpsKeyProviders/test_download_archives.py": "4683991a12264e8b34e96cb8062db5019f17100bf89870c5ac1d25453a707c56",
+    "tests/infrastructure/HttpsKeyProviders/test_verify_signatures.py": "5aaee4517f702b349a3ffbf98909c8e70fe132feb9894f17fadb26459bbc9d37",
+    "tests/infrastructure/HttpsKeyProviders/verify-signatures.py": "65d8256ed7f7d4d127838c89565efeeb6c2c6c864860108e64517e40db4b5af9"
+  },
+  "finalIndependentRecordReview": {
+    "expectedPublicFileHashes": 7,
+    "individualSignatureReceiptAcceptance": "NOT VERIFIED manualZIPpending",
+    "localLinks": 502,
+    "path": "/tmp/iga-linux-proof-rerun-independent-review/final-record-review.json",
+    "retainedMetadataAndCurrentCheckDigests": 11,
+    "sha256": "26101b44485f61c313ccaf16becbb290772c28e3c46ce01253dc4b813e9238f6",
+    "sourceCommit": "2c049f8683ac30faaab0d15ce753ba10a948444f",
+    "sourceHashes": 9,
+    "status": "PASS_REMOTE_METADATA_AND_CANONICAL_RECORDS_ONLY"
+  },
+  "independentPartialReview": {
+    "path": "/tmp/iga-linux-proof-rerun-independent-review/partial-review.json",
+    "sha256": "0dd313dae474a70cdefc2f8f4616d4dbe614c250d8146e090194605380bd5220",
+    "status": "PASS_METADATA_ONLY_ARTIFACT_REQUIRED"
+  },
+  "job": {
+    "jobs": [
+      {
+        "conclusion": "success",
+        "id": 111269428858,
+        "logs_url": null,
+        "name": "exact-37-signatures",
+        "run_id": 37145824111,
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Check out the proof source",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Check diagnostic safety cases without network",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Set up the exact approved SDK",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Capture source, runner and normal SDK trust candidates",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Acquire only the pinned official archives",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Verify all 37 normal signatures with direct exit receipts",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Require complete machine signature evidence",
+            "number": 8,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Preserve only diagnostic evidence, including failures",
+            "number": 9,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Set up the exact approved SDK",
+            "number": 17,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Check out the proof source",
+            "number": 18,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 19,
+            "status": "completed"
+          }
+        ]
+      }
+    ]
+  },
+  "limits": [
+    "No signature/platform acceptance inferred solely from jobSUCCESS",
+    "No trust/proxy/security/download-policy bypass",
+    "No merge/default/old pilot branch updates beyond exactapproved proofhead",
+    "No Azure resources/grants/spending/session/admission/dependencies/providerharness/production lifecycle/release",
+    "Unchanged C#/PG/build/format/runtime source not rerun; previous evidence historical",
+    "All sixhuman tasks/production decisions/ARL/G1-G9/Milestone2 open",
+    "BFF/HTTPS private board stale4346e0f since2026-10-02T19:50:45.775370+00:00 due separate publisher automaticrejection; no retry/bypass; preserveCycle14"
+  ],
+  "logHashMeaning": "connector-decoded UTF-8 job text, not raw downloadable log bytes",
+  "public": {
+    "additions": 1530,
+    "base": "main",
+    "base_sha": "31c61eaf17a2abbc3b4b87a674b057d0b2b75651",
+    "body": "## Scope\r\n\r\nRuns one isolated Ubuntu 24.04 package-signature diagnostic job for the fixed 37-archive experimental shared-key provider inventory. No application deployment, dependency integration, Azure credentials, OIDC, trust changes or production approval.\r\n\r\n## Verification\r\n\r\nLocally executed: 16 downloader and 18 verifier mocked safety tests, 10 independent mocked hostile cases, YAML/shell/Python syntax and static permissions/action/upload controls, exact seven-file export and secret checks. These are preparation checks. Actual Linux signature/platform evidence remains pending this run and independent receipt review.\r\n\r\nManifest SHA256: `8ed2ffab1478d381cf310b62e7c6b198bf47595e8e7100c16d2738fc6a4fee42`. SDK: `10.0.401`. Normal TLS/revocation/package trust; all 37 original archive hashes and direct verifier exits must match. Diagnostic receipts/logs only are uploaded under the existing repository retention default.\r\n\r\nThis draft PR contains only the reviewed proof workflow, manifest, downloader/verifier safety tooling and self-contained proof contract. No merge or release is requested.\r\n",
+    "changed_files": 7,
+    "closed_at": null,
+    "comments": [],
+    "commits": 2,
+    "created_at": "2026-10-03T17:10:57Z",
+    "deletions": 0,
+    "display_title": "Verify exact shared-key package signatures on Linux",
+    "display_url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/3",
+    "draft": true,
+    "head": "codex/https-cycle04-public-proof",
+    "head_repo_full_name": "pedrovolua-pixel/IGAMigrationTool",
+    "head_repo_id": 1389857966,
+    "head_sha": "cefd8354d69e00eb372f8efff457e9b175d3a6eb",
+    "merge_commit_sha": "e7e5f70ea67068fb20fe4f7c3a89a6c18e6d6b12",
+    "mergeable": true,
+    "merged": false,
+    "merged_at": null,
+    "number": 3,
+    "requested_reviewers": null,
+    "requested_team_reviewers": null,
+    "state": "open",
+    "title": "Verify exact shared-key package signatures on Linux",
+    "updated_at": "2026-10-03T18:52:14Z",
+    "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/3",
+    "user": {
+      "avatar_url": "https://avatars.githubusercontent.com/u/262221149?v=4",
+      "email": null,
+      "id": 262221149,
+      "login": "pedrovolua-pixel",
+      "name": "pedrovolua-pixel"
+    }
+  },
+  "recordedAtUtc": "2026-10-03T19:01:11.783013+00:00",
+  "retainedEvidence": [
+    {
+      "bytes": 899,
+      "path": "/tmp/iga-https-linux-proof-rerun/artifacts.json",
+      "sha256": "fe511f6ad513f732f76f021c2a13df0fe2d1232cb5982f1bd3ef9b21b4c266ca"
+    },
+    {
+      "bytes": 484,
+      "path": "/tmp/iga-https-linux-proof-rerun/completed-runs.json",
+      "sha256": "51e04f817cff2c9a8206422be74fdcbc935e54ee9325cc5abf8a70808b02ff7f"
+    },
+    {
+      "bytes": 821,
+      "path": "/tmp/iga-https-linux-proof-rerun/coordinator-metadata-check.json",
+      "sha256": "e272455452b4b6d97ff1f418690296dba864b6ecf9000d972fa0750f2b362e9b"
+    },
+    {
+      "bytes": 936,
+      "path": "/tmp/iga-https-linux-proof-rerun/expected-source-hashes.json",
+      "sha256": "a31743a2e4e26b6fc137dd57803578e6bbfa4f066c9bea99314314edc653201a"
+    },
+    {
+      "bytes": 476,
+      "path": "/tmp/iga-https-linux-proof-rerun/initial-runs.json",
+      "sha256": "9f9f33f2136c917eb3f08e84d37a95ed96c43c2fb4a1316b64bf895464438435"
+    },
+    {
+      "bytes": 39682,
+      "path": "/tmp/iga-https-linux-proof-rerun/job.log",
+      "sha256": "3cf4f1e8706c53bd0998a69e24886df4e2af45f98f765ade30a5d1438aa64914"
+    },
+    {
+      "bytes": 2266,
+      "path": "/tmp/iga-https-linux-proof-rerun/jobs.json",
+      "sha256": "50fa03495d1c8dbcbc2a493cf785b8ccb835c993ef65ef01e6077da8586313ff"
+    },
+    {
+      "bytes": 2348,
+      "path": "/tmp/iga-https-linux-proof-rerun/pr-readback.json",
+      "sha256": "66e752d911b2f1d3099c7136aea377d6b6e9c95f5de4035682daec51878523e5"
+    },
+    {
+      "bytes": 2513,
+      "path": "/tmp/iga-linux-proof-rerun-independent-review/partial-review.json",
+      "sha256": "0dd313dae474a70cdefc2f8f4616d4dbe614c250d8146e090194605380bd5220"
+    }
+  ],
+  "retentionMeaning": "Observed artifact expiry roughly90days only; no product policy or exact repository retention configuration attestation",
+  "run": {
+    "workflow_runs": [
+      {
+        "conclusion": "success",
+        "id": 37145824111,
+        "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37145824111/jobs",
+        "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37145824111/logs",
+        "name": "HTTPS key provider signatures (artifact prerequisite only)",
+        "run_number": 2,
+        "status": "completed",
+        "workflow_id": 374055575
+      }
+    ]
+  },
+  "schemaVersion": 1,
+  "sourceBindings": [
+    {
+      "path": "docs/development/https-key-provider-linux-run-result.md",
+      "sha256": "159a4e7ffb80745eb772c9574893714d047d61e37867752dce0f812fdab85cd9"
+    },
+    {
+      "path": "docs/development/https-key-provider-public-export-approval.md",
+      "sha256": "9fa69b13785137564e1acc8f092f858219d4e74ce72af2c532ce5dd752622758"
+    },
+    {
+      "path": "docs/development/https-production-test-packet.md",
+      "sha256": "01c9a3b508085b41800e04f1eaae02b86f45bb854edd1f3960ea8777fc1a5837"
+    },
+    {
+      "path": "plans/active/https-key-provider-linux-proof-run.md",
+      "sha256": "9711a3709fb597e07beab4ea4d471ae045397ff3836d7690480f241376dab0e2"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "f65730b9cb780c5cce0797831249b78095a6e700d590fda21455745f11fcb156"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "ae4ee837097327e98a1a72cc1eec10232fe9d94a33c2b99bfa3f7b0bb0677e7c"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "cc0fe97ccbb4d121cdbb5a4c17c4d67a370dd8298229dd61ebefdc89a899edfc"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "4e5101901b3b7a182e4321a99eae343efcd56a47221eb1a8886ce4c0cdd5d325"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "94c5470554c75423ba04a3db052339538e5aa9aeeae0c01a8b39647f0ebac8b2"
+    }
+  ],
+  "status": "REMOTE_JOB_SUCCESS_INDEPENDENT_SIGNATURE_RECEIPTS_NOT_VERIFIED"
+}

@@ -45,7 +45,7 @@ export function DraftReportView({ report }: { report: ReportDraft | null }) {
       <p className="draft-digest">
         Canonical draft digest: <code>{snapshot.canonicalContentDigest}</code>
       </p>
-      <div className="draft-view-controls" aria-label="Draft view">
+      <div className="draft-view-controls" role="group" aria-label="Draft view">
         {(
           [
             ['summary', 'Summary draft'],
