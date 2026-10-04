@@ -1,6 +1,6 @@
 # Native publication v1 independent oracle addendum
 
-Status: PROPOSED EXACT FREEZE — RR-P03; coordinator review precedes core hashing
+Status: FROZEN — coordinator reviewed d52189f; original vector checkpoint51272d2 precedes core hashing
 Date: 2026-10-03
 Baseline: integrated `b6c806e`, reviewed RR-P02 `4391d27d6760e3c457b9c9b61a6fcaf4527ab949`
 Ownership: independent oracle author; this addendum and `tests/unit/ReportPublication.Tests/` only
@@ -98,6 +98,10 @@ Findings severity/state/method preserve RR-P02 exact enums without aliases. Conf
 Manifest keys/types remain exactly RR-P02's manifest table. `artifactInputs` is an array of `{kind,digest,byteLength}` with kind Projection/Score, exactly one of each and exact independently measured canonical lengths/digests. Manifest `provenance`, `retention`, `requiredCategories`, `requiredFields`, `inputs`, `sourceDigest`, `projectionDigest`, `scoreDigest` repeat their original commitments. Classification is MinimizedDerivedReport. `createdBy` is exactly `{tenantId,objectId}` from the verified actor; createdAtUtc is trusted transaction time, not fixture authority in production. ApprovalState is PublishedWithWarnings iff warning set nonempty. ReportVersionId is server-owned UUID. No report UUID/created time is inserted back into original sourceDigest.
 
 Audit/event/publication/read receipt and read-request field sets are the reviewed RR-P02 Closed audit and receipt bytes section, copied literally by independent vectors. Audit `scope` uses four-field scope or null with null resourceKind/resourceId. Verified Human actor or Anonymous/null; sequence canonical positive string; previousEventDigest all-zero only at genesis. Successful publication targets Run; successful exact read targets ReportVersion. The native audited failure stream is not manufactured authority when scope/identity is unresolved. Receipt links are checked against original event bytes/hash, request/command hash and the exact committed report. Unknown commit is never converted into a known Failed event.
+
+## RR-P04 structural linkage clarification
+
+The coordinator-selected linkage clarification in the native contract applies before codec guards: mandatory severe review flags/warnings, exact finding/coverage category and kind matching, provenance-bound SourceLimitation, record-section-specific markers and no standalone metadata marker IDs. IDs are unique within declared collection identities, not globally. Owning terminal-state labels are preserved independently of numeric coverage gaps. Original source-limitation golden bytes remain valid and unchanged.
 
 ## Independent evidence and scope
 
