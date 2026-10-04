@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-wire-scenarios-v1",
+  "sourceSnapshot": "9ee3500e",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "credit": "portable wire/bound-operation only; no35SQLexecution/18persisted/sessionbinding/currentauthority credit",
+  "cases": [
+    {
+      "name": "actor-scope-original-command-envelopes",
+      "expected": "For three original RR-P03 publication command vectors, Scope/Actor bytes equal independent literal closed sorted property envelopes copied from original bytes, preserving assessmentId and numeric-string securityVersion."
+    },
+    {
+      "name": "publish-and-read-existing-originalbytes",
+      "expected": "Bound Publish/Read bytes equal unchanged original command/read-request vectors and SHA256; native codec called only by source, never regenerate independent golden bytes."
+    },
+    {
+      "name": "bound-returnedbytes-ownership",
+      "expected": "Mutating CopyBytes output does not alter later copy or digest; returned bytes have separate ownership."
+    },
+    {
+      "name": "bound-meaning-canonical-equivalence",
+      "expected": "Command/request constructor copies with canonical-equal content, and only excluded correlation/invocation changes where allowed, match; actor/scope/resource/revision/digest/operation/warning tuple semantic changes refuse."
+    },
+    {
+      "name": "bound-admission-exact-owner",
+      "expected": "Exact actor/scope/purpose/resource/originaloperation and zero-offset deadline admission match; null or any changed binding/purpose or nonzero offset refuses. Actual deadline currentness remains original lease/session obligation."
+    },
+    {
+      "name": "token-copy-ordinal-set",
+      "expected": "Tokens copies caller collection, sorts ordinal ASCII closed token grammar, rejects null/empty/129character/control/slash/nonASCII/duplicate; valid empty and grammar boundary serialize exact arrays."
+    },
+    {
+      "name": "fixed-binding-no-empty-or-null",
+      "expected": "Customer/Stream/WriterBindingReferences all nonzero required; null and each zero refuse with closed argument error."
+    },
+    {
+      "name": "clock-utc7-exactticks",
+      "expected": "Exact UTC7 native value equals server ticks; tick mismatch/nonUTC/precision/calendar/null/offset alias refuses with fixed integrity marker."
+    },
+    {
+      "name": "null-invalid-typed-before-fields",
+      "expected": "Null actor/scope/commands/requests and zero or invalid scalar objects refuse via fixed marker/argument error before field access, not null dereference."
+    },
+    {
+      "name": "digest-independent-known-bytes",
+      "expected": "Digest equals independent SHA256 known literal bytes including empty, ASCII, embedded NUL and raw UTF8; lowercase64hex without prefix."
+    }
+  ]
+}
