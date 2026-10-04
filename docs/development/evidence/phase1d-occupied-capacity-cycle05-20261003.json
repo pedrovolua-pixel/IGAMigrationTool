@@ -2128,5 +2128,13 @@
     "path": ".sites-work/phase1d-cycle05-evidence/initial-preservation-manifest.json",
     "artifacts": 72,
     "sha256": "48e167ec0ca5225561d023f7a388241a2ae272645df18003b89298abbd5b92e3"
+  },
+  "laterIndependentIntegration": {
+    "rootCommit": "2b76e3a",
+    "owner": "M08 cycle07 coordinator",
+    "changedPreviouslyPinnedPath": "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs",
+    "preserved": true,
+    "threeMcpTestedPathsStillExact": true,
+    "qualification": "332pins apply to frozen e0d6a67 and equivalent413bd13 Phase1D source; another owner's subsequent M08 patch changes its own source. No claim that full hosted checks on413bd13 validate the later combined root commit. M08 evidence remains under its own canonical records."
   }
 }
