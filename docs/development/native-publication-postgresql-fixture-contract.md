@@ -1,6 +1,6 @@
 # RR-P05: native publication PostgreSQL fixture contract
 
-Status: REVISED FOR INDEPENDENT REVIEW — coordinator-selected design recorded below; documentation only; persistence implementation not authorized by this document
+Status: FROZEN — independently accepted fdefd8e; coordinator authorizes bounded P05A/P05B in the execution plan; this design itself records no runtime evidence
 Date: 2026-10-03
 Owner: Native publication worker; coordinator owns solution, CI, canonical plans/status and deployment
 Native core baseline: `8881c1cf4efe214afe4779221970070d4ecfc4db`

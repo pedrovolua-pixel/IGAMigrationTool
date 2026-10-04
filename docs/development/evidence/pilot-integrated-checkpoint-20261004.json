@@ -67,6 +67,31 @@
         "status": "PASS"
       },
       "correction": "MoveverifiedGitcommithashoutofkeyword-bearingreviewstatusstringintotypedscannerreviewfields;noallowlistchange;nextpushpending"
+    },
+    "correctedIntegratedHead": {
+      "commit": "8a6037a5691808748c6f36fc6ee1fd617fae646e",
+      "bootstrap253": {
+        "runId": 37173794842,
+        "Windows2022": "PASS",
+        "Windows2025": "PASS",
+        "Linux": "FAILstep56after125AI-previewchecks;hiddenclosedcontrolsincorrectlymeasured",
+        "browser": "151.0.7922.34",
+        "passedThrough": "draft-reportandstructuredrecommendationbrowserflows"
+      },
+      "package163": {
+        "runId": 37173794832,
+        "status": "PASS"
+      },
+      "httpsSignature8": {
+        "runId": 37173794825,
+        "status": "PASS"
+      },
+      "correction": {
+        "sourceCommit": "2b6afdc",
+        "governingPacket": "547d9f2",
+        "visibleTargetControls": "PASS5exact-sourcecallback;Chromium151.0.7922.34",
+        "fullGuardedDriver": "NOTVERIFIEDuntilnewhostedrun;local55433belongselsewhere"
+      }
     }
   },
   "originalFailures": [
@@ -77,11 +102,12 @@
     "Draftfirstinvocationrefusedwrongdisposabledatabase;dedicatednewownedv6/v7fixturescreatedwithoutguardchanges",
     "Defaultsecretscan10falsepositivesindependentlyrecomputed5syntheticgroupdigests;firstcolumn-offsetallowancefailed;finalfull-fieldboundarypasses3positive/negativecontrols",
     "IndependentLOWnested-copyallowancefinding;exactrepository-relativeanchorcorrected;all6independentcontrols+fullscanPASS",
-    "Linuxbootstrap252failedonegeneric-api-keymatchinnewcanonicalreviewfield;exacttrackedGitarchiveindependentlyreproducedmatchasverifiedGitcommithash;structuredscannerreviewfieldsavoidfalsepatternwithoutnewallowance"
+    "Linuxbootstrap252failedonegeneric-api-keymatchinnewcanonicalreviewfield;exacttrackedGitarchiveindependentlyreproducedmatchasverifiedGitcommithash;structuredscannerreviewfieldsavoidfalsepatternwithoutnewallowance",
+    "Hosted253LinuxAI-previewfailed125checksattarget-sizepredicatebecausehiddenclosedcontrolsmeasured;visibleenabledcorrectionretains24pxandenforcesbothdimensions;fullreplaypending"
   ],
   "limits": [
     "RealOneIdentitySQLexecution/signedregistry/permissions/nativecodecs/historySP18-SP19NOTVERIFIED;noactivation",
-    "Native18persistedcasesPLANNED;P05designunderindependentreviewwithcommit-timeexpiry/lockorder/cancellationconcerns",
+    "Native18persistedcasesPLANNED;P05designindependentlyaccepted;boundedadapter/verifierpacketsassigned",
     "RemainingcurrentUIAI/artifact/task/Phase1Bbrowserchecksawaitdedicatedhostedfixtures;theiroriginalport/databaseguardsunchanged",
     "FullsupportedWindowsbrowser/NVDA/Narrator/PDFmanualacceptanceNOTVERIFIED",
     "OriginalownedPGcluster56283checkpointerremainsuninterruptible;shutdownrequestednotconfirmed;newseparatecluster56284works",
@@ -188,6 +214,14 @@
     {
       "path": "work/release-readiness-20261003/site-combined-render.json",
       "sha256": "ba9591e2eec52a65493de48d6730d1c19953f0583d52aa38a81612e8e9329f99"
+    },
+    {
+      "path": "work/release-readiness-20261003/hosted253-ai-preview-original-failure.log",
+      "sha256": "87f424fb33ddd25b20b93a25ed262ee057ef746792ee3cfa10fa46c102839d5e"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-measurement-controls.json",
+      "sha256": "e6e03a024987143edccee425ada0353208d7d771bd2b5d9612ee5df1a84cb236"
     }
   ],
   "reviews": {
@@ -198,5 +232,16 @@
       "sourceCommit": "a9975634134b9bef2411424e9026ded5377c28fe",
       "result": "5recomputeddigests,10fields,sixcontrols+fullscanPASS;LOWnested-copyfindingCLOSED"
     }
+  },
+  "nativePersistence": {
+    "designCommit": "fdefd8e79fa108bb099e5922e9a49b87a6a1a50e",
+    "designSha256": "a2e81c399cfbb04aecf84c4f6e4e1a09df38bdca7fc0a27abc02e64bc6896d50",
+    "integratedDesign": "5f3e9b6",
+    "review": "ACCEPTEDnonauthor;35signatures/6byte-receipts/5branches;noSQLruntimecredit",
+    "packets": "P05B18-case/grant-expectationsbeforeP05Adependentcode;coordinatorP05Cintegration",
+    "persistedCases": "PLANNED18;NOTEXECUTED",
+    "localPostgreSql": "18.4freshownedfixture56284",
+    "hostedPostgreSql": "existingpinned18.4image",
+    "activation": "disabledordinaryhost/customer/source/provider/cloud/MCP"
   }
 }
