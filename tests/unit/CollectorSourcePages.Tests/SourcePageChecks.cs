@@ -257,6 +257,27 @@ internal static class SourcePageChecks
                 result.Outcome == (transportFailure ? SourcePageOutcome.Disconnected : SourcePageOutcome.Refused) &&
                 result.Reason == (transportFailure ? SourcePageReason.TransportFailure : SourcePageReason.PortFailure));
         }
+        foreach (var scenario in new[] { "caller", "retention", "deadline" })
+        {
+            fixture = new(); using var cancel = new CancellationTokenSource();
+            var limits = fixture.Limits(timeout: scenario == "deadline" ? TimeSpan.FromSeconds(1) : null);
+            if (scenario == "retention")
+            {
+                fixture.Descriptor = fixture.Descriptor with { MaximumDuration = TimeSpan.FromHours(2) };
+                fixture.Pair = fixture.MakePair(); fixture.Binding = fixture.MakeBinding();
+                fixture.History = new(SourceHistoryState.Initial, fixture.Clock.GetUtcNow() - TimeSpan.FromHours(1) + TimeSpan.FromSeconds(1), null);
+                limits = fixture.Limits(duration: TimeSpan.FromHours(2));
+            }
+            fixture.Hooks["read"] = () =>
+            {
+                if (scenario == "caller") cancel.Cancel(); else fixture.Clock.Advance(TimeSpan.FromSeconds(2));
+                throw new OperationCanceledException("fictional-canary");
+            };
+            result = await fixture.Kernel().RunPageAsync(fixture.Request(limits: limits), cancel.Token);
+            Check("actual cancellation state keeps OCE precedence", result.Page is null && result.Receipt is null &&
+                result.Outcome == (scenario == "caller" ? SourcePageOutcome.Canceled : scenario == "retention" ? SourcePageOutcome.Expired : SourcePageOutcome.TimedOut) &&
+                result.Reason == (scenario == "caller" ? SourcePageReason.None : scenario == "retention" ? SourcePageReason.Retention : SourcePageReason.Deadline));
+        }
         fixture = TypedFixture([new("K", "int", false, FieldClassification.ApprovedReference), new("F", "varchar(16)", false, FieldClassification.ApprovedReference)],
             [SourceNativeValue.Integer("int", 0), SourceNativeValue.Text("varchar(16)", new string('q', 17), 17)]);
         result = await fixture.Kernel().RunPageAsync(fixture.Request(), default);
