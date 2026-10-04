@@ -93,6 +93,27 @@ RawRefuse("noncanonical-decimal", b => Encoding.UTF8.GetBytes(Encoding.UTF8.GetS
 RawRefuse("unknown-nested-key", b => Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(b).Replace("\"inputs\":{", "\"inputs\":{\"rawSql\":null,", StringComparison.Ordinal)));
 RawRefuse("omitted-field", b => Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(b).Replace("\"modelVersion\":null,", "", StringComparison.Ordinal)));
 RawRefuse("null-array", b => Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(b).Replace("\"acceptedRisks\":[]", "\"acceptedRisks\":null", StringComparison.Ordinal)));
+Check("typed-sets-sort-to-original-frozen-bytes", () =>
+{
+    var source = Original("warned.source.json");
+    void Reverse(JsonNode array)
+    {
+        var values = array.AsArray().Select(v => v!.DeepClone()).Reverse().ToArray();
+        array.AsArray().Clear(); foreach (var value in values) array.AsArray().Add(value);
+    }
+    Reverse(source["requiredCategories"]!); Reverse(source["requiredFields"]!); Reverse(source["provenance"]!);
+    Reverse(source["projection"]!["warnings"]!);
+    Exact("warned.source.json", NativePublicationCanonicalV1.SourceBytes(FixtureLoader.Source(source)));
+});
+RawRefuse("unsorted-warning-set", _ =>
+{
+    // Replace only original frozen array bytes so no test encoder adds escapes.
+    using var doc = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(directory, "warned.projection.json")));
+    var raw = doc.RootElement.GetProperty("warnings").GetRawText();
+    var items = doc.RootElement.GetProperty("warnings").EnumerateArray().Select(v => v.GetRawText()).Reverse();
+    return Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(File.ReadAllBytes(Path.Combine(directory, "warned.projection.json")))
+        .Replace(raw, "[" + string.Join(",", items) + "]", StringComparison.Ordinal));
+});
 Refuse("zero-revision", "completed", n => n["runRevision"] = "0");
 Refuse("zero-scope", "completed", n => n["scope"]!["customerId"] = Guid.Empty.ToString());
 Refuse("invalid-input-digest", "completed", n => n["inputs"]!["baselineDigest"] = "A" + new string('0', 63));
