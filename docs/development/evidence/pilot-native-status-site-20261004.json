@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "pilot-private-site-receipt-v1",
+  "siteProjectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+  "sourceCommit": "ed1c155209c070e19c80459ef04752f633dd42ed",
+  "canonicalCheckpoint": "60ebff3894eded489c2d3e22754d3b5f86cfa99b",
+  "deploymentId": "appgdep_6ac1b90a1f1c8191afa88ff7acb62a25",
+  "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_427c53722494819196a63a2102bcd74b",
+  "status": "succeeded",
+  "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+  "confirmedAtUtc": "2026-10-04T02:25:21.510195+00:00",
+  "taskCount": 14,
+  "gateStatus": "G0PASS;G1-G9NOTVERIFIED",
+  "limitations": "Historicalsnapshot;latercombinedchecksreceivelaterpublication"
+}

@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "pilot-integrated-checkpoint-v1",
+  "date": "2026-10-04",
+  "codeCheckpoint": "615e60838c0fdebd0ea4fb025ad6a2cda226f8bf",
+  "authority": "Owner-approved continuous pilot execution; original approved implementation plan remains authoritative",
+  "checks": {
+    "lockedRestore": "PASS123projects",
+    "solutionFormat": "PASS",
+    "releaseBuild": "PASS0warnings0errors123projects",
+    "architecture": "PASS7policy4scan",
+    "defaultSecretScan": "PASSexactrepositorypath/rule/5literalfictionalSHAallowance;independentlyreviewed",
+    "collectorAuthored": "PASS59SQLfamily+225scriptedkernel=284",
+    "collectorIndependent": "PASS55",
+    "nativeCodec": "PASS157",
+    "nativeFlow": "PASS58",
+    "frontend": "PASScontract/typecheck/Vite/format"
+  },
+  "browser": {
+    "consultant": 385,
+    "analysis": 718,
+    "reviewMaturity": 2180,
+    "draftReports": 2095,
+    "recommendationGuidance": 2923,
+    "status": "PASSboundedengineering;latestkeyboard-helperreplayPASS718",
+    "actualPostgreSql": "18.4freshownedloopbackfixture;actualprocessrestartwhereexplicitdriverrecorded",
+    "chromium": "141.0.7390.37",
+    "node": "24.21.0",
+    "axe": "4.13.0;zero confirmed violations;color-contrast INCOMPLETE"
+  },
+  "sourcePins": {
+    "collectorCorrection": "d0191a1d95177de9baf4a3a4e3806df3c55c0040",
+    "collectorFinalAuthoredCases": "f72a547ba989e70b08ee5c5bdd118c9c76cf657d",
+    "collectorIndependent": "3ce4116",
+    "nativeFlowCorrection": "8881c1cf4efe214afe4779221970070d4ecfc4db",
+    "originalNativeGoldens": "51272d2",
+    "approvedUIRoot": "e83e234",
+    "uiIntegration": "3b3c0cd+678e258;documentation49823c0"
+  },
+  "hosted": {
+    "commit": "60ebff3894eded489c2d3e22754d3b5f86cfa99b",
+    "bootstrap251": {
+      "id": 37170762866,
+      "status": "PASSLinux+Windows2022+Windows2025"
+    },
+    "package161": {
+      "id": 37170762870,
+      "status": "PASS"
+    },
+    "httpsSignature6": {
+      "id": 37170762817,
+      "status": "PASS"
+    },
+    "newerIntegratedHead": "PENDINGnewpush;priorhostedPASSdoesnotcovercurrentUI/sourcecorrections"
+  },
+  "originalFailures": [
+    "SourceunsolicitedOCEfalsecaller-cancel and rejectednativepayloadcounter;bothindependentlyclosed",
+    "Nativeoriginalflow7failures,intermediate1failure;closedat58PASSwithoriginaltracesretained",
+    "UIoldlanding/hidden-targetdriverfailuresretained;realnavigationandrendered-targetchecks",
+    "Analysisfirstkeyboardretry703checktimeout;unchangedapplicationdiagnostic708PASS;RAFhelpercompletionmadeexplicit",
+    "Draftfirstinvocationrefusedwrongdisposabledatabase;dedicatednewownedv6/v7fixturescreatedwithoutguardchanges",
+    "Defaultsecretscan10falsepositivesindependentlyrecomputed5syntheticgroupdigests;firstcolumn-offsetallowancefailed;finalfull-fieldboundarypasses3positive/negativecontrols",
+    "IndependentLOWnested-copyallowancefinding;exactrepository-relativeanchorcorrected;all6independentcontrols+fullscanPASS"
+  ],
+  "limits": [
+    "RealOneIdentitySQLexecution/signedregistry/permissions/nativecodecs/historySP18-SP19NOTVERIFIED;noactivation",
+    "Native18persistedcasesPLANNED;P05designunderindependentreviewwithcommit-timeexpiry/lockorder/cancellationconcerns",
+    "RemainingcurrentUIAI/artifact/task/Phase1Bbrowserchecksawaitdedicatedhostedfixtures;theiroriginalport/databaseguardsunchanged",
+    "FullsupportedWindowsbrowser/NVDA/Narrator/PDFmanualacceptanceNOTVERIFIED",
+    "OriginalownedPGcluster56283checkpointerremainsuninterruptible;shutdownrequestednotconfirmed;newseparatecluster56284works",
+    "G0PASS;G1-G9/fullM01-M12acceptanceOPEN;14humanroles/document/doneconditionsretained"
+  ],
+  "activation": "No ordinaryhostnativeadapter/customer/cloud/provider/PDF/MCPactivation",
+  "privateSite": {
+    "lastConfirmedSource": "ed1c155209c070e19c80459ef04752f633dd42ed",
+    "newSnapshot": "PENDINGsame-cyclepublication"
+  },
+  "logs": [
+    {
+      "path": "work/release-readiness-20261003/integrated123-restore.log",
+      "sha256": "051a2855c7f29633d2787fbade1a6d82a0f2641507df3f05bd55b9c2884aead5"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-build.log",
+      "sha256": "1dc21050d7d693f1d1e4e1f62d12ec554363f31a0e1e86a85fbd063c8b7c3001"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-gitleaks-final.log",
+      "sha256": "2efde733c44f9128878455ed03aeaceedaa6c7b662ed9b342c3860d2b6ac6417"
+    },
+    {
+      "path": "work/release-readiness-20261003/source-pages-corrected-integrated-tests.log",
+      "sha256": "e7cd3a3cbf7b63e73a26763f8095842819b9c3b161056c1d122521dc30fe1e21"
+    },
+    {
+      "path": "work/release-readiness-20261003/source-pages-independent-integrated-tests.log",
+      "sha256": "016ba7341d7215d61f2aa391d5c3aa01633f329baa040afb23a25552b67629d5"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-final-integrated-tests.log",
+      "sha256": "9c8d042a14efa1c13661665c701ab06a218a0212de79a949e8f7c7d5c0489fe1"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-final-build.log",
+      "sha256": "c49207d0e5d89d04f70039e9ea62c9d48e6c16c04c89173ba036b610b983c956"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-final-format.log",
+      "sha256": "3e72da6df4a5aec963ee5760ce0bbe3d902a507ef8a7e60663c7581dfbe07f1d"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-consultant-browser-replay.log",
+      "sha256": "4bebd523ffbccfa30531b547ef2117f55ad1ac9b8327e0b119c8f8d7c8979781"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-analysis-browser-diagnostic.log",
+      "sha256": "67e2018127f40937357adaf265f34acd8c04f57a791cae66cd334fc26dc7263d"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-review-browser.log",
+      "sha256": "057173d8ef40aa532b71d436c4405f8d2f2b16abab58fd3d66068280d2ea5954"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-draft-reports-browser-replay.log",
+      "sha256": "018e44bf5e6c90a9cb756e9dcd1e084a82ed4761e4864e9bd3fb095d5eba5562"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-recommendation-guidance-browser-replay.log",
+      "sha256": "c94d4fdfbb5dfc9eae6f4c413f9097c792d0e57bfe89ccff5b43f3fe2c23852c"
+    },
+    {
+      "path": "work/release-readiness-20261003/ui-gitleaks-negative-controls.json",
+      "sha256": "798b9241133a5493b26d92987326c143bcb09dd05dc1a32a45248e305701af4e"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-analysis-browser-final.log",
+      "sha256": "216ca9b0965fb026b59b6a65af1af80c4262478b19cf755406d1e2ba2febb91d"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-independent-review.json",
+      "sha256": "73dc3e4baf1027b3186d70f5f48287ec962c113a40a1a7242d520a0fc7f70972"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-gitleaks-anchored.log",
+      "sha256": "230842b04d6eda6ca06038c7651b298b45ce435cf3f839783eaccddec13b5304"
+    },
+    {
+      "path": "work/release-readiness-20261003/ui-gitleaks-independent-review.json",
+      "sha256": "31781eb5839e236762ec078076527b8c96982545439e8ddfb810a51139d9238a"
+    }
+  ],
+  "reviews": {
+    "collector": "Independent55PASS;bothfindingsCLOSED;3ce4116",
+    "UI": "Independentreview3b3c0cd+678e258+49823c0ACCEPTED;executedrootbrowserreceipts;notreviewerbrowserreplays",
+    "secretScan": "ACCEPTEDa997563;5digestsrecomputed,10fields,sixcontrols+fullscanPASS;LOWnested-copyfindingCLOSED"
+  }
+}
