@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-cancellation-observer-scenarios-v1",
+  "governingAmendment": "9cdf019ae542caaa7a4840799131505f752b4251",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "originalFailure": "4643300b1f2dccaf3c3adc75074385ba4e3e1d96",
+  "credit": "portable cancellation observation only; no physical backend/fence release claim",
+  "cases": [
+    {
+      "name": "original-stalled-dispatch-existing-pending-wait",
+      "expected": "Already waiting ignored-token dependency ends with OperationCanceledException while unrelated later original CTS callback remains stalled; zero late result. Original464 failure preserved."
+    },
+    {
+      "name": "newer-stalled-dispatch-existing-pending-wait",
+      "expected": "Already waiting ignored-token dependency ends with OperationCanceledException when newer per-dependency token canceled state becomes true while unrelated later callback stalls dispatch; zero late result."
+    },
+    {
+      "name": "original-and-newer-precanceled-entry",
+      "expected": "Original or newer already canceled token denies before protected action; no dependency starts."
+    },
+    {
+      "name": "source-disposed-before-observer-admission",
+      "expected": "Disposed original caller source refuses lease construction and disposed per-dependency source refuses Invoke before protected action; no null/generic data result or callback fault escaping."
+    },
+    {
+      "name": "caller-wait-handle-remains-owned",
+      "expected": "Caller creates cancellation WaitHandle; lease disposal and repeated cleanup never disposes that handle. Caller can continue observing false/current then true/canceled state and only caller disposes source."
+    },
+    {
+      "name": "noncancelable-admission-and-operation",
+      "expected": "CancellationToken.None successfully invokes current action without demanding caller WaitHandle; no observer for a noncancelable source. Verify source inventory and executable currentness, no invented private allocation counter."
+    },
+    {
+      "name": "cleanup-before-raced-caller-cancellation",
+      "expected": "Dispose lease then cancel caller; raced observer cannot start protected work, return late dependency output, skip timer cleanup or throw. Timers dispose once and original token canceled."
+    },
+    {
+      "name": "dispose-pending-wrapper-before-caller-signal",
+      "expected": "Dispose active lease while caller remains current and dependency ignores cancellation; pending wrapper ends, repeated disposal safe, later caller cancellation cannot restore access."
+    },
+    {
+      "name": "original-cutoff-and-monotonic-unchanged",
+      "expected": "Original expiry/narrowed cutoff/UTC rollback continue to end waits without a new validity window or polling-based extension; existing exact portable corpus retains same result."
+    },
+    {
+      "name": "outsidegate-fault-contained-registration-dispatch",
+      "expected": "Existing throwing/stalled owned callback controls continue passing; observer only ends lease/cancel signal, owner registrations unregistered and cancellation sources disposed after callbacks complete."
+    }
+  ]
+}
