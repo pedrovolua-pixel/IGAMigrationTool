@@ -1,0 +1,174 @@
+{
+  "cycle": "Phase1D cycle07 selective occupied cursor reclamation",
+  "date": "2026-10-03",
+  "status": "PRIVATE CHECKPOINT CONFIRMED — final closure republication follows",
+  "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+  "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+  "opening": {
+    "version": 118,
+    "source": "95c64c17e85ec77ff08abd89ff57addec8a56154"
+  },
+  "local_checkpoint": {
+    "deployment": {
+      "id": "appgdep_6ac1a956ff348191965308381ae82332",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_d09c7ca3e5448191bf8e9f26ec186b7e",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-04T01:18:21.346089+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_d09c7ca3e5448191bf8e9f26ec186b7e",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "version_number": 119,
+      "source": {
+        "commit_sha": "c66b75842969e04f121027cc6d42a74be4053fab"
+      },
+      "archive_storage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_00000000019481f585b49267ee08aa8f",
+        "content_hash": "sha256:e5e9d69cbe629df70989138733dbd4ecbb635aaad70b3c608bce7c7537016166",
+        "size_bytes": 143360,
+        "file_count": 2
+      },
+      "screenshot_url": null,
+      "deployment_id": "appgdep_6ac1a956ff348191965308381ae82332"
+    },
+    "audience": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "status": "active",
+      "current_user_role": "owner",
+      "latest_version_number": 119,
+      "access_mode": "custom",
+      "revision": 1,
+      "allowed_users": [
+        {
+          "role": "owner",
+          "is_external": false
+        }
+      ],
+      "allowed_groups": 0,
+      "external_visitor_count": 0,
+      "current_live_url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+    },
+    "archive_check": {
+      "status": "PASS",
+      "source": "c66b75842969e04f121027cc6d42a74be4053fab",
+      "archive_html_matches_committed_source": true,
+      "archive_manifest_path": "dist/.openai/hosting.json",
+      "local_archive_sha256": "aa9dbbcf0f7af7cf3d3622d9475e0cc14cd40a34a177743d02b88644bf148a2e",
+      "initial_validation_error": "expected root .openai/hosting.json; helper packages manifest inside static dist; corrected validation retains original failure; native deployment had already succeeded",
+      "server_hash_is_separate": true
+    },
+    "repository_snapshot": "66f3b99063c830950aaa98e559cf8782fefb8007"
+  },
+  "hosted_final": {
+    "status": "PASS",
+    "source": "f947d380c1e5c05127d4d4fde3c315671077d886",
+    "bootstrap_run": 243,
+    "bootstrap_id": 37166801380,
+    "package_run": 153,
+    "package_id": 37166801394,
+    "all_configured_jobs_and_steps_success": true,
+    "jobs": [
+      {
+        "id": 111331273948,
+        "name": "dotnet-bootstrap",
+        "steps": 69
+      },
+      {
+        "id": 111331274144,
+        "name": "collector-windows (windows-2022)",
+        "steps": 28
+      },
+      {
+        "id": 111331274146,
+        "name": "collector-windows (windows-2025)",
+        "steps": 28
+      },
+      {
+        "id": 111331273896,
+        "name": "bootstrap-package",
+        "steps": 10
+      }
+    ],
+    "linux_native_log_sha256": "61b60596cb5844b963618f3e013fda730e03f4629f2be1057803c7a53adf00a4",
+    "linux_cycle07_counts_matched": true,
+    "limits": "Configured partial engineering gate only; no customer/live/UAT/production acceptance"
+  },
+  "board_preservation": {
+    "status": "PASS",
+    "opening_source": "95c64c17e85ec77ff08abd89ff57addec8a56154",
+    "old_html_sha256": "876448779cca6b94f2b601a8398bfd9d45df6d951cd36320be6cfb3d95833922",
+    "new_html_sha256": "0df4ecd92d363b286efce7f1ea5ccf52e0c0f191792b904415a4e9d8e31f2111",
+    "open_tasks": 13,
+    "other_12_cards_byte_preserved": true,
+    "unowned_html_byte_preserved": true,
+    "own_changes": [
+      "new cycle07 section",
+      "own current footer",
+      "Phase1D actual integration task clarification"
+    ],
+    "repository_snapshot": "66f3b99063c830950aaa98e559cf8782fefb8007"
+  },
+  "independent_board_review": {
+    "status": "PASS",
+    "reviewer": "/root/p1d_c07_gap_review",
+    "scope": "read-only final cycle07 board compared with opening source/current AGENTS exception and canonical records",
+    "html_sha256": "0df4ecd92d363b286efce7f1ea5ccf52e0c0f191792b904415a4e9d8e31f2111",
+    "findings": [],
+    "evidence": [
+      "13 task cards; only Phase1D changed; other12 byte-identical",
+      "Every card has requested roles/source links/done conditions",
+      "Seven new immutable repository links resolve locally",
+      "Local publisher preparation distinct from actual client/source evidence, acceptance and activation authorization",
+      "Windows/package success and pending Linux consistent with preserved job observations"
+    ],
+    "limits": "No edits/runtime reruns/rendering/remote writes; root performed browser QA separately",
+    "raw_report": "Board review passed with no actionable findings. Reviewed HTML SHA256: 0df4ecd9…1f2111. No gate/task closures or expanded exposure appear."
+  },
+  "browser_checks": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "secret_check": {
+    "status": "PASS",
+    "site_scanned_bytes": 130769,
+    "closure_documents_scanned_bytes": 443852
+  },
+  "changes": "Add cycle07 execution/limits and actionable next local developer work; refine only Phase1D card to actual integration facts/acceptance; preserve other12 cards and all unowned HTML",
+  "remaining": "I01-I11 and all13 tasks open; full Phase1D/Milestone11/UAT/G1-G9 NOT VERIFIED; no runtime/config/dependency/migration/native activation",
+  "final_closure_publication": null
+}
