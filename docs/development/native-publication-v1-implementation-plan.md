@@ -63,3 +63,6 @@ Implement the coordinator-selected actor-first finite PostgreSQL lock mapping an
 
 
 RR-P05 final designfdefd8e is independently accepted, integrated5f3e9b6 and frozen in the [fixture contract](native-publication-postgresql-fixture-contract.md). The [coordinator packet record](../../plans/active/pilot-release-readiness-execution.md#rr-p05-persisted-implementation-packets--2026-10-04) assigns separate same-checkpoint author/verifier worktrees and exact paths. P05B freezes18case expectations/grant surface before P05A dependent code. Actual PostgreSQL18.4 restricted fixtures remain unexecuted; no runtime or acceptance credit follows design review.
+
+
+RR-P05 subject/error refinement documents the approved all-subject-session version requirement before dependent code: customer-local current subject projection, ordered subject/session keys, monotonic update and immutable history. The coordinator owns public accessibility of the existing fixed parameterless integrity marker; no adapter source-factory friendship is added. P05B appends explicit independent expectations, nonauthor review closes documentary gaps, then author implements affected authority functions. Other P05A work may continue within already frozen contracts.

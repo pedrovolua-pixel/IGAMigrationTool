@@ -114,3 +114,13 @@ Before dependent implementation, independent verifier commits `fixtures/persiste
 
 
 AI target correction8dea8be independently closes LOWUI-TARGET-001: real rendering visibility excludes the undersized closed-details descendant, while reopening it still refuses below24px. Five exact-source root and five independent Chromium151 controls PASS; selector/threshold/semantic checks/DBguards unchanged. Original125check hosted failure and intermediate4PASS/1FAIL review are retained. Full guarded hosted replay remains pending; no gate/manual accessibility credit. RR-P05 author/verifier worktrees share packet checkpointa3e7c5d; fresh2fictional databases/16role absence and owner receipt are recorded before controlled setup. Database setup and18persisted cases have not executed.
+
+
+The owner-private packet snapshot is confirmed at exactsitecf5b2e49/canonicald02cb0d: [deployment receipt](../../docs/development/evidence/pilot-native-postgresql-packet-site-20261004.json). Actual desktop/mobile layout checks pass, all14taskcards remain byte-identical, and native design/packet progress retains18persistedcases/fullgate limits. This publication introduces no source/identity/customer access or task closure.
+
+
+## RR-P05 subject/version and trusted error refinement
+
+P05B independent18case/35signature/15composite expectations froze at6232bbf before dependent adapter code. Preparation50207b7 adds only isolated module project/README/pinned dependency, with empty-assembly build; no runtime credit. Author preparation identified old exactactor4+S current rows could survive a security-version change. Current identity policy invalidates ALL subject sessions: select the [finite customer-local subject projection and subject-before-session lock](../../docs/development/native-publication-postgresql-fixture-contract.md#coordinator-subjectversion-and-error-marker-refinement--2026-10-04), preserving35signatures/bytes/scoped flags and immutable history. Verifier appends two-scope/two-session/lower-version/wait controls before affected authority code. Nonauthor review precedes that dependent implementation. Real cross-plane invalidation remains open.
+
+Coordinator also selects public accessibility of the existing sealed parameterless fixed-message PublicationIntegrityException rather than broad adapter SourceCapture friendship. Record native contract/test expectations first, obtain engineering review, then make only that minimal core accessibility edit and rerun existing codec/flows. Public source constructor and current test friendship remain unchanged; unknown errors stay dependency failures. No new request route, grant, activation or golden-byte change.
