@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "collector-source-page-independent-review-evidence-v1",
+  "packet": "RR-S07",
+  "date": "2026-10-03",
+  "ownedPaths": [
+    "tests/unit/CollectorSourcePages.Independent.Tests/**"
+  ],
+  "scenarioFreeze": "1cc913e",
+  "initialTests": "f9d4ed7f21991e077f78611598ac053ccf074feb",
+  "governingContract": "9e7c25e",
+  "scopeClarification": "4a4280fad7c3d0e218ebac15664886b8713ad609",
+  "correctionContract": "5c063b1efc675d8af42519783cbea45b30163ffa",
+  "originalSource": "18311aebbbdb9bf8bbfb3f14d56d3f2f0fe15298",
+  "acceptedSource": "d0191a1d95177de9baf4a3a4e3806df3c55c0040",
+  "sourceSnapshot": "/private/tmp/iga-rs07-source-d0191a1",
+  "trackedSourceFilesCompared": 8,
+  "allTrackedSourceFilesEqualGitBlobs": true,
+  "reviewSkills": [
+    "skills/review-feature/SKILL.md",
+    "skills/security-review/SKILL.md"
+  ],
+  "toolchain": {
+    "dotnet": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+    "sdk": "10.0.401",
+    "gitleaks": "/private/tmp/iga-parallel-tools/gitleaks",
+    "gitleaksVersion": "8.30.1",
+    "gitleaksRules": "default"
+  },
+  "initialIndependentRuns": [
+    {
+      "checks": 44,
+      "passed": 42,
+      "failed": 2
+    },
+    {
+      "checks": 53,
+      "passed": 51,
+      "failed": 2,
+      "log": "/private/tmp/iga-rs07-initial-53.log"
+    }
+  ],
+  "findings": [
+    {
+      "severity": "MEDIUM",
+      "location": "SourcePageKernel.cs:322",
+      "issue": "Unsolicited OperationCanceledException classified as user Canceled/None with live caller/deadline/retention.",
+      "reproduction": "unrequested-operation-cancellation-never-user-canceled",
+      "status": "CLOSED",
+      "correction": "Actual caller/expiry/deadline signals retain precedence; otherwise throwing transport or trusted port maps to the closed TransportFailure or PortFailure result.",
+      "finalControl": "Reader Disconnected/TransportFailure and trusted permission-port Refused/PortFailure; no page, no retained connection."
+    },
+    {
+      "severity": "LOW",
+      "location": "SourcePageKernel.cs:143",
+      "issue": "Received measurable width-invalid text omitted from BytesObserved before refusal.",
+      "reproduction": "rejected-native-width-payload-in-observed-counter",
+      "status": "CLOSED",
+      "correction": "Count measurable received row payload before native/schema admission; unknown lengths are never inferred; checked overflow closes.",
+      "finalControl": "int4 plus returned varchar17 counts21 before refusal; negative text length preserves known int4 only, no classification."
+    }
+  ],
+  "executed": [
+    {
+      "check": "Locked audited restore independent project",
+      "result": "PASS",
+      "exitCode": 0,
+      "newDirectPackages": 0
+    },
+    {
+      "check": "Independent final Release execution",
+      "result": "PASS",
+      "passed": 55,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "check": "Immutable original author suite fe79e65, source18311ae",
+      "result": "PASS",
+      "sqlChecks": 59,
+      "kernelChecks": 213,
+      "exitCode": 0
+    },
+    {
+      "check": "Immutable corrected author suite d0191a1",
+      "result": "PASS",
+      "sqlChecks": 59,
+      "kernelChecks": 222,
+      "exitCode": 0
+    },
+    {
+      "check": "Independent Release build --no-restore",
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0,
+      "exitCode": 0
+    },
+    {
+      "check": "Scoped dotnet format --no-restore --verify-no-changes with CollectorSourcePagesProject environment override",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "check": "Gitleaks8.30.1 dir owned subtree --redact --no-banner",
+      "result": "PASS",
+      "leaks": 0,
+      "exitCode": 0
+    },
+    {
+      "check": "git diff --check",
+      "result": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "commands": [
+    "/private/tmp/iga-dotnet-10.0.401/dotnet restore tests/unit/CollectorSourcePages.Independent.Tests/CollectorSourcePages.Independent.Tests.csproj --locked-mode -p:CollectorSourcePagesProject=/private/tmp/iga-rs07-source-d0191a1/src/collector/CollectorSourcePages/CollectorSourcePages.csproj",
+    "/private/tmp/iga-dotnet-10.0.401/dotnet run --project tests/unit/CollectorSourcePages.Independent.Tests/CollectorSourcePages.Independent.Tests.csproj --configuration Release --no-restore -p:CollectorSourcePagesProject=/private/tmp/iga-rs07-source-d0191a1/src/collector/CollectorSourcePages/CollectorSourcePages.csproj",
+    "/private/tmp/iga-dotnet-10.0.401/dotnet build tests/unit/CollectorSourcePages.Independent.Tests/CollectorSourcePages.Independent.Tests.csproj --configuration Release --no-restore -p:CollectorSourcePagesProject=/private/tmp/iga-rs07-source-d0191a1/src/collector/CollectorSourcePages/CollectorSourcePages.csproj",
+    "CollectorSourcePagesProject=/private/tmp/iga-rs07-source-d0191a1/src/collector/CollectorSourcePages/CollectorSourcePages.csproj /private/tmp/iga-dotnet-10.0.401/dotnet format tests/unit/CollectorSourcePages.Independent.Tests/CollectorSourcePages.Independent.Tests.csproj --no-restore --verify-no-changes",
+    "/private/tmp/iga-parallel-tools/gitleaks dir tests/unit/CollectorSourcePages.Independent.Tests --redact --no-banner",
+    "git diff --check"
+  ],
+  "limitations": [
+    "Scripted trusted decisions are neither signed-registry proof nor actual source-access/effective-permission evidence.",
+    "Native integer ordering and UID equality are fictional fixture semantics; no vendor/collation authority is invented.",
+    "Optional UID conflicts cover current page only; no extraction-wide UID inventory or deduplication claim.",
+    "Physical provider/SQL and durable source codec/history integration remain SP18/SP19 NOT VERIFIED.",
+    "No ordinary host registration, migration, configuration or production activation occurred.",
+    "Shared solution/CI inclusion and full integrated checks are coordinator-owned."
+  ]
+}

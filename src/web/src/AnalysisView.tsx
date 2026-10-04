@@ -270,6 +270,7 @@ export function AnalysisView({
             run={run}
             analysis={response}
             preview={<AiProposalPreview preview={response.aiPreview} run={run} />}
+            initialProposalView={retryFocus.current === run.runId && response.aiPreview !== null}
             onSettings={onNavigateWorkspace ? () => onNavigateWorkspace('Settings') : undefined}
           />
         </div>
@@ -731,6 +732,7 @@ export function AnalysisView({
             run={run}
             analysis={response}
             preview={<AiProposalPreview preview={response.aiPreview} run={run} />}
+            initialProposalView={retryFocus.current === run.runId && response.aiPreview !== null}
             onSettings={onNavigateWorkspace ? () => onNavigateWorkspace('Settings') : undefined}
           />
         </div>

@@ -85,3 +85,13 @@ A false required purge-protection input emits null, omitting the optional proper
 ## Stored deployment sources
 
 [Deployment template inventory](deployment-template-inventory.md) maps every composed source file to the two executed synthetic sessions, records original/repaired Git revisions and distinguishes repository parameters from protected ephemeral Azure inputs and portal bootstrap settings. The [detailed architecture](../../architecture/diagrams/05-azure-development-foundation.md) shows the tested configuration and future application paths.
+
+
+## Optional private browser development access
+
+The [Bastion handoff](../../docs/development/bastion-development-access.md) describes the accepted local template packet and protected preflight. The [separate access entry point](pilot-development-private-browser-access.bicep) composes a private Windows development desktop/Bastion Developer and default-domain browser DNS against an existing foundation; it does not recreate the disposed environment or change app ingress. [Inputs](environments/pilot-dev-private-browser.parameters.example.json) deliberately contain nulls and omit the owner-supplied secure password. Pinned build/lint, negative policies and provider-binding commands are in the [workstation tests](../../tests/infrastructure/PrivateBrowserAccess/README.md) and [DNS tests](../../tests/infrastructure/PrivateBrowserDns/README.md). Compilation/input consistency do not authorize a paid session or establish effective NSG/platform/TLS/login behavior.
+
+
+## Disabled HTTPS pilot environment preparation
+
+The owner accepted [ADR-0011](../../architecture/decisions/ADR-0011-https-pilot-portal.md) for bounded local preparation. [HTTPS-P01 checks and protected binding instructions](../../tests/infrastructure/HttpsPortal/README.md) cover the stored external environment module, required false-only root composition and intentionally incomplete example. There is no portal app, public admission, live login, grant or paid deployment. Do not use the disabled diagnostic BFF image as a production portal. The [next production packet](../../docs/development/https-pilot-portal-next-packet.md) records the remaining contracts and approvals.

@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
@@ -489,6 +490,7 @@ try {
   let uiData = await ready(uiRun.runId);
   guidance(uiData);
   await page.goto(base);
+  await showAssessments(page);
   const section = page.locator(".recommendation-guidance");
   async function refresh() {
     const response = page.waitForResponse(
@@ -979,6 +981,7 @@ try {
       await route.fulfill({ response: r, json: d });
     });
     await page.reload();
+    await showAssessments(page);
     await page
       .getByRole("button", { name: "Retry analysis", exact: true })
       .waitFor();
@@ -1011,6 +1014,7 @@ try {
     await route.fulfill({ response: r, json: d });
   });
   await page.reload();
+  await showAssessments(page);
   await section.waitFor();
   eq(
     await section.locator(".guidance-finding").count(),
@@ -1025,6 +1029,7 @@ try {
   );
   await page.unroute(target);
   await page.reload();
+  await showAssessments(page);
   await section.waitFor();
   group(
     "RG-UI-002 source/content substitution refusal, focused same-revision retry and typed unavailable no fallback",
@@ -1041,6 +1046,7 @@ try {
     } catch {}
   });
   await page.reload();
+  await showAssessments(page);
   await seen;
   await select(healthyRun.runId);
   const focus = await page.evaluate(() => ({
@@ -1088,6 +1094,7 @@ try {
     sessionStorage.setItem("iga-v7-delay-digest", "once"),
   );
   await page.reload();
+  await showAssessments(page);
   await until(
     () => page.evaluate(() => window.__igaV7DigestWaiters?.length ?? 0),
     (n) => n > 0,
@@ -1121,6 +1128,7 @@ try {
   await stopHost();
   await launchHost();
   await page.reload();
+  await showAssessments(page);
   await section.waitFor();
   await visible(data);
   eq(
@@ -1154,6 +1162,7 @@ try {
     await route.fulfill({ response: r, json: d });
   });
   await page.reload();
+  await showAssessments(page);
   await section.waitFor();
   await section
     .locator("details")

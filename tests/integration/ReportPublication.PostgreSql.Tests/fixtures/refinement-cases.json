@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-refinement-v1",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "originalCaseFreeze": "6232bbfe53f7b2d00ba8070a7bfed97344eb99ea",
+  "governingCommits": [
+    "2fa77721d6afbcf92eec4d3918c29ada06706dc7",
+    "cab65d1"
+  ],
+  "contractSha256": "9161ba9775ecd5116854c4cd0278648c386eded2b9f518881099e1fdc6d74900",
+  "nativeControlBytesChanged": false,
+  "sql35SignaturesChanged": false,
+  "sql15ReturnShapesChanged": false,
+  "customerLocalFixtureOnly": true,
+  "cases": [
+    {
+      "id": "NPV-I07",
+      "name": "subject-before-session-emission-race",
+      "procedure": "Two restricted sessions of same subject in separate scopes hold original emission/admission fences; controller raises subject securityVersion. Observe pg_locks stable subject wait before actor/session/customer/scope. Release each owner-bound fence; mutation proceeds only after both. Another subject and customer progress.",
+      "expected": "No reversion of actor substeps; old subject version denied in both sessions/scopes, fresh matching version permitted.",
+      "status": "PLANNED_NOT_EXECUTED"
+    },
+    {
+      "id": "NPV-I15",
+      "name": "monotonic-subject-and-history",
+      "procedure": "Seed current version in two sessions/scopes, raise one scope/session to higher version under exact expected revision, then attempt lower version and stale expected revision. Compare committed current projection/history counts and hashes before/after each refusal.",
+      "expected": "Exactly one monotonic customer/tenant/object projection; lower/stale requests create zero current/history mutation; old rows remain immutable and cannot grant.",
+      "status": "PLANNED_NOT_EXECUTED"
+    },
+    {
+      "id": "NPV-I01",
+      "name": "every-authority-entry-checks-subject",
+      "procedure": "Use old-version actor on normal open, recheck, minimized source/version, protected source/manifest/blob/reference and postack paths after subject raise; release subject advisory key on a live backend then attempt protected access.",
+      "expected": "Exact current subject equality and known subject+session locks required; zero protected content on denial and no prior-open Boolean fallback.",
+      "status": "PLANNED_NOT_EXECUTED"
+    },
+    {
+      "id": "NPV-I06",
+      "name": "historical-and-readonly-subject-current",
+      "procedure": "Reconcile/replay a committed exact publication/read receipt with stale actor in another scope/session after subject raise, then with a fresh actor meaning.",
+      "expected": "Current stale actor denied before bytes; changed actor with original operation conflicts rather than rebinding historical receipt. Fresh independently bound operation follows documented branch; no readonly write/new audit/emission.",
+      "status": "PLANNED_NOT_EXECUTED"
+    },
+    {
+      "id": "NPV-I15",
+      "name": "fixed-public-integrity-marker",
+      "procedure": "Before coordinator accessibility edit record core8881c1c marker internal. After edit inspect type public sealed, one public parameterless constructor, no arbitrary-message/inner constructor or own payload fields; trusted adapter marker enters native publisher/read catches.",
+      "expected": "Fixed message Publication integrity verification failed.; IntegrityMismatch closed issue/failed audit with zero visibility/delivery. Unknown dependency exception stays DependencyUnavailable. No added source factory/friendship or byte change.",
+      "status": "PLANNED_NOT_EXECUTED"
+    },
+    {
+      "id": "NPV-I18",
+      "name": "original-proof-unchanged",
+      "procedure": "Run original31 byte commitments,157 codec and58 scripted flows against coordinator marker-only source delta; independently freeze source identity for later PostgreSQL suite.",
+      "expected": "Original commitments unchanged; bounded marker/refinement evidence never becomes actual18 persisted-case or real cross-plane subject invalidation credit.",
+      "status": "PLANNED_NOT_EXECUTED"
+    }
+  ]
+}

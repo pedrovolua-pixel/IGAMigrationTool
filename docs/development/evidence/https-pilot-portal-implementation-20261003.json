@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T02:31:52.345019+00:00",
+  "scope": "HTTPS-P01 local environment/input scaffold only",
+  "approvedProposalSource": "50cf4fdfdabf83fd9aa5e92db7196ae26f5437fc",
+  "approvalRecord": "https-pilot-portal-approval-20261003.json",
+  "workerCommit": "e796c364842b1e4934c539dd65be2e8953a93cf3",
+  "integratedSourceCommit": "6690955c0dc8a438f280bde3924985a4e18f0d6d",
+  "approvedCycle13Base": "711e38d84ac1c626d3695a7a442f36053c2c9729",
+  "integrationMergeCommit": "9477952",
+  "workerSourceBindings": [
+    {
+      "path": "infra/bicep/environments/pilot-dev-https-portal.parameters.example.json",
+      "sha256": "bd386ccdc07fc3178a040a1b38e6d16c681dbdac4b5ed1508b027c74aa27effd"
+    },
+    {
+      "path": "infra/bicep/modules/pilot-https-container-apps-environment.bicep",
+      "sha256": "01023f860474a9a13547d09452b9e24d15e47c18b4c4c0319a3d6b81774ae6b4"
+    },
+    {
+      "path": "infra/bicep/pilot-https-portal.bicep",
+      "sha256": "17e680ec5f489c1b11e1e038b8bcaf7d7253870c9079517a274649651409bbdf"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/README.md",
+      "sha256": "52bcf6a4abfcd4ae678f03a63423e3f3ebc99aef68598a549ec5702a7a47a3ef"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/template-policy.py",
+      "sha256": "6d8f1a1dcf1b780da158bf156005890654a3b99817049761e5b1436fc0f19f0e"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/test-inputs.py",
+      "sha256": "1e314151964b3a11ea22a8ead546b8488a26fa988b283326fabce1c782ed8929"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/validate-inputs.py",
+      "sha256": "4245da6aa58c41a33c9bf9173d31ba5f6defeba9ba71a008135cba0641f9f5bb"
+    }
+  ],
+  "independentWorkerReview": {
+    "status": "PASS",
+    "reviewer": "auth_transport",
+    "compileLintFormat": "PASS",
+    "templateNegativeCases": 38,
+    "inputNegativeCases": 50,
+    "actualCliDeniedCases": 51,
+    "additionalDeniedProbes": 4,
+    "reservedRangeDefect": "Corrected before immutable submission; all eight documented ranges denied"
+  },
+  "nextDependencyHandoffReview": {
+    "status": "PASS",
+    "reviewer": "production_identity_proposal",
+    "localLinkInstances": 12
+  },
+  "coordinatorFinalReview": {
+    "status": "PASS",
+    "reviewer": "auth_transport",
+    "resolvedFinding": "Stale proposed/not accepted caption in diagram README corrected; bounded local acceptance and future undeployed portal distinguished",
+    "executedScope": "Exact worker/original approval hashes, prior workflow preservation and one new step, JSON/SVG/six icon embeds, 389 local targets under independent regex, diff check and evidence/limit accuracy; no fresh runtime/cloud/CI by reviewer"
+  },
+  "executedChecks": [
+    {
+      "name": "Pinned Bicep0.47.16 build/lint",
+      "status": "PASS",
+      "templates": 23,
+      "diagnosticEntries": 0
+    },
+    {
+      "name": "HTTPS formatter byte comparisons",
+      "status": "PASS",
+      "templates": 2
+    },
+    {
+      "name": "HTTPS compiled policy",
+      "status": "PASS",
+      "unsafeMutations": 38
+    },
+    {
+      "name": "HTTPS input and actual CLI",
+      "status": "PASS",
+      "inputNegatives": 50,
+      "cliDenials": 51
+    },
+    {
+      "name": "Combined .NET10.0.401 locked restore",
+      "status": "PASS",
+      "projects": 74
+    },
+    {
+      "name": "Combined format verify-no-changes",
+      "status": "PASS"
+    },
+    {
+      "name": "Combined Release build",
+      "status": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "name": "Combined unit/architecture projects",
+      "status": "PASS",
+      "projects": 28
+    },
+    {
+      "name": "Portable integration projects",
+      "status": "PASS",
+      "projects": 3,
+      "httpsTransportChecks": 308,
+      "localHostingChecks": 60,
+      "syntheticCompositionAssertions": 143
+    },
+    {
+      "name": "Existing configured infrastructure commands",
+      "status": "PASS",
+      "commands": 13
+    },
+    {
+      "name": "Whole combined checkout Gitleaks8.30.1",
+      "status": "PASS",
+      "scannedBytes": 29581194
+    },
+    {
+      "name": "Original immutable approval bindings",
+      "status": "PASS",
+      "bindings": 3
+    },
+    {
+      "name": "Updated official icon diagram render and visual inspection",
+      "status": "PASS",
+      "sizePixels": [
+        3200,
+        2000
+      ],
+      "unalteredIconEmbeds": 6
+    },
+    {
+      "name": "Local documentation/JSON/SVG/diff/protected prose checks",
+      "status": "PASS",
+      "markdownTargets": 392,
+      "headingAnchors": 17,
+      "unalteredIconEmbeds": 6,
+      "stagedDiffCheck": "PASS"
+    }
+  ],
+  "mergeReview": {
+    "status": "PASS",
+    "reviewer": "auth_transport",
+    "solutionProjects": 74,
+    "resolvedProjectReferences": 90,
+    "coordinatorOwnedSourceBlobsUnchanged": 131,
+    "incomingOwnedSourceBlobsUnchanged": 285,
+    "overlappingChangedRuntimePaths": 0,
+    "conflictsResolved": 4,
+    "resolution": "Additive union preserving both parent records and project sets"
+  },
+  "notExecuted": [
+    "Actual Azure deployment/provider/what-if/capacity/network proof",
+    "Real Entra/federation/Graph/customer authority",
+    "Production shared-key/audit/recovery adapters",
+    "Fresh PostgreSQL integration, frontend/browser end-to-end, Windows collector and container-package checks",
+    "Fresh hosted CI; public source upload rejected and approval pending"
+  ],
+  "publication": {
+    "githubUpload": "BLOCKED by automatic approval review; read-only metadata confirms owned public destination; exact public export authorization required",
+    "remoteDraftHeadUnchanged": "50cf4fdfdabf83fd9aa5e92db7196ae26f5437fc",
+    "privateBoard": "STALE for BFF/access; prior publisher credential/network rejection remains separately blocked",
+    "lastConfirmedBffBoardSource": "4346e0f",
+    "unrelatedCycle13Publication": "Preserved"
+  },
+  "publicAdmission": "Disabled; no application and required false-only root",
+  "azureOperations": 0,
+  "newDependencies": 0,
+  "migrations": 0,
+  "grants": 0,
+  "paidSessionApproved": false,
+  "liveSignIn": "NOT VERIFIED; absent from scaffold",
+  "httpsT01": "Local environment/input subset only",
+  "httpsT02ToT08": "NOT VERIFIED",
+  "gatesG1ToG9Milestone2": "NOT VERIFIED",
+  "coordinatorSourceBindings": [
+    {
+      "path": ".github/workflows/bootstrap-checks.yml",
+      "sha256": "849e247293c925028a7291375b9e85328384e8e0de2af3a0851a2187ef6340eb"
+    },
+    {
+      "path": "architecture/diagrams/06-proposed-https-pilot-portal.svg",
+      "sha256": "d840cc22d58a51aa6e85f5b05c70ef93045a9291b19b560435f458afc79b9996"
+    },
+    {
+      "path": "architecture/diagrams/README.md",
+      "sha256": "b92884d7e9d9bea2ac3ee7a4a74702c4381151b769158ad64fd6391d83aa56b0"
+    },
+    {
+      "path": "architecture/diagrams/previews/06-proposed-https-pilot-portal.png",
+      "sha256": "d72400b34c5b5e366183f696158a606998dc4db1ef90e0db541ba688b02e33ba"
+    },
+    {
+      "path": "docs/development/evidence/https-pilot-portal-approval-20261003.json",
+      "sha256": "fefdd2360c14f5fd373d07f7e5bf8ba153cc4fb57e4a82f4a92fd77709b3e66e"
+    },
+    {
+      "path": "docs/development/https-pilot-portal-approval.md",
+      "sha256": "c4172aba30aef69dfbbabf1e51a6c09ce32ca3870dc316a8001e335982b7787c"
+    },
+    {
+      "path": "docs/development/https-pilot-portal-next-packet.md",
+      "sha256": "4b7c56ab03a3b662feebf89a9ccffb771bef0b848f62b9f6beabe71cdbeb6ca1"
+    },
+    {
+      "path": "docs/development/https-pilot-portal-proposal.md",
+      "sha256": "76a21d481a7a2a888094c0193fdb451ca58b87a98776f9427e0e455c06ddcc04"
+    },
+    {
+      "path": "infra/bicep/README.md",
+      "sha256": "2e2600f303449efa271a15ea6101bae43fc67b0e0401aac3cc149162ba5d133a"
+    },
+    {
+      "path": "infra/bicep/deployment-template-inventory.md",
+      "sha256": "daa4829e5b41f2dfd57a1b714836667c6976df6cd2aed9e8ff7720dd2bd14711"
+    },
+    {
+      "path": "infra/bicep/environments/pilot-dev-https-portal.parameters.example.json",
+      "sha256": "bd386ccdc07fc3178a040a1b38e6d16c681dbdac4b5ed1508b027c74aa27effd"
+    },
+    {
+      "path": "infra/bicep/modules/pilot-https-container-apps-environment.bicep",
+      "sha256": "01023f860474a9a13547d09452b9e24d15e47c18b4c4c0319a3d6b81774ae6b4"
+    },
+    {
+      "path": "infra/bicep/pilot-https-portal.bicep",
+      "sha256": "17e680ec5f489c1b11e1e038b8bcaf7d7253870c9079517a274649651409bbdf"
+    },
+    {
+      "path": "plans/active/https-pilot-portal-preparation.md",
+      "sha256": "bbb2faf39f7c544543917601fcc4400a6c1893f77499cad61a250b26b03802d7"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "5e259e9c9b753e6129cb8291adf2bb9317d85e6e27f896d44a6d99bc03acd726"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "cf20702ea874dbcc1dd6193ff0a14ab9d6ce2fa50351e5aca6271e970413657a"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "cb888d8bb5e340f476ad04d33dba88c82a35a6f875f883f1adb870ab9b86c038"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "c498b97ab9f60c11dc75586176d22f44f96d376aef86cbe21c91d8f1a7999f7b"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "39f69c96fb63da1cebfc83039901c22c0684943fe44c8030fd3466ef332c5329"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/README.md",
+      "sha256": "52bcf6a4abfcd4ae678f03a63423e3f3ebc99aef68598a549ec5702a7a47a3ef"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/template-policy.py",
+      "sha256": "6d8f1a1dcf1b780da158bf156005890654a3b99817049761e5b1436fc0f19f0e"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/test-inputs.py",
+      "sha256": "1e314151964b3a11ea22a8ead546b8488a26fa988b283326fabce1c782ed8929"
+    },
+    {
+      "path": "tests/infrastructure/HttpsPortal/validate-inputs.py",
+      "sha256": "4245da6aa58c41a33c9bf9173d31ba5f6defeba9ba71a008135cba0641f9f5bb"
+    }
+  ],
+  "compiledTemplateBindings": [
+    {
+      "source": "infra/bicep/modules/engineering-evidence-roles.bicep",
+      "sha256": "eb3b1dcd9ed92ee39d8b69e053834ad3535bbfce174727de905d953263e06ff7"
+    },
+    {
+      "source": "infra/bicep/modules/engineering-evidence-store.bicep",
+      "sha256": "2bca521afd500fdd67a574cd89ed0155710b896b5a2084887d167e25c627ae1b"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-container-apps-environment.bicep",
+      "sha256": "1badb18a2319b6dec7afcf88e230d724931186bc548fd809cf63ad78b76fb588"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-container-registry.bicep",
+      "sha256": "56b85de422a2d9548949998cc5a98b15753112111587ff4bdddea02c72b57333"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-development-bootstrap-apps.bicep",
+      "sha256": "130dcebb4a3dd0488050c4d977b8776cf70c5ed83d7b5c49936271492046dbc0"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-development-browser-dns.bicep",
+      "sha256": "93bb9e4cdacd02a12686fb2039b4dceaade46552a05e55d0336e6376d285967d"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-development-private-browser-access.bicep",
+      "sha256": "44d85435baf73cafae5de09623d9e2529a25c08dec018330826fda9f5324169a"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-https-container-apps-environment.bicep",
+      "sha256": "b60083f39584a4ae09d9411b5d4c3ada53f020eea8e1537c53374d4b6e1793dd"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-key-vault.bicep",
+      "sha256": "90e934628b4cc7dee1ccbb512dc576c263e46cda9c45a3206ffd14111cb69b8f"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-monitor-private-link.bicep",
+      "sha256": "a80888ddad20759c6f9222e88e0461ad5fd1a8be3e8cffcb036c65bd7761a8de"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-network-egress.bicep",
+      "sha256": "897608349b843e28c2a64168c01f7f7a09d2d4ce952ebd6311b987b12f0bb581"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-observability.bicep",
+      "sha256": "f275e4ef4171a3ff1bfd03fa11877198d28670c93fba89ddb0a2519a1f5d3fc5"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-postgresql.bicep",
+      "sha256": "024b96122b04ecc76a9970b264ff5d0787e5db611214b1f0c7b2539719dbcee6"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-private-dns.bicep",
+      "sha256": "8dbdd9c71649075442110aff4140eccb10fef422dab65280fc56b835a647821b"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-service-bus-namespace.bicep",
+      "sha256": "0c6a3c15100833eb4f9eff2797a5bf578ac84dda082623637e0c4109b9d4abf0"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-service-bus-work-queue.bicep",
+      "sha256": "86f36a85ca83779f67e32aab3f3afeb59ce7f319c44626affd238299f5a527e9"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-service-bus-work-roles.bicep",
+      "sha256": "74cb181acb61af1b2424b15585f48165e3eb75bf33aac5cc23276ef508bf3509"
+    },
+    {
+      "source": "infra/bicep/modules/pilot-workload-identity.bicep",
+      "sha256": "530a4f19576645b0388d8291890cfa6400072242ae12130a52d9904300c356b4"
+    },
+    {
+      "source": "infra/bicep/pilot-broker-network-spike.bicep",
+      "sha256": "8bdffd48ffc62c893233a944b6b773cb362228819d236a9e2a64a466383a8265"
+    },
+    {
+      "source": "infra/bicep/pilot-development-bootstrap-apps.bicep",
+      "sha256": "6e6ee1479e0f4eb33482a2ed3124a674d8e56224ae81909177c61eabd4332977"
+    },
+    {
+      "source": "infra/bicep/pilot-development-foundation.bicep",
+      "sha256": "977707702b41167aa6016c424971239633dd1073386ad486eb18e6bcb165abc0"
+    },
+    {
+      "source": "infra/bicep/pilot-development-private-browser-access.bicep",
+      "sha256": "ca99a0ef89af3f27b256cd91f870a9d4ef14b5f691c5b14ee93a113ba0f3d692"
+    },
+    {
+      "source": "infra/bicep/pilot-https-portal.bicep",
+      "sha256": "b3b51527199a3b813f02eae2fbeb88d23525a98d07a2e6cfe1e7c2e4044812b8"
+    }
+  ],
+  "ephemeralCheckFingerprints": [
+    {
+      "name": "iga-https-integration-restore.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "name": "iga-https-integration-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "iga-https-integration-build.log",
+      "sha256": "cedd3f8a01ff7ea44741d59375cf093b71aa22168fdf6f0b981a7fc7ab6aaf09"
+    },
+    {
+      "name": "iga-https-integration-unit-results.json",
+      "sha256": "09cedde912860c55a8adc068d1867e1d74968f0dd96a462d72fbe680bb361a3c"
+    },
+    {
+      "name": "iga-https-integration-portable-results.json",
+      "sha256": "a4fb01c3c8ee41a83c1da460e18c5ab99de6821762bc21c6ac03dd577d44308f"
+    },
+    {
+      "name": "iga-https-existing-infra-results.json",
+      "sha256": "7c3b6567711ba378697a02ca6b21be483949da1803bf859c8fde064a3e40b218"
+    },
+    {
+      "name": "iga-https-final-infra-results.json",
+      "sha256": "a666cc2c68c9d17cdd8654638b29d36db1fb3da2d094bd4cbd2833155207a8df"
+    },
+    {
+      "name": "iga-https-final-gitleaks.log",
+      "sha256": "0e17dd7436a0313901e220aecccb40a70cd8852ac2bf674065bf3ee86d82c1a3"
+    },
+    {
+      "name": "iga-https-final-reviewed-gitleaks.log",
+      "sha256": "017479796d36528c707317c2810e23c003a2addae12f7d14f8aafcdbfe03bb2a"
+    }
+  ],
+  "runtimeCheckSourceCommit": "94779522690b56ceb2801c78626ad7456c190c3b"
+}

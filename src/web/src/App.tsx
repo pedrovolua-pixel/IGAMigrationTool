@@ -101,7 +101,6 @@ function ConsultantApp() {
   const [navigationNotice, setNavigationNotice] = useState('');
   const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('Overview');
   useEffect(() => {
-    setWorkspaceView('Overview');
     setCategoryRequest(null);
   }, [selectedId]);
   const [analysis, setAnalysis] = useState<AnalysisDetail | null>(null);
@@ -301,6 +300,7 @@ function ConsultantApp() {
         catalog.csrfToken,
       );
       setRun(next);
+      setWorkspaceView('Assessments');
       setNavigationNotice('');
       setSelectedId(next.runId);
       startKey.current = null;
@@ -391,6 +391,7 @@ function ConsultantApp() {
   }
 
   function selectRun(id: string) {
+    setWorkspaceView('Assessments');
     setError(null);
     setNavigationNotice('');
     if (id !== selectedId) setRun(null);

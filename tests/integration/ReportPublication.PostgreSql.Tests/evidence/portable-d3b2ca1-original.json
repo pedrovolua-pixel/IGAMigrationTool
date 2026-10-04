@@ -1,0 +1,1252 @@
+[
+  {
+    "Name": "original-typed-control:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "counter-padded:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:completed:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:completed:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:completed:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:completed:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:completed:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-original:completed",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-owned:completed",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:missing-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:duplicate-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:unsorted-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:zero-run-revision",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:digest-uppercase",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:unknown-field",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:duplicate-provenance",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:duplicate-reference",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:desired-pair-missing",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:unpaired-retention",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:unrecognized-warning",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:completed:unknown-protected-reference-field",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "counter-padded:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:warned:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:warned:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:warned:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:warned:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:warned:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-original:warned",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-owned:warned",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:missing-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:duplicate-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:unsorted-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:zero-run-revision",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:digest-uppercase",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:unknown-field",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:duplicate-provenance",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:duplicate-reference",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:desired-pair-missing",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:unpaired-retention",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:unrecognized-warning",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:warned:unknown-protected-reference-field",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "counter-padded:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:source-limitation:manifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:source-limitation:receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:source-limitation:read-receipt",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:source-limitation:publish-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "original-typed-control:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "input-copy:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "root-duplicate:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "alias-duplicate:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "extra-field:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "trailing-newline:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "BOM:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "raw-NUL:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "invalid-UTF8:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "nested-duplicate:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-counter-number:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "schema-alias:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "UTC-precision:source-limitation:read-event",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-original:source-limitation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-owned:source-limitation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:missing-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:duplicate-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:unsorted-field-registry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:zero-run-revision",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:digest-uppercase",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:unknown-field",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:duplicate-provenance",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:duplicate-reference",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:desired-pair-missing",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:unpaired-retention",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:unrecognized-warning",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "sourceMetadata-refusal:source-limitation:unknown-protected-reference-field",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "anonymous-audit-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "control-oversize-refusal",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-minus-one-exact-plus-one",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-narrow-original-monotonic-origin",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-UTC-rollback-monotonic-expiry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-nested-pre-canceled-caller-zero-dependency-start",
+    "Passed": false,
+    "FailureType": "InvalidOperationException"
+  },
+  {
+    "Name": "lease-pending-ignored-token-late-result:expiry",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-pending-ignored-token-late-result:caller",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-pending-ignored-token-late-result:invalidate",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-pending-ignored-token-late-result:dispose",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-pending-ignored-token-late-result:UTC-rollback",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-disposal-repeated-refuses-admission",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "lease-no-zero-or-past-original-window",
+    "Passed": true,
+    "FailureType": null
+  }
+]

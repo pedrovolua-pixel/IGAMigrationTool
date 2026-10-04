@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-audit-encoder-evidence-v1",
+  "scenarioFreeze": "8aca2ee4",
+  "governingClarification": "c4cc4ee4",
+  "sourceSnapshot": "a9e389d7",
+  "sourceSha256": "777dc3f4ef2110d7d332fc4d3977f25b496ee39b6ffad6489094d43a7d279133",
+  "passed": 109,
+  "failed": 6,
+  "records": "evidence/audit-encoder-a9e389d7-original.json",
+  "finding": "6crosscustomernonnullverifiedscope negatives encodeeventratherthanrefuse; original6auditbytes/head/intent/ownedbuffers/anonymousnull positives unchangedPASS.",
+  "executed": {
+    "ReleaseBuild": "PASS_0warnings_0errors",
+    "original31Commitments": "PASS",
+    "ownPreparation31": "PASS",
+    "scriptedMarker4": "PASS"
+  },
+  "limits": [
+    "No SQL audit-head reservation/append/receipt/serverclock proof",
+    "All18persisted mechanisms NOT_EXECUTED"
+  ],
+  "correctionReplay": {
+    "sourceSnapshot": "8e19cb2f",
+    "sourceSha256": "ae6e0f74bff19183cf73f4f6635edf3caede0217839d62204276ee2065d64c55",
+    "passed": 115,
+    "failed": 0,
+    "records": "evidence/audit-encoder-8e19cb2f-corrected.json",
+    "closure": "All6crosscustomer nonnullscope negativesrefuse; all6originalauditbytes andanonymousnull positive/head/intent/ownedfields unchangedPASS. Original109PASS6FAIL retained."
+  }
+}

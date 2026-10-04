@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { readFile, writeFile, readdir, mkdir } from "node:fs/promises";
@@ -197,6 +198,7 @@ async function select(page, id) {
     id,
   );
   await page.reload();
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
@@ -691,6 +693,7 @@ try {
   });
   const page = await context.newPage();
   await page.goto(base);
+  await showAssessments(page);
   const runs = [];
   for (const baseline of [
     "synthetic-analysis-healthy-v1",
@@ -1179,6 +1182,7 @@ try {
       ["hostile", normal],
     ]) {
       mutation = fixture === "hostile" ? coherentHostile : null;
+      last = "viewport-select-" + name + "-" + fixture;
       await select(page, run.runId);
       const dto = await analysis(run.runId);
       await fullVisible(
@@ -1239,6 +1243,7 @@ try {
       if (fixture === "normal") {
         const shot = path.join(directory, "execution", name + ".png");
         await mkdir(path.dirname(shot), { recursive: true });
+        last = "screenshot-full-" + name + "-" + fixture;
         await page.screenshot({ path: shot, fullPage: true });
         screenshots.push(shot);
         await region(page).evaluate((element) =>
@@ -1249,6 +1254,7 @@ try {
           "execution",
           name + "-visible.png",
         );
+        last = "screenshot-visible-" + name + "-" + fixture;
         await page.screenshot({ path: visibleShot, fullPage: false });
         screenshots.push(visibleShot);
       }

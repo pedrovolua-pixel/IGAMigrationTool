@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -435,6 +436,7 @@ try {
       behavior =
         '<img src=x onerror="window.phase1bInjected=true"> Fictional desired behavior';
     await page.goto(base);
+    await showAssessments(page);
     await page.getByLabel("Evidence baseline").selectOption(baseline);
     await page.getByLabel("Assessment profile").selectOption(profile);
     await page
@@ -728,6 +730,7 @@ try {
       "response-loss confirmation retains exactly one saved finding event",
     );
     await page.reload();
+    await showAssessments(page);
     await page
       .getByRole("heading", { name: "Combined fictional health assessment" })
       .waitFor();
@@ -810,6 +813,7 @@ try {
       "all exact artifact attestations make task creation eligible",
     );
     await page.reload();
+    await showAssessments(page);
     await page
       .getByRole("heading", {
         name: "Artifact attestations and planning tasks",
@@ -1009,6 +1013,7 @@ try {
     await navigation(changed);
     // Approved retirement keeps old run readable, while new locking of its old proof fails closed.
     await page.goto(base);
+    await showAssessments(page);
     await page.getByLabel("Evidence baseline").selectOption(baseline);
     await page.getByLabel("Assessment profile").selectOption(profile);
     await page

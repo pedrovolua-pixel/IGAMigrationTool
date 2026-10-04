@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T02:41:34.839603+00:00",
+  "ownerInstruction": "Approved",
+  "approvalScope": "Public upload of reviewed af31cba to the owned existing GitHub repository and update draft PR2 for fresh CI; no Azure activation",
+  "approvedCommit": "af31cba0daee2df64677f27bb3ecbf7a804d04b2",
+  "destination": "https://github.com/pedrovolua-pixel/IGAMigrationTool",
+  "visibility": "public",
+  "branch": "codex/bff-integration",
+  "pullRequest": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/2",
+  "approvedCommitPush": "PASS; fast-forward from50cf4fd toaf31cba, exit0",
+  "historicalExportRejection": "Resolved by explicit exact public export approval; preserved in original implementation evidence",
+  "advancedPublicTarget": "cf8b320a3d2d5eddb54afa09f84ae7e461efd154",
+  "documentationIntegrationCommit": "3fec237bbf8fe4f3d7d4959f7e4b7c01447a8e9f",
+  "integrationScope": "17 already-public Cycle14 documentation paths only; three additive canonical append conflicts resolved preserving both sections; no runtime/IaC/project/workflow source change",
+  "independentIntegrationReview": {
+    "status": "PASS",
+    "reviewer": "auth_transport",
+    "immutableSource": "3fec237bbf8fe4f3d7d4959f7e4b7c01447a8e9f",
+    "unchangedSourceBlobs": 1246,
+    "exactIncomingDocuments": 13,
+    "additiveCanonicalFiles": 3,
+    "technicalSpec": "Approved upstream TC14-06 CSV wording retained with BFF addenda; initial overstrict all-parent-line probe corrected, no merge loss",
+    "conflictMarkers": "NONE",
+    "diffCheck": "PASS"
+  },
+  "freshHostedCi": "NOT YET VERIFIED; initial approved commit cannot start Actions while new target documentation conflicts remain",
+  "privateBoard": "STALE for BFF/HTTPS; prior separately rejected credential/network publisher remains blocked; preserve confirmed unrelated Cycle14 publication",
+  "azureOperations": 0,
+  "grants": 0,
+  "migrations": 0,
+  "publicAdmission": "Disabled; false-only environment-only scaffold",
+  "gatesG1ToG9Milestone2": "NOT VERIFIED",
+  "documentaryChecks": {
+    "status": "PASS",
+    "localMarkdownTargets": 273,
+    "headingAnchors": 12,
+    "jsonAndSixUnmodifiedIcons": "PASS",
+    "protectedProseAndDiff": "PASS",
+    "wholeCheckoutGitleaks": "PASS",
+    "runtimeTests": "Not repeated; 1246 code/configuration blobs unchanged from verified af31cba"
+  },
+  "sourceBindings": [
+    {
+      "path": "plans/active/https-pilot-portal-preparation.md",
+      "sha256": "b81ee9bbbfde64e768132fba6b75decba638796cded82e3c19103e538597485b"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "8c81563a87e8a2e671a2ac84fd39d384c380c62a5a821348f8ac155c1976389c"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "772d12d666c575a0fb6dabbedfac51cab712b717b535b0f84383e1b6156efccb"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "464ea49681f19f646ac182a622892afcfbee0efa62eda02f958f782e9046f80e"
+    }
+  ],
+  "originalImplementationBindings": "Original record retained; coordinator fingerprints can be verified against approved af31cba Git blobs, not rewritten to follow documentation changes",
+  "independentPublicationRecordReview": {
+    "status": "PASS",
+    "reviewer": "auth_transport",
+    "scope": "Five documentary paths, JSON, 270 independent local Markdown targets, diff guard, exact public approval and historical rejection/source/live limits"
+  }
+}

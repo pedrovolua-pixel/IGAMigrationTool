@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { readFile, writeFile, readdir, mkdir } from "node:fs/promises";
@@ -162,6 +163,7 @@ const region = (page) =>
   page.getByRole("region", {
     name: "Offline simulated configuration response",
     exact: true,
+    includeHidden: true,
   });
 async function select(page, id) {
   await page.evaluate(
@@ -169,11 +171,22 @@ async function select(page, id) {
     id,
   );
   await page.reload();
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
 }
+async function showProposedFindings(page) {
+  last = "open-proposed-findings-tab";
+  const tab = page
+    .getByRole("tablist", { name: "AI workspace sections", exact: true })
+    .getByRole("tab", { name: "Proposed findings", exact: true });
+  await tab.waitFor();
+  if ((await tab.getAttribute("aria-selected")) !== "true") await tab.click();
+}
 async function shown(page, id) {
+  await showProposedFindings(page);
+  last = "await-visible-preview-region";
   await region(page).waitFor();
   await until(
     () => region(page).locator("details dd").first().textContent(),
@@ -424,7 +437,13 @@ try {
   equal(catalogResponse.status(), 200, "actual-catalog-ready");
   const catalog = await catalogResponse.json();
   equal(catalog.profiles.length, 11, "actual-catalog-eleven-profiles");
-  equal(catalog.profiles.filter(p => p.id !== "synthetic-review-maturity-planning-tasks-equal-v1").length, 10, "actual-historical-catalog-ten-profiles");
+  equal(
+    catalog.profiles.filter(
+      (p) => p.id !== "synthetic-review-maturity-planning-tasks-equal-v1",
+    ).length,
+    10,
+    "actual-historical-catalog-ten-profiles",
+  );
   equal(catalog.baselines.length, 9, "actual-catalog-nine-baselines");
   const headers = { Origin: base, "X-CSRF-TOKEN": catalog.csrfToken };
   const normal = await start(expected.baseline, expected.normal, headers),
@@ -481,6 +500,7 @@ try {
     "V10-BROWSER-001 actual host/PG/catalog/normal-empty/full independent bytes/digests/no-health",
   );
   await page.goto(base);
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
@@ -537,8 +557,16 @@ try {
       .locator("button:not([disabled]),summary,select:not([disabled])")
       .evaluateAll(
         (nodes) =>
-          nodes.filter((node) => node.getBoundingClientRect().height < 24)
-            .length,
+          nodes.filter((node) => {
+            if (
+              !node.getClientRects().length ||
+              !node.checkVisibility() ||
+              getComputedStyle(node).visibility === "hidden"
+            )
+              return false;
+            const bounds = node.getBoundingClientRect();
+            return bounds.height < 24 || bounds.width < 24;
+          }).length,
       ),
     0,
     "24px-enabled-targets",
@@ -738,6 +766,7 @@ try {
     },
   };
   await select(page, normal.runId);
+  await showProposedFindings(page);
   await region(page).getByRole("status").waitFor();
   equal(
     await region(page).locator("article,details").count(),

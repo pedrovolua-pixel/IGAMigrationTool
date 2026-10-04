@@ -17,3 +17,23 @@ ADRs are append-only decision history. Supersede an accepted ADR with a new ADR 
 - [`ADR-0006-engineering-evidence-store-access.md`](./ADR-0006-engineering-evidence-store-access.md) — separate create, read and purge data identities implemented as a pilot draft; Milestone 0 review pending.
 - [`ADR-0007-reviewer-decision-evidence.md`](./ADR-0007-reviewer-decision-evidence.md) — signed, metadata-only reviewer decisions and trusted role coverage implemented as a pilot draft; Milestone 0 review pending.
 - [`ADR-0008-pilot-owner-override-evidence.md`](./ADR-0008-pilot-owner-override-evidence.md) — signed, exact-scope pilot-owner waiver evidence implemented as a local draft; Milestone 0 review pending.
+
+## Accepted local BFF design; production composition pending
+
+- [`ADR-0009-production-bff-authority-and-audit.md`](./ADR-0009-production-bff-authority-and-audit.md) — versioned product/provider authority and atomic payload-free session/authority audit; accepted for local P01–P05 synthetic implementation on2026-10-02. No live access or deployment authorization.
+
+
+## Accepted bounded private development access
+
+- [ADR-0010-private-pilot-browser-access.md](ADR-0010-private-pilot-browser-access.md) — accepted owner-operated private test desktop design and local templates through Bastion Developer on2026-10-02; exact Azure access/spending and live gates remain separate.
+
+
+## Accepted local HTTPS audit prototype; production outage decision open
+
+- [ADR-0012-authentication-failure-audit-preservation.md](ADR-0012-authentication-failure-audit-preservation.md) — compares durable authentication failure journal/service and exact policy amendment alternatives; Option A accepted for bounded local prototype only; no live audit-policy exception selected.
+
+ADR-0012 Option A is now accepted for a bounded local prototype only; total-audit-outage policy and live acceptance remain open. [Owner approval scope](../../plans/active/https-production-local-cycle01.md).
+
+## Proposed shared-key inventory and recovery decision
+
+- [ADR-0013-shared-key-inventory-and-recovery.md](ADR-0013-shared-key-inventory-and-recovery.md) — compares durable inventory and independent witness alternatives; no option or production policy selected. [Production input checklist](../../docs/development/https-key-production-input-checklist.md) identifies remaining technical decisions and protected deployment evidence.

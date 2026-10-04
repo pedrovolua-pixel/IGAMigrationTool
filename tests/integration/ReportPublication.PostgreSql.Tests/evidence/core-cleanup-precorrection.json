@@ -1,0 +1,42 @@
+[
+  {
+    "Name": "publisher-precommit-transaction-dispose-uncertainty",
+    "Passed": true,
+    "FailureType": null,
+    "Propagated": true,
+    "OutcomeCount": 0,
+    "UnknownSignals": 1,
+    "ProtectedLoads": 0,
+    "Deliveries": 0
+  },
+  {
+    "Name": "publisher-precommit-fence-dispose-uncertainty",
+    "Passed": true,
+    "FailureType": null,
+    "Propagated": true,
+    "OutcomeCount": 0,
+    "UnknownSignals": 1,
+    "ProtectedLoads": 0,
+    "Deliveries": 0
+  },
+  {
+    "Name": "reader-precommit-transaction-dispose-uncertainty",
+    "Passed": false,
+    "FailureType": "ExplicitUncertaintyNotPropagated",
+    "Propagated": false,
+    "OutcomeCount": 1,
+    "UnknownSignals": 0,
+    "ProtectedLoads": 0,
+    "Deliveries": 0
+  },
+  {
+    "Name": "reader-precommit-fence-dispose-uncertainty",
+    "Passed": false,
+    "FailureType": "ExplicitUncertaintyNotPropagated",
+    "Propagated": false,
+    "OutcomeCount": 1,
+    "UnknownSignals": 0,
+    "ProtectedLoads": 0,
+    "Deliveries": 0
+  }
+]

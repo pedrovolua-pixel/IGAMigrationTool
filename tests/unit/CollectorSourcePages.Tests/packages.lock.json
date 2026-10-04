@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "Microsoft.SqlServer.TransactSql.ScriptDom": {
+        "type": "Transitive",
+        "resolved": "180.107.0",
+        "contentHash": "81MHhvTJW/pNzYh5WhM8QgV4YhlwY3Vmm6sQUiE88IaJzrzqJbIb38JPdjqn54I83/goE1A1ArzEw5hAmc6/pQ=="
+      },
+      "collectorsafety": {
+        "type": "Project",
+        "dependencies": {
+          "Microsoft.SqlServer.TransactSql.ScriptDom": "[180.107.0, 180.107.0]"
+        }
+      },
+      "collectorsourcepages": {
+        "type": "Project",
+        "dependencies": {
+          "CollectorSafety": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

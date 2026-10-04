@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "independent-report-publication-compiled-evidence-v1",
+  "observedAtUtc": "2026-10-04T02:03:30.728950+00:00",
+  "worktree": "/private/tmp/iga-release-publication-oracle",
+  "branch": "codex/release-publication-oracle",
+  "originalGoldenCommit": "51272d2",
+  "scenarioFreezeCommit": "cd475cb",
+  "testedCoreCommit": "7ded2dc418acf0d6ab9451b562af3d67ebf61b82",
+  "testedCoreSnapshot": "/private/tmp/iga-rp03-source-7ded2dc",
+  "testedCoreFileSha256": {
+    "Directory.Build.props": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e",
+    "src/server/modules/ReportPublication/Canonical.cs": "6ea850088eed9f9789a166748fcae312a6474327df7e563931bc627d94e7b5f2",
+    "src/server/modules/ReportPublication/Contracts.cs": "9d67b41d5648fb98940e4d404a431667ec2fa62cedc542a193d2fe9c5377b9a2",
+    "src/server/modules/ReportPublication/ManifestContracts.cs": "b284765615fe4e62078d43946c535589fe6955346d4c839d97caa9317b0b1621",
+    "src/server/modules/ReportPublication/MetadataCanonical.cs": "3c0bd07eb450349a1db76b80a7dda317be49b5254ee2492429aa0fe37a8e7eaa",
+    "src/server/modules/ReportPublication/NativeReportPublisher.cs": "f3405fbaba70ba58df6f56a85ab79e02ebf7cce618bab4239e48057aea5e6b90",
+    "src/server/modules/ReportPublication/Ports.cs": "3f706087b750efa82f3feed2f4bc66bd5abc3729da72814039144202e9c41d47",
+    "src/server/modules/ReportPublication/ProjectionReader.cs": "d54a05a9c2a61119eec52c01114c9dade575b1669e71466675eec7299c0a3de4",
+    "src/server/modules/ReportPublication/README.md": "51e55bfa1a9a01948524246d6717f7e8245873f47797749782b52eaa53db3310",
+    "src/server/modules/ReportPublication/ReportPublication.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+    "src/server/modules/ReportPublication/Validation.cs": "01800b9751c297764911c37c35ee63d46ec4bc793af221f2ac4a5858fff50186",
+    "src/server/modules/ReportPublication/packages.lock.json": "1624731bf151ec2ac6993023046a4abbac7c6ddc71ed2e242e8285bbc69d561e"
+  },
+  "dotnetExecutable": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+  "dotnetSdk": "10.0.401",
+  "targetFramework": "net10.0",
+  "additionalPackages": [],
+  "projectPropertyOverride": "ReportPublicationProject=/private/tmp/iga-rp03-source-7ded2dc/src/server/modules/ReportPublication/ReportPublication.csproj",
+  "executed": {
+    "lockedRestore": "PASS",
+    "scopedWhitespaceFormatVerify": "PASS",
+    "releaseBuild": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "compiledChecks": {
+      "passed": 157,
+      "failed": 0,
+      "originalTypedExactVectors": 31,
+      "originalHashLengthChecks": 31,
+      "productionParserRoundtrips": 3,
+      "unicodeTestScalarCases": 14,
+      "productionUnicodeCases": 14,
+      "rawParserRefusals": 12,
+      "typedSourceProjectionRefusals": 33,
+      "metadataRefusals": 15,
+      "typedSetOrderChecks": 1,
+      "ownershipChecks": 2,
+      "nonpublicSourceFactoryChecks": 1
+    },
+    "pythonOriginalVectors": 31,
+    "pythonRefusalTestMethods": 19,
+    "originalBytesPreservedAgainst51272d2": 31,
+    "coreSnapshotMatchesTrackedCommit": true,
+    "gitDiffCheck": "PASS",
+    "gitleaks": {
+      "executable": "/private/tmp/iga-parallel-tools/gitleaks",
+      "version": "8.30.1",
+      "result": "PASS",
+      "findings": 0,
+      "rules": "default",
+      "redacted": true,
+      "report": "/private/tmp/iga-rp03-compiled-final-gitleaks.json"
+    },
+    "ownedPathCheck": "PASS"
+  },
+  "initialFailures": [
+    {
+      "stage": "fixture-loader",
+      "passed": 74,
+      "failed": 20,
+      "cause": "Record constructor parameter names PascalCase versus frozen camelCase fields; missing mapped fields defaulted. Corrected test-only mapping before baseline acceptance; no core finding."
+    },
+    {
+      "stage": "draft-category-refusals",
+      "passed": 91,
+      "failed": 3,
+      "cause": "Draft demanded same category across independently classified linked projection rows, absent from contract. Replaced with required-category membership refusals at SourceBytes; no invented equality and no core finding."
+    },
+    {
+      "stage": "draft-raw-counter-mutations",
+      "passed": 138,
+      "failed": 2,
+      "cause": "Draft used revision7 while original is9, leaving two raw inputs unchanged. Corrected literal and added assertion every raw mutation changes input."
+    },
+    {
+      "stage": "concurrent-full-project-build",
+      "errors": 1,
+      "diagnostic": "CS8602 NativeReportPublisher.cs117:52",
+      "cause": "Author added initial publisher during ProjectReference execution. Author corrected nullable audit access and froze7ded2dc; final source-pinned build passes."
+    },
+    {
+      "stage": "initial-format-command",
+      "cause": "Wrong dotnet-format property argument gave workspace-load warnings; reran with environment MSBuild property and verified0exit without warnings."
+    }
+  ],
+  "limits": [
+    "Codec and projection-parser acceptance only; initial publisher merely compiled, not accepted by this packet.",
+    "18 persisted cases remain PLANNED_NOT_EXECUTED.",
+    "No database, host, provider, real One Identity source, authority, customer access, renderer, MCP or deployment acceptance.",
+    "Test fixture loader is trusted friend constructor mapping, not a production source JSON parser."
+  ],
+  "compiledTestFileSha256": {
+    "tests/unit/ReportPublication.Tests/FixtureLoader.cs": "5055f71e5f84f8194829fce62ab5068b84b672e1d5a8aa872ab92fea936b6f6e",
+    "tests/unit/ReportPublication.Tests/Program.cs": "bcf4d3dd084881505d7058c7fb46f59d9f6f81ae702c513e22dd03a8b130a302",
+    "tests/unit/ReportPublication.Tests/ReportPublication.Tests.csproj": "b0aa266af425e16c1ce79c42335dad793375b62de579d0048b2f88753f085f11",
+    "tests/unit/ReportPublication.Tests/packages.lock.json": "5b60cbabc19905d3f0f308e94d25166bfef71959edee406ba5f736a7cf999afd"
+  }
+}

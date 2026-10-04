@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-cancellation-observer-evidence-v1",
+  "scenarioFreeze": "01d3bf44",
+  "governingAmendment": "9cdf019a",
+  "sourceLease": "415bc14",
+  "leaseSha256": "8b67c8c2816b164fcd30a554faac27a76bc9c6a11a10714689140970e93f6a46",
+  "passed": 3,
+  "failed": 4,
+  "records": "evidence/portable-observer-415bc14-original.json",
+  "sourceWire": "9ee3500e_not_relevant_to_lease",
+  "executed": {
+    "ReleaseBuild": "PASS_0warnings_0errors",
+    "original31Commitments": "PASS",
+    "ownPreparation31": "PASS",
+    "scriptedMarker4": "PASS"
+  },
+  "observations": [
+    "Original and newer per-dependency pending wait timeout while unrelated callback dispatch stalls",
+    "Disposed original or per-dependency caller source currently permits one action start; governed correction must refuse before work",
+    "Caller-owned wait handle remains usable after repeated lease disposal",
+    "Noncancelable current invocation and pending disposal/raced callback timer cleanup pass"
+  ],
+  "limits": [
+    "No18persisted mechanisms executed",
+    "No physical backend release evidence"
+  ]
+}

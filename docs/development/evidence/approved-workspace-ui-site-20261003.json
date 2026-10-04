@@ -1,0 +1,54 @@
+{
+  "deployment": {
+    "id": "appgdep_6ac148913e508191bf504259ce5ec96f",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_ff230687bcd48191b7758e4168a27c9d",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T18:25:27.997098+00:00"
+  },
+  "site": {
+    "version": 97,
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "privateOwner": true
+  },
+  "source": {
+    "commit_sha": "d4d3bd1d22e710fce3ee9db6dcc00ea49a5a5371",
+    "checkout_path": "/private/tmp/iga-uiw3-site",
+    "archive": "/private/tmp/iga-uiw3-site-final.tar.gz"
+  },
+  "boardValidation": {
+    "repositoryHead": "e6f7d31fb5127c79aae07a9777f88833d88ff49d",
+    "tasks": 12,
+    "taskHashes": [
+      "88a21d88fd636a7ec6ba850160a82ec06e30272ad89d5a64edfdbe0806115c79",
+      "647568c2b00531f151a6ae9cea04ffc2faefec3e3e91cb790e6bb746d3ee5147",
+      "a8a2e17da13a71e2f17c81a74b917848525029090fe6697d3f76a27c236e41e3",
+      "af5aefd45451c317f59ce3807ab3692343023c5d2d0afb508a1867077caf2cc4",
+      "071e3441c4ac7e13819c0beca88f97a583aa0c2e1328df6cb059cb2fc682cef9",
+      "211cf0d06ab0be48d399d11027ee1450541fb3f8813f27db72daa741699278ff",
+      "b20a39259dc521054d1c34c27f62e5a9c3935ba04c4944567c92cb535c25006d",
+      "e0dacd264ae5365bafee3f69ffe457f909ced83cf1bf180e33d56124eecd4f11",
+      "0c76e4d000f819f6d378287a000e2cb3d46acab296539c1f79077519d4e3c09d",
+      "d7ba98eea5c6d3ff181aff39ae2077f272ba06e304665293489665482e111c40",
+      "7cb73e48b9ac7e4b3f7c422ff44129f79e3b35fd17e88627960e62bebe28683b",
+      "c8946bc8c8b72e1f9080cd3455fad8c3fad0978e6f7ba4579857b838d2a0845b"
+    ],
+    "humanTasksBytePreserved": true,
+    "siteFileSha256": "0275af86ed94495177e1e2d014599e056db0de78cba3f564b12711ff77cacefd"
+  },
+  "qa": {
+    "desktop": "CUA screenshot inspected",
+    "390px": "CUA screenshot inspected checkpoint; no horizontal overflow",
+    "320px": "no horizontal document overflow",
+    "allTwelveTaskCards": "byte-preserved",
+    "archiveSha256": "bbd9277e89658dd1c627d6198a711d4655a697e559ca90b9303c2b2c116989de"
+  }
+}

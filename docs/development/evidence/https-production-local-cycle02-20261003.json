@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUtc": "2026-10-03T14:45:31.925066+00:00",
+  "status": "VERIFIED_BOUNDED_LOCAL_SCOPE_ONLY",
+  "approvedPacket": "d518d25274956fbaf19f8cdff916bf0236394fc6",
+  "cyclePlanSource": "b186d121419236e15e7fa184a22c6bac4d2db939",
+  "testedRuntimeSource": "ffd2278327000f0289e21c6b76946f0057df1444",
+  "sdk": "10.0.401",
+  "runtime": "10.0.12",
+  "postgres": "18.4",
+  "ap01": {
+    "authorCommit": "d133a1c43481ec241f1fb96742881c1b8f0c1de3",
+    "integratedCommit": "ffd2278327000f0289e21c6b76946f0057df1444",
+    "reviewer": "package_hosting",
+    "review": "PASS no material findings",
+    "newAssertions": 212,
+    "suiteAssertions": 281,
+    "independentAssertions": 146,
+    "rangeSha256": "4c82483605acb510855d7762134e7f699adacce96fa3c367d1ac34115b275179",
+    "independentRestore": "PASS cached offline locked; NuGetAudit=false, supplies no audit claim",
+    "independentChecks": "Release build0warnings/errors; unfiltered test project format;281suite+146separate hostile/shape/concurrent checks; scoped Gitleaks/whitespace",
+    "trace": "AP-T01\u201303 partial AU01\u201303 only; no durability/identity/receipt/witness/retention/live proof"
+  },
+  "ap02": {
+    "authorCommits": [
+      "543679478076e5dcafd50e15e180e5e132dd01a9",
+      "a530449bd5e02c459cc592ccc3326f21f98b90ee"
+    ],
+    "integratedCommits": [
+      "e3ec3ab",
+      "37c3fb7"
+    ],
+    "reviewer": "package_hosting",
+    "review": "PASS retained37inventory/graph/archive hashes and14receipt digests; exact final wording",
+    "actualSelectedPackages": 37,
+    "projectReferences": 3,
+    "auditedExperimentalRestoreExit": 0,
+    "restoreBoundary": "Disposable source only; force-evaluate, not approved locked dependency integration",
+    "signatureVerifyExit": 1,
+    "verifiedSignatures": 36,
+    "failedSignatures": 1,
+    "failedPackage": "System.Security.Cryptography.ProtectedData4.5.0",
+    "failure": "NU3037 validity expiry and NU3028 timestamp-chain ExplicitDistrust; not proof of tampering",
+    "sdkBuildFormatHarness": "NOT EXECUTED because selected integrity unresolved",
+    "locksGraphConfig": "No repository dependency/lock/config changes",
+    "firstRun": "Isolated CLI home printed development certificate installation; no trust/cleanup or independent certificate-state inspection",
+    "trace": "AP-T04 KEY prerequisite evidence only, not KEY acceptance"
+  },
+  "coordinatorChecks": {
+    "fullSolution": [
+      {
+        "case": "restore",
+        "command": [
+          "/tmp/iga-dotnet-10.0.401/dotnet",
+          "restore",
+          "IgaMigrationTool.slnx",
+          "--locked-mode",
+          "--verbosity",
+          "minimal",
+          "-m:1",
+          "-nr:false",
+          "/p:UseSharedCompilation=false",
+          "/p:NuGetAudit=true",
+          "/p:NuGetAuditMode=all",
+          "/p:NuGetAuditLevel=low"
+        ],
+        "startedAtUtc": "2026-10-03T14:41:28.969210+00:00",
+        "exitCode": 0,
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "log": "/tmp/iga-https-ap02-execution/restore.log",
+        "tail": [
+          "  Determining projects to restore...",
+          "  All projects are up-to-date for restore."
+        ],
+        "logSha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+      },
+      {
+        "case": "format",
+        "command": [
+          "/tmp/iga-dotnet-10.0.401/dotnet",
+          "format",
+          "IgaMigrationTool.slnx",
+          "--verify-no-changes",
+          "--no-restore",
+          "--verbosity",
+          "minimal"
+        ],
+        "startedAtUtc": "2026-10-03T14:41:30.805330+00:00",
+        "exitCode": 0,
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "log": "/tmp/iga-https-ap02-execution/format.log",
+        "tail": [],
+        "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "case": "build",
+        "command": [
+          "/tmp/iga-dotnet-10.0.401/dotnet",
+          "build",
+          "IgaMigrationTool.slnx",
+          "-c",
+          "Release",
+          "--no-restore",
+          "-m:1",
+          "-nr:false",
+          "/p:UseSharedCompilation=false"
+        ],
+        "startedAtUtc": "2026-10-03T14:41:49.381590+00:00",
+        "exitCode": 0,
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "log": "/tmp/iga-https-ap02-execution/build.log",
+        "tail": [
+          "Build succeeded.",
+          "    0 Warning(s)",
+          "    0 Error(s)",
+          "",
+          "Time Elapsed 00:00:47.86"
+        ],
+        "logSha256": "f67f4c639349050b27d2e4eecef632a435cbc1a740c0483dd215c8e21230d906"
+      }
+    ],
+    "regressionSuites": [
+      {
+        "case": "authority-unit",
+        "project": "tests/unit/IdentityAuthority.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:42:46.397217+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS 212 closed authority/provider assertions"
+        ],
+        "log": "/tmp/iga-https-ap02-execution/authority-unit.log",
+        "logSha256": "80c73e186b1c08474a83c6b8399444feb7d6a5aa41c21ec93a5c312f991e582c"
+      },
+      {
+        "case": "sessions-unit",
+        "project": "tests/unit/IdentitySessions.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:42:47.051593+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS: 27 session entropy/context/minimal-ticket checks; persistence verified separately.",
+          "PASS: 281 total session and closed audit/canonical/receipt/witness checks."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/sessions-unit.log",
+        "logSha256": "a840be4877c423ed88095dba0745f0f9a673dd08544a545f472a651ce6556226"
+      },
+      {
+        "case": "policy-unit",
+        "project": "tests/unit/IdentityPolicy.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:42:47.602198+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS: 2546 independent human policy matrix, refusal, boundary and overlap checks."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/policy-unit.log",
+        "logSha256": "4500b58739754411ebdefab901fb651fd046164ee932b49c9b852754fc71b8b7"
+      },
+      {
+        "case": "bff-foundation",
+        "project": "tests/unit/BffFoundation.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:42:48.043687+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS 116 actual HTTPS synthetic signed protocol assertions; no Entra/Graph/FIC proof",
+          "PASS 188 BFF foundation assertions; local middleware/options only, live OIDC/FIC unverified"
+        ],
+        "log": "/tmp/iga-https-ap02-execution/bff-foundation.log",
+        "logSha256": "6b4c379202a1e9ddd60c58a16decd48bebe6cd9ab6626dcb556ffff931b73544"
+      },
+      {
+        "case": "bff-auth-transport",
+        "project": "tests/integration/BffAuthenticationTransport.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:42:49.997207+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "BFF-PUBLIC-AUTH: 308 actual HTTPS checks passed; production/OIDC acceptance NOT VERIFIED."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/bff-auth-transport.log",
+        "logSha256": "ff56a569fb16c481f0cdeb807c3354d99124ef7a8e6cd9c046ac8cca81800b99"
+      },
+      {
+        "case": "bff-hosting",
+        "project": "tests/integration/BffHostingContracts.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:42:51.008517+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS BFF hosting contracts: 60 checks; actual HTTPS/framework DP, synthetic wrapping/repository only."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/bff-hosting.log",
+        "logSha256": "626f73a1a1298c725325bb894304d6143bf78768b1047b37890ea355a247b426"
+      },
+      {
+        "case": "architecture",
+        "project": "tests/architecture/BoundaryChecks",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:42:59.981677+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "7 architecture policy and 4 project-scan cases passed; repository ProjectReferences satisfy the checked boundaries."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/architecture.log",
+        "logSha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+      },
+      {
+        "case": "authority-postgres",
+        "project": "tests/integration/IdentityAuthority.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:43:00.640247+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS 120 actual PostgreSQL authority/audit/role/concurrency assertions"
+        ],
+        "log": "/tmp/iga-https-ap02-execution/authority-postgres.log",
+        "logSha256": "a13092c18b16ebb8e1d218eb190591bd84c42aeb322df75c5ae41cb757f084bf"
+      },
+      {
+        "case": "audit-postgres",
+        "project": "tests/integration/SecurityAudit.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:43:04.057984+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS case: actual PostgreSQL COMMIT followed by deterministic simulated acknowledgment loss; internal metadata-only receipt retry, no credential replay (not actual TCP interruption).",
+          "PASS: 81 real PostgreSQL atomic audit/restricted-role/receipt/head-wait/lifecycle/witness checks."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/audit-postgres.log",
+        "logSha256": "72349929dca34ef88dbfc64b877dbee37f2dd2958196a8a59fd469e56c7816ae"
+      },
+      {
+        "case": "composition-postgres",
+        "project": "tests/integration/BffAuthorityComposition.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:43:04.888872+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS: 644 independently authored real PostgreSQL authority/audit/session composition checks."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/composition-postgres.log",
+        "logSha256": "6cca5aa7a079945ea1691b6c53847bfa25c136c4ffda7dc18868e5d9cfe23efd"
+      },
+      {
+        "case": "sessions-postgres",
+        "project": "tests/integration/IdentitySessions.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:43:08.386744+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS: 126 real PostgreSQL shared-ticket/context/lifetime/rotation/revocation/race checks."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/sessions-postgres.log",
+        "logSha256": "9fbbf1bdfdbf835aa997d6012e2bf9c0114c1b14df41d040c1c8236b5204e9ed"
+      },
+      {
+        "case": "bff-https-postgres",
+        "project": "tests/integration/BffSessionFlow.Tests",
+        "exitCode": 0,
+        "startedAtUtc": "2026-10-03T14:43:09.084906+00:00",
+        "source": "ffd2278327000f0289e21c6b76946f0057df1444",
+        "summary": [
+          "PASS active idle renewal at minute 450: OK",
+          "PASS active idle renewal at minute 460: OK",
+          "PASS active idle renewal at minute 470: OK",
+          "PASS eight-hour absolute deadline remains fixed: Unauthorized",
+          "BFF-FLOW: 84 actual HTTPS/shared PostgreSQL checks passed; Entra/FIC NOT VERIFIED."
+        ],
+        "log": "/tmp/iga-https-ap02-execution/bff-https-postgres.log",
+        "logSha256": "53bc23bb0737cd5482667ed6df55ee03ce797d88d17e0216923dbae25c5e2381"
+      }
+    ],
+    "wholeCheckoutGitleaks": "PASS8.30.1 no leaks",
+    "documentationChecks": {
+      "localMarkdownTargets": 384,
+      "checkedHeadingAnchors": 15,
+      "xmlAndUnmodifiedEmbeddedIcons": 6,
+      "diffCheck": "PASS",
+      "protectedEmailUuidAddedProse": "PASS",
+      "errors": []
+    },
+    "fullConfiguredCiFrontendBrowserWindowsPackaging": "NOT RUN; prior evidence not a current claim"
+  },
+  "failuresAndCorrections": [
+    "Author first build found two nullable flow diagnostics; explicit fail-closed null branches fixed before immutable candidate",
+    "Two AP02 documentary precision corrections: lock hash meaning and dependency lower-bound legend",
+    "First documentation check before receipt creation reported six missing receipt links; final validation required after receipt saved"
+  ],
+  "unchangedBoundaries": {
+    "newDependencies": 0,
+    "locksConfigurationChanges": 0,
+    "migrationSchemaChanges": 0,
+    "producerHostWiring": 0,
+    "azureOperations": 0,
+    "permissionsGranted": 0,
+    "paidSession": false,
+    "publicAdmission": false,
+    "G1ToG9Milestone2ProductionRelease": "NOT VERIFIED",
+    "GitGuardian": "Historical six digest findings await human disposition; no suppression"
+  },
+  "privateBoard": {
+    "status": "STALE BFF/HTTPS",
+    "lastConfirmedSnapshot": "4346e0f",
+    "lastConfirmedPublicationUtc": "2026-10-02T19:50:45.775370+00:00",
+    "reason": "Separate automatic approval rejection of credential/network publisher proxy-bypass approach; design approval does not resolve action",
+    "unrelatedCycle14": "PRESERVED",
+    "delta": "Cycle02 bounded protocol/graph status and six linked open human tasks updated in acceptance packet"
+  },
+  "rollout": "No deployment; remove unused additive codec/context/tests without durable-state migration",
+  "temporaryCluster": "Owned isolated loopback PostgreSQL18.4 cluster; five UTF8 synthetic databases; stopped, data preserved under /tmp/iga-https-ap02-pg-data",
+  "sourceBindings": [
+    {
+      "path": "docs/development/https-key-provider-resolved-graph-evidence.md",
+      "sha256": "169a59ec6a74435b90caa3eb9d3b6290a8412e9d929e76611f5bfc41e3b2b419"
+    },
+    {
+      "path": "docs/development/https-production-test-packet.md",
+      "sha256": "ac54f796a95af659c1392d4d44e241d2d057901a2745f709c3e7ec064d4a9c1a"
+    },
+    {
+      "path": "plans/active/https-production-local-cycle02.md",
+      "sha256": "6cd469ee42c7ed9bc25162016e6ebd39dde1f99e91691bb7321521440b6c24eb"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "0fcffd215207b5a606f3bdbadb75f55cf74422a5728d9a5deeaf919e3db399c5"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "4feb4a5c50371126307a11bbae1db69ae33dc2da3767ccc7b896f8549750886d"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "b5361a299d0f0c230cd8d045c5271bf0c8e2404ff9f2120492b9c6de8972b084"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "1f10538a8c2fabce2da1ad96b09e8e4733f0df2e122025133a461f30faa660c1"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "32c571232fdba888a9e6a200a6a409100ac784a95225492cdb305d37c2f2860c"
+    },
+    {
+      "path": "src/server/modules/IdentitySessions/AuthenticationFailureJournal.cs",
+      "sha256": "3d9efe37f5fdd6f4df60df3746cfc202cb09ccbce98f884b5274bd360c83074a"
+    },
+    {
+      "path": "tests/unit/IdentitySessions.Tests/AuthenticationFailureJournalChecks.cs",
+      "sha256": "cac4f2a8e72326f6a95c954bb2ccd6211ba4e3f5c881674761120c3a5781df1c"
+    },
+    {
+      "path": "tests/unit/IdentitySessions.Tests/Program.cs",
+      "sha256": "646b365d599545c8d2d7d59a658e41c4162b23ac3d1f455f053120ad53dd249e"
+    }
+  ],
+  "finalNonAuthorRecordReview": {
+    "status": "PASS no material corrections",
+    "reviewer": "package_hosting",
+    "reviewedCommit": "80b1ac74469d02c024c8f449753cbd5d2eb0322b",
+    "scope": "Documentary/source compatibility only;11source/documentbindings,15retained logdigests and executionrows,4authorblobs,382changed-document local link occurrences and whitespace; runtime/config/IaC/workflow/projectdiff from ffd2278 empty",
+    "limits": "No runtime/cloud rerun; final receipt change records only this review, no other source binding changed"
+  }
+}

@@ -2,10 +2,13 @@
   <Folder Name="/src/collector/">
     <Project Path="src/collector/CollectorHost/CollectorHost.csproj" />
     <Project Path="src/collector/CollectorSafety/CollectorSafety.csproj" />
+    <Project Path="src/collector/CollectorSourcePages/CollectorSourcePages.csproj" />
   </Folder>
   <Folder Name="/src/" />
   <Folder Name="/src/server/" />
   <Folder Name="/src/server/hosts/">
+    <Project Path="src/server/hosts/BffFoundation/BffFoundation.csproj" />
+    <Project Path="src/server/hosts/BffDevelopmentHost/BffDevelopmentHost.csproj" />
     <Project Path="src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj" />
     <Project Path="src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
   </Folder>
@@ -17,6 +20,10 @@
     <Project Path="src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj" />
     <Project Path="src/server/modules/SyntheticTaskCsvIntegration/SyntheticTaskCsvIntegration.csproj" />
     <Project Path="src/server/modules/SyntheticEvaluation/SyntheticEvaluation.csproj" />
+
+    <Project Path="src/server/modules/IdentityAuthority/IdentityAuthority.csproj" />
+    <Project Path="src/server/modules/IdentitySessions/IdentitySessions.csproj" />
+    <Project Path="src/server/modules/IdentityPolicy/IdentityPolicy.csproj" />
     <Project Path="src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj" />
     <Project Path="src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj" />
     <Project Path="src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj" />
@@ -25,6 +32,8 @@
     <Project Path="src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj" />
     <Project Path="src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj" />
     <Project Path="src/server/modules/ReportDrafts/ReportDrafts.csproj" />
+    <Project Path="src/server/modules/ReportPublication/ReportPublication.csproj" />
+    <Project Path="src/server/modules/ReportPublication.PostgreSql/ReportPublication.PostgreSql.csproj" />
     <Project Path="src/server/modules/FindingReview/FindingReview.csproj" />
     <Project Path="src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj" />
     <Project Path="src/server/modules/AssessmentScoring/AssessmentScoring.csproj" />
@@ -43,6 +52,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/ReportPublication.PostgreSql.Tests/ReportPublication.PostgreSql.Tests.csproj" />
     <Project Path="tests/integration/SyntheticEvaluationPopulationIntegration.Tests/SyntheticEvaluationPopulationIntegration.Tests.csproj" />
     <Project Path="tests/integration/SyntheticEvaluationSchemaProvenanceIntegration.Tests/SyntheticEvaluationSchemaProvenanceIntegration.Tests.csproj" />
     <Project Path="tests/integration/SyntheticEvaluationPopulationIndependent.Tests/SyntheticEvaluationPopulationIndependent.Tests.csproj" />
@@ -52,6 +62,14 @@
     <Project Path="tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj" />
     <Project Path="tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
     <Project Path="tests/integration/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj" />
+
+    <Project Path="tests/integration/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj" />
+    <Project Path="tests/integration/SecurityAudit.Tests/SecurityAudit.Tests.csproj" />
+    <Project Path="tests/integration/BffAuthorityComposition.Tests/BffAuthorityComposition.Tests.csproj" />
+    <Project Path="tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj" />
+    <Project Path="tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
+    <Project Path="tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj" />
+    <Project Path="tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj" />
     <Project Path="tests/integration/LocalArtifactReview.Tests/LocalArtifactReview.Tests.csproj" />
     <Project Path="tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
     <Project Path="tests/integration/SyntheticFixPackages.Tests/SyntheticFixPackages.Tests.csproj" />
@@ -73,6 +91,11 @@
     <Project Path="tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj" />
     <Project Path="tests/unit/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj" />
     <Project Path="tests/unit/SyntheticEvaluation.Tests/SyntheticEvaluation.Tests.csproj" />
+
+    <Project Path="tests/unit/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj" />
+    <Project Path="tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj" />
+    <Project Path="tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj" />
+    <Project Path="tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj" />
     <Project Path="tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj" />
     <Project Path="tests/unit/ArtifactReviewComponent.Tests/ArtifactReviewComponent.Tests.csproj" />
     <Project Path="tests/unit/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj" />
@@ -85,6 +108,7 @@
     <Project Path="tests/unit/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiPreviewHtml.Tests/SyntheticAiPreviewHtml.Tests.csproj" />
     <Project Path="tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj" />
+    <Project Path="tests/unit/ReportPublication.Tests/ReportPublication.Tests.csproj" />
     <Project Path="tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj" />
     <Project Path="tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj" />
     <Project Path="tests/unit/FindingReview.Tests/FindingReview.Tests.csproj" />
@@ -95,6 +119,8 @@
     <Project Path="tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj" />
     <Project Path="tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj" />
     <Project Path="tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj" />
+    <Project Path="tests/unit/CollectorSourcePages.Tests/CollectorSourcePages.Tests.csproj" />
+    <Project Path="tests/unit/CollectorSourcePages.Independent.Tests/CollectorSourcePages.Independent.Tests.csproj" />
     <Project Path="tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj" />
   </Folder>
   <Project Path="src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTasks.csproj" />

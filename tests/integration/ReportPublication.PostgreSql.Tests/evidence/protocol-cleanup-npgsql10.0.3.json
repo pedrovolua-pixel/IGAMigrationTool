@@ -1,0 +1,12 @@
+{
+  "StartupCompleted": true,
+  "QueryReceived": true,
+  "CancelRequestReceived": true,
+  "LogicalWaitCanceledWhileCancelResponseHeld": true,
+  "DriverPendingWhileCancelResponseHeld": true,
+  "PublicDisposePendingWhilePeerHeld": true,
+  "TestOwnedPeersReleased": true,
+  "ObservedDriverTasksEnded": true,
+  "DriverFailureType": "NpgsqlException",
+  "DisposalFailureType": "NpgsqlException"
+}

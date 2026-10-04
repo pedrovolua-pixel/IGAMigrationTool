@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "pilot-native-postgresql-packet-site-v1",
+  "date": "2026-10-04",
+  "siteProjectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+  "siteSourceCommit": "cf5b2e49170fa0bb2f6284f5a246c0d29ce36131",
+  "canonicalSnapshot": "d02cb0d417e3f44d5e2980a7044403e546d76e6d",
+  "deploymentId": "appgdep_6ac1cd3c7c6c81919642f53ba9092de5",
+  "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_3da683f9cd7081918e9ef26d19d1c54d",
+  "status": "succeeded",
+  "confirmedAtUtc": "2026-10-04T03:51:30.361653+00:00",
+  "privateUrl": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+  "taskCount": 14,
+  "taskHashesPreserved": true,
+  "localQA": "Chromium151.0.7922.34;1280/390nooverflow;14tasks",
+  "scope": "reviewedPostgreSQLdesign/assignedisolatedpackets;18persistedcasesNOTEXECUTED;correctedhostedbrowserpending;noacceptance/taskclosure"
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-release-observer-scenarios-v1",
+  "governingAmendment": "29b5f925c0081cfbe12d70b24c51e2bf758e1952",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "credit": "Trustedfictionalreleaseobservation seam only; actualpersisted18 need realownbackend/locks evidence",
+  "surfaceUnchanged": {
+    "sqlFunctions": 35,
+    "compositeReturns": 15,
+    "nativeGoldens": 31,
+    "publicCoreAPIs": "unchanged"
+  },
+  "bindingFields": [
+    "positiveServerPID",
+    "exactUTCmicrosecondBackendStart",
+    "currentDatabaseNameAndOID",
+    "actualSessionUserNameAndOID",
+    "ownedImmutableKnownAdvisoryKeyTuplesClassIdObjectIdObjSubIdMode"
+  ],
+  "windowFields": [
+    "originalUTCCutoffIncludingAnyNarrowing",
+    "originalAdmittedUTC",
+    "originalMonotonicOrigin",
+    "sameOriginalTimeProviderIdentity",
+    "LIVEOriginalCallerToken"
+  ],
+  "cases": [
+    {
+      "name": "register-once-pre-admit-owner",
+      "expected": "Onlytrusted testowner observer registeredonce inNew/Bound beforeAdmit; missing/duplicate/late/disposed/foreignfixture registration refuses beforework. NotarbitraryrequestBoolean."
+    },
+    {
+      "name": "serverbinding-fixed-own-backend",
+      "expected": "Bindingfromfixedprivateownbackend query whileoriginalvalid; callerPID/start/DB/user cannotchoose target. Wrong/zeroPID,startprecision/offset,database/name/OID,user/name/OID observation refuses; completeownreceipt remainschecked."
+    },
+    {
+      "name": "immutable-knownkeys-owned-exact",
+      "expected": "Mutatedoriginalarrays/returnedrows cannotchangeboundknownkeys; duplicates/omitted/foreign/fabricatedkeys/invalidmode deny. Latertransactionlocks belongtosamebackend; observationcannotignoreoutstandingoriginalPIDlocks."
+    },
+    {
+      "name": "all-own-separatebackends-required",
+      "expected": "Eachactualmain/staging/auditauxiliarybackend ownsitsfixedidentity/window andmustbe accountedfor beforeclaimingitscleanup; missingstager backend cannotinheritmainreleaseproof."
+    },
+    {
+      "name": "zero-protectedwork-after-firstinvalidate",
+      "expected": "Registry/retainedviews/protectedlease invalidatedfirst; releasewindow authorizesonlymetadataobservation andcannotresurrectsource/read/replay/append/sinkwork."
+    },
+    {
+      "name": "original-time-only-budget-not-invalidated-token",
+      "expected": "Postinvalidationmetadata wait canuseimmutableadmittedUTC/monoorigin/originalcutoff/sameclock+LIVEcaller; noresetorigin/copieduncanceledbool/newTTL. Itdoesnotusetheinvalidatedprotectedtoken asfreshauthority."
+    },
+    {
+      "name": "exactcutoff-and-monotonic-rollback",
+      "expected": "Minus1tickcurrent observation maypass; exact/+1ticklate,pastnarrowedcutoff,UTCrollback withelapsedexhaustion deny explicituncertainty. Laterdeadline cannotextend."
+    },
+    {
+      "name": "livecaller-stalled-dispatch-and-disposedsource",
+      "expected": "Originalcallerstate cancellationstalledbyLIFOcallback endsobservation independentlyofcallbackdispatch; originalsource disposedbeforeaccess failsclosed; no late releasevalue."
+    },
+    {
+      "name": "stale-or-late-observation-time",
+      "expected": "Timestampbeforeobservationstart,wrongtimeprovider/monoorigin,staleclock orresult afteroriginalceiling refuses; typedtrustedobservation mustmatchsamebinding/currentwindow."
+    },
+    {
+      "name": "outstandingbackend-or-oldlocks-deny",
+      "expected": "Actualoriginalbackendexists or anylocksstillattributabletoitsoriginalPID=>notproved; contradictorybackendgonewitholdlocksreturned refuses. PublicDisposecompleted alone isnotproof."
+    },
+    {
+      "name": "pidreuse-conservative-originalownership",
+      "expected": "Differentbackend_start withsamePID identifiesdifferentinstance; reusedPIDwithoutstandingrows/locks conservativelyunproved. Cannotattributeanotherfixture/backend tooriginal oracceptitsreceipt."
+    },
+    {
+      "name": "key-reacquired-by-newowner-valid",
+      "expected": "Originalbackend/itslocks gone,legitdifferentPID+backendstart acquiressameknownkey=>originalrelease maypass. Neverrequireglobalkeyabsence."
+    },
+    {
+      "name": "observation-stall-fault-empty-mismatch",
+      "expected": "Missing/unavailablemetadata,observerfault/stall/unownedtuple/latecompletion yieldsfixedexistingPublicationCommitUncertainException,nosuccess/outcomeappend/lateemission; observefaults withoutfreshordinaryreconciliation."
+    },
+    {
+      "name": "typedmetadata-privacy-authority",
+      "expected": "Readonlyboundedpg_stat_activity/pg_locks throughreceiptedprovisioner onlyfixture; no query/state/client/source content inreceipt/log/site. NoPGsignalprivilege,newruntimebroadsstats/publicfunction orrawconnectionaccess."
+    },
+    {
+      "name": "actualrelease-success-window",
+      "expected": "Onlyactualownbound absence observedwithinoriginalwindow plusownerkeyabsence/providerdisposalseparatereceipt maygateordinarycompletion; retaindistinctlogicalend/providercompletion/serverreleaseobservations. NoscriptedBoolean creditedasphysicalproof."
+    },
+    {
+      "name": "oldempty-snapshot-live-staging-no-advisory-locks",
+      "expected": "Primeoldempty pg_stat_activity snapshotinobservertransaction,thenstartnewownstagingbackend withzeroAdvisorylocks. Newtimestamp/oldrows cannotprovegone: eachactualobservationmustbeginNEWexplicitREADONLY transaction aftercloseobservationstart, no reusedactivitysnapshot/earliertransaction; freshrows detectlivebackend anddeny."
+    },
+    {
+      "name": "remaining-nonadvisory-lock-deny",
+      "expected": "Return/observeboundoriginalPID nonadvisorypg_locksrowwithnoadvisoryknownkeys; anyrowconservativelypreventsrelease. Knownkeysadditionalownershipevidence, neverfilterthatcanomitrowlocks."
+    },
+    {
+      "name": "stager-selfmetadata-no-fence-grant",
+      "expected": "BlobStager capturesfixedSELFbackendidentity underoriginalvalidity,nevercallsopen_fence,nofunctioninventory/grantaddition. Missingseparatestageridentity remainsuncertainty."
+    },
+    {
+      "name": "opened-but-unbound-execution-backend",
+      "expected": "ExecutionOpen succeedsbutopen_fence/admissionidentitycapture incomplete; noexactbinding cannotfabricatereleaseproof evenifDisposecompleted. Originalwindowretainsuncertainty/non-success."
+    },
+    {
+      "name": "observer-ownidentity-and-localtime-start-complete",
+      "expected": "Validateconcreteobserverconnection ownreceiptedfixtureidentityindependently; observationstart/completion capturedinsameoriginalTimeProvider byowningsession,notuntrustedreturnedwallclock. Anotherbackend/disposal/invocation staleobservation refuses."
+    },
+    {
+      "name": "completeimmutable-alllockcounts-peroriginalPID",
+      "expected": "Actualtypedobservation coversEACHboundoriginalPIDexactlyonce includingseparatestager,nonnegativeALLpg_locksrowscount notjustadvisory. Missing/duplicate/extraPID,negative/overflow/mutablealiasedcountcollectionoranynonzero countrefuses. Positive requireszerocompletecountsandnooriginalPIDbackendheaders underfreshREADONLYsnapshot/currentoriginalwindow."
+    }
+  ],
+  "governingLiteralClarifications": [
+    "647275792b7efa36d863a57b91f92f46d2e219c8",
+    "dec9a4876869851a30cf39f3351d581d9977da37"
+  ]
+}

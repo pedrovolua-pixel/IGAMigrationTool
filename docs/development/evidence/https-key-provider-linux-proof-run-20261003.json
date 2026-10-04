@@ -1,0 +1,208 @@
+{
+  "artifacts": [
+    {
+      "bytes": 22,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/artifacts.json",
+      "sha256": "fb09a9699b26ad536855bb4263ff01baa31a107d9af48b348e96cb4a9eb2b8d9"
+    },
+    {
+      "bytes": 495,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/changed-paths.json",
+      "sha256": "49fc22bc1dce73ab3927350486de9b16cfd7792a64794f59a116ed0edd7c0a97"
+    },
+    {
+      "bytes": 1575,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/corrected-downloader-tests.log",
+      "sha256": "d424acf31e55f4ddcd446c5d7be9306e9010944f6a1d736a7c8d4680651f5f65"
+    },
+    {
+      "bytes": 389,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/correction-inventory.json",
+      "sha256": "8b12c79987be89e6fdb4861ccc77c30c8a39d8f187d87ab6227d970312c6c8d6"
+    },
+    {
+      "bytes": 3137,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/correction.patch",
+      "sha256": "1d3db54d8d64d73c163b3f14bda9508ede0f338131a1fb379e01f0712d520fe0"
+    },
+    {
+      "bytes": 22712,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/job.log",
+      "sha256": "268fd1096fb0c84d680273156ed215770a5bc7bfcc813e227726527a78a3b443"
+    },
+    {
+      "bytes": 2098,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/jobs.json",
+      "sha256": "b249a25155bcd6a26c88bdfd97dcfb5e8086bbc54d1d3829653e145d0a7612e1"
+    },
+    {
+      "bytes": 2348,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/pr-readback.json",
+      "sha256": "138f4458376bab5c296c720ef59cb5f28ce19883c290fdf84aa3b07fc09bd1b8"
+    },
+    {
+      "bytes": 484,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/runs.json",
+      "sha256": "032ffcb90914cf0b0263ae2a6235f523c1dfa0aac47c38c2d2a2ffe5754ab260"
+    },
+    {
+      "bytes": 1542,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/unchanged-verifier-tests.log",
+      "sha256": "40ca7a8dd43e50d8414273948708afb4666d13de7e36d3b7c0eec1719fbbd7d8"
+    },
+    {
+      "bytes": 452,
+      "path": "/tmp/iga-linux-proof-independent-review/corrected-context-oracle.log",
+      "sha256": "ecae780686119994d03d11e1b7ad1cd96965f28db14a8c3b0faf19e852912b32"
+    },
+    {
+      "bytes": 1575,
+      "path": "/tmp/iga-linux-proof-independent-review/corrected-downloader-tests.log",
+      "sha256": "4abbefdd142cd4220d1caea34791c83bf4b098977f420d926ab7a0f088a348e4"
+    },
+    {
+      "bytes": 1071,
+      "path": "/tmp/iga-linux-proof-independent-review/fix-review-receipt.json",
+      "sha256": "4d533ccc57aa08f49531393d2ade26eecdbb3a9fa239eb6393f5d7e244413190"
+    },
+    {
+      "bytes": 457,
+      "path": "/tmp/iga-linux-proof-independent-review/portable-context-oracle.log",
+      "sha256": "3c5a33640d3db344902eb68fd69e51845efb9565e5df5589fdf4e52af9348bd1"
+    },
+    {
+      "bytes": 4010,
+      "path": "/tmp/iga-linux-proof-independent-review/review-receipt.json",
+      "sha256": "2cf2fa8b7a9a903cbc30a17711186bd4feddac15ebe135acb5f62823c07b3605"
+    },
+    {
+      "bytes": 3137,
+      "path": "/tmp/iga-linux-proof-independent-review/test-portability-fix.patch",
+      "sha256": "1d3db54d8d64d73c163b3f14bda9508ede0f338131a1fb379e01f0712d520fe0"
+    },
+    {
+      "bytes": 81,
+      "path": "/tmp/iga-https-linux-proof-run-evidence/secret-check.log",
+      "sha256": "e5f978044cd27d510e9d8d8a73f781a35e4d0f5580e0091a7fef9f875d032377"
+    }
+  ],
+  "authority": "Owner Approved exact seven-file4fadf7c publication/run; no changed-byte publication authority",
+  "baseline": "f8fb332114aa8a52696caae8f4b264075e900d55",
+  "cases": {
+    "KV-L01": "PASS publication/head/base/draft/sevenfiles/readback",
+    "KV-L02": "NOT VERIFIED no actual acquisition or signature execution",
+    "KV-L03": "PARTIAL Setup runner2.337.0 Ubuntu24.04.5 image20260927.320.1 only; SDK/architecture/selected trust/retention/artifact integrity NOT VERIFIED",
+    "KV-L04": "PASS bounded honest failure/canonical report; private site STALE",
+    "KV-L05": "PASS reviewed local test correction only"
+  },
+  "correction": {
+    "candidateCommit": "cefd8354d69e00eb372f8efff457e9b175d3a6eb",
+    "changedPaths": [
+      "tests/infrastructure/HttpsKeyProviders/test_download_archives.py"
+    ],
+    "fileSHA256": "4683991a12264e8b34e96cb8062db5019f17100bf89870c5ac1d25453a707c56",
+    "parent": "4fadf7ced8b6c6b978e326e2fae6d925001fdb26",
+    "patchSHA256": "1d3db54d8d64d73c163b3f14bda9508ede0f338131a1fb379e01f0712d520fe0"
+  },
+  "executionPlanCommit": "e7f7f15dbfd47a13a0f78d6620ba2c37d4875bd0",
+  "failure": "Downloader safety test expected None instead of normal explicit SSLContext; SDK/provenance/acquisition/signature/machine steps skipped; secondary upload failed because no receipts exist",
+  "finalIndependentRecordReview": {
+    "artifactHashesChecked": 17,
+    "localLinksChecked": 478,
+    "path": "/tmp/iga-linux-proof-independent-review/final-record-review.json",
+    "productionGateAcceptance": false,
+    "sha256": "0f4c06a3aed72fdfdf400dbcb628c9fc11c8b39307755c13adfc9b7c76525cef",
+    "sourceBindingsChecked": 10,
+    "sourceCommit": "64f6b7d9b53cd66a1428a4578992701eefa238fb",
+    "status": "PASS_BOUNDED_FAILED_RUN_AND_LOCAL_CORRECTION_RECORDS_ONLY"
+  },
+  "limits": [
+    "Correction candidate local only; no further public push/run until exact approval",
+    "No artifact ZIP obtained; no SDK/platform-selected trust/signature conclusion",
+    "No unchanged application C#/PG checks rerun; prior evidence historical",
+    "No Azure resources/grants/spending/session/admission/dependency lock/production lifecycle or release",
+    "All six human tasks/G1-G9/Milestone2 remain open",
+    "BFF/HTTPS private snapshot4346e0f stale since2026-10-02T19:50:45.775370+00:00; automatic review rejected credential/network publisher proxy-bypass; no retry/bypass; preserve unrelated Cycle14"
+  ],
+  "localChecks": {
+    "coordinatorDownloaderMocks": 17,
+    "coordinatorUnchangedVerifierMocks": 18,
+    "independentDownloaderMocks": 17,
+    "independentEffectiveConnectionControls": 6,
+    "otherPublicFilesUnchanged": 6,
+    "scopedSecretScan": "PASS Gitleaks8.30.1 exact changed sources and receipt, no findings",
+    "syntaxWhitespace": "PASS"
+  },
+  "logHashMeaning": "Hash of retained connector-decoded UTF-8 job text, not raw downloadable log bytes",
+  "packageConclusion": "NONE",
+  "public": {
+    "actualCheckout": "eb6e70a69a2287c3ce40ef72d78fa78adbcb2ea9",
+    "attached": true,
+    "attempt": 1,
+    "base": "31c61eaf17a2abbc3b4b87a674b057d0b2b75651",
+    "conclusion": "failure",
+    "diagnosticArtifacts": 0,
+    "draft": true,
+    "head": "4fadf7ced8b6c6b978e326e2fae6d925001fdb26",
+    "job": 111251011962,
+    "pr": 3,
+    "run": 37139568768,
+    "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/3"
+  },
+  "recordedAtUtc": "2026-10-03T17:18:38.095046+00:00",
+  "remoteMockTests": {
+    "downloader": {
+      "fail": 1,
+      "pass": 15,
+      "run": 16
+    },
+    "verifier": {
+      "pass": 18,
+      "run": 18
+    }
+  },
+  "schemaVersion": 1,
+  "sourceBindings": [
+    {
+      "path": "docs/development/https-key-provider-linux-run-result.md",
+      "sha256": "ce5ae5a5fcd10184ae38e2a70f360d8ac214054e21423cd4f3c50c88412c1427"
+    },
+    {
+      "path": "docs/development/https-key-provider-public-export-approval.md",
+      "sha256": "eeb06505433bb8b2e967b78d318628e84406139693d5f334cc7a6f3dcec38464"
+    },
+    {
+      "path": "docs/development/https-production-test-packet.md",
+      "sha256": "e68088d3b1fa0f54204cdcb75cbd28a3803e1adcf464e6f57f0f8a495fe3f4cd"
+    },
+    {
+      "path": "plans/active/https-key-provider-linux-proof-run.md",
+      "sha256": "afdeb126925c8bc653dcb29e1e6c3935a8203abceeef92b8bb05cc944d8955b1"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "c59025eb50acb34bce4692c50dd07af8e16d19e2eebf19a7f8a4c50c4d3b0502"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "0fadbae9e5ba1ed399ea7be6b5254c45fc887cd3f486a4cbfe5750fcaf2777ba"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "24a90853a3636e7088b392a145565218f1dd0fb6226195e51d35a47ebfe06ab8"
+    },
+    {
+      "path": "specs/003-health-assessment/technical-spec.md",
+      "sha256": "44515cafde487998af07d628fe7691137c0dd4f698ba72d147fdef3c13c28a3c"
+    },
+    {
+      "path": "specs/003-health-assessment/test-plan.md",
+      "sha256": "062c7dc3a97936b8628b6a4d17d6c3d01415d49f1510b4ba5fbbc3b1772a9cc2"
+    },
+    {
+      "path": "tests/infrastructure/HttpsKeyProviders/test_download_archives.py",
+      "sha256": "4683991a12264e8b34e96cb8062db5019f17100bf89870c5ac1d25453a707c56"
+    }
+  ],
+  "status": "FAILED_BEFORE_SIGNATURES_LOCAL_CORRECTION_REVIEWED_PENDING_PUBLIC_APPROVAL"
+}

@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "status": "VERIFIED_BOUNDED_LOCAL_RP01_TO_08_ONLY",
+  "recordedAtUtc": "2026-10-04T00:28:26.435760+00:00",
+  "authority": "Owner approved next step; accepted PC-D02; independently reviewed bc65859 plan and9211df1 supported synthetic challenge clarification",
+  "baseline": "65f2608",
+  "authorCandidate": "fb6e837d715ce2534eba4bd71e027f9c4b57cdb9",
+  "integratedRuntimeSource": "35a317529a28ca0b39f667e9519b9ae39582203e",
+  "actualGraph": {
+    "assetsSHA256": "432f6c7796b7302a655eb65d0e3baa1bb1cb7c656c9fc05ec8ff16b7a8874a1f",
+    "lockSHA256": "2d726d936d5cb3b5d647ef77a3f62d56e16fb0a70b49738f483ab3c7b5eebe9f",
+    "manifestSHA256": "8ed2ffab1478d381cf310b62e7c6b198bf47595e8e7100c16d2738fc6a4fee42",
+    "archives": 37,
+    "selectedEntries": 74,
+    "SDK": "10.0.401",
+    "runtime": "10.0.12",
+    "productionPromotion": false,
+    "frameworkOnlyRestore": "Empty sources; not fresh advisory or signature proof"
+  },
+  "author": {
+    "summary": {
+      "path": "/tmp/iga-key-resolver-pipeline-author-evidence/author-summary.json",
+      "bytes": 2254,
+      "sha256": "5f5a1061120300515332eac1cf80dbc07819d49bc48e1aaa3db5939a191cdaaf"
+    },
+    "focusedChecks": {
+      "path": "/tmp/iga-key-resolver-pipeline-author-evidence/focused-checks.json",
+      "bytes": 6165,
+      "sha256": "08e6b3669dac56d6571191c3c7251ace8966f86ced6c5ce93b427ac8724b3c2f"
+    },
+    "finalReceipt": {
+      "path": "/tmp/iga-key-resolver-pipeline-author-evidence/final/receipt.json",
+      "bytes": 30810,
+      "sha256": "0146a9d51bee9753d0d7c2c6410e4aabdfed1c4715d04d803ebbef1e5da85e04"
+    },
+    "cases": 45,
+    "originalCases": 27,
+    "resolverCases": 18,
+    "retainedRuns": {
+      "path": "/tmp/iga-rp-retained-author-runs.json",
+      "bytes": 7159,
+      "sha256": "d6ab06b0922d8da480bb15ce5259fe03897bd97c1df08aeeafa4dbfab2ed12e8"
+    },
+    "retainedRunRawLogsVerified": 92,
+    "formatNegativeControl": {
+      "path": "/tmp/iga-key-resolver-pipeline-author-evidence/format-negative-control.json",
+      "bytes": 717,
+      "sha256": "9d4e0393614cd185cd458f30f1d282e32c4a147e37058089ce406b86baa482b9"
+    }
+  },
+  "independent": {
+    "receipt": {
+      "path": "/tmp/iga-key-resolver-pipeline-independent-review/review-receipt.json",
+      "bytes": 12244,
+      "sha256": "07acd8d669ebd9b75ad624a0af01dd78960423064b6ef4db7d9ec11c0628226a"
+    },
+    "checks": {
+      "actualArchives": 37,
+      "actualSelectedDLLentries": 74,
+      "actualCaseChecks": 45,
+      "priorDispatchCases": 27,
+      "newPipelineCases": 18,
+      "caseLabels": [
+        "DISP02-legacy-instance",
+        "DISP02-legacy-factory",
+        "DISP02-modern-async-only-read",
+        "DISP02-modern-async-only-write",
+        "DISP03-read-denies-missing",
+        "DISP03-read-denies-empty",
+        "DISP03-read-denies-malformed",
+        "DISP03-read-denies-inventory",
+        "DISP03-read-denies-304",
+        "DISP03-validated-304",
+        "DISP04-no-read-create-denied",
+        "DISP04-unsafe-condition-11",
+        "DISP04-unsafe-condition-12",
+        "DISP04-unsafe-condition-13",
+        "DISP04-unsafe-condition-14",
+        "DISP04-lost-fixture-inventory",
+        "DISP05-conflict-then-missing",
+        "DISP05-repeated-conflicts",
+        "DISP05-terminal-error",
+        "DISP05-unguarded-missing-create-control",
+        "DISP06-versionless-new-wrap",
+        "DISP06-new-version-and-historical-unwrap",
+        "DISP06-invalid-historical-22",
+        "DISP06-invalid-historical-23",
+        "DISP06-invalid-historical-24",
+        "DISP06-invalid-resolved-25",
+        "DISP06-invalid-resolved-26",
+        "RP01-metadata200-sync",
+        "RP03-terminal403-sync",
+        "RP01-metadata200-async",
+        "RP03-terminal403-async",
+        "RP03-provider-refuses-wrap",
+        "RP04-input-denied-5",
+        "RP04-input-denied-6",
+        "RP04-input-denied-7",
+        "RP04-resolved-denied-8",
+        "RP04-resolved-denied-9",
+        "RP04-versionless-historical-before-resolver",
+        "RP07-unexpected-request-trap",
+        "RP02-unguarded403-force-remote-sync",
+        "RP02-unguarded403-force-remote-async",
+        "RP01-actual-provider-wrap-historical-decrypt",
+        "RP05-normal-diagnostics",
+        "RP06-supported-diagnostics-off",
+        "RP06-allowlist-hostile-and-positive-controls"
+      ],
+      "commandLogSizeHashBindings": 12,
+      "loadedAssemblyHashBindings": 6,
+      "SDK": "10.0.401",
+      "runtime": "10.0.12",
+      "frameworkEmptySourceRestore": "PASS_not_newaudit",
+      "Release": "PASS_0warnings_0errors",
+      "wholeScratchFormatting": "PASS_exit0_empty_stderr",
+      "newFileFormatControl": "PASS_restore0_clean0_misformatted2_restored0",
+      "runnerInputGuardNegatives": 9,
+      "newSourceCopyGuardNegatives": 4,
+      "PythonAST": "PASS",
+      "localReadmeLinks": 5,
+      "scopedGitleaks": "PASS_exit0_emptyfindings",
+      "whitespaceCleanImmutable4files": "PASS"
+    },
+    "formatControlCommands": [
+      {
+        "label": "restore",
+        "command": [
+          "/tmp/iga-dotnet-10.0.401/dotnet",
+          "restore",
+          "Dispatch.csproj",
+          "--configfile",
+          "NuGet.Config"
+        ],
+        "exitCode": 0,
+        "stdout": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/restore.stdout.log",
+          "bytes": 130,
+          "sha256": "1aa70c23f1827eef54dcb9295018afd3d47aa57ee2bfeff76a1f6751839d8010"
+        },
+        "stderr": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/restore.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "clean-before",
+        "command": [
+          "/tmp/iga-dotnet-10.0.401/dotnet",
+          "format",
+          "Dispatch.csproj",
+          "--no-restore",
+          "--verify-no-changes"
+        ],
+        "exitCode": 0,
+        "stdout": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/clean-before.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/clean-before.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "label": "misformatted-new-file",
+        "command": [
+          "/tmp/iga-dotnet-10.0.401/dotnet",
+          "format",
+          "Dispatch.csproj",
+          "--no-restore",
+          "--verify-no-changes"
+        ],
+        "exitCode": 2,
+        "stdout": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/misformatted-new-file.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/misformatted-new-file.stderr.log",
+          "bytes": 222,
+          "sha256": "de91c14ce342967280ec192aaed462e39882f21f3faabd73e42bb0e80220ee3f"
+        }
+      },
+      {
+        "label": "clean-restored",
+        "command": [
+          "/tmp/iga-dotnet-10.0.401/dotnet",
+          "format",
+          "Dispatch.csproj",
+          "--no-restore",
+          "--verify-no-changes"
+        ],
+        "exitCode": 0,
+        "stdout": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/clean-restored.stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/tmp/iga-key-resolver-pipeline-format-control/clean-restored.stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ],
+    "executionArtifacts": [
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/sdk.stdout.log",
+        "bytes": 9,
+        "sha256": "93c11b5221b72e0032ab2d9f93d28c2c9b7a0bb2557effffcdfef45ab739a0da"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/sdk.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/runtimes.stdout.log",
+        "bytes": 194,
+        "sha256": "ce3493d0985b1e9216a74974eb572d429b384b695ad5f8375f80a327c2b122b5"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/runtimes.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/restore.stdout.log",
+        "bytes": 131,
+        "sha256": "9b4cc97d24efa1fcb19ee824ea4b7089d200075254925de05d1bb1c268a64d35"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/restore.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/build.stdout.log",
+        "bytes": 178,
+        "sha256": "ff49460769cd7d6d97615fab8612dfe0a82dfde6ac138fe67fb7410e4d8eb1d7"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/build.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/format.stdout.log",
+        "bytes": 951,
+        "sha256": "d5dfcca4cedd9734f5226aa5ff8cf93000e71d97ff319821b39e1fe607039969"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/format.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/cases.stdout.log",
+        "bytes": 7410,
+        "sha256": "7fbb71476bc0649e5f4161d4f58c9831f7a1e35f255e27651c68cb984048fa04"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/cases.stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/iga-key-resolver-pipeline-independent-run/receipt.json",
+        "bytes": 30804,
+        "sha256": "d55bd96ba9702ebe7cd5b72e5bffc34202f3e2c4a85f3eea8d5106c13821cd5e"
+      },
+      {
+        "path": "/tmp/iga-key-resolver-pipeline-independent-review/negative-oracles.py",
+        "bytes": 2360,
+        "sha256": "41c4b375afb667b13db79de183f534cca89045c6d8fee6816df75a8ebc42fd40"
+      },
+      {
+        "path": "/tmp/iga-key-resolver-pipeline-independent-review/negative-oracles.log",
+        "bytes": 885,
+        "sha256": "f7d5500cc2910cc294b2e5a1317ae868823fb412ba8845679df509e4267e51e6"
+      },
+      {
+        "path": "/tmp/iga-key-resolver-pipeline-independent-review/source-copy-oracles.py",
+        "bytes": 2307,
+        "sha256": "3553a8114da9dbbb69043640a02f70f40b7a1818deb23c7f4346efdff3ba7ded"
+      },
+      {
+        "path": "/tmp/iga-key-resolver-pipeline-independent-review/source-copy-oracles.log",
+        "bytes": 401,
+        "sha256": "a6faf879c4d76f8b4489802ab4f7700ac0afde4f964cacfee22c48bd03f77f89"
+      },
+      {
+        "path": "/tmp/iga-key-resolver-pipeline-independent-review/secrets.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      {
+        "path": "/tmp/iga-key-resolver-pipeline-independent-review/secrets.log",
+        "bytes": 79,
+        "sha256": "2d3f0d08d693ce3c4ba255708104f8bb38509c0595ee0de4c7026d7fcb7495e3"
+      },
+      {
+        "path": "/tmp/iga-key-resolver-pipeline-format-control/receipt.json",
+        "bytes": 3022,
+        "sha256": "03ca1d32a68dbf086a311696cf8799cd7c53836d79be0b231ce730c14eaa6bee"
+      }
+    ],
+    "findings": []
+  },
+  "coordinator": {
+    "runExitCode": 0,
+    "sourceAndLogVerification": {
+      "path": "/tmp/iga-rp-coordinator-checks.json",
+      "bytes": 4532,
+      "sha256": "4aeeba2a66f0d90b12ab310a9a6dfc6a5b10e42c32e036f849cd18a499d63199"
+    },
+    "runReceipt": {
+      "path": "/tmp/iga-key-resolver-pipeline-coordinator-run/receipt.json",
+      "bytes": 30804,
+      "sha256": "866fadd8cd6ed0b75e1386037ac73c8eb88525fd935f40df56db2b7314d186a0"
+    },
+    "originalCases": 27,
+    "resolverCases": 18,
+    "rawCommandLogsVerified": 12,
+    "loadedAssemblies": [
+      {
+        "assembly": "Azure.Storage.Blobs",
+        "version": "12.26.0.0",
+        "sha256": "4483f43e7871d2aff8c748dd11488c90a1abc4040005d327441af29e902254e2"
+      },
+      {
+        "assembly": "Azure.Core",
+        "version": "1.61.0.0",
+        "sha256": "9d728c1adb91fe9f6dff1ba1059d9e7e6500d13411399d2ce22978a26857a85e"
+      },
+      {
+        "assembly": "Microsoft.AspNetCore.DataProtection",
+        "version": "10.0.0.0",
+        "sha256": "7a89ac53215fa5e59bbd2131c254ca178993d0f6a334fa657d3cf11ca6bcf83e"
+      },
+      {
+        "assembly": "Azure.Extensions.AspNetCore.DataProtection.Blobs",
+        "version": "1.5.4.0",
+        "sha256": "02db27739464fc4429f6d7d4a2b8e38d79946e77b03a616aed30bb015bd608a1"
+      },
+      {
+        "assembly": "Azure.Extensions.AspNetCore.DataProtection.Keys",
+        "version": "1.6.4.0",
+        "sha256": "92d55f38deb64f452c1fb7dcaa61589e50786d75dad8388f0548e7fc8d8891ff"
+      },
+      {
+        "assembly": "Azure.Security.KeyVault.Keys",
+        "version": "4.10.0.0",
+        "sha256": "540cfc53443b658adcb9a21a877889ea263a7dc15f6229b383333d0bf9e999e8"
+      }
+    ],
+    "sourceBindings": [
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/Program.cs",
+        "bytes": 22470,
+        "sha256": "c1f5255cab15a42c769624b24ec1cb0ab03ae1e12f8e6969bf56daecd6a929a4"
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/README.md",
+        "bytes": 14636,
+        "sha256": "10ca9afe34f5e4457fab012f444475344b4c7d06ddcb079335db65c283637564"
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/ResolverPipelineCases.cs",
+        "bytes": 31129,
+        "sha256": "a5b5e5761591d2802fd68ba34b78a044d4f3a7efd49699d38103cea5bcf2f838"
+      },
+      {
+        "path": "tests/infrastructure/HttpsKeyProviderDispatch/run-experimental.py",
+        "bytes": 10471,
+        "sha256": "2f49dc0617124d6fc25936b7a19e756f52a1cb8f6ac5590e4da73efef324b7d3"
+      }
+    ],
+    "build": "0warnings0errors",
+    "wholeScratchFormat": "exit0_empty_stderr",
+    "pythonAST": "PASS",
+    "documentationAndSecrets": {
+      "documentSnapshot": {
+        "path": "/tmp/iga-rp-final-document-check.json",
+        "bytes": 4423,
+        "sha256": "69776cd79ca2cb5032fbd3f1a42eaa8ddc3969ef8d87bd69c21c156218a29cd0"
+      },
+      "localLinks": 665,
+      "headingAnchors": 64,
+      "utf8JsonWhitespaceProtectedProse": "PASS",
+      "scopedSecrets": {
+        "path": "/tmp/iga-rp-final-gitleaks-receipt.json",
+        "bytes": 1459,
+        "sha256": "a72147d4ba6dc51716e0a84944581feeb757d7afb382f56deea742764de52d21"
+      },
+      "scannedPaths": 18,
+      "gitleaksExitCode": 0,
+      "snapshotMeaning": "Exact pre-metadata-augmentation document/source snapshot, not a self-referential hash of this final receipt. Final immutable canonical review binds the completed records separately."
+    }
+  },
+  "diagnosticObservations": {
+    "normal": "RP05 observations off=False activity=4 diagnostic=8 event=4 binding=True bodyField=False protectedField=True token=False cryptoMarker=False sinkAccepted=1 sinkRejected=16 protectedReachedSink=False",
+    "off": "RP05 observations off=True activity=0 diagnostic=0 event=0 binding=False bodyField=False protectedField=False token=False cryptoMarker=False sinkAccepted=1 sinkRejected=0 protectedReachedSink=False"
+  },
+  "scopeReviews": [
+    {
+      "path": "/tmp/iga-key-resolver-pipeline-independent-review/plan-review.json",
+      "bytes": 3561,
+      "sha256": "b58af4ccfeef72120c0a42aaf95b075ddf3ff801c69b3bd497f02ae611e1a5ab"
+    },
+    {
+      "path": "/tmp/iga-key-resolver-pipeline-independent-review/challenge-plan-review.json",
+      "bytes": 1994,
+      "sha256": "b5ab2c8dbcb37d2b025c6d40fdde1e6a8316586b7ad50de0c8c4e8f3578146a2"
+    }
+  ],
+  "officialImmutableSourceReceipt": {
+    "path": "/tmp/iga-key-resolver-pipeline-coordinator-sources/sources-receipt.json",
+    "bytes": 3011,
+    "sha256": "4ba3f2d73b914a4bf08fc7b290412a0cfc6ef59964fd2a512ea1e20e10a63566"
+  },
+  "failureCorrections": [
+    {
+      "run": "run01",
+      "outcome": "Build exit1,5errors,0warnings; corrected string KeyId/direct WrapResult fixture API assumptions"
+    },
+    {
+      "run": "run02\u201304",
+      "outcome": "Case exit1; exact SDK operation path casing corrected"
+    },
+    {
+      "run": "run05\u201306",
+      "outcome": "Case exit1; supported SDK authentication policy removed initial body, corrected with approved synthetic401; no request replacement"
+    },
+    {
+      "run": "run07",
+      "outcome": "PASS45; final source added narrowed token context/safe presence flags and loaded assembly versions"
+    }
+  ],
+  "limits": [
+    "Guarded403 credentialzero/cryptozero proven only in fresh process before staticchallengecachepriming; no universal warmcache credentialzero claim.",
+    "Subsequent syncremote control scripts401/1token/2crypto attempts; asyncwarmcache scripts0challenge/1token/1crypto; actualAzureRBAC/livecredentials/TCP notverified.",
+    "Ordinary SDK challenge resourceverification enabled; no privateAPI/cachemutation/requestreplacement; syntheticresource and token context only.",
+    "Actual selectedMicrosoft pipeline and DI provider execution under suppliedtransport, not production adapter/graphpromotion or actualnetwork.",
+    "Memory-only diagnostics observed protectedbinding; body/token/cryptomarker absence limitedto selectedchannels/fixture/defaultcontentlogging; diagnosticsOff0notuniversal privacyproof.",
+    "Allowlist sink rejectsrawSDKpayloads and positiveclosedlabel/controlpasses; no production exporter/redactionpolicy accepted.",
+    "45casechecks not totalassertions; allprevious27preserved; historicalv1/v2dispatchfixturesremainseparate.",
+    "No fullKEY/403Azureproof/witness/inventory/lifecycle/retention/realrange/stage/retry/outage/composition/live/gateacceptance.",
+    "No repo/sharedcache changes, newdependencygraph, trust/proxy/credentialfallback or cloudcalls; productregressions notrerun."
+  ],
+  "architecturePreparation": "ADR-0013 remains Proposed/unselected; separate documentary receipt https-key-inventory-preparation-20261004.json",
+  "site": {
+    "lastConfirmedBffHttpsSnapshot": "4346e0f",
+    "atUtc": "2026-10-02T19:50:45.775370+00:00",
+    "current": false,
+    "reason": "Separate credential/network publisher proxy-bypass rejected by automatic approval review; no retry/bypass; unrelated Cycle14 publication preserved",
+    "humanTasksOpen": 6
+  },
+  "notExecuted": [
+    "Unchanged product regression/PostgreSQL suites; historical evidence retained",
+    "Azure resources or RBAC/live credential/network behavior",
+    "Production graph/guard/parser/limits/inventory/witness/lifecycle composition",
+    "Production KEY/ARL/live admission/G1\u2013G9/Milestone2 gates",
+    "New paid session, public source publication or private site publication"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-portable-evidence-v1",
+  "scenarioFreeze": "3fe36c95543d97c9a395c03dcb877543a65bc7de",
+  "sourceSnapshot": "d3b2ca1",
+  "nativeCoreMarker": "2a5a293",
+  "sourceFiles": [
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/AssemblyInfo.cs",
+      "sha256": "116873e888044614a6e8c05a2336d73dea9f65859607634302c6679099840be1"
+    },
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/ControlReader.cs",
+      "sha256": "26d7bae297e618031297896692b204e521559fbe1c8ccd695fa4d121c6100822"
+    },
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/OriginalValidityLease.cs",
+      "sha256": "ccdccf7414715f4ac76b8c00ae9818ff5b19275409c864c7bd049a3264d8d4d7"
+    },
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/ReportPublication.PostgreSql.csproj",
+      "sha256": "89e5ff73c976918fd8d870d2cb41355694de491c28d0598b374446f46fd9620e"
+    },
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/packages.lock.json",
+      "sha256": "70da9296edd5db587c3d38c751fdf6187c2f02546ef512424897fc8a1e063de9"
+    }
+  ],
+  "sdk": "10.0.401",
+  "npgsql": "10.0.3",
+  "executed": {
+    "lockedRestore": "PASS",
+    "ReleaseBuild": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "originalNativeCommitments": {
+      "result": "PASS",
+      "count": 31
+    },
+    "ownStrictSourceOwnershipTimeMarker": {
+      "result": "PASS",
+      "count": 31
+    },
+    "scriptedNativeMarkerVersusUnknownError": {
+      "result": "PASS",
+      "count": 4
+    },
+    "adapterPortable": {
+      "result": "FAIL",
+      "passed": 249,
+      "failed": 1,
+      "records": "evidence/portable-d3b2ca1-original.json"
+    }
+  },
+  "findings": [
+    {
+      "source": "d3b2ca1",
+      "name": "lease-nested-pre-canceled-caller-zero-dependency-start",
+      "expectedDependencyStarts": 0,
+      "observedDependencyStarts": 1,
+      "correctionAuthor": "79ef3f1",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "oversized-control-before-copy-observed-allocation",
+      "result": "FAIL",
+      "failureType": "InvalidOperationException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "lease-expiry-owned-throwing-callback-contained-and-executed",
+      "result": "FAIL",
+      "failureType": "AggregateException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "lease-dispose-owned-throwing-callback-executed-cleanup-finally",
+      "result": "FAIL",
+      "failureType": "AggregateException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "lease-expiry-callback-second-thread-getter-outside-gate",
+      "result": "FAIL",
+      "failureType": "InvalidOperationException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "415bc14",
+      "name": "lease-original-caller-stalled-dispatch-pending-wait-ends",
+      "result": "FAIL",
+      "failureType": "TimeoutException",
+      "originalCallerCanceled": true,
+      "dependency": "ignored-token pending TaskCompletionSource<int>",
+      "observation": "Pending InvokeAsync does not end within bounded500ms while an unrelated later-registered original-caller callback stalls cancellation dispatch. Releasing that callback ends invocation with OperationCanceledException; no result accepted.",
+      "correctionReplay": "NOT_EXECUTED"
+    }
+  ],
+  "originalInvocationLimits": [
+    "Earlier root-relative/absolute formatter include paths exited0 but did not match effective project documents; project-cwd basename file list produced actual initializer corrections3c3be88"
+  ],
+  "limits": [
+    "All18persisted mechanisms PLANNED_NOT_EXECUTED",
+    "No SQL migration/role/database setup",
+    "Portable controls/lease do not establish real source/authority/cloud gates"
+  ],
+  "expandedOriginal": {
+    "scenarioFreeze": "6e966d4537666e4d5e8f236f50ecd70eac26904c",
+    "sourceSnapshot": "d3b2ca1",
+    "passed": 250,
+    "failed": 5,
+    "records": "evidence/portable-d3b2ca1-expanded-original.json",
+    "credit": "portable controls/lease only"
+  },
+  "correctedSourceReplay": {
+    "sourceSnapshot": "415bc14",
+    "sourceFiles": [
+      {
+        "path": "src/server/modules/ReportPublication.PostgreSql/AssemblyInfo.cs",
+        "sha256": "116873e888044614a6e8c05a2336d73dea9f65859607634302c6679099840be1"
+      },
+      {
+        "path": "src/server/modules/ReportPublication.PostgreSql/ControlReader.cs",
+        "sha256": "52292bdadf92b0e5dcc99ed30dcc035764b230b9ba266395f26b301021daed02"
+      },
+      {
+        "path": "src/server/modules/ReportPublication.PostgreSql/OriginalValidityLease.cs",
+        "sha256": "8b67c8c2816b164fcd30a554faac27a76bc9c6a11a10714689140970e93f6a46"
+      }
+    ],
+    "scenarioFreeze": "35e52886",
+    "passed": 256,
+    "failed": 1,
+    "records": "evidence/portable-415bc14-original.json",
+    "previous255Controls": "PASS",
+    "originalCallerStalledFreshAdmission": "PASS_zero_dependency_starts",
+    "originalCallerStalledPendingWait": "FAIL_TimeoutException",
+    "credit": "portable controls/lease only; all18persisted NOT_EXECUTED"
+  }
+}

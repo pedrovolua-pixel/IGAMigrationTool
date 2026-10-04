@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-ownership-scenarios-v1",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "governing": [
+    "d69debd7a72fe1452f628bec9b59a53cecb235cd",
+    "6b08602"
+  ],
+  "contractSha256": "e44567811633a550d03ff76199eaaedd56b216cf4cf01627dab667e413958ec7",
+  "sql35Changed": false,
+  "nativeBytesChanged": false,
+  "cases": [
+    {
+      "name": "registration-once-after-admission",
+      "expected": "Before admission/missing/second/mismatched/disposed fence registration refuses; first exact actor/scope/original cutoff registers exact object once, grants nothing."
+    },
+    {
+      "name": "source-same-concrete-session-and-original-native-transaction",
+      "expected": "Proxy/fake transaction even same scope/id, another session or another TransactionId refuses before minimized load; same owning Active transaction proceeds."
+    },
+    {
+      "name": "source-exact-fence-object",
+      "expected": "Another equal-value fence or copied identity refuses; registered ReferenceEquals owning fence required, even if actor/scope match."
+    },
+    {
+      "name": "source-bound-canonical-command",
+      "expected": "Changing actor/scope/operation/run/revision/sourceDigest/warning tuple refuses before minimized read; equivalent immutable copy with only canonical-excluded invocation/correlation changes preserves command meaning."
+    },
+    {
+      "name": "source-current-purpose-and-original-lease",
+      "expected": "ReadExact purpose, nonActive transaction, expired/narrowed/canceled/invalidated/disposed lease refuses before minimized source load; SQL persisted full facts/locks independently required."
+    },
+    {
+      "name": "read-active-new-processing-positive",
+      "expected": "Same exact registered ReadExact fence/report/request/scope and fully authorized ActiveTransaction permits pre-audit current reference processing."
+    },
+    {
+      "name": "read-active-found-replay-positive",
+      "expected": "Same exact active Found replay transaction permits current references/integrity work; no new successful audit/finalization/commit."
+    },
+    {
+      "name": "read-proved-committed-readonly-positive",
+      "expected": "Same exact provedCommittedReadOnly transaction permits bounded current overlay delivery rechecks under original lease/fence."
+    },
+    {
+      "name": "read-wrong-stage-session-transaction-fence",
+      "expected": "BareFenced/PendingFinalized/disposed/missing registry/Publish purpose/anotherSession/TransactionId/proxy or changed exact request/report/scope deny before minimized reference read."
+    },
+    {
+      "name": "invalidation-clears-registry",
+      "expected": "Invalidation/cancellation/expiry clears/revokes ownership before locks released, retained source/read/fence references cannot admit another load."
+    },
+    {
+      "name": "database-clock-same-pinned-owner",
+      "expected": "Exact p.clock_v1 UTC7/ticks/generation validates through same pinned session/original lease, not another backend or inline timestamp."
+    },
+    {
+      "name": "protected-byte-boundary",
+      "expected": "SQL protects original source/projection/score/control commitments and links; strict source/native codecs prove protected prose marker membership. No invented sourceMetadata redactionMarkers/CreatedBy fields or SQL JSONB prose parse."
+    }
+  ]
+}

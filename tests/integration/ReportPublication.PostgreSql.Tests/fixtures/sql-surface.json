@@ -1,0 +1,1006 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-sql-surface-v1",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "source": "approved documentation only, never adapter/migration code",
+  "acceptedDesign": "fdefd8e79fa108bb099e5922e9a49b87a6a1a50e",
+  "coordinatorCheckpoint": "a3e7c5d",
+  "contractSha256": "b995452f6be9ea7eaf3b6b21ee1d5200c253d25a51695c714c74e4de115670b8",
+  "schemas": [
+    "report_publication",
+    "report_publication_fixture"
+  ],
+  "builtinsAreNotApplicationGrantProof": true,
+  "physicalConnectIsNotContentAuthority": true,
+  "functions": [
+    {
+      "signature": "report_publication.read_identity()",
+      "returns": "report_publication.identity_v1",
+      "granted": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController"
+      ],
+      "denied": [
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Configured customer/schema admission only."
+    },
+    {
+      "signature": "report_publication_fixture.open_fence(actor_bytes bytea,scope_bytes bytea,mode text,resource_id uuid,operation_bytes bytea)",
+      "returns": "report_publication_fixture.fence_v1",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Autocommit, no existing backend context; exact Publish/ReadExact by login; closed canonical command/read-request bytes must match AB/SB/resource/mode, derive operation identity/digest and bind once. Acquire actor\u2192customer\u2192scope session locks; current facts; create ephemeral Fenced context with server UUIDs/original trusted SQL cutoff."
+    },
+    {
+      "signature": "report_publication_fixture.recheck_fence(actor_bytes bytea,scope_bytes bytea,mode text,resource_id uuid,categories_bytes bytea,fields_bytes bytea)",
+      "returns": "boolean",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Existing exact Fenced/Active/Pending-committed context; current full facts, original ceiling and known locks. False denies; no caller grant Boolean."
+    },
+    {
+      "signature": "report_publication_fixture.begin_write()",
+      "returns": "report_publication_fixture.transaction_v1",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "READ WRITE transaction; Fenced only; assign/store own pg_current_xact_id(), own backend_start/login/TransactionId."
+    },
+    {
+      "signature": "report_publication_fixture.finalize_write()",
+      "returns": "report_publication_fixture.transaction_v1",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Same active xid/NotFound-new-operation only; branch-specific current authority/lifecycle/deadline and exact required successful linkage. New Publish also checks current source pointer; new ReadExact checks historical report/reference/audit links without source_current equality. Change to PendingFinalized; all subsequent writes refuse."
+    },
+    {
+      "signature": "report_publication_fixture.confirm_committed_readonly()",
+      "returns": "boolean",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Fresh READ ONLY transaction; original xid must differ from current assigned xid and pg_xact_status(original) must equal committed. No row write or caller state/xid argument."
+    },
+    {
+      "signature": "report_publication_fixture.close_fence()",
+      "returns": "void",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Outside business/read-only transaction after invalidation; remove only own ephemeral context/release known session locks. Cannot alter history or reopen an invocation."
+    },
+    {
+      "signature": "report_publication_fixture.read_source_metadata(scope_bytes bytea,run_id uuid,revision bigint)",
+      "returns": "report_publication_fixture.source_admission_v1",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid; authenticated exact scope/actor/revision, minimized required-set/retention-cutoff only; **no protected reference/warning IDs, source input/provenance IDs, raw prose or full SourceMetadataV1 bytes**."
+    },
+    {
+      "signature": "report_publication_fixture.read_authorized_source_metadata(scope_bytes bytea,run_id uuid,revision bigint)",
+      "returns": "report_publication_fixture.source_metadata_v1",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid; current complete required categories+17fields and source-retention fence before loading protected SourceMetadataV1/reference IDs."
+    },
+    {
+      "signature": "report_publication_fixture.read_source_bytes(scope_bytes bytea,run_id uuid,revision bigint)",
+      "returns": "bytea",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid; exact complete source category/field/retention current authorization before protected load."
+    },
+    {
+      "signature": "report_publication.lock_publication_receipt(scope_bytes bytea,operation_id uuid,actor_bytes bytea,command_bytes bytea,command_digest text)",
+      "returns": "report_publication.receipt_lookup_v1",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid; operation xact lock; canonical command bytes/hash equal context and all original actor/scope/operation/run/revision/source/warning meaning; changed binding returns safe Conflict without bytes."
+    },
+    {
+      "signature": "report_publication.lock_read_receipt(scope_bytes bytea,invocation_id uuid,actor_bytes bytea,request_bytes bytea,request_digest text)",
+      "returns": "report_publication.receipt_lookup_v1",
+      "granted": [
+        "Reader"
+      ],
+      "denied": [
+        "Publisher",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid; invocation xact lock; canonical six-field read-request/hash equal context actor/scope/invocation/exact report/manifest meaning; **Reader only**."
+    },
+    {
+      "signature": "report_publication.read_publication_receipt(scope_bytes bytea,operation_id uuid,actor_bytes bytea,command_bytes bytea,command_digest text)",
+      "returns": "report_publication.receipt_lookup_v1",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "READ ONLY, committed original context proof; same exact safe equality, no operation lock/write."
+    },
+    {
+      "signature": "report_publication.read_read_receipt(scope_bytes bytea,invocation_id uuid,actor_bytes bytea,request_bytes bytea,request_digest text)",
+      "returns": "report_publication.receipt_lookup_v1",
+      "granted": [
+        "Reader"
+      ],
+      "denied": [
+        "Publisher",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "READ ONLY, committed original context proof; Reader only."
+    },
+    {
+      "signature": "report_publication_fixture.read_version_admission(scope_bytes bytea,report_id uuid)",
+      "returns": "report_publication_fixture.version_admission_v1",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid or proven committed READ ONLY context; exact scope/actor minimal binding/lifecycle/required-set metadata, no manifest/input/provenance/reference IDs."
+    },
+    {
+      "signature": "report_publication.read_version(scope_bytes bytea,report_id uuid)",
+      "returns": "report_publication.version_v1",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid or proven committed READ ONLY context; full current category+17field/lifecycle admission **before original manifest bytes**; exact committed report, never latest/draft. P bound original publication report; R bound requested exact report. Missing returns SQL NULL composite, not an empty report."
+    },
+    {
+      "signature": "report_publication.put_blob(scope_bytes bytea,kind text,bytes bytea,digest text)",
+      "returns": "report_publication.blob_v1",
+      "granted": [
+        "BlobStager"
+      ],
+      "denied": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Own autocommit staging connection; bounded immutable put-if-absent, exact bytes/hash equality on collision. No report/source authority implied."
+    },
+    {
+      "signature": "report_publication.read_staged_blob(scope_bytes bytea,kind text,digest text)",
+      "returns": "bytea",
+      "granted": [
+        "BlobStager"
+      ],
+      "denied": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Own scoped staged verification; no version/receipt/audit access. Missing returns NULL."
+    },
+    {
+      "signature": "report_publication.read_committed_blob(scope_bytes bytea,report_id uuid,kind text,digest text)",
+      "returns": "bytea",
+      "granted": [
+        "Reader"
+      ],
+      "denied": [
+        "Publisher",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Bound ReadExact active or proven committed READ ONLY context; current full fields/categories/lifecycle/deadline, exact linked descriptor; no orphan/staged/global retrieval."
+    },
+    {
+      "signature": "report_publication.read_reference_availability(scope_bytes bytea,report_id uuid,reference_ids uuid[])",
+      "returns": "SETOF report_publication.reference_v1",
+      "granted": [
+        "Reader"
+      ],
+      "denied": [
+        "Publisher",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Same read modes/full access; sorted unique linked set only, no raw resolver."
+    },
+    {
+      "signature": "report_publication.lock_audit_head(stream_id uuid,binding_id uuid)",
+      "returns": "report_publication.audit_head_v1",
+      "granted": [
+        "Publisher",
+        "Reader",
+        "Audit"
+      ],
+      "denied": [
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "P/R Active same xid with bound NotFound-new-operation; A own explicit outcome transaction. Head FOR UPDATE last; create the exact backend/xid/login/stream-bound private reservation with database-generated event UUID and trusted clock only after wait; duplicate outstanding reservation refuses."
+    },
+    {
+      "signature": "report_publication.append_audit(stream_id uuid,binding_id uuid,event_bytes bytea,event_digest text)",
+      "returns": "report_publication.audit_commit_v1",
+      "granted": [
+        "Publisher",
+        "Reader",
+        "Audit"
+      ],
+      "denied": [
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Same transaction/head; P/R require bound NotFound-new-operation and server-owned current write_xid. P Publish/Succeeded, R ReadExact/Succeeded, A Denied/Failed/Cancelled only. Exact native control/binding and reserved event UUID/time/next sequence/previous digest equality; consume only its own reservation after append/head advancement. Caller cannot choose another timestamp/head/event UUID."
+    },
+    {
+      "signature": "report_publication.add_publication(scope_bytes bytea,manifest_bytes bytea,manifest_digest text,receipt_bytes bytea,receipt_digest text)",
+      "returns": "void",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid; original native manifest/source/blob/audit/actor/command exact linkage, including expected run/revision/source digest and exact acknowledgedWarnings=owning protected source warning tuples (empty iff empty), approval state bound to those warnings; inserts version/descriptors/lifecycle-init/pub receipt once."
+    },
+    {
+      "signature": "report_publication.add_read_receipt(scope_bytes bytea,receipt_bytes bytea,receipt_digest text)",
+      "returns": "void",
+      "granted": [
+        "Reader"
+      ],
+      "denied": [
+        "Publisher",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid; original successful ReadExact event/exact report/request/actor linkage."
+    },
+    {
+      "signature": "report_publication.recheck_source(scope_bytes bytea,run_id uuid,revision bigint,source_digest text)",
+      "returns": "boolean",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Active same xid only; current owning source equality, no source payload."
+    },
+    {
+      "signature": "report_publication.read_database_utc()",
+      "returns": "report_publication.clock_v1",
+      "granted": [
+        "Publisher",
+        "Reader",
+        "Audit"
+      ],
+      "denied": [
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "P/R existing Fenced/Active or proven committed READ ONLY context; A bound outcome transaction. No caller time."
+    },
+    {
+      "signature": "report_publication_fixture.open_reconciliation_fence(actor_bytes bytea,scope_bytes bytea,mode text,resource_id uuid,operation_bytes bytea)",
+      "returns": "report_publication_fixture.reconciliation_fence_v1",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Fresh BEGIN READ ONLY, no existing context row; ReconcilePublication(P)/ReconcileRead(R) only. Validate original canonical command/request actor/scope/resource/identity/hash meaning; session locks/current full authority; **no INSERT/UPDATE or begin_write**."
+    },
+    {
+      "signature": "report_publication.reconcile_publication_receipt(scope_bytes bytea,operation_id uuid,actor_bytes bytea,command_bytes bytea,command_digest text)",
+      "returns": "report_publication.reconciliation_v1",
+      "granted": [
+        "Publisher"
+      ],
+      "denied": [
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Fresh READ ONLY/no ordinary context; exact held locks/current full source-owned categories/fields and linked committed version/event/manifest; recompute command hash from original canonical bytes, exact native actor/scope/operation/expected source/revision/warning meaning against original receipt/manifest/source-owned commitments; safe status, no protected blob/source loads or audit writes."
+    },
+    {
+      "signature": "report_publication.reconcile_read_receipt(scope_bytes bytea,invocation_id uuid,actor_bytes bytea,request_bytes bytea,request_digest text)",
+      "returns": "report_publication.reconciliation_v1",
+      "granted": [
+        "Reader"
+      ],
+      "denied": [
+        "Publisher",
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Same readonly restrictions plus canonical request byte/hash/actor/scope/invocation/report/expected manifest equality for original exact report/current lifecycle, Reader only."
+    },
+    {
+      "signature": "report_publication_fixture.close_reconciliation_fence(actor_bytes bytea,scope_bytes bytea,mode text,resource_id uuid)",
+      "returns": "void",
+      "granted": [
+        "Publisher",
+        "Reader"
+      ],
+      "denied": [
+        "Audit",
+        "BlobStager",
+        "FixtureController",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Fresh READ ONLY backend; release only exact known acquired keys, no context/business write. Dispose closes physical backend even if release uncertain."
+    },
+    {
+      "signature": "report_publication_fixture.mutate_authority(authority_bytes bytea,digest text,expected_revision bigint)",
+      "returns": "bigint",
+      "granted": [
+        "FixtureController"
+      ],
+      "denied": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Closed AuthorityControlV1; expected0 initial row, otherwise current+1; applicable stable actor\u2192customer\u2192scope locks. Returns accepted new revision."
+    },
+    {
+      "signature": "report_publication_fixture.append_source_revision(scope_bytes bytea,run_id uuid,expected_revision bigint,metadata_bytes bytea,source_bytes bytea)",
+      "returns": "bigint",
+      "granted": [
+        "FixtureController"
+      ],
+      "denied": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Closed metadata/source commitments; scope-exclusive mutation, expected+1."
+    },
+    {
+      "signature": "report_publication_fixture.append_report_lifecycle(scope_bytes bytea,report_id uuid,expected_revision bigint,state text,read_blocked boolean,expires_utc7 text,hold_reference uuid,decision_reference uuid)",
+      "returns": "bigint",
+      "granted": [
+        "FixtureController"
+      ],
+      "denied": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Scope-exclusive; exact revision, expiry only stay/shorten, nullable hold, no state restoration."
+    },
+    {
+      "signature": "report_publication_fixture.append_reference_lifecycle(scope_bytes bytea,reference_id uuid,expected_revision bigint,availability text,reason text,expires_utc7 text,decision_reference uuid)",
+      "returns": "bigint",
+      "granted": [
+        "FixtureController"
+      ],
+      "denied": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Scope-exclusive; exact availability/reason/revision, expiry cannot extend, no raw restoration."
+    },
+    {
+      "signature": "report_publication_fixture.advance_clock(utc7 text,ticks bigint,generation bigint)",
+      "returns": "report_publication.clock_v1",
+      "granted": [
+        "FixtureController"
+      ],
+      "denied": [
+        "Publisher",
+        "Reader",
+        "Audit",
+        "BlobStager",
+        "Migration",
+        "PUBLIC",
+        "unregisteredLogin"
+      ],
+      "requiredChecks": "Exact canonical text/ticks + next generation; no authority locks, elapsed-time owner never rolls back."
+    }
+  ],
+  "compositeReturns": [
+    {
+      "name": "report_publication.identity_v1",
+      "attributes": [
+        {
+          "name": "schema_version",
+          "type": "text"
+        },
+        {
+          "name": "migration_digest",
+          "type": "text"
+        },
+        {
+          "name": "customer_id",
+          "type": "uuid"
+        }
+      ],
+      "constraints": "schema_version text, migration_digest text, customer_id uuid"
+    },
+    {
+      "name": "report_publication_fixture.fence_v1",
+      "attributes": [
+        {
+          "name": "context_id",
+          "type": "uuid"
+        },
+        {
+          "name": "transaction_id",
+          "type": "uuid"
+        },
+        {
+          "name": "authority_revision",
+          "type": "bigint"
+        },
+        {
+          "name": "original_deadline_utc7",
+          "type": "text"
+        },
+        {
+          "name": "original_deadline_ticks",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "context_id uuid, transaction_id uuid, authority_revision bigint, original_deadline_utc7 text, original_deadline_ticks bigint"
+    },
+    {
+      "name": "report_publication_fixture.transaction_v1",
+      "attributes": [
+        {
+          "name": "context_id",
+          "type": "uuid"
+        },
+        {
+          "name": "transaction_id",
+          "type": "uuid"
+        },
+        {
+          "name": "write_xid",
+          "type": "xid8"
+        },
+        {
+          "name": "state",
+          "type": "text"
+        }
+      ],
+      "constraints": "context_id uuid, transaction_id uuid, write_xid xid8, state text (ActiveTransaction/PendingFinalized only)"
+    },
+    {
+      "name": "report_publication_fixture.source_admission_v1",
+      "attributes": [
+        {
+          "name": "run_id",
+          "type": "uuid"
+        },
+        {
+          "name": "run_revision",
+          "type": "bigint"
+        },
+        {
+          "name": "assessment_state",
+          "type": "text"
+        },
+        {
+          "name": "source_digest",
+          "type": "text"
+        },
+        {
+          "name": "projection_digest",
+          "type": "text"
+        },
+        {
+          "name": "score_digest",
+          "type": "text"
+        },
+        {
+          "name": "required_categories",
+          "type": "text[]"
+        },
+        {
+          "name": "required_fields",
+          "type": "text[]"
+        },
+        {
+          "name": "retention_expires_utc7",
+          "type": "text"
+        },
+        {
+          "name": "retention_expires_ticks",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "run_id uuid, run_revision bigint, assessment_state text, source_digest text, projection_digest text, score_digest text, required_categories text[], required_fields text[], retention_expires_utc7 text, retention_expires_ticks bigint (no protected reference/warning/input/provenance IDs)"
+    },
+    {
+      "name": "report_publication_fixture.source_metadata_v1",
+      "attributes": [
+        {
+          "name": "metadata_bytes",
+          "type": "bytea"
+        },
+        {
+          "name": "metadata_digest",
+          "type": "text"
+        }
+      ],
+      "constraints": "metadata_bytes bytea, metadata_digest text (closed SourceMetadataV1 below, protected authorized load only)"
+    },
+    {
+      "name": "report_publication_fixture.version_admission_v1",
+      "attributes": [
+        {
+          "name": "report_version_id",
+          "type": "uuid"
+        },
+        {
+          "name": "manifest_digest",
+          "type": "text"
+        },
+        {
+          "name": "required_categories",
+          "type": "text[]"
+        },
+        {
+          "name": "required_fields",
+          "type": "text[]"
+        },
+        {
+          "name": "lifecycle_state",
+          "type": "text"
+        },
+        {
+          "name": "lifecycle_revision",
+          "type": "bigint"
+        },
+        {
+          "name": "expires_utc7",
+          "type": "text"
+        },
+        {
+          "name": "expires_ticks",
+          "type": "bigint"
+        },
+        {
+          "name": "retention_expires_utc7",
+          "type": "text"
+        },
+        {
+          "name": "retention_expires_ticks",
+          "type": "bigint"
+        },
+        {
+          "name": "read_blocked",
+          "type": "boolean"
+        }
+      ],
+      "constraints": "report_version_id uuid, manifest_digest text, required_categories text[], required_fields text[], lifecycle_state text, lifecycle_revision bigint, expires_utc7 text, expires_ticks bigint, retention_expires_utc7 text, retention_expires_ticks bigint, read_blocked boolean"
+    },
+    {
+      "name": "report_publication.receipt_lookup_v1",
+      "attributes": [
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "receipt_bytes",
+          "type": "bytea"
+        },
+        {
+          "name": "receipt_digest",
+          "type": "text"
+        }
+      ],
+      "constraints": "status text, receipt_bytes bytea, receipt_digest text (NotFound/Found/Conflict; both byte/digest null unless Found)"
+    },
+    {
+      "name": "report_publication.version_v1",
+      "attributes": [
+        {
+          "name": "manifest_bytes",
+          "type": "bytea"
+        },
+        {
+          "name": "manifest_digest",
+          "type": "text"
+        },
+        {
+          "name": "lifecycle_state",
+          "type": "text"
+        },
+        {
+          "name": "lifecycle_revision",
+          "type": "bigint"
+        },
+        {
+          "name": "expires_utc7",
+          "type": "text"
+        },
+        {
+          "name": "expires_ticks",
+          "type": "bigint"
+        },
+        {
+          "name": "read_blocked",
+          "type": "boolean"
+        }
+      ],
+      "constraints": "manifest_bytes bytea, manifest_digest text, lifecycle_state text, lifecycle_revision bigint, expires_utc7 text, expires_ticks bigint, read_blocked boolean"
+    },
+    {
+      "name": "report_publication.blob_v1",
+      "attributes": [
+        {
+          "name": "kind",
+          "type": "text"
+        },
+        {
+          "name": "digest",
+          "type": "text"
+        },
+        {
+          "name": "byte_length",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "kind text, digest text, byte_length bigint"
+    },
+    {
+      "name": "report_publication.reference_v1",
+      "attributes": [
+        {
+          "name": "reference_id",
+          "type": "uuid"
+        },
+        {
+          "name": "availability",
+          "type": "text"
+        },
+        {
+          "name": "reason",
+          "type": "text"
+        },
+        {
+          "name": "revision",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "reference_id uuid, availability text, reason text, revision bigint"
+    },
+    {
+      "name": "report_publication.audit_head_v1",
+      "attributes": [
+        {
+          "name": "event_id",
+          "type": "uuid"
+        },
+        {
+          "name": "next_sequence",
+          "type": "bigint"
+        },
+        {
+          "name": "previous_digest",
+          "type": "text"
+        },
+        {
+          "name": "event_at_utc7",
+          "type": "text"
+        },
+        {
+          "name": "event_at_ticks",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "event_id uuid, next_sequence bigint, previous_digest text, event_at_utc7 text, event_at_ticks bigint"
+    },
+    {
+      "name": "report_publication.audit_commit_v1",
+      "attributes": [
+        {
+          "name": "event_id",
+          "type": "uuid"
+        },
+        {
+          "name": "event_digest",
+          "type": "text"
+        },
+        {
+          "name": "event_at_utc7",
+          "type": "text"
+        },
+        {
+          "name": "event_at_ticks",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "event_id uuid, event_digest text, event_at_utc7 text, event_at_ticks bigint"
+    },
+    {
+      "name": "report_publication.clock_v1",
+      "attributes": [
+        {
+          "name": "utc7",
+          "type": "text"
+        },
+        {
+          "name": "ticks",
+          "type": "bigint"
+        },
+        {
+          "name": "generation",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "utc7 text, ticks bigint, generation bigint"
+    },
+    {
+      "name": "report_publication_fixture.reconciliation_fence_v1",
+      "attributes": [
+        {
+          "name": "authority_revision",
+          "type": "bigint"
+        },
+        {
+          "name": "original_deadline_utc7",
+          "type": "text"
+        },
+        {
+          "name": "original_deadline_ticks",
+          "type": "bigint"
+        }
+      ],
+      "constraints": "authority_revision bigint, original_deadline_utc7 text, original_deadline_ticks bigint"
+    },
+    {
+      "name": "report_publication.reconciliation_v1",
+      "attributes": [
+        {
+          "name": "status",
+          "type": "text"
+        },
+        {
+          "name": "receipt_bytes",
+          "type": "bytea"
+        },
+        {
+          "name": "receipt_digest",
+          "type": "text"
+        },
+        {
+          "name": "version",
+          "type": "report_publication.version_v1"
+        },
+        {
+          "name": "event_bytes",
+          "type": "bytea"
+        },
+        {
+          "name": "event_digest",
+          "type": "text"
+        }
+      ],
+      "constraints": "status text, receipt_bytes bytea, receipt_digest text, version p.version_v1, event_bytes bytea, event_digest text (NotFound/Found/Conflict; all other attributes NULL unless Found)"
+    }
+  ],
+  "globalRequirements": [
+    "all unlisted signatures/logins/PUBLIC denied",
+    "SECURITY DEFINER SET search_path=pg_catalog; qualified static identifiers only",
+    "SESSION_USER binding; no runtime table/sequence/schema CREATE privileges",
+    "nonlogin function/table owners; no execution membership in owners/migration/pg_signal_backend",
+    "immutable business rows no runtime UPDATE/DELETE; only explicit ephemeral context/reservation cleanup",
+    "original canonical bytea/control hash admission precedes mutation",
+    "same backend/start/top-level xid/operation identity, branch and original lease enforced",
+    "fresh READ ONLY committed proof/reconciliation; no caller-controlled xid/state/time/head/authority",
+    "trusted fresh provisioner creates the exact six restricted logins/two nonlogin owners per database and assigns fixed-schema nonlogin ownership plus this exact signature matrix after additive DDL; migration creates no roles/logins/passwords and accepts no runtime-selected identifiers"
+  ]
+}

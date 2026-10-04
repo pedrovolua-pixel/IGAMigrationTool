@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "independent-report-publication-scripted-flow-evidence-v1",
+  "observedAtUtc": "2026-10-04T02:27:33.450115+00:00",
+  "worktree": "/private/tmp/iga-release-publication-oracle",
+  "branch": "codex/release-publication-oracle",
+  "scenarioFreezeCommit": "52027f6",
+  "testedCoreCommit": "8881c1cf4efe214afe4779221970070d4ecfc4db",
+  "testedCoreSnapshot": "/private/tmp/iga-rp06-source-8881c1c",
+  "testedCoreFileSha256": {
+    "Directory.Build.props": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e",
+    "src/server/modules/ReportPublication/Canonical.cs": "6ea850088eed9f9789a166748fcae312a6474327df7e563931bc627d94e7b5f2",
+    "src/server/modules/ReportPublication/Contracts.cs": "9d67b41d5648fb98940e4d404a431667ec2fa62cedc542a193d2fe9c5377b9a2",
+    "src/server/modules/ReportPublication/ManifestContracts.cs": "b284765615fe4e62078d43946c535589fe6955346d4c839d97caa9317b0b1621",
+    "src/server/modules/ReportPublication/MetadataCanonical.cs": "3c0bd07eb450349a1db76b80a7dda317be49b5254ee2492429aa0fe37a8e7eaa",
+    "src/server/modules/ReportPublication/NativePublishedReportReader.cs": "5b8ee728676b690ad98fd11a785419007c5894b610488cf6fe9a91c4532fc46a",
+    "src/server/modules/ReportPublication/NativeReportPublisher.cs": "4e690ac454cbd6e8a5834f799c10306df1dab8d088e974f6a0c9bf4b2be3de06",
+    "src/server/modules/ReportPublication/Ports.cs": "7ade8296661c0a02519e81d55b145e7d4f1e70a0b1ddcb925f6a32af13ae0c23",
+    "src/server/modules/ReportPublication/ProjectionReader.cs": "d54a05a9c2a61119eec52c01114c9dade575b1669e71466675eec7299c0a3de4",
+    "src/server/modules/ReportPublication/README.md": "8704d2b92d1d12811fe260f7b4108682e52985715af243e8cf67688636b7d123",
+    "src/server/modules/ReportPublication/ReportPublication.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+    "src/server/modules/ReportPublication/Validation.cs": "01800b9751c297764911c37c35ee63d46ec4bc793af221f2ac4a5858fff50186",
+    "src/server/modules/ReportPublication/packages.lock.json": "1624731bf151ec2ac6993023046a4abbac7c6ddc71ed2e242e8285bbc69d561e"
+  },
+  "dotnetExecutable": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+  "dotnetSdk": "10.0.401",
+  "targetFramework": "net10.0",
+  "additionalPackages": [],
+  "projectPropertyOverride": "ReportPublicationProject=/private/tmp/iga-rp06-source-8881c1c/src/server/modules/ReportPublication/ReportPublication.csproj",
+  "executed": {
+    "lockedRestore": "PASS",
+    "scopedWhitespaceFormatVerify": "PASS",
+    "releaseBuild": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "compiledCodecChecks": {
+      "passed": 157,
+      "failed": 0
+    },
+    "scriptedActualFlowChecks": {
+      "passed": 58,
+      "failed": 0
+    },
+    "coreSnapshotMatchesTrackedCommit": true,
+    "originalBytesPreservedAgainst51272d2": 31,
+    "pythonOriginalCanonicalVectors": 31,
+    "pythonRefusalTestMethods": 19,
+    "gitDiffCheck": "PASS",
+    "gitleaks": {
+      "executable": "/private/tmp/iga-parallel-tools/gitleaks",
+      "version": "8.30.1",
+      "rules": "default",
+      "redacted": true,
+      "findings": 0,
+      "result": "PASS",
+      "report": "/private/tmp/iga-rp06-final-gitleaks.json"
+    },
+    "ownedPathCheck": "PASS"
+  },
+  "initialRuns": [
+    {
+      "testedCoreCommit": "3ee89e6c47965a1732047bede0846e7b6a7df5e8",
+      "flowPassed": 44,
+      "flowFailed": 5,
+      "codecPassed": 157,
+      "codecFailed": 0
+    },
+    {
+      "testedCoreCommit": "3ee89e6c47965a1732047bede0846e7b6a7df5e8",
+      "flowPassed": 46,
+      "flowFailed": 6,
+      "codecPassed": 157,
+      "codecFailed": 0
+    },
+    {
+      "testedCoreCommit": "3ee89e6c47965a1732047bede0846e7b6a7df5e8",
+      "flowPassed": 46,
+      "flowFailed": 7,
+      "codecPassed": 157,
+      "codecFailed": 0
+    },
+    {
+      "testedCoreCommit": "fc0a8c81cb90f1c0b848ecc4c27b6ba98362ea1c",
+      "flowPassed": 52,
+      "flowFailed": 1,
+      "codecPassed": 157,
+      "codecFailed": 0
+    },
+    {
+      "testedCoreCommit": "8881c1cf4efe214afe4779221970070d4ecfc4db",
+      "flowPassed": 58,
+      "flowFailed": 0,
+      "codecPassed": 157,
+      "codecFailed": 0
+    }
+  ],
+  "independentFindings": [
+    {
+      "id": "RR-P06-F01",
+      "problem": "Reader lease started after protected content/reference loads; authority/report expiry allowed later loads and did not cancel paused blob/reference waits.",
+      "reproTests": [
+        "read-no-new-protected-load-after-original-deadline",
+        "read-report-deadline-blocks-further-protected-loads",
+        "read-expiry-cancels-paused-blob-wait",
+        "read-expiry-cancels-paused-references-wait"
+      ],
+      "initialProtectedTrace": [
+        "blob.read.Manifest",
+        "blob.read.Projection",
+        "blob.read.Score",
+        "references.read"
+      ],
+      "initialWaitCleanup": "Only explicit caller cancellation released paused port/fence; expiry alone failed.",
+      "correctedCoreCommit": "fc0a8c81cb90f1c0b848ecc4c27b6ba98362ea1c",
+      "status": "VERIFIED_CORRECTED_IN_SCRIPTED_SCOPE"
+    },
+    {
+      "id": "RR-P06-F02",
+      "problem": "Certain read CommitNotApplied was incorrectly separately audited Denied/LifecycleDenied rather than Failed/DependencyUnavailable.",
+      "reproTests": [
+        "read-commit-NotApplied"
+      ],
+      "initialOutcome": "Denied/LifecycleDenied",
+      "correctedCoreCommit": "fc0a8c81cb90f1c0b848ecc4c27b6ba98362ea1c",
+      "status": "VERIFIED_CORRECTED_IN_SCRIPTED_SCOPE"
+    },
+    {
+      "id": "RR-P06-F03",
+      "problem": "Null overlay row dereferenced before null guard and misclassified malformed metadata as DependencyUnavailable.",
+      "reproTests": [
+        "read-null-overlay-integrity-classification"
+      ],
+      "initialOutcome": "Failed/DependencyUnavailable",
+      "correctedCoreCommit": "fc0a8c81cb90f1c0b848ecc4c27b6ba98362ea1c",
+      "status": "VERIFIED_CORRECTED_IN_SCRIPTED_SCOPE"
+    },
+    {
+      "id": "RR-P06-F04",
+      "problem": "Retained reference-adapter array mutated after validation changed UUID/availability/reason/revision delivered to trusted sink.",
+      "reproTests": [
+        "read-current-overlay-defensive-ownership-before-sink"
+      ],
+      "correctedCoreCommit": "8881c1cf4efe214afe4779221970070d4ecfc4db",
+      "status": "VERIFIED_CORRECTED_IN_SCRIPTED_SCOPE"
+    }
+  ],
+  "harnessCorrections": [
+    "Initial CS0649 unassigned scripted hooks corrected by adding frozen planned cases/explicit initializers.",
+    "Nullable test overlay assertion CS8604 fixed with explicit nonnull test assertion."
+  ],
+  "limits": [
+    "Actual native publisher and reader methods exercised with scripted trusted ports; no real database or host composition.",
+    "58 checks are executable scenarios, not actual PostgreSQL/concurrency/provider/customer acceptance.",
+    "18 persisted cases remain PLANNED_NOT_EXECUTED.",
+    "Trusted source double verifies exact actor/command/transaction/fence and complete requirements before source materialization.",
+    "Ordinary scripted receipts originate successful actual in-process flow; durable audit/receipt verification belongs to the real store port and remains unproved by this packet.",
+    "Original31 vectors and historical157-check RR-P03 evidence remain unchanged.",
+    "Ten-second fixture lease and watchdog durations are test inputs only, never authority policy or production TTL.",
+    "Known-commit disposal cases preserve committed receipt/audit and do not invent a failure audit; cleanup signaling was exercised, not a storage guarantee."
+  ],
+  "testFileSha256": {
+    "tests/unit/ReportPublication.Tests/FlowFixtures.cs": "36ffdf8ef30d20f5ba12c99551c13658c2978b5ee889d19d2b97c10cc5bf899f",
+    "tests/unit/ReportPublication.Tests/FlowTests.cs": "cad24a9ba92c65bbcfae79671e1468d9c15740680519affce48447ef931ec8aa",
+    "tests/unit/ReportPublication.Tests/Program.cs": "0177d62cff7dd743f1f60f375bcdef3493bedb85539d71c0cfd226c276dd6811",
+    "tests/unit/ReportPublication.Tests/FixtureLoader.cs": "5055f71e5f84f8194829fce62ab5068b84b672e1d5a8aa872ab92fea936b6f6e",
+    "tests/unit/ReportPublication.Tests/ReportPublication.Tests.csproj": "b0aa266af425e16c1ce79c42335dad793375b62de579d0048b2f88753f085f11",
+    "tests/unit/ReportPublication.Tests/packages.lock.json": "5b60cbabc19905d3f0f308e94d25166bfef71959edee406ba5f736a7cf999afd"
+  }
+}

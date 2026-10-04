@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-portable-correction-evidence-v1",
+  "sourceSnapshot": "ce01b38984de672f99fafac46473c836aefa988d",
+  "nativeCoreMarker": "2a5a293",
+  "wireSnapshot": "9ee3500e",
+  "sourceFiles": [
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/AssemblyInfo.cs",
+      "sha256": "116873e888044614a6e8c05a2336d73dea9f65859607634302c6679099840be1"
+    },
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/ControlReader.cs",
+      "sha256": "52292bdadf92b0e5dcc99ed30dcc035764b230b9ba266395f26b301021daed02"
+    },
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/OriginalValidityLease.cs",
+      "sha256": "6ed9bb0d11d4c5f1c5a0bc4208e7e6cf9909c03cf576370cadb6d76e77e1c99a"
+    },
+    {
+      "path": "src/server/modules/ReportPublication.PostgreSql/Wire.cs",
+      "sha256": "697ed62814d79703eae43db0432d6c0f8399684f18fabcab8433e46da6a4f3bc"
+    }
+  ],
+  "scenarioFreezes": [
+    "3fe36c9",
+    "6e966d4",
+    "35e52886",
+    "c9c45215",
+    "01d3bf44"
+  ],
+  "executed": {
+    "ReleaseBuild": {
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    "originalCommitments": {
+      "passed": 31
+    },
+    "ownPreparation": {
+      "passed": 31
+    },
+    "scriptedMarkerClassification": {
+      "passed": 4
+    },
+    "adapter": {
+      "passed": 257,
+      "failed": 0,
+      "records": "evidence/portable-adapter-ce01b389-corrected.json"
+    },
+    "observer": {
+      "passed": 7,
+      "failed": 0,
+      "records": "evidence/portable-observer-ce01b389-corrected.json"
+    },
+    "wire": {
+      "passed": 112,
+      "failed": 0,
+      "records": "evidence/portable-wire-ce01b389-corrected.json"
+    }
+  },
+  "retainedOriginalFailures": [
+    "evidence/portable-d3b2ca1-original.json",
+    "evidence/portable-d3b2ca1-expanded-original.json",
+    "evidence/portable-415bc14-original.json",
+    "evidence/portable-observer-415bc14-original.json"
+  ],
+  "closure": "Selected portable controls, callback cleanup, pre-entry cancellation, pending original/newer stalled-dispatch waits and disposed caller sources now pass independent frozen scenarios.",
+  "limits": [
+    "All18persisted mechanisms PLANNED_NOT_EXECUTED",
+    "No SQL/migration/roles/database setup/grants executed",
+    "No physical backend/advisory-lock disposal/race proof",
+    "No real OneIdentity/customer/source/permission/two-environment acceptance"
+  ]
+}

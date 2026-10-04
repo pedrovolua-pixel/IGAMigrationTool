@@ -17,7 +17,7 @@ Read the relevant documents before substantial work. Use a matching repository S
 
 ## Control rules
 
-1. Do not implement substantial product behavior without an approved product specification, technical specification, implementation plan, and test plan.
+1. Do not implement substantial product behavior without product specification, technical specification, implementation plan, and test plan.
 2. Do not invent product behavior, permissions, architecture, security policy, retention policy, or public contracts.
 3. Follow accepted ADRs. Propose an ADR instead of silently changing architecture.
 4. Prefer small, scoped, reversible changes; avoid unrelated refactoring.
@@ -26,7 +26,7 @@ Read the relevant documents before substantial work. Use a matching repository S
 7. Update affected documentation in the same change as behavior, architecture, configuration, API, security, or operations changes.
 8. Stop and escalate material ambiguity, contradictory specifications, possible data loss, destructive changes, security-boundary changes, or scope beyond the authorization given.
 
-Human approval is required for product scope, consequential architecture or security decisions, and production release. Production or otherwise irreversible operations require explicit authorization.
+For One Identity health-assessment pilot development and release-readiness work, product scope and consequential architecture or security decisions do not require additional human approval. Document those decisions and update the affected specifications, ADRs, plans and tests before implementation; continue independently actionable pilot work without approval pauses. This pilot exception takes precedence over repository approval or escalation requirements for those decisions, but does not waive required verification evidence, independent acceptance reviews, customer/source-access authorization or spending authorization. Outside this pilot exception, human approval is required for product scope and consequential architecture or security decisions. Production release and production or otherwise irreversible operations still require explicit human authorization.
 
 ## Evidence and completion
 
@@ -43,3 +43,5 @@ The repository owner approved a coordinator and up to three bounded parallel wor
 For One Identity health-assessment pilot work, also maintain the existing private [pilot status site](docs/development/pilot-status-site.md). The repository's approved plans, feature status, and evidence index remain authoritative; the site summarizes them for human review.
 
 Whenever pilot implementation progress changes a canonical plan or feature status, or a gate, phase, milestone, or human dependency changes, update and publish the site's status and human tasks board in the same work cycle. Keep each open human task linked to the repository document or template that states the needed information, the requested role, and what completes the task. Close or change a task only when the canonical records support it. Do not report the site as current until the private deployment is confirmed; if publication is unavailable, report the stale snapshot and the reason. Never put customer evidence, credentials, protected identifiers, or raw SQL on the site.
+
+Include next steps for the human to have better understand what needs to happens next to complete the pilot

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-wire-evidence-v1",
+  "scenarioFreeze": "c9c45215",
+  "sourceSnapshot": "9ee3500e",
+  "sourcePath": "src/server/modules/ReportPublication.PostgreSql/Wire.cs",
+  "sourceSha256": "697ed62814d79703eae43db0432d6c0f8399684f18fabcab8433e46da6a4f3bc",
+  "passed": 112,
+  "failed": 0,
+  "records": "evidence/portable-wire-9ee3500e.json",
+  "executed": {
+    "ReleaseBuild": "PASS_0warnings_0errors",
+    "original31Commitments": "PASS",
+    "ownPreparation31": "PASS",
+    "scriptedMarker4": "PASS"
+  },
+  "limits": [
+    "No18persisted mechanisms executed",
+    "No35SQLfunctions/sessionbind-once/currentauthority physical proof",
+    "Original wire and core native bytes unchanged"
+  ]
+}

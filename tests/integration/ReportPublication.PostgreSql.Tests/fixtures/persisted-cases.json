@@ -1,0 +1,434 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-case-oracle-v1",
+  "status": "PLANNED_NOT_EXECUTED",
+  "packet": "RR-P05B",
+  "checkpoint": "a3e7c5d",
+  "acceptedDesign": "fdefd8e79fa108bb099e5922e9a49b87a6a1a50e",
+  "governingAmendment": "615e60838c0fdebd0ea4fb025ad6a2cda226f8bf",
+  "frozenCoordinatorContractSha256": "b995452f6be9ea7eaf3b6b21ee1d5200c253d25a51695c714c74e4de115670b8",
+  "originalCore": "8881c1cf4efe214afe4779221970070d4ecfc4db",
+  "originalVectors": "51272d2",
+  "authority": "Fictional controlled persisted fixture only; no actual identity/source/customer permission or release acceptance",
+  "cases": [
+    {
+      "id": "NPV-I01",
+      "trace": "NPV-T04/11",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Deny role/session/customer/category/one of17 fields before source/manifest/receipt/blob load.",
+        "Observe authorized minimized preload separately from protected metadata."
+      ],
+      "expected": [
+        "protectedSourceReads=0; protectedMetadataReads=0; blobReads=0; sinkWrites=0 on denial",
+        "No business receipt/version; safe configured separate denial audit only after release",
+        "Preload carries no warning/reference/input/provenance IDs"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I02",
+      "trace": "NPV-T06",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Interrupt each Projection/Score/Manifest stage, version/descriptor/event/receipt insert and precommit.",
+        "Use another actual backend to observe visibility before and after rollback."
+      ],
+      "expected": [
+        "visibleVersionDelta=0; receiptDelta=0; successfulEventDelta=0 before successful owning COMMIT",
+        "Staged immutable bytes may remain; exact reader cannot retrieve or enumerate orphan content",
+        "Required metadata/event/receipt links become visible atomically"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I03",
+      "trace": "NPV-T06/14",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Cause actual required audit refusal and cancel before positively established noncommit.",
+        "Observe transaction and fence release before separate outcome write."
+      ],
+      "expected": [
+        "All business metadata/event/head/receipt changes roll back together",
+        "No success receipt; known failure/cancellation outcome uses separate bound Audit identity after release",
+        "Unknown COMMIT produces no false Failed/Cancelled rollback event"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I04",
+      "trace": "NPV-T07",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Race two distinct Publisher backends using one operation and identical canonical command.",
+        "Observe operation advisory-lock wait using pg_locks/pg_stat_activity."
+      ],
+      "expected": [
+        "versionDelta=1; publicationReceiptDelta=1; PublishSucceededDelta=1",
+        "Both exact authorized results identify the same original receipt/version/manifest",
+        "No fabricated wait Boolean; retain actual backend wait/progress observations"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I05",
+      "trace": "NPV-T05/07/08",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Change actor/session/scope/expected revision/source digest/warning tuple with the same operation.",
+        "Test raw SQL canonical command/request bytes versus supplied digest.",
+        "Advance source_current after a committed publication and retry the exact original."
+      ],
+      "expected": [
+        "Changed meaning conflicts or exact source-ack refusal without new successful business rows",
+        "Unknown/duplicate/noncanonical/mismatched operation bytes refuse before mutation",
+        "Exact original Found replay returns original historical receipt under current authority/lifecycle, without current-pointer equality or new source load/event/finalize/COMMIT",
+        "Missing/additional/changed warning acknowledgment never substitutes the coarse grant condition"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I06",
+      "trace": "NPV-T08",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Perform real COMMIT and deliberately discard acknowledgement; separately prove server rollback.",
+        "Reconcile with a fresh READ ONLY backend for Found/missing/outage/conflict/tamper/disposal uncertainty."
+      ],
+      "expected": [
+        "Original committed version/event/receipt exist exactly once",
+        "Only fully authorized intact Found returns original metadata receipt",
+        "Missing/outage/disposal uncertainty is Unresolved; all nonFound results have nullReceipt",
+        "No source/blob/context/business/outcome writes, COMMIT retry, new operation, core NotFound fallthrough or sink delivery",
+        "Acknowledgement discard is not asserted as TCP-failure evidence"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I07",
+      "trace": "NPV-T09",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Pause actual publication/read work with held session fence; compete via separate Controller backend.",
+        "Advance authority revision on the same actor/session; exercise actor-only, customer-only, scope-only and combined mutations.",
+        "Execute independent customer database work concurrently."
+      ],
+      "expected": [
+        "Observed competing backend waits on stable actor/session key excluding all revisions",
+        "Runtime and combined mutations use actor\u2192customer\u2192scope\u2192operation\u2192rows\u2192audit order",
+        "Single lower-class mutation never acquires an earlier class",
+        "Revocation winner denies; publication winner preserves committed history then mutation progresses",
+        "Independent customer database progresses; no nested subject-lock backend"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I08",
+      "trace": "NPV-T10/12",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Publish then append edited score/review/profile/source revision and another operation.",
+        "Read exact older report with its expected digest."
+      ],
+      "expected": [
+        "Old projection/score/manifest original bytes and SHA256 remain identical",
+        "Old approval/warnings/provenance/input/reference commitments never rewritten",
+        "New operation may create a distinct immutable version",
+        "No newest fallback; reader/replay/reconciliation validates historical source links rather than source_current"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I09",
+      "trace": "NPV-T10/11",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Request wrong scope/customer/version/manifest digest, partial grants, draft/latest/orphan substitution.",
+        "Attempt direct SQL receipt/version/blob lookup using another login/database/scope."
+      ],
+      "expected": [
+        "No protected load before complete17field/category authority",
+        "Exact immutable links verified; all substitutions refuse without fallback",
+        "Wrong database/scope/login cannot read/write protected fixture data even if PostgreSQL CONNECT/system-catalog access is possible",
+        "No cross-customer digest existence/content authority"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I10",
+      "trace": "NPV-T12",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Advance linked reference expiry; append reference deletion/redaction; apply blocking/nonblocking hold and report lifecycle deletion/expiry."
+      ],
+      "expected": [
+        "Current overlay is linked/unique/owned and separately labeled; original bytes/digests remain unchanged",
+        "Expired/deleted/redacted reference yields declared unavailable/redacted metadata and current revision; no raw resolver/restoration",
+        "Expired/deleted or blocked report denies all protected loads/emission",
+        "Nonblocking hold grants no access and never extends original expiry"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I11",
+      "trace": "NPV-T09/13/14",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Hold actual audit-head row on another backend; start original invocation and cross its cutoff while waiting.",
+        "Test required audit failure/unknown acknowledgement before callback."
+      ],
+      "expected": [
+        "Linked original token cancels expired head/store wait; no protected callback before durable linked ReadExact receipt/event",
+        "Reserved eventUUID/time/sequence/predecessor are database-owned after actual wait",
+        "Wrong reservation tuple/duplicate outstanding/head-only unconsumed reservation cannot commit",
+        "Known rollback versus unknown commit remain distinct; no fabricated audit success"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I12",
+      "trace": "NPV-T13",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Pause authority admission/source/stager/store/audit/COMMIT-ack/cleanup waits and advance original UTC/elapsed clock minus1tick/exact/plus1tick.",
+        "Force SET CONSTRAINTS ALL IMMEDIATE while valid, advance clock beyond original cutoff, then perform actual COMMIT."
+      ],
+      "expected": [
+        "Original UTC+monotonic lease begins before backend/lock waits and only narrows with source/report retention",
+        "Valid callback retains actual session fence; exact/late cutoff cancels dependency and permits no later success/protected emission",
+        "Early-trigger/late-COMMIT retains linked immutable historical rows; zero successful adapter result/sink write; no false rollback/failure event",
+        "Fresh same-expired-actor read/reconciliation denies; genuinely current authority is evaluated independently",
+        "Deferred linkage checks are not credited as physical-COMMIT freshness"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I13",
+      "trace": "NPV-T13/16",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Roll UTC backward while advancing monotonic elapsed time; ignore cancellation then wake late callback/dependency.",
+        "Observe invalidation, owned buffers and backend/key disposal."
+      ],
+      "expected": [
+        "Clock rollback cannot renew original lease or extend pending waits",
+        "Late/retained view cannot expose detached bytes or emit after invalidation",
+        "Invalidation/cancel precedes lock release; owned context/buffers cannot be reused",
+        "Cleanup uses normal close/discard or explicit owner-bound PID/backend_start only; no broad pg_signal_backend or another fixture termination",
+        "Unconfirmed release remains NOT_VERIFIED rather than success"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I14",
+      "trace": "NPV-T07/13/14",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Repeat one read invocation/exact request, alter its canonical meaning, then use another invocation.",
+        "Read an old version after source_current advances; expire authority/overlay during replay."
+      ],
+      "expected": [
+        "Same invocation/exact actor/request deduplicates ReadExact audit receipt while reloading integrity/current authority/lifecycle/availability",
+        "Changed meaning conflicts; new invocation creates one separate historical event",
+        "Found read replay performs no new successful event/finalize/COMMIT; Active context ends through rollback/disposal",
+        "Reader/new read audit never requires publisher source_current equality",
+        "No callback on failed/unknown audit; delivery bounded by current invocation original lease"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I15",
+      "trace": "NPV-T15",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Exercise all35 exact signature/return/grant combinations with actual Publisher/Reader/Audit/BlobStager/Controller/Migration logins and PUBLIC/alternate/wrong binding.",
+        "Attempt direct DML/DDL/SET ROLE/private helpers/manual unlock/forged context/skip begin/finalize/write after finalization.",
+        "Finalize then try committed reads within the still active original xid; test aborted/unknown/null status."
+      ],
+      "expected": [
+        "Exact declared SQL composite/scalar attributes and parameter types; no generic extra surface",
+        "No execution role table/sequence/CREATE grants or function-owner/migration/broad-signal membership",
+        "Only fixed SECURITY DEFINER owners/search_path and exact SESSION_USER/scope/mode binding; no inline grant/context GUC proof",
+        "PendingFinalized is not committed; fresh READ ONLY plus positively committed original xid required; no caller xid/state argument",
+        "Bound NotFound+same write_xid required for new success; Found/historical event cannot authorize append/finalize",
+        "Closed duplicate-preserving canonical SQL admission refuses each malformed control before business/context/head mutation"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I16",
+      "trace": "NPV-T11/14",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Place fictional forbidden source-original/comment/native-object/credential/SQL/report sentinels in controlled rejected fixtures.",
+        "Inspect allowed report/audit/receipt/error/trace and raw-resolver call counters without printing sentinels."
+      ],
+      "expected": [
+        "Protected forbidden values absent from allowed output and all ordinary diagnostics",
+        "Fixed safe outcomes/SQLSTATE categories only; audit outage signal only signal/invocation/correlation",
+        "Raw resolverCalls=0; denial does not fetch protected content for redaction",
+        "Credentials remain ephemeral memory and never enter files/logs/site/evidence"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I17",
+      "trace": "NPV-T02/06/16",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Attempt existing digest with altered content, oversized controls/payload and wrong kind/customer links.",
+        "Exercise all31 original native vectors and Unicode/control/NUL payloads; SQL control duplicate/UTF8/canonical negatives."
+      ],
+      "expected": [
+        "Immutable collision cannot replace content; full SHA256 and length compare original bytea",
+        "Projection/source Unicode/NUL original bytes remain bytea, never generic JSONB/text-unescaped payload storage",
+        "All original31 vectors unchanged; no regeneration from adapter",
+        "Native and explicit fixture bounds refuse without truncation; no cross-customer dedup",
+        "Control recursion/ASCII/schema/scalar/set/calendar/decimal/counter/type checks independent of source/prose payload path"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    },
+    {
+      "id": "NPV-I18",
+      "trace": "NPV-T17/18",
+      "status": "PLANNED_NOT_EXECUTED",
+      "procedure": [
+        "Run coordinator-owned unchanged draft/run/review/MCP and original157codec+58flow checks separately from actual persisted fixture.",
+        "Execute applicable locked restore/format/build/dependency/architecture/default secret checks and preserve original failures."
+      ],
+      "expected": [
+        "No ordinary-host/startup/HTTP/MCP/provider/cloud/renderer/source activation or historical byte/schema/API rewrite",
+        "Executed command/tool/source/migration/oracle/owner/login/wait/count/hash evidence names actual observations",
+        "Unexecuted case remains PLANNED_NOT_EXECUTED or NOT_VERIFIED; no scripted-port substitute",
+        "Fixture results do not close eligible realOneIdentity/two-environment/production gates"
+      ],
+      "evidenceRequired": [
+        "exact tracked adapter/migration/test/tool identities",
+        "actual restricted backend/SESSION_USER identities without credentials",
+        "committed row deltas and original canonical hashes",
+        "safe refusal/authority/load/emission counters",
+        "actual backend wait/progress where concurrency applies",
+        "original failures and independently verified corrections"
+      ]
+    }
+  ]
+}

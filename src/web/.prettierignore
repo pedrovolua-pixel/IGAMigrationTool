@@ -1,3 +1,4 @@
 node_modules/
 dist/
 src/demo-contract.generated.ts
+src/bff-authentication-contract.generated.ts

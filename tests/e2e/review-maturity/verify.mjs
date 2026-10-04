@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { spawn } from "node:child_process";
@@ -580,6 +581,7 @@ try {
   );
 
   await page.goto(base);
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
@@ -718,6 +720,7 @@ try {
     "original title preserved after edited presentation",
   );
   await page.reload();
+  await showAssessments(page);
   await page
     .getByLabel("Consultant review and history", { exact: true })
     .getByRole("heading", { name: hostile, exact: true, level: 5 })
@@ -827,6 +830,7 @@ try {
     });
   });
   await page.reload();
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Retry analysis", exact: true })
     .waitFor();
@@ -930,6 +934,7 @@ try {
     }
   });
   await page.reload();
+  await showAssessments(page);
   await getHeld;
   await refreshHistory();
   await page
@@ -1065,6 +1070,7 @@ try {
     await stop();
     await launch();
     await page.reload();
+    await showAssessments(page);
     await page
       .getByRole("heading", {
         name: "Consultant review and history",

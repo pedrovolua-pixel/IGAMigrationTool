@@ -1,0 +1,475 @@
+{
+  "schemaVersion": "pilot-integrated-checkpoint-v1",
+  "date": "2026-10-04",
+  "codeCheckpoint": "615e60838c0fdebd0ea4fb025ad6a2cda226f8bf",
+  "authority": "Owner-approved continuous pilot execution; original approved implementation plan remains authoritative",
+  "checks": {
+    "lockedRestore": "PASS123projects",
+    "solutionFormat": "PASS",
+    "releaseBuild": "PASS0warnings0errors123projects",
+    "architecture": "PASS7policy4scan",
+    "defaultSecretScan": "PASSexactrepositorypath/rule/5literalfictionalSHAallowance;independentlyreviewed",
+    "collectorAuthored": "PASS59SQLfamily+225scriptedkernel=284",
+    "collectorIndependent": "PASS55",
+    "nativeCodec": "PASS157",
+    "nativeFlow": "PASS58",
+    "frontend": "PASScontract/typecheck/Vite/format"
+  },
+  "browser": {
+    "consultant": 385,
+    "analysis": 718,
+    "reviewMaturity": 2180,
+    "draftReports": 2095,
+    "recommendationGuidance": 2923,
+    "status": "PASSboundedengineering;latestkeyboard-helperreplayPASS718",
+    "actualPostgreSql": "18.4freshownedloopbackfixture;actualprocessrestartwhereexplicitdriverrecorded",
+    "chromium": "141.0.7390.37",
+    "node": "24.21.0",
+    "axe": "4.13.0;zero confirmed violations;color-contrast INCOMPLETE"
+  },
+  "sourcePins": {
+    "collectorCorrection": "d0191a1d95177de9baf4a3a4e3806df3c55c0040",
+    "collectorFinalAuthoredCases": "f72a547ba989e70b08ee5c5bdd118c9c76cf657d",
+    "collectorIndependent": "3ce4116",
+    "nativeFlowCorrection": "8881c1cf4efe214afe4779221970070d4ecfc4db",
+    "originalNativeGoldens": "51272d2",
+    "approvedUIRoot": "e83e234",
+    "uiIntegration": "3b3c0cd+678e258;documentation49823c0"
+  },
+  "hosted": {
+    "commit": "60ebff3894eded489c2d3e22754d3b5f86cfa99b",
+    "bootstrap251": {
+      "id": 37170762866,
+      "status": "PASSLinux+Windows2022+Windows2025"
+    },
+    "package161": {
+      "id": 37170762870,
+      "status": "PASS"
+    },
+    "httpsSignature6": {
+      "id": 37170762817,
+      "status": "PASS"
+    },
+    "newerIntegratedHead": {
+      "commit": "9c9dadf8815e6ea956d1e8a2f673c60d44a50d59",
+      "bootstrap252": {
+        "runId": 37173384654,
+        "Windows2022": "PASS",
+        "Windows2025": "PASS",
+        "Linux": "FAILEDatsecret-scanonly;1newcanonicalmetadatafalsepositive"
+      },
+      "package162": {
+        "runId": 37173384691,
+        "status": "PASS"
+      },
+      "httpsSignature7": {
+        "runId": 37173384618,
+        "status": "PASS"
+      },
+      "correction": "MoveverifiedGitcommithashoutofkeyword-bearingreviewstatusstringintotypedscannerreviewfields;noallowlistchange;nextpushpending"
+    },
+    "correctedIntegratedHead": {
+      "commit": "8a6037a5691808748c6f36fc6ee1fd617fae646e",
+      "bootstrap253": {
+        "runId": 37173794842,
+        "Windows2022": "PASS",
+        "Windows2025": "PASS",
+        "Linux": "FAILstep56after125AI-previewchecks;hiddenclosedcontrolsincorrectlymeasured",
+        "browser": "151.0.7922.34",
+        "passedThrough": "draft-reportandstructuredrecommendationbrowserflows"
+      },
+      "package163": {
+        "runId": 37173794832,
+        "status": "PASS"
+      },
+      "httpsSignature8": {
+        "runId": 37173794825,
+        "status": "PASS"
+      },
+      "correction": {
+        "sourceCommit": "8dea8be4693dfc679faa5f375a9d609f277c24b4",
+        "governingPacket": "547d9f2",
+        "visibleTargetControls": "PASS5root+5independentexactsourcecallback;Chromium151.0.7922.34;closedundersizeddetails0/opened1",
+        "fullGuardedDriver": "NOTVERIFIEDuntilnewhostedrun;local55433belongselsewhere",
+        "governingRefinement": "a3e7c5d",
+        "review": "ACCEPTED;LOWUI-TARGET-001closedwithcheckVisibility;fullguardeddriverpending"
+      }
+    },
+    "navigationIntegratedHead": {
+      "sourceCommit": "d02cb0d417e3f44d5e2980a7044403e546d76e6d",
+      "bootstrap254": {
+        "runId": 37175154760,
+        "Windows2022": "PASS",
+        "Windows2025": "PASS",
+        "Linux": "FAILstep59localfixpackages2672assertionsTimeoutError;laterstepsNOTVERIFIED"
+      },
+      "package164": {
+        "runId": 37175154749,
+        "status": "PASS"
+      },
+      "httpsSignature9": {
+        "runId": 37175154751,
+        "status": "PASS"
+      },
+      "offlineAiPreview": {
+        "status": "PASS",
+        "checks": 651,
+        "browser": "151.0.7922.34",
+        "scope": "actualguardeddedicatedPG/host/browser;original125failurepreserved"
+      },
+      "navigationCorrection": {
+        "sourceCommit": "2f1a534eef819cd580f48d703355c52df76bbb3d",
+        "governingPacket": "8b2aa18",
+        "rootGlyphControls": "PASS4;original2PASS2FAIL;intermediate4FAILretained",
+        "actualOriginalDiagnostic": "reproducedclosedmobilenavigationlocatorwait;owned56284/notoriginalhostedcredit",
+        "independentReview": "ACCEPTED;4exactsourceglyphcontrolsPASS;original2PASS2FAIL/intermediate4FAILpreserved;3sfixturelimitexplicit",
+        "correctedFullHostedRun": "PENDING",
+        "ownedDiagnosticReplay": {
+          "status": "PASS",
+          "checks": 3487,
+          "browser": "151.0.7922.34",
+          "PostgreSql": "18.4",
+          "sourceCommit": "2f1a534",
+          "diagnosticOnly": "fixed56284/freshreceiptdatabase+60spoll;originalhostedguardstill55433/30s",
+          "coverage": "desktop1440/mobile390/narrow320keyboard/reflow/axe/fullfields/actualhostrestart",
+          "cleanup": "4owneddatabasesconfirmedremoved;nootherfixturemutation"
+        }
+      }
+    }
+  },
+  "originalFailures": [
+    "SourceunsolicitedOCEfalsecaller-cancel and rejectednativepayloadcounter;bothindependentlyclosed",
+    "Nativeoriginalflow7failures,intermediate1failure;closedat58PASSwithoriginaltracesretained",
+    "UIoldlanding/hidden-targetdriverfailuresretained;realnavigationandrendered-targetchecks",
+    "Analysisfirstkeyboardretry703checktimeout;unchangedapplicationdiagnostic708PASS;RAFhelpercompletionmadeexplicit",
+    "Draftfirstinvocationrefusedwrongdisposabledatabase;dedicatednewownedv6/v7fixturescreatedwithoutguardchanges",
+    "Defaultsecretscan10falsepositivesindependentlyrecomputed5syntheticgroupdigests;firstcolumn-offsetallowancefailed;finalfull-fieldboundarypasses3positive/negativecontrols",
+    "IndependentLOWnested-copyallowancefinding;exactrepository-relativeanchorcorrected;all6independentcontrols+fullscanPASS",
+    "Linuxbootstrap252failedonegeneric-api-keymatchinnewcanonicalreviewfield;exacttrackedGitarchiveindependentlyreproducedmatchasverifiedGitcommithash;structuredscannerreviewfieldsavoidfalsepatternwithoutnewallowance",
+    "Hosted253LinuxAI-previewfailed125checksattarget-sizepredicatebecausehiddenclosedcontrolsmeasured;visibleenabledcorrectionretains24pxandenforcesbothdimensions;fullreplaypending",
+    "Independent2b6afdcvisibilityedge:undersizedclosednative-detailschildstillhasclientrect/visibleCSS;4PASS1FAIL;renderingvisibilitycorrection8dea8beclosesat5PASSwithoriginalfailurepreserved",
+    "Hosted254Linuxlocalfixpackages2672Timeoutafterlastcompletedhostileinertassertion;owna2diagnosticidentifiesclosedmobilenavigationlocator;originalguardunchanged",
+    "FirstincludeHiddenbuttoncorrectionfd60168simplifiedDOM4PASSbutactuala3failsbecausearia-hiddenglyphchangesname;strengthenedglyphcontrols4FAIL;corrected2f1a5344PASS",
+    "125projectsolutionformatfailsnewFixtureConfigurationinitializer;scopedworkerincludeinvocationmatchednone;owned3c3be88formattercorrectionwhole125PASS",
+    "Nativeadapterd3portable249PASS1FAILalreadycanceleddependencystarts;independentoversizecopy/callbackundergate/timerthrow/Disposecleanupdefects;originalandpartialcorrectionevidencepreserved"
+  ],
+  "limits": [
+    "RealOneIdentitySQLexecution/signedregistry/permissions/nativecodecs/historySP18-SP19NOTVERIFIED;noactivation",
+    "Native18persistedcasesPLANNED;P05designindependentlyaccepted;boundedadapter/verifierpacketsassigned",
+    "RemainingcurrentUIAI/artifact/task/Phase1Bbrowserchecksawaitdedicatedhostedfixtures;theiroriginalport/databaseguardsunchanged",
+    "FullsupportedWindowsbrowser/NVDA/Narrator/PDFmanualacceptanceNOTVERIFIED",
+    "OriginalownedPGcluster56283checkpointerremainsuninterruptible;shutdownrequestednotconfirmed;newseparatecluster56284works",
+    "G0PASS;G1-G9/fullM01-M12acceptanceOPEN;14humanroles/document/doneconditionsretained"
+  ],
+  "activation": "No ordinaryhostnativeadapter/customer/cloud/provider/PDF/MCPactivation",
+  "privateSite": {
+    "sourceCommit": "cf5b2e49170fa0bb2f6284f5a246c0d29ce36131",
+    "canonicalSnapshot": "d02cb0d417e3f44d5e2980a7044403e546d76e6d",
+    "status": "CONFIRMEDsucceeded",
+    "receipt": "pilot-native-postgresql-packet-site-20261004.json",
+    "taskCount": 14,
+    "taskHashesPreserved": true
+  },
+  "logs": [
+    {
+      "path": "work/release-readiness-20261003/integrated123-restore.log",
+      "sha256": "051a2855c7f29633d2787fbade1a6d82a0f2641507df3f05bd55b9c2884aead5"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-build.log",
+      "sha256": "1dc21050d7d693f1d1e4e1f62d12ec554363f31a0e1e86a85fbd063c8b7c3001"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-gitleaks-final.log",
+      "sha256": "2efde733c44f9128878455ed03aeaceedaa6c7b662ed9b342c3860d2b6ac6417"
+    },
+    {
+      "path": "work/release-readiness-20261003/source-pages-corrected-integrated-tests.log",
+      "sha256": "e7cd3a3cbf7b63e73a26763f8095842819b9c3b161056c1d122521dc30fe1e21"
+    },
+    {
+      "path": "work/release-readiness-20261003/source-pages-independent-integrated-tests.log",
+      "sha256": "016ba7341d7215d61f2aa391d5c3aa01633f329baa040afb23a25552b67629d5"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-final-integrated-tests.log",
+      "sha256": "9c8d042a14efa1c13661665c701ab06a218a0212de79a949e8f7c7d5c0489fe1"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-final-build.log",
+      "sha256": "c49207d0e5d89d04f70039e9ea62c9d48e6c16c04c89173ba036b610b983c956"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-final-format.log",
+      "sha256": "3e72da6df4a5aec963ee5760ce0bbe3d902a507ef8a7e60663c7581dfbe07f1d"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-consultant-browser-replay.log",
+      "sha256": "4bebd523ffbccfa30531b547ef2117f55ad1ac9b8327e0b119c8f8d7c8979781"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-analysis-browser-diagnostic.log",
+      "sha256": "67e2018127f40937357adaf265f34acd8c04f57a791cae66cd334fc26dc7263d"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-review-browser.log",
+      "sha256": "057173d8ef40aa532b71d436c4405f8d2f2b16abab58fd3d66068280d2ea5954"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-draft-reports-browser-replay.log",
+      "sha256": "018e44bf5e6c90a9cb756e9dcd1e084a82ed4761e4864e9bd3fb095d5eba5562"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-recommendation-guidance-browser-replay.log",
+      "sha256": "c94d4fdfbb5dfc9eae6f4c413f9097c792d0e57bfe89ccff5b43f3fe2c23852c"
+    },
+    {
+      "path": "work/release-readiness-20261003/ui-gitleaks-negative-controls.json",
+      "sha256": "798b9241133a5493b26d92987326c143bcb09dd05dc1a32a45248e305701af4e"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-analysis-browser-final.log",
+      "sha256": "216ca9b0965fb026b59b6a65af1af80c4262478b19cf755406d1e2ba2febb91d"
+    },
+    {
+      "path": "work/release-readiness-20261003/graphical-independent-review.json",
+      "sha256": "73dc3e4baf1027b3186d70f5f48287ec962c113a40a1a7242d520a0fc7f70972"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated123-gitleaks-anchored.log",
+      "sha256": "230842b04d6eda6ca06038c7651b298b45ce435cf3f839783eaccddec13b5304"
+    },
+    {
+      "path": "work/release-readiness-20261003/ui-gitleaks-independent-review.json",
+      "sha256": "31781eb5839e236762ec078076527b8c96982545439e8ddfb810a51139d9238a"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated-metadata-corrected-gitleaks.log",
+      "sha256": "242cf132b0700bec26433c816c96392594ee2a5d188cb0c2aaf994718632e590"
+    },
+    {
+      "path": "work/release-readiness-20261003/tracked-corrected-checkpoint-gitleaks.log",
+      "sha256": "fc12a1b9f40c993650f2ce7cd081d89f8fcea894b30a260a10b110268624c88b"
+    },
+    {
+      "path": "work/release-readiness-20261003/site-combined-render.json",
+      "sha256": "ba9591e2eec52a65493de48d6730d1c19953f0583d52aa38a81612e8e9329f99"
+    },
+    {
+      "path": "work/release-readiness-20261003/hosted253-ai-preview-original-failure.log",
+      "sha256": "87f424fb33ddd25b20b93a25ed262ee057ef746792ee3cfa10fa46c102839d5e"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-measurement-controls.json",
+      "sha256": "e6e03a024987143edccee425ada0353208d7d771bd2b5d9612ee5df1a84cb236"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-independent-original.json",
+      "sha256": "3578c9211ee4ade67aad74944de5e1dc953d18735041228ac8ccd57882fc67b8"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-independent-corrected.json",
+      "sha256": "1028e8db2186c7248061cf96497e8e81af81585915c0362587089a25b879b7d8"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-rendered-controls.json",
+      "sha256": "0b9d1b81d16b85a3475e0219637c6d28070f4a4c1a4a0399950e5f9bee7a0a29"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-p05-supplemental-design-review.json",
+      "sha256": "5232ee41e302ece684ca2c984067da843b4fafa1ce29c18fcb58a1ebbaf0b4d9"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-p05b-owner-receipt.json",
+      "sha256": "ffefe48f6937c3cdd7cf0c61770fa38e1f1e19b070a89fdd4bfe87a6988833f2"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-packet-secret-relative-scan.log",
+      "sha256": "17ff87b181c7bfb68d591ea338d9dc90d8a877cbf61a21faac39e517a01646e3"
+    },
+    {
+      "path": "work/release-readiness-20261003/site-p05-render.json",
+      "sha256": "b11dd1bcac2ddd3d4b4349244df278ebb28200a88fd164a115cdc2c9756068a9"
+    },
+    {
+      "path": "work/release-readiness-20261003/site-p05-task-preservation.json",
+      "sha256": "57e8024d80c5320440f99052909cd474c9c5ca51a2c49323fe207566b3424186"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-final-secret-scan.log",
+      "sha256": "5fd6fc421712e828947eca7f3078f7760a3a34a5d53a88f1ed821cc17c744bec"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-restore.log",
+      "sha256": "4f1ff19559882816e1cb15a167838ce0d2fe84980b96dfcefd1ff11a77056396"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-build.log",
+      "sha256": "ad53aead2a6f7ddb89d2cec65cff4772778fba66b021e3afbd7c2842a8cea5ee"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-format.log",
+      "sha256": "d03ec210cd949da188b9c16d6c18390e453bd8b33ede6835c7c0f22c762582ae"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-format-corrected.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-run.log",
+      "sha256": "d5f4752cfad15d143d6df27dd77515c30ca5f3c170ae20461adaf62edfc0ff26"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-public-marker-tests.log",
+      "sha256": "9c8d042a14efa1c13661665c701ab06a218a0212de79a949e8f7c7d5c0489fe1"
+    },
+    {
+      "path": "work/release-readiness-20261003/navigation-controls-original.json",
+      "sha256": "2e68067896b89ecb10cc8eda691571a5a7785aa1b1097fefc63afe27270266ce"
+    },
+    {
+      "path": "work/release-readiness-20261003/navigation-glyph-controls-intermediate.json",
+      "sha256": "9074c77947d977d91345463ff6269696ce69f91d2ccb67f7081044c09478d08f"
+    },
+    {
+      "path": "work/release-readiness-20261003/navigation-glyph-controls-corrected.json",
+      "sha256": "b0e8b912b1bc36b19c1d1511012d750b775182587f136576c489487192f193f9"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-original.log",
+      "sha256": "03c72d58c68ef4c0d65682a98fffb8c6094bea7240d62448b806c917b174ea49"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a2-original.log",
+      "sha256": "d505b91f6806cd7495b3c1c92522abdcca56881739dcbfcde977fa8f3e2db6aa"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a3-corrected.log",
+      "sha256": "e078475bbc2cc49e316968fd24e6c03a6a988b35a364000b3007b9964e3d3a4b"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-public-marker-independent-review.json",
+      "sha256": "0bddd9b54167700dfffcf1b9f4cd4ad76523d07453b205cea85f521e3ee7131b"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-pg-preparation-independent-review.json",
+      "sha256": "8fee4b3dc03c85132465c5af477a3fa0fd1b2d4c30cd3c4a21b081fe5c86bb3a"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-subject-refinement-independent-review.json",
+      "sha256": "0e2184af5bd39533c9594abc0966c0b2df5e049cb5aad499c82cf40aac02a0bf"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-reader-lease-original-review.json",
+      "sha256": "8990c684d174b98b5aaa2f148bab127576a6baf6aaa8ed4f2102e04b3f9f59b5"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-reader-lease-partial-review.json",
+      "sha256": "cbe4cefeabc8f7be6a7f21e97eb03c2229a8e240e00e64583dfbc533b43f76cd"
+    },
+    {
+      "path": "work/release-readiness-20261003/hosted254-fix-packages-original-failure.log",
+      "sha256": "4ad0e25aefc21a9927293bcdd667ec886095b38834ef6fd0a9983ff81e2fdbdd"
+    },
+    {
+      "path": "work/release-readiness-20261003/navigation-correction-format.log",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-secret-scan.log",
+      "sha256": "fdfce51e6d81380f7fc7cd24f1ecdb185040da3fa9a97b4b131f01f7ef47d146"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-preparation125-secret-corrected-scan.log",
+      "sha256": "127dd9d0184acfa230a7ec77f55eab1084591671494d0b60f443b38532af6b22"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a4-corrected.log",
+      "sha256": "9addacff90dd0b67640b1cdacf64643a74159e74c08d779293e34de2c9da777c"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-owner-receipt.json",
+      "sha256": "447b075a52ecb563ac4f8c4919006c7c480df8c152f44f4a8524ef6527fb6842"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a2-owner-receipt.json",
+      "sha256": "e64a03d032ab9a5d90807932fc92748e8c4666108c8eb805e3fdd95afd43b90f"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a3-owner-receipt.json",
+      "sha256": "9725d5c2be7e4bc325b44dc543d9439f453e9f2f9f8304087d3c433e82746662"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a4-owner-receipt.json",
+      "sha256": "6ef43112be5267f18e934358191406002cd5f3d7cf564fec347893b3b6fa019e"
+    },
+    {
+      "path": "work/release-readiness-20261003/navigation-independent-review.json",
+      "sha256": "3f814d47d6e0f043a37a581324650583e9c81603b73430142067c90ef5b19ef9"
+    }
+  ],
+  "reviews": {
+    "collector": "Independent55PASS;bothfindingsCLOSED;3ce4116",
+    "UI": "Independentreview3b3c0cd+678e258+49823c0ACCEPTED;executedrootbrowserreceipts;notreviewerbrowserreplays",
+    "scanner": {
+      "status": "ACCEPTED",
+      "sourceCommit": "a9975634134b9bef2411424e9026ded5377c28fe",
+      "result": "5recomputeddigests,10fields,sixcontrols+fullscanPASS;LOWnested-copyfindingCLOSED"
+    },
+    "UITargetCorrection": {
+      "status": "ACCEPTED",
+      "sourceCommit": "8dea8be4693dfc679faa5f375a9d609f277c24b4",
+      "controls": "PASS5independent;LOWfindingCLOSED;guardedfullreplaypending"
+    }
+  },
+  "nativePersistence": {
+    "designCommit": "fdefd8e79fa108bb099e5922e9a49b87a6a1a50e",
+    "designSha256": "a2e81c399cfbb04aecf84c4f6e4e1a09df38bdca7fc0a27abc02e64bc6896d50",
+    "integratedDesign": "5f3e9b6",
+    "review": "ACCEPTEDnonauthor;35signatures/6byte-receipts/5branches;noSQLruntimecredit",
+    "packets": "P05B18-case/grant-expectationsbeforeP05Adependentcode;coordinatorP05Cintegration",
+    "persistedCases": "PLANNED18;NOTEXECUTED",
+    "localPostgreSql": "18.4freshownedfixture56284",
+    "hostedPostgreSql": "existingpinned18.4image",
+    "activation": "disabledordinaryhost/customer/source/provider/cloud/MCP"
+  },
+  "preparation125": {
+    "adapterSourceCommit": "50207b7275a492e5a472692100eae3e6df78d45f",
+    "verifierSourceCommit": "7ca06208344f4aea7937a02d28b17f6fab0e40e3",
+    "caseFreeze": "6232bbfe53f7b2d00ba8070a7bfed97344eb99ea",
+    "checks": {
+      "lockedRestore": "PASS125projects",
+      "releaseBuild": "PASS125projects0warnings0errors",
+      "solutionFormat": "PASSafterownedFixtureConfigurationinitializerformatcorrection;originalfailurepreserved",
+      "architecture": "PASS7policy4scan",
+      "standaloneVerifier": "PASS18planned/35signatures/15returnshapes/31originalhashes;noSQLexecution",
+      "defaultSecretScan": "PASS0fulltracked-sourceexport;noallowancechange"
+    },
+    "actualMigration": "NOTEXECUTED",
+    "persistedCases": "18PLANNED_NOTEXECUTED",
+    "adapterBehavior": "d3b2ca1notintegrated;portable249PASS1FAILandindependentcallback/allocationfindingsretainedpendingcorrectionreplay",
+    "marker": {
+      "sourceCommit": "2a5a293ca972b0d9222ee1e13849057a48310b1f",
+      "coreCodec": "PASS157",
+      "coreFlow": "PASS58",
+      "externalNonfriendProbe": "PASS17;solecoresourcefriendunchanged"
+    },
+    "refinements": {
+      "subjectSecurity": "independentlyacceptedcab65d1;expectations70a1dcprecedeaffectedcode",
+      "migrationSetup": "3c02e54actualMigrationDDLplusseparateexactprovisionertransfers;noexistingfixturemutation",
+      "ownershipMethods": "d69debd+6b08602;expectationsc5ee201precedeaffectedcode;no35function/envelope/publicAPIexpansion"
+    }
+  }
+}

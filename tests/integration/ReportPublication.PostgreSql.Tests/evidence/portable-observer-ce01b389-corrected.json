@@ -1,0 +1,37 @@
+[
+  {
+    "Name": "pending-stalled-dispatch:original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "pending-stalled-dispatch:per-dependency",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "disposed-original-source-no-admission",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "disposed-per-dependency-source-no-start",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "caller-handle-owned-after-dispose",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "noncancelable-current-invoke",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "dispose-pending-before-raced-caller",
+    "Passed": true,
+    "FailureType": null
+  }
+]

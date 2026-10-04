@@ -111,6 +111,36 @@ jobs:
         run: dotnet run --project tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj --configuration Release --no-build
       - name: Check synthetic baseline planning and coverage integration
         run: dotnet run --project tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj --configuration Release --no-build
+      - name: Check BFF transport, sessions and human authorization
+        run: |
+          dotnet run --project tests/unit/BffFoundation.Tests/BffFoundation.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/integration/BffAuthenticationTransport.Tests/BffAuthenticationTransport.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/IdentitySessions.Tests/IdentitySessions.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/IdentityPolicy.Tests/IdentityPolicy.Tests.csproj --configuration Release --no-build
+      - name: Check reviewed BFF ingress and local shared key seams
+        run: dotnet run --project tests/integration/BffHostingContracts.Tests/BffHostingContracts.Tests.csproj --configuration Release --no-build
+      - name: Check local identity authority and atomic audit composition
+        env:
+          IGA_AUTHORITY_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_identity_authority;Username=iga_synthetic
+          IGA_AUDIT_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_security_audit;Username=iga_synthetic
+          IGA_COMPOSITION_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_composition;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_identity_authority
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_security_audit
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_bff_composition
+          dotnet run --project tests/unit/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/integration/IdentityAuthority.Tests/IdentityAuthority.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
+          dotnet run --project tests/integration/SecurityAudit.Tests/SecurityAudit.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
+          dotnet run --project tests/integration/BffAuthorityComposition.Tests/BffAuthorityComposition.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
+      - name: Check shared PostgreSQL BFF sessions and real HTTPS transport
+        env:
+          IGA_SESSION_TEST_CONNECTION: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_sessions;Username=iga_synthetic
+          IGA_BFF_FLOW_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_bff_http;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_bff_sessions
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_bff_http
+          dotnet run --project tests/integration/IdentitySessions.Tests/IdentitySessions.Tests.csproj --configuration Release --no-build -- --reset-synthetic-schema
+          dotnet run --project tests/integration/BffSessionFlow.Tests/BffSessionFlow.Tests.csproj --configuration Release --no-build
       - name: Check durable synthetic run contracts
         run: dotnet run --project tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj --configuration Release --no-build
       - name: Check deterministic fixture rules and health scoring
@@ -124,6 +154,19 @@ jobs:
           docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_r5
           dotnet run --project tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/FindingReview.Tests/FindingReview.Tests.csproj --configuration Release --no-build
+      - name: Check native publication original oracle and bounded core
+        run: |
+          python3 tests/unit/ReportPublication.Tests/oracle/verify_vectors.py
+          python3 tests/unit/ReportPublication.Tests/oracle/test_oracle.py
+          dotnet run --project tests/unit/ReportPublication.Tests -c Release --no-build
+      - name: Check native PostgreSQL portable controls (no persisted case credit)
+        run: |
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-adapter
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-observer
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-wire
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --core-cleanup
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --protocol-cleanup
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --audit-encoder
       - name: Check detached canonical draft and inert Markdown
         run: |
           dotnet run --project tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build
@@ -274,6 +317,7 @@ jobs:
           export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
           export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
           node tests/e2e/consultant-demo/verify.mjs
+          node tests/e2e/bff-authentication/verify.mjs
       - name: Check isolated evaluation HTTP and browser flow
         env:
           IGA_SYNTHETIC_EVALUATION_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_host;Username=iga_synthetic
@@ -380,6 +424,10 @@ jobs:
           node tests/e2e/planning-tasks/verify.mjs
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
+      - name: Check bounded scripted source pages
+        run: |
+          dotnet run --project tests/unit/CollectorSourcePages.Tests -c Release --no-build
+          dotnet run --project tests/unit/CollectorSourcePages.Independent.Tests -c Release --no-build
       - name: Check collector host contract
         run: dotnet run --project tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-build
       - name: Check project dependency boundaries
@@ -432,6 +480,34 @@ jobs:
           python3 tests/infrastructure/AzureFoundation/composition-policy.py "$RUNNER_TEMP/pilot-development-foundation.json"
           python3 tests/infrastructure/AzureFoundation/entra-policy.py infra/entra/pilot-bff.application.json
 
+
+      - name: Validate optional Bastion private development access
+        run: |
+          for module in pilot-development-private-browser-access pilot-development-browser-dns; do
+            "$RUNNER_TEMP/bicep" build "infra/bicep/modules/$module.bicep" --outfile "$RUNNER_TEMP/$module.json"
+            "$RUNNER_TEMP/bicep" lint "infra/bicep/modules/$module.bicep"
+          done
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-development-private-browser-access.bicep --outfile "$RUNNER_TEMP/private-browser-composition.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-development-private-browser-access.bicep
+          python3 tests/infrastructure/PrivateBrowserAccess/template-policy.py "$RUNNER_TEMP/pilot-development-private-browser-access.json"
+          python3 tests/infrastructure/PrivateBrowserAccess/test-inputs.py
+          python3 tests/infrastructure/PrivateBrowserDns/policy.py "$RUNNER_TEMP/pilot-development-browser-dns.json" "$RUNNER_TEMP/private-browser-composition.json"
+          python3 tests/infrastructure/PrivateBrowserDns/environment_inputs.py --self-test
+          python3 tests/infrastructure/PrivateBrowserDns/test_composition_inputs.py
+
+      - name: Validate disabled HTTPS environment preparation
+        run: |
+          for source in infra/bicep/modules/pilot-https-container-apps-environment.bicep infra/bicep/pilot-https-portal.bicep; do
+            "$RUNNER_TEMP/bicep" format "$source" --stdout > "$RUNNER_TEMP/https-formatted.bicep"
+            cmp "$source" "$RUNNER_TEMP/https-formatted.bicep"
+          done
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-https-container-apps-environment.bicep --outfile "$RUNNER_TEMP/pilot-https-environment.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-https-container-apps-environment.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-https-portal.bicep --outfile "$RUNNER_TEMP/pilot-https-composition.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-https-portal.bicep
+          python3 tests/infrastructure/HttpsPortal/template-policy.py "$RUNNER_TEMP/pilot-https-environment.json" "$RUNNER_TEMP/pilot-https-composition.json"
+          python3 tests/infrastructure/HttpsPortal/test-inputs.py
+
   collector-windows:
     strategy:
       matrix:
@@ -473,6 +549,34 @@ jobs:
           python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
           dotnet build tests/integration/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
           python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+      - name: Verify Windows native publication bounded core
+        run: |
+          python tests/unit/ReportPublication.Tests/oracle/verify_vectors.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python tests/unit/ReportPublication.Tests/oracle/test_oracle.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/ReportPublication.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows native PostgreSQL portable controls (no persisted case credit)
+        run: |
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-restore -- --portable-adapter
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-observer
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-wire
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --core-cleanup
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --protocol-cleanup
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --audit-encoder
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows bounded scripted source pages
+        run: |
+          dotnet run --project tests/unit/CollectorSourcePages.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/CollectorSourcePages.Independent.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
       - name: Verify Windows local Phase1D synthetic MCP boundaries

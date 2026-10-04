@@ -1,0 +1,69 @@
+{
+  "status": "PASS_INV_P01_TO_P05_PROPOSED_DOCUMENTS_ONLY",
+  "candidate": "66ca09a9d4438bcf4fca429a1bf15daaecef4e8d",
+  "initialCandidate": "8bd16abe242b8c0658066dffa2eda7663c8fd4c8",
+  "plan": "4be13b53a1eb69c9478bab5b54bcc5a9e53aed8e",
+  "sourceBindings": [
+    {
+      "path": "architecture/decisions/ADR-0013-shared-key-inventory-and-recovery.md",
+      "sha256": "11e4741efeba97b8057916a0dc6124bf68f2e6cab5e716f0a2b5cbb71f1a12b6",
+      "bytes": 14572
+    },
+    {
+      "path": "docs/development/https-key-production-input-checklist.md",
+      "sha256": "3be6b445f6d0b13bb8258bb6a86184c1f90c922b054cbf3ae3f289ac72395824",
+      "bytes": 16089
+    }
+  ],
+  "executedChecks": {
+    "strictUTF8NewlineImmutableFiles": 2,
+    "localLinks": 41,
+    "headingAnchors": 13,
+    "technicalInputs": 7,
+    "liveInputs": 9,
+    "exactExistingNullIntakeFields": 42,
+    "protectedUuidProse": "PASS",
+    "scopedGitleaksBothDocuments": "PASS_exit0",
+    "gitWhitespace": "PASS",
+    "cleanOwnedTwoFileCandidate": "PASS",
+    "authScopeCorrection": "PASS_canonical_design38_40_102"
+  },
+  "retainedEvidence": [
+    {
+      "path": "/tmp/iga-key-inventory-review-independent/document-checks-initial.json",
+      "bytes": 744,
+      "sha256": "9629c62afe9b6d756c4cafa8f9e56aca46cb6b16758bbdbced2b5f92e7c4c3d5"
+    },
+    {
+      "path": "/tmp/iga-key-inventory-review-independent/gitleaks-final-adr.log",
+      "bytes": 79,
+      "sha256": "54abc5ff5bf9256b6dd4cda0bcc38286d6f1849b42ce0eb8ee3e9564859c1ef0"
+    },
+    {
+      "path": "/tmp/iga-key-inventory-review-independent/gitleaks-final-checklist.log",
+      "bytes": 79,
+      "sha256": "91ca9696d51b69b00076df1a7e1e57930d07bd166bc1385d347bf3e1f3c5f6ed"
+    },
+    {
+      "path": "/tmp/iga-key-inventory-proposal-correction-evidence/handoff.json",
+      "bytes": 1433,
+      "sha256": "cbae0d48662e71c59a0c974b01aa351211a5acee2f0b039bfcca616a25ed03cb"
+    }
+  ],
+  "findings": [],
+  "resolvedFinding": "Clarified original authentication15minute language to distinguish ordinarysession, single-use admission, protected-action MFA/CA and provider evidence scopes; onlytwo paragraphs/row changed.",
+  "conclusion": "ADR0013 remains Proposed and explicitly unselected; A evaluation preference does not choose SQL schema/roles/witness, B signature freshness limitation explicit, C writer orthogonal. Unknown commits, privileged common-owner rollback, witness independence, readiness/outage/recovery/lifecycle/retention/cost boundaries remain unresolved. Checklist preserves approved unrelated quantities and exact protected intake fields without actual bindings.",
+  "limits": [
+    "Documentary preparation only; no architecture approval/implementation/grants/newpolicies/publicschema/dependencies/productionKEY/livegates.",
+    "No runtime/cloud/network/repo changes; existing37signature/27dispatch evidence historical and RP separatelypending.",
+    "Sixhuman dependencies/stale privateBFF/no publisher retry preserved."
+  ],
+  "recordedAtUtc": "2026-10-04T00:13:20.382092+00:00",
+  "integratedDocumentationCommit": "9211df1950d0b5e2594cf5155b811514ded9faf1",
+  "independentReviewReceipt": {
+    "path": "/tmp/iga-key-inventory-review-independent/review-receipt.json",
+    "bytes": 2974,
+    "sha256": "95f87159a40105375ab7c6152786d3f1ee4f2a3b31d88682f6369e23de6a86a4"
+  },
+  "architectureAccepted": false
+}

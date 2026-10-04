@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
@@ -362,6 +363,7 @@ try {
   const uiRun = await start();
   let uiData = await ready(uiRun.runId);
   await page.goto(base);
+  await showAssessments(page);
   const draftSection = page.locator(".draft-report");
   async function refresh() {
     const response = page.waitForResponse(
@@ -731,6 +733,7 @@ try {
       await route.fulfill({ response: r, json: d });
     });
     await page.reload();
+    await showAssessments(page);
     await page
       .getByRole("button", { name: "Retry analysis", exact: true })
       .waitFor();
@@ -764,6 +767,7 @@ try {
     } catch {}
   });
   await page.reload();
+  await showAssessments(page);
   await seen;
   const healthy = await start("healthy");
   const healthyData = await ready(healthy.runId);
@@ -800,6 +804,7 @@ try {
     await stopHost();
     await launchHost();
     await page.reload();
+    await showAssessments(page);
     await draftSection.waitFor();
     await visible("64.2", "64.2", 0);
     eq(

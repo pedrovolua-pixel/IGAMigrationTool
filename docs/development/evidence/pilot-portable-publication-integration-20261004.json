@@ -1,0 +1,326 @@
+{
+  "schemaVersion": "pilot-portable-publication-integration-v1",
+  "date": "2026-10-04",
+  "codeCheckpoint": "39a972a1f66760eccb966c7da475b5349751b0a9",
+  "authority": "Owner-approved continuous pilot execution; Milestones1-12/G1-9 control and Phase1A-1D reporting",
+  "portablePublication": {
+    "authorCancellation": "ce01b38984de672f99fafac46473c836aefa988d",
+    "verifierCancellation": "a9bc70c1",
+    "adapter": {
+      "passed": 257,
+      "failed": 0
+    },
+    "observer": {
+      "passed": 7,
+      "failed": 0
+    },
+    "wire": {
+      "passed": 112,
+      "failed": 0
+    },
+    "independentAdditionalReview": "18controls and32cancellation/disposal races PASS",
+    "auditAuthor": "8e19cb2f",
+    "auditVerifier": "b0a39ac2",
+    "auditEncoder": {
+      "passed": 115,
+      "failed": 0
+    },
+    "auditOriginal": "109PASS6FAIL retained; foreign verified customer",
+    "coreReaderCorrection": "90ef85f9",
+    "coreCleanup": {
+      "passed": 4,
+      "failed": 0
+    },
+    "coreCleanupOriginal": "2PASS2FAIL retained; early reader uncertainty misclassified",
+    "protocolControl": "PASS synthetic Npgsql10.0.3 canceled-query response stall; no PostgreSQL release proof",
+    "nativeRegressions": "157codec+58scripted PASS; original31vectors unchanged",
+    "governance": "dadf7f87/29b5f925/64727579/dec9a487/c4cc4ee4 before affected code; fresh typed owner-bound release snapshots under original window",
+    "actualPersistedCases": "18PLANNED_NOT_EXECUTED",
+    "migrationAndRoleGrants": "NOT_EXECUTED",
+    "activation": "ordinary hosts/customer/provider/PDF/production disabled"
+  },
+  "sharedChecks": {
+    "lockedRestore": "PASS125projects",
+    "releaseBuild": "PASS125projects0warnings0errors",
+    "solutionFormat": "PASS",
+    "architecture": "PASS7policies4scans",
+    "frontend": "PASScontract/type/build/format;523.50kB existing chunk warning",
+    "wholeCurrentSourceLeakDetection": "PASSdefaultGitleaks8.30.1;37.39MB exact tracked archive plus5pendingcanonical files"
+  },
+  "approvedUiIntegration": {
+    "foundation": "0e44eb0152fd043896cf351956f88fb6808a8fa0",
+    "merge": "78e49873",
+    "rendering": "402new+27existing PASS on mergedsource",
+    "fixPackageDiagnostic": {
+      "source": "9cdf019a",
+      "checks": 3679,
+      "status": "PASSowned diagnostic; original guarded hosted replay NOT_EXECUTED",
+      "cleanup": "CONFIRMED"
+    },
+    "aiCorrection": "df90ed29",
+    "independentControls": "6DOM+9actualReact PASS;43sourceblobs exact",
+    "originals": "hosted256FAIL106; ownedfirstFAIL92Timeout; intermediateFAIL537focus retained",
+    "aiOwnedDiagnostic": {
+      "source": "df90ed29",
+      "checks": 610,
+      "status": "PASS8groups29tamper5lock-negative controls; actual own hostrestart/stale-response denial",
+      "browser": "151.0.7922.34",
+      "guardChanges": "fixed fresh owned56284/database only; safe stage instrumentation",
+      "originalGuardedReplay": "NOT_EXECUTED",
+      "cleanup": "all3fresh databases absent; owner/session checks confirmed"
+    },
+    "manualAcceptance": "Windows/NVDA/Narrator/zoom/PDF/owner visual NOT_VERIFIED"
+  },
+  "hosted": {
+    "source": "589068f9512afcd4aaabec8db7a35517ea52c99c",
+    "bootstrap256": {
+      "id": 37178787975,
+      "linuxJob": 111366900554,
+      "linux": "FAILAI106 after backend+earlier browser suites",
+      "windows2022": "PASS",
+      "windows2025": "PASS"
+    },
+    "package166": {
+      "id": 37178787930,
+      "status": "PASS"
+    },
+    "httpsSignature10": {
+      "id": 37178787928,
+      "status": "PASS"
+    },
+    "currentCorrectedHead": "NOT_EXECUTED"
+  },
+  "productProgress": {
+    "Phase1A": "local source contracts verified; eligible real exact-build A/B/read/query evidence OPEN",
+    "Phase1B": "fictional deterministic engineering verified; real reviewed rules/provider evidence OPEN",
+    "Phase1C": "portable native publication controls integrated; persisted publication/evaluation/provenance/PDF/operations OPEN",
+    "Phase1D": "actual publisher/identity/audit/MCP integration follows persistence; OPEN"
+  },
+  "gates": "G0PASS;G1-G9/fullM1-M12NOT_VERIFIED",
+  "humanTasks": "14OPENunchangedroles/instructions/doneconditions",
+  "latestConfirmedPrivateSnapshot": {
+    "source": "cd4be5917b1d277163da137371f51a4b55d0e2db",
+    "canonicalSource": "4698c45b82e8f00e44a1226aace504ecb84d5434",
+    "deployment": "appgdep_6ac1da0636a48191a14faed1efedfa13",
+    "updatedAt": "2026-10-04T04:46:05.084768+00:00",
+    "status": "historical verified; currentcycle publication pending"
+  },
+  "logs": [
+    {
+      "path": "work/release-readiness-20261003/ai-proposal-tab-driver-format.log",
+      "byteLength": 66,
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-tab-corrected-focus-independent-review.json",
+      "byteLength": 8046,
+      "sha256": "697d03d81b595c2e6fb0915890546d3babc02f829868627143406adf44d2d2b1"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-tab-original-focus-independent-review.json",
+      "byteLength": 2687,
+      "sha256": "63ffcb7b78e37a8b9061da36f6a76e7e0b833417538f4502c814d607e2f4e213"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-tab-retry-frontend-build.log",
+      "byteLength": 1207,
+      "sha256": "6155824513a6267cb53a923f70610f5b362b590ffe34c11a96e17439084ca015"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-tab-retry-frontend-format.log",
+      "byteLength": 202,
+      "sha256": "3e72da6df4a5aec963ee5760ce0bbe3d902a507ef8a7e60663c7581dfbe07f1d"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-ai-render.log",
+      "byteLength": 375,
+      "sha256": "a4447e406b374069c6980493a4935c04120f919534352ddabba53031b66339c6"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-areas-render.log",
+      "byteLength": 98,
+      "sha256": "f7c8a6148a3ed359477d96ac03af0cb0067f30c744d59149817af56a963a3380"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-complete-source-secret-scan.log",
+      "byteLength": 146,
+      "sha256": "a1c9be7b11e6ee9641a89a5f415e67985debfa06d16cfbd0d5cd390530f4587c"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-existing-areas-render-corrected.log",
+      "byteLength": 1135,
+      "sha256": "62ac8672ed0d9da0b8fab9be531d15f1f739e46a545df11eee180b497a1d038d"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-existing-areas-render.log",
+      "byteLength": 728,
+      "sha256": "52071c3c7d5cd7948fcdf764eeeb25f23b10e4c5c36ea8c97680769e8f1dbeab"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-frontend-build.log",
+      "byteLength": 1207,
+      "sha256": "e119dd851ae982ccb04f5b86e54d68ce355e4d6bea6ba1fb3a0f0c63ad975ebc"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-frontend-format.log",
+      "byteLength": 202,
+      "sha256": "3e72da6df4a5aec963ee5760ce0bbe3d902a507ef8a7e60663c7581dfbe07f1d"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-overview-render.log",
+      "byteLength": 1082,
+      "sha256": "ad85368db166d362a34dc9853d71b6476680b7fd7bfe80f1852559bad24e7f58"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-report-render.log",
+      "byteLength": 622,
+      "sha256": "28a511bcc60811574e3635c268cb048eb4cc6307298f3bf91bf80b62cac8c18b"
+    },
+    {
+      "path": "work/release-readiness-20261003/foundation-merged-risk-render.log",
+      "byteLength": 369,
+      "sha256": "3b46695fd6d3fa2f7a5cf0d94b27c7053463265826def670f950af2adc3077eb"
+    },
+    {
+      "path": "work/release-readiness-20261003/hosted256-ai-preview-original-failure.log",
+      "byteLength": 1438,
+      "sha256": "c9462460bc63c12023408affaa076e5b8e33ff3e0a8b872ec3ff213ff4da83d0"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-cancellation-observer-independent-review.json",
+      "byteLength": 14745,
+      "sha256": "189e36282f533f34f0042512dd06b700e4f14c18a30578aa393884f4293b9bc5"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-cleanup-corrected-document-review.json",
+      "byteLength": 1422,
+      "sha256": "675a6ea8ac76a049b788c4e2641703247eb7a079c6ed9067cc7971ff47f9f4cf"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-cleanup-original-document-review.json",
+      "byteLength": 4752,
+      "sha256": "9d1cb353dd17955e6cddcbb0b19538638bcfde36527ce944386664a4632a3478"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-audit-portable-integrated-build.log",
+      "byteLength": 20852,
+      "sha256": "7d6fc8ee975cf34d0c1b83d56f1656382f030044327e9c43e2f39cbaa4148805"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-audit-portable-integrated-encoder.log",
+      "byteLength": 464,
+      "sha256": "581a0fd6fa0c662922fab33a26088c370008f71efaf2a1f8f3e2ad00b1958f48"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-audit-portable-integrated-format.log",
+      "byteLength": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-core-cleanup-integrated-correction.log",
+      "byteLength": 462,
+      "sha256": "81522bd3fbd506faeec468f074ef852315368d59362d106e721db451a55ee91a"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-portable-integrated-adapter.log",
+      "byteLength": 464,
+      "sha256": "9589e6f64c690ee71bcbf033d2043848ab3f49f8819935f71b25d6aa7e31f8eb"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-portable-integrated-architecture.log",
+      "byteLength": 116,
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-portable-integrated-observer.log",
+      "byteLength": 477,
+      "sha256": "0170c587192173ce6dd8082c6bd8e5887f4da6cfdb0a18018179734099aa8211"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-portable-integrated-restore.log",
+      "byteLength": 80,
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-portable-integrated-wire.log",
+      "byteLength": 461,
+      "sha256": "075d71fd676bd80370d62966dc227b91b9a9131a08290c3858bce262018bdf12"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-protocol-cleanup-integrated.log",
+      "byteLength": 566,
+      "sha256": "eb8bdaf90a5e44d13a7a42206de0cf6882d93e331e2996fc182667906660a066"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-reader-uncertainty-native-core-regressions.log",
+      "byteLength": 246,
+      "sha256": "9c8d042a14efa1c13661665c701ab06a218a0212de79a949e8f7c7d5c0489fe1"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-a1-initial-owner-receipt.json",
+      "byteLength": 627,
+      "sha256": "caef5647add5e2c2d2ffc1b6a6bb9c5f510c0853a26eae6fb7cebec8b32f70cb"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-a1-owner-receipt.json",
+      "byteLength": 718,
+      "sha256": "5cc8735f2e8daa3165577d412f61f396e5b01f48f16a9b38b7ea65ff96179795"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-a2-initial-owner-receipt.json",
+      "byteLength": 627,
+      "sha256": "499a5657d63a043c944fbde6c98db4a28361c3d4e2aee4eafd75a75582109b48"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-a2-owner-receipt.json",
+      "byteLength": 718,
+      "sha256": "015cf55160f3806ece746650288653671ef0cfca1c315ea1591fdde551c306a7"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-a3-initial-owner-receipt.json",
+      "byteLength": 627,
+      "sha256": "452522d2ed2f8d5ffa585c263bab52552f53d25d618754d51e47c6c5d1369db1"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-a3-owner-receipt.json",
+      "byteLength": 718,
+      "sha256": "8e77c853e5adb20b67d4f70079a685e1220c6d168e829b081f9895703c374b70"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-corrected.log",
+      "byteLength": 1593,
+      "sha256": "9b7678c4dcada87e6984d911dc2957867f104e707c75dcd395d5b065cc29009d"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-focus-corrected-execution.json",
+      "byteLength": 2428,
+      "sha256": "054aa3fe17ff27d47aa08111b0cfd3b23eb1fcc95db715291022cc6b5304f483"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-focus-corrected.log",
+      "byteLength": 6639,
+      "sha256": "b398acfc7e34e3350d05b0d67d813f812a2aa833aac7983e392d66e93bd94385"
+    },
+    {
+      "path": "work/release-readiness-20261003/v10-diagnostic-original.log",
+      "byteLength": 519,
+      "sha256": "bea1b9e4d2e66d02cd8f131e6618b145b953df08699bd0ec480bda46bf022b14"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a5-foundation.log",
+      "byteLength": 1432,
+      "sha256": "8706c66f736d6598be94f3401de130af0e7a18de91ca5149c2a141b153dd8cd6"
+    },
+    {
+      "path": "work/release-readiness-20261003/v12-diagnostic-a5-owner-receipt.json",
+      "byteLength": 852,
+      "sha256": "faedb77ca145654e95a0793b765cd4ea0d5af3ff44fac515c86e060d428b2f9f"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-portable-integrated-complete-source-secret-scan.log",
+      "byteLength": 146,
+      "sha256": "aed82da3e6a2f6274c9a1437a7c4587dc338541f8b5f334413e9b3d05b1f39a9"
+    }
+  ],
+  "leakDetectionSourceCheckpoint": "355c056832640e2bd65522355527bc57b32bd9eb"
+}

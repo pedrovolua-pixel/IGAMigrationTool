@@ -44,6 +44,8 @@ Console.WriteLine($"{QueryApplicabilityChecks.Run()} collector query-applicabili
 Console.WriteLine($"{PageBudgetChecks.Run()} collector page-budget cases passed.");
 Console.WriteLine($"{LocalRetentionWindowChecks.Run()} collector local-retention cases passed.");
 Console.WriteLine($"{StaticSqlShapeChecks.Run()} collector static-SQL shape cases passed.");
+Console.WriteLine($"{StrictKeysetSqlChecks.Run()} strict keyset SQL cases passed.");
+Console.WriteLine($"{QueryPackPreflightChecks.Run()} query-pack preflight cases passed.");
 Console.WriteLine($"{await CollectorRunGateChecks.RunAsync()} collector run-gate cases passed.");
 Console.WriteLine($"{OfflinePayloadEncryptionChecks.Run()} collector offline-encryption cases passed.");
 Console.WriteLine($"{FieldMinimizerChecks.Run()} collector field-minimization cases passed.");

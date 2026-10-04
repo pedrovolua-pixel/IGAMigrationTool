@@ -1,0 +1,438 @@
+{
+  "schemaVersion": "pilot-release-readiness-checkpoint-v1",
+  "date": "2026-10-03",
+  "executionApproved": true,
+  "source": {
+    "integrationBranch": "codex/pilot-release-integration",
+    "mergeCheckpoint": "aab8f258ce44fee95a2d5548695435b767415a3b",
+    "queryPreflightCheckpoint": "23b24ae",
+    "nativeDesignReviewed": "4391d27d6760e3c457b9c9b61a6fcaf4527ab949",
+    "nativeDesignIntegrated": "b6c806e"
+  },
+  "checks": [
+    {
+      "name": "locked restore / formatting / Release build",
+      "result": "PASS",
+      "scope": "118 merged projects; zero build warnings/errors before additive query preflight"
+    },
+    {
+      "name": "portable hosts",
+      "result": "PASS after harness correction",
+      "scope": "43 hosts; initial six harness failures retained (Node/dependencies/AssemblyName)"
+    },
+    {
+      "name": "frontend contract/type/build/format/audit",
+      "result": "PASS",
+      "scope": "approved UI overlay; npm audit zero vulnerabilities"
+    },
+    {
+      "name": "actual PostgreSQL authority / audit / sessions",
+      "result": "PASS",
+      "assertions": [
+        120,
+        141,
+        126
+      ]
+    },
+    {
+      "name": "BFF actual PostgreSQL authority composition",
+      "result": "PASS after exact fixture database naming correction",
+      "assertions": 643
+    },
+    {
+      "name": "BFF session / authentication / hosting HTTPS",
+      "result": "PASS",
+      "assertions": [
+        84,
+        308,
+        60
+      ]
+    },
+    {
+      "name": "SyntheticMcp selective reclamation",
+      "result": "PASS",
+      "scope": "four scenarios,2808 invocations,64457 assertions"
+    },
+    {
+      "name": "strict query preflight coordinator",
+      "result": "PASS",
+      "scope": "335 checks after independently reproduced invalid UTF8 denial fix"
+    },
+    {
+      "name": "independent merge/native design review",
+      "result": "PASS",
+      "scope": "source preservation,closed disabled live sign-in; scoped Gitleaks8.30.1 zero findings"
+    }
+  ],
+  "originalFailures": [
+    "Six portable harness errors corrected using pinned Node/exact-lock dependencies and explicit AssemblyName.",
+    "Two composition launches rejected nonexact synthetic database names before DB work; aborted native processes did not finish on this host; exact-name launch passed.",
+    "Invalid UTF8 SQL was accepted via replacement fallback; independently reproduced and fixed using strict UTF8 encoder with regression cases."
+  ],
+  "gateStatus": {
+    "G0": "PASS",
+    "G1": "NOT VERIFIED",
+    "G2": "NOT VERIFIED",
+    "G3": "NOT VERIFIED",
+    "G4": "NOT VERIFIED",
+    "G5": "NOT VERIFIED",
+    "G6": "NOT VERIFIED",
+    "G7": "NOT VERIFIED",
+    "G8": "NOT VERIFIED",
+    "G9": "NOT VERIFIED"
+  },
+  "limitations": [
+    "No real source baseline/rule catalog or independent two-environment acceptance.",
+    "No actual Azure/Entra/OpenAI/Prince or production release verification.",
+    "Native publication is reviewed design; executable implementation is in progress.",
+    "Post-query whole-solution checks and affected browser/database regressions remain pending.",
+    "Private status deployment not yet confirmed for this checkpoint."
+  ],
+  "logManifest": [
+    {
+      "path": "work/release-readiness-20261003/ArtifactReviewComponent.Tests-portable-corrected.log",
+      "sha256": "17c10997be4aa9e621318c84cfe6255ce2b330a7bb407e6b7e067b6df9da09e6",
+      "byteLength": 61
+    },
+    {
+      "path": "work/release-readiness-20261003/ArtifactReviewComponent.Tests-portable.log",
+      "sha256": "0a9831037f894eb301b48ea6ff8ea4519d3b299b44efbbe94d4bea10bf609691",
+      "byteLength": 1070
+    },
+    {
+      "path": "work/release-readiness-20261003/AssessmentCoverage.Tests-portable.log",
+      "sha256": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd",
+      "byteLength": 259
+    },
+    {
+      "path": "work/release-readiness-20261003/AssessmentMaturity.Tests-portable.log",
+      "sha256": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698",
+      "byteLength": 154
+    },
+    {
+      "path": "work/release-readiness-20261003/AssessmentOrchestration.Tests-portable.log",
+      "sha256": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5",
+      "byteLength": 202
+    },
+    {
+      "path": "work/release-readiness-20261003/AssessmentRuns.Tests-portable.log",
+      "sha256": "5e7be126948f7239778fb3b7b13af7d8f69e2f51c7d9e87b35ae3cafc7ae649b",
+      "byteLength": 77
+    },
+    {
+      "path": "work/release-readiness-20261003/AssessmentScoring.Tests-portable.log",
+      "sha256": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0",
+      "byteLength": 114
+    },
+    {
+      "path": "work/release-readiness-20261003/BffAuthenticationTransport-remaining-integration.log",
+      "sha256": "ff56a569fb16c481f0cdeb807c3354d99124ef7a8e6cd9c046ac8cca81800b99",
+      "byteLength": 90
+    },
+    {
+      "path": "work/release-readiness-20261003/BffAuthorityComposition-integration-corrected.log",
+      "sha256": "243789228f9115db885fd803fa127ddc9d198a50ee125641968c5d0ca7bfc054",
+      "byteLength": 460
+    },
+    {
+      "path": "work/release-readiness-20261003/BffAuthorityComposition-integration-exact-database.log",
+      "sha256": "4f10714d0bdf9adf70a8c06d3a587d14c7c9b8c053797afee24be87faabe5ad3",
+      "byteLength": 293
+    },
+    {
+      "path": "work/release-readiness-20261003/BffAuthorityComposition-integration.log",
+      "sha256": "243789228f9115db885fd803fa127ddc9d198a50ee125641968c5d0ca7bfc054",
+      "byteLength": 460
+    },
+    {
+      "path": "work/release-readiness-20261003/BffFoundation.Tests-portable.log",
+      "sha256": "6b4c379202a1e9ddd60c58a16decd48bebe6cd9ab6626dcb556ffff931b73544",
+      "byteLength": 177
+    },
+    {
+      "path": "work/release-readiness-20261003/BffHostingContracts-remaining-integration.log",
+      "sha256": "626f73a1a1298c725325bb894304d6143bf78768b1047b37890ea355a247b426",
+      "byteLength": 102
+    },
+    {
+      "path": "work/release-readiness-20261003/BffSessionFlow-remaining-integration.log",
+      "sha256": "53bc23bb0737cd5482667ed6df55ee03ce797d88d17e0216923dbae25c5e2381",
+      "byteLength": 3702
+    },
+    {
+      "path": "work/release-readiness-20261003/BoundaryChecks-portable.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb",
+      "byteLength": 116
+    },
+    {
+      "path": "work/release-readiness-20261003/CollectorHost.Tests-portable.log",
+      "sha256": "a62c02b8c6072da43abe9a120ccdbc16cdb96515b2d2d2faa8af3b8f92079c5c",
+      "byteLength": 245
+    },
+    {
+      "path": "work/release-readiness-20261003/CollectorSafety.Tests-portable.log",
+      "sha256": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61",
+      "byteLength": 392
+    },
+    {
+      "path": "work/release-readiness-20261003/DeterministicAnalysis.Tests-portable.log",
+      "sha256": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af",
+      "byteLength": 138
+    },
+    {
+      "path": "work/release-readiness-20261003/EvidenceGovernance.Tests-portable.log",
+      "sha256": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40",
+      "byteLength": 479
+    },
+    {
+      "path": "work/release-readiness-20261003/FindingReview.Tests-portable.log",
+      "sha256": "cfd943c7a1a7239628988120dd2e416ae2dff74d6bf9209e5dbeb96d05398bc3",
+      "byteLength": 164
+    },
+    {
+      "path": "work/release-readiness-20261003/IdentityAuthority-integration.log",
+      "sha256": "a13092c18b16ebb8e1d218eb190591bd84c42aeb322df75c5ae41cb757f084bf",
+      "byteLength": 71
+    },
+    {
+      "path": "work/release-readiness-20261003/IdentityAuthority.Tests-portable.log",
+      "sha256": "80c73e186b1c08474a83c6b8399444feb7d6a5aa41c21ec93a5c312f991e582c",
+      "byteLength": 46
+    },
+    {
+      "path": "work/release-readiness-20261003/IdentityPolicy.Tests-portable.log",
+      "sha256": "4500b58739754411ebdefab901fb651fd046164ee932b49c9b852754fc71b8b7",
+      "byteLength": 82
+    },
+    {
+      "path": "work/release-readiness-20261003/IdentitySessions-remaining-integration.log",
+      "sha256": "9fbbf1bdfdbf835aa997d6012e2bf9c0114c1b14df41d040c1c8236b5204e9ed",
+      "byteLength": 246
+    },
+    {
+      "path": "work/release-readiness-20261003/IdentitySessions.Tests-portable.log",
+      "sha256": "a840be4877c423ed88095dba0745f0f9a673dd08544a545f472a651ce6556226",
+      "byteLength": 164
+    },
+    {
+      "path": "work/release-readiness-20261003/LocalAiPreview.Tests-portable.log",
+      "sha256": "081881967ec400676e081481c50dc9397e9e3e244e2d2dc8cae8517a7f987654",
+      "byteLength": 70
+    },
+    {
+      "path": "work/release-readiness-20261003/LocalFixPackages.Tests-portable-corrected.log",
+      "sha256": "4a0de99985daeeee925968234538882d08ef6fff74f3c85d33b6aac7f0d31b1b",
+      "byteLength": 88
+    },
+    {
+      "path": "work/release-readiness-20261003/LocalFixPackages.Tests-portable.log",
+      "sha256": "3b35cbdffc6439cb1f1eb794c7dbaef4538e27879233aa0a7a5d1aa0e0e5777a",
+      "byteLength": 466
+    },
+    {
+      "path": "work/release-readiness-20261003/PlanningTasksComponent.Tests-portable-corrected.log",
+      "sha256": "9177e9cf735a1f84c42617b4b1c26c0904ef19302271595046299d8d4d9b9e25",
+      "byteLength": 75
+    },
+    {
+      "path": "work/release-readiness-20261003/PlanningTasksComponent.Tests-portable.log",
+      "sha256": "625094e9a6ee9b127871a0c8ad7951face38ab28c69fadd7a439884e299c6903",
+      "byteLength": 1069
+    },
+    {
+      "path": "work/release-readiness-20261003/RecommendationGuidance.Tests-portable.log",
+      "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325",
+      "byteLength": 44
+    },
+    {
+      "path": "work/release-readiness-20261003/ReportDrafts.Tests-portable.log",
+      "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4",
+      "byteLength": 83
+    },
+    {
+      "path": "work/release-readiness-20261003/ReportMarkdown.Tests-portable.log",
+      "sha256": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef",
+      "byteLength": 439
+    },
+    {
+      "path": "work/release-readiness-20261003/SecurityAudit-integration.log",
+      "sha256": "f7d59dde63fd6ca8d9b8968874c6cb1e6c8c890dbd8d2a72d69bb0944aa26fcf",
+      "byteLength": 850
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticAiExecution.Tests-portable.log",
+      "sha256": "fadcbb0fec4132e0ad38d53ced1c7f9f6a5a8d8bcfc9109cbe2d581b0879d713",
+      "byteLength": 51
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticAiPackets.Tests-portable.log",
+      "sha256": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d",
+      "byteLength": 68
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticAiPreview.Tests-portable.log",
+      "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0",
+      "byteLength": 382
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticAiPreviewHtml.Tests-portable.log",
+      "sha256": "7ea394ff57b7d9a82dedf830d42de866d2606b1657da082d8d2b1b6c761799ff",
+      "byteLength": 194
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticAiProposals.Tests-portable.log",
+      "sha256": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408",
+      "byteLength": 41
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluation.Tests-portable.log",
+      "sha256": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1",
+      "byteLength": 57
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationPopulationIntegration.Tests-portable-corrected.log",
+      "sha256": "7b263c1d20c9d0f97a21e75b6a480c1a02635598b44afc2caa53a1e1509b4c2e",
+      "byteLength": 63
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationPopulationIntegration.Tests-portable.log",
+      "sha256": "c44afdbf243fd5e1a305bd1d7527515f90fa5b7f78d0ceee6e06c81a941acece",
+      "byteLength": 514
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationRegression.Tests-portable.log",
+      "sha256": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1",
+      "byteLength": 64
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationReviewer.Tests-portable.log",
+      "sha256": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a",
+      "byteLength": 56
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationSampling.Tests-portable.log",
+      "sha256": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8",
+      "byteLength": 66
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationSchemaProvenanceIntegration.Tests-portable-corrected.log",
+      "sha256": "20972d270b5542f535fe6cc68ed9e4edee4d38a3407378d472e1de1ae760d140",
+      "byteLength": 2745
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationSchemaProvenanceIntegration.Tests-portable.log",
+      "sha256": "80a637b8cb4e5885d3e2663a84ebd9a6fd4698bae2b334b35c14ae14e5a06651",
+      "byteLength": 526
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationSourceIntegration.Tests-portable-corrected.log",
+      "sha256": "c8a7e7e2c2f2ed71731340d77fbdb0e39e87038d66fde68cc0056360266db3da",
+      "byteLength": 70
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationSourceIntegration.Tests-portable.log",
+      "sha256": "0952ea176f75c54ad7fb3597f9ee7ff92a6b87d109a743418783fe727946eb2c",
+      "byteLength": 506
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticEvaluationWorkflow.Tests-portable.log",
+      "sha256": "ccc15e771ea70f15c8b1ea05031cc756d85f475754e26f4261e0344e23401947",
+      "byteLength": 55
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticFixPackageHtml.Tests-portable.log",
+      "sha256": "374e5d00a0f4772b238ecb53cc51cab11ca7bcf73263b7873db82b02cb83b435",
+      "byteLength": 245
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticFixPackages.Tests-portable.log",
+      "sha256": "d8f6f6e6655167200d8a8f61aca65874a8f6c5144a3c059e7fec89f985d4b4c1",
+      "byteLength": 106
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticFixReview.Tests-portable.log",
+      "sha256": "d54e493eb5b97ef64f1b78e6386fd56d51d178382ae849e1bc2714fb3eccfd1a",
+      "byteLength": 62
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticMcp-remaining-integration.log",
+      "sha256": "51b78adbcfb80599e17becbc7df2bbf9a366309110a0cbc40389f0117f33d0cd",
+      "byteLength": 1559
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticMcpBoundary.Tests-portable.log",
+      "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6",
+      "byteLength": 116
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticMcpPublication.Tests-portable.log",
+      "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb",
+      "byteLength": 61
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticOutcomePriority.Tests-portable.log",
+      "sha256": "5e52a4168196268ec29ffd2fc7991bf6277a108991a41289faca2a6a23acdbc2",
+      "byteLength": 86
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticPlanningTasks.Tests-portable.log",
+      "sha256": "1729aa07170453730e221fbbc718bb865043e1962d8b32bb9966faf864da639e",
+      "byteLength": 63
+    },
+    {
+      "path": "work/release-readiness-20261003/SyntheticTaskCsv.Tests-portable.log",
+      "sha256": "49f1774bda25e9fcf2d8dcbb976052ee723dc8d1dda3965ae85ce574665cfbc4",
+      "byteLength": 107
+    },
+    {
+      "path": "work/release-readiness-20261003/frontend-audit.log",
+      "sha256": "6d8c5c8f3d7684adb070417bd608d01ae90aa3dc26a65af03ffda4955f38d9a3",
+      "byteLength": 24
+    },
+    {
+      "path": "work/release-readiness-20261003/frontend-build.log",
+      "sha256": "0936515692916bfe2e080fe5344794668021da4c5b060cf86e633e61de05e9be",
+      "byteLength": 846
+    },
+    {
+      "path": "work/release-readiness-20261003/frontend-format.log",
+      "sha256": "3e72da6df4a5aec963ee5760ce0bbe3d902a507ef8a7e60663c7581dfbe07f1d",
+      "byteLength": 202
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated-build.log",
+      "sha256": "c0f577b84a21fea67b78dc1a0bd624d1766597a9a81808cd55945526311c01c4",
+      "byteLength": 19677
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byteLength": 0
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated-restore.log",
+      "sha256": "b285edffa987fa2872b6d9c1dbfaec56378a5817deb32d8e48ce46daa6d128d7",
+      "byteLength": 16550
+    },
+    {
+      "path": "work/release-readiness-20261003/postgres-init.log",
+      "sha256": "c8fcc087ac9f604868c6a4fff817cd7c935c84b8ab5b9c38745f6e984559a8d6",
+      "byteLength": 841
+    },
+    {
+      "path": "work/release-readiness-20261003/postgres-runtime.log",
+      "sha256": "83bc2c17551dc31b89f307a5db7c9ab6e708a5a876cd95687e6df455f21bbc85",
+      "byteLength": 59754
+    },
+    {
+      "path": "work/release-readiness-20261003/query-preflight-build.log",
+      "sha256": "daad92aaf2b4be3ddfc599c7502246c390fd5043a0ef18ae8cd3c6452f3a93c6",
+      "byteLength": 359
+    },
+    {
+      "path": "work/release-readiness-20261003/query-preflight-coordinator.log",
+      "sha256": "98546f522670130ce1b2bbcea1b5d639c0429af25f952bb2313f7f29565c5e69",
+      "byteLength": 466
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../IdentityPolicy/IdentityPolicy.csproj" />
+    <ProjectReference Include="../IdentitySessions/IdentitySessions.csproj" />
+    <EmbeddedResource Include="../../../../migrations/identity-authority/001-authority.sql" LogicalName="IdentityAuthority.001-authority.sql" />
+  </ItemGroup>
+</Project>

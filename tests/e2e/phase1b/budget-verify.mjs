@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { createHash, randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -243,6 +244,7 @@ try {
     "original approved budget policy remains versioned",
   );
   await page.goto(`${base}/?run=${runId}`);
+  await showAssessments(page);
   await page
     .getByRole("heading", { name: "Combined Phase 1B workspace", exact: true })
     .waitFor();
