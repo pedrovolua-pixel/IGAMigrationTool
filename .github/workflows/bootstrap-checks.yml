@@ -416,6 +416,10 @@ jobs:
           node tests/e2e/planning-tasks/verify.mjs
       - name: Check collector permission decisions
         run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
+      - name: Check bounded scripted source pages
+        run: |
+          dotnet run --project tests/unit/CollectorSourcePages.Tests -c Release --no-build
+          dotnet run --project tests/unit/CollectorSourcePages.Independent.Tests -c Release --no-build
       - name: Check collector host contract
         run: dotnet run --project tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-build
       - name: Check project dependency boundaries
@@ -544,6 +548,12 @@ jobs:
           python tests/unit/ReportPublication.Tests/oracle/test_oracle.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet run --project tests/unit/ReportPublication.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows bounded scripted source pages
+        run: |
+          dotnet run --project tests/unit/CollectorSourcePages.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/CollectorSourcePages.Independent.Tests -c Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
