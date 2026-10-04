@@ -52,3 +52,9 @@ deadline lease cancels paused callbacks and invalidates delivery before releasin
 fences. Every protected delivery rechecks authority, lifecycle and reference
 metadata. The configured transport must honor linked cancellation on every
 bounded write; production adapters remain a separate packet.
+
+The owning source port must establish terminal eligibility, minimization, current
+authorization for the complete source category set, and supplied retention
+authority before loading/capturing protected source content. The core revalidates
+the frozen complete set after capture; that does not replace the owning adapter's
+pre-load enforcement or make a typed capture a source-authority proof.

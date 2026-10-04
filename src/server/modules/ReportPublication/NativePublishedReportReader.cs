@@ -190,7 +190,8 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                 throw new OperationCanceledException(Token);
             Token.ThrowIfCancellationRequested();
         }
-        public void Dispose() { active = false; linked.Cancel(); linked.Dispose(); expiry.Dispose(); }
+        internal void Invalidate() { active = false; linked.Cancel(); }
+        public void Dispose() { Invalidate(); linked.Dispose(); expiry.Dispose(); }
     }
     private sealed class DeliveryView(Guid id, string digest, byte[] bytes, EmissionLease lease,
         Func<CancellationToken, ValueTask<IReadOnlyList<PublicationReferenceAvailabilityV1>>> revalidate, ITrustedReportDeliverySinkV1 sink)
@@ -198,7 +199,7 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
     {
         private int active = 1;
         private readonly SemaphoreSlim serial = new(1, 1);
-        internal void Invalidate() => Interlocked.Exchange(ref active, 0);
+        internal void Invalidate() { Interlocked.Exchange(ref active, 0); lease.Invalidate(); }
         public override async ValueTask DeliverAsync(CancellationToken cancellationToken)
         {
             using var combined = CancellationTokenSource.CreateLinkedTokenSource(lease.Token, cancellationToken);
