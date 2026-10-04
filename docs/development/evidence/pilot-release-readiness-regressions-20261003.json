@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "pilot-release-readiness-regression-v1",
+  "sourceCheckpoint": "23b24ae",
+  "preservedUiSource": "aab8f258ce44fee95a2d5548695435b767415a3b",
+  "checks": [
+    {
+      "name": "DurableAssessment.Tests",
+      "result": "PASS",
+      "assertions": 80
+    },
+    {
+      "name": "ReportDrafts.Tests",
+      "result": "PASS",
+      "assertions": 201
+    },
+    {
+      "name": "approved-workspace browser",
+      "result": "PASS",
+      "groups": 7,
+      "runtimeErrors": 0,
+      "axeScans": [
+        {
+          "label": "desktop dedicated Evidence",
+          "version": "4.13.0",
+          "violationCount": 0,
+          "incompleteCount": 1
+        },
+        {
+          "label": "desktop dedicated Reports",
+          "version": "4.13.0",
+          "violationCount": 0,
+          "incompleteCount": 1
+        },
+        {
+          "label": "desktop dedicated Settings",
+          "version": "4.13.0",
+          "violationCount": 0,
+          "incompleteCount": 1
+        },
+        {
+          "label": "320px mobile Findings list",
+          "version": "4.13.0",
+          "violationCount": 0,
+          "incompleteCount": 1
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Automated browser has color-contrast incomplete findings requiring supported manual acceptance;zero detected violations is not full conformance.",
+    "Source/customer/cloud/PDF/manual Windows acceptance remains not verified.",
+    "Storage became full after tests;own checkouts reduced to assigned sparse paths;no customer or other-owner files deleted.",
+    "Own PostgreSQL fast shutdown requested;checkpointer is in uninterruptible macOS I/O after full disk. Do not claim cleanup complete;cluster preserved."
+  ],
+  "logs": [
+    {
+      "path": "work/release-readiness-20261003/DurableAssessment.Tests-pg-regression.log",
+      "sha256": "38f77656a5b8ba6fa593a0ecf3c4979d4fdfbe49c3c6f4ec106e6c8b794bc6ab"
+    },
+    {
+      "path": "work/release-readiness-20261003/ReportDrafts.Tests-pg-regression.log",
+      "sha256": "e53ce6f504a26fbf1c67594905ad1aa94054453d2e75214c0b5d0efdd3862df3"
+    },
+    {
+      "path": "work/release-readiness-20261003/browser-approved.log",
+      "sha256": "68195ed19b54be3dd08c4207d017a4718cee72521b3027a6ea49b31e72d141de"
+    },
+    {
+      "path": "work/release-readiness-20261003/browser-approved/validation.json",
+      "sha256": "48f5123766d5329e6b242d0591c95a2df3f696af8daf7117335104e0372de138"
+    }
+  ]
+}
