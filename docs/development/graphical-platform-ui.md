@@ -16,4 +16,4 @@ See UI-W4's preimplementation tests and dated execution evidence. Automated/loca
 
 Release-readiness integration preserves Overview as the initial landing. Starting or explicitly opening a saved run selects Assessments so the existing run-detail focus and controls stay visible. Browser regression drivers use the real navigation control before interacting with an initial/reloaded Assessments form; semantic/transport/authentication checks remain intact.
 
-Existing server-generated run/task/finding deep links retain their Assessments admission and focus path on initial navigation. A query identifier remains a selection hint only; the owning server still resolves exact scope and authority. Ordinary entry, including remembered browser selection, lands on Overview.
+Existing server-generated run/view/task-or-finding deep links retain the original exact three-key App guard and Phase1BProtectedNavigation destination. They do not enter ConsultantApp or its presentation initializer. A query identifier remains a selection hint only; the owning server still resolves exact scope and authority. Ordinary entry, including remembered browser selection, lands on Overview.
