@@ -30,6 +30,12 @@ if (args.SequenceEqual(new[] { "--portable-adapter" }))
     await File.WriteAllTextAsync(Path.Combine(AppContext.BaseDirectory, "portable-adapter-results.json"), JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
     if (results.Any(x => !x.Passed)) Environment.ExitCode = 1;
 }
+else if (args.SequenceEqual(new[] { "--portable-wire" }))
+{
+    var results = AdapterWireChecks.Run();
+    await File.WriteAllTextAsync(Path.Combine(AppContext.BaseDirectory, "portable-wire-results.json"), JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
+    if (results.Any(x => !x.Passed)) Environment.ExitCode = 1;
+}
 else if (args.SequenceEqual(new[] { "--verify-preconditions" }))
 {
     using var bounded = new CancellationTokenSource(TimeSpan.FromSeconds(20));

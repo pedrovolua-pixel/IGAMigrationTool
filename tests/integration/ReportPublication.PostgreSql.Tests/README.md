@@ -17,3 +17,5 @@ The pre-code [subject/version and fixed-marker refinement oracle](fixtures/refin
 Exact `415bc14` portable replay: 256 passed / 1 failed, with all original 255 controls passing. The new original-caller pending-wait case still times out while an unrelated original-token callback stalls dispatch; fresh admission is correctly refused with zero starts. See [retained exact replay](evidence/portable-415bc14-original.json). This is portable lease evidence only; all 18 persisted mechanisms remain unexecuted.
 
 [Portable wire expectations](fixtures/wire-cases.json) freeze exact `9ee3500e` immutable-source byte/ownership/binding scenarios before independent executable additions. They do not exercise bind-once session/SQL/authority or any persisted case.
+
+Exact `9ee3500e` portable wire corpus executed: 112 passed / 0 failed, with original31 byte commitments and own31 preparation /4 marker classifications passing. [Evidence](wire-evidence.json) retains literal results; no session, SQL or persisted credit.

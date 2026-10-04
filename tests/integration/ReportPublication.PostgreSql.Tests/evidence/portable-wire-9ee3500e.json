@@ -1,0 +1,562 @@
+[
+  {
+    "Name": "completed:scope-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:actor-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-owned-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-canonical-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-excluded-invocation-correlation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-revision-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-digest-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-run-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-operation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-actor-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:command-scope-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-exact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-null-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-purpose-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-resource-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-operation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-actor-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-scope-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:admission-offset-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-copy-owned",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-correlation-excluded",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-invocation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-resource-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-digest-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-publish-purpose-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:scope-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:actor-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-owned-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-canonical-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-excluded-invocation-correlation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-revision-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-digest-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-run-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-operation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-actor-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:command-scope-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-exact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-null-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-purpose-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-resource-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-operation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-actor-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-scope-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:admission-offset-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-copy-owned",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-correlation-excluded",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-invocation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-resource-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-digest-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-publish-purpose-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:scope-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:actor-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-owned-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-canonical-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-excluded-invocation-correlation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-revision-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-digest-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-run-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-operation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-actor-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:command-scope-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-exact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-null-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-purpose-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-resource-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-operation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-actor-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-scope-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:admission-offset-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-original",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-copy-owned",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-correlation-excluded",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-invocation-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-resource-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-digest-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-publish-purpose-deny",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-deny:",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-deny:616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-deny:612F62",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-deny:610062",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-deny:C3A9",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-deny:612062",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-null-set",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-null-item",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-duplicate",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-empty",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-ordinal-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "tokens-length-boundary",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "binding-exact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "binding-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "binding-zero-customer",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "binding-zero-stream",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "binding-zero-writer",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "clock-exact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "clock-ticks-mismatch",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "clock-format-deny:2026-10-04T01:00:00Z",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "clock-format-deny:2026-10-04T01:00:00.0000001\u002B00:00",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "clock-format-deny:2026-02-30T01:00:00.0000001Z",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "clock-format-deny:2026-10-04T01:00:00.0000001z",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "digest-literal:",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "digest-literal:616263",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "digest-literal:0001FF",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "digest-literal:E99BAA00C3A9",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "actor-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "scope-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "publish-null-arguments",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "read-null-arguments",
+    "Passed": true,
+    "FailureType": null
+  }
+]
