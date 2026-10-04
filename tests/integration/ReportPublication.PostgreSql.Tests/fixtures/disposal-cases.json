@@ -1,6 +1,6 @@
 {
   "schemaVersion": "native-publication-postgresql-independent-disposal-scenarios-v1",
-  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED_PENDING_GOVERNING_DECISION",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
   "package": "Npgsql10.0.3",
   "existingCaseFreeze": "6232bbf",
   "existing18Unchanged": true,
@@ -79,6 +79,26 @@
     {
       "name": "cleanup-authority-bound-no-extra-privilege",
       "expected": "Onlynormal publicownedconnectiondisposal/test-ownedtransportcleanup; no broadpg_signal_backend/privateNpgsqlreflection/socketabort/callerPID/anotherfixturekill. No physicalcleanup claim forsource-only/portable/scriptedcontrols."
+    }
+  ],
+  "governingAmendment": "dadf7f871180341a5be90e863cf8db2df8c1d6a9",
+  "physicalProofSeam": "Pending coordinator selection: publicDisposeAsync completion is not remote release proof; no fakeBoolean",
+  "coreScenariosBeforeCorrection": [
+    {
+      "name": "publisher-precommit-transaction-dispose-uncertainty",
+      "expected": "PublicationCommitUncertainException propagates; exactlyexistingCommitOutcomeUnknown operational signal once, Failed/Cancelled/outcomeAppend=0, protectedloads/delivery/success=0. EarlyreadreturnUnavailable orpublishIdempotencyConflict cannotmask pendingphysicalcleanup."
+    },
+    {
+      "name": "publisher-precommit-fence-dispose-uncertainty",
+      "expected": "PublicationCommitUncertainException propagates; exactlyexistingCommitOutcomeUnknown operational signal once, Failed/Cancelled/outcomeAppend=0, protectedloads/delivery/success=0. EarlyreadreturnUnavailable orpublishIdempotencyConflict cannotmask pendingphysicalcleanup."
+    },
+    {
+      "name": "reader-precommit-transaction-dispose-uncertainty",
+      "expected": "PublicationCommitUncertainException propagates; exactlyexistingCommitOutcomeUnknown operational signal once, Failed/Cancelled/outcomeAppend=0, protectedloads/delivery/success=0. EarlyreadreturnUnavailable orpublishIdempotencyConflict cannotmask pendingphysicalcleanup."
+    },
+    {
+      "name": "reader-precommit-fence-dispose-uncertainty",
+      "expected": "PublicationCommitUncertainException propagates; exactlyexistingCommitOutcomeUnknown operational signal once, Failed/Cancelled/outcomeAppend=0, protectedloads/delivery/success=0. EarlyreadreturnUnavailable orpublishIdempotencyConflict cannotmask pendingphysicalcleanup."
     }
   ]
 }
