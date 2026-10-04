@@ -72,3 +72,7 @@ Continue available approved engineering while these inputs remain outstanding. N
 ## Native source authority contract amendment — RR-P04/RR-P06
 
 Freeze the explicit actor/command/fence source-port binding in the native contract/test plan before the dependent integration and independent flow tests. The 31 original goldens remain immutable; 157 compiled byte/hash/shape/ownership checks passed against the frozen codec source. RR-P06 tests actual publisher/reader calls with scripted trusted ports, including current preload authority, receipt/commit/audit/deadline and late-delivery paths. Persisted PostgreSQL races and actual-source/control/customer integrations remain separate and open.
+
+## Integrated native codec checkpoint — 2026-10-04
+
+RR-P04code integrated;RR-P03compiled157andoriginal31/negative19PASS. Shared120-projectlockedrestore/format/Releasebuild0warnings passed. Independentpublisher/readflow reviewactive;RR-P05persistencedesign preparation;RR-S06scriptedexecutor implementationactive. ExistingWindows2022/2025bootstrap250passed;Linuxpending atinspection. BFFpackage160staleallowlistcorrectedwith2exactpaths;localfullinputsPASS,hostedcorrectionpending. See [nativecoreevidence](../../docs/development/evidence/pilot-native-core-20261004.json). Allfullacceptancegatesremainopen.

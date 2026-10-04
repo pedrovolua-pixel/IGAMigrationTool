@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "pilot-native-core-checkpoint-v1",
+  "date": "2026-10-04",
+  "nativeAuthorCommit": "3ee89e6c47965a1732047bede0846e7b6a7df5e8",
+  "originalGoldenCommit": "51272d2",
+  "independentCodecCommit": "d75c561",
+  "checks": {
+    "lockedRestore": "PASS120projects",
+    "solutionFormat": "PASS",
+    "solutionReleaseBuild": "PASS0warnings0errors120projects",
+    "compiledOriginalCodecs": "PASS157",
+    "originalOracle": "PASS31unchangedvectors",
+    "negativeOracle": "PASS19methods",
+    "architecture": "PASS7policy4scan",
+    "gitleaks": "PASSdefault8.30.1",
+    "bffExactContext": "PASS48exactsourcefiles"
+  },
+  "hosted": {
+    "bootstrap250": "Windows2022/2025PASS;Linuxinprogressatlastinspection",
+    "package160": "FAILED missing2exactsourceallowlistentries;bootstrappackagejobPASS;correctionawaitsnewhostedrun",
+    "httpsKeys5": "PASS"
+  },
+  "flow": "INDEPENDENT REVIEW IN PROGRESS; not accepted by codec checks",
+  "persisted": "18PLANNED_NOT_EXECUTED;designpreparation",
+  "activation": "No ordinaryhost/native source/customer/cloud/provider/PDF/MCP activation",
+  "harnessCorrections": [
+    "Root compiled DLL invocation occurred before whole build finished; no test executed. Corrected invocation after successful build passed157.",
+    "Exact BFF whitelist omitted2existingreviewedsources; full independentdiagnosis and local script pass afterexact correction."
+  ],
+  "hostLimits": [
+    "OwnPG checkpointer and4aborted dotnetchildren remain uninterruptible after previousdiskexhaustion; shutdownrequestednotconfirmed.",
+    "Spaceavailable6GiB atcurrentobservation; no originaldata/otherownerartifactsremoved."
+  ],
+  "logs": [
+    {
+      "path": "work/release-readiness-20261003/native-integrated-restore.log",
+      "sha256": "56434dd0b15b7ddf9f63c9218547d130a664cd617bdff90a3b7b6bbc2bd7e45a"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-integrated-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-integrated-build.log",
+      "sha256": "ad87bd5d85304eb0a073e694c39c472bec83594ac85aec2c6f0d4b50087df4d2"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-integrated-codec-tests.log",
+      "sha256": "7e36fcdf2f693d0b6907c941b54edf3775bd5f9c3149d714ebf73daadc6334c5"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-integrated-oracle.log",
+      "sha256": "5764b283a2d8f8fd065357281dacb1096e86e096634f1f306e290300ed84cfb9"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-integrated-oracle-negative.log",
+      "sha256": "7703374f0522b53e3b1006a1e488f96c1c42100e70ff2a26fb1ffc29206193af"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-integrated-architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-integrated-gitleaks.log",
+      "sha256": "e527f697a1e6500299d45e5e7b79cf91188a6b44182b12057743b130375e3e86"
+    },
+    {
+      "path": "work/release-readiness-20261003/bff-package-corrected-inputs.log",
+      "sha256": "56715cf1fbc131048f0080fd8751e1801cb7a94fee435a6059abe43d29567677"
+    }
+  ]
+}

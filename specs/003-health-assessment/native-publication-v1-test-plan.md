@@ -1,6 +1,6 @@
 # Native publication v1 test plan
 
-Status: PROPOSED FREEZE — RR-P02; no runtime cases executed
+Status: FROZEN DESIGN — RR-P02; RR-P03 codec/oracle subset executed; independent flow/persisted cases remain open
 Date: 2026-10-03
 Contract: [native-publication-v1-contract.md](native-publication-v1-contract.md)
 Execution: [bounded plan](../../docs/development/native-publication-v1-implementation-plan.md)
