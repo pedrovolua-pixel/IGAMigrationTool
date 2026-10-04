@@ -29,6 +29,59 @@ public static class PublicationValidationV1
         && Scope(request.Scope) && Id(request.ReportVersionId) && Id(request.InvocationId) && Id(request.CorrelationId)
         && Digest(request.ExpectedManifestDigest);
 
+    public static bool Manifest(PublicationManifestV1? m) => m is not null && Scope(m.Scope) && Id(m.ReportVersionId) && Id(m.RunId)
+        && m.RunRevision > 0 && Utc(m.CreatedAtUtc) && m.CreatedBy is { } creator && Id(creator.TenantId) && Id(creator.ObjectId)
+        && Enum.IsDefined(m.AssessmentState) && Enum.IsDefined(m.ApprovalState) && Inputs(m.Inputs)
+        && Digest(m.ProjectionDigest) && Digest(m.ScoreDigest) && Digest(m.SourceDigest)
+        && !m.RequiredCategories.IsDefaultOrEmpty && m.RequiredCategories.Length <= 100000 && m.RequiredCategories.All(Token) && Unique(m.RequiredCategories)
+        && !m.RequiredFields.IsDefault && m.RequiredFields.Order(StringComparer.Ordinal).SequenceEqual(RequiredFields)
+        && !m.RedactionMarkers.IsDefault && m.RedactionMarkers.Length <= 100000
+        && m.RedactionMarkers.All(r => r is not null && Id(r.Id) && MarkerField(r.Section, r.Field) && UnavailableReason(r.Reason) && r.Reason != PublicationReasonV1.NotApplicable)
+        && Unique(m.RedactionMarkers.Select(r => (r.Section, r.Id, r.Field, r.Reason)))
+        && m.Retention is { } retention && Id(retention.PolicyId) && Token(retention.PolicyVersion) && Utc(retention.ClockStartUtc)
+        && Utc(retention.ExpiresAtUtc) && retention.ClockStartUtc <= retention.ExpiresAtUtc && retention.HoldReference != Guid.Empty
+        && !m.Provenance.IsDefault && m.Provenance.Length <= 100000
+        && m.Provenance.All(p => p is not null && Token(p.Kind) && Id(p.OpaqueRecordId) && Digest(p.Digest))
+        && Unique(m.Provenance.Select(p => (p.Kind, p.OpaqueRecordId)))
+        && !m.ArtifactInputs.IsDefault && m.ArtifactInputs.Length == 2
+        && m.ArtifactInputs.All(a => a is not null && a.ByteLength > 0 && Digest(a.Digest) && a.Kind is PublicationBlobKindV1.Projection or PublicationBlobKindV1.Score)
+        && m.ArtifactInputs.Select(a => a.Kind).Distinct().Count() == 2
+        && m.ArtifactInputs.Single(a => a.Kind == PublicationBlobKindV1.Projection).Digest == m.ProjectionDigest
+        && m.ArtifactInputs.Single(a => a.Kind == PublicationBlobKindV1.Score).Digest == m.ScoreDigest;
+
+    public static bool PublicationReceipt(PublicationReceiptV1? r) => r is not null && Id(r.OperationId) && Actor(r.Actor) && Scope(r.Scope)
+        && Id(r.RunId) && r.ExpectedRunRevision > 0 && Digest(r.CommandDigest) && Id(r.ReportVersionId) && Digest(r.ManifestDigest)
+        && Digest(r.ProjectionDigest) && Digest(r.ScoreDigest) && Utc(r.CommittedAtUtc) && Id(r.EventId) && Digest(r.EventDigest);
+    public static bool ReadReceipt(ExactReadReceiptV1? r) => r is not null && Id(r.InvocationId) && Digest(r.RequestDigest) && Actor(r.Actor)
+        && Scope(r.Scope) && Id(r.ReportVersionId) && Digest(r.ManifestDigest) && Utc(r.CommittedAtUtc) && Id(r.EventId) && Digest(r.EventDigest);
+
+    public static bool AuditEvent(PublicationAuditEventV1? e)
+    {
+        if (e is null || !Id(e.EventId) || !Id(e.StreamId) || !Id(e.WriterBindingReference) || e.Sequence < 1 || !Digest(e.PreviousEventDigest)
+            || (e.Sequence == 1) != (e.PreviousEventDigest == new string('0', 64))
+            || !Utc(e.EventAtUtc) || !Id(e.InvocationId) || !Id(e.CorrelationId) || !Enum.IsDefined(e.ActorKind)
+            || (e.ActorKind == PublicationAuditActorKindV1.Human ? !Actor(e.Actor) : e.Actor is not null)
+            || (e.Scope is null ? e.ResourceKind is not null || e.ResourceId is not null : !Scope(e.Scope) || e.ResourceKind is not { } kind
+                || !Enum.IsDefined(kind) || e.ResourceId is not { } resource || !Id(resource))
+            || !Enum.IsDefined(e.Action) || !Enum.IsDefined(e.Outcome) || !Enum.IsDefined(e.Reason)
+            || (e.Action == PublicationAuditActionV1.Publish ? e.OperationId is not { } operation || !Id(operation) : e.OperationId is not null)
+            || e.ReturnedFields.IsDefault || e.RedactedFields.IsDefault || !e.RedactedFields.IsEmpty
+            || !e.ReturnedFields.All(RequiredFields.Contains) || !Unique(e.ReturnedFields)) return false;
+        if (e.Outcome == PublicationAuditOutcomeV1.Succeeded)
+            return e.Reason == PublicationAuditReasonV1.None && e.ActorKind == PublicationAuditActorKindV1.Human && e.Scope is not null
+                && Digest(e.ManifestDigest) && (e.Action == PublicationAuditActionV1.Publish ? e.ResourceKind == PublicationResourceKindV1.Run && e.ReturnedFields.IsEmpty
+                    : e.ResourceKind == PublicationResourceKindV1.ReportVersion && e.ReturnedFields.Order(StringComparer.Ordinal).SequenceEqual(RequiredFields));
+        if (e.ManifestDigest is not null || !e.ReturnedFields.IsEmpty) return false;
+        return e.Outcome switch
+        {
+            PublicationAuditOutcomeV1.Denied => e.Reason is PublicationAuditReasonV1.InvalidInput or PublicationAuditReasonV1.AuthorityDenied
+                or PublicationAuditReasonV1.SourceUnavailable or PublicationAuditReasonV1.RevisionConflict or PublicationAuditReasonV1.IdempotencyConflict or PublicationAuditReasonV1.LifecycleDenied,
+            PublicationAuditOutcomeV1.Failed => e.Reason is PublicationAuditReasonV1.IntegrityMismatch or PublicationAuditReasonV1.DependencyUnavailable,
+            PublicationAuditOutcomeV1.Cancelled => e.Reason == PublicationAuditReasonV1.Cancelled,
+            _ => false
+        };
+    }
+
     public static bool Source(SourceCaptureV1? source)
     {
         if (source is null || !Enum.IsDefined(source.AssessmentState) || !Projection(source.Projection)

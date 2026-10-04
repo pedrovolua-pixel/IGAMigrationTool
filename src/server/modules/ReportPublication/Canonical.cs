@@ -5,7 +5,7 @@ using System.Text;
 namespace ReportPublication;
 
 /// <summary>Native typed commitments; no arbitrary JSON source admission or authority grant.</summary>
-public static class NativePublicationCanonicalV1
+public static partial class NativePublicationCanonicalV1
 {
     private static readonly UTF8Encoding StrictUtf8 = new(false, true);
     public const int MaximumProjectionBytes = 32 * 1024 * 1024;
@@ -175,8 +175,15 @@ public static class NativePublicationCanonicalV1
             {
                 Append(rune.Value switch
                 {
-                    '"' => "\\\"", '\\' => "\\\\", '\b' => "\\b", '\f' => "\\f", '\n' => "\\n", '\r' => "\\r", '\t' => "\\t",
-                    < 32 => "\\u" + rune.Value.ToString("x4", CultureInfo.InvariantCulture), _ => rune.ToString()
+                    '"' => "\\\"",
+                    '\\' => "\\\\",
+                    '\b' => "\\b",
+                    '\f' => "\\f",
+                    '\n' => "\\n",
+                    '\r' => "\\r",
+                    '\t' => "\\t",
+                    < 32 => "\\u" + rune.Value.ToString("x4", CultureInfo.InvariantCulture),
+                    _ => rune.ToString()
                 });
             }
             Append("\"");
