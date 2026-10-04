@@ -7,6 +7,7 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
     public async ValueTask<PublishResultV1> PublishAsync(PublicationActorV1 actor, PublishCommandV1 command, CancellationToken cancellationToken)
     {
         PublicationScopeV1? verifiedScope = null;
+        var commitAttempted = false;
         try
         {
             if (!PublicationValidationV1.Command(actor, command)) return await Deny(PublicationIssueV1.InvalidInput, PublicationAuditReasonV1.InvalidInput);
@@ -24,6 +25,11 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
         catch (PublicationCommitUncertainException)
         {
             outcomeAudit.OperationalSignal(PublicationOperationalSignalV1.CommitOutcomeUnknown, Safe(command?.InvocationId), Safe(command?.CorrelationId)); throw;
+        }
+        catch (Exception) when (commitAttempted)
+        {
+            outcomeAudit.OperationalSignal(PublicationOperationalSignalV1.CommitOutcomeUnknown, Safe(command?.InvocationId), Safe(command?.CorrelationId));
+            throw new PublicationCommitUncertainException(Safe(command?.OperationId));
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
@@ -89,8 +95,9 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
                 || !await transaction.RevalidateSourceAsync(p.RunId, p.RunRevision, sourceDigest, cancellationToken))
                 return new(PublicationIssueV1.Unavailable, null);
             cancellationToken.ThrowIfCancellationRequested();
+            commitAttempted = true;
             try { await transaction.CommitAsync(cancellationToken); }
-            catch (PublicationCommitNotAppliedException) { return new(PublicationIssueV1.DependencyUnavailable, null); }
+            catch (PublicationCommitNotAppliedException) { commitAttempted = false; return new(PublicationIssueV1.DependencyUnavailable, null); }
             catch (Exception) { throw new PublicationCommitUncertainException(command.OperationId); }
             return new(null, result);
         }

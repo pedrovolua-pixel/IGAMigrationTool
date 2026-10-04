@@ -35,3 +35,20 @@ that guarantee.
 The project uses the existing repository net10.0 settings and has no package
 dependencies. A scoped locked restore/build will be recorded once preparation
 is complete; no whole-repository build or acceptance evidence is implied.
+
+A successful `CommitAsync` ends the database write transaction. Until disposal,
+the scoped context may retain only read operations for current report/reference
+metadata under the independent, still-held fence; Append/Add/Commit after success
+must refuse. Unknown commit outcome also forbids new writes or retrying Commit;
+reconcile the original scoped receipt through a fresh read-only context and fresh
+current authority. Disposal invalidates retained context.
+
+`NativeReportPublisherV1.PublishAsync` and `NativePublishedReportReaderV1.ReadExactAsync`
+are finite core flows. Exact read authorizes the entire declared field/category
+set before loading blobs/references, verifies original canonical bytes and all
+source commitments, then commits read audit/receipt before the callback. The
+callback receives only an opaque delivery view. A UTC plus monotonic original
+deadline lease cancels paused callbacks and invalidates delivery before releasing
+fences. Every protected delivery rechecks authority, lifecycle and reference
+metadata. The configured transport must honor linked cancellation on every
+bounded write; production adapters remain a separate packet.
