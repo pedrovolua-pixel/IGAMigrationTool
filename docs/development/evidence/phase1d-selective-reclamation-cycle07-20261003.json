@@ -462,5 +462,43 @@
         "workflow_id": 370675336
       }
     ]
+  },
+  "documentary_checks": {
+    "status": "PASS",
+    "owned_relative_links": 7,
+    "owned_diff_whitespace": "PASS",
+    "unowned_canonical_diffs_preserved": true,
+    "concurrent_agents_update": {
+      "path": "AGENTS.md",
+      "working_sha256": "5a5bc9738309a5044ea1524fddc711cb9b6db58531fcc4c3ff9b517803570f07",
+      "state": "Unowned concurrent update preserved; not staged",
+      "effect": "Pilot scope/architecture/security decisions no longer require additional human approval; document specs/ADRs/plans/tests before implementation. Verification, independent acceptance, customer/source access, spending and production authorization remain required."
+    },
+    "initial_check_sequence_error": "Preservation assertion detected newer unowned AGENTS.md. Dependent scanner was invoked before scan directory creation and returned1. Checkpoint commit438477f proceeded before rerun; original error recorded. Corrected sequence validates canonical diffs, preserves both AGENTS snapshots and scans exact committed documentation before publication."
+  },
+  "document_secret_scan": {
+    "exit_code": 0,
+    "scanned_bytes": 399819
+  },
+  "concurrent_instructions": {
+    "path": "AGENTS.md",
+    "working_sha256": "5a5bc9738309a5044ea1524fddc711cb9b6db58531fcc4c3ff9b517803570f07",
+    "state": "Unowned concurrent update preserved; not staged",
+    "effect": "Pilot scope/architecture/security decisions no longer require additional human approval; document specs/ADRs/plans/tests before implementation. Verification, independent acceptance, customer/source access, spending and production authorization remain required."
+  },
+  "next_action": "Local synthetic Phase1C publisher contract and paired spec/implementation/test plan are independently actionable under the pilot exception; actual source/client/protected evidence and acceptance remain open.",
+  "cleanup": {
+    "own_clean_worktrees_removed": [
+      "/private/tmp/iga-p1d-cycle07-reclamation",
+      "/private/tmp/iga-p1d-cycle07-coordinator"
+    ],
+    "matching_external_runner_removed": true,
+    "branches_sources_runtime_logs_preserved": true
+  },
+  "authority_clarification_review": {
+    "reviewer": "p1d_c07_gap_review",
+    "status": "PASS: no actionable mismatch",
+    "scope": "Current unowned AGENTS exception and handoff/canonical/receipt clarification, no resulting board review or runtime rerun",
+    "all_inputs_tasks_gates_open": true
   }
 }
