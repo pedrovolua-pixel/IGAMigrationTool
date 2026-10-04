@@ -164,6 +164,9 @@ jobs:
           dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-adapter
           dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-observer
           dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-wire
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --core-cleanup
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --protocol-cleanup
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-audit
       - name: Check detached canonical draft and inert Markdown
         run: |
           dotnet run --project tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build
@@ -561,6 +564,12 @@ jobs:
           dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-observer
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-wire
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --core-cleanup
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --protocol-cleanup
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-audit
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows bounded scripted source pages
         run: |
