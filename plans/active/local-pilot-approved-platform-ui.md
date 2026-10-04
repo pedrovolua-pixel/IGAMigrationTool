@@ -1,6 +1,6 @@
 # Approved graphical platform UI — UI-W4
 
-Status: LOCAL VERIFICATION COMPLETE; private checkpoint publication pending. Owner approval: 2026-10-03, directly following review of the complete navigable mockup at `work/ui-review/2026-10-03/platform-mockup/`. This supersedes UI-W3's assumption about the preferred landing design: use the recovered chart-led overview and unblurred contextual relationship overlays.
+Status: COMPLETE — bounded local presentation implementation and private checkpoint verified. Owner approval: 2026-10-03, directly following review of the complete navigable mockup at `work/ui-review/2026-10-03/platform-mockup/`. This supersedes UI-W3's assumption about the preferred landing design: use the recovered chart-led overview and unblurred contextual relationship overlays.
 
 ## Scope and decisions before implementation
 
@@ -36,4 +36,8 @@ Preserve the preimplementation dirty UI in a dated work snapshot before integrat
 
 Configured frontend formatting, contract generation, typecheck, production build and dependency audit passed. Gitleaks found no frontend leaks; whitespace check passed. Rendering checks passed66 assertions for unavailable/stale records, current review and escaped hostile labels. Nonauthor reviews have no outstanding findings. Browser checks covered all18 areas, eight settings tabs, same-run unsaved review/filter preservation, cross-run score clearing, native overlay keyboard/focus/no blur, theme persistence and390/320 reflow. No dependency, backend contract, migration or permission change.
 
-The preimplementation snapshot and original/mockup are preserved. The implemented preview uses frozen synthetic records and rejects writes. Full mutating workflow regression, hosted CI and supported Windows/screen-reader/manual operational acceptance are NOT VERIFIED. G1–G9 and existing human dependencies remain open. Private publication is pending. The dated evidence record gives exact source hashes and scope.
+The preimplementation snapshot and original/mockup are preserved. The implemented preview uses frozen synthetic records and rejects writes. Full mutating workflow regression, hosted CI and supported Windows/screen-reader/manual operational acceptance are NOT VERIFIED. G1–G9 and existing human dependencies remain open. Private publication is confirmed on exact site source406b9495096074345fa1198ce8e673f535a45472; the fourteen human task cards are byte-preserved. The dated evidence record gives exact source hashes and scope.
+
+## Closure
+
+Application source, approved complete mockup, recovered original and preimplementation UI are saved locally in Git d8eeee830ac3ca1a9c94f534b6de620a80d22f81; no GitHub push or production application release. Private status publication succeeded; see approved-platform-ui-site-20261003.json. The source update preserves a concurrent release-readiness update and all fourteen existing human tasks. Full pilot and independent operational/manual acceptance remain open.

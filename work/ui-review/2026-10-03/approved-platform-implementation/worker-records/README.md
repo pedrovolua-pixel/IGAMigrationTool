@@ -1,0 +1,1 @@
+Original writing-worker files and reported verification records preserved before removing the two task-owned sparse worktrees. Coordinator integrations differ by documented theme/accessibility changes. Final exact root source hashes are in the canonical UI-W4 record. Independent reviewers reported no outstanding findings; browser evidence is separate.

@@ -1,0 +1,35 @@
+{
+  "packet": "UI-W4",
+  "result": "succeeded",
+  "audience": "owner-only custom policy; one allowed account, zero groups/editors",
+  "code_commit": "d8eeee830ac3ca1a9c94f534b6de620a80d22f81",
+  "site_commit": "406b9495096074345fa1198ce8e673f535a45472",
+  "archive": "/private/tmp/iga-ui-w4-private-site.tar.gz",
+  "deployment": {
+    "id": "appgdep_6ac1b75724608191884cde6c03079639",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_fa24aaa7e22c819199c31121a75086a3",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-04T02:18:05.497965+00:00"
+  },
+  "board": "14 task cards unchanged; hash and local desktop/mobile/internal anchors verified",
+  "source_publication": "Application UI source committed locally; not pushed to GitHub. Site source pushed and exact archive privately deployed.",
+  "archive_sha256": "5b5c834e2c48e78fda9d6eaa1585fc907fd604c45ac173981bd3250e124fc49e",
+  "board_evidence": {
+    "before_sha256": "c2dea498866f942f3cfbc015608f64eac65ad3d70d935a4f64f78c018a8e5fd6",
+    "task_count": 14,
+    "task_cards_sha256": "9df3a0850b8e7ca08cb6d119812d04a6c5d677394517f37dbfd9881f9bb9bd63",
+    "canonical_code_commit": "d8eeee830ac3ca1a9c94f534b6de620a80d22f81",
+    "after_sha256": "36c4f32157df7f83d4187515cbe66c5edf07c1d9e2dfa6578208099fd93b12db",
+    "cards_preserved": true
+  },
+  "site_source_html_sha256": "36c4f32157df7f83d4187515cbe66c5edf07c1d9e2dfa6578208099fd93b12db"
+}

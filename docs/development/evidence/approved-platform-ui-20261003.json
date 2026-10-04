@@ -151,7 +151,7 @@
     "permissions_or_activation": false,
     "gates": "G1\u2013G9 unchanged"
   },
-  "private_site": "publication pending; recorded separately",
+  "private_site": "confirmed owner-private publication; see approved-platform-ui-site-20261003.json",
   "sha256": {
     "App.tsx": "abb11c4a143a74ec83500b27336765b9ef1ee10aaed8fd040ae130c39655f0fc",
     "AnalysisView.tsx": "64f27efa4946359cdbd44e070b4f87f06f178249a632ffadbccad0fbd0ae5987",
@@ -171,5 +171,6 @@
     "old": "http://127.0.0.1:5210/",
     "mockup": "http://127.0.0.1:5211/",
     "implementation": "http://127.0.0.1:5212/"
-  }
+  },
+  "code_commit": "d8eeee830ac3ca1a9c94f534b6de620a80d22f81"
 }
