@@ -21,6 +21,7 @@ foreach (var item in goldens.RootElement.GetProperty("files").EnumerateObject())
 if (count != 31) throw new InvalidOperationException("Original vector inventory changed.");
 Console.WriteLine("PASS: frozen 18 planned cases, 35 SQL signatures, 15 return shapes and unchanged 31 original byte commitments.");
 _ = PreparationChecks.Run();
+_ = await MarkerClassificationChecks.RunAsync();
 Console.WriteLine("Persisted mechanisms NOT EXECUTED: standalone verifier preparation only.");
 
 if (args.SequenceEqual(new[] { "--verify-preconditions" }))

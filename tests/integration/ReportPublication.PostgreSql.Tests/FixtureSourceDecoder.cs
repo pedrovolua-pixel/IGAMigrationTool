@@ -15,7 +15,11 @@ internal static class FixtureSourceDecoder
         SourceCaptureV1 capture;
         try { capture = FrozenFixtureLoader.Source(sourceNode); }
         catch (Exception) { throw Refusal(); }
-        if (!NativePublicationCanonicalV1.SourceBytes(capture).AsSpan().SequenceEqual(sourceBytes.Span)) throw Refusal();
+        try
+        {
+            if (!NativePublicationCanonicalV1.SourceBytes(capture).AsSpan().SequenceEqual(sourceBytes.Span)) throw Refusal();
+        }
+        catch (Exception) { throw Refusal(); }
         // Canonical equality proves every closed owning source property, including redundant root inputs/score/warnings/scope.
         if (!MetadataFor(sourceNode, capture).AsSpan().SequenceEqual(metadataBytes.Span)) throw Refusal();
         return capture;
@@ -95,5 +99,5 @@ internal static class FixtureSourceDecoder
                 }
         }
     }
-    private static InvalidOperationException Refusal() => new("Independent fictional source commitment refused.");
+    private static PublicationIntegrityException Refusal() => new();
 }

@@ -72,7 +72,7 @@ internal static class PreparationChecks
     private static void Refuse(Action action)
     {
         try { action(); }
-        catch (InvalidOperationException) { return; }
+        catch (PublicationIntegrityException) { return; }
         throw new InvalidOperationException("Independent decoder accepted malformed fictional commitment.");
     }
 }
