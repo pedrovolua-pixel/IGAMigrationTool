@@ -1,0 +1,1631 @@
+{
+  "cycle": "Phase1D cycle07",
+  "date": "2026-10-03",
+  "status": "COMPLETED — bounded developer verification",
+  "baseline": "2a2f732b1ec2b21524afba68119168e81a73723e",
+  "author_commit": "c51952a2d03feac888cf7b9a2e1803869cba3a91",
+  "coordinator_source": "92217714f67deeb1966ba78a87b50223b67ea14b",
+  "equivalent_root_code": "f947d380c1e5c05127d4d4fde3c315671077d886",
+  "identical_git_tree": "50355ad42a7a18ff4440d81816cb79c149718981",
+  "new_scenarios": 4,
+  "new_invocations": 2808,
+  "new_assertions": 64457,
+  "new_accepted_audits": 2808,
+  "new_operational_failures": 0,
+  "cases": {
+    "expiry": {
+      "worlds": 2,
+      "calls_per_world": 774,
+      "predicted_expired_cohort": 250,
+      "observed_refill_slots": 250,
+      "max_identity_rate_window": 53,
+      "max_customer_rate_window": 259,
+      "clock_edges": [
+        299.999,
+        300,
+        0,
+        599.999,
+        600,
+        0
+      ]
+    },
+    "revision": {
+      "worlds": 2,
+      "calls_per_world": 630,
+      "predicted_invalidated_identity0_handles": 103,
+      "observed_refill_slots": 103,
+      "max_identity_rate_window": 57,
+      "max_customer_rate_window": 250,
+      "revoke_regrant_revisions": [
+        1,
+        2,
+        3
+      ],
+      "refill": "50 at180 and53 at240",
+      "other_identity_revisions": "All four remain1"
+    }
+  },
+  "author_evidence": {
+    "baseline": "2a2f732b1ec2b21524afba68119168e81a73723e",
+    "branch": "codex/p1d-cycle07-reclamation",
+    "initialOracleSha256": "794d20768af7914df27756b0e6165dd2bc71ef3c40d90be23fd7150ab6b95c12",
+    "files": {
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.cs": "2ace9e14bdea90620435c41721f5da8bd88e0ec04b6ff7ecec508f9b41394fd0",
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.oracle.md": "48eac4f1e59673edce24e88cfa7e846bb5fb04ed82563d7e09b618f6c258266e"
+    },
+    "commands": [
+      {
+        "command": "/private/tmp/iga-dotnet-10.0.401/dotnet build tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj -c Release --no-restore",
+        "result": "FAIL initial NETSDK1004; log preserved build-initial.txt"
+      },
+      {
+        "command": "/private/tmp/iga-dotnet-10.0.401/dotnet restore tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj --locked-mode",
+        "exitCode": 0
+      },
+      {
+        "command": "/private/tmp/iga-dotnet-10.0.401/dotnet build tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj -c Release --no-restore",
+        "exitCode": 0,
+        "warnings": 0,
+        "errors": 0
+      },
+      {
+        "command": "/private/tmp/iga-dotnet-10.0.401/dotnet run --project /private/tmp/iga-c07-author-runner/Runner.csproj -c Release --no-restore",
+        "exitCode": 0,
+        "invocations": 2808,
+        "assertions": 64457
+      },
+      {
+        "command": "/private/tmp/iga-dotnet-10.0.401/dotnet format tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj --no-restore --include tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.cs --verify-no-changes",
+        "exitCode": 0
+      },
+      {
+        "command": "git diff --check 2a2f732b1ec2b21524afba68119168e81a73723e HEAD",
+        "exitCode": 0
+      }
+    ],
+    "worlds": 4,
+    "invocations": 2808,
+    "assertions": 64457,
+    "acceptedAudits": 2808,
+    "operationalFailures": 0,
+    "expiryWorld": {
+      "calls": 774,
+      "predictedExpired": 250,
+      "observedRefill": 250,
+      "maxIdentityWindow": 53,
+      "maxCustomerWindow": 259
+    },
+    "revisionWorld": {
+      "calls": 630,
+      "predictedRevised": 103,
+      "observedRefill": 103,
+      "maxIdentityWindow": 57,
+      "maxCustomerWindow": 250
+    },
+    "limits": "Representative replay; no exhaustive/global4096/concurrency/emission/native/production verification; combined checks and independent review coordinator-owned.",
+    "commit": "c51952a2d03feac888cf7b9a2e1803869cba3a91"
+  },
+  "gap_review": {
+    "reviewer": "p1d_c07_gap_review",
+    "status": "Meaningful composed coverage gap; no confirmed runtime defect",
+    "source": "2a2f732b1ec2b21524afba68119168e81a73723e",
+    "existing": "Sparse expiry/rollback and revocation; one-slot identity/global expiry reclaim; C05 customer occupancy before expiry",
+    "selected": "Four worlds, NamedUser/Service x partial expiry/per-identity revision; original Findings page2; exact selective customer512 reclamation and representative unaffected final handles",
+    "scope": "Read-only source/spec/oracle inspection; no executed tests or code edits",
+    "source_locations": [
+      "SyntheticMcp.Tests/Program.cs:219-228,265-266",
+      "SyntheticMcpBoundary.Tests/Program.cs:189-221",
+      "OccupiedCursorCapacity.cs:113-147",
+      "ContinuationRecovery.cs:196-231"
+    ],
+    "limits": "Representative replay, no concurrent/emission/global/distributed/native reader/client/production proof"
+  },
+  "locked_restore": {
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "restore",
+      "IgaMigrationTool.slnx",
+      "--locked-mode",
+      "--disable-parallel"
+    ],
+    "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+    "source": "2a2f732b1ec2b21524afba68119168e81a73723e",
+    "exit_code": 0,
+    "seconds": 2.87,
+    "log": "locked-restore.log",
+    "sha256": "a7fcf351b1581ee9c689d2c4d6d2dd48ad36cdf7a372b9b1f26b803102ab4835"
+  },
+  "local_checks": [
+    {
+      "name": "full-format",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "IgaMigrationTool.slnx",
+        "--verify-no-changes",
+        "--no-restore"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+      "sourceCommit": "92217714f67deeb1966ba78a87b50223b67ea14b",
+      "exitCode": 0,
+      "seconds": 25.41,
+      "artifact": "full-format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "full-build",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "IgaMigrationTool.slnx",
+        "-c",
+        "Release",
+        "--no-restore",
+        "-m:1"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+      "sourceCommit": "92217714f67deeb1966ba78a87b50223b67ea14b",
+      "exitCode": 0,
+      "seconds": 15.54,
+      "artifact": "full-build.log",
+      "sha256": "3eb88acc691149a3d3f48446f007c1fd28beaa247f7d105e02e7d4f4721456e8"
+    },
+    {
+      "name": "oracle",
+      "command": [
+        "python3",
+        "tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py",
+        "--verify"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+      "sourceCommit": "92217714f67deeb1966ba78a87b50223b67ea14b",
+      "exitCode": 0,
+      "seconds": 0.03,
+      "artifact": "oracle.log",
+      "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45"
+    },
+    {
+      "name": "publication",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticMcpPublication.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+      "sourceCommit": "92217714f67deeb1966ba78a87b50223b67ea14b",
+      "exitCode": 0,
+      "seconds": 0.58,
+      "artifact": "publication.log",
+      "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb"
+    },
+    {
+      "name": "boundary",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticMcpBoundary.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+      "sourceCommit": "92217714f67deeb1966ba78a87b50223b67ea14b",
+      "exitCode": 0,
+      "seconds": 6.9,
+      "artifact": "boundary.log",
+      "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6"
+    },
+    {
+      "name": "composed",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests.dll"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+      "sourceCommit": "92217714f67deeb1966ba78a87b50223b67ea14b",
+      "exitCode": 0,
+      "seconds": 5.1,
+      "artifact": "composed.log",
+      "sha256": "51b78adbcfb80599e17becbc7df2bbf9a366309110a0cbc40389f0117f33d0cd"
+    },
+    {
+      "name": "architecture",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/architecture/BoundaryChecks",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+      "sourceCommit": "92217714f67deeb1966ba78a87b50223b67ea14b",
+      "exitCode": 0,
+      "seconds": 0.43,
+      "artifact": "architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    }
+  ],
+  "dependency_audit": {
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "list",
+      "IgaMigrationTool.slnx",
+      "package",
+      "--vulnerable",
+      "--include-transitive",
+      "--format",
+      "json",
+      "--no-restore"
+    ],
+    "exit_code": 0,
+    "source": "92217714f67deeb1966ba78a87b50223b67ea14b",
+    "sha256": "ea2947dc8e352ead1e85586510f232d13db1b34a6c9401fdf366673a5c81eab3",
+    "projects": 102,
+    "reported_vulnerable_packages": 0
+  },
+  "source_secret_scan": {
+    "command": [
+      "/private/tmp/iga-parallel-tools/gitleaks",
+      "dir",
+      "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle07-evidence/source-secret-scan",
+      "--no-banner",
+      "--redact",
+      "--report-format",
+      "json",
+      "--report-path",
+      "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle07-evidence/source-secret.json"
+    ],
+    "source": "92217714f67deeb1966ba78a87b50223b67ea14b",
+    "exit_code": 0,
+    "tracked_text_files": 1999,
+    "log_sha256": "a8789b5f9e41de30d5ec740d7d0128f3de45467477b3d063e4c992b2bb4923a4",
+    "scope": "Tracked final code/docs/config/fixtures; image/PDF/font binaries excluded; no generated bins, unrelated working content or history scan"
+  },
+  "preservation": {
+    "status": "PASS",
+    "baseline": "2a2f732b1ec2b21524afba68119168e81a73723e",
+    "root_code": "f947d380c1e5c05127d4d4fde3c315671077d886",
+    "coordinator_code": "92217714f67deeb1966ba78a87b50223b67ea14b",
+    "unchanged_working_pins": 380,
+    "unchanged_committed_pins": 380,
+    "original_fixtures": 16,
+    "all_tested_code_paths_match": true,
+    "only_three_test_paths_changed": true,
+    "unowned_diffs_preserved": true
+  },
+  "source_runtime_pins": {
+    "source": "92217714f67deeb1966ba78a87b50223b67ea14b",
+    "test_paths": {
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.cs": "2ace9e14bdea90620435c41721f5da8bd88e0ec04b6ff7ecec508f9b41394fd0",
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.oracle.md": "48eac4f1e59673edce24e88cfa7e846bb5fb04ed82563d7e09b618f6c258266e",
+      "tests/integration/SyntheticMcp.Tests/Program.cs": "659fe6137e9e8a683352e6c8c4e42b36f0c6069d53bc415d7792e7cb3531d49c"
+    },
+    "dll_sha256": "e2b6570cb132287b3abc7d7afbe71330ddb5847b4618a64f4562e162e3ceb98a",
+    "initial_oracle_sha256": "794d20768af7914df27756b0e6165dd2bc71ef3c40d90be23fd7150ab6b95c12"
+  },
+  "original_failure": "Author initial build before locked restore had missing assets NETSDK1004; original log preserved. Initial focused log reports61697 assertions; final committed source and execution report64457. Both logs are retained; final evidence binds only the final pinned source.",
+  "limits": "Representative handle replay and exact refill ceilings; no exhaustive registry/global/concurrent/emission/native/production proof. In-memory accepted audits are not durability evidence. Oracle pins identify bytes; preinspection ordering is author-declared and review confirms fixture-derived literals/no production expected-value helpers.",
+  "scope": "Only2new test/oracle paths plus6line Main registration; no runtime/config/dependency/migration/identity/exposure changes",
+  "remaining": "Actual reader/client inputs I01-I11 and all13 human tasks; fullPhase1D/Milestone11/UAT/G1-G9 NOT VERIFIED",
+  "publication_receipt": "phase1d-selective-reclamation-cycle07-site-20261003.json",
+  "independent_execution": {
+    "command": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "/private/tmp/iga-p1d-cycle07-coordinator/tests/integration/SyntheticMcp.Tests/bin/Release/net10.0/SyntheticMcp.Tests.dll"
+    ],
+    "cwd": "/private/tmp/iga-p1d-cycle07-coordinator",
+    "source": "92217714f67deeb1966ba78a87b50223b67ea14b",
+    "git_tree": "50355ad42a7a18ff4440d81816cb79c149718981",
+    "source_paths_sha256": {
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.cs": "2ace9e14bdea90620435c41721f5da8bd88e0ec04b6ff7ecec508f9b41394fd0",
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.oracle.md": "48eac4f1e59673edce24e88cfa7e846bb5fb04ed82563d7e09b618f6c258266e",
+      "tests/integration/SyntheticMcp.Tests/Program.cs": "659fe6137e9e8a683352e6c8c4e42b36f0c6069d53bc415d7792e7cb3531d49c"
+    },
+    "dll_sha256_before": "e2b6570cb132287b3abc7d7afbe71330ddb5847b4618a64f4562e162e3ceb98a",
+    "dll_sha256_after": "e2b6570cb132287b3abc7d7afbe71330ddb5847b4618a64f4562e162e3ceb98a",
+    "log_file": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle07-evidence/nonauthor/composed-execution.txt",
+    "log_sha256": "51b78adbcfb80599e17becbc7df2bbf9a366309110a0cbc40389f0117f33d0cd",
+    "exit_code": 0,
+    "duration_seconds": 5.203,
+    "expected_count_fragments": [
+      "2849",
+      "10060 requests, 92904 assertions",
+      "24 scenarios, 112 invocations, 1011 assertions",
+      "16 scenarios, 5200 invocations, 88562 assertions",
+      "4 scenarios, 2808 invocations, 64457 assertions"
+    ],
+    "expected_count_fragments_present": {
+      "2849": true,
+      "10060 requests, 92904 assertions": false,
+      "24 scenarios, 112 invocations, 1011 assertions": true,
+      "16 scenarios, 5200 invocations, 88562 assertions": true,
+      "4 scenarios, 2808 invocations, 64457 assertions": true
+    },
+    "runtime_source_changes": false,
+    "review_outcome": "PASS; no actionable findings in the bounded engineering review",
+    "scope": "synthetic final composed DLL only; no human gate approval",
+    "validated_expected_counts": {
+      "original": true,
+      "cycle03": true,
+      "cycle04": true,
+      "cycle05": true,
+      "cycle07": true
+    },
+    "validation_wrapper_correction": "Initial expected Cycle03 count fragment assumed adjacent requests/assertions; actual existing output has a parenthesized scenario partition. DLL execution itself exited0. Preserved initial wrapper result, corrected count parsing against the unchanged executed log; no rerun required."
+  },
+  "independent_review": {
+    "reviewer": "p1d_c07_gap_review",
+    "outcome": "PASS",
+    "findings": [],
+    "source": "92217714f67deeb1966ba78a87b50223b67ea14b",
+    "equivalent_root_source": "f947d380c1e5c05127d4d4fde3c315671077d886",
+    "git_tree": "50355ad42a7a18ff4440d81816cb79c149718981",
+    "scope": "Independent final source review of all three changed paths against frozen contract, approved local test matrix, recorded cycle07 plan and original fixture; independent execution of final composed DLL; current plan/verification/receipt reviewed in pending state.",
+    "requirements": [
+      "P1D-T06",
+      "P1D-T07",
+      "P1D-T08",
+      "P1D-T09",
+      "P1D-T10",
+      "P1D-T11",
+      "P1D-T12"
+    ],
+    "source_paths_sha256": {
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.cs": "2ace9e14bdea90620435c41721f5da8bd88e0ec04b6ff7ecec508f9b41394fd0",
+      "tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.oracle.md": "48eac4f1e59673edce24e88cfa7e846bb5fb04ed82563d7e09b618f6c258266e",
+      "tests/integration/SyntheticMcp.Tests/Program.cs": "659fe6137e9e8a683352e6c8c4e42b36f0c6069d53bc415d7792e7cb3531d49c"
+    },
+    "evidence_locations": {
+      "independent_clock_and_request_ledger": "SelectiveCursorReclamation.cs:55-82",
+      "exact_source_authority_commit_audit": "SelectiveCursorReclamation.cs:84-117",
+      "explicit_response_and_handle_ledger": "SelectiveCursorReclamation.cs:119-136",
+      "exact_512_cohort_fill": "SelectiveCursorReclamation.cs:141-150",
+      "expiry_250_refill_and_rollback": "SelectiveCursorReclamation.cs:153-170",
+      "revision_103_refill_and_survivors": "SelectiveCursorReclamation.cs:174-192",
+      "fixture_literal_bindings_rows_hashes": "SelectiveCursorReclamation.cs:202-270",
+      "synthetic_reader_policy_audit_ports": "SelectiveCursorReclamation.cs:289-344",
+      "main_hook": "Program.cs:51-56"
+    },
+    "checks": [
+      "Exactly four scenarios; Findings pageSize2 yields exact a/b allocating pages and c final pages.",
+      "External handle ledger predicts 512 occupancy and103/103/102/102/102 identity distribution; no reflection/private production helper.",
+      "Predicted expiry group250: observed250 replacement successes followed by cursor Limited; representative later/new handles survive.",
+      "Predicted per-identity revision group103: observed50+53 replacement successes followed by cursor Limited; other identities have unchanged grants and surviving representative handles.",
+      "Every invocation independently counts rate-window usage including denials and rollback; observed maxima53/259 expiry,57/250 revision rule out rate/concurrency masking.",
+      "Stale/expired/revoked probes have zero manifest/item reads; allocating quota denial has exact selected reads and current commit.",
+      "Every invocation has exact typed result and one accepted safe in-memory audit; no operational failures.",
+      "Literal expected rows and all14 binding atoms checked against pinned original fixture bytes; no production expected-output helper.",
+      "Original initial oracle SHA matches794d20768af7914df27756b0e6165dd2bc71ef3c40d90be23fd7150ab6b95c12; final oracle contains exact initial prefix. Chronology remains author-declared.",
+      "Three-path additive source diff only; ordinary runtime/original fixture/prior guards unchanged at the reviewed clean source.",
+      "Six-line Main hook is inside Main, retains existing guards and records failures through Environment.ExitCode.",
+      "Current canonical plan/verification/receipt honestly retain independent/hosted/publication pending states and open human gates; parent may update independent pass after handoff."
+    ],
+    "independent_execution": {
+      "exit_code": 0,
+      "new_scenarios": 4,
+      "new_invocations": 2808,
+      "new_assertions": 64457,
+      "original_assertions": 2849,
+      "cycle03_requests": 10060,
+      "cycle03_assertions": 92904,
+      "cycle04_scenarios": 24,
+      "cycle04_invocations": 112,
+      "cycle04_assertions": 1011,
+      "cycle05_scenarios": 16,
+      "cycle05_invocations": 5200,
+      "cycle05_assertions": 88562,
+      "dll_sha256": "e2b6570cb132287b3abc7d7afbe71330ddb5847b4618a64f4562e162e3ceb98a",
+      "log_sha256": "51b78adbcfb80599e17becbc7df2bbf9a366309110a0cbc40389f0117f33d0cd",
+      "execution_receipt": "execution.json"
+    },
+    "documentation_snapshot_sha256": {
+      "plans/active/local-pilot-phase1d-selective-reclamation-cycle07.md": "fbeb4ab36b3e378c88bfe6cdf5996116c071af1f5a328afe25c1dd2a8259e881",
+      "specs/003-health-assessment/phase1d-selective-reclamation-cycle07.md": "8f3947a1471467a08ad679296d0facf24e59f5a287f76c40d97a4dc4cec3ca52",
+      "docs/development/evidence/phase1d-selective-reclamation-cycle07-20261003.json": "5821e0023559c1c689fc92050a79a92dc7eb6124924cc88b6980a3a026bfc8a0"
+    },
+    "limitations": [
+      "Representative stale/survivor replay and exact refill ceilings do not individually verify all expired or retained handles.",
+      "No global4096, concurrent reclamation, expiry during emission, actual publisher/reader/client, distributed/production behavior or durable audit proof.",
+      "No independent rerun of coordinator restore/format/build/publication/boundary/architecture/dependency/secret/hosted checks in this reviewer packet; those remain parent-owned evidence.",
+      "Initial count-validation wrapper assumed adjacent Cycle03 counts and failed after DLL exited0; unchanged executed log was parsed correctly, original wrapper JSON preserved, no runtime rerun or source correction.",
+      "Engineering review is not required human gate acceptance."
+    ],
+    "mutations": "Only bounded ignored nonauthor evidence files; no source or canonical edits."
+  },
+  "hosted_initial": {
+    "workflow_runs": [
+      {
+        "id": 37166801394,
+        "name": "Azure development package (partial checks)",
+        "status": "in_progress",
+        "conclusion": null,
+        "run_number": 153,
+        "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801394/jobs",
+        "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801394/logs",
+        "workflow_id": 372721003
+      },
+      {
+        "id": 37166801380,
+        "name": "Bootstrap checks (partial gate)",
+        "status": "in_progress",
+        "conclusion": null,
+        "run_number": 243,
+        "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801380/jobs",
+        "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801380/logs",
+        "workflow_id": 370675336
+      }
+    ]
+  },
+  "documentary_checks": {
+    "status": "PASS",
+    "owned_relative_links": 7,
+    "owned_diff_whitespace": "PASS",
+    "unowned_canonical_diffs_preserved": true,
+    "concurrent_agents_update": {
+      "path": "AGENTS.md",
+      "working_sha256": "5a5bc9738309a5044ea1524fddc711cb9b6db58531fcc4c3ff9b517803570f07",
+      "state": "Unowned concurrent update preserved; not staged",
+      "effect": "Pilot scope/architecture/security decisions no longer require additional human approval; document specs/ADRs/plans/tests before implementation. Verification, independent acceptance, customer/source access, spending and production authorization remain required."
+    },
+    "initial_check_sequence_error": "Preservation assertion detected newer unowned AGENTS.md. Dependent scanner was invoked before scan directory creation and returned1. Checkpoint commit438477f proceeded before rerun; original error recorded. Corrected sequence validates canonical diffs, preserves both AGENTS snapshots and scans exact committed documentation before publication.",
+    "authority_document_scan": {
+      "status": "PASS",
+      "scanned_bytes": 404252,
+      "report": "authority-document-secret.json",
+      "exact_staged_scan_before_commit": "66f3b99063c830950aaa98e559cf8782fefb8007",
+      "whitespace": "PASS"
+    }
+  },
+  "document_secret_scan": {
+    "exit_code": 0,
+    "scanned_bytes": 399819
+  },
+  "concurrent_instructions": {
+    "path": "AGENTS.md",
+    "working_sha256": "5a5bc9738309a5044ea1524fddc711cb9b6db58531fcc4c3ff9b517803570f07",
+    "state": "Unowned concurrent update preserved; not staged",
+    "effect": "Pilot scope/architecture/security decisions no longer require additional human approval; document specs/ADRs/plans/tests before implementation. Verification, independent acceptance, customer/source access, spending and production authorization remain required."
+  },
+  "next_action": "Local synthetic Phase1C publisher contract and paired spec/implementation/test plan are independently actionable under the pilot exception; actual source/client/protected evidence and acceptance remain open.",
+  "cleanup": {
+    "own_clean_worktrees_removed": [
+      "/private/tmp/iga-p1d-cycle07-reclamation",
+      "/private/tmp/iga-p1d-cycle07-coordinator"
+    ],
+    "matching_external_runner_removed": true,
+    "branches_sources_runtime_logs_preserved": true,
+    "own_duplicate_scan_copies_removed": true
+  },
+  "authority_clarification_review": {
+    "reviewer": "p1d_c07_gap_review",
+    "status": "PASS: no actionable mismatch",
+    "scope": "Current unowned AGENTS exception and handoff/canonical/receipt clarification, no resulting board review or runtime rerun",
+    "all_inputs_tasks_gates_open": true
+  },
+  "hosted_final": {
+    "status": "PASS",
+    "source": "f947d380c1e5c05127d4d4fde3c315671077d886",
+    "bootstrap_run": 243,
+    "bootstrap_id": 37166801380,
+    "package_run": 153,
+    "package_id": 37166801394,
+    "all_configured_jobs_and_steps_success": true,
+    "jobs": [
+      {
+        "id": 111331273948,
+        "name": "dotnet-bootstrap",
+        "steps": 69
+      },
+      {
+        "id": 111331274144,
+        "name": "collector-windows (windows-2022)",
+        "steps": 28
+      },
+      {
+        "id": 111331274146,
+        "name": "collector-windows (windows-2025)",
+        "steps": 28
+      },
+      {
+        "id": 111331273896,
+        "name": "bootstrap-package",
+        "steps": 10
+      }
+    ],
+    "linux_native_log_sha256": "61b60596cb5844b963618f3e013fda730e03f4629f2be1057803c7a53adf00a4",
+    "linux_cycle07_counts_matched": true,
+    "limits": "Configured partial engineering gate only; no customer/live/UAT/production acceptance",
+    "native_runs": {
+      "workflow_runs": [
+        {
+          "id": 37166801394,
+          "name": "Azure development package (partial checks)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 153,
+          "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801394/jobs",
+          "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801394/logs",
+          "workflow_id": 372721003
+        },
+        {
+          "id": 37166801380,
+          "name": "Bootstrap checks (partial gate)",
+          "status": "completed",
+          "conclusion": "success",
+          "run_number": 243,
+          "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801380/jobs",
+          "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37166801380/logs",
+          "workflow_id": 370675336
+        }
+      ]
+    },
+    "native_jobs": [
+      {
+        "id": 111331273948,
+        "name": "dotnet-bootstrap",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37166801380,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Initialize containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Scan checkout for secrets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Restore locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Verify formatting",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Build",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Verify approved local Phase1D synthetic MCP boundaries",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Check approved Phase1B portable and owning PostgreSQL contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Execute Linux isolated CSV renderer and adversarial boundary probes",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Run synthetic artifact-integrity checks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Check synthetic evaluation accuracy",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Check approved synthetic evaluation policy",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Check isolated synthetic evaluation workflow",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          },
+          {
+            "name": "Check actual saved Phase1B evaluation source capture",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Check owning accepted-schema provenance and additive readiness",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          },
+          {
+            "name": "Check saved Phase1B population and truthful provenance readiness",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18
+          },
+          {
+            "name": "Check assessment coverage reconciliation",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Check assessment capability locks",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Check synthetic baseline planning and coverage integration",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          },
+          {
+            "name": "Check durable synthetic run contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Check deterministic fixture rules and health scoring",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Check independent maturity and durable finding review",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Check detached canonical draft and inert Markdown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          },
+          {
+            "name": "Check offline synthetic AI packets and proposed output",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26
+          },
+          {
+            "name": "Check offline synthetic AI preview and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27
+          },
+          {
+            "name": "Check saved-source offline AI workspace projection",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28
+          },
+          {
+            "name": "Check fictional unverified fix packages and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29
+          },
+          {
+            "name": "Check saved-source fictional fix-package workspace projection",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 30
+          },
+          {
+            "name": "Check synthetic artifact review contracts and independent durable source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 31
+          },
+          {
+            "name": "Check synthetic planning tasks and independent durable source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 32
+          },
+          {
+            "name": "Check canonical unverified recommendation guidance",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 33
+          },
+          {
+            "name": "Check independent recommendation identities, originals and saved review bridge",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 34
+          },
+          {
+            "name": "Check independent canonical draft goldens and saved source bridge",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 35
+          },
+          {
+            "name": "Check independent review and maturity goldens",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 36
+          },
+          {
+            "name": "Check persisted analysis and independent scoring goldens",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 37
+          },
+          {
+            "name": "Check real PostgreSQL persistence and process recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 38
+          },
+          {
+            "name": "Build and audit pinned consultant view",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 39
+          },
+          {
+            "name": "Build isolated evaluation workspace",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 40
+          },
+          {
+            "name": "Check independent offline AI preview component",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 41
+          },
+          {
+            "name": "Check independent fictional fix-package component",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 42
+          },
+          {
+            "name": "Check independent artifact review component",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 43
+          },
+          {
+            "name": "Check independent planning task component",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 44
+          },
+          {
+            "name": "Check consultant browser flow and recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 45
+          },
+          {
+            "name": "Check isolated evaluation HTTP and browser flow",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 46
+          },
+          {
+            "name": "Check analysis findings, scoring and browser read recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 47
+          },
+          {
+            "name": "Check consultant review history, current scores and independent maturity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 48
+          },
+          {
+            "name": "Check draft summary, technical and inert Markdown browser parity",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 49
+          },
+          {
+            "name": "Check structured recommendation guidance and inert consultant display",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 50
+          },
+          {
+            "name": "Check offline AI preview in the consultant workspace",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 51
+          },
+          {
+            "name": "Check actual inert offline AI preview browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 52
+          },
+          {
+            "name": "Check actual inert fictional fix-package browser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 53
+          },
+          {
+            "name": "Check fictional fix packages in the consultant workspace",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 54
+          },
+          {
+            "name": "Check opt-in artifact review browser history and recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 55
+          },
+          {
+            "name": "Check opt-in planning task browser history and recovery",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 56
+          },
+          {
+            "name": "Check collector permission decisions",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 57
+          },
+          {
+            "name": "Check collector host contract",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 58
+          },
+          {
+            "name": "Check project dependency boundaries",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 59
+          },
+          {
+            "name": "Install pinned Bicep CLI",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 60
+          },
+          {
+            "name": "Compile, lint and check evidence-store baseline",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 61
+          },
+          {
+            "name": "Compile, lint and check Service Bus baselines",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 62
+          },
+          {
+            "name": "Compile, lint and check pilot network-egress baseline",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 63
+          },
+          {
+            "name": "Compile and lint workload identity module",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 64
+          },
+          {
+            "name": "Validate private Azure development foundation",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 65
+          },
+          {
+            "name": "Post Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 128
+          },
+          {
+            "name": "Post Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 129
+          },
+          {
+            "name": "Stop containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 130
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 131
+          }
+        ]
+      },
+      {
+        "id": 111331274144,
+        "name": "collector-windows (windows-2022)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37166801380,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Restore locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Check approved Phase1B Windows portable contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Check Windows offline synthetic AI packets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check Windows offline synthetic proposed output",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check Windows independent fake-provider composition",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Check Windows offline AI preview and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Check Windows fictional fix packages and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Build collector host tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Verify Windows local Phase1D synthetic MCP boundaries",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Check Windows fixed offline AI workspace source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Check Windows synthetic evaluation accuracy",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Check Windows approved synthetic evaluation policy",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          },
+          {
+            "name": "Check Windows saved-source capture canonical contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Check Windows accepted-schema canonical contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          },
+          {
+            "name": "Check Windows population provenance canonical contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18
+          },
+          {
+            "name": "Check Windows isolated evaluation workflow",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Check Windows fictional fix-package workspace sources",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Check Windows portable artifact review and independent source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          },
+          {
+            "name": "Check Windows portable planning tasks and independent source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Check Windows collector host and protected key behavior",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Publish self-contained collector",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Smoke test Windows Service and one-shot CLI",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          },
+          {
+            "name": "Post Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 49
+          },
+          {
+            "name": "Post Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 50
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 51
+          }
+        ]
+      },
+      {
+        "id": 111331274146,
+        "name": "collector-windows (windows-2025)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37166801380,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Restore locked dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Check approved Phase1B Windows portable contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Check Windows offline synthetic AI packets",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check Windows offline synthetic proposed output",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Check Windows independent fake-provider composition",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8
+          },
+          {
+            "name": "Check Windows offline AI preview and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Check Windows fictional fix packages and inert HTML",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Build collector host tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          },
+          {
+            "name": "Verify Windows local Phase1D synthetic MCP boundaries",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Check Windows fixed offline AI workspace source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Check Windows synthetic evaluation accuracy",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Check Windows approved synthetic evaluation policy",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          },
+          {
+            "name": "Check Windows saved-source capture canonical contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16
+          },
+          {
+            "name": "Check Windows accepted-schema canonical contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17
+          },
+          {
+            "name": "Check Windows population provenance canonical contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18
+          },
+          {
+            "name": "Check Windows isolated evaluation workflow",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19
+          },
+          {
+            "name": "Check Windows fictional fix-package workspace sources",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20
+          },
+          {
+            "name": "Check Windows portable artifact review and independent source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21
+          },
+          {
+            "name": "Check Windows portable planning tasks and independent source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22
+          },
+          {
+            "name": "Check Windows collector host and protected key behavior",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23
+          },
+          {
+            "name": "Publish self-contained collector",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 24
+          },
+          {
+            "name": "Smoke test Windows Service and one-shot CLI",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 25
+          },
+          {
+            "name": "Post Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 49
+          },
+          {
+            "name": "Post Check out repository",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 50
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 51
+          }
+        ]
+      },
+      {
+        "id": 111331273896,
+        "name": "bootstrap-package",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 37166801394,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Build and verify inert host",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Build and exercise non-root container",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Install pinned Bicep",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Check private hosting template",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Post Install approved SDK",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post Check out source",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          }
+        ]
+      }
+    ]
+  },
+  "final_source_preservation": {
+    "status": "PASS",
+    "preserved_working_paths": 380,
+    "preserved_committed_paths": 380,
+    "production_paths": 326,
+    "original_fixture_paths": 16,
+    "controlled_exception": [
+      "tests/integration/SyntheticMcp.Tests/Program.cs"
+    ],
+    "unowned_canonical_diff_preserved": true,
+    "current_concurrent_AGENTS_preserved": true,
+    "agents_sha256": "5a5bc9738309a5044ea1524fddc711cb9b6db58531fcc4c3ff9b517803570f07"
+  },
+  "private_checkpoint": {
+    "version": 119,
+    "source": "c66b75842969e04f121027cc6d42a74be4053fab",
+    "deployment": "appgdep_6ac1a956ff348191965308381ae82332",
+    "status": "succeeded",
+    "audience": "owner-only;custom revision1,users1/groups0/external0",
+    "final_closure_receipt": "phase1d-selective-reclamation-cycle07-site-20261003.json"
+  },
+  "board_review": {
+    "status": "PASS",
+    "reviewer": "/root/p1d_c07_gap_review",
+    "scope": "read-only final cycle07 board compared with opening source/current AGENTS exception and canonical records",
+    "html_sha256": "0df4ecd92d363b286efce7f1ea5ccf52e0c0f191792b904415a4e9d8e31f2111",
+    "findings": [],
+    "evidence": [
+      "13 task cards; only Phase1D changed; other12 byte-identical",
+      "Every card has requested roles/source links/done conditions",
+      "Seven new immutable repository links resolve locally",
+      "Local publisher preparation distinct from actual client/source evidence, acceptance and activation authorization",
+      "Windows/package success and pending Linux consistent with preserved job observations"
+    ],
+    "limits": "No edits/runtime reruns/rendering/remote writes; root performed browser QA separately",
+    "raw_report": "Board review passed with no actionable findings. Reviewed HTML SHA256: 0df4ecd9…1f2111. No gate/task closures or expanded exposure appear."
+  },
+  "site_checks": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "native_log_parse_correction": {
+    "status": "PASS",
+    "job_id": 111331274144,
+    "run_id": 37166801380,
+    "source": "f947d380c1e5c05127d4d4fde3c315671077d886",
+    "cycle07_counts_matched": true,
+    "sha256": "eabf771111a8f2972795dfa2c15cb91fb65f600e8df3b1d74af0bc3982f10d65",
+    "initial_wrapper_error": "Native decoded logs contain ungrouped 64457 rather than comma-grouped 64,457; saved bytes unchanged and corrected parser matches final four-scenario summary."
+  },
+  "archive_validation_correction": {
+    "status": "PASS",
+    "source": "c66b75842969e04f121027cc6d42a74be4053fab",
+    "archive_html_matches_committed_source": true,
+    "archive_manifest_path": "dist/.openai/hosting.json",
+    "local_archive_sha256": "aa9dbbcf0f7af7cf3d3622d9475e0cc14cd40a34a177743d02b88644bf148a2e",
+    "initial_validation_error": "expected root .openai/hosting.json; helper packages manifest inside static dist; corrected validation retains original failure; native deployment had already succeeded",
+    "server_hash_is_separate": true
+  },
+  "private_closure": {
+    "status": "succeeded",
+    "version": 120,
+    "source": "3785f1ce3420ab5272015c109dd3f23408254a65",
+    "deployment": "appgdep_6ac1ac0abe488191a25460146f389a92",
+    "audience": "owner-only custom revision1;1owner,0groups,0external",
+    "receipt": "phase1d-selective-reclamation-cycle07-site-20261003.json"
+  },
+  "final_artifacts": {
+    "manifest": ".sites-work/phase1d-cycle07-evidence/final-artifact-manifest.json",
+    "sha256": "c84c0b50fcb7ae5d0f38f323c344c3c3128eb19cffb1156dcec2d4e4af79a55c",
+    "file_count": 119
+  },
+  "runtime_compaction": {
+    "status": "PASS",
+    "archive": "preserved-runtime-copies.tar.gz",
+    "archive_sha256": "bd76278b061da554ee561b86d2545c6613c8587170413a0b959591628ed5bfab",
+    "members": {
+      "composed-runtime/SyntheticMcp.Tests.deps.json": "290695616edb392a2a1d49b2180bca010411234851a4642b325754fd616cbb8a",
+      "composed-runtime/SyntheticMcp.Tests.runtimeconfig.json": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+      "composed-runtime/SyntheticMcp.Tests.dll": "e2b6570cb132287b3abc7d7afbe71330ddb5847b4618a64f4562e162e3ceb98a",
+      "composed-runtime/SyntheticMcp.dll": "3e6b2ac2a9d7b1657e1fcc4d3ba9b1e832b34533ddfd58f53c7684ba3791b4df",
+      "composed-runtime/SyntheticMcp.Tests": "c3c8ca37613e285db0a625f995993cd6915ae1c963b6b0bce95631968a654b99",
+      "composed-runtime/SyntheticMcp.Tests.pdb": "12504c8e726814323e6ceb1fc00637f4264173e13864c25dd483351300b8ec4b",
+      "composed-runtime/SyntheticMcp.pdb": "6a971b4aee700bb9300215338e7ac6fcbb5fdbc1769fd5818fe6112b83b00700",
+      "composed-runtime/fixtures/denial-corpus.json": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c",
+      "composed-runtime/fixtures/syn-finding-c.json": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d",
+      "composed-runtime/fixtures/author_oracle.py": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9",
+      "composed-runtime/fixtures/syn-score.json": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10",
+      "composed-runtime/fixtures/syn-coverage-a.json": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f",
+      "composed-runtime/fixtures/syn-rec-a.json": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277",
+      "composed-runtime/fixtures/golden-hashes.json": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f",
+      "composed-runtime/fixtures/syn-ref-b.json": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b",
+      "composed-runtime/fixtures/syn-finding-b.json": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2",
+      "composed-runtime/fixtures/syn-finding-a.json": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5",
+      "composed-runtime/fixtures/syn-status.json": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef",
+      "composed-runtime/fixtures/syn-rec-b.json": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9",
+      "composed-runtime/fixtures/syn-ref-a.json": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b",
+      "composed-runtime/fixtures/syn-coverage-b.json": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60",
+      "composed-runtime/fixtures/syn-rec-c.json": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4",
+      "composed-runtime/fixtures/manifest.json": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d",
+      "author/runtime/SyntheticMcp.Tests.deps.json": "290695616edb392a2a1d49b2180bca010411234851a4642b325754fd616cbb8a",
+      "author/runtime/SyntheticMcp.Tests.runtimeconfig.json": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+      "author/runtime/SyntheticMcp.Tests.dll": "d2d1c8f30bb13a874d645b81057473ef94198f176f9c80812e02d11cfd8a2698",
+      "author/runtime/SyntheticMcp.dll": "f4c65c855a1f335f7dfaddb28d7282a98d766ee2bb1363b839b149d3eb4bd8cf",
+      "author/runtime/SyntheticMcp.Tests": "c3c8ca37613e285db0a625f995993cd6915ae1c963b6b0bce95631968a654b99",
+      "author/runtime/SyntheticMcp.Tests.pdb": "cbde43143065ac660901601674932dc1975e57becd35f319927e16cd8fa32e79",
+      "author/runtime/SyntheticMcp.pdb": "e18d410fafafde504b7ca18820fddfcd72675dad417d97560679fb5e01a8b936",
+      "author/runtime/fixtures/denial-corpus.json": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c",
+      "author/runtime/fixtures/syn-finding-c.json": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d",
+      "author/runtime/fixtures/author_oracle.py": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9",
+      "author/runtime/fixtures/syn-score.json": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10",
+      "author/runtime/fixtures/syn-coverage-a.json": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f",
+      "author/runtime/fixtures/syn-rec-a.json": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277",
+      "author/runtime/fixtures/golden-hashes.json": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f",
+      "author/runtime/fixtures/syn-ref-b.json": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b",
+      "author/runtime/fixtures/syn-finding-b.json": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2",
+      "author/runtime/fixtures/syn-finding-a.json": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5",
+      "author/runtime/fixtures/syn-status.json": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef",
+      "author/runtime/fixtures/syn-rec-b.json": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9",
+      "author/runtime/fixtures/syn-ref-a.json": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b",
+      "author/runtime/fixtures/syn-coverage-b.json": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60",
+      "author/runtime/fixtures/syn-rec-c.json": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4",
+      "author/runtime/fixtures/manifest.json": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d"
+    },
+    "all_member_hashes_verified_before_removing_own_duplicates": true
+  },
+  "final_cleanup": {
+    "status": "PASS",
+    "own_server_pid": 55301,
+    "own_server_command": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -m http.server 8795 --bind 127.0.0.1",
+    "cwd_checked": true,
+    "own_server_stopped": true,
+    "own_worktrees_removed": true,
+    "other_worktrees_or_servers_untouched": true
+  },
+  "final_closure_review": {
+    "status": "PASS",
+    "reviewer": "/root/p1d_c07_gap_review",
+    "scope": "final documentary/source/board closure review read-only",
+    "findings": [],
+    "checks": [
+      "All configured jobs/steps succeeded; Linux/Windows2022 native logs report4/2808/64457",
+      "All3 source pins unchanged",
+      "Eight board links resolve",
+      "13tasks open;12other cards byte-preserved",
+      "All46 compacted runtime member hashes match"
+    ],
+    "qualification": "Completed labels were prepared closure records while final native publication/audience pending; final publication is required before reporting completion",
+    "limits": "No edits/runtime reruns/remote writes"
+  },
+  "closure_document_checks": {
+    "status": "PASS",
+    "staged_relative_links": 445,
+    "json": "PASS",
+    "whitespace": "PASS",
+    "secret_scanned_bytes": 450551
+  },
+  "concurrent_canonical_preservation": {
+    "status": "PASS",
+    "records": {
+      "specs/003-health-assessment/status.md": {
+        "status": "PASS",
+        "all_opening_unowned_insertion_blocks_retained_verbatim": true,
+        "current_diff_is_additive_only": true,
+        "current_working_sha256": "109e32d646ba7829e326e0936c09114a8f79958b2c760542aacb98ff68a65f24",
+        "new_unowned_update": "Concurrent release-readiness authority/checkpoint sections added after closure snapshot8d6283b; preserved unstaged; not claimed as own execution"
+      },
+      "specs/003-health-assessment/implementation-plan.md": {
+        "status": "PASS",
+        "all_opening_unowned_insertion_blocks_retained_verbatim": true,
+        "current_diff_is_additive_only": true,
+        "current_working_sha256": "9a5fb00618ed1748722d793a54329179124d46a86dcd2fd6fa19e238de230366",
+        "new_unowned_update": "Concurrent release-readiness authority/checkpoint sections added after closure snapshot8d6283b; preserved unstaged; not claimed as own execution"
+      },
+      "specs/003-health-assessment/evidence-index.md": {
+        "status": "PASS",
+        "all_opening_unowned_insertion_blocks_retained_verbatim": true,
+        "current_diff_is_additive_only": true,
+        "current_working_sha256": "732116eda962adcff27f62d1bfbe68a546ba480b5989e7c18ce16b51b8bc14aa",
+        "new_unowned_update": "Concurrent release-readiness authority/checkpoint sections added after closure snapshot8d6283b; preserved unstaged; not claimed as own execution"
+      }
+    },
+    "earlier_final_guard_error": "Strict equality with opening diff detected legitimate newer unowned additive release-readiness records; stopped receipt preparation. Missing-scan scanner returned1, no commit occurred. Corrected guard verifies retained opening insertion blocks plus additive-only current diffs and preserves new snapshots."
+  }
+}
