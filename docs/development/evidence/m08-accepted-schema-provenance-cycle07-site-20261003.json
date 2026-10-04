@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "m08-accepted-schema-provenance-cycle07-site-v1",
+  "date": "2026-10-03",
+  "status": "CONFIRMED owner-private deployment, preserved evidence and all3ownworktree cleanups; bounded cycle complete",
+  "repositorySourceSnapshot": "4930315215a9bafce3419e80107b94a4e699320e",
+  "deployment": {
+    "id": "appgdep_6ac19df286d08191a267c5ef8c4228ab",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_29928d9fc7588191963da6be906b807c",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-04T00:29:45.373487+00:00"
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_29928d9fc7588191963da6be906b807c",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "version_number": 116,
+    "source": {
+      "commit_sha": "52147e47516bd6753ef290a10023dd0752524516"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000856c81f5888c5e4385925948",
+      "content_hash": "sha256:62a33b30e04829403f4617925b31e287043cf2a349146f84debcfcacb6377d9b",
+      "size_bytes": 133120,
+      "file_count": 2
+    },
+    "screenshot_url": "https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-f858-820c-9f9d-a9cc301b2c17/raw?se=2026-10-04T01%3A31%3A16Z&sp=r&sv=2026-02-06&sr=b&scid=5e7dbe41-3939-4734-8296-8e0f93ed1ee4&skoid=2757bbe4-5137-4324-975b-acedc0bad279&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-03T18%3A53%3A16Z&ske=2026-10-04T18%3A53%3A16Z&sks=b&skv=2026-02-06&sig=0AJaE1McAEEsK0vcbjTeJb1emTskL47SvWExdO8/CF4%3D",
+    "deployment_id": "appgdep_6ac19df286d08191a267c5ef8c4228ab"
+  },
+  "siteSource": {
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "checkout_path": "/private/tmp/iga-m08-cycle03-site",
+    "commit_sha": "52147e47516bd6753ef290a10023dd0752524516",
+    "archive": "/private/tmp/iga-m08-cycle07-evidence/site/pilot-cycle07.tar.gz"
+  },
+  "audience": {
+    "role": "owner",
+    "mode": "custom",
+    "users": 1,
+    "groups": 0,
+    "externalVisitors": 0,
+    "revision": 1
+  },
+  "nativeEvidenceRoot": "work/m08-cycle07-evidence",
+  "nineBindingsMissing": true,
+  "completeSamplingReady": false,
+  "milestonePhaseAndLiveGates": "NOT VERIFIED; actual human qualification/customer evidence still required",
+  "localSiteQA": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "preservation": {
+    "openingSiteCommit": "fb9136bd597e5a22d38d89b6434ad04003905265",
+    "canonicalSnapshot": "4930315215a9bafce3419e80107b94a4e699320e",
+    "beforeSha256": "a050bd232895db13b993cf9cbae101ac6cc40d61d10545118fdd8884774cb61d",
+    "afterSha256": "e090aab27e8c8a6bc59df13e51a5a5e2312fd201af82fbdf8276eeefff82ae7b",
+    "humanCards": 13,
+    "allHumanCardsByteIdentical": true,
+    "ownPhase1CParagraphAndMilestoneUpdated": true,
+    "priorPhase1DAndCycle06PanelsPreserved": true,
+    "hostedText": "Complete Linux/Windows2022/Windows2025/packagePASS nowincluded",
+    "unownedNamedPanelsByteIdentical": 25,
+    "unownedAnonymousPanelsByteIdentical": 7,
+    "totalPriorPanelsByteIdentical": 32,
+    "openingConfirmedSiteVersion": 115,
+    "status": "PASS finalsite sourcepreservation"
+  },
+  "archiveVerification": {
+    "status": "PASS",
+    "siteSource": "52147e47516bd6753ef290a10023dd0752524516",
+    "archive": "/private/tmp/iga-m08-cycle07-evidence/site/pilot-cycle07.tar.gz",
+    "members": [
+      "._dist",
+      "dist",
+      "dist/._index.html",
+      "dist/index.html",
+      "dist/._.openai",
+      "dist/.openai",
+      "dist/.openai/._hosting.json",
+      "dist/.openai/hosting.json"
+    ],
+    "localArchiveSha256": "ad6f6659ea34c755ea2b8ee56a75e04594dd8cef2f724da0cb7c042498e75691",
+    "htmlSha256": "e090aab27e8c8a6bc59df13e51a5a5e2312fd201af82fbdf8276eeefff82ae7b",
+    "exactPushedSourceAndLocalArchiveHtmlEqual": true,
+    "manifestProjectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "qualification": "Helper emitted default-locale tar warnings but exited0; all archive HTML/manifest bytes inspected. Native server may repack archive; localgzip hash is not equated to server archive_storage.content_hash."
+  },
+  "worktreeCleanup": {
+    "status": "PASS",
+    "coordinatorCleanCommit": "4930315215a9bafce3419e80107b94a4e699320e",
+    "coordinatorWorktreeRemoved": true,
+    "bothWritingWorkerWorktreesRemoved": true,
+    "allThreeOwnTemporaryWorktreesRemoved": true,
+    "sourceRuntimeArchivesIndependentlyVerified": true,
+    "currentDocsInRetainedGitBranches": true,
+    "sourceBranchesAndFixtureDatabasesRetained": true,
+    "compiledRuntimeBytesSameAsCurrentCommittedCode": true,
+    "unrelatedWorktreesProcessesUntouched": true,
+    "canonicalClosureMethod": "Final owned documentation prepared from committed HEAD and committed with an isolated temporary Git index; root shared working prefixes preserved by guarded integration. No new writing worker or temporary checkout created."
+  },
+  "localRuntimeAndSourcePreservation": {
+    "receipt": "preservation/source-runtime-preservation.json",
+    "sha256": "b3f35c2222c216e1fa0c783a20bbbddc7f0573e0778c8a630204514fd391257f"
+  },
+  "limits": "Nine source bindings remain Missing; actual reviewer qualification/customer evidence and full M08/Phase1C/TP-HAS-012/019/UAT/G1-G9 remain NOT VERIFIED. No migration, package version, setting default or host/provider/live activation."
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "m08-accepted-schema-provenance-cycle07-v1",
   "date": "2026-10-03",
-  "status": "VERIFIED bounded local and hosted engineering; owner-private publication finalization pending",
+  "status": "VERIFIED bounded local and hosted engineering; private publication, evidence preservation and all3ownworktree cleanups confirmed; full milestone open",
   "testedCombinedSource": "ae02576c4368aa62510548c57595078b2f4e773c",
   "firstSevenChecksSource": "9e4999f",
   "engineeringFreeze": "6d50891",
@@ -614,6 +614,30 @@
     {
       "path": "hosted/closure.json",
       "sha256": "bb268a98314f59432e4529da6ee5a56d28d9838e30162235b202113295407944"
+    },
+    {
+      "path": "review/hosted-checkpoint-review.json",
+      "sha256": "2ac9196b29beb6f1bf2d99b72a6ae40a883aec330ca159b324521c5c1e8cb200"
+    },
+    {
+      "path": "preservation/worktree-cleanup.json",
+      "sha256": "d622b169f8adf3139293a8e44d8dbf4fc77d5db0b4c50bdb8bab72f385cf1df8"
+    },
+    {
+      "path": "site/native-publication.json",
+      "sha256": "b74d31da7895eac1ac5b2bb3c9bb6e70da38cf10bc37f08fb7437049598f0bb6"
+    },
+    {
+      "path": "site/preservation.json",
+      "sha256": "7c33540dcb2f0f55b541703fb22175e1a4f26b4d54b5dbe5c7a1dfd0a57c0258"
+    },
+    {
+      "path": "site/archive-verification.json",
+      "sha256": "097ca7e768c74ebdb2dc3acb5d47f0e1b929a72e85c32eb309798c40db11053e"
+    },
+    {
+      "path": "site/site-final-qa.json",
+      "sha256": "40c046015090805f443935d21b9b12a6d9134e173b72a800d1b59160bd4b5542"
     }
   ],
   "behavior": "Additive metadata-only owning accepted-schema read and new unactivated detached schema-readiness adapter; caller transaction/fences and current integrity validation retained. Only old AI declaration gains partial; all old owning method bodies unchanged. The other22 population bindings retain exact historical values. No accepted output JSON leaves the owner.",
@@ -637,7 +661,7 @@
     "Fictional/local only; actual qualified reviewers/customer evidence, fullM08/Phase1C/UAT/G1-G9 remainNOT VERIFIED"
   ],
   "hostedStatus": "PASS complete configured jobs on2b76e3a; exact schema53/389/574 Linux and53eachWindows",
-  "privateSiteStatus": "PENDING current-cycle native publication; latest confirmed external source is tracked separately",
+  "privateSiteStatus": "CONFIRMED owner-private version116/source52147e4, succeeded native deployment; all13human cards and32prior panels preserved",
   "sourceEquivalence": {
     "result": "PASS",
     "coordinatorCommit": "ae02576c4368aa62510548c57595078b2f4e773c",
@@ -720,7 +744,8 @@
     "nativeComparison": "coordinator/old-source-comparison-final.json"
   },
   "completionObservations": [
-    "docs/development/evidence/m08-accepted-schema-provenance-cycle07-hosted-20261003.json"
+    "docs/development/evidence/m08-accepted-schema-provenance-cycle07-hosted-20261003.json",
+    "docs/development/evidence/m08-accepted-schema-provenance-cycle07-site-20261003.json"
   ],
   "additionalWholeHistoricalDiff": {
     "status": "PASS",
@@ -735,5 +760,6 @@
     "log": "/private/tmp/iga-m08-cycle07-evidence/coordinator/whole-historical-diff-final.log",
     "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supersedes": "Initial foreignPhase1DblankEOF diagnostic; separate owner fixed own plan in35d80d, imported unchanged. No cycle07 edit to that plan."
-  }
+  },
+  "publicationSourceQualification": "Site116 reflects canonical4930315 full local/hosted checkpoint. Post-deployment receipt records nativeconfirmation/cleanup only; identical Phase1C phase/gate/task/binding facts require no repeated publication. Separately owned newer Phase1D documentary handoff is preserved in current committed source and may independently advance the Site. Native server-repacked tar hash is not equated with localgzip bytes."
 }
