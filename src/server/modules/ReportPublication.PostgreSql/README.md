@@ -19,3 +19,8 @@ The internal control reader owns an input copy, rejects malformed UTF-8, non-ASC
 This checkpoint follows independently frozen P05B expectations6232bbf and refinement70a1dc, coordinator governing refinements2fa7772/cab65d1 and actual-Migration setup3c02e54. The only core import is coordinator-owned fixed parameterless integrity marker2a5a293; core source construction and original golden bytes are unchanged. Adapter-only test friendship is ReportPublication.Tests.
 
 Executed locally: scoped .NET format and Release build with pinned .NET10.0.401/Npgsql10.0.3, zero warnings/errors. Independent metadata/lease tests and all18 persisted cases remain the verifier's next evidence; compilation alone does not satisfy them. No database was connected or modified.
+
+
+## Independently accepted portable correction
+
+Exact author ce01b389 and verifier a9bc70c1 were integrated after nonauthor review: 257 adapter controls, 7 cancellation-observer controls and 112 wire controls passed; a separate reviewer executed18 controls including32 cancellation/disposal races. Original allocation, callback and pending-wait failures remain in the verifier evidence. Scoped builds/format/scans passed. These control reader, original UTC/monotonic lease and immutable wire components remain unactivated; Session, migration, physical backend cleanup and all18 persisted cases are separate pending work. The [finite cleanup refinement](../../../../docs/development/native-publication-postgresql-fixture-contract.md#finite-cleanup-uncertainty-boundary--2026-10-04) is selected before affected implementation, with its trusted fixture observation seam under independent review.

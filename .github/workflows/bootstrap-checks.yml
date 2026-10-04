@@ -159,8 +159,11 @@ jobs:
           python3 tests/unit/ReportPublication.Tests/oracle/verify_vectors.py
           python3 tests/unit/ReportPublication.Tests/oracle/test_oracle.py
           dotnet run --project tests/unit/ReportPublication.Tests -c Release --no-build
-      - name: Check native PostgreSQL fixture preparation (no persisted case credit)
-        run: dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build
+      - name: Check native PostgreSQL portable controls (no persisted case credit)
+        run: |
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-adapter
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-observer
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-wire
       - name: Check detached canonical draft and inert Markdown
         run: |
           dotnet run --project tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build
@@ -551,9 +554,13 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           dotnet run --project tests/unit/ReportPublication.Tests -c Release --no-restore
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Check Windows native PostgreSQL fixture preparation (no persisted case credit)
+      - name: Check Windows native PostgreSQL portable controls (no persisted case credit)
         run: |
-          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-restore
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-restore -- --portable-adapter
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-observer
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/ReportPublication.PostgreSql.Tests -c Release --no-build -- --portable-wire
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Check Windows bounded scripted source pages
         run: |
