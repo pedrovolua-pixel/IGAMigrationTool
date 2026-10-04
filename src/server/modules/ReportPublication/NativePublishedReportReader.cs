@@ -28,6 +28,11 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                 _ => verifiedScope is null ? PublicationAuditReasonV1.AuthorityDenied : PublicationAuditReasonV1.LifecycleDenied
             });
         }
+        catch (PublicationCommitUncertainException)
+        {
+            outcomeAudit.OperationalSignal(PublicationOperationalSignalV1.CommitOutcomeUnknown, NativeReportPublisherV1.Safe(request?.InvocationId), NativeReportPublisherV1.Safe(request?.CorrelationId));
+            throw;
+        }
         catch (Exception) when (commitAttempted && !committed)
         {
             outcomeAudit.OperationalSignal(PublicationOperationalSignalV1.CommitOutcomeUnknown, NativeReportPublisherV1.Safe(request?.InvocationId), NativeReportPublisherV1.Safe(request?.CorrelationId));
