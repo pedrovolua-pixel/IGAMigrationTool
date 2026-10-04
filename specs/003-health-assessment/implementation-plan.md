@@ -1,5 +1,10 @@
 # Implementation Plan: One Identity Manager Health-Assessment Pilot
 
+## Release-readiness execution authority — 2026-10-03
+
+The repository owner approved continuous execution through M01–M12/G1–G9 using [the coordinator execution record](../../plans/active/pilot-release-readiness-execution.md). AGENTS.md's pilot exception closes repeated internal product/architecture/security approval pauses; document exact decisions/specs/ADRs/tests before dependent code. Actual source/customer/spending authority, independent acceptance and production/irreversible authorization remain required. The critical path is platform/identity → eligible real baseline → real deterministic assessment → Phase1C → Phase1D → two-environment validation. G0 remains PASS; G1–G9 remain NOT VERIFIED.
+
+
 Status: Approved — G0 passed; implementation authorized within this plan  
 Product spec: `specs/003-health-assessment/product-spec.md` (Approved 2026-09-28)  
 Technical spec: `specs/003-health-assessment/technical-spec.md` (Approved 2026-09-28)  

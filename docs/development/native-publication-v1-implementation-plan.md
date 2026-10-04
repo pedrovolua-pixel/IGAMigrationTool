@@ -1,6 +1,6 @@
 # RR-P02: native publication design and execution packet
 
-Status: DESIGN REVIEW — no implementation authorization until exact freeze confirmed
+Status: IMPLEMENTING — RR-P02 design reviewed at4391d27; bounded RR-P03/RR-P04 authorized
 Date: 2026-10-03
 Owner: Pilot coordinator with bounded reporting author and independent verifier
 Base: `810a1eb0288d3af41758991c06c4287b7a75fe46`
@@ -24,7 +24,7 @@ No product code is written in RR-P02. The following code paths are proposals for
 
 | Packet | Proposed owned paths | Exit evidence |
 |---|---|---|
-| RR-P03 oracle | `tests/integration/ReportPublication.Tests/fixtures/`, `tests/integration/ReportPublication.Tests/oracle/` | Independent native canonical bytes/digests, denial/failure corpus and fictional owning source records committed before production code. |
+| RR-P03 oracle | `tests/unit/ReportPublication.Tests/`, `specs/003-health-assessment/native-publication-v1-oracle-addendum.md` | Independent native canonical bytes/digests, denial/failure corpus and fictional owning source records committed before production code. |
 | RR-P04 core | `src/server/modules/ReportPublication/{Contracts,Canonical,NativeReportPublisher,NativePublishedReportReader}.cs`, module README/project/lock | Strong native types, source/authority/blob/transaction ports, exact source/state/warning/integrity guards; NPV-T01–05/10–12/16. Coordinator owns solution/CI wiring. |
 | RR-P05 persisted core | `src/server/modules/ReportPublication/Persistence/`, `src/server/migrations/report-publication/`; bounded explicit test store fixture | Actual PostgreSQL immutable versions/receipts/audit, customer-scoped blob staging adapter and transaction visibility/fence; NPV-T06–09/13–15. Migration paths require coordinator confirmation first. |
 | RR-P06 independent verification | `tests/unit/ReportPublication.Tests/`, `tests/integration/ReportPublication.Tests/` | Independently authored persisted races/oracles, authority/raw/write/load/emission spies, actual login restrictions, byte compatibility and evidence. |
@@ -51,4 +51,4 @@ Rollback removes only unactivated new wiring while preserving canonical versions
 
 ## RR-P02 documentary evidence
 
-Before handoff execute whitespace/diff ownership/link existence checks and a scoped prohibited-data inspection. Record actual results in the handoff with the exact commit. Runtime tests have NOT EXECUTED in this design packet. Independent reviewer disposition and coordinator freeze receipt are pending.
+Before handoff execute whitespace/diff ownership/link existence checks and a scoped prohibited-data inspection. Record actual results in the handoff with the exact commit. Runtime tests have NOT EXECUTED in this design packet. Independent review closed at4391d27d6760e3c457b9c9b61a6fcaf4527ab949. Coordinator integrated the reviewed design atb6c806e and approved bounded RR-P03/RR-P04 implementation on2026-10-03. Exact literal canonical envelopes are completed by the independent oracle addendum before hash implementation.

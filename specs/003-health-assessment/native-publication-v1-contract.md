@@ -1,6 +1,6 @@
 # Native publication v1: internal engineering contract
 
-Status: PROPOSED FREEZE — RR-P02 design; coordinator decision and nonauthor review pending
+Status: FROZEN DESIGN — independent review closed at4391d27; coordinator approved bounded implementation on2026-10-03
 Date: 2026-10-03
 Source baseline: `810a1eb0288d3af41758991c06c4287b7a75fe46`
 Owner: Reporting module owner; coordinator owns integration and canonical records

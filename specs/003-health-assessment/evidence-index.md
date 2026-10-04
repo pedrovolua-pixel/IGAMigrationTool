@@ -1,5 +1,9 @@
 # Implementation Evidence Index: Health-Assessment Pilot
 
+## Release-readiness checkpoint — 2026-10-03
+
+[Executed integration checkpoint and original corrections](../../docs/development/evidence/pilot-release-readiness-20261003.json). This records118-project/43-host plus actual fixture PostgreSQL/HTTPS checks, exact source bounds and pending work. No live gate or acceptance pass follows.
+
 Status: G0 approval recorded; local synthetic/bootstrap checks have run, but no G1–G9 execution gate evidence exists  
 Owner: Technical, quality, security and operations owners  
 Last updated: 2026-10-03
