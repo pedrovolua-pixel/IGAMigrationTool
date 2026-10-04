@@ -74,6 +74,14 @@
     {
       "name": "blocked-callback-cannot-hold-dependency-result-or-original-owner",
       "expected": "Paused cancellation callback does not keep Invoke pending or timer undisposed; cutoff promptly ends wrapper and zero late result escapes."
+    },
+    {
+      "name": "original-caller-state-before-and-after-stalled-dispatch",
+      "expected": "Original admission token canceled state denies fresh dependency start and late result even if a later LIFO callback pauses propagation to the lease bridge."
+    },
+    {
+      "name": "original-caller-pending-wait-despite-stalled-dispatch",
+      "expected": "An already pending ignored-token dependency ends through original cancellation without waiting for the unrelated stalled callback; no late result or retained original owner."
     }
   ],
   "externalOriginalReview": {
