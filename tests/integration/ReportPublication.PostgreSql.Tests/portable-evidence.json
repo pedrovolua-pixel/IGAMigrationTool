@@ -61,6 +61,38 @@
       "observedDependencyStarts": 1,
       "correctionAuthor": "79ef3f1",
       "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "oversized-control-before-copy-observed-allocation",
+      "result": "FAIL",
+      "failureType": "InvalidOperationException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "lease-expiry-owned-throwing-callback-contained-and-executed",
+      "result": "FAIL",
+      "failureType": "AggregateException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "lease-dispose-owned-throwing-callback-executed-cleanup-finally",
+      "result": "FAIL",
+      "failureType": "AggregateException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "d3b2ca1",
+      "name": "lease-expiry-callback-second-thread-getter-outside-gate",
+      "result": "FAIL",
+      "failureType": "InvalidOperationException",
+      "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
+      "correctionReplay": "NOT_EXECUTED"
     }
   ],
   "originalInvocationLimits": [
@@ -70,5 +102,13 @@
     "All18persisted mechanisms PLANNED_NOT_EXECUTED",
     "No SQL migration/role/database setup",
     "Portable controls/lease do not establish real source/authority/cloud gates"
-  ]
+  ],
+  "expandedOriginal": {
+    "scenarioFreeze": "6e966d4537666e4d5e8f236f50ecd70eac26904c",
+    "sourceSnapshot": "d3b2ca1",
+    "passed": 250,
+    "failed": 5,
+    "records": "evidence/portable-d3b2ca1-expanded-original.json",
+    "credit": "portable controls/lease only"
+  }
 }

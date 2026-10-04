@@ -105,6 +105,14 @@ internal static class AdapterPortableChecks
         }
         Check("anonymous-audit-original", () => Require(NativePublicationCanonicalV1.AuditEventBytes(NativeControlReaderV1.Audit(Original("anonymous-denial.audit.json"))).SequenceEqual(Original("anonymous-denial.audit.json"))));
         Check("control-oversize-refusal", () => Deny(() => NativeControlReaderV1.Manifest(new byte[1024 * 1024 + 1])));
+        Check("oversized-control-before-copy-observed-allocation", () =>
+        {
+            var supplied = new byte[8 * 1024 * 1024];
+            var before = GC.GetAllocatedBytesForCurrentThread();
+            Deny(() => NativeControlReaderV1.ReadReceipt(supplied));
+            var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
+            Require(allocated < 65536);
+        });
         var origin = DateTimeOffset.Parse("2026-10-03T12:00:00.0000000Z", System.Globalization.CultureInfo.InvariantCulture);
         Check("lease-minus-one-exact-plus-one", () =>
         {
@@ -158,6 +166,52 @@ internal static class AdapterPortableChecks
             var clock = new FixtureClock(origin); Canceled(() => _ = new OriginalValidityLeaseV1(clock, origin, default));
             Canceled(() => _ = new OriginalValidityLeaseV1(clock, origin - TimeSpan.FromTicks(1), default));
             using var caller = new CancellationTokenSource(); caller.Cancel(); Canceled(() => _ = new OriginalValidityLeaseV1(clock, origin + TimeSpan.FromSeconds(1), caller.Token));
+        });
+        await CheckAsync("lease-expiry-owned-throwing-callback-contained-and-executed", async () =>
+        {
+            var clock = new FixtureClock(origin); using var lease = new OriginalValidityLeaseV1(clock, origin + TimeSpan.FromSeconds(2), default);
+            var ran = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            using var registration = lease.Token.Register(() => { ran.TrySetResult(); throw new InvalidOperationException("Closed owned callback failure."); });
+            clock.Advance(TimeSpan.FromSeconds(2));
+            await ran.Task.WaitAsync(TimeSpan.FromSeconds(2)); Require(lease.Token.IsCancellationRequested); Canceled(lease.Check);
+        });
+        await CheckAsync("lease-dispose-owned-throwing-callback-executed-cleanup-finally", async () =>
+        {
+            var clock = new FixtureClock(origin); var lease = new OriginalValidityLeaseV1(clock, origin + TimeSpan.FromSeconds(2), default);
+            var ran = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            using var registration = lease.Token.Register(() => { ran.TrySetResult(); throw new InvalidOperationException("Closed owned callback failure."); });
+            try
+            {
+                lease.Dispose(); lease.Dispose();
+                await ran.Task.WaitAsync(TimeSpan.FromSeconds(2));
+                Require(clock.TimerDisposals == 1 && lease.Token.IsCancellationRequested); Canceled(lease.Check);
+            }
+            finally { lease.Dispose(); }
+        });
+        await CheckAsync("lease-expiry-callback-second-thread-getter-outside-gate", async () =>
+        {
+            var clock = new FixtureClock(origin); using var lease = new OriginalValidityLeaseV1(clock, origin + TimeSpan.FromSeconds(2), default);
+            var observed = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            using var getterFinished = new ManualResetEventSlim();
+            Thread? getter = null;
+            using var registration = lease.Token.Register(() =>
+            {
+                getter = new Thread(() => { _ = lease.DeadlineUtc; getterFinished.Set(); }) { IsBackground = true };
+                getter.Start(); var completedDuringCallback = getterFinished.Wait(TimeSpan.FromMilliseconds(300));
+                observed.TrySetResult(completedDuringCallback);
+            });
+            clock.Advance(TimeSpan.FromSeconds(2));
+            var ranOutsideGate = await observed.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Require(getter is not null && getter.Join(TimeSpan.FromSeconds(2))); Require(ranOutsideGate);
+        });
+        await CheckAsync("lease-dispose-cancellation-registration-not-dropped-before-dispatch", async () =>
+        {
+            var clock = new FixtureClock(origin); var lease = new OriginalValidityLeaseV1(clock, origin + TimeSpan.FromSeconds(2), default);
+            var ran = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            using var registration = lease.Token.Register(() => ran.TrySetResult());
+            lease.Dispose();
+            await ran.Task.WaitAsync(TimeSpan.FromSeconds(2));
+            Require(clock.TimerDisposals == 1 && lease.Token.IsCancellationRequested);
         });
         foreach (var result in results.Where(x => !x.Passed)) Console.WriteLine("FAIL: " + result.Name + " (" + result.FailureType + ")");
         Console.WriteLine($"Portable adapter: {results.Count(x => x.Passed)} PASS / {results.Count(x => !x.Passed)} FAIL; persisted mechanisms NOT EXECUTED.");

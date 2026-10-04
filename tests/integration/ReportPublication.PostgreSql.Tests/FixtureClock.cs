@@ -5,6 +5,7 @@ internal sealed class FixtureClock(DateTimeOffset initial) : TimeProvider
     private DateTimeOffset utc = initial;
     private long timestamp;
     private readonly List<Timer> timers = [];
+    internal int TimerDisposals { get; private set; }
     public override DateTimeOffset GetUtcNow() { lock (gate) return utc; }
     public override long GetTimestamp() { lock (gate) return timestamp; }
     public override long TimestampFrequency => TimeSpan.TicksPerSecond;
@@ -35,7 +36,7 @@ internal sealed class FixtureClock(DateTimeOffset initial) : TimeProvider
         }
         internal Action? Due(long now)
         { if (disposed || now < due) return null; due = long.MaxValue; return () => callback(state); }
-        public void Dispose() { lock (clock.gate) { disposed = true; due = long.MaxValue; } }
+        public void Dispose() { lock (clock.gate) { if (disposed) return; disposed = true; due = long.MaxValue; clock.TimerDisposals++; } }
         public ValueTask DisposeAsync() { Dispose(); return ValueTask.CompletedTask; }
     }
 }
