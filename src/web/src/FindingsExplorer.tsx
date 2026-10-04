@@ -7,6 +7,7 @@ import type {
   ReviewFinding,
 } from './demo-contract.generated';
 import './FindingsExplorer.css';
+import { RiskDistribution } from './RiskDistribution';
 
 export type ExplorationState = {
   query: string;
@@ -53,8 +54,8 @@ export function FindingsExplorer({
   const prefix = useId();
   const [detailView, setDetailView] = useState<{
     findingId: string | null;
-    view: 'Evidence' | 'Relationships' | 'Recommendations' | 'Original';
-  }>({ findingId: null, view: 'Evidence' });
+    view: 'Overview' | 'Evidence' | 'Relationships' | 'Review' | 'Recommendations' | 'Original';
+  }>({ findingId: null, view: overlay ? 'Overview' : 'Evidence' });
   const { query, severity, category, state, confidence, mandatory, selectedId } = exploration;
   useLayoutEffect(() => {
     if (evidenceView) setDetailView({ findingId: selectedId, view: 'Evidence' });
@@ -62,6 +63,7 @@ export function FindingsExplorer({
   const update = (value: Partial<ExplorationState>) => onChange({ ...exploration, ...value });
   const inspectId = (findingId: string) => `inspect-finding-${runId}-${findingId}`;
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const [visibleLimit, setVisibleLimit] = useState(8);
   const [selectedObject, setSelectedObject] = useState<string | null>(null);
   const resultsHeading = useRef<HTMLHeadingElement>(null);
   const detailHeading = useRef<HTMLHeadingElement>(null);
@@ -106,17 +108,19 @@ export function FindingsExplorer({
   useLayoutEffect(() => {
     setSelectedObject(null);
   }, [selected?.id]);
-  const activeDetailView = detailView.findingId === selectedId ? detailView.view : 'Evidence';
+  const activeDetailView =
+    detailView.findingId === selectedId ? detailView.view : overlay ? 'Overview' : 'Evidence';
   const selectedGuidance =
     guidance?.status === 'Ready'
       ? guidance.snapshot?.findings.find((finding) => finding.findingId === selectedId)
       : undefined;
   const select = (finding: AnalysisFinding) => {
-    setDetailView({ findingId: finding.id, view: 'Evidence' });
+    setDetailView({ findingId: finding.id, view: overlay ? 'Overview' : 'Evidence' });
     update({ selectedId: finding.id });
     requestAnimationFrame(() => {
       detailHeading.current?.focus({ preventScroll: true });
-      detailHeading.current?.scrollIntoView({ block: 'start' });
+      if (overlay) dialogRef.current?.scrollTo({ top: 0 });
+      else detailHeading.current?.scrollIntoView({ block: 'start' });
     });
   };
   const close = () => {
@@ -136,7 +140,86 @@ export function FindingsExplorer({
     onChange({ ...initialExploration, selectedId });
   };
   const filtered = !!(query || severity || category || state || confidence || mandatory);
+  useLayoutEffect(() => {
+    setVisibleLimit(8);
+  }, [query, severity, category, state, confidence, mandatory]);
+  const labelCategory = (value: string) =>
+    value.toLocaleLowerCase().replace(/(^|[ _-])\w/g, (letter) => letter.toLocaleUpperCase());
+  const reviewFinding = () => {
+    if (!selected) return;
+    dialogRef.current?.close();
+    update({ selectedId: null });
+    const controls = document.getElementById('finding-review-controls');
+    if (controls instanceof HTMLDetailsElement) controls.open = true;
+    requestAnimationFrame(() => {
+      const target = document.getElementById(`review-finding-${runId}-${selected.id}`);
+      target?.focus({ preventScroll: true });
+      target?.scrollIntoView({ block: 'start' });
+    });
+  };
 
+  const filters = (
+    <>
+      <div className="finding-filters" role="search" aria-label="Filter findings">
+        <div className="finding-search">
+          <label htmlFor={`${prefix}-search`}>Search findings</label>
+          <input
+            id={`${prefix}-search`}
+            type="search"
+            maxLength={250}
+            value={query}
+            onChange={(event) => update({ query: event.target.value })}
+            placeholder="Title, rule, object or evidence reference"
+          />
+        </div>
+        <Filter
+          id={`${prefix}-severity`}
+          label="Finding severity"
+          value={severity}
+          values={unique(findings.map((finding) => finding.severity))}
+          onChange={(value) => update({ severity: value })}
+        />
+        {!overlay && (
+          <Filter
+            id={`${prefix}-category`}
+            label="Finding category"
+            value={category}
+            values={unique(findings.map((finding) => finding.category))}
+            onChange={(value) => update({ category: value })}
+          />
+        )}
+        <Filter
+          id={`${prefix}-state`}
+          label="Finding state"
+          value={state}
+          values={unique(findings.map(findingState))}
+          onChange={(value) => update({ state: value })}
+        />
+        <Filter
+          id={`${prefix}-confidence`}
+          label="Confidence band"
+          value={confidence}
+          values={unique(findings.map((finding) => finding.confidenceBand))}
+          onChange={(value) => update({ confidence: value })}
+        />
+      </div>
+      <div className="finding-filter-actions">
+        <button
+          type="button"
+          aria-pressed={mandatory}
+          onClick={() => update({ mandatory: !mandatory })}
+        >
+          Mandatory review pending
+        </button>
+        <button type="button" onClick={clear} disabled={!filtered}>
+          Clear finding filters
+        </button>
+        <p role="status" aria-live="polite" aria-atomic="true">
+          Showing {visible.length} of {findings.length} findings{filtered ? ' · Filtered' : ''}
+        </p>
+      </div>
+    </>
+  );
   const detail = (
     <aside
       className="finding-detail"
@@ -149,9 +232,7 @@ export function FindingsExplorer({
       }}
     >
       <div className="finding-detail-title">
-        <h4 id={`${prefix}-detail`} tabIndex={-1} ref={detailHeading}>
-          {selected ? (selectedReview?.title ?? selected.title) : 'Finding and evidence'}
-        </h4>
+        <h2 className="risk-drawer-heading">{overlay ? 'Risk details' : 'Finding details'}</h2>
         {selected && (
           <button type="button" onClick={close}>
             <span className="finding-close-label">Close finding</span>
@@ -159,6 +240,19 @@ export function FindingsExplorer({
           </button>
         )}
       </div>
+      <div className="risk-detail-badges">
+        {selected && (
+          <>
+            <span className={`risk-pill ${selected.severity.toLowerCase()}`}>
+              {selected.severity}
+            </span>
+            <span className="risk-pill">{selectedReview?.state ?? selected.state}</span>
+          </>
+        )}
+      </div>
+      <h3 id={`${prefix}-detail`} tabIndex={-1} ref={detailHeading}>
+        {selected ? (selectedReview?.title ?? selected.title) : 'Finding and evidence'}
+      </h3>
       {!selected ? (
         <p>
           Select Inspect on a finding to see its explanation, evidence and original recommendations
@@ -171,69 +265,84 @@ export function FindingsExplorer({
               This selected finding is outside the current filters. Its details remain open.
             </p>
           )}
-          <p>
-            <strong>{selected.severity}</strong> · {dedicated ? 'Method: ' : ''}
-            {selected.method} · Confidence {selected.confidencePercent}% · {selected.confidenceBand}
-          </p>
-          <dl className="finding-detail-facts">
+          <div className="risk-summary-facts">
             <div>
-              <dt>Current review state</dt>
-              <dd>{selectedReview?.state ?? 'No current review snapshot available'}</dd>
+              Category<strong>{labelCategory(selected.category)}</strong>
             </div>
             <div>
-              <dt>Generated state</dt>
-              <dd>{selected.initialState}</dd>
+              Confidence
+              <strong>
+                {selected.confidencePercent}% · {selected.method}
+              </strong>
             </div>
-            <div>
-              <dt>Original title</dt>
-              <dd>{selected.originalTitle}</dd>
-            </div>
-            <div>
-              <dt>Category / rule</dt>
-              <dd>
-                {selected.category} · {selected.ruleId} / {selected.ruleVersion}
-              </dd>
-            </div>
-            {selectedReview && (
-              <div>
-                <dt>Current business context</dt>
-                <dd>{selectedReview.businessContext || 'No business context supplied.'}</dd>
-              </div>
-            )}
-          </dl>
-          {selectedReview && (
-            <button
-              type="button"
-              onClick={() => {
-                if (overlay) {
-                  dialogRef.current?.close();
-                  update({ selectedId: null });
-                }
-                const target = document.getElementById(`review-finding-${runId}-${selected.id}`);
-                target?.focus({ preventScroll: true });
-                target?.scrollIntoView({ block: 'start' });
-              }}
-            >
-              Review this finding
-            </button>
-          )}
+          </div>
           {dedicated && (
             <div className="finding-detail-tabs" role="group" aria-label="Finding detail views">
-              {(['Evidence', 'Relationships', 'Recommendations', 'Original'] as const).map(
-                (view) => (
-                  <button
-                    type="button"
-                    key={view}
-                    aria-pressed={activeDetailView === view}
-                    aria-controls={`${prefix}-${view.toLowerCase()}`}
-                    onClick={() => setDetailView({ findingId: selectedId, view })}
-                  >
-                    {view}
-                  </button>
-                ),
-              )}
+              {(overlay
+                ? (['Overview', 'Relationships', 'Evidence', 'Review'] as const)
+                : (['Evidence', 'Relationships', 'Recommendations', 'Original'] as const)
+              ).map((view) => (
+                <button
+                  type="button"
+                  key={view}
+                  aria-pressed={activeDetailView === view}
+                  aria-controls={`${prefix}-${view.toLowerCase()}`}
+                  onClick={() => setDetailView({ findingId: selectedId, view })}
+                >
+                  {view}
+                </button>
+              ))}
             </div>
           )}
+          <section id={`${prefix}-overview`} hidden={!overlay || activeDetailView !== 'Overview'}>
+            <h4>Why this matters</h4>
+            <p>{selected.rootCause}</p>
+            <h4>Potential impact</h4>
+            <p>{selected.impact}</p>
+            <h4>Assessment method</h4>
+            <p>
+              {selected.method} · {selected.ruleId} / {selected.ruleVersion}
+            </p>
+            <h4>Review-only guidance</h4>
+            <p>{selected.validationGuidance || 'No validation guidance supplied.'}</p>
+            <details>
+              <summary>Original and limitations</summary>
+              {renderOriginal(selected)}
+              <List values={selected.limitations} empty="No limitations supplied." />
+            </details>
+            <details>
+              <summary>Original recommendation options · Unverified</summary>
+              <List
+                values={selected.recommendations}
+                empty="No original recommendations supplied."
+              />
+            </details>
+          </section>
+          <section id={`${prefix}-review`} hidden={!overlay || activeDetailView !== 'Review'}>
+            <h4>Review state</h4>
+            <p>{selectedReview?.state ?? selected.state}</p>
+            <p className="field-note">Original generated state: {selected.initialState}</p>
+            <p>{selectedReview?.businessContext || 'No business context supplied.'}</p>
+            {selectedReview ? (
+              <>
+                <button type="button" onClick={reviewFinding}>
+                  Review this finding
+                </button>
+                <details>
+                  <summary>Review history ({selectedReview.history.length} events)</summary>
+                  {selectedReview.history.map((event) => (
+                    <p key={event.eventId}>
+                      {event.kind} · {event.actorId} · {event.recordedAtUtc}
+                      <br />
+                      {event.text}
+                    </p>
+                  ))}
+                </details>
+              </>
+            ) : (
+              <p>No admitted review record is supplied.</p>
+            )}
+          </section>
           <section
             id={`${prefix}-relationships`}
             hidden={activeDetailView !== 'Relationships'}
@@ -409,72 +518,67 @@ export function FindingsExplorer({
       className={`findings-explorer subsection ${dedicated ? 'findings-dedicated' : ''} ${selected ? 'finding-is-open' : ''}`}
       aria-labelledby="findings-heading"
     >
-      <p className="eyebrow">Investigate / Fixed synthetic evidence</p>
-      <h4 id="findings-heading" tabIndex={-1} ref={resultsHeading}>
-        Generated findings
-      </h4>
-      <p className="field-note">
-        Filter this saved snapshot, then inspect a finding and its evidence together. Filters do not
-        change health scores, review history or reports.
-      </p>
-      <div className="finding-filters" role="search" aria-label="Filter findings">
-        <div className="finding-search">
-          <label htmlFor={`${prefix}-search`}>Search findings</label>
-          <input
-            id={`${prefix}-search`}
-            type="search"
-            maxLength={250}
-            value={query}
-            onChange={(event) => update({ query: event.target.value })}
-            placeholder="Title, rule, object or evidence reference"
-          />
+      {!overlay && (
+        <>
+          <p className="eyebrow">Investigate / Fixed synthetic evidence</p>
+          <p className="field-note">Filter the saved snapshot and inspect its supplied evidence.</p>
+        </>
+      )}
+      {overlay ? (
+        <div className="risk-toolbar">
+          <div className="risk-severity-filters" role="group" aria-label="Severity filters">
+            {['', 'Critical', 'High', 'Medium', 'Low', 'Informational'].map((value) => (
+              <button
+                key={value}
+                type="button"
+                aria-pressed={severity === value}
+                onClick={() => update({ severity: value })}
+              >
+                {value || 'All findings'}
+              </button>
+            ))}
+          </div>
+          <div className="risk-category-row">
+            <Filter
+              id={`${prefix}-category`}
+              label="Category"
+              value={category}
+              values={unique(findings.map((f) => f.category))}
+              onChange={(value) => update({ category: value })}
+            />
+            <span role="status" aria-live="polite">
+              {visible.length} of {findings.length} findings
+            </span>
+            {filtered && (
+              <button type="button" className="risk-clear" onClick={clear}>
+                Clear filters
+              </button>
+            )}
+            <details className="risk-advanced-filters">
+              <summary>More filters</summary>
+              {filters}
+            </details>
+          </div>
         </div>
-        <Filter
-          id={`${prefix}-severity`}
-          label="Finding severity"
-          value={severity}
-          values={unique(findings.map((finding) => finding.severity))}
-          onChange={(value) => update({ severity: value })}
+      ) : (
+        filters
+      )}
+      {overlay && (
+        <RiskDistribution
+          findings={findings}
+          category={category}
+          severity={severity}
+          onFilter={(value) => update(value)}
         />
-        <Filter
-          id={`${prefix}-category`}
-          label="Finding category"
-          value={category}
-          values={unique(findings.map((finding) => finding.category))}
-          onChange={(value) => update({ category: value })}
-        />
-        <Filter
-          id={`${prefix}-state`}
-          label="Finding state"
-          value={state}
-          values={unique(findings.map(findingState))}
-          onChange={(value) => update({ state: value })}
-        />
-        <Filter
-          id={`${prefix}-confidence`}
-          label="Confidence band"
-          value={confidence}
-          values={unique(findings.map((finding) => finding.confidenceBand))}
-          onChange={(value) => update({ confidence: value })}
-        />
-      </div>
-      <div className="finding-filter-actions">
-        <button
-          type="button"
-          aria-pressed={mandatory}
-          onClick={() => update({ mandatory: !mandatory })}
-        >
-          Mandatory review pending
-        </button>
-        <button type="button" onClick={clear} disabled={!filtered}>
-          Clear finding filters
-        </button>
-        <p role="status" aria-live="polite" aria-atomic="true">
-          Showing {visible.length} of {findings.length} findings{filtered ? ' · Filtered' : ''}
-        </p>
-      </div>
+      )}
       <div className={`finding-investigation ${selected ? 'has-selection' : ''}`}>
-        <div className="finding-results">
+        <div className={`finding-results ${overlay ? 'risk-findings-panel' : ''}`}>
+          <div className="risk-list-heading">
+            <h4 id="findings-heading" tabIndex={-1} ref={resultsHeading}>
+              Findings
+            </h4>
+            <span>{visible.length} matching</span>
+          </div>
           {!findings.length ? (
             <p>
               No findings were generated by the executed fixture rules. Check coverage and
@@ -485,7 +589,7 @@ export function FindingsExplorer({
               No findings match these filters. Clear finding filters to see the full saved snapshot.
             </p>
           ) : (
-            visible.map((finding) => (
+            (overlay ? visible.slice(0, visibleLimit) : visible).map((finding) => (
               <article
                 className={`analysis-finding severity-${finding.severity.toLowerCase()}`}
                 key={finding.id}
@@ -496,25 +600,38 @@ export function FindingsExplorer({
                     type="button"
                     className="inspect-finding finding-row-title"
                     id={inspectId(finding.id)}
-                    aria-pressed={selectedId === finding.id}
+                    aria-expanded={selectedId === finding.id}
                     aria-controls={`${prefix}-detail`}
                     onClick={() => select(finding)}
                   >
                     <span className="sr-only">Inspect </span>
-                    {current(finding)?.title ?? finding.title}
+                    <span className="risk-row-copy">
+                      <span className={`risk-pill ${finding.severity.toLowerCase()}`}>
+                        {finding.severity}
+                      </span>
+                      <strong>{current(finding)?.title ?? finding.title}</strong>
+                      <small>
+                        {findingState(finding)} · {labelCategory(finding.category)} ·{' '}
+                        {finding.method}
+                      </small>
+                    </span>
+                    <span aria-hidden="true">›</span>
                   </button>
                 )}
-                <p className="finding-row-meta">
-                  <strong>{finding.severity}</strong> · {dedicated ? 'Method: ' : ''}
-                  {finding.method} · Confidence {finding.confidencePercent}% ·{' '}
-                  {finding.confidenceBand} · {dedicated ? 'State: ' : ''}
-                  {findingState(finding)}
-                  {needsReview(finding) ? ' · Mandatory review pending' : ''}
-                </p>
-                <p className="field-note">
-                  {finding.category} · {finding.objectIds.length} affected synthetic objects ·{' '}
-                  {finding.ruleId} / {finding.ruleVersion}
-                </p>
+                {!dedicated && (
+                  <>
+                    <p className="finding-row-meta">
+                      <strong>{finding.severity}</strong> · {finding.method} · Confidence{' '}
+                      {finding.confidencePercent}% · {finding.confidenceBand} ·{' '}
+                      {findingState(finding)}
+                      {needsReview(finding) ? ' · Mandatory review pending' : ''}
+                    </p>
+                    <p className="field-note">
+                      {finding.category} · {finding.objectIds.length} affected synthetic objects ·{' '}
+                      {finding.ruleId} / {finding.ruleVersion}
+                    </p>
+                  </>
+                )}
                 {!dedicated && (
                   <button
                     type="button"
@@ -531,6 +648,15 @@ export function FindingsExplorer({
               </article>
             ))
           )}
+          {overlay && visible.length > visibleLimit && (
+            <button
+              type="button"
+              className="risk-show-more"
+              onClick={() => setVisibleLimit((value) => value + 8)}
+            >
+              Show more findings
+            </button>
+          )}
         </div>
         {overlay ? (
           <dialog
@@ -546,6 +672,25 @@ export function FindingsExplorer({
             }}
           >
             {detail}
+            {selected && (
+              <div className="risk-drawer-actions">
+                <button
+                  type="button"
+                  onClick={() => setDetailView({ findingId: selected.id, view: 'Relationships' })}
+                >
+                  Explore relationships
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDetailView({ findingId: selected.id, view: 'Evidence' })}
+                >
+                  View evidence references
+                </button>
+                <p className="field-note">
+                  Synthetic finding · supplied references · no live operations
+                </p>
+              </div>
+            )}
           </dialog>
         ) : (
           detail

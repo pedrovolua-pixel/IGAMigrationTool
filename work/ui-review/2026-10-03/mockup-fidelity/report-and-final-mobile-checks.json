@@ -1,0 +1,41 @@
+{
+  "reports": [
+    {
+      "label": "Practitioner",
+      "selected": "true"
+    },
+    {
+      "label": "Auditor",
+      "selected": "true"
+    },
+    {
+      "label": "Assessment quality",
+      "selected": "true"
+    },
+    {
+      "label": "Publication history",
+      "selected": "true"
+    },
+    {
+      "label": "Executive",
+      "selected": "true"
+    }
+  ],
+  "mobile": [
+    {
+      "area": "Reports",
+      "documentWidth": 305,
+      "width": 320
+    },
+    {
+      "area": "Recommendations",
+      "documentWidth": 305,
+      "width": 320
+    },
+    {
+      "area": "Risk analysis",
+      "documentWidth": 305,
+      "width": 320
+    }
+  ]
+}

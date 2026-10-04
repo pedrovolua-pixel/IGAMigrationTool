@@ -1,0 +1,97 @@
+[
+  {
+    "area": "Settings",
+    "label": "General",
+    "selected": "true"
+  },
+  {
+    "area": "Settings",
+    "label": "Assessment",
+    "selected": "true"
+  },
+  {
+    "area": "Settings",
+    "label": "AI",
+    "selected": "true"
+  },
+  {
+    "area": "Settings",
+    "label": "Access",
+    "selected": "true"
+  },
+  {
+    "area": "Settings",
+    "label": "Data policy",
+    "selected": "true"
+  },
+  {
+    "area": "Settings",
+    "label": "Notifications",
+    "selected": "true"
+  },
+  {
+    "area": "Settings",
+    "label": "Integrations",
+    "selected": "true"
+  },
+  {
+    "area": "Settings",
+    "label": "Appearance",
+    "selected": "true"
+  },
+  {
+    "area": "Sources & baselines",
+    "label": "Connection",
+    "selected": "true"
+  },
+  {
+    "area": "Sources & baselines",
+    "label": "Object inventory",
+    "selected": "true"
+  },
+  {
+    "area": "Sources & baselines",
+    "label": "Baselines",
+    "selected": "true"
+  },
+  {
+    "area": "Sources & baselines",
+    "label": "Collection history",
+    "selected": "true"
+  },
+  {
+    "area": "Rule catalog",
+    "label": "Catalog",
+    "selected": "true"
+  },
+  {
+    "area": "Rule catalog",
+    "label": "Version history",
+    "selected": "true"
+  },
+  {
+    "area": "Rule catalog",
+    "label": "Custom rules",
+    "selected": "true"
+  },
+  {
+    "area": "Migration",
+    "label": "Readiness",
+    "selected": "true"
+  },
+  {
+    "area": "Migration",
+    "label": "Mappings",
+    "selected": "true"
+  },
+  {
+    "area": "Migration",
+    "label": "Scope decisions",
+    "selected": "true"
+  },
+  {
+    "area": "Migration",
+    "label": "Validation",
+    "selected": "true"
+  }
+]

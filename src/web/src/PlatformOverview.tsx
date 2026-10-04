@@ -64,7 +64,6 @@ export function PlatformOverview({
     severity,
     count: findings.filter((finding) => finding.severity === severity).length,
   }));
-  const maximumSeverity = Math.max(1, ...severityCounts.map((item) => item.count));
   const hotspots = [...new Set(findings.map((finding) => finding.category))]
     .map((category) => ({
       category,
@@ -73,6 +72,10 @@ export function PlatformOverview({
     .sort((a, b) => b.count - a.count || a.category.localeCompare(b.category));
   const quality = current?.quality;
   const coverage = run?.executableCoverage;
+  const coverageLabel =
+    coverage?.hasApplicableUnits && coverage.denominator > 0
+      ? `${coverage.numerator} / ${coverage.denominator} executed applicable units`
+      : 'coverage unavailable';
   const maturity = current?.maturity?.status === 'Ready' ? current.maturity.level : null;
   const categories = current?.categories ?? [];
   const radarAvailable =
@@ -87,17 +90,10 @@ export function PlatformOverview({
       .join(' ');
 
   return (
-    <section className="platform-overview" aria-labelledby="platform-overview-heading">
-      <header className="platform-overview-heading">
-        <div>
-          <h2 id="platform-overview-heading" tabIndex={-1}>
-            Your assessment at a glance
-          </h2>
-          <p>Health, priority risks, and what needs review next.</p>
-        </div>
-        {run && <span className="platform-overview-tag">{run.selection.scopeLabel}</span>}
-      </header>
-
+    <section
+      className="platform-overview"
+      aria-label={run ? `${run.selection.scopeLabel} assessment overview` : 'Assessment overview'}
+    >
       {!current && (
         <p className="platform-overview-notice" role="status">
           {run
@@ -138,6 +134,21 @@ export function PlatformOverview({
                 {value === null ? 'Health unavailable' : `${current?.provisional?.status} status`}
               </strong>
               <p>Current publishable score: {scoreLabel(current?.publishableCurrent)}</p>
+              {current && (
+                <div
+                  className="platform-overview-priority-chips"
+                  aria-label="Priority finding counts"
+                >
+                  {severityCounts.slice(0, 2).map(({ severity, count }) => (
+                    <span
+                      className={`platform-overview-tag priority-${severity.toLowerCase()}`}
+                      key={severity}
+                    >
+                      {count} {severity}
+                    </span>
+                  ))}
+                </div>
+              )}
               <button type="button" onClick={() => onNavigate('Outcomes & maturity')}>
                 {maturity ? `Maturity: ${maturity}` : 'Explore outcomes & maturity'}
                 <span aria-hidden="true"> →</span>
@@ -145,7 +156,7 @@ export function PlatformOverview({
             </div>
           </div>
           <p className="platform-overview-footnote">
-            Provisional and publishable scores stay separate from assessment quality.
+            Provisional assessment · review status and quality tracked separately.
           </p>
         </section>
 
@@ -347,120 +358,130 @@ export function PlatformOverview({
           </p>
         </section>
 
-        <section className="platform-overview-panel" aria-labelledby="overview-severity-heading">
-          <div className="platform-overview-panel-heading">
-            <h3 id="overview-severity-heading">Findings by severity</h3>
-          </div>
-          {current ? (
-            <ul className="platform-overview-severities">
-              {severityCounts.map(({ severity, count }) => (
-                <li key={severity}>
-                  <span>{severity}</span>
-                  <div className="platform-overview-bar-track" aria-hidden="true">
-                    <span style={{ width: `${(count / maximumSeverity) * 100}%` }} />
-                  </div>
-                  <strong>
-                    {count}
-                    <span className="platform-overview-screen-reader"> findings</span>
-                  </strong>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="platform-overview-empty">Finding severity counts are unavailable.</p>
-          )}
-          <button
-            className="platform-overview-link"
-            type="button"
-            onClick={() => onNavigate('Findings')}
-          >
-            Explore priority risks <span aria-hidden="true">→</span>
-          </button>
-        </section>
-
-        <section className="platform-overview-panel" aria-labelledby="overview-review-heading">
-          <div className="platform-overview-panel-heading">
-            <h3 id="overview-review-heading">Review focus</h3>
-          </div>
-          {current ? (
-            <dl className="platform-overview-metrics">
-              <div>
-                <dt>Proposed findings</dt>
-                <dd>{proposed.length}</dd>
-              </div>
-              <div>
-                <dt>Critical / high proposed</dt>
-                <dd>{priorityProposed.length}</dd>
-              </div>
-              <div>
-                <dt>Occurrences awaiting mandatory review</dt>
-                <dd>{quality?.proposedReviewUnits ?? 'Unavailable'}</dd>
-              </div>
-            </dl>
-          ) : (
-            <p className="platform-overview-empty">Verified review results are unavailable.</p>
-          )}
-          <p className="platform-overview-footnote">
-            {review
-              ? 'Uses the current verified review snapshot.'
-              : current
-                ? 'Uses finding states; a current review snapshot is unavailable.'
-                : 'Review does not change historical evidence.'}
-          </p>
-          <button
-            className="platform-overview-link"
-            type="button"
-            onClick={() => onNavigate('Tasks & reviews')}
-          >
-            Open tasks & reviews <span aria-hidden="true">→</span>
-          </button>
-        </section>
-
         <section
-          className="platform-overview-panel platform-overview-quality"
-          aria-labelledby="overview-quality-heading"
+          className="platform-overview-panel platform-overview-review"
+          aria-labelledby="overview-review-heading"
         >
-          <div className="platform-overview-panel-heading">
-            <h3 id="overview-quality-heading">Separate assessment quality</h3>
-            <span className="platform-overview-caption">Not part of health</span>
+          <div className="platform-overview-review-summary">
+            <div>
+              <h3 id="overview-review-heading">Review focus</h3>
+              <p>
+                {current
+                  ? `${proposed.length} proposed findings await review · ${priorityProposed.length} are Critical or High.`
+                  : 'Verified review results are unavailable.'}
+              </p>
+            </div>
+            <button
+              className="platform-overview-action"
+              type="button"
+              onClick={() => onNavigate('Findings')}
+            >
+              Explore priority risks <span aria-hidden="true">→</span>
+            </button>
           </div>
-          <dl className="platform-overview-metrics">
-            <div>
-              <dt>Executable coverage</dt>
-              <dd>
-                {coverage?.hasApplicableUnits && coverage.denominator > 0
-                  ? `${coverage.numerator} / ${coverage.denominator}`
-                  : 'Unavailable'}
-              </dd>
+          <p className="platform-overview-footnote">
+            Assessment quality: {coverageLabel} · limitations tracked separately from health.
+          </p>
+          <details className="platform-overview-quality-details">
+            <summary>Review &amp; assessment quality details</summary>
+            <div className="platform-overview-detail-grid">
+              <section aria-labelledby="overview-review-detail-heading">
+                <h4 id="overview-review-detail-heading">Current review</h4>
+                {current ? (
+                  <dl className="platform-overview-metrics">
+                    <div>
+                      <dt>Proposed findings</dt>
+                      <dd>{proposed.length}</dd>
+                    </div>
+                    <div>
+                      <dt>Critical / high proposed</dt>
+                      <dd>{priorityProposed.length}</dd>
+                    </div>
+                    <div>
+                      <dt>Occurrences awaiting mandatory review</dt>
+                      <dd>{quality?.proposedReviewUnits ?? 'Unavailable'}</dd>
+                    </div>
+                  </dl>
+                ) : (
+                  <p>Verified review results are unavailable.</p>
+                )}
+                <p className="platform-overview-detail-caption">
+                  {review
+                    ? 'Uses the current verified review snapshot.'
+                    : current
+                      ? 'Uses finding states; a current review snapshot is unavailable.'
+                      : 'Review does not change historical evidence.'}
+                </p>
+                <button
+                  className="platform-overview-link"
+                  type="button"
+                  onClick={() => onNavigate('Tasks & reviews')}
+                >
+                  Open tasks &amp; reviews <span aria-hidden="true">→</span>
+                </button>
+              </section>
+              <section aria-labelledby="overview-quality-heading">
+                <h4 id="overview-quality-heading">Separate assessment quality</h4>
+                <dl className="platform-overview-metrics">
+                  <div>
+                    <dt>Executable coverage</dt>
+                    <dd>
+                      {coverage?.hasApplicableUnits && coverage.denominator > 0
+                        ? `${coverage.numerator} / ${coverage.denominator}`
+                        : 'Unavailable'}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Planned units</dt>
+                    <dd>{quality?.plannedUnits ?? run?.progress.plannedUnits ?? 'Unavailable'}</dd>
+                  </div>
+                  <div>
+                    <dt>Executed applicable units</dt>
+                    <dd>{quality?.executedUnits ?? 'Unavailable'}</dd>
+                  </div>
+                  <div>
+                    <dt>Explained gap units</dt>
+                    <dd>{quality?.gapUnits ?? 'Unavailable'}</dd>
+                  </div>
+                  <div>
+                    <dt>Not applicable units</dt>
+                    <dd>{quality?.notApplicableUnits ?? 'Unavailable'}</dd>
+                  </div>
+                  <div>
+                    <dt>Finding occurrences</dt>
+                    <dd>{quality?.totalFindingUnits ?? 'Unavailable'}</dd>
+                  </div>
+                </dl>
+                <button
+                  className="platform-overview-link"
+                  type="button"
+                  onClick={() => onNavigate('Evidence')}
+                >
+                  Explore evidence &amp; coverage <span aria-hidden="true">→</span>
+                </button>
+              </section>
+              <section aria-labelledby="overview-severity-heading">
+                <h4 id="overview-severity-heading">Findings by severity</h4>
+                {current ? (
+                  <dl className="platform-overview-metrics">
+                    {severityCounts.map(({ severity, count }) => (
+                      <div key={severity}>
+                        <dt>
+                          <span>{severity}</span>
+                        </dt>
+                        <dd>{count} findings</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : (
+                  <p>Finding severity counts are unavailable.</p>
+                )}
+                <p className="platform-overview-detail-caption">
+                  Recorded findings include retained review history.
+                </p>
+              </section>
             </div>
-            <div>
-              <dt>Planned units</dt>
-              <dd>{quality?.plannedUnits ?? run?.progress.plannedUnits ?? 'Unavailable'}</dd>
-            </div>
-            <div>
-              <dt>Executed applicable units</dt>
-              <dd>{quality?.executedUnits ?? 'Unavailable'}</dd>
-            </div>
-            <div>
-              <dt>Explained gap units</dt>
-              <dd>{quality?.gapUnits ?? 'Unavailable'}</dd>
-            </div>
-            <div>
-              <dt>Not applicable units</dt>
-              <dd>{quality?.notApplicableUnits ?? 'Unavailable'}</dd>
-            </div>
-            <div>
-              <dt>Finding occurrences</dt>
-              <dd>{quality?.totalFindingUnits ?? 'Unavailable'}</dd>
-            </div>
-          </dl>
-          <button
-            className="platform-overview-link"
-            type="button"
-            onClick={() => onNavigate('Evidence')}
-          >
-            Explore evidence & coverage <span aria-hidden="true">→</span>
-          </button>
+          </details>
         </section>
       </div>
     </section>

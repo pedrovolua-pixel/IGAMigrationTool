@@ -1,0 +1,209 @@
+{
+  "packet": "UI-W5",
+  "date": "2026-10-03",
+  "result": "bounded local fidelity correction verified; owner visual acceptance pending",
+  "baseline_commit": "e83e234db83f41ee8c4f586d1e703dcda99d74b7",
+  "authority": "Owner requested implementation follow approved complete mockup, explicitly comparing Risk at5211/#risk with implementation at5212.",
+  "qualification": "UI-W4 established local functional/data checks; it did not establish visual parity or owner acceptance of implementation.",
+  "scope": [
+    "Risk severity chips/category row, equal chart panels, compact badge/title rows, native four-tab unblurred inspector",
+    "Overview approved five-panel composition",
+    "AI four tabs and assistant/context/usage split with disabled unavailable operations",
+    "Settings forms and management underline tabs, actual audit table and screenshot gallery",
+    "Three-column task board and mounted progressive controls; recommendations four-stat strip and split; five report audiences from one canonical snapshot"
+  ],
+  "checks": {
+    "contract_generation": "pass",
+    "strict_typecheck": "pass",
+    "production_build": "pass",
+    "prettier_frontend_and_contracts": "pass",
+    "npm_audit": "0 vulnerabilities",
+    "gitleaks_frontend": "no leaks",
+    "scoped_git_diff_check": "pass"
+  },
+  "rendering_assertions": {
+    "risk": 109,
+    "AI": 125,
+    "areas": 75,
+    "overview": 51,
+    "reports": 42,
+    "existing_areas_regression": 27
+  },
+  "independent_review": {
+    "risk_and_controller_retention": "clean after visible reset/badge and mobile scroll fixes",
+    "AI": "clean after offline-preview/Unavailable-health binding correction;20 independent assertions",
+    "overview": "clean;42 independent assertions; severity palette aligned",
+    "areas": "clean;27 independent assertions",
+    "reports": "clean;50 independent assertions and inline render byte-identical to HEAD baseline",
+    "recommendations": "Ready empty and flat stat strip corrected"
+  },
+  "browser": {
+    "matched_risk_comparison": "1280x720 approved and implemented JPEGs",
+    "navigation": "all18 areas open without desktop overflow",
+    "tabs": "AI4/settings8/sources4/rules3/migration4/tasks3/reports5 selected-state checks pass",
+    "filters": "severity, category+severity heatmap, text search and visible reset checked",
+    "inspector": "Overview/Relationships/Evidence/Review; modal background filter none, Escape returns row focus; review opens mounted editor",
+    "draft_retention": "unsaved review retained after Reports and Risk navigation",
+    "mobile": "390 and320 widths observed with no page overflow on changed areas; final Reports/Recommendations/Risk checked at320; Close top20 and dialog scroll0 after overlay fix"
+  },
+  "intentional_data_differences": [
+    "Saved fixture has5findings and2categories; mockup has33findings and5categories. Counts and bars retain admitted data.",
+    "All5actual severity levels retained; mockup visual sample displayed3.",
+    "History, unknown settings, AI budgets, customer risk acceptance, execution and publication remain unavailable within approved composition."
+  ],
+  "limitations": [
+    "Frozen GET-only synthetic preview rejects writes; full backend-mutating workflow regression NOT VERIFIED.",
+    "Supported Windows/browser/screen-reader/zoom and complete operational/human visual acceptance NOT VERIFIED.",
+    "Build succeeds with523.33kB minified JS chunk-size warning; no dependency additions or backend/permission/migration changes.",
+    "Application source remains local Git; no GitHub push or production application release."
+  ],
+  "source_files": [
+    {
+      "path": "src/web/src/App.tsx",
+      "sha256": "9d0d56ed59a7d3b90e177dfa36fbe0a62544a93b64590af7810ed87b94c8ef06"
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "5feee2d1b369016512792696afc4954169fb9a80dd88d3de80663e457ea9f89b"
+    },
+    {
+      "path": "src/web/src/FindingsExplorer.tsx",
+      "sha256": "61a08ff7cf00f296fa4737cd896dbc2341c4d1c98167833a6a17390b19e27823"
+    },
+    {
+      "path": "src/web/src/RiskDistribution.tsx",
+      "sha256": "61044a4d167d27c6ee0811b594de92f290fedc007800136d46b5fd5c3a2c7f9a"
+    },
+    {
+      "path": "src/web/src/RiskDistribution.css",
+      "sha256": "391a7055f21440a9044cc83351555bef6a00f17213461eb39f3fd788a0643fe8"
+    },
+    {
+      "path": "src/web/src/AiWorkspace.tsx",
+      "sha256": "2f5f33718a741f037de61cf30fc3899f771f343b85e413840294896d660ed2f7"
+    },
+    {
+      "path": "src/web/src/AiWorkspace.css",
+      "sha256": "fe485a62a2527035715e55a89173c01d30e9642815946a1526ebbeaeaa6e2980"
+    },
+    {
+      "path": "src/web/src/PlatformOverview.tsx",
+      "sha256": "8d9b4672d2f61c01f8db1ab816d13c5069431eca612c1e155b4985b13031d908"
+    },
+    {
+      "path": "src/web/src/PlatformOverview.css",
+      "sha256": "3d924dbde0bfb6e68068486ec747b5350b01254028161ccf068de10f234390e7"
+    },
+    {
+      "path": "src/web/src/PlatformAreas.tsx",
+      "sha256": "101653c4a94e8927ca7ccb7e291f8a5946a17d22bb43986d45e450d2e3f5ae6c"
+    },
+    {
+      "path": "src/web/src/PlatformAreas.css",
+      "sha256": "85033be10aae0c3b20040f750b06bd222c2524c6eff7945fee1b26d0e4860b9a"
+    },
+    {
+      "path": "src/web/src/DraftReportView.tsx",
+      "sha256": "5914f9f3e9f56ae1d7855a3ce7ec81d0a460b2a611c1663ff2ad9b94a682e33d"
+    },
+    {
+      "path": "src/web/src/WorkspaceNavigation.tsx",
+      "sha256": "21e032ef72237923662a99d63100de1113bfb1f7d5657f6776626e7ea91356cf"
+    },
+    {
+      "path": "src/web/src/workspace.css",
+      "sha256": "237015a164f52f1ef5f3efda5e53d9f929f5f24cf42f3ab00a80af2053225573"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/README.md",
+      "sha256": "1dce4db4a29ba9455a0bb511633f5e8b4aed788a1bafa42c841004c16a0ef241"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/approved-risk-desktop.jpg",
+      "sha256": "5c8bebba93ce032dd614cb09d0d0f19995bfa0d0f42b3ba0f7c02ec7fe2b758e"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/implemented-ai-desktop.jpg",
+      "sha256": "e1c691999b6a4cdbfc131011ca21802465b52e1e8749923a68dc5f92ec537e9d"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/implemented-recommendations-desktop.jpg",
+      "sha256": "114a9018ba0fa39474cbc4c2e7134c966c814d8b1ebe5c6ea80353314aa9607c"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/implemented-reports-desktop.jpg",
+      "sha256": "35721d337fcfbbb55a9941cabb89565c31e85ce1d07e47660546953fc3ee7e88"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/implemented-risk-desktop.jpg",
+      "sha256": "c1f743bbd78dcc31a242b8040a99dd557f14aae3af58f37c65c53ccee8ae7214"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/implemented-risk-mobile.jpg",
+      "sha256": "3055b88eff1d0d4cd09c26ed89b975e8aa7a31969c88ecbfaca97dc0aa5c1cd6"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/implemented-risk-overlay-desktop.jpg",
+      "sha256": "5e8cfe16a1b163708540cea9c2c838dd87476455803a3a0b051a6605a30cdb17"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/implemented-settings-desktop.jpg",
+      "sha256": "4378ca2d09a5c7a3f914285e4c5545be3f7bd3029e8c74bc7a0ca69004f6b797"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/independent/ai-review.mjs",
+      "sha256": "70e2619ea3eca569588968c1dd880aff7140ca39660581ce2824944362295d83"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/independent/areas-review.json",
+      "sha256": "201afc305e647e1e9059de43d0c25102bec9d1355d8d2b238edbf4b4bc74244e"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/independent/overview-review.mjs",
+      "sha256": "c6c8aabb4f604f66d865c26725047077450fe3c5e060ae21a9ddd67e42cd90bd"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/independent/report-review.mjs",
+      "sha256": "0eb0671163584f10ce120017a05e92724ad3e7bbadfed95a17e19a2ff4bf647e"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/management-tabs.json",
+      "sha256": "e9e6f183dfce5a54bde21a2dd01ed15e9a5e78529e397437514ee8c4736b4cc9"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/mobile-checks.json",
+      "sha256": "438f0f822e6b135ed2f6effe47ff1913a0e95cb67ec126f63771993fdea3b15a"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/navigation-checks.json",
+      "sha256": "91fae37baccc1245cf4e03f3dbd79863036cb31f4d0e45545b5254d100e9de93"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/overview-render.json",
+      "sha256": "2ffd2465f6d36cdc49298b32e1834409064da3ff46cac1a341f47830dfd58bac"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/report-and-final-mobile-checks.json",
+      "sha256": "6667579cc0737d76f8b934cd0b1eb5753302c517379deac235d5e64aaa7415f6"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/report-render.json",
+      "sha256": "2a0837182d44799973272f584ce0a96a97f71ae010a58d16db1acc7cd0a96348"
+    },
+    {
+      "path": "work/ui-review/2026-10-03/mockup-fidelity/status-page-local-qa.json",
+      "sha256": "bd67bc6e0f40bdd75f37b639fcd3421a71dd635de74aa2071df736c389b33d57"
+    }
+  ],
+  "private_site": {
+    "status": "succeeded",
+    "receipt": "docs/development/evidence/approved-mockup-fidelity-site-20261003.json",
+    "source_commit": "383f27b3dc4d092c4f5528496069990830fc776c",
+    "deployment_id": "appgdep_6ac1c568ecc88191a34ae532fb0b535a",
+    "human_task_cards_preserved": 14
+  },
+  "application_commit": "dff88945cdd010d8cd720e4a9a55c7ba3f43994f",
+  "independent_review_archives": "Preserved original nonauthor scripts/record under work/ui-review/2026-10-03/mockup-fidelity/independent; scripts may retain original isolated execution paths. Portable author/coordinator checks are under tests/e2e/mockup-fidelity."
+}

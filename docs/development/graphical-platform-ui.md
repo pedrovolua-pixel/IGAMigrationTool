@@ -17,3 +17,9 @@ See UI-W4's preimplementation tests and dated execution evidence. Automated/loca
 Release-readiness integration preserves Overview as the initial landing. Starting or explicitly opening a saved run selects Assessments so the existing run-detail focus and controls stay visible. Browser regression drivers use the real navigation control before interacting with an initial/reloaded Assessments form; semantic/transport/authentication checks remain intact.
 
 Existing server-generated run/view/task-or-finding deep links retain the original exact three-key App guard and Phase1BProtectedNavigation destination. They do not enter ConsultantApp or its presentation initializer. A query identifier remains a selection hint only; the owning server still resolves exact scope and authority. Ordinary entry, including remembered browser selection, lands on Overview.
+
+## Visual fidelity correction — UI-W5
+
+The approved static page composition is the visual source of truth. In particular Risk requires severity chips, a category filter, two chart panels and a compact findings list. Detailed search/state/confidence controls and consultant mutation forms are progressively disclosed, retaining mounted state. Charts use admitted findings only and expose all five real severity levels and actual categories. Prior UI-W4 navigation checks did not establish parity with the mockup; side-by-side viewport evidence is required.
+
+UI-W5 bounded verification: the corrected Risk composition was compared with the approved screenshot at1280×720; chart counts retain5actual saved findings and2categories rather than33mock findings and5sample categories.402 new rendering assertions and27 existing regression assertions passed; browser evidence covers all18 areas, tab groups, filters, inspector, mounted editor retention and390/320 reflow. Human visual acceptance and supported manual/operational acceptance remain open. See `evidence/approved-mockup-fidelity-20261003.json`.

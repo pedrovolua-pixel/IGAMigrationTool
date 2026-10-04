@@ -444,7 +444,7 @@ function ConsultantApp() {
                     : workspaceView === 'Assessments'
                       ? 'Select a baseline, start a synthetic assessment, or return to saved work.'
                       : workspaceView === 'Findings'
-                        ? 'Inspect risks and the evidence behind each review decision.'
+                        ? 'Select a hotspot, then open a finding over the page.'
                         : workspaceView === 'Evidence'
                           ? 'Trace supplied objects, references, and declared coverage gaps.'
                           : workspaceView === 'Reports'
@@ -664,7 +664,7 @@ function ConsultantApp() {
                 ) : (
                   <>
                     <p className="run-selection">{selectionName(run.selection)}</p>
-                    <p className="muted small">
+                    <p className="muted small run-started">
                       {run.selection.scopeLabel} · Started{' '}
                       <time dateTime={run.createdAtUtc}>{formatTime(run.createdAtUtc)}</time>
                     </p>
@@ -847,6 +847,7 @@ function ConsultantApp() {
                           planningTaskDrafts={planningTaskDrafts}
                           workspaceView={workspaceView}
                           onAnalysisChange={onAnalysisChange}
+                          onNavigateWorkspace={setWorkspaceView}
                           categoryRequest={categoryRequest}
                         />
                       )}

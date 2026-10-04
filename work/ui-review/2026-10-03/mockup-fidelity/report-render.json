@@ -1,0 +1,11 @@
+{
+  "result": "pass",
+  "assertions": 42,
+  "scope": "Pure SSR of actual frozen canonical report and all five internal audience projections; private helper exported only by test build",
+  "notVerified": [
+    "browser tab interactions",
+    "integrated application styling",
+    "live publication"
+  ],
+  "sha256": "5914f9f3e9f56ae1d7855a3ce7ec81d0a460b2a611c1663ff2ad9b94a682e33d"
+}
