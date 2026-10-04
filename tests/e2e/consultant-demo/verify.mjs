@@ -1,3 +1,4 @@
+import { showAssessments } from "./navigation.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { writeFile } from "node:fs/promises";
@@ -340,6 +341,7 @@ try {
   );
 
   await page.goto(base);
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
@@ -415,6 +417,7 @@ try {
     "polling preserves keyboard focus",
   );
   await page.reload();
+  await showAssessments(page);
   await page.getByText(uiStart.runId, { exact: true }).waitFor();
   equal(
     await page.evaluate(() =>
@@ -543,6 +546,7 @@ try {
     "cancelled work cannot resume",
   );
   await page.reload();
+  await showAssessments(page);
   await page.getByText(recovery.runId, { exact: true }).waitFor();
   equal(
     (await read(recovery.runId)).progress,
@@ -576,9 +580,15 @@ try {
     .locator("button:not([disabled]),select:not([disabled])")
     .evaluateAll(
       (elements) =>
-        elements.filter(
-          (element) => element.getBoundingClientRect().height < 24,
-        ).length,
+        elements.filter((element) => {
+          if (
+            !element.getClientRects().length ||
+            getComputedStyle(element).visibility === "hidden"
+          )
+            return false;
+          const bounds = element.getBoundingClientRect();
+          return bounds.height < 24 || bounds.width < 24;
+        }).length,
     );
   equal(undersized, 0, "interactive targets meet24px engineering minimum");
   const unlabeled = await page
@@ -669,6 +679,7 @@ try {
     await stopHost("SIGKILL");
     await launchHost(true);
     await page.reload();
+    await showAssessments(page);
     await page.getByText(restartStart.runId, { exact: true }).waitFor();
     const paused = await read(restartStart.runId);
     check(
@@ -721,6 +732,7 @@ try {
     await stopHost();
     await launchHost();
     await page.reload();
+    await showAssessments(page);
     const finished = await waitFor(
       () => read(restartStart.runId),
       (value) => value.state === "Scoring",

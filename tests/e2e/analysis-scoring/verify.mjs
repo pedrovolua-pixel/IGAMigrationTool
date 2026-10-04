@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { spawn } from "node:child_process";
@@ -535,6 +536,7 @@ try {
   );
 
   await page.goto(base);
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
@@ -623,6 +625,7 @@ try {
   );
   const beforeReload = await analysis(startedUI.runId);
   await page.reload();
+  await showAssessments(page);
   await page.getByText(startedUI.runId, { exact: true }).waitFor();
   await page
     .getByRole("heading", {
@@ -672,6 +675,7 @@ try {
     else await route.continue();
   });
   await page.reload();
+  await showAssessments(page);
   const retry = page.getByRole("button", {
     name: "Retry analysis",
     exact: true,
@@ -705,6 +709,7 @@ try {
     });
   });
   await page.reload();
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Retry analysis", exact: true })
     .waitFor();

@@ -99,9 +99,13 @@ function ConsultantApp() {
   const artifactDrafts = useRef<Record<string, ArtifactReviewDraft>>({});
   const planningTaskDrafts = useRef<Record<string, PlanningTaskDraft>>({});
   const [navigationNotice, setNavigationNotice] = useState('');
-  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('Overview');
+  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>(() => {
+    const selection = new URLSearchParams(window.location.search);
+    return selection.has('run') && (selection.has('task') || selection.has('finding'))
+      ? 'Assessments'
+      : 'Overview';
+  });
   useEffect(() => {
-    setWorkspaceView('Overview');
     setCategoryRequest(null);
   }, [selectedId]);
   const [analysis, setAnalysis] = useState<AnalysisDetail | null>(null);
@@ -301,6 +305,7 @@ function ConsultantApp() {
         catalog.csrfToken,
       );
       setRun(next);
+      setWorkspaceView('Assessments');
       setNavigationNotice('');
       setSelectedId(next.runId);
       startKey.current = null;
@@ -391,6 +396,7 @@ function ConsultantApp() {
   }
 
   function selectRun(id: string) {
+    setWorkspaceView('Assessments');
     setError(null);
     setNavigationNotice('');
     if (id !== selectedId) setRun(null);

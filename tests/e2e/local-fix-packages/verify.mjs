@@ -1,3 +1,4 @@
+import { showAssessments } from "../consultant-demo/navigation.mjs";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { readFile, writeFile, readdir, mkdir } from "node:fs/promises";
@@ -197,6 +198,7 @@ async function select(page, id) {
     id,
   );
   await page.reload();
+  await showAssessments(page);
   await page
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
@@ -691,6 +693,7 @@ try {
   });
   const page = await context.newPage();
   await page.goto(base);
+  await showAssessments(page);
   const runs = [];
   for (const baseline of [
     "synthetic-analysis-healthy-v1",
