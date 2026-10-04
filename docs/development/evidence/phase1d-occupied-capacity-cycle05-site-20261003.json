@@ -1,6 +1,6 @@
 {
   "date": "2026-10-03",
-  "status": "INITIAL_LOCAL_CHECKPOINT_PRIVATE_CONFIRMED_FULL_LINUX_PENDING",
+  "status": "COMPLETED_SYNTHETIC_CYCLE_PRIVATE_BOARD_CURRENT",
   "initial": {
     "date": "2026-10-03",
     "stage": "Localverified completeWindows/package; broaderLinux pending",
@@ -107,5 +107,105 @@
       }
     }
   },
-  "completionPublication": "Pending full hostedcycle closure; initial version114 owner-only confirmed"
+  "completionPublication": {
+    "date": "2026-10-03",
+    "stage": "Completed synthetic cycle; complete hosted results",
+    "deployment": {
+      "id": "appgdep_6ac19ae44be08191a5e914f37c8ea7c8",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_af66e7491ff0819193a7d3f48e2713be",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-04T00:16:43.876095+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_af66e7491ff0819193a7d3f48e2713be",
+      "number": 115,
+      "source": {
+        "commit_sha": "fb9136bd597e5a22d38d89b6434ad04003905265"
+      },
+      "archiveStorage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_00000000f36c81f599531cfd024f000b",
+        "content_hash": "sha256:1b2a63443b2391a3426633a5f1ce8367ae8e374705be2101572b5e8398b5ba3e",
+        "size_bytes": 133120,
+        "file_count": 2
+      }
+    },
+    "audience": {
+      "role": "owner",
+      "mode": "custom",
+      "users": 1,
+      "groups": 0,
+      "externalVisitors": 0,
+      "revision": 1
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-review",
+      "commit_sha": "fb9136bd597e5a22d38d89b6434ad04003905265",
+      "archive": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/.sites-work/phase1d-cycle05-evidence/site-final-corrected.tar.gz"
+    },
+    "canonicalSnapshot": "822fa32fccdeadd4c37b30ab5b9863973f5e4105",
+    "archiveQualification": "Native tarhash/filecount are server metadata. Exactlocal/pushed/archiveHTML checked separately; server-repacked archivebytes not independently retrieved/equated.",
+    "qa": {
+      "status": "PASS",
+      "results": [
+        {
+          "width": 1440,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 390,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        },
+        {
+          "width": 320,
+          "openTasks": 13,
+          "roleAndCompletion": true,
+          "noOverflow": true,
+          "anchorsAndRepositoryLinks": true,
+          "pageErrors": []
+        }
+      ]
+    },
+    "preservation": {
+      "status": "PASS",
+      "canonicalSnapshot": "822fa32fccdeadd4c37b30ab5b9863973f5e4105",
+      "allUnownedHtmlByteIdentical": true,
+      "entireHumanTaskSectionByteIdentical": true,
+      "openHumanTasks": 13,
+      "beforeHtmlSha256": "067485c7232b8904d44376820cc21a714e19600de15b3f13ac1da607736040c6",
+      "afterHtmlSha256": "a050bd232895db13b993cf9cbae101ac6cc40d61d10545118fdd8884774cb61d",
+      "sourceLinkRefreshQualification": "Only six40-character immutable refs replaced after provenance wording correction; final render checks reused with identical layout/code, refreshed Git targets all verified.",
+      "pushedSiteSource": "fb9136bd597e5a22d38d89b6434ad04003905265",
+      "archiveSourceHtmlByteIdentical": true,
+      "localGzipSha256": "908331ca55f33b2769c635b422dbbeb3076d120c5a2dba9223ca393f1a3afcd3",
+      "finalUnownedBytesRechecked": true
+    },
+    "checks": {
+      "siteSecretScan": {
+        "status": "PASS",
+        "scannedBytes": 122840,
+        "findings": 0
+      },
+      "diffWhitespace": "PASS",
+      "visualQa": "390px screenshot inspected;1440/390/320 navigation/tasks/reflow checked; only same-length source-link refs refreshed thereafter."
+    }
+  }
 }

@@ -1254,7 +1254,8 @@
   "cleanup": {
     "twoOwnedCleanWorktreesRemoved": true,
     "branchesAndGitObjectsRetained": true,
-    "testedSourceRuntimeLogsAuthorAndIndependentEvidencePreserved": true
+    "testedSourceRuntimeLogsAuthorAndIndependentEvidencePreserved": true,
+    "ownLocalPreviewStopped": true
   },
   "limits": [
     "Approved fictional in-process harness only; no actual immutable publisher/reader, transport, SDK, client, real identity/grant or durable audit.",
@@ -2151,5 +2152,35 @@
       "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs"
     ],
     "initialFinalCheckFailure": "Gitcomparison initially confused working hashes with clean snapshot hashes; originaldirtyAnalysisView caught it. Corrected separate working-preservation and committed-baseline comparisons; no source changed."
-  }
+  },
+  "completionSiteReceipt": {
+    "path": "docs/development/evidence/phase1d-occupied-capacity-cycle05-site-20261003.json",
+    "version": 115,
+    "deploymentStatus": "succeeded",
+    "ownerOnlyConfirmed": true,
+    "siteSource": "fb9136bd597e5a22d38d89b6434ad04003905265",
+    "canonicalSnapshot": "822fa32fccdeadd4c37b30ab5b9863973f5e4105"
+  },
+  "finalArtifactManifest": {
+    "path": ".sites-work/phase1d-cycle05-evidence/final-artifact-manifest.json",
+    "artifacts": 90,
+    "sha256": "950492382a53b7885de6ef7bade75eea1ebd752dfae9fedbb154cb1190a73f21",
+    "initialArtifactsRehashed": 72
+  },
+  "finalPreservationQualification": {
+    "status": "PASS",
+    "workingPins": 332,
+    "preexistingDirtyPaths": [
+      "src/web/src/AnalysisView.tsx",
+      "src/web/src/App.tsx",
+      "src/web/src/DraftReportView.tsx",
+      "src/web/src/ReviewPanel.tsx"
+    ],
+    "committedBaselinePathsUnchangedInTestedCode": 332,
+    "laterIndependentOwnerChange": [
+      "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs"
+    ],
+    "initialArtifactsUnchanged": 72
+  },
+  "finalHelperDiagnostic": "One helper accidentally launched outside Sitecheckout was cancelled before stdin/setup; relaunched in selectedcheckout. Unpublished sourcecc407 archive retained; only corrected exactsourcefb913 saved/deployed."
 }
