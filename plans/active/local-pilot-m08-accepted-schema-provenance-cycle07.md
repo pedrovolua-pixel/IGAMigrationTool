@@ -1,6 +1,6 @@
 # Milestone08 cycle07 — owning accepted-schema provenance
 
-Status: VERIFIED bounded local engineering; hosted/private publication and preservation pending
+Status: VERIFIED bounded local and hosted engineering; private publication finalization pending
 Date: 2026-10-03
 Owner: Phase1C coordinator
 Stable source: 3551fe5693196ab371282c38bae53d2f9ed23f19
@@ -17,7 +17,7 @@ Expose actual accepted AI schema provenance through an additive metadata-only po
 | Contract review, literal expectations and freeze | cycle05_policy_audit / cycle05_independent, coordinator freeze receipt and this plan | VERIFIED |
 | Owning reader and new readiness library | cycle05_source_audit in isolated writer worktree after freeze; new owning partial file, declaration keyword, new integration module and focused new tests | VERIFIED |
 | Independent consumer | cycle05_independent in separate isolated worktree after freeze; new independent tests only | VERIFIED |
-| Shared project/solution/CI and combined verification | Coordinator; additive exact entries only | VERIFIED locally; hosted pending |
+| Shared project/solution/CI and combined verification | Coordinator; additive exact entries only | VERIFIED local and hosted |
 | Canonical records/private Site/preservation | Coordinator; additive records preserving foreign dirty work and existing private Site/task board | RUNNING |
 
 ## Requirements and controls
@@ -31,7 +31,7 @@ Preserve the current owning Read admission and integrity/fence path. The compose
 - [x] Source/policy/non-author dependency audits executed against exact stable source, with native SHA256 receipts.
 - [x] Exact contract/test/literal expectations independently reviewed and frozen before runtime code.
 - [x] Author and separate independent consumer pass actual guarded PostgreSQL/portable tests and nonauthor review.
-- [ ] Applicable audited locked restore, format, build, old/new unit/integration/e2e, security/architecture/compatibility and configured hosted checks executed with source/log hashes.
+- [x] Applicable audited locked restore, format, build, old/new unit/integration/e2e, security/architecture/compatibility and configured hosted checks executed with source/log hashes.
 - [ ] Canonical status/implementation/evidence updated and existing owner-private Site/task board published and natively confirmed.
 - [ ] Native evidence/source/runtime preserved; clean owned temporary worktrees removed.
 
@@ -46,3 +46,7 @@ Engineering freeze [receipt](../../docs/development/evidence/m08-accepted-schema
 53 portable,389 author PostgreSQL and574 independent PostgreSQL assertions pass. The combined31 applicable local checks pass, including locked audited restore, whole-solution format/zero-warning Release build, original population/capture/AI/outcome/CSV/evaluation and ordinary MCP entrypoints, four Python oracles, architecture, owned diff and default-rule secret scan. The first seven checks and documentation-only source bridge are bound in the [native receipt](../../docs/development/evidence/m08-accepted-schema-provenance-cycle07-20261003.json). Initial sparse-resource, namespace, fixture and scanner observations remain preserved. A separately owned Phase1D plan has an historical whole-diff blankEOF diagnostic; it was not edited by this packet.
 
 Accepted normal/mixed/empty outputs each supply actual saved schema provenance and14 bound / 9 missing fields. No accepted output preserves13/10. The other nine bindings and CompleteSamplingReady=false remain unchanged. Independent review closes the internal alias/reference consistency findings and validates real writer lock waits and successful caller COMMIT whole-table nonmutation. Three synthetic-hash derivation assertions and four scanner controls substantiate the exact fixture classification; default rules remain active. No migration, new package version, configuration default or live activation. Direct lost-response and known older/nonSucceeded/nonResponse accepted-row injections were not separately executed; infrastructure failure propagation was reviewed statically. Counts do not close all 14 future cases, TP-HAS-012/019 or full M08/Phase1C.
+
+## Hosted verification confirmed
+
+Complete configured Linux, Windows 2022, Windows 2025 and development-package jobs pass on exact integrated source 2b76e3a. Linux reports 53/389/574 new assertions; each Windows job reports 53 portable assertions. Exact logs and documentation-only bridge are bound in the [hosted receipt](../../docs/development/evidence/m08-accepted-schema-provenance-cycle07-hosted-20261003.json). The separately owned Phase1D plan correction now permits the full historical diff check to pass; its initial failure is retained. Both clean writing worktrees were removed after all source/runtime archive members were independently verified. Historical PNG outputs remain byte-identical in reachable Git with reconstruction manifests; no compilation input or executable evidence was lost. Coordinator cleanup and current-cycle native private publication follow.
