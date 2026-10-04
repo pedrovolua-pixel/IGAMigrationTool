@@ -546,8 +546,15 @@ try {
       .locator("button:not([disabled]),summary,select:not([disabled])")
       .evaluateAll(
         (nodes) =>
-          nodes.filter((node) => node.getBoundingClientRect().height < 24)
-            .length,
+          nodes.filter((node) => {
+            if (
+              !node.getClientRects().length ||
+              getComputedStyle(node).visibility === "hidden"
+            )
+              return false;
+            const bounds = node.getBoundingClientRect();
+            return bounds.height < 24 || bounds.width < 24;
+          }).length,
       ),
     0,
     "24px-enabled-targets",
