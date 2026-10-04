@@ -7,3 +7,8 @@ The kernel handles one immutable query pair/page per call, opens a fresh connect
 Production composition must supply reviewed source/customer authority, immutable signed artifact/policy mappings, effective SQL permission probes on the actual transport connection, durable warning receipts, native ordering/UID semantics, classification/content detectors and impact evidence. No permissive production adapters are shipped here. Physical provider and typed storage integration remain SP18/SP19. Historical CollectorHost/Safety APIs and disabled host activation are unchanged.
 
 The own assertion executable lives at `tests/unit/CollectorSourcePages.Tests`. The coordinator owns solution/CI inclusion and canonical release records. No migration or configuration/activation change is needed for this unactivated library.
+
+
+Optional approved UID conflicts cover current-page occurrences. Paging progress also checks the prior actual last key; cross-page UID/relationship conflict inventory and reconciliation remain future persisted history/baseline work. An admitted page does not prove extraction-wide uniqueness.
+
+The named authority resolver must compare the complete candidate pair to the current signed registry definition, including fields/native types/nullability/classification, parameters, budgets/reviews and digests, before returning Current. QueryPackExpectedBindings is only a subset; this kernel's structural/binding checks are not signed-definition or actual source-access proof. Scripted authority decisions establish neither.
