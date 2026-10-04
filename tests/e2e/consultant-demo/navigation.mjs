@@ -1,8 +1,8 @@
 // Exercise the real approved workspace navigation without relaxing workflow checks.
 export async function showAssessments(page) {
   const target = page
-    .getByRole("navigation", { name: "Workspace sections" })
-    .getByRole("button", { name: "Assessments", exact: true });
+    .getByRole("navigation", { name: "Workspace sections", includeHidden: true })
+    .getByRole("button", { name: "Assessments", exact: true, includeHidden: true });
   await target.waitFor({ state: "attached" });
   if (!(await target.isVisible()))
     await page.getByRole("button", { name: "Menu", exact: true }).click();

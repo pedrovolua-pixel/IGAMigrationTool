@@ -1182,6 +1182,7 @@ try {
       ["hostile", normal],
     ]) {
       mutation = fixture === "hostile" ? coherentHostile : null;
+      last = "viewport-select-" + name + "-" + fixture;
       await select(page, run.runId);
       const dto = await analysis(run.runId);
       await fullVisible(
@@ -1242,6 +1243,7 @@ try {
       if (fixture === "normal") {
         const shot = path.join(directory, "execution", name + ".png");
         await mkdir(path.dirname(shot), { recursive: true });
+        last = "screenshot-full-" + name + "-" + fixture;
         await page.screenshot({ path: shot, fullPage: true });
         screenshots.push(shot);
         await region(page).evaluate((element) =>
@@ -1252,6 +1254,7 @@ try {
           "execution",
           name + "-visible.png",
         );
+        last = "screenshot-visible-" + name + "-" + fixture;
         await page.screenshot({ path: visibleShot, fullPage: false });
         screenshots.push(visibleShot);
       }
