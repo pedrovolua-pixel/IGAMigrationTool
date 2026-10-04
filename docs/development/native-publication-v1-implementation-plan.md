@@ -52,3 +52,7 @@ Rollback removes only unactivated new wiring while preserving canonical versions
 ## RR-P02 documentary evidence
 
 Before handoff execute whitespace/diff ownership/link existence checks and a scoped prohibited-data inspection. Record actual results in the handoff with the exact commit. Runtime tests have NOT EXECUTED in this design packet. Independent review closed at4391d27d6760e3c457b9c9b61a6fcaf4527ab949. Coordinator integrated the reviewed design atb6c806e and approved bounded RR-P03/RR-P04 implementation on2026-10-03. Exact literal canonical envelopes are completed by the independent oracle addendum before hash implementation.
+
+## RR-P06 correction packet
+
+Independent scripted flow review found5failing cases against3ee89e6 while157codec/44flowpassed. Freeze the exact original admission lease before store/blob/reference waits, narrow to current report retention without renewal, and correct null-overlay/known-rollback closed failure classifications before dependent code. Preserve original controls, correct only owned native core paths, then independent replay before persisted adapters or source activation.

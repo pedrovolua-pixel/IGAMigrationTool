@@ -43,3 +43,7 @@ Document checks for RR-P02: exact permitted-path diff, link existence, source/AP
 ## RR-P04 / RR-P06 explicit preload binding tests
 
 Scripted flow spies must prove that `CaptureAsync(transaction,actor,command,fence,ct)` receives the identical verified actor and acquired fence, and that the owning fixture adapter revalidates the complete required categories/fields before protected source reads. Exercise wrong actor/scope/revision, denied or changed field/category authority and unresolved classification with zero protected loads. No ambient authority or request Boolean is admissible. Verify initial/final database-clock bounds on successful audit timestamps and exact replay revision/source/manifest/artifact/receipt/event commitments. The independent 31-byte golden corpus remains unchanged. These in-process flow tests are separate from the planned 18 persisted races and actual cross-plane/source integration.
+
+## RR-P06 independent regression controls
+
+Original3ee89e6 passed157codec+44scriptedflow checks and failed5flow checks. Retain controls for expiry crossing during manifest load (zero later projection/score/reference loads), paused cancellable blob/reference load (original token cancels and fence releases), null overlay row (IntegrityMismatch) and certain read noncommit (Failed/DependencyUnavailable). Rerun these actual core cases and affected flow suite against the corrected immutable source. The18actualPostgreSQL races remain separately planned.
