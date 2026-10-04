@@ -44,7 +44,8 @@ enum PublicationIssueV1 { InvalidInput, Unavailable, RevisionConflict,
 // It contains typed bindings/content, not arbitrary DraftReportSnapshot/JSON.
 interface IPublicationSourceV1 {
     ValueTask<SourceCaptureV1?> CaptureAsync(IPublicationTransactionV1 transaction,
-        PublishCommandV1 command, CancellationToken cancellationToken);
+        PublicationActorV1 actor, PublishCommandV1 command, PublicationFenceV1 fence,
+        CancellationToken cancellationToken);
 }
 interface IPublicationAuthorityV1 {
     ValueTask<PublicationFenceV1?> EnterPublishAsync(PublicationActorV1 actor,
@@ -70,6 +71,12 @@ ValueTask<ExactReadResultV1> ReadExactAsync(PublicationActorV1 actor,
 ```
 
 The above names/entry signatures are frozen. `PublicationFenceV1` is an opaque lease owned by a trusted authority adapter, not a public record with caller-controlled `Allowed=true`. Its actor/session/security binding must be revalidated, including the privileged proof for PublishReport. Publication authorization targets the mutable current run resource; an existing Published report is read separately and cannot authorize another PublishReport action. `IPublicationTransactionV1` exposes only owning capture/store/audit operations and lifetime; its concrete PostgreSQL implementation keeps its connection/transaction internal. A capture adapter may access them through a separate internal friend seam, never an ordinary caller cast. Fence acquisition returns null on denial or unavailable authority; neither condition permits source/blob loads. Infrastructure exception detail is not returned. Requested cancellation propagates `OperationCanceledException`; commit uncertainty is handled below.
+
+### RR-P04 source preloading authority amendment
+
+The source port receives the already verified actor and the exact acquired publish fence explicitly. The owning adapter checks actor/session/security-version, scope/run/expected-revision and fence bindings, resolves only minimized required-category/full-native-field metadata under its owning revision fence, then calls the supplied fence's current revalidation for that complete set before loading protected text, score or other source content. The transaction scope or ambient context alone cannot establish actor authority. Failure produces no protected content load; supplied category names or an inline permission boolean never grant access. Terminal eligibility, classification, source computation and native provenance remain the owning adapter's responsibilities. This internal signature amendment preserves all original canonical shapes, 31 golden bytes and their commitments.
+
+Successful publication/read audit timestamps must lie between the initial and final trusted database-clock observations. Receipt replay also verifies expected revision/source digest and the complete manifest/artifact/receipt/event binding before success. These checks strengthen the frozen invariants without a new permission or lifecycle rule.
 
 First reader scope is deliberately narrow: return the complete minimized canonical native report only when its entire frozen required category/field set is authorized. There is no partial-count or field-filtering fallback. Executive/support projections and MCP grants cannot obtain this complete value by reusing a broader role. Later audience/MCP consumers receive their separately authorized projection/partition contract; this packet implements no service-identity or MCP authentication. An exact-version reader is a source capability, not permission to serve all its bytes.
 

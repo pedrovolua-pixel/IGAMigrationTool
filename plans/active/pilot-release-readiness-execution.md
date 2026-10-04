@@ -68,3 +68,7 @@ Continue available approved engineering while these inputs remain outstanding. N
 - RR-S05 first/final-page,typedrow/version/provenance/permission/executor contract design in progress; no sourceactivation or sentinel assumptions.
 - Reviewable draftPR4 targets currentpilotfoundation; shared118-projectbuild,architecture,23Bicep templates andGitleaks passed. Original failures/hoststorage-process limits retained.
 - Existing private board confirmed at checkpoint2e129a3; this new source checkpoint is scheduled for same-cycle publication. AllM01–M12fullacceptance/G1–G9remainopen.
+
+## Native source authority contract amendment — RR-P04/RR-P06
+
+Freeze the explicit actor/command/fence source-port binding in the native contract/test plan before the dependent integration and independent flow tests. The 31 original goldens remain immutable; 157 compiled byte/hash/shape/ownership checks passed against the frozen codec source. RR-P06 tests actual publisher/reader calls with scripted trusted ports, including current preload authority, receipt/commit/audit/deadline and late-delivery paths. Persisted PostgreSQL races and actual-source/control/customer integrations remain separate and open.
