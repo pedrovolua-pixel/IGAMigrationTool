@@ -33,6 +33,7 @@
     <Project Path="src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj" />
     <Project Path="src/server/modules/ReportDrafts/ReportDrafts.csproj" />
     <Project Path="src/server/modules/ReportPublication/ReportPublication.csproj" />
+    <Project Path="src/server/modules/ReportPublication.PostgreSql/ReportPublication.PostgreSql.csproj" />
     <Project Path="src/server/modules/FindingReview/FindingReview.csproj" />
     <Project Path="src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj" />
     <Project Path="src/server/modules/AssessmentScoring/AssessmentScoring.csproj" />
@@ -51,6 +52,7 @@
     <Project Path="tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj" />
   </Folder>
   <Folder Name="/tests/integration/">
+    <Project Path="tests/integration/ReportPublication.PostgreSql.Tests/ReportPublication.PostgreSql.Tests.csproj" />
     <Project Path="tests/integration/SyntheticEvaluationPopulationIntegration.Tests/SyntheticEvaluationPopulationIntegration.Tests.csproj" />
     <Project Path="tests/integration/SyntheticEvaluationSchemaProvenanceIntegration.Tests/SyntheticEvaluationSchemaProvenanceIntegration.Tests.csproj" />
     <Project Path="tests/integration/SyntheticEvaluationPopulationIndependent.Tests/SyntheticEvaluationPopulationIndependent.Tests.csproj" />

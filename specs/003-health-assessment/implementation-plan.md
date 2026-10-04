@@ -1138,3 +1138,11 @@ RR-P05 designfdefd8e is independently accepted and integrated5f3e9b6. The [exact
 
 
 AI target correction8dea8be independently closes LOWUI-TARGET-001: real rendering visibility excludes the undersized closed-details descendant, while reopening it still refuses below24px. Five exact-source root and five independent Chromium151 controls PASS; selector/threshold/semantic checks/DBguards unchanged. Original125check hosted failure and intermediate4PASS/1FAIL review are retained. Full guarded hosted replay remains pending; no gate/manual accessibility credit. RR-P05 author/verifier worktrees share packet checkpointa3e7c5d; fresh2fictional databases/16role absence and owner receipt are recorded before controlled setup. Database setup and18persisted cases have not executed.
+
+
+The owner-private packet snapshot is confirmed at exactsitecf5b2e49/canonicald02cb0d: [deployment receipt](../../docs/development/evidence/pilot-native-postgresql-packet-site-20261004.json). Actual desktop/mobile layout checks pass, all14taskcards remain byte-identical, and native design/packet progress retains18persistedcases/fullgate limits. This publication introduces no source/identity/customer access or task closure.
+
+
+## Preparation and hosted failure checkpoint — 2026-10-04
+
+M09 / Phase1C RR-P05 preparation integrates the isolated empty module and verifier preparation only:125-project lockedrestore/format/zero-warningReleasebuild/architecture PASS.18persisted cases still planned, SQL/migration unexecuted. Reviewed subject-version projection, fixed integrity marker157+58 plus17external checks, explicit owning-fence registry and actualMigration-login setup precede dependent code. Portable adapter cancellation/allocation failures remain retained pending exact closure. Hosted254 AI651 passes; local fix-package closed-menu driver Timeout is isolated and corrected in2f1a534, independent/full hosted replay pending. M01–M12/G1–G9 full acceptance remains open.

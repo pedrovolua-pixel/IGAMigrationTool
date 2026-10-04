@@ -36,9 +36,15 @@ internal static class FixtureConfiguration
             throw new InvalidOperationException("Unowned fixture identity.");
         var options = new NpgsqlConnectionStringBuilder
         {
-            Host = "127.0.0.1", Port = Port, Database = database, Username = role,
-            Pooling = false, Timeout = 5, CommandTimeout = 10,
-            IncludeErrorDetail = false, ApplicationName = "RR-P05B-independent"
+            Host = "127.0.0.1",
+            Port = Port,
+            Database = database,
+            Username = role,
+            Pooling = false,
+            Timeout = 5,
+            CommandTimeout = 10,
+            IncludeErrorDetail = false,
+            ApplicationName = "RR-P05B-independent"
         };
         return NpgsqlDataSource.Create(options.ConnectionString);
     }
