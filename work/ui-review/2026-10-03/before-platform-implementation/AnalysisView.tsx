@@ -33,29 +33,14 @@ export function AnalysisView({
   artifactDrafts,
   planningTaskDrafts,
   workspaceView = 'Assessments',
-  onAnalysisChange,
-  categoryRequest,
 }: {
   workspaceView?: WorkspaceView;
-  onAnalysisChange?: (analysis: AnalysisDetail | null) => void;
-  categoryRequest?: { category: string; sequence: number } | null;
   run: RunDetail;
   csrfToken: string;
   artifactDrafts: RefObject<Record<string, ArtifactReviewDraft>>;
   planningTaskDrafts: RefObject<Record<string, PlanningTaskDraft>>;
 }) {
   const [response, setResponse] = useState<AnalysisDetail | null>(null);
-  useEffect(() => {
-    onAnalysisChange?.(response);
-  }, [response, onAnalysisChange]);
-  useEffect(() => {
-    if (categoryRequest)
-      setExploration((previous) => ({
-        ...previous,
-        category: categoryRequest.category,
-        selectedId: null,
-      }));
-  }, [categoryRequest]);
   const [failed, setFailed] = useState(false);
   const [retry, setRetry] = useState(0);
   const [notice, setNotice] = useState<string | null>(null);
@@ -182,11 +167,7 @@ export function AnalysisView({
             ? '.draft-report'
             : '#findings-heading',
       );
-      const visible = target?.getClientRects().length
-        ? target
-        : fallback?.getClientRects().length
-          ? fallback
-          : document.getElementById('workspace-title');
+      const visible = target?.getClientRects().length ? target : fallback;
       if (visible) {
         visible.tabIndex = -1;
         visible.focus();
@@ -241,7 +222,7 @@ export function AnalysisView({
             </button>
           )}
         </div>
-        {unavailableTasks && ['Assessments', 'Tasks & reviews'].includes(workspaceView) && (
+        {unavailableTasks && (
           <PlanningTasksPanel
             analysis={null}
             standaloneDetail={unavailableTasks}
@@ -261,20 +242,10 @@ export function AnalysisView({
             ? 'This saved fixture demonstrates coverage only; health scoring remains unavailable.'
             : 'Analysis is unavailable for this saved run. No health result is inferred.'}
         </p>
-        <div hidden={!['Assessments', 'AI workspace'].includes(workspaceView)}>
-          <AiProposalPreview preview={response.aiPreview} run={run} />
-        </div>
-        <div hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}>
-          <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
-        </div>
-        <div
-          hidden={!['Assessments', 'Recommendations', 'Tasks & reviews'].includes(workspaceView)}
-        >
-          <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
-        </div>
-        <div hidden={!['Assessments', 'Tasks & reviews'].includes(workspaceView)}>
-          <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
-        </div>
+        <AiProposalPreview preview={response.aiPreview} run={run} />
+        <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
+        <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
+        <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
       </>
     );
   }
@@ -395,7 +366,6 @@ export function AnalysisView({
           runId={response.runId}
           dedicated={workspaceView !== 'Assessments'}
           evidenceView={workspaceView === 'Evidence'}
-          overlay={workspaceView === 'Findings'}
           findings={response.findings}
           review={response.review}
           guidance={response.recommendationGuidance}
@@ -478,9 +448,7 @@ export function AnalysisView({
           )}
         />
       </div>
-      <div
-        hidden={!['Assessments', 'Findings', 'Evidence', 'Tasks & reviews'].includes(workspaceView)}
-      >
+      <div hidden={!['Assessments', 'Findings', 'Evidence'].includes(workspaceView)}>
         {response.review && (
           <ReviewPanel
             review={response.review}
@@ -498,48 +466,17 @@ export function AnalysisView({
       <div hidden={!['Assessments', 'Reports'].includes(workspaceView)}>
         <DraftReportView key={response.runId} report={response.reportDraft} />
       </div>
-      <div className="platform-feature-areas">
-        <div hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}>
-          <RecommendationGuidanceView
-            key={`guidance-${response.runId}`}
-            guidance={response.recommendationGuidance}
-          />
-        </div>
-        <div hidden={!['Assessments', 'AI workspace'].includes(workspaceView)}>
-          <AiProposalPreview preview={response.aiPreview} run={run} />
-          {workspaceView === 'AI workspace' && (
-            <div className="platform-availability">
-              <h3>Assessment assistant and deep analysis</h3>
-              <p>
-                Interactive AI analysis is unavailable in this local pilot. Existing preview
-                proposals remain unverified; no provider call or raw evidence retrieval is made.
-              </p>
-              <a href="/design-review/#ai">Review the approved AI design ↗</a>
-            </div>
-          )}
-        </div>
-        <div hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}>
-          <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
-        </div>
-        <div
-          hidden={!['Assessments', 'Recommendations', 'Tasks & reviews'].includes(workspaceView)}
-        >
-          <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
-        </div>
-        <div hidden={!['Assessments', 'Tasks & reviews'].includes(workspaceView)}>
-          <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
-        </div>
-        <div hidden={!['Assessments', 'Outcomes & maturity'].includes(workspaceView)}>
-          {response.maturity ? (
-            <MaturityView maturity={response.maturity} />
-          ) : (
-            <p className="field-note">No admitted maturity record is supplied for this run.</p>
-          )}
-          {workspaceView === 'Outcomes & maturity' && (
-            <Dimension label="Saved outcome adherence" rows={response.outcomes} />
-          )}
-        </div>
-        <details hidden={workspaceView !== 'Assessments'} className="locked-inputs">
+      <div hidden={workspaceView !== 'Assessments'}>
+        <RecommendationGuidanceView
+          key={`guidance-${response.runId}`}
+          guidance={response.recommendationGuidance}
+        />
+        <AiProposalPreview preview={response.aiPreview} run={run} />
+        <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
+        <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
+        <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
+        {response.maturity && <MaturityView maturity={response.maturity} />}
+        <details className="locked-inputs">
           <summary>Analysis versions and content digests</summary>
           <dl>
             <div>

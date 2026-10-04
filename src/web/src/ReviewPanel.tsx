@@ -146,7 +146,9 @@ function FindingEditor({
   const disabled = busy || refreshing || pending !== null || error !== null;
   return (
     <article className="review-finding">
-      <h5>{finding.title}</h5>
+      <h5 id={`review-finding-${runId}-${finding.id}`} tabIndex={-1}>
+        {finding.title}
+      </h5>
       <p>
         {finding.category} · {finding.state} · Revision {finding.revision} ·{' '}
         {finding.occurrenceIds.length} affected occurrences

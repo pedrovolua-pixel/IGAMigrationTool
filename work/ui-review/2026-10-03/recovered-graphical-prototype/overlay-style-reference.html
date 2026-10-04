@@ -1,0 +1,9 @@
+<style>
+#iga-visual-review{position:relative}
+#iga-visual-review.is-overlay>.shell{filter:blur(2.5px);pointer-events:none;user-select:none}
+#iga-visual-review .drawer-layer{position:absolute;inset:0;z-index:30;display:flex;justify-content:flex-end}
+#iga-visual-review .drawer-scrim{position:absolute;inset:0;background:light-dark(rgb(25 39 63 / .18),rgb(0 0 0 / .38))}
+#iga-visual-review .drawer-layer .risk-drawer{position:relative;z-index:1;width:min(430px,88%);margin:0;align-self:stretch;background:var(--iga-panel);border:0;border-left:1px solid var(--iga-line);border-radius:0!important;padding:24px;box-shadow:-12px 0 35px rgb(0 0 0 / .16)}
+#iga-visual-review .risk-drawer .detailblock h4{font-size:12px;line-height:1.5;font-weight:600}
+@media(max-width:640px){#iga-visual-review .drawer-layer .risk-drawer{width:94%;padding:18px}#iga-visual-review .risk-drawer .drawer-mobile-back{display:block}#iga-visual-review .risk-drawer .drawer-close-desktop{display:none}}
+</style>

@@ -1,0 +1,31 @@
+{
+  "referenceThread": "Research Top UI Patterns and Mockups",
+  "threadId": "01a0fa9e-7362-7d13-ba00-172ab120d9cb",
+  "acceptedDirection": "Overlay panels, relationships and evidence together, no blur.",
+  "copies": [
+    {
+      "source": "/private/tmp/iga-relationships-panel.html",
+      "copy": "index.html",
+      "sha256": "cae12b5fa634d126bf17d2fcc871a1b238cc96e1d1fc641961394dd9fdc1fbba",
+      "bytes": 129565
+    },
+    {
+      "source": "/Users/pedrovolu/.codex/visualizations/2026/10/02/01a0fa9e-7362-7d13-ba00-172ab120d9cb/risk-drilldown-review.html",
+      "copy": "risk-drilldown-source.html",
+      "sha256": "c7c6e233a70ec821fd7f4d7ee74bf1ab9220def4eb9793b0ba02e4225488a3d3",
+      "bytes": 47109
+    },
+    {
+      "source": "/private/tmp/iga-overlay-style.html",
+      "copy": "overlay-style-reference.html",
+      "sha256": "ac3066b651914d3ede0d0b3fa822d6d4f11512b6d94c96994835eb8dc827f478",
+      "bytes": 981
+    },
+    {
+      "source": "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/work/ui-review/visual-concepts/graphical-workspace.html",
+      "copy": "graphical-workspace-original.html",
+      "sha256": "8b8f5cd0329c3a34bf6360b0408e1f9c5d8f64ad57f9df88fbb6f855b1acc83b",
+      "bytes": 26946
+    }
+  ]
+}
