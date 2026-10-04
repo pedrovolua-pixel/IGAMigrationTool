@@ -16,6 +16,9 @@ internal static class StrictKeysetSqlChecks
             .Replace("FROM [dbo].[FictionalArtifact]", "FROM [dbo].[FictionalArtifact] AS [a]"), StrictKeysetSqlDecision.StructurallyReady);
         Check("TOP parentheses", sql.Replace("TOP (@PageSize)", "TOP ((@PageSize))"), StrictKeysetSqlDecision.StructurallyReady);
         Check("projection order", sql.Replace("[UID], [State]", "[State], [UID]"), StrictKeysetSqlDecision.StructurallyReady);
+        Check("valid surrogate pair", sql + " --\uD83D\uDE00", StrictKeysetSqlDecision.StructurallyReady);
+        Check("lone high surrogate", sql + " --\uD800", StrictKeysetSqlDecision.InvalidInput);
+        Check("lone low surrogate", sql + " --\uDC00", StrictKeysetSqlDecision.InvalidInput);
 
         foreach (var (name, predicate) in new[]
         {

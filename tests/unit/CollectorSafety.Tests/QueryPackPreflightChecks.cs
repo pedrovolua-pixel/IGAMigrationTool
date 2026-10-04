@@ -96,6 +96,16 @@ internal static class QueryPackPreflightChecks
         }) Check(name, item, expected, QueryPackPreflightDecision.BindingMismatch);
 
         Check("SQL changed", candidate with { Sql = sql + " ASC" }, expected, QueryPackPreflightDecision.SqlDigestMismatch);
+        // Python hashlib over the explicit U+FFFD UTF-8 bytes calculates this
+        // replacement-byte digest independently. Neither invalid UTF-16 string
+        // may be silently repaired to the signed SQL text those bytes describe.
+        const string replacementDigest = "f89d54232f907e7750038eebb2a533f1c136145a07ab9fbd7be30ab6dbdaf412";
+        foreach (var malformedSql in new[] { sql + " --\uD800", sql + " --\uDC00" })
+            Check("unpaired surrogate", candidate with { Sql = malformedSql, SqlSha256 = replacementDigest },
+                expected with { SqlSha256 = replacementDigest }, QueryPackPreflightDecision.InvalidInput);
+        const string pairedDigest = "7fc61d50160c39d142a787fa3d066bb6b6461cd3e20c68d6b8647ce0d99f2fe5";
+        Check("valid surrogate pair", candidate with { Sql = sql + " --\uD83D\uDE00", SqlSha256 = pairedDigest },
+            expected with { SqlSha256 = pairedDigest }, QueryPackPreflightDecision.StructurallyReady);
         Check("digest changed", candidate with { SqlSha256 = new string('a', 64) }, expected, QueryPackPreflightDecision.SqlDigestMismatch);
         Check("trusted digest mismatch", candidate, expected with { SqlSha256 = new string('a', 64) }, QueryPackPreflightDecision.SqlDigestMismatch);
         Check("different build", candidate, expected with { Source = expected.Source with { ExactBuild = "10.0.0.101" } }, QueryPackPreflightDecision.UnsupportedSource);

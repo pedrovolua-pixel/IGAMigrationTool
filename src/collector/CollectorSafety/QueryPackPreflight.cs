@@ -113,7 +113,17 @@ public static class QueryPackPreflight
             return Result(QueryPackPreflightDecision.BindingMismatch);
         }
 
-        var actualDigest = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(candidate.Sql)));
+        string actualDigest;
+        try
+        {
+            // Never hash replacement bytes for malformed UTF-16 input. The pack
+            // digest binds the exact, valid UTF-8 SQL text rather than a repaired text.
+            actualDigest = Convert.ToHexString(SHA256.HashData(new UTF8Encoding(false, true).GetBytes(candidate.Sql)));
+        }
+        catch (EncoderFallbackException)
+        {
+            return Result(QueryPackPreflightDecision.InvalidInput);
+        }
         if (!EqualDigest(candidate.SqlSha256, expected.SqlSha256) || !EqualDigest(candidate.SqlSha256, actualDigest))
         {
             return Result(QueryPackPreflightDecision.SqlDigestMismatch);

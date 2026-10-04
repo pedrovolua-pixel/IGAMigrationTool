@@ -1,4 +1,5 @@
 using Microsoft.SqlServer.TransactSql.ScriptDom;
+using System.Text;
 
 namespace CollectorSafety;
 
@@ -20,6 +21,15 @@ public static class StrictKeysetSqlValidator
     public static StrictKeysetSqlDecision Evaluate(string? sql, StrictKeysetSqlPolicy? policy)
     {
         if (string.IsNullOrWhiteSpace(sql) || policy is null || policy.ProjectedColumns is null)
+        {
+            return StrictKeysetSqlDecision.InvalidInput;
+        }
+
+        try
+        {
+            _ = new UTF8Encoding(false, true).GetByteCount(sql);
+        }
+        catch (EncoderFallbackException)
         {
             return StrictKeysetSqlDecision.InvalidInput;
         }
