@@ -147,3 +147,7 @@ The first includeHidden button correctionfd60168 passes four simplified DOM cont
 
 
 Navigation correction2f1a534 is independently accepted with four exact-source real-glyph Chromium151 controls. Owned diagnostic passes3487 plus actual host restart; the explicit56284/database/60s configuration remains diagnostic only. Original hosted254 and intermediate failures are retained; corrected full hosted validation remains pending. NoG1–G9/manual/real-environment credit.
+
+## Foundation ancestry reconciliation — 2026-10-04
+
+DraftPR4 now targets foundatione83e234 instead of earlier4c95b734 and reports conflicts; no new exact4698c45 hosted runs are scheduled. Merge the already reviewed graphical foundation ancestry into the isolated integration branch. Preserve its approved UI files/evidence and the integrated exact source-authority contracts, canonical execution/evidence history, BFF behavior and reviewed assessment selection/navigation corrections. Inspect each conflict and retain both evidence histories rather than reverting integrated functionality or changing another checkout. Rerun checks affected by the resulting source, confirm PR mergeability and new hosted scheduling. This is a reversible engineering branch merge, not PR merge, production release or gate acceptance.
