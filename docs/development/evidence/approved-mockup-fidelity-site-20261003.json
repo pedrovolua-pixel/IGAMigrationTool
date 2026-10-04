@@ -1,0 +1,40 @@
+{
+  "packet": "UI-W5",
+  "date": "2026-10-03",
+  "application_commit": "dff88945cdd010d8cd720e4a9a55c7ba3f43994f",
+  "application_pushed_to_GitHub": false,
+  "site_source_commit": "383f27b3dc4d092c4f5528496069990830fc776c",
+  "publication": {
+    "id": "appgdep_6ac1c568ecc88191a34ae532fb0b535a",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_da2a571aecd0819181ed1c5f83dc2e8a",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-04T03:18:07.596429+00:00"
+  },
+  "human_tasks": {
+    "count": 14,
+    "byte_preserved": true,
+    "sha256": "9df3a0850b8e7ca08cb6d119812d04a6c5d677394517f37dbfd9881f9bb9bd63"
+  },
+  "qa": {
+    "local_viewports": [
+      1280,
+      390,
+      320
+    ],
+    "no_document_overflow": true,
+    "broken_internal_anchors": 0,
+    "rendered_cards": 14
+  },
+  "limits": "Private status publication only. No application production release, owner visual/manual/operational acceptance, gate change or source/provider activation.",
+  "archive_sha256": "d98a2d19f10a97b6fa457000858f32867c1ba810f8e990f22205e7fe24406e81",
+  "archive_confirms_UIW5_and_all14_cards": true
+}
