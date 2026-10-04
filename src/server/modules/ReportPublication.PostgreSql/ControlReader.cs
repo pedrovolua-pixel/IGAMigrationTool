@@ -18,7 +18,7 @@ internal static class NativeControlReaderV1
             || parsed.ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff'Z'", CultureInfo.InvariantCulture) != value) throw Integrity();
         return parsed;
     }
-    internal static PublicationManifestV1 Manifest(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, ManifestCore);
+    internal static PublicationManifestV1 Manifest(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, 1024 * 1024, ManifestCore);
     private static PublicationManifestV1 ManifestCore(ReadOnlyMemory<byte> bytes)
     {
         using var document = Parse(bytes, 1024 * 1024);
@@ -41,7 +41,7 @@ internal static class NativeControlReaderV1
         Same(bytes, NativePublicationCanonicalV1.ManifestBytes(value));
         return value;
     }
-    internal static PublicationReceiptV1 PublicationReceipt(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, PublicationReceiptCore);
+    internal static PublicationReceiptV1 PublicationReceipt(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, NativePublicationCanonicalV1.MaximumCommandBytes, PublicationReceiptCore);
     private static PublicationReceiptV1 PublicationReceiptCore(ReadOnlyMemory<byte> bytes)
     {
         using var document = Parse(bytes, NativePublicationCanonicalV1.MaximumCommandBytes);
@@ -54,7 +54,7 @@ internal static class NativeControlReaderV1
         Same(bytes, NativePublicationCanonicalV1.PublicationReceiptBytes(value));
         return value;
     }
-    internal static ExactReadReceiptV1 ReadReceipt(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, ReadReceiptCore);
+    internal static ExactReadReceiptV1 ReadReceipt(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, NativePublicationCanonicalV1.MaximumCommandBytes, ReadReceiptCore);
     private static ExactReadReceiptV1 ReadReceiptCore(ReadOnlyMemory<byte> bytes)
     {
         using var document = Parse(bytes, NativePublicationCanonicalV1.MaximumCommandBytes);
@@ -66,7 +66,7 @@ internal static class NativeControlReaderV1
         Same(bytes, NativePublicationCanonicalV1.ReadReceiptBytes(value));
         return value;
     }
-    internal static PublicationAuditEventV1 Audit(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, AuditCore);
+    internal static PublicationAuditEventV1 Audit(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, NativePublicationCanonicalV1.MaximumCommandBytes, AuditCore);
     private static PublicationAuditEventV1 AuditCore(ReadOnlyMemory<byte> bytes)
     {
         using var document = Parse(bytes, NativePublicationCanonicalV1.MaximumCommandBytes);
@@ -84,7 +84,7 @@ internal static class NativeControlReaderV1
         Same(bytes, NativePublicationCanonicalV1.AuditEventBytes(value));
         return value;
     }
-    internal static FixtureSourceMetadataV1 SourceMetadata(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, SourceMetadataCore);
+    internal static FixtureSourceMetadataV1 SourceMetadata(ReadOnlyMemory<byte> bytes) => ReadOwned(bytes, 1024 * 1024, SourceMetadataCore);
     private static FixtureSourceMetadataV1 SourceMetadataCore(ReadOnlyMemory<byte> bytes)
     {
         using var document = Parse(bytes, 1024 * 1024);
@@ -250,8 +250,9 @@ internal static class NativeControlReaderV1
             default: throw Integrity();
         }
     }
-    private static T ReadOwned<T>(ReadOnlyMemory<byte> input, Func<ReadOnlyMemory<byte>, T> read)
+    private static T ReadOwned<T>(ReadOnlyMemory<byte> input, int maximum, Func<ReadOnlyMemory<byte>, T> read)
     {
+        if (input.IsEmpty || input.Length > maximum) throw Integrity();
         // The provider cannot retain an alias that changes bytes between admission and comparison.
         var owned = input.ToArray();
         return Guard(() => read(owned));
