@@ -102,6 +102,11 @@
     {
       "name": "migration-and-fresh-only-setup",
       "expected": "ActualMigration executes additiveDDL inownfreshDB; provisioner only exactownerACL/seeds/7edges plusPUBLICCREATE/TEMPrevokes on2newDBs/publicschemas afterDDL. Migrationzerooutboundedges and no runtimegrants. Owner/setup/cleanupreceipts separatefrom18persistedcredit."
+    },
+    {
+      "name": "migration-implicit-pg-database-owner-is-setup-only",
+      "expected": "ActualMigration owns onlyitsfreshDB and has builtinimplicitpg_database_owner privileges inthatDB, which is notanexplicitpg_auth_members edge/runtimeauthority. Verify its databaseownership+implicitUSAGE positive separately; require zeroexplicit/direct/transitive memberships andnoruntimefunctions/owneredges. Do notassertpg_has_role(Migration,pg_database_owner,USAGE)=false."
     }
-  ]
+  ],
+  "governingLiteralClarification": "a053d12d"
 }
