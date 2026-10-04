@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "pilot-private-site-receipt-v1",
+  "siteProjectId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+  "sourceCommit": "2e129a30559db2c2d14bbfdcb1be13beaae34e0c",
+  "canonicalCheckpoint": "9603149",
+  "deploymentId": "appgdep_6ac1aceefc7c8191b4892558f5822109",
+  "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_deeb3632161c819192d34e4a315178f0",
+  "status": "succeeded",
+  "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+  "confirmedAtUtc": "2026-10-04T01:33:41.312067Z",
+  "taskCount": 14,
+  "gateStatus": "G0PASS;G1-G9NOTVERIFIED",
+  "publicationCorrections": [
+    "Expired source credential renewed through native operation.",
+    "Concurrent remote cycle07 update merged; all remote panel IDs and14 taskcards retained; source packaged/pushed before deployment."
+  ]
+}

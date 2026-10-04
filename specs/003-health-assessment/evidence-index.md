@@ -2,6 +2,8 @@
 
 ## Release-readiness checkpoint — 2026-10-03
 
+[Confirmed owner-private checkpoint deployment](../../docs/development/evidence/pilot-release-readiness-site-20261003.json): exact source2e129a3, successful private deployment,14 tasks preserved.
+
 [Executed integration checkpoint and original corrections](../../docs/development/evidence/pilot-release-readiness-20261003.json). This records118-project/43-host plus actual fixture PostgreSQL/HTTPS checks, exact source bounds and pending work. No live gate or acceptance pass follows.
 
 Status: G0 approval recorded; local synthetic/bootstrap checks have run, but no G1–G9 execution gate evidence exists  
