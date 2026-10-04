@@ -26,3 +26,16 @@ The compiled packet must verify all 31 original SHA-256/length commitments and e
 The 19 reference refusal groups remain executed independently. Compiled equivalents additionally exercise source/projection scope and input bindings, source-only provenance ownership, exact warning category/kind/record targets, severe unreviewed false flags with and without warnings, marker section/ID/field substitution, root-cause/reference/category links, coverage arithmetic/reasons, unavailable/null pairs, actor/revision/digest validation, token/text bounds, duplicate IDs and unknown enum values. Constructor inputs and returned bytes are mutated after capture to prove defensive ownership. Command invocation/correlation exclusion is tested independently. All source factory calls are through the explicitly trusted test friend; no public source constructor may exist.
 
 Persistence and lease delivery cases remain **PLANNED_NOT_EXECUTED**. Raw parser-only refusals remain distinct from typed codec checks until the actual parser exists. This separation prevents a strict test loader from being counted as a production admission check.
+
+## Compiled checkpoint
+
+The package-free `ReportPublication.Tests.csproj` references the repository module by default. In this sparse worker checkout only, use `-p:ReportPublicationProject=/private/tmp/iga-release-native-publication/src/server/modules/ReportPublication/ReportPublication.csproj` with locked restore and run. The property is a local compilation path override, not a runtime configuration or authority grant. The pinned executable used is `/private/tmp/iga-dotnet-10.0.401/dotnet`.
+
+```sh
+dotnet restore tests/unit/ReportPublication.Tests/ReportPublication.Tests.csproj --locked-mode
+dotnet run --project tests/unit/ReportPublication.Tests/ReportPublication.Tests.csproj --configuration Release --no-restore
+```
+
+The current compiled packet checks155 independent assertions:31 original hash/length commitments;31 exact typed canonical output vectors; three strict production projection parser roundtrips;14 original Unicode cases at the strict test scalar layer and separately at the production projection parser;11 raw parser refusals;33 typed source/projection refusals;15 malformed manifest/audit/receipt cases; and two defensive-ownership plus one nonpublic-source-factory checks. Counts are executable assertions rather than scenario or milestone acceptance. Fourteen Unicode production parser cases insert valid canonical scalar bytes or original hostile bytes into a known valid projection, ensuring the actual decoder handles them. Source envelopes are supplied only through the trusted friend typed source constructor; the test loader accepts no real source data and proves no source JSON admission boundary.
+
+Initial harness failures are retained in `compiled-execution-evidence.json`: constructor record parameter casing and two ineffective counter string mutations were corrected before acceptance; attempted same-category rules across independently classified linked records were removed after checking the approved contract. The replacement source-category tests enforce membership in the frozen requiredCategories without inventing category equality across records. No production failure was observed in this checkpoint. Persistence18 cases remain planned and did not run.

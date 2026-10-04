@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>ReportPublication.Tests</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <ReportPublicationProject Condition="'$(ReportPublicationProject)' == ''">../../../src/server/modules/ReportPublication/ReportPublication.csproj</ReportPublicationProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(ReportPublicationProject)" />
+    <None Include="fixtures/*.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
