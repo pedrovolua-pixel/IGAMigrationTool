@@ -33,8 +33,12 @@ through valid emission; transaction row locks released at commit cannot provide
 that guarantee.
 
 The project uses the existing repository net10.0 settings and has no package
-dependencies. A scoped locked restore/build will be recorded once preparation
-is complete; no whole-repository build or acceptance evidence is implied.
+dependencies. The scoped pinned-SDK locked restore, Release build (zero warnings/errors),
+format verification, whitespace check and default gitleaks8.30.1 scan have run
+successfully. The author DTO harness passed22 checks; independent RR-P03 passed
+157 checks against codec checkpoint7ded2dc, preserving all31 original vectors.
+The transaction/fence flow review is pending. No whole-repository build, actual
+database integration, two-environment validation or acceptance is implied.
 
 A successful `CommitAsync` ends the database write transaction. Until disposal,
 the scoped context may retain only read operations for current report/reference
