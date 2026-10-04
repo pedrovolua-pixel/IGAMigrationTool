@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-disposal-scenarios-v1",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED_PENDING_GOVERNING_DECISION",
+  "package": "Npgsql10.0.3",
+  "existingCaseFreeze": "6232bbf",
+  "existing18Unchanged": true,
+  "sourceReview": [
+    {
+      "upstream": "https://raw.githubusercontent.com/npgsql/npgsql/v10.0.3/src/Npgsql/Internal/NpgsqlConnector.cs",
+      "sha256": "7a13d79578e0a0874c5842532d450d496f7d52c0f66d3fa7c1a2984a83465274",
+      "localReadOnly": "/private/tmp/iga-p05b-cleanup-source-review/Internal_NpgsqlConnector.cs"
+    },
+    {
+      "upstream": "https://raw.githubusercontent.com/npgsql/npgsql/v10.0.3/src/Npgsql/NpgsqlConnection.cs",
+      "sha256": "02ed57055a9e1f025c631590d10c4040af1abddf4fa53d04cd07eaf35675d93b",
+      "localReadOnly": "/private/tmp/iga-p05b-cleanup-source-review/NpgsqlConnection.cs"
+    },
+    {
+      "upstream": "https://raw.githubusercontent.com/npgsql/npgsql/v10.0.3/src/Npgsql/NpgsqlDataReader.cs",
+      "sha256": "9c109626d6627b55aef9768827ce4aa860d3934c224d009048ba57060431607c",
+      "localReadOnly": "/private/tmp/iga-p05b-cleanup-source-review/NpgsqlDataReader.cs"
+    },
+    {
+      "upstream": "https://raw.githubusercontent.com/npgsql/npgsql/v10.0.3/src/Npgsql/NpgsqlTransaction.cs",
+      "sha256": "2a44d5f8fcb23459fc1f1f5cacaecce6c1ae1df9cee4f254ff389ae446b9ec6c",
+      "localReadOnly": "/private/tmp/iga-p05b-cleanup-source-review/NpgsqlTransaction.cs"
+    }
+  ],
+  "proposedSupportedSettings": {
+    "Pooling": false,
+    "Multiplexing": false,
+    "Enlist": false,
+    "CancellationTimeout": -1
+  },
+  "sourceSupportedLimits": [
+    "PerformUserCancellationUnsynchronized calls PerformPostgresCancellation before CancellationTimeout>=0 comparison",
+    "DoCancelRequest opens under ConnectionTimeout with CancellationToken.None then synchronously reads cancelserverclose",
+    "Connection.DisposeAsync awaits CloseAsync which may closeongoingreader byConsume before connector return/physicalclose",
+    "Transaction.DisposeAsync may closeongoingoperations androllback without cancellationtoken",
+    "A setting or local cancellation/DisposeAsync task state alone proves neither serverbackendrelease nor lockabsence at originaldeadline"
+  ],
+  "cases": [
+    {
+      "name": "originalvalidity-logicalinvalidate-before-cleanup",
+      "expected": "OriginalUTC/monotonic/caller termination immediately clears owningregistry/views/buffers and denies newlyadmitted protectedwork, success/delivery/lateoutputs before awaitedcleanup. Zero postcutoff source/blob/reference/metadata protectedload, businessappend, sinkdelivery and successreceipt release."
+    },
+    {
+      "name": "exact-public-supported-config",
+      "expected": "Owned sessions and auxiliaryconnections use reviewedfalsePooling/Multiplexing/Enlist andCancellationTimeout-1; ambientTransactionScope cannotretainbackend; nosettingsinterpretedasphysicaldeadlineproof. Runtime configuration inputsnotcallercontrolled."
+    },
+    {
+      "name": "pending-operation-public-dispose-order",
+      "expected": "Protected originallease wrapper pendingcommand ends logically; cleanup invokes owned connection DisposeAsync without firstuncancellableTransaction.Dispose/Rollback. Cleanupneverstarts expiredclose_fence orotherSQL anddoesnotreturnconnectorforreuse."
+    },
+    {
+      "name": "open-reader-disposal-consume-limit",
+      "expected": "Pause owntrustedreader/serverresponse; recordthat publicDisposeAsync mayawaitreaderClose/Consume, remainscleanupPending without reopeningview/newwork/success. Do notclaiminstantabort orrelease fromPoolingfalse."
+    },
+    {
+      "name": "cancel-response-transport-stall-independent-limit",
+      "expected": "Test-only ownerbound loopback controlledtransport withholds cancellationconnectorserverclose after request; source ordering showsCancellationTimeout-1 doesnotbound that priorcancelhandshake wait. Logicalresult remainsdenied/lateoutputzero; blockedphysicaldisposal NOTPROVED untiltesttransportowner releases it. Boundedtestcontrolcleanup releases onlyitsownrelay; noruntimepolling/TTL/termination/API added."
+    },
+    {
+      "name": "physical-own-backend-and-known-lock-release",
+      "expected": "Onactualfreshfixture wait/reader/cancel/rollback scenarios record serverderivedownPID+backend_start+database+SESSION_USER beforeoperation; privilegedtestobserver uses exactowneridentity to observe pg_stat_activity backendabsence and allknownpg_locks absence aftercleanup. Backendmissing orPIDreusedwithdifferentstart distinguished. No selfreportedBoolean/connectionClosed/taskCompletion alone physicalproof."
+    },
+    {
+      "name": "unknowncommit-or-cleanup-zero-outcomeaudit",
+      "expected": "In-flight or uncertainCOMMIT/physicalcleanup invalidates logicalsession; zeronewordinarywrite/retry/Failed/Cancelled rollbackaudit/success/emission. Historicalcommittedlinkedrows retained iflaterconfirmed. Separatefreshreadonlyreconciliation onlyoriginalreceipt meaning/currentauthority underitsownnewlease; no ordinarycorefallthrough."
+    },
+    {
+      "name": "cleanup-fault-or-outstanding-task-honest-receipt",
+      "expected": "Physicalcleanupstillpending/faulted/releaseunobserved remainsNOTPROVED with observedtaskfault/typeonly; invocationforeverinvalid/nonpooled/nonreused, no success cleanupclaim. Any evidence markslogicalend andphysicalrelease distinct. No rawNpgsqlexception/protectedquery/state/client/credentials logged."
+    },
+    {
+      "name": "current-normal-disposal-and-repeated-ownercleanup",
+      "expected": "Currentready/committed/uncommitted session publicDisposeAsync observedonce; repeatedcleanup cannot resurrectviews/work or skipobservedfaults; actualownbackend/knownlocks disappear. Auxiliary BlobStager/Audit owners tracktheir ownbackendcleanup independentofmainfence."
+    },
+    {
+      "name": "cleanup-authority-bound-no-extra-privilege",
+      "expected": "Onlynormal publicownedconnectiondisposal/test-ownedtransportcleanup; no broadpg_signal_backend/privateNpgsqlreflection/socketabort/callerPID/anotherfixturekill. No physicalcleanup claim forsource-only/portable/scriptedcontrols."
+    }
+  ]
+}
