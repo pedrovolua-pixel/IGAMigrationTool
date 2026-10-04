@@ -333,4 +333,4 @@ The [cycle05 plan](../../plans/active/local-pilot-phase1d-occupied-capacity-veri
 
 ### Phase1D cycle05 concurrent integration qualification
 
-The 332 preservation pins and complete hosted checks bind frozen Phase1D source e0d6a67 / code413bd13. Another owner's later approved M08 cycle07 integration through2b76e3a changes SyntheticAiExecutionStore.cs and is preserved with its own canonical evidence. All three MCP test paths still match their tested bytes. No full-check claim for the later combined root follows from the earlier413bd13 workflows.
+The 332 initial working-file preservation hashes include four unrelated dirty UI files and were verified at the local checkpoint. Separately, all 332 committed baseline paths remain identical in tested code 413bd13. Another owner later integrated approved M08 cycle07 source through 2b76e3a, changing SyntheticAiExecutionStore.cs; it is preserved with its own canonical evidence. All three MCP paths still match their tested bytes. Earlier 413bd13 hosted workflows do not validate the later combined root.

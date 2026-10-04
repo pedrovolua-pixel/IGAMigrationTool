@@ -2135,6 +2135,21 @@
     "changedPreviouslyPinnedPath": "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs",
     "preserved": true,
     "threeMcpTestedPathsStillExact": true,
-    "qualification": "332pins apply to frozen e0d6a67 and equivalent413bd13 Phase1D source; another owner's subsequent M08 patch changes its own source. No claim that full hosted checks on413bd13 validate the later combined root commit. M08 evidence remains under its own canonical records."
+    "qualification": "332 initial hashes pin original working bytes, including four unrelated dirty UI files; preservation was verified before later M08 integration. Separately all332 committed baseline paths are identical in code413bd13. Later M08 changes its own store; no complete hosted-check claim for later combined root."
+  },
+  "preservationQualification": {
+    "initialWorkingPins": 332,
+    "workingPathsWithPreexistingUncommittedBytes": [
+      "src/web/src/AnalysisView.tsx",
+      "src/web/src/App.tsx",
+      "src/web/src/DraftReportView.tsx",
+      "src/web/src/ReviewPanel.tsx"
+    ],
+    "committedBaselinePathsIdenticalInTestedCode": 332,
+    "afterIndependentM08WorkingPathsStillIdentical": 331,
+    "independentOwnerChangedPaths": [
+      "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs"
+    ],
+    "initialFinalCheckFailure": "Gitcomparison initially confused working hashes with clean snapshot hashes; originaldirtyAnalysisView caught it. Corrected separate working-preservation and committed-baseline comparisons; no source changed."
   }
 }
