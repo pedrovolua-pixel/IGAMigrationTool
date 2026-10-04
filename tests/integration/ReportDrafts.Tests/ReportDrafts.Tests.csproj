@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/ReportDrafts/ReportDrafts.csproj" />
+    <ProjectReference Include="../../../src/server/modules/AssessmentRuns/AssessmentRuns.csproj" />
+    <ProjectReference Include="../../../src/server/modules/FindingReview/FindingReview.csproj" />
+    <ProjectReference Include="../../../src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj" />
+  </ItemGroup>
+  <ItemGroup><None Update="canonical-golden.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+  <ItemGroup><Compile Include="../ReviewMaturity.Tests/HistoricalGoldens.cs" Link="HistoricalGoldens.cs" /></ItemGroup>
+</Project>

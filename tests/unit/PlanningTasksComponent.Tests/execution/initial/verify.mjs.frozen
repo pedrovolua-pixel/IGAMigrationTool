@@ -1,0 +1,885 @@
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import assert from "node:assert/strict";
+const allowed = new Set([
+  "PATH",
+  "HOME",
+  "TMPDIR",
+  "TMP",
+  "TEMP",
+  "SystemRoot",
+  "SYSTEMROOT",
+  "WINDIR",
+  "COMSPEC",
+  "PATHEXT",
+  "LANG",
+  "LC_ALL",
+  "TZ",
+]);
+let removed = 0;
+for (const k of Object.keys(process.env))
+  if (!allowed.has(k)) {
+    delete process.env[k];
+    removed++;
+  }
+const here = dirname(fileURLToPath(import.meta.url)),
+  root = resolve(here, "../../.."),
+  frontend = resolve(root, "src/web"),
+  out = resolve(here, "artifacts");
+const require = createRequire(resolve(frontend, "package.json")),
+  React = require("react"),
+  { renderToStaticMarkup } = require("react-dom/server");
+const { transformWithOxc } = await import(
+  pathToFileURL(resolve(frontend, "node_modules/vite/dist/node/index.js")).href
+);
+await mkdir(out, { recursive: true });
+for (const name of [
+  "FixPackagePreview",
+  "ArtifactReviewPanel",
+  "PlanningTasksPanel",
+]) {
+  const path = resolve(frontend, "src", name + ".tsx");
+  const result = await transformWithOxc(await readFile(path, "utf8"), path, {
+    lang: "tsx",
+    jsx: { runtime: "automatic" },
+    target: "es2022",
+  });
+  const code = result.code
+    .replace(new RegExp(`import ['"]\\./${name}\\.css['"];?\\n`, "g"), "")
+    .replaceAll(
+      '"react/jsx-runtime"',
+      JSON.stringify(pathToFileURL(require.resolve("react/jsx-runtime")).href),
+    )
+    .replaceAll('"./FixPackagePreview"', '"./FixPackagePreview.mjs"')
+    .replaceAll('"./ArtifactReviewPanel"', '"./ArtifactReviewPanel.mjs"');
+  await writeFile(
+    resolve(out, name + ".mjs"),
+    code +
+      (name === "PlanningTasksPanel"
+        ? "\nexport {structural as testOnlyStructural, utc as testOnlyUtc};\n"
+        : ""),
+  );
+}
+const {
+  PlanningTasksPanel,
+  coherentPlanningTasks,
+  coherentUnavailablePlanningTasks,
+  testOnlyStructural,
+  testOnlyUtc,
+} = await import(pathToFileURL(resolve(out, "PlanningTasksPanel.mjs")).href);
+const complete = JSON.parse(
+    await readFile(resolve(here, "complete-fixture.json"), "utf8"),
+  ),
+  empty = JSON.parse(
+    await readFile(resolve(here, "empty-fixture.json"), "utf8"),
+  ),
+  unavailable = JSON.parse(
+    await readFile(resolve(here, "unavailable-fixture.json"), "utf8"),
+  );
+const hash = (s) => createHash("sha256").update(s).digest("hex"),
+  clone = () => structuredClone(complete),
+  d = (x) => x.analysis.planningTasks,
+  e = (x) => d(x).entries[0],
+  o = (x) => d(x).options[0],
+  noop = () => {};
+let checks = 0,
+  accepted = 0,
+  denied = 0;
+const check = (v, label) => {
+    assert.ok(v, label);
+    checks++;
+  },
+  equal = (a, b, label) => {
+    assert.deepEqual(a, b, label);
+    checks++;
+  };
+const props = (x, drafts = {}, verified = true) => ({
+  analysis: x.analysis,
+  run: x.run,
+  verified,
+  drafts,
+  onReasonChange: noop,
+  onAction: noop,
+  onRetry: noop,
+  onRefresh: noop,
+});
+const render = (x, drafts = {}, verified = true) =>
+  renderToStaticMarkup(
+    React.createElement(PlanningTasksPanel, props(x, drafts, verified)),
+  );
+const renderUnavailable = (x) =>
+  renderToStaticMarkup(
+    React.createElement(PlanningTasksPanel, {
+      analysis: null,
+      run: x.run,
+      standaloneDetail: x.detail,
+      verified: true,
+      drafts: {},
+      onReasonChange: noop,
+      onAction: noop,
+      onRetry: noop,
+      onRefresh: noop,
+    }),
+  );
+async function accept(x, label) {
+  check(await coherentPlanningTasks(x.analysis, x.run), label);
+  accepted++;
+}
+async function deny(x, label, sync = true) {
+  check(!(await coherentPlanningTasks(x.analysis, x.run)), label);
+  denied++;
+  if (sync) {
+    const html = render(x);
+    check(
+      html.includes("Planning task data is inconsistent."),
+      label + " closed rendering",
+    );
+    check(
+      !html.includes("<textarea") &&
+        !html.includes("Current original recommendation"),
+      label + " no controls/content",
+    );
+  }
+}
+async function denyUnavailable(x, label) {
+  check(!(await coherentUnavailablePlanningTasks(x.detail, x.run)), label);
+  denied++;
+  const html = renderUnavailable(x);
+  check(
+    html.includes("Planning task data is inconsistent."),
+    label + " unavailable closed rendering",
+  );
+}
+const pristine = JSON.stringify(complete);
+for (const [name, x] of [
+  ["complete", complete],
+  ["empty", empty],
+]) {
+  await accept(x, name);
+  const actual = render(x);
+  equal(
+    actual,
+    await readFile(resolve(here, name + "-expected.html"), "utf8"),
+    name + " independent whole markup bytes",
+  );
+  await writeFile(resolve(out, name + "-actual.html"), actual);
+}
+check(
+  await coherentUnavailablePlanningTasks(unavailable.detail, unavailable.run),
+  "independent source-unavailable proof",
+);
+accepted++;
+equal(
+  renderUnavailable(unavailable),
+  await readFile(resolve(here, "unavailable-expected.html"), "utf8"),
+  "unavailable complete literal markup",
+);
+await writeFile(
+  resolve(out, "unavailable-actual.html"),
+  renderUnavailable(unavailable),
+);
+check(
+  !renderUnavailable(unavailable).includes("<textarea") &&
+    !renderUnavailable(unavailable).includes("Reason or comment") &&
+    !renderUnavailable(unavailable).includes("Planning task contract"),
+  "unavailable suppresses content/actions",
+);
+const html = render(complete);
+check(
+  !/<script|<iframe|<form|<a\b|<img|\son\w+=|href=|src=/i.test(html),
+  "hostile original/reason strings remain inert markup",
+);
+check(
+  html.includes("&lt;script&gt;window.injected=1&lt;/script&gt;") &&
+    html.includes("😀 e\u0301"),
+  "exact hostile Unicode reason retained",
+);
+check(
+  html.includes("\0\r\n"),
+  "SSR string retains NUL and CRLF; parsed browser normalization is separately verified by V14",
+);
+for (const opt of d(complete).options) {
+  for (const [key, value] of Object.entries(opt.identity)) {
+    for (const v of Array.isArray(value) ? value : [value])
+      check(html.includes(v), "visible identity " + key);
+  }
+  for (const a of opt.currentAttestations)
+    for (const key of ["artifactId", "eventId", "kind", "sourceDigest"])
+      check(html.includes(a[key]), "complete selected reference " + key);
+}
+for (const h of e(complete).history)
+  for (const key of ["eventId", "actorId", "recordedAtUtc", "planningEventId"])
+    check(html.includes(h[key]), "complete attributed history " + key);
+for (const [key, value] of Object.entries(d(complete).source.artifactSource))
+  if (typeof value === "string")
+    check(html.includes(value), "full source metadata " + key);
+check(
+  render(complete, {}, false).includes(
+    "Verifying the current planning source",
+  ) && !render(complete, {}, false).includes("<textarea"),
+  "default verification gate withholds controls",
+);
+const defaults = props(complete);
+delete defaults.verified;
+check(
+  !renderToStaticMarkup(
+    React.createElement(PlanningTasksPanel, defaults),
+  ).includes("<textarea"),
+  "missing verified defaults false",
+);
+const command = {
+  eventId: "30000000-2222-4333-8444-000000000001",
+  kind: "Comment",
+  expectedRevision: 1,
+  expectedSourceDigest: d(complete).source.artifactSource.sourceDigest,
+  expectedAttestations: o(complete).currentAttestations,
+  reason: "exact pending text",
+};
+const id = e(complete).identity.taskId;
+for (const [draft, label] of [
+  [
+    {
+      reason: "draft",
+      pending: command,
+      busy: false,
+      error: null,
+      requiresRefresh: false,
+    },
+    "uncertain",
+  ],
+  [
+    {
+      reason: "draft",
+      pending: null,
+      busy: true,
+      error: null,
+      requiresRefresh: false,
+    },
+    "busy",
+  ],
+  [
+    {
+      reason: "draft",
+      pending: null,
+      busy: false,
+      error: "Conflict: refresh",
+      requiresRefresh: true,
+    },
+    "conflict",
+  ],
+]) {
+  const h = render(complete, { [id]: draft });
+  check(
+    !h.includes(">Start progress</button>"),
+    "withheld normal action " + label,
+  );
+  check(
+    h.includes("draft") && h.includes('disabled=""'),
+    "retained reason " + label,
+  );
+  if (label === "uncertain")
+    check(h.includes("Retry same planning command"), "explicit frozen retry");
+  if (label === "conflict")
+    check(
+      h.includes('role="alert"') && h.includes("Refresh planning source"),
+      "actionable conflict",
+    );
+}
+for (const reason of ["", " \t\r\n", "x".repeat(2001), "\ud800", "\udc00"])
+  check(
+    render(complete, {
+      [id]: {
+        reason,
+        pending: null,
+        busy: false,
+        error: null,
+        requiresRefresh: false,
+      },
+    }).includes('disabled="">Start progress'),
+    "invalid input disables command",
+  );
+for (const reason of [
+  "x".repeat(2000),
+  "😀".repeat(1000),
+  "\0",
+  "  exact \r\n ",
+])
+  check(
+    !render(complete, {
+      [id]: {
+        reason,
+        pending: null,
+        busy: false,
+        error: null,
+        requiresRefresh: false,
+      },
+    }).includes('disabled="">Start progress'),
+    "valid exact reason boundary",
+  );
+function flags(x, status = "Planned", fresh = true) {
+  const t = e(x);
+  t.status = status;
+  t.freshness = fresh ? "CurrentPlan" : "NeedsReconfirmation";
+  Object.assign(t, {
+    canReconfirm:
+      ["Planned", "InProgress"].includes(status) &&
+      !fresh &&
+      o(x).currentAttestations.every((a) => a.state === "ReviewedForPlanning"),
+    canStart: status === "Planned" && fresh,
+    canReturnToPlanned: status === "InProgress",
+    canComplete: status === "InProgress" && fresh,
+    canCancel: ["Planned", "InProgress"].includes(status),
+    canReopen: ["Completed", "Cancelled"].includes(status),
+    canComment: true,
+  });
+}
+function append(x, kind, status) {
+  const t = e(x),
+    last = t.history.at(-1),
+    n = last.revision + 1,
+    h = {
+      eventId: `20000000-2222-4333-8444-${String(n).padStart(12, "0")}`,
+      revision: n,
+      kind,
+      actorId: t.assigneeId,
+      actorRoles: ["Consultant"],
+      recordedAtUtc: "2026-10-03T01:02:05.1234567Z",
+      reason: "  exact " + kind + " \0\r\n 😀 e\u0301  ",
+      source: structuredClone(d(x).source),
+      attestations: structuredClone(o(x).currentAttestations),
+      recordedStatus: status,
+      planningEventId:
+        kind === "ReconfirmPlan"
+          ? `20000000-2222-4333-8444-${String(n).padStart(12, "0")}`
+          : last.planningEventId,
+    };
+  t.history.push(h);
+  t.revision = n;
+  if (kind === "ReconfirmPlan") t.plan = structuredClone(h);
+  flags(
+    x,
+    status,
+    JSON.stringify(t.plan.attestations) ===
+      JSON.stringify(o(x).currentAttestations),
+  );
+  return x;
+}
+function attestation(x, artifactId, kind) {
+  const a = x.analysis.artifactReview.artifacts.find(
+      (a) => a.artifactId === artifactId,
+    ),
+    n = a.revision + 1,
+    h = {
+      eventId: `40000000-2222-4333-8444-${String(n).padStart(12, "0")}`,
+      revision: n,
+      kind,
+      actorId: x.analysis.artifactReview.actorId,
+      actorRoles: ["Consultant"],
+      recordedAtUtc: "2026-10-03T01:02:05.1234567Z",
+      reason: "Exact " + kind,
+      source: structuredClone(x.analysis.artifactReview.source),
+      recordedState:
+        kind === "ReviewForPlanning" ? "ReviewedForPlanning" : "Unverified",
+    };
+  a.history.push(h);
+  a.revision = n;
+  a.state = h.recordedState;
+  a.canReview = a.state !== "ReviewedForPlanning";
+  a.canWithdraw = !a.canReview;
+  for (const opt of d(x).options) {
+    for (const v of opt.currentAttestations)
+      if (v.artifactId === artifactId)
+        Object.assign(v, {
+          revision: n,
+          eventId: h.eventId,
+          kind,
+          state: a.state,
+          sourceDigest: h.source.sourceDigest,
+        });
+    opt.canCreate =
+      opt.currentAttestations.every((v) => v.state === "ReviewedForPlanning") &&
+      !d(x).entries.some((t) => t.identity.taskId === opt.identity.taskId);
+  }
+  flags(x, e(x).status, false);
+  return x;
+}
+let x = clone();
+append(x, "StartProgress", "InProgress");
+await accept(x, "explicit start");
+append(x, "Comment", "InProgress");
+await accept(x, "append comment preserves state");
+append(x, "ReturnToPlanned", "Planned");
+await accept(x, "return to planned");
+append(x, "Cancel", "Cancelled");
+await accept(x, "cancel");
+append(x, "Comment", "Cancelled");
+await accept(x, "terminal comment");
+append(x, "Reopen", "Planned");
+await accept(x, "reopen cancelled");
+append(x, "StartProgress", "InProgress");
+append(x, "Complete", "Completed");
+await accept(x, "completion only planning");
+append(x, "Comment", "Completed");
+await accept(x, "completed comment");
+append(x, "Reopen", "Planned");
+await accept(x, "reopen completed");
+x = attestation(clone(), o(complete).identity.artifactIds[0], "WithdrawReview");
+await accept(x, "selected withdrawal gives needs reconfirmation");
+check(
+  !render(x).includes(">Start progress</button>") &&
+    render(x).includes("Needs reconfirmation"),
+  "freshness separate from planned workflow",
+);
+append(x, "Comment", "Planned");
+await accept(x, "stale maintenance stores observed current vector");
+append(x, "Cancel", "Cancelled");
+await accept(x, "stale cancel");
+append(x, "Reopen", "Planned");
+await accept(x, "stale reopen remains stale");
+attestation(x, o(x).identity.artifactIds[0], "ReviewForPlanning");
+await accept(x, "re-review unchanged package remains needs reconfirmation");
+check(e(x).canReconfirm, "new review event permits explicit reconfirm");
+append(x, "ReconfirmPlan", "Planned");
+await accept(x, "explicit reconfirm new vector preserves creation");
+equal(
+  e(x).creation,
+  e(complete).creation,
+  "original creation event never replaced",
+);
+check(e(x).plan.eventId !== e(x).creation.eventId, "plan points new event");
+x = clone();
+const unselected = d(x).options[1].identity.artifactIds[0];
+attestation(x, unselected, "WithdrawReview");
+flags(x, "Planned", true);
+await accept(x, "unselected attestation does not invalidate selected task");
+x = clone();
+d(x).entries = [];
+for (const a of x.analysis.artifactReview.artifacts)
+  Object.assign(a, {
+    revision: 0,
+    state: "Unverified",
+    canReview: true,
+    canWithdraw: false,
+    history: [],
+  });
+for (const opt of d(x).options) {
+  opt.canCreate = false;
+  for (const a of opt.currentAttestations)
+    Object.assign(a, {
+      revision: 0,
+      eventId: null,
+      kind: null,
+      state: "Unverified",
+      sourceDigest: null,
+    });
+}
+await accept(x, "unreviewed current proof valid with no conversion");
+check(
+  !render(x).includes(">Create planning task</button>"),
+  "unreviewed conversion suppressed",
+);
+for (const value of [
+  "2026-02-29T00:00:00Z",
+  "2026-04-31T00:00:00Z",
+  "2026-10-03T01:02:05+00:00",
+  "2026-10-03T01:02:05.12345678Z",
+  "2026-10-03T24:00:00Z",
+  "2026-10-03T01:02:60Z",
+  "not-a-date",
+])
+  check(!testOnlyUtc(value), "invalid UTC calendar or precision " + value);
+for (const value of [
+  "2024-02-29T00:00:00Z",
+  "2026-10-03T01:02:05.1Z",
+  "2026-10-03T01:02:05.1234567Z",
+])
+  check(testOnlyUtc(value), "valid UTC exact " + value);
+for (const key of Object.keys(d(complete))) {
+  x = clone();
+  delete d(x)[key];
+  await deny(x, "missing detail " + key);
+}
+for (const key of Object.keys(o(complete))) {
+  x = clone();
+  delete o(x)[key];
+  await deny(x, "missing option " + key);
+}
+for (const key of Object.keys(o(complete).identity)) {
+  x = clone();
+  delete o(x).identity[key];
+  await deny(x, "missing identity " + key);
+}
+for (const key of Object.keys(e(complete))) {
+  x = clone();
+  delete e(x)[key];
+  await deny(x, "missing entry " + key);
+}
+for (const key of Object.keys(e(complete).history[0])) {
+  x = clone();
+  delete e(x).history[0][key];
+  await deny(x, "missing event " + key);
+}
+for (const key of Object.keys(o(complete).currentAttestations[0])) {
+  x = clone();
+  delete o(x).currentAttestations[0][key];
+  await deny(x, "missing vector " + key);
+}
+for (const key of Object.keys(d(complete).source.artifactSource)) {
+  x = clone();
+  delete d(x).source.artifactSource[key];
+  await deny(x, "missing complete source " + key);
+}
+const mutations = [
+  ["unknown detail", (x) => (d(x).extra = true)],
+  ["unknown option", (x) => (o(x).extra = true)],
+  ["unknown identity", (x) => (o(x).identity.extra = true)],
+  ["unknown entry", (x) => (e(x).extra = true)],
+  ["unknown event", (x) => (e(x).history[0].extra = true)],
+  ["unknown source", (x) => (d(x).source.extra = true)],
+  [
+    "unknown artifact binding",
+    (x) => (d(x).source.artifactSource.extra = true),
+  ],
+  ["unknown vector", (x) => (o(x).currentAttestations[0].extra = true)],
+  ["task ID identity spoof", (x) => (o(x).identity.taskId = "a".repeat(64))],
+  ["task ID uppercase", (x) => (o(x).identity.taskId = "A".repeat(64))],
+  ["wrong finding", (x) => (o(x).identity.findingId = "b".repeat(64))],
+  ["wrong category", (x) => (o(x).identity.categoryId = "OPERATIONS")],
+  ["wrong package", (x) => (o(x).identity.packageId = "b".repeat(64))],
+  [
+    "wrong scoped option",
+    (x) => (o(x).identity.scopedOptionId = "b".repeat(64)),
+  ],
+  ["missing selected artifact", (x) => o(x).identity.artifactIds.pop()],
+  [
+    "duplicate artifact",
+    (x) => (o(x).identity.artifactIds[1] = o(x).identity.artifactIds[0]),
+  ],
+  ["unordered artifacts", (x) => o(x).identity.artifactIds.reverse()],
+  ["wrong profile", (x) => (x.run.selection.profileId = "unapproved")],
+  ["missing lock", (x) => x.run.lockedInputs.pop()],
+  ["duplicate lock", (x) => (x.run.lockedInputs[0] = x.run.lockedInputs[1])],
+  [
+    "wrong task lock",
+    (x) => (x.run.lockedInputs.at(-1).sha256 = "b".repeat(64)),
+  ],
+  [
+    "wrong task lock version",
+    (x) => (x.run.lockedInputs.at(-1).version = "other"),
+  ],
+  [
+    "wrong application",
+    (x) =>
+      (x.run.lockedInputs.find((l) => l.name === "Application").version =
+        "other"),
+  ],
+  [
+    "wrong template",
+    (x) =>
+      (x.run.lockedInputs.find(
+        (l) => l.name === "Fictional fix-package templates",
+      ).sha256 = "b".repeat(64)),
+  ],
+  [
+    "wrong wrapper contract",
+    (x) => (d(x).source.planningTaskContractDigest = "b".repeat(64)),
+  ],
+  ["wrong actor", (x) => (d(x).actorId = "other")],
+  ["wrong assignee", (x) => (e(x).assigneeId = "other")],
+  ["missing option", (x) => d(x).options.pop()],
+  ["duplicate option", (x) => d(x).options.push(o(x))],
+  ["unordered options", (x) => d(x).options.reverse()],
+  ["duplicate task", (x) => d(x).entries.push(e(x))],
+  ["wrong option finding state", (x) => (o(x).findingState = "Rejected")],
+  ["false create flags", (x) => (o(x).canCreate = true)],
+  [
+    "future selected attestation",
+    (x) => (o(x).currentAttestations[0].revision = 2),
+  ],
+  [
+    "wrong selected event",
+    (x) =>
+      (o(x).currentAttestations[0].eventId =
+        "30000000-2222-4333-8444-000000000001"),
+  ],
+  [
+    "wrong selected kind",
+    (x) => (o(x).currentAttestations[0].kind = "WithdrawReview"),
+  ],
+  [
+    "wrong selected state",
+    (x) => (o(x).currentAttestations[0].state = "Unverified"),
+  ],
+  [
+    "wrong selected source",
+    (x) => (o(x).currentAttestations[0].sourceDigest = "b".repeat(64)),
+  ],
+  ["history gap", (x) => (e(x).history[0].revision = 2)],
+  [
+    "history unsafe revision",
+    (x) => (e(x).revision = Number.MAX_SAFE_INTEGER + 1),
+  ],
+  ["history string revision", (x) => (e(x).revision = "1")],
+  ["history empty", (x) => (e(x).history = [])],
+  ["wrong first kind", (x) => (e(x).history[0].kind = "Comment")],
+  [
+    "wrong first outcome",
+    (x) => (e(x).history[0].recordedStatus = "Completed"),
+  ],
+  ["wrong history actor", (x) => (e(x).history[0].actorId = "other")],
+  ["mixed roles", (x) => e(x).history[0].actorRoles.push("Auditor")],
+  [
+    "wrong timestamp",
+    (x) => (e(x).history[0].recordedAtUtc = "2026-04-31T00:00:00Z"),
+  ],
+  ["null reason", (x) => (e(x).history[0].reason = null)],
+  ["empty reason", (x) => (e(x).history[0].reason = " \r\n")],
+  ["oversized reason", (x) => (e(x).history[0].reason = "x".repeat(2001))],
+  ["lone high surrogate", (x) => (e(x).history[0].reason = "\ud800")],
+  ["lone low surrogate", (x) => (e(x).history[0].reason = "\udc00")],
+  [
+    "wrong plan pointer",
+    (x) =>
+      (e(x).history[0].planningEventId =
+        "30000000-2222-4333-8444-000000000001"),
+  ],
+  ["changed creation", (x) => (e(x).creation.reason = "rewritten")],
+  ["changed latest plan", (x) => (e(x).plan.reason = "rewritten")],
+  ["wrong current status", (x) => (e(x).status = "Completed")],
+  ["wrong freshness", (x) => (e(x).freshness = "NeedsReconfirmation")],
+  ["history vector missing", (x) => e(x).history[0].attestations.pop()],
+  [
+    "history vector spoof event",
+    (x) =>
+      (e(x).history[0].attestations[0].eventId =
+        "30000000-2222-4333-8444-000000000001"),
+  ],
+  [
+    "history vector spoof source",
+    (x) => (e(x).history[0].attestations[0].sourceDigest = "b".repeat(64)),
+  ],
+  [
+    "history current revision rollback",
+    (x) => (e(x).history[0].attestations[0].revision = 2),
+  ],
+  [
+    "future run revision",
+    (x) => (e(x).history[0].source.artifactSource.runRevision = 8),
+  ],
+  [
+    "future finding revision",
+    (x) =>
+      (e(x).history[0].source.artifactSource.findingRevisions[0].revision = 3),
+  ],
+  [
+    "equal vector changed package",
+    (x) =>
+      (e(x).history[0].source.artifactSource.sourceDigest = "b".repeat(64)),
+  ],
+  [
+    "historical profile swap",
+    (x) => (e(x).history[0].source.artifactSource.profileId = "other"),
+  ],
+  [
+    "wrong historic scope",
+    (x) => (e(x).history[0].source.artifactSource.scope.customerId = "other"),
+  ],
+];
+for (const [label, mutate] of mutations) {
+  x = clone();
+  mutate(x);
+  await deny(x, label);
+}
+for (const field of [
+  "canReconfirm",
+  "canStart",
+  "canReturnToPlanned",
+  "canComplete",
+  "canCancel",
+  "canReopen",
+  "canComment",
+]) {
+  x = clone();
+  e(x)[field] = !e(x)[field];
+  await deny(x, "forged current action " + field);
+}
+for (const [kind, state] of [
+  ["Complete", "Completed"],
+  ["ReturnToPlanned", "Planned"],
+  ["Reopen", "Planned"],
+  ["ReconfirmPlan", "Planned"],
+  ["Create", "Planned"],
+]) {
+  x = clone();
+  append(x, kind, state);
+  await deny(x, "invalid transition " + kind);
+}
+x = clone();
+append(x, "Cancel", "Cancelled");
+append(x, "Cancel", "Cancelled");
+await deny(x, "terminal self-cancel");
+x = clone();
+append(x, "StartProgress", "InProgress");
+append(x, "Complete", "Completed");
+append(x, "Cancel", "Cancelled");
+await deny(x, "completed cannot cancel");
+x = clone();
+append(x, "Comment", "Planned");
+e(x).history[1].eventId = e(x).history[0].eventId;
+await deny(x, "duplicate accepted UUID within task");
+x = clone();
+const second = structuredClone(e(x));
+second.identity = structuredClone(d(x).options[1].identity);
+second.history[0].attestations = structuredClone(
+  d(x).options[1].currentAttestations,
+);
+second.creation = structuredClone(second.history[0]);
+second.plan = structuredClone(second.history[0]);
+d(x).entries.push(second);
+d(x).entries.sort((a, b) => a.identity.taskId.localeCompare(b.identity.taskId));
+d(x).options[1].canCreate = false;
+await deny(x, "duplicate accepted UUID across tasks");
+x = clone();
+x.analysis.fixPackages.snapshot.guidance.findings[0].options[0].text =
+  "rehashed wrong source";
+await deny(x, "actual package property vs cached canonical mismatch", false);
+x = clone();
+x.analysis.fixPackages.snapshot.canonicalJson += " ";
+await deny(x, "cached canonical mismatch", false);
+x = clone();
+for (const opt of d(x).options) {
+  const prior = opt.identity.taskId;
+  opt.identity.taskId = hash("incorrect:" + prior);
+  const t = d(x).entries.find((t) => t.identity.taskId === prior);
+  if (t) t.identity.taskId = opt.identity.taskId;
+}
+d(x).options.sort((a, b) => a.identity.taskId.localeCompare(b.identity.taskId));
+await deny(x, "well-shaped invented task digest", false);
+for (const key of Object.keys(unavailable.detail)) {
+  const u = structuredClone(unavailable);
+  delete u.detail[key];
+  await denyUnavailable(u, "missing unavailable detail " + key);
+}
+for (const key of Object.keys(unavailable.detail.unavailableEntries[0])) {
+  const u = structuredClone(unavailable);
+  delete u.detail.unavailableEntries[0][key];
+  await denyUnavailable(u, "missing unavailable entry " + key);
+}
+for (const key of Object.keys(
+  unavailable.detail.unavailableEntries[0].history[0],
+)) {
+  const u = structuredClone(unavailable);
+  delete u.detail.unavailableEntries[0].history[0][key];
+  await denyUnavailable(u, "missing unavailable event " + key);
+}
+for (const [label, change] of [
+  [
+    "leaked reason",
+    (u) => (u.detail.unavailableEntries[0].history[0].reason = "secret"),
+  ],
+  [
+    "leaked source",
+    (u) =>
+      (u.detail.unavailableEntries[0].history[0].source = d(complete).source),
+  ],
+  [
+    "leaked vector",
+    (u) =>
+      (u.detail.unavailableEntries[0].history[0].attestations =
+        o(complete).currentAttestations),
+  ],
+  [
+    "unavailable action",
+    (u) => (u.detail.unavailableEntries[0].canComment = true),
+  ],
+  ["wrong actor", (u) => (u.detail.actorId = "other")],
+  ["current content fallback", (u) => (u.detail.entries = d(complete).entries)],
+  [
+    "invented unavailable task ID",
+    (u) => (u.detail.unavailableEntries[0].identity.taskId = "b".repeat(64)),
+  ],
+  ["unavailable source exists", (u) => (u.detail.source = d(complete).source)],
+  ["standalone ready", (u) => (u.detail = d(complete))],
+]) {
+  const u = structuredClone(unavailable);
+  change(u);
+  check(!(await coherentUnavailablePlanningTasks(u.detail, u.run)), label);
+  denied++;
+  if (label !== "invented unavailable task ID")
+    check(
+      renderUnavailable(u).includes("Planning task data is inconsistent."),
+      label + " closed display",
+    );
+}
+const u = structuredClone(unavailable);
+const q = clone();
+q.analysis.planningTasks = u.detail;
+await accept(
+  q,
+  "coherent whole analysis can carry metadata source-unavailable",
+);
+const old = JSON.parse(
+  await readFile(resolve(here, "original-artifact-fixture.json"), "utf8"),
+);
+await accept(old, "historical profile omits task field");
+equal(render(old), "", "historical task panel omitted");
+old.analysis.planningTasks = null;
+await deny(old, "old profile nullable presence rejected");
+x = clone();
+d(x).status = "Unavailable";
+d(x).reasonCode = "planning_task_integrity_denied";
+d(x).source = null;
+d(x).actorId = null;
+d(x).options = [];
+d(x).entries = [];
+await accept(x, "payload-free integrity denial coherent");
+check(!render(x).includes("<textarea"), "denial no controls");
+const originalDigest = crypto.subtle.digest.bind(crypto.subtle);
+x = clone();
+let mutated = false;
+crypto.subtle.digest = async (...args) => {
+  const result = await originalDigest(...args);
+  if (!mutated) {
+    mutated = true;
+    e(x).history[0].reason = "changed during asynchronous source gate";
+  }
+  return result;
+};
+try {
+  check(
+    !(await coherentPlanningTasks(x.analysis, x.run)),
+    "await-boundary mutation fence",
+  );
+  denied++;
+} finally {
+  crypto.subtle.digest = originalDigest;
+}
+equal(JSON.stringify(complete), pristine, "immutable fixtures unchanged");
+const summary = {
+  schemaVersion: 1,
+  checks,
+  accepted,
+  denied,
+  environmentGuard: {
+    active: true,
+    removedInheritedKeys: removed,
+    retainedKeysOnlyAllowlist: Object.keys(process.env).every((k) =>
+      allowed.has(k),
+    ),
+  },
+  limitations: [
+    "SSR component checks only; no browser keyboard/reflow/network or database/hook execution.",
+    "Historical package bytes verified by server; client verifies reference coherence and actual available artifact histories.",
+    "Literal fixture/golden inputs authored independently before actual rendering.",
+  ],
+};
+await writeFile(
+  resolve(out, "results.json"),
+  JSON.stringify(summary, null, 2) + "\n",
+);
+console.log(
+  `PASS B14 ${checks} assertions / ${accepted} accepted / ${denied} denied; environment guard ${summary.environmentGuard.retainedKeysOnlyAllowlist ? "PASS" : "FAIL"}`,
+);

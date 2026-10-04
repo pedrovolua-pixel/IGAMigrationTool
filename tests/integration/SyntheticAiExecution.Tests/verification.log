@@ -1,0 +1,65 @@
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "restore", "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj", "--locked-mode", "-p:NuGetAudit=true", "-p:NuGetAuditMode=all", "-p:NuGetAuditLevel=low"]
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "restore", "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj", "--locked-mode", "-p:NuGetAudit=true", "-p:NuGetAuditMode=all", "-p:NuGetAuditLevel=low"]
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "format", "src/server/modules/SyntheticAiExecution/SyntheticAiExecution.csproj", "--verify-no-changes", "--no-restore", "--include", "src/server/modules/SyntheticAiExecution/AiExecutionCanonical.cs", "src/server/modules/SyntheticAiExecution/AiExecutionContracts.cs", "src/server/modules/SyntheticAiExecution/AiExecutionMigration.cs", "src/server/modules/SyntheticAiExecution/AiExecutionPolicy.cs", "src/server/modules/SyntheticAiExecution/FakeAiProvider.cs", "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs"]
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "format", "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj", "--verify-no-changes", "--no-restore", "--include", "tests/unit/SyntheticAiExecution.Tests/AiFixtures.cs", "tests/unit/SyntheticAiExecution.Tests/Program.cs"]
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "format", "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj", "--verify-no-changes", "--no-restore", "--include", "tests/integration/SyntheticAiExecution.Tests/Program.cs"]
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "build", "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj", "--no-restore", "--configuration", "Release", "--disable-build-servers", "-p:UseSharedCompilation=false", "-m:1"]
+  SyntheticAiValidation -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  AssessmentCoverage -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/AssessmentCoverage/bin/Release/net10.0/AssessmentCoverage.dll
+  SyntheticSourceFence -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/SyntheticSourceFence/bin/Release/net10.0/SyntheticSourceFence.dll
+  SyntheticAiExecution -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/SyntheticAiExecution/bin/Release/net10.0/SyntheticAiExecution.dll
+  AssessmentScoring -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/AssessmentScoring/bin/Release/net10.0/AssessmentScoring.dll
+  SyntheticAiExecution.Tests -> /private/tmp/iga-phase1b-ai-contract/tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.82
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "build", "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj", "--no-restore", "--configuration", "Release", "--disable-build-servers", "-p:UseSharedCompilation=false", "-m:1"]
+  SyntheticAiValidation -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  AssessmentCoverage -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/AssessmentCoverage/bin/Release/net10.0/AssessmentCoverage.dll
+  SyntheticSourceFence -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/SyntheticSourceFence/bin/Release/net10.0/SyntheticSourceFence.dll
+  SyntheticAiExecution -> /private/tmp/iga-phase1b-ai-contract/src/server/modules/SyntheticAiExecution/bin/Release/net10.0/SyntheticAiExecution.dll
+  SyntheticAiExecution.Tests -> /private/tmp/iga-phase1b-ai-contract/tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.35
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "tests/unit/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll"]
+PASS 70 synthetic AI execution portable assertions
+EXIT 0
+COMMAND ["/private/tmp/iga-dotnet-10.0.401/dotnet", "tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll"]
+PASS 463 actual PostgreSQL synthetic AI execution assertions
+EXIT 0
+COMMAND ["git", "diff", "--check"]
+EXIT 0
+COMMAND ["/private/tmp/iga-parallel-tools/gitleaks", "dir", "src/server/modules/SyntheticAiExecution", "--no-banner", "--redact"]
+[90m12:28PM[0m [32mINF[0m [1mscanned ~233016 bytes (233.02 KB) in 20.9ms[0m
+[90m12:28PM[0m [32mINF[0m [1mno leaks found[0m
+EXIT 0
+COMMAND ["/private/tmp/iga-parallel-tools/gitleaks", "dir", "migrations/synthetic-ai-execution", "--no-banner", "--redact"]
+[90m12:28PM[0m [32mINF[0m [1mscanned ~3262 bytes (3.26 KB) in 2.21ms[0m
+[90m12:28PM[0m [32mINF[0m [1mno leaks found[0m
+EXIT 0
+COMMAND ["/private/tmp/iga-parallel-tools/gitleaks", "dir", "tests/unit/SyntheticAiExecution.Tests", "--no-banner", "--redact"]
+[90m12:28PM[0m [32mINF[0m [1mscanned ~206161 bytes (206.16 KB) in 13.5ms[0m
+[90m12:28PM[0m [32mINF[0m [1mno leaks found[0m
+EXIT 0
+COMMAND ["/private/tmp/iga-parallel-tools/gitleaks", "dir", "tests/integration/SyntheticAiExecution.Tests", "--no-banner", "--redact"]
+[90m12:28PM[0m [32mINF[0m [1mscanned ~235873 bytes (235.87 KB) in 17.6ms[0m
+[90m12:28PM[0m [32mINF[0m [1mno leaks found[0m
+EXIT 0

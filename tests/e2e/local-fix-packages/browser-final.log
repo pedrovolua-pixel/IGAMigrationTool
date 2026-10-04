@@ -1,0 +1,23 @@
+PASS V12-BROWSER actual four-presets/full-source/complete-fields/empty-unavailable
+PASS V12-BROWSER actual saved review/current detached source/original artifacts
+PASS V12-BROWSER deny-foreign-run
+PASS V12-BROWSER deny-wrong-source-review
+PASS V12-BROWSER deny-changed-displayed-artifact
+PASS V12-BROWSER deny-forged-coherent-template
+PASS V12-BROWSER deny-wrong-artifact-status
+PASS V12-BROWSER deny-missing-field
+PASS V12-BROWSER deny-extra-field
+PASS V12-BROWSER deny-duplicate-canonical-key
+PASS V12-BROWSER deny-wrong-canonical-digest
+PASS V12-BROWSER deny-foreign-option
+PASS V12-BROWSER deny-stale-finding-revision
+PASS V12-BROWSER missing-selected-template-lock
+PASS V12-BROWSER coherent hostile/control text nodes
+PASS V12-BROWSER held-prior-run-selection-race
+PASS V12-BROWSER UI-review-refresh-clear and late superseded capture
+PASS V12-BROWSER reject-real-old-guidance-packages-paired-with-fresh-review
+PASS V12-BROWSER obsolete-review-completion
+PASS V12-BROWSER historical flows remain available
+PASS V12-BROWSER desktop-mobile-320 keyboard/reflow/axe/full fields
+PASS V12-BROWSER own-host-restart-detached-package
+PASS V12 browser assertions=3538

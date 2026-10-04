@@ -1,0 +1,380 @@
+{
+  "schema": "phase1b-local-closure-site-v1",
+  "recordedUtc": "2026-10-03T18:33:22.025897+00:00",
+  "status": "VERIFIED; approved local synthetic Phase1B CLOSED",
+  "canonicalPublishedSnapshot": "283a2934c7e9cda7b3ace27c5a07897ce7283d76",
+  "frozenRuntimeTests": "6b7a5f25d9d726af2ebbc3f45480dd1e23476d24",
+  "siteProject": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+  "siteSource": "cb3e893e0d00cdd3a94f65f8d2c05920c4095a92",
+  "siteVersion": 98,
+  "nativeDeployment": {
+    "id": "appgdep_6ac149bce7d08191b8bbdceae0a1f87c",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_14698c6bc4348191a0d8f3e9248b611c",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T18:30:28.117987+00:00"
+  },
+  "nativeVersion": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_14698c6bc4348191a0d8f3e9248b611c",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "version_number": 98,
+    "source": {
+      "commit_sha": "cb3e893e0d00cdd3a94f65f8d2c05920c4095a92"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000d89481f5a807654077c3b622",
+      "content_hash": "sha256:33c22ad599e186270809511ba09a5da03a2c24d0059449a9ae99e05438b76e7a",
+      "size_bytes": 102400,
+      "file_count": 2
+    }
+  },
+  "localUploadedArchive": {
+    "path": "work/phase1b-closure-evidence/private-site-closure.tar.gz",
+    "bytes": 23211,
+    "sha256": "1143f002bcf1288514f4342d8f9b67f7b17bcc86b290a9681f2c1ef8485c5843"
+  },
+  "archiveInspection": "HTML bytes match exact pushed source; packager-normalized manifest binds same project. Native archive content hash/size refer to backend normalized tar, separately from local compressed archive SHA/bytes.",
+  "siteQa": {
+    "path": "work/phase1b-closure-evidence/site-final-qa/results.json",
+    "bytes": 28952,
+    "sha256": "b668c77db4954444bae817e996a6cbe9f0d77515dd079be2240916a9ab09348b"
+  },
+  "siteQaLog": {
+    "path": "work/phase1b-closure-evidence/site-final-qa.log",
+    "bytes": 285,
+    "sha256": "53fdcee4a7ff55b8fcdc65c70ffbc25a50085b11ff52064ad3e831f3435d903e"
+  },
+  "siteQaScript": {
+    "path": "work/phase1b-closure-evidence/site-final-qa.mjs",
+    "bytes": 3754,
+    "sha256": "3720d47c3cd46f044a50f0bd3afb22812ef875efbdf53ed9ab3bec5905298d5a"
+  },
+  "screenshots": [
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/1440-overview.png",
+      "bytes": 391402,
+      "sha256": "261812eebfd331208dc9f8af320af8d2e5f96ca8789329d908ba771506709ac3"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/1440-phase1b.png",
+      "bytes": 270262,
+      "sha256": "c4db0a1a164f7fb1f291dd99a8a87661df34e5b5db355e558d4b9580488769d9"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/1440-tasks.png",
+      "bytes": 417333,
+      "sha256": "367b68cfc6630e7602efdb6389c987517f8a389c27d59bd3a8ef81f909e14235"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/320-overview.png",
+      "bytes": 139879,
+      "sha256": "82f6cb9c644f30cd8b28193415b32e419cd0ea9d8ea9786ea5135c1dc283b8d9"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/320-phase1b.png",
+      "bytes": 111425,
+      "sha256": "4dff2230252decd61cf128628373a45dad46a606210cce6cbbc6cb4002501d29"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/320-tasks.png",
+      "bytes": 103880,
+      "sha256": "f23ace26fc628272e76f33b6b89f8dea56f1e1c23f81e7c745b62c6f5634e38d"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/390-overview.png",
+      "bytes": 165398,
+      "sha256": "0e1e40dfd4fd36d7667539fc00e606b37a3869e624da251d0ecc0c52d150909a"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/390-phase1b.png",
+      "bytes": 130376,
+      "sha256": "4c5424bd8f77a262fac13c011a1c2faabff5345452e5466e2b5b848cd7bc2cd9"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-final-qa/390-tasks.png",
+      "bytes": 121438,
+      "sha256": "f39c565bf5edc53bd75cf0e9528f7d3f8778c2e4c7529591edc1334f41b7b2e1"
+    }
+  ],
+  "sitePreservation": {
+    "siteSourceBefore": "d4d3bd1d22e710fce3ee9db6dcc00ea49a5a5371",
+    "canonicalSnapshot": "283a2934c7e9cda7b3ace27c5a07897ce7283d76",
+    "humanTasks": 12,
+    "taskCardsBytePreserved": 12,
+    "humanTaskCards": [
+      {
+        "index": 0,
+        "sha256": "88a21d88fd636a7ec6ba850160a82ec06e30272ad89d5a64edfdbe0806115c79"
+      },
+      {
+        "index": 1,
+        "sha256": "647568c2b00531f151a6ae9cea04ffc2faefec3e3e91cb790e6bb746d3ee5147"
+      },
+      {
+        "index": 2,
+        "sha256": "a8a2e17da13a71e2f17c81a74b917848525029090fe6697d3f76a27c236e41e3"
+      },
+      {
+        "index": 3,
+        "sha256": "af5aefd45451c317f59ce3807ab3692343023c5d2d0afb508a1867077caf2cc4"
+      },
+      {
+        "index": 4,
+        "sha256": "071e3441c4ac7e13819c0beca88f97a583aa0c2e1328df6cb059cb2fc682cef9"
+      },
+      {
+        "index": 5,
+        "sha256": "211cf0d06ab0be48d399d11027ee1450541fb3f8813f27db72daa741699278ff"
+      },
+      {
+        "index": 6,
+        "sha256": "b20a39259dc521054d1c34c27f62e5a9c3935ba04c4944567c92cb535c25006d"
+      },
+      {
+        "index": 7,
+        "sha256": "e0dacd264ae5365bafee3f69ffe457f909ced83cf1bf180e33d56124eecd4f11"
+      },
+      {
+        "index": 8,
+        "sha256": "0c76e4d000f819f6d378287a000e2cb3d46acab296539c1f79077519d4e3c09d"
+      },
+      {
+        "index": 9,
+        "sha256": "d7ba98eea5c6d3ff181aff39ae2077f272ba06e304665293489665482e111c40"
+      },
+      {
+        "index": 10,
+        "sha256": "7cb73e48b9ac7e4b3f7c422ff44129f79e3b35fd17e88627960e62bebe28683b"
+      },
+      {
+        "index": 11,
+        "sha256": "c8946bc8c8b72e1f9080cd3455fad8c3fad0978e6f7ba4579857b838d2a0845b"
+      }
+    ],
+    "unownedPanelsBytePreserved": 16,
+    "unownedPanels": [
+      {
+        "id": "workspace-ui-checkpoint",
+        "sha256": "4efec6f8632b9e70c4595839588828f70f4a068ab1fd4c3aaf24f23f0ea57fbd"
+      },
+      {
+        "id": "ai-preview-checkpoint",
+        "sha256": "040411fef5e69b350b2bb064a9d5ddda98f0974f9b2082829fa5344a34358257"
+      },
+      {
+        "id": "ai-workspace-checkpoint",
+        "sha256": "f32c095d527b91a44b536ab4428c078ade0d80534d0b843cd32787db6503b33e"
+      },
+      {
+        "id": "fix-packages-checkpoint",
+        "sha256": "cf493a81727b26ecebb1447cc65246b243dd1014368b3d932f01c5e3cd328167"
+      },
+      {
+        "id": "artifact-review-preparation",
+        "sha256": "bd511695a7db79a7fdb07f677a45a3170e82e90c3de06c105f2b5b9fb2e6f6d7"
+      },
+      {
+        "id": "fix-workspace-checkpoint",
+        "sha256": "da88f20d1244ad39c8972370279ab591beebaabfbc7e06848c476b192446bc2b"
+      },
+      {
+        "id": "bff-checkpoint",
+        "sha256": "32ed86539102454215cd37dd4363b754c445f6ee6a4adc4504820379cc5db1f5"
+      },
+      {
+        "id": "bff-deployment-preparation",
+        "sha256": "94d30194a70e9d45f316354f85596c41f841c6d0c4a36bb9246b7244494b3b13"
+      },
+      {
+        "id": "approved-workspace-ui-checkpoint",
+        "sha256": "6cc1f4bd9e4776fd7d60417931dde1ef3ba61b91a4b4006fc04df9df1e4fb3e1"
+      },
+      {
+        "id": "planning-task-checkpoint",
+        "sha256": "127130fd1723aa9872f18a6560656c9d1e98d012192d2a307ce7f98df3362687"
+      },
+      {
+        "id": "artifact-review-decision",
+        "sha256": "ec77998afade242c17b267337b4954f49e99f7cf37abf18abdc00f581f97b23d"
+      },
+      {
+        "id": "planning-task-decision",
+        "sha256": "7045d58c76b0e1921d089d15a34e0bccddba61263d73499beab2bf61d172b884"
+      },
+      {
+        "id": "m08-evaluation-checkpoint",
+        "sha256": "81e484f612b4313854c65f088ebb44c6152c5f859d78fa15c9088c5a7db22bba"
+      },
+      {
+        "id": "evaluation-cycle02-checkpoint",
+        "sha256": "d782ebb2eaa9f4b259e67734d2accd2a6bffebcf81f66447da5f4166500cf0c8"
+      },
+      {
+        "id": "evaluation-cycle03-checkpoint",
+        "sha256": "d8e2185bce507ed3e1521cf86a2897f087ee634ee604ca08f03802b50168ebe4"
+      },
+      {
+        "id": "evaluation-policy-decision",
+        "sha256": "cbf5000076fa854e9d4d2857c39f1ebadcbc181dc9d08a5447d3465cda81c974"
+      }
+    ],
+    "originalHtmlSha256": "0275af86ed94495177e1e2d014599e056db0de78cba3f564b12711ff77cacefd",
+    "htmlSha256": "a03183934a443e670d09e0c2ddb566e40b670e37d4a0c5c8c67e650cd5b2d142",
+    "concurrentSourcePreserved": true
+  },
+  "concurrentSiteReconciliation": "Initial ordinary push rejected because another agent advanced source8fea to d4d3bd1 (version97). Reopened latest source, applied only owned patch, preserved all12 human cards and16 unowned panels byte-identically, repeated1440/390/320 QA, and pushed cb3e893 without force.",
+  "cleanup": {
+    "ownedHostStopped": 75698,
+    "rawEvidenceCopiedAndRuntimeArchiveRetained": true,
+    "removed": [
+      {
+        "worktree": "/private/tmp/iga-phase1b-ai-contract",
+        "retainedBranch": "codex/phase1b-ai-implementation",
+        "retainedCommit": "c0b8f06452714e0d1200aabc04d380bcf8e9a44a",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-csv-contract",
+        "retainedBranch": "codex/phase1b-csv-implementation",
+        "retainedCommit": "465c10bbe5f87dbda0cf41b78dff4848b28da129",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-closure-contract",
+        "retainedBranch": "codex/phase1b-outcomes-implementation",
+        "retainedCommit": "53d7bfefd4a9b91188d1d46bc48d9d520f7b3073",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-coordinator",
+        "retainedBranch": "codex/phase1b-integration",
+        "retainedCommit": "48acac234160e608277709a8df51ffd3d93593f3",
+        "removed": true
+      }
+    ],
+    "unrelatedWorktreesPreserved": true,
+    "databasesPreserved": true
+  },
+  "nativeArtifactPreservationMap": [
+    {
+      "original": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-op-pg-apphost.log",
+      "preserved": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-op-pg-apphost.log",
+      "bytes": 145,
+      "sha256": "9ffa5aa3214251b42d623e35d80a0cf9b54f430abf79d332e13f8de6c05dd194"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-ai-pg.log",
+      "preserved": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-ai-pg.log",
+      "bytes": 61,
+      "sha256": "783ebdb63576e5cc721e996dacd6c20e4b2e6a47cf3a4126eb87bc854a32d0bf"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-csv-mac-pg.log",
+      "preserved": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-csv-mac-pg.log",
+      "bytes": 3831,
+      "sha256": "3516e2a585e644989584d23345bad0549bf15797cea7d25ae8fa5b925c086b44"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-consultant-closure.log",
+      "preserved": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-browser-consultant-closure.log",
+      "bytes": 7323,
+      "sha256": "da96990a02aceb742c2d3ca58a13607b8c53cb6f40b92d039c8e04e18286934e"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-report.json",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/consultant-report.json",
+      "bytes": 11136,
+      "sha256": "a68576ee90d290f6f5433a0cd0237e1d66a13f23db582a2aaa21ead043f3d39c"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-final.png",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/consultant-final.png",
+      "bytes": 4366540,
+      "sha256": "299858f864870cec777a6e91b56903da8240ef483a8b2aca1e57d2c25bf61a1e"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-auditor-closure.log",
+      "preserved": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-browser-auditor-closure.log",
+      "bytes": 2310,
+      "sha256": "dbc70e87fae6e121c4b95d58166f2bdfb2124b8ff615de85e07cb339db275e66"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-report.json",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/auditor-report.json",
+      "bytes": 3039,
+      "sha256": "3d16333edf0350410e8f83818e4766f5a35da57aac9b0d62f48d485b63f512ec"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-final.png",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/auditor-final.png",
+      "bytes": 59473,
+      "sha256": "f356c9c4e841a3fd98d8bac3a243a205db554511e58878fe8d47c2fc99ceb7d8"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-budget-final.log",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-budget-final.log",
+      "bytes": 5075,
+      "sha256": "8e726e4e04e8f18d57d51e0bc9d8394d41b35e178adedd04e5824e8c3b4029c0"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-budget-final-evidence/budget-report.json",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/budget-report.json",
+      "bytes": 5569,
+      "sha256": "de3be36d0b7bc493ecc66e33d45a2aa97414f4ec7cec5b1ebf268fdc213e2bf7"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-budget-final-evidence/budget-final.png",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/budget-final.png",
+      "bytes": 415194,
+      "sha256": "1b49806bbf7f7bc6fc6d92d51a21cf00fb1f35b95bbededea141e810f19d35c3"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-components-mobile.log",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-components-mobile.log",
+      "bytes": 3673,
+      "sha256": "ee4bca869d1847c31a434c94779599ac1a6e3eb58ff1d0690f6c716efecfc1f8"
+    },
+    {
+      "original": "/private/tmp/iga-phase1b-mobile-independent.json",
+      "preserved": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-mobile-independent.json",
+      "bytes": 567,
+      "sha256": "8b256f56846b538ce52e34e4d794a6c17cc46b413500ec5ef1c9594f62888cfc"
+    }
+  ],
+  "runtimeArchive": {
+    "path": "work/phase1b-closure-evidence/phase1b-runtime-closure.tar.gz",
+    "bytes": 7140488,
+    "sha256": "c0ca0fbd0ef04033ca03af689606138f7873e24e0d81748353a9c03c7cb8296d"
+  },
+  "runtimeArchiveInventory": {
+    "path": "work/phase1b-closure-evidence/runtime-closure-inventory.json",
+    "bytes": 35044,
+    "sha256": "922e6c9412220a45796f4ee7ae8db903588254090cfab7d44909bdd2baf98d12"
+  },
+  "limits": "Local engineering closure only. Phase1C separately owned; full milestones/UAT/G1-G9, manual accessibility/default Mac startup and real customer/provider/source/production remain open. Mac-only CSV host; Linux renderer verification-only. No DB reset/history rewrite/release.",
+  "finalDocumentationChecks": {
+    "secretScan": "PASS exit0",
+    "artifacts": [
+      {
+        "path": "work/phase1b-closure-evidence/final-closure-docs-gitleaks.log",
+        "bytes": 146,
+        "sha256": "54ae931b44e26be6269a3305459ad65ae7cedd6c89503394eea1e4a118ebb006"
+      },
+      {
+        "path": "work/phase1b-closure-evidence/final-closure-docs-gitleaks.json",
+        "bytes": 3,
+        "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      }
+    ],
+    "relativeLinks": "Checked staged repository Markdown targets; exact count in final local check log"
+  }
+}

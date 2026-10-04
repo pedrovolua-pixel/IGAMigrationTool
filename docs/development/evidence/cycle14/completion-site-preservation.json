@@ -1,0 +1,262 @@
+{
+  "schema": "cycle14-private-site-evidence-preservation-v1",
+  "recordedUtc": "2026-10-03T05:35:46.153600+00:00",
+  "archive": "/private/tmp/iga-cycle14-preserved/site/originals.tar.gz",
+  "archiveSha256": "1a5d4fb63941736c7aaf1a26d3e3e89d77503feacbe51164a39d24352d48f35b",
+  "allArchiveEntriesRehashed": 42,
+  "scope": "Exact89/90publication archives, safe receipt/link/source proofs, executed QA source/reports and all6 final viewport captures; initial weak-navigation capture generation preserved separately",
+  "files": [
+    {
+      "path": "iga-cycle14-site.tar.gz",
+      "original": "/private/tmp/iga-cycle14-site.tar.gz",
+      "sha256": "0a4e9d653d2df1225c48d7aad073e314ea8dd204624c3f0b2faa5490673f15b4",
+      "bytes": 19492
+    },
+    {
+      "path": "iga-cycle14-approved-site-final-qa.json",
+      "original": "/private/tmp/iga-cycle14-approved-site-final-qa.json",
+      "sha256": "65317049f4704145257bbcae7686190e25a8bb8df521d89d3fee9fa90a7d5432",
+      "bytes": 7899
+    },
+    {
+      "path": "iga-cycle14-preparation-site-mobile-viewport.png",
+      "original": "/private/tmp/iga-cycle14-preparation-site-mobile-viewport.png",
+      "sha256": "351512640399fb937a1ffd390c4dc7907b9add64ddee47899065cf79473ca348",
+      "bytes": 167504
+    },
+    {
+      "path": "iga-cycle14-approved-site.tar.gz",
+      "original": "/private/tmp/iga-cycle14-approved-site.tar.gz",
+      "sha256": "8d1cf02eb855f18be3bb3a0b5e548b488c4ccf7d43f0210570739f36bdea42e5",
+      "bytes": 19288
+    },
+    {
+      "path": "iga-cycle14-site-source-proof.json",
+      "original": "/private/tmp/iga-cycle14-site-source-proof.json",
+      "sha256": "23281735928bcd9ddb3c428fca0b228f980187271b75f93ddb0cb90c3aaf2eb6",
+      "bytes": 381
+    },
+    {
+      "path": "iga-cycle14-completion-site-desktop-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-desktop-viewport.png",
+      "sha256": "3eec134239dc76169e0997fa9d1cf4d66e6b173bb09cb9ea4ada4deb912a1760",
+      "bytes": 383078
+    },
+    {
+      "path": "iga-cycle14-completion-site.tar.gz",
+      "original": "/private/tmp/iga-cycle14-completion-site.tar.gz",
+      "sha256": "fae0e23df0e64217920f6ccd24197a81bb685ab85a45f5039f77289e3a1c480a",
+      "bytes": 19436
+    },
+    {
+      "path": "iga-cycle14-completion-site-archive-proof.json",
+      "original": "/private/tmp/iga-cycle14-completion-site-archive-proof.json",
+      "sha256": "3350f2ebe89e3560e8ca8c0976e51a13dec9adaa10a72730d2aae698efd30dac",
+      "bytes": 496
+    },
+    {
+      "path": "iga-cycle14-completion-site-reflow-tasks-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-reflow-tasks-viewport.png",
+      "sha256": "43109343ec53aecb8d934242d95861b72444ab6cfe836e2d01dbfd830752a3e4",
+      "bytes": 88177
+    },
+    {
+      "path": "iga-cycle14-approved-site-qa.mjs",
+      "original": "/private/tmp/iga-cycle14-approved-site-qa.mjs",
+      "sha256": "e44f768b0ab2f752e3da207f8f5c258f1d03df9b6beb5d95f031e954bc34bfde",
+      "bytes": 2393
+    },
+    {
+      "path": "iga-cycle14-completion-site-qa.mjs",
+      "original": "/private/tmp/iga-cycle14-completion-site-qa.mjs",
+      "sha256": "f4723d269093958ba7cda4809af93c264bba7c0671fd074d983cebc79012defc",
+      "bytes": 2834
+    },
+    {
+      "path": "iga-cycle14-completion-site-links.json",
+      "original": "/private/tmp/iga-cycle14-completion-site-links.json",
+      "sha256": "595330b4e2bb2c4bb39232a6fea6403715bf6987f5c3b39469039af8893db818",
+      "bytes": 4303
+    },
+    {
+      "path": "iga-cycle14-approved-site-reflow-viewport.png",
+      "original": "/private/tmp/iga-cycle14-approved-site-reflow-viewport.png",
+      "sha256": "1dbd98b06bfdb484b7ba5779d09f52f37fbec8b4269161402d2d6a4f4737bc29",
+      "bytes": 124915
+    },
+    {
+      "path": "iga-cycle14-preparation-site-desktop-viewport.png",
+      "original": "/private/tmp/iga-cycle14-preparation-site-desktop-viewport.png",
+      "sha256": "23ece35072c9b500cf766a3f1e37ee60ca03b85626e6d25615236b5d5e532004",
+      "bytes": 368860
+    },
+    {
+      "path": "iga-cycle14-site-version88.html",
+      "original": "/private/tmp/iga-cycle14-site-version88.html",
+      "sha256": "6a781b60ea305b482f7c5a200762f3897ccf6454b94d0cff33b50d4cf496f062",
+      "bytes": 77517
+    },
+    {
+      "path": "iga-cycle14-site-draft-review-by-b14.json",
+      "original": "/private/tmp/iga-cycle14-site-draft-review-by-b14.json",
+      "sha256": "d0daf29a9d39d006af818acaceb9ea446778c7209a294f5936b7036d336eb2d2",
+      "bytes": 1811
+    },
+    {
+      "path": "iga-cycle14-completion-site90.tar.gz",
+      "original": "/private/tmp/iga-cycle14-completion-site90.tar.gz",
+      "sha256": "c8d2e24c6f1b7648d30768cc2faa1c553577ae5d1d58472e7ed61d54dc4a0479",
+      "bytes": 19445
+    },
+    {
+      "path": "iga-cycle14-completion-site-mobile-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-mobile-viewport.png",
+      "sha256": "37977f115f821f309a9b04c138d770e266388808849cec9be347de14b373a792",
+      "bytes": 173845
+    },
+    {
+      "path": "iga-cycle14-final-site-archive-proof.json",
+      "original": "/private/tmp/iga-cycle14-final-site-archive-proof.json",
+      "sha256": "d1fe908eaf64a07612f75046bbb54ff952cf5e1b83e9f0f0e62d2a5414fdda14",
+      "bytes": 356
+    },
+    {
+      "path": "iga-cycle14-final-site-links.json",
+      "original": "/private/tmp/iga-cycle14-final-site-links.json",
+      "sha256": "d77a2abdc95ca9bcd433b77eb5a66d3ee8d76ab6322a2ddf54d865553cfe103d",
+      "bytes": 4422
+    },
+    {
+      "path": "iga-cycle14-completion-site-draft.html",
+      "original": "/private/tmp/iga-cycle14-completion-site-draft.html",
+      "sha256": "35e64bf2915903222b9f6cb9ce4d34ca31cc1bbaac0cb2225dcfab5890574a47",
+      "bytes": 78068
+    },
+    {
+      "path": "iga-cycle14-completion-site-mobile-tasks-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-mobile-tasks-viewport.png",
+      "sha256": "15d4ea9ff529396792f4c0a97c39bf52f9a7c48bf45e5713f5b8e84a2f9906ca",
+      "bytes": 103196
+    },
+    {
+      "path": "iga-cycle14-preparation-site-qa.mjs",
+      "original": "/private/tmp/iga-cycle14-preparation-site-qa.mjs",
+      "sha256": "1f4f04edbc8db9b1c2de1ab3fb0b7ef1544e736c1405e3d9d210ec99190a5db7",
+      "bytes": 2404
+    },
+    {
+      "path": "iga-cycle14-approved-site-mobile-viewport.png",
+      "original": "/private/tmp/iga-cycle14-approved-site-mobile-viewport.png",
+      "sha256": "3152fcba8cbc484654534421aa9c70807942b8c98379b83a7bdb31ae0277a1de",
+      "bytes": 172441
+    },
+    {
+      "path": "iga-cycle14-completion-site89.tar.gz",
+      "original": "/private/tmp/iga-cycle14-completion-site89.tar.gz",
+      "sha256": "fae0e23df0e64217920f6ccd24197a81bb685ab85a45f5039f77289e3a1c480a",
+      "bytes": 19436
+    },
+    {
+      "path": "iga-cycle14-completion-site-desktop-tasks-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-desktop-tasks-viewport.png",
+      "sha256": "ec96b6c7630b1e28b1aa496b8123b206d048e6109e186767f48f07d5d2cec245",
+      "bytes": 375407
+    },
+    {
+      "path": "iga-cycle14-approved-site-before.html",
+      "original": "/private/tmp/iga-cycle14-approved-site-before.html",
+      "sha256": "2b9e330394964b85fccc6424ab415743236e528fce722412406faf9f4a9e6499",
+      "bytes": 78358
+    },
+    {
+      "path": "iga-cycle14-completion-site-reflow-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-reflow-viewport.png",
+      "sha256": "d4de53c01061250d0b96d3bd26281cedb418eff70bdbd2dcce5e5124cd243930",
+      "bytes": 124129
+    },
+    {
+      "path": "iga-cycle14-preparation-site-final-qa.json",
+      "original": "/private/tmp/iga-cycle14-preparation-site-final-qa.json",
+      "sha256": "67757a6ec5ff8d9d6f654a8a79bce3b701b2039e334de5b666e5e025a4da0495",
+      "bytes": 8574
+    },
+    {
+      "path": "iga-cycle14-site-card-preservation.json",
+      "original": "/private/tmp/iga-cycle14-site-card-preservation.json",
+      "sha256": "6a9f87a6eca4dd8dc3b426cd55db2c9c66f5d0d135503572bf2d534db9a5ccd9",
+      "bytes": 124
+    },
+    {
+      "path": "iga-cycle14-preparation-site-reflow-viewport.png",
+      "original": "/private/tmp/iga-cycle14-preparation-site-reflow-viewport.png",
+      "sha256": "f0b5c5eda6fd409587d57b3d4af4ae174a40e38bf74616988f90885ac7f160ab",
+      "bytes": 122856
+    },
+    {
+      "path": "iga-cycle14-approved-site-desktop-viewport.png",
+      "original": "/private/tmp/iga-cycle14-approved-site-desktop-viewport.png",
+      "sha256": "e103f587e75f145f2bff62e22b54dd45ae0a48158be19142663da3799d17cc4a",
+      "bytes": 387866
+    },
+    {
+      "path": "iga-cycle14-site-original.html",
+      "original": "/private/tmp/iga-cycle14-site-original.html",
+      "sha256": "f6c07189da055cdbcdadb3051e506036ffb34b6b68a14fbaa016176ccc6f714a",
+      "bytes": 74407
+    },
+    {
+      "path": "iga-cycle14-completion-site-final-qa.json",
+      "original": "/private/tmp/iga-cycle14-completion-site-final-qa.json",
+      "sha256": "3da2f5edc4e4041b36f0c44b92018cb18fa4e045ac23db64a4ec0d3b133313b9",
+      "bytes": 7926
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-desktop-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-desktop-viewport.png",
+      "sha256": "3eec134239dc76169e0997fa9d1cf4d66e6b173bb09cb9ea4ada4deb912a1760",
+      "bytes": 383078
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-reflow-tasks-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-reflow-tasks-viewport.png",
+      "sha256": "494ede1b8b9b4143b2df4dc66ec02441653c8bbc4d8da69dd7e04d7d38f96d7f",
+      "bytes": 123369
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-qa.mjs",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-qa.mjs",
+      "sha256": "5209872ef5ca9a376b9bbefeabefbc9dbf784e93a497f8450526deb141f96de2",
+      "bytes": 2526
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-mobile-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-mobile-viewport.png",
+      "sha256": "37977f115f821f309a9b04c138d770e266388808849cec9be347de14b373a792",
+      "bytes": 173845
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-mobile-tasks-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-mobile-tasks-viewport.png",
+      "sha256": "4a07462ea212011139402a004b722bef4956f3d9bc4239c5ecd4f3325264c2c8",
+      "bytes": 172710
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-desktop-tasks-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-desktop-tasks-viewport.png",
+      "sha256": "e970e991df1b9b74d1f059b7f2b0925be3590cfef414a2da82c4402fe45e4165",
+      "bytes": 382972
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-reflow-viewport.png",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-reflow-viewport.png",
+      "sha256": "d4de53c01061250d0b96d3bd26281cedb418eff70bdbd2dcce5e5124cd243930",
+      "bytes": 124129
+    },
+    {
+      "path": "iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-final-qa.json",
+      "original": "/private/tmp/iga-cycle14-completion-site-initial-navigation/iga-cycle14-completion-site-final-qa.json",
+      "sha256": "3da2f5edc4e4041b36f0c44b92018cb18fa4e045ac23db64a4ec0d3b133313b9",
+      "bytes": 7926
+    }
+  ]
+}

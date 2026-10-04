@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "m08-population-provenance-cycle06-hosted-v1",
+  "date": "2026-10-03",
+  "status": "PASS final configured hosted checks; first failed run retained",
+  "sourceCommit": "e3590d6668fc124d6ff8d9388e22f35c0c8d09b2",
+  "identicalCodeTestsAndConfigurationTo": "2d7f1020219fef07f174d45b39d22b946415ffa0",
+  "finalRuns": [
+    {
+      "id": 37156471282,
+      "name": "Azure development package (partial checks)",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "e3590d6668fc124d6ff8d9388e22f35c0c8d09b2",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471282",
+      "jobs": [
+        {
+          "id": 111300762750,
+          "name": "bootstrap-package",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471282/job/111300762750"
+        }
+      ]
+    },
+    {
+      "id": 37156471291,
+      "name": "Bootstrap checks (partial gate)",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "e3590d6668fc124d6ff8d9388e22f35c0c8d09b2",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471291",
+      "jobs": [
+        {
+          "id": 111300762875,
+          "name": "collector-windows (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471291/job/111300762875"
+        },
+        {
+          "id": 111300763023,
+          "name": "collector-windows (windows-2025)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471291/job/111300763023"
+        },
+        {
+          "id": 111300763029,
+          "name": "dotnet-bootstrap",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471291/job/111300763029"
+        }
+      ]
+    }
+  ],
+  "jobLogs": [
+    {
+      "jobId": 111300762750,
+      "name": "bootstrap-package",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471282/job/111300762750",
+      "path": "hosted/job-111300762750.log",
+      "sha256": "32db4a8efa3e56017db40f6643a148b365c79ec4a5401ec51e977b70343fb89c"
+    },
+    {
+      "jobId": 111300762875,
+      "name": "collector-windows (windows-2022)",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471291/job/111300762875",
+      "path": "hosted/job-111300762875.log",
+      "sha256": "bb608fc56bae158dc980111b242348802c89a2355453c5571feb538c2490d67d"
+    },
+    {
+      "jobId": 111300763023,
+      "name": "collector-windows (windows-2025)",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471291/job/111300763023",
+      "path": "hosted/job-111300763023.log",
+      "sha256": "06845794cfd595f88ca374bfbe91fc0a092793507abc72a92d9bfced218c87ca"
+    },
+    {
+      "jobId": 111300763029,
+      "name": "dotnet-bootstrap",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37156471291/job/111300763029",
+      "path": "hosted/job-111300763029.log",
+      "sha256": "0ece7d3e1aa37532d853a40a6fb445609ef0a998a6ff8461efe1b604406d821c"
+    }
+  ],
+  "populationAssertions": {
+    "portable": 145,
+    "authorPostgres": 365,
+    "independentPostgres": 534
+  },
+  "initialFailure": {
+    "sourceCommit": "2d7f1020219fef07f174d45b39d22b946415ffa0",
+    "runId": 37156299438,
+    "jobId": 111300257620,
+    "conclusion": "failure",
+    "step": "Check actual inert fictional fix-package browser",
+    "code": "keyboard-fragment-navigation",
+    "partialAssertions": 659,
+    "failedLogSha256": "8249b67969b6662116b34e919c6b1bb76482ec1beed773a2708a4e186a927c3c",
+    "diagnosisSha256": "e9fdbde3d32b54b4baf628722484aeafddfdbde72a48ac4c5110569b5e57a388",
+    "disposition": "Unchanged source/configuration independently passed in final run. Likely URL observation synchronization race; root cause unproven. No product/test expectation changed; test timing follow-up remains."
+  },
+  "limits": [
+    "Workflow names are partial gate checks; no production release/customer acceptance",
+    "Native connector reads timed out; GitHub REST read-only fallback used existing credential in memory without printing or saving token",
+    "Historical local Mac direct-apphost/guarded-entrypoint limits remain in local receipt"
+  ]
+}

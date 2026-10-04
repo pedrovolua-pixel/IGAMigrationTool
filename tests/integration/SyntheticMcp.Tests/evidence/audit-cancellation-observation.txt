@@ -1,0 +1,1 @@
+OBSERVATION cancellation after synchronous terminal completion begins: Success, content=True, completion=Success, tokenCancelled=True

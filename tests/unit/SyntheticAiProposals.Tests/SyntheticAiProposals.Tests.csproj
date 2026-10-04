@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj" />
+    <None Include="golden-snapshot.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="golden-digest.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

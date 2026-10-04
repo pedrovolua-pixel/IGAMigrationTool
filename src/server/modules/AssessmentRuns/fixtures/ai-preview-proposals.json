@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "synthetic-ai-fixture-output-v1",
+  "runId": "11111111-2222-3333-4444-555555555555",
+  "packetDigest": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "proposals": [
+    {
+      "proposalId": "proposal-01",
+      "facts": [
+        {
+          "text": "Fictional scheduleEnabled is disabled.",
+          "evidenceIds": [
+            "ev-1111111111111111111111111111111111111111111111111111111111111111"
+          ],
+          "ruleIds": [
+            "fixture-rule-schedule-v1"
+          ]
+        },
+        {
+          "text": "Fictional retryPolicy describes three attempts.",
+          "evidenceIds": [
+            "ev-2222222222222222222222222222222222222222222222222222222222222222"
+          ],
+          "ruleIds": [
+            "fixture-rule-conflict-v1"
+          ]
+        }
+      ],
+      "inferences": [
+        {
+          "text": "Fictional schedule and retry evidence may conflict.",
+          "evidenceIds": [
+            "ev-2222222222222222222222222222222222222222222222222222222222222222",
+            "ev-1111111111111111111111111111111111111111111111111111111111111111"
+          ],
+          "ruleIds": [
+            "fixture-rule-schedule-v1",
+            "fixture-rule-conflict-v1"
+          ]
+        }
+      ],
+      "assumptions": [
+        {
+          "text": "Fictional context: café, 漢字, 😀.",
+          "evidenceIds": [
+            "ev-1111111111111111111111111111111111111111111111111111111111111111"
+          ],
+          "ruleIds": [
+            "fixture-rule-schedule-v1"
+          ]
+        }
+      ],
+      "missingContext": [
+        "Consultant confirmation of the fictional fixture assumptions.",
+        "No actual provider or customer evidence was used."
+      ],
+      "suggestions": [
+        {
+          "text": "Review these fictional settings; <script>window.fixtureExecuted=true</script> is data only.",
+          "evidenceIds": [
+            "ev-2222222222222222222222222222222222222222222222222222222222222222",
+            "ev-1111111111111111111111111111111111111111111111111111111111111111"
+          ],
+          "ruleIds": [
+            "fixture-rule-conflict-v1"
+          ]
+        }
+      ],
+      "uncertainty": "Fictional conflict remains unresolved; no setting is selected.",
+      "conflictingEvidenceIds": [
+        "ev-2222222222222222222222222222222222222222222222222222222222222222",
+        "ev-1111111111111111111111111111111111111111111111111111111111111111"
+      ]
+    }
+  ]
+}

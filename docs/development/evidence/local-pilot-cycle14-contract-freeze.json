@@ -1,0 +1,45 @@
+{
+  "schema": "local-pilot-cycle14-contract-freeze-v1",
+  "status": "FROZEN_ENGINEERING_CHECKPOINT",
+  "approvedProposalSha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839",
+  "contract": {
+    "path": "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+    "sha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2",
+    "bytes": 19198
+  },
+  "independentReviews": [
+    {
+      "path": "docs/development/evidence/cycle14/engineering-audit.json",
+      "sha256": "a958847accd6a5c60d5d86115a8e529e7eda351cae302e7c66fb66f530a53f58"
+    },
+    {
+      "path": "docs/development/evidence/cycle14/a14-contract-review.json",
+      "sha256": "568739dde56e2f1526017b0afe7b49b62132a021840fa6710d98ac3aa2dda4fe"
+    },
+    {
+      "path": "docs/development/evidence/cycle14/b14-contract-review.json",
+      "sha256": "3335c29245cf4af9ceba561ccc2edb82e98ac7a3cc672018be2748f2b8173326"
+    },
+    {
+      "path": "docs/development/evidence/cycle14/v14-contract-review.json",
+      "sha256": "9a883687fbd7a349e1cc669e52f4289558cac6f833f2c7e2f90413c5e42ce3c9"
+    }
+  ],
+  "runtime": "NOT RUN at engineering freeze",
+  "profile": "synthetic-review-maturity-planning-tasks-equal-v1",
+  "application": "synthetic-planning-tasks-app-v1",
+  "taskFlag": "--enable-synthetic-planning-tasks",
+  "databasePrefix": "iga_synthetic_cycle14_",
+  "migration": "migrations/planning-tasks/001-initial.sql",
+  "historicalProfiles": 10,
+  "packets": {
+    "A14": "RUNNING",
+    "B14": "RUNNING",
+    "V14": "RUNNING",
+    "coordinator": "RUNNING"
+  },
+  "limits": [
+    "No export/taskpriority/reassignment/customerdata/release/livegate acceptance",
+    "Existing input/profile/migration/oracle bytes preserved; oldanalysis task property omitted"
+  ]
+}

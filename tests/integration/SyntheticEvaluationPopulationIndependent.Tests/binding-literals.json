@@ -1,0 +1,320 @@
+{
+  "basis": "Independent Python JSON-path traversal, actual previous-cycle public owning captures; new population implementation not consumed",
+  "freezeCommit": "c27cb20b13698e07cfb55c7626264b229260142f",
+  "sourceRunId": "51cc48e7-65d7-4052-a247-dde748012f38",
+  "sourceFixture": "actual-source-fixture-clean.json",
+  "vectors": [
+    {
+      "kind": "SourceBuild",
+      "literalBundle": {
+        "P.$.CapabilityLock.ProductBuild": "fixture-product-v1",
+        "P.$.CapabilityLock.DatabaseSchemaBuild": "fixture-facts-v1",
+        "P.$.CapabilityLock.HotfixSetDigest": "synthetic-hotfix-digest",
+        "P.$.CapabilityLock.SqlServerBuild": "synthetic-sql-build",
+        "P.$.CapabilityLock.CompatibilityLevel": 160,
+        "P.$.CapabilityLock.Modules[0].Id": "SyntheticOperations",
+        "P.$.CapabilityLock.Modules[1].Id": "SyntheticSecurity",
+        "P.$.CapabilityLock.Modules[0].Version": "synthetic-module-v1",
+        "P.$.CapabilityLock.Modules[1].Version": "synthetic-module-v1"
+      },
+      "valueJson": "{\"P.$.CapabilityLock.CompatibilityLevel\":160,\"P.$.CapabilityLock.DatabaseSchemaBuild\":\"fixture-facts-v1\",\"P.$.CapabilityLock.HotfixSetDigest\":\"synthetic-hotfix-digest\",\"P.$.CapabilityLock.Modules[0].Id\":\"SyntheticOperations\",\"P.$.CapabilityLock.Modules[0].Version\":\"synthetic-module-v1\",\"P.$.CapabilityLock.Modules[1].Id\":\"SyntheticSecurity\",\"P.$.CapabilityLock.Modules[1].Version\":\"synthetic-module-v1\",\"P.$.CapabilityLock.ProductBuild\":\"fixture-product-v1\",\"P.$.CapabilityLock.SqlServerBuild\":\"synthetic-sql-build\"}",
+      "reference": "synthetic-ref-ba7176f7de60af59b0c53f4e4600b6ff471774e74eea68a12f4c06db5cd35b4f",
+      "originPaths": [
+        "P.$.CapabilityLock.CompatibilityLevel",
+        "P.$.CapabilityLock.DatabaseSchemaBuild",
+        "P.$.CapabilityLock.HotfixSetDigest",
+        "P.$.CapabilityLock.Modules[0].Id",
+        "P.$.CapabilityLock.Modules[0].Version",
+        "P.$.CapabilityLock.Modules[1].Id",
+        "P.$.CapabilityLock.Modules[1].Version",
+        "P.$.CapabilityLock.ProductBuild",
+        "P.$.CapabilityLock.SqlServerBuild"
+      ]
+    },
+    {
+      "kind": "EnvironmentEvidence",
+      "literalBundle": {
+        "C.$.scope.customerId": "synthetic-customer",
+        "C.$.scope.projectId": "synthetic-project",
+        "C.$.scope.environmentId": "synthetic-environment",
+        "L.$.scope.customerId": "synthetic-customer",
+        "L.$.scope.projectId": "synthetic-project",
+        "L.$.scope.environmentId": "synthetic-environment",
+        "I[0].$.source.customerId": "synthetic-customer",
+        "I[0].$.source.projectId": "synthetic-project",
+        "I[0].$.source.environmentId": "synthetic-environment",
+        "I[0].$.source.runId": "51cc48e7-65d7-4052-a247-dde748012f38",
+        "I[0].$.source.baselineDigest": "44c9f87974cc94428180f8e342ac0a4c7b8297f3eb2b7bc9fee0c89a17d0771f",
+        "I[0].$.source.profileDigest": "37cd9fc1ec7d8dfa69c49fd54555c28344f545705da331c9c1754f531cfb0363",
+        "I[0].$.evidence[0].evidenceId": "ev-1111111111111111111111111111111111111111111111111111111111111111",
+        "I[0].$.evidence[1].evidenceId": "ev-2222222222222222222222222222222222222222222222222222222222222222",
+        "I[0].$.evidence[0].classification": "NormalizedRedactedConfiguration",
+        "I[0].$.evidence[1].classification": "NormalizedRedactedConfiguration",
+        "I[0].$.evidence[0].redactionCount": 0,
+        "I[0].$.evidence[1].redactionCount": 0,
+        "I[0].$.evidence[0].configurationKey": "scheduleEnabled",
+        "I[0].$.evidence[1].configurationKey": "retryPolicy",
+        "I[0].$.evidence[0].configurationValue": "false",
+        "I[0].$.evidence[1].configurationValue": "three attempts",
+        "O[0,0].$.evidenceIds[0]": "ev-2222222222222222222222222222222222222222222222222222222222222222",
+        "O[1,0].$.evidenceIds[0]": "ev-1111111111111111111111111111111111111111111111111111111111111111",
+        "O[0,0].$.packetDigest": "66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967",
+        "O[1,0].$.packetDigest": "66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967",
+        "F.$.phase1bLocks.aiPacketDigest": "66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967",
+        "L.$.sourceDigest": "b2c764f0bdd8828c209c3b9f634d5bb29e3474b536fcd7cb1a14c52dac2ea3b8"
+      },
+      "valueJson": "{\"C.$.scope.customerId\":\"synthetic-customer\",\"C.$.scope.environmentId\":\"synthetic-environment\",\"C.$.scope.projectId\":\"synthetic-project\",\"F.$.phase1bLocks.aiPacketDigest\":\"66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967\",\"I[0].$.evidence[0].classification\":\"NormalizedRedactedConfiguration\",\"I[0].$.evidence[0].configurationKey\":\"scheduleEnabled\",\"I[0].$.evidence[0].configurationValue\":\"false\",\"I[0].$.evidence[0].evidenceId\":\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"I[0].$.evidence[0].redactionCount\":0,\"I[0].$.evidence[1].classification\":\"NormalizedRedactedConfiguration\",\"I[0].$.evidence[1].configurationKey\":\"retryPolicy\",\"I[0].$.evidence[1].configurationValue\":\"three attempts\",\"I[0].$.evidence[1].evidenceId\":\"ev-2222222222222222222222222222222222222222222222222222222222222222\",\"I[0].$.evidence[1].redactionCount\":0,\"I[0].$.source.baselineDigest\":\"44c9f87974cc94428180f8e342ac0a4c7b8297f3eb2b7bc9fee0c89a17d0771f\",\"I[0].$.source.customerId\":\"synthetic-customer\",\"I[0].$.source.environmentId\":\"synthetic-environment\",\"I[0].$.source.profileDigest\":\"37cd9fc1ec7d8dfa69c49fd54555c28344f545705da331c9c1754f531cfb0363\",\"I[0].$.source.projectId\":\"synthetic-project\",\"I[0].$.source.runId\":\"51cc48e7-65d7-4052-a247-dde748012f38\",\"L.$.scope.customerId\":\"synthetic-customer\",\"L.$.scope.environmentId\":\"synthetic-environment\",\"L.$.scope.projectId\":\"synthetic-project\",\"L.$.sourceDigest\":\"b2c764f0bdd8828c209c3b9f634d5bb29e3474b536fcd7cb1a14c52dac2ea3b8\",\"O[0,0].$.evidenceIds[0]\":\"ev-2222222222222222222222222222222222222222222222222222222222222222\",\"O[0,0].$.packetDigest\":\"66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967\",\"O[1,0].$.evidenceIds[0]\":\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"O[1,0].$.packetDigest\":\"66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967\"}",
+      "reference": "synthetic-ref-0a42a700129114f3713e4fadba6f6641fbd7f4a4b803af0a50200744f7bdb0fa",
+      "originPaths": [
+        "C.$.scope.customerId",
+        "C.$.scope.environmentId",
+        "C.$.scope.projectId",
+        "F.$.phase1bLocks.aiPacketDigest",
+        "I[0].$.evidence[0].classification",
+        "I[0].$.evidence[0].configurationKey",
+        "I[0].$.evidence[0].configurationValue",
+        "I[0].$.evidence[0].evidenceId",
+        "I[0].$.evidence[0].redactionCount",
+        "I[0].$.evidence[1].classification",
+        "I[0].$.evidence[1].configurationKey",
+        "I[0].$.evidence[1].configurationValue",
+        "I[0].$.evidence[1].evidenceId",
+        "I[0].$.evidence[1].redactionCount",
+        "I[0].$.source.baselineDigest",
+        "I[0].$.source.customerId",
+        "I[0].$.source.environmentId",
+        "I[0].$.source.profileDigest",
+        "I[0].$.source.projectId",
+        "I[0].$.source.runId",
+        "L.$.scope.customerId",
+        "L.$.scope.environmentId",
+        "L.$.scope.projectId",
+        "L.$.sourceDigest",
+        "O[0,0].$.evidenceIds[0]",
+        "O[0,0].$.packetDigest",
+        "O[1,0].$.evidenceIds[0]",
+        "O[1,0].$.packetDigest"
+      ]
+    },
+    {
+      "kind": "Capability",
+      "literalBundle": {
+        "P.$.CapabilityLock.MatrixVersion": "synthetic-analysis-matrix-v1",
+        "P.$.CapabilityLock.StateAtLock": 1,
+        "P.$.CapabilityLock.ProductBuild": "fixture-product-v1",
+        "P.$.CapabilityLock.DatabaseSchemaBuild": "fixture-facts-v1",
+        "P.$.CapabilityLock.HotfixSetDigest": "synthetic-hotfix-digest",
+        "P.$.CapabilityLock.SqlServerBuild": "synthetic-sql-build",
+        "P.$.CapabilityLock.CompatibilityLevel": 160,
+        "P.$.CapabilityLock.Modules": [
+          {
+            "Id": "SyntheticOperations",
+            "Version": "synthetic-module-v1"
+          },
+          {
+            "Id": "SyntheticSecurity",
+            "Version": "synthetic-module-v1"
+          }
+        ],
+        "P.$.CapabilityLock.QueryPackVersion": "synthetic-query-pack-v1",
+        "P.$.CapabilityLock.NormalizationSchemaVersion": "synthetic-normalization-v1",
+        "P.$.CapabilityLock.RuleCatalogVersion": "synthetic-analysis-catalog-v1",
+        "P.$.CapabilityLock.LockDigest": "a7dd1c8462eadf9ed5c8709711c4a3478524979bb84566687b0952eed2514b7c"
+      },
+      "valueJson": "{\"P.$.CapabilityLock.CompatibilityLevel\":160,\"P.$.CapabilityLock.DatabaseSchemaBuild\":\"fixture-facts-v1\",\"P.$.CapabilityLock.HotfixSetDigest\":\"synthetic-hotfix-digest\",\"P.$.CapabilityLock.LockDigest\":\"a7dd1c8462eadf9ed5c8709711c4a3478524979bb84566687b0952eed2514b7c\",\"P.$.CapabilityLock.MatrixVersion\":\"synthetic-analysis-matrix-v1\",\"P.$.CapabilityLock.Modules\":[{\"Id\":\"SyntheticOperations\",\"Version\":\"synthetic-module-v1\"},{\"Id\":\"SyntheticSecurity\",\"Version\":\"synthetic-module-v1\"}],\"P.$.CapabilityLock.NormalizationSchemaVersion\":\"synthetic-normalization-v1\",\"P.$.CapabilityLock.ProductBuild\":\"fixture-product-v1\",\"P.$.CapabilityLock.QueryPackVersion\":\"synthetic-query-pack-v1\",\"P.$.CapabilityLock.RuleCatalogVersion\":\"synthetic-analysis-catalog-v1\",\"P.$.CapabilityLock.SqlServerBuild\":\"synthetic-sql-build\",\"P.$.CapabilityLock.StateAtLock\":1}",
+      "reference": "synthetic-ref-6bbc3d1c6394810bc619040355522dc25e34a2d4335b4efbe729273fd88103d2",
+      "originPaths": [
+        "P.$.CapabilityLock.CompatibilityLevel",
+        "P.$.CapabilityLock.DatabaseSchemaBuild",
+        "P.$.CapabilityLock.HotfixSetDigest",
+        "P.$.CapabilityLock.LockDigest",
+        "P.$.CapabilityLock.MatrixVersion",
+        "P.$.CapabilityLock.Modules",
+        "P.$.CapabilityLock.NormalizationSchemaVersion",
+        "P.$.CapabilityLock.ProductBuild",
+        "P.$.CapabilityLock.QueryPackVersion",
+        "P.$.CapabilityLock.RuleCatalogVersion",
+        "P.$.CapabilityLock.SqlServerBuild",
+        "P.$.CapabilityLock.StateAtLock"
+      ]
+    },
+    {
+      "kind": "Baseline",
+      "literalBundle": {
+        "C.$.baselineId": "synthetic-phase1b-baseline-v1",
+        "P.$.BaselineId": "synthetic-phase1b-baseline-v1",
+        "P.$.FixtureVersion": "synthetic-baseline-inventory-v1",
+        "L.$.baselineDigest": "44c9f87974cc94428180f8e342ac0a4c7b8297f3eb2b7bc9fee0c89a17d0771f",
+        "I[0].$.source.baselineDigest": "44c9f87974cc94428180f8e342ac0a4c7b8297f3eb2b7bc9fee0c89a17d0771f"
+      },
+      "valueJson": "{\"C.$.baselineId\":\"synthetic-phase1b-baseline-v1\",\"I[0].$.source.baselineDigest\":\"44c9f87974cc94428180f8e342ac0a4c7b8297f3eb2b7bc9fee0c89a17d0771f\",\"L.$.baselineDigest\":\"44c9f87974cc94428180f8e342ac0a4c7b8297f3eb2b7bc9fee0c89a17d0771f\",\"P.$.BaselineId\":\"synthetic-phase1b-baseline-v1\",\"P.$.FixtureVersion\":\"synthetic-baseline-inventory-v1\"}",
+      "reference": "synthetic-ref-070afbae619a4a0198bee56b3c50f327e4f108293bffb8e3d10c39520aaec086",
+      "originPaths": [
+        "C.$.baselineId",
+        "I[0].$.source.baselineDigest",
+        "L.$.baselineDigest",
+        "P.$.BaselineId",
+        "P.$.FixtureVersion"
+      ]
+    },
+    {
+      "kind": "Query",
+      "literalBundle": {
+        "P.$.CapabilityLock.QueryPackVersion": "synthetic-query-pack-v1"
+      },
+      "valueJson": "{\"P.$.CapabilityLock.QueryPackVersion\":\"synthetic-query-pack-v1\"}",
+      "reference": "synthetic-ref-663800110b4355b9ccf1e067802b9c619fbc6bc148ef85264e0f2014aa3a0876",
+      "originPaths": [
+        "P.$.CapabilityLock.QueryPackVersion"
+      ]
+    },
+    {
+      "kind": "Normalization",
+      "literalBundle": {
+        "P.$.CapabilityLock.NormalizationSchemaVersion": "synthetic-normalization-v1",
+        "I[0].$.source.normalizationVersion": "fixture-normalization-v1",
+        "I[0].$.source.redactionVersion": "fixture-redaction-v1"
+      },
+      "valueJson": "{\"I[0].$.source.normalizationVersion\":\"fixture-normalization-v1\",\"I[0].$.source.redactionVersion\":\"fixture-redaction-v1\",\"P.$.CapabilityLock.NormalizationSchemaVersion\":\"synthetic-normalization-v1\"}",
+      "reference": "synthetic-ref-c9f4233d3458d89e65cca2faa3ed791389e880306a5b89b0fe7d1254869b0f4f",
+      "originPaths": [
+        "I[0].$.source.normalizationVersion",
+        "I[0].$.source.redactionVersion",
+        "P.$.CapabilityLock.NormalizationSchemaVersion"
+      ]
+    },
+    {
+      "kind": "Catalog",
+      "literalBundle": {
+        "P.$.CapabilityLock.RuleCatalogVersion": "synthetic-analysis-catalog-v1",
+        "L.$.mappingDigest": "fdcc039cca617eb19e2de2b3cc6cc8b2ffc1898155f9578dd68b78dfb36ba34f",
+        "F.$.phase1bLocks.aiMappingDigest": "fdcc039cca617eb19e2de2b3cc6cc8b2ffc1898155f9578dd68b78dfb36ba34f",
+        "A.$.works[0].work.units[0].ruleId": "fixture-rule-schedule-v1",
+        "A.$.works[0].work.units[1].ruleId": "fixture-rule-conflict-v1",
+        "A.$.works[0].work.units[0].ruleVersion": "synthetic-rule-v1",
+        "A.$.works[0].work.units[1].ruleVersion": "synthetic-rule-v1",
+        "A.$.works[0].work.units[0].proposalId": "proposal-01",
+        "A.$.works[0].work.units[1].proposalId": "proposal-02",
+        "A.$.works[0].work.units[0].key": {
+          "evidenceCategory": "configuration",
+          "inventoryId": "synthetic-ai-schedule"
+        },
+        "A.$.works[0].work.units[1].key": {
+          "evidenceCategory": "configuration",
+          "inventoryId": "synthetic-ai-retry"
+        },
+        "A.$.works[0].work.units[0].moduleId": "SyntheticOperations",
+        "A.$.works[0].work.units[1].moduleId": "SyntheticOperations",
+        "A.$.works[0].work.units[0].severity": "High",
+        "A.$.works[0].work.units[1].severity": "Medium",
+        "A.$.works[0].work.units[0].evidenceIds": [
+          "ev-1111111111111111111111111111111111111111111111111111111111111111"
+        ],
+        "A.$.works[0].work.units[1].evidenceIds": [
+          "ev-2222222222222222222222222222222222222222222222222222222222222222"
+        ]
+      },
+      "valueJson": "{\"A.$.works[0].work.units[0].evidenceIds\":[\"ev-1111111111111111111111111111111111111111111111111111111111111111\"],\"A.$.works[0].work.units[0].key\":{\"evidenceCategory\":\"configuration\",\"inventoryId\":\"synthetic-ai-schedule\"},\"A.$.works[0].work.units[0].moduleId\":\"SyntheticOperations\",\"A.$.works[0].work.units[0].proposalId\":\"proposal-01\",\"A.$.works[0].work.units[0].ruleId\":\"fixture-rule-schedule-v1\",\"A.$.works[0].work.units[0].ruleVersion\":\"synthetic-rule-v1\",\"A.$.works[0].work.units[0].severity\":\"High\",\"A.$.works[0].work.units[1].evidenceIds\":[\"ev-2222222222222222222222222222222222222222222222222222222222222222\"],\"A.$.works[0].work.units[1].key\":{\"evidenceCategory\":\"configuration\",\"inventoryId\":\"synthetic-ai-retry\"},\"A.$.works[0].work.units[1].moduleId\":\"SyntheticOperations\",\"A.$.works[0].work.units[1].proposalId\":\"proposal-02\",\"A.$.works[0].work.units[1].ruleId\":\"fixture-rule-conflict-v1\",\"A.$.works[0].work.units[1].ruleVersion\":\"synthetic-rule-v1\",\"A.$.works[0].work.units[1].severity\":\"Medium\",\"F.$.phase1bLocks.aiMappingDigest\":\"fdcc039cca617eb19e2de2b3cc6cc8b2ffc1898155f9578dd68b78dfb36ba34f\",\"L.$.mappingDigest\":\"fdcc039cca617eb19e2de2b3cc6cc8b2ffc1898155f9578dd68b78dfb36ba34f\",\"P.$.CapabilityLock.RuleCatalogVersion\":\"synthetic-analysis-catalog-v1\"}",
+      "reference": "synthetic-ref-e932b5a4458abf987d2920d2ce1eac15a54b4c86cf3d82b20784df720406f7ef",
+      "originPaths": [
+        "A.$.works[0].work.units[0].evidenceIds",
+        "A.$.works[0].work.units[0].key",
+        "A.$.works[0].work.units[0].moduleId",
+        "A.$.works[0].work.units[0].proposalId",
+        "A.$.works[0].work.units[0].ruleId",
+        "A.$.works[0].work.units[0].ruleVersion",
+        "A.$.works[0].work.units[0].severity",
+        "A.$.works[0].work.units[1].evidenceIds",
+        "A.$.works[0].work.units[1].key",
+        "A.$.works[0].work.units[1].moduleId",
+        "A.$.works[0].work.units[1].proposalId",
+        "A.$.works[0].work.units[1].ruleId",
+        "A.$.works[0].work.units[1].ruleVersion",
+        "A.$.works[0].work.units[1].severity",
+        "F.$.phase1bLocks.aiMappingDigest",
+        "L.$.mappingDigest",
+        "P.$.CapabilityLock.RuleCatalogVersion"
+      ]
+    },
+    {
+      "kind": "Profile",
+      "literalBundle": {
+        "C.$.profileId": "synthetic-phase1b-combined-v1",
+        "F.$.profileVersion": "synthetic-profile-v1",
+        "L.$.profileId": "synthetic-phase1b-combined-v1",
+        "L.$.profileDigest": "37cd9fc1ec7d8dfa69c49fd54555c28344f545705da331c9c1754f531cfb0363",
+        "I[0].$.source.profileDigest": "37cd9fc1ec7d8dfa69c49fd54555c28344f545705da331c9c1754f531cfb0363"
+      },
+      "valueJson": "{\"C.$.profileId\":\"synthetic-phase1b-combined-v1\",\"F.$.profileVersion\":\"synthetic-profile-v1\",\"I[0].$.source.profileDigest\":\"37cd9fc1ec7d8dfa69c49fd54555c28344f545705da331c9c1754f531cfb0363\",\"L.$.profileDigest\":\"37cd9fc1ec7d8dfa69c49fd54555c28344f545705da331c9c1754f531cfb0363\",\"L.$.profileId\":\"synthetic-phase1b-combined-v1\"}",
+      "reference": "synthetic-ref-e3ff05ebd91c096829133d398c54ec1bcb932a2f05a4d02d90b02582e4c2fafd",
+      "originPaths": [
+        "C.$.profileId",
+        "F.$.profileVersion",
+        "I[0].$.source.profileDigest",
+        "L.$.profileDigest",
+        "L.$.profileId"
+      ]
+    },
+    {
+      "kind": "Scoring",
+      "literalBundle": {
+        "F.$.scoringAlgorithmVersion": "pilot-health-v1"
+      },
+      "valueJson": "{\"F.$.scoringAlgorithmVersion\":\"pilot-health-v1\"}",
+      "reference": "synthetic-ref-a630461153f9d4cdc17e7a3e9e63e4189e56cfb934a3389121affd7104adb77a",
+      "originPaths": [
+        "F.$.scoringAlgorithmVersion"
+      ]
+    },
+    {
+      "kind": "AiProvider",
+      "literalBundle": {
+        "L.$.providerVersion": "synthetic-fixed-provider-v1"
+      },
+      "valueJson": "{\"L.$.providerVersion\":\"synthetic-fixed-provider-v1\"}",
+      "reference": "synthetic-ref-b4f756794ed31c6ad819e21c8027ebaf2c7086afeacbb6249cb5853935581d3f",
+      "originPaths": [
+        "L.$.providerVersion"
+      ]
+    },
+    {
+      "kind": "AiModel",
+      "literalBundle": {
+        "F.$.modelVersion": "synthetic-fixed-provider-v1"
+      },
+      "valueJson": "{\"F.$.modelVersion\":\"synthetic-fixed-provider-v1\"}",
+      "reference": "synthetic-ref-3698de6b5ea0736cfe5a30d2c3ef32db3c1949a919066f88e2eecd46dbbce8d7",
+      "originPaths": [
+        "F.$.modelVersion"
+      ]
+    },
+    {
+      "kind": "AiPrompt",
+      "literalBundle": {
+        "L.$.promptVersion": "fixture-prompt-v1",
+        "F.$.promptVersion": "fixture-prompt-v1",
+        "I[0].$.source.promptVersion": "fixture-prompt-v1"
+      },
+      "valueJson": "{\"F.$.promptVersion\":\"fixture-prompt-v1\",\"I[0].$.source.promptVersion\":\"fixture-prompt-v1\",\"L.$.promptVersion\":\"fixture-prompt-v1\"}",
+      "reference": "synthetic-ref-d0c42c053a7ab178448bd7bc221c1cf44fc906bced75dbcb3cd21905f8cc9b93",
+      "originPaths": [
+        "F.$.promptVersion",
+        "I[0].$.source.promptVersion",
+        "L.$.promptVersion"
+      ]
+    },
+    {
+      "kind": "Application",
+      "literalBundle": {
+        "L.$.applicationVersion": "synthetic-phase1b-app-v1",
+        "F.$.applicationVersion": "synthetic-phase1b-app-v1"
+      },
+      "valueJson": "{\"F.$.applicationVersion\":\"synthetic-phase1b-app-v1\",\"L.$.applicationVersion\":\"synthetic-phase1b-app-v1\"}",
+      "reference": "synthetic-ref-2581c5c57f342f76203ba580a971ac9a61704285d7f3b25680dde929fc22a321",
+      "originPaths": [
+        "F.$.applicationVersion",
+        "L.$.applicationVersion"
+      ]
+    }
+  ]
+}

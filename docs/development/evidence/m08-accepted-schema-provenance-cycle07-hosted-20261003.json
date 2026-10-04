@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "m08-accepted-schema-provenance-cycle07-hosted-v1",
+  "date": "2026-10-03",
+  "status": "PASS complete configured Linux/Windows2022/Windows2025/package jobs",
+  "executedSource": "2b76e3adf3453a1975221eb5ebe26ddc3a2e601e",
+  "runs": [
+    {
+      "id": 37163258385,
+      "name": "Azure development package (partial checks)",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "2b76e3adf3453a1975221eb5ebe26ddc3a2e601e",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37163258385",
+      "jobs": [
+        {
+          "id": 111320920319,
+          "name": "bootstrap-package",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37163258385/job/111320920319"
+        }
+      ]
+    },
+    {
+      "id": 37163258349,
+      "name": "Bootstrap checks (partial gate)",
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "2b76e3adf3453a1975221eb5ebe26ddc3a2e601e",
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37163258349",
+      "jobs": [
+        {
+          "id": 111320920216,
+          "name": "dotnet-bootstrap",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37163258349/job/111320920216"
+        },
+        {
+          "id": 111320920280,
+          "name": "collector-windows (windows-2022)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37163258349/job/111320920280"
+        },
+        {
+          "id": 111320920308,
+          "name": "collector-windows (windows-2025)",
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37163258349/job/111320920308"
+        }
+      ]
+    }
+  ],
+  "nativeLogs": [
+    {
+      "jobId": 111320920216,
+      "path": "job-111320920216.log",
+      "sha256": "31ef30183096c7cecb5bf07e8d0db3293ffcf131028430ccc559637822bca8a0",
+      "bytes": 451872
+    },
+    {
+      "jobId": 111320920280,
+      "path": "job-111320920280.log",
+      "sha256": "223e36d34567e72354ae917ab01cbcd12caa697c26d02dcfc8bcedd3be7c5404",
+      "bytes": 74128
+    },
+    {
+      "jobId": 111320920308,
+      "path": "job-111320920308.log",
+      "sha256": "29703af015e59ebe648f95ba7a5706534b6315e52fafbd42be90e8213c467add",
+      "bytes": 74274
+    },
+    {
+      "jobId": 111320920319,
+      "path": "job-111320920319.log",
+      "sha256": "286afd018d7629d62c7d73d1837c3a0ed9f645dd5d548179a68f9b18d2ebe85e",
+      "bytes": 31295
+    }
+  ],
+  "newSchemaChecks": {
+    "linuxPortable": 53,
+    "linuxAuthorPostgres": 389,
+    "linuxIndependentPostgres": 574,
+    "windows2022Portable": 53,
+    "windows2025Portable": 53
+  },
+  "documentationOnlyBridge": {
+    "to": "86c91f8818ed2f336b3f09808049558322322305",
+    "paths": [
+      "docs/development/evidence/phase1d-occupied-capacity-cycle05-20261003.json",
+      "docs/development/evidence/phase1d-occupied-capacity-cycle05-site-20261003.json",
+      "plans/active/local-pilot-phase1d-occupied-capacity-verification-cycle05.md",
+      "specs/003-health-assessment/evidence-index.md",
+      "specs/003-health-assessment/implementation-plan.md",
+      "specs/003-health-assessment/phase1d-occupied-capacity-verification-cycle05.md",
+      "specs/003-health-assessment/status.md"
+    ],
+    "allRuntimeTestCiSolutionScannerBytesEqual": true
+  },
+  "nativeEvidenceRoot": "work/m08-cycle07-evidence",
+  "qualification": "Hosted synthetic/configuration checks only; fullmilestone/customer/manual/UAT/G1-G9 not established. Linux container teardown logs retain deliberate adversarial fixture SQL/errors; these do not mean the checks failed and are never published on Site."
+}

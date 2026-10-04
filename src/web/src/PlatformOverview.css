@@ -1,0 +1,515 @@
+.platform-overview {
+  --overview-accent: var(--platform-blue, #355fc8);
+  --overview-ink: var(--platform-ink, #213148);
+  --overview-muted: var(--platform-muted, #59677c);
+  --overview-line: var(--platform-line, #e0e5ee);
+  color: var(--overview-ink);
+  min-width: 0;
+  animation: platform-overview-enter 180ms ease-out;
+}
+
+.platform-overview h3 {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 650;
+}
+
+.platform-overview p {
+  margin: 0;
+  color: var(--overview-muted);
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.platform-overview .platform-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.platform-overview .platform-overview-panel {
+  padding: 20px;
+  min-width: 0;
+  background: var(--platform-panel, #fff);
+  border: 1px solid var(--overview-line);
+  border-radius: 13px;
+}
+
+.platform-overview .platform-overview-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.platform-overview .platform-overview-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--platform-soft, #edf1ff);
+  color: var(--platform-blue, #294a9e);
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+.platform-overview .platform-overview-caption {
+  color: var(--overview-muted);
+  font-size: 0.75rem;
+}
+
+.platform-overview .platform-overview-health {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  min-height: 140px;
+  margin: 8px 0 16px;
+}
+
+.platform-overview .platform-overview-gauge {
+  position: relative;
+  width: 124px;
+  flex: 0 0 124px;
+  aspect-ratio: 1;
+}
+
+.platform-overview .platform-overview-gauge svg {
+  width: 100%;
+  height: 100%;
+}
+
+.platform-overview .platform-overview-gauge-track,
+.platform-overview .platform-overview-gauge-value {
+  fill: none;
+  stroke-width: 12;
+}
+
+.platform-overview .platform-overview-gauge-track {
+  stroke: var(--platform-soft, #edf0f6);
+}
+
+.platform-overview .platform-overview-gauge-value {
+  stroke: var(--overview-accent);
+  transition: stroke-dasharray 220ms ease;
+}
+
+.platform-overview .platform-overview-gauge-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.platform-overview .platform-overview-gauge-label strong {
+  font-size: 1.9rem;
+  line-height: 1.3;
+}
+
+.platform-overview .platform-overview-gauge-label span {
+  font-size: 0.73rem;
+  color: var(--overview-muted);
+}
+
+.platform-overview .platform-overview-health-context {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 0.875rem;
+}
+
+.platform-overview button {
+  margin: 0;
+  min-height: 44px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--platform-blue, #294a9e);
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.platform-overview button:hover {
+  background: var(--platform-soft, #edf1ff);
+  color: var(--platform-blue, #213b80);
+}
+
+.platform-overview button:focus-visible,
+.platform-overview summary:focus-visible,
+.platform-overview [tabindex]:focus-visible {
+  outline: 3px solid var(--overview-accent);
+  outline-offset: 3px;
+}
+
+.platform-overview .platform-overview-health-context button {
+  padding: 4px 0;
+}
+
+.platform-overview .platform-overview-footnote {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--overview-line);
+  font-size: 0.75rem;
+}
+
+.platform-overview .platform-overview-category-chart {
+  display: grid;
+  gap: 20px;
+  min-height: 140px;
+  align-content: center;
+}
+
+.platform-overview .platform-overview-radar {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 242px;
+  max-width: 310px;
+  margin: auto;
+}
+
+.platform-overview .platform-overview-radar-grid {
+  fill: none;
+  stroke: var(--overview-line);
+  stroke-width: 1;
+}
+
+.platform-overview .platform-overview-radar-value {
+  fill: var(--platform-soft, #edf1ff);
+  stroke: var(--overview-accent);
+  stroke-width: 2;
+}
+
+.platform-overview .platform-overview-radar-point {
+  fill: var(--overview-accent);
+}
+
+.platform-overview .platform-overview-radar-label {
+  fill: var(--overview-muted);
+  font-size: 10px;
+}
+
+.platform-overview .platform-overview-category-row {
+  display: grid;
+  grid-template-columns: minmax(70px, 1fr) minmax(50px, 1.5fr) minmax(24px, auto);
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+}
+
+.platform-overview .platform-overview-category-row > span {
+  overflow-wrap: anywhere;
+}
+
+.platform-overview .platform-overview-bar-track {
+  height: 9px;
+  border-radius: 4px;
+  background: var(--platform-soft, #edf0f6);
+  overflow: hidden;
+}
+
+.platform-overview .platform-overview-bar-track > span {
+  display: block;
+  height: 100%;
+  background: var(--overview-accent);
+  border-radius: inherit;
+}
+
+.platform-overview .platform-overview-chart-details {
+  margin-top: 12px;
+  font-size: 0.8rem;
+}
+
+.platform-overview summary {
+  min-height: 44px;
+  display: list-item;
+  align-content: center;
+  color: var(--platform-blue, #294a9e);
+  cursor: pointer;
+}
+
+.platform-overview .platform-overview-table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.platform-overview table {
+  width: 100%;
+  min-width: 280px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.75rem;
+}
+
+.platform-overview th,
+.platform-overview td {
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--overview-line);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.platform-overview caption {
+  text-align: left;
+  padding: 10px 0;
+  color: var(--overview-muted);
+}
+
+.platform-overview .platform-overview-history-empty {
+  display: grid;
+  gap: 8px;
+  padding: 8px 0 16px;
+  min-height: 140px;
+  align-content: center;
+}
+
+.platform-overview .platform-overview-history-empty > span {
+  font-size: 1.6rem;
+  color: var(--overview-muted);
+}
+
+.platform-overview .platform-overview-hotspots {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.platform-overview .platform-overview-hotspots li + li {
+  border-top: 1px solid var(--overview-line);
+}
+
+.platform-overview .platform-overview-hotspots button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 4px;
+}
+
+.platform-overview .platform-overview-hotspots strong,
+.platform-overview .platform-overview-hotspots small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.platform-overview .platform-overview-hotspots strong {
+  color: var(--overview-ink);
+}
+
+.platform-overview .platform-overview-hotspots small {
+  margin-top: 3px;
+  color: var(--overview-muted);
+  font-size: 0.75rem;
+}
+
+.platform-overview .platform-overview-hotspot-count {
+  white-space: nowrap;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: var(--platform-soft, #edf1ff);
+}
+
+.platform-overview .platform-overview-metrics {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.platform-overview .platform-overview-metrics > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--overview-line);
+}
+
+.platform-overview .platform-overview-metrics dt {
+  color: var(--overview-muted);
+  font-size: 0.82rem;
+}
+
+.platform-overview .platform-overview-metrics dd {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+.platform-overview .platform-overview-review {
+  grid-column: 1 / -1;
+}
+
+.platform-overview .platform-overview-review-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.platform-overview .platform-overview-review-summary h3 {
+  margin-bottom: 4px;
+}
+
+.platform-overview .platform-overview-review-summary p {
+  font-size: 12px;
+}
+
+.platform-overview .platform-overview-action {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 10px 13px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--overview-accent);
+  color: var(--platform-panel, #fff);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.platform-overview .platform-overview-action:hover {
+  background: var(--overview-accent);
+  color: var(--platform-panel, #fff);
+  filter: brightness(0.92);
+}
+
+.platform-overview .platform-overview-priority-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.platform-overview .platform-overview-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding-top: 8px;
+}
+
+.platform-overview .platform-overview-detail-grid > section {
+  min-width: 0;
+}
+
+.platform-overview .platform-overview-detail-grid h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.platform-overview .platform-overview-detail-caption {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.platform-overview .platform-overview-quality-details {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.platform-overview .platform-overview-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 6px 0;
+}
+
+.platform-overview .platform-overview-notice {
+  padding: 12px 16px;
+  margin: 0 0 18px;
+  border-left: 3px solid var(--overview-accent);
+  background: var(--platform-soft, #edf1ff);
+}
+
+.platform-overview .platform-overview-empty {
+  padding: 24px 0;
+}
+
+.platform-overview .platform-overview-screen-reader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@keyframes platform-overview-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 740px) {
+  .platform-overview .platform-overview-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .platform-overview .platform-overview-detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .platform-overview .platform-overview-panel {
+    padding: 16px;
+  }
+  .platform-overview .platform-overview-health {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .platform-overview .platform-overview-panel-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .platform-overview .platform-overview-review-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .platform-overview .platform-overview-category-row {
+    gap: 7px;
+  }
+  .platform-overview .platform-overview-grid {
+    gap: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-overview {
+    animation: none;
+  }
+  .platform-overview button,
+  .platform-overview .platform-overview-gauge-value {
+    transition: none;
+  }
+}
+
+.platform-overview .priority-critical {
+  color: light-dark(#b43b51, #ff9aab);
+  background: light-dark(#fff0f3, #402b36);
+}
+.platform-overview .priority-high {
+  color: light-dark(#966016, #ffc785);
+  background: light-dark(#fff5e6, #40372a);
+}

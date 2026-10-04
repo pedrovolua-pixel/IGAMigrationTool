@@ -1,0 +1,142 @@
+{
+  "schema": "cycle14-v14-independent-review-by-a14-v1",
+  "result": "PASS scoped no actionable findings",
+  "reviewer": "A14 domain author, non-author V14 verifier reviewer",
+  "reviewedCommit": "c1f24a74421abc333c16fab05f56eb93d2d11b80",
+  "reviewedExecutionSourceCommit": "5072dbe4cbb64c8dbc8b79dda53006c94702d84c",
+  "reviewedDomainDependency": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+  "contractSha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2",
+  "findings": [],
+  "independentlyExecuted": {
+    "artifactBindings": 7510,
+    "boundBytesRead": 1087818752,
+    "copyEqualities": 43,
+    "linkTopologies": 6,
+    "ownedGitBlobs": 90,
+    "pythonLiteralFiles": 41,
+    "javascriptOracleChecks": 56,
+    "telemetryUniqueReasons": 24,
+    "telemetryUniqueOriginalArtifactTexts": 3,
+    "telemetrySerializedVariants": 43,
+    "telemetryOccurrences": 0,
+    "postReviewOriginalBindingsAndGitReverified": true
+  },
+  "sourceReview": [
+    "Preauthor primitive provenance and independent complete ordinal canonical/source/template/identity/command recipes; observed outputs not expected fixtures.",
+    "Actual source composition uses real package/guidance builders and trusted artifact-module transaction read; no reflected accepted positive path.",
+    "Authority-before-history/replay, closed commands, per-run UUID conflicts, fresh duplicate no-write, original receipt replay, complete task/artifact no-effect row checks.",
+    "Lifecycle/freshness, read-only versus accepted-event highwater, source rollback/missing identity suppression, current and unavailable source recovery.",
+    "Real Create/revision/replay concurrency and shared run-fence writer blocking; cancellation/failure rollback with protected release/await cleanup.",
+    "Owned exact databases, absent-only initialization, bounded controlled corruption with exact original values and trigger restoration in finally; no customer/other database changes.",
+    "Actual saved context and host restart/reconnect; history/current/source/UI field parity, inert React controls, malformed/lost committed receipt exact retry, held same-run review epoch and run-selection fences.",
+    "Native Enter/Space exercises all eight workflow actions; strict inert assertions before/after screenshots and axe retained; caret initial is harness-only."
+  ],
+  "visualReview": {
+    "directOriginalViewportScreenshotsInspected": 6,
+    "viewportWidths": [
+      1440,
+      390,
+      320
+    ],
+    "regionalScreenshotsBound": 3,
+    "regionalRepresentativeReadableCropsInspected": 6,
+    "result": "Readable labels, current/historical provenance and controls; long identifiers wrap and narrow actions stack; no actionable visual finding.",
+    "limit": "The three region images are extremely tall (55374/94371/111122px). Representative diagnostic crops only were readable; complete region pixels were not visually inspected line by line. Some attempted bottom crops retained the full source image and were downscaled; these are not counted as readable crops."
+  },
+  "authorExecutedEvidenceReviewedNotRerun": {
+    "portable": 702,
+    "portablePlusDedicatedPostgres": 2542,
+    "inclusiveCountsAreNotAdditive": true,
+    "independentPythonExpectedFiles": 41,
+    "independentJavaScriptFullSourceIdentityCommand": 56,
+    "actualChromiumBrowser": 13626,
+    "axeViewportRecords": 3,
+    "axeViolations": 0,
+    "axeIncomplete": 0,
+    "originalScreenshots": 9
+  },
+  "telemetryFollowup": "Final metadata-only escaped-payload proof preserves original predecessor six aliases and7503-binding snapshot; final7510 manifest and original log hashes independently verified. No runtime source/output relabeling.",
+  "limitations": [
+    "No reviewer native DLL/build/PostgreSQL/host/browser/network/audit execution; author702/2542/13626 counts are reviewed original evidence, not reviewer reruns.",
+    "Default macOS startup remains NOT VERIFIED; recorded local watcher override does not establish general startup.",
+    "Axe is an engineering subset, not a complete accessibility conformance assessment.",
+    "Earlier first two partial browser host stdout logs were not persisted, invalid Vite/Python-cache tool errors lack original raw transcripts, and interim portable-final/postgres-final test DLL was not frozen; final source/native closure is separately bound.",
+    "External absolute SDK/runtime/Node/Playwright/Chromium/axe/frontend toolchain roots are bound existing dependencies; this review does not create a relocatable archive. Coordinator must preserve them before cleanup.",
+    "No customer/provider data, production execution, CSV/export activation, human gate or release approval is inferred."
+  ],
+  "originalEvidenceBindings": [
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/artifact-bindings.json",
+      "sha256": "2a65ca23e0d7bbd05c74a4e65f5edfd758119b992a7ceb40518409e715852eff",
+      "bytes": 2489388
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/execution.json",
+      "sha256": "6a0ae69eda2960517a3bc1a3797514404e1d2fcffe92ef2da6885c8bb1ef9671",
+      "bytes": 20014
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/reviews/source-review.json",
+      "sha256": "ddee4fe46a53f8eddd785da05d610539f017f6fa104af73381bde42dc004b3ff",
+      "bytes": 8808
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/verify.mjs",
+      "sha256": "b86630e14f848ea57ca16e69e8d18bf453b60964c39873dc0eb887397f21b9b3",
+      "bytes": 86881
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/expected.mjs",
+      "sha256": "51e539d6227ddde27a1e33ac57a52f4fa82fa99a04117fc33d17311f5ee03990",
+      "bytes": 11877
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/execution.json",
+      "sha256": "9f19631da3e74d1fe4dfee7b10af5f5e8301fecdecf5aca4704e82d46383fc58",
+      "bytes": 3501
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/telemetry.json",
+      "sha256": "35c8605d581feb74a8dffe02c039bafd401a9c1aa9b0db40c42b42fc24c813aa",
+      "bytes": 964
+    }
+  ],
+  "reviewerEvidence": [
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-a14/binding-review.json",
+      "sha256": "1dfb8004eccedd0f1833c00e00e3c7f43dd80481c259dbe0200329df99ee93b4",
+      "bytes": 549
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-a14/post-review-preservation.json",
+      "sha256": "db9a3acc4967f484e6ac1b4405fd93f4dfdf48fc4e6688186f6f883b0a330a0f",
+      "bytes": 557
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-a14/pure-checks.json",
+      "sha256": "efc8d9f07d3bea4be878c05a38ca93fc9d9e37393a58847f1f3d8de0073705ed",
+      "bytes": 1032
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-a14/telemetry-review.json",
+      "sha256": "1b463a14b540b005fa77b5acf8d1e3f665d8c4a4682fffc765218e45f25046b2",
+      "bytes": 825
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-a14/visual-crops.json",
+      "sha256": "2a31bb1cd60fb659cfd5f78ea6c546e5cf087d676cbb01e1a63c13c61e294fca",
+      "bytes": 3867
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-a14/node-independent-oracles.log",
+      "sha256": "be8bcb4d9d5dc820040eafc87b8aa73a848d06e3b2f5175c2f325d42e5711bdc",
+      "bytes": 112
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-review-by-a14/python-literal-oracles.log",
+      "sha256": "853ab986e730e4b09e450281c5dd01f047d9f44c56e4da42b57b8116a978f486",
+      "bytes": 146
+    }
+  ],
+  "utc": "2026-10-03T04:44:48.932825+00:00"
+}

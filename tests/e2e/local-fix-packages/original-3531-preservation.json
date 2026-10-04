@@ -1,0 +1,26 @@
+{
+  "schema": "v12-original-browser-3531-preservation-v1",
+  "sourceSha256": "9bd835d72f6bd34ba0343e47e0283493779b9fb3d4618e75d04176193e622849",
+  "reportSha256": "4b7189e836ede8baf459b4c9d5207657d181f21b895db15f07c3975289db7d1d",
+  "originalShots": [
+    {
+      "original": "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/desktop.png",
+      "preserved": "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/original-3531-desktop.png",
+      "sha256": "4e5fffff87880220732938a1b4c2670944f15c1dd6bcc6e8cac28b90e38177ce",
+      "bytes": 5893618
+    },
+    {
+      "original": "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/mobile.png",
+      "preserved": "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/original-3531-mobile.png",
+      "sha256": "b0adf4ac805f84e6f08afca15a155d003407a9b093e814a59a0dd02d0ab6488b",
+      "bytes": 5651721
+    },
+    {
+      "original": "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/narrow.png",
+      "preserved": "/private/tmp/iga-cycle12-v12/tests/e2e/local-fix-packages/execution/original-3531-narrow.png",
+      "sha256": "2d0d1f458ba41770b81419af5e612bc96a2ad52630bf5222ce77dda393daa74c",
+      "bytes": 5689476
+    }
+  ],
+  "limitation": "Original full-page pixels too tall for readable automatic overview; final viewport replay is separate."
+}

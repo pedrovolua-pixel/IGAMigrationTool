@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "assertions": 712,
+  "groups": [
+    "AS-API-001 real stored findings/provisional/publishable/quality/provenance precision goldens",
+    "AS-API-002 comparisons/mixed/gaps/explicit healthy/historical/cancelled",
+    "AS-API-003 hostile scope/weights/frozen lock/profile/origin/Host/unknown-resource",
+    "AS-UI-001 actual keyboard start/grouped original/reload/history immutable score",
+    "AS-UI-002 actual transient failure/keyboard read-only same-revision retry/stale projection denial",
+    "AS-UI-003 actual findings provenance/desktop390320/axe/forced-colors engineering smoke"
+  ],
+  "accessibility": [
+    {
+      "label": "desktop findings/original",
+      "version": "4.13.0",
+      "passes": 30,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "320px findings/original",
+      "version": "4.13.0",
+      "passes": 31,
+      "violations": [],
+      "incomplete": ["color-contrast"]
+    }
+  ],
+  "browser": "145.0.7632.6",
+  "node": "v24.21.0",
+  "limitations": [
+    "Synthetic internal scoring only; no actual rule promotion, review/risk grant, publication, maturity or AI enabled",
+    "Full supported Windows browser/NVDA/Narrator acceptance NOT VERIFIED",
+    "Axe 320px findings/original incomplete:color-contrast; those rules are NOT VERIFIED"
+  ]
+}

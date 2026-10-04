@@ -1,0 +1,1545 @@
+{
+  "schema": "local-pilot-phase1b-closure-v1",
+  "recordedUtc": "2026-10-03T18:22:06.855481+00:00",
+  "status": "VERIFIED; approved local synthetic Phase1B CLOSED",
+  "frozenCode": "6b7a5f25d9d726af2ebbc3f45480dd1e23476d24",
+  "coordinatorCode": "48acac234160e608277709a8df51ffd3d93593f3",
+  "sourceEquivalence": "All owned Phase1B runtime/Controller/codec/CSS paths identical between root frozenCode and coordinator. Separate root uncommitted workspace UI is preserved and built, not substituted for committed browser proof. GitHub PR merge checkouts bound separately in native records.",
+  "approval": "specs/003-health-assessment/local-phase1b-approval.md",
+  "approvedProposalHashesUnchanged": {
+    "specs/003-health-assessment/local-phase1b-csv-test-plan.md": "64395ba1607702089e73a40d34cd6fd241577ac416a2a834e1d5b0670727e579",
+    "specs/003-health-assessment/local-phase1b-csv-contract-proposal.md": "108537455b4f4beac92b0cb24c526d261385662f8ff64dc6af1c5c172ef7ecc7",
+    "specs/003-health-assessment/local-phase1b-closure-decision-packet.md": "32ee7da8a74f4a1d68e4183cb61cac11e2063a88cf92c556b6dc1faa9e1563f9",
+    "specs/003-health-assessment/local-phase1b-outcomes-priority-test-plan.md": "f21727d7c91429549c98ea7ceba97f1902458e590b563777665adecf173bd714",
+    "specs/003-health-assessment/local-phase1b-outcomes-priority-contract-proposal.md": "f7775ef74297f0b2e563c01d435bf4800fd07a71ea9ce18558cca95a3c7af5b8",
+    "specs/003-health-assessment/local-phase1b-ai-contract-proposal.md": "471fdcb92780bac8f552366c988eab7d4f7498a123e1625aacc1dd2ecaf49af5",
+    "specs/003-health-assessment/local-phase1b-ai-test-plan.md": "c98ac0f08ae9194c72d4dc995de48877f4ad3e9bed90f53ed82e66baa52abb43"
+  },
+  "verification": "specs/003-health-assessment/local-phase1b-closure-verification.md",
+  "operationsHandoff": "docs/operations/local-phase1b-synthetic-handoff.md",
+  "checks": [
+    {
+      "name": "root32-unit-hosts",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-results.json",
+          "bytes": 13671,
+          "sha256": "b2b966a87e4aa5cc8bedc2271d82f2fe82374d13dbd9af92e8e3d87c02028dd1"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-ArtifactReviewComponent.Tests.log",
+          "bytes": 61,
+          "sha256": "17c10997be4aa9e621318c84cfe6255ce2b330a7bb407e6b7e067b6df9da09e6"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-AssessmentCoverage.Tests.log",
+          "bytes": 259,
+          "sha256": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-AssessmentMaturity.Tests.log",
+          "bytes": 154,
+          "sha256": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-AssessmentOrchestration.Tests.log",
+          "bytes": 202,
+          "sha256": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-AssessmentRuns.Tests.log",
+          "bytes": 77,
+          "sha256": "5e7be126948f7239778fb3b7b13af7d8f69e2f51c7d9e87b35ae3cafc7ae649b"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-AssessmentScoring.Tests.log",
+          "bytes": 114,
+          "sha256": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-CollectorHost.Tests.log",
+          "bytes": 245,
+          "sha256": "a62c02b8c6072da43abe9a120ccdbc16cdb96515b2d2d2faa8af3b8f92079c5c"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-CollectorSafety.Tests.log",
+          "bytes": 392,
+          "sha256": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-DeterministicAnalysis.Tests.log",
+          "bytes": 138,
+          "sha256": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-EvidenceGovernance.Tests.log",
+          "bytes": 479,
+          "sha256": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-FindingReview.Tests.log",
+          "bytes": 164,
+          "sha256": "cfd943c7a1a7239628988120dd2e416ae2dff74d6bf9209e5dbeb96d05398bc3"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-LocalAiPreview.Tests.log",
+          "bytes": 70,
+          "sha256": "081881967ec400676e081481c50dc9397e9e3e244e2d2dc8cae8517a7f987654"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-LocalFixPackages.Tests.log",
+          "bytes": 88,
+          "sha256": "4a0de99985daeeee925968234538882d08ef6fff74f3c85d33b6aac7f0d31b1b"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-PlanningTasksComponent.Tests.log",
+          "bytes": 75,
+          "sha256": "9177e9cf735a1f84c42617b4b1c26c0904ef19302271595046299d8d4d9b9e25"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-RecommendationGuidance.Tests.log",
+          "bytes": 44,
+          "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-ReportDrafts.Tests.log",
+          "bytes": 83,
+          "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-ReportMarkdown.Tests.log",
+          "bytes": 439,
+          "sha256": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticAiExecution.Tests.log",
+          "bytes": 51,
+          "sha256": "fadcbb0fec4132e0ad38d53ced1c7f9f6a5a8d8bcfc9109cbe2d581b0879d713"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticAiPackets.Tests.log",
+          "bytes": 68,
+          "sha256": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticAiPreview.Tests.log",
+          "bytes": 382,
+          "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticAiPreviewHtml.Tests.log",
+          "bytes": 194,
+          "sha256": "7ea394ff57b7d9a82dedf830d42de866d2606b1657da082d8d2b1b6c761799ff"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticAiProposals.Tests.log",
+          "bytes": 41,
+          "sha256": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticEvaluation.Tests.log",
+          "bytes": 57,
+          "sha256": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticEvaluationRegression.Tests.log",
+          "bytes": 64,
+          "sha256": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticEvaluationReviewer.Tests.log",
+          "bytes": 56,
+          "sha256": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticEvaluationSampling.Tests.log",
+          "bytes": 66,
+          "sha256": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticFixPackageHtml.Tests.log",
+          "bytes": 245,
+          "sha256": "388992ded43f7d7c2b771347a075f27413e9c895907b1615fc8cf73adb540f7e"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticFixPackages.Tests.log",
+          "bytes": 106,
+          "sha256": "d8f6f6e6655167200d8a8f61aca65874a8f6c5144a3c059e7fec89f985d4b4c1"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticFixReview.Tests.log",
+          "bytes": 62,
+          "sha256": "d54e493eb5b97ef64f1b78e6386fd56d51d178382ae849e1bc2714fb3eccfd1a"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticOutcomePriority.Tests.log",
+          "bytes": 86,
+          "sha256": "5e52a4168196268ec29ffd2fc7991bf6277a108991a41289faca2a6a23acdbc2"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticPlanningTasks.Tests.log",
+          "bytes": 63,
+          "sha256": "1729aa07170453730e221fbbc718bb865043e1962d8b32bb9966faf864da639e"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-unit-SyntheticTaskCsv.Tests.log",
+          "bytes": 107,
+          "sha256": "49f1774bda25e9fcf2d8dcbb976052ee723dc8d1dda3965ae85ce574665cfbc4"
+        }
+      ],
+      "command": "Exact32 pinned dotnet DLL commands and exit codes in root-unit-results.json"
+    },
+    {
+      "name": "root131-compound-owning-PostgreSQL",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-final-compound.log",
+          "bytes": 8049,
+          "sha256": "c1f16c5dc30ec9c325aa9b14c45471f26ce304204abd7be0d9c2cdbe229e035f"
+        }
+      ],
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/integration/Phase1BCompound.Tests/bin/Release/net10.0/Phase1BCompound.Tests.dll"
+      ]
+    },
+    {
+      "name": "OP158-owning-PostgreSQL",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-op-pg-apphost.log",
+          "bytes": 145,
+          "sha256": "9ffa5aa3214251b42d623e35d80a0cf9b54f430abf79d332e13f8de6c05dd194",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-op-pg-apphost.log"
+        }
+      ],
+      "command": "DOTNET_ROOT pinned; executable apphost tests/integration/SyntheticOutcomePriority.Tests/bin/Release/net10.0/SyntheticOutcomePriority.Tests"
+    },
+    {
+      "name": "AI463-owning-PostgreSQL",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-ai-pg.log",
+          "bytes": 61,
+          "sha256": "783ebdb63576e5cc721e996dacd6c20e4b2e6a47cf3a4126eb87bc854a32d0bf",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-ai-pg.log"
+        }
+      ],
+      "command": "pinned dotnet tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll"
+    },
+    {
+      "name": "CSV81-mac-sandbox-and-owning-PostgreSQL",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-csv-mac-pg.log",
+          "bytes": 3831,
+          "sha256": "3516e2a585e644989584d23345bad0549bf15797cea7d25ae8fa5b925c086b44",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-csv-mac-pg.log"
+        }
+      ],
+      "command": "pinned dotnet tests/integration/SyntheticTaskCsv.Tests/bin/Release/net10.0/SyntheticTaskCsv.Tests.dll"
+    },
+    {
+      "name": "root-pinned-audited-locked-restore",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-final-restore.log",
+          "bytes": 11320,
+          "sha256": "1084e22fc9049457add7632ef031cba674143734a3f6e392b0836aa7e28bc3fc"
+        }
+      ],
+      "command": "dotnet restore IgaMigrationTool.slnx --locked-mode (pinned10.0.401)"
+    },
+    {
+      "name": "root81-project-Release-build-zero-warning-error",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-legacy-start-repair-build.log",
+          "bytes": 13625,
+          "sha256": "15c46f20faf5c48100ef9a5108720eb1e04b9a9b1f836a330a53f3382170dc20"
+        }
+      ],
+      "command": "dotnet build IgaMigrationTool.slnx -c Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1"
+    },
+    {
+      "name": "root-whole-solution-format",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-final-format.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "command": "dotnet format IgaMigrationTool.slnx --verify-no-changes --no-restore"
+    },
+    {
+      "name": "root-frontend-contract-types-build-format-audit",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-final-frontend-results.json",
+          "bytes": 1020,
+          "sha256": "b4189b8eaf5635b652d6a2284265fa09667dcb855305d7db0bde73e026339cf0"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-final-web-format.log",
+          "bytes": 167,
+          "sha256": "da4f2e13f41f369319f3e04fc48a598dbea94a21ce7d7efea7f738e1b00afcd4"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-final-web-build.log",
+          "bytes": 638,
+          "sha256": "1bacdf977925302ba18383d375975cff56e7c8e4fa60c19e95122f07c80f9720"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-final-web-audit.log",
+          "bytes": 100,
+          "sha256": "68d4981a9641170b59620ce7737dbad25183ca6a987dfcaf36ad200fde5cba40"
+        }
+      ],
+      "command": "Pinned node/npm exact argv and individual exit codes in results JSON; root working UI composition included"
+    },
+    {
+      "name": "root-architecture7-plus4",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-final-architecture.log",
+          "bytes": 116,
+          "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+        }
+      ],
+      "command": "pinned dotnet tests/architecture/BoundaryChecks/bin/Release/net10.0/BoundaryChecks.dll"
+    },
+    {
+      "name": "tracked-source-gitleaks1788-files",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-tracked-gitleaks.log",
+          "bytes": 145,
+          "sha256": "d7d7e1ea8eb61e146bfe27cb601c4068524f5792bd0ae3ee7d81a7ab459cd598"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-tracked-gitleaks.json",
+          "bytes": 3,
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        }
+      ],
+      "command": "gitleaks8.30.1 dir coordinator-created hardlink inventory of all git ls-files --redact"
+    },
+    {
+      "name": "whole-workspace-gitleaks-generated-digest-disposition",
+      "result": "EXIT1; nine independently recomputed digest false positives; no suppression",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/root-final-gitleaks.log",
+          "bytes": 83,
+          "sha256": "086c519f518aabd73209fe7ea7220de8a4befe1d301714b38be9df712197454a"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/root-final-gitleaks.json",
+          "bytes": 5381,
+          "sha256": "93f86bfe2eab22b357b85cb3c8bb5217236387f6ab5e37ce0b320f0fa9779a6d"
+        }
+      ],
+      "command": "gitleaks8.30.1 dir . --redact; all9 in otheragent untracked/notignored work/m08-cycle03-evidence/draft-evidence.json nativeArtifactHashes; referenced artifact SHA256 matches; no mutation"
+    },
+    {
+      "name": "real-host-consultant-121",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-browser-consultant-closure.log",
+          "bytes": 7323,
+          "sha256": "da96990a02aceb742c2d3ca58a13607b8c53cb6f40b92d039c8e04e18286934e",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-consultant-closure.log"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/consultant-report.json",
+          "bytes": 11136,
+          "sha256": "a68576ee90d290f6f5433a0cd0237e1d66a13f23db582a2aaa21ead043f3d39c",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-report.json"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/consultant-final.png",
+          "bytes": 4366540,
+          "sha256": "299858f864870cec777a6e91b56903da8240ef483a8b2aca1e57d2c25bf61a1e",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/consultant-final.png"
+        }
+      ],
+      "command": "Pinned Node24 realChrome151 verify.mjs; normal Consultant then genuine Auditor host on same dedicated browser_closure_tests; no DB reset"
+    },
+    {
+      "name": "real-host-auditor-40",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/preserved-final-coordinator/work/phase1b-closure-evidence/combined-browser-auditor-closure.log",
+          "bytes": 2310,
+          "sha256": "dbc70e87fae6e121c4b95d58166f2bdfb2124b8ff615de85e07cb339db275e66",
+          "originalLocation": "/private/tmp/iga-phase1b-coordinator/work/phase1b-closure-evidence/combined-browser-auditor-closure.log"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/auditor-report.json",
+          "bytes": 3039,
+          "sha256": "3d16333edf0350410e8f83818e4766f5a35da57aac9b0d62f48d485b63f512ec",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-report.json"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/auditor-final.png",
+          "bytes": 59473,
+          "sha256": "f356c9c4e841a3fd98d8bac3a243a205db554511e58878fe8d47c2fc99ceb7d8",
+          "originalLocation": "/private/tmp/iga-phase1b-browser-closure-evidence/auditor-final.png"
+        }
+      ],
+      "command": "Pinned Node24 realChrome151 verify.mjs; normal Consultant then genuine Auditor host on same dedicated browser_closure_tests; no DB reset"
+    },
+    {
+      "name": "real-paused-host-budget81",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-budget-final.log",
+          "bytes": 5075,
+          "sha256": "8e726e4e04e8f18d57d51e0bc9d8394d41b35e178adedd04e5824e8c3b4029c0",
+          "originalLocation": "/private/tmp/iga-phase1b-budget-final.log"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/budget-report.json",
+          "bytes": 5569,
+          "sha256": "de3be36d0b7bc493ecc66e33d45a2aa97414f4ec7cec5b1ebf268fdc213e2bf7",
+          "originalLocation": "/private/tmp/iga-phase1b-budget-final-evidence/budget-report.json"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/budget-final.png",
+          "bytes": 415194,
+          "sha256": "1b49806bbf7f7bc6fc6d92d51a21cf00fb1f35b95bbededea141e810f19d35c3",
+          "originalLocation": "/private/tmp/iga-phase1b-budget-final-evidence/budget-final.png"
+        }
+      ],
+      "command": "IGA_PHASE1B_PAUSED_HOST=1 pinned Node24/realChrome budget-verify.mjs; actual committed-response loss and exact UUID keyboardRetry"
+    },
+    {
+      "name": "independent-component-Chrome50-and-real390320",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-components-mobile.log",
+          "bytes": 3673,
+          "sha256": "ee4bca869d1847c31a434c94779599ac1a6e3eb58ff1d0690f6c716efecfc1f8",
+          "originalLocation": "/private/tmp/iga-phase1b-components-mobile.log"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/preserved-external/iga-phase1b-mobile-independent.json",
+          "bytes": 567,
+          "sha256": "8b256f56846b538ce52e34e4d794a6c17cc46b413500ec5ef1c9594f62888cfc",
+          "originalLocation": "/private/tmp/iga-phase1b-mobile-independent.json"
+        }
+      ],
+      "command": "Phase1BComponents.browser.mjs realChrome, globalCSS; separate non-mutating saved-run390/320 read without style injection"
+    },
+    {
+      "name": "hosted-Linux18-isolation-and-native4",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/hosted-linux-csv-runtime-3ecdfc6.json",
+          "bytes": 15357,
+          "sha256": "af008d6e4b59d31805e13bc610235f3477c51edb0f28895b7056e4c1ef619489"
+        }
+      ],
+      "command": "bootstrap37140723141/job111254435403; PRhead3ecdfc6 checkout merge sourceCommit4b426ec6; exact source files/digests in native JSON"
+    },
+    {
+      "name": "configured-hosted-job-111254435403",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-job-111254435403.log",
+          "bytes": 246564,
+          "sha256": "d23a21f757201dd5d6def1909f75bc2915122d27710c806f8b6d379354be83bb"
+        }
+      ],
+      "command": "bootstrap37140723141 +package37140723219, PRhead3ecdfc6"
+    },
+    {
+      "name": "configured-hosted-job-111254435489",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-job-111254435489.log",
+          "bytes": 60192,
+          "sha256": "0b2dcd0c15f96382be30156958fb8ed07554e6f9b895961c232a9d90b34bef16"
+        }
+      ],
+      "command": "bootstrap37140723141 +package37140723219, PRhead3ecdfc6"
+    },
+    {
+      "name": "configured-hosted-job-111254435492",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-job-111254435492.log",
+          "bytes": 60152,
+          "sha256": "9aecb7f3d4bb115eca534dd7be3cb49b9346c136051b597408426977981d76cd"
+        }
+      ],
+      "command": "bootstrap37140723141 +package37140723219, PRhead3ecdfc6"
+    },
+    {
+      "name": "configured-hosted-job-111254435736",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-job-111254435736.log",
+          "bytes": 29858,
+          "sha256": "b5d25f9b42d5b4d1be98a18df1fdcb6a62215ed10d24d683b7f03dcdc5c70c39"
+        }
+      ],
+      "command": "bootstrap37140723141 +package37140723219, PRhead3ecdfc6"
+    },
+    {
+      "name": "final-configured-hosted-job-111259243177",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-final-job-111259243177.log",
+          "bytes": 246501,
+          "sha256": "7f4e416fce0d7ec3a08b98eda26b457c09e21974b38a0fd4f948df4fba00028b"
+        }
+      ],
+      "command": "GitHub configured workflow on exact PRhead6b7a5f2; actual merge checkout separately recorded"
+    },
+    {
+      "name": "final-configured-hosted-job-111259243308",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-final-job-111259243308.log",
+          "bytes": 60270,
+          "sha256": "f0206ac1a701e4ecaf4d99cb3d361909257f36279b8c65b8955b3b83ea913203"
+        }
+      ],
+      "command": "GitHub configured workflow on exact PRhead6b7a5f2; actual merge checkout separately recorded"
+    },
+    {
+      "name": "final-configured-hosted-job-111259243379",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-final-job-111259243379.log",
+          "bytes": 60112,
+          "sha256": "f953d31c64c7e59687e2a90f5ed4a93577116ced43364629db5bfa93c4b1b27a"
+        }
+      ],
+      "command": "GitHub configured workflow on exact PRhead6b7a5f2; actual merge checkout separately recorded"
+    },
+    {
+      "name": "final-configured-hosted-job-111259242937",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/github-final-job-111259242937.log",
+          "bytes": 30269,
+          "sha256": "5c56ed4ffde91138d06dc2fdff6ca2a3841754faf561f7c0349e6af35f0b21df"
+        }
+      ],
+      "command": "GitHub configured workflow on exact PRhead6b7a5f2; actual merge checkout separately recorded"
+    },
+    {
+      "name": "final-source-plus-closure-documents-gitleaks1794",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/final-source-gitleaks.log",
+          "bytes": 146,
+          "sha256": "9f6793a64644ae0b903dd0605f320044cc3cb6f532322627f96eed263c1d4cd6"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/final-source-gitleaks.json",
+          "bytes": 3,
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        }
+      ],
+      "command": "gitleaks8.30.1 detect --no-git against all tracked files plus four new owned closure documents; exit0"
+    },
+    {
+      "name": "final-closed-canonical-documents-secret-scan",
+      "result": "PASS",
+      "artifacts": [
+        {
+          "path": "work/phase1b-closure-evidence/final-closure-docs-gitleaks.log",
+          "bytes": 146,
+          "sha256": "54ae931b44e26be6269a3305459ad65ae7cedd6c89503394eea1e4a118ebb006"
+        },
+        {
+          "path": "work/phase1b-closure-evidence/final-closure-docs-gitleaks.json",
+          "bytes": 3,
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        }
+      ],
+      "command": "gitleaks8.30.1 detect --no-git ten owned closure/canonical/handoff files; exit0"
+    }
+  ],
+  "frozenCodeManifest": {
+    "commit": "6b7a5f25d9d726af2ebbc3f45480dd1e23476d24",
+    "base": "d7d493e",
+    "files": [
+      {
+        "path": ".github/workflows/bootstrap-checks.yml",
+        "bytes": 36246,
+        "sha256": "2b08660abfd303f8618b34246c4a30c22f4ca35b5a142aadb3d53e2745ec625f"
+      },
+      {
+        "path": "IgaMigrationTool.slnx",
+        "bytes": 8044,
+        "sha256": "80199d7deba79d49fd436a31448488545572aa9641a04e029cb60c422ecf0505"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+        "bytes": 10648,
+        "sha256": "623d9c7a07b1a1d70774fc64ebda39d7700f440c7682133e2308ac48bd846788"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoFixPackageProjection.cs",
+        "bytes": 10190,
+        "sha256": "736fb65189f91209e7e73ab38ee290a069860caf90cee4ed17e378d7ae0de14e"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoMaturityProjection.cs",
+        "bytes": 3462,
+        "sha256": "d59f9d26e37b15dacad71e825b7c1bab4afb01e0e88810becf6e93f3dd82d41f"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoPhase1BCsv.cs",
+        "bytes": 12358,
+        "sha256": "7f0cfc447359cfcef24c29a2987cb58065c41efa6865a5b9390423d197fb5cc8"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoPhase1BRoutes.cs",
+        "bytes": 8617,
+        "sha256": "c0dac8f502de1ea6052d2bb21946d917ac47b458af9bfffec4db9705432a66ec"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoPhase1BService.cs",
+        "bytes": 20090,
+        "sha256": "04b81fae26588d6276c33e82cb56caed1036a7dfdd1c8321472d789e4c48a462"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoPhase1BWorker.cs",
+        "bytes": 14583,
+        "sha256": "951ceaa574e3f4d290bfd7ae4bb1597b6f7201fbd984f34743efd730d06f0e64"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoRecommendationGuidanceProjection.cs",
+        "bytes": 6376,
+        "sha256": "46193bc66af0de236575e8a0889719ddd343d2f9006a0c64cd70d739a568bc4d"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+        "bytes": 7876,
+        "sha256": "935e7ade8bbde39cfe4fa9a8686a93422f65a8d9132ac8d0eeb5463ff9e94562"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+        "bytes": 1036,
+        "sha256": "d78ea83a7c04ae4c8e26bb950d739e73038ee5a5597652a88a9bfe205ae39e71"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/Phase1BTestVisibility.cs",
+        "bytes": 96,
+        "sha256": "b6fb536c2bc1ade76f8e78e28bf1a2823c7abf31c711d086f41a7f6f5b3594b5"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+        "bytes": 42113,
+        "sha256": "47b1475bfbef030989b6378c7cdc1852ea833f8b71f56c44386a39c932f37b4a"
+      },
+      {
+        "path": "src/server/hosts/LocalConsultantDemo/packages.lock.json",
+        "bytes": 5155,
+        "sha256": "7ff161cf7594e2fe0f9c32ecdcadc1a7715a9fe906db441df18494985dfbc8aa"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+        "bytes": 1174,
+        "sha256": "165e5887b36974713f319a1b4c41ee6696c151bae644006f448826e86ce29cc4"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+        "bytes": 9988,
+        "sha256": "9751862888e9161a83fb89f4cc8bf3851901afd50a1cdb0e5e880d69155e96fc"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/DemoPhase1BAiFixture.cs",
+        "bytes": 3376,
+        "sha256": "5b2af23181ebfee7c796ec47a174732e6fe9504b1c28b8bd9ea72f8ff402a23f"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/DemoPhase1BCatalog.cs",
+        "bytes": 6342,
+        "sha256": "65fe5f9902ea455367dc047bebcc1c23293a1ca2670bb8a2903bf61800de6e73"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+        "bytes": 48187,
+        "sha256": "63b6951e3af64b3b82ab08502c4749cd8b801f419f4cd1fd75f5fda33197b8ad"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/SyntheticPhase1BAnalysisAdapter.cs",
+        "bytes": 11954,
+        "sha256": "9fe46db9aeb2e984a048eb51eab11c5285e3390b12ebf7369650185aafc16800"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+        "bytes": 5551,
+        "sha256": "d1b861aaa3e77b53b6b7b094d1ff444360980fb87d9bb88aed11cb0445ea7843"
+      },
+      {
+        "path": "src/server/modules/AssessmentRuns/packages.lock.json",
+        "bytes": 6915,
+        "sha256": "9095c6f3f8190e98c1eba7106db6445adafd8482821f7a35ba269ce3b2bd6057"
+      },
+      {
+        "path": "src/server/modules/FindingReview/SyntheticReviewExportCapture.cs",
+        "bytes": 4086,
+        "sha256": "17a43cbb52baf339753e0684ea76b419ca784ea8c46e033a195ec73b90f88ee9"
+      },
+      {
+        "path": "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+        "bytes": 32756,
+        "sha256": "0142758cff5a509245dd98330501f3f2ef0ff34cae656a9438d14d2118543674"
+      },
+      {
+        "path": "src/server/modules/RecommendationGuidance/Phase1BGuidanceSource.cs",
+        "bytes": 4175,
+        "sha256": "e30bf02879d0e87ffd51c2575fb8f2934f03c0908f0f7303dbe9b6e665c94c35"
+      },
+      {
+        "path": "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+        "bytes": 20566,
+        "sha256": "ee53e988536d0a8ab4bc9a5cd70f85aa5743fe7d0b7b2d7d0e7fb4deeea7bf03"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/AiExecutionCanonical.cs",
+        "bytes": 1901,
+        "sha256": "53a4ade0773515aea73642dce3fc91a3b6cff6c3a4ddb66463e84b090958f4b8"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/AiExecutionContracts.cs",
+        "bytes": 5627,
+        "sha256": "251323a67d8eab140538592b9c50ee8966128ced91b987be247f2bab5e5cdf3d"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/AiExecutionMigration.cs",
+        "bytes": 8734,
+        "sha256": "4e122d2caa6a71dfb303d6bbe2d8978dfe191614edd14ea6f132a84a922ad830"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/AiExecutionPolicy.cs",
+        "bytes": 9180,
+        "sha256": "0b7a267b740b96299d5dc3aada1ba203159b389b515602ca326d11ff4d7d1c4c"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/FakeAiProvider.cs",
+        "bytes": 3652,
+        "sha256": "607e02ef68e32739ea38c71dddaad8d796391eafc55b7db667e8bf0c9a1764fd"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/README.md",
+        "bytes": 13014,
+        "sha256": "2c376b745e2ac9feb0b97c6d10bc6b2e8d9329d4e1e2374b563d918adddff473"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/SyntheticAiExecution.csproj",
+        "bytes": 842,
+        "sha256": "3b71fffcf86aa666b313c7f577240b5925a3f838fa657bb61a8ee11b6c423758"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/SyntheticAiExecutionStore.cs",
+        "bytes": 45862,
+        "sha256": "50e1abaff330fe13618682aa4633d23243bb397146524932dafe45ef23d09f5f"
+      },
+      {
+        "path": "src/server/modules/SyntheticAiExecution/packages.lock.json",
+        "bytes": 1195,
+        "sha256": "1c60469a6a7a6020076ef8e324bd6a9bd7dd7868263d09ca48714e961ef1aefb"
+      },
+      {
+        "path": "src/server/modules/SyntheticFixReview/ArtifactExportCapture.cs",
+        "bytes": 3361,
+        "sha256": "fb97ef94fc02fdd904ff133bce0c47e786939d67be7d2ec22ceab04c658c75cb"
+      },
+      {
+        "path": "src/server/modules/SyntheticFixReview/ArtifactExportContracts.cs",
+        "bytes": 2006,
+        "sha256": "e6858741674a535cf4cda566ddbcf5e2b3db2e89a8afc77197014c3b803ae863"
+      },
+      {
+        "path": "src/server/modules/SyntheticFixReview/ArtifactReviewSourceBuilder.cs",
+        "bytes": 6211,
+        "sha256": "17a354fc30d03f5bf38e6e65fee4a00f9e30fae72926436c00e14284d0a9e403"
+      },
+      {
+        "path": "src/server/modules/SyntheticFixReview/ArtifactReviewTransactionalMutation.cs",
+        "bytes": 6206,
+        "sha256": "a76de4114bd8833cd0b95743d8a03add6a78185ec89be154f3cf03e9a0c569c2"
+      },
+      {
+        "path": "src/server/modules/SyntheticFixReview/Phase1BExportCompatibility.cs",
+        "bytes": 3712,
+        "sha256": "cc213d797081696316f996f0b27d5ab1eadbb6de021fb0130c57246084f9869c"
+      },
+      {
+        "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+        "bytes": 27262,
+        "sha256": "d060af7f417943f1cae7d23e0813d4c3a84c4c9da1946ee7051d3d183f896ca0"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/Canonical.cs",
+        "bytes": 5531,
+        "sha256": "0b69be455377f8adcc685adad08e5e92e81a2b2d5b224089603bc637495e2801"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/Contracts.cs",
+        "bytes": 7862,
+        "sha256": "1dd22a71446563305160bd63989f37d604f1bdd776b7149fc4bfe87cf7300428"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/Migration.cs",
+        "bytes": 10123,
+        "sha256": "d750a1f440f1f797293fe335786803f56c9bb403d481e451177589c680326e97"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/Policy.cs",
+        "bytes": 10175,
+        "sha256": "ea1ccb2156507dd757f2410d054f6ee4d56ca8ac0136eb62921e1a63c12ba6c8"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/README.md",
+        "bytes": 7733,
+        "sha256": "9387737fbc2d46e9b969e5e1515a636f03ed3970dfbe4b0ffaf7b192ca311801"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/Store.cs",
+        "bytes": 47928,
+        "sha256": "a8e7c346377356595b32f0db96bf1272feceac1861d16bb8e171e4e6eafa9883"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/SyntheticOutcomePriority.csproj",
+        "bytes": 508,
+        "sha256": "b390114a0a4e46124259f332cd97a483151094234501723ee0a955e5c97abbaa"
+      },
+      {
+        "path": "src/server/modules/SyntheticOutcomePriority/packages.lock.json",
+        "bytes": 1272,
+        "sha256": "dd1a00e8f1ff4758ddbe304d1d460876b0a941f71f5459cd144457f4ae81b8b8"
+      },
+      {
+        "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskExportCapture.cs",
+        "bytes": 6695,
+        "sha256": "619b05a17f76e0785c0519db52b000653600ceea0f6ba3af9a5dc9670b36a850"
+      },
+      {
+        "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskExportContracts.cs",
+        "bytes": 2406,
+        "sha256": "4d0f8f95471fdf73fb12f04c9ad00af0f508842095db031cf8bc0da2972fe425"
+      },
+      {
+        "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskSourceBuilder.cs",
+        "bytes": 10018,
+        "sha256": "cf0ed1a7c992ac8a03b318608a2a12ef3b3830e1b212641c21f2f0069f0f4613"
+      },
+      {
+        "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskTransactionalMutation.cs",
+        "bytes": 6693,
+        "sha256": "8103d67817d8c47ce57b31c0b1d563c05b5e7358612ded00e7b043d7d52b0a97"
+      },
+      {
+        "path": "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskStore.cs",
+        "bytes": 29787,
+        "sha256": "19b6bbbb96c0985f0d4ba72300cc1f397198c046827c802e116678422537e29c"
+      },
+      {
+        "path": "src/server/modules/SyntheticSourceFence/SyntheticRunSourceFence.cs",
+        "bytes": 3102,
+        "sha256": "7f3c9410b02c3ab7e94a1768939d2fb8cfa197906052fa6499b290c04c95d8c8"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsv/CsvCanonical.cs",
+        "bytes": 2370,
+        "sha256": "56bea6365fe78b2bcb19c45ae09aefd475de7e52e3ce4c430b535b6ac54bafa8"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsv/CsvCodec.cs",
+        "bytes": 13623,
+        "sha256": "59e1e083a1221f4d0d0c908197efe50e40f3951f4242ab6ac8949d17921d55f0"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsv/CsvContracts.cs",
+        "bytes": 2915,
+        "sha256": "d25893b2244b8c8807704eedf982c126563e61588e61091ebb1c000e7ff964e4"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj",
+        "bytes": 36,
+        "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsv/packages.lock.json",
+        "bytes": 61,
+        "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsvIntegration/CsvAuditMigration.cs",
+        "bytes": 10308,
+        "sha256": "eefda405436d3c748f0ea2b164db6215f371313a593ab44a1365e79d081e9091"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsvIntegration/CsvAuditStore.cs",
+        "bytes": 9690,
+        "sha256": "d43a2638099128689775d159d6309ba8a9f3a25511bac44cf22b4f1ff960279f"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsvIntegration/CsvExportCaptureAdapter.cs",
+        "bytes": 3164,
+        "sha256": "386699bd28ad3004bcd6fe7999551ce9a6dd7b6d8a29ad60f4f261c8eb588662"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsvIntegration/CsvSandboxRunner.cs",
+        "bytes": 6090,
+        "sha256": "0e41dc63603de597a7425372fdaa414dd23c348e66b35bae223ed41eb55f72cb"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsvIntegration/README.md",
+        "bytes": 5064,
+        "sha256": "288427ef77f9f27268e333ac54373ea1b40117973a71ac7b3dc024a9f64198ab"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsvIntegration/SyntheticTaskCsvIntegration.csproj",
+        "bytes": 545,
+        "sha256": "cd84a780e168e18473ade10ef84cafad46da482dd43b6cbb05e49ac464326220"
+      },
+      {
+        "path": "src/server/modules/SyntheticTaskCsvIntegration/packages.lock.json",
+        "bytes": 1895,
+        "sha256": "9e0d7fcb223767a9b79dbdef172d34d61b0ad39b41fec66509054555acd47ec5"
+      },
+      {
+        "path": "src/server/workers/SyntheticCsvRenderer/Program.cs",
+        "bytes": 816,
+        "sha256": "f39c050a06b28e174b4a2148d6d0a47c4691ee222604686805431da9391886aa"
+      },
+      {
+        "path": "src/server/workers/SyntheticCsvRenderer/SyntheticCsvRenderer.csproj",
+        "bytes": 211,
+        "sha256": "e21710dfe483b8ce1c379f1575d2bd2131f90355838b173c7279c6758bd92168"
+      },
+      {
+        "path": "src/server/workers/SyntheticCsvRenderer/packages.lock.json",
+        "bytes": 128,
+        "sha256": "aba235b67e838fa08e0ba141e0e3e8df8e8fb89a6276be9e9a93ec7dfbbcb2d9"
+      },
+      {
+        "path": "src/web/src/App.tsx",
+        "bytes": 33634,
+        "sha256": "eea67fe8c557cdda5adccb4148cee8409cdd72c75c3b03554e7e97e7d61ffcce"
+      },
+      {
+        "path": "src/web/src/Phase1BComponents.browser.mjs",
+        "bytes": 29346,
+        "sha256": "5c31af6090cab122f19f56cb109c06c43b0a5b973b522a5397f8913be5791819"
+      },
+      {
+        "path": "src/web/src/Phase1BController.tsx",
+        "bytes": 37660,
+        "sha256": "31751f47196634fa79fd549cf2edebc0cdb4aca07743e39477124d49943bbc8a"
+      },
+      {
+        "path": "src/web/src/Phase1BSetup.css",
+        "bytes": 2298,
+        "sha256": "0d246e52d1d3b226aadb8a03addab25f4f5fdd80a637c1115dc77285addb28d9"
+      },
+      {
+        "path": "src/web/src/Phase1BSetup.tsx",
+        "bytes": 22346,
+        "sha256": "c4c77b2c1ee19c7f2aac90701eca3529fdbaa7d78f85dd3e37231bdc5f400f64"
+      },
+      {
+        "path": "src/web/src/Phase1BWorkspace.css",
+        "bytes": 1133,
+        "sha256": "2bd275979ef5fb97dfa82082234a4c789677d7230bf367946cf88a58e0992c90"
+      },
+      {
+        "path": "src/web/src/Phase1BWorkspace.tsx",
+        "bytes": 20689,
+        "sha256": "8162d6bcad99e00e3cdf0e34fb48392ea6d4270bb2e66316387f53c17cab9979"
+      },
+      {
+        "path": "src/web/src/phase1b-contract.ts",
+        "bytes": 3022,
+        "sha256": "a0c5ed6dafc5ff53ac5fa846e087c22e0bc72f5215212b864a45bc624e379db8"
+      },
+      {
+        "path": "tests/e2e/phase1b/budget-verify.mjs",
+        "bytes": 15505,
+        "sha256": "2190dae572642c60856c5a07e6a6e4b7ffc251079020f7e45c01c15a141cc6ac"
+      },
+      {
+        "path": "tests/e2e/phase1b/verify.mjs",
+        "bytes": 37134,
+        "sha256": "c9caca9840bae124eef68f17153befbf97ff2238c2c4de4c0469a2e79cb1a785"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/AtomicCases.cs",
+        "bytes": 11942,
+        "sha256": "fecfc6c062c0271a99e96b69c9c226a85aa02d23f963ce51b41e3e5234312258"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/CaptureCsvCases.cs",
+        "bytes": 14982,
+        "sha256": "1bcd85794e185c1d5f2b72374efc9781dc784ebbbb68029036a967a45d6a4a79"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/Phase1BCompound.Tests.csproj",
+        "bytes": 423,
+        "sha256": "64b6b881ee40f4560e42a74a9b756357fbc02ec8b6a10a357cd6ab02e0341022"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/Program.cs",
+        "bytes": 9474,
+        "sha256": "c76958564704a55473e7cb5dd91a1b6e39b2a87fcd5746f868f75b3c41dede37"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/README.md",
+        "bytes": 3616,
+        "sha256": "6fbc8313b2deadf750da3f8a971b469a445656c52c6640f08ec09089f17b5227"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/build.log",
+        "bytes": 3134,
+        "sha256": "bd7e63c52d40e14716c33a8edf78f01c4b84540fa7d7d1662d6afcea2b2aa6cf"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/execution.json",
+        "bytes": 5979,
+        "sha256": "b2b13c7f672be716753b9e8cfc21d1880b691adc6655b83a01df3dabc7bbeaf5"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/execution.log",
+        "bytes": 8049,
+        "sha256": "c1f16c5dc30ec9c325aa9b14c45471f26ce304204abd7be0d9c2cdbe229e035f"
+      },
+      {
+        "path": "tests/integration/Phase1BCompound.Tests/packages.lock.json",
+        "bytes": 5666,
+        "sha256": "b3653fac4a4e6b95f6e6c54dc549616faa33e2e6366aab3e9aa3d7ed61230522"
+      },
+      {
+        "path": "tests/integration/SyntheticAiExecution.Tests/Program.cs",
+        "bytes": 33692,
+        "sha256": "52eef39dd065c06374726028fceff0a1cb051849fb7388c13ea4f51a677985c2"
+      },
+      {
+        "path": "tests/integration/SyntheticAiExecution.Tests/README.md",
+        "bytes": 2259,
+        "sha256": "dd4cffbaa1f8c6f0f48314af4e47e1c06c6c51a3e020d40bc94e7ae50e5d83d0"
+      },
+      {
+        "path": "tests/integration/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "bytes": 327,
+        "sha256": "9a3d4d31a3e8098172df1fd19164a933f0c86c896fe1e6e3f2bd8227d62d297e"
+      },
+      {
+        "path": "tests/integration/SyntheticAiExecution.Tests/artifacts.json",
+        "bytes": 19155,
+        "sha256": "71c6af231339775c34bdb59dbe09c326f96f086602a7905f1ff55a0e6cae988b"
+      },
+      {
+        "path": "tests/integration/SyntheticAiExecution.Tests/packages.lock.json",
+        "bytes": 1441,
+        "sha256": "738e065f4072c79ed19de0486399b4eb7d0012ad81766b3193815aaeb2459987"
+      },
+      {
+        "path": "tests/integration/SyntheticAiExecution.Tests/verification.log",
+        "bytes": 5649,
+        "sha256": "9eae0377916e03ae7a2cc22aa1ac05be1ae9adc6c5f1031f313471429d4d4bce"
+      },
+      {
+        "path": "tests/integration/SyntheticAiExecution.Tests/verify.py",
+        "bytes": 5173,
+        "sha256": "ea10fa4c36ac74f23e04d9b7442241e578864a779e2b569ccadb29ad872a17ff"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/Program.cs",
+        "bytes": 28738,
+        "sha256": "17e20049b9816097dbc8a8bd2bf2bf199faa685c1dd4d158df6c5f5a053f4885"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/README.md",
+        "bytes": 2384,
+        "sha256": "7aff0f311f88ffe7fd662dae26f9727440b12d24b76c53b8ca8b4f8ba93ffdd9"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj",
+        "bytes": 335,
+        "sha256": "9e05e06af09bfed62f5d90316191121cbd7e1579ba5c3523cc46b1f66ff7f809"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/architecture.log",
+        "bytes": 116,
+        "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/build-integration.log",
+        "bytes": 867,
+        "sha256": "61f7b3bd3a168bfaa27a0e677c832d9de7267015dcad8dd98bfda7da9aedb194"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/build-unit.log",
+        "bytes": 860,
+        "sha256": "dc512addba7e1ab3b29f1c38c71259ce666d08954cee83db695f1984e104b9e0"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/evidence.json",
+        "bytes": 3984,
+        "sha256": "14a03818fa43d5be72bbd0238c216ef138777499e5601cecc3971071d60bb361"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/format-integration.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/format-module.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/format-unit.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/postgres.log",
+        "bytes": 145,
+        "sha256": "6e41b8015510f2697ac81ef3779877bcf80d6eeba092a7c261c8511b01407626"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/restore-integration.log",
+        "bytes": 235,
+        "sha256": "7f8069b1b11be1bac99496b1fe704eb3d02ae52ae71ff51ec4a93befe549b8dd"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/restore-unit.log",
+        "bytes": 712,
+        "sha256": "c6e9110363783328cfdf4aeb1ae6a3cf290f51bb55656aae4fb9f5ce0f252817"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/execution/unit.log",
+        "bytes": 86,
+        "sha256": "5e52a4168196268ec29ffd2fc7991bf6277a108991a41289faca2a6a23acdbc2"
+      },
+      {
+        "path": "tests/integration/SyntheticOutcomePriority.Tests/packages.lock.json",
+        "bytes": 1518,
+        "sha256": "1b3b7dead819b9226e7c7725a142f922dd478cd6f8f9d261b191493f940f9fa8"
+      },
+      {
+        "path": "tests/integration/SyntheticTaskCsv.Tests/Probe/Probe.csproj",
+        "bytes": 277,
+        "sha256": "3784c130676424a34fc6c8983c7aaf380384bef897aa3811261202fee0249c74"
+      },
+      {
+        "path": "tests/integration/SyntheticTaskCsv.Tests/Probe/Program.cs",
+        "bytes": 2016,
+        "sha256": "992af15e08aa68019b21eaf2760b1af498efe0d4729ce34dc0abc0f0e0998630"
+      },
+      {
+        "path": "tests/integration/SyntheticTaskCsv.Tests/Probe/packages.lock.json",
+        "bytes": 128,
+        "sha256": "aba235b67e838fa08e0ba141e0e3e8df8e8fb89a6276be9e9a93ec7dfbbcb2d9"
+      },
+      {
+        "path": "tests/integration/SyntheticTaskCsv.Tests/Program.cs",
+        "bytes": 21868,
+        "sha256": "edee1d511f9a3a620f5dac0611fce37ab703de3aacc9b2ba344b1a66bc459178"
+      },
+      {
+        "path": "tests/integration/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj",
+        "bytes": 276,
+        "sha256": "e298b6bd4560224b33f7cbaa1a7745f65323bbb1d4d9727e55fd54647de6c0c2"
+      },
+      {
+        "path": "tests/integration/SyntheticTaskCsv.Tests/execution.json",
+        "bytes": 3334,
+        "sha256": "cf38c8642d4205453eb4d2c05aba20616f4d4f921279af79621a9bc2ac93981a"
+      },
+      {
+        "path": "tests/integration/SyntheticTaskCsv.Tests/packages.lock.json",
+        "bytes": 2097,
+        "sha256": "d722931f44ff04c3bf0dc1d2750f8ef3970be650e15376a722bee643fce0ad6e"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/.gitignore",
+        "bytes": 53,
+        "sha256": "fbd247d84965bfb1057e32fd0889e58e3c11087aeac4d9a3a825a639c1126886"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/Dockerfile",
+        "bytes": 336,
+        "sha256": "d04851df401ccbab081b9c85870798cdf23ba31ccb5ff4bb2d0d9e04ebc69513"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/README.md",
+        "bytes": 4786,
+        "sha256": "3cec1ad2ac0ed3f8967b586448c6f380dd4e0795a08d55ae2b9a0e408bada1cc"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/native-verification.json",
+        "bytes": 3053,
+        "sha256": "503bb26603e4ebd6998e01a11ad8dcf3c59b11e76faaecf2ce2b8cb41ce184f8"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/probe/Probe.csproj",
+        "bytes": 410,
+        "sha256": "be6972e395faadd7254826680e21ae455f1e5b03ff0d8dfb9ca855ef410fe6cb"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/probe/Program.cs",
+        "bytes": 3487,
+        "sha256": "e9aa712d424e80ca2dd3a219379dc1d8907689da51e27457eea878a871cc34ad"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/probe/packages.lock.json",
+        "bytes": 128,
+        "sha256": "aba235b67e838fa08e0ba141e0e3e8df8e8fb89a6276be9e9a93ec7dfbbcb2d9"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/run.py",
+        "bytes": 15326,
+        "sha256": "dfd83e30215a2c8bee6e01d5ff49df6b1f0ee73a8f1e80e24fa1efaef5e3b4fc"
+      },
+      {
+        "path": "tests/security/phase1b-csv-linux/seccomp.json",
+        "bytes": 535,
+        "sha256": "949ea33c1229417b6b6ce887423bc997b9465c4f6e664947221e9308d9c1b2e0"
+      },
+      {
+        "path": "tests/unit/LocalAiPreview.Tests/Program.cs",
+        "bytes": 17074,
+        "sha256": "99e5f85f2c03e6b9e6925c890244506da65e2056a597e41996cc03b0e40f13e4"
+      },
+      {
+        "path": "tests/unit/LocalFixPackages.Tests/Program.cs",
+        "bytes": 26528,
+        "sha256": "8c9ba69714f9a97e01af6e27d114232f2be4a8420bfa954502ec3d1377b93bbf"
+      },
+      {
+        "path": "tests/unit/SyntheticAiExecution.Tests/AiFixtures.cs",
+        "bytes": 2905,
+        "sha256": "b368e975aae3bd7708781d67aea6d89b386f6a8af433116aee7de8709312ce8f"
+      },
+      {
+        "path": "tests/unit/SyntheticAiExecution.Tests/Program.cs",
+        "bytes": 8817,
+        "sha256": "75abb5d196c2f8b17b0348d5e9f3daabdefce9df2a30e49d7fd749a910f1ec3b"
+      },
+      {
+        "path": "tests/unit/SyntheticAiExecution.Tests/SyntheticAiExecution.Tests.csproj",
+        "bytes": 334,
+        "sha256": "15c8e2631791f4e4f8108f2b5ee7d32a7bf691fdea5a1c51a6789e05b4f1600e"
+      },
+      {
+        "path": "tests/unit/SyntheticAiExecution.Tests/packages.lock.json",
+        "bytes": 1586,
+        "sha256": "4b466fad435334bd8dae194652857ce505649f9de1ca338462cd2155b3fd5e6c"
+      },
+      {
+        "path": "tests/unit/SyntheticOutcomePriority.Tests/Fixtures.cs",
+        "bytes": 2200,
+        "sha256": "c8bf47ea443c53f23892ca932fc8cd19757244efc858bedf611752cb8544a98b"
+      },
+      {
+        "path": "tests/unit/SyntheticOutcomePriority.Tests/Program.cs",
+        "bytes": 6432,
+        "sha256": "85ef213f0daa0f98a0255c58f388d1b2b9e33d06cc86249b3e595a379ca6c0a7"
+      },
+      {
+        "path": "tests/unit/SyntheticOutcomePriority.Tests/SyntheticOutcomePriority.Tests.csproj",
+        "bytes": 241,
+        "sha256": "bbf3a54e04954d7d0cc91c09137db24e417b91c277e6fe877a96d0161d962875"
+      },
+      {
+        "path": "tests/unit/SyntheticOutcomePriority.Tests/packages.lock.json",
+        "bytes": 1518,
+        "sha256": "1b3b7dead819b9226e7c7725a142f922dd478cd6f8f9d261b191493f940f9fa8"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/.gitattributes",
+        "bytes": 106,
+        "sha256": "3afded8e30868ef23012d1904fa3b9f9bb890c8d7dadea470c69143d5314ce03"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/Fixtures/author_oracles.py",
+        "bytes": 4752,
+        "sha256": "890e8fad40f929a26165f2538e07202e09cca1f4ef58b7423fc27b2563e758aa"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/Fixtures/golden-digests.txt",
+        "bytes": 130,
+        "sha256": "2fda75591a88210d4820ab5d04052a5868f792d106dd6916b19c12fddc74b4e8"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/Fixtures/golden-envelope.json",
+        "bytes": 4592,
+        "sha256": "585639bbc2ab1a08fac0b2da325e3846cf89e9708e45e50d020a8324de261a05"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/Fixtures/golden-header.csv",
+        "bytes": 283,
+        "sha256": "2e1c6fedadd38cb870c4d6ef25dbd44f806fdc16f6c10ed3c20293c8a9f4b603"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/Fixtures/golden-one-row.csv",
+        "bytes": 1239,
+        "sha256": "01a6e80d3175662e29b44aea735626844b7088b0b8af770251e0f0948955ce92"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/Program.cs",
+        "bytes": 5541,
+        "sha256": "2740fc4fd956cf2400944704c13cb02f2ecd25dc3fb3cf71f95b187d4a8f0f60"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/SyntheticTaskCsv.Tests.csproj",
+        "bytes": 294,
+        "sha256": "e88fcb9a773841d1ec4aa777caca965f3308b9d51fb0c8e9499f0e703cb12a73"
+      },
+      {
+        "path": "tests/unit/SyntheticTaskCsv.Tests/packages.lock.json",
+        "bytes": 128,
+        "sha256": "aba235b67e838fa08e0ba141e0e3e8df8e8fb89a6276be9e9a93ec7dfbbcb2d9"
+      }
+    ]
+  },
+  "runtimeClosure": {
+    "path": "work/phase1b-closure-evidence/phase1b-runtime-closure.tar.gz",
+    "bytes": 7140488,
+    "sha256": "c0ca0fbd0ef04033ca03af689606138f7873e24e0d81748353a9c03c7cb8296d"
+  },
+  "runtimeClosureInventory": {
+    "path": "work/phase1b-closure-evidence/runtime-closure-inventory.json",
+    "bytes": 35044,
+    "sha256": "922e6c9412220a45796f4ee7ae8db903588254090cfab7d44909bdd2baf98d12"
+  },
+  "preservedNativeFiles": {
+    "path": "work/phase1b-closure-evidence/preserved-coordinator-file-inventory.json",
+    "bytes": 38819,
+    "sha256": "83681b7de39f62530f325ff1f07d099216a523a2d363c02163b079979be573c7"
+  },
+  "additiveMigrations": [
+    {
+      "path": "migrations/synthetic-ai-execution/001-initial.sql",
+      "bytes": 1702,
+      "sha256": "99fbed715e73f1b4350ab13da4b84b54dbf1f3018ef66269902e06dd256ed4ee"
+    },
+    {
+      "path": "migrations/synthetic-ai-execution/002-integrity-proof.sql",
+      "bytes": 686,
+      "sha256": "338d602dff6b45a4d5e7d57c83b696cd81c840e25e03b8c341cd3d98a3ee67bf"
+    },
+    {
+      "path": "migrations/synthetic-ai-execution/003-history-truncate-guards.sql",
+      "bytes": 874,
+      "sha256": "f43ca6a7c8ae334690cf5e14b90728974da342d100b06a0000fc16202604fb2e"
+    },
+    {
+      "path": "migrations/synthetic-outcome-priority/001-initial.sql",
+      "bytes": 2254,
+      "sha256": "1787504794770674eec1edcd9b4522d4b22341e43f7e3389d1334ad9cf8ae570"
+    },
+    {
+      "path": "migrations/synthetic-task-csv/001-initial.sql",
+      "bytes": 1964,
+      "sha256": "d870b0154cc07ea7ae00286e39db7086ec83bd55dfbcb892b1e988c825ed851b"
+    },
+    {
+      "path": "migrations/synthetic-task-csv/002-transfer-interrupted.sql",
+      "bytes": 696,
+      "sha256": "da34fab5a247799827acfa1969b890f153ef203fa938476a3d1ea145b7a1aec9"
+    }
+  ],
+  "historicalMigrationsByteIdentical": [
+    {
+      "path": "migrations/assessment-runs/001-initial.sql",
+      "bytes": 5424,
+      "sha256": "67bad3b18091babdda2abb898666932b7dc09df767c4e6a3ed49265590e34f88"
+    },
+    {
+      "path": "migrations/finding-review/001-initial.sql",
+      "bytes": 4108,
+      "sha256": "f919f6a16de9a579573e52046ca1d756f691dfed5f79c1d6eda5ecc7b370180d"
+    },
+    {
+      "path": "migrations/fix-review/001-initial.sql",
+      "bytes": 6307,
+      "sha256": "def3557d73879f4fc199d8152b1ff6c404f2e2477a99f7e50b031cccf5d92ab8"
+    },
+    {
+      "path": "migrations/planning-tasks/001-initial.sql",
+      "bytes": 6155,
+      "sha256": "2ac4f0cebcf290dc08aefc809103a84bc493da6ab61bd6ce4b041c94ad2c4853"
+    }
+  ],
+  "dependencyChanges": "No new external package/version. Existing resolved dependency144 entries matched during new project-lock composition.",
+  "configuration": "Explicit synthetic flag and fixed loopback/dedicated database guard; process-only Mac reloadConfigOnChange=false test override; no permanent live activation.",
+  "independentReviews": [
+    {
+      "scope": "OP module complete proof/fences",
+      "source": "7f171",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "AI execution mapping/budgets/immutable003",
+      "source": "831ee21",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "CSV pure/owning export/genuine authority/audit/sandbox",
+      "source": "a339d27",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "root server composition",
+      "source": "6f70608",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "compound exact partition and actual response-write fencing",
+      "source": "8088e759",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "frontend closed DTO/original versus confirmed AI state",
+      "source": "7fb70b3",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "invalid-plan pure preflight and Windows failure propagation",
+      "source": "88a4814/b70bcb4",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "retirement binding and mobile contain/wrap",
+      "source": "362ae79/53d7bfef",
+      "result": "CLOSED"
+    },
+    {
+      "scope": "final protected navigation/genuine Auditor download/budget oracle and81 execution",
+      "source": "3996f18/cec9ae0/f301e28/465c10b",
+      "result": "CLOSED; logs/reports/source hashes independently read, no reviewer mutations"
+    },
+    {
+      "scope": "canonical handoff/requirement disposition/147frozenfiles/110runtimefiles/225bindings",
+      "result": "CLOSED; independent read-only final review after three wording corrections"
+    }
+  ],
+  "retainedFailures": [
+    "Original invocation filename/apphost mistakes retained; corrected executed PASS",
+    "First hosted9493cf3 invalid historical plan reached missing DB; restored preflighte16e683 and14 pure cases plus full3ec CI PASS",
+    "Confirmed AI decoder, retirement expectedReviewEventId and long mobile references fixed; original browser failures retained",
+    "Budget first oracle expectedrevision1 instead of0; second exact wrappingselect label failed; both beforeoverride and nocharge; corrected actual81 PASS",
+    "Wrong read-only diagnostic SQL table name refused; no runtime/test/data change"
+  ],
+  "accessibility": {
+    "violations": 0,
+    "consultantScans": 6,
+    "auditorScans": 4,
+    "consultantNarrowIncomplete": "color-contrast on history/guidance retained in report; NOT VERIFIED manual acceptance",
+    "auditorIncomplete": [],
+    "manualWindowsATZoom": "NOT VERIFIED"
+  },
+  "approvedPhaseAllocation": "P1B-SCOPE-01 residual FR-HAS-12/15 beyond Confirm/Reject/Defer/comment/presentation to Phase1C; full Milestone5 open",
+  "notVerified": [
+    "UAT/full milestone/G1-G9",
+    "Real customer/source/build/permission identity",
+    "Real provider/model accuracy/cost/latency/ZDR",
+    "Deployed worker/queue/audit/retention/deletion",
+    "Default Mac startup and supported manual accessibility",
+    "FR-HAS-53 adherence accuracy; separate Phase1C evaluation",
+    "Linux/Windows localhost CSV host export; Linux evidence is pure-renderer verification only"
+  ],
+  "privatePublication": {
+    "status": "succeeded",
+    "version": 98,
+    "siteSource": "cb3e893e0d00cdd3a94f65f8d2c05920c4095a92",
+    "deployment": "appgdep_6ac149bce7d08191b8bbdceae0a1f87c",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "receipt": "docs/development/evidence/phase1b-local-closure-site-20261003.json"
+  },
+  "productionRelease": false,
+  "customerProviderCredentials": false,
+  "finalHostedReplay": {
+    "prHead": "6b7a5f25d9d726af2ebbc3f45480dd1e23476d24",
+    "actualLinuxMergeCheckout": "10cebe45904e991f639205cc61eb13d4fb434b68",
+    "bootstrapRun": 37142354919,
+    "packageRun": 37142354891,
+    "result": "PASS all configured jobs",
+    "receipt": {
+      "path": "work/phase1b-closure-evidence/final-hosted-jobs.json",
+      "bytes": 21533,
+      "sha256": "ca108b25e36e08137c3b99ff519934f1346dbabd63a6b3d38f7f85445309698a"
+    },
+    "linuxNative": {
+      "path": "docs/development/evidence/phase1b-linux-csv-runtime-20261003.json",
+      "bytes": 15357,
+      "sha256": "14051216ad8c98eadd0fdc2dad798d74ed6f78ed0f2c77ff1576009d92d6135b"
+    }
+  },
+  "cleanup": {
+    "ownedHostStopped": 75698,
+    "rawEvidenceCopiedAndRuntimeArchiveRetained": true,
+    "removed": [
+      {
+        "worktree": "/private/tmp/iga-phase1b-ai-contract",
+        "retainedBranch": "codex/phase1b-ai-implementation",
+        "retainedCommit": "c0b8f06452714e0d1200aabc04d380bcf8e9a44a",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-csv-contract",
+        "retainedBranch": "codex/phase1b-csv-implementation",
+        "retainedCommit": "465c10bbe5f87dbda0cf41b78dff4848b28da129",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-closure-contract",
+        "retainedBranch": "codex/phase1b-outcomes-implementation",
+        "retainedCommit": "53d7bfefd4a9b91188d1d46bc48d9d520f7b3073",
+        "removed": true
+      },
+      {
+        "worktree": "/private/tmp/iga-phase1b-coordinator",
+        "retainedBranch": "codex/phase1b-integration",
+        "retainedCommit": "48acac234160e608277709a8df51ffd3d93593f3",
+        "removed": true
+      }
+    ],
+    "unrelatedWorktreesPreserved": true,
+    "databasesPreserved": true
+  },
+  "preservedNativeFilesFinal": {
+    "path": "work/phase1b-closure-evidence/final-native-preservation-map.json",
+    "bytes": 4355,
+    "sha256": "17246a8624ccbb67fc07cc634a4a4685803a5cee664e932e4d73ef8d15930a02"
+  }
+}

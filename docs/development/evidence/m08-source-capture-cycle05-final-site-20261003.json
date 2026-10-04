@@ -1,0 +1,129 @@
+{
+  "deployment": {
+    "id": "appgdep_6ac1693cabc48191984b56870304f248",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_265691ef219c8191860949f7b295da23",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T20:44:50.983528+00:00"
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_265691ef219c8191860949f7b295da23",
+    "number": 107,
+    "source": {
+      "commit_sha": "f6e3390c3be975805ff07591cf5c44f6dea03aad"
+    }
+  },
+  "access": {
+    "role": "owner",
+    "mode": "custom",
+    "users": 1,
+    "groups": 0,
+    "visitors": 0,
+    "revision": 1
+  },
+  "canonicalSnapshot": "643458c2895301d040e646cf39a69a72dc720130",
+  "qa": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "preservation": {
+    "baseSiteSource": "d931b38c960e8dc2debd43a1e1a5dffc86b472b6",
+    "canonicalClosure": "1acf86749e2e4fa15c96c06e0570f317c18c6798",
+    "preservedUnownedPanels": 22,
+    "preservedHumanCards": 13,
+    "unchangedRawSha256": [
+      "4efec6f8632b9e70c4595839588828f70f4a068ab1fd4c3aaf24f23f0ea57fbd",
+      "040411fef5e69b350b2bb064a9d5ddda98f0974f9b2082829fa5344a34358257",
+      "f32c095d527b91a44b536ab4428c078ade0d80534d0b843cd32787db6503b33e",
+      "cf493a81727b26ecebb1447cc65246b243dd1014368b3d932f01c5e3cd328167",
+      "bd511695a7db79a7fdb07f677a45a3170e82e90c3de06c105f2b5b9fb2e6f6d7",
+      "da88f20d1244ad39c8972370279ab591beebaabfbc7e06848c476b192446bc2b",
+      "32ed86539102454215cd37dd4363b754c445f6ee6a4adc4504820379cc5db1f5",
+      "f61c305374118ad25def2185c0058fe47f64768aa47ae1b5590769fa334d382f",
+      "e45b730d74b41b1c6dc38a319a0b1ce3b382a1e38ada381bf847be17c9bb2113",
+      "6cc1f4bd9e4776fd7d60417931dde1ef3ba61b91a4b4006fc04df9df1e4fb3e1",
+      "127130fd1723aa9872f18a6560656c9d1e98d012192d2a307ce7f98df3362687",
+      "ec77998afade242c17b267337b4954f49e99f7cf37abf18abdc00f581f97b23d",
+      "7045d58c76b0e1921d089d15a34e0bccddba61263d73499beab2bf61d172b884",
+      "81e484f612b4313854c65f088ebb44c6152c5f859d78fa15c9088c5a7db22bba",
+      "791970a14bd0b3a58f88a114b5489cd4fc1284f7df07df3413f55825b3decfbf",
+      "d782ebb2eaa9f4b259e67734d2accd2a6bffebcf81f66447da5f4166500cf0c8",
+      "63bfed7ab5ec25d635463ca1413e72dfbefff435b12a227437ac2276bd0e0e1b",
+      "4181781281364abffe2ce984a8e32aa651e34d3b976794e2bb1ed4641d44bd74",
+      "cbf5000076fa854e9d4d2857c39f1ebadcbc181dc9d08a5447d3465cda81c974",
+      "5f8ead91a085ca1f555cac386400c687d5b87f1164ab9b895973ec76b589ba1f",
+      "76b409f3479920b756522712be46a19c4fc0348b925070388fa3502f7d734833",
+      "fc71c9538689ed7659b16abdb685f656471caea4d74ae878d318f631692428d8",
+      "31bc967d51ad193f62f88a51d8466a51fed117adea273eed71e05355880c853d",
+      "88a21d88fd636a7ec6ba850160a82ec06e30272ad89d5a64edfdbe0806115c79",
+      "647568c2b00531f151a6ae9cea04ffc2faefec3e3e91cb790e6bb746d3ee5147",
+      "a8a2e17da13a71e2f17c81a74b917848525029090fe6697d3f76a27c236e41e3",
+      "af5aefd45451c317f59ce3807ab3692343023c5d2d0afb508a1867077caf2cc4",
+      "071e3441c4ac7e13819c0beca88f97a583aa0c2e1328df6cb059cb2fc682cef9",
+      "211cf0d06ab0be48d399d11027ee1450541fb3f8813f27db72daa741699278ff",
+      "b20a39259dc521054d1c34c27f62e5a9c3935ba04c4944567c92cb535c25006d",
+      "e0dacd264ae5365bafee3f69ffe457f909ced83cf1bf180e33d56124eecd4f11",
+      "0c76e4d000f819f6d378287a000e2cb3d46acab296539c1f79077519d4e3c09d",
+      "d7ba98eea5c6d3ff181aff39ae2077f272ba06e304665293489665482e111c40",
+      "7cb73e48b9ac7e4b3f7c422ff44129f79e3b35fd17e88627960e62bebe28683b",
+      "c8946bc8c8b72e1f9080cd3455fad8c3fad0978e6f7ba4579857b838d2a0845b"
+    ],
+    "canonicalHostedObservation": "643458c",
+    "afterHtmlSha256": "2a744e7cd5330fccbd523f602209a29fecc07c3daa8c7fa05e3ed107dc3d60b5"
+  },
+  "archiveVerification": {
+    "sourceCommit": "f6e3390c3be975805ff07591cf5c44f6dea03aad",
+    "archiveSha256": "7ee1b4c481cea6fee919b697c6227b76a98e69549e87b8216ffa98675bacd806",
+    "verifiedFiles": [
+      {
+        "sourcePath": "dist/index.html",
+        "archivePath": "dist/index.html",
+        "bytes": 105594,
+        "sha256": "2a744e7cd5330fccbd523f602209a29fecc07c3daa8c7fa05e3ed107dc3d60b5"
+      },
+      {
+        "sourcePath": ".openai/hosting.json",
+        "archivePath": "dist/.openai/hosting.json",
+        "bytes": 106,
+        "sha256": "3921792c6d3b60f8c5a4747efd9b14a3fd21d51f556a6c92c8cdcc5ab9188fb4"
+      }
+    ],
+    "status": "PASS"
+  },
+  "credentialRetry": "Expired source credential renewed for the same Site before retry; source unchanged, no token persisted.",
+  "limits": "Source-backed sampling/reviewer integration, actual assignments/customer accuracy/full M08/Phase1C/live/manual gates remain open; two failed earlier Mac process terminations remain unconfirmed. No runtime changes after associated passing CIc02b945.",
+  "localQaServer": "Stopped, exit0"
+}

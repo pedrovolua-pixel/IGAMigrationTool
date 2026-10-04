@@ -1,0 +1,50 @@
+{
+  "schema": "cycle14-hosted-native-log-preservation-v1",
+  "recordedUtc": "2026-10-03T05:09:09.477407+00:00",
+  "archive": "/private/tmp/iga-cycle14-preserved/hosted/originals.tar.gz",
+  "archiveSha256": "2d2d9be96fbe851472f33776a7b0432083d0357975afdc4d76c2e82025dd6732",
+  "allEntriesRehashed": 8,
+  "files": [
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/job-111126348919.log",
+      "bytes": 42393,
+      "sha256": "9b0c4772a2f91954f50a402a3fa28d6117e10a80f073ffb32fd1d892351f52b4"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/job-111130424101.log",
+      "bytes": 46470,
+      "sha256": "fb3d339224b70fdb34605bf0d4992b913201fcc9eda60859c73f86979f953b3e"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/job-111126348969.log",
+      "bytes": 44015,
+      "sha256": "16abd6478d757c7d945968b72698a79d55e1211009285477acb6a23e88335585"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/job-111130424107.log",
+      "bytes": 46633,
+      "sha256": "36baf36cc29cd83540ba55e0912c0accae090c17a184ef4ba0fff624ba169daf"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/job-111130423873.log",
+      "bytes": 29312,
+      "sha256": "745207fe264ff21da7033b7950be3febce2bfd656ebc3dfa5aabab47cdb711cc"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/job-111126348769.log",
+      "bytes": 31160,
+      "sha256": "a0cea23af0cc460f2874f29a228586b5d7a47046b03eaaf00a9cc94b6fb00745"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/first-linux-failure.log",
+      "bytes": 177174,
+      "sha256": "2de7d7ab5dc138d06d45b42fda7b24fad2aad81f22416f9027259ba100fefdfd"
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-hosted-originals/job-111130423951.log",
+      "bytes": 194140,
+      "sha256": "b55a07742a4b3bcf1765fa9a07dc9ef159c0da0739733c65ee127e07a91b069c"
+    }
+  ],
+  "limitations": "Exact decoded source-bound logs retained; no ephemeral hosted database/compiled/browser capture archive claim"
+}

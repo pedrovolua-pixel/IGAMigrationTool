@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../modules/SyntheticFixReview/SyntheticFixReview.csproj" />
+    <ProjectReference Include="../../modules/SyntheticFixPackages/SyntheticFixPackages.csproj" />
+    <ProjectReference Include="../../modules/SyntheticAiPreview/SyntheticAiPreview.csproj" />
+    <ProjectReference Include="../../modules/RecommendationGuidance/RecommendationGuidance.csproj" />
+    <ProjectReference Include="../../modules/ReportDrafts/ReportDrafts.csproj" />
+    <ProjectReference Include="../../modules/AssessmentRuns/AssessmentRuns.csproj" />
+    <ProjectReference Include="../../modules/FindingReview/FindingReview.csproj" />
+  </ItemGroup>
+  <ItemGroup><ProjectReference Include="../../modules/SyntheticPlanningTasks/SyntheticPlanningTasks.csproj" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="../../modules/SyntheticTaskCsvIntegration/SyntheticTaskCsvIntegration.csproj" /></ItemGroup>
+</Project>

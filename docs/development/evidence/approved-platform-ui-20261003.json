@@ -1,0 +1,176 @@
+{
+  "packet": "UI-W4",
+  "date": "2026-10-03",
+  "result": "bounded local presentation verified",
+  "base_head": "4c95b734c3ca1545d3ee23f8393cbcf690db30a8",
+  "approval": "Owner approved complete navigable mockup directly before implementation.",
+  "checks": {
+    "contract_generation": "pass",
+    "typecheck": "pass",
+    "vite_production_build": "pass",
+    "prettier_frontend_and_contracts": "pass",
+    "npm_audit": "0 vulnerabilities",
+    "gitleaks_frontend": "no leaks",
+    "git_diff_check": "pass"
+  },
+  "rendering_tests": [
+    {
+      "result": "pass",
+      "assertions": 39,
+      "scope": "Pure PlatformOverview SSR rendering; no backend or browser",
+      "scenarios": [
+        "actual precision and publishable separation",
+        "current review overrides original state",
+        "five severity levels",
+        "quality separate from score",
+        "untrusted title escaping",
+        "no run",
+        "no admitted analysis",
+        "stale run revision",
+        "unavailable analysis",
+        "zero score",
+        "review fallback",
+        "missing categories",
+        "missing quality",
+        "actual category radar",
+        "unavailable category bars fallback"
+      ],
+      "unavailable": [
+        "browser/mobile interactions",
+        "integrated application acceptance"
+      ],
+      "files": [
+        {
+          "name": "PlatformOverview.tsx",
+          "sha256": "99bd9a07aad485f48932db67fa823eee90070241d7d8cc47725dfff9221af21a"
+        },
+        {
+          "name": "PlatformOverview.css",
+          "sha256": "39704d2faf64f8d1c1e4ebe3a8d7702ca82bdb777b2be3fd332cf7e20dd9e6d3"
+        }
+      ]
+    },
+    {
+      "result": "pass",
+      "assertions": 27,
+      "scope": "Independent read-only PlatformAreas SSR smoke and stale-admission/inert-text checks",
+      "views": [
+        "Projects",
+        "Sources & baselines",
+        "Compare runs",
+        "Rule catalog",
+        "Audit history",
+        "Settings",
+        "Migration",
+        "Portfolio",
+        "Design archive"
+      ],
+      "scenarios": [
+        "nine views with supplied and null records",
+        "cross-revision analysis excluded",
+        "cross-run analysis excluded",
+        "untrusted rule IDs escaped",
+        "untrusted review titles and text escaped",
+        "untrusted scope label escaped",
+        "future portfolio and migration actions unavailable"
+      ],
+      "notVerified": [
+        "tab interactions",
+        "browser appearance preferences",
+        "mobile overflow"
+      ],
+      "files": [
+        {
+          "name": "PlatformAreas.tsx",
+          "sha256": "0d93512f589c3f91ea36a3630a94fadcc7fc0beb3e33b22ff5c87e69a2ef71ff"
+        },
+        {
+          "name": "PlatformAreas.css",
+          "sha256": "b1bf74d7ff10025f1e198e0422677544a24a2fdc4d87273db66c3742bed753f2"
+        }
+      ]
+    }
+  ],
+  "independent_review": {
+    "overview_author": "platform_overview",
+    "areas_author": "platform_areas",
+    "coordinator_and_overview_reviewed_by": "platform_areas",
+    "areas_reviewed_by": "platform_overview",
+    "result": "no outstanding actionable findings",
+    "corrections": [
+      "one-shot hotspot and cross-run category reset",
+      "visible retry focus fallback",
+      "workspace dark surfaces and active-tab colors",
+      "focusable table scroll regions"
+    ]
+  },
+  "browser": {
+    "fixture": "existing frozen synthetic run/catalog/history/analysis snapshot; GET-only; no backend forwarding",
+    "desktop_areas": 18,
+    "settings_tabs": 8,
+    "390px_overflow": "none in 10 inspected areas",
+    "320px_overflow": "none in 5 inspected areas and relationship overlay",
+    "dialog": [
+      "native modal focus containment through 12 Tab presses",
+      "Escape closes and returns trigger focus",
+      "backdrop filter none",
+      "supplied object associations only; no inherited edges"
+    ],
+    "same_run": "unsaved review text and cleared category filter retained across Reports navigation",
+    "cross_run": "coverage-only run clears prior numeric health; unavailable analysis stays honest",
+    "appearance": "dark persisted through reload; overview panel and page surfaces readable; reset returns light",
+    "console": "no warning/error entries after final-asset interactions"
+  },
+  "protocol": {
+    "5210": {
+      "status": 200,
+      "bytes": 129565
+    },
+    "5211": {
+      "status": 200,
+      "bytes": 177295
+    },
+    "5212": {
+      "status": 200,
+      "bytes": 479
+    },
+    "implementation_post_rejected": 503
+  },
+  "not_verified": [
+    "full supported Windows/browser/screen-reader/manual accessibility acceptance",
+    "large real customer data and full operational acceptance",
+    "live provider/customer/production capabilities",
+    "full backend-mutating workflow regression on the read-only fixture",
+    "automated axe audit not run; keyboard/DOM engineering checks do not replace it",
+    "hosted CI not run for this local presentation snapshot"
+  ],
+  "changes": {
+    "dependencies": false,
+    "migrations": false,
+    "backend_or_contract": false,
+    "permissions_or_activation": false,
+    "gates": "G1\u2013G9 unchanged"
+  },
+  "private_site": "confirmed owner-private publication; see approved-platform-ui-site-20261003.json",
+  "sha256": {
+    "App.tsx": "abb11c4a143a74ec83500b27336765b9ef1ee10aaed8fd040ae130c39655f0fc",
+    "AnalysisView.tsx": "64f27efa4946359cdbd44e070b4f87f06f178249a632ffadbccad0fbd0ae5987",
+    "WorkspaceNavigation.tsx": "7151dc758b908d0944f0ccc8cb62d4896f2fcd935bfbebe63ba86fe8ee1e586a",
+    "workspace.css": "038b7d11c8f6df71c9954e41a2fb82fed094e7df258a06a5b3289b6687f8ed06",
+    "FindingsExplorer.tsx": "906445113ac38c5fd3ebde9a764552ea5b0bea5ff883142e987a060f5d3de8dd",
+    "FindingsExplorer.css": "e16a7083d97e020be6a67525a9272b344376af8a874942f6e80993d6a4297c21",
+    "PlatformOverview.tsx": "99bd9a07aad485f48932db67fa823eee90070241d7d8cc47725dfff9221af21a",
+    "PlatformOverview.css": "39704d2faf64f8d1c1e4ebe3a8d7702ca82bdb777b2be3fd332cf7e20dd9e6d3",
+    "PlatformAreas.tsx": "0d93512f589c3f91ea36a3630a94fadcc7fc0beb3e33b22ff5c87e69a2ef71ff",
+    "PlatformAreas.css": "b1bf74d7ff10025f1e198e0422677544a24a2fdc4d87273db66c3742bed753f2",
+    "ReviewPanel.tsx": "a9726033e4d7cc178386f3bbc64c0c3c2301d97badce283d1f431702a5d23f30",
+    "DraftReportView.tsx": "f6fe72146c6c7ab79b6740f274ec1dd5175614855906d7464e19510d82e50a52"
+  },
+  "artifacts": "work/ui-review/2026-10-03/approved-platform-implementation",
+  "urls": {
+    "old": "http://127.0.0.1:5210/",
+    "mockup": "http://127.0.0.1:5211/",
+    "implementation": "http://127.0.0.1:5212/"
+  },
+  "code_commit": "d8eeee830ac3ca1a9c94f534b6de620a80d22f81"
+}

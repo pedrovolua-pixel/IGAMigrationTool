@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Phase1BHostProject Condition="'$(Phase1BHostProject)' == ''">../../../src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj</Phase1BHostProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="$(Phase1BHostProject)" />
+  </ItemGroup>
+</Project>

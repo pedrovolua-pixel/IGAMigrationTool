@@ -1,0 +1,312 @@
+{
+  "schemaVersion": "cycle14-a14-non-author-corrective-review-v1",
+  "seal": "4dc84bc82d84eb6a616c94044ed84e321d7996a1",
+  "sourceCommit": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+  "checkout": "/private/tmp/iga-cycle14-task-domain",
+  "manifest": {
+    "path": "tests/unit/SyntheticPlanningTasks.Tests/execution.json",
+    "sha256": "dd901c7bf44a8d341ec5f435596463a4d7f6da91408f02a2e186054cc3a1ae7c"
+  },
+  "reviewedSourceBindings": [
+    {
+      "path": "migrations/planning-tasks/001-initial.sql",
+      "bytes": 6155,
+      "sha256": "2ac4f0cebcf290dc08aefc809103a84bc493da6ab61bd6ce4b041c94ad2c4853",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskCanonical.cs",
+      "bytes": 2467,
+      "sha256": "9be27123708db86eaeb8188b8a9177cfdff4d62b1d66f43a4b768d57b55b2b4e",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskContracts.cs",
+      "bytes": 5649,
+      "sha256": "6ea5775b50f182e79bedb5a1b373cc68402f64d5aaca9f6355e92e7387602685",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskPolicy.cs",
+      "bytes": 5282,
+      "sha256": "274377876d74936d28ef3a0bfa104a54b4536df9b9e06081db95c0b245fd3c57",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/PlanningTaskSourceBuilder.cs",
+      "bytes": 9770,
+      "sha256": "7f1c502fd0e2ba4e173dafa2b6a5fd5a01cbef497eaa78aca9116461e9be6a30",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/README.md",
+      "bytes": 5538,
+      "sha256": "233408c1db982c7feeb227a5868bd1c5738579f7a8085fa46454ca30c07638d6",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskMigration.cs",
+      "bytes": 10117,
+      "sha256": "f5cea9e0c7b19d391c544c45e663fb0615d9bb9c842df342d409c4920d3f9560",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskStore.cs",
+      "bytes": 29066,
+      "sha256": "6783c3f9c7fb744c43b46eb6a8b995ce3471f9d009da168c16b715fc5bb6f882",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/DatabaseCases.cs",
+      "bytes": 44434,
+      "sha256": "1baa12a0d3a971aac523cea27d1498938ce034e8a62eebc89ce53a47d34580bc",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/GuidanceFixture.cs",
+      "bytes": 5268,
+      "sha256": "340a5898a9394413250f8c215cd4b64bc223e2eb45c728910cce4fba71d32c9a",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/Program.cs",
+      "bytes": 17985,
+      "sha256": "f7388c3319160a55be5f9e6d655b06d79e5a45d20bc150d020de3c723fc2f8f8",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/README.md",
+      "bytes": 4560,
+      "sha256": "536d03840b3b948c97e27727a8db2333eb72dbc75a3ff90f93be9f207d3ac5d7",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/empty-artifacts.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/empty-binding.json",
+      "bytes": 922,
+      "sha256": "7137462c99ff0391a13b52021c46b73abc4069a1f30b88e773f3adec937ebac7",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/empty-golden.json",
+      "bytes": 6231,
+      "sha256": "02ea4ba775e3208df951a1d47861bffacf5a7d62039ff15e2c678bc57fec2ca0",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/empty-task-binding.json",
+      "bytes": 1037,
+      "sha256": "9be69cb987baaf605d7cf56ebcb1056159a6e332d03fb50b77ee199160a87ed0",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/empty-task-options.json",
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/golden-digests.json",
+      "bytes": 1263,
+      "sha256": "760b4c38f2ea8ccfb7ac5cb11f0e9e0e011f845725228955686b14b3b994aec3",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/hostile-artifacts.json",
+      "bytes": 1463,
+      "sha256": "2b4e17501afa2cbc39c27e2960dd7eb97b2076b8e9473ec4316f29c544bf534b",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/hostile-binding.json",
+      "bytes": 1015,
+      "sha256": "9363fbce2691a3b09b354d23ce7dae411e815d7861a6da8cef94a036d454c516",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/hostile-golden.json",
+      "bytes": 9072,
+      "sha256": "f8ece4b44ddc727eb49b0718c4ad3ee3ab2b0972be47ca393b15bbb5527ccb88",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/hostile-task-binding.json",
+      "bytes": 1130,
+      "sha256": "572086bd798790c8ff8beb9d417dcc54fb793e8d97509c0f0aa11ca67b6cbe45",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/hostile-task-options.json",
+      "bytes": 1133,
+      "sha256": "18f21750b36a0957400e55f4a4191405519e2ab4ca3d70fdade14b2f04378100",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/independent-oracle.py",
+      "bytes": 14283,
+      "sha256": "90bb13cc3aa43f272a9612722be2353b47f4c00ed1637f04bfcf34297b59724f",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/multi-artifacts.json",
+      "bytes": 4387,
+      "sha256": "9d43e1acd17f89918d8c10138a9d8d252bc1de38ed8ffc72184bc87721fc868d",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/multi-binding.json",
+      "bytes": 1109,
+      "sha256": "d5e735bb878d87c0b390d1e75425503521092437c67ca34df191875359510564",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/multi-golden.json",
+      "bytes": 12386,
+      "sha256": "5a475ab175aad4908403adf9e80b3ee399ec5fc1a4c50a0bbc56a095d1ded8c4",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/multi-task-binding.json",
+      "bytes": 1224,
+      "sha256": "3c487d578f72ce4c35ae49f4a65fe9ca9699ebbc88636dbd4d207d45b99e37f3",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/multi-task-options.json",
+      "bytes": 3397,
+      "sha256": "88a01eb1a5a1c3dab3cf722be6e1883d8964037606ade7c8d8337782f8d76d40",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-artifacts.json",
+      "bytes": 1463,
+      "sha256": "2b4e17501afa2cbc39c27e2960dd7eb97b2076b8e9473ec4316f29c544bf534b",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-binding.json",
+      "bytes": 1015,
+      "sha256": "04da05746baa5eafd74963e4453c19f93c93c96dcd0f09007c5f9b0558406b90",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-command.json",
+      "bytes": 1120,
+      "sha256": "8289fd7b17bc7fac2d838b331d48ebcca6fa4b22ac03a5c049638e2a9db53bbd",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-golden.json",
+      "bytes": 8526,
+      "sha256": "2349462b535c105f0a107c2300a441e5a7d4336f2363fb002eb57adcd1638c76",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-reviewed-vector.json",
+      "bytes": 850,
+      "sha256": "0e3eb998c71914205e1cb5c6e97a83400bde906e9b4f3d37eeee5de30ee47007",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-semantic-command.json",
+      "bytes": 1457,
+      "sha256": "8fbd489c89fbe3ff5fadaadf3b3702e5b7977a200303dce619f0c58a4fd35242",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-task-binding.json",
+      "bytes": 1130,
+      "sha256": "62e3c75467b1c9baa0e7f15e7cb960bc17fcefee83e01d6b4b0f5d773dc84a4e",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/normal-task-options.json",
+      "bytes": 1133,
+      "sha256": "18f21750b36a0957400e55f4a4191405519e2ab4ca3d70fdade14b2f04378100",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/run-checks.py",
+      "bytes": 4558,
+      "sha256": "73003c5fa337f8ce5d490cfa8e170da35d2f8abef39c5c70f1ec8d010403f136",
+      "gitSealBlobExact": true
+    },
+    {
+      "path": "tests/unit/SyntheticPlanningTasks.Tests/verify-evidence.py",
+      "bytes": 2452,
+      "sha256": "782de9e04146f86ae676b397787ccdc8873a6c73b9fd7c9d4671bfd3a07f919e",
+      "gitSealBlobExact": true
+    }
+  ],
+  "sourceCorrectionBytesUnchangedSinceIndependentReview": true,
+  "executedReadOnlyChecks": [
+    {
+      "command": "python3 tests/unit/SyntheticPlanningTasks.Tests/verify-evidence.py --verify",
+      "exitCode": 0,
+      "stdout": "PASS 2755 original A14 bindings/equalities/generation source/log checks; no runtime or database execution",
+      "log": "/private/tmp/iga-cycle14-a14-review-by-b14/final-bindings.log",
+      "logSha256": "c20c7db5c0ec0086bae43f153c4ec4aec9c1a7f1b26c32c869155bc9e3044da0"
+    }
+  ],
+  "finalDeclaredOriginalExecution": {
+    "portableAssertions": 736,
+    "portablePlusPostgreSqlAssertions": 1249,
+    "freshDatabase": "iga_synthetic_cycle14_a14_20261003_v5",
+    "finalNative": {
+      "SyntheticPlanningTasks.dll": {
+        "path": "tests/unit/SyntheticPlanningTasks.Tests/execution/generation-20261003T041408-1732000/native/SyntheticPlanningTasks.dll",
+        "sha256": "68a2aae7675423c69b693b86132eb7b043631cc3f0661947db988bc3dbb743f4",
+        "bytes": 145408
+      },
+      "SyntheticPlanningTasks.Tests.dll": {
+        "path": "tests/unit/SyntheticPlanningTasks.Tests/execution/generation-20261003T041408-1732000/native/SyntheticPlanningTasks.Tests.dll",
+        "sha256": "d842c26ca787d9b6e327ee24dbac9753a96f862cb4d1a6f3149cfc04eee7b824",
+        "bytes": 123392
+      },
+      "SyntheticPlanningTasks.Tests.pdb": {
+        "path": "tests/unit/SyntheticPlanningTasks.Tests/execution/generation-20261003T041408-1732000/native/SyntheticPlanningTasks.Tests.pdb",
+        "sha256": "c4f20c3f1de3eca1488d896269a8c5990304ba94c52f5c41baffd8183e9fb62b",
+        "bytes": 24128
+      }
+    },
+    "bindingCount": 1566,
+    "sourceEqualities": 108,
+    "generationCount": 15,
+    "coordinatorLockEqualities": 12,
+    "countsAreNotAdditive": true
+  },
+  "findingsClosure": [
+    {
+      "issue": "Retained full artifact-history forks accepted while current source unavailable",
+      "status": "CLOSED in inspected source",
+      "evidence": "SourceDominates checks full historical prefixes. Load requires either complete proof direction, preserving same-package attestation progress; History/CheckCurrent require directed chronological/current prefixes. New independently authored Reason-fork regression denies Ready and SourceUnavailable then restores exact references/snapshot and verifies valid progress."
+    },
+    {
+      "issue": "Barrier waits preceding cleanup protection",
+      "status": "CLOSED in inspected source",
+      "evidence": "Both entered waits now inside try/finally; release/cancel and bounded awaits of held/writer operations cover failure paths."
+    }
+  ],
+  "remainingScopedFindings": [],
+  "reviewScope": [
+    "Approved frozen f4d2 task semantics",
+    "SourceBuilder actual package/source/history integrity and exact same-digest bindings",
+    "Authority before content/replay and exact replay/duplicate precedence",
+    "Full retained artifact prefix comparability without current source, directed chronology/current proofs",
+    "Task/event/current/receipt reconstruction and atomic source registration under run fence",
+    "Additive schema drift guards and independent oracle/negative/cancellation/source tests",
+    "Corrective fixture restoration and immediate barrier cleanup",
+    "Original source/native/log/evidence bindings plus preserved failing generations"
+  ],
+  "limitations": [
+    "Reviewer executed byte/hash/Git/evidence verification only; no database/host/browser/network/native replay",
+    "Original61 packet and final correction are distinct generations; original1229 counts not relabeled1249",
+    "Native/ignored/untracked evidence depends on coordinator verified archival before worker cleanup",
+    "Agent review does not grant human acceptance/production release; full manual/UAT/defaultMac gates remain open"
+  ]
+}

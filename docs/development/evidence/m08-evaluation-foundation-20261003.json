@@ -1,0 +1,406 @@
+{
+  "schema": "synthetic-evaluation-foundation-evidence-v1",
+  "scope": "Milestone08 bounded FR-HAS-51\u201353/AC-HAS-12/TP-HAS-012 arithmetic and detached outcomes only",
+  "status": "LOCAL_FOUNDATION_VERIFIED_PRIVATE_SITE_CONFIRMED",
+  "base": "0185a6c",
+  "domainCommit": "9e589941a2a4f59efce4f3b58c79b3be1b6e6e65",
+  "verifierCommits": [
+    "fbfe7b8",
+    "25432a2"
+  ],
+  "coordinatorSourceBeforeRecord": "c4b9570ecd0719968405788d37a6719ca2bf0905",
+  "checks": {
+    "pinnedSdk": "10.0.401",
+    "lockedAuditedRestore": "PASS",
+    "solutionFormatting": "PASS",
+    "releaseBuild": {
+      "projects": 64,
+      "warnings": 0,
+      "errors": 0,
+      "result": "PASS"
+    },
+    "independentAssertions": 23550,
+    "portableRegressionHosts": 14,
+    "architecture": "PASS",
+    "gitleaks": "PASS no findings after prose-only correction",
+    "reviews": "No remaining scoped findings"
+  },
+  "failuresAndCorrections": [
+    {
+      "check": "formatter",
+      "initial": "FAIL nested foreach indentation in independently authored Program.cs",
+      "correction": "25432a2 whitespace-only; independent diff -w and final checks PASS"
+    },
+    {
+      "check": "gitleaks",
+      "initial": "generic-api-key flagged ordinary contract prose line7",
+      "classification": "Independent read-only review confirmed prose false positive",
+      "correction": "Rephrased sentence; no scanner ignore/policy change; final scan PASS"
+    },
+    {
+      "check": "ancillary YAML parser",
+      "initial": "PyYAML unavailable; system Ruby YAML1.1 parser rejected existing unquoted flow port syntax at unchanged line21",
+      "result": "Hosted YAML/CI NOT VERIFIED; independent review confirms two additive steps and ordering"
+    },
+    {
+      "check": "site checkout preparation",
+      "initial": "Old local Site source diverged from remote; helper refused overwrite",
+      "correction": "Preserved old checkout, opened latest existing Site source into fresh checkout"
+    }
+  ],
+  "limits": [
+    "No sampling/low-sample/regression selection or reviewer eligibility decision.",
+    "No database/UI/host/API/provider integration or protected/customer data.",
+    "No full Milestone08/TP-HAS-012/019/Phase1C/UAT/G1\u2013G9 acceptance.",
+    "Hosted Linux/Windows/container checks not executed in this local checkpoint.",
+    "No migrations, dependency, runtime flag or production configuration change."
+  ],
+  "nativeEvidence": "work/m08-evaluation-evidence (preserved source/runtime/log closures)",
+  "nativeLogs": [
+    {
+      "path": "architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb",
+      "bytes": 116
+    },
+    {
+      "path": "build-final.log",
+      "sha256": "70a4bd046bbf347b09a598eb583f7351042c6e58abfa521b3a0e5302a9490adf",
+      "bytes": 10115
+    },
+    {
+      "path": "build.log",
+      "sha256": "3da83388956ad86a958a210fd97a65df7baec6eeecb1497ad755789f7ccb0b51",
+      "bytes": 10115
+    },
+    {
+      "path": "focused-tests-final.log",
+      "sha256": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1",
+      "bytes": 57
+    },
+    {
+      "path": "focused-tests.log",
+      "sha256": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1",
+      "bytes": 57
+    },
+    {
+      "path": "format-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "format.log",
+      "sha256": "367295d1a28ebce22fa918395a6f01a32ffe6bee498ddc2a78b0dc80e93b132f",
+      "bytes": 8286
+    },
+    {
+      "path": "initial-restore.log",
+      "sha256": "cec761119aeef982f7182a275aa156a94247f62fd59263c78fd650b15cafb2ba",
+      "bytes": 8628
+    },
+    {
+      "path": "locked-restore.log",
+      "sha256": "15c75f81002e8033d6ef0190a13c8e8b94127cc1fb08247f4fa1df721118449c",
+      "bytes": 8638
+    },
+    {
+      "path": "regression-AssessmentCoverage.log",
+      "sha256": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd",
+      "bytes": 259
+    },
+    {
+      "path": "regression-AssessmentMaturity.log",
+      "sha256": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698",
+      "bytes": 154
+    },
+    {
+      "path": "regression-AssessmentOrchestration.log",
+      "sha256": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5",
+      "bytes": 202
+    },
+    {
+      "path": "regression-AssessmentScoring.log",
+      "sha256": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0",
+      "bytes": 114
+    },
+    {
+      "path": "regression-CollectorSafety.log",
+      "sha256": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61",
+      "bytes": 392
+    },
+    {
+      "path": "regression-DeterministicAnalysis.log",
+      "sha256": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af",
+      "bytes": 138
+    },
+    {
+      "path": "regression-EvidenceGovernance.log",
+      "sha256": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40",
+      "bytes": 479
+    },
+    {
+      "path": "regression-RecommendationGuidance.log",
+      "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325",
+      "bytes": 44
+    },
+    {
+      "path": "regression-ReportDrafts.log",
+      "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4",
+      "bytes": 83
+    },
+    {
+      "path": "regression-ReportMarkdown.log",
+      "sha256": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef",
+      "bytes": 439
+    },
+    {
+      "path": "regression-SyntheticAiPackets.log",
+      "sha256": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d",
+      "bytes": 68
+    },
+    {
+      "path": "regression-SyntheticAiPreview.log",
+      "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0",
+      "bytes": 382
+    },
+    {
+      "path": "regression-SyntheticAiProposals.log",
+      "sha256": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408",
+      "bytes": 41
+    },
+    {
+      "path": "regression-SyntheticFixPackages.log",
+      "sha256": "d8f6f6e6655167200d8a8f61aca65874a8f6c5144a3c059e7fec89f985d4b4c1",
+      "bytes": 106
+    },
+    {
+      "path": "secret-report.log",
+      "sha256": "2b3c061f0b730f27249e6399dfc9a802762898381be31f59c3f48e8111bedf1b",
+      "bytes": 83
+    },
+    {
+      "path": "secret-scan-final.log",
+      "sha256": "55286b66d0f75f39f108147fa8827d18768157253eb461cf79ad24b4ae5232a5",
+      "bytes": 83
+    },
+    {
+      "path": "secret-scan.log",
+      "sha256": "6122a8f4f875358f59b501d54bab8c43d73f3ab1602b9e88e33eaa43a79d69c2",
+      "bytes": 83
+    }
+  ],
+  "regressions": [
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/EvidenceGovernance.Tests/bin/Release/net10.0/EvidenceGovernance.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 1.164,
+      "log": "regression-EvidenceGovernance.log",
+      "sha256": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/AssessmentCoverage.Tests/bin/Release/net10.0/AssessmentCoverage.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.13,
+      "log": "regression-AssessmentCoverage.log",
+      "sha256": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/AssessmentOrchestration.Tests/bin/Release/net10.0/AssessmentOrchestration.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.336,
+      "log": "regression-AssessmentOrchestration.log",
+      "sha256": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/AssessmentScoring.Tests/bin/Release/net10.0/AssessmentScoring.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.885,
+      "log": "regression-AssessmentScoring.log",
+      "sha256": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/AssessmentMaturity.Tests/bin/Release/net10.0/AssessmentMaturity.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 2.613,
+      "log": "regression-AssessmentMaturity.log",
+      "sha256": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/DeterministicAnalysis.Tests/bin/Release/net10.0/DeterministicAnalysis.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.091,
+      "log": "regression-DeterministicAnalysis.log",
+      "sha256": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/RecommendationGuidance.Tests/bin/Release/net10.0/RecommendationGuidance.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.094,
+      "log": "regression-RecommendationGuidance.log",
+      "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/ReportDrafts.Tests/bin/Release/net10.0/ReportDrafts.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.161,
+      "log": "regression-ReportDrafts.log",
+      "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/ReportMarkdown.Tests/bin/Release/net10.0/ReportMarkdown.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.078,
+      "log": "regression-ReportMarkdown.log",
+      "sha256": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/SyntheticAiPackets.Tests/bin/Release/net10.0/SyntheticAiPackets.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.056,
+      "log": "regression-SyntheticAiPackets.log",
+      "sha256": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/SyntheticAiProposals.Tests/bin/Release/net10.0/SyntheticAiProposals.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.054,
+      "log": "regression-SyntheticAiProposals.log",
+      "sha256": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.117,
+      "log": "regression-SyntheticAiPreview.log",
+      "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 1.856,
+      "log": "regression-SyntheticFixPackages.log",
+      "sha256": "d8f6f6e6655167200d8a8f61aca65874a8f6c5144a3c059e7fec89f985d4b4c1"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/unit/CollectorSafety.Tests/bin/Release/net10.0/CollectorSafety.Tests.dll"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 0.144,
+      "log": "regression-CollectorSafety.log",
+      "sha256": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61"
+    },
+    {
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "/private/tmp/iga-m08-evaluation-coordinator/tests/architecture/BoundaryChecks/bin/Release/net10.0/BoundaryChecks.dll"
+      ],
+      "exitCode": 0,
+      "log": "architecture.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    }
+  ],
+  "reviews": {
+    "domain": "Non-author V08 review: no confirmed scoped defect.",
+    "verifier": "Non-author E08 review: no semantic issue; indentation-only formatter correction independently confirmed.",
+    "integration": "Independent read-only review: no actionable findings in configuration/scope/canonical delta; ordinary contract prose false positive classified independently."
+  },
+  "codeSnapshot": "ab678bb2e8343b5cc91333285302d259a0fa6fb9",
+  "sitePublication": {
+    "deployment": {
+      "id": "appgdep_6ac11333e1fc81918b5d635f10d300dd",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_77fbdf8e430c81918e332fd545654c3f",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T14:37:45.937014+00:00"
+    },
+    "source": {
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "checkout_path": "/private/tmp/iga-m08-site",
+      "commit_sha": "37240557936bb0b17bdd1be39a33b80959f56706",
+      "archive": "/private/tmp/iga-m08-evidence/site.tar.gz"
+    },
+    "canonicalSnapshot": "ab678bb2e8343b5cc91333285302d259a0fa6fb9",
+    "access": {
+      "currentRole": "owner",
+      "mode": "custom",
+      "version": 91,
+      "allowedUsers": 1,
+      "externalVisitors": 0,
+      "allowedGroups": 0
+    }
+  },
+  "concurrentPreservation": {
+    "status": "PASS",
+    "concurrentFiles": 26,
+    "unchangedNoncanonicalFiles": 23,
+    "canonicalReverseRestoresExactOriginalBytes": true,
+    "codeSnapshot": "ab678bb"
+  },
+  "dependencyLicenseChange": "New locks contain project reference only; no external package or license footprint added.",
+  "preservation": "Original domain/verifier source, consumed source/configuration, compiled runtimes and native logs archived and rehashed; clean writing checkouts removed after verification.",
+  "siteChecks": {
+    "widths": [
+      1440,
+      390,
+      320
+    ],
+    "openHumanTasks": 12,
+    "elevenEarlierTasksRetained": true,
+    "roleCompletionAndLinks": "PASS",
+    "pageErrors": 0,
+    "overflow": false,
+    "imagesInspected": [
+      "desktop1440",
+      "newTask320",
+      "overview320"
+    ]
+  }
+}

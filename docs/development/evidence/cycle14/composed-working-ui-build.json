@@ -1,0 +1,205 @@
+{
+  "schema": "cycle14-composed-working-ui-build-v1",
+  "coordinator": "02ce7eddcc2b213470ace81be2e1c025d3c218e9",
+  "compositionProof": "/private/tmp/iga-cycle14-root-composition/20261003T041632/proof.json",
+  "source": [
+    {
+      "path": "contracts/local-demo/README.md",
+      "sha256": "b2e64b7858b1ae960af30e186f39b9cc2aeffe17e7b0082b80a8d147edf642a3",
+      "bytes": 11757
+    },
+    {
+      "path": "contracts/local-demo/demo-v1.schema.json",
+      "sha256": "ee3548d6e5449aacdac3d5b2c7c108783083eaa45b1803062de6d569fa7b1998",
+      "bytes": 97759
+    },
+    {
+      "path": "contracts/local-demo/generate-types.mjs",
+      "sha256": "9ddc28c905635e6f3097e3529fd921d3881e54c828dc5ad5ad2e7dc386984ccf",
+      "bytes": 1668
+    },
+    {
+      "path": "src/web/.gitignore",
+      "sha256": "790e3169bc19b046fe55ba1da6d13b976c28363c8c00462a2195fe5faf260910",
+      "bytes": 20
+    },
+    {
+      "path": "src/web/.prettierignore",
+      "sha256": "5424a270c713a697409ba2912ac683972f97d96a742e3e8fbfe27b87a9dd6a1f",
+      "bytes": 51
+    },
+    {
+      "path": "src/web/.prettierrc.json",
+      "sha256": "85378d4d734cb7d35641c44ffdf322fe0bc76a3b12841927f20aa5f0eba12695",
+      "bytes": 73
+    },
+    {
+      "path": "src/web/README.md",
+      "sha256": "f1558b927e0f1aa899f7fa64a49f0ecacda141fc96799f736ad2f8a589f90b49",
+      "bytes": 1956
+    },
+    {
+      "path": "src/web/index.html",
+      "sha256": "c6e7e6098351ddb84a2a2e59cc85a3332ab2512175cc80548cdfc7b95a5282e6",
+      "bytes": 381
+    },
+    {
+      "path": "src/web/package-lock.json",
+      "sha256": "baefd0a0d25052138b9b2f5b080285cd242f8a981fdf31469cb57389a1a25b1d",
+      "bytes": 40559
+    },
+    {
+      "path": "src/web/package.json",
+      "sha256": "a52d363e3358d64520696bcada6d53a352022dcca5d1c1fb876cd54d110be95d",
+      "bytes": 900
+    },
+    {
+      "path": "src/web/src/AiProposalPreview.css",
+      "sha256": "ca096222827fdada282393c834ab75f6210655c96aaf5a1c29565313c7682d6e",
+      "bytes": 1457
+    },
+    {
+      "path": "src/web/src/AiProposalPreview.tsx",
+      "sha256": "8704ae4ec86cedcee181c6b7cd4a3d477363f4af9e9b3b76d6f5ee5fd97cabfe",
+      "bytes": 17423
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "d6f3b6bd0f0cd299c24d4935455a519126b68a9d6a7b6b8d72b21e9f07aaa2de",
+      "bytes": 31138
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "sha256": "091c6eb258cf70d0d9ab2f003ddb4dbe4006117cf701289aa71a68d09cd5e50c",
+      "bytes": 34311
+    },
+    {
+      "path": "src/web/src/ArtifactReviewPanel.css",
+      "sha256": "22caf17bfd870c5c383afc7a53408545b5a82f065d57962483f306bd91f13c67",
+      "bytes": 1453
+    },
+    {
+      "path": "src/web/src/ArtifactReviewPanel.tsx",
+      "sha256": "556b11a3b6eaa2cb744188f958b0577fc106bda5dafdf443bfa945ca9a3f3e5b",
+      "bytes": 24094
+    },
+    {
+      "path": "src/web/src/DraftReportView.tsx",
+      "sha256": "07cdf830f52c56d8c68931bdd883a6500fc1651d32a155c4fa6e56ec6d2aed1d",
+      "bytes": 12536
+    },
+    {
+      "path": "src/web/src/FindingsExplorer.css",
+      "sha256": "2750e4b304c8ad39808fefa0710c233879daa450a12ce8bff59f42978a026896",
+      "bytes": 2938
+    },
+    {
+      "path": "src/web/src/FindingsExplorer.tsx",
+      "sha256": "6a92662aa20b39de007928d77098c183ad9ad8eceb483da28872c0604626842e",
+      "bytes": 16510
+    },
+    {
+      "path": "src/web/src/FixPackagePreview.css",
+      "sha256": "3dc3f16a2e0dee15c3cb3ca2922be0009510546c7ef5436bf6df515ab131ca26",
+      "bytes": 1448
+    },
+    {
+      "path": "src/web/src/FixPackagePreview.tsx",
+      "sha256": "e29a667a907b7c103550f028d4c856f83fcfed6e5e7d099e69a5529f186a1978",
+      "bytes": 42225
+    },
+    {
+      "path": "src/web/src/MaturityView.tsx",
+      "sha256": "ed13d1063c5bd56950a2ddda799868755eb05cde94360720961351cbccf91143",
+      "bytes": 5043
+    },
+    {
+      "path": "src/web/src/PlanningTasksPanel.css",
+      "sha256": "1972b7fad5300258f3abfdcda87242caf5413a078fab6e31b9eed46bdb0e7fc0",
+      "bytes": 1266
+    },
+    {
+      "path": "src/web/src/PlanningTasksPanel.tsx",
+      "sha256": "b77b4ee322f1522ed6b7a6a84972bffe99a39970b5146f4a524d14def7e5a1e7",
+      "bytes": 40149
+    },
+    {
+      "path": "src/web/src/RecommendationGuidanceView.css",
+      "sha256": "5e506225429a4a34729f2de47efd0f1e3043532c2507c328e28100d6e650bf05",
+      "bytes": 2244
+    },
+    {
+      "path": "src/web/src/RecommendationGuidanceView.tsx",
+      "sha256": "14a86dbe7c5156fc123626ecafa3fc24917d88acfd318c6915d61fa2f6e2c96b",
+      "bytes": 12447
+    },
+    {
+      "path": "src/web/src/ReviewPanel.tsx",
+      "sha256": "a9726033e4d7cc178386f3bbc64c0c3c2301d97badce283d1f431702a5d23f30",
+      "bytes": 10415
+    },
+    {
+      "path": "src/web/src/WorkspaceNavigation.tsx",
+      "sha256": "c41f26a55c05198f55c9ecc473d24ce52e708a1311ce12dc0aca8ac072a91b64",
+      "bytes": 2798
+    },
+    {
+      "path": "src/web/src/api.ts",
+      "sha256": "9fa62aa42aa5a890a5adfd3b01c3c81cd5bd4362f84880fc206e10b1f18c99a0",
+      "bytes": 1499
+    },
+    {
+      "path": "src/web/src/assets.d.ts",
+      "sha256": "da5bf71d48cf909584a01c80b445f730507068f5b34c920f352e2bfcf0315e4c",
+      "bytes": 24
+    },
+    {
+      "path": "src/web/src/demo-contract.generated.ts",
+      "sha256": "07183a793699b1a0bd8ae3535d5b4b225dc6accb831429675d167243924b3c06",
+      "bytes": 31196
+    },
+    {
+      "path": "src/web/src/main.tsx",
+      "sha256": "b17a742859a62d74b9012cf25b5f80d30f147e5211fa5cc68fad8cb34b89b951",
+      "bytes": 315
+    },
+    {
+      "path": "src/web/src/styles.css",
+      "sha256": "98ac6c74bdc24732cebed0c757b12242a545ce69090ee29f47291f2f8e8cd2f7",
+      "bytes": 13544
+    },
+    {
+      "path": "src/web/src/useArtifactReview.ts",
+      "sha256": "21bf6729c0f4618478299ea3cc5ab401dba844539259b02b99b0be3f9380fbc8",
+      "bytes": 9058
+    },
+    {
+      "path": "src/web/src/usePlanningTasks.ts",
+      "sha256": "33db1c8429165fa0db7c34a4d394ccb28500d8c09cf7b9c3b700d86cb8947d59",
+      "bytes": 10376
+    },
+    {
+      "path": "src/web/src/workspace.css",
+      "sha256": "5303693dd832311b58b87b54efbc23a4158944def1f5f8c08228cd02ed2ee233",
+      "bytes": 5565
+    },
+    {
+      "path": "src/web/tsconfig.json",
+      "sha256": "24bd9eec94129d13041a3e64a073bb052dcece65504ed545d2f26b8fe6853ebc",
+      "bytes": 403
+    }
+  ],
+  "startUtc": "2026-10-03T04:16:39.804768+00:00",
+  "scope": "Concurrent root UI plus approved task integration only. This overlay is not the published pilot source.",
+  "argv": [
+    "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+    "/private/tmp/iga-npm-11.20.0/node_modules/npm/bin/npm-cli.js",
+    "run",
+    "build",
+    "--prefix",
+    "src/web"
+  ],
+  "exitCode": 0,
+  "endUtc": "2026-10-03T04:16:40.520972+00:00",
+  "logSha256": "ec6d1f66b1de2ef3911cfe553f610759a2b40226af9eff0a0e91c80bf7ad99cc"
+}

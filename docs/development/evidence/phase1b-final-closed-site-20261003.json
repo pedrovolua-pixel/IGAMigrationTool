@@ -1,0 +1,239 @@
+{
+  "schema": "phase1b-final-closed-private-publication-v1",
+  "recordedUtc": "2026-10-03T18:38:24.082075+00:00",
+  "purpose": "Publication provenance only; Phase1B local closure and all pending human/live statuses are unchanged.",
+  "closedCanonicalSnapshot": "0f78830c90d016be96576dcc0a061a0bc41436e6",
+  "frozenRuntimeTests": "6b7a5f25d9d726af2ebbc3f45480dd1e23476d24",
+  "previousEngineeringPublicationReceipt": "docs/development/evidence/phase1b-local-closure-site-20261003.json",
+  "nativeDeployment": {
+    "id": "appgdep_6ac14b62e91c8191a41a49b4e62c8d44",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_98d0148f2bd48191a66679986008eea1",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T18:37:29.562086+00:00"
+  },
+  "nativeVersion": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_98d0148f2bd48191a66679986008eea1",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "version_number": 99,
+    "source": {
+      "commit_sha": "8f2b5a579de00824eb194a23413408c83dd668c2"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000c0e081f5a207f26e037a3865",
+      "content_hash": "sha256:74bda25103ea84c26ce63f39e6408e04c0e4099cdcfc3cb02d46e276b21f5b0a",
+      "size_bytes": 102400,
+      "file_count": 2
+    }
+  },
+  "localUploadedArchive": {
+    "path": "work/phase1b-closure-evidence/private-site-final-closed.tar.gz",
+    "bytes": 23295,
+    "sha256": "62f91cac20aa57679bdf8d307ea3b08113ef81860cb689a8c90bbd5398a7014b"
+  },
+  "archiveInspection": "HTML exact pushed-source match; normalized hosting manifest binds exact existing project. Native normalized tar hash/size are separately retained from local compressed bytes.",
+  "qa": {
+    "path": "work/phase1b-closure-evidence/site-closed-qa/results.json",
+    "bytes": 30173,
+    "sha256": "51cf45021a158d445b58971898257835b306b191000e89f71d840673d2a52de3"
+  },
+  "qaLog": {
+    "path": "work/phase1b-closure-evidence/site-closed-qa.log",
+    "bytes": 299,
+    "sha256": "84888ad5db9ee525a079d2a9a890071400a7e8e49f9ef05bc99ae3dc85cdc45d"
+  },
+  "qaScript": {
+    "path": "work/phase1b-closure-evidence/site-final-qa.mjs",
+    "bytes": 3765,
+    "sha256": "16e381a5af567083d7e614f9cbb80cbf55a3f4eaa49ff8cb641e8417abf1bd62"
+  },
+  "screenshots": [
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/1440-overview.png",
+      "bytes": 389762,
+      "sha256": "b914e5d67b807c6cfe6b318a92f7c19c76c095f529872d181e87efb5162f923b"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/1440-phase1b.png",
+      "bytes": 283159,
+      "sha256": "b4ea38f415d6cc2dc65594f57c2d8757936cbb6fbcad72e02631a674d8bb4fe1"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/1440-tasks.png",
+      "bytes": 417321,
+      "sha256": "7508e9ac6bd815a014d9957be140d54881ce9e40782d9f1bb1c3d1358774be4c"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/320-overview.png",
+      "bytes": 139879,
+      "sha256": "82f6cb9c644f30cd8b28193415b32e419cd0ea9d8ea9786ea5135c1dc283b8d9"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/320-phase1b.png",
+      "bytes": 111664,
+      "sha256": "f102961554af144da121790481432fda1996c984f41da964f0e1be1dec6f52d4"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/320-tasks.png",
+      "bytes": 103881,
+      "sha256": "1c28f84c1f37d4177b679197978654ff1f9937c352d076d151bc6aacbeb787a6"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/390-overview.png",
+      "bytes": 173203,
+      "sha256": "9f2e4b7a92d61e89c2e60d662877f82b1a7025f3ea7fc8e730adf1180bba07d1"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/390-phase1b.png",
+      "bytes": 130141,
+      "sha256": "1e77bdb66ff1caaeabb85e1cc1172abf3388b589f11d50ef729200a7ab22ef55"
+    },
+    {
+      "path": "work/phase1b-closure-evidence/site-closed-qa/390-tasks.png",
+      "bytes": 121472,
+      "sha256": "10990f27ea1cc9b5a8e9dba7a68cceab2593e722687dbcfb9b5de5dd04c46bec"
+    }
+  ],
+  "preservation": {
+    "siteSourceBefore": "d4d3bd1d22e710fce3ee9db6dcc00ea49a5a5371",
+    "canonicalSnapshot": "283a2934c7e9cda7b3ace27c5a07897ce7283d76",
+    "humanTasks": 12,
+    "taskCardsBytePreserved": 12,
+    "humanTaskCards": [
+      {
+        "index": 0,
+        "sha256": "88a21d88fd636a7ec6ba850160a82ec06e30272ad89d5a64edfdbe0806115c79"
+      },
+      {
+        "index": 1,
+        "sha256": "647568c2b00531f151a6ae9cea04ffc2faefec3e3e91cb790e6bb746d3ee5147"
+      },
+      {
+        "index": 2,
+        "sha256": "a8a2e17da13a71e2f17c81a74b917848525029090fe6697d3f76a27c236e41e3"
+      },
+      {
+        "index": 3,
+        "sha256": "af5aefd45451c317f59ce3807ab3692343023c5d2d0afb508a1867077caf2cc4"
+      },
+      {
+        "index": 4,
+        "sha256": "071e3441c4ac7e13819c0beca88f97a583aa0c2e1328df6cb059cb2fc682cef9"
+      },
+      {
+        "index": 5,
+        "sha256": "211cf0d06ab0be48d399d11027ee1450541fb3f8813f27db72daa741699278ff"
+      },
+      {
+        "index": 6,
+        "sha256": "b20a39259dc521054d1c34c27f62e5a9c3935ba04c4944567c92cb535c25006d"
+      },
+      {
+        "index": 7,
+        "sha256": "e0dacd264ae5365bafee3f69ffe457f909ced83cf1bf180e33d56124eecd4f11"
+      },
+      {
+        "index": 8,
+        "sha256": "0c76e4d000f819f6d378287a000e2cb3d46acab296539c1f79077519d4e3c09d"
+      },
+      {
+        "index": 9,
+        "sha256": "d7ba98eea5c6d3ff181aff39ae2077f272ba06e304665293489665482e111c40"
+      },
+      {
+        "index": 10,
+        "sha256": "7cb73e48b9ac7e4b3f7c422ff44129f79e3b35fd17e88627960e62bebe28683b"
+      },
+      {
+        "index": 11,
+        "sha256": "c8946bc8c8b72e1f9080cd3455fad8c3fad0978e6f7ba4579857b838d2a0845b"
+      }
+    ],
+    "unownedPanelsBytePreserved": 16,
+    "unownedPanels": [
+      {
+        "id": "workspace-ui-checkpoint",
+        "sha256": "4efec6f8632b9e70c4595839588828f70f4a068ab1fd4c3aaf24f23f0ea57fbd"
+      },
+      {
+        "id": "ai-preview-checkpoint",
+        "sha256": "040411fef5e69b350b2bb064a9d5ddda98f0974f9b2082829fa5344a34358257"
+      },
+      {
+        "id": "ai-workspace-checkpoint",
+        "sha256": "f32c095d527b91a44b536ab4428c078ade0d80534d0b843cd32787db6503b33e"
+      },
+      {
+        "id": "fix-packages-checkpoint",
+        "sha256": "cf493a81727b26ecebb1447cc65246b243dd1014368b3d932f01c5e3cd328167"
+      },
+      {
+        "id": "artifact-review-preparation",
+        "sha256": "bd511695a7db79a7fdb07f677a45a3170e82e90c3de06c105f2b5b9fb2e6f6d7"
+      },
+      {
+        "id": "fix-workspace-checkpoint",
+        "sha256": "da88f20d1244ad39c8972370279ab591beebaabfbc7e06848c476b192446bc2b"
+      },
+      {
+        "id": "bff-checkpoint",
+        "sha256": "32ed86539102454215cd37dd4363b754c445f6ee6a4adc4504820379cc5db1f5"
+      },
+      {
+        "id": "bff-deployment-preparation",
+        "sha256": "94d30194a70e9d45f316354f85596c41f841c6d0c4a36bb9246b7244494b3b13"
+      },
+      {
+        "id": "approved-workspace-ui-checkpoint",
+        "sha256": "6cc1f4bd9e4776fd7d60417931dde1ef3ba61b91a4b4006fc04df9df1e4fb3e1"
+      },
+      {
+        "id": "planning-task-checkpoint",
+        "sha256": "127130fd1723aa9872f18a6560656c9d1e98d012192d2a307ce7f98df3362687"
+      },
+      {
+        "id": "artifact-review-decision",
+        "sha256": "ec77998afade242c17b267337b4954f49e99f7cf37abf18abdc00f581f97b23d"
+      },
+      {
+        "id": "planning-task-decision",
+        "sha256": "7045d58c76b0e1921d089d15a34e0bccddba61263d73499beab2bf61d172b884"
+      },
+      {
+        "id": "m08-evaluation-checkpoint",
+        "sha256": "81e484f612b4313854c65f088ebb44c6152c5f859d78fa15c9088c5a7db22bba"
+      },
+      {
+        "id": "evaluation-cycle02-checkpoint",
+        "sha256": "d782ebb2eaa9f4b259e67734d2accd2a6bffebcf81f66447da5f4166500cf0c8"
+      },
+      {
+        "id": "evaluation-cycle03-checkpoint",
+        "sha256": "d8e2185bce507ed3e1521cf86a2897f087ee634ee604ca08f03802b50168ebe4"
+      },
+      {
+        "id": "evaluation-policy-decision",
+        "sha256": "cbf5000076fa854e9d4d2857c39f1ebadcbc181dc9d08a5447d3465cda81c974"
+      }
+    ],
+    "originalHtmlSha256": "0275af86ed94495177e1e2d014599e056db0de78cba3f564b12711ff77cacefd",
+    "htmlSha256": "a03183934a443e670d09e0c2ddb566e40b670e37d4a0c5c8c67e650cd5b2d142",
+    "concurrentSourcePreserved": true,
+    "finalClosedCanonicalSnapshot": "0f78830c90d016be96576dcc0a061a0bc41436e6",
+    "sourceBeforeFinalProvenance": "cb3e893e0d00cdd3a94f65f8d2c05920c4095a92",
+    "finalHtmlSha256": "4b563226845ce01a2aa32840b1a16e8d14568e1f173366ca4836098fdd5f43c1"
+  },
+  "independentReview": "Original closure source/native/evidence review CLOSED; final99 publication changes only closed snapshot links/title and adds confirmed receipt.",
+  "productionOrCustomerRelease": false,
+  "phase1COwnership": "Preserved; separately owned",
+  "humanTasks": 12
+}

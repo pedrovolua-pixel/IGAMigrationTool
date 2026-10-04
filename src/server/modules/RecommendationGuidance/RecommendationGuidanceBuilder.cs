@@ -1,0 +1,241 @@
+using System.Collections.Immutable;
+using System.Globalization;
+using System.Security.Cryptography;
+using System.Text.Json;
+
+namespace RecommendationGuidance;
+
+/// <summary>Detached current fictional guidance; no authority, raw resolver, storage, network or executor.</summary>
+public static partial class RecommendationGuidanceBuilder
+{
+    public const string SchemaVersion = "synthetic-recommendation-guidance-v1";
+    public const string Status = "SyntheticUnverified";
+    public const int MaximumContentBytes = 32 * 1024 * 1024;
+    public const int MaximumTextLength = 16 * 1024;
+    public const int MaximumRecords = 100_000;
+    private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
+    private static readonly ImmutableArray<string> Warnings =
+    [
+        "Synthetic fixture guidance only; no actual One Identity defect, supported remediation or customer approval is established.",
+        "Every option is review-only and unverified. Finding confirmation, rejection or deferral does not review guidance or validate remediation.",
+        "Stable identity ordering is not a priority calculation. Recovery guidance does not establish executed or verified restoration.",
+        "This is a current detached value, not durable recommendation history. The run remains Scoring and unpublished."
+    ];
+    private static readonly ImmutableArray<string> Unavailable =
+    [
+        "Priority calculation, effort estimates and consultant overrides are unavailable.",
+        "Customer-approved objectives, roles and approvals are unavailable.",
+        "Fix artifacts, recommendation review, task conversion/workflows and CSV export are unavailable.",
+        "Customer risk acceptance, validated remediation, reassessment and actual report publication/sharing are unavailable.",
+        "No SQL, script, configuration artifact, customer-system execution, external task connector or ROI calculation exists."
+    ];
+
+    public static GuidanceResult Build(GuidanceInput? input)
+    {
+        if (input is null || input.Source is null || input.Findings.IsDefault) return Deny(GuidanceIssue.InvalidInput);
+        try
+        {
+            if (ValidateSource(input.Source) is { } sourceIssue) return Deny(sourceIssue);
+            if (ValidateFindings(input) is { } contentIssue) return Deny(contentIssue);
+            var source = input.Source with
+            {
+                FrozenVersions = CanonicalElement(input.Source.FrozenVersions),
+                CapabilityLock = CanonicalElement(input.Source.CapabilityLock),
+                AnalysisLock = CanonicalElement(input.Source.AnalysisLock)
+            };
+            var findings = input.Findings.OrderBy(finding => finding.FindingId, StringComparer.Ordinal).Select(finding =>
+                new GuidanceFinding(finding.FindingId, finding.RuleId, finding.RuleVersion, finding.CategoryId, finding.Severity,
+                    finding.OriginalTitle, finding.PresentationTitle, finding.BusinessContext, finding.InitialState, finding.CurrentState,
+                    finding.FindingRevision, finding.RootCause,
+                    finding.Occurrences.OrderBy(item => item.OccurrenceId, StringComparer.Ordinal).ToImmutableArray(),
+                    finding.Options.OrderBy(item => item.OptionId, StringComparer.Ordinal).Select(option => new GuidanceOption(
+                        ScopedOptionId(source, finding.FindingId, option.OptionId), option.OptionId, "Unverified", option.Text,
+                        option.Prerequisites, option.Risk, option.RecoveryGuidance)).ToImmutableArray(),
+                    finding.ValidationGuidance, finding.GuidanceReferences, finding.Assumptions, finding.Limitations)).ToImmutableArray();
+            var snapshot = new GuidanceSnapshot(SchemaVersion, Status, source, "", findings, Warnings, Unavailable);
+            return new(null, snapshot with { ContentDigest = Hash(CanonicalPayload(snapshot)) });
+        }
+        catch (ValidationException exception) { return Deny(exception.Issue); }
+        catch (Exception exception) when (exception is JsonException or InvalidOperationException or ObjectDisposedException or ArgumentException or OverflowException)
+        { return Deny(GuidanceIssue.InvalidInput); }
+    }
+
+    /// <summary>Exact full envelope bytes without ContentDigest, returned as an independent caller-owned array.</summary>
+    public static byte[] CanonicalPayload(GuidanceSnapshot snapshot) => CanonicalBytes(JsonSerializer.SerializeToElement(new
+    {
+        snapshot.SchemaVersion,
+        snapshot.Status,
+        snapshot.Source,
+        snapshot.Findings,
+        snapshot.Warnings,
+        snapshot.UnavailableSections
+    }, JsonOptions));
+
+    private static string ScopedOptionId(GuidanceSourceBinding source, string findingId, string optionId) =>
+        Hash(CanonicalBytes(JsonSerializer.SerializeToElement(new
+        { findingId, optionId, runId = source.RunId.ToString("D"), scope = source.Scope }, JsonOptions)));
+
+    private static GuidanceIssue? ValidateSource(GuidanceSourceBinding source)
+    {
+        if (source.ProfileId == "synthetic-phase1b-combined-v1") return ValidatePhase1BSource(source);
+        if (source.Scope != new GuidanceScope("synthetic-customer", "synthetic-project", "synthetic-environment")) return GuidanceIssue.WrongScope;
+        if (source.RunId == Guid.Empty || source.RunRevision < 0 || source.RunState != "Scoring") return GuidanceIssue.InvalidSource;
+        if (source.ProfileId is not ("synthetic-review-maturity-equal-v1" or "synthetic-review-maturity-operations-v1" or "synthetic-review-maturity-fix-packages-equal-v1" or "synthetic-review-maturity-planning-tasks-equal-v1" or "synthetic-review-maturity-fix-review-equal-v1") ||
+            source.BaselineId is not ("synthetic-analysis-healthy-v1" or "synthetic-analysis-findings-v1" or "synthetic-analysis-mixed-v1" or "synthetic-analysis-gaps-v1")) return GuidanceIssue.UnknownVersion;
+        if (source.ReviewRunId != source.RunId || source.ReviewRunRevision != source.RunRevision) return GuidanceIssue.SourceMismatch;
+        foreach (var digest in new[] { source.RunInputDigest, source.AnalysisFixtureDigest, source.AnalysisContentDigest, source.SavedCoverageDigest, source.ReviewSnapshotDigest })
+            if (!Digest(digest)) return GuidanceIssue.InvalidSource;
+        var planningTasks = source.ProfileId == "synthetic-review-maturity-planning-tasks-equal-v1";
+        var artifactReview = planningTasks || source.ProfileId == "synthetic-review-maturity-fix-review-equal-v1";
+        var fixPackages = artifactReview || source.ProfileId == "synthetic-review-maturity-fix-packages-equal-v1";
+        var versions = source.FrozenVersions;
+        if (artifactReview && String(versions, "fixReviewContractDigest") != "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f") return GuidanceIssue.UnknownVersion;
+        if (planningTasks && String(versions, "planningTaskContractDigest") != "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2") return GuidanceIssue.UnknownVersion;
+        string[] versionFields = ["profileVersion", "desiredOutcomeVersion", "scoringAlgorithmVersion", "aiPolicyVersion", "promptVersion", "modelVersion", "applicationVersion", "workSchemaVersion", "scriptedResultsDigest", "analysisFixtureDigest", "maturityFixtureDigest"];
+        if (!Object(versions, planningTasks ? [.. versionFields, "fixPackageTemplateDigest", "fixReviewContractDigest", "planningTaskContractDigest"] : artifactReview ? [.. versionFields, "fixPackageTemplateDigest", "fixReviewContractDigest"] : fixPackages ? [.. versionFields, "fixPackageTemplateDigest"] : versionFields)) return GuidanceIssue.InvalidSource;
+        if (fixPackages && String(versions, "fixPackageTemplateDigest") != "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669") return GuidanceIssue.UnknownVersion;
+        var expectedVersions = new Dictionary<string, string>
+        {
+            ["profileVersion"] = "synthetic-profile-v1",
+            ["scoringAlgorithmVersion"] = "pilot-health-v1",
+            ["aiPolicyVersion"] = "synthetic-ai-disabled-v1",
+            ["promptVersion"] = "synthetic-prompt-disabled-v1",
+            ["modelVersion"] = "synthetic-model-disabled-v1",
+            ["applicationVersion"] = planningTasks ? "synthetic-planning-tasks-app-v1" : artifactReview ? "synthetic-fix-review-app-v1" : fixPackages ? "synthetic-fix-packages-app-v1" : "synthetic-review-maturity-app-v1",
+            ["workSchemaVersion"] = "synthetic-run-work-v1"
+        };
+        if (expectedVersions.Any(pair => String(versions, pair.Key) != pair.Value) || versions.GetProperty("desiredOutcomeVersion").ValueKind != JsonValueKind.Null) return GuidanceIssue.UnknownVersion;
+        if (!Digest(String(versions, "scriptedResultsDigest")) || !Digest(String(versions, "maturityFixtureDigest"))) return GuidanceIssue.InvalidSource;
+        if (String(versions, "analysisFixtureDigest") != source.AnalysisFixtureDigest) return GuidanceIssue.SourceMismatch;
+        var capability = source.CapabilityLock;
+        if (!Object(capability, ["matrixVersion", "stateAtLock", "productBuild", "databaseSchemaBuild", "hotfixSetDigest", "sqlServerBuild", "compatibilityLevel", "modules", "queryPackVersion", "normalizationSchemaVersion", "ruleCatalogVersion", "lockDigest"]) ||
+            !Digest(String(capability, "lockDigest")) || !capability.GetProperty("compatibilityLevel").TryGetInt32(out var level)) return GuidanceIssue.InvalidSource;
+        var expectedCapability = new Dictionary<string, string>
+        {
+            ["matrixVersion"] = "synthetic-analysis-matrix-v1",
+            ["stateAtLock"] = "FixtureVerified",
+            ["productBuild"] = "fixture-product-v1",
+            ["databaseSchemaBuild"] = "fixture-facts-v1",
+            ["hotfixSetDigest"] = "synthetic-hotfix-digest",
+            ["sqlServerBuild"] = "synthetic-sql-build",
+            ["queryPackVersion"] = "synthetic-query-pack-v1",
+            ["normalizationSchemaVersion"] = "synthetic-normalization-v1",
+            ["ruleCatalogVersion"] = "synthetic-analysis-catalog-v1"
+        };
+        if (level != 160 || expectedCapability.Any(pair => String(capability, pair.Key) != pair.Value)) return GuidanceIssue.UnknownVersion;
+        var modules = capability.GetProperty("modules");
+        if (modules.ValueKind != JsonValueKind.Array || modules.GetArrayLength() != 2) return GuidanceIssue.InvalidSource;
+        var moduleIds = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var module in modules.EnumerateArray())
+        {
+            if (!Object(module, ["id", "version"])) return GuidanceIssue.InvalidSource;
+            if (String(module, "id") is not ("SyntheticSecurity" or "SyntheticOperations") || String(module, "version") != "synthetic-module-v1") return GuidanceIssue.UnknownVersion;
+            if (!moduleIds.Add(String(module, "id")!)) return GuidanceIssue.DuplicateId;
+        }
+        var analysis = source.AnalysisLock;
+        if (!Object(analysis, ["scope", "packVersion", "packDigest", "presetId", "presetVersion", "evidenceDigest", "catalogVersion", "catalogDigest", "profileId", "profileVersion", "profileDigest", "compatibility"])) return GuidanceIssue.InvalidSource;
+        var scope = analysis.GetProperty("scope");
+        if (!Object(scope, ["customerId", "projectId", "environmentId"])) return GuidanceIssue.InvalidSource;
+        if (String(scope, "customerId") != source.Scope.CustomerId || String(scope, "projectId") != source.Scope.ProjectId ||
+            String(scope, "environmentId") != source.Scope.EnvironmentId || String(analysis, "presetId") != source.BaselineId ||
+            String(analysis, "profileVersion") != String(versions, "profileVersion") || String(analysis, "catalogVersion") != String(capability, "ruleCatalogVersion")) return GuidanceIssue.SourceMismatch;
+        if (String(analysis, "packVersion") != "synthetic-analysis-pack-v1" || String(analysis, "presetVersion") != "synthetic-evidence-v1" ||
+            String(analysis, "catalogVersion") != "synthetic-analysis-catalog-v1" ||
+            String(analysis, "profileId") != (fixPackages ? "synthetic-analysis-equal-v1" : source.ProfileId.Replace("synthetic-review-maturity-", "synthetic-analysis-", StringComparison.Ordinal))) return GuidanceIssue.UnknownVersion;
+        foreach (var name in new[] { "packDigest", "evidenceDigest", "catalogDigest", "profileDigest" }) if (!Digest(String(analysis, name))) return GuidanceIssue.InvalidSource;
+        var compatibility = analysis.GetProperty("compatibility");
+        if (!Object(compatibility, ["sourceProduct", "productVersion", "evidenceSchemaVersion", "ruleLanguageVersion"])) return GuidanceIssue.InvalidSource;
+        if (String(compatibility, "sourceProduct") != "SYNTHETIC-ONLY" || String(compatibility, "productVersion") != "fixture-product-v1" ||
+            String(compatibility, "evidenceSchemaVersion") != "fixture-facts-v1" || String(compatibility, "ruleLanguageVersion") != "count-predicate-v1") return GuidanceIssue.UnknownVersion;
+        return null;
+    }
+
+    private static GuidanceIssue? ValidateFindings(GuidanceInput input)
+    {
+        if (input.Findings.Length > MaximumRecords) return GuidanceIssue.InvalidContent;
+        var findingIds = new HashSet<string>(StringComparer.Ordinal);
+        var occurrenceIds = new HashSet<string>(StringComparer.Ordinal);
+        var totalOptions = 0;
+        foreach (var finding in input.Findings)
+        {
+            if (finding is null || !Digest(finding.FindingId) || !Text(finding.RuleId) || !Text(finding.CategoryId) ||
+                !Text(finding.OriginalTitle) || !Text(finding.PresentationTitle) || !NullableEmptyText(finding.BusinessContext) || !Text(finding.RootCause) ||
+                finding.FindingRevision < 0 || finding.Occurrences.IsDefaultOrEmpty || finding.Options.IsDefaultOrEmpty ||
+                !Texts(finding.ValidationGuidance, true) || !Texts(finding.GuidanceReferences, true) || !Texts(finding.Assumptions, false) || !Texts(finding.Limitations, true)) return GuidanceIssue.InvalidContent;
+            if (!findingIds.Add(finding.FindingId)) return GuidanceIssue.DuplicateId;
+            if (finding.RuleVersion != "synthetic-rule-v1") return GuidanceIssue.UnknownVersion;
+            if (finding.CategoryId is not ("SECURITY" or "OPERATIONS") || finding.Severity is not ("Critical" or "High" or "Medium" or "Low" or "Informational") ||
+                finding.InitialState is not ("Proposed" or "AutoConfirmed") || finding.CurrentState is not ("Proposed" or "AutoConfirmed" or "Confirmed" or "Rejected" or "Deferred")) return GuidanceIssue.InvalidContent;
+            if ((finding.InitialState == "AutoConfirmed" && finding.CurrentState != "AutoConfirmed") ||
+                (finding.InitialState == "Proposed" && finding.CurrentState == "AutoConfirmed") ||
+                (finding.Severity is "Critical" or "High" && finding.InitialState != "Proposed") ||
+                (finding.FindingRevision == 0 && (finding.CurrentState != finding.InitialState || finding.PresentationTitle != finding.OriginalTitle || finding.BusinessContext != ""))) return GuidanceIssue.SourceMismatch;
+            if (finding.Occurrences.Length > MaximumRecords || finding.Options.Length > MaximumRecords) return GuidanceIssue.InvalidContent;
+            var objectIds = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var occurrence in finding.Occurrences)
+            {
+                if (occurrence is null || !Digest(occurrence.OccurrenceId) || !Digest(occurrence.OriginalDigest) || !Text(occurrence.ObjectId) ||
+                    !Text(occurrence.ObjectType) || !Text(occurrence.ModuleId) || !Text(occurrence.EvidenceReference)) return GuidanceIssue.InvalidContent;
+                if (!occurrenceIds.Add(occurrence.OccurrenceId) || !objectIds.Add(occurrence.ObjectId)) return GuidanceIssue.DuplicateId;
+                if (occurrence.ObjectType != "SyntheticControl" || occurrence.ModuleId is not ("SyntheticSecurity" or "SyntheticOperations")) return GuidanceIssue.UnknownVersion;
+            }
+            var optionIds = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var option in finding.Options)
+            {
+                if (option is null || !Text(option.OptionId) || !Text(option.Text) || !Text(option.Prerequisites) || !Text(option.Risk) || !Text(option.RecoveryGuidance)) return GuidanceIssue.InvalidContent;
+                if (!optionIds.Add(option.OptionId)) return GuidanceIssue.DuplicateId;
+            }
+            totalOptions = checked(totalOptions + finding.Options.Length);
+            if (totalOptions > MaximumRecords || occurrenceIds.Count > MaximumRecords) return GuidanceIssue.InvalidContent;
+        }
+        return null;
+    }
+
+    private static JsonElement CanonicalElement(JsonElement value)
+    {
+        using var document = JsonDocument.Parse(CanonicalBytes(value));
+        return document.RootElement.Clone();
+    }
+    private static byte[] CanonicalBytes(JsonElement value)
+    {
+        using var stream = new MemoryStream();
+        using (var writer = new Utf8JsonWriter(stream)) Write(writer, value, 0, "");
+        if (stream.Length > MaximumContentBytes) throw new ValidationException(GuidanceIssue.InvalidContent);
+        return stream.ToArray();
+    }
+    private static void Write(Utf8JsonWriter writer, JsonElement value, int depth, string path)
+    {
+        if (depth > 32 || writer.BytesCommitted + writer.BytesPending > MaximumContentBytes) throw new ValidationException(GuidanceIssue.InvalidContent);
+        if (value.ValueKind == JsonValueKind.Object)
+        {
+            var properties = value.EnumerateObject().ToArray();
+            if (properties.Select(property => property.Name).Distinct(StringComparer.Ordinal).Count() != properties.Length) throw new ValidationException(GuidanceIssue.DuplicateId);
+            writer.WriteStartObject();
+            foreach (var property in properties.OrderBy(property => property.Name, StringComparer.Ordinal))
+            { writer.WritePropertyName(property.Name); Write(writer, property.Value, depth + 1, path + "/" + property.Name); }
+            writer.WriteEndObject();
+        }
+        else if (value.ValueKind == JsonValueKind.Array)
+        {
+            var items = value.EnumerateArray().ToArray();
+            if (path is "/modules" or "/source/capabilityLock/modules") items = items.OrderBy(item => String(item, "id"), StringComparer.Ordinal).ToArray();
+            writer.WriteStartArray();
+            foreach (var item in items) Write(writer, item, depth + 1, path + "/*");
+            writer.WriteEndArray();
+        }
+        else if (value.ValueKind == JsonValueKind.Number) writer.WriteRawValue(value.GetDecimal().ToString("G29", CultureInfo.InvariantCulture));
+        else if (value.ValueKind is JsonValueKind.String or JsonValueKind.Null or JsonValueKind.True or JsonValueKind.False) value.WriteTo(writer);
+        else throw new ValidationException(GuidanceIssue.InvalidSource);
+    }
+    private static bool Object(JsonElement value, string[] fields) => value.ValueKind == JsonValueKind.Object &&
+        value.EnumerateObject().Count() == fields.Length && value.EnumerateObject().Select(item => item.Name).Distinct(StringComparer.Ordinal).Count() == fields.Length &&
+        fields.All(field => value.TryGetProperty(field, out _));
+    private static string? String(JsonElement value, string name) => value.ValueKind == JsonValueKind.Object && value.TryGetProperty(name, out var property) && property.ValueKind == JsonValueKind.String ? property.GetString() : null;
+    private static bool Text(string? value) => value is { Length: > 0 and <= MaximumTextLength } && !string.IsNullOrWhiteSpace(value);
+    private static bool NullableEmptyText(string? value) => value is { Length: <= MaximumTextLength };
+    private static bool Texts(ImmutableArray<string> values, bool required) => !values.IsDefault && (!required || !values.IsEmpty) && values.Length <= MaximumRecords && values.All(Text);
+    private static bool Digest(string? value) => value is { Length: 64 } && value.All(character => character is >= '0' and <= '9' or >= 'a' and <= 'f');
+    private static string Hash(byte[] value) => Convert.ToHexStringLower(SHA256.HashData(value));
+    private static GuidanceResult Deny(GuidanceIssue issue) => new(issue, null);
+    private sealed class ValidationException(GuidanceIssue issue) : Exception { public GuidanceIssue Issue { get; } = issue; }
+}

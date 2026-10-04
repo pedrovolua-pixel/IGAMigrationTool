@@ -1,0 +1,98 @@
+{
+  "sourceFileCount": 190,
+  "sourceSha256": "ae55d6ebbc6f229bc536a65f8ac07b79aa36a463f82e7f28df676c0d4fe51df7",
+  "sourceDigestMethod": "Sorted selected implementation/test/config paths, each UTF8 relative path + NUL + exact bytes + NUL; excludes generated execution/evidence metadata and build outputs.",
+  "secretSnapshotFileCount": 350,
+  "transcripts": {
+    "iga-cycle04-checks.log": "d3d2baaba61c61e5c66367c08f49ee34cd2d21ca67ca452dd6ab86562e232e0a",
+    "iga-cycle04-final-checks.log": "6311260de396e3cab8f7631cbd66fbafe406e89b749c3ce88bb5e86ad1ef60c7",
+    "iga-cycle04-format-repair.log": "5715f79b019046d6b0c9bf858801ef872697dc17f2445529a3259031117974af",
+    "iga-cycle04-infra-checks.log": "cde691044586231d24c5cb1a79148ee5ad308c542bbd79e8eb19b35c9125e739",
+    "iga-cycle04-coverage-final.log": "67f769a94d471f8b238d12c4fed48d817c868982ba535c30fadc4a4573f2ba5c",
+    "iga-cycle04-checkout-scan.log": "348a036e25bedade23491bc392b9df7d4d89213000d6b26b8675a2329a1bf213"
+  },
+  "recordedUtc": "2026-10-02",
+  "scope": "Bounded first Phase1B synthetic developer slice; no human milestone or live gate acceptance",
+  "workers": {
+    "S4": "ee0ffb3b09952b242aae770906938ba14364779b",
+    "D4": "3b26e016e0c6ec80591db54402aa2181dede46ac",
+    "V4": "039b0f95e10792fba380e1f9ef715701e4abf750"
+  },
+  "checks": {
+    "auditedLockedRestore": "PASS",
+    "fullSolutionFormat": "PASS after disclosed runner whitespace correction",
+    "releaseBuild": "PASS zero warnings/errors, 24 projects",
+    "currentSuitesAndWindowsCrossPublish": "PASS",
+    "independentRules": 175,
+    "independentScoringGroups": 92,
+    "independentActualPostgresAssertions": 399,
+    "portableDurablePostgresAssertions": 80,
+    "finalAnalysisBrowserAssertions": 712,
+    "finalCoverageRecoveryBrowserChecks": 396,
+    "frontendContractTypeFormatBuildAudit": "PASS zero audit vulnerabilities",
+    "pinnedInfrastructurePolicies": "PASS 16 templates",
+    "secretScan": "PASS zero leaks after prose false-positive rewording; no allowlist",
+    "secretScanSnapshotFiles": 351,
+    "whitespace": "PASS",
+    "remotePartialCI": "PASS all configured Linux/Windows2022/2025 jobs, run36951595057 on38340b5e180c1dbaa6d15bb22e68d81975576da3; initial metadata-only failure run36951320677 retained in cycle record",
+    "privatePublication": "Confirmed initial matching owner-private Succeeded; final archived snapshot published in same closure work cycle",
+    "temporaryWorktrees": "All three removed after preserving commits/evidence"
+  },
+  "coverageRecoveryFinal": {
+    "status": "PASS",
+    "checks": 396,
+    "groups": [
+      "DEMO-001 strict transport and independent durable coverage golden",
+      "DEMO-002 actual keyboard start/progress/locks/reload/history/focus",
+      "DEMO-003 keyboard cancellation preserves incomplete durable results",
+      "DEMO-004 semantic/target/reflow/forced-colors engineering smoke",
+      "DEMO-006 actual host SIGKILL/reload/expired-lease keyboard resume/missing-only completion",
+      "DEMO-005 unavailable coverage and focused denied-action error recovery"
+    ],
+    "accessibility": [
+      {
+        "label": "desktop gap coverage",
+        "version": "4.13.0",
+        "passes": 30,
+        "violations": [],
+        "incomplete": []
+      },
+      {
+        "label": "320px cancellation with expanded locks",
+        "version": "4.13.0",
+        "passes": 29,
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ]
+      }
+    ],
+    "browser": "145.0.7632.6",
+    "node": "v24.21.0",
+    "base": "http://127.0.0.1:5183",
+    "limitations": [
+      "Historical coverage presets only; actual host SIGKILL/lease expiry/keyboard resume checked against final assets. Full supported Windows/manual accessibility and production/live acceptance NOT VERIFIED."
+    ]
+  },
+  "limitations": [
+    "No repeat cluster restart in portable recovery suite",
+    "No real One Identity catalog promotion or source authority",
+    "No mutating review, maturity, desired-outcome approval, AI, tasks, fix execution or report publication",
+    "320px contrast rule incomplete; full Windows/NVDA/Narrator acceptance NOT VERIFIED",
+    "G1\u2013G9 NOT VERIFIED"
+  ],
+  "initialPrivatePublication": {
+    "sourceSha": "381b562c41dce4fc010f85b26dedbb24393b1c93",
+    "repositorySnapshot": "62c94ba6c491d60e488ce9004c03c738841f0e9a",
+    "deploymentId": "appgdep_6abf09c9552881918d21e78b9b8dec3c",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_35fca85757348191a3b7ee8f2f1a8922",
+    "status": "succeeded",
+    "confirmedUtc": "2026-10-02T01:33:03.888141+00:00",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site"
+  },
+  "closureScan": {
+    "files": 353,
+    "status": "PASS zero leaks; final canonical records plus concurrent owner non-ignored diagram artifacts",
+    "transcriptSha256": "ce02fae4f3cd338583c85f4ca888058c4363a70104ac399a1cf5c77aec24cf46"
+  }
+}

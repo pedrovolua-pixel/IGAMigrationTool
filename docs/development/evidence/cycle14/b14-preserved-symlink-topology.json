@@ -1,0 +1,38 @@
+{
+  "schema": "cycle14-preserved-symlink-topology-v1",
+  "archiveSha256": "7d239939def0c80bbb72a96e5a5e0a6ed76e47cd48c7caa0cebb0ea7e4b0df89",
+  "materializedArchivedInputBytesVerified": true,
+  "restore": "Restore captured files first. Recreate relative in-archive file links listed here. Any external directory alias stays materialized from captured inputs; do not recreate links to removed checkouts.",
+  "fileLinks": [
+    {
+      "archivePath": "checkout/src/web/node_modules/.bin/nanoid",
+      "originalLink": "/private/tmp/iga-cycle14-task-ui/src/web/node_modules/.bin/nanoid",
+      "linkTarget": "../nanoid/bin/nanoid.cjs",
+      "targetBytesSha256": "e4eb9be1a3e3feb3f8979ef08c3bf3ef8430f4f22df9c4e427353a1577accbe8"
+    },
+    {
+      "archivePath": "checkout/src/web/node_modules/.bin/prettier",
+      "originalLink": "/private/tmp/iga-cycle14-task-ui/src/web/node_modules/.bin/prettier",
+      "linkTarget": "../prettier/bin/prettier.cjs",
+      "targetBytesSha256": "6e922134a3c76fd4de202959bb6aef50bde0c994148075003a15569b7197906e"
+    },
+    {
+      "archivePath": "checkout/src/web/node_modules/.bin/rolldown",
+      "originalLink": "/private/tmp/iga-cycle14-task-ui/src/web/node_modules/.bin/rolldown",
+      "linkTarget": "../rolldown/bin/cli.mjs",
+      "targetBytesSha256": "98d6df62aa3c84284db17944a2a8017f911640e9c4d3de907a9f93b467ee47c8"
+    },
+    {
+      "archivePath": "checkout/src/web/node_modules/.bin/tsc",
+      "originalLink": "/private/tmp/iga-cycle14-task-ui/src/web/node_modules/.bin/tsc",
+      "linkTarget": "../typescript/bin/tsc",
+      "targetBytesSha256": "2219f428a7e55aaf1f7ad85b9b0f0cf5078aeb76ccc9a7c6036c92d48f492ffd"
+    },
+    {
+      "archivePath": "checkout/src/web/node_modules/.bin/vite",
+      "originalLink": "/private/tmp/iga-cycle14-task-ui/src/web/node_modules/.bin/vite",
+      "linkTarget": "../vite/bin/vite.js",
+      "targetBytesSha256": "de5833362e640673962f16e255bf8738d4380a68601b9af26217eee4e1bac36d"
+    }
+  ]
+}

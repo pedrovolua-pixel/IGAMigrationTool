@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-03",
+  "status": "CONFIRMED owner-private completed local-cycle snapshot",
+  "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+  "versionNumber": 106,
+  "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_4c70c6302eb08191bea8c243a38809c3",
+  "sourceCommit": "d931b38c960e8dc2debd43a1e1a5dffc86b472b6",
+  "canonicalSnapshot": "650ddb6",
+  "testedMcpSourceCommit": "8e9ada7016d2eac49d4847d965bdf655bcc8fd8f",
+  "deployment": {
+    "id": "appgdep_6ac1644799d8819187ff665bb6b6523a",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_4c70c6302eb08191bea8c243a38809c3",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T20:23:41.567980+00:00"
+  },
+  "audience": {
+    "currentUserRole": "owner",
+    "allowedAccountCount": 1,
+    "groupCount": 0,
+    "externalVisitorCount": 0,
+    "policyRevision": 1
+  },
+  "sourceReconciliation": {
+    "initialPhase1dVersion": 104,
+    "concurrentPhase1cVersion": 105,
+    "openingSiteCommit": "979dbaf34a9bc839bde706e7a8d7a46ff09bbfbf",
+    "preserved": "Latest concurrent cycle05 panel,12 other human task cards,19 other named panels; byte checks in native evidence",
+    "taskState": "P1D-D01\u201303 local approval closed; separate actual publication/client/identity checklist task open;13 total human dependencies",
+    "nativePreservationProof": {
+      "baselineSiteCommit": "979dbaf34a9bc839bde706e7a8d7a46ff09bbfbf",
+      "baselineVersion": 105,
+      "otherTaskCardsByteIdentical": 12,
+      "otherNamedPanelsByteIdentical": 19,
+      "cycle05ConcurrentPanelPreserved": true,
+      "recordSnapshot": "1acf86749e2e4fa15c96c06e0570f317c18c6798"
+    }
+  },
+  "qa": {
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "taskRolesCompletionAndLinks": "PASS",
+    "repositoryLinksAndAnchors": "PASS",
+    "reflowNoOverflow": "PASS",
+    "pageErrors": 0,
+    "exactWorkingPushedPackagedHtml": "PASS",
+    "nativeEvidence": ".sites-work/phase1d-implementation-evidence"
+  },
+  "archiveStorage": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000d64081f5b86554d7b36b110d",
+    "content_hash": "sha256:7d8113b6fe3b9669ebb9527adb435aef1a57c4d8b3a1703b97d2a44e2b5c07cb",
+    "size_bytes": 112640,
+    "file_count": 2
+  },
+  "cleanup": "Four clean own A/B/V/combined worktrees removed; branches, source/runtime/oracle/native evidence preserved; unrelated working edits and concurrentPhase1C remain intact",
+  "hostedScope": "Linux MCP step and complete Windows2022/2025 jobs plus package passed on8e9ada7. Whole Linux historical regression still in progress at publication; no full hosted-pass claim.",
+  "limits": "Full Phase1D/Milestone11/UAT/G1\u2013G9 and actual publication/protocol/identity/retention/durable/distributed/production proof remain NOT VERIFIED.",
+  "localArchiveProof": {
+    "htmlSha256": "f782c8bc99b05b2d249e9ccc464247f84cbe4a8c2ae9c4f3e37d862874c54505",
+    "localTarGzSha256": "1b240c40f13e34ed8b48a1f4f3fe308fade34435e54c13b1891d6a47633e142e",
+    "exactWorkingPushedPackagedHtml": true
+  },
+  "initialPrivatePublication": {
+    "date": "2026-10-03",
+    "stage": "Initial local approval/task reconciliation; final completed-plan snapshot follows",
+    "repositorySnapshot": "ba83d69cc3b2a8fef7d1ff1690a14e3eee3ef277",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "sourceCommit": "201706e9b28c52c7d72f28bab2a7a0523e8a7a24",
+    "versionId": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_f4f39b579b7c81919245b88a6a19cdc6",
+    "versionNumber": 104,
+    "deployment": {
+      "id": "appgdep_6ac1612584e08191a90aba18bddcbe27",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_f4f39b579b7c81919245b88a6a19cdc6",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T20:10:20.290320+00:00"
+    },
+    "audience": {
+      "currentUserRole": "owner",
+      "allowedAccounts": 1,
+      "allowedGroups": 0,
+      "externalVisitors": 0,
+      "revision": 1
+    },
+    "taskReconciliation": {
+      "closed": "P1D-D01\u201303 exact local approval",
+      "open": "Separate actual publication/MCP client/identity integration contract",
+      "otherTaskCardsBytePreserved": 12,
+      "otherNamedPanelsBytePreserved": 18,
+      "openTasks": 13
+    },
+    "qa": "1440/390/320 reflow,role+completion+links,anchors,no page errors; exact working/pushed/packaged HTML",
+    "nativeArchive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000e64081f5a9b48e31f4e9b826",
+      "content_hash": "sha256:0f507b97be9c95de2406ccc579dbe50d2f67ca4c719ca462e0472f1c1d264303",
+      "size_bytes": 112640,
+      "file_count": 2
+    }
+  },
+  "nativeWorkflowRetry": "Final source helper credential expired; renewed same Site credential and reran successfully. Tar locale warnings did not fail validated packaging.",
+  "preservedNativeArchive": {
+    "artifact": ".sites-work/phase1d-implementation-preserved-20261003.tar.gz",
+    "sha256": "0e0483888626535d320f58347a152ecfd3e1c67ae683837a0d6eab00868d6002",
+    "sizeBytes": 1930722,
+    "manifestEntries": 180,
+    "sourceRuntimeNativeSiteEvidencePreserved": true
+  }
+}

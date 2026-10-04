@@ -1,0 +1,148 @@
+{
+  "date": "2026-10-03",
+  "status": "COMPLETE approved local implementation cycle; full M08/live gates NOT VERIFIED",
+  "publishedCodeCommit": "8b44a2767fe70b561bf6583bdf0b812c9f404d1a",
+  "executionSourceTreeEqualsPublishedCode": "59089ff92275e08ea86c402b7e8dc97de24d425f",
+  "privateSite": {
+    "deployment": {
+      "id": "appgdep_6ac131371714819181a9f3b58d4e2c20",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "title": "IGA Pilot Progress",
+      "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_e1ac9306c35881918acde35d5e3ebfd6",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-10-03T16:45:49.384492+00:00"
+    },
+    "version": {
+      "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_e1ac9306c35881918acde35d5e3ebfd6",
+      "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+      "version_number": 95,
+      "source": {
+        "commit_sha": "eba7bd85aca25f3fe5f6e33cb7161e8cc895dcf4"
+      },
+      "archive_storage": {
+        "archive_format": "tar",
+        "sediment_file_id": "file_00000000da2c81f59997cc29097d638b",
+        "content_hash": "sha256:cdd01bfd23984d1d613e030b91af3cde8e57446379091fe1f3ebc390c608015c",
+        "size_bytes": 92160,
+        "file_count": 2
+      },
+      "screenshot_url": null,
+      "deployment_id": "appgdep_6ac131371714819181a9f3b58d4e2c20"
+    },
+    "access": {
+      "mode": "custom",
+      "role": "owner",
+      "users": 1,
+      "groups": 0,
+      "external": 0,
+      "revision": 1
+    },
+    "repositoryCommit": "8b44a2767fe70b561bf6583bdf0b812c9f404d1a",
+    "qa": "site-qa.json",
+    "taskPreservation": "site-task-preservation.json",
+    "inspected": [
+      1440,
+      390,
+      320
+    ],
+    "limits": "Rendering QA on exact local assets; production source/deployment/audience confirmed by Sites native version metadata. Full live gate evidence not implied."
+  },
+  "sourceArchiveProof": {
+    "status": "PASS exact pushed static asset and hosting bytes",
+    "localArchiveSha256": "65651a4e671b05ce6c3b0c8d8d55f1a4412c91f8d21b4c391b0069dd6e1ded85",
+    "files": [
+      "._dist",
+      "dist/._index.html",
+      "dist/index.html",
+      "dist/._.openai",
+      "dist/.openai/._hosting.json",
+      "dist/.openai/hosting.json"
+    ],
+    "containerDigestNote": "Helper packs hosting under dist/.openai; local gzip/AppleDouble container and server-normalized two-file tar hashes recorded separately. Initial root hosting-path assertion corrected; no container-equality claim."
+  },
+  "siteTaskPreservation": {
+    "status": "PASS",
+    "preservedOpenTaskCards": 11,
+    "replacedPolicyDecisionWithActualReviewerAssignment": true,
+    "approvalCardClosed": true,
+    "inspectedViewports": [
+      1440,
+      390,
+      320
+    ],
+    "finalBadgeCorrected": true
+  },
+  "archives": {
+    "location": "work/m08-cycle03-evidence",
+    "artifactCount": 249,
+    "manifestSha256": "ae5b56963801fd825fa86155409603bcf5f98e274fb4971b7f551f8dc0396225",
+    "sourceRuntimeManifestSha256": "7aea2d1909be9371c448a0ba0b938e36808660cb68d195ddc9304a62cbafcf3e",
+    "cleanup": {
+      "status": "PASS",
+      "removedOnlyCleanOwnWorktrees": [
+        "sampling",
+        "regression",
+        "reviewer",
+        "coordinator"
+      ],
+      "archivesVerifiedBeforeRemoval": true,
+      "branchesRetained": true,
+      "unrelatedWorktreesUntouched": true
+    },
+    "sourceAssetLimit": "Original consumed source/config and compiled runtime retained. Unconsumed image/PDF files remain in Git and prior lossless source views; not duplicated."
+  },
+  "reviews": {
+    "finalCanonicalConfig": "regression/final-doc-review.json",
+    "nineMetadataBindings": "regression/false-positive-bindings.json",
+    "result": "CLOSED; native bytes/hash/check outcomes independently verified"
+  },
+  "hosted": {
+    "codeCommit": "8b44a2767fe70b561bf6583bdf0b812c9f404d1a",
+    "bootstrapRun": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37137627504",
+    "containerRun": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37137627426",
+    "container": "PASS",
+    "windows2022": "PASS including all new guarded policy checks",
+    "windows2025": "PASS including all new guarded policy checks",
+    "linuxPolicyStep": "PASS (native job step summary)",
+    "linuxWholeBootstrap": "RUNNING at this checkpoint; remaining historical browser/infrastructure checks not claimed passed",
+    "nativeProof": "work/m08-cycle03-evidence/coordinator/hosted-current.json",
+    "windowsCounts": "Both actual job logs bind exact code and7717/6144/300626/128 outputs; originals retained"
+  },
+  "preservation": {
+    "noncanonicalFiles": 23,
+    "sharedCanonicalAppendsOnly": true,
+    "allPriorOpenTaskCards": 11,
+    "openHumanTasks": 12
+  },
+  "noChanges": [
+    "External packages",
+    "Database migrations",
+    "Runtime flags",
+    "Public API/host/UI registration",
+    "Production or provider/source activation",
+    "Actual reviewer grants",
+    "Accepted ADRs"
+  ],
+  "unverified": [
+    "All40 full operational cases",
+    "Real reviewer/customer qualification/permission/conflict proof",
+    "Server current-policy/redaction/history/atomic queue/audit/lifecycle enforcement",
+    "Named independent human outcomes in two eligible environments",
+    "Risk acceptance/reassessment/recurrence/score explanations/residual collaboration",
+    "Supported manual accessibility/live UAT",
+    "Full M08/Phase1C/TP-HAS-012/019/G1-G9"
+  ],
+  "toolingNotes": [
+    "First Site helper invocation rejected unsupported argument before action; corrected documented stdin flow.",
+    "First publication helper required fresh expired source credential; renewed same Site then exact publication succeeded.",
+    "Helper packs hosting under dist/.openai and includes local AppleDouble entries; corrected artifact-path check and verified exact pushed asset/hosting bytes. Server normalized tar digest recorded separately."
+  ],
+  "publicationFollowup": "A final docs-complete canonical snapshot will be reflected in the existing private Site in this same work cycle; final native receipt adds provenance without changing milestone/human/gate status."
+}

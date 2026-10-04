@@ -1,0 +1,9 @@
+# Pure synthetic draft Markdown
+
+M6 owns only the structured Markdown source and this test host. The renderer consumes one D6 validated immutable snapshot, carries its canonical identity, and hashes exact UTF-8 output. It performs no network, filesystem, database, evidence resolution, renderer execution or authority check. Plain source punctuation is escaped, HTML characters encoded and control/newline characters represented visibly. These conventions produce inert Markdown text in the existing screen, not an export or published report.
+
+The literal fixture checks scores/status, original/current finding identity, review history, independent maturity, quality gaps, source versions/digests, section IDs and unavailable sections. Hostile source text checks HTML, URLs/autolinks/email, images, fences, multiline headings, shell/formula/table syntax and controls against explicit expected fragments. Culture/order/disposal checks preserve deterministic bytes. Changed digest/content/source/schema/status are refused before output. The fixtures are fictional values, not actual One Identity rules or integrity validation of a saved run.
+
+Use the pinned SDK10.0.401 to restore this project with `--locked-mode -p:NuGetAudit=true -p:NuGetAuditMode=all`, build Release and run the resulting test host. Format and verify the exact owned `.cs` file paths (directory `--include` patterns can bypass files). No dependency was added. Executed evidence and commit are reported with the worker handoff; no check is assumed passed.
+
+Host/UI/browser parity, PostgreSQL saved-source validation, full solution checks, PDF/renderer sandbox, real export/publication, production authority and supported Windows/manual assistive-technology acceptance remain outside this pure packet and NOT VERIFIED by this host. Coordinator owns canonical records and private status-site publication. No migration, retention policy, storage or configuration changes occur here.

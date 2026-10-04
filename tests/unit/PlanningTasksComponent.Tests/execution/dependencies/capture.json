@@ -1,0 +1,8 @@
+{
+  "origin": "/private/tmp/iga-cycle14-coordinator/src/web/src/usePlanningTasks.ts",
+  "coordinatorHead": "c430747743aeec5b6ad9d5253f2ad26142772df3",
+  "sourceSha256": "33db1c8429165fa0db7c34a4d394ccb28500d8c09cf7b9c3b700d86cb8947d59",
+  "capturedPath": "tests/unit/PlanningTasksComponent.Tests/execution/dependencies/usePlanningTasks.ts.frozen",
+  "purpose": "Untouched pure planningTaskReceiptAgrees helper only, inert API imports; no hook effects exercised.",
+  "immutableSourceCommit": "4388683d0a9cf58f09026e28f70f8dc1120e7ca5"
+}

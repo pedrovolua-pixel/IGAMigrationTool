@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-03",
+  "artifact": "Complete navigable platform mockup",
+  "preview": "http://127.0.0.1:5211/",
+  "original_preview": "http://127.0.0.1:5210/",
+  "primary_areas_verified": 18,
+  "secondary_screens_verified": 35,
+  "mobile_viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "mobile_areas_checked": 10,
+  "checks": {
+    "browser_navigation": "passed",
+    "scripted_ai_conversation": "passed",
+    "unblurred_relationship_overlay": "passed",
+    "escape_dismissal": "passed",
+    "settings_reload_persistence": "passed",
+    "sample_assessment_wizard": "passed",
+    "task_status_movement": "passed",
+    "theme_switching": "passed",
+    "mobile_navigation_and_overflow": "passed",
+    "screenshot_enlargement": "passed",
+    "generated_javascript_syntax": "passed",
+    "python_build_parse": "passed",
+    "prettier": "passed",
+    "write_methods_return_405": "passed",
+    "browser_error_warning_logs": "empty"
+  },
+  "production_checks": "not applicable to standalone mockup; no application source changed",
+  "git_commit": null,
+  "sha256": {
+    "index.html": "9dd766c7ee147a1fed9716b59f49bcbf2621fcb7a638ff777d4f0c2499753816",
+    "platform.js": "e9a487eeefd8b2946f96046568e6c1f0c4d9605a4f25ba83181fe63acbb5397f",
+    "platform.css": "b515aeffa338e184e481f2870100e770d0dc403da9347e3c2b878950c8799af4",
+    "preview.mjs": "83b2f4d6f50baa90fc3a7dad2549c2a99dfdff9cf170df4cd343ab609d443133"
+  }
+}

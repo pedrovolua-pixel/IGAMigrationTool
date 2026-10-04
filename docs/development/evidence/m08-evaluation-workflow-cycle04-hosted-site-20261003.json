@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-03",
+  "status": "CONFIRMED private hosted-check observation published",
+  "repositorySnapshot": "4bd8d41",
+  "implementationSource": "16fac348b753d43ded4b1365619479811aace891",
+  "deployment": {
+    "id": "appgdep_6ac154c65934819192cbe94ea1b909cf",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_744529662af48191a4814a448a64582b",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T19:17:32.602263+00:00"
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_744529662af48191a4814a448a64582b",
+    "versionNumber": 103,
+    "source": {
+      "commit_sha": "0728d97954036a943615b0c28449e567f5802332"
+    },
+    "deploymentId": "appgdep_6ac154c65934819192cbe94ea1b909cf",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000f8c081f587df06ec5a00cbc9",
+      "content_hash": "sha256:b33c5bc611bc7ade5cd791808ab31baae52266aa0e4985784e4cb6b3301fc99c",
+      "size_bytes": 112640,
+      "file_count": 2
+    }
+  },
+  "access": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "status": "active",
+    "access": "custom",
+    "users": 1,
+    "groups": 0,
+    "external": 0,
+    "revision": 1
+  },
+  "currentHumanTasks": 13,
+  "originalCurrentCardsBytePreserved": true,
+  "unownedPanelsBytePreserved": 18,
+  "reconciledWithLaterPhase1D": true,
+  "source": "0728d97954036a943615b0c28449e567f5802332",
+  "native": "work/m08-cycle04-evidence/hosted-site",
+  "qa": "PASS1440/390/320 links/task roles/completion/reflow; exact pushed archive bytes reverified",
+  "hosted": "Bootstrap37145211463 and package37145211465 complete success; later documentation rerun37145680195 and package37145680180 also success",
+  "limits": "Full M08/Phase1C/live/manual/native-select/capacity stress remain NOT VERIFIED; separately owned Phase1D decision stays PENDING."
+}

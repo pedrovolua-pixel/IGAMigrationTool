@@ -1,0 +1,7 @@
+PASS DR-MD-001 independent section/source/hash literals, deterministic bytes and invalid-snapshot refusal
+PASS DR-CORE-001 independent complete byte/digest/score/maturity/order literals
+PASS DR-CORE-002 ordering/culture/deep clone/disposal/old returned value/source digest binding
+PASS DR-CORE-003 fail-closed binding/version/required data/duplicate/time/token/nested maturity/history negatives
+PASS DR-MD-002 independently expected hostile HTML/link/image/fence/newline/control escaping
+PASS DR-PG-001 actual saved engine/review draft coherence/current change/old immutable value/fresh reload/wrongscope/historical locks/no storage
+201 independent draft assertions passed. Synthetic read-only values only; publication and manual Windows acceptance NOT VERIFIED.

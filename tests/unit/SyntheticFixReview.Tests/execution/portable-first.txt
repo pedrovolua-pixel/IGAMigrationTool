@@ -1,0 +1,1 @@
+PASS 197 actual assertions portable (PostgreSQL not executed)

@@ -1,0 +1,1 @@
+PASS PostgreSQL: 139 lifecycle/lock/highwater/planning/export/concurrency/replay/corruption assertions; dedicated iga_synthetic_phase1b_op_tests

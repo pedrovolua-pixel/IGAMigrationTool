@@ -1,0 +1,17 @@
+[
+  {
+    "path": "specs/003-health-assessment/local-planning-task-contract-proposal.md",
+    "sha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839",
+    "result": "PASS"
+  },
+  {
+    "path": "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+    "sha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2",
+    "result": "PASS"
+  },
+  {
+    "path": "migrations/planning-tasks/001-initial.sql",
+    "sha256": "2ac4f0cebcf290dc08aefc809103a84bc493da6ab61bd6ce4b041c94ad2c4853",
+    "result": "PASS"
+  }
+]

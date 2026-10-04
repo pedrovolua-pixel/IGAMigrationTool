@@ -1,0 +1,76 @@
+{
+  "schema": "local-pilot-cycle14-site-publication-v1",
+  "status": "CONFIRMED_PRIVATE_PUBLICATION",
+  "canonicalSnapshot": "2b565945be99c4c674cf00b08caa6fc581b99ffd",
+  "proposal": {
+    "path": "specs/003-health-assessment/local-planning-task-contract-proposal.md",
+    "sha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839",
+    "humanDecision": "PENDING"
+  },
+  "deployment": {
+    "id": "appgdep_6ac068d1b4cc8191b9f1b8cd44211bbc",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_3d23d9f544bc8191943b1d8e0f9b2aed",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T02:30:47.917332+00:00"
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_3d23d9f544bc8191943b1d8e0f9b2aed",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "version_number": 87,
+    "source": {
+      "commit_sha": "dd358edcf7058e6d80be734b7d35f9e3e1b46086"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000000b5481f5b852617811d9c209",
+      "content_hash": "sha256:700417739486480d5651217e6c84b5a439148f0c1f1e3a4f99b8b5597e0dbb1d",
+      "size_bytes": 81920,
+      "file_count": 2
+    },
+    "screenshot_url": null,
+    "deployment_id": "appgdep_6ac068d1b4cc8191b9f1b8cd44211bbc"
+  },
+  "access": {
+    "role": "owner",
+    "mode": "custom",
+    "version": 87,
+    "status": "active",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "users": 1,
+    "external": 0,
+    "groups": 0
+  },
+  "checks": {
+    "desktop1440": "PASS",
+    "mobile390": "PASS",
+    "reflow320": "PASS",
+    "pageErrors": 0,
+    "taskRolesCompletionLinksAnchorsNavigation": "PASS",
+    "existing11TaskCardsPreserved": "PASS",
+    "openTasks": 12,
+    "immutableSourcePathsChecked": 63,
+    "exactArchiveHtmlMatchesSourceCommit": "PASS",
+    "siteCommittedChangeGitleaks": "PASS",
+    "root51FileRoundtripPreservation": "PASS"
+  },
+  "archive": {
+    "path": "/private/tmp/iga-cycle14-site.tar.gz",
+    "sha256": "0a4e9d653d2df1225c48d7aad073e314ea8dd204624c3f0b2faa5490673f15b4",
+    "note": "Local uploaded tar digest; server archive_storage content_hash is recorded independently, not equated to local tar bytes."
+  },
+  "limits": [
+    "Documentary preparation only; task implementation BLOCKED on TC14-01\u201306 approval.",
+    "No Cycle14 product runtime, migration, build or implementation CI executed.",
+    "No milestone, human UAT, live gate, customer data or permission acceptance."
+  ],
+  "preservationDirectory": "work/cycle14-preparation-evidence"
+}

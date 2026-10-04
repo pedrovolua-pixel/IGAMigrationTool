@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">IGA health-assessment pilot system context</title>
+  <desc id="desc">Consultants and customer reviewers authenticate with Microsoft Entra ID and use the Azure-hosted pilot. A customer-side collector in each independent One Identity Manager pilot environment queries SQL Server read-only and sends normalized, redacted evidence outbound to the Azure ingestion boundary. The platform optionally uses the OpenAI API for constrained analysis and publishes governed reports.</desc>
+  <defs>
+    <style>
+      .title{font:600 30px 'Segoe UI',Arial,sans-serif;fill:#172033}.subtitle{font:400 16px 'Segoe UI',Arial,sans-serif;fill:#526174}.section{font:600 17px 'Segoe UI',Arial,sans-serif;fill:#172033}.label{font:600 15px 'Segoe UI',Arial,sans-serif;fill:#172033}.small{font:400 13px 'Segoe UI',Arial,sans-serif;fill:#526174}.tiny{font:400 12px 'Segoe UI',Arial,sans-serif;fill:#526174}.box{fill:#fff;stroke:#a9b7c6;stroke-width:1.5}.azure{fill:#f3f8fd;stroke:#0078d4;stroke-width:2}.external{fill:#fffaf1;stroke:#c98a18;stroke-width:1.5}.customer{fill:#f7f4fb;stroke:#7451a6;stroke-width:1.5}.flow{fill:none;stroke:#2476b8;stroke-width:2.5;marker-end:url(#arrow)}.identity{fill:none;stroke:#7451a6;stroke-width:2.5;stroke-dasharray:7 6;marker-end:url(#arrow-purple)}.external-flow{fill:none;stroke:#b3544b;stroke-width:2.5;stroke-dasharray:8 6;marker-end:url(#arrow-red)}.boundary{fill:#f8fbfe;stroke:#0078d4;stroke-width:2}.note{fill:#eef6fc;stroke:#8abce1;stroke-width:1}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2476b8"/></marker>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#7451a6"/></marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#b3544b"/></marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <text class="title" x="48" y="55">IGA health-assessment pilot — system context</text>
+  <text class="subtitle" x="48" y="84">What participates in the pilot and where the major trust boundaries sit</text>
+
+  <text class="section" x="48" y="135">People</text>
+  <rect class="customer" x="48" y="155" width="280" height="110" rx="12"/>
+  <circle cx="88" cy="197" r="20" fill="#7451a6" opacity="0.16"/>
+  <circle cx="88" cy="190" r="7" fill="#7451a6"/><path d="M74 214c3-12 25-12 28 0" fill="#7451a6"/>
+  <text class="label" x="122" y="190">Consultant</text>
+  <text class="small" x="122" y="214">Starts runs, reviews findings,</text>
+  <text class="small" x="122" y="234">publishes governed reports</text>
+
+  <rect class="customer" x="48" y="285" width="280" height="120" rx="12"/>
+  <circle cx="88" cy="330" r="20" fill="#7451a6" opacity="0.16"/>
+  <circle cx="88" cy="323" r="7" fill="#7451a6"/><path d="M74 347c3-12 25-12 28 0" fill="#7451a6"/>
+  <text class="label" x="122" y="315">Customer roles</text>
+  <text class="small" x="122" y="339">Reviewer • evidence authorizer</text>
+  <text class="small" x="122" y="361">risk owner • executive • auditor</text>
+  <text class="tiny" x="122" y="383">Customer authority remains separate</text>
+
+  <text class="section" x="48" y="470">Customer-side pilot environments</text>
+  <rect class="external" x="48" y="492" width="280" height="105" rx="12"/>
+  <ellipse cx="90" cy="526" rx="22" ry="9" fill="#d69d2e" opacity="0.25"/><path d="M68 526v25c0 12 44 12 44 0v-25" fill="#d69d2e" opacity="0.25" stroke="#b77c10"/><ellipse cx="90" cy="526" rx="22" ry="9" fill="none" stroke="#b77c10"/>
+  <text class="label" x="126" y="524">PILOT-ENV-A</text>
+  <text class="small" x="126" y="548">One Identity Manager 10.x</text>
+  <text class="small" x="126" y="570">SQL Server + local collector</text>
+  <text class="tiny" x="126" y="589">Approved read-only query pack</text>
+
+  <rect class="external" x="48" y="617" width="280" height="105" rx="12"/>
+  <ellipse cx="90" cy="651" rx="22" ry="9" fill="#d69d2e" opacity="0.25"/><path d="M68 651v25c0 12 44 12 44 0v-25" fill="#d69d2e" opacity="0.25" stroke="#b77c10"/><ellipse cx="90" cy="651" rx="22" ry="9" fill="none" stroke="#b77c10"/>
+  <text class="label" x="126" y="649">PILOT-ENV-B</text>
+  <text class="small" x="126" y="673">One Identity Manager 10.x</text>
+  <text class="small" x="126" y="695">SQL Server + local collector</text>
+  <text class="tiny" x="126" y="714">Independent evidence and validation</text>
+  <text class="tiny" x="48" y="748">Delivery: outbound-only HTTPS or encrypted offline package</text>
+
+  <rect class="boundary" x="390" y="120" width="790" height="660" rx="18"/>
+  <text class="section" x="415" y="153">Azure-hosted pilot platform</text>
+  <text class="small" x="415" y="176">Shared control plane • isolated customer data planes • United States region</text>
+
+  <rect class="azure" x="438" y="202" width="300" height="100" rx="12"/>
+  <image href="icons/microsoft-entra-id.svg" x="458" y="226" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="524" y="235">Microsoft Entra ID</text>
+  <text class="small" x="524" y="258">Single tenant + explicit B2B guests</text>
+  <text class="small" x="524" y="280">MFA / Conditional Access</text>
+
+  <rect class="azure" x="790" y="202" width="330" height="100" rx="12"/>
+  <image href="icons/azure-container-apps.svg" x="812" y="226" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="878" y="235">Azure Container Apps</text>
+  <text class="small" x="878" y="258">React UI + ASP.NET Core BFF/API</text>
+  <text class="small" x="878" y="280">Server session + product policy</text>
+
+  <rect class="azure" x="438" y="342" width="300" height="120" rx="12"/>
+  <image href="icons/azure-container-apps.svg" x="458" y="374" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="524" y="372">Assessment workers</text>
+  <text class="small" x="524" y="395">Rules • AI gateway • scoring</text>
+  <text class="small" x="524" y="417">rendering • purge • evaluation</text>
+  <text class="tiny" x="524" y="440">Independent managed identities</text>
+
+  <rect class="azure" x="790" y="342" width="330" height="120" rx="12"/>
+  <image href="icons/azure-service-bus.svg" x="812" y="374" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="878" y="372">Azure Service Bus Standard</text>
+  <text class="small" x="878" y="395">Opaque delivery signals only</text>
+  <text class="small" x="878" y="417">Retry • dead letter • duplicate-safe</text>
+  <text class="tiny" x="878" y="440">Controlled public Azure endpoint</text>
+
+  <rect class="azure" x="438" y="512" width="300" height="125" rx="12"/>
+  <text class="label" x="462" y="542">Feature 001 ingestion boundary</text>
+  <text class="small" x="462" y="566">Receives collector evidence/packages</text>
+  <text class="small" x="462" y="590">Validate • normalize • redact • classify</text>
+  <text class="tiny" x="462" y="614">No Azure-initiated source connection</text>
+
+  <rect class="azure" x="790" y="512" width="330" height="125" rx="12"/>
+  <image href="icons/azure-postgresql.svg" x="810" y="548" width="43" height="43" preserveAspectRatio="xMidYMid meet"/>
+  <image href="icons/azure-storage.svg" x="862" y="548" width="43" height="43" preserveAspectRatio="xMidYMid meet"/>
+  <text class="label" x="922" y="542">Canonical data and artifacts</text>
+  <text class="small" x="922" y="566">Non-HA PostgreSQL Flexible Server</text>
+  <text class="small" x="922" y="590">Customer-scoped Blob Storage</text>
+  <text class="tiny" x="922" y="614">Immutable baselines and publications</text>
+
+  <rect class="note" x="438" y="675" width="682" height="70" rx="10"/>
+  <text class="label" x="462" y="704">Hard boundary</text>
+  <text class="small" x="462" y="728">No remediation executor and no credential path from the assessment platform to customer systems.</text>
+
+  <text class="section" x="1230" y="135">External provider</text>
+  <rect class="external" x="1230" y="158" width="310" height="150" rx="12"/>
+  <text class="label" x="1256" y="194">OpenAI API</text>
+  <text class="small" x="1256" y="220">GPT-6 Sol • Responses API</text>
+  <text class="small" x="1256" y="244">US regional endpoint • ZDR required</text>
+  <text class="small" x="1256" y="268">Normalized/redacted packets only</text>
+  <text class="tiny" x="1256" y="291">No tools, raw evidence or retrieval</text>
+
+  <text class="section" x="1230" y="380">Governed outputs</text>
+  <rect class="box" x="1230" y="402" width="310" height="220" rx="12"/>
+  <text class="label" x="1256" y="440">One canonical publication</text>
+  <text class="small" x="1256" y="469">Interactive dashboard</text>
+  <text class="small" x="1256" y="496">Accessible PDF + Markdown</text>
+  <text class="small" x="1256" y="523">Revocable passcode link ≤24 hours</text>
+  <text class="small" x="1256" y="550">Read-only MCP in Phase 1D</text>
+  <text class="tiny" x="1256" y="582">All surfaces share one frozen manifest</text>
+
+  <g aria-label="Connections">
+    <path class="identity" d="M328 210 H380 V250 H438"/>
+    <path class="identity" d="M328 345 H365 V270 H438"/>
+    <path class="identity" d="M738 252 H790"/>
+    <text class="tiny" x="666" y="241">tokens / claims</text>
+
+    <path class="flow" d="M790 272 H760 V378 H738"/>
+    <path class="flow" d="M738 402 H790"/>
+    <path class="flow" d="M790 430 H760 V450 H738"/>
+
+    <path class="flow" d="M328 544 H382 V558 H438"/>
+    <path class="flow" d="M328 669 H382 V596 H438"/>
+    <path class="flow" d="M738 574 H790"/>
+    <path class="flow" d="M955 462 V512"/>
+    <path class="flow" d="M738 430 H770 V612 H790"/>
+
+    <path class="external-flow" d="M738 380 H1162 V232 H1230"/>
+    <text class="tiny" x="1012" y="220">approved redacted packet</text>
+    <path class="external-flow" d="M1230 280 H1188 V450 H1120"/>
+    <text class="tiny" x="1148" y="334">schema result</text>
+
+    <path class="flow" d="M1120 252 H1196 V470 H1230"/>
+    <path class="flow" d="M1120 596 H1196 V555 H1230"/>
+  </g>
+
+  <g transform="translate(48 820)">
+    <line x1="0" y1="0" x2="52" y2="0" class="flow"/><text class="tiny" x="68" y="5">application / data flow</text>
+    <line x1="280" y1="0" x2="332" y2="0" class="identity"/><text class="tiny" x="348" y="5">identity / policy</text>
+    <line x1="520" y1="0" x2="572" y2="0" class="external-flow"/><text class="tiny" x="588" y="5">external trust boundary</text>
+  </g>
+</svg>

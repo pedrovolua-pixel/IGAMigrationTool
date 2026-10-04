@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "synthetic-ai-fixture-input-v1",
+  "source": {
+    "customerId": "synthetic-customer",
+    "projectId": "synthetic-project",
+    "environmentId": "synthetic-environment",
+    "runId": "11111111-2222-3333-4444-555555555555",
+    "baselineDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "profileDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+    "normalizationVersion": "fixture-normalization-v1",
+    "redactionVersion": "fixture-redaction-v1",
+    "promptVersion": "fixture-prompt-v1"
+  },
+  "evidence": [
+    {
+      "evidenceId": "ev-bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "classification": "NormalizedRedactedConfiguration",
+      "redactionCount": 2,
+      "configurationKey": "retryPolicy",
+      "configurationValue": "linear-3"
+    },
+    {
+      "evidenceId": "ev-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "classification": "NormalizedRedactedConfiguration",
+      "redactionCount": 1,
+      "configurationKey": "scheduleEnabled",
+      "configurationValue": "false"
+    }
+  ],
+  "ruleIds": [
+    "fixture-rule-schedule-v1",
+    "fixture-rule-conflict-v1"
+  ]
+}

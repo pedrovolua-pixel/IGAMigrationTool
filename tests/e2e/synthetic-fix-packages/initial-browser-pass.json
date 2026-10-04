@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "v11-browser-execution-v1",
+  "result": "PASS",
+  "checks": 4530,
+  "groups": [
+    "V11-BROWSER-desktop",
+    "V11-BROWSER-mobile",
+    "V11-BROWSER-reflow"
+  ],
+  "browserVersion": "145.0.7632.6",
+  "nodeVersion": "v24.21.0",
+  "playwrightVersion": "1.62.1",
+  "harnessSha256": "d2c91e69ffa6253d14c42b06b051664c7b1c30e82d7b094e7c48999035fe102f",
+  "inputManifestSha256": "dbf3a75f1b1973807ce1fe6d097677656048e62a64cd4fe656ca81263033d06e",
+  "environmentStrategy": "Self-reexec explicit OS-path environment allowlist before fixture/server/Playwright load; browser uses same whitelist; no application/PG/provider setting forwarded",
+  "forwardedEnvironmentNames": [
+    "HOME",
+    "PATH",
+    "TMPDIR"
+  ],
+  "servedCount": 9,
+  "blockedCount": 0,
+  "deniedCount": 0,
+  "normalization": "HtmlEncoder numeric references: NUL becomes U+FFFD; encoded CR and CRLF retained",
+  "screenshots": [
+    {
+      "viewport": "desktop",
+      "viewportPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/desktop-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/desktop-preview.png"
+    },
+    {
+      "viewport": "mobile",
+      "viewportPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/mobile-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/mobile-preview.png"
+    },
+    {
+      "viewport": "reflow",
+      "viewportPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/reflow-viewport.png",
+      "fullPath": "/private/tmp/iga-cycle11-v11/tests/e2e/synthetic-fix-packages/reflow-preview.png"
+    }
+  ],
+  "limitations": [
+    "Deployed ADR sandbox/customer authorization NOT VERIFIED",
+    "Supported Windows/manual screenreader/contrast/full accessibility NOT VERIFIED",
+    "Task/CSV/review/persistence/publication/execution absent"
+  ]
+}

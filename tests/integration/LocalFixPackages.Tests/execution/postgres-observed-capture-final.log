@@ -1,0 +1,4 @@
+PASS V12-PORTABLE literal-source/full-canonical/template/identity/review/old-lock/opt-in invariants
+PASS V12-PG source/current-review/reload/no-artifact-storage/original invariants
+PASS V12-PG negative durable sources/tamper/historical-eight/schema invariants
+PASS V12 independent local fix packages; checks=691

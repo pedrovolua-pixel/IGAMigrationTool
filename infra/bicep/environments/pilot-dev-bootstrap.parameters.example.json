@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "REPLACE-existing-private-environment"
+    },
+    "registryName": {
+      "value": "REPLACEexistingprivateregistry"
+    },
+    "webIdentityName": {
+      "value": "REPLACE-existing-web-pull-identity"
+    },
+    "workerIdentityName": {
+      "value": "REPLACE-existing-worker-pull-identity"
+    },
+    "webAppName": {
+      "value": "ca-iga-dev-bootstrap-web"
+    },
+    "workerAppName": {
+      "value": "ca-iga-dev-bootstrap-worker"
+    },
+    "imageRepository": {
+      "value": "iga/azure-development-bootstrap"
+    },
+    "imageDigest": {
+      "value": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  }
+}

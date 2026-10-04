@@ -1,0 +1,113 @@
+{
+  "schema": "v13-independent-production-source-review-v1",
+  "reviewedCheckout": "/private/tmp/iga-cycle13-v13",
+  "checkpoint": "e28c57c8249c3ad3e987887cfa9802222c861350",
+  "sourceBindings": [
+    {
+      "path": "src/server/modules/SyntheticFixReview/ArtifactReviewContracts.cs",
+      "sha256": "c3915ffe210de433b513ad16dc0b179ea837c05e885d78dc2343e65cc8417513",
+      "bytes": 4490
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/ArtifactReviewCanonical.cs",
+      "sha256": "0099d5ae319fec809f742722b6b6c3a8765bbabed49412803cbf6e79c9a7b3db",
+      "bytes": 2478
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/ArtifactReviewSourceBuilder.cs",
+      "sha256": "2ed8aa71e87649892426cba1caa724cd5aa9e8492210c7a879ef1186bdba1763",
+      "bytes": 5285
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewMigration.cs",
+      "sha256": "31fb4582b37200aab14793b8801a7a684a7a398d22a554b6bb60e9f29b4d3d59",
+      "bytes": 10034
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/ArtifactReviewPolicy.cs",
+      "sha256": "e084f2e6d9d9357ec2e7d20d4a0b5095e3629049b3cd2b0c3fd6d7fb89ccbd67",
+      "bytes": 2766
+    },
+    {
+      "path": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+      "sha256": "68cb0926b833d70a125aee23edbf971579f287821687f66883a342d5ed389f84",
+      "bytes": 24614
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoArtifactReviewService.cs",
+      "sha256": "23e260aba2a1840f70e1ff141b9bbfc29790b64bcf8af490f4cb6cbbef9180cb",
+      "bytes": 5726
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+      "sha256": "55d16397f9d77d205817db867feaa0eb32ac827c34f23267de75f8a04d57dcdc",
+      "bytes": 29331
+    },
+    {
+      "path": "src/web/src/ArtifactReviewPanel.tsx",
+      "sha256": "2bb6c16c889871d5839d15b7708887a743bc9dcfac71d79d696ec3f65a2f4e7b",
+      "bytes": 23169
+    },
+    {
+      "path": "src/web/src/ArtifactReviewPanel.css",
+      "sha256": "22caf17bfd870c5c383afc7a53408545b5a82f065d57962483f306bd91f13c67",
+      "bytes": 1453
+    },
+    {
+      "path": "src/web/src/useArtifactReview.ts",
+      "sha256": "21bf6729c0f4618478299ea3cc5ab401dba844539259b02b99b0be3f9380fbc8",
+      "bytes": 9058
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "318abd63a4dfa82b91ef79d7bcf356169c8aa3d3f2401952d485e0674d9d178f",
+      "bytes": 29303
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "sha256": "35e111e12c3b3d26598364a97be9fec357b5fd4b14b4f46fb3a4bf9b272fba10",
+      "bytes": 31119
+    },
+    {
+      "path": "migrations/fix-review/001-initial.sql",
+      "sha256": "def3557d73879f4fc199d8152b1ff6c404f2e2477a99f7e50b031cccf5d92ab8",
+      "bytes": 6307
+    }
+  ],
+  "scope": [
+    "Approved AR13-01\u201305/frozen a0dca implementation contract/T01\u2013T12",
+    "Exact A final source reader/policy/source/store/canonical/migration; exact B component/coherence and parent capture/volatile drafts/read epoch/HTTP action integration"
+  ],
+  "findings": [
+    {
+      "id": "V13-R01",
+      "priority": "MEDIUM",
+      "location": "ArtifactReviewPanel.tsx structural history length guard",
+      "issue": "Undocumented history cap",
+      "status": "CLOSED",
+      "evidence": "Exact e15 corrected component already in imported512 bytes; only package/source100000 record bound remains."
+    },
+    {
+      "id": "V13-R02",
+      "priority": "MEDIUM",
+      "location": "App.tsx/useArtifactReview.ts",
+      "issue": "Draft and frozen uncertain command lost on keyed child run switch",
+      "status": "CLOSED_SOURCE_AND_BROWSER",
+      "evidence": "Volatile retainedDrafts owned by stable App, keyed run/artifact; cleanup marks uncertain and aborts; no browser storage authority. Actual second9132 browser executes run-return exact frozen command/reason retention and no duplicate event."
+    },
+    {
+      "id": "V13-R03",
+      "priority": "HIGH",
+      "location": "DemoArtifactReviewService.ReadAnalysisAsync",
+      "issue": "Prefence fallback exposed unfenced earlier source after pre-capture denial",
+      "status": "CLOSED_SOURCE_AND_HOST",
+      "evidence": "56a41 exact two-file correction consumed; null before verified capture => closed503 with no analysis source. Actual owned helper7 checks503 exact closed error/no source and restoration; independent recovery1 check O."
+    }
+  ],
+  "remainingActionableSourceFindings": [],
+  "limitations": [
+    "No production behavior edited by reviewer.",
+    "Final exact browser source ae4e422 executed10564 PASS; local engineering subset only. No feature/gate/human acceptance inferred.",
+    "Author execution counts are not reviewer runtime proof."
+  ]
+}

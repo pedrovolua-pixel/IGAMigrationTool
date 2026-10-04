@@ -1,0 +1,11 @@
+  AssessmentCoverage -> /private/tmp/iga-phase1b-closure-contract/src/server/modules/AssessmentCoverage/bin/Release/net10.0/AssessmentCoverage.dll
+  SyntheticSourceFence -> /private/tmp/iga-phase1b-closure-contract/src/server/modules/SyntheticSourceFence/bin/Release/net10.0/SyntheticSourceFence.dll
+  AssessmentScoring -> /private/tmp/iga-phase1b-closure-contract/src/server/modules/AssessmentScoring/bin/Release/net10.0/AssessmentScoring.dll
+  SyntheticOutcomePriority -> /private/tmp/iga-phase1b-closure-contract/src/server/modules/SyntheticOutcomePriority/bin/Release/net10.0/SyntheticOutcomePriority.dll
+  SyntheticOutcomePriority.Tests -> /private/tmp/iga-phase1b-closure-contract/tests/unit/SyntheticOutcomePriority.Tests/bin/Release/net10.0/SyntheticOutcomePriority.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.41

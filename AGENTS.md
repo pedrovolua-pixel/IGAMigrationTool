@@ -33,3 +33,13 @@ Human approval is required for product scope, consequential architecture or secu
 Run every applicable repository check before claiming completion: formatting, linting, type checking, unit tests, integration tests, end-to-end tests, security checks, and build. Report what ran, its result, what could not run, migrations/configuration changes, and unresolved risks. Never claim a check passed unless it was executed.
 
 For substantial work, keep the canonical implementation plan and feature status current.
+
+## Parallel pilot development
+
+The repository owner approved a coordinator and up to three bounded parallel workers on 2026-10-01. For approved local pilot implementation, delegate independent work through [the parallel development workflow](docs/development/parallel-agent-workflow.md). Use isolated worktrees for writing workers, explicit path ownership and traceable work packets. The coordinator owns shared configuration, integration, canonical records, human reporting and the existing private site. Workers return executed evidence and receive independent review; agent review does not replace required human approval. Use fewer workers when tasks are dependent or cannot be safely isolated.
+
+## Pilot status site
+
+For One Identity health-assessment pilot work, also maintain the existing private [pilot status site](docs/development/pilot-status-site.md). The repository's approved plans, feature status, and evidence index remain authoritative; the site summarizes them for human review.
+
+Whenever pilot implementation progress changes a canonical plan or feature status, or a gate, phase, milestone, or human dependency changes, update and publish the site's status and human tasks board in the same work cycle. Keep each open human task linked to the repository document or template that states the needed information, the requested role, and what completes the task. Close or change a task only when the canonical records support it. Do not report the site as current until the private deployment is confirmed; if publication is unavailable, report the stale snapshot and the reason. Never put customer evidence, credentials, protected identifiers, or raw SQL on the site.

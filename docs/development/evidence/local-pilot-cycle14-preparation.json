@@ -1,0 +1,128 @@
+{
+  "schema": "local-pilot-cycle14-preparation-v1",
+  "status": "PREPARATION_COMPLETE_AWAITING_HUMAN_DECISION",
+  "auditedCommit": "711e38d84ac1c626d3695a7a442f36053c2c9729",
+  "scope": "Documentary task/conversion/workflow/source/authority proposal only; TC14-01\u201306 not approved; implementation BLOCKED.",
+  "runtime": "NOT RUN \u2014 preparation adds no product code, schema, permission or dependency; no historical test is relabeled.",
+  "humanDecision": {
+    "status": "PENDING",
+    "ids": [
+      "TC14-01",
+      "TC14-02",
+      "TC14-03",
+      "TC14-04",
+      "TC14-05",
+      "TC14-06"
+    ],
+    "requestedRole": "Repository owner with product/security/technical responsibility",
+    "completion": "Explicit approval/amendment identifying TC14 IDs and exact reviewed proposal revision/digest",
+    "source": "specs/003-health-assessment/local-planning-task-contract-proposal.md#requested-decision"
+  },
+  "independentAudits": [
+    {
+      "path": "docs/development/evidence/cycle14/authority-audit.json",
+      "sha256": "c50d854d737b5f23c44aff69517b707e8c2961fb55698563ac51d85e985d2633"
+    },
+    {
+      "path": "docs/development/evidence/cycle14/product-audit.json",
+      "sha256": "abf9cb4c7f72bab544aa3747236f0a2edccfdd35eabda7366bb6ff4c5268dd85"
+    }
+  ],
+  "limits": [
+    "No full Milestone7/TP018/local pilot/UAT/G1\u2013G9 acceptance.",
+    "CSV fields/snapshot/links/encoding/lifecycle/worker design remain separate; no export activation.",
+    "Task assignment/priority/effort/customer source/provider/production use deferred.",
+    "Concurrent rootUI/BFF/research not source authority;51file preservation baseline captured."
+  ],
+  "site": {
+    "status": "CONFIRMED_PRIVATE_PUBLICATION",
+    "version": 87,
+    "source": "dd358edcf7058e6d80be734b7d35f9e3e1b46086",
+    "deploymentId": "appgdep_6ac068d1b4cc8191b9f1b8cd44211bbc",
+    "canonicalSnapshot": "2b565945be99c4c674cf00b08caa6fc581b99ffd",
+    "openHumanTasks": 12,
+    "receipt": "docs/development/evidence/local-pilot-cycle14-site-publication.json"
+  },
+  "proposalBinding": {
+    "algorithm": "SHA256 exact UTF8/LF finalnewline bytes",
+    "path": "specs/003-health-assessment/local-planning-task-contract-proposal.md",
+    "sha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839",
+    "bytes": 16681
+  },
+  "documentBindings": [
+    {
+      "path": "specs/003-health-assessment/local-planning-task-contract-proposal.md",
+      "sha256": "fe8a1583de876b653ddef41fa105a0defe4679f612400f660721ca8234c2b839"
+    },
+    {
+      "path": "specs/003-health-assessment/local-planning-task-test-plan.md",
+      "sha256": "58dc6d59664b0d3d4d04b6836b074344b1e9fdd83e23fb67504e6b7cb0b9a58f"
+    },
+    {
+      "path": "plans/active/local-pilot-planning-tasks-cycle-14.md",
+      "sha256": "e48dc3eee58ea27168268af46a449c78ff300c0a5b588e370097f50d03915f06"
+    }
+  ],
+  "documentaryChecks": [
+    {
+      "check": "Document links/anchors and named requirement IDs",
+      "status": "PASS",
+      "proof": "/private/tmp/iga-cycle14-document-link-proof.json",
+      "links": 17
+    },
+    {
+      "check": "git diff --check",
+      "status": "PASS",
+      "scope": "Isolated documentary patch; no code/runtime"
+    },
+    {
+      "check": "gitleaks8.30.1 full isolated source dir",
+      "status": "PASS",
+      "log": "/private/tmp/iga-cycle14-preparation-secret-scan.log",
+      "sha256": "6aaca6921c42a7bfeedc41d5d9e431e636a2e08c7c29877c9ba88221d050a7b0"
+    },
+    {
+      "check": "JSON parse / TC14 six decision rows / bounded test matrix",
+      "status": "PASS"
+    }
+  ],
+  "retainedCorrections": [
+    "Initial documentary reviews found ambiguous duplicate-create precedence, redundant current-plan reconfirmation, cancel table qualification and broken core-records anchor; corrected before final approval packet.",
+    "Initial template and ADR filename lookups corrected by repository inventory; no behavior or executed test affected."
+  ],
+  "independentReviews": {
+    "status": "CLOSED_NO_REMAINING_SCOPED_DOCUMENTARY_FINDINGS",
+    "records": [
+      {
+        "path": "docs/development/evidence/cycle14/authority-audit.json",
+        "sha256": "c50d854d737b5f23c44aff69517b707e8c2961fb55698563ac51d85e985d2633"
+      },
+      {
+        "path": "docs/development/evidence/cycle14/final-authority-proposal-review.json",
+        "sha256": "1de5db843a4418db519901d2da372a8452ea900b9e3a7c3f8fffb13505a15f3b"
+      },
+      {
+        "path": "docs/development/evidence/cycle14/final-product-proposal-review.json",
+        "sha256": "9cd6c620e296048790045a0c60c741e5e9971b0fabcb0adbcea991ba5a83876e"
+      },
+      {
+        "path": "docs/development/evidence/cycle14/initial-authority-proposal-review.json",
+        "sha256": "9653288320a4ef93781af9b4033a274dc095b464120db9b89cb25c7e40e9f400"
+      },
+      {
+        "path": "docs/development/evidence/cycle14/initial-product-proposal-review.json",
+        "sha256": "b1bb6303341c12503cefbfd7eefa9758576bcca8845b2418d8c6022daadf310f"
+      },
+      {
+        "path": "docs/development/evidence/cycle14/product-audit.json",
+        "sha256": "abf9cb4c7f72bab544aa3747236f0a2edccfdd35eabda7366bb6ff4c5268dd85"
+      }
+    ],
+    "note": "Final reviews bind exact proposal/test and plan before documentary checklist closure. Only that checkbox changes afterward; no proposed semantic text changes. Agent review is not human approval."
+  },
+  "checklistClosure": {
+    "reviewedPlanSha256": "ba9b03dd22e9073b5518be7611ff68614fe7502004e1b5384299245f9ae92781",
+    "finalPlanSha256": "e48dc3eee58ea27168268af46a449c78ff300c0a5b588e370097f50d03915f06",
+    "onlyChange": "Documentary preparation completion checkbox"
+  }
+}

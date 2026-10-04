@@ -1,0 +1,22 @@
+--- actual-628-executed-source
++++ final-formatted-source
+@@ -855,14 +855,11 @@
+   await select(page, normal.runId);
+   await observed;
+   equal(await region(page).count(), 0, "delayed-preview-cleared-before-result");
+-  const row = page
+-    .locator(".history tbody tr")
+-    .filter({
+-      has: page.getByText(
+-        "Fictional configuration · empty offline AI response",
+-        { exact: true },
+-      ),
+-    });
++  const row = page.locator(".history tbody tr").filter({
++    has: page.getByText("Fictional configuration · empty offline AI response", {
++      exact: true,
++    }),
++  });
+   await row.first().getByRole("button").focus();
+   await page.keyboard.press("Enter");
+   await shown(page, empty.runId);

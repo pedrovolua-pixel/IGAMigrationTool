@@ -1,0 +1,6 @@
+Unhandled exception. System.InvalidOperationException: FAIL T04 unpaired surrogate contractVersion typed outcome
+   at Program.Check(Boolean value, String name) in /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs:line 37
+   at Program.Denied(McpResult result, String label, Nullable`1 expected) in /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs:line 80
+   at Program.T04() in /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs:line 168
+   at Program.Main(String[] args) in /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs:line 30
+   at Program.<Main>(String[] args)

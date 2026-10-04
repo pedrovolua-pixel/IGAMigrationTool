@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><AssemblyName>LocalArtifactReview.IntegrationTests</AssemblyName></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <None Update="*.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

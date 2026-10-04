@@ -1,0 +1,322 @@
+{
+  "schema": "cycle14-independent-controlled-legacy-artifact-race-v1",
+  "result": "PASS deterministic oldordering reproduction and proposed barrier correction",
+  "checks": 5358,
+  "publishedSource": "d42a4d59c7850b815637b7220052138efe78df5f",
+  "database": "iga_synthetic_cycle13_v14_investigation",
+  "databaseCreation": "absence0 confirmed; CREATE only own fresh DB using established role iga_synthetic/127.0.0.1:55433; no reset/schema probe/trigger mutation/cluster changes",
+  "port": 5183,
+  "ownedHostStopped": true,
+  "productionSourceModified": false,
+  "sealedV14Modified": false,
+  "controlledOrdering": [
+    "Actual finding save committed; hold only its browser response, leaving previously visible original retry control.",
+    "Click identical artifact retry while finding response remains held; actual accepted historical receipt is captured and held.",
+    "Release committed finding response and await displayed fresh source at unchanged runRevision.",
+    "Release old receipt: backend NeedsReview revision4, DOM correctly withheld with original pending command/reason because readEpoch changed. This is the exact condition the old harness wrongly treated as a refreshed label.",
+    "Await exact fresh source row barrier, then explicitly retry the same frozen command; DOM becomes NeedsReview revision4, complete source/history parity passes and history remains4 (no duplicate or rebound command)."
+  ],
+  "limitations": [
+    "Investigation-only copied published harness DB guard and deterministic response gates/early exit; not a full legacy acceptance rerun.",
+    "Chromium145 macOS actual browser; hosted failure itself was Linux and remains separately preserved.",
+    "Host/runtime assets copied after execution, then byte-compared unchanged; source preparation and exact original commands/logs are retained.",
+    "Canonical patch is source-reviewed separately; its full configured hosted rerun belongs to coordinator."
+  ],
+  "bindings": [
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/AnalysisView.tsx",
+      "sha256": "35f6d3718f3cf24161892d4ecf55c7f4385ec468bf64d723d64e4bf7c0808e8d",
+      "bytes": 31715
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/ReviewPanel.tsx",
+      "sha256": "93999eb45cab07024fbaf0945e4337173bc8367b5c225ea0e74d32db4ad32164",
+      "bytes": 10340
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-dist/assets/index-Bt1g4Fb4.js",
+      "sha256": "6dba7243105f7a17776cfbc46819c2924e632dcdb6cff9103f9ce47211227254",
+      "bytes": 376049
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-dist/assets/index-Di9Zfee_.css",
+      "sha256": "4c4014378d9e6c8b81bc314a9f8c5321d42abdc70c460fec903c2b048b1fef58",
+      "bytes": 17335
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-dist/index.html",
+      "sha256": "89e4551331ccdd1455bbdda015759114d5af60262bbdf6850164cd1241cd3d0b",
+      "bytes": 479
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentCoverage.dll",
+      "sha256": "1ca7ffbd557a7f849a4d2f422a0882316baa5a11d014701057785714a259f034",
+      "bytes": 36864
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentCoverage.pdb",
+      "sha256": "aba6ad8e53e0ae3b27894ab5bcd92adf3107ed7dcbca7b1e58b10c3bb3bfc9ae",
+      "bytes": 17020
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentMaturity.dll",
+      "sha256": "94e9c2e31ed74395c73e86028c9ea030a244404628300972ba1324d8b27f203a",
+      "bytes": 47616
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentMaturity.pdb",
+      "sha256": "0818327500684ebfd69a12d8fed1fe3d9500e0161ff78bc284b7759c87da7f03",
+      "bytes": 19160
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentOrchestration.dll",
+      "sha256": "fa16a43170ed70a85d956dc343b7e9dec00f482cf86d1eca539d235a09958a9d",
+      "bytes": 45056
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentOrchestration.pdb",
+      "sha256": "39276bc739dabba8db708ead68ae71112700e2b0fd992f4d8fd16f9a498b2d8d",
+      "bytes": 18956
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentRuns.dll",
+      "sha256": "9b643c5687805b949558c1bca9189403683637525ecb7ad1fc02ece832cd6796",
+      "bytes": 177152
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentRuns.pdb",
+      "sha256": "2e007e24ccec0211183652698fcda3024fbffb109274c5bc1719986566ba5a7a",
+      "bytes": 39136
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentScoring.dll",
+      "sha256": "379398edefcbe61bdebf7ebcd360388451145c84cf7edd8ba2006330623a1437",
+      "bytes": 54272
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/AssessmentScoring.pdb",
+      "sha256": "aa0f0adc14cc19787b0b0c4accdfe81ba9ed84f4a63bc0c0833964d1f094ac5f",
+      "bytes": 20124
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/DeterministicAnalysis.dll",
+      "sha256": "b5589aed6db474631ef39576b10d723a9a6f80f33900682e4263b1aaaf5599b2",
+      "bytes": 94208
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/DeterministicAnalysis.pdb",
+      "sha256": "534aea1c07d99832179f34d9d4c53b4a218b95026c73080d0bccedd3847fd518",
+      "bytes": 24560
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/FindingReview.dll",
+      "sha256": "7c5bac782818249216f0fbe20357bfff6b367bc0daf9fb13abfa88fd5e1d1eac",
+      "bytes": 96256
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/FindingReview.pdb",
+      "sha256": "5e847512b55e52fbc1c80c8736d705e0986cbcca0997e219b087d74ddf2b792e",
+      "bytes": 26776
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/LocalConsultantDemo",
+      "sha256": "37cc85df5c2465562b7653c0a2691fbfd7a3748a66132981ba26481c8a29c005",
+      "bytes": 124712
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/LocalConsultantDemo.deps.json",
+      "sha256": "a1e2b7fdb839cd178028d5a8cc04a4f594c5c96e1eb5ee5873ee0744943b1fac",
+      "bytes": 10244
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/LocalConsultantDemo.dll",
+      "sha256": "2e822dc0a601dc195f05a3ae8d78bf7a75d3ec974a69c66ded64ca6ee19575e9",
+      "bytes": 245760
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/LocalConsultantDemo.pdb",
+      "sha256": "33e7a978a9f95b94bd9683aecec60ba6b03add1266bbd245252624a8ff06bf46",
+      "bytes": 45424
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/LocalConsultantDemo.runtimeconfig.json",
+      "sha256": "eff38a9750f7cca2407b1d639a963d56ffea92088e6da971bbbfa74e3dcd7224",
+      "bytes": 540
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/LocalConsultantDemo.staticwebassets.endpoints.json",
+      "sha256": "eb6525c892afda953a2560f151f9c5e5bc6e79ef6741d886488ac450262c91e3",
+      "bytes": 51
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/Microsoft.EntityFrameworkCore.Abstractions.dll",
+      "sha256": "74bc17c936d66ea090b6a5b4cc4307d2154c9692e57edd4c55d68dd4a99c11b6",
+      "bytes": 34616
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/Microsoft.EntityFrameworkCore.Relational.dll",
+      "sha256": "a1e4f36208650b15b75a4b01a5821d61d5be417ac2e86ec3c65e2560a87e0d7d",
+      "bytes": 2194744
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/Microsoft.EntityFrameworkCore.dll",
+      "sha256": "f5b1703d608e241314952b2ede8dcdd1b8d8adda8c91a13cb7e6b1007414cef4",
+      "bytes": 2829152
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
+      "sha256": "94fcf66e8e953fdb02c40c72ca89821dd5eed5324d4c0f12a7219ea8cd3d5a5e",
+      "bytes": 679424
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/Npgsql.dll",
+      "sha256": "e2bcafe1660fe4543fe9dfcabed972ec8d32259e5ea8009462ce1de23c7034c2",
+      "bytes": 1478656
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/RecommendationGuidance.dll",
+      "sha256": "0fed8522c396329093b5dbdf6e4b6f79cf4861344a5102385bdeb7dc735881ca",
+      "bytes": 61440
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/RecommendationGuidance.pdb",
+      "sha256": "878de7a0b88531cf1e51563ed7f97b175fab37f9a8b8c07d95d12f2cb0108f7c",
+      "bytes": 19920
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/ReportDrafts.dll",
+      "sha256": "f4fc5accb7cd682df09efa6a6a754d32ab82bb000d7a6af7fee9a7048692ebe9",
+      "bytes": 54784
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/ReportDrafts.pdb",
+      "sha256": "3b228aa54a3dd80a7d2c1b709c156657d8edb8022f58fbaa0180b4079592f46d",
+      "bytes": 19784
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticAiPreview.dll",
+      "sha256": "a39a8adad3aa0ef0869a00c177d2f10daad2472d7b58daca990200288c0f8f9a",
+      "bytes": 40448
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticAiPreview.pdb",
+      "sha256": "8d79dca3be6741c469369c446ac697ee667d470a8ed9d038d0810a86251f8382",
+      "bytes": 18000
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticAiValidation.dll",
+      "sha256": "5ef84cf425da9706dba69e15afdb5cf683c308a38d66e1563fd5202094104e05",
+      "bytes": 23552
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticAiValidation.pdb",
+      "sha256": "8cbe5182f572f4cb0b912e58f64ee8a7bd0ddb7a4f32656d37184bcbe394c5fe",
+      "bytes": 16196
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticFixPackages.dll",
+      "sha256": "cb4b169915056718667bb7b085c68c4a5b20984c9590f6f85e9729c388dcdb96",
+      "bytes": 46080
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticFixPackages.pdb",
+      "sha256": "18d093d5704f9ca2fa4766e791361ef7e2498c2c9d12b091ef8e8e0f70698ea9",
+      "bytes": 17032
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticFixReview.dll",
+      "sha256": "d4e8a703f203c9d4d07ad3994d62224b7ccd437fa8ebb2aff3439c893d9953bf",
+      "bytes": 122880
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticFixReview.pdb",
+      "sha256": "baf9af00cad187aa9529f5aa636f0ea4c50ce253569d9028742af1a9be8988c1",
+      "bytes": 31732
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticPlanningTasks.dll",
+      "sha256": "5fb1fadf4fe553945ced6eab9a912222507c9eae138233434d1893ca4063516e",
+      "bytes": 145408
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticPlanningTasks.pdb",
+      "sha256": "1eb745f8a51bf324c3c212706d2aa40cd67fbf764f607aabaab554080b903dfb",
+      "bytes": 34996
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticSourceFence.dll",
+      "sha256": "6266a4b44b26dc44a26fd4c358f6e31cdac07c8453eb347f7a1eaeda45b0ded6",
+      "bytes": 9728
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-host/SyntheticSourceFence.pdb",
+      "sha256": "ca0ce3e8c70c34338da640ddd7de2c5118e7225927daaa3561286ac861e7e635",
+      "bytes": 12260
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/consumed-runtime.json",
+      "sha256": "05f26d0036db2fd99acff22aca73d2eea29d5bf8cc0a09476e02bababf91d595",
+      "bytes": 10027
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/execution.json",
+      "sha256": "3ed21819f06402b6c470bf9ba23d5b1c95ee728db8e5650aed883614ded82986",
+      "bytes": 2132
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/expected.mjs",
+      "sha256": "8890d5600972a38b691ea711af4c78400133b7c2744b86be03bd324c7fe64129",
+      "bytes": 7418
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/native.log",
+      "sha256": "9f907c94f958e1d5b4ae9623e643d5215eb50e7aead65b5ef9cf16aea6dd44b6",
+      "bytes": 1197
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/published-expected.mjs",
+      "sha256": "8890d5600972a38b691ea711af4c78400133b7c2744b86be03bd324c7fe64129",
+      "bytes": 7418
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/published-verify.mjs",
+      "sha256": "ca0e2e1cabf845bad09180ea33388655bb6f2cedef635740b086c2f274159644",
+      "bytes": 72927
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/source-preparation.json",
+      "sha256": "8df3c4c8791d0c974a9c5ef6e1a6eeed351a7351e9439259952e91fd9368f695",
+      "bytes": 1699
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/useArtifactReview.ts",
+      "sha256": "21bf6729c0f4618478299ea3cc5ab401dba844539259b02b99b0be3f9380fbc8",
+      "bytes": 9058
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-v14-legacy-investigation/verify.mjs",
+      "sha256": "c091900f42fa6631e4d579467deddf38df69410285c62ecb3202f53995ea3c1b",
+      "bytes": 54091
+    },
+    {
+      "path": "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+      "sha256": "e4b5a3af0e05c75de2eae013904145f40fe7fc2a6e6f17510128bf45cca4e79b",
+      "bytes": 122129232
+    },
+    {
+      "path": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "sha256": "00c673767ee2538369f307d3c8a0ce06f16bc9e0ecf8ce767b64dd02b2230e98",
+      "bytes": 141392
+    },
+    {
+      "path": "/private/tmp/iga-cycle05-preserved-browser/node_modules/playwright/package.json",
+      "sha256": "ca170ec143a88ed3043ac953eb3b2377b2b97304104f4e1e23316684ce2c35af",
+      "bytes": 1416
+    },
+    {
+      "path": "/Users/pedrovolu/Library/Caches/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-mac-arm64/chrome-headless-shell",
+      "sha256": "a46b3b1e63163fa2d2437fb6ae967cb5a73b50050bca32f1964e6129b6228244",
+      "bytes": 154876784
+    }
+  ]
+}

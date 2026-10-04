@@ -1,0 +1,6 @@
+PASS V10-002 portable real builder/validator/preview full independent oracles and source denial
+PASS V10-001 independent whole-template/literal-proposal/six-old-lock/opt-in contracts
+PASS V10-PG-001 actual saved normal/empty/idempotent/frozen-source/full-oracle/reload/no-score/no-mutation
+PASS V10-PG-002 changed persisted locks/source/plan/result integrity denies with restored owned rows
+PASS V10-PG-003 six-historical-lock/null/health regressions and no-AI-schema
+282 independent local AI preview assertions passed. Fictional fixed response only; provider, production authorization, budgets, retention, manual accessibility and gates NOT VERIFIED.

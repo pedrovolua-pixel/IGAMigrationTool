@@ -1,0 +1,72 @@
+{
+  "schema": "v14-browser-execution-v1",
+  "status": "PASS",
+  "checks": 13626,
+  "lastCode": "zero-browser-or-owned-host-faults",
+  "browserVersion": "145.0.7632.6",
+  "groups": [
+    "TC14-T01/T03/T08 four-real-saved-presets-full-source-and-visible-options",
+    "TC14-T01/T03/T04/T11 explicit-workflow-duplicate-historical-replay-noeffects",
+    "TC14-T04/T06/T10 committed-malformed-and-lost-response-exact-retry-focus",
+    "TC14-T03/T06/T10 same-run-held-receipt-review-epoch-stale-maintenance-reconfirm",
+    "TC14-T06/T10 run-switch-late-receipt-fence-and-retained-volatile-draft",
+    "TC14-T02/T07/T12 actualHTTP-closed-input-authority-UTF16-UTF8-routebounds-noeffects",
+    "TC14-T07/T10 intercepted-closed-unavailable-metadata-no-content-or-actions",
+    "TC14-T07 client-denied-extra-detail",
+    "TC14-T07 client-denied-foreign-run-source",
+    "TC14-T07 client-denied-contract-lock",
+    "TC14-T07 client-denied-missing-vector",
+    "TC14-T07 client-denied-task-identity",
+    "TC14-T07 client-denied-unsafe-history",
+    "TC14-T07 client-denied-history-role",
+    "TC14-T07 client-denied-fake-current",
+    "TC14-T07 client-denied-fullcanonical",
+    "TC14-T07 client-denied-current-capability",
+    "TC14-T07 client-denied-history-nonUTC",
+    "TC14-T07/T09 literal-hostile-controls-and-closed-current-history-digest-guards",
+    "TC14-T08 ten-historical-profiles-additive-field-omission-no-promotion",
+    "TC14-T03/T10 actual-Enter-Space-eight-workflow-actions-stale-comment-explicit-reconfirm-focus-noeffects",
+    "TC14-T06/T09/T10 actual-own-restart-inert-keyboard-reflow-axe-three-viewports"
+  ],
+  "blockedAttemptCodes": [],
+  "pageErrorCodes": [],
+  "dialogCodes": [],
+  "screenshots": [
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/desktop-task-viewport.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/desktop.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/desktop-viewport.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/mobile-task-viewport.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/mobile.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/mobile-viewport.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/narrow-task-viewport.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/narrow.png",
+    "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/narrow-viewport.png"
+  ],
+  "accessibility": [
+    {
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "viewport": "narrow",
+      "violations": [],
+      "incomplete": []
+    }
+  ],
+  "environmentStrategy": "closed allowlist before fixture/browser/host loading; no inherited marker bypass",
+  "removedEnvironmentKeys": 41,
+  "sourceHash": "b86630e14f848ea57ca16e69e8d18bf453b60964c39873dc0eb887397f21b9b3",
+  "defaultMacStartupVerified": false,
+  "temporaryConfigurationWatchOverride": true,
+  "limitations": [
+    "Chromium macOS automated subset only; Windows/manual screen reader/deployed sandbox/production identity/full product gates NOT VERIFIED.",
+    "Test-only axe injection isolated from product inert-node assertions.",
+    "Observed synthetic captures never used as expected goldens; old counts not relabeled."
+  ]
+}

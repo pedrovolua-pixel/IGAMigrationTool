@@ -1,0 +1,28 @@
+{
+  "schema": "v14-independent-semantic-design-v1",
+  "status": "Preauthor design; exact engineering labels and byte recipes pending",
+  "decisions": ["TC14-01", "TC14-02", "TC14-03", "TC14-04", "TC14-05", "TC14-06"],
+  "workflow": ["Planned", "InProgress", "Completed", "Cancelled"],
+  "freshness": ["CurrentPlan", "NeedsReconfirmation", "SourceUnavailable"],
+  "statusTransitions": [
+    {"from": "Planned", "to": "InProgress", "requires": "CurrentPlan and verified non-Rejected source"},
+    {"from": "Planned", "to": "Cancelled", "requires": "Verified exact current source and selected vector; may be stale or Rejected"},
+    {"from": "InProgress", "to": "Planned", "requires": "Verified exact current source and selected vector; may be stale or Rejected"},
+    {"from": "InProgress", "to": "Completed", "requires": "CurrentPlan and verified non-Rejected source"},
+    {"from": "InProgress", "to": "Cancelled", "requires": "Verified exact current source and selected vector; may be stale or Rejected"},
+    {"from": "Completed", "to": "Planned", "requires": "Explicit reopen; verified non-Rejected current source; may remain stale"},
+    {"from": "Cancelled", "to": "Planned", "requires": "Explicit reopen; verified non-Rejected current source; may remain stale"}
+  ],
+  "commentsAllowedIn": ["Planned", "InProgress", "Completed", "Cancelled"],
+  "reconfirmAllowedIn": ["Planned", "InProgress"],
+  "taskIdentityCoordinates": ["customerId", "projectId", "environmentId", "runId", "findingId", "scopedOptionId"],
+  "taskIdentityExcludes": ["sourceDigest", "workflow", "commandEventId"],
+  "selectedArtifacts": ["fictional-script", "fictional-query", "fictional-object-layer"],
+  "selectionCardinality": 3,
+  "textMaximumUtf16Units": 2000,
+  "createExpectedRevision": 0,
+  "historicalProfileCount": 10,
+  "newProfileOrdinal": 11,
+  "mutationBranches": ["Closed input validation", "Shared run fence", "Trusted authority and current verifiable source/vector and stored integrity", "Accepted UUID exact replay or conflict", "Fresh exact current source/vector precondition", "Create stable identity AlreadyExists or absent-task eligibility; other action task revision and eligibility", "Atomic write"],
+  "pendingEngineering": ["Exact enums/DTOs", "Canonical/identity/command recipes", "Exact artifact kinds/templates", "Profile IDs and versions", "Source-vector high-water fields", "Read-unavailable field boundary", "Schema/fingerprint", "Issue codes and command limits"]
+}

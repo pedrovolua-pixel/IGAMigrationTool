@@ -1,0 +1,58 @@
+[
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/PlanningTasksPanel.tsx.frozen",
+    "sha256": "b1e208de0537d654cd7266dd68f6a5c1acc4649c0ea12df4d3c2eee79951fc19"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/oracle.py.frozen",
+    "sha256": "b3cea4d2fa79031d393daf0c51d549c33b056daa18c4b737c7820692206c234e"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/oracle-hashes.json.frozen",
+    "sha256": "7fd18a6dfb3d32e5965c2dd7992dda30770c7c84b9f7a64be8a73037eb9669c0"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/complete-expected.html.frozen",
+    "sha256": "a1b5c99187fc404fadaf8c60380dbcf6877ff3ee42d1ddcf1764e4d7a4106277"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/empty-expected.html.frozen",
+    "sha256": "9e42e6be6170fbee0e470b56fc2ec56baa4f2bb1ecc4302f483e770820147ee2"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/unavailable-expected.html.frozen",
+    "sha256": "14f9389690b26428927bec07ec608ff2f2b9229bf1df1dbe9252613f0b08727e"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/verify.mjs.frozen",
+    "sha256": "4cc60df875883d125c47e85ac9981077f5a0b7008776703d9f404b87226f0095"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/initial-unit.log.frozen",
+    "sha256": "6b81ec87630db04d5612ca216084d04a8b167a1cc9f63acc3ee6b81522b15711"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/FixPackagePreview.mjs.frozen",
+    "sha256": "9924d1583905092045c1ee4b24a3c46f20b10186b4d6b78096fba3b8e7a01401"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/complete-actual.html.frozen",
+    "sha256": "a1b5c99187fc404fadaf8c60380dbcf6877ff3ee42d1ddcf1764e4d7a4106277"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/PlanningTasksPanel.mjs.frozen",
+    "sha256": "56561829d0ac9c1292592c5b67937275838decb31e76d9acd8d7d2627a2ae295"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/empty-actual.html.frozen",
+    "sha256": "9e42e6be6170fbee0e470b56fc2ec56baa4f2bb1ecc4302f483e770820147ee2"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/ArtifactReviewPanel.mjs.frozen",
+    "sha256": "3a0a093ea88adae2411d9e06ddc02675f1f12780e18421f583b3cacabb0fbe12"
+  },
+  {
+    "path": "tests/unit/PlanningTasksComponent.Tests/execution/initial/unavailable-actual.html.frozen",
+    "sha256": "14f9389690b26428927bec07ec608ff2f2b9229bf1df1dbe9252613f0b08727e"
+  }
+]

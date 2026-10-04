@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "syntheticaipreview": {
+        "type": "Project",
+        "dependencies": {
+          "SyntheticAiValidation": "[1.0.0, )"
+        }
+      },
+      "syntheticaivalidation": {
+        "type": "Project"
+      }
+    }
+  }
+}

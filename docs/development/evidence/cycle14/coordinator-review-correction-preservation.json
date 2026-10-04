@@ -1,0 +1,256 @@
+{
+  "schema": "cycle14-parent-reviewed-follow-on-preservation-v1",
+  "recordedUtc": "2026-10-03T04:56:37.077786+00:00",
+  "archive": "/private/tmp/iga-cycle14-preserved/coordinator/review-and-correction-follow-on.tar.gz",
+  "archiveSha256": "1122dbcdedce36547661d99a4a93a7ba26298174b9fa7449c4fb50f1ba068055",
+  "allArchiveEntriesRehashed": 41,
+  "newExecutionNativeCasBindingsAlreadyPreservedInOriginalArchive": 1405,
+  "files": [
+    {
+      "path": "private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/source.tar.gz",
+      "original": "/private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/source.tar.gz",
+      "sha256": "411db94eed92d0ead7a591f2545cb173a62eb9127883c2c2edadf491408dd966",
+      "bytes": 125644728
+    },
+    {
+      "path": "private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/native-closure.json",
+      "original": "/private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/native-closure.json",
+      "sha256": "63d98b213044c7dc564d55922820e2465ca1198c6c9a96d8f17434a054d8be6c",
+      "bytes": 326594
+    },
+    {
+      "path": "private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/native.log",
+      "original": "/private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/native.log",
+      "sha256": "6f3b20ed4357776aae7bd90eaa8570bd4220af174fa3b662efab1773e5b8ebcc",
+      "bytes": 145
+    },
+    {
+      "path": "private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/1-executed.sh",
+      "original": "/private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/1-executed.sh",
+      "sha256": "d2151849233f8dc72789b80346a1be6ebce2e0ef83d3dedffc0b1bae545060be",
+      "bytes": 376
+    },
+    {
+      "path": "private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/execution.json",
+      "original": "/private/tmp/iga-cycle14-coordinator-execution/legacy-browser-barrier-format-syntax-secret-20261003T044311/execution.json",
+      "sha256": "a02e046c71de9adb5638cadd5ba9f4c5f3f47e997d5be98fc2dc15d98409c886",
+      "bytes": 305972
+    },
+    {
+      "path": "private/tmp/iga-cycle14-a14-review-by-b14/correction-source-review.json",
+      "original": "/private/tmp/iga-cycle14-a14-review-by-b14/correction-source-review.json",
+      "sha256": "6855a2965642cb2585ca8686af92a705cedb2b5d9ac2d181596178e9fc96264f",
+      "bytes": 2029
+    },
+    {
+      "path": "private/tmp/iga-cycle14-a14-review-by-b14/interim-sealed-review.json",
+      "original": "/private/tmp/iga-cycle14-a14-review-by-b14/interim-sealed-review.json",
+      "sha256": "b5fa44177f57abfdf3879aa8342a35cc7202b4bacef1fc5c8c2eefaea140cf39",
+      "bytes": 11276
+    },
+    {
+      "path": "private/tmp/iga-cycle14-a14-review-by-b14/final-review.json",
+      "original": "/private/tmp/iga-cycle14-a14-review-by-b14/final-review.json",
+      "sha256": "14356bacec935aa837bf3ad8fb24526e95ceefba6e03155d020cda3b3c4064fe",
+      "bytes": 13126
+    },
+    {
+      "path": "private/tmp/iga-cycle14-a14-review-by-b14/correction.patch",
+      "original": "/private/tmp/iga-cycle14-a14-review-by-b14/correction.patch",
+      "sha256": "3ee6aed4f1e68bac2c8cede00800ecc669bc39799c8c999fa3a9d500c43d083f",
+      "bytes": 19044
+    },
+    {
+      "path": "private/tmp/iga-cycle14-a14-review-by-b14/final-bindings.log",
+      "original": "/private/tmp/iga-cycle14-a14-review-by-b14/final-bindings.log",
+      "sha256": "c20c7db5c0ec0086bae43f153c4ec4aec9c1a7f1b26c32c869155bc9e3044da0",
+      "bytes": 106
+    },
+    {
+      "path": "private/tmp/iga-cycle14-a14-review-by-b14/bindings.log",
+      "original": "/private/tmp/iga-cycle14-a14-review-by-b14/bindings.log",
+      "sha256": "66ead43c6adfb4cd5ccf0ecd8153892fcf903af8f87c2d0c5c3a5faf6634a1f5",
+      "bytes": 106
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/pure-checks.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/pure-checks.json",
+      "sha256": "efc8d9f07d3bea4be878c05a38ca93fc9d9e37393a58847f1f3d8de0073705ed",
+      "bytes": 1032
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/telemetry-review.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/telemetry-review.json",
+      "sha256": "1b463a14b540b005fa77b5acf8d1e3f665d8c4a4682fffc765218e45f25046b2",
+      "bytes": 825
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/binding-review.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/binding-review.json",
+      "sha256": "1dfb8004eccedd0f1833c00e00e3c7f43dd80481c259dbe0200329df99ee93b4",
+      "bytes": 549
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/post-review-preservation.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/post-review-preservation.json",
+      "sha256": "db9a3acc4967f484e6ac1b4405fd93f4dfdf48fc4e6688186f6f883b0a330a0f",
+      "bytes": 557
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/node-independent-oracles.log",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/node-independent-oracles.log",
+      "sha256": "be8bcb4d9d5dc820040eafc87b8aa73a848d06e3b2f5175c2f325d42e5711bdc",
+      "bytes": 112
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/final-review.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/final-review.json",
+      "sha256": "f747ef25e1c53d5a2679e9f5c05e90a79390ff28747128bbbf272288b4f1a643",
+      "bytes": 7791
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/python-literal-oracles.log",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/python-literal-oracles.log",
+      "sha256": "853ab986e730e4b09e450281c5dd01f047d9f44c56e4da42b57b8116a978f486",
+      "bytes": 146
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual-crops.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual-crops.json",
+      "sha256": "2a31bb1cd60fb659cfd5f78ea6c546e5cf087d676cbb01e1a63c13c61e294fca",
+      "bytes": 3867
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/mobile-middle.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/mobile-middle.png",
+      "sha256": "1a3ac2e5e21adf2d2c25b7f1142575e705c986b10f2f912be391a70988b0e4bb",
+      "bytes": 86975
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/desktop-middle.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/desktop-middle.png",
+      "sha256": "af8985e9073a7789a9aaaee83bde4a1e76245e742cc2a95744c3a01b7761d1cb",
+      "bytes": 201715
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/mobile-top.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/mobile-top.png",
+      "sha256": "16e7165cb7f20d31daee692340c4b591ddb74fe7efad890d2617ed57e49928b2",
+      "bytes": 115376
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/narrow-middle.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/narrow-middle.png",
+      "sha256": "3423017678a0678b45324ff3637a4ff3253cc6f82506b5a6b49ee8a9e4805755",
+      "bytes": 87966
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/narrow-top.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/narrow-top.png",
+      "sha256": "160981040f97887d252a553cd8ee91b1bf355ee6779691f2b611004721337efd",
+      "bytes": 74091
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/desktop-bottom.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/desktop-bottom.png",
+      "sha256": "4ad2700fa56150c7d1398eaa8613d7a3b918621d6cbae91b2410d342b0f342f0",
+      "bytes": 9839971
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/mobile-bottom.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/mobile-bottom.png",
+      "sha256": "3b4bda8760f281822340dcc01accc4bc6947fd36dcb4704617b4a6eb8e1d0f91",
+      "bytes": 10108228
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/narrow-bottom.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/narrow-bottom.png",
+      "sha256": "9c93b53b9536a277b8e9cc7d72cece060e1aebd5a758328f0f4f06fdda80f662",
+      "bytes": 10432827
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-a14/visual/desktop-top.png",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-a14/visual/desktop-top.png",
+      "sha256": "73ee255bfdbb0705534bb5c5138371257b957302bebcde16334b9ce395cb753d",
+      "bytes": 198781
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-b14/interim-review.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-b14/interim-review.json",
+      "sha256": "6ec3c4a8decda16df206ee4acf202e61c66faba7edf327a302f9c74f4b1ac098",
+      "bytes": 14836
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-b14/oracle-javascript.log",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-b14/oracle-javascript.log",
+      "sha256": "be8bcb4d9d5dc820040eafc87b8aa73a848d06e3b2f5175c2f325d42e5711bdc",
+      "bytes": 112
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-b14/oracle-python.log",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-b14/oracle-python.log",
+      "sha256": "853ab986e730e4b09e450281c5dd01f047d9f44c56e4da42b57b8116a978f486",
+      "bytes": 146
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-b14/final-review.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-b14/final-review.json",
+      "sha256": "75974ca87160aaf94dd499cd4aca1ffae3c8420a34e2dbe9a59ce582571c5c3b",
+      "bytes": 23002
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-review-by-b14/final-bindings-proof.json",
+      "original": "/private/tmp/iga-cycle14-v14-review-by-b14/final-bindings-proof.json",
+      "sha256": "5f48d36780d83761ca6f605f24162af430d9b31661bb239013130dddd01db98a",
+      "bytes": 1150
+    },
+    {
+      "path": "private/tmp/c14-close-records.py",
+      "original": "/private/tmp/c14-close-records.py",
+      "sha256": "d1ba3853307bf22e718606a3b94b4257e05769c44f34a528664d8d2906ff9228",
+      "bytes": 12829
+    },
+    {
+      "path": "private/tmp/c14-final-evidence-draft.py",
+      "original": "/private/tmp/c14-final-evidence-draft.py",
+      "sha256": "a2f1eaf7a81fd891dc2ce26a8b3a9af6e446d6d2cf30a91cbcf5b07133899b5b",
+      "bytes": 6993
+    },
+    {
+      "path": "private/tmp/c14-integrate-followon.py",
+      "original": "/private/tmp/c14-integrate-followon.py",
+      "sha256": "c6af6b589562e10052c9efc54c5fb9f476e438e4708b967f202100eeaa88b798",
+      "bytes": 3787
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-legacy-ar-barrier-review.json",
+      "original": "/private/tmp/iga-cycle14-v14-legacy-ar-barrier-review.json",
+      "sha256": "ac915ff26bc0bded6dda1d0cb543f15d232f17f7920589af8eac7f6a3b475586",
+      "bytes": 2120
+    },
+    {
+      "path": "private/tmp/iga-cycle14-canonical-draft-review-by-b14.json",
+      "original": "/private/tmp/iga-cycle14-canonical-draft-review-by-b14.json",
+      "sha256": "4aa031211027e71c38565757b8c0aa73fc28715ef37a0509100f1967edbaf19a",
+      "bytes": 4002
+    },
+    {
+      "path": "private/tmp/iga-cycle14-canonical-draft-corrected-review-by-b14.json",
+      "original": "/private/tmp/iga-cycle14-canonical-draft-corrected-review-by-b14.json",
+      "sha256": "81ea5f46e7452bb537d22c3cc273e81ae93d8f7cb17cdad7f552a11348367100",
+      "bytes": 3526
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-final-source-equivalence.json",
+      "original": "/private/tmp/iga-cycle14-v14-final-source-equivalence.json",
+      "sha256": "60108e78abbe9432249285228d3614c35965eae2bf11ed8345496458c9d0b49a",
+      "bytes": 3690
+    },
+    {
+      "path": "private/tmp/iga-cycle14-v14-preservation-inventory.json",
+      "original": "/private/tmp/iga-cycle14-v14-preservation-inventory.json",
+      "sha256": "a6ab668176fa51c49aa6e65c7d284c2ba2d0c263ce4dab76361abfc86c7d1590",
+      "bytes": 9078
+    }
+  ]
+}

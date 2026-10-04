@@ -1,0 +1,480 @@
+{
+  "run": {
+    "schemaVersion": 1,
+    "demoOnly": true,
+    "runId": "11111111-2222-4333-8444-555555555555",
+    "revision": 7,
+    "state": "Scoring",
+    "createdAtUtc": "2026-10-03T00:00:00Z",
+    "updatedAtUtc": "2026-10-03T00:00:01Z",
+    "selection": {
+      "scopeId": "demo-scope",
+      "scopeLabel": "Synthetic One Identity environment",
+      "baselineId": "synthetic-analysis-findings-v1",
+      "baselineLabel": "Fictional findings",
+      "profileId": "synthetic-review-maturity-planning-tasks-equal-v1",
+      "profileLabel": "Synthetic consultant planning tasks · equal weights"
+    },
+    "progress": {
+      "plannedUnits": 1,
+      "terminalUnits": 1,
+      "remainingUnits": 0,
+      "allTerminal": true
+    },
+    "coverageCompletionKind": "Complete",
+    "lockedInputs": [
+      {
+        "name": "Baseline",
+        "version": "synthetic-analysis-findings-v1",
+        "sha256": "f9f1d314f66ec32777b268f447e0dc8dfb99b07fa63026c1ccf8f487a9fe4313"
+      },
+      {
+        "name": "Profile",
+        "version": "synthetic-profile-v1",
+        "sha256": "419f8babe9cc4dbc9814f649d76842843b6b9f4f908101ebfaf4c93e9fa9750b"
+      },
+      {
+        "name": "Rule catalog",
+        "version": "synthetic-analysis-catalog-v1",
+        "sha256": "5029075f99d9c3442019b09b38e70c7f722abc7d9cdc7fbf0f32858e0c826694"
+      },
+      {
+        "name": "Capability",
+        "version": "synthetic-analysis-matrix-v1",
+        "sha256": "0952b8a488fff211c5ea7fa52024e95a6570acdf97e32934535034e36d5637bc"
+      },
+      {
+        "name": "Desired outcomes",
+        "version": "disabled",
+        "sha256": "17eb3c0168d0d7b21ede5481150f17233427d89833ec121b4dbc4fb96cfab71e"
+      },
+      {
+        "name": "Scoring algorithm",
+        "version": "pilot-health-v1",
+        "sha256": "29e4c1370cbc21c01927bdfe0ffe962e8dcb98d5665b043dd3fc6b176599c2ca"
+      },
+      {
+        "name": "AI policy",
+        "version": "synthetic-ai-disabled-v1",
+        "sha256": "c3c38ca102b3b21f125d228da17f1c6ec3ba7df96295fe435e5aa56e21884899"
+      },
+      {
+        "name": "Prompt",
+        "version": "synthetic-prompt-disabled-v1",
+        "sha256": "6aad774326a3961f9ae2b794dda6615167e94769ed54b3de4d9bebcad4809993"
+      },
+      {
+        "name": "Model",
+        "version": "synthetic-model-disabled-v1",
+        "sha256": "fb1207db5a421724a19a721ad49c7aa845874f972941c97fab8e6e0d399f9bad"
+      },
+      {
+        "name": "Application",
+        "version": "synthetic-planning-tasks-app-v1",
+        "sha256": "8d4a7cc42ef5cd406eb1ac2733c808bca6d25cb92296dd84deafef9fefa0ab14"
+      },
+      {
+        "name": "Work schema",
+        "version": "synthetic-run-work-v1",
+        "sha256": "62f97295786395635b782fb69bf8b54b70cc375c045f4a1d1ce56cc8bb6d7cea"
+      },
+      {
+        "name": "Complete frozen input",
+        "version": "synthetic-input-lock-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Exact capability tuple",
+        "version": "synthetic-analysis-matrix-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Scripted result fixture",
+        "version": "synthetic-outcomes-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Frozen analysis contents",
+        "version": "synthetic-analysis-lock-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Fictional fix-package templates",
+        "version": "fictional-fix-templates-v1",
+        "sha256": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+      },
+      {
+        "name": "Artifact review contract",
+        "version": "synthetic-fix-review-contract-v1",
+        "sha256": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f"
+      },
+      {
+        "name": "Planning task contract",
+        "version": "synthetic-planning-task-contract-v1",
+        "sha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2"
+      }
+    ],
+    "warnings": [],
+    "stateCounts": [
+      {
+        "state": "Pass",
+        "count": 1
+      }
+    ],
+    "executableCoverage": null,
+    "limitations": [],
+    "actions": {
+      "cancel": false,
+      "resume": false
+    },
+    "cancelRequested": false
+  },
+  "analysis": {
+    "schemaVersion": 1,
+    "demoOnly": true,
+    "runId": "11111111-2222-4333-8444-555555555555",
+    "runRevision": 7,
+    "status": "Ready",
+    "reasonCode": null,
+    "algorithmVersion": "pilot-health-v1",
+    "fixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "contentDigest": "8888888888888888888888888888888888888888888888888888888888888888",
+    "provisional": null,
+    "publishableCurrent": null,
+    "categories": [],
+    "objectTypes": [],
+    "modules": [],
+    "outcomes": [],
+    "quality": null,
+    "findings": [],
+    "warnings": [],
+    "review": {
+      "schemaVersion": 1,
+      "demoOnly": true,
+      "runId": "11111111-2222-4333-8444-555555555555",
+      "runRevision": 7,
+      "status": "Ready",
+      "reasonCode": null,
+      "snapshotDigest": "4444444444444444444444444444444444444444444444444444444444444444",
+      "actor": "synthetic-consultant",
+      "findings": []
+    },
+    "maturity": null,
+    "reviewSnapshotDigest": "4444444444444444444444444444444444444444444444444444444444444444",
+    "reportDraft": null,
+    "recommendationGuidance": {
+      "status": "Ready",
+      "reasonCode": null,
+      "snapshot": {
+        "schemaVersion": "synthetic-recommendation-guidance-v1",
+        "status": "SyntheticUnverified",
+        "source": {
+          "scope": {
+            "customerId": "synthetic-customer",
+            "projectId": "synthetic-project",
+            "environmentId": "synthetic-environment"
+          },
+          "runId": "11111111-2222-4333-8444-555555555555",
+          "runRevision": 7,
+          "runState": "Scoring",
+          "runInputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+          "baselineId": "synthetic-analysis-findings-v1",
+          "profileId": "synthetic-review-maturity-planning-tasks-equal-v1",
+          "frozenVersions": {
+            "profileVersion": "synthetic-profile-v1",
+            "desiredOutcomeVersion": null,
+            "scoringAlgorithmVersion": "pilot-health-v1",
+            "aiPolicyVersion": "synthetic-ai-disabled-v1",
+            "promptVersion": "synthetic-prompt-disabled-v1",
+            "modelVersion": "synthetic-model-disabled-v1",
+            "applicationVersion": "synthetic-planning-tasks-app-v1",
+            "workSchemaVersion": "synthetic-run-work-v1",
+            "scriptedResultsDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "analysisFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "maturityFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "fixPackageTemplateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669",
+            "fixReviewContractDigest": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+            "planningTaskContractDigest": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2"
+          },
+          "capabilityLock": {
+            "matrixVersion": "synthetic-analysis-matrix-v1",
+            "stateAtLock": "FixtureVerified",
+            "productBuild": "fixture-product-v1",
+            "databaseSchemaBuild": "fixture-facts-v1",
+            "hotfixSetDigest": "synthetic-hotfix-digest",
+            "sqlServerBuild": "synthetic-sql-build",
+            "compatibilityLevel": 160,
+            "modules": [
+              {
+                "id": "SyntheticOperations",
+                "version": "synthetic-module-v1"
+              },
+              {
+                "id": "SyntheticSecurity",
+                "version": "synthetic-module-v1"
+              }
+            ],
+            "queryPackVersion": "synthetic-query-pack-v1",
+            "normalizationSchemaVersion": "synthetic-normalization-v1",
+            "ruleCatalogVersion": "synthetic-analysis-catalog-v1",
+            "lockDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          "analysisLock": {
+            "scope": {
+              "customerId": "synthetic-customer",
+              "projectId": "synthetic-project",
+              "environmentId": "synthetic-environment"
+            },
+            "packVersion": "synthetic-analysis-pack-v1",
+            "packDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "presetId": "synthetic-analysis-findings-v1",
+            "presetVersion": "synthetic-evidence-v1",
+            "evidenceDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "catalogVersion": "synthetic-analysis-catalog-v1",
+            "catalogDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "profileId": "synthetic-analysis-equal-v1",
+            "profileVersion": "synthetic-profile-v1",
+            "profileDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "compatibility": {
+              "sourceProduct": "SYNTHETIC-ONLY",
+              "productVersion": "fixture-product-v1",
+              "evidenceSchemaVersion": "fixture-facts-v1",
+              "ruleLanguageVersion": "count-predicate-v1"
+            }
+          },
+          "analysisFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+          "analysisContentDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+          "savedCoverageDigest": "3333333333333333333333333333333333333333333333333333333333333333",
+          "reviewRunId": "11111111-2222-4333-8444-555555555555",
+          "reviewRunRevision": 7,
+          "reviewSnapshotDigest": "4444444444444444444444444444444444444444444444444444444444444444"
+        },
+        "findings": [],
+        "warnings": [
+          "Synthetic fixture guidance only; no actual One Identity defect, supported remediation or customer approval is established.",
+          "Every option is review-only and unverified. Finding confirmation, rejection or deferral does not review guidance or validate remediation.",
+          "Stable identity ordering is not a priority calculation. Recovery guidance does not establish executed or verified restoration.",
+          "This is a current detached value, not durable recommendation history. The run remains Scoring and unpublished."
+        ],
+        "unavailableSections": [
+          "Priority calculation, effort estimates and consultant overrides are unavailable.",
+          "Customer-approved objectives, roles and approvals are unavailable.",
+          "Fix artifacts, recommendation review, task conversion/workflows and CSV export are unavailable.",
+          "Customer risk acceptance, validated remediation, reassessment and actual report publication/sharing are unavailable.",
+          "No SQL, script, configuration artifact, customer-system execution, external task connector or ROI calculation exists."
+        ],
+        "contentDigest": "035fc441dc0ca6ecdd00d89b03fbeb88dae0befff8bd76545a0b8287bd88762c"
+      }
+    },
+    "aiPreview": null,
+    "fixPackages": {
+      "schemaVersion": "synthetic-fix-package-demo-v1",
+      "runId": "11111111-2222-4333-8444-555555555555",
+      "runRevision": 7,
+      "runInputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+      "baselineId": "synthetic-analysis-findings-v1",
+      "profileId": "synthetic-review-maturity-planning-tasks-equal-v1",
+      "status": "Ready",
+      "reasonCode": null,
+      "snapshot": {
+        "schemaVersion": "synthetic-fix-package-preview-v1",
+        "status": "Unverified",
+        "disclaimer": "Fictional fix-package preview. Every artifact is unverified and review-only; these generic examples are not supported One Identity remediation. No execution or approval is authorized.",
+        "guidance": {
+          "schemaVersion": "synthetic-recommendation-guidance-v1",
+          "status": "SyntheticUnverified",
+          "source": {
+            "scope": {
+              "customerId": "synthetic-customer",
+              "projectId": "synthetic-project",
+              "environmentId": "synthetic-environment"
+            },
+            "runId": "11111111-2222-4333-8444-555555555555",
+            "runRevision": 7,
+            "runState": "Scoring",
+            "runInputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "baselineId": "synthetic-analysis-findings-v1",
+            "profileId": "synthetic-review-maturity-planning-tasks-equal-v1",
+            "frozenVersions": {
+              "profileVersion": "synthetic-profile-v1",
+              "desiredOutcomeVersion": null,
+              "scoringAlgorithmVersion": "pilot-health-v1",
+              "aiPolicyVersion": "synthetic-ai-disabled-v1",
+              "promptVersion": "synthetic-prompt-disabled-v1",
+              "modelVersion": "synthetic-model-disabled-v1",
+              "applicationVersion": "synthetic-planning-tasks-app-v1",
+              "workSchemaVersion": "synthetic-run-work-v1",
+              "scriptedResultsDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+              "analysisFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+              "maturityFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+              "fixPackageTemplateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669",
+              "fixReviewContractDigest": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+              "planningTaskContractDigest": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2"
+            },
+            "capabilityLock": {
+              "matrixVersion": "synthetic-analysis-matrix-v1",
+              "stateAtLock": "FixtureVerified",
+              "productBuild": "fixture-product-v1",
+              "databaseSchemaBuild": "fixture-facts-v1",
+              "hotfixSetDigest": "synthetic-hotfix-digest",
+              "sqlServerBuild": "synthetic-sql-build",
+              "compatibilityLevel": 160,
+              "modules": [
+                {
+                  "id": "SyntheticOperations",
+                  "version": "synthetic-module-v1"
+                },
+                {
+                  "id": "SyntheticSecurity",
+                  "version": "synthetic-module-v1"
+                }
+              ],
+              "queryPackVersion": "synthetic-query-pack-v1",
+              "normalizationSchemaVersion": "synthetic-normalization-v1",
+              "ruleCatalogVersion": "synthetic-analysis-catalog-v1",
+              "lockDigest": "1111111111111111111111111111111111111111111111111111111111111111"
+            },
+            "analysisLock": {
+              "scope": {
+                "customerId": "synthetic-customer",
+                "projectId": "synthetic-project",
+                "environmentId": "synthetic-environment"
+              },
+              "packVersion": "synthetic-analysis-pack-v1",
+              "packDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+              "presetId": "synthetic-analysis-findings-v1",
+              "presetVersion": "synthetic-evidence-v1",
+              "evidenceDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+              "catalogVersion": "synthetic-analysis-catalog-v1",
+              "catalogDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+              "profileId": "synthetic-analysis-equal-v1",
+              "profileVersion": "synthetic-profile-v1",
+              "profileDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+              "compatibility": {
+                "sourceProduct": "SYNTHETIC-ONLY",
+                "productVersion": "fixture-product-v1",
+                "evidenceSchemaVersion": "fixture-facts-v1",
+                "ruleLanguageVersion": "count-predicate-v1"
+              }
+            },
+            "analysisFixtureDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+            "analysisContentDigest": "2222222222222222222222222222222222222222222222222222222222222222",
+            "savedCoverageDigest": "3333333333333333333333333333333333333333333333333333333333333333",
+            "reviewRunId": "11111111-2222-4333-8444-555555555555",
+            "reviewRunRevision": 7,
+            "reviewSnapshotDigest": "4444444444444444444444444444444444444444444444444444444444444444"
+          },
+          "findings": [],
+          "warnings": [
+            "Synthetic fixture guidance only; no actual One Identity defect, supported remediation or customer approval is established.",
+            "Every option is review-only and unverified. Finding confirmation, rejection or deferral does not review guidance or validate remediation.",
+            "Stable identity ordering is not a priority calculation. Recovery guidance does not establish executed or verified restoration.",
+            "This is a current detached value, not durable recommendation history. The run remains Scoring and unpublished."
+          ],
+          "unavailableSections": [
+            "Priority calculation, effort estimates and consultant overrides are unavailable.",
+            "Customer-approved objectives, roles and approvals are unavailable.",
+            "Fix artifacts, recommendation review, task conversion/workflows and CSV export are unavailable.",
+            "Customer risk acceptance, validated remediation, reassessment and actual report publication/sharing are unavailable.",
+            "No SQL, script, configuration artifact, customer-system execution, external task connector or ROI calculation exists."
+          ],
+          "contentDigest": "035fc441dc0ca6ecdd00d89b03fbeb88dae0befff8bd76545a0b8287bd88762c"
+        },
+        "templateVersion": "fictional-fix-templates-v1",
+        "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669",
+        "templates": [
+          {
+            "templateId": "fictional-config-v1",
+            "kind": "Configuration",
+            "text": "{\n  \"fixtureOnly\": true,\n  \"reviewRequired\": true\n}"
+          },
+          {
+            "templateId": "fictional-script-v1",
+            "kind": "Script",
+            "text": "# Fictional review-only example. No customer-system action.\nWrite-Output 'Fixture review required'"
+          },
+          {
+            "templateId": "fictional-sql-v1",
+            "kind": "Sql",
+            "text": "-- Fictional review-only example. No customer database or object.\nSELECT 'Fixture review required' AS FixtureMessage;"
+          }
+        ],
+        "packages": [],
+        "warnings": [
+          "Finding confirmation, rejection or deferral does not review artifacts or validate remediation.",
+          "Package identity ordering is not priority or effort. Existing finding groups are preserved without root-cause merging.",
+          "Source guidance is retained verbatim as historical input; its unavailable sections describe that upstream projection.",
+          "No findings were supplied; no fix packages or actions are available."
+        ],
+        "unavailableSections": [
+          "Consultant artifact review, approval history and content invalidation are unavailable.",
+          "Priority, effort, customer objectives, task conversion/workflows and CSV/export are unavailable.",
+          "Customer-system execution, external connectors, validated recovery/remediation and report publication are unavailable."
+        ],
+        "canonicalJson": "{\"disclaimer\":\"Fictional fix-package preview. Every artifact is unverified and review-only; these generic examples are not supported One Identity remediation. No execution or approval is authorized.\",\"guidance\":{\"contentDigest\":\"035fc441dc0ca6ecdd00d89b03fbeb88dae0befff8bd76545a0b8287bd88762c\",\"findings\":[],\"schemaVersion\":\"synthetic-recommendation-guidance-v1\",\"source\":{\"analysisContentDigest\":\"2222222222222222222222222222222222222222222222222222222222222222\",\"analysisFixtureDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"analysisLock\":{\"catalogDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"catalogVersion\":\"synthetic-analysis-catalog-v1\",\"compatibility\":{\"evidenceSchemaVersion\":\"fixture-facts-v1\",\"productVersion\":\"fixture-product-v1\",\"ruleLanguageVersion\":\"count-predicate-v1\",\"sourceProduct\":\"SYNTHETIC-ONLY\"},\"evidenceDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"packDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"packVersion\":\"synthetic-analysis-pack-v1\",\"presetId\":\"synthetic-analysis-findings-v1\",\"presetVersion\":\"synthetic-evidence-v1\",\"profileDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"profileId\":\"synthetic-analysis-equal-v1\",\"profileVersion\":\"synthetic-profile-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"}},\"baselineId\":\"synthetic-analysis-findings-v1\",\"capabilityLock\":{\"compatibilityLevel\":160,\"databaseSchemaBuild\":\"fixture-facts-v1\",\"hotfixSetDigest\":\"synthetic-hotfix-digest\",\"lockDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"matrixVersion\":\"synthetic-analysis-matrix-v1\",\"modules\":[{\"id\":\"SyntheticOperations\",\"version\":\"synthetic-module-v1\"},{\"id\":\"SyntheticSecurity\",\"version\":\"synthetic-module-v1\"}],\"normalizationSchemaVersion\":\"synthetic-normalization-v1\",\"productBuild\":\"fixture-product-v1\",\"queryPackVersion\":\"synthetic-query-pack-v1\",\"ruleCatalogVersion\":\"synthetic-analysis-catalog-v1\",\"sqlServerBuild\":\"synthetic-sql-build\",\"stateAtLock\":\"FixtureVerified\"},\"frozenVersions\":{\"aiPolicyVersion\":\"synthetic-ai-disabled-v1\",\"analysisFixtureDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"applicationVersion\":\"synthetic-planning-tasks-app-v1\",\"desiredOutcomeVersion\":null,\"fixPackageTemplateDigest\":\"a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669\",\"fixReviewContractDigest\":\"a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f\",\"maturityFixtureDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"modelVersion\":\"synthetic-model-disabled-v1\",\"planningTaskContractDigest\":\"f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2\",\"profileVersion\":\"synthetic-profile-v1\",\"promptVersion\":\"synthetic-prompt-disabled-v1\",\"scoringAlgorithmVersion\":\"pilot-health-v1\",\"scriptedResultsDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"workSchemaVersion\":\"synthetic-run-work-v1\"},\"profileId\":\"synthetic-review-maturity-planning-tasks-equal-v1\",\"reviewRunId\":\"11111111-2222-4333-8444-555555555555\",\"reviewRunRevision\":7,\"reviewSnapshotDigest\":\"4444444444444444444444444444444444444444444444444444444444444444\",\"runId\":\"11111111-2222-4333-8444-555555555555\",\"runInputDigest\":\"1111111111111111111111111111111111111111111111111111111111111111\",\"runRevision\":7,\"runState\":\"Scoring\",\"savedCoverageDigest\":\"3333333333333333333333333333333333333333333333333333333333333333\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"}},\"status\":\"SyntheticUnverified\",\"unavailableSections\":[\"Priority calculation, effort estimates and consultant overrides are unavailable.\",\"Customer-approved objectives, roles and approvals are unavailable.\",\"Fix artifacts, recommendation review, task conversion/workflows and CSV export are unavailable.\",\"Customer risk acceptance, validated remediation, reassessment and actual report publication/sharing are unavailable.\",\"No SQL, script, configuration artifact, customer-system execution, external task connector or ROI calculation exists.\"],\"warnings\":[\"Synthetic fixture guidance only; no actual One Identity defect, supported remediation or customer approval is established.\",\"Every option is review-only and unverified. Finding confirmation, rejection or deferral does not review guidance or validate remediation.\",\"Stable identity ordering is not a priority calculation. Recovery guidance does not establish executed or verified restoration.\",\"This is a current detached value, not durable recommendation history. The run remains Scoring and unpublished.\"]},\"packages\":[],\"schemaVersion\":\"synthetic-fix-package-preview-v1\",\"status\":\"Unverified\",\"templateDigest\":\"a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669\",\"templateVersion\":\"fictional-fix-templates-v1\",\"templates\":[{\"kind\":\"Configuration\",\"templateId\":\"fictional-config-v1\",\"text\":\"{\\n  \\u0022fixtureOnly\\u0022: true,\\n  \\u0022reviewRequired\\u0022: true\\n}\"},{\"kind\":\"Script\",\"templateId\":\"fictional-script-v1\",\"text\":\"# Fictional review-only example. No customer-system action.\\nWrite-Output \\u0027Fixture review required\\u0027\"},{\"kind\":\"Sql\",\"templateId\":\"fictional-sql-v1\",\"text\":\"-- Fictional review-only example. No customer database or object.\\nSELECT \\u0027Fixture review required\\u0027 AS FixtureMessage;\"}],\"unavailableSections\":[\"Consultant artifact review, approval history and content invalidation are unavailable.\",\"Priority, effort, customer objectives, task conversion/workflows and CSV/export are unavailable.\",\"Customer-system execution, external connectors, validated recovery/remediation and report publication are unavailable.\"],\"warnings\":[\"Finding confirmation, rejection or deferral does not review artifacts or validate remediation.\",\"Package identity ordering is not priority or effort. Existing finding groups are preserved without root-cause merging.\",\"Source guidance is retained verbatim as historical input; its unavailable sections describe that upstream projection.\",\"No findings were supplied; no fix packages or actions are available.\"]}",
+        "contentDigest": "5500d6956ba42bb183516c5891387f27add8934c2c91765448f4dbd1c206a790"
+      }
+    },
+    "artifactReview": {
+      "schemaVersion": 1,
+      "demoOnly": true,
+      "status": "Ready",
+      "reasonCode": null,
+      "source": {
+        "scope": {
+          "customerId": "synthetic-customer",
+          "projectId": "synthetic-project",
+          "environmentId": "synthetic-environment"
+        },
+        "runId": "11111111-2222-4333-8444-555555555555",
+        "runRevision": 7,
+        "runInputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+        "baselineId": "synthetic-analysis-findings-v1",
+        "profileId": "synthetic-review-maturity-planning-tasks-equal-v1",
+        "applicationVersion": "synthetic-planning-tasks-app-v1",
+        "contractDigest": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+        "sourceDigest": "5500d6956ba42bb183516c5891387f27add8934c2c91765448f4dbd1c206a790",
+        "guidanceDigest": "035fc441dc0ca6ecdd00d89b03fbeb88dae0befff8bd76545a0b8287bd88762c",
+        "findingReviewDigest": "4444444444444444444444444444444444444444444444444444444444444444",
+        "templateVersion": "fictional-fix-templates-v1",
+        "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669",
+        "findingRevisions": []
+      },
+      "actorId": "synthetic-consultant",
+      "artifacts": []
+    },
+    "planningTasks": {
+      "schemaVersion": 1,
+      "demoOnly": true,
+      "status": "Ready",
+      "reasonCode": null,
+      "source": {
+        "artifactSource": {
+          "scope": {
+            "customerId": "synthetic-customer",
+            "projectId": "synthetic-project",
+            "environmentId": "synthetic-environment"
+          },
+          "runId": "11111111-2222-4333-8444-555555555555",
+          "runRevision": 7,
+          "runInputDigest": "1111111111111111111111111111111111111111111111111111111111111111",
+          "baselineId": "synthetic-analysis-findings-v1",
+          "profileId": "synthetic-review-maturity-planning-tasks-equal-v1",
+          "applicationVersion": "synthetic-planning-tasks-app-v1",
+          "contractDigest": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f",
+          "sourceDigest": "5500d6956ba42bb183516c5891387f27add8934c2c91765448f4dbd1c206a790",
+          "guidanceDigest": "035fc441dc0ca6ecdd00d89b03fbeb88dae0befff8bd76545a0b8287bd88762c",
+          "findingReviewDigest": "4444444444444444444444444444444444444444444444444444444444444444",
+          "templateVersion": "fictional-fix-templates-v1",
+          "templateDigest": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669",
+          "findingRevisions": []
+        },
+        "planningTaskContractDigest": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2"
+      },
+      "actorId": "synthetic-consultant",
+      "options": [],
+      "entries": [],
+      "unavailableEntries": []
+    }
+  }
+}

@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  Restored /private/tmp/iga-cycle10-verification/src/server/modules/ReportDrafts/ReportDrafts.csproj (in 35 ms).
+  Restored /private/tmp/iga-cycle10-verification/src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj (in 35 ms).
+  Restored /private/tmp/iga-cycle10-verification/src/server/modules/FindingReview/FindingReview.csproj (in 60 ms).
+  Restored /private/tmp/iga-cycle10-verification/src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj (in 76 ms).
+  8 of 12 projects are up-to-date for restore.

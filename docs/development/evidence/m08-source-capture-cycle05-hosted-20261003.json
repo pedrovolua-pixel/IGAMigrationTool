@@ -1,0 +1,748 @@
+{
+  "schemaVersion": "m08-source-capture-cycle05-hosted-v1",
+  "status": "PASS",
+  "observedAtUtc": "2026-10-03T20:43:09.903639+00:00",
+  "associatedPullRequestHeadCommit": "c02b945ad50789dd9c6b92ff15a5a02ff12dd08a",
+  "laterCanonicalCommit": "7030a64b4953958ef631c820b8e247ed562f4f32",
+  "laterRuntimeTestOrCiChanges": [],
+  "workflowRuns": [
+    {
+      "id": 37150936031,
+      "name": "Azure development package (partial checks)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 119,
+      "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936031/jobs",
+      "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936031/logs",
+      "workflow_id": 372721003
+    },
+    {
+      "id": 37150936195,
+      "name": "Bootstrap checks (partial gate)",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 209,
+      "jobs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936195/jobs",
+      "logs_url": "https://api.github.com/repos/pedrovolua-pixel/IGAMigrationTool/actions/runs/37150936195/logs",
+      "workflow_id": 370675336
+    }
+  ],
+  "jobs": [
+    {
+      "id": 111284513106,
+      "name": "collector-windows (windows-2025)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restore locked dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check approved Phase1B Windows portable contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows offline synthetic AI packets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows offline synthetic proposed output",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows independent fake-provider composition",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows offline AI preview and inert HTML",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows fictional fix packages and inert HTML",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build collector host tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify Windows local Phase1D synthetic MCP boundaries",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows fixed offline AI workspace source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows synthetic evaluation accuracy",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows approved synthetic evaluation policy",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows saved-source capture canonical contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows isolated evaluation workflow",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows fictional fix-package workspace sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows portable artifact review and independent source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows portable planning tasks and independent source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows collector host and protected key behavior",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Publish self-contained collector",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Smoke test Windows Service and one-shot CLI",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 111284513299,
+      "name": "dotnet-bootstrap",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Initialize containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Scan checkout for secrets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restore locked dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify formatting",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify approved local Phase1D synthetic MCP boundaries",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check approved Phase1B portable and owning PostgreSQL contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Execute Linux isolated CSV renderer and adversarial boundary probes",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run synthetic artifact-integrity checks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check synthetic evaluation accuracy",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check approved synthetic evaluation policy",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check isolated synthetic evaluation workflow",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check actual saved Phase1B evaluation source capture",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check assessment coverage reconciliation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check assessment capability locks",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check synthetic baseline planning and coverage integration",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check durable synthetic run contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check deterministic fixture rules and health scoring",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent maturity and durable finding review",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check detached canonical draft and inert Markdown",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check offline synthetic AI packets and proposed output",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check offline synthetic AI preview and inert HTML",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check saved-source offline AI workspace projection",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check fictional unverified fix packages and inert HTML",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check saved-source fictional fix-package workspace projection",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check synthetic artifact review contracts and independent durable source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check synthetic planning tasks and independent durable source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check canonical unverified recommendation guidance",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent recommendation identities, originals and saved review bridge",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent canonical draft goldens and saved source bridge",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent review and maturity goldens",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check persisted analysis and independent scoring goldens",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check real PostgreSQL persistence and process recovery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build and audit pinned consultant view",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build isolated evaluation workspace",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent offline AI preview component",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent fictional fix-package component",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent artifact review component",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check independent planning task component",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check consultant browser flow and recovery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check isolated evaluation HTTP and browser flow",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check analysis findings, scoring and browser read recovery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check consultant review history, current scores and independent maturity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check draft summary, technical and inert Markdown browser parity",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check structured recommendation guidance and inert consultant display",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check offline AI preview in the consultant workspace",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check actual inert offline AI preview browser",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check actual inert fictional fix-package browser",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check fictional fix packages in the consultant workspace",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check opt-in artifact review browser history and recovery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check opt-in planning task browser history and recovery",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check collector permission decisions",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check collector host contract",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check project dependency boundaries",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned Bicep CLI",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile, lint and check evidence-store baseline",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile, lint and check Service Bus baselines",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile, lint and check pilot network-egress baseline",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile and lint workload identity module",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate private Azure development foundation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stop containers",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 111284513357,
+      "name": "collector-windows (windows-2022)",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out repository",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Restore locked dependencies",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check approved Phase1B Windows portable contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows offline synthetic AI packets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows offline synthetic proposed output",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows independent fake-provider composition",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows offline AI preview and inert HTML",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows fictional fix packages and inert HTML",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build collector host tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify Windows local Phase1D synthetic MCP boundaries",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows fixed offline AI workspace source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows synthetic evaluation accuracy",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows approved synthetic evaluation policy",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows saved-source capture canonical contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows isolated evaluation workflow",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows fictional fix-package workspace sources",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows portable artifact review and independent source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows portable planning tasks and independent source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check Windows collector host and protected key behavior",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Publish self-contained collector",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Smoke test Windows Service and one-shot CLI",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out repository",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 111284512272,
+      "name": "bootstrap-package",
+      "status": "completed",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build and verify inert host",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Build and exercise non-root container",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install pinned Bicep",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check private hosting template",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Install approved SDK",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "nativeEvidence": [
+    {
+      "path": "hosted/final-native.json",
+      "bytes": 26141,
+      "sha256": "9c60c0cfb8b98c55e286998ffe8d059ffa749f95af1fbe47a8b051c045df9833"
+    },
+    {
+      "path": "hosted/job-111284512272.log",
+      "bytes": 29853,
+      "sha256": "1056ae1edbcd5816caecc3f099d39133c370c49599db51ee423e0e168f285b78"
+    },
+    {
+      "path": "hosted/job-111284513299.log",
+      "bytes": 288494,
+      "sha256": "b5725e0e67dfafb3a38c80d783dfb0b9908e561bd428f8d3293957f3993e4683"
+    },
+    {
+      "path": "hosted/windows-111284513106.log",
+      "bytes": 65496,
+      "sha256": "8d1e9654746aae797b276e3351d28596dd18d369a3ed4f598ce47e0ca51ec9db"
+    },
+    {
+      "path": "hosted/windows-111284513357.log",
+      "bytes": 65366,
+      "sha256": "927cd644c314c28f20347087daca38bc94e120555c65f64fa5d0d13c969c84db"
+    }
+  ],
+  "historicalImmutability": {
+    "unchangedEvaluationApprovalFiles": 58,
+    "receiptSha256": "3b1a767f8b3e2c9eef57f7bf85a4d483ef465e154b19e5e1f084ea282b6e0c55"
+  },
+  "finalIndependentReview": {
+    "reviewer": "cycle05_policy_audit",
+    "sourceCommit": "1acf86749e2e4fa15c96c06e0570f317c18c6798",
+    "recordedAtUtc": "2026-10-03T20:29:05.149567+00:00",
+    "status": "PASS",
+    "rawCompletedReport": "PASS at committed1acf867. Counts, bounded coverage, transaction guards, frozen contracts and source equivalence match preserved evidence. Verified158 retained files, two native archives,19 capture files, Site105 private deployment and preserved22panels/13cards, plus removal of three worktrees with branches retained. Pending bootstrap and unresolved termination of PIDs43181/48502 accurately disclosed. No material findings, edits or broad reruns."
+  },
+  "limits": "Executed configured CI proves the bounded synthetic capture and historical configured checks. Actual sampling/reviewer integration, human/customer/live/manual/full M08/Phase1C/TP-HAS-012/019/G1-G9 remain open. Earlier failed OS process termination remains unconfirmed; final runs exited successfully."
+}

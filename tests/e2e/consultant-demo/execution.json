@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "checks": 392,
+  "groups": [
+    "DEMO-001 strict transport and independent durable coverage golden",
+    "DEMO-002 actual keyboard start/progress/locks/reload/history/focus",
+    "DEMO-003 keyboard cancellation preserves incomplete durable results",
+    "DEMO-004 semantic/target/reflow/forced-colors engineering smoke",
+    "DEMO-006 actual host SIGKILL/reload/expired-lease keyboard resume/missing-only completion",
+    "DEMO-005 unavailable coverage and focused denied-action error recovery"
+  ],
+  "accessibility": [
+    {
+      "label": "desktop gap coverage",
+      "version": "4.13.0",
+      "passes": 30,
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "label": "320px cancellation with expanded locks",
+      "version": "4.13.0",
+      "passes": 29,
+      "violations": [],
+      "incomplete": ["color-contrast"]
+    }
+  ],
+  "browser": "145.0.7632.6",
+  "node": "v24.21.0",
+  "base": "http://127.0.0.1:5183",
+  "limitations": [
+    "Local macOS Chromium engineering smoke only; supported Windows browser and NVDA/Narrator acceptance NOT VERIFIED",
+    "Production identity/customer isolation, live source, scoring, AI and ServiceBus NOT VERIFIED",
+    "The320px axe color-contrast rule was incomplete; narrow-screen contrast is NOT VERIFIED by that scan."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-03",
+  "reviewedSourceCommit": "1061012",
+  "immutablePolicyBase": "9eab6bc4afb72eb242bda3bd5ee783f78989dfec",
+  "authority": "Repository owner Do it; bounded cycle04",
+  "status": "FROZEN",
+  "nonauthorReview": "PASS after exact domain93fa6c9 and presentationf915d74 addenda",
+  "closedFindings": [
+    "revocation preserves stored prior outcomes while current disclosure clears",
+    "separate source/history permissions",
+    "canonical envelope and omitted source hash limits",
+    "registry mutations bounded by seeded ceiling",
+    "ratio uses server counts",
+    "final precommit outcome/context recheck"
+  ],
+  "files": [
+    {
+      "path": "specs/003-health-assessment/local-evaluation-workflow-authority.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "262e6fc2c9fd5b7fde2b09074ef0649a3aa4455f7edc4af979485d58af94f5f4"
+      }
+    },
+    {
+      "path": "specs/003-health-assessment/local-evaluation-workflow-domain-test-plan.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "5b7868bd962d8bd2f91afcbedadeb131b176b4e251f7d986473ee1cfabbe5d32"
+      }
+    },
+    {
+      "path": "specs/003-health-assessment/local-evaluation-workflow-engineering-contract.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "9dc054852fa260d8b8a5bcd1b749344a00d388e1a3313017dab64563b5ba01f4"
+      }
+    },
+    {
+      "path": "specs/003-health-assessment/local-evaluation-workflow-host-contract.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "b377b398c83c6e0de511e14180b60f194177a7a55845161492879e8a3c7219f4"
+      }
+    },
+    {
+      "path": "specs/003-health-assessment/local-evaluation-workflow-presentation-contract.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "8fb71d197ed803e1bd0c1c29f1cabf628d17befab0c77ea7eecf197b49bacab6"
+      }
+    },
+    {
+      "path": "specs/003-health-assessment/local-evaluation-workflow-ui-test-plan.md",
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "c5f80398adb8731f48258670c117529fcf83c423a89059de42bd03b8cde09c31"
+      }
+    }
+  ],
+  "executionClaims": "Documentary checks only; runtime and full M08 NOT VERIFIED",
+  "diskRecovery": "Lossless source-member object deduplication recovered approximately557MiB; four previous source containers replaced only after all members rehashed. Runtime/native logs unchanged; supplemental preservation manifest retained."
+}

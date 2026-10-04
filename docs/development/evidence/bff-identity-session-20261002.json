@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "started": "2026-10-01",
+  "recordedUtc": "2026-10-02T11:37:59.165506Z",
+  "scope": "Bounded local BFF identity, shared sessions and human authorization foundation; live sign-in disabled",
+  "source": {
+    "base": "131eaa6fe88be2d06a2f7056561ba115ae9802a8",
+    "implementationCommit": "3781b3b464102062795185fd812818555259aa20",
+    "branch": "codex/bff-integration",
+    "workerCommits": {
+      "codex/bff-sessions": "90fb073f294a0b37ae3088ce044d4650b22a3982",
+      "codex/bff-transport": "bba44cbd95169ea11cc84457c9ac6337d02b220d",
+      "codex/bff-policy": "f5c7c39a2a044255f504a2726c1416814ebcbbdc"
+    },
+    "combinedPublicationCodeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4",
+    "combinedPilotBase": "0a58364de8a60dea5d9ef64d9e6b3b2c381eae9f"
+  },
+  "authorization": "Owner requested Work on it; existing approved feature003 identity/session design, authorization matrix, technical specification and implementation/test plans. No new live trust or paid Azure session authorized.",
+  "checks": [
+    {
+      "name": "Pinned SDK 10.0.401 locked audited solution restore",
+      "result": "PASS",
+      "projects": 33
+    },
+    {
+      "name": "Solution formatting verification",
+      "result": "PASS"
+    },
+    {
+      "name": "Release solution build",
+      "result": "PASS",
+      "warnings": 0,
+      "errors": 0
+    },
+    {
+      "name": "All 11 current unit executables",
+      "result": "PASS",
+      "bffFoundationAssertions": 72,
+      "sessionUnitCases": 27,
+      "humanPolicyCases": 2546
+    },
+    {
+      "name": "Shared PostgreSQL session integration",
+      "result": "PASS",
+      "checks": 100,
+      "databaseVersion": "18.4",
+      "coverage": [
+        "opaque identifiers and protected minimal tickets",
+        "deadline boundaries",
+        "rotation",
+        "shared revocation and security version",
+        "concurrent admission/revocation"
+      ]
+    },
+    {
+      "name": "Two actual HTTPS servers with shared PostgreSQL sessions",
+      "result": "PASS",
+      "checks": 84,
+      "independentExactHeadRepeat": "PASS",
+      "coverage": [
+        "actual authenticated immutable subject binding",
+        "second admitted subject forbidden on primary resource",
+        "customer/project/resource/revision denial",
+        "opaque secure cookies",
+        "CSRF missing, altered, missing cookie and cross-subject denial",
+        "logout, individual and subject revocation across replicas",
+        "provider freshness, idle and absolute expiry"
+      ]
+    },
+    {
+      "name": "Architecture boundaries",
+      "result": "PASS",
+      "policyCases": 7,
+      "projectScannerCases": 4
+    },
+    {
+      "name": "Synthetic baseline-to-coverage integration",
+      "result": "PASS",
+      "assertions": 65,
+      "fixtures": 11
+    },
+    {
+      "name": "Existing persisted analysis/scoring regression",
+      "result": "PASS",
+      "assertions": 399,
+      "databaseVersion": "18.4"
+    },
+    {
+      "name": "Existing durable database/process regression",
+      "result": "PASS",
+      "assertions": 80,
+      "clusterCrashRestart": "NOT VERIFIED; explicit shared-cluster restart not enabled"
+    },
+    {
+      "name": "NuGet direct and transitive advisory query",
+      "result": "PASS",
+      "projects": 33,
+      "source": "api.nuget.org",
+      "reportedVulnerabilities": 0
+    },
+    {
+      "name": "Gitleaks 8.30.1 directory scan",
+      "result": "PASS",
+      "findings": 0,
+      "coverage": "Current integration checkout, not Git history or provider secret stores"
+    },
+    {
+      "name": "Bicep 0.47.16 build and lint",
+      "result": "PASS",
+      "files": 18
+    },
+    {
+      "name": "Infrastructure compiled policies",
+      "result": "PASS",
+      "suites": [
+        "EvidenceStorePolicy",
+        "ServiceBusPolicy",
+        "NetworkEgressPolicy",
+        "AzureFoundation private-services",
+        "AzureFoundation postgresql",
+        "AzureFoundation compute",
+        "AzureFoundation composition",
+        "AzureFoundation Entra application"
+      ]
+    },
+    {
+      "name": "Inert federated credential template JSON syntax",
+      "result": "PASS",
+      "trustCreated": false
+    },
+    {
+      "name": "Whitespace diff check",
+      "result": "PASS"
+    },
+    {
+      "name": "Configured hosted CI, Windows execution and container build",
+      "result": "PASS",
+      "codeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4",
+      "bootstrap": {
+        "runId": 37001243915,
+        "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37001243915",
+        "result": "success",
+        "jobs": [
+          "Linux dotnet-bootstrap",
+          "Windows 2022 collector",
+          "Windows 2025 collector"
+        ]
+      },
+      "package": {
+        "runId": 37001244041,
+        "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/actions/runs/37001244041",
+        "result": "success",
+        "scope": "Inert bootstrap image, actual non-root/read-only container smoke and hosting policy; not a deployable BFF image or live Azure proof"
+      }
+    },
+    {
+      "name": "Azure bootstrap hosting policy",
+      "result": "PASS",
+      "unsafeDriftsDenied": 44,
+      "scope": "Compiled inert root/module templates; separate distinct output paths used for equal filenames. No deployed image/pull proof."
+    },
+    {
+      "name": "Combined published code snapshot local verification",
+      "result": "PASS",
+      "codeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4",
+      "projects": 38,
+      "lockedRestore": "PASS",
+      "format": "PASS",
+      "releaseBuild": {
+        "warnings": 0,
+        "errors": 0
+      },
+      "bffFocusedRepeat": {
+        "transport": 72,
+        "sessionUnit": 27,
+        "humanPolicy": 2546
+      },
+      "architecture": {
+        "policyCases": 7,
+        "scannerCases": 4
+      },
+      "secretScanFindings": 0,
+      "bffRuntimeTestSourceDiffFromReviewedImplementation": "EMPTY"
+    }
+  ],
+  "review": [
+    {
+      "packet": "BFF-S1",
+      "author": "session worker",
+      "reviewer": "policy worker",
+      "result": "PASS",
+      "executed": "27 unit cases and 103 real PostgreSQL checks, including 3 independent one-tick boundary probes",
+      "correctedBeforeAcceptance": "Expired-session rotation with unchanged authentication could reset idle admission; replacement authentication now must be at or after the relevant expiry boundary."
+    },
+    {
+      "packet": "BFF-S2",
+      "author": "transport worker",
+      "reviewer": "session worker",
+      "result": "PASS",
+      "executed": "71 unit assertions and independently compiled disabled/insecure challenge/callback/sign-out zero-metadata-fetch probe",
+      "correctedBeforeAcceptance": "Supported guarded OIDC handler refuses disabled or insecure flows before provider metadata retrieval."
+    },
+    {
+      "packet": "BFF-S3",
+      "author": "policy worker",
+      "reviewer": "transport worker",
+      "result": "PASS",
+      "executed": "2546 independent matrix/boundary/overlap cases"
+    },
+    {
+      "packet": "BFF-I1",
+      "author": "coordinator",
+      "reviewer": "policy worker",
+      "implementationCommit": "3781b3b464102062795185fd812818555259aa20",
+      "result": "PASS",
+      "executed": "Independent exact-head locked offline restore, Release build zero warnings/errors and 84 actual HTTPS/shared PostgreSQL checks; all 12 root packet files reviewed",
+      "correctedBeforeAcceptance": [
+        "Policy fixture now resolves the actual authenticated subject, with a distinct admitted subject refusal case.",
+        "Typed Minimal API delegate handlers preserve authorization IResult HTTP statuses.",
+        "Provider remote sign-out callback stays within the narrow cookie path."
+      ],
+      "humanReviewRequired": true
+    }
+  ],
+  "configuration": {
+    "liveSignInEnabled": false,
+    "federatedTemplate": "infra/entra/pilot-bff.federated-credential.template.json",
+    "migration": "migrations/identity-sessions/001-initial.sql",
+    "migrationScope": "Additive module-owned control-plane schema only; no startup migration or production database grants",
+    "exactDependencies": [
+      "Microsoft.Identity.Web [4.15.0]",
+      "Npgsql 10.0.3"
+    ],
+    "azureResourcesCreated": false,
+    "customerDataUsed": false
+  },
+  "remaining": [
+    "Live Entra/OIDC signature, issuer, audience, lifetime, nonce, state, PKCE and key rollover proofs",
+    "Container Apps federated managed-identity code redemption, renewal, replicas, incorrect trust and trust removal",
+    "Actual product/provider assignment and guest onboarding adapters, reviewed MFA/Conditional Access verification",
+    "Production shared protected Data Protection key ring and separate database roles/migration permissions/rollback",
+    "Full customer routing, field projection, append-only audit and API/workload/render/export/share/MCP authorization",
+    "Queued work cancellation and final product host contracts",
+    "Image release scans/SBOM/provenance and deployed private-path/gate evidence"
+  ],
+  "gates": {
+    "G0": "Previously approved",
+    "G1-G9": "NOT VERIFIED"
+  },
+  "publication": {
+    "source": "PUBLISHED; draft PR and configured hosted checks verified",
+    "privateBoard": {
+      "result": "SUCCEEDED",
+      "version": 53,
+      "sourceCommit": "f48b51a41e6a95dd181f905bd64071deceb048a7",
+      "deploymentId": "appgdep_6abf318af4148191b0f3444b8ce82a3f",
+      "confirmedUtc": "2026-10-02T04:22:41.696542Z",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "audience": "Existing owner-private audience preserved",
+      "localPreview": "Desktop and 390px mobile layout reviewed; no horizontal overflow/broken internal anchors; 31 unique repository links verified in published immutable snapshot."
+    },
+    "approval": {
+      "result": "APPROVED",
+      "date": "2026-10-02",
+      "humanStatement": "Approved",
+      "scope": "Publish the BFF source/evidence branch to the owner public repository, open a draft PR and execute configured hosted checks; no merge/release/live sign-in or Azure grants/paid resources"
+    },
+    "draftPullRequest": {
+      "url": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/2",
+      "number": 2,
+      "headBranch": "codex/bff-integration",
+      "baseBranch": "codex/pilot-foundation",
+      "draft": true,
+      "merged": false,
+      "checkedCodeCommit": "145de02af6537c2532c5cdd2ca0bd3e4117e21d4"
+    },
+    "humanPublicationDependency": "CLOSED",
+    "currentBoardUpdate": {
+      "result": "SUCCEEDED",
+      "version": 57,
+      "sourceCommit": "09a74be08d6ec172a946fb78ddfcdc92956ba3c2",
+      "deploymentId": "appgdep_6abf98c91ea481918477bda7606c473b",
+      "confirmedUtc": "2026-10-02T11:43:11.228083+00:00",
+      "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+      "audience": "Existing owner-private audience preserved",
+      "localPreview": "Desktop 1920px and mobile 390px reviewed with no horizontal overflow; 10 remaining human tasks each retain requested role, completion conditions and sources; all internal anchors and 49 unique link targets checked against immutable repository trees."
+    },
+    "documentationFollowup": "Later publication/board records and additive cycle06 planning merge change documentation only; runtime, tests, CI, dependencies and infrastructure remain unchanged from passing code snapshot145de02."
+  },
+  "cleanup": {
+    "result": "PASS",
+    "syntheticPostgresCluster": "Stopped only the dedicated BFF PostgreSQL cluster after independent review finished; stopped fixture files retained locally",
+    "temporaryWorkerCheckouts": "Three clean writing worktrees removed; committed branches preserved",
+    "integrationCheckout": "Retained for published draft review",
+    "preview": "Temporary preview server stopped and own browser tab closed; viewport override reset",
+    "azureChanges": "None"
+  }
+}

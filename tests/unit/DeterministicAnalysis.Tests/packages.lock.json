@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "assessmentcoverage": {
+        "type": "Project"
+      },
+      "deterministicanalysis": {
+        "type": "Project",
+        "dependencies": {
+          "AssessmentCoverage": "[1.0.0, )"
+        }
+      }
+    }
+  }
+}

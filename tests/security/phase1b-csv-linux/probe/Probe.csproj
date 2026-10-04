@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>SyntheticCsvRenderer</AssemblyName>
+    <Phase1BCsvProject Condition="'$(Phase1BCsvProject)' == ''">../../../../src/server/modules/SyntheticTaskCsv/SyntheticTaskCsv.csproj</Phase1BCsvProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(Phase1BCsvProject)" />
+  </ItemGroup>
+</Project>

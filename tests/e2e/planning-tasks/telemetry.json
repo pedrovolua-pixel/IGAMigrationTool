@@ -1,0 +1,30 @@
+{
+  "schema": "v14-payload-free-telemetry-proof-v2",
+  "result": "PASS",
+  "reasonCount": 24,
+  "artifactTextCount": 3,
+  "reasonVariantCount": 34,
+  "artifactVariantCount": 9,
+  "encodings": [
+    "literal",
+    "JSON ensure_ascii True",
+    "JSON ensure_ascii False",
+    "independent System.Text.Json default web encoding",
+    "Unicode escape hex case variants",
+    "escaped slash variants"
+  ],
+  "reasonPayloadOccurrences": 0,
+  "artifactPayloadOccurrences": 0,
+  "bindings": [
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.host/observed/final-saved-task-source.json",
+      "sha256": "f2c35e61de4c0968da481332562cb395bed19120987e6744fe257a3409d1c31a",
+      "bytes": 975494
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.host/host-runtime.log",
+      "sha256": "335a28c68741cd9c243eb6eab7cb95ce1eea2e377e791a9985b85a927fa94d39",
+      "bytes": 11142
+    }
+  ]
+}

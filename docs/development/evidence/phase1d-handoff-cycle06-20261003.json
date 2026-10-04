@@ -1,0 +1,131 @@
+{
+  "cycle": "Phase1D cycle06",
+  "date": "2026-10-03",
+  "status": "COMPLETED: source-backed owner handoff; final private publication in separate receipt",
+  "inventory_commit": "4930315215a9bafce3419e80107b94a4e699320e",
+  "scope": "Documentation and readiness review only; no runtime/test/config/dependency/migration/identity/activation changes",
+  "input_disposition": {
+    "P02-I01": "NOT PROVIDED",
+    "P02-I02": "NOT PROVIDED",
+    "P02-I03": "NOT PROVIDED",
+    "P02-I04": "NOT PROVIDED",
+    "P02-I05": "NOT PROVIDED",
+    "P02-I06": "NOT PROVIDED",
+    "P02-I07": "NOT PROVIDED",
+    "P02-I08": "NOT PROVIDED",
+    "P02-I09": "NOT PROVIDED",
+    "P02-I10": "NOT PROVIDED",
+    "P02-I11": "NOT PROVIDED"
+  },
+  "independent_review": {
+    "reviewer": "p1d_c06_inventory_review",
+    "source": "4930315215a9bafce3419e80107b94a4e699320e",
+    "status": "PASS: no actionable findings",
+    "handoff_sha256": "4cc8cc4ef914d13962fb5a685d123aae036e964a6696fe29f3aa6be47ca57e35",
+    "plan_reviewed_sha256": "55ae423da92a2735a364d1ff02ee16de398e9e48892ae2a01d7b08de3eca4368",
+    "coverage": "Approved specs/ADRs/intake/native committed source/M08 schema provenance; final handoff/plan scope and roles/done criteria",
+    "limits": "No runtime, secret, rendering or deployment checks by reviewer",
+    "initial_command_error": "rg -E invalid; corrected search succeeded"
+  },
+  "checks": {
+    "status": "PASS",
+    "unchanged_working_source_pins": 365,
+    "owned_relative_links": 25,
+    "owned_markdown_whitespace": "PASS",
+    "entire_human_tasks_section_preserved": true,
+    "open_tasks": 13,
+    "runtime_checks": "NOT RERUN: documentation-only packet",
+    "initial_checker_failure": "Expected no-index exit0; received normal differences exit1 with no diagnostics. Corrected exit interpretation and reran.",
+    "unowned_canonical_diffs": "PRESERVED"
+  },
+  "source_inventory_logs": [
+    {
+      "command": [
+        "git",
+        "grep",
+        "-n",
+        "-E",
+        "ReportVersion|IPublicationReader|PublishedReport|PublishedManifest|report[.]publish|PublishAsync|PublishedStatus|CompletedWithGaps",
+        "4930315215a9bafce3419e80107b94a4e699320e",
+        "--",
+        "src",
+        "contracts",
+        "migrations"
+      ],
+      "exit_code": 0,
+      "log": "inventory-0.txt",
+      "sha256": "048b8e7351509ce221141f406d9b3351641852ff918fd97b4a55816c61e61719"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--stat",
+        "86c91f8..4930315215a9bafce3419e80107b94a4e699320e"
+      ],
+      "exit_code": 0,
+      "log": "inventory-1.txt",
+      "sha256": "0f4b7f2677f959e3bef2e96fb1d8feeefd5422571b3b7600c410aefa4d16e3a6"
+    }
+  ],
+  "secret_checks": {
+    "plan": {
+      "bytes": 2087,
+      "exit_code": 0
+    },
+    "handoff": {
+      "bytes": 9513,
+      "exit_code": 0
+    },
+    "reconciled_static": {
+      "bytes": 127968,
+      "exit_code": 0
+    }
+  },
+  "not_rerun": [
+    "runtime format/build/unit/integration/browser",
+    "dependency audit",
+    "Windows/Linux/container/infrastructure"
+  ],
+  "not_rerun_reason": "Documentation-only packet. Earlier exact-source results and separate M08 checks retain their original scopes.",
+  "remaining": "Actual publisher/reader/client contracts,13 human tasks, full Phase1D/Milestone11/UAT/G1-G9",
+  "publication_receipt": "phase1d-handoff-cycle06-site-20261003.json",
+  "evidence_directory": ".sites-work/phase1d-cycle06-evidence",
+  "site_checks": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "site_reconciliation": {
+    "remote_source": "52147e47516bd6753ef290a10023dd0752524516",
+    "local_unpublished_source": "b99d13ca8125c0d26a9c8bebed2d7374f427298b",
+    "merged_source": "938fc2974d676860ab1e1680a78880ea4f95ef7b",
+    "unowned_remote_html_bytes": "PRESERVED after removing own section/current-source paragraph",
+    "initial_push": "Rejected fetch-first, no force push",
+    "reopen": "Divergence detected, no overwrite; normal merge succeeded"
+  }
+}

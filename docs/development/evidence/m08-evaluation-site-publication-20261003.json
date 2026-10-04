@@ -1,0 +1,32 @@
+{
+  "deployment": {
+    "id": "appgdep_6ac11333e1fc81918b5d635f10d300dd",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_77fbdf8e430c81918e332fd545654c3f",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T14:37:45.937014+00:00"
+  },
+  "source": {
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "checkout_path": "/private/tmp/iga-m08-site",
+    "commit_sha": "37240557936bb0b17bdd1be39a33b80959f56706",
+    "archive": "/private/tmp/iga-m08-evidence/site.tar.gz"
+  },
+  "canonicalSnapshot": "ab678bb2e8343b5cc91333285302d259a0fa6fb9",
+  "access": {
+    "currentRole": "owner",
+    "mode": "custom",
+    "version": 91,
+    "allowedUsers": 1,
+    "externalVisitors": 0,
+    "allowedGroups": 0
+  }
+}

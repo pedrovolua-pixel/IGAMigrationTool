@@ -1,0 +1,4389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "iga:private-local-demo:v1",
+  "title": "Private synthetic local-demo DTOs \u2014 not a production HTTP contract",
+  "$defs": {
+    "RunState": {
+      "enum": ["Planned", "Running", "Scoring", "Cancelled", "Failed"]
+    },
+    "CompletionKind": {
+      "enum": ["Complete", "CompleteWithGaps"]
+    },
+    "CoverageState": {
+      "enum": [
+        "Pass",
+        "Finding",
+        "NotApplicable",
+        "NotAssessed",
+        "InsufficientEvidence",
+        "Excluded",
+        "Inaccessible",
+        "Redacted",
+        "Unsupported",
+        "Error"
+      ]
+    },
+    "ScopeOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": ["id", "label"]
+    },
+    "Warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": ["code", "message"]
+    },
+    "BaselineOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "scopeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Warning"
+          }
+        }
+      },
+      "required": ["id", "label", "scopeId", "version", "warnings"]
+    },
+    "ProfileOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "required": ["id", "label", "version", "baselineIds"]
+    },
+    "Catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ScopeOption"
+          }
+        },
+        "baselines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/BaselineOption"
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ProfileOption"
+          }
+        },
+        "csrfToken": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "scopes",
+        "baselines",
+        "profiles",
+        "csrfToken"
+      ]
+    },
+    "StartRunRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profileId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "requestId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": ["scopeId", "baselineId", "profileId", "requestId"]
+    },
+    "RunMutationRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requestId": {
+          "type": "string",
+          "format": "uuid"
+        }
+      },
+      "required": ["expectedRevision", "requestId"]
+    },
+    "Selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scopeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "scopeLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "baselineLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profileId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "profileLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "scopeId",
+        "scopeLabel",
+        "baselineId",
+        "baselineLabel",
+        "profileId",
+        "profileLabel"
+      ]
+    },
+    "Progress": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plannedUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "terminalUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "remainingUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allTerminal": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "plannedUnits",
+        "terminalUnits",
+        "remainingUnits",
+        "allTerminal"
+      ]
+    },
+    "LockedInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": ["name", "version", "sha256"]
+    },
+    "StateCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/CoverageState"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["state", "count"]
+    },
+    "Limitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/CoverageState"
+        },
+        "reasonCode": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "responsibleStage": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["state", "reasonCode", "responsibleStage", "count"]
+    },
+    "ExecutableCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "numerator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "denominator": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hasApplicableUnits": {
+          "type": "boolean"
+        }
+      },
+      "required": ["numerator", "denominator", "hasApplicableUnits"]
+    },
+    "RunActions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "canCancel": {
+          "type": "boolean"
+        },
+        "canResume": {
+          "type": "boolean"
+        },
+        "resumeAvailableAtUtc": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "canCancel",
+        "canResume",
+        "resumeAvailableAtUtc",
+        "reasonCode"
+      ]
+    },
+    "RunSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state": {
+          "$ref": "#/$defs/RunState"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "selection": {
+          "$ref": "#/$defs/Selection"
+        },
+        "progress": {
+          "$ref": "#/$defs/Progress"
+        },
+        "coverageCompletionKind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CompletionKind"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cancelRequested": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "runId",
+        "revision",
+        "state",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "selection",
+        "progress",
+        "coverageCompletionKind",
+        "cancelRequested"
+      ]
+    },
+    "RunDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state": {
+          "$ref": "#/$defs/RunState"
+        },
+        "createdAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "selection": {
+          "$ref": "#/$defs/Selection"
+        },
+        "progress": {
+          "$ref": "#/$defs/Progress"
+        },
+        "coverageCompletionKind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CompletionKind"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lockedInputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/LockedInput"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Warning"
+          }
+        },
+        "stateCounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StateCount"
+          }
+        },
+        "executableCoverage": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ExecutableCoverage"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Limitation"
+          }
+        },
+        "actions": {
+          "$ref": "#/$defs/RunActions"
+        },
+        "cancelRequested": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "runId",
+        "revision",
+        "state",
+        "createdAtUtc",
+        "updatedAtUtc",
+        "selection",
+        "progress",
+        "coverageCompletionKind",
+        "lockedInputs",
+        "warnings",
+        "stateCounts",
+        "executableCoverage",
+        "limitations",
+        "actions",
+        "cancelRequested"
+      ]
+    },
+    "RunHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RunSummary"
+          }
+        }
+      },
+      "required": ["schemaVersion", "demoOnly", "runs"]
+    },
+    "DemoError": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "message": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "correlationId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "currentRevision": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "code",
+        "message",
+        "correlationId",
+        "currentRevision"
+      ]
+    },
+    "AnalysisScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "display": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": ["Unavailable", "Red", "Yellow", "Green"]
+        },
+        "eligibleUnits": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": ["raw", "display", "status", "eligibleUnits"]
+    },
+    "AnalysisScoreRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "provisional": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "publishableCurrent": {
+          "$ref": "#/$defs/AnalysisScore"
+        }
+      },
+      "required": ["id", "provisional", "publishableCurrent"]
+    },
+    "AnalysisCategoryRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "provisional": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "publishableCurrent": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "provisionalWeight": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publishableWeight": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "provisional",
+        "publishableCurrent",
+        "provisionalWeight",
+        "publishableWeight"
+      ]
+    },
+    "AnalysisFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": ["Critical", "High", "Medium", "Low", "Informational"]
+        },
+        "confidencePercent": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "reviewRequired": {
+          "type": "boolean"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "rootCauseKey": {
+          "type": "string"
+        },
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "impact": {
+          "type": "string"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationGuidance": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidenceBand": {
+          "type": "string"
+        },
+        "method": {
+          "const": "Deterministic"
+        },
+        "likelihood": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "originalDigests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outcomeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rootCause": {
+          "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "initialState": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "category",
+        "severity",
+        "confidencePercent",
+        "state",
+        "reviewRequired",
+        "ruleId",
+        "ruleVersion",
+        "baselineId",
+        "rootCauseKey",
+        "objectIds",
+        "evidenceReferences",
+        "facts",
+        "inferences",
+        "assumptions",
+        "impact",
+        "recommendations",
+        "validationGuidance",
+        "sources",
+        "confidenceBand",
+        "method",
+        "likelihood",
+        "limitations",
+        "originalDigests",
+        "outcomeIds",
+        "rootCause",
+        "originalTitle",
+        "initialState"
+      ]
+    },
+    "AnalysisQuality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "plannedUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "executedUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gapUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "notApplicableUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "proposedReviewUnits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalFindingUnits": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "plannedUnits",
+        "executedUnits",
+        "gapUnits",
+        "notApplicableUnits",
+        "proposedReviewUnits",
+        "totalFindingUnits"
+      ]
+    },
+    "AnalysisDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "algorithmVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fixtureDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contentDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "provisional": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisScore"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publishableCurrent": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisScore"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisCategoryRow"
+          }
+        },
+        "objectTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "quality": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AnalysisQuality"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisFinding"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "review": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReviewDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maturity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MaturityDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reviewSnapshotDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reportDraft": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReportDraft"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "recommendationGuidance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RecommendationGuidance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "aiPreview": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AiPreviewDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fixPackages": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FixPackageDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifactReview": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "planningTasks": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskDetail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "runId",
+        "runRevision",
+        "status",
+        "reasonCode",
+        "algorithmVersion",
+        "fixtureDigest",
+        "contentDigest",
+        "provisional",
+        "publishableCurrent",
+        "categories",
+        "objectTypes",
+        "modules",
+        "outcomes",
+        "quality",
+        "findings",
+        "warnings",
+        "review",
+        "maturity",
+        "reviewSnapshotDigest",
+        "reportDraft",
+        "recommendationGuidance",
+        "aiPreview",
+        "fixPackages",
+        "artifactReview"
+      ]
+    },
+    "ReviewKind": {
+      "enum": ["Confirm", "Reject", "Defer", "Comment", "EditPresentation"]
+    },
+    "ReviewCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "kind": {
+          "$ref": "#/$defs/ReviewKind"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 250
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "businessContext": {
+          "anyOf": [
+            {
+              "type": "string",
+              "maxLength": 2000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "eventId",
+        "expectedRevision",
+        "kind",
+        "reason",
+        "text",
+        "title",
+        "businessContext"
+      ]
+    },
+    "ReviewActions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "confirm": {
+          "type": "boolean"
+        },
+        "reject": {
+          "type": "boolean"
+        },
+        "defer": {
+          "type": "boolean"
+        },
+        "comment": {
+          "type": "boolean"
+        },
+        "editPresentation": {
+          "type": "boolean"
+        }
+      },
+      "required": ["confirm", "reject", "defer", "comment", "editPresentation"]
+    },
+    "ReviewEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "$ref": "#/$defs/ReviewKind"
+        },
+        "recordedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "state": {
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "businessContext": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "eventId",
+        "actorId",
+        "actorRoles",
+        "kind",
+        "recordedAtUtc",
+        "revision",
+        "state",
+        "reason",
+        "text",
+        "title",
+        "businessContext"
+      ]
+    },
+    "ReviewFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "category": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "initialState": {
+          "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "originalDigests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "occurrenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "$ref": "#/$defs/ReviewActions"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReviewEvent"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "revision",
+        "category",
+        "state",
+        "initialState",
+        "originalTitle",
+        "title",
+        "businessContext",
+        "originalDigests",
+        "occurrenceIds",
+        "actions",
+        "history"
+      ]
+    },
+    "ReviewDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshotDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReviewFinding"
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "runId",
+        "runRevision",
+        "status",
+        "reasonCode",
+        "snapshotDigest",
+        "actor",
+        "findings"
+      ]
+    },
+    "MaturityGate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "type": "string"
+        },
+        "metDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mandatoryDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requiredPercent": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "isMet": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "level",
+        "metDomains",
+        "mandatoryDomains",
+        "requiredPercent",
+        "isMet"
+      ]
+    },
+    "MaturityIndicator": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assessmentReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hasValidatedImprovementEvidence": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "state",
+        "reasonCode",
+        "evidenceReferences",
+        "assessmentReferences",
+        "hasValidatedImprovementEvidence"
+      ]
+    },
+    "MaturityDomain": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "baseMet": {
+          "type": "boolean"
+        },
+        "operationAndReviewMet": {
+          "type": "boolean"
+        },
+        "improvementMet": {
+          "type": "boolean"
+        },
+        "insufficientIndicators": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "indicators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaturityIndicator"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "baseMet",
+        "operationAndReviewMet",
+        "improvementMet",
+        "insufficientIndicators",
+        "indicators"
+      ]
+    },
+    "MaturityOwnership": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "type": "string"
+        },
+        "ownerId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["state", "ownerId", "evidenceReferences", "reasonCode"]
+    },
+    "MaturityDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "level": {
+          "anyOf": [
+            {
+              "enum": [
+                "Initial",
+                "Developing",
+                "Defined",
+                "Managed",
+                "Optimized"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "algorithmVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "catalogVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inputDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "contentDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "authorityBoundary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mandatoryDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "insufficientIndicators": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "insufficientDomains": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "improvementMissingDistinctAssessments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "governanceOwnershipEvidenced": {
+          "type": "boolean"
+        },
+        "gates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaturityGate"
+          }
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/MaturityDomain"
+          }
+        },
+        "ownership": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MaturityOwnership"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "reasonCode",
+        "level",
+        "algorithmVersion",
+        "catalogVersion",
+        "inputDigest",
+        "contentDigest",
+        "authorityBoundary",
+        "mandatoryDomains",
+        "insufficientIndicators",
+        "insufficientDomains",
+        "improvementMissingDistinctAssessments",
+        "governanceOwnershipEvidenced",
+        "gates",
+        "domains",
+        "ownership"
+      ]
+    },
+    "DraftScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["customerId", "projectId", "environmentId"],
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "environmentId": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftFrozenVersions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profileVersion",
+        "scoringAlgorithmVersion",
+        "aiPolicyVersion",
+        "promptVersion",
+        "modelVersion",
+        "applicationVersion",
+        "workSchemaVersion",
+        "scriptedResultsDigest",
+        "analysisFixtureDigest",
+        "maturityFixtureDigest",
+        "desiredOutcomeVersion"
+      ],
+      "properties": {
+        "profileVersion": {
+          "type": "string"
+        },
+        "scoringAlgorithmVersion": {
+          "type": "string"
+        },
+        "aiPolicyVersion": {
+          "type": "string"
+        },
+        "promptVersion": {
+          "type": "string"
+        },
+        "modelVersion": {
+          "type": "string"
+        },
+        "applicationVersion": {
+          "type": "string"
+        },
+        "workSchemaVersion": {
+          "type": "string"
+        },
+        "scriptedResultsDigest": {
+          "type": "string"
+        },
+        "analysisFixtureDigest": {
+          "type": "string"
+        },
+        "maturityFixtureDigest": {
+          "type": "string"
+        },
+        "desiredOutcomeVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "fixPackageTemplateDigest": {
+          "const": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+        },
+        "fixReviewContractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "planningTaskContractDigest": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftModuleVersion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftCapabilityLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matrixVersion",
+        "stateAtLock",
+        "productBuild",
+        "databaseSchemaBuild",
+        "hotfixSetDigest",
+        "sqlServerBuild",
+        "queryPackVersion",
+        "normalizationSchemaVersion",
+        "ruleCatalogVersion",
+        "lockDigest",
+        "compatibilityLevel",
+        "modules"
+      ],
+      "properties": {
+        "matrixVersion": {
+          "type": "string"
+        },
+        "stateAtLock": {
+          "type": "string"
+        },
+        "productBuild": {
+          "type": "string"
+        },
+        "databaseSchemaBuild": {
+          "type": "string"
+        },
+        "hotfixSetDigest": {
+          "type": "string"
+        },
+        "sqlServerBuild": {
+          "type": "string"
+        },
+        "queryPackVersion": {
+          "type": "string"
+        },
+        "normalizationSchemaVersion": {
+          "type": "string"
+        },
+        "ruleCatalogVersion": {
+          "type": "string"
+        },
+        "lockDigest": {
+          "type": "string"
+        },
+        "compatibilityLevel": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftModuleVersion"
+          }
+        }
+      }
+    },
+    "DraftCompatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceProduct",
+        "productVersion",
+        "evidenceSchemaVersion",
+        "ruleLanguageVersion"
+      ],
+      "properties": {
+        "sourceProduct": {
+          "type": "string"
+        },
+        "productVersion": {
+          "type": "string"
+        },
+        "evidenceSchemaVersion": {
+          "type": "string"
+        },
+        "ruleLanguageVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftAnalysisLock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packVersion",
+        "packDigest",
+        "presetId",
+        "presetVersion",
+        "evidenceDigest",
+        "catalogVersion",
+        "catalogDigest",
+        "profileId",
+        "profileVersion",
+        "profileDigest",
+        "scope",
+        "compatibility"
+      ],
+      "properties": {
+        "packVersion": {
+          "type": "string"
+        },
+        "packDigest": {
+          "type": "string"
+        },
+        "presetId": {
+          "type": "string"
+        },
+        "presetVersion": {
+          "type": "string"
+        },
+        "evidenceDigest": {
+          "type": "string"
+        },
+        "catalogVersion": {
+          "type": "string"
+        },
+        "catalogDigest": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "profileVersion": {
+          "type": "string"
+        },
+        "profileDigest": {
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/DraftScope"
+        },
+        "compatibility": {
+          "$ref": "#/$defs/DraftCompatibility"
+        }
+      }
+    },
+    "DraftSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runInputDigest",
+        "analysisFixtureDigest",
+        "analysisContentDigest",
+        "scoringContentDigest",
+        "savedCoverageDigest",
+        "reviewSnapshotDigest",
+        "maturityFixtureDigest",
+        "maturityInputDigest",
+        "maturityContentDigest",
+        "scope",
+        "runId",
+        "runRevision",
+        "runState",
+        "baselineId",
+        "profileId",
+        "frozenVersions",
+        "capabilityLock",
+        "analysisLock",
+        "reviewRunId",
+        "reviewRunRevision"
+      ],
+      "properties": {
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisFixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scoringContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "savedCoverageDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewSnapshotDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "maturityFixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "maturityInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "maturityContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scope": {
+          "$ref": "#/$defs/DraftScope"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "runState": {
+          "const": "Scoring"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "frozenVersions": {
+          "$ref": "#/$defs/DraftFrozenVersions"
+        },
+        "capabilityLock": {
+          "$ref": "#/$defs/DraftCapabilityLock"
+        },
+        "analysisLock": {
+          "$ref": "#/$defs/DraftAnalysisLock"
+        },
+        "reviewRunId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "reviewRunRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "DraftFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": ["Critical", "High", "Medium", "Low", "Informational"]
+        },
+        "confidencePercent": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "reviewRequired": {
+          "type": "boolean"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "rootCauseKey": {
+          "type": "string"
+        },
+        "objectIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidenceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "impact": {
+          "type": "string"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validationGuidance": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidenceBand": {
+          "type": "string"
+        },
+        "method": {
+          "const": "Deterministic"
+        },
+        "likelihood": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "originalDigests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outcomeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rootCause": {
+          "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "initialState": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "occurrenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "category",
+        "severity",
+        "confidencePercent",
+        "state",
+        "reviewRequired",
+        "ruleId",
+        "ruleVersion",
+        "baselineId",
+        "rootCauseKey",
+        "objectIds",
+        "evidenceReferences",
+        "facts",
+        "inferences",
+        "assumptions",
+        "impact",
+        "recommendations",
+        "validationGuidance",
+        "sources",
+        "confidenceBand",
+        "method",
+        "likelihood",
+        "limitations",
+        "originalDigests",
+        "outcomeIds",
+        "rootCause",
+        "originalTitle",
+        "initialState",
+        "revision",
+        "businessContext",
+        "occurrenceIds"
+      ]
+    },
+    "DraftReviewHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findingId",
+        "revision",
+        "originalTitle",
+        "businessContext",
+        "events"
+      ],
+      "properties": {
+        "findingId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReviewEvent"
+          }
+        }
+      }
+    },
+    "DraftHealthyControl": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objectId", "ruleId", "ruleVersion", "state"],
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "state": {
+          "const": "Pass"
+        }
+      }
+    },
+    "DraftLimitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objectId", "ruleId", "state", "reasonCode"],
+      "properties": {
+        "objectId": {
+          "type": "string"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/CoverageState"
+        },
+        "reasonCode": {
+          "type": "string"
+        }
+      }
+    },
+    "DraftContent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provisional",
+        "publishableCurrent",
+        "categories",
+        "objectTypes",
+        "modules",
+        "outcomes",
+        "quality",
+        "findings",
+        "warnings",
+        "maturity",
+        "reviewHistory",
+        "healthyControls",
+        "limitations",
+        "methodology",
+        "unavailableSections"
+      ],
+      "properties": {
+        "provisional": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "publishableCurrent": {
+          "$ref": "#/$defs/AnalysisScore"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisCategoryRow"
+          }
+        },
+        "objectTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AnalysisScoreRow"
+          }
+        },
+        "quality": {
+          "$ref": "#/$defs/AnalysisQuality"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftFinding"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maturity": {
+          "$ref": "#/$defs/MaturityDetail"
+        },
+        "reviewHistory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftReviewHistory"
+          }
+        },
+        "healthyControls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftHealthyControl"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/DraftLimitation"
+          }
+        },
+        "methodology": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unavailableSections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DraftSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "status",
+        "source",
+        "canonicalContentDigest",
+        "content"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-draft-report-v1"
+        },
+        "status": {
+          "const": "SyntheticDraft"
+        },
+        "source": {
+          "$ref": "#/$defs/DraftSourceBinding"
+        },
+        "canonicalContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "content": {
+          "$ref": "#/$defs/DraftContent"
+        }
+      }
+    },
+    "DraftMarkdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "canonicalContentDigest",
+        "markdownText",
+        "markdownSha256"
+      ],
+      "properties": {
+        "version": {
+          "const": "synthetic-draft-markdown-v1"
+        },
+        "canonicalContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "markdownText": {
+          "type": "string"
+        },
+        "markdownSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "ReportDraft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reasonCode", "snapshot", "markdown"],
+      "properties": {
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "markdown": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftMarkdown"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "GuidanceSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "runInputDigest",
+        "analysisFixtureDigest",
+        "analysisContentDigest",
+        "savedCoverageDigest",
+        "reviewSnapshotDigest",
+        "scope",
+        "runId",
+        "runRevision",
+        "runState",
+        "baselineId",
+        "profileId",
+        "frozenVersions",
+        "capabilityLock",
+        "analysisLock",
+        "reviewRunId",
+        "reviewRunRevision"
+      ],
+      "properties": {
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisFixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "analysisContentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "savedCoverageDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewSnapshotDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "scope": {
+          "$ref": "#/$defs/DraftScope"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "runState": {
+          "const": "Scoring"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "frozenVersions": {
+          "$ref": "#/$defs/DraftFrozenVersions"
+        },
+        "capabilityLock": {
+          "$ref": "#/$defs/DraftCapabilityLock"
+        },
+        "analysisLock": {
+          "$ref": "#/$defs/DraftAnalysisLock"
+        },
+        "reviewRunId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "reviewRunRevision": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "GuidanceOccurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "occurrenceId",
+        "objectId",
+        "objectType",
+        "moduleId",
+        "originalDigest",
+        "evidenceReference"
+      ],
+      "properties": {
+        "occurrenceId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "objectType": {
+          "type": "string"
+        },
+        "moduleId": {
+          "type": "string"
+        },
+        "originalDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "evidenceReference": {
+          "type": "string"
+        }
+      }
+    },
+    "GuidanceOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scopedOptionId",
+        "optionId",
+        "status",
+        "text",
+        "prerequisites",
+        "risk",
+        "recoveryGuidance"
+      ],
+      "properties": {
+        "scopedOptionId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "optionId": {
+          "type": "string"
+        },
+        "status": {
+          "const": "Unverified"
+        },
+        "text": {
+          "type": "string"
+        },
+        "prerequisites": {
+          "type": "string"
+        },
+        "risk": {
+          "type": "string"
+        },
+        "recoveryGuidance": {
+          "type": "string"
+        }
+      }
+    },
+    "GuidanceFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "findingId",
+        "ruleId",
+        "ruleVersion",
+        "categoryId",
+        "originalTitle",
+        "presentationTitle",
+        "businessContext",
+        "rootCause",
+        "severity",
+        "initialState",
+        "currentState",
+        "findingRevision",
+        "occurrences",
+        "options",
+        "validationGuidance",
+        "guidanceReferences",
+        "assumptions",
+        "limitations"
+      ],
+      "properties": {
+        "findingId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "ruleId": {
+          "type": "string"
+        },
+        "ruleVersion": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "originalTitle": {
+          "type": "string"
+        },
+        "presentationTitle": {
+          "type": "string"
+        },
+        "businessContext": {
+          "type": "string"
+        },
+        "rootCause": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": ["Critical", "High", "Medium", "Low", "Informational"]
+        },
+        "initialState": {
+          "enum": ["Proposed", "AutoConfirmed"]
+        },
+        "currentState": {
+          "enum": [
+            "Proposed",
+            "AutoConfirmed",
+            "Confirmed",
+            "Rejected",
+            "Deferred"
+          ]
+        },
+        "findingRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "occurrences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuidanceOccurrence"
+          }
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuidanceOption"
+          }
+        },
+        "validationGuidance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "guidanceReferences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GuidanceSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "status",
+        "source",
+        "contentDigest",
+        "findings",
+        "warnings",
+        "unavailableSections"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-recommendation-guidance-v1"
+        },
+        "status": {
+          "const": "SyntheticUnverified"
+        },
+        "source": {
+          "$ref": "#/$defs/GuidanceSourceBinding"
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GuidanceFinding"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unavailableSections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RecommendationGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reasonCode", "snapshot"],
+      "properties": {
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GuidanceSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "AiPreviewSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "environmentId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "baselineDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "profileDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "normalizationVersion": {
+          "type": "string"
+        },
+        "redactionVersion": {
+          "type": "string"
+        },
+        "promptVersion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customerId",
+        "projectId",
+        "environmentId",
+        "runId",
+        "baselineDigest",
+        "profileDigest",
+        "normalizationVersion",
+        "redactionVersion",
+        "promptVersion"
+      ]
+    },
+    "AiPreviewStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "evidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ruleIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["text", "evidenceIds", "ruleIds"]
+    },
+    "AiPreviewProposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "proposalId": {
+          "type": "string"
+        },
+        "facts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "inferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "missingContext": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewStatement"
+          }
+        },
+        "uncertainty": {
+          "type": "string"
+        },
+        "conflictingEvidenceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "proposalId",
+        "facts",
+        "inferences",
+        "assumptions",
+        "missingContext",
+        "suggestions",
+        "uncertainty",
+        "conflictingEvidenceIds"
+      ]
+    },
+    "AiPreviewSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-ai-preview-v1"
+        },
+        "status": {
+          "const": "Proposed"
+        },
+        "disclaimer": {
+          "const": "Fictional offline preview. AI output is proposed and untrusted; cited statements are not verified facts. No evidence is resolved and no action is authorized."
+        },
+        "canonicalJson": {
+          "type": "string"
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source": {
+          "$ref": "#/$defs/AiPreviewSource"
+        },
+        "packetDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "proposalDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "proposals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AiPreviewProposal"
+          }
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "disclaimer",
+        "canonicalJson",
+        "contentDigest",
+        "source",
+        "packetDigest",
+        "proposalDigest",
+        "proposals"
+      ]
+    },
+    "AiPreviewDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-ai-demo-preview-v1"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string"
+        },
+        "fixtureDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AiPreviewSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "runId",
+        "runRevision",
+        "runInputDigest",
+        "baselineId",
+        "profileId",
+        "fixtureDigest",
+        "status",
+        "reasonCode",
+        "snapshot"
+      ]
+    },
+    "FixTemplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "templateId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": ["Configuration", "Script", "Sql"]
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": ["templateId", "kind", "text"]
+    },
+    "FixArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": ["Configuration", "Script", "Sql"]
+        },
+        "status": {
+          "const": "Unverified"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": ["artifactId", "templateId", "kind", "status", "text"]
+    },
+    "FixOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scopedOptionId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixArtifact"
+          }
+        }
+      },
+      "required": ["scopedOptionId", "artifacts"]
+    },
+    "FixPackage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "packageId": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "findingId": {
+          "type": "string"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixOption"
+          }
+        }
+      },
+      "required": ["packageId", "findingId", "options"]
+    },
+    "FixPackageSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-fix-package-preview-v1"
+        },
+        "status": {
+          "const": "Unverified"
+        },
+        "disclaimer": {
+          "const": "Fictional fix-package preview. Every artifact is unverified and review-only; these generic examples are not supported One Identity remediation. No execution or approval is authorized."
+        },
+        "guidance": {
+          "$ref": "#/$defs/GuidanceSnapshot"
+        },
+        "templateVersion": {
+          "const": "fictional-fix-templates-v1"
+        },
+        "templateDigest": {
+          "const": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixTemplate"
+          }
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FixPackage"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unavailableSections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "canonicalJson": {
+          "type": "string"
+        },
+        "contentDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "disclaimer",
+        "guidance",
+        "templateVersion",
+        "templateDigest",
+        "templates",
+        "packages",
+        "warnings",
+        "unavailableSections",
+        "canonicalJson",
+        "contentDigest"
+      ]
+    },
+    "FixPackageDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-fix-package-demo-v1"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "enum": [
+            "synthetic-review-maturity-fix-packages-equal-v1",
+            "synthetic-review-maturity-fix-review-equal-v1",
+            "synthetic-review-maturity-planning-tasks-equal-v1"
+          ]
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FixPackageSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "runId",
+        "runRevision",
+        "runInputDigest",
+        "baselineId",
+        "profileId",
+        "status",
+        "reasonCode",
+        "snapshot"
+      ]
+    },
+    "ArtifactReviewKind": {
+      "enum": ["ReviewForPlanning", "WithdrawReview"]
+    },
+    "ArtifactReviewState": {
+      "enum": ["Unverified", "ReviewedForPlanning", "NeedsReview"]
+    },
+    "ArtifactReviewIssue": {
+      "enum": [
+        "InvalidInput",
+        "Denied",
+        "WrongScope",
+        "InvalidState",
+        "NotFound",
+        "RevisionConflict",
+        "SourceConflict",
+        "EventConflict",
+        "SeedConflict",
+        "IntegrityMismatch",
+        "MigrationDrift",
+        "NotInitialized",
+        "SourceUnavailable",
+        "RevisionOverflow"
+      ]
+    },
+    "ArtifactReviewScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "customerId": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "environmentId": {
+          "type": "string"
+        }
+      },
+      "required": ["customerId", "projectId", "environmentId"]
+    },
+    "ArtifactReviewFindingRevision": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "findingId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": ["findingId", "revision"]
+    },
+    "ArtifactReviewSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "$ref": "#/$defs/ArtifactReviewScope"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "runInputDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "baselineId": {
+          "type": "string"
+        },
+        "profileId": {
+          "type": "string",
+          "enum": [
+            "synthetic-review-maturity-fix-review-equal-v1",
+            "synthetic-review-maturity-planning-tasks-equal-v1"
+          ]
+        },
+        "applicationVersion": {
+          "type": "string",
+          "enum": [
+            "synthetic-fix-review-app-v1",
+            "synthetic-planning-tasks-app-v1"
+          ]
+        },
+        "contractDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "sourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "guidanceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "findingReviewDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "templateVersion": {
+          "const": "fictional-fix-templates-v1"
+        },
+        "templateDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "findingRevisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReviewFindingRevision"
+          },
+          "maxItems": 100000
+        }
+      },
+      "required": [
+        "scope",
+        "runId",
+        "runRevision",
+        "runInputDigest",
+        "baselineId",
+        "profileId",
+        "applicationVersion",
+        "contractDigest",
+        "sourceDigest",
+        "guidanceDigest",
+        "findingReviewDigest",
+        "templateVersion",
+        "templateDigest",
+        "findingRevisions"
+      ]
+    },
+    "ArtifactReviewEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "kind": {
+          "$ref": "#/$defs/ArtifactReviewKind"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "const": "Consultant"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        },
+        "recordedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "source": {
+          "$ref": "#/$defs/ArtifactReviewSourceBinding"
+        },
+        "recordedState": {
+          "enum": ["ReviewedForPlanning", "Unverified"]
+        }
+      },
+      "required": [
+        "eventId",
+        "revision",
+        "kind",
+        "actorId",
+        "actorRoles",
+        "recordedAtUtc",
+        "reason",
+        "source",
+        "recordedState"
+      ]
+    },
+    "ArtifactReviewEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "findingId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "packageId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "scopedOptionId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "artifactId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "templateId": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": ["Configuration", "Script", "Sql"]
+        },
+        "artifactTextDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "state": {
+          "$ref": "#/$defs/ArtifactReviewState"
+        },
+        "canReview": {
+          "type": "boolean"
+        },
+        "canWithdraw": {
+          "type": "boolean"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReviewEvent"
+          },
+          "maxItems": 100000
+        }
+      },
+      "required": [
+        "findingId",
+        "packageId",
+        "scopedOptionId",
+        "artifactId",
+        "categoryId",
+        "templateId",
+        "kind",
+        "artifactTextDigest",
+        "revision",
+        "state",
+        "canReview",
+        "canWithdraw",
+        "history"
+      ]
+    },
+    "ArtifactReviewReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-fix-review-receipt-v1"
+        },
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "runId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "artifactId": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "$ref": "#/$defs/ArtifactReviewKind"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "recordedAtUtc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "eventId",
+        "runId",
+        "artifactId",
+        "kind",
+        "revision",
+        "actorId",
+        "recordedAtUtc",
+        "sourceDigest"
+      ]
+    },
+    "ArtifactReviewCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "eventId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "kind": {
+          "$ref": "#/$defs/ArtifactReviewKind"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "expectedSourceDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
+      "required": [
+        "eventId",
+        "kind",
+        "expectedRevision",
+        "expectedSourceDigest",
+        "reason"
+      ]
+    },
+    "ArtifactReviewDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "status": {
+          "enum": ["Ready", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "enum": [
+                "artifact_review_source_unavailable",
+                "artifact_review_integrity_denied",
+                "artifact_review_denied"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewSourceBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actorId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ArtifactReviewEntry"
+          },
+          "maxItems": 100000
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "status",
+        "reasonCode",
+        "source",
+        "actorId",
+        "artifacts"
+      ]
+    },
+    "ArtifactReviewResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "issue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewIssue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "alreadyApplied": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "issue",
+        "alreadyApplied",
+        "receipt"
+      ]
+    },
+    "PlanningTaskKind": {
+      "type": "string",
+      "enum": [
+        "Create",
+        "ReconfirmPlan",
+        "StartProgress",
+        "ReturnToPlanned",
+        "Complete",
+        "Cancel",
+        "Reopen",
+        "Comment"
+      ]
+    },
+    "PlanningTaskStatus": {
+      "type": "string",
+      "enum": ["Planned", "InProgress", "Completed", "Cancelled"]
+    },
+    "PlanningTaskFreshness": {
+      "type": "string",
+      "enum": ["CurrentPlan", "NeedsReconfirmation", "SourceUnavailable"]
+    },
+    "PlanningTaskIssue": {
+      "type": "string",
+      "enum": [
+        "InvalidInput",
+        "Denied",
+        "WrongScope",
+        "InvalidState",
+        "NotFound",
+        "RevisionConflict",
+        "SourceConflict",
+        "EventConflict",
+        "SeedConflict",
+        "IntegrityMismatch",
+        "MigrationDrift",
+        "NotInitialized",
+        "SourceUnavailable",
+        "RevisionOverflow"
+      ]
+    },
+    "PlanningTaskIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "taskId",
+        "findingId",
+        "categoryId",
+        "packageId",
+        "scopedOptionId",
+        "artifactIds"
+      ],
+      "properties": {
+        "taskId": {
+          "type": "string"
+        },
+        "findingId": {
+          "type": "string"
+        },
+        "categoryId": {
+          "type": "string"
+        },
+        "packageId": {
+          "type": "string"
+        },
+        "scopedOptionId": {
+          "type": "string"
+        },
+        "artifactIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PlanningTaskAttestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifactId",
+        "revision",
+        "eventId",
+        "kind",
+        "state",
+        "sourceDigest"
+      ],
+      "properties": {
+        "artifactId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "eventId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ArtifactReviewKind"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "state": {
+          "$ref": "#/$defs/ArtifactReviewState"
+        },
+        "sourceDigest": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "PlanningTaskSourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactSource", "planningTaskContractDigest"],
+      "properties": {
+        "artifactSource": {
+          "$ref": "#/$defs/ArtifactReviewSourceBinding"
+        },
+        "planningTaskContractDigest": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "findingState",
+        "currentAttestations",
+        "canCreate"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/PlanningTaskIdentity"
+        },
+        "findingState": {
+          "type": "string"
+        },
+        "currentAttestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskAttestation"
+          }
+        },
+        "canCreate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PlanningTaskCommand": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "kind",
+        "expectedRevision",
+        "expectedSourceDigest",
+        "expectedAttestations",
+        "reason"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "expectedRevision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "expectedSourceDigest": {
+          "type": "string"
+        },
+        "expectedAttestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskAttestation"
+          }
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "revision",
+        "kind",
+        "actorId",
+        "actorRoles",
+        "recordedAtUtc",
+        "reason",
+        "source",
+        "attestations",
+        "recordedStatus",
+        "planningEventId"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recordedAtUtc": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/PlanningTaskSourceBinding"
+        },
+        "attestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskAttestation"
+          }
+        },
+        "recordedStatus": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "planningEventId": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "eventId",
+        "runId",
+        "taskId",
+        "kind",
+        "revision",
+        "actorId",
+        "recordedAtUtc",
+        "sourceDigest"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "synthetic-planning-task-receipt-v1"
+        },
+        "eventId": {
+          "type": "string"
+        },
+        "runId": {
+          "type": "string"
+        },
+        "taskId": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "recordedAtUtc": {
+          "type": "string"
+        },
+        "sourceDigest": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "assigneeId",
+        "revision",
+        "status",
+        "freshness",
+        "creation",
+        "plan",
+        "history",
+        "canReconfirm",
+        "canStart",
+        "canReturnToPlanned",
+        "canComplete",
+        "canCancel",
+        "canReopen",
+        "canComment"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/PlanningTaskIdentity"
+        },
+        "assigneeId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "status": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "freshness": {
+          "$ref": "#/$defs/PlanningTaskFreshness"
+        },
+        "creation": {
+          "$ref": "#/$defs/PlanningTaskEvent"
+        },
+        "plan": {
+          "$ref": "#/$defs/PlanningTaskEvent"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskEvent"
+          }
+        },
+        "canReconfirm": {
+          "type": "boolean"
+        },
+        "canStart": {
+          "type": "boolean"
+        },
+        "canReturnToPlanned": {
+          "type": "boolean"
+        },
+        "canComplete": {
+          "type": "boolean"
+        },
+        "canCancel": {
+          "type": "boolean"
+        },
+        "canReopen": {
+          "type": "boolean"
+        },
+        "canComment": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PlanningTaskUnavailableHistory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eventId",
+        "revision",
+        "kind",
+        "actorId",
+        "actorRoles",
+        "recordedAtUtc",
+        "recordedStatus",
+        "planningEventId"
+      ],
+      "properties": {
+        "eventId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "kind": {
+          "$ref": "#/$defs/PlanningTaskKind"
+        },
+        "actorId": {
+          "type": "string"
+        },
+        "actorRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recordedAtUtc": {
+          "type": "string"
+        },
+        "recordedStatus": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "planningEventId": {
+          "type": "string"
+        }
+      }
+    },
+    "PlanningTaskUnavailableEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identity",
+        "assigneeId",
+        "revision",
+        "status",
+        "freshness",
+        "history"
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/PlanningTaskIdentity"
+        },
+        "assigneeId": {
+          "type": "string"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "status": {
+          "$ref": "#/$defs/PlanningTaskStatus"
+        },
+        "freshness": {
+          "const": "SourceUnavailable"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskUnavailableHistory"
+          }
+        }
+      }
+    },
+    "PlanningTaskDetail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "status",
+        "reasonCode",
+        "source",
+        "actorId",
+        "options",
+        "entries",
+        "unavailableEntries"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Ready", "SourceUnavailable", "Unavailable"]
+        },
+        "reasonCode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "planning_task_source_unavailable",
+                "planning_task_denied",
+                "planning_task_integrity_denied"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskSourceBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "actorId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskOption"
+          }
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskEntry"
+          }
+        },
+        "unavailableEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PlanningTaskUnavailableEntry"
+          }
+        }
+      }
+    },
+    "PlanningTaskResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "demoOnly",
+        "issue",
+        "alreadyApplied",
+        "receipt",
+        "alreadyExistsTaskId"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "demoOnly": {
+          "const": true
+        },
+        "issue": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskIssue"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "alreadyApplied": {
+          "type": "boolean"
+        },
+        "receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PlanningTaskReceipt"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "alreadyExistsTaskId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

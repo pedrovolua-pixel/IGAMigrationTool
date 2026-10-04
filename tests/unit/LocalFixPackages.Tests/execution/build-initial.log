@@ -1,0 +1,20 @@
+  RecommendationGuidance -> /private/tmp/iga-cycle12-a12/src/server/modules/RecommendationGuidance/bin/Release/net10.0/RecommendationGuidance.dll
+  SyntheticFixPackages -> /private/tmp/iga-cycle12-a12/src/server/modules/SyntheticFixPackages/bin/Release/net10.0/SyntheticFixPackages.dll
+  SyntheticAiValidation -> /private/tmp/iga-cycle12-a12/src/server/modules/SyntheticAiValidation/bin/Release/net10.0/SyntheticAiValidation.dll
+  SyntheticAiPreview -> /private/tmp/iga-cycle12-a12/src/server/modules/SyntheticAiPreview/bin/Release/net10.0/SyntheticAiPreview.dll
+  ReportDrafts -> /private/tmp/iga-cycle12-a12/src/server/modules/ReportDrafts/bin/Release/net10.0/ReportDrafts.dll
+  AssessmentCoverage -> /private/tmp/iga-cycle12-a12/src/server/modules/AssessmentCoverage/bin/Release/net10.0/AssessmentCoverage.dll
+  AssessmentOrchestration -> /private/tmp/iga-cycle12-a12/src/server/modules/AssessmentOrchestration/bin/Release/net10.0/AssessmentOrchestration.dll
+  DeterministicAnalysis -> /private/tmp/iga-cycle12-a12/src/server/modules/DeterministicAnalysis/bin/Release/net10.0/DeterministicAnalysis.dll
+  AssessmentScoring -> /private/tmp/iga-cycle12-a12/src/server/modules/AssessmentScoring/bin/Release/net10.0/AssessmentScoring.dll
+  AssessmentMaturity -> /private/tmp/iga-cycle12-a12/src/server/modules/AssessmentMaturity/bin/Release/net10.0/AssessmentMaturity.dll
+  AssessmentRuns -> /private/tmp/iga-cycle12-a12/src/server/modules/AssessmentRuns/bin/Release/net10.0/AssessmentRuns.dll
+  FindingReview -> /private/tmp/iga-cycle12-a12/src/server/modules/FindingReview/bin/Release/net10.0/FindingReview.dll
+  LocalConsultantDemo -> /private/tmp/iga-cycle12-a12/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll
+  LocalFixPackages.Tests -> /private/tmp/iga-cycle12-a12/tests/unit/LocalFixPackages.Tests/bin/Release/net10.0/LocalFixPackages.UnitTests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:08.77

@@ -1,0 +1,5 @@
+PASS RG-CORE-001 literal complete fields/grouping/scoped identities/canonical bytes/digest
+PASS RG-CORE-002 independent ordering/immutability/current-vs-original/empty/draft compatibility
+PASS RG-CORE-003 missing/unknown/cross-scope/run/revision/versions/locks/duplicate/current/original/option denial
+PASS RG-PG-001 actual saved grouped options/current review/immutable original/scoped identity/reload/old locks/no storage
+257 independent guidance assertions passed. Inert synthetic unverified values only; manual Windows, live pilot, CSV/PDF acceptance NOT VERIFIED.

@@ -1,0 +1,1534 @@
+{
+  "date": "2026-10-03",
+  "status": "COMPLETED approved local engineering cycle; broader hosted observations distinguished",
+  "approval": "specs/003-health-assessment/local-phase1d-approval.md",
+  "testedSourceCommit": "8e9ada7016d2eac49d4847d965bdf655bcc8fd8f",
+  "sdk": "10.0.401",
+  "projects": 90,
+  "localChecks": [
+    {
+      "name": "final-restore",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "IgaMigrationTool.slnx",
+        "--locked-mode"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 2.39,
+      "log": "final-restore.log"
+    },
+    {
+      "name": "final-format",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "format",
+        "IgaMigrationTool.slnx",
+        "--verify-no-changes",
+        "--no-restore"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 23.01,
+      "log": "final-format.log"
+    },
+    {
+      "name": "final-build",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "IgaMigrationTool.slnx",
+        "-c",
+        "Release",
+        "--no-restore"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 3.36,
+      "log": "final-build.log"
+    },
+    {
+      "name": "final-oracle",
+      "command": [
+        "python3",
+        "tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py",
+        "--verify"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 0.03,
+      "log": "final-oracle.log"
+    },
+    {
+      "name": "final-SyntheticMcpPublication.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticMcpPublication.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 0.82,
+      "log": "final-SyntheticMcpPublication.Tests.log"
+    },
+    {
+      "name": "final-SyntheticMcpBoundary.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticMcpBoundary.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 6.95,
+      "log": "final-SyntheticMcpBoundary.Tests.log"
+    },
+    {
+      "name": "final-SyntheticMcp.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/SyntheticMcp.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 1.18,
+      "log": "final-SyntheticMcp.Tests.log"
+    },
+    {
+      "name": "final-BoundaryChecks",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/architecture/BoundaryChecks",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 0.43,
+      "log": "final-BoundaryChecks.log"
+    },
+    {
+      "name": "final-secret-scan",
+      "command": [
+        "/private/tmp/iga-parallel-tools/gitleaks",
+        "dir",
+        "--no-banner",
+        "--redact=100",
+        "."
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 1.63,
+      "log": "final-secret-scan.log"
+    },
+    {
+      "name": "final-vulnerabilities",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "list",
+        "IgaMigrationTool.slnx",
+        "package",
+        "--vulnerable",
+        "--include-transitive",
+        "--format",
+        "json"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 7.78,
+      "log": "final-vulnerabilities.log"
+    },
+    {
+      "name": "final-diff-check",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/private/tmp/iga-p1d-integrated",
+      "exitCode": 0,
+      "seconds": 0.01,
+      "log": "final-diff-check.log"
+    }
+  ],
+  "mcpAssertions": {
+    "publication": 260,
+    "boundary": 10444,
+    "independent": 2849,
+    "note": "Counts overlap; not distinct requirements"
+  },
+  "compatibilityChecks": [
+    {
+      "name": "sampling-oracle",
+      "command": [
+        "python3",
+        "tests/unit/SyntheticEvaluationSampling.Tests/oracle.py"
+      ],
+      "exitCode": 0,
+      "seconds": 0.03,
+      "log": "sampling-oracle.log"
+    },
+    {
+      "name": "composed-oracle",
+      "command": [
+        "python3",
+        "tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py"
+      ],
+      "exitCode": 0,
+      "seconds": 0.02,
+      "log": "composed-oracle.log"
+    },
+    {
+      "name": "workflow-independent-oracle",
+      "command": [
+        "python3",
+        "tests/integration/SyntheticEvaluationWorkflowIndependent.Tests/oracle.py"
+      ],
+      "exitCode": 0,
+      "seconds": 0.02,
+      "log": "workflow-independent-oracle.log"
+    },
+    {
+      "name": "SyntheticEvaluationWorkflow.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticEvaluationWorkflow.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5,
+      "log": "SyntheticEvaluationWorkflow.Tests.log"
+    },
+    {
+      "name": "SyntheticEvaluation.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticEvaluation.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.89,
+      "log": "SyntheticEvaluation.Tests.log"
+    },
+    {
+      "name": "SyntheticEvaluationSampling.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticEvaluationSampling.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 1.91,
+      "log": "SyntheticEvaluationSampling.Tests.log"
+    },
+    {
+      "name": "SyntheticEvaluationRegression.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticEvaluationRegression.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 3.82,
+      "log": "SyntheticEvaluationRegression.Tests.log"
+    },
+    {
+      "name": "SyntheticEvaluationReviewer.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticEvaluationReviewer.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.85,
+      "log": "SyntheticEvaluationReviewer.Tests.log"
+    },
+    {
+      "name": "SyntheticEvaluationPolicy.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/SyntheticEvaluationPolicy.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.53,
+      "log": "SyntheticEvaluationPolicy.Tests.log"
+    },
+    {
+      "name": "AssessmentCoverage.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/AssessmentCoverage.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.54,
+      "log": "AssessmentCoverage.Tests.log"
+    },
+    {
+      "name": "AssessmentOrchestration.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/AssessmentOrchestration.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.69,
+      "log": "AssessmentOrchestration.Tests.log"
+    },
+    {
+      "name": "AssessmentScoring.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/AssessmentScoring.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.85,
+      "log": "AssessmentScoring.Tests.log"
+    },
+    {
+      "name": "AssessmentMaturity.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/AssessmentMaturity.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 3.29,
+      "log": "AssessmentMaturity.Tests.log"
+    },
+    {
+      "name": "DeterministicAnalysis.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/DeterministicAnalysis.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.49,
+      "log": "DeterministicAnalysis.Tests.log"
+    },
+    {
+      "name": "ReportDrafts.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/ReportDrafts.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.58,
+      "log": "ReportDrafts.Tests.log"
+    },
+    {
+      "name": "ReportMarkdown.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/ReportMarkdown.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.47,
+      "log": "ReportMarkdown.Tests.log"
+    },
+    {
+      "name": "SyntheticAiPackets.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticAiPackets.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.55,
+      "log": "SyntheticAiPackets.Tests.log"
+    },
+    {
+      "name": "SyntheticAiProposals.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticAiProposals.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.44,
+      "log": "SyntheticAiProposals.Tests.log"
+    },
+    {
+      "name": "SyntheticAiPreview.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticAiPreview.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.52,
+      "log": "SyntheticAiPreview.Tests.log"
+    },
+    {
+      "name": "RecommendationGuidance.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/RecommendationGuidance.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5,
+      "log": "RecommendationGuidance.Tests.log"
+    },
+    {
+      "name": "CollectorSafety.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/CollectorSafety.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.57,
+      "log": "CollectorSafety.Tests.log"
+    },
+    {
+      "name": "EvidenceGovernance.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/EvidenceGovernance.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 1.39,
+      "log": "EvidenceGovernance.Tests.log"
+    },
+    {
+      "name": "BoundaryChecks",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/architecture/BoundaryChecks",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.47,
+      "log": "BoundaryChecks.log"
+    },
+    {
+      "name": "AssessmentRuns.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/AssessmentRuns.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5,
+      "log": "AssessmentRuns.Tests.log"
+    },
+    {
+      "name": "CollectorHost.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/CollectorHost.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 1.73,
+      "log": "CollectorHost.Tests.log"
+    },
+    {
+      "name": "SyntheticAiPreviewHtml.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticAiPreviewHtml.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.48,
+      "log": "SyntheticAiPreviewHtml.Tests.log"
+    },
+    {
+      "name": "SyntheticOutcomePriority.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticOutcomePriority.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.47,
+      "log": "SyntheticOutcomePriority.Tests.log"
+    },
+    {
+      "name": "SyntheticAiExecution.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticAiExecution.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.47,
+      "log": "SyntheticAiExecution.Tests.log"
+    },
+    {
+      "name": "SyntheticTaskCsv.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticTaskCsv.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.46,
+      "log": "SyntheticTaskCsv.Tests.log"
+    },
+    {
+      "name": "LocalAiPreview.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/LocalAiPreview.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.54,
+      "log": "LocalAiPreview.Tests.log"
+    },
+    {
+      "name": "LocalFixPackages.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/LocalFixPackages.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.95,
+      "log": "LocalFixPackages.Tests.log"
+    },
+    {
+      "name": "SyntheticFixReview.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticFixReview.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.78,
+      "log": "SyntheticFixReview.Tests.log"
+    },
+    {
+      "name": "SyntheticPlanningTasks.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/unit/SyntheticPlanningTasks.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.56,
+      "log": "SyntheticPlanningTasks.Tests.log"
+    },
+    {
+      "name": "integration-SyntheticPilotFlow.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/SyntheticPilotFlow.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.8,
+      "log": "integration-SyntheticPilotFlow.Tests.log"
+    },
+    {
+      "name": "integration-SyntheticAiValidation.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/SyntheticAiValidation.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.47,
+      "log": "integration-SyntheticAiValidation.Tests.log"
+    },
+    {
+      "name": "integration-SyntheticAiPreview.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/SyntheticAiPreview.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.47,
+      "log": "integration-SyntheticAiPreview.Tests.log"
+    },
+    {
+      "name": "integration-Phase1BCompound.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/Phase1BCompound.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 15.87,
+      "log": "integration-Phase1BCompound.Tests.log"
+    },
+    {
+      "name": "integration-ReportDrafts.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/ReportDrafts.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.51,
+      "log": "integration-ReportDrafts.Tests.log"
+    },
+    {
+      "name": "integration-AnalysisScoring.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/AnalysisScoring.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.88,
+      "log": "integration-AnalysisScoring.Tests.log"
+    },
+    {
+      "name": "integration-ReviewMaturity.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/ReviewMaturity.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5,
+      "log": "integration-ReviewMaturity.Tests.log"
+    },
+    {
+      "name": "integration-LocalAiPreview.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/LocalAiPreview.Tests",
+        "-c",
+        "Release",
+        "--no-build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.48,
+      "log": "integration-LocalAiPreview.Tests.log"
+    },
+    {
+      "name": "portable-LocalFixPackages.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/LocalFixPackages.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "--portable"
+      ],
+      "exitCode": 0,
+      "seconds": 0.53,
+      "log": "portable-LocalFixPackages.Tests.log"
+    },
+    {
+      "name": "portable-LocalArtifactReview.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/LocalArtifactReview.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "--portable"
+      ],
+      "exitCode": 0,
+      "seconds": 0.57,
+      "log": "portable-LocalArtifactReview.Tests.log"
+    },
+    {
+      "name": "portable-LocalPlanningTasks.Tests",
+      "command": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "run",
+        "--project",
+        "tests/integration/LocalPlanningTasks.Tests",
+        "-c",
+        "Release",
+        "--no-build",
+        "--",
+        "--portable"
+      ],
+      "exitCode": 0,
+      "seconds": 0.51,
+      "log": "portable-LocalPlanningTasks.Tests.log"
+    }
+  ],
+  "sourceProof": {
+    "baselineCommit": "a6c3375a8ccdf562333d4b9487811c3cd8ec0f09",
+    "checkedWorkingFiles": 279,
+    "mismatches": [],
+    "note": "Preserves preexisting dirty UI bytes as well as all original tracked source/DTO/migration bytes."
+  },
+  "sourceHashes": {
+    "src/server/modules/SyntheticMcp/Contracts.cs": "c1d61a49e0822db59962fe91857815fc41c2b64586414d550473e3cf786024b3",
+    "src/server/modules/SyntheticMcp/CursorRegistry.cs": "016c3078fc4e92d9800a65c49149572023e96726b6e0219ac53bb6816ec75474",
+    "src/server/modules/SyntheticMcp/LocalLimits.cs": "595565d1144ef0707992711f27004b93d57784e9369b098c57a3b452ebc038fb",
+    "src/server/modules/SyntheticMcp/McpHarness.cs": "100e0f5466e545fcc483ca8d1dcad262a2aa0a0361b317da8ccaa59ea2cceb36",
+    "src/server/modules/SyntheticMcp/Projection.cs": "cab82f5e2eae5c4300598b8e4a0ba39ef9586fa5bcf982bae5b8d0a3bb6fdebd",
+    "src/server/modules/SyntheticMcp/PublicationCodec.cs": "cbe2b17d440c8b0140f2777c3d79c1e645b7338569c17f6f23b146ed9a45ea71",
+    "src/server/modules/SyntheticMcp/RequestParser.cs": "b327538e05b7d4c7b3afd41a2803ba9a0165ace3794a49193d0d0516d7f42cd7",
+    "src/server/modules/SyntheticMcp/SyntheticMcp.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+    "src/server/modules/SyntheticMcp/packages.lock.json": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb",
+    "tests/unit/SyntheticMcpPublication.Tests/Program.cs": "59f4591ba5f4d52b25c9b954860a571401c217a80664dcbbb12536f79d50439d",
+    "tests/unit/SyntheticMcpPublication.Tests/README.md": "383a448b0727504d0b846bb580819f6b50e369ad4d667ae61587abbf53679078",
+    "tests/unit/SyntheticMcpPublication.Tests/SyntheticMcpPublication.Tests.csproj": "c1e6024c6973de3b918f9de41aab38b8744b2872153be1608500436e27b4f766",
+    "tests/unit/SyntheticMcpPublication.Tests/fixtures/Coverage.json": "73943eb7256fc5a4fcafd0a0048a8294387b679f4facd83d38661ce41f70e67b",
+    "tests/unit/SyntheticMcpPublication.Tests/fixtures/Findings.json": "c0455a03d07dc53e52e9fdb10824aed25251d6f27ed12a0e60be15ea08e94d77",
+    "tests/unit/SyntheticMcpPublication.Tests/fixtures/ProtectedReferences.json": "0f92e6c1f570747d7a05c7c77810e3538bebc18d5b3382f75b3ade32b124c36a",
+    "tests/unit/SyntheticMcpPublication.Tests/fixtures/PublishedStatus.json": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef",
+    "tests/unit/SyntheticMcpPublication.Tests/fixtures/Recommendations.json": "7b96c9bbb60f6156901c8e977989814e000a7429ba2afc0f5bb95d06077e187a",
+    "tests/unit/SyntheticMcpPublication.Tests/fixtures/Scores.json": "1902657228fc99523830a3c5bdc5eba6a8a595761e3fb2e7a57d09beba3806ea",
+    "tests/unit/SyntheticMcpPublication.Tests/fixtures/manifest.json": "fe987e49d33965fdbf760587eba7c5763f6ba229e64b607d20f7f75e421ff457",
+    "tests/unit/SyntheticMcpPublication.Tests/packages.lock.json": "4d8c74ac696c3f227e3dbab7d69da094174ab10431a6f7b339c0a77173420bbb",
+    "tests/unit/SyntheticMcpBoundary.Tests/Fixture.cs": "693d77e2abff04def764e6a3ba8694a82a630042d409bdff619fe66e94b45e4d",
+    "tests/unit/SyntheticMcpBoundary.Tests/Program.cs": "51a1ca2e1d7314e6aedd3025ec76b09da2a4af2a0cf7e7e252974110ef8da1d6",
+    "tests/unit/SyntheticMcpBoundary.Tests/README.md": "b3092c9848521ae99fd4bbedb49e2d29b5c8ef2340ff08e33a8b8d066c989092",
+    "tests/unit/SyntheticMcpBoundary.Tests/SyntheticMcpBoundary.Tests.csproj": "c1e6024c6973de3b918f9de41aab38b8744b2872153be1608500436e27b4f766",
+    "tests/unit/SyntheticMcpBoundary.Tests/packages.lock.json": "4d8c74ac696c3f227e3dbab7d69da094174ab10431a6f7b339c0a77173420bbb",
+    "tests/integration/SyntheticMcp.Tests/Program.cs": "349d768221464a063447dd5f52387893961b41cd2ee76698a57de3ec64a16820",
+    "tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj": "c1e6024c6973de3b918f9de41aab38b8744b2872153be1608500436e27b4f766",
+    "tests/integration/SyntheticMcp.Tests/evidence/audit-cancellation-observation.txt": "20e78b34348dd86cc964094df7895859e3f922979ea8734a2d0a13a2659d5832",
+    "tests/integration/SyntheticMcp.Tests/evidence/audit-deadline-observation.txt": "c9a13d9b0c870103d14d0be33e9c6b80acc426713dfd423aaa1e66d282fd0027",
+    "tests/integration/SyntheticMcp.Tests/evidence/build-release.txt": "5449dedfaa9856c28f5acd2aa6bcb2cbfd42d5ab61e697cf6992c5723f315d94",
+    "tests/integration/SyntheticMcp.Tests/evidence/build.txt": "f58e92125cfb536540cf15b7b1799a18c791e60d393d606bf30d7221c9f6b32a",
+    "tests/integration/SyntheticMcp.Tests/evidence/original-denial-scope-failure.txt": "ed1ccf626ac974fac0f83968b04f58d0d433062a7bf836568bc8fcfe9406e384",
+    "tests/integration/SyntheticMcp.Tests/evidence/original-run-failure.txt": "583a6fd5d5c6bf7b031ed0782cbe548c31d43a6e4e691cd9cb7f0772178929e9",
+    "tests/integration/SyntheticMcp.Tests/evidence/original-surrogate-failure.txt": "060fbe8c8427a3bf6d8a977206b71808214aaa05ee028a424244bf810d83002d",
+    "tests/integration/SyntheticMcp.Tests/evidence/run-final-release.txt": "4d6f01ac0fe0ebcc8ab37092069f06ec7becc73204eb50bb7c3a5fbbb6cad1b6",
+    "tests/integration/SyntheticMcp.Tests/evidence/run2.txt": "ef1b6c21b1220fce84dc1bb6e0e15007a5ab333fb4fce1f1a72da48a24cfc316",
+    "tests/integration/SyntheticMcp.Tests/evidence/run3.txt": "ef1b6c21b1220fce84dc1bb6e0e15007a5ab333fb4fce1f1a72da48a24cfc316",
+    "tests/integration/SyntheticMcp.Tests/evidence/run4.txt": "a6dfb5a9a37ddb0c1438db3166a85a5803229b2f5fa4e5b24cefa60e4aabb7f8",
+    "tests/integration/SyntheticMcp.Tests/evidence/run5.txt": "51ac9df2729283018d3cdb8cc88d65b299c180242387c54796ddaada41bdfbed",
+    "tests/integration/SyntheticMcp.Tests/evidence/run6.txt": "4d6f01ac0fe0ebcc8ab37092069f06ec7becc73204eb50bb7c3a5fbbb6cad1b6",
+    "tests/integration/SyntheticMcp.Tests/evidence/verification.json": "086d0c303d931ad41973b84782fa54ee9c34d08cdf7eed5d50422e54590b9458",
+    "tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py": "a7826822dd4e42ca562b841325307203e728129dc22eeb55f29d267ceef31da9",
+    "tests/integration/SyntheticMcp.Tests/fixtures/denial-corpus.json": "4d3bc8f66eb0eeca7da0838d5819ee383d1a1d9aa8ca050b3acf2280f08ec22c",
+    "tests/integration/SyntheticMcp.Tests/fixtures/golden-hashes.json": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f",
+    "tests/integration/SyntheticMcp.Tests/fixtures/manifest.json": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-coverage-a.json": "52b67124fef5c88d0ee732bf5d021a743325b0dd9f9987ff5ec1219c1dd1fd2f",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-coverage-b.json": "782fdba6985795e9096917c467372defa716aa4c8e1095619b7f67129713df60",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-finding-a.json": "b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-finding-b.json": "7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-finding-c.json": "b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-rec-a.json": "9847bb817d7c2bdc53682b8a8b97dedf0aed1cca0f40d62d016e51085dbb8277",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-rec-b.json": "b11eaa7d51e86ae98bd44467b4f9336ba7b9331e88d753002549310a5f8fbfa9",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-rec-c.json": "757e7856d25f2d8a3ff637b842145f857763e83b3aea374aa59796f47c0a06e4",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-ref-a.json": "2c520b0ce57fe558d86aea3240ac1486c868a6aa39fa75535c70ce738497eb0b",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-ref-b.json": "cfaa70a4318a3f81304849ffe4d3ae72d28af033fc6a526c477fe3ccfa11d59b",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-score.json": "85d82c2d1d16b5181f195a72d165448673a1a500d6dc40b7625399ae1b481e10",
+    "tests/integration/SyntheticMcp.Tests/fixtures/syn-status.json": "9c4bc6272df05da4cf310c83101bf6803b686d8123343e4417d63568db32d8ef",
+    "tests/integration/SyntheticMcp.Tests/packages.lock.json": "4d8c74ac696c3f227e3dbab7d69da094174ab10431a6f7b339c0a77173420bbb",
+    "IgaMigrationTool.slnx": "6a72ec6fc9aa7fc7014a2fbc8e1244cfd539d703ac7751a3f5d6a0bb255a0e5d",
+    ".github/workflows/bootstrap-checks.yml": "1b1b916562aba608b1cf2dbc229b3cb4fde34fbdfc284c1c206178e3e8337da3",
+    "specs/003-health-assessment/local-phase1d-implementation-contract.md": "ccbd7a8bafa683105a246437d39d56fc6b55d29cdc96ba61e0c351787207b972"
+  },
+  "workerEvidenceHashes": [
+    {
+      "sha256": "199b1cf7e5dee9465338203e8117026ea1dcbb195110be8ee605f6bf6ea08654",
+      "artifact": "a-original.tar.gz"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "a/test-format.log"
+    },
+    {
+      "sha256": "a6c0c795042c7e0c59684a2b1ffb67f32772049bcf385a844ef6f89839191e0b",
+      "artifact": "a/surrogate-fixed-command.json"
+    },
+    {
+      "sha256": "2003afa9b80042d4351a6b498ef3c71f4c16d665612b775a5c32de25e01b4c66",
+      "artifact": "a/owned-commits.bundle"
+    },
+    {
+      "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb",
+      "artifact": "a/publication-260.log"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "a/diff-check.log"
+    },
+    {
+      "sha256": "7664a7bcdd587bf0981d4ce0e70ee3a9ee93a4ca9f6f0c0113ea5e43dd32625a",
+      "artifact": "a/surrogate-command.json"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "a/owned-commit-bundle.log"
+    },
+    {
+      "sha256": "43f5561e7e540b3d6811dd49e80e6e604a8dc7f742e1e767251528ac1b841aad",
+      "artifact": "a/surrogate-fixed-probe.log"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "a/identity.log"
+    },
+    {
+      "sha256": "7338f64c351665ade4ef11f03c395f6e1c664a4e99cba7446d548b5f21248af3",
+      "artifact": "a/commands.json"
+    },
+    {
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+      "artifact": "a/locked-restore.log"
+    },
+    {
+      "sha256": "a0425465d5dbfa653052675af56cf43ed46a084a51d2bab8fe6e5af5c00d6325",
+      "artifact": "a/surrogate-probe.log"
+    },
+    {
+      "sha256": "7bc00c50933171922b559d386bcb290b91535b4c462445c3a8d77537064410f4",
+      "artifact": "a/release-build.log"
+    },
+    {
+      "sha256": "287d1eae690c8a6aa1f3443081a09ecda6a391389dec40d8c30c628cf5dd8ae7",
+      "artifact": "a/owned-history.log"
+    },
+    {
+      "sha256": "5cec2ba109434788e01ebff7ad16471c99ea4a7ba38841fca6044b80df48a06c",
+      "artifact": "a/original-failures-transcribed.json"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "a/module-format.log"
+    },
+    {
+      "sha256": "52635da6411d1d84936119397298d368642253b4524f5d76de33bb7a7c564b8b",
+      "artifact": "a/bundle-verify.log"
+    },
+    {
+      "sha256": "b674e3b2fd24ef98d2c691f2ada7a7034528752659170b906d3afed7728c90d2",
+      "artifact": "a/nonauthor-review.json"
+    },
+    {
+      "sha256": "3da0af4059a8a19b44ea0f6a2752ebc8872da79cf7110e633822d60b738151a6",
+      "artifact": "a/owned-source.tar.gz"
+    },
+    {
+      "sha256": "5119701ee0df59e56f50b4daf29a40412e3a6aeebf23cbc7c72520f1290d855c",
+      "artifact": "a/SHA256SUMS"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "a/owned-source-archive.log"
+    },
+    {
+      "sha256": "e46760221bf12804af0c0f9ca1e8d0d22177deae7c5ae3ae6ddcae916ed441db",
+      "artifact": "a/toolchain.log"
+    },
+    {
+      "sha256": "583a6fd5d5c6bf7b031ed0782cbe548c31d43a6e4e691cd9cb7f0772178929e9",
+      "artifact": "v/original-run-failure.txt"
+    },
+    {
+      "sha256": "060fbe8c8427a3bf6d8a977206b71808214aaa05ee028a424244bf810d83002d",
+      "artifact": "v/original-surrogate-failure.txt"
+    },
+    {
+      "sha256": "5449dedfaa9856c28f5acd2aa6bcb2cbfd42d5ab61e697cf6992c5723f315d94",
+      "artifact": "v/build-release.txt"
+    },
+    {
+      "sha256": "20e78b34348dd86cc964094df7895859e3f922979ea8734a2d0a13a2659d5832",
+      "artifact": "v/audit-cancellation-observation.txt"
+    },
+    {
+      "sha256": "f58e92125cfb536540cf15b7b1799a18c791e60d393d606bf30d7221c9f6b32a",
+      "artifact": "v/build.txt"
+    },
+    {
+      "sha256": "4d6f01ac0fe0ebcc8ab37092069f06ec7becc73204eb50bb7c3a5fbbb6cad1b6",
+      "artifact": "v/run6.txt"
+    },
+    {
+      "sha256": "51ac9df2729283018d3cdb8cc88d65b299c180242387c54796ddaada41bdfbed",
+      "artifact": "v/run5.txt"
+    },
+    {
+      "sha256": "c9a13d9b0c870103d14d0be33e9c6b80acc426713dfd423aaa1e66d282fd0027",
+      "artifact": "v/audit-deadline-observation.txt"
+    },
+    {
+      "sha256": "a6dfb5a9a37ddb0c1438db3166a85a5803229b2f5fa4e5b24cefa60e4aabb7f8",
+      "artifact": "v/run4.txt"
+    },
+    {
+      "sha256": "ef1b6c21b1220fce84dc1bb6e0e15007a5ab333fb4fce1f1a72da48a24cfc316",
+      "artifact": "v/run3.txt"
+    },
+    {
+      "sha256": "ef1b6c21b1220fce84dc1bb6e0e15007a5ab333fb4fce1f1a72da48a24cfc316",
+      "artifact": "v/run2.txt"
+    },
+    {
+      "sha256": "ed1ccf626ac974fac0f83968b04f58d0d433062a7bf836568bc8fcfe9406e384",
+      "artifact": "v/original-denial-scope-failure.txt"
+    },
+    {
+      "sha256": "086d0c303d931ad41973b84782fa54ee9c34d08cdf7eed5d50422e54590b9458",
+      "artifact": "v/verification.json"
+    },
+    {
+      "sha256": "4d6f01ac0fe0ebcc8ab37092069f06ec7becc73204eb50bb7c3a5fbbb6cad1b6",
+      "artifact": "v/run-final-release.txt"
+    },
+    {
+      "sha256": "94c6532af92146363f37c87da49a635f058066a964ca2a59c1c4d9532286900c",
+      "artifact": "b/original-01-missing-assets.log"
+    },
+    {
+      "sha256": "cfcbb1be29e8d700468996357ace2d222204452fa9a310e79f8844b44c0d3efe",
+      "artifact": "b/original-03-unicode-fixture.log"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "b/final-format-owned-module.log"
+    },
+    {
+      "sha256": "e9198e78489bff1e1ad1261cab1a2db9f04442a5dda17d7c8c429cfc96add1fa",
+      "artifact": "b/final-secret-tests.log"
+    },
+    {
+      "sha256": "9ef660a97a86d3105b02f8a2fc29ee97d3454f62f3f2140dbcc009ff6cc79b0a",
+      "artifact": "b/results.json"
+    },
+    {
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+      "artifact": "b/final-locked-restore.log"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "b/final-format-boundary.log"
+    },
+    {
+      "sha256": "22d1b7a8fb0be004e22d6be56e894b45d03faf1f1a4b197428b15fb30257298a",
+      "artifact": "b/final-build.log"
+    },
+    {
+      "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6",
+      "artifact": "b/escaped-surrogate-fixed.log"
+    },
+    {
+      "sha256": "5b71c15342b6e3be7a9d63ae38c27bfc6f27addb2e2d519b248b41e9bbb91755",
+      "artifact": "b/final-secret-module.log"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "b/final-diff-check.log"
+    },
+    {
+      "sha256": "c8a85079b8d9ef981bfdfcec3afab439609abd21c3d1bbb7bac5329b91626801",
+      "artifact": "b/original-02-test-syntax.log"
+    },
+    {
+      "sha256": "1eb8f3533c586ec187841e760ba7f75b0bfde4a4931bd924c7ae550fff4acae5",
+      "artifact": "b/a-nonauthor-review.json"
+    },
+    {
+      "sha256": "6de58aa3ed5867f34f1ba54d6065f69dba09f78dae8aadc1b6d4c4b8b020183c",
+      "artifact": "b/escaped-surrogate-original.log"
+    },
+    {
+      "sha256": "cc4ea2e95b6f107a1b7e825d608dc3c007c3400844453d0a59084e2f7a66058d",
+      "artifact": "b/original-observations.json"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "b/final-clean-status.log"
+    },
+    {
+      "sha256": "b078c43d190adc2055ebb3420f25c3d8ecb17441388c0c81836279b06964fe54",
+      "artifact": "a/surrogate-probe/probe.csproj"
+    },
+    {
+      "sha256": "dd27ca41797810ddc763d30a5bd6add7abfcc89761b170ac95811cdb5e0330ce",
+      "artifact": "a/surrogate-probe/Program.cs"
+    },
+    {
+      "sha256": "b14461e0cb1be3f77fcf9fe2fdd62889325ca92523d0f606980ed59eb5c4aa1c",
+      "artifact": "a/surrogate-probe/obj/probe.csproj.nuget.g.targets"
+    },
+    {
+      "sha256": "1439730196568309e4847b2cdc83df20bf83a753df1fe56ec2f1f96f0ca82595",
+      "artifact": "a/surrogate-probe/obj/project.nuget.cache"
+    },
+    {
+      "sha256": "6d92977ad68ac3d0359b612dcb68de3bcd2e6f89911e7761dde7e6b2c3dd3abb",
+      "artifact": "a/surrogate-probe/obj/probe.csproj.nuget.dgspec.json"
+    },
+    {
+      "sha256": "e467e86d1c43e16430afa9a34bfb731df16b6d7465392379573cb395fd3d3fea",
+      "artifact": "a/surrogate-probe/obj/probe.csproj.nuget.g.props"
+    },
+    {
+      "sha256": "4f8548f51cefe7d89086dc3ca9c7efa6a48c210f2b7dceb6c98aec62d2d3e7be",
+      "artifact": "a/surrogate-probe/obj/project.assets.json"
+    },
+    {
+      "sha256": "a5146dd3b898ca5ff722d268528ddb5a12e0490920a6a07c2a911ef545924b0e",
+      "artifact": "a/surrogate-probe/bin/Debug/net10.0/probe.pdb"
+    },
+    {
+      "sha256": "f9bc8e9f0c46247078ed47309f19a7576b4b94e4300e9de0003917d6bd2d667a",
+      "artifact": "a/surrogate-probe/bin/Debug/net10.0/probe.runtimeconfig.json"
+    },
+    {
+      "sha256": "bc6bad91d0a83bc4ee3efe7f829d0d82423a18a1d898bb212604b45c9ceacceb",
+      "artifact": "a/surrogate-probe/bin/Debug/net10.0/probe.dll"
+    },
+    {
+      "sha256": "4aecda003390159f4b0364293e17e70dcd8837d079ed8af26dae628d85e8f0ba",
+      "artifact": "a/surrogate-probe/bin/Debug/net10.0/probe.deps.json"
+    },
+    {
+      "sha256": "9dfce635a7b4272d2952bb1a5281e7910859b4ee9efbbfd388e99fa9f6cb425f",
+      "artifact": "a/surrogate-probe/bin/Debug/net10.0/SyntheticMcp.dll"
+    },
+    {
+      "sha256": "0f72ed04c6afa7872b9bce11d4772572e3082bdf0ab6696789d6ebc9e8ca3612",
+      "artifact": "a/surrogate-probe/bin/Debug/net10.0/probe"
+    },
+    {
+      "sha256": "5f64b532e9d4ce02c0dd56614ce390c134f16232f021e34a957a32cc11938862",
+      "artifact": "a/surrogate-probe/bin/Debug/net10.0/SyntheticMcp.pdb"
+    },
+    {
+      "sha256": "a5146dd3b898ca5ff722d268528ddb5a12e0490920a6a07c2a911ef545924b0e",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.pdb"
+    },
+    {
+      "sha256": "953fbafc6402bacd60bcfefd84950577b44c1deafce83ac05daec71d4d24e893",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.GeneratedMSBuildEditorConfig.editorconfig"
+    },
+    {
+      "sha256": "8f86a2cbf00ff3eee0bda2bc0eb5e1fc19c8544d5dc650c53d0132325956b592",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.GlobalUsings.g.cs"
+    },
+    {
+      "sha256": "bc6bad91d0a83bc4ee3efe7f829d0d82423a18a1d898bb212604b45c9ceacceb",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.dll"
+    },
+    {
+      "sha256": "0f72ed04c6afa7872b9bce11d4772572e3082bdf0ab6696789d6ebc9e8ca3612",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/apphost"
+    },
+    {
+      "sha256": "18ab052cbc1ac95551d3cfb3287885fe954f1cd7e992e77943c380f5ae1779d6",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.csproj.CoreCompileInputs.cache"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.csproj.Up2Date"
+    },
+    {
+      "sha256": "ae8a8bfa56faeba50c5e7b21892802a361f256c7c3f8b9a1a999a6ac434afbae",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.csproj.AssemblyReference.cache"
+    },
+    {
+      "sha256": "f79c1ad9a9fc76110b3655f5bfb5ff4e3168e9addceff05b937c0796f0ec34eb",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/.NETCoreApp,Version=v10.0.AssemblyAttributes.cs"
+    },
+    {
+      "sha256": "353376bd74279fbd8d125e5e303a482bc8f612c15bbdba1a851500d9fc3d8001",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.assets.cache"
+    },
+    {
+      "sha256": "729195b2bbf11726a618ac9f1d8a8beeaf8931e458f6759407c860055073ea13",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.AssemblyInfo.cs"
+    },
+    {
+      "sha256": "4b9f34ccb6a49a84b5f2b2328ac1c977ec77af5436fe473a7b771cbe6bd21117",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.csproj.FileListAbsolute.txt"
+    },
+    {
+      "sha256": "d5f517a2fb28afe8913603039ab591884aac8d059c8219e0427476eb5c58a1ac",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.genruntimeconfig.cache"
+    },
+    {
+      "sha256": "87ab18d5f3996e4fef7d6f6e1becdb970ea049eddefe933772e378e8814302fd",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/probe.AssemblyInfoInputs.cache"
+    },
+    {
+      "sha256": "5bae8184e0080b51b2563116f935a8e20ffb4a7740c61ea468c3cbc15bf8f76e",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/ref/probe.dll"
+    },
+    {
+      "sha256": "5bae8184e0080b51b2563116f935a8e20ffb4a7740c61ea468c3cbc15bf8f76e",
+      "artifact": "a/surrogate-probe/obj/Debug/net10.0/refint/probe.dll"
+    }
+  ],
+  "reviews": {
+    "A": "No remaining actionable findings; external surrogate fix replay at1ce75da",
+    "B": "A publication review no actionable findings",
+    "V": "Independent scope/Unicode findings fixed and replayed; terminal deadline limitation explicit;2849pass",
+    "canonicalDocument": "V found and coordinator corrected two plan wording overclaims: authorization-denial loading vs later authorized-source failures; V executable T01\u201311 vs coordinator-owned T12. Nonauthor review closed.",
+    "T12IndependentReexecution": {
+      "status": "PASS",
+      "sha256": "cd1ed98feaa03585d75f6c352900be57b69dddbb98fdee7b3b177c8905a5f315",
+      "artifact": ".sites-work/phase1d-implementation-evidence/t12-nonauthor-review.json",
+      "summary": "279/279priorworkinghashes,26oldserverprojectsnoMCPref,4newprojects/lockszeroexternalpackages;oldruntime/host/UI/DTO/contract/migrationbyteproof"
+    }
+  },
+  "initialHosted": {
+    "source": "1ce75dab8e9432f280bf7b21654c8d7f35a18545",
+    "bootstrap": 37149868263,
+    "outcome": "failure; Linux format,Windows2025 outdated overrestrictive test,Windows2022cancelled",
+    "package": 37149868189,
+    "packageOutcome": "success",
+    "cause": "Coordinator published intermediate V test checkpoint too early; final correction integrated8e9ada7"
+  },
+  "currentHosted": {
+    "source": "8e9ada7016d2eac49d4847d965bdf655bcc8fd8f",
+    "bootstrap": 37150129304,
+    "package": 37150129349,
+    "status": "Phase1D Linux step and both complete Windows jobs PASS; package PASS; whole Linux/bootstrap still IN PROGRESS",
+    "windows2022": "success",
+    "windows2025": "success",
+    "linuxMcpStep": "success",
+    "packageStatus": "success"
+  },
+  "nativeEvidenceRoot": ".sites-work/phase1d-implementation-evidence",
+  "nativeLogHashes": [
+    {
+      "sha256": "c87c56f6a0bb204a6c8723e3e2b9eb0c974d97dc1b8f51dd91e5eaad24419fe6",
+      "artifact": "final-SyntheticMcpBoundary.Tests.log"
+    },
+    {
+      "sha256": "4a0de99985daeeee925968234538882d08ef6fff74f3c85d33b6aac7f0d31b1b",
+      "artifact": "LocalFixPackages.Tests.log"
+    },
+    {
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb",
+      "artifact": "final-BoundaryChecks.log"
+    },
+    {
+      "sha256": "18510532dd9313379f2215c2fa62411aedfb149b47e6d8bedd8e3f585dd7658c",
+      "artifact": "integration-SyntheticPilotFlow.Tests.log"
+    },
+    {
+      "sha256": "4cd773d4fba0927baf108888c55bdac04c2b4cd07615691de2403bfdc243a5b5",
+      "artifact": "AssessmentOrchestration.Tests.log"
+    },
+    {
+      "sha256": "5e7be126948f7239778fb3b7b13af7d8f69e2f51c7d9e87b35ae3cafc7ae649b",
+      "artifact": "AssessmentRuns.Tests.log"
+    },
+    {
+      "sha256": "0812257f3011b4321f686273a961e31373309efb4eaec27be6854a467e4b7e5a",
+      "artifact": "SyntheticEvaluationReviewer.Tests.log"
+    },
+    {
+      "sha256": "1729aa07170453730e221fbbc718bb865043e1962d8b32bb9966faf864da639e",
+      "artifact": "SyntheticPlanningTasks.Tests.log"
+    },
+    {
+      "sha256": "081881967ec400676e081481c50dc9397e9e3e244e2d2dc8cae8517a7f987654",
+      "artifact": "LocalAiPreview.Tests.log"
+    },
+    {
+      "sha256": "6d2533821c7a4cb5070a77949d5d4a10e0986020d9125aa0f094e3e3b1771c61",
+      "artifact": "CollectorSafety.Tests.log"
+    },
+    {
+      "sha256": "85aa642ae80b720b7b95d7c103c95d9514cea057641440de1fa4619d26d11b63",
+      "artifact": "final-restore.log"
+    },
+    {
+      "sha256": "49f1774bda25e9fcf2d8dcbb976052ee723dc8d1dda3965ae85ce574665cfbc4",
+      "artifact": "SyntheticTaskCsv.Tests.log"
+    },
+    {
+      "sha256": "60f313f7490314b45e7ba131edc37d2a7eb003d70739eee0c10a260e5de7b1ef",
+      "artifact": "ReportMarkdown.Tests.log"
+    },
+    {
+      "sha256": "abd68feaa38f1f39af1b56dd8d2f79971626ea7446e3f1d8875039953f975a3f",
+      "artifact": "portable-LocalArtifactReview.Tests.log"
+    },
+    {
+      "sha256": "7097c0d3ff3d99e0b6b880a7731fec729a996c14ba7aa495722c10ed3e272cbe",
+      "artifact": "integration-ReviewMaturity.Tests.log"
+    },
+    {
+      "sha256": "f83dec430f17c5712666e3b4a8b7d6457acf6bfa107451d2147bbba6a51942d8",
+      "artifact": "SyntheticEvaluationSampling.Tests.log"
+    },
+    {
+      "sha256": "4d6f01ac0fe0ebcc8ab37092069f06ec7becc73204eb50bb7c3a5fbbb6cad1b6",
+      "artifact": "final-SyntheticMcp.Tests.log"
+    },
+    {
+      "sha256": "a473404734bfea0d4225047cdac07fbf3e7bbbc1685760389bad269a89b35b45",
+      "artifact": "final-oracle.log"
+    },
+    {
+      "sha256": "425938e2aa6519c7fd4fec2e2fe4f187d81a931b86200c0c5524d0c8d6e9c283",
+      "artifact": "workflow-independent-oracle.log"
+    },
+    {
+      "sha256": "a62c02b8c6072da43abe9a120ccdbc16cdb96515b2d2d2faa8af3b8f92079c5c",
+      "artifact": "CollectorHost.Tests.log"
+    },
+    {
+      "sha256": "adfc203a58ad48f00fc126110bb4ba8d0058c4284a689293509132debd857408",
+      "artifact": "SyntheticAiProposals.Tests.log"
+    },
+    {
+      "sha256": "2f809e079a7c3639fc5e77a2dca3f03cde36d2c943121df26585ac9302e32698",
+      "artifact": "AssessmentMaturity.Tests.log"
+    },
+    {
+      "sha256": "7ea394ff57b7d9a82dedf830d42de866d2606b1657da082d8d2b1b6c761799ff",
+      "artifact": "SyntheticAiPreviewHtml.Tests.log"
+    },
+    {
+      "sha256": "5a256ffd2826ded26e46e781444874507e40bffdc9953abe2d8112e8f220d149",
+      "artifact": "combined-restore.log"
+    },
+    {
+      "sha256": "9e82bf64d414eb1d5ae124eb25dbef44e9858de6152a6c284531d2a78a7be4d4",
+      "artifact": "ReportDrafts.Tests.log"
+    },
+    {
+      "sha256": "6f8428437211f724ddf666802c462dcfd74636110e701d04042dfa9c1a1cb83b",
+      "artifact": "final-secret-scan.log"
+    },
+    {
+      "sha256": "38f3bf6142c34277a3f1ad7db77876a7f79e7776950638901bfb32efc75986d1",
+      "artifact": "portable-LocalFixPackages.Tests.log"
+    },
+    {
+      "sha256": "f2233a86658b7abc98a3d7634d4f15c3e5ef1cd4fb81f01151c300be57c393e8",
+      "artifact": "final-build.log"
+    },
+    {
+      "sha256": "53dbf14f4f9db02f2515feb859371fc1afee7d65eb7d644a94a0e2f887e728d7",
+      "artifact": "sampling-oracle.log"
+    },
+    {
+      "sha256": "b1f124f4deff5f163b113c64dda91b55823ba57eeb57b88c276fbcb71900f6c1",
+      "artifact": "SyntheticEvaluationRegression.Tests.log"
+    },
+    {
+      "sha256": "c5b12c228796e0b7f7fc9bfb788aea487373d18dc1ad4238a6a530186d548092",
+      "artifact": "integration-SyntheticAiValidation.Tests.log"
+    },
+    {
+      "sha256": "dfa5f2c1c40bdbc93f81a4a27126ec053c9739d649a93101f54a6d4c1d5f9820",
+      "artifact": "integration-ReportDrafts.Tests.log"
+    },
+    {
+      "sha256": "ef0d594c7f2ebcf17daf01c5e9c4873e1efe9cf4fb71967f0bdc515104d474a0",
+      "artifact": "AssessmentScoring.Tests.log"
+    },
+    {
+      "sha256": "5d2b9ed0ff21717c0879e03f0235296f380cc2048f8fe1f8273c4c0960aa5839",
+      "artifact": "combined-secret-scan.log"
+    },
+    {
+      "sha256": "db827d0a8c8b2b8d40f6c3f63839202f938c2f6a6a630c9bbcd59a510019a5f6",
+      "artifact": "combined-build.log"
+    },
+    {
+      "sha256": "d54e493eb5b97ef64f1b78e6386fd56d51d178382ae849e1bc2714fb3eccfd1a",
+      "artifact": "SyntheticFixReview.Tests.log"
+    },
+    {
+      "sha256": "df63aa81ad030a36938a57d9eb3e46fc4e71ee19406573c53e785af1486706e5",
+      "artifact": "integration-AnalysisScoring.Tests.log"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "final-diff-check.log"
+    },
+    {
+      "sha256": "412f644493bce8f506777a1e1350db988592b125dbda7edc297fd4f02ee27cdb",
+      "artifact": "final-SyntheticMcpPublication.Tests.log"
+    },
+    {
+      "sha256": "dc68fa3844b695510513bc0e7000e255ebe5b08d6333d4647b11a34a944c54e1",
+      "artifact": "composed-oracle.log"
+    },
+    {
+      "sha256": "fadcbb0fec4132e0ad38d53ced1c7f9f6a5a8d8bcfc9109cbe2d581b0879d713",
+      "artifact": "SyntheticAiExecution.Tests.log"
+    },
+    {
+      "sha256": "9b060ba86b4657b6624626c0fa3474328b697f30f2a6e54555dd51c61b8eeee1",
+      "artifact": "SyntheticEvaluation.Tests.log"
+    },
+    {
+      "sha256": "25784c7acbb636e585fb03e6620efad6ea0c495c8bb67fb807a8606ec5d60d4b",
+      "artifact": "portable-LocalPlanningTasks.Tests.log"
+    },
+    {
+      "sha256": "c87540f0390a21804fa4e9049ec139bbdcd4785b289796ca0e1457a054089849",
+      "artifact": "integration-LocalAiPreview.Tests.log"
+    },
+    {
+      "sha256": "ccc15e771ea70f15c8b1ea05031cc756d85f475754e26f4261e0344e23401947",
+      "artifact": "SyntheticEvaluationWorkflow.Tests.log"
+    },
+    {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifact": "final-format.log"
+    },
+    {
+      "sha256": "75723913195fafe9d44f33f667e4d41ab7b6909c4006ce509378eb9244330325",
+      "artifact": "RecommendationGuidance.Tests.log"
+    },
+    {
+      "sha256": "bc44da39cb5adb1d12b660ca59a82483c18c8f0a8e296f6e7d8cf7d630c87d10",
+      "artifact": "final-vulnerabilities.log"
+    },
+    {
+      "sha256": "5e52a4168196268ec29ffd2fc7991bf6277a108991a41289faca2a6a23acdbc2",
+      "artifact": "SyntheticOutcomePriority.Tests.log"
+    },
+    {
+      "sha256": "f8129266c38f4299928291996e515c6416b9794bcce3b0c6812e256ecc8db0af",
+      "artifact": "DeterministicAnalysis.Tests.log"
+    },
+    {
+      "sha256": "10dd67090ce4a8f5eeac0f272078f3607149c9d34cd9827f1dc9536db7f49927",
+      "artifact": "integration-SyntheticAiPreview.Tests.log"
+    },
+    {
+      "sha256": "8f64a56f8d07bd72a98000c61b70161af9b2a58cc45dace344f138a2f4ad5f40",
+      "artifact": "EvidenceGovernance.Tests.log"
+    },
+    {
+      "sha256": "07fe7aa7d27bab3127abb2dac1718e9af82a238602d90e93403cfb566268b2a0",
+      "artifact": "SyntheticAiPreview.Tests.log"
+    },
+    {
+      "sha256": "f9c6db2f4e0c321f9cba9e4ac8f18a8e2d9cb6950780b125c289ba1ea4eeff55",
+      "artifact": "combined-format.log"
+    },
+    {
+      "sha256": "c1f16c5dc30ec9c325aa9b14c45471f26ce304204abd7be0d9c2cdbe229e035f",
+      "artifact": "integration-Phase1BCompound.Tests.log"
+    },
+    {
+      "sha256": "5a6a20164058aec70e19c333960624f4b27033944e2174c248fbfc86e04656fd",
+      "artifact": "AssessmentCoverage.Tests.log"
+    },
+    {
+      "sha256": "53a917ec21558c3d36688aaba61998d0ef73345679806b4f125e432ec94aae6d",
+      "artifact": "SyntheticAiPackets.Tests.log"
+    },
+    {
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb",
+      "artifact": "BoundaryChecks.log"
+    },
+    {
+      "sha256": "c679515e0b92fbe97f0f28f50c3168c4fb2f00dc2da842f2e8fa22ecf5c502f4",
+      "artifact": "SyntheticEvaluationPolicy.Tests.log"
+    }
+  ],
+  "nativeArchiveHashes": [
+    {
+      "sha256": "1a3eddd4d332709bdc4d4020e83ece5660773a8abf477075e883a6a2e4f08837",
+      "artifact": "source-8e9ada7.tar"
+    },
+    {
+      "sha256": "3197ebf943ea070fbe269f6d596a8f19281692d7c19e78a171f97f535db45d89",
+      "artifact": "tested-runtime.tar.gz"
+    },
+    {
+      "sha256": "199b1cf7e5dee9465338203e8117026ea1dcbb195110be8ee605f6bf6ea08654",
+      "artifact": "workers/a-original.tar.gz"
+    }
+  ],
+  "internalContract": {
+    "originalFreezeHash": "1dccb6813d1eb50fb92e17815983eb4cc0fe492896d67db6433a1eab9073d16f",
+    "clarifiedHash": "ccbd7a8bafa683105a246437d39d56fc6b55d29cdc96ba61e0c351787207b972",
+    "review": "V nonauthor acceptance of explicit existing terminal-atom timing and denied-scope minimization"
+  },
+  "cleanup": "Three clean own writer/verifier worktrees removed; branches, bundle, source/runtime/native evidence retained. Clean combined verification worktree retained until closure.",
+  "limitations": [
+    "Synchronous terminal append-only audit may exceed5sec/holdfence; late cancellation cannot undo atom; no end-to-end deadline guarantee.",
+    "No actual publication adapter, external protocol/token/client, live permissions, durable audit/distributed quotas/cursors/retention or production activation.",
+    "Local saved-source PostgreSQL/browser/Windows/container/infra checks not rerun except stated compound owning-database test; full configured hosted jobs pending.",
+    "FullMilestone11/Phase1D/UAT/G1\u2013G9 remain NOT VERIFIED."
+  ],
+  "privatePublication": "Owner-private104/source201706e9 deployment succeeded; final completed-plan source reconciled by separate phase1d-implementation-site-20261003.json receipt.",
+  "originalCoordinatorRecordChecks": {
+    "markdown": "Initial new verification doc had3 trailing hard-break spaces; removed and diffcheck passed",
+    "secretScan": "Four metadata SHA256 values keyed by filenames containing secret were flagged by generic-api-key. No credential values were present. Receipt now uses separate artifact/sha256 fields; no allowlist or scanner policy changed. Original redacted findings retained in native evidence."
+  },
+  "compatibilitySourceCommit": "7ca9bbf61e497d44f4cbe9572d57d91610ef9cdb"
+}

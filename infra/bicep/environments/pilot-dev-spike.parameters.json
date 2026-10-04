@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkName": { "value": "vnet-iga-pilot-dev" },
+    "virtualNetworkAddressPrefix": { "value": "10.64.0.0/16" },
+    "containerAppsSubnetName": { "value": "snet-container-apps" },
+    "containerAppsSubnetAddressPrefix": { "value": "10.64.0.0/23" },
+    "privateEndpointSubnetName": { "value": "snet-private-endpoints" },
+    "privateEndpointSubnetAddressPrefix": { "value": "10.64.2.0/24" },
+    "staticEgressPublicIpName": { "value": "pip-iga-pilot-dev-egress" },
+    "natGatewayName": { "value": "nat-iga-pilot-dev" },
+    "serviceBusNamespaceName": { "value": "sb-iga-pilot-dev-1001-pv" },
+    "workQueueName": { "value": "synthetic-work" },
+    "workloadIdentityPrefix": { "value": "id-iga-pilot-dev" }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "source": "7b7a8289aa254803bcdd151ca6a5c55ed5fe5fa5",
+  "archive": "/private/tmp/iga-cycle14-completion-site.tar.gz",
+  "archiveSha256": "fae0e23df0e64217920f6ccd24197a81bb685ab85a45f5039f77289e3a1c480a",
+  "indexGitBytesEqual": true,
+  "hostingGitBytesEqual": true,
+  "packagerMetadataPath": "dist/.openai/hosting.json",
+  "initialCheckLimit": "Initial verifier assumed archive-root config path; corrected to actual supported packager layout before final confirmation"
+}

@@ -1,0 +1,112 @@
+{
+  "aiTabs": [
+    {
+      "label": "Proposed findings",
+      "selected": "true"
+    },
+    {
+      "label": "Analysis history",
+      "selected": "true"
+    },
+    {
+      "label": "Deep analysis",
+      "selected": "true"
+    },
+    {
+      "label": "Analysis",
+      "selected": "true"
+    }
+  ],
+  "navigation": [
+    {
+      "documentWidth": 1265,
+      "heading": "Your assessment at a glance",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Assessments",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Risk analysis",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Evidence",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Outcomes & maturity",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "AI workspace",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Recommendations",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Tasks & reviews",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Reports",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Compare runs",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Projects",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Sources & baselines",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Rule catalog",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Settings",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1280,
+      "heading": "Audit history",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Migration",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Portfolio",
+      "viewport": 1280
+    },
+    {
+      "documentWidth": 1265,
+      "heading": "Design archive",
+      "viewport": 1280
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/SyntheticEvaluationWorkflow/SyntheticEvaluationWorkflow.csproj" />
+    <Compile Include="../../../src/server/fixtures/SyntheticEvaluationWorkflowFixture.cs" Link="FictionalEvaluationFixture.cs" />
+    <None Include="expected-v1.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><AssemblyName>SyntheticEvaluationPopulationIntegration.UnitTests</AssemblyName></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticEvaluationPopulationIntegration/SyntheticEvaluationPopulationIntegration.csproj" /></ItemGroup>
+  <ItemGroup><None Update="full-envelope-literal.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

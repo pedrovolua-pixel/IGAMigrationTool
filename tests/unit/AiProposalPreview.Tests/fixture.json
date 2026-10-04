@@ -1,0 +1,261 @@
+{
+  "run": {
+    "schemaVersion": 1,
+    "demoOnly": true,
+    "runId": "12345678-1234-5678-9abc-123456789abc",
+    "revision": 5,
+    "state": "Scoring",
+    "createdAtUtc": "2026-10-02T00:00:00Z",
+    "updatedAtUtc": "2026-10-02T00:00:00Z",
+    "selection": {
+      "scopeId": "scope-synthetic",
+      "scopeLabel": "Synthetic fixture scope",
+      "baselineId": "baseline-ai-configuration-v1",
+      "baselineLabel": "Fictional offline configuration",
+      "profileId": "profile-ai-preview-v1",
+      "profileLabel": "Fixed offline preview"
+    },
+    "progress": {
+      "plannedUnits": 2,
+      "terminalUnits": 2,
+      "remainingUnits": 0,
+      "allTerminal": true
+    },
+    "coverageCompletionKind": "Complete",
+    "lockedInputs": [
+      {
+        "name": "Baseline",
+        "version": "baseline-ai-configuration-v1",
+        "sha256": "7ce414f75580d8737db369bc8cd296c59a6f1f84ed1d16af1d992dfaa18684b4"
+      },
+      {
+        "name": "Profile",
+        "version": "synthetic-ai-preview-profile-v1",
+        "sha256": "e81313114d1e6a218b8f2a76c3a171dc88b200095adafef8d05c36dc5421d214"
+      },
+      {
+        "name": "Rule catalog",
+        "version": "synthetic-ai-fixture-rules-v1",
+        "sha256": "93c184203c67d330ebb594288349ada73c23acf84af0bcea2323cadb0b3af43c"
+      },
+      {
+        "name": "Capability",
+        "version": "synthetic-ai-matrix-v1",
+        "sha256": "9ab52da72983b0a3d8940cf64f74db6472d6b4fa5ddf8e343f11adb0282e6408"
+      },
+      {
+        "name": "Desired outcomes",
+        "version": "disabled",
+        "sha256": "17eb3c0168d0d7b21ede5481150f17233427d89833ec121b4dbc4fb96cfab71e"
+      },
+      {
+        "name": "Scoring algorithm",
+        "version": "synthetic-scoring-unimplemented-v1",
+        "sha256": "0d731346988c0bce13b5fee65094ec9f33856493819eb09da6af67d3f868e9d9"
+      },
+      {
+        "name": "AI policy",
+        "version": "synthetic-ai-offline-preview-only-v1",
+        "sha256": "6f7d2c0f0c83940fa6e9d4fea29287c710bfa6132f16ffa1154f95d74cbf45c0"
+      },
+      {
+        "name": "Prompt",
+        "version": "fixture-prompt-v1",
+        "sha256": "bdce7298e4a857073e43751e75446d28eac54e0f3fe809489e06adca6e2455b4"
+      },
+      {
+        "name": "Model",
+        "version": "synthetic-fixed-response-v1",
+        "sha256": "7a71a5fc0bd40d57a2614c361a728b7ed293e28933e392af60b8a603a759d4a4"
+      },
+      {
+        "name": "Application",
+        "version": "synthetic-ai-preview-demo-app-v1",
+        "sha256": "e2c0d1e8e8dd1a4aaf1c4f86efd27da071566b895892b085bfdec2667dd912de"
+      },
+      {
+        "name": "Work schema",
+        "version": "synthetic-run-work-v1",
+        "sha256": "62f97295786395635b782fb69bf8b54b70cc375c045f4a1d1ce56cc8bb6d7cea"
+      },
+      {
+        "name": "Complete frozen input",
+        "version": "synthetic-input-lock-v1",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "name": "Exact capability tuple",
+        "version": "synthetic-ai-matrix-v1",
+        "sha256": "9ab52da72983b0a3d8940cf64f74db6472d6b4fa5ddf8e343f11adb0282e6408"
+      },
+      {
+        "name": "Scripted result fixture",
+        "version": "synthetic-outcomes-v1",
+        "sha256": "ab6c3b99035d97bf8ce7c179796167ac07bf8d5773e641cd8a6b5f4e1c0bc810"
+      },
+      {
+        "name": "Frozen offline AI contents",
+        "version": "synthetic-ai-demo-fixture-v1",
+        "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      },
+      {
+        "name": "Offline AI configuration template",
+        "version": "synthetic-ai-configuration-v1",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    ],
+    "warnings": [],
+    "stateCounts": [
+      {
+        "state": "Pass",
+        "count": 2
+      }
+    ],
+    "executableCoverage": {
+      "numerator": 2,
+      "denominator": 2,
+      "hasApplicableUnits": true
+    },
+    "limitations": [],
+    "actions": {
+      "canCancel": false,
+      "canResume": false,
+      "resumeAvailableAtUtc": null,
+      "reasonCode": "scoring_paused"
+    },
+    "cancelRequested": false
+  },
+  "analysis": {
+    "schemaVersion": 1,
+    "demoOnly": true,
+    "runId": "12345678-1234-5678-9abc-123456789abc",
+    "runRevision": 5,
+    "status": "Unavailable",
+    "reasonCode": "coverage_only_fixture",
+    "algorithmVersion": null,
+    "fixtureDigest": null,
+    "contentDigest": null,
+    "provisional": null,
+    "publishableCurrent": null,
+    "categories": [],
+    "objectTypes": [],
+    "modules": [],
+    "outcomes": [],
+    "quality": null,
+    "findings": [],
+    "warnings": [],
+    "review": null,
+    "maturity": null,
+    "reviewSnapshotDigest": null,
+    "reportDraft": null,
+    "recommendationGuidance": null,
+    "aiPreview": {
+      "schemaVersion": "synthetic-ai-demo-preview-v1",
+      "runId": "12345678-1234-5678-9abc-123456789abc",
+      "runRevision": 5,
+      "runInputDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "baselineId": "baseline-ai-configuration-v1",
+      "profileId": "profile-ai-preview-v1",
+      "fixtureDigest": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "status": "Ready",
+      "reasonCode": null,
+      "snapshot": {
+        "schemaVersion": "synthetic-ai-preview-v1",
+        "status": "Proposed",
+        "disclaimer": "Fictional offline preview. AI output is proposed and untrusted; cited statements are not verified facts. No evidence is resolved and no action is authorized.",
+        "source": {
+          "customerId": "synthetic-customer",
+          "projectId": "synthetic-project",
+          "environmentId": "synthetic-environment",
+          "runId": "12345678-1234-5678-9abc-123456789abc",
+          "baselineDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "profileDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "normalizationVersion": "fixture-normalization-v1",
+          "redactionVersion": "fixture-redaction-v1",
+          "promptVersion": "fixture-prompt-v1"
+        },
+        "packetDigest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "proposalDigest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "proposals": [
+          {
+            "proposalId": "proposal-01",
+            "facts": [
+              {
+                "text": "<script>alert('x' & \"y\")</script>",
+                "evidenceIds": [
+                  "ev-1111111111111111111111111111111111111111111111111111111111111111",
+                  "ev-2222222222222222222222222222222222222222222222222222222222222222"
+                ],
+                "ruleIds": [
+                  "fixture-rule-conflict-v1",
+                  "fixture-rule-schedule-v1"
+                ]
+              },
+              {
+                "text": "Unicode café 中文 😀",
+                "evidenceIds": [
+                  "ev-1111111111111111111111111111111111111111111111111111111111111111",
+                  "ev-2222222222222222222222222222222222222222222222222222222222222222"
+                ],
+                "ruleIds": [
+                  "fixture-rule-conflict-v1",
+                  "fixture-rule-schedule-v1"
+                ]
+              }
+            ],
+            "inferences": [
+              {
+                "text": "<img src=x onerror=alert(1)>",
+                "evidenceIds": [
+                  "ev-1111111111111111111111111111111111111111111111111111111111111111",
+                  "ev-2222222222222222222222222222222222222222222222222222222222222222"
+                ],
+                "ruleIds": [
+                  "fixture-rule-conflict-v1",
+                  "fixture-rule-schedule-v1"
+                ]
+              }
+            ],
+            "assumptions": [
+              {
+                "text": "A < B & B > C",
+                "evidenceIds": [
+                  "ev-1111111111111111111111111111111111111111111111111111111111111111",
+                  "ev-2222222222222222222222222222222222222222222222222222222222222222"
+                ],
+                "ruleIds": [
+                  "fixture-rule-conflict-v1",
+                  "fixture-rule-schedule-v1"
+                ]
+              }
+            ],
+            "suggestions": [
+              {
+                "text": "javascript:alert(1) remains text",
+                "evidenceIds": [
+                  "ev-1111111111111111111111111111111111111111111111111111111111111111",
+                  "ev-2222222222222222222222222222222222222222222222222222222222222222"
+                ],
+                "ruleIds": [
+                  "fixture-rule-conflict-v1",
+                  "fixture-rule-schedule-v1"
+                ]
+              }
+            ],
+            "missingContext": [
+              "First missing context <iframe>",
+              "Second missing context & detail"
+            ],
+            "uncertainty": "Conflicting configuration <style>body{display:none}</style>",
+            "conflictingEvidenceIds": [
+              "ev-1111111111111111111111111111111111111111111111111111111111111111",
+              "ev-2222222222222222222222222222222222222222222222222222222222222222"
+            ]
+          }
+        ],
+        "canonicalJson": "{\"disclaimer\":\"Fictional offline preview. AI output is proposed and untrusted; cited statements are not verified facts. No evidence is resolved and no action is authorized.\",\"packetDigest\":\"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee\",\"proposalDigest\":\"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\",\"proposals\":[{\"assumptions\":[{\"evidenceIds\":[\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"ev-2222222222222222222222222222222222222222222222222222222222222222\"],\"ruleIds\":[\"fixture-rule-conflict-v1\",\"fixture-rule-schedule-v1\"],\"text\":\"A \\u003C B \\u0026 B \\u003E C\"}],\"conflictingEvidenceIds\":[\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"ev-2222222222222222222222222222222222222222222222222222222222222222\"],\"facts\":[{\"evidenceIds\":[\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"ev-2222222222222222222222222222222222222222222222222222222222222222\"],\"ruleIds\":[\"fixture-rule-conflict-v1\",\"fixture-rule-schedule-v1\"],\"text\":\"\\u003Cscript\\u003Ealert(\\u0027x\\u0027 \\u0026 \\u0022y\\u0022)\\u003C/script\\u003E\"},{\"evidenceIds\":[\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"ev-2222222222222222222222222222222222222222222222222222222222222222\"],\"ruleIds\":[\"fixture-rule-conflict-v1\",\"fixture-rule-schedule-v1\"],\"text\":\"Unicode caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\"}],\"inferences\":[{\"evidenceIds\":[\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"ev-2222222222222222222222222222222222222222222222222222222222222222\"],\"ruleIds\":[\"fixture-rule-conflict-v1\",\"fixture-rule-schedule-v1\"],\"text\":\"\\u003Cimg src=x onerror=alert(1)\\u003E\"}],\"missingContext\":[\"First missing context \\u003Ciframe\\u003E\",\"Second missing context \\u0026 detail\"],\"proposalId\":\"proposal-01\",\"suggestions\":[{\"evidenceIds\":[\"ev-1111111111111111111111111111111111111111111111111111111111111111\",\"ev-2222222222222222222222222222222222222222222222222222222222222222\"],\"ruleIds\":[\"fixture-rule-conflict-v1\",\"fixture-rule-schedule-v1\"],\"text\":\"javascript:alert(1) remains text\"}],\"uncertainty\":\"Conflicting configuration \\u003Cstyle\\u003Ebody{display:none}\\u003C/style\\u003E\"}],\"schemaVersion\":\"synthetic-ai-preview-v1\",\"source\":{\"baselineDigest\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"normalizationVersion\":\"fixture-normalization-v1\",\"profileDigest\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"projectId\":\"synthetic-project\",\"promptVersion\":\"fixture-prompt-v1\",\"redactionVersion\":\"fixture-redaction-v1\",\"runId\":\"12345678-1234-5678-9abc-123456789abc\"},\"status\":\"Proposed\"}",
+        "contentDigest": "1a710575e20e76922b34209a45db8cfda73e23a1c85079c6424f87774227eaf9"
+      }
+    }
+  }
+}

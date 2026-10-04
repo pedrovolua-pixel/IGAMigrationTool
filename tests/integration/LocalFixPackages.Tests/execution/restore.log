@@ -1,0 +1,15 @@
+  Determining projects to restore...
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj (in 36 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj (in 746 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/AssessmentCoverage/AssessmentCoverage.csproj (in 0.7 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/AssessmentRuns/AssessmentRuns.csproj (in 23 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj (in 0.6 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/AssessmentOrchestration/AssessmentOrchestration.csproj (in 0.7 ms).
+  Restored /private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/LocalFixPackages.Tests.csproj (in 3 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/AssessmentScoring/AssessmentScoring.csproj (in 0.6 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj (in 0.4 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/FindingReview/FindingReview.csproj (in 0.8 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj (in 0.7 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/AssessmentMaturity/AssessmentMaturity.csproj (in 0.3 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj (in 0.6 ms).
+  Restored /private/tmp/iga-cycle12-v12/src/server/modules/ReportDrafts/ReportDrafts.csproj (in 0.4 ms).

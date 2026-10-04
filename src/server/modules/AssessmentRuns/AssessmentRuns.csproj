@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../SyntheticAiExecution/SyntheticAiExecution.csproj" />
+    <ProjectReference Include="../SyntheticOutcomePriority/SyntheticOutcomePriority.csproj" />
+    <ProjectReference Include="../SyntheticSourceFence/SyntheticSourceFence.csproj" />
+    <ProjectReference Include="../AssessmentOrchestration/AssessmentOrchestration.csproj" />
+    <ProjectReference Include="../DeterministicAnalysis/DeterministicAnalysis.csproj" />
+    <ProjectReference Include="../AssessmentScoring/AssessmentScoring.csproj" />
+    <ProjectReference Include="../AssessmentMaturity/AssessmentMaturity.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.12" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+    <EmbeddedResource Include="../../../../migrations/assessment-runs/001-initial.sql" LogicalName="AssessmentRuns.001-initial.sql" />
+  </ItemGroup>
+  <ItemGroup><EmbeddedResource Include="fixtures/ai-preview-*.json" /></ItemGroup>
+</Project>

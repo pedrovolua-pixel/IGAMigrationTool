@@ -1,0 +1,517 @@
+{
+  "schema": "cycle14-root-composition-v1",
+  "base": "cf8b320a3d2d5eddb54afa09f84ae7e461efd154",
+  "coordinator": "c45fd59646539c34a0e52cb1e1f1c4125aa2bf63",
+  "changed": [
+    ".gitattributes",
+    ".github/workflows/bootstrap-checks.yml",
+    ".gitignore",
+    "IgaMigrationTool.slnx",
+    "contracts/local-demo/README.md",
+    "contracts/local-demo/demo-v1.schema.json",
+    "docs/development/evidence/cycle14/a14-contract-review.json",
+    "docs/development/evidence/cycle14/b14-contract-review.json",
+    "docs/development/evidence/cycle14/b14-original-preservation.json",
+    "docs/development/evidence/cycle14/engineering-audit.json",
+    "docs/development/evidence/cycle14/historical-immutable-byte-check.json",
+    "docs/development/evidence/cycle14/v14-contract-review.json",
+    "docs/development/evidence/local-pilot-cycle14-approval-site.json",
+    "docs/development/evidence/local-pilot-cycle14-contract-freeze.json",
+    "docs/development/local-consultant-demo.md",
+    "migrations/planning-tasks/001-initial.sql",
+    "plans/active/local-pilot-planning-tasks-cycle-14.md",
+    "specs/003-health-assessment/local-planning-task-implementation-contract.md",
+    "specs/003-health-assessment/local-planning-task-test-plan.md",
+    "src/server/hosts/LocalConsultantDemo/AssemblyInfo.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoArtifactReviewService.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoFixPackageProjection.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoPlanningTaskService.cs",
+    "src/server/hosts/LocalConsultantDemo/DemoReviewService.cs",
+    "src/server/hosts/LocalConsultantDemo/LocalConsultantDemo.csproj",
+    "src/server/hosts/LocalConsultantDemo/Program.cs",
+    "src/server/hosts/LocalConsultantDemo/packages.lock.json",
+    "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+    "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+    "src/server/modules/AssessmentRuns/DemoPlanningTaskCatalog.cs",
+    "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+    "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+    "src/server/modules/FindingReview/SyntheticReviewStore.cs",
+    "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+    "src/server/modules/SyntheticFixReview/ArtifactReviewSourceBuilder.cs",
+    "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+    "src/server/modules/SyntheticPlanningTasks/PlanningTaskCanonical.cs",
+    "src/server/modules/SyntheticPlanningTasks/PlanningTaskContracts.cs",
+    "src/server/modules/SyntheticPlanningTasks/PlanningTaskPolicy.cs",
+    "src/server/modules/SyntheticPlanningTasks/PlanningTaskSourceBuilder.cs",
+    "src/server/modules/SyntheticPlanningTasks/README.md",
+    "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskMigration.cs",
+    "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTaskStore.cs",
+    "src/server/modules/SyntheticPlanningTasks/SyntheticPlanningTasks.csproj",
+    "src/server/modules/SyntheticPlanningTasks/packages.lock.json",
+    "src/web/src/AnalysisView.tsx",
+    "src/web/src/App.tsx",
+    "src/web/src/ArtifactReviewPanel.tsx",
+    "src/web/src/FixPackagePreview.tsx",
+    "src/web/src/PlanningTasksPanel.css",
+    "src/web/src/PlanningTasksPanel.tsx",
+    "src/web/src/demo-contract.generated.ts",
+    "src/web/src/usePlanningTasks.ts",
+    "tests/e2e/local-ai-preview/verify.mjs",
+    "tests/e2e/planning-tasks/.gitignore",
+    "tests/e2e/planning-tasks/expected.mjs",
+    "tests/e2e/planning-tasks/preauthor/browser-design.md",
+    "tests/e2e/planning-tasks/verify-oracles.mjs",
+    "tests/e2e/planning-tasks/verify.mjs",
+    "tests/integration/LocalAiPreview.Tests/Program.cs",
+    "tests/integration/LocalArtifactReview.Tests/PortableCases.cs",
+    "tests/integration/LocalArtifactReview.Tests/packages.lock.json",
+    "tests/integration/LocalFixPackages.Tests/PortableCases.cs",
+    "tests/integration/LocalFixPackages.Tests/packages.lock.json",
+    "tests/integration/LocalPlanningTasks.Tests/.gitignore",
+    "tests/integration/LocalPlanningTasks.Tests/ConcurrencyRecoveryCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/DatabaseCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/DomainFixture.cs",
+    "tests/integration/LocalPlanningTasks.Tests/Expected.cs",
+    "tests/integration/LocalPlanningTasks.Tests/HostRecoveryCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj",
+    "tests/integration/LocalPlanningTasks.Tests/OracleCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/OwnedDatabase.cs",
+    "tests/integration/LocalPlanningTasks.Tests/Policies.cs",
+    "tests/integration/LocalPlanningTasks.Tests/PortableCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/Program.cs",
+    "tests/integration/LocalPlanningTasks.Tests/README.md",
+    "tests/integration/LocalPlanningTasks.Tests/SavedSourceCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/SourceBoundaryCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/SourceTimelineCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/UuidAndIntegrityCases.cs",
+    "tests/integration/LocalPlanningTasks.Tests/command-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/empty-artifact-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/empty-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/empty-fix-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/empty-guidance-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/empty-input.json",
+    "tests/integration/LocalPlanningTasks.Tests/empty-options-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/expected-manifest.json",
+    "tests/integration/LocalPlanningTasks.Tests/freeze-runtime.py",
+    "tests/integration/LocalPlanningTasks.Tests/historical-six-locks.json",
+    "tests/integration/LocalPlanningTasks.Tests/hostile-artifact-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/hostile-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/hostile-fix-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/hostile-guidance-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/hostile-input.json",
+    "tests/integration/LocalPlanningTasks.Tests/hostile-options-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/identity-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/normal-artifact-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/normal-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/normal-fix-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/normal-guidance-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/normal-input.json",
+    "tests/integration/LocalPlanningTasks.Tests/normal-options-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/oracle-provenance.json",
+    "tests/integration/LocalPlanningTasks.Tests/oracle.py",
+    "tests/integration/LocalPlanningTasks.Tests/packages.lock.json",
+    "tests/integration/LocalPlanningTasks.Tests/preauthor/design-checkpoint.json",
+    "tests/integration/LocalPlanningTasks.Tests/preauthor/design.md",
+    "tests/integration/LocalPlanningTasks.Tests/preauthor/semantic-cases.json",
+    "tests/integration/LocalPlanningTasks.Tests/preauthor/semantic-primitives.json",
+    "tests/integration/LocalPlanningTasks.Tests/preauthor/source-bindings.json",
+    "tests/integration/LocalPlanningTasks.Tests/reviews/source-review.json",
+    "tests/integration/LocalPlanningTasks.Tests/run-isolated.py",
+    "tests/integration/LocalPlanningTasks.Tests/run-later-artifact-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/run-later-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/run-later-fix-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/run-later-guidance-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/run-later-input.json",
+    "tests/integration/LocalPlanningTasks.Tests/run-later-options-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/selected-vector-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-b-artifact-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-b-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-b-fix-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-b-guidance-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-b-input.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-b-options-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-return-artifact-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-return-binding-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-return-fix-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-return-guidance-golden.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-return-input.json",
+    "tests/integration/LocalPlanningTasks.Tests/source-return-options-golden.json",
+    "tests/integration/ReviewMaturity.Tests/BridgeCases.cs",
+    "tests/unit/AssessmentRuns.Tests/Program.cs",
+    "tests/unit/LocalFixPackages.Tests/Program.cs",
+    "tests/unit/LocalFixPackages.Tests/packages.lock.json",
+    "tests/unit/PlanningTasksComponent.Tests/PlanningTasksComponent.Tests.csproj",
+    "tests/unit/PlanningTasksComponent.Tests/Program.cs",
+    "tests/unit/PlanningTasksComponent.Tests/README.md",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/ArtifactReviewPanel.mjs",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/FixPackagePreview.mjs",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/PlanningTasksPanel.mjs",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/complete-actual.html",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/empty-actual.html",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/inert-api.mjs",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/receipt-dependency.mjs",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/results.json",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/same-digest-counterexample.json",
+    "tests/unit/PlanningTasksComponent.Tests/artifacts/unavailable-actual.html",
+    "tests/unit/PlanningTasksComponent.Tests/complete-expected.html",
+    "tests/unit/PlanningTasksComponent.Tests/complete-fixture.json",
+    "tests/unit/PlanningTasksComponent.Tests/dotnet-format.log",
+    "tests/unit/PlanningTasksComponent.Tests/empty-expected.html",
+    "tests/unit/PlanningTasksComponent.Tests/empty-fixture.json",
+    "tests/unit/PlanningTasksComponent.Tests/executed-checks.json",
+    "tests/unit/PlanningTasksComponent.Tests/execution-metadata.json",
+    "tests/unit/PlanningTasksComponent.Tests/execution/dependencies/capture.json",
+    "tests/unit/PlanningTasksComponent.Tests/execution/dependencies/usePlanningTasks.ts.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/ArtifactReviewPanel.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/FixPackagePreview.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/PlanningTasksPanel.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/PlanningTasksPanel.tsx.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/bindings.json",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/complete-actual.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/complete-expected.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/empty-actual.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/empty-expected.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/evidence-json-format-failure.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/initial-unit.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/oracle-hashes.json.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/oracle.py.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/unavailable-actual.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/unavailable-expected.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/initial/verify.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/ArtifactReviewPanel.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/FixPackagePreview.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.deps.json.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.dll.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.pdb.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.runtimeconfig.json.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksPanel.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksPanel.tsx.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/README.md.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/complete-actual.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/empty-actual.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/executed-checks.json.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/execution-metadata.json.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-component.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-contract.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-diff.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-dotnet-build.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-dotnet-format.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-evidence-format-pass.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-evidence-format.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-evidence-secret.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-frontend-build.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-frontend-format.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-oracle.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-restore.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-secret-frontend.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-secret-owned-tests.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-typecheck.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/inert-api.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/preservation.json",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/receipt-dependency.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/results.json.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/unavailable-actual.html.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/original734/verify.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/same-digest-reproduction/PlanningTasksPanel.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/same-digest-reproduction/PlanningTasksPanel.tsx.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/same-digest-reproduction/same-digest-counterexample.json.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/same-digest-reproduction/same-digest-reproduction-failure.log.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/execution/same-digest-reproduction/verify.mjs.frozen",
+    "tests/unit/PlanningTasksComponent.Tests/fifth-unit.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-component.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-contract.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-diff.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-dotnet-build.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-dotnet-format.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-evidence-format-pass.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-evidence-format.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-evidence-secret.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-frontend-build.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-frontend-format.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-oracle.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-restore.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-secret-frontend.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-secret-owned-tests.log",
+    "tests/unit/PlanningTasksComponent.Tests/final-typecheck.log",
+    "tests/unit/PlanningTasksComponent.Tests/fourth-unit.log",
+    "tests/unit/PlanningTasksComponent.Tests/initial-unit.log",
+    "tests/unit/PlanningTasksComponent.Tests/oracle-hashes.json",
+    "tests/unit/PlanningTasksComponent.Tests/oracle.py",
+    "tests/unit/PlanningTasksComponent.Tests/original-artifact-fixture.json",
+    "tests/unit/PlanningTasksComponent.Tests/original-empty-artifact-fixture.json",
+    "tests/unit/PlanningTasksComponent.Tests/packages.lock.json",
+    "tests/unit/PlanningTasksComponent.Tests/restore.log",
+    "tests/unit/PlanningTasksComponent.Tests/run-checks.py",
+    "tests/unit/PlanningTasksComponent.Tests/same-digest-correction-pass.log",
+    "tests/unit/PlanningTasksComponent.Tests/same-digest-reproduction-failure.log",
+    "tests/unit/PlanningTasksComponent.Tests/second-unit.log",
+    "tests/unit/PlanningTasksComponent.Tests/sixth-unit.log",
+    "tests/unit/PlanningTasksComponent.Tests/third-unit.log",
+    "tests/unit/PlanningTasksComponent.Tests/typecheck.log",
+    "tests/unit/PlanningTasksComponent.Tests/unavailable-expected.html",
+    "tests/unit/PlanningTasksComponent.Tests/unavailable-fixture.json",
+    "tests/unit/PlanningTasksComponent.Tests/verify-evidence.py",
+    "tests/unit/PlanningTasksComponent.Tests/verify.mjs",
+    "tests/unit/SyntheticPlanningTasks.Tests/DatabaseCases.cs",
+    "tests/unit/SyntheticPlanningTasks.Tests/GuidanceFixture.cs",
+    "tests/unit/SyntheticPlanningTasks.Tests/Program.cs",
+    "tests/unit/SyntheticPlanningTasks.Tests/README.md",
+    "tests/unit/SyntheticPlanningTasks.Tests/SyntheticPlanningTasks.Tests.csproj",
+    "tests/unit/SyntheticPlanningTasks.Tests/empty-artifacts.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/empty-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/empty-golden.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/empty-task-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/empty-task-options.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/execution.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/golden-digests.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/hostile-artifacts.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/hostile-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/hostile-golden.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/hostile-task-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/hostile-task-options.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/independent-oracle.py",
+    "tests/unit/SyntheticPlanningTasks.Tests/multi-artifacts.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/multi-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/multi-golden.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/multi-task-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/multi-task-options.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-artifacts.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-command.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-golden.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-reviewed-vector.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-semantic-command.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-task-binding.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/normal-task-options.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/packages.lock.json",
+    "tests/unit/SyntheticPlanningTasks.Tests/run-checks.py",
+    "tests/unit/SyntheticPlanningTasks.Tests/verify-evidence.py"
+  ],
+  "original51": [
+    {
+      "path": "infra/bicep/deployment-template-inventory.md",
+      "sha256": "51dd5ce3a8dab2c31d497adfef72f93ed4353d82d7887b55b6974c6bb0f690b6"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "ad90841c68057420eb7ce50b04c6227ff021a00825473e629dd7f9be6769e6d6"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "61f63ab16aac413b4553532a5e219b4c7682560b4a9798615c50207c1f357c8b"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "74c01eaa4b8f6309cc4e2228f3669a8e3b8ed017b73413bd000fd0b17bc91e4a"
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "f0143b4b0aa390cafaf893ccce94f472f73370e8c0e16fd72c2bf3ba82c81d22"
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "sha256": "9e1600516fad8c8bf3200a3a1efcde28e746bed5e1d83148b177e99a876267fd"
+    },
+    {
+      "path": "src/web/src/ReviewPanel.tsx",
+      "sha256": "a9726033e4d7cc178386f3bbc64c0c3c2301d97badce283d1f431702a5d23f30"
+    },
+    {
+      "path": "docs/development/azure-bff-next-session-preflight.md",
+      "sha256": "be9da66390bdd2ded87404b33e2f3277047be5e5d0504e4ddf7edb15aa38ad2c"
+    },
+    {
+      "path": "docs/development/bff-production-contract-proposal.md",
+      "sha256": "d19f3218b9e39e7e0a39980901591cf21079d95219843fa15fe49192cd72194c"
+    },
+    {
+      "path": "docs/development/evidence/assessment-workspace-ui-20261002.json",
+      "sha256": "4d356cb8303911619bc2d7aff2b338b5f2e05e276d50738e6d6e0938844e951f"
+    },
+    {
+      "path": "docs/development/evidence/bff-deployment-preparation-20261002.json",
+      "sha256": "dd009faba412921a99ed61f1e19d485ededdcb7d5588d0ea383fa2887219b05d"
+    },
+    {
+      "path": "docs/development/evidence/finding-evidence-ui-20261002.json",
+      "sha256": "91f219522ed5fd7ed52320c0e4a2b981ebcb10518a1f61cde40b338935d4d5ab"
+    },
+    {
+      "path": "plans/active/bff-azure-deployment-preparation.md",
+      "sha256": "0a2c04bf739dc165b34b10e606d26eae3ec14acf59dce2c6c3a48b607adfa6cc"
+    },
+    {
+      "path": "plans/completed/local-pilot-assessment-workspace-ui.md",
+      "sha256": "4001e5946ed69d230408c7a7cf29cb4e8145cb97f2847f95eac0cc87206005f6"
+    },
+    {
+      "path": "plans/completed/local-pilot-finding-evidence-ui.md",
+      "sha256": "f4d93e166d7fd44e6122a7b3485f057c0577d4ddb217e9442d0497951a3ac817"
+    },
+    {
+      "path": "product/research/ui-reference-review-2026-10-01.md",
+      "sha256": "52a3c61e08720bfaaa0c7bd5bc6f91f07bfc1eaf2d8dba3b3344c03b9005a2b0"
+    },
+    {
+      "path": "src/web/src/FindingsExplorer.css",
+      "sha256": "2750e4b304c8ad39808fefa0710c233879daa450a12ce8bff59f42978a026896"
+    },
+    {
+      "path": "src/web/src/FindingsExplorer.tsx",
+      "sha256": "6a92662aa20b39de007928d77098c183ad9ad8eceb483da28872c0604626842e"
+    },
+    {
+      "path": "src/web/src/WorkspaceNavigation.tsx",
+      "sha256": "c41f26a55c05198f55c9ecc473d24ce52e708a1311ce12dc0aca8ac072a91b64"
+    },
+    {
+      "path": "src/web/src/workspace.css",
+      "sha256": "5303693dd832311b58b87b54efbc23a4158944def1f5f8c08228cd02ed2ee233"
+    },
+    {
+      "path": "tests/e2e/assessment-workspace/README.md",
+      "sha256": "c83a12ee1c4c77cd20d7477b2c4a428abc5dee9f78e1f4fda0e87761e5d8175d"
+    },
+    {
+      "path": "tests/e2e/assessment-workspace/preview.mjs",
+      "sha256": "1b6501e7cbb81694d6be29daa892178ecdcf75885fa465ec547682d447eda597"
+    },
+    {
+      "path": "tests/e2e/assessment-workspace/verify.mjs",
+      "sha256": "ca7bf5a84a7cf85314a98f610adcdbb42c9545421ec4ed5173f47b4390874054"
+    },
+    {
+      "path": "tests/e2e/finding-evidence/README.md",
+      "sha256": "2287f73134ad4080cf4aa8afc3369539fd1e6c31da3b07f0e3bd166db731ad8a"
+    },
+    {
+      "path": "tests/e2e/finding-evidence/host-harness.mjs",
+      "sha256": "a68c099a4820930955d93830eaab199a06eff1d05c45c5d0f00046107115bd46"
+    },
+    {
+      "path": "tests/e2e/finding-evidence/verify.mjs",
+      "sha256": "0e4253a3d7b61465284fe81cfbe8e99c3f8d98095e76cdf4e52bd5288d3f06f1"
+    },
+    {
+      "path": "work/ui-review/assessment-ui-concepts.html",
+      "sha256": "2b290b4015b3f03fc18365fb7d2ce4a076f45cc2250e3b4aa4d5362639c0c028"
+    },
+    {
+      "path": "work/ui-review/assessment-ui-preview.html",
+      "sha256": "3253af021495da5b7ab2964af76e9af767bd55e88d2ab26d2c58f26ed127d3e6"
+    },
+    {
+      "path": "work/ui-review/assistant-desktop.png",
+      "sha256": "cedd35d4fe06dafcaaf81942d34f24b9d44a94fa02b6d353f8e938c061b9b265"
+    },
+    {
+      "path": "work/ui-review/assistant-narrow-dark.png",
+      "sha256": "045a8b9bd61845fb8cad7f829744a4be5aa2e3d293b984d1a6db56b9c6dbe7e9"
+    },
+    {
+      "path": "work/ui-review/finding-evidence-desktop.png",
+      "sha256": "3518f642ea1be865c049596d133143595f46429fa8b59aaa0c4547a0b73c3fa9"
+    },
+    {
+      "path": "work/ui-review/finding-evidence-narrow.png",
+      "sha256": "7e757621d9786c858d9a123f797b93b146898ddbee31a4ed3fff2e1a2caf95d5"
+    },
+    {
+      "path": "work/ui-review/finding-evidence-review.png",
+      "sha256": "52b7aa6e282d0d4e69be4d89b6da56ef7dfbf9efd61958fd51ff579b5f0342dd"
+    },
+    {
+      "path": "work/ui-review/mockup-checks.json",
+      "sha256": "9f88befaba96f7c0f88870cd15cf78efccd2d4f475e5fec3f6ca1057763516ee"
+    },
+    {
+      "path": "work/ui-review/studio-desktop.png",
+      "sha256": "e0f55ded4088bcf89bd22106d9ba040ef362d0cf2042110bd99a5ac4c6b026f8"
+    },
+    {
+      "path": "work/ui-review/studio-narrow-dark.png",
+      "sha256": "73deb921e553cdf988fa359c97dba1aeafedee1410b7f3af42e92e14404ffb31"
+    },
+    {
+      "path": "work/ui-review/verify-mockups.cjs",
+      "sha256": "81a4d29cd58cbdd02535d50a30adf9549709f9c3e115671a94009ee05626cc6a"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/drilldown-desktop.png",
+      "sha256": "40d735da50174f6856439ecb2b697073755d5c39c0b010c9cf17c1e0a9435724"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/drilldown-evidence.png",
+      "sha256": "265b83034a294f133bd4af1a72c4ed8d625da94578e51cb5a11df567a1f830ee"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/drilldown-mobile.png",
+      "sha256": "80b99a8d63f5c9f049394086a8d8a543276edbb618e408572282fcfad6cd29f3"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/evidence.png",
+      "sha256": "32a079535a5210ca27ea1d782f9ebeeed21c7bb398d2e982d382acfa333499c7"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/graphical-workspace.html",
+      "sha256": "8b8f5cd0329c3a34bf6360b0408e1f9c5d8f64ad57f9df88fbb6f855b1acc83b"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/overlay-no-blur-desktop.png",
+      "sha256": "2072bfe1978eccea08d924f808bcdd188c641b1e5713b65e4fe6eea276646e7f"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/overlay-no-blur-mobile.png",
+      "sha256": "88ed7b82f28aad6fda72b57074d0104ea7b66ea6602394f0a5ac9d8c61d928fe"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/overview.png",
+      "sha256": "721a1ee25b8f5d8ed01d0b451c6a55c6be1f1685c90b95dbeb71c0f6a8cc80f6"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/relationships-overlay-desktop.png",
+      "sha256": "d505929ee295c1e7b7bd0403d25ea5233c5013c3d40e9dd35d2e70d51e21e93e"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/relationships-overlay-mobile.png",
+      "sha256": "47969701cf1fd17d74ddc7f0a3b431cd292d3c101da0d34b505f515d3f169370"
+    },
+    {
+      "path": "work/ui-review/visual-concepts/risk-analysis.png",
+      "sha256": "b2b39226a4b75d7fb700053de62611ad642b76204912abc11ea5ecc3179eab27"
+    },
+    {
+      "path": "work/ui-review/workspace-desktop.png",
+      "sha256": "18c2dbb11a4d436a8a327791218c369609106aa27878eea1936ab362bd5c8ca0"
+    },
+    {
+      "path": "work/ui-review/workspace-narrow-dark.png",
+      "sha256": "976da7c6f99bbb28bd1b52edbb68862dddebb43f2d0ac55a5097709d5b651dfd"
+    },
+    {
+      "path": "work/ui-review/workspace-narrow.png",
+      "sha256": "30fd8a9d330b0f7e47adfa37c802ed07db0db02a4e22d55efeb4be2962c3e0fd"
+    }
+  ],
+  "overlaps": [
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "originalSha256": "f0143b4b0aa390cafaf893ccce94f472f73370e8c0e16fd72c2bf3ba82c81d22",
+      "incomingSha256": "35f6d3718f3cf24161892d4ecf55c7f4385ec468bf64d723d64e4bf7c0808e8d",
+      "composedSha256": "d6f3b6bd0f0cd299c24d4935455a519126b68a9d6a7b6b8d72b21e9f07aaa2de",
+      "reverseExact": true
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "originalSha256": "9e1600516fad8c8bf3200a3a1efcde28e746bed5e1d83148b177e99a876267fd",
+      "incomingSha256": "168c1b07b01938aab9646d207abeaa0806abc49beb369808683998ce5533a9c8",
+      "composedSha256": "091c6eb258cf70d0d9ab2f003ddb4dbe4006117cf701289aa71a68d09cd5e50c",
+      "reverseExact": true
+    }
+  ],
+  "patchSha256": "e3bb2a4097ee3774047d772f937a4c750844f456bf77dafb4df4114e4465eafc",
+  "preparedOnly": false,
+  "stagedTreeExactlyCoordinator": true,
+  "unrelatedOriginalFilesStillExact": true
+}

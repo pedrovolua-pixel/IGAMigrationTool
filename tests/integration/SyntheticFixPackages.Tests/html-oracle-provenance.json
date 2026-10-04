@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "v11-independent-html-oracle-v1",
+  "files": [
+    {
+      "path": "empty-html-golden.html",
+      "sha256": "a7540aced9caa64a6a9338f33d5d26b9981d189a30ef30d28cdadc7cb2e6e990",
+      "bytes": 9771
+    },
+    {
+      "path": "hostile-html-golden.html",
+      "sha256": "6fb857aa442c1ef9483fcab10a6461f7b46af7d336044264937de52372f648c5",
+      "bytes": 40906
+    },
+    {
+      "path": "normal-html-golden.html",
+      "sha256": "1c358da22e64220bb9c40a774369bfe5670537d7fdccba42836e0ef9c8646227",
+      "bytes": 21445
+    }
+  ]
+}

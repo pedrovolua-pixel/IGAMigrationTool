@@ -1,0 +1,12 @@
+CREATE TABLE synthetic_outcome_priority.data_plane_scope(singleton boolean PRIMARY KEY CHECK(singleton), customer_id text NOT NULL, project_id text NOT NULL, environment_id text NOT NULL);
+CREATE TABLE synthetic_outcome_priority.outcome_versions(outcome_id text NOT NULL, version bigint NOT NULL CHECK(version>0), content_json text NOT NULL, content_digest text NOT NULL, PRIMARY KEY(outcome_id,version));
+CREATE TABLE synthetic_outcome_priority.outcome_events(outcome_id text NOT NULL, version bigint NOT NULL, revision bigint NOT NULL CHECK(revision>0), event_json text NOT NULL, event_digest text NOT NULL, PRIMARY KEY(outcome_id,version,revision), FOREIGN KEY(outcome_id,version) REFERENCES synthetic_outcome_priority.outcome_versions);
+CREATE TABLE synthetic_outcome_priority.outcome_current(outcome_id text NOT NULL, version bigint NOT NULL, revision bigint NOT NULL, state text NOT NULL, PRIMARY KEY(outcome_id,version), FOREIGN KEY(outcome_id,version) REFERENCES synthetic_outcome_priority.outcome_versions);
+CREATE TABLE synthetic_outcome_priority.outcome_highwater(outcome_id text PRIMARY KEY, version bigint NOT NULL);
+CREATE TABLE synthetic_outcome_priority.registry_current(singleton boolean PRIMARY KEY CHECK(singleton), revision bigint NOT NULL);
+INSERT INTO synthetic_outcome_priority.registry_current VALUES(true,0);
+CREATE TABLE synthetic_outcome_priority.run_locks(run_id uuid PRIMARY KEY, lock_json text NOT NULL, lock_digest text NOT NULL);
+CREATE TABLE synthetic_outcome_priority.planning_sources(run_id uuid NOT NULL, source_digest text NOT NULL, source_json text NOT NULL, PRIMARY KEY(run_id,source_digest));
+CREATE TABLE synthetic_outcome_priority.planning_events(run_id uuid NOT NULL, option_id text NOT NULL, revision bigint NOT NULL CHECK(revision>0), event_json text NOT NULL, event_digest text NOT NULL, PRIMARY KEY(run_id,option_id,revision));
+CREATE TABLE synthetic_outcome_priority.planning_current(run_id uuid NOT NULL, option_id text NOT NULL, revision bigint NOT NULL, PRIMARY KEY(run_id,option_id));
+CREATE TABLE synthetic_outcome_priority.receipts(event_id uuid PRIMARY KEY, actor_id text NOT NULL, command_digest text NOT NULL, receipt_kind text NOT NULL, receipt_json text NOT NULL, receipt_digest text NOT NULL);

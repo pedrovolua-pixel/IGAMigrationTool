@@ -1,0 +1,14 @@
+PASS V12-BROWSER actual four-presets/full-source/complete-fields/empty-unavailable
+PASS V12-BROWSER actual saved review/current detached source/original artifacts
+PASS V12-BROWSER deny-foreign-run
+PASS V12-BROWSER deny-wrong-source-review
+PASS V12-BROWSER deny-changed-displayed-artifact
+PASS V12-BROWSER deny-forged-coherent-template
+PASS V12-BROWSER deny-wrong-artifact-status
+PASS V12-BROWSER deny-missing-field
+PASS V12-BROWSER deny-extra-field
+PASS V12-BROWSER deny-duplicate-canonical-key
+PASS V12-BROWSER deny-wrong-canonical-digest
+PASS V12-BROWSER deny-foreign-option
+PASS V12-BROWSER deny-stale-finding-revision
+FAIL V12 browser code=invalid-whole-analysis-no-old-package assertions=1265 type=TimeoutError2

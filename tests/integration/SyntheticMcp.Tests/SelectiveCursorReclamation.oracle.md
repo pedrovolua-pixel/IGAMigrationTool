@@ -1,0 +1,39 @@
+# Selective cursor reclamation independent oracle
+
+Initial oracle authored before reading runtime implementation or prior guard code, from the frozen local Phase1D contract/test matrix, cycle07 plan and original fixture bytes at baseline 2a2f732b1ec2b21524afba68119168e81a73723e. Scope: P1D-T06/07/08/09/10/12, named-user/service × partial expiry/selective revision; test-only original Findings with page size 2.
+
+## Fixed payload and bindings
+
+Manifest SHA-256: `613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d`.
+The 14 scalar bindings are contractVersion=synthetic-published-health-read-v1, fixtureKind=SyntheticPublishedFixture, customerId=syn-customer-a, projectId=syn-project-a, environmentId=syn-environment-a, assessmentId=syn-assessment-a, reportVersionId=syn-report-a, baselineVersion=syn-baseline-v1, catalogVersion=syn-catalog-v1, scoringProfileVersion=syn-scoring-v1, maturityProfileVersion=syn-maturity-v1, applicationVersion=syn-application-v1, assessmentState=CompletedWithGaps, approvalState=SyntheticApproved.
+Grant only Findings, all four categories, explicit optional field allowlist title/severity. First page exactly a (Summary, High), b (Configuration, Low); final page exactly c (Identity, Low). Every title is Fictional finding. Exact row keys category/itemId/severity/title. Optional fields confidence/mandatoryReview/referenceIds/reviewState/summary are redacted audit schema names. First page has a fresh opaque 64 lowercase hexadecimal cursor; final page cursor is null and cannot allocate. Success envelope keys bindings/contractVersion/items/manifestDigest/nextCursor/resourceKind; original digest and all bindings stay frozen. Denials have typed outcome and no bytes/cursor.
+
+## Independent state expectations
+
+Four isolated worlds. Allocate 250 at raw0, 250 at60, 12 at120, distributing each cohort round robin across five identities. External successful-handle counts are 103/103/102/102/102, all below128; customer has exactly512. Track handle identity/revision/creation/expiry independently, and distinctness. Request ledger clamps raw clock to its own nondecreasing high-watermark, evicts timestamps age>=60, and requires every invocation to remain strictly below60 per identity and300 per customer; therefore any Limited here is cursor capacity. No reflected registry, production projection/codec or private helper derives expectations.
+
+Expiry world: full allocation Limited299.999; representative oldest and later final reads succeed. At300 the oldest250 expire, stale oldest denied Unavailable before manifest/item reads while a later retained c succeeds. Roll raw0, refill exactly250 at effective300, then Limited; later/new final handles succeed. New refill succeeds599.999, expires600, and rollback0 remains denied. Refill expiry600 proves lifetime uses monotonic high-watermark. External ledger records250 expired,250 replacement handles, and continued capacity512 without evicting retained handles.
+
+Revision world: at180 revoke ONLY identity0, advance1->2; its old cursor denies Unavailable with zero protected reads and null audit scope. Regrant ONLY identity0 revision3; stale cursor still denies before source. Refill50 at180 and53 at240, exactly103 target handles reclaimed; next allocation Limited. Representative old final cursors for each of the other four identities stay valid, as does a new revision3 target cursor. Old target denies after rollback0. External ledger records only the103 revision1 target handles invalidated; other identities remain revision1.
+
+Every invocation independently checks exact resolve arguments, source call arguments, grant, commit attempt/result, typed result, full success envelope/fields/bindings/digest, and exactly one accepted payload-free audit including safe kind/identity/scope/resource/returned/redacted names/outcome/correlation/elapsed. No operational failures, raw resolver or business writes are introduced. Representative replay is explicit: no exhaustive replay of all retained/stale handles, global4096/concurrency/emission-race/native transport/production claim. Runtime remains unchanged; discrepancies are reported.
+
+## Fixture pins
+
+- `manifest.json`: `613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d`
+- `syn-finding-a.json`: `b23d755e06c869b3d4c1f58e65f979d13e652415db80a9db2a4fe0e5d00c9ad5`
+- `syn-finding-b.json`: `7b4c6caf8852489ffa5af5bf91a3b431b9d6a31a460ef4dc5191e0b0dce3a6b2`
+- `syn-finding-c.json`: `b166fe91aa3b25acc3164b2e40b4bed6238d728211c2bff4b089e97e91a9dd0d`
+- `golden-hashes.json`: `c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f`
+
+## Executed author evidence
+
+Preserved initial note SHA-256 `794d20768af7914df27756b0e6165dd2bc71ef3c40d90be23fd7150ab6b95c12` at `.sites-work/phase1d-cycle07-evidence/author/oracle-initial.md`; that snapshot predates runtime/prior-guard inspection. This final note appends execution only. P1D-T11 also maps the frozen original bindings on every successful response.
+
+Pinned `/private/tmp/iga-dotnet-10.0.401/dotnet` executed locked restore for `tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj`, Release build with `--no-restore` (zero warnings/errors), and `format` with `--no-restore --include tests/integration/SyntheticMcp.Tests/SelectiveCursorReclamation.cs --verify-no-changes` (exit0). `git diff --check` passed. The first no-restore build found missing assets (NETSDK1004); original log is retained as `author/build-initial.txt`, followed by successful locked restore. No runtime discrepancy or correction was needed.
+
+A temporary external reflection runner references the integration project and copies original fixtures, invoking only this new guard. Exact final command: `/private/tmp/iga-dotnet-10.0.401/dotnet run --project /private/tmp/iga-c07-author-runner/Runner.csproj -c Release --no-restore`. It passed four worlds, 2,808 invocations and 64,457 assertions. Each expiry world executed774 calls, reached max request windows53 identity/259 customer, predicted250 expired handles, individually rejected one original oldest handle at300 and one new refill handle at600/rollback, and observed exactly250 successful replacement handles followed by Limited. Each revision world executed630 calls, reached57 identity/250 customer, predicted103 target handles invalidated, individually rejected one old target handle while revoked, after regrant and after rollback, and observed exactly103 successful replacements followed by Limited. Each unaffected identity was replayed at180 and240. New target/refill representative handles were replayed. Every world reached512 external live handles with each identity below128. Each call accepted exactly one payload-free audit; operational failures were zero.
+
+The initial and final focused logs, tool commands, runner source, byte hashes and count partition are retained in the author evidence directory. Whole-solution/historical/configured hosted checks, independent non-author review and composed Main registration belong to the coordinator; this author pass does not claim them. No fixtures/goldens/prior guards/runtime/projects/configuration/locks/workflows/canonical/site files were edited. No migration, configuration, dependency or activation change.
+
+Representative replays and exact observed refill ceilings do not establish every expired/retained handle's individual behavior. The external lifetime/revision cohort counts are predictions supported by selected rejection/survival and the exact capacity refill. The ledger proves probes stay below unrelated admission quotas; this guard does not independently re-prove an exact rate-limit ceiling, concurrency, all global4096 reclamation, races at emission, external/native transport, persisted publication, distributed or production behavior. No raw/business mutation capability is present in these fixture ports. Full Phase1D/Milestone11/UAT/G1–G9 remain NOT VERIFIED.

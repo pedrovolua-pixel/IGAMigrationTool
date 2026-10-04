@@ -1,0 +1,3 @@
+Actual stress canonical bytes: 27469592; HTML bytes: 45673167.
+B11 tests PASS: 311 assertions, 25 accepted render calls, 52 payload-free denials.
+Independent complete HTML SHA256: 65994da5e3d4e1776ed0aab10c402ef4bc5ce6bb269defc14c4f1ee3974f032f

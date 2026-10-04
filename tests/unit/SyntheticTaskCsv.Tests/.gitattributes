@@ -1,0 +1,2 @@
+# Exact approved UTF8 CRLF byte oracles are binary fixtures; do not normalize them.
+Fixtures/*.csv binary

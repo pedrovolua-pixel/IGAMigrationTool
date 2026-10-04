@@ -1,0 +1,217 @@
+{
+  "fixtureDefinitionVersion": "analysis-scoring-independent-v1",
+  "recordedUtc": "2026-10-01",
+  "digestMeaning": "Full owned fixture/test source definitions, actual executed output artifacts and exact dependency/build files; not a claimed hash of one summarized input. Negative variants and 100000-key generator are fully represented in the hashed sources.",
+  "moduleCommits": {
+    "scoring": "ee0ffb3b09952b242aae770906938ba14364779b",
+    "analysis": "3b26e016e0c6ec80591db54402aa2181dede46ac"
+  },
+  "checks": {
+    "sdk": "10.0.401",
+    "auditedLockedRestore": "PASS",
+    "releaseBuild": "PASS 0 warnings/errors",
+    "focusedFormatVerification": "PASS",
+    "postgres": "18.4; 399 independent assertions PASS; own iga_synthetic_v4",
+    "browser": "712 assertions PASS; 6 groups; final index-D-DND92L.js; Chromium145.0.7632.6; Node24.21.0",
+    "npmCiExistingLockedDependencies": "PASS; npm audit 0 vulnerabilities",
+    "nodeSyntax": "PASS"
+  },
+  "ownedArtifacts": [
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/AnalysisAndStoreCases.cs",
+      "sha256": "0e07f651a5f077c57ce9ac1a22cd0f021ac33b3add26b4edd21fe2197513ec79"
+    },
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/AnalysisScoring.Tests.csproj",
+      "sha256": "dc11e1dd933e7c693ef0d7187b492806831181203b6d31497728ac9fb19337b0"
+    },
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/DurableCases.cs",
+      "sha256": "16bb80a80324ce6e96defce970fca61898c15a06d0b2e19a217763a738303846"
+    },
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/Program.cs",
+      "sha256": "7703d7a5ed12567aa99e2978365a55a3602483fbd98c3d3feedc11c8329444c9"
+    },
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/README.md",
+      "sha256": "2a0b5d2886a82c31f8fc531d70873efd2bf0171e31e9657f4bff6d10751d70df"
+    },
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/ScoringFixture.cs",
+      "sha256": "ab3e9efeb89b264676247009050adfc5aae60a116b83507391e2452f9876b73b"
+    },
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/golden-design.md",
+      "sha256": "afd68f3a4e6145b29b8ac0cb2f7efb487f95a76c209d4ec2be4513a9c55a813f"
+    },
+    {
+      "path": "tests/integration/AnalysisScoring.Tests/packages.lock.json",
+      "sha256": "1ab84cea4bcc4c52489c4648393a18cfce096f609bf1c883c50b11f8bb25ba46"
+    },
+    {
+      "path": "tests/e2e/analysis-scoring/README.md",
+      "sha256": "fb85731fc92e9eb9239c7fc70414e5368ad816e36423658093d1d668f28813cc"
+    },
+    {
+      "path": "tests/e2e/analysis-scoring/desktop-analysis.png",
+      "sha256": "a63f62042afa1f293db68fc8d221a45e80cf329ab596aad1bf34ca20f54704e0"
+    },
+    {
+      "path": "tests/e2e/analysis-scoring/execution.json",
+      "sha256": "98eb4bbca5cb017ae5cc3ac8796b18b9d2e83b76243a4e9f0b088641d740e8db"
+    },
+    {
+      "path": "tests/e2e/analysis-scoring/mobile-analysis.png",
+      "sha256": "9f4695102c4d8bdb4bc221a098415211e6079928241b12f3e9fb0c174bd61f5b"
+    },
+    {
+      "path": "tests/e2e/analysis-scoring/reflow-analysis.png",
+      "sha256": "990ac1d830f67330030652b639b29312dc2041b0fa92435b871e1ccf5608c12b"
+    },
+    {
+      "path": "tests/e2e/analysis-scoring/verify.mjs",
+      "sha256": "8f1e6bfa524b560cea1d40dfc7c569c94accf30abefc7624ba45028e5005ebff"
+    }
+  ],
+  "testDependencySource": [
+    {
+      "path": "src/server/modules/AssessmentScoring/PilotHealthScorer.cs",
+      "sha256": "4108969453ec3f3eec338cef4ab6c6b9d9470dbf3e0ad400ea1082003c0e3d1a",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentScoring/ScoringContracts.cs",
+      "sha256": "2f0e2a8849074f0643bf1a5d371cf73cbb765da130408a66db5504cdb2cae6cc",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisContracts.cs",
+      "sha256": "abc65c0ecee6265077e3d2ce91115bd4396c16afc418742bb9df4b2b0c80855a",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisEngine.cs",
+      "sha256": "3a9d8fa75f670750315c6681ccbfe8fe505121b7f9f2a4599be13dc9b18f69e7",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticAnalysisFixturePack.cs",
+      "sha256": "f2ccafa73819f11812db563660e5b22d57a2697fb96c62530417dcf6e31014cf",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticCanonicalDigest.cs",
+      "sha256": "3715d5773a70b2a45678814a3603dc85406c8ad700a4fb7b420031fd66d83aa4",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/DeterministicAnalysis/SyntheticRuleEvaluator.cs",
+      "sha256": "ebb7ceaa86acf6e460ab6606ed0f7ff6fd7dd4890493582430e42a63cfa48188",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+      "sha256": "ac89735230b5c4a608dd28f48a92b97e5b1f31606042a7e0ad7f360300fd034d",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+      "sha256": "fb1c3fba8e1fde5e6482d4bc2d903b35bc509faecdaea8b778c849c8115aefc3",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDemoAnalysisAdapter.cs",
+      "sha256": "cd8feae3e547a6c0b9a481b5446560fb66873cbddef60c9e0d1d669dfd370fa6",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+      "sha256": "375f22f1d171d4d8ddccac47db8ba3d5831f6505709253b84200768e440acb06",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+      "sha256": "3b265610075d0dc1b4d9a59c2c48eca8b087ca326f058c67709e88aec3c9028c",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunDbContext.cs",
+      "sha256": "734275bfcc32ef733f208fac4aa7740816ffd6a7a360d2abe53276cac539acf4",
+      "excludedFromPacket": true
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs",
+      "sha256": "7488f7ffa74f816114bac085ad7c465b01ec823a25394dab69edd5f7a878dfbb",
+      "excludedFromPacket": true
+    }
+  ],
+  "coordinatorAndRuntimeArtifacts": [
+    {
+      "path": "contracts/local-demo/demo-v1.schema.json",
+      "sha256": "98217aa16cd94a3b1ba6e391f3617c78d1fc6de74167620583250b5d7c02cea9"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll",
+      "sha256": "8bb94ba7ab2d05d697b6c89c53a6f0cb28d6e48d6a8050a47f1c000d959b1886"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoAnalysisProjection.cs",
+      "sha256": "e34035aaf80570bd3d5f4acfcb104074c9d72c2e3191967e467f7189d572d144"
+    },
+    {
+      "path": "src/web/dist/index.html",
+      "sha256": "e384119fa3ea87f4084cf5763708c39a8af0b3d6f3a59da6f83c7122df33625b"
+    },
+    {
+      "path": "src/web/src/AnalysisView.tsx",
+      "sha256": "9f3fa259595deffdf889d2e881694d71ccc6eddf58a8afc12be3401b5b7800f6"
+    },
+    {
+      "path": "src/web/src/App.tsx",
+      "sha256": "ce96c15f0fca395292e0f3d87d51d75de1f5b9cfac017baa5a4df699218e7fe4"
+    },
+    {
+      "path": "tests/e2e/consultant-demo/package.json",
+      "sha256": "f1944e37f215591a83ecac47b80b237163550b6b2deba519e4cbb60e2875e6ec"
+    },
+    {
+      "path": "tests/e2e/consultant-demo/package-lock.json",
+      "sha256": "3f151ef6ce03447fd62f401e5b0d35af36275d52ffae97a167b7806787f8bbb1"
+    },
+    {
+      "path": "src/web/dist/assets/index-D-DND92L.js",
+      "sha256": "9594c2288c36179ced827cc03eee95b539098e03581274f3776c824f07e9a42e"
+    },
+    {
+      "path": "src/web/dist/assets/index-DnKXCmq8.css",
+      "sha256": "fe72cc45d8b90057bc749d6c981ffeb166675559e5f61144b0533cd46c672a29"
+    },
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/Program.cs",
+      "sha256": "b5eedef40c3cf9d7c4cd22dd30d3cb2e5e2bdcb78539ce61e67726906fa7c82d"
+    }
+  ],
+  "limitations": [
+    "Fixed synthetic scope/fixtures only; live gates, actual OIM rules, AI, mutable review/risk authority, publication/maturity NOT VERIFIED",
+    "Supported Windows manual NVDA/Narrator acceptance NOT VERIFIED",
+    "320px axe color-contrast INCOMPLETE; no full WCAG conformance claim",
+    "Existing consultant recovery regression is separately executed by coordinator"
+  ],
+  "coordinatorIntegration": {
+    "workerCommit": "039b0f95e10792fba380e1f9ef715701e4abf750",
+    "changes": [
+      {
+        "path": "tests/integration/AnalysisScoring.Tests/Program.cs",
+        "workerSha256": "34e39ea87d235acc2da8e54eac019e9ffa23f113e69a2c6ffac854c575b269ab",
+        "integratedSha256": "7703d7a5ed12567aa99e2978365a55a3602483fbd98c3d3feedc11c8329444c9"
+      },
+      {
+        "path": "tests/integration/AnalysisScoring.Tests/golden-design.md",
+        "workerSha256": "5c350ea834a5d5f52ef89abc9e34d74f9666790a1f91cfa7fc8a0a88084bcce0",
+        "integratedSha256": "afd68f3a4e6145b29b8ac0cb2f7efb487f95a76c209d4ec2be4513a9c55a813f"
+      }
+    ],
+    "reason": "Full solution formatting normalized verification Program.cs collection-expression layout after integration; test behavior unchanged. Full solution format verification, Release build and actual PostgreSQL399 assertions re-executed PASS. Historical worker artifact digests are preserved here. Reworded the 100000-unit fixture prose after generic-api-key matched ordinary mathematical text; no credential was present and no allowlist was added."
+  }
+}

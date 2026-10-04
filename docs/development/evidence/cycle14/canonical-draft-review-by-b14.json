@@ -1,0 +1,82 @@
+{
+  "stage": "draft canonical closure source review before execution",
+  "script": {
+    "path": "/private/tmp/c14-close-records.py",
+    "sha256": "a8a35a4c53a4aac2131a3ccef9dccf16c7490a20ca33f78616dcb2886c43ea8c"
+  },
+  "draft": {
+    "path": "/private/tmp/c14-final-local-evidence-draft.json",
+    "sha256": "d7acc0bd6bbb0ddba184538cf3fce262ec4422fc40e789296f0119a2a0c74f4a"
+  },
+  "canonicalBindings": [
+    {
+      "path": "plans/active/local-pilot-planning-tasks-cycle-14.md",
+      "sha256": "3236ac04cd846515e39a9b7dd0638a411800281d36b7cff504c136a909af707f"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "ee5685546a041128d6937f93a68524ad9f671ba04535b93149e8b0d529030011"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "0b806b2ada36d904332b8f8858f5694c5906c602bed0b7d9b2fbc30c2a9dbefd"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "3b6988637535105977f336ea7c1a478b3c6040676b5afec3683b653a657f81b0"
+    },
+    {
+      "path": "plans/active/one-identity-local-pilot-build.md",
+      "sha256": "fa2a9d9abda369d3054c7981587108c8799a6df6efb6b01589ed8a128ce1def4"
+    },
+    {
+      "path": "specs/003-health-assessment/local-planning-task-test-plan.md",
+      "sha256": "3302da03dd48779a04471246f7bff1e659d27cd8d6142f4218d2892107919cca"
+    }
+  ],
+  "readOnlyChecks": [
+    "Python syntax parses",
+    "worker counts736/1249,737,702/2542,13626 match sealed evidence and explicitly overlap",
+    "Current guarded script must refuse hosted RUNNING and preservation/review PENDING",
+    "Frozen f4d2 contract/migration hashes remain unchanged",
+    "Full Milestone7/TP018/localpilot/UAT/G1-G9/manual/deployed/defaultMac/hardkill limits remain open; eleven priorhuman tasks preserved"
+  ],
+  "actionableFindings": [
+    {
+      "severity": "HIGH preexecution stale result claims",
+      "location": "c14-close-records.py closure strings +draft hosted/sourceBinding",
+      "issue": "Hardcoded d42 and first hosted run links claim PASS even though that Linux job failed; future updated PASS draft alone would not refresh hardcoded claims. Rebind to final verified exact source/run/jobs and preserve first failure."
+    },
+    {
+      "severity": "LOW date replacement bug",
+      "location": "shared status/implementation/evidence append loop",
+      "issue": "status.md current Last updated2026-10-02 does not match replacement2026-10-01 and remains stale."
+    },
+    {
+      "severity": "MEDIUM superseded evidence pointer",
+      "location": "draft workerResults.V14/preservation/reviews",
+      "issue": "V14 still db90/7503/literal telemetry pending; final c1/7510/43variants +review/archive must be recorded beforeclosure."
+    },
+    {
+      "severity": "LOW stale plan instruction",
+      "location": "activeCycle14 freeze/resume sections",
+      "issue": "After COMPLETE, plan still reports runtime pending and tells reader start A/V/B; qualify frozen kickoff as historical or update currentresume."
+    },
+    {
+      "severity": "MEDIUM incomplete cycle state",
+      "location": "plan COMPLETE +privateSitePUBLICATION_PENDING +mandatorypublicationunchecked",
+      "issue": "Use bounded developer VERIFIED/publication pending until actual confirmed publication, then complete mandatorycycle."
+    },
+    {
+      "severity": "MEDIUM nonidempotent closure risk",
+      "location": "unconditional appends +privateSite overwrite",
+      "issue": "Rerun duplicates closure prose and overwrites confirmed publication state back to pending/version88. Preflight exact one-time replacements or replace explicit sections idempotently and preserveconfirmedfields."
+    }
+  ],
+  "limitations": [
+    "No closure script executed; no canonical files edited",
+    "No hosted rerun/output outcome inferred from pending draft",
+    "No source/test/native/PG/host/browser/site operations",
+    "Actual final CI/canonical/privateSite closure requires coordinator proof"
+  ]
+}

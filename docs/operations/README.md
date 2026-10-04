@@ -5,3 +5,8 @@ This directory will hold deployment, rollback, backup/restore, incident response
 Operational documents must name prerequisites, safe checks, approval boundaries, failure/rollback paths, and verification evidence. Investigation does not authorize destructive recovery. No production environment or operating procedure has been defined yet.
 
 Use [`release-readiness-review-template.md`](./release-readiness-review-template.md) when a release candidate exists.
+
+## Health-assessment pilot
+
+- [`health-assessment-pilot-operations-plan.md`](./health-assessment-pilot-operations-plan.md) — deployment, rollback, monitoring, retention, backup, restore and readiness design.
+- [One Identity Manager pilot SME evidence handoff](./one-identity-sme-pilot-handoff.md) — exact source, query, field and database-owner evidence request, with a linked fillable template.

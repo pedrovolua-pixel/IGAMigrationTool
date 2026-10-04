@@ -1,0 +1,10 @@
+PASS RM-MAT-001 inclusive60/80 and cumulative governance prerequisite
+PASS RM-MAT-002 partial/missing/insufficient denominator and disclosure
+PASS RM-MAT-003/004/006 operation pairs, distinct validation and global prerequisites
+PASS RM-MAT-005 adversarial versions/evidence/catalog/ownership and immutable health-independent input
+PASS RM-MAT-007 fixed baseline fixtures are independent of health
+PASS RM-POL-001 server-supplied identity role/scope/category/assignment/state deny matrix
+PASS RM-POL-002 proposed-only transitions reason/text boundaries and unsupported grants
+NOT VERIFIED RM-STORE: actual PostgreSQL requires --postgres and own disposable iga_synthetic_v5.
+NOT VERIFIED RM-BRIDGE: actual saved-run checks require --postgres.
+199 independent review/maturity assertions passed. Synthetic fixtures only; production authority/publication/manual Windows acceptance NOT VERIFIED.

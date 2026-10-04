@@ -1,0 +1,201 @@
+[
+  {
+    "name": "oracle",
+    "argv": [
+      "python3",
+      "tests/unit/PlanningTasksComponent.Tests/oracle.py",
+      "--verify"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:20:57.459992+00:00",
+    "elapsedSeconds": 0.09,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-oracle.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "restore",
+    "argv": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "restore",
+      "tests/unit/PlanningTasksComponent.Tests/PlanningTasksComponent.Tests.csproj",
+      "--locked-mode",
+      "-p:NuGetAudit=true",
+      "-p:NuGetAuditMode=all",
+      "-p:NuGetAuditLevel=low"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:20:57.550170+00:00",
+    "elapsedSeconds": 0.487,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-restore.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "dotnet-format",
+    "argv": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "format",
+      "tests/unit/PlanningTasksComponent.Tests/PlanningTasksComponent.Tests.csproj",
+      "--no-restore",
+      "--verify-no-changes"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:20:58.037574+00:00",
+    "elapsedSeconds": 1.837,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-dotnet-format.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": {
+      "DOTNET_hostBuilder__reloadConfigOnChange": "false"
+    }
+  },
+  {
+    "name": "dotnet-build",
+    "argv": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "build",
+      "tests/unit/PlanningTasksComponent.Tests/PlanningTasksComponent.Tests.csproj",
+      "--configuration",
+      "Release",
+      "--no-restore",
+      "--disable-build-servers",
+      "-p:UseSharedCompilation=false",
+      "-m:1"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:20:59.875281+00:00",
+    "elapsedSeconds": 0.824,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-dotnet-build.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "frontend-format",
+    "argv": [
+      "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+      "src/web/node_modules/prettier/bin/prettier.cjs",
+      "--check",
+      "src/web/src/PlanningTasksPanel.tsx",
+      "src/web/src/PlanningTasksPanel.css",
+      "tests/unit/PlanningTasksComponent.Tests/verify.mjs"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:21:00.699072+00:00",
+    "elapsedSeconds": 0.255,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-frontend-format.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "contract",
+    "argv": [
+      "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+      "contracts/local-demo/generate-types.mjs",
+      "--check"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:21:00.954425+00:00",
+    "elapsedSeconds": 0.047,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-contract.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "typecheck",
+    "argv": [
+      "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+      "src/web/node_modules/typescript/bin/tsc",
+      "--noEmit",
+      "-p",
+      "src/web/tsconfig.json"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:21:01.001380+00:00",
+    "elapsedSeconds": 0.186,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-typecheck.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "frontend-build",
+    "argv": [
+      "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+      "/private/tmp/iga-npm-11.20.0/node_modules/npm/bin/npm-cli.js",
+      "run",
+      "build"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui/src/web",
+    "startedAtUtc": "2026-10-03T03:21:01.187926+00:00",
+    "elapsedSeconds": 1.187,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-frontend-build.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "component",
+    "argv": [
+      "/private/tmp/iga-dotnet-10.0.401/dotnet",
+      "tests/unit/PlanningTasksComponent.Tests/bin/Release/net10.0/PlanningTasksComponent.Tests.dll"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:21:02.374892+00:00",
+    "elapsedSeconds": 0.363,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-component.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "secret-frontend",
+    "argv": [
+      "/private/tmp/iga-parallel-tools/gitleaks",
+      "dir",
+      "--no-banner",
+      "--redact=100",
+      "src/web/src"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:21:02.737798+00:00",
+    "elapsedSeconds": 0.26,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-secret-frontend.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "secret-owned-tests",
+    "argv": [
+      "/private/tmp/iga-parallel-tools/gitleaks",
+      "dir",
+      "--no-banner",
+      "--redact=100",
+      "tests/unit/PlanningTasksComponent.Tests"
+    ],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:21:02.997771+00:00",
+    "elapsedSeconds": 0.262,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-secret-owned-tests.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  },
+  {
+    "name": "diff",
+    "argv": ["git", "diff", "--check"],
+    "cwd": "/private/tmp/iga-cycle14-task-ui",
+    "startedAtUtc": "2026-10-03T03:21:03.259907+00:00",
+    "elapsedSeconds": 0.023,
+    "exitCode": 0,
+    "log": "tests/unit/PlanningTasksComponent.Tests/final-diff.log",
+    "environment": "Explicit isolated OS paths/pinned Node+SDK+own CLI HOME; no inherited provider/PG values. Fictional canary supplied for guard.",
+    "overrides": null
+  }
+]

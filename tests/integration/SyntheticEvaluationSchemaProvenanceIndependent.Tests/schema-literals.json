@@ -1,0 +1,106 @@
+{
+  "sourceCommit": "3551fe5693196ab371282c38bae53d2f9ed23f19",
+  "newAuthorImplementationConsumed": false,
+  "expectationsDerivedFrom": "Actual preserved old owning accepted rows and independent Python JSON parse/hashlib UTF8 hash; no author output.",
+  "vectors": [
+    {
+      "scenario": "normal",
+      "runId": "51cc48e7-65d7-4052-a247-dde748012f38",
+      "workId": "synthetic-phase1b-configuration-work-v1",
+      "findingCount": 2,
+      "terminalGapCount": 0,
+      "acceptedProofCount": 1,
+      "attemptKey": {
+        "ordinal": 1,
+        "attemptId": "b061e2bc-349b-433f-9044-56e1020a6f5f",
+        "logicalKey": "3dcf8adeb48563410e353cb057a7a1829e875601d0952565fa33e8414961a8aa",
+        "packetDigest": "66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967"
+      },
+      "receiptId": "3e78288e19d6670a8cf6a8bcb596357acdbe61ae8b4f5f53e75f50401c4b4df4",
+      "schemaTriplet": {
+        "packetInputSchema": "synthetic-ai-fixture-input-v1",
+        "rawOutputSchema": "synthetic-ai-fixture-output-v1",
+        "acceptedSnapshotSchema": "synthetic-ai-proposal-snapshot-v1"
+      },
+      "digestTriplet": {
+        "packetDigest": "66e9c39afb0eda725ece941a385a46d8f41696649f1ece750120a9a3b97cb967",
+        "rawOutputDigest": "1185e3da9c31703b093bce1329632336f48d2905a2840706b8ec5c97b44416c9",
+        "acceptedSnapshotDigest": "230e60111d25ae87739b4ad4149bd15fa1736681ba95804054084f75c0089767"
+      },
+      "sourceJsonUtf8Bytes": 1499,
+      "acceptedCanonicalUtf8Bytes": 1522
+    },
+    {
+      "scenario": "mixed",
+      "runId": "aaba0b55-15e5-45ca-9c9c-4ea410baaec3",
+      "workId": "synthetic-phase1b-configuration-work-v1",
+      "findingCount": 1,
+      "terminalGapCount": 1,
+      "acceptedProofCount": 1,
+      "attemptKey": {
+        "ordinal": 1,
+        "attemptId": "ddfa5f6c-f422-440b-83d8-eeb9e2f23212",
+        "logicalKey": "71f4b8bec239a014e470a09aa4c82f2be02cf0a45e4e56730b8fff03832ce931",
+        "packetDigest": "0a92b4e10f95c15e7436892cb2eca41a05b684f5010ee90a986917b8ed19bf14"
+      },
+      "receiptId": "73c505ea87221d02e0eba79a35838ed09984d2fb6792f0b2d59957d38d2a1aa9",
+      "schemaTriplet": {
+        "packetInputSchema": "synthetic-ai-fixture-input-v1",
+        "rawOutputSchema": "synthetic-ai-fixture-output-v1",
+        "acceptedSnapshotSchema": "synthetic-ai-proposal-snapshot-v1"
+      },
+      "digestTriplet": {
+        "packetDigest": "0a92b4e10f95c15e7436892cb2eca41a05b684f5010ee90a986917b8ed19bf14",
+        "rawOutputDigest": "2515462b3252729206569077a081285474fc90a60872dd2987225432f53f4234",
+        "acceptedSnapshotDigest": "4e3423ba602476107d2baac1fb0e546df51f11f05ae635312d2e923e9008058f"
+      },
+      "sourceJsonUtf8Bytes": 846,
+      "acceptedCanonicalUtf8Bytes": 869
+    },
+    {
+      "scenario": "accepted-empty",
+      "runId": "2e2e6d7d-35eb-4cf0-8c86-3994183f6c61",
+      "workId": "synthetic-phase1b-configuration-work-v1",
+      "findingCount": 0,
+      "terminalGapCount": 2,
+      "acceptedProofCount": 1,
+      "attemptKey": {
+        "ordinal": 1,
+        "attemptId": "e1dd269e-acec-4748-8abd-c222ef9bd3e1",
+        "logicalKey": "5f11ce79fe62358f8a9c34b6ddfb48d2e7e0959e7cd1c457ca27678ae2bc3a5d",
+        "packetDigest": "3fe56b6eee42738a7efbe0ce59a91f662684a41ad1cc97b518dc729f19842b17"
+      },
+      "receiptId": "0f9789812057f6a8b716b7375983ec219e148f39a25072c58b0b016f29f0c6a4",
+      "schemaTriplet": {
+        "packetInputSchema": "synthetic-ai-fixture-input-v1",
+        "rawOutputSchema": "synthetic-ai-fixture-output-v1",
+        "acceptedSnapshotSchema": "synthetic-ai-proposal-snapshot-v1"
+      },
+      "digestTriplet": {
+        "packetDigest": "3fe56b6eee42738a7efbe0ce59a91f662684a41ad1cc97b518dc729f19842b17",
+        "rawOutputDigest": "e7d552d029f13731beba960c39c94e6a72c5e5d3611f38ed2188b615d77ca6ea",
+        "acceptedSnapshotDigest": "fe4b37ae2423333b38deb2c18a53dc08f70c504d88a8e0452fa6abf967e3784f"
+      },
+      "sourceJsonUtf8Bytes": 194,
+      "acceptedCanonicalUtf8Bytes": 217
+    }
+  ],
+  "terminalNoAcceptedPortableVector": {
+    "scenario": "terminal-nonaccepted",
+    "findingCount": 0,
+    "acceptedProofCount": 0,
+    "rawOutputSchema": null,
+    "acceptedSnapshotSchema": null,
+    "acceptedOutputDigest": null,
+    "acceptedSnapshotDigest": null,
+    "expectedAiSchemaState": "Missing",
+    "nativeExecuted": false,
+    "reason": "Existing preserved independent cycle05/06 databases contain accepted normal/empty/mixed and pending works, but no saved final failed/no-accepted work. Literal absence follows owning contracts; actual terminal fixture must be produced only after runtime test packet authorization/freeze."
+  },
+  "literalSchemaTriplet": {
+    "packetInputSchema": "synthetic-ai-fixture-input-v1",
+    "rawOutputSchema": "synthetic-ai-fixture-output-v1",
+    "acceptedSnapshotSchema": "synthetic-ai-proposal-snapshot-v1"
+  },
+  "sourceFileSha256": "39b5f6704d7d87d2326c6e22fa80fa81efe189e59a429fc878da6eaa30613e09"
+}

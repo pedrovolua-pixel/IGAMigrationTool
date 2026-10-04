@@ -1,0 +1,76 @@
+{
+  "schema": "v13-browser-execution-v1",
+  "status": "PASS",
+  "checks": 10564,
+  "lastCode": "zero-browser-or-owned-host-faults",
+  "browserVersion": "145.0.7632.6",
+  "groups": [
+    "AR13-T01/T03/T07 four-actual-presets-full-original-current-source-empty-boundaries",
+    "AR13-T03/T04/T09 actual-review-withdraw-replay-control-reason-original-health-invariants",
+    "AR13-T02/T03/T04/T11 host-exact-input-origin-CSRF-namespace-source-replay-boundaries",
+    "AR13-T07 client-deny-missing-field",
+    "AR13-T07 client-deny-extra-field",
+    "AR13-T07 client-deny-foreign-run",
+    "AR13-T07 client-deny-wrong-current-source",
+    "AR13-T07 client-deny-wrong-current-vector",
+    "AR13-T07 client-deny-foreign-artifact",
+    "AR13-T07 client-deny-wrong-original-text-hash",
+    "AR13-T07 client-deny-duplicate-artifact",
+    "AR13-T07 client-deny-changed-history-state",
+    "AR13-T07 client-deny-history-gap",
+    "AR13-T07 client-deny-history-role",
+    "AR13-T07 client-deny-unsafe-revision",
+    "AR13-T07 client-deny-forged-current-capability",
+    "AR13-T07 client-deny-corrupt-full-package-canonical",
+    "AR13-T07 complete-source-original-canonical-history-schema-client-denials",
+    "AR13-T04/T06/T07 real-malformed-committed-receipt-explicit-replay",
+    "AR13-T04/T06/T07 actual-committed-response-loss-refresh-original-command-retry",
+    "AR13-T07 actual-competing-revision-conflict-refresh-reason-new-inspection",
+    "AR13-T07 held-old-analysis-selection-race-completed",
+    "AR13-T07 late-prior-run-mutation-completion-fence",
+    "AR13-T07 forged-old-package-guidance-overlay-with-fresh-review-denied",
+    "AR13-T07 unchanged-run-held-artifact-receipt-review-source-epoch-fence",
+    "AR13-T12 actual-host-pre-capture-schema-denial-and-restoration",
+    "AR13-T06 owned-host-stop-restart-exact-history-receipt",
+    "AR13-T08/T11 actual-historical-nine-no-authority-or-operation-promotion",
+    "AR13-T09/T10 actual-inert-history-keyboard-focus-reflow-axe-three-viewports"
+  ],
+  "blockedAttemptCodes": [],
+  "pageErrorCodes": [],
+  "dialogCodes": [],
+  "screenshots": [
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/desktop-viewport.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/mobile-viewport.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow.png",
+    "/private/tmp/iga-cycle13-v13/tests/e2e/artifact-review/narrow-viewport.png"
+  ],
+  "accessibility": [
+    {
+      "viewport": "desktop",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "viewport": "mobile",
+      "violations": [],
+      "incomplete": []
+    },
+    {
+      "viewport": "narrow",
+      "violations": [],
+      "incomplete": []
+    }
+  ],
+  "environmentStrategy": "closed allowlist applied before fixture/browser loading; no marker bypass",
+  "removedEnvironmentKeys": 41,
+  "sourceHash": "ca0e2e1cabf845bad09180ea33388655bb6f2cedef635740b086c2f274159644",
+  "defaultMacStartupVerified": false,
+  "temporaryConfigurationWatchOverride": true,
+  "limitations": [
+    "Chromium macOS automated subset only; Windows/manual screen reader/deployed sandbox/production identity/full product gates NOT VERIFIED.",
+    "Test-only axe injection is isolated from product inert-node checks.",
+    "Historical test counts remain original evidence, not new assertions."
+  ]
+}

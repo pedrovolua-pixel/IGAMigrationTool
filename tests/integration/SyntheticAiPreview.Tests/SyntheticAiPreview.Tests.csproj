@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj" />
+  </ItemGroup>
+  <ItemGroup><None Update="*.json" CopyToOutputDirectory="PreserveNewest" /><None Update="*.html" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

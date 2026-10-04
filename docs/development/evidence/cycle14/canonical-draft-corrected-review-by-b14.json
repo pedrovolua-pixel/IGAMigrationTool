@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "cycle14-canonical-draft-corrected-readonly-review-v1",
+  "script": {
+    "path": "/private/tmp/c14-close-records.py",
+    "sha256": "46be9ffbacd72561723b5abb24171f1f5612e1f3fe7715f9931e50c8e5829155"
+  },
+  "draft": {
+    "path": "/private/tmp/c14-final-local-evidence-draft.json",
+    "sha256": "8c3a09787977898c45f076263c66a95ce6043222d2be312bd50a91bf8ad824ea"
+  },
+  "earlierReviewPreserved": {
+    "path": "/private/tmp/iga-cycle14-canonical-draft-review-by-b14.json",
+    "sha256": "4aa031211027e71c38565757b8c0aa73fc28715ef37a0509100f1967edbaf19a"
+  },
+  "canonicalSourceBindings": [
+    {
+      "path": "plans/active/local-pilot-planning-tasks-cycle-14.md",
+      "sha256": "3236ac04cd846515e39a9b7dd0638a411800281d36b7cff504c136a909af707f"
+    },
+    {
+      "path": "specs/003-health-assessment/status.md",
+      "sha256": "ee5685546a041128d6937f93a68524ad9f671ba04535b93149e8b0d529030011"
+    },
+    {
+      "path": "specs/003-health-assessment/implementation-plan.md",
+      "sha256": "0b806b2ada36d904332b8f8858f5694c5906c602bed0b7d9b2fbc30c2a9dbefd"
+    },
+    {
+      "path": "specs/003-health-assessment/evidence-index.md",
+      "sha256": "3b6988637535105977f336ea7c1a478b3c6040676b5afec3683b653a657f81b0"
+    },
+    {
+      "path": "plans/active/one-identity-local-pilot-build.md",
+      "sha256": "fa2a9d9abda369d3054c7981587108c8799a6df6efb6b01589ed8a128ce1def4"
+    },
+    {
+      "path": "specs/003-health-assessment/local-planning-task-test-plan.md",
+      "sha256": "3302da03dd48779a04471246f7bff1e659d27cd8d6142f4218d2892107919cca"
+    }
+  ],
+  "executedReadOnlyChecks": [
+    "Python source parses without execution",
+    "All1366 frozen source bytes/hashes match exact Git b10 commit; recomputed sorted-path-NUL-perSHA-LF aggregate cea366b43013c43eefe612a3ec40dc9f36b4fe771f97806c7b6cbd8cd7098745",
+    "Dynamic hosted URLs/code tied to new run b10; firstd42Linux failure explicitly preserved",
+    "Current hostedRUNNING triggers initial assertion before any write",
+    "Final c1V7510/43telemetry metadata and actual2review/preservation paths resolve",
+    "Earlier 01/02 dates handled; historical freeze/current resume qualified",
+    "Single-use closure marker guard precedes writes; VERIFIED/privatepublicationpending remains explicit until actual receipt",
+    "Counts nonadditive; all11human/fullMilestone/manual/UAT/gates/defaultMac/hardkill boundaries remain open"
+  ],
+  "priorFindings": [
+    {
+      "finding": "Hardcoded failed hosted PASS revision/URLs",
+      "status": "CLOSED in corrected draft"
+    },
+    {
+      "finding": "Stale status Last updated replacement",
+      "status": "CLOSED in corrected draft"
+    },
+    {
+      "finding": "Superseded V seal/binding/telemetry pointers",
+      "status": "CLOSED in corrected draft"
+    },
+    {
+      "finding": "Stale kickoff/runtime pending instructions",
+      "status": "CLOSED in corrected draft"
+    },
+    {
+      "finding": "Complete before private publication confirmation",
+      "status": "CLOSED in corrected draft"
+    },
+    {
+      "finding": "Duplicate/regressing closure rerun risk",
+      "status": "CLOSED in corrected draft"
+    }
+  ],
+  "remainingScopedFindings": [],
+  "limitations": [
+    "Closure script not executed and canonical files unchanged by reviewer",
+    "Hosted stillRUNNING; no final CI PASS inferred",
+    "Final execution must await verified job outcomes and private publication independently",
+    "No database/host/browser/native/network/source/site edits or runs"
+  ]
+}

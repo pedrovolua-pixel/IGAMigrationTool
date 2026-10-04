@@ -1,0 +1,99 @@
+# Test Plan: One Identity pilot ingestion slice
+
+Status: Approved for local pilot implementation — executable source fixtures pending  
+Product spec: `specs/001-data-ingestion/product-spec.md` (Approved 2026-09-28)  
+Technical spec: `specs/001-data-ingestion/technical-spec.md` (Approved for local pilot implementation)  
+Owner: Quality owner  
+Last updated: 2026-10-01
+
+Only the local synthetic cases recorded in the feature status are claimed executed. CI fixtures must be synthetic and payload-free. Exact SQL, modules, field dictionaries, scale data and production-impact plans are approved separately for each eligible build/environment.
+
+## Acceptance-criteria mapping
+
+| Criterion | Test ID and level | Pilot expectation |
+|---|---|---|
+| AC-ING-1 | TP-ING-001 contract | One logical One Identity source; cross-source endpoint rejected. |
+| AC-ING-2 | TP-ING-002 static/integration | No write path, read-only intent and blocking permission categories. |
+| AC-ING-3 | TP-ING-003 contract/UI | Exact-build capability, policy, gap and estimate preview before run. |
+| AC-ING-4 | TP-ING-004 unit/integration | Timeout/disconnect resumes from compatible checkpoint without duplicate page. |
+| AC-ING-5 | TP-ING-005 integration | New immutable baseline, tombstones and untouched timestamps. |
+| AC-ING-6 | TP-ING-006 integration/UI | Partial baseline has category gaps and prominent warning. |
+| AC-ING-7 | TP-ING-007 later upload slice | Generic upload/archive safety is deferred; offline collector package has separate corruption/inspection tests. |
+| AC-ING-8 | TP-ING-008 later upload slice | Generic CSV/JSON mapping is deferred. |
+| AC-ING-9 | TP-ING-009 lifecycle | Temporary raw expiry no later than 30 days; normalized provenance survives. |
+| AC-ING-10 | TP-ING-010 minimization | General identity/account profiles excluded; approved references only. |
+| AC-ING-11 | TP-ING-011 hosted assembler | Value-level provenance/conflict across methods; collector contributes its own provenance. |
+| AC-ING-12 | TP-ING-012 mapping | Matching vendor default and actual value retained; missing baseline labeled incomplete. |
+| AC-ING-13 | TP-ING-013 coverage | Uninstalled module is not applicable; inaccessible installed module is a gap. |
+| AC-ING-14 | TP-ING-014 coverage | Every supported in-scope category/object has terminal assessed or gap state. |
+| AC-ING-15 | TP-ING-015 capability | Unsupported/unverified version cannot migrate; reduced-trust upload is a later slice. |
+| AC-ING-16 | TP-ING-016 permission | Excess read-only warns/audits; any write/DDL/ownership/admin blocks before query. |
+
+## Unit and static tests
+
+- Static SQL validator rejects multiple statements, dynamic SQL, write/DDL/control/permission/impersonation/administrative statements, unbounded fields and unsupported query-pack metadata. Bound parameter values cannot change SQL structure.
+- Exact-build/module applicability rejects unknown, mismatched, suspended and future versions; no broad `10.x` wildcard is pilot-validated.
+- Permission classifier tests minimum read, excess read-only, write, DDL, owner, impersonation, security/server administration, agent/job and backup/restore categories; block occurs before evidence-read mock invocation.
+- Field/category policy excludes prohibited values and general profiles, preserves allowed native type/UID/path/provenance and emits explicit redaction/gap markers.
+- The pure field minimizer requires an exact explicit allowlist; excluded categories, unlisted fields, redacted/prohibited/unknown classifications and invalid policy metadata return no value. Its object formatting must not print values. Signature, classification-dictionary and pre-staging integration remain separate checks.
+- Checkpoints bind pack/build/scope/policy/order/boundary/digest, completed row count and terminal state; replay of identical metadata is idempotent, changed metadata conflicts, and an incompatible or count-less older checkpoint stops. A resumed run must honor the cumulative row cap and never reread a terminal page.
+- Package vectors cover AES-256-GCM authentication, RSA-OAEP-SHA256 wrap/unwrap, wrong key, altered nonce/tag/ciphertext/manifest, expiry, wrong scope and duplicate chunk. Exact serialized vectors await envelope approval.
+- [The cycle-02 offline receiving draft](collector-offline-receiving-contract-draft.md#contract-negative-fixture-matrix--planned-not-executed) proposes OFF-N01–24 for exact-byte/algorithm/trust/scope/expiry/replay/concurrency/inspection/restore/capacity failures and INST-D01–09 review inputs. These are planned vectors, not executed tests or approval of the candidate OFF-D01–08 schemas, lifetime/limits, signer/bootstrap or replay lifecycle. Independent byte vectors and required human decisions remain enablement blockers.
+- Collector-host contract cases reject unknown/duplicate/future configuration fields, bad digests and limits, unapproved CLI switches, UNC/device/traversal/alternate-stream paths, and exercise spring gap, fall ambiguity and missed-run schedule behavior. The one-shot command must remain blocked without an approved query pack and offline envelope.
+- The local run-lease primitive must reject an overlapping scope, allow a different scope and permit reacquisition after release. Windows service/CLI contention and crash recovery require controlled host tests before collection.
+- The local encrypted checkpoint ledger must authenticate exact context, reject wrong keys, ciphertext tampering, duplicate pages, removal or rewriting of completed pages, and enforce file/page bounds. Protected key provisioning and crash recovery require Windows integration tests.
+- An authenticated identical ordered-ledger retry must preserve ciphertext without a temporary replacement file and succeed at the exact existing run-directory byte cap. A narrowed cap or unrelated run files over the aggregate cap still reject without changing the ledger. Appending pages still reserves transient replacement bytes; authentication and immutable-prefix checks precede any no-write return.
+- The coordinator must reject a checkpoint outside the run-start directory or a path collision before any page read, and pass that run directory to staging. Windows checks must reject broadly accessible checkpoint directories/files; checkpoint creation and replacement must count their temporary bytes with all existing run files against `maxLocalBytes` and leave the prior ledger intact when the cap is exceeded.
+- On coordinator restart, each checkpointed page must be authenticated from the encrypted stage directory before a new source read. A missing or tampered stage, or a row-count, terminal-state or digest mismatch with the ledger, returns checkpoint rejection. An orphan stage whose checkpoint write failed may still be retried idempotently.
+- The isolated local page-stage primitive must encrypt only minimized permitted fields, bind exact checkpoint context, boundary, row count and terminal state into the digest, reject prohibited or excluded values and oversized pages, preserve one encrypted page on idempotent retry, reject changed content, and detect ciphertext tampering. It must reject a new page before exceeding the configured local-byte cap, counting all existing run-directory files; same-content replay may finish without another write. A reviewed adapter must still prove protected-directory provisioning, key lifecycle, expiry/cleanup, cross-run queue limits, cancellation and service restart on Windows before use.
+- Windows stage-store checks must reject a writable/readable broad directory or file ACL, unprotected inherited stage-directory rules, invalid local paths and reparse points before page reads or writes. Ephemeral runner checks do not validate the eventual customer service identity or installer provisioning.
+- The shared local coordinator must reject absent/mismatched approved pack and policy material, unsupported exact build, blocking permission, overlapping runs, malformed/oversized/prohibited pages and wrong checkpoint key before staging. Synthetic pages must show bounded reads, field minimization, encrypted checkpoint resume, cancellation and failed read/stage behavior. A test adapter cannot substitute for the reviewed source probe, signed material loader, durable package sink or customer environment tests.
+- A synthetic staging adapter held until the configured deadline must return a partial limit outcome and leave the completed-page ledger unchanged. The production sink's cancellation and idempotent restart behavior remain integration checks.
+- If encrypted staging succeeds but checkpoint persistence fails, a fresh synthetic adapter and coordinator invocation must retry the same boundary without a second unique staged page; changed content for that boundary must conflict. This fixture does not prove a provisioned customer sink or service crash recovery.
+- An adapter cancellation that was not requested by the run or its configured deadline must return a source or staging failure, preserve completed checkpoints and avoid reporting a user cancellation or time limit.
+- A separate process must hold the local run lease, reject an overlapping process and allow reacquisition after forced process termination. This checks operating-system handle release, not a customer-host service crash.
+- Windows 2022/2025 CI cases must reload the same DPAPI-protected key, reject a wrong scope and tampered blob, and reject a key file with a write-capable broad ACL. These checks do not substitute for customer service-identity, Server Core, installer or crash-recovery validation.
+- Windows create-once key provisioning must reject a broadly readable directory, leave no new blob on denial, persist a scoped DPAPI blob under the restricted directory, reload the same 256-bit key and reject an existing key rather than replacing it. This does not validate the future installer, service identity or rotation workflow.
+- An extraction start at the configured `retentionHours` boundary or earlier must return expired before another page read/write; a future or missing new start must fail closed. The encrypted `IGR1` record must survive a new coordinator and adapter instance, ignore a changed proposed timestamp, reject wrong key/context/tampering, and reject resume when a checkpoint lacks its record or staged pages exist before record creation. Its initial write must obey `maxLocalBytes`, and a resumed record must reject a cap narrower than the current run-directory usage while allowing exact-cap replay. The reviewed adapter must use a stable protected run directory and key across restarts. Expiry must not silently delete completed evidence.
+- Ephemeral Windows 2022/2025 runners must start, restart and stop the self-contained collector under Service Control Manager with a synthetic protected config, observe payload-free disabled status, and confirm one-shot collection exits blocked without a package. This smoke check does not validate a signed MSI, customer service identity or source resume.
+
+## Integration and end-to-end tests
+
+- Dedicated synthetic SQL Server fixture exercises Integrated Security and SQL-account fallback, pre-query permission attestation, bounded pages, cancellation, timeout, impact stop, schema/column mismatch and no source mutation.
+- Windows Service schedule and one-shot CLI use the same core; overlap is skipped, missed offline schedule does not catch up, restart resumes compatible encrypted checkpoint, local storage/retention limit fails safely.
+- Authorized enrollment produces a non-exportable device key/certificate; wrong, revoked, expired or cross-scope device/upload authorization fails. Online path uses outbound HTTPS only.
+- Offline handoff imports an approved package only after inspection and digest/signature verification; replay and corruption never create duplicate active evidence.
+- Baseline assembler compares multiple pages/endpoints, retains value-level provenance/conflicts, creates explicit gaps, and never mutates prior manifests. Raw/normalized deletion and surviving unavailable markers are verified independently.
+- Health assessment accepts only an eligible immutable feature-001 baseline and never opens a source SQL connection.
+
+## Authorization and isolation tests
+
+- Customer administrator can install/enroll/configure/remove only its collector; consultant, partner administrator and platform operator cannot administer it.
+- Hosted enrollment/upload/import/activation denies unauthenticated, wrong role, customer, project, environment, suspended/deleted scope, revoked device and direct locator substitution.
+- Possession of a package, digest, checkpoint or device certificate alone never authorizes another customer data plane or source SQL principal.
+
+## Failure, compatibility and recovery tests
+
+- SQL disconnect, credential expiry, cancellation, service crash, upload outage, local queue full/expired, interrupted cleanup, malformed page and checksum mismatch preserve completed work and expose the correct gap/error.
+- Collector/query-pack/manifest schema version skew fails closed or follows an explicitly approved compatibility matrix; old baselines remain readable without reinterpretation.
+- Installer upgrade/downgrade and removal verify publisher/chain/digest, supported host, no remote self-update, enrollment revocation and customer-controlled local cleanup.
+
+## Performance and security evidence
+
+Performance testing is required. Independently exercise 100,000 records in each applicable named scale category under the approved query/build plan, bounded page size/concurrency/timeouts, source impact and local storage caps. Record duration, source resource impact, retries, checkpoint lag and partial outcomes without values. Customer database owner approves each exact query/build execution plan and material-impact threshold before a pilot source run.
+
+Security testing includes static SQL adversarial inputs; effective permission denial; field minimization and prohibited value detection; DPAPI/ACL inspection; device key non-exportability/revocation; TLS-only outbound connectivity; package crypto tamper/expiry; payload-free logs/status/audit; secret scan; signed MSI provenance; and no inbound listener. Security findings remain open until executed evidence exists.
+
+## Manual environment evidence and gaps
+
+- Windows Server 2022 and 2025, including Server Core, MSI install/service restart/upgrade/removal and Integrated/SQL-auth flows need controlled Windows hosts.
+- PILOT-ENV-A and PILOT-ENV-B must be independent exact One Identity 10.x/SQL Server environments with protected identifiers and customer database-owner authorization. Build/module/query/mapping/permission/impact/SME records are not available locally.
+- Enrollment/upload, hosted baseline activation, customer data-plane isolation and lifecycle checks need approved cloud resources. Offline package serialization and API operation shapes still need technical/security review.
+- AC-ING-7/8 and the broader multi-source paths remain later feature-001 design, not a pass/fail claim for this pilot slice.
+
+## Approval
+
+Approved for local pilot implementation by: Repository owner  
+Date: 2026-09-29
+
+The exact query pack, customer source tests, offline exchange format, hosted operations and production release require their separate gates.

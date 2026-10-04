@@ -1,0 +1,1 @@
+PASS independent SyntheticMcp integration: 2733 assertions; P1D-T01–11 executable coverage; T12 coordinator source-bound checks

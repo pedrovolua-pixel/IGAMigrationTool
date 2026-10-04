@@ -1,0 +1,16 @@
+**/bin/
+**/obj/
+.env.local
+**/.env.local
+*.user
+*.suo
+# Local synthetic consultant frontend and private status site checkout
+src/web/node_modules/
+src/web/dist/
+.sites-work/
+
+# Cycle14 original native task checks are archived separately from source.
+tests/unit/SyntheticPlanningTasks.Tests/execution/
+
+# Dedicated local evaluation workspace generated assets.
+src/web/evaluation/dist/

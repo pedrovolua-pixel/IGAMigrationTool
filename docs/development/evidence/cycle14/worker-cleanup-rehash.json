@@ -1,0 +1,27 @@
+{
+  "schema": "cycle14-before-worker-cleanup-rehash-v1",
+  "recordedUtc": "2026-10-03T04:49:39.184998+00:00",
+  "results": [
+    {
+      "label": "a14",
+      "archive": "/private/tmp/iga-cycle14-preserved/a14/originals.tar.gz",
+      "sha256": "459edcf6bd076a3df71b2379b8014fe363e42614e541d1a8ad98b32a747945a8",
+      "rehashedEntries": 3031,
+      "result": "PASS"
+    },
+    {
+      "label": "b14",
+      "archive": "/private/tmp/iga-cycle14-preserved/b14/originals.tar.gz",
+      "sha256": "7d239939def0c80bbb72a96e5a5e0a6ed76e47cd48c7caa0cebb0ea7e4b0df89",
+      "rehashedEntries": 2438,
+      "result": "PASS"
+    },
+    {
+      "label": "v14",
+      "archive": "/private/tmp/iga-cycle14-preserved/v14/originals.tar.gz",
+      "sha256": "c7e109e038032f04ee92b2294d86b4f88cb615e158c2a012c21ebd38abfed8c2",
+      "rehashedEntries": 9223,
+      "result": "PASS"
+    }
+  ]
+}

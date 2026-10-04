@@ -1,0 +1,92 @@
+"""Independent full HTML oracle from literal fixture primitives and fixed presentation contract.
+
+No C# source parsing, executed output capture, or production canonical/renderer calls.
+"""
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).resolve().parent
+spec = importlib.util.spec_from_file_location('literal_v11', HERE / 'oracle.py')
+oracle = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(oracle)
+
+STYLE = 'html{color:#17212b;background:#fff;font:1rem/1.6 system-ui,sans-serif}body{margin:0}main,header,nav{max-width:70rem;margin:auto;padding:1rem}*{box-sizing:border-box;min-width:0}h1,h2,h3,h4,p,li,dt,dd,summary,code{overflow-wrap:anywhere}a{color:#003f86}a:focus-visible,summary:focus-visible{outline:3px solid #003f86;outline-offset:4px}details{margin:1rem 0;border:1px solid #687787;padding:.75rem}summary{cursor:pointer;font-weight:700}dl{margin:.5rem 0}dt{font-weight:700}dd{margin:0 0 .75rem 1rem}ol,ul{padding-left:1.5rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f4f7;padding:.75rem}code{font-size:.9rem}.warning{border-left:.3rem solid #8a3500;padding:.75rem;background:#fff5e8}.skip{display:inline-block;padding:.75rem}'
+
+def encode(text):
+    names = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}
+    return ''.join(names.get(c, '&#x' + format(ord(c), 'X') + ';' if ord(c) < 32 or ord(c) > 126 or c in "'+`" else c) for c in text)
+
+def field(name, value): return '<dl><dt>' + encode(name) + '</dt><dd>' + encode(value) + '</dd></dl>'
+def code(text): return '<pre><code>' + encode(text) + '</code></pre>'
+def list_(values): return '<ul>' + ''.join('<li>' + encode(value) + '</li>' for value in values) + '</ul>'
+def tree(value):
+    if isinstance(value, dict): return '<dl>' + ''.join('<dt>' + encode(k) + '</dt><dd>' + tree(v) + '</dd>' for k, v in value.items()) + '</dl>'
+    if isinstance(value, list): return '<ol>' + ''.join('<li>' + tree(v) + '</li>' for v in value) + '</ol>'
+    if value is None: return 'Not supplied'
+    if isinstance(value, str): return encode(value)
+    return encode(str(value))
+
+def ordered_source(source):
+    # Three detached JsonElement locks are canonically ordered by upstream builder.
+    result = dict(source)
+    for key in ['frozenVersions', 'capabilityLock', 'analysisLock']:
+        result[key] = json.loads(oracle.canonical(result[key]))
+    return result
+
+def ordered_finding(finding):
+    result = dict(finding)
+    result['options'] = [dict(scopedOptionId=o['scopedOptionId'], optionId=o['optionId'], status=o['status'],
+        text=o['text'], prerequisites=o['prerequisites'], risk=o['risk'], recoveryGuidance=o['recoveryGuidance']) for o in finding['options']]
+    return result
+
+def expected(name):
+    guidance, snapshot = oracle.expected(oracle.input_fixture(hostile=name == 'hostile', empty=name == 'empty'))
+    payload_digest = oracle.digest(snapshot)
+    html = '<!DOCTYPE html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; base-uri \'none\'; form-action \'none\'"><title>Fictional fix-package preview</title><style>' + STYLE + '</style></head><body><a class="skip" href="#main">Skip to preview</a><header><h1>Fictional fix-package preview</h1>'
+    html += '<p class="warning">' + encode(oracle.DISCLAIMER) + '</p><p>Status: Unverified</p></header>'
+    html += '<nav aria-label="Preview sections"><a href="#packages">Packages</a> · <a href="#historical">Historical guidance</a> · <a href="#provenance">Source and integrity</a></nav><main id="main" tabindex="-1">'
+    html += '<section><h2>Current preview boundary</h2>' + list_(snapshot['warnings']) + list_(oracle.UNAVAILABLE) + '</section>'
+    html += '<section id="packages"><h2>Fictional packages — Unverified</h2>'
+    if not snapshot['packages']:
+        html += '<p class="warning">No findings were supplied; no fix packages or actions are available. Empty input does not establish a healthy environment.</p>'
+    for package in snapshot['packages']:
+        html += '<details><summary>Package for finding ' + encode(package['findingId']) + '</summary>'
+        html += field('Package ID', package['packageId']) + field('Finding ID', package['findingId'])
+        for option in package['options']:
+            html += '<details><summary>Option ' + encode(option['scopedOptionId']) + ' — Unverified artifacts</summary>' + field('Scoped option ID', option['scopedOptionId'])
+            for artifact in option['artifacts']:
+                html += '<article><h3>' + encode(artifact['kind']) + ' — Unverified</h3>'
+                for label, key in [('Artifact ID', 'artifactId'), ('Template ID', 'templateId'), ('Kind', 'kind'), ('Artifact status', 'status')]:
+                    html += field(label, artifact[key])
+                html += code(artifact['text']) + '</article>'
+            html += '</details>'
+        html += '</details>'
+    html += '</section><section><h2>Fixed fictional templates</h2>'
+    for template in oracle.TEMPLATES:
+        html += '<details><summary>' + encode(template['kind']) + ' template — Unverified</summary>'
+        html += field('Template ID', template['templateId']) + field('Kind', template['kind']) + code(template['text']) + '</details>'
+    html += '</section><section id="historical"><h2>Historical upstream guidance</h2><p>These source warnings and unavailable sections describe the earlier guidance projection. The current fictional preview boundary is stated above. Finding decisions do not review artifacts.</p>'
+    html += field('Guidance schema', guidance['schemaVersion']) + field('Guidance status', guidance['status'])
+    html += '<details><summary>Historical upstream warnings and unavailable sections</summary>' + list_(oracle.GUIDANCE_WARNINGS) + list_(oracle.GUIDANCE_UNAVAILABLE) + '</details>'
+    for finding in guidance['findings']:
+        html += '<details><summary>' + encode(finding['presentationTitle']) + ' — finding state: ' + encode(finding['currentState']) + '</summary>'
+        html += tree(ordered_finding(finding)) + '</details>'
+    html += '</section><section id="provenance"><h2>Source and integrity</h2><details><summary>Source bindings, frozen versions and locks</summary>'
+    html += tree(ordered_source(guidance['source'])) + '</details><details><summary>Preview versions and digests</summary>'
+    for label, value in [('Preview schema', snapshot['schemaVersion']), ('Template version', oracle.TEMPLATE_VERSION), ('Template digest', snapshot['templateDigest']), ('Guidance digest', guidance['contentDigest']), ('Package digest', payload_digest)]:
+        html += field(label, value)
+    return (html + '</details></section></main></body></html>\n').encode()
+
+files = {name + '-html-golden.html': expected(name) for name in ['normal', 'hostile', 'empty']}
+files['html-oracle-provenance.json'] = (json.dumps(dict(schemaVersion='v11-independent-html-oracle-v1',
+    files=[dict(path=k, sha256=hashlib.sha256(v).hexdigest(), bytes=len(v)) for k, v in sorted(files.items())]), indent=2) + '\n').encode()
+if sys.argv[1:] == ['--write']:
+    for name, value in files.items(): (HERE / name).write_bytes(value)
+elif sys.argv[1:]: raise SystemExit('FAIL invalid HTML oracle arguments')
+else:
+    for name, value in files.items():
+        if (HERE / name).read_bytes() != value: raise SystemExit('FAIL independent HTML oracle mismatch: ' + name)
+print('PASS V11 independent full HTML oracle; files=' + str(len(files)) + '; normal-bytes=' + str(len(files['normal-html-golden.html'])) + '; normal-sha256=' + hashlib.sha256(files['normal-html-golden.html']).hexdigest())

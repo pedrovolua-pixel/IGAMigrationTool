@@ -1,0 +1,8 @@
+  SyntheticMcp -> /private/tmp/iga-p1d-v/src/server/modules/SyntheticMcp/bin/Debug/net10.0/SyntheticMcp.dll
+  SyntheticMcp.Tests -> /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/bin/Debug/net10.0/SyntheticMcp.Tests.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.38

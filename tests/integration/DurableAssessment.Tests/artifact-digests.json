@@ -1,0 +1,14 @@
+{
+  "kind": "actual final portable80-assertion test binary and copied execution dependencies",
+  "d3Commit": "0254aa1",
+  "syntheticFixtureVersion": "durable-independent-v3-v1",
+  "sha256": {
+    "tests/integration/DurableAssessment.Tests/Program.cs": "96c2856a49010b78e584952b900a2b69a3f54161cbd56607e2c237d4a134c285",
+    "tests/integration/DurableAssessment.Tests/SyntheticFixture.cs": "7a80f2ddc963db6c65cef67b5fa14e9ac65dbec4a9bf0793da9f69d7a85558fc",
+    "tests/integration/DurableAssessment.Tests/bin/Release/net10.0/DurableAssessment.Tests.dll": "ec94b8bbc51395a806a9d5c8d2db504b42c6b5d32b29536b1a9078a968dab5b6",
+    "tests/integration/DurableAssessment.Tests/bin/Release/net10.0/AssessmentRuns.dll": "580e7477433ebf25a69f3eee5ee21cae0e2c942462ccaf2f32b0c0d711e5abcc",
+    "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs": "377e3062a92574001ec2243431b1031a16ace1ba6a6c51358ecd2791c629d144",
+    "src/server/modules/AssessmentRuns/SyntheticRunMigration.cs": "7488f7ffa74f816114bac085ad7c465b01ec823a25394dab69edd5f7a878dfbb",
+    "migrations/assessment-runs/001-initial.sql": "67bad3b18091babdda2abb898666932b7dc09df767c4e6a3ed49265590e34f88"
+  }
+}

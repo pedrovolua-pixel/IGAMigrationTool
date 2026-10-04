@@ -1,0 +1,9 @@
+# Synthetic preview projection checks
+
+This portable host calls the actual Cycle08 packet/proposal factories and Cycle09 preview builder. Accepted fixtures use real factories. Nonpublic constructors are invoked by reflection only to create impossible production values for integrity, metadata, closed-shape, membership and structural denial checks; reflection does not create any accepted preview fixture.
+
+The packet input and fixed fake output are literal fictional fixtures. The complete `golden-packet.json`, `golden-proposal.json`, `golden-preview.json` and digest were authored independently using Python's primitive ordinal `json.dumps(sort_keys=True,separators=(',',':'))` and SHA256 on ASCII-only literal object definitions. No module canonicalization, serializer, builder output or regenerated actual value supplies an expected golden. Assertions compare complete byte strings and preserve every source/proposal field and array order.
+
+Cases cover typed labels/citations/conflicts/context, explicit zero proposals, copied immutable children, culture-independent bytes, all text channels carrying hostile or Unicode data, maximum proposal/statement counts, exact4096 UTF16-unit strings, and real factory outputs whose default escaping expands them beyond the original wire-size guards. Sixty-eight reflection-only denials cover null/corrupt metadata, all nine source fields, run/packet/source mismatches, unauthorized/duplicate/empty citations, closed shapes, conflict rules, duplicates, missing fields and parse/depth/size bounds. Diagnostics print codes/counts/digests, never supplied text.
+
+Execution metadata binds exact source, independent fixtures, shared module/factory inputs, executed DLLs and copied transcripts. This host does not verify HTML rendering/browser behavior, real provider/security policy, authorization/redaction semantics, saved-run/scoring/review/persistence, customer data or any live gate. Those remain separate checks.

@@ -1,0 +1,176 @@
+{
+  "run": {
+    "schemaVersion": 1,
+    "demoOnly": true,
+    "runId": "11111111-2222-4333-8444-555555555555",
+    "revision": 7,
+    "state": "Scoring",
+    "createdAtUtc": "2026-10-03T00:00:00Z",
+    "updatedAtUtc": "2026-10-03T00:00:01Z",
+    "selection": {
+      "scopeId": "demo-scope",
+      "scopeLabel": "Synthetic One Identity environment",
+      "baselineId": "synthetic-analysis-findings-v1",
+      "baselineLabel": "Fictional findings",
+      "profileId": "synthetic-review-maturity-planning-tasks-equal-v1",
+      "profileLabel": "Synthetic consultant planning tasks · equal weights"
+    },
+    "progress": {
+      "plannedUnits": 1,
+      "terminalUnits": 1,
+      "remainingUnits": 0,
+      "allTerminal": true
+    },
+    "coverageCompletionKind": "Complete",
+    "lockedInputs": [
+      {
+        "name": "Baseline",
+        "version": "synthetic-analysis-findings-v1",
+        "sha256": "f9f1d314f66ec32777b268f447e0dc8dfb99b07fa63026c1ccf8f487a9fe4313"
+      },
+      {
+        "name": "Profile",
+        "version": "synthetic-profile-v1",
+        "sha256": "419f8babe9cc4dbc9814f649d76842843b6b9f4f908101ebfaf4c93e9fa9750b"
+      },
+      {
+        "name": "Rule catalog",
+        "version": "synthetic-analysis-catalog-v1",
+        "sha256": "5029075f99d9c3442019b09b38e70c7f722abc7d9cdc7fbf0f32858e0c826694"
+      },
+      {
+        "name": "Capability",
+        "version": "synthetic-analysis-matrix-v1",
+        "sha256": "0952b8a488fff211c5ea7fa52024e95a6570acdf97e32934535034e36d5637bc"
+      },
+      {
+        "name": "Desired outcomes",
+        "version": "disabled",
+        "sha256": "17eb3c0168d0d7b21ede5481150f17233427d89833ec121b4dbc4fb96cfab71e"
+      },
+      {
+        "name": "Scoring algorithm",
+        "version": "pilot-health-v1",
+        "sha256": "29e4c1370cbc21c01927bdfe0ffe962e8dcb98d5665b043dd3fc6b176599c2ca"
+      },
+      {
+        "name": "AI policy",
+        "version": "synthetic-ai-disabled-v1",
+        "sha256": "c3c38ca102b3b21f125d228da17f1c6ec3ba7df96295fe435e5aa56e21884899"
+      },
+      {
+        "name": "Prompt",
+        "version": "synthetic-prompt-disabled-v1",
+        "sha256": "6aad774326a3961f9ae2b794dda6615167e94769ed54b3de4d9bebcad4809993"
+      },
+      {
+        "name": "Model",
+        "version": "synthetic-model-disabled-v1",
+        "sha256": "fb1207db5a421724a19a721ad49c7aa845874f972941c97fab8e6e0d399f9bad"
+      },
+      {
+        "name": "Application",
+        "version": "synthetic-planning-tasks-app-v1",
+        "sha256": "8d4a7cc42ef5cd406eb1ac2733c808bca6d25cb92296dd84deafef9fefa0ab14"
+      },
+      {
+        "name": "Work schema",
+        "version": "synthetic-run-work-v1",
+        "sha256": "62f97295786395635b782fb69bf8b54b70cc375c045f4a1d1ce56cc8bb6d7cea"
+      },
+      {
+        "name": "Complete frozen input",
+        "version": "synthetic-input-lock-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Exact capability tuple",
+        "version": "synthetic-analysis-matrix-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Scripted result fixture",
+        "version": "synthetic-outcomes-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Frozen analysis contents",
+        "version": "synthetic-analysis-lock-v1",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "name": "Fictional fix-package templates",
+        "version": "fictional-fix-templates-v1",
+        "sha256": "a40f3ccb1128581f36de236dbca3353097f4034b6738bcd01a98275229bee669"
+      },
+      {
+        "name": "Artifact review contract",
+        "version": "synthetic-fix-review-contract-v1",
+        "sha256": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f"
+      },
+      {
+        "name": "Planning task contract",
+        "version": "synthetic-planning-task-contract-v1",
+        "sha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2"
+      }
+    ],
+    "warnings": [],
+    "stateCounts": [
+      {
+        "state": "Finding",
+        "count": 1
+      }
+    ],
+    "executableCoverage": null,
+    "limitations": [],
+    "actions": {
+      "cancel": false,
+      "resume": false
+    },
+    "cancelRequested": false
+  },
+  "detail": {
+    "schemaVersion": 1,
+    "demoOnly": true,
+    "status": "SourceUnavailable",
+    "reasonCode": "planning_task_source_unavailable",
+    "source": null,
+    "actorId": "synthetic-consultant",
+    "options": [],
+    "entries": [],
+    "unavailableEntries": [
+      {
+        "identity": {
+          "taskId": "e31efb2358f83f9b1f6faf128b0d431df4dce5ab5b6e5def4c487489a248f11b",
+          "findingId": "5555555555555555555555555555555555555555555555555555555555555555",
+          "categoryId": "SECURITY",
+          "packageId": "31ee8307cc1a42ec5f0477e26a3f993ed482e8344da031efd281afe90c075aac",
+          "scopedOptionId": "6753e92546d65aaa236a1f8c7902fd7214893de75bf008cb5b7f9082e3e77a77",
+          "artifactIds": [
+            "3eb080aa14c4aeb3a254b774d5d8cfc7360e915ec31958002c4c822b2f847dc5",
+            "46b491b0d7d628ae513ee5e5e34f06c15e316dd33a635df1d6e58ce59e28a230",
+            "a9a3eb6a3164b0cabe1bca0fb01ae489dfecc3e5254799f104f8b9f07679228e"
+          ]
+        },
+        "assigneeId": "synthetic-consultant",
+        "revision": 1,
+        "status": "Planned",
+        "freshness": "SourceUnavailable",
+        "history": [
+          {
+            "eventId": "20000000-2222-4333-8444-000000000001",
+            "revision": 1,
+            "kind": "Create",
+            "actorId": "synthetic-consultant",
+            "actorRoles": [
+              "Consultant"
+            ],
+            "recordedAtUtc": "2026-10-03T01:02:04.1234567Z",
+            "recordedStatus": "Planned",
+            "planningEventId": "20000000-2222-4333-8444-000000000001"
+          }
+        ]
+      }
+    ]
+  }
+}

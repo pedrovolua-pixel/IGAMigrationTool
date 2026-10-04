@@ -1,0 +1,1265 @@
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { createRequire } from "node:module";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import assert from "node:assert/strict";
+const allowed = new Set([
+  "PATH",
+  "HOME",
+  "TMPDIR",
+  "TMP",
+  "TEMP",
+  "SystemRoot",
+  "SYSTEMROOT",
+  "WINDIR",
+  "COMSPEC",
+  "PATHEXT",
+  "LANG",
+  "LC_ALL",
+  "TZ",
+]);
+const fictionalCanaryWasPresent = Object.hasOwn(
+  process.env,
+  "IGA_B14_FICTIONAL_INPUT_GUARD",
+);
+let removed = 0;
+for (const k of Object.keys(process.env))
+  if (!allowed.has(k)) {
+    delete process.env[k];
+    removed++;
+  }
+const here = dirname(fileURLToPath(import.meta.url)),
+  root = resolve(here, "../../.."),
+  frontend = resolve(root, "src/web"),
+  out = resolve(here, "artifacts");
+const require = createRequire(resolve(frontend, "package.json")),
+  React = require("react"),
+  { renderToStaticMarkup } = require("react-dom/server");
+const { transformWithOxc } = await import(
+  pathToFileURL(resolve(frontend, "node_modules/vite/dist/node/index.js")).href
+);
+await mkdir(out, { recursive: true });
+for (const name of [
+  "FixPackagePreview",
+  "ArtifactReviewPanel",
+  "PlanningTasksPanel",
+]) {
+  const path = resolve(frontend, "src", name + ".tsx");
+  const result = await transformWithOxc(await readFile(path, "utf8"), path, {
+    lang: "tsx",
+    jsx: { runtime: "automatic" },
+    target: "es2022",
+  });
+  const code = result.code
+    .replace(new RegExp(`import ['"]\\./${name}\\.css['"];?\\n`, "g"), "")
+    .replaceAll(
+      '"react/jsx-runtime"',
+      JSON.stringify(pathToFileURL(require.resolve("react/jsx-runtime")).href),
+    )
+    .replaceAll('"./FixPackagePreview"', '"./FixPackagePreview.mjs"')
+    .replaceAll('"./ArtifactReviewPanel"', '"./ArtifactReviewPanel.mjs"');
+  await writeFile(
+    resolve(out, name + ".mjs"),
+    code +
+      (name === "PlanningTasksPanel"
+        ? "\nexport {structural as testOnlyStructural, utc as testOnlyUtc};\n"
+        : ""),
+  );
+}
+const {
+  PlanningTasksPanel,
+  coherentPlanningTasks,
+  coherentUnavailablePlanningTasks,
+  testOnlyStructural,
+  testOnlyUtc,
+} = await import(pathToFileURL(resolve(out, "PlanningTasksPanel.mjs")).href);
+const receiptDependency = resolve(
+  here,
+  "execution/dependencies/usePlanningTasks.ts.frozen",
+);
+const capturedReceipt = await readFile(receiptDependency, "utf8");
+const receiptCode = (
+  await transformWithOxc(capturedReceipt, receiptDependency, {
+    lang: "ts",
+    target: "es2022",
+  })
+).code
+  .replaceAll(
+    '"react"',
+    JSON.stringify(pathToFileURL(require.resolve("react")).href),
+  )
+  .replaceAll('"./api"', '"./inert-api.mjs"');
+await writeFile(
+  resolve(out, "inert-api.mjs"),
+  'export class DemoRequestError extends Error {}\nexport function request(){throw new Error("Test receipt dependency API must remain inert.");}\n',
+);
+await writeFile(resolve(out, "receipt-dependency.mjs"), receiptCode);
+const { planningTaskReceiptAgrees } = await import(
+  pathToFileURL(resolve(out, "receipt-dependency.mjs")).href
+);
+const complete = JSON.parse(
+    await readFile(resolve(here, "complete-fixture.json"), "utf8"),
+  ),
+  empty = JSON.parse(
+    await readFile(resolve(here, "empty-fixture.json"), "utf8"),
+  ),
+  unavailable = JSON.parse(
+    await readFile(resolve(here, "unavailable-fixture.json"), "utf8"),
+  );
+const hash = (s) => createHash("sha256").update(s).digest("hex"),
+  clone = () => structuredClone(complete),
+  d = (x) => x.analysis.planningTasks,
+  e = (x) => d(x).entries[0],
+  o = (x) => d(x).options[0],
+  noop = () => {};
+let checks = 0,
+  accepted = 0,
+  denied = 0;
+const check = (v, label) => {
+    assert.ok(v, label);
+    checks++;
+  },
+  equal = (a, b, label) => {
+    assert.deepEqual(a, b, label);
+    checks++;
+  };
+const props = (x, drafts = {}, verified = true) => ({
+  analysis: x.analysis,
+  run: x.run,
+  verified,
+  drafts,
+  onReasonChange: noop,
+  onAction: noop,
+  onRetry: noop,
+  onRefresh: noop,
+});
+const render = (x, drafts = {}, verified = true) =>
+  renderToStaticMarkup(
+    React.createElement(PlanningTasksPanel, props(x, drafts, verified)),
+  );
+const renderUnavailable = (x) =>
+  renderToStaticMarkup(
+    React.createElement(PlanningTasksPanel, {
+      analysis: null,
+      run: x.run,
+      standaloneDetail: x.detail,
+      verified: true,
+      drafts: {},
+      onReasonChange: noop,
+      onAction: noop,
+      onRetry: noop,
+      onRefresh: noop,
+    }),
+  );
+async function accept(x, label) {
+  check(await coherentPlanningTasks(x.analysis, x.run), label);
+  accepted++;
+}
+async function deny(x, label, sync = true) {
+  check(!(await coherentPlanningTasks(x.analysis, x.run)), label);
+  denied++;
+  if (sync) {
+    const html = render(x);
+    check(
+      html.includes("Planning task data is inconsistent."),
+      label + " closed rendering",
+    );
+    check(
+      !html.includes("<textarea") &&
+        !html.includes("Current original recommendation"),
+      label + " no controls/content",
+    );
+  }
+}
+async function denyUnavailable(x, label) {
+  check(!(await coherentUnavailablePlanningTasks(x.detail, x.run)), label);
+  denied++;
+  const html = renderUnavailable(x);
+  check(
+    html.includes("Planning task data is inconsistent."),
+    label + " unavailable closed rendering",
+  );
+}
+const pristine = JSON.stringify(complete);
+for (const [name, x] of [
+  ["complete", complete],
+  ["empty", empty],
+]) {
+  await accept(x, name);
+  const actual = render(x);
+  equal(
+    actual,
+    await readFile(resolve(here, name + "-expected.html"), "utf8"),
+    name + " independent whole markup bytes",
+  );
+  await writeFile(resolve(out, name + "-actual.html"), actual);
+}
+check(
+  await coherentUnavailablePlanningTasks(unavailable.detail, unavailable.run),
+  "independent source-unavailable proof",
+);
+accepted++;
+equal(
+  renderUnavailable(unavailable),
+  await readFile(resolve(here, "unavailable-expected.html"), "utf8"),
+  "unavailable complete literal markup",
+);
+await writeFile(
+  resolve(out, "unavailable-actual.html"),
+  renderUnavailable(unavailable),
+);
+check(
+  !renderUnavailable(unavailable).includes("<textarea") &&
+    !renderUnavailable(unavailable).includes("Reason or comment") &&
+    !renderUnavailable(unavailable).includes("Planning task contract"),
+  "unavailable suppresses content/actions",
+);
+const html = render(complete);
+check(
+  !/<(?:script|iframe|form|a|img)\b|<[^>]+\s(?:on\w+|href|src)=/i.test(html),
+  "hostile original/reason strings remain inert markup",
+);
+check(
+  html.includes("&lt;script&gt;window.injected=1&lt;/script&gt;") &&
+    html.includes("😀 e\u0301"),
+  "exact hostile Unicode reason retained",
+);
+check(
+  html.includes("\0\r\n"),
+  "SSR string retains NUL and CRLF; parsed browser normalization is separately verified by V14",
+);
+for (const opt of d(complete).options) {
+  for (const [key, value] of Object.entries(opt.identity)) {
+    for (const v of Array.isArray(value) ? value : [value])
+      check(html.includes(v), "visible identity " + key);
+  }
+  for (const a of opt.currentAttestations)
+    for (const key of ["artifactId", "eventId", "kind", "sourceDigest"])
+      check(html.includes(a[key]), "complete selected reference " + key);
+}
+for (const h of e(complete).history)
+  for (const key of ["eventId", "actorId", "recordedAtUtc", "planningEventId"])
+    check(html.includes(h[key]), "complete attributed history " + key);
+for (const [key, value] of Object.entries(d(complete).source.artifactSource))
+  if (typeof value === "string")
+    check(html.includes(value), "full source metadata " + key);
+check(
+  render(complete, {}, false).includes(
+    "Verifying the current planning source",
+  ) && !render(complete, {}, false).includes("<textarea"),
+  "default verification gate withholds controls",
+);
+const defaults = props(complete);
+delete defaults.verified;
+check(
+  !renderToStaticMarkup(
+    React.createElement(PlanningTasksPanel, defaults),
+  ).includes("<textarea"),
+  "missing verified defaults false",
+);
+const command = {
+  eventId: "30000000-2222-4333-8444-000000000001",
+  kind: "Comment",
+  expectedRevision: 1,
+  expectedSourceDigest: d(complete).source.artifactSource.sourceDigest,
+  expectedAttestations: o(complete).currentAttestations,
+  reason: "exact pending text",
+};
+const id = e(complete).identity.taskId;
+for (const [draft, label] of [
+  [
+    {
+      reason: "draft",
+      pending: command,
+      busy: false,
+      error: null,
+      requiresRefresh: false,
+    },
+    "uncertain",
+  ],
+  [
+    {
+      reason: "draft",
+      pending: null,
+      busy: true,
+      error: null,
+      requiresRefresh: false,
+    },
+    "busy",
+  ],
+  [
+    {
+      reason: "draft",
+      pending: null,
+      busy: false,
+      error: "Conflict: refresh",
+      requiresRefresh: true,
+    },
+    "conflict",
+  ],
+]) {
+  const h = render(complete, { [id]: draft });
+  check(!h.includes(">Start work</button>"), "withheld normal action " + label);
+  check(
+    h.includes("draft") && h.includes('disabled=""'),
+    "retained reason " + label,
+  );
+  if (label === "uncertain")
+    check(h.includes("Retry same planning command"), "explicit frozen retry");
+  if (label === "conflict")
+    check(
+      h.includes('role="alert"') && h.includes("Refresh planning source"),
+      "actionable conflict",
+    );
+}
+for (const reason of ["", " \t\r\n", "x".repeat(2001), "\ud800", "\udc00"])
+  check(
+    render(complete, {
+      [id]: {
+        reason,
+        pending: null,
+        busy: false,
+        error: null,
+        requiresRefresh: false,
+      },
+    }).includes('disabled="">Start work'),
+    "invalid input disables command",
+  );
+for (const reason of [
+  "x".repeat(2000),
+  "😀".repeat(1000),
+  "\0",
+  "  exact \r\n ",
+])
+  check(
+    !render(complete, {
+      [id]: {
+        reason,
+        pending: null,
+        busy: false,
+        error: null,
+        requiresRefresh: false,
+      },
+    }).includes('disabled="">Start work'),
+    "valid exact reason boundary",
+  );
+function flags(x, status = "Planned", fresh = true) {
+  const t = e(x);
+  t.status = status;
+  t.freshness = fresh ? "CurrentPlan" : "NeedsReconfirmation";
+  Object.assign(t, {
+    canReconfirm:
+      ["Planned", "InProgress"].includes(status) &&
+      !fresh &&
+      o(x).currentAttestations.every((a) => a.state === "ReviewedForPlanning"),
+    canStart: status === "Planned" && fresh,
+    canReturnToPlanned: status === "InProgress",
+    canComplete: status === "InProgress" && fresh,
+    canCancel: ["Planned", "InProgress"].includes(status),
+    canReopen: ["Completed", "Cancelled"].includes(status),
+    canComment: true,
+  });
+}
+function append(x, kind, status) {
+  const t = e(x),
+    last = t.history.at(-1),
+    n = last.revision + 1,
+    h = {
+      eventId: `20000000-2222-4333-8444-${String(n).padStart(12, "0")}`,
+      revision: n,
+      kind,
+      actorId: t.assigneeId,
+      actorRoles: ["Consultant"],
+      recordedAtUtc: "2026-10-03T01:02:05.1234567Z",
+      reason: "  exact " + kind + " \0\r\n 😀 e\u0301  ",
+      source: structuredClone(d(x).source),
+      attestations: structuredClone(o(x).currentAttestations),
+      recordedStatus: status,
+      planningEventId:
+        kind === "ReconfirmPlan"
+          ? `20000000-2222-4333-8444-${String(n).padStart(12, "0")}`
+          : last.planningEventId,
+    };
+  t.history.push(h);
+  t.revision = n;
+  if (kind === "ReconfirmPlan") t.plan = structuredClone(h);
+  flags(
+    x,
+    status,
+    JSON.stringify(t.plan.attestations) ===
+      JSON.stringify(o(x).currentAttestations),
+  );
+  return x;
+}
+function attestation(x, artifactId, kind) {
+  const a = x.analysis.artifactReview.artifacts.find(
+      (a) => a.artifactId === artifactId,
+    ),
+    n = a.revision + 1,
+    h = {
+      eventId: `40000000-2222-4333-8444-${String(n).padStart(12, "0")}`,
+      revision: n,
+      kind,
+      actorId: x.analysis.artifactReview.actorId,
+      actorRoles: ["Consultant"],
+      recordedAtUtc: "2026-10-03T01:02:05.1234567Z",
+      reason: "Exact " + kind,
+      source: structuredClone(x.analysis.artifactReview.source),
+      recordedState:
+        kind === "ReviewForPlanning" ? "ReviewedForPlanning" : "Unverified",
+    };
+  a.history.push(h);
+  a.revision = n;
+  a.state = h.recordedState;
+  a.canReview = a.state !== "ReviewedForPlanning";
+  a.canWithdraw = !a.canReview;
+  for (const opt of d(x).options) {
+    for (const v of opt.currentAttestations)
+      if (v.artifactId === artifactId)
+        Object.assign(v, {
+          revision: n,
+          eventId: h.eventId,
+          kind,
+          state: a.state,
+          sourceDigest: h.source.sourceDigest,
+        });
+    opt.canCreate =
+      opt.currentAttestations.every((v) => v.state === "ReviewedForPlanning") &&
+      !d(x).entries.some((t) => t.identity.taskId === opt.identity.taskId);
+  }
+  flags(x, e(x).status, false);
+  return x;
+}
+let x = clone();
+append(x, "StartProgress", "InProgress");
+await accept(x, "explicit start");
+append(x, "Comment", "InProgress");
+await accept(x, "append comment preserves state");
+append(x, "ReturnToPlanned", "Planned");
+await accept(x, "return to planned");
+append(x, "Cancel", "Cancelled");
+await accept(x, "cancel");
+append(x, "Comment", "Cancelled");
+await accept(x, "terminal comment");
+append(x, "Reopen", "Planned");
+await accept(x, "reopen cancelled");
+append(x, "StartProgress", "InProgress");
+append(x, "Complete", "Completed");
+await accept(x, "completion only planning");
+append(x, "Comment", "Completed");
+await accept(x, "completed comment");
+append(x, "Reopen", "Planned");
+await accept(x, "reopen completed");
+x = attestation(clone(), o(complete).identity.artifactIds[0], "WithdrawReview");
+await accept(x, "selected withdrawal gives needs reconfirmation");
+check(
+  !render(x).includes(">Start work</button>") &&
+    render(x).includes("Needs reconfirmation"),
+  "freshness separate from planned workflow",
+);
+append(x, "Comment", "Planned");
+await accept(x, "stale maintenance stores observed current vector");
+append(x, "Cancel", "Cancelled");
+await accept(x, "stale cancel");
+append(x, "Reopen", "Planned");
+await accept(x, "stale reopen remains stale");
+attestation(x, o(x).identity.artifactIds[0], "ReviewForPlanning");
+await accept(x, "re-review unchanged package remains needs reconfirmation");
+check(e(x).canReconfirm, "new review event permits explicit reconfirm");
+append(x, "ReconfirmPlan", "Planned");
+await accept(x, "explicit reconfirm new vector preserves creation");
+equal(
+  e(x).creation,
+  e(complete).creation,
+  "original creation event never replaced",
+);
+check(e(x).plan.eventId !== e(x).creation.eventId, "plan points new event");
+x = clone();
+const unselected = d(x).options[1].identity.artifactIds[0];
+attestation(x, unselected, "WithdrawReview");
+flags(x, "Planned", true);
+await accept(x, "unselected attestation does not invalidate selected task");
+x = clone();
+d(x).entries = [];
+for (const a of x.analysis.artifactReview.artifacts)
+  Object.assign(a, {
+    revision: 0,
+    state: "Unverified",
+    canReview: true,
+    canWithdraw: false,
+    history: [],
+  });
+for (const opt of d(x).options) {
+  opt.canCreate = false;
+  for (const a of opt.currentAttestations)
+    Object.assign(a, {
+      revision: 0,
+      eventId: null,
+      kind: null,
+      state: "Unverified",
+      sourceDigest: null,
+    });
+}
+await accept(x, "unreviewed current proof valid with no conversion");
+check(
+  !render(x).includes(">Create planning task</button>"),
+  "unreviewed conversion suppressed",
+);
+
+function canonical(v) {
+  if (v === null) return "null";
+  if (typeof v === "boolean" || typeof v === "number") return String(v);
+  if (typeof v === "string") {
+    let r = '"';
+    for (const c of v.split("")) {
+      const n = c.charCodeAt(0),
+        simple = {
+          "\\": "\\\\",
+          "\b": "\\b",
+          "\f": "\\f",
+          "\n": "\\n",
+          "\r": "\\r",
+          "\t": "\\t",
+        };
+      r +=
+        simple[c] ??
+        (n < 32 || n >= 127 || "<>&'\"+`".includes(c)
+          ? "\\u" + n.toString(16).toUpperCase().padStart(4, "0")
+          : c);
+    }
+    return r + '"';
+  }
+  if (Array.isArray(v)) return "[" + v.map(canonical).join(",") + "]";
+  return (
+    "{" +
+    Object.keys(v)
+      .sort()
+      .map((k) => canonical(k) + ":" + canonical(v[k]))
+      .join(",") +
+    "}"
+  );
+}
+equal(
+  canonical(
+    Object.fromEntries(
+      Object.entries(complete.analysis.fixPackages.snapshot).filter(
+        ([k]) => !["contentDigest", "canonicalJson"].includes(k),
+      ),
+    ),
+  ),
+  complete.analysis.fixPackages.snapshot.canonicalJson,
+  "independent canonical serializer agrees original manually frozen package",
+);
+function findingState(x, state) {
+  const a = x.analysis,
+    p = a.fixPackages.snapshot,
+    g = p.guidance;
+  g.findings[0].currentState = state;
+  g.findings[0].findingRevision = 3;
+  a.findings[0].state = state;
+  a.review.findings[0].state = state;
+  a.review.findings[0].revision = 3;
+  a.reviewSnapshotDigest = hash("independent later finding " + state);
+  a.review.snapshotDigest = a.reviewSnapshotDigest;
+  g.source.reviewSnapshotDigest = a.reviewSnapshotDigest;
+  g.contentDigest = hash(
+    canonical(
+      Object.fromEntries(
+        Object.entries(g).filter(([k]) => k !== "contentDigest"),
+      ),
+    ),
+  );
+  a.recommendationGuidance.snapshot = structuredClone(g);
+  p.canonicalJson = canonical(
+    Object.fromEntries(
+      Object.entries(p).filter(
+        ([k]) => !["canonicalJson", "contentDigest"].includes(k),
+      ),
+    ),
+  );
+  p.contentDigest = hash(p.canonicalJson);
+  const src = a.artifactReview.source;
+  Object.assign(src, {
+    sourceDigest: p.contentDigest,
+    guidanceDigest: g.contentDigest,
+    findingReviewDigest: a.reviewSnapshotDigest,
+    findingRevisions: [{ findingId: g.findings[0].findingId, revision: 3 }],
+  });
+  d(x).source.artifactSource = structuredClone(src);
+  for (const art of a.artifactReview.artifacts)
+    Object.assign(art, {
+      state: "NeedsReview",
+      canReview: true,
+      canWithdraw: false,
+    });
+  for (const opt of d(x).options) {
+    opt.findingState = state;
+    opt.canCreate = false;
+    for (const v of opt.currentAttestations) v.state = "NeedsReview";
+  }
+  flags(x, e(x).status, false);
+  e(x).canReconfirm = false;
+  e(x).canStart = false;
+  e(x).canComplete = false;
+  e(x).canReopen =
+    ["Completed", "Cancelled"].includes(e(x).status) && state !== "Rejected";
+  return x;
+}
+for (const state of ["Proposed", "Deferred"]) {
+  x = findingState(clone(), state);
+  await accept(x, "later " + state + " source remains stale");
+  check(
+    render(x).includes(
+      "Warning: " +
+        state +
+        " finding. Planning work does not confirm this finding.",
+    ),
+    "visible " + state + " warning",
+  );
+}
+x = findingState(clone(), "Rejected");
+await accept(x, "rejected source allows verified stale maintenance");
+check(
+  !render(x).includes(">Start work</button>") &&
+    !render(x).includes(">Reconfirm plan</button>") &&
+    render(x).includes(">Cancel task</button>") &&
+    render(x).includes(">Add comment</button>"),
+  "rejected finding maintenance exact controls",
+);
+append(x, "Comment", "Planned");
+await accept(x, "comment on rejected source");
+append(x, "Cancel", "Cancelled");
+e(x).canReopen = false;
+await accept(x, "cancel rejected task without reopening authority");
+// Independent historical source references, not historical full-package byte proof.
+function historical(x) {
+  const binding = structuredClone(d(x).source);
+  Object.assign(binding.artifactSource, {
+    runRevision: 6,
+    sourceDigest: "a".repeat(64),
+    guidanceDigest: "b".repeat(64),
+    findingReviewDigest: "c".repeat(64),
+  });
+  for (const a of x.analysis.artifactReview.artifacts) {
+    a.history[0].source = structuredClone(binding.artifactSource);
+    a.state = "NeedsReview";
+    a.canReview = true;
+    a.canWithdraw = false;
+  }
+  for (const opt of d(x).options) {
+    opt.canCreate = false;
+    for (const v of opt.currentAttestations) {
+      v.sourceDigest = binding.artifactSource.sourceDigest;
+      v.state = "NeedsReview";
+    }
+  }
+  const t = e(x);
+  t.history[0].source = structuredClone(binding);
+  for (const v of t.history[0].attestations)
+    v.sourceDigest = binding.artifactSource.sourceDigest;
+  t.creation = structuredClone(t.history[0]);
+  t.plan = structuredClone(t.history[0]);
+  flags(x, "Planned", false);
+  return x;
+}
+x = historical(clone());
+await accept(x, "historical source references remain stale to later run");
+append(x, "Comment", "Planned");
+await accept(x, "stale comment observes later source without rebinding");
+const earlier = structuredClone(x);
+earlier.analysis.planningTasks.entries[0].history[1].source = structuredClone(
+  earlier.analysis.planningTasks.entries[0].history[0].source,
+);
+earlier.analysis.planningTasks.entries[0].history[1].attestations[0].revision = 0;
+Object.assign(
+  earlier.analysis.planningTasks.entries[0].history[1].attestations[0],
+  { eventId: null, kind: null, state: "Unverified", sourceDigest: null },
+);
+await deny(earlier, "history attestation revision rollback");
+x = historical(clone());
+const fork = structuredClone(e(x)),
+  secondOpt = d(x).options[1];
+fork.identity = structuredClone(secondOpt.identity);
+fork.history[0].eventId = "20000000-2222-4333-8444-000000000099";
+fork.history[0].planningEventId = fork.history[0].eventId;
+fork.history[0].source.artifactSource.sourceDigest = "d".repeat(64);
+fork.history[0].attestations = structuredClone(secondOpt.currentAttestations);
+for (const v of fork.history[0].attestations) {
+  v.state = "ReviewedForPlanning";
+  v.sourceDigest = "d".repeat(64);
+  const a = x.analysis.artifactReview.artifacts.find(
+    (a) => a.artifactId === v.artifactId,
+  );
+  a.history[0].source = structuredClone(fork.history[0].source.artifactSource);
+}
+for (const v of secondOpt.currentAttestations) v.sourceDigest = "d".repeat(64);
+fork.creation = structuredClone(fork.history[0]);
+fork.plan = structuredClone(fork.history[0]);
+d(x).entries.push(fork);
+d(x).entries.sort((a, b) => a.identity.taskId.localeCompare(b.identity.taskId));
+await deny(x, "equal historical source vectors cannot fork across tasks");
+
+// Non-author review counterexample: a later observed source cannot reuse a full package digest with different metadata.
+x = historical(clone());
+for (const art of x.analysis.artifactReview.artifacts)
+  art.history[0].source.findingRevisions[0].revision = 1;
+for (const field of ["history", "creation", "plan"]) {
+  const hs = field === "history" ? e(x).history : [e(x)[field]];
+  for (const h of hs) h.source.artifactSource.findingRevisions[0].revision = 1;
+}
+append(x, "Comment", "Planned");
+e(x).history[1].source = structuredClone(d(x).source);
+e(x).history[1].source.artifactSource.findingRevisions[0].revision = 1;
+e(x).history[1].source.artifactSource.guidanceDigest = "b".repeat(64);
+e(x).history[1].source.artifactSource.findingReviewDigest = "c".repeat(64);
+await writeFile(
+  resolve(out, "same-digest-counterexample.json"),
+  JSON.stringify(x, null, 2) + "\n",
+);
+await deny(
+  x,
+  "same current package digest with lower vector and changed source metadata",
+);
+for (const l of unavailable.run.lockedInputs) {
+  const u = structuredClone(unavailable);
+  u.run.lockedInputs.find((v) => v.name === l.name).version = "unexpected";
+  await denyUnavailable(u, "standalone exact lock version " + l.name);
+}
+for (const [label, change] of [
+  ["wrong scope selection", (u) => (u.run.selection.scopeId = "other")],
+  ["unknown baseline", (u) => (u.run.selection.baselineId = "other")],
+  ["unknown source-free profile", (u) => (u.run.selection.profileId = "other")],
+  [
+    "unsafe run revision",
+    (u) => (u.run.revision = Number.MAX_SAFE_INTEGER + 1),
+  ],
+]) {
+  const u = structuredClone(unavailable);
+  change(u);
+  await denyUnavailable(u, label);
+}
+for (const value of [
+  "2026-02-29T00:00:00Z",
+  "2026-04-31T00:00:00Z",
+  "2026-10-03T01:02:05+00:00",
+  "2026-10-03T01:02:05.12345678Z",
+  "2026-10-03T24:00:00Z",
+  "2026-10-03T01:02:60Z",
+  "not-a-date",
+])
+  check(!testOnlyUtc(value), "invalid UTC calendar or precision " + value);
+for (const value of [
+  "2024-02-29T00:00:00Z",
+  "2026-10-03T01:02:05.1Z",
+  "2026-10-03T01:02:05.1234567Z",
+])
+  check(testOnlyUtc(value), "valid UTC exact " + value);
+for (const key of Object.keys(d(complete))) {
+  x = clone();
+  delete d(x)[key];
+  await deny(x, "missing detail " + key);
+}
+for (const key of Object.keys(o(complete))) {
+  x = clone();
+  delete o(x)[key];
+  await deny(x, "missing option " + key);
+}
+for (const key of Object.keys(o(complete).identity)) {
+  x = clone();
+  delete o(x).identity[key];
+  await deny(x, "missing identity " + key);
+}
+for (const key of Object.keys(e(complete))) {
+  x = clone();
+  delete e(x)[key];
+  await deny(x, "missing entry " + key);
+}
+for (const key of Object.keys(e(complete).history[0])) {
+  x = clone();
+  delete e(x).history[0][key];
+  await deny(x, "missing event " + key);
+}
+for (const key of Object.keys(o(complete).currentAttestations[0])) {
+  x = clone();
+  delete o(x).currentAttestations[0][key];
+  await deny(x, "missing vector " + key);
+}
+for (const key of Object.keys(d(complete).source.artifactSource)) {
+  x = clone();
+  delete d(x).source.artifactSource[key];
+  await deny(x, "missing complete source " + key);
+}
+const mutations = [
+  ["unknown detail", (x) => (d(x).extra = true)],
+  ["unknown option", (x) => (o(x).extra = true)],
+  ["unknown identity", (x) => (o(x).identity.extra = true)],
+  ["unknown entry", (x) => (e(x).extra = true)],
+  ["unknown event", (x) => (e(x).history[0].extra = true)],
+  ["unknown source", (x) => (d(x).source.extra = true)],
+  [
+    "unknown artifact binding",
+    (x) => (d(x).source.artifactSource.extra = true),
+  ],
+  ["unknown vector", (x) => (o(x).currentAttestations[0].extra = true)],
+  ["task ID identity spoof", (x) => (o(x).identity.taskId = "a".repeat(64))],
+  ["task ID uppercase", (x) => (o(x).identity.taskId = "A".repeat(64))],
+  ["wrong finding", (x) => (o(x).identity.findingId = "b".repeat(64))],
+  ["wrong category", (x) => (o(x).identity.categoryId = "OPERATIONS")],
+  ["wrong package", (x) => (o(x).identity.packageId = "b".repeat(64))],
+  [
+    "wrong scoped option",
+    (x) => (o(x).identity.scopedOptionId = "b".repeat(64)),
+  ],
+  ["missing selected artifact", (x) => o(x).identity.artifactIds.pop()],
+  [
+    "duplicate artifact",
+    (x) => (o(x).identity.artifactIds[1] = o(x).identity.artifactIds[0]),
+  ],
+  ["unordered artifacts", (x) => o(x).identity.artifactIds.reverse()],
+  ["wrong profile", (x) => (x.run.selection.profileId = "unapproved")],
+  ["missing lock", (x) => x.run.lockedInputs.pop()],
+  ["duplicate lock", (x) => (x.run.lockedInputs[0] = x.run.lockedInputs[1])],
+  [
+    "wrong task lock",
+    (x) => (x.run.lockedInputs.at(-1).sha256 = "b".repeat(64)),
+  ],
+  [
+    "wrong task lock version",
+    (x) => (x.run.lockedInputs.at(-1).version = "other"),
+  ],
+  [
+    "wrong application",
+    (x) =>
+      (x.run.lockedInputs.find((l) => l.name === "Application").version =
+        "other"),
+  ],
+  [
+    "wrong template",
+    (x) =>
+      (x.run.lockedInputs.find(
+        (l) => l.name === "Fictional fix-package templates",
+      ).sha256 = "b".repeat(64)),
+  ],
+  [
+    "wrong wrapper contract",
+    (x) => (d(x).source.planningTaskContractDigest = "b".repeat(64)),
+  ],
+  ["wrong actor", (x) => (d(x).actorId = "other")],
+  ["wrong assignee", (x) => (e(x).assigneeId = "other")],
+  ["missing option", (x) => d(x).options.pop()],
+  ["duplicate option", (x) => d(x).options.push(o(x))],
+  ["unordered options", (x) => d(x).options.reverse()],
+  ["duplicate task", (x) => d(x).entries.push(e(x))],
+  ["wrong option finding state", (x) => (o(x).findingState = "Rejected")],
+  ["false create flags", (x) => (o(x).canCreate = true)],
+  [
+    "future selected attestation",
+    (x) => (o(x).currentAttestations[0].revision = 2),
+  ],
+  [
+    "wrong selected event",
+    (x) =>
+      (o(x).currentAttestations[0].eventId =
+        "30000000-2222-4333-8444-000000000001"),
+  ],
+  [
+    "wrong selected kind",
+    (x) => (o(x).currentAttestations[0].kind = "WithdrawReview"),
+  ],
+  [
+    "wrong selected state",
+    (x) => (o(x).currentAttestations[0].state = "Unverified"),
+  ],
+  [
+    "wrong selected source",
+    (x) => (o(x).currentAttestations[0].sourceDigest = "b".repeat(64)),
+  ],
+  ["history gap", (x) => (e(x).history[0].revision = 2)],
+  [
+    "history unsafe revision",
+    (x) => (e(x).revision = Number.MAX_SAFE_INTEGER + 1),
+  ],
+  ["history string revision", (x) => (e(x).revision = "1")],
+  ["history empty", (x) => (e(x).history = [])],
+  ["wrong first kind", (x) => (e(x).history[0].kind = "Comment")],
+  [
+    "wrong first outcome",
+    (x) => (e(x).history[0].recordedStatus = "Completed"),
+  ],
+  ["wrong history actor", (x) => (e(x).history[0].actorId = "other")],
+  ["mixed roles", (x) => e(x).history[0].actorRoles.push("Auditor")],
+  [
+    "wrong timestamp",
+    (x) => (e(x).history[0].recordedAtUtc = "2026-04-31T00:00:00Z"),
+  ],
+  ["null reason", (x) => (e(x).history[0].reason = null)],
+  ["empty reason", (x) => (e(x).history[0].reason = " \r\n")],
+  ["oversized reason", (x) => (e(x).history[0].reason = "x".repeat(2001))],
+  ["lone high surrogate", (x) => (e(x).history[0].reason = "\ud800")],
+  ["lone low surrogate", (x) => (e(x).history[0].reason = "\udc00")],
+  [
+    "wrong plan pointer",
+    (x) =>
+      (e(x).history[0].planningEventId =
+        "30000000-2222-4333-8444-000000000001"),
+  ],
+  ["changed creation", (x) => (e(x).creation.reason = "rewritten")],
+  ["changed latest plan", (x) => (e(x).plan.reason = "rewritten")],
+  ["wrong current status", (x) => (e(x).status = "Completed")],
+  ["wrong freshness", (x) => (e(x).freshness = "NeedsReconfirmation")],
+  ["history vector missing", (x) => e(x).history[0].attestations.pop()],
+  [
+    "history vector spoof event",
+    (x) =>
+      (e(x).history[0].attestations[0].eventId =
+        "30000000-2222-4333-8444-000000000001"),
+  ],
+  [
+    "history vector spoof source",
+    (x) => (e(x).history[0].attestations[0].sourceDigest = "b".repeat(64)),
+  ],
+  [
+    "history current revision rollback",
+    (x) => (e(x).history[0].attestations[0].revision = 2),
+  ],
+  [
+    "future run revision",
+    (x) => (e(x).history[0].source.artifactSource.runRevision = 8),
+  ],
+  [
+    "future finding revision",
+    (x) =>
+      (e(x).history[0].source.artifactSource.findingRevisions[0].revision = 3),
+  ],
+  [
+    "equal vector changed package",
+    (x) =>
+      (e(x).history[0].source.artifactSource.sourceDigest = "b".repeat(64)),
+  ],
+  [
+    "historical profile swap",
+    (x) => (e(x).history[0].source.artifactSource.profileId = "other"),
+  ],
+  [
+    "wrong historic scope",
+    (x) => (e(x).history[0].source.artifactSource.scope.customerId = "other"),
+  ],
+];
+for (const [label, mutate] of mutations) {
+  x = clone();
+  mutate(x);
+  await deny(x, label);
+}
+for (const field of [
+  "canReconfirm",
+  "canStart",
+  "canReturnToPlanned",
+  "canComplete",
+  "canCancel",
+  "canReopen",
+  "canComment",
+]) {
+  x = clone();
+  e(x)[field] = !e(x)[field];
+  await deny(x, "forged current action " + field);
+}
+for (const [kind, state] of [
+  ["Complete", "Completed"],
+  ["ReturnToPlanned", "Planned"],
+  ["Reopen", "Planned"],
+  ["ReconfirmPlan", "Planned"],
+  ["Create", "Planned"],
+]) {
+  x = clone();
+  append(x, kind, state);
+  await deny(x, "invalid transition " + kind);
+}
+x = clone();
+append(x, "Cancel", "Cancelled");
+append(x, "Cancel", "Cancelled");
+await deny(x, "terminal self-cancel");
+x = clone();
+append(x, "StartProgress", "InProgress");
+append(x, "Complete", "Completed");
+append(x, "Cancel", "Cancelled");
+await deny(x, "completed cannot cancel");
+x = clone();
+append(x, "Comment", "Planned");
+e(x).history[1].eventId = e(x).history[0].eventId;
+await deny(x, "duplicate accepted UUID within task");
+x = clone();
+const second = structuredClone(e(x));
+second.identity = structuredClone(d(x).options[1].identity);
+second.history[0].attestations = structuredClone(
+  d(x).options[1].currentAttestations,
+);
+second.creation = structuredClone(second.history[0]);
+second.plan = structuredClone(second.history[0]);
+d(x).entries.push(second);
+d(x).entries.sort((a, b) => a.identity.taskId.localeCompare(b.identity.taskId));
+d(x).options[1].canCreate = false;
+await deny(x, "duplicate accepted UUID across tasks");
+x = clone();
+x.analysis.fixPackages.snapshot.guidance.findings[0].options[0].text =
+  "rehashed wrong source";
+await deny(x, "actual package property vs cached canonical mismatch", false);
+x = clone();
+x.analysis.fixPackages.snapshot.canonicalJson += " ";
+await deny(x, "cached canonical mismatch", false);
+x = clone();
+for (const opt of d(x).options) {
+  const prior = opt.identity.taskId;
+  opt.identity.taskId = hash("incorrect:" + prior);
+  const t = d(x).entries.find((t) => t.identity.taskId === prior);
+  if (t) t.identity.taskId = opt.identity.taskId;
+}
+d(x).options.sort((a, b) => a.identity.taskId.localeCompare(b.identity.taskId));
+await deny(x, "well-shaped invented task digest", false);
+for (const key of Object.keys(unavailable.detail)) {
+  const u = structuredClone(unavailable);
+  delete u.detail[key];
+  await denyUnavailable(u, "missing unavailable detail " + key);
+}
+for (const key of Object.keys(unavailable.detail.unavailableEntries[0])) {
+  const u = structuredClone(unavailable);
+  delete u.detail.unavailableEntries[0][key];
+  await denyUnavailable(u, "missing unavailable entry " + key);
+}
+for (const key of Object.keys(
+  unavailable.detail.unavailableEntries[0].history[0],
+)) {
+  const u = structuredClone(unavailable);
+  delete u.detail.unavailableEntries[0].history[0][key];
+  await denyUnavailable(u, "missing unavailable event " + key);
+}
+for (const [label, change] of [
+  [
+    "leaked reason",
+    (u) => (u.detail.unavailableEntries[0].history[0].reason = "secret"),
+  ],
+  [
+    "leaked source",
+    (u) =>
+      (u.detail.unavailableEntries[0].history[0].source = d(complete).source),
+  ],
+  [
+    "leaked vector",
+    (u) =>
+      (u.detail.unavailableEntries[0].history[0].attestations =
+        o(complete).currentAttestations),
+  ],
+  [
+    "unavailable action",
+    (u) => (u.detail.unavailableEntries[0].canComment = true),
+  ],
+  ["wrong actor", (u) => (u.detail.actorId = "other")],
+  ["current content fallback", (u) => (u.detail.entries = d(complete).entries)],
+  [
+    "invented unavailable task ID",
+    (u) => (u.detail.unavailableEntries[0].identity.taskId = "b".repeat(64)),
+  ],
+  ["unavailable source exists", (u) => (u.detail.source = d(complete).source)],
+  ["standalone ready", (u) => (u.detail = d(complete))],
+]) {
+  const u = structuredClone(unavailable);
+  change(u);
+  check(!(await coherentUnavailablePlanningTasks(u.detail, u.run)), label);
+  denied++;
+  if (label !== "invented unavailable task ID")
+    check(
+      renderUnavailable(u).includes("Planning task data is inconsistent."),
+      label + " closed display",
+    );
+}
+const u = structuredClone(unavailable);
+const q = clone();
+q.analysis.planningTasks = u.detail;
+await accept(
+  q,
+  "coherent whole analysis can carry metadata source-unavailable",
+);
+const old = JSON.parse(
+  await readFile(resolve(here, "original-artifact-fixture.json"), "utf8"),
+);
+await accept(old, "historical profile omits task field");
+equal(render(old), "", "historical task panel omitted");
+old.analysis.planningTasks = null;
+await deny(old, "old profile nullable presence rejected");
+x = clone();
+d(x).status = "Unavailable";
+d(x).reasonCode = "planning_task_integrity_denied";
+d(x).source = null;
+d(x).actorId = null;
+d(x).options = [];
+d(x).entries = [];
+await accept(x, "payload-free integrity denial coherent");
+check(!render(x).includes("<textarea"), "denial no controls");
+
+// Independently expected metadata receipts; only coordinator's pure validator is consumed.
+const expectedResult = {
+  schemaVersion: 1,
+  demoOnly: true,
+  issue: null,
+  alreadyApplied: false,
+  receipt: {
+    schemaVersion: "synthetic-planning-task-receipt-v1",
+    eventId: command.eventId,
+    runId: complete.run.runId,
+    taskId: id,
+    kind: "Comment",
+    revision: 2,
+    actorId: "synthetic-consultant",
+    recordedAtUtc: "2026-10-03T01:02:04.1234567Z",
+    sourceDigest: command.expectedSourceDigest,
+  },
+  alreadyExistsTaskId: null,
+};
+const receiptAccept = (r, c = command) =>
+  planningTaskReceiptAgrees(
+    r,
+    complete.run.runId,
+    id,
+    "synthetic-consultant",
+    c,
+  );
+check(receiptAccept(expectedResult), "closed independent metadata receipt");
+const replay = structuredClone(expectedResult);
+replay.alreadyApplied = true;
+check(
+  receiptAccept(replay),
+  "original historical receipt independent of later task state",
+);
+const creation = {
+  ...structuredClone(command),
+  kind: "Create",
+  expectedRevision: 0,
+};
+const exists = {
+  schemaVersion: 1,
+  demoOnly: true,
+  issue: null,
+  alreadyApplied: false,
+  receipt: null,
+  alreadyExistsTaskId: id,
+};
+check(
+  receiptAccept(exists, creation),
+  "fresh duplicate has identity only, no reserved receipt",
+);
+for (const key of Object.keys(expectedResult)) {
+  const r = structuredClone(expectedResult);
+  delete r[key];
+  check(!receiptAccept(r), "missing result " + key);
+}
+for (const key of Object.keys(expectedResult.receipt)) {
+  const r = structuredClone(expectedResult);
+  delete r.receipt[key];
+  check(!receiptAccept(r), "missing receipt " + key);
+}
+for (const [label, change] of [
+  ["unknown result", (r) => (r.extra = true)],
+  ["unknown receipt", (r) => (r.receipt.extra = true)],
+  ["wrong issue", (r) => (r.issue = "EventConflict")],
+  [
+    "wrong event",
+    (r) => (r.receipt.eventId = "40000000-2222-4333-8444-000000000001"),
+  ],
+  [
+    "wrong run",
+    (r) => (r.receipt.runId = "aaaaaaaa-2222-4333-8444-000000000001"),
+  ],
+  ["wrong task", (r) => (r.receipt.taskId = "b".repeat(64))],
+  ["wrong actor", (r) => (r.receipt.actorId = "other")],
+  ["wrong kind", (r) => (r.receipt.kind = "Complete")],
+  ["wrong revision", (r) => (r.receipt.revision = 3)],
+  [
+    "unsafe revision",
+    (r) => (r.receipt.revision = Number.MAX_SAFE_INTEGER + 1),
+  ],
+  ["fraction revision", (r) => (r.receipt.revision = 1.5)],
+  ["wrong source", (r) => (r.receipt.sourceDigest = "b".repeat(64))],
+  [
+    "wrong UTC calendar",
+    (r) => (r.receipt.recordedAtUtc = "2026-04-31T00:00:00Z"),
+  ],
+  [
+    "wrong UTC offset",
+    (r) => (r.receipt.recordedAtUtc = "2026-10-03T01:02:04+00:00"),
+  ],
+  [
+    "wrong UTC precision",
+    (r) => (r.receipt.recordedAtUtc = "2026-10-03T01:02:04.12345678Z"),
+  ],
+  ["mixed duplicate/result", (r) => (r.alreadyExistsTaskId = id)],
+]) {
+  const r = structuredClone(expectedResult);
+  change(r);
+  check(!receiptAccept(r), "invalid closed receipt " + label);
+}
+for (const [label, change] of [
+  ["wrong duplicate ID", (r) => (r.alreadyExistsTaskId = "b".repeat(64))],
+  ["duplicate receipt content", (r) => (r.receipt = expectedResult.receipt)],
+  ["duplicate alreadyApplied", (r) => (r.alreadyApplied = true)],
+  ["duplicate issue", (r) => (r.issue = "SourceConflict")],
+]) {
+  const r = structuredClone(exists);
+  change(r);
+  check(!receiptAccept(r, creation), "invalid duplicate " + label);
+}
+check(!receiptAccept(exists), "nonCreate cannot claim AlreadyExists");
+check(
+  !receiptAccept(exists, { ...creation, expectedRevision: 1 }),
+  "Create noninitial revision cannot claim duplicate",
+);
+const originalDigest = crypto.subtle.digest.bind(crypto.subtle);
+x = clone();
+let mutated = false;
+crypto.subtle.digest = async (...args) => {
+  const result = await originalDigest(...args);
+  if (!mutated) {
+    mutated = true;
+    e(x).history[0].reason = "changed during asynchronous source gate";
+  }
+  return result;
+};
+try {
+  check(
+    !(await coherentPlanningTasks(x.analysis, x.run)),
+    "await-boundary mutation fence",
+  );
+  denied++;
+} finally {
+  crypto.subtle.digest = originalDigest;
+}
+equal(JSON.stringify(complete), pristine, "immutable fixtures unchanged");
+const summary = {
+  schemaVersion: 1,
+  checks,
+  accepted,
+  denied,
+  environmentGuard: {
+    active: true,
+    fictionalCanaryWasPresent,
+    fictionalCanaryRemoved: !Object.hasOwn(
+      process.env,
+      "IGA_B14_FICTIONAL_INPUT_GUARD",
+    ),
+    removedInheritedKeys: removed,
+    retainedKeysOnlyAllowlist: Object.keys(process.env).every((k) =>
+      allowed.has(k),
+    ),
+  },
+  limitations: [
+    "SSR component checks only; no browser keyboard/reflow/network or database/hook execution.",
+    "Historical package bytes verified by server; client verifies reference coherence and actual available artifact histories.",
+    "Literal fixture/golden inputs authored independently before actual rendering.",
+  ],
+};
+await writeFile(
+  resolve(out, "results.json"),
+  JSON.stringify(summary, null, 2) + "\n",
+);
+console.log(
+  `PASS B14 ${checks} assertions / ${accepted} accepted / ${denied} denied; environment guard ${summary.environmentGuard.retainedKeysOnlyAllowlist ? "PASS" : "FAIL"}`,
+);

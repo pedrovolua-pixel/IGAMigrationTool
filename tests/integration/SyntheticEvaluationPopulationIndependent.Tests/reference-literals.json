@@ -1,0 +1,145 @@
+{
+  "authority": "Cycle06 reviewed framing recipe; no new runtime consumed",
+  "sourceCommit": "7c48de7e4db977f7de8da345e13f91d0f8dbf6de",
+  "method": "Independent Python struct.pack >I framing and hashlib SHA256; strict UTF8, kind+scope length fields then part COUNT then part length fields",
+  "versionBindingLiteralMeaning": "Concrete normative AiProvider bundle JSON independently from inventory source path L.$.providerVersion; actual literal fixed provider field is unchanged source.",
+  "vectors": [
+    {
+      "kind": "scope",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e7631000000000573636f70650000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e7400000000",
+      "byteLength": 126,
+      "sha256": "8daf6b0955696c8fcb844db1ef5c5c58955811855ad3c3884172657689aa2388",
+      "reference": "synthetic-ref-8daf6b0955696c8fcb844db1ef5c5c58955811855ad3c3884172657689aa2388"
+    },
+    {
+      "kind": "environment",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "synthetic-environment"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e7631000000000b656e7669726f6e6d656e740000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e74000000010000001573796e7468657469632d656e7669726f6e6d656e74",
+      "byteLength": 157,
+      "sha256": "85402e72ec00d086ffd2df172bf6c3c4371fd44ef4e077e05dd8c8d4bec76328",
+      "reference": "synthetic-ref-85402e72ec00d086ffd2df172bf6c3c4371fd44ef4e077e05dd8c8d4bec76328"
+    },
+    {
+      "kind": "member",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "e3003bf710a58e5af23e1a1af61f3af16dd9496bbc7ef146b4c88f734428100d"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e763100000000066d656d6265720000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e74000000010000004065333030336266373130613538653561663233653161316166363166336166313664643934393662626337656631343662346338386637333434323831303064",
+      "byteLength": 195,
+      "sha256": "3f190fdd20b7688328fc199566dfea06e87998cb6a9baf78236f7d073c24297e",
+      "reference": "synthetic-ref-3f190fdd20b7688328fc199566dfea06e87998cb6a9baf78236f7d073c24297e"
+    },
+    {
+      "kind": "module",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "SyntheticOperations"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e763100000000066d6f64756c650000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e74000000010000001353796e7468657469634f7065726174696f6e73",
+      "byteLength": 150,
+      "sha256": "54336c6e98655b24aaa114de36f78eec3f0795ca9e3631c90a637e27249e5e0d",
+      "reference": "synthetic-ref-54336c6e98655b24aaa114de36f78eec3f0795ca9e3631c90a637e27249e5e0d"
+    },
+    {
+      "kind": "category",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "OPERATIONS"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e7631000000000863617465676f72790000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e74000000010000000a4f5045524154494f4e53",
+      "byteLength": 143,
+      "sha256": "daab2d721879873322fd815321cc0904b2ccec2cc95d2312ffe2b20a591dddf5",
+      "reference": "synthetic-ref-daab2d721879873322fd815321cc0904b2ccec2cc95d2312ffe2b20a591dddf5"
+    },
+    {
+      "kind": "rule-version",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "fixture-rule-schedule-v1",
+        "synthetic-rule-v1"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e7631000000000c72756c652d76657273696f6e0000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e740000000200000018666978747572652d72756c652d7363686564756c652d76310000001173796e7468657469632d72756c652d7631",
+      "byteLength": 182,
+      "sha256": "14f432f915553dd6845927e0e8fc75ccf2a52ef9496fdd0b6da1030c096a0ccd",
+      "reference": "synthetic-ref-14f432f915553dd6845927e0e8fc75ccf2a52ef9496fdd0b6da1030c096a0ccd"
+    },
+    {
+      "kind": "model-prompt",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "synthetic-fixed-provider-v1",
+        "fixture-prompt-v1"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e7631000000000c6d6f64656c2d70726f6d70740000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e74000000020000001b73796e7468657469632d66697865642d70726f76696465722d763100000011666978747572652d70726f6d70742d7631",
+      "byteLength": 185,
+      "sha256": "f783ae7e1b4f8788386dc7ee79bebfbc2e6e34225f5d12aa1ea0eeb4a1887364",
+      "reference": "synthetic-ref-f783ae7e1b4f8788386dc7ee79bebfbc2e6e34225f5d12aa1ea0eeb4a1887364"
+    },
+    {
+      "kind": "confidence-band",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "Fictional fixed confidence"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e7631000000000f636f6e666964656e63652d62616e640000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e74000000010000001a46696374696f6e616c20666978656420636f6e666964656e6365",
+      "byteLength": 166,
+      "sha256": "1ddedd67695857b7dbaed38cfb46248132af2fdc6d0595790bea752d24c69016",
+      "reference": "synthetic-ref-1ddedd67695857b7dbaed38cfb46248132af2fdc6d0595790bea752d24c69016"
+    },
+    {
+      "kind": "version-binding",
+      "scope": [
+        "synthetic-customer",
+        "synthetic-project",
+        "synthetic-environment"
+      ],
+      "parts": [
+        "AiProvider",
+        "{\"L.$.providerVersion\":\"synthetic-fixed-provider-v1\"}"
+      ],
+      "byteHex": "6967612e73796e7468657469632d6576616c756174696f6e2e6e61746976652d7265666572656e63652e7631000000000f76657273696f6e2d62696e64696e670000001273796e7468657469632d637573746f6d65720000001173796e7468657469632d70726f6a6563740000001573796e7468657469632d656e7669726f6e6d656e74000000020000000a416950726f7669646572000000357b224c2e242e70726f766964657256657273696f6e223a2273796e7468657469632d66697865642d70726f76696465722d7631227d",
+      "byteLength": 207,
+      "sha256": "b4f756794ed31c6ad819e21c8027ebaf2c7086afeacbb6249cb5853935581d3f",
+      "reference": "synthetic-ref-b4f756794ed31c6ad819e21c8027ebaf2c7086afeacbb6249cb5853935581d3f"
+    }
+  ],
+  "reviewedBundleSchemaSource": "cc5e3f9"
+}

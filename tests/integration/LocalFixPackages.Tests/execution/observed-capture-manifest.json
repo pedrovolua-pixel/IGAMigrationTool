@@ -1,0 +1,57 @@
+{
+  "schema": "v12-separate-observed-capture-replay-v1",
+  "status": "PASS",
+  "checks": 691,
+  "files": [
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-restored-source-636565c4-6858-4bb7-b9a6-785d6e60fc4b.json",
+      "stage": "restored-source",
+      "sha256": "b5b301ce43da6bc7d6b0dd88c40848c19db25b5f6db8ae57e1c2836535d194fe",
+      "bytes": 218633
+    },
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-review-Comment-636565c4-6858-4bb7-b9a6-785d6e60fc4b.json",
+      "stage": "review-Comment",
+      "sha256": "0f05463e0b500d43735f6fb53986aa97b2a8c16ea77e8c981d8897f7e0fd0a0b",
+      "bytes": 214431
+    },
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-review-Confirm-636565c4-6858-4bb7-b9a6-785d6e60fc4b.json",
+      "stage": "review-Confirm",
+      "sha256": "945124d990661a50fcf9cf7ac7d9279d96f2aeb728919a057e72b138af255384",
+      "bytes": 218632
+    },
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-review-EditPresentation-636565c4-6858-4bb7-b9a6-785d6e60fc4b.json",
+      "stage": "review-EditPresentation",
+      "sha256": "0bc00f9f7a775f23e92fee5c138ac35b7b4a8a185359f01e38f6427d1b4ba1cb",
+      "bytes": 216992
+    },
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-synthetic-analysis-findings-v1-636565c4-6858-4bb7-b9a6-785d6e60fc4b.json",
+      "stage": "synthetic-analysis-findings-v1",
+      "sha256": "42c662b327992bd67ae0d18d7033d870caca65043d4677a4e041216c0e837798",
+      "bytes": 212717
+    },
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-synthetic-analysis-gaps-v1-d8312c35-d3a0-43f5-81a9-08cff52f1916.json",
+      "stage": "synthetic-analysis-gaps-v1",
+      "sha256": "2c96f3bfa3d19cf630c921a891e9006c28cb56de042e448ccc652afb4bda28ff",
+      "bytes": 84916
+    },
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-synthetic-analysis-healthy-v1-abd38846-7d0f-4f99-abf6-6cae05e2ba57.json",
+      "stage": "synthetic-analysis-healthy-v1",
+      "sha256": "383c184cc13f727e2081a0831215e27ec392e623ea373b83aab8f42f4eee8121",
+      "bytes": 82843
+    },
+    {
+      "path": "/private/tmp/iga-cycle12-v12/tests/integration/LocalFixPackages.Tests/bin/Release/net10.0/v12-observed-synthetic-analysis-mixed-v1-a2499175-fc94-4a08-adaf-75ebb2086888.json",
+      "stage": "synthetic-analysis-mixed-v1",
+      "sha256": "a2132d1f6b5f3a11cbea5e2e646455c37b504a18dad1e2ac5159e9f2214c0f8d",
+      "bytes": 196159
+    }
+  ],
+  "expectationsChanged": false,
+  "earlierDynamicBytesReconstructed": false
+}

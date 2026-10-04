@@ -1,0 +1,9 @@
+# Pilot owner override evidence draft
+
+The repository-owner exception is separate from normal artifact promotion. Its signed metadata bundle binds an exact artifact SHA-256, opaque scope, owner, customer, environment and capability IDs, a sorted list of precisely waived check IDs, a rationale digest, a suspension target, a UTC decision time and an expiry. The rationale stored alongside it must describe the reason, known risk and compensating controls, if any. The bundle contains only the rationale digest; the restricted-store retrieval must verify the rationale bytes and protect them from ordinary logs and the public evidence index.
+
+`PilotOwnerOverrideBundle.Create` emits deterministic version-1 JSON. `Verify` checks its digest and detached RSA-PSS/SHA-256 signature, exact expected values, rationale digest, and expiry against both the current time and a trusted pilot end time. It rejects duplicate/extra fields, unordered or duplicate waived checks and oversized bundles. The local test harness covers 24 synthetic cases.
+
+`OwnerOverrideTrustRegistry` accepts a protected caller-supplied key snapshot. It binds a key ID to one owner ID, allowed scopes, signing window and revocation state; the bundle cannot grant itself an owner role. Thirteen synthetic cases cover wrong owner/scope/key, revocation, signing windows and invalid registry entries. The protected production source and live identity mapping remain missing.
+
+The caller must supply the actual failed/missing check set, exact target IDs and pilot end time from trusted state. A valid result is `ValidForOperatorReview`; it is **not** artifact activation, a gate pass or a waiver of an unlisted failure. Identity enrollment/revocation, rationale sanitation and storage, operator authorization, product audit, exception disclosure, expiry shutdown and rollback/suspension are still required before pilot use. See `architecture/decisions/ADR-0008-pilot-owner-override-evidence.md`.

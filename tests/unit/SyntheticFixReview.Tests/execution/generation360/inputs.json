@@ -1,0 +1,150 @@
+{
+  "generation": "Successful212 portable/360 inclusivePG before precision-fingerprint correction",
+  "inputs": [
+    {
+      "originalPath": "src/server/modules/RecommendationGuidance/GuidanceContracts.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/RecommendationGuidance/GuidanceContracts.cs.frozen",
+      "sha256": "3de7f1ec79f6caf27dd809869b4cf2945ed62b9018dda2b42f7555f10ae72d19"
+    },
+    {
+      "originalPath": "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs.frozen",
+      "sha256": "5eed8b2b8138d805705f51e4edf4d767c2619f78637eb0e99bb6d27b8d8ad4a0"
+    },
+    {
+      "originalPath": "src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/RecommendationGuidance/RecommendationGuidance.csproj.frozen",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "originalPath": "src/server/modules/RecommendationGuidance/packages.lock.json",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/RecommendationGuidance/packages.lock.json.frozen",
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixPackages/FixPackageHtmlRenderer.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixPackages/FixPackageHtmlRenderer.cs.frozen",
+      "sha256": "822703e9f86b852043b7a6b6ac8fcab1ae307014b02b023e005948a69d5e4c3a"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixPackages/FixPackageBuilder.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixPackages/FixPackageBuilder.cs.frozen",
+      "sha256": "a164d098553ea45ce93834f1b84202079880b2fa29247995bd6ef93815f10e50"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixPackages/FixPackageContracts.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixPackages/FixPackageContracts.cs.frozen",
+      "sha256": "12a55f6e33657aed31993d27cd24c5bb8557f73315662dba6a103d8a8e31a084"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj.frozen",
+      "sha256": "6a88130b401e2e5ca0b65d0b4aa39aae25ced3b2cb5ea7ac930f9e22fc3a40b1"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixPackages/packages.lock.json",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixPackages/packages.lock.json.frozen",
+      "sha256": "bdfa54267d7a47b94b1b9fbaee6b9ee60bc3dba2784d2634865866208f7bfe4d"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticSourceFence/SyntheticRunSourceFence.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticSourceFence/SyntheticRunSourceFence.cs.frozen",
+      "sha256": "32b42c6a8d48185ed110d58d2e06cec7beff5f9ed773c0f92e48a54a4e43468c"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticSourceFence/SyntheticSourceFence.csproj.frozen",
+      "sha256": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticSourceFence/packages.lock.json",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticSourceFence/packages.lock.json.frozen",
+      "sha256": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/ArtifactReviewContracts.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/ArtifactReviewContracts.cs.frozen",
+      "sha256": "c3915ffe210de433b513ad16dc0b179ea837c05e885d78dc2343e65cc8417513"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/ArtifactReviewCanonical.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/ArtifactReviewCanonical.cs.frozen",
+      "sha256": "0099d5ae319fec809f742722b6b6c3a8765bbabed49412803cbf6e79c9a7b3db"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/ArtifactReviewSourceBuilder.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/ArtifactReviewSourceBuilder.cs.frozen",
+      "sha256": "2ed8aa71e87649892426cba1caa724cd5aa9e8492210c7a879ef1186bdba1763"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/SyntheticFixReviewMigration.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/SyntheticFixReviewMigration.cs.frozen",
+      "sha256": "3ee1cc22e378198df52793782f4bae80e1a5b2c95a9636895f0384b80441451f"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/ArtifactReviewPolicy.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/ArtifactReviewPolicy.cs.frozen",
+      "sha256": "e084f2e6d9d9357ec2e7d20d4a0b5095e3629049b3cd2b0c3fd6d7fb89ccbd67"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/SyntheticFixReviewStore.cs.frozen",
+      "sha256": "68cb0926b833d70a125aee23edbf971579f287821687f66883a342d5ed389f84"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/SyntheticFixReview.csproj.frozen",
+      "sha256": "dddbee2fbec10efd3190e52a30d10c72abd90eeccbb097e40ddb9e0a098e5dd4"
+    },
+    {
+      "originalPath": "src/server/modules/SyntheticFixReview/packages.lock.json",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/src/server/modules/SyntheticFixReview/packages.lock.json.frozen",
+      "sha256": "a4ef6fe037c9cdc2f60c57ea45a3dc185ad27ef4badfbea7e66b0e187a14d7f9"
+    },
+    {
+      "originalPath": "tests/unit/SyntheticFixReview.Tests/DatabaseCases.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/tests/unit/SyntheticFixReview.Tests/DatabaseCases.cs.frozen",
+      "sha256": "59e002024d02c5a023598ae6afde8355a64ad10623150b08606e537b2898450d"
+    },
+    {
+      "originalPath": "tests/unit/SyntheticFixReview.Tests/GuidanceFixture.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/tests/unit/SyntheticFixReview.Tests/GuidanceFixture.cs.frozen",
+      "sha256": "abd68d0dd33b4d771be558302cf68879a2e5d7a6174cb050105fe6da7adc3347"
+    },
+    {
+      "originalPath": "tests/unit/SyntheticFixReview.Tests/Program.cs",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/tests/unit/SyntheticFixReview.Tests/Program.cs.frozen",
+      "sha256": "628a19e206962f931b7c83ab87871922b66611a47ad0f663ae11b81716865d5b"
+    },
+    {
+      "originalPath": "tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/tests/unit/SyntheticFixReview.Tests/SyntheticFixReview.Tests.csproj.frozen",
+      "sha256": "ce062000d4b6572153ade1ffbb063e217a6d1ebb951bdd479cf4f120687dafc8"
+    },
+    {
+      "originalPath": "tests/unit/SyntheticFixReview.Tests/packages.lock.json",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/tests/unit/SyntheticFixReview.Tests/packages.lock.json.frozen",
+      "sha256": "5862d19c25b94a5bb46ddc18aee1e02a091122d261febfc64a6615adb92bfeb8"
+    },
+    {
+      "originalPath": "Directory.Build.props",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/Directory.Build.props.frozen",
+      "sha256": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e"
+    },
+    {
+      "originalPath": "global.json",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/global.json.frozen",
+      "sha256": "9969064a379ad96f0fd9358b4133bf2652018a32c60d44f37a0638168381a90d"
+    },
+    {
+      "originalPath": "migrations/fix-review/001-initial.sql",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/migrations/fix-review/001-initial.sql.frozen",
+      "sha256": "def3557d73879f4fc199d8152b1ff6c404f2e2477a99f7e50b031cccf5d92ab8"
+    },
+    {
+      "originalPath": "specs/003-health-assessment/local-artifact-review-implementation-contract.md",
+      "preservedPath": "tests/unit/SyntheticFixReview.Tests/execution/generation360/inputs/specs/003-health-assessment/local-artifact-review-implementation-contract.md.frozen",
+      "sha256": "a0dca320bcf11dda2f03abc16387f75395caff48e9c917c6b58a2826eb5a8b0f"
+    }
+  ]
+}

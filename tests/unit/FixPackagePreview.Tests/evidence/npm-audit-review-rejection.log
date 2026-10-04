@@ -1,0 +1,6 @@
+NOT VERIFIED: read-only public npm audit.
+Initial sandbox execution failed: registry.npmjs.org DNS unavailable.
+The subsequent require_escalated exec_command request was rejected before process launch by automatic approval review.
+Requested action: npm audit --audit-level=low --json, existing locked src/web dependencies, explicit temporary cache.
+Exact review reason: The audit sends the project's dependency metadata to the public npm registry, and the user has not specifically authorized that payload and destination.
+No retry, workaround or indirect execution was performed after this rejection. Specific human authorization is required before this public audit proceeds.

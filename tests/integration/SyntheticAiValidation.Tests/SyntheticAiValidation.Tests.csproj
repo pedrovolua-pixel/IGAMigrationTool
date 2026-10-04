@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj" /></ItemGroup>
+  <ItemGroup><None Update="*.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

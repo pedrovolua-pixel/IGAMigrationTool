@@ -1,0 +1,95 @@
+{
+  "reviewer": "V-D2 independent nonauthor verifier",
+  "date": "2026-10-03",
+  "scope": "Approved local synthetic P1D-D01\u201303 only",
+  "sdk": "/private/tmp/iga-dotnet-10.0.401/dotnet",
+  "sdkVersion": "10.0.401",
+  "oraclePreservedBeforeRuntimeRead": {
+    "commit": "039fbdf",
+    "manifestDigest": "613f1bca6039cddee6d19aae6e3ae23ff92bbda8027fafa08dcb79d53128291d",
+    "goldenFiles": 14,
+    "denialRequests": 47
+  },
+  "runtimeReviewed": [
+    "A c55cf7b",
+    "B f92cdac",
+    "B scope fix5533447",
+    "B surrogate fix00345de"
+  ],
+  "checks": [
+    {
+      "command": "dotnet restore tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj --locked-mode",
+      "result": "PASS"
+    },
+    {
+      "command": "dotnet format tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj --no-restore --verify-no-changes --include /private/tmp/iga-p1d-v/tests/integration/SyntheticMcp.Tests/Program.cs --verbosity quiet",
+      "result": "PASS"
+    },
+    {
+      "command": "dotnet build tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj -c Release --no-restore",
+      "result": "PASS, zero warnings/errors"
+    },
+    {
+      "command": "dotnet run --project tests/integration/SyntheticMcp.Tests/SyntheticMcp.Tests.csproj -c Release --no-build",
+      "result": "PASS2849 independent assertions"
+    },
+    {
+      "command": "python3 tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py --verify",
+      "result": "PASS14 exact byte/hash artifacts and47 denial requests"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "coverage": {
+    "P1D-T01": "PASS six kinds for named-user/service, exact schema/decimals/review labels, repeated reads; no write surface",
+    "P1D-T02": "PASS original manifest+payload digests, canonical scalar tamper, wrong scope/version/state, duplicate descriptor/unknown schema, source payload bound, cross-reference linkage",
+    "P1D-T03": "PASS denied flags before source reads, unsupported identities, category load minimization/linkage filtering, schema field filtering,12 malformed grant traps, null audit scope on denied authority",
+    "P1D-T04": "PASS47 preserved mutation/authority/unknown selector corpus,30 escaped unpaired surrogate vectors,4 wellformed unicode wronggrammar vectors, invalid UTF8 and request-byte cap",
+    "P1D-T05": "PASS hostile protected prose nested options/title/summary/reason denial and no sentinel audit; denied category never fetched to redact",
+    "P1D-T06": "PASS stable ordinal pages, empty/default/max, opaque random handles, wrong page/resource/report/identity/restart/malformed handle denial",
+    "P1D-T07": "PASS revoke/regrant cursors, between-page policy/category/source changes, blocked-source pre-emission revision races, immutable vs current evidence availability",
+    "P1D-T08": "PASS60/61 identity and300/301 customer rate,600/601 ingress isolation, denied admission budget,4/5 identity and16/17 customer actual blocked reads, paired acquisition rollback, other customer progress,128/129 and512/513 cursor capacity, cancellation/exception cleanup",
+    "P1D-T09": "PASS exact300second expiry, rollback high-watermark, exact60second rate reset, clock faults, exact5second/cancellation at terminal fence entry, independent Unicode envelopes262143/262144/262145bytes",
+    "P1D-T10": "PASS safe typed completion, one audit per invocation/retry, audit unavailable/throw operational signals, policy port faults, invalid overlay,129 failed cursor reservation cleanup",
+    "P1D-T11": "PASS independent frozen scalar bindings and original digest across all six kinds, null unavailable score remains null",
+    "P1D-T12": "NOT VERIFIED by this worker; coordinator owns historical source/DTO/no-host-reference/no-dependency/migration/architecture checks"
+  },
+  "findings": [
+    {
+      "issue": "Overrestrictive verifier expected oversize outcome Limited or Unavailable",
+      "disposition": "Corrected test assumption; approved contract did not specify this outcome; original failure preserved; no runtime edit"
+    },
+    {
+      "issue": "Unauthorized denied-grant Scope reached audit",
+      "disposition": "Closed B5533447; independent denial/limited assertions pass"
+    },
+    {
+      "issue": "Escaped unpaired surrogate raised InvalidOperationException outside parser and yielded DependencyUnavailable",
+      "disposition": "Closed B00345de; independent34Unicode vectors pass"
+    }
+  ],
+  "acceptedLocalLimitations": [
+    "Deadline/cancellation check precedes synchronous terminal append-only audit/emission. A clock advance to5s or cancellation during completion can still return Success. Both observations preserved. Reviewed coordinator contract paragraph43 and operations guide explicit disclosure; no end-to-end5second timeout claim. Slow synchronous audit can hold fence; production reliability remains NOT VERIFIED.",
+    "No real persisted publication adapter/protocol/token/customer policy/retention/durable audit/distributed proof, live listener or provider evidence. Full Milestone11/Phase1D/UAT/G1\u2013G9 remain NOT VERIFIED.",
+    "Executable local sources expose only manifest/minimized item reads. No raw resolver or business write port is available; source spies observe denial-before-read. Coordinator source-bound proof must establish absence of external mutation/raw bypass paths."
+  ],
+  "sourceHash": "349d768221464a063447dd5f52387893961b41cd2ee76698a57de3ec64a16820",
+  "evidenceHashes": {
+    "audit-cancellation-observation.txt": "20e78b34348dd86cc964094df7895859e3f922979ea8734a2d0a13a2659d5832",
+    "audit-deadline-observation.txt": "c9a13d9b0c870103d14d0be33e9c6b80acc426713dfd423aaa1e66d282fd0027",
+    "build-release.txt": "5449dedfaa9856c28f5acd2aa6bcb2cbfd42d5ab61e697cf6992c5723f315d94",
+    "build.txt": "f58e92125cfb536540cf15b7b1799a18c791e60d393d606bf30d7221c9f6b32a",
+    "original-denial-scope-failure.txt": "ed1ccf626ac974fac0f83968b04f58d0d433062a7bf836568bc8fcfe9406e384",
+    "original-run-failure.txt": "583a6fd5d5c6bf7b031ed0782cbe548c31d43a6e4e691cd9cb7f0772178929e9",
+    "original-surrogate-failure.txt": "060fbe8c8427a3bf6d8a977206b71808214aaa05ee028a424244bf810d83002d",
+    "run-final-release.txt": "4d6f01ac0fe0ebcc8ab37092069f06ec7becc73204eb50bb7c3a5fbbb6cad1b6",
+    "run2.txt": "ef1b6c21b1220fce84dc1bb6e0e15007a5ab333fb4fce1f1a72da48a24cfc316",
+    "run3.txt": "ef1b6c21b1220fce84dc1bb6e0e15007a5ab333fb4fce1f1a72da48a24cfc316",
+    "run4.txt": "a6dfb5a9a37ddb0c1438db3166a85a5803229b2f5fa4e5b24cefa60e4aabb7f8",
+    "run5.txt": "51ac9df2729283018d3cdb8cc88d65b299c180242387c54796ddaada41bdfbed",
+    "run6.txt": "4d6f01ac0fe0ebcc8ab37092069f06ec7becc73204eb50bb7c3a5fbbb6cad1b6"
+  },
+  "goldenHashIndex": "c50954fcd4881b3c1ca70e6865cd2db4c3a8d2e886c217a2335c5d42db3bdb6f"
+}

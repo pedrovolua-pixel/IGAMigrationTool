@@ -1,0 +1,362 @@
+{
+  "schema": "local-ai-preview-a10-execution-v1",
+  "worker": "A10",
+  "baseCommit": "bdca2465dc3d99827ee0c5762c6220b1ddbb5eea",
+  "sourceWorkspace": "/private/tmp/iga-cycle10-backend",
+  "recordedAtUtc": "2026-10-02T17:45:58.686408+00:00",
+  "sdk": "10.0.401",
+  "result": {
+    "assertions": 485,
+    "result": "PASS",
+    "fullNormalAndEmptyGolden": true,
+    "oracle": "independent manually authored primitives; Python stdlib, no implementation/template/helper/output reads"
+  },
+  "checks": {
+    "lockedAuditedRestore": "PASS",
+    "scopedFormatVerify": "PASS",
+    "releaseWarningsAsErrorsBuild": "PASS: zero warnings/errors",
+    "actualPortableExecution": "PASS",
+    "secretScan": "PASS: Gitleaks8.30.1 owned snapshot 79926 bytes; no allowlist or leaks",
+    "whitespace": "PASS: git diff --check",
+    "transitiveVulnerabilityAudit": "PASS: no vulnerable packages found"
+  },
+  "sources": [
+    {
+      "path": "src/server/hosts/LocalConsultantDemo/DemoAiPreviewProjection.cs",
+      "sha256": "9cd65728a5ef3c939774a1f0d052f53f035adc8c394160a448d53e700a0cce59",
+      "bytes": 3669
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoAiPreviewCatalog.cs",
+      "sha256": "d0da26761f1553241c76c2aa561642ba262f7fcb380aa3e6480b6b65410d711a",
+      "bytes": 5829
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoFixtureCatalog.cs",
+      "sha256": "6632c8597ae3f8edc6c205dacd93ed53497828e1e138138a760b49e1917fc335",
+      "bytes": 8411
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/DemoAnalysisCatalog.cs",
+      "sha256": "e5fe727579c771525ceb0b0beb00591ba981361f936a820a679d6f228f3f7d95",
+      "bytes": 7576
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticRunContracts.cs",
+      "sha256": "e8e2ce011dccd9790c5fd388856044af4311601feea55a0b459ce519131cc2a9",
+      "bytes": 4279
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-empty.json",
+      "sha256": "ca88cea9c3bfc0c03d9a538017f224463d5a5b39bb62a1d5ea2cf288d969f220",
+      "bytes": 212
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-packet.json",
+      "sha256": "d4d584f5903957cd999fbf9adfbebaddb0be54d8393719b87932bf3890b596c4",
+      "bytes": 1225
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/fixtures/ai-preview-proposals.json",
+      "sha256": "209f918a7d8b5602499ff74b180ffbc667404c0c1784cac0fe438d6083762011",
+      "bytes": 2500
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/Program.cs",
+      "sha256": "3ae97b487028f55493b9076aa9d56a7bb94be001c2f427dea00edca19d846374",
+      "bytes": 16801
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/README.md",
+      "sha256": "570421d5a1207306ae1f7fe712a0b77690e0496512928b347e9e6a4ed1237188",
+      "bytes": 2615
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-empty-preview.json",
+      "sha256": "5ac2bc21ecb5cb7ba36f72e9ab13f1dde6638071688aabdd021a6087a8e6c739",
+      "bytes": 876
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-empty-versions.json",
+      "sha256": "6a0610c07a35d46943daeebeb1bf17b233c5e45f33396b1bd19477dc3624e1b3",
+      "bytes": 571
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-historical-comparison.json",
+      "sha256": "ad033f5b93e1cd6f9445d2e4d8358a7d7fbf7492ddbdb1ea74c0279436f4c19e",
+      "bytes": 445
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-historical-standard.json",
+      "sha256": "ed5be03d65fa30b32a7da1517365e394f411b711e2a323bf73af4bf69a2933d6",
+      "bytes": 445
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-manifest.json",
+      "sha256": "90f1d16c648fa0903964ff423383c564c75dbee956c8db2d565d69e526cf2045",
+      "bytes": 1479
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-normal-preview.json",
+      "sha256": "3dcbeb6743661432d106d0753c6e7f130f2638a1dfc53ca9c72bd00b5e3ad7f3",
+      "bytes": 2498
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-normal-versions.json",
+      "sha256": "637d3d5749fdd8755bdc8c09a8ed7c700d2d0d5d7ba41cc6c10a9ea1e093b66d",
+      "bytes": 565
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-plan.json",
+      "sha256": "2341b4938a76f90740dc22eb523c0f7edafa1c0bc9994a8d99b14950d167004a",
+      "bytes": 1468
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/golden-summary.json",
+      "sha256": "b8409c43a43fccd568067c58c275e8beb7907e790dc2a2b2e8318c1acc44e02e",
+      "bytes": 352
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/oracle.py",
+      "sha256": "d1fb789fad89a54fcda763530d8e102ca8b00d2f64670577c267ec2e57f99248",
+      "bytes": 8278
+    }
+  ],
+  "sharedInputs": [
+    {
+      "path": "Directory.Build.props",
+      "sha256": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e",
+      "bytes": 463
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "70cf624568944fbe90e526e69bbfce22f6016e5d6f64adb0dfad552b2927b380",
+      "bytes": 377
+    },
+    {
+      "path": "specs/003-health-assessment/local-ai-preview-integration-contract.md",
+      "sha256": "cbd790337f8b9eda1d36d5233eb09b9abe870f00fb1ef95eb47c898a75fa667a",
+      "bytes": 8287
+    },
+    {
+      "path": "plans/active/local-pilot-ai-workspace-cycle-10.md",
+      "sha256": "4a15c01b0c6bcea875aedc3229829f760c9c69e1827d5de072ad3b6d3f37b37e",
+      "bytes": 4380
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/AssessmentRuns.csproj",
+      "sha256": "50a1bca2dd121bcfa7ed867d240a3f6e739ae059c9af5815604aec969004a353",
+      "bytes": 905
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/packages.lock.json",
+      "sha256": "61be9ab1289c5185db26bb6850874e99a9085d60777f69c87868c87361e219d3",
+      "bytes": 6226
+    },
+    {
+      "path": "src/server/modules/AssessmentRuns/SyntheticDurableRunEngine.cs",
+      "sha256": "56c338dbc0316d004076908e07cfda495c9421291d2e6ef6162e0f4a6981ac1a",
+      "bytes": 38827
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/PacketBuilder.cs",
+      "sha256": "972a884e4bc0fef605a975f4e59a1a888c2aba93174eccf283b2c7388e1ae8d8",
+      "bytes": 5809
+    },
+    {
+      "path": "src/server/modules/SyntheticAiValidation/ProposalValidator.cs",
+      "sha256": "26b727544d4a5b70c79c4d366af1d963bee1c8863e6d199a43c1b97a34e5388c",
+      "bytes": 7177
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewBuilder.cs",
+      "sha256": "944fd60053b4deb560fdb1ffa1d73236472c04d11cd0e3bb26263f5f66100990",
+      "bytes": 13344
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewCanonical.cs",
+      "sha256": "a546551b3b75daef11177ce7e5d74bf9b50f1d7e07ac3972cdebb2ef23e1e527",
+      "bytes": 2189
+    },
+    {
+      "path": "src/server/modules/SyntheticAiPreview/PreviewContracts.cs",
+      "sha256": "244be0394eeec4b3b26a3845724bbdb2e281fc507d2bd2593f64c3e3f80bfd8f",
+      "bytes": 3415
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/LocalAiPreview.Tests.csproj",
+      "sha256": "30ed34f50d062a51938b98c5a0767d175ebdc6a8e51e2577ef5d7d081c8ee7e6",
+      "bytes": 477
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/packages.lock.json",
+      "sha256": "92953a1ccb3119ba843a2f5fcdcd50025f57c44cde6de280411f9b27a38f925c",
+      "bytes": 6824
+    }
+  ],
+  "executedAssemblies": [
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/AssessmentCoverage.dll",
+      "sha256": "581fdda84179b49a4a86bb0aabeb66690edd4dda257d981c28aaf3bdd47aabe9",
+      "bytes": 36864
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/AssessmentMaturity.dll",
+      "sha256": "706e390e27b4c25120f9423a8f3b03114e153544e1063af83c5ea957d3398fc7",
+      "bytes": 47616
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/AssessmentOrchestration.dll",
+      "sha256": "93cf59eb7b6fabe20fc5f60981229320f54db36a031ed917c612ed6bc0df2225",
+      "bytes": 45056
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/AssessmentRuns.dll",
+      "sha256": "1a0a1cb1d8fb845e2d15adb2cd34c8654c3c4a416d053a66e259b765c16396ef",
+      "bytes": 168448
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/AssessmentScoring.dll",
+      "sha256": "259efaafa4cd7d68c207d6d1d1120e06dcaaa99b8eb1837c5ed50ce82b05e466",
+      "bytes": 54272
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/DeterministicAnalysis.dll",
+      "sha256": "26410cd7c2f661a69e7b4cc978579a42fbe28bbbf2a3d97abf07a20e86187d08",
+      "bytes": 94208
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/LocalAiPreview.Tests.dll",
+      "sha256": "7b142c01d42d465fc231e85251f187029d5d56fcaf0f004036855369507f204c",
+      "bytes": 40448
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
+      "sha256": "74bc17c936d66ea090b6a5b4cc4307d2154c9692e57edd4c55d68dd4a99c11b6",
+      "bytes": 34616
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.EntityFrameworkCore.Relational.dll",
+      "sha256": "a1e4f36208650b15b75a4b01a5821d61d5be417ac2e86ec3c65e2560a87e0d7d",
+      "bytes": 2194744
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.EntityFrameworkCore.dll",
+      "sha256": "f5b1703d608e241314952b2ede8dcdd1b8d8adda8c91a13cb7e6b1007414cef4",
+      "bytes": 2829152
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.Caching.Abstractions.dll",
+      "sha256": "eb027242c11808fe0d8faf851bd30d0c6e39944b773713ffb04e17e196bece0f",
+      "bytes": 37672
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.Caching.Memory.dll",
+      "sha256": "dca415c48a9d6af45c7f28f6481a88baa9cb9f09d3090ca5878d1acbd446048d",
+      "bytes": 47912
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll",
+      "sha256": "fb45286fa39f58b9e74b6346e31034e00031170169ee11fd0a15f99b6dca0b56",
+      "bytes": 28456
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+      "sha256": "da04edc338d5aa0f38a1f5fa5ff3ee7e36affe9c961daf3ea724a428bd746bc6",
+      "bytes": 65872
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.DependencyInjection.dll",
+      "sha256": "2d0e268bf76b4ce36a55ebb2767354db956c6660de65d6cccfc35c957fb12cfc",
+      "bytes": 95528
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.Logging.Abstractions.dll",
+      "sha256": "7c242f8ca612fa1acc61f78efd5f8c89e01bd0bd47dc4ecc65e0e6e24f1a1668",
+      "bytes": 66856
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.Logging.dll",
+      "sha256": "05b76234f2a5eb945b268ced706cb4d81446778ea6bd6910298b5e9111170b4a",
+      "bytes": 51536
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.Options.dll",
+      "sha256": "b4ff561da6a7b11b68341f9fd32cab3f8b23cdd8b40332b9fd8bed73a9ee7de3",
+      "bytes": 65360
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Microsoft.Extensions.Primitives.dll",
+      "sha256": "67642533eb87e8dadeb9026de59ff4b66cc9bf35c0cfbedfef7b79bc6d8b30bc",
+      "bytes": 44880
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll",
+      "sha256": "94fcf66e8e953fdb02c40c72ca89821dd5eed5324d4c0f12a7219ea8cd3d5a5e",
+      "bytes": 679424
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/Npgsql.dll",
+      "sha256": "e2bcafe1660fe4543fe9dfcabed972ec8d32259e5ea8009462ce1de23c7034c2",
+      "bytes": 1478656
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.dll",
+      "sha256": "bf36ae75ddd7b65c4656dc53f2a8810d33ed75e1cc56132d8e9d0ec3bacb9cea",
+      "bytes": 40448
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/bin/Release/net10.0/SyntheticAiValidation.dll",
+      "sha256": "6d24cb78a34fe5a81c3d4d80c987183f897cf9751a2f363d8a6a6f86422d150a",
+      "bytes": 23552
+    }
+  ],
+  "transcripts": [
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/audit.log",
+      "sha256": "4a682240f1c3bc93c755d585ea879c2eb944d568ba8649dde77603e660ec5736",
+      "bytes": 169
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/build.log",
+      "sha256": "441425be3f613a1f20534c73a97f69a569c012cfead95b9cc4b8d425085d2ffc",
+      "bytes": 1334
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/format-apply.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/oracle.log",
+      "sha256": "e5066b38d3c9b950b02b0563984e8250a1bacfd0e1778f932dec18d66c316161",
+      "bytes": 120
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/restore.log",
+      "sha256": "4b3e2ec86ad546682669385ba47b2b5c53b2f542928be6e8e8729e9406fbcd59",
+      "bytes": 1127
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/run.log",
+      "sha256": "cc3df51c9366884c57d459d49bcfebf8afa969ff6711a2c551da6255316064fa",
+      "bytes": 70
+    },
+    {
+      "path": "tests/unit/LocalAiPreview.Tests/execution/secrets.log",
+      "sha256": "050312d95f3ba3093e3790e08972611c820e665ec3e8fdeba5a6c5fb997aa1c6",
+      "bytes": 79
+    }
+  ],
+  "limitations": [
+    "Initial sandbox restore/build stalled; final scoped escalated checks used reviewed package cache, disabled build servers, and only the exact owned build process was stopped.",
+    "This source packet does not execute host, browser, PostgreSQL, Windows or manual accessibility; coordinator/V10 evidence is separate.",
+    "No provider processing, production transport/security approval, persistent AI/review/report mutation, dependency or DDL migration.",
+    "Canonical records/status/private site are coordinator-owned."
+  ]
+}

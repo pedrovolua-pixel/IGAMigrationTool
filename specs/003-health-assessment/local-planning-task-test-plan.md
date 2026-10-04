@@ -1,0 +1,47 @@
+# Test plan: local fictional consultant planning tasks
+
+Status: VERIFIED — executed bounded TC14-T01–T12 developer cases; full feature acceptance NOT VERIFIED
+Owner: Quality owner / independent verifier
+Last updated: 2026-10-03
+Contract: [TC14-01–06 approval](local-planning-task-approval.md) and [frozen implementation contract](local-planning-task-implementation-contract.md)
+Plan: [Cycle14](../../plans/active/local-pilot-planning-tasks-cycle-14.md)
+Authority: approved TP-HAS-002/003/009/013/014/017/018 subsets; no full acceptance
+
+## Acceptance mapping and independent oracles
+
+Author expected task/source/selected-attestation identities, canonical bytes, transition/freshness/replay outcomes independently from the approved contract before consuming author-produced expected output. Do not regenerate old goldens or use production helpers as expected-value oracles. Bind executed source, compiled closures, consumed fixtures and native outputs before cleanup; preserve each failing generation separately.
+
+| ID | Proposed positive and negative cases | Level | Requirement |
+| --- | --- | --- | --- |
+| TC14-T01 | Actual coherent option/complete three-artifact conversion; all latest artifacts reviewed for same source; wrong/missing option/artifact/finding/template/contract, absent-task creation on empty/unreviewed/withdrawn/stale/Rejected denied; proposed/deferred warning preserved | Unit + independent composition + host | FR-HLT-13/21; FR-HAS-35/37/42; AC-HAS-18 |
+| TC14-T02 | Sole trusted active assigned Consultant success; unauthenticated/inactive/revoked/stale assignment; reviewer/Auditor/executive/support; wrong scope/run/task/category/action/resource; actor/assignee/roles/timestamp supplied in body denied before content lookup | Policy matrix + actual host | FR-HAS-50; AC-HAS-14 |
+| TC14-T03 | Separate lifecycle/freshness; full source change or selected attestation withdrawal/re-review makes Needs reconfirmation even with same package digest; unselected attestation does not; current original preserved; Completed/Cancelled remain unchanged; explicit reopen→Planned then Reconfirm only when Needs reconfirmation; new alreadyCurrent reconfirm denied while exact accepted replay allowed, no implicit revalidation | Portable + saved database + browser | FR-HAS-37/42; ADR0003 |
+| TC14-T04 | One task per scoped run/finding/option; cross-run distinct; exact accepted event replay original metadata receipt after later state/source, no current-view resurrection; changed accepted UUID/actor/task/payload conflicts; fresh duplicate initial revision0 despite existing revision>0; exact current source/vector→Already exists even after inspected withdrawn/Rejected source, stale expected source/vector→conflict; accepted exact/changed UUID replay/conflict precedes duplicates; no UUID reservation/event/current/receipt or silent reconfirmation | Real PostgreSQL + host | Technical concurrency/replay; FR-TSK-3 |
+| TC14-T05 | Concurrent conversions produce one task; revision conflict one winner; real artifact Withdraw/Review, finding and assessment writers serialized with atomic conversion/reconfirmation; no cross-connection nested fence; all stores unchanged on denied command | Owned PostgreSQL + controlled barriers | Source/attestation integrity |
+| TC14-T06 | Controlled transaction failure/cancellation rolls back entire event/current/receipt; DB reconnect and owned host stop/restart preserve exact history/replay; schema fingerprint/foreign DB guard; no shared cluster/roles/HBA changes; mark unexecuted hard-kill cases separately | Actual owned database/process | ADR0003; recovery |
+| TC14-T07 | Whole coherent task/original/latest source display; retained exact uncertain command Retry; typed Already exists→reread; conflict preserves input and requires fresh explicit command; late old read/mutation, same-run source epoch and run/option switch races cannot restore stale state | Component + actual browser | FR-HAS-40/41/42; AC-HAS-13 |
+| TC14-T08 | All ten historical profiles retain exact saved input/source/lock/DTO/golden compatibility; new task profile only; older task field nullable/unavailable contract explicitly frozen; old finding/artifact review, guidance/AI/drafts/health/maturity unchanged | Portable + saved database + prior browser suites | TP-HAS-002/003/017 |
+| TC14-T09 | Hostile markup/script/form/network/control/Unicode/comment/reason inert; no executable/injected resource, supplied hyperlink, artifact edit/download, external task or export action; invalid Unicode/input/revision/body fails before write | Actual browser + negative route inventory | AC-HAS-18/14; TP-HAS-014/018 subset |
+| TC14-T10 | Keyboard conversion/reconfirmation/status/reopen/comment/history and usable labels, mandatory reasons/warnings, error/success focus; desktop/mobile320 reflow; axe violations/incomplete separately; manual Windows/screen-reader/zoom remains open | Actual browser + visual review | AC-HAS-13; TP-HAS-013 subset |
+| TC14-T11 | Task completion/cancellation/reopening/comments do not mutate finding/score/maturity/artifact attestation/report; no task/status inference from finding lifecycle; rejected source permits only specified maintenance; stale/nonterminal/terminal/alreadyCurrent reconfirm and missing-proof cases obey exact table; cancel only Planned/InProgress, comments all states, no self-cancel/Completed→Cancelled; CSV and excluded routes denied | Host + domain/store/architecture regression | FR-HAS-37; AC-HAS-14/18 |
+| TC14-T12 | Append-only continuous attributed creation/binding/status/comment history and trusted UTC; payload-free audit/logs exclude reasons/comments/code/source values; scoped read/sourceUnavailable hides unverifiable content, authority before replay/duplicates/history; no historical proof rollback | PostgreSQL + telemetry negative corpus | Approved audit/matrix; FR-HAS-50 |
+
+## Data, compatibility and migration limits
+
+Use only fixed versioned fictional source packages and bounded hostile test strings. No customer evidence, real One Identity code/query/provider or production assignment. New explicit profile/schema/flag must be reviewed before code; no customer retention or export policy is inferred from test data. Preserve original databases and immutable histories. Concurrent root UI/BFF/research edits remain outside frozen pilot claims unless explicitly composed and tested.
+
+Performance evidence is bounded fixture behavior, not product-scale acceptance. Do not invent product-scale thresholds; applicable approved NFR targets still require later scale evidence. Default Mac startup is not verified by a configuration-watch override. Supported manual accessibility and deployed sandbox/isolation remain separate NOT VERIFIED tests.
+
+## Applicable checks and evidence
+
+After exact decision/contract freeze: current pinned locked/audited restore, solution/frontend formatting/lint/type/build/audit, new and historical unit/portable/owned PostgreSQL checks, architecture/secret/infrastructure/collector checks, actual browser regressions and configured hosted Linux/Windows/container checks. Record original native commands/times/exits/tool/source/output hashes, exact counts and NOT VERIFIED cases, never overlap or relabel counts as additive.
+
+Preparation executes only documentary requirement/decision/traceability/source/link/whitespace/secret checks and independent review. Runtime, migrations, build and implementation CI are NOT RUN for this preparation. Historical Cycle13 checks retain their exact source and are not Cycle14 PASS.
+
+TC14-06, if approved, reconciles future CSV actor wording only. No export is implemented/tested/passed here. Before CSV code, a separate approved export contract must settle authorized data/view/version selection, formula-safe columns, protected-link resolution, customer policy, artifact lifecycle, immutable/audited access and ADR0001 sandboxed worker execution.
+
+## Executed evidence — 2026-10-03
+
+All twelve rows have bounded executed local developer evidence, independently authored literal/semantic oracles and non-author review, with exact source/runtime/consumed fixtures preserved in [Cycle14 execution evidence](../../docs/development/evidence/local-pilot-cycle14-developer-checks.json) and `tests/integration/LocalPlanningTasks.Tests/execution.json`. 736/1249 domain,737 component,702/2542 independent native and 13626 actual browser assertions are overlapping/inclusive, not additive. TC14-T10 now includes actual Enter/Space for all eight task actions, stale Comment/Reconfirm and saved-heading focus; three viewport axe audits reported zero violations/incomplete and nine captures were inspected. The configured exact-source Linux job also executes prior PostgreSQL/browser suites; Windows2022/2025 and container jobs pass separately.
+
+Controlled failure/cancellation, reconnect and owned-host stop/restart are verified subsets of T06; hard-kill/OS-powerloss/shared-cluster restart are NOT VERIFIED. The Mac browser uses a temporary test-only configuration-watch override; default Mac startup stays NOT VERIFIED. Human supported Windows/screenreader/zoom/accessibility, product-scale, live/customer/provider/identity, deployed isolation, full approved feature test plan/TP018/Milestone7/UAT/G1–G9 remain NOT VERIFIED. Preparation and earlier unsealed/missing-closure attempts are preserved distinctly; no old count or PASS is relabeled. TC14-06 remains documentary future export-role wording only.

@@ -1,0 +1,545 @@
+name: Bootstrap checks (partial gate)
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  dotnet-bootstrap:
+    runs-on: ubuntu-24.04
+    services:
+      synthetic-postgres:
+        image: postgres:18.4@sha256:a02db8cac496f15b094798a38254f14d6e00741f709360e5e00bb6668ea31636
+        env:
+          POSTGRES_USER: iga_synthetic
+          POSTGRES_DB: iga_synthetic_v3
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: [55433:5432]
+        options: >-
+          --health-cmd "pg_isready -U iga_synthetic -d iga_synthetic_v3"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Scan checkout for secrets
+        run: |
+          curl -fsSL https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz -o "$RUNNER_TEMP/gitleaks.tar.gz"
+          echo "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb  $RUNNER_TEMP/gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/gitleaks.tar.gz" -C "$RUNNER_TEMP" gitleaks
+          "$RUNNER_TEMP/gitleaks" dir --no-banner --redact=100 .
+      - name: Install approved SDK
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          global-json-file: global.json
+      - name: Restore locked dependencies
+        run: dotnet restore IgaMigrationTool.slnx --locked-mode
+      - name: Verify formatting
+        run: dotnet format IgaMigrationTool.slnx --verify-no-changes --no-restore
+      - name: Build
+        run: dotnet build IgaMigrationTool.slnx --configuration Release --no-restore
+      - name: Verify approved local Phase1D synthetic MCP boundaries
+        run: |
+          python3 tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py --verify
+          dotnet run --project tests/unit/SyntheticMcpPublication.Tests -c Release --no-build
+          dotnet run --project tests/unit/SyntheticMcpBoundary.Tests -c Release --no-build
+          dotnet run --project tests/integration/SyntheticMcp.Tests -c Release --no-build
+      - name: Check approved Phase1B portable and owning PostgreSQL contracts
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_ai_tests
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_phase1b_csv_tests
+          dotnet run --project tests/unit/SyntheticOutcomePriority.Tests -c Release --no-build
+          dotnet run --project tests/unit/SyntheticAiExecution.Tests -c Release --no-build
+          dotnet run --project tests/unit/SyntheticTaskCsv.Tests -c Release --no-build
+          dotnet run --project tests/integration/SyntheticOutcomePriority.Tests -c Release --no-build
+          dotnet tests/integration/SyntheticAiExecution.Tests/bin/Release/net10.0/SyntheticAiExecution.Tests.dll
+      - name: Execute Linux isolated CSV renderer and adversarial boundary probes
+        run: |
+          docker pull mcr.microsoft.com/dotnet/runtime:10.0.12
+          python3 tests/security/phase1b-csv-linux/run.py --evidence "$RUNNER_TEMP/phase1b-csv-linux-verification.json"
+          python3 -c 'import json,os; p=json.load(open(os.environ["RUNNER_TEMP"]+"/phase1b-csv-linux-verification.json")); assert p["linuxStatus"]=="PASS" and len(p["cases"])==18'
+          cat "$RUNNER_TEMP/phase1b-csv-linux-verification.json"
+      - name: Run synthetic artifact-integrity checks
+        run: dotnet run --project tests/unit/EvidenceGovernance.Tests/EvidenceGovernance.Tests.csproj --configuration Release --no-build
+      - name: Check synthetic evaluation accuracy
+        run: dotnet run --project tests/unit/SyntheticEvaluation.Tests --configuration Release --no-build
+      - name: Check approved synthetic evaluation policy
+        run: |
+          python3 tests/unit/SyntheticEvaluationSampling.Tests/oracle.py
+          python3 tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticEvaluationSampling.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticEvaluationRegression.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticEvaluationReviewer.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/SyntheticEvaluationPolicy.Tests --configuration Release --no-build
+      - name: Check isolated synthetic evaluation workflow
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationWorkflow.Tests -c Release --no-build
+          python3 tests/integration/SyntheticEvaluationWorkflowIndependent.Tests/oracle.py
+          for db in domain independent tamper migration bootstrap legacycheck; do
+            docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic "iga_synthetic_evaluation_ci_$db"
+          done
+          IGA_EVALUATION_TEST_CONNECTION='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_domain;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationWorkflowStore.Tests -c Release --no-build
+          IGA_EVALUATION_BOOTSTRAP_PROBE=1 IGA_EVALUATION_TEST_CONNECTION='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_bootstrap;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationWorkflowStore.Tests -c Release --no-build
+          IGA_EVALUATION_BOOTSTRAP_PROBE=legacycheck IGA_EVALUATION_TEST_CONNECTION='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_legacycheck;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationWorkflowStore.Tests -c Release --no-build
+          export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_independent;Username=iga_synthetic'
+          dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build
+          export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_tamper;Username=iga_synthetic'
+          dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build -- --tamper-only
+          export IGA_SYNTHETIC_EVALUATION_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_migration;Username=iga_synthetic'
+          dotnet run --project tests/integration/SyntheticEvaluationWorkflowIndependent.Tests -c Release --no-build -- --migration-only
+      - name: Check actual saved Phase1B evaluation source capture
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_SOURCE_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_SOURCE_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_evalsource_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSourceIndependent.Tests -c Release --no-build
+      - name: Check owning accepted-schema provenance and additive readiness
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationSchemaProvenanceIntegration.Tests -c Release --no-build
+          IGA_ACCEPTED_SCHEMA_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_schema07_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSchemaProvenanceIntegration.Tests -c Release --no-build
+          IGA_ACCEPTED_SCHEMA_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_schema07_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationSchemaProvenanceIndependent.Tests -c Release --no-build
+      - name: Check saved Phase1B population and truthful provenance readiness
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationPopulationIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_POPULATION_TEST_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_pop06_author_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationPopulationIntegration.Tests -c Release --no-build
+          IGA_EVALUATION_POPULATION_INDEPENDENT_DATABASE='Host=127.0.0.1;Port=55433;Database=iga_synthetic_phase1b_pop06_independent_ci;Username=iga_synthetic' dotnet run --project tests/integration/SyntheticEvaluationPopulationIndependent.Tests -c Release --no-build
+      - name: Check assessment coverage reconciliation
+        run: dotnet run --project tests/unit/AssessmentCoverage.Tests/AssessmentCoverage.Tests.csproj --configuration Release --no-build
+      - name: Check assessment capability locks
+        run: dotnet run --project tests/unit/AssessmentOrchestration.Tests/AssessmentOrchestration.Tests.csproj --configuration Release --no-build
+      - name: Check synthetic baseline planning and coverage integration
+        run: dotnet run --project tests/integration/SyntheticPilotFlow.Tests/SyntheticPilotFlow.Tests.csproj --configuration Release --no-build
+      - name: Check durable synthetic run contracts
+        run: dotnet run --project tests/unit/AssessmentRuns.Tests/AssessmentRuns.Tests.csproj --configuration Release --no-build
+      - name: Check deterministic fixture rules and health scoring
+        run: |
+          dotnet run --project tests/unit/DeterministicAnalysis.Tests/DeterministicAnalysis.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/AssessmentScoring.Tests/AssessmentScoring.Tests.csproj --configuration Release --no-build
+      - name: Check independent maturity and durable finding review
+        env:
+          IGA_R5_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_r5;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_r5
+          dotnet run --project tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/FindingReview.Tests/FindingReview.Tests.csproj --configuration Release --no-build
+      - name: Check detached canonical draft and inert Markdown
+        run: |
+          dotnet run --project tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj --configuration Release --no-build
+      - name: Check offline synthetic AI packets and proposed output
+        run: |
+          dotnet run --project tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --configuration Release --no-build
+          dotnet run --project tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj --configuration Release --no-build
+      - name: Check offline synthetic AI preview and inert HTML
+        run: |
+          dotnet run --project tests/unit/SyntheticAiPreview.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticAiPreviewHtml.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-build
+      - name: Check saved-source offline AI workspace projection
+        env:
+          IGA_AI_PREVIEW_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v10;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_v10
+          dotnet run --project tests/unit/LocalAiPreview.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-build -- --postgres
+      - name: Check fictional unverified fix packages and inert HTML
+        run: |
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+      - name: Check saved-source fictional fix-package workspace projection
+        env:
+          IGA_FIX_PACKAGE_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle12_v12;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle12_v12
+          dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-build
+          dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-build -- --portable
+          dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-build
+      - name: Check synthetic artifact review contracts and independent durable source
+        env:
+          IGA_A13_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle13_a13_ci;Username=iga_synthetic
+          IGA_ARTIFACT_REVIEW_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle13_v13_v2;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle13_a13_ci
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle13_v13_v2
+          python3 tests/unit/SyntheticFixReview.Tests/independent-oracle.py --verify
+          python3 tests/integration/LocalArtifactReview.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticFixReview.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticFixReview.Tests --configuration Release --no-build -- --database
+          dotnet run --project tests/integration/LocalArtifactReview.Tests --configuration Release --no-build -- --portable
+          dotnet run --project tests/integration/LocalArtifactReview.Tests --configuration Release --no-build
+      - name: Check synthetic planning tasks and independent durable source
+        env:
+          IGA_A14_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle14_a14_ci;Username=iga_synthetic
+          IGA_PLANNING_TASK_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle14_v14_domain;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle14_a14_ci
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle14_v14_domain
+          python3 tests/unit/SyntheticPlanningTasks.Tests/independent-oracle.py
+          python3 tests/integration/LocalPlanningTasks.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticPlanningTasks.Tests --configuration Release --no-build
+          dotnet run --project tests/unit/SyntheticPlanningTasks.Tests --configuration Release --no-build -- --database
+          dotnet run --project tests/integration/LocalPlanningTasks.Tests --configuration Release --no-build -- --portable
+          dotnet run --project tests/integration/LocalPlanningTasks.Tests --configuration Release --no-build
+      - name: Check canonical unverified recommendation guidance
+        run: dotnet run --project tests/unit/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build
+      - name: Check independent recommendation identities, originals and saved review bridge
+        env:
+          IGA_GUIDANCE_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v7;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_v7
+          dotnet run --project tests/integration/RecommendationGuidance.Tests/RecommendationGuidance.Tests.csproj --configuration Release --no-build -- --postgres
+      - name: Check independent canonical draft goldens and saved source bridge
+        env:
+          IGA_DRAFT_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v6;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_v6
+          dotnet run --project tests/integration/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build -- --postgres
+      - name: Check independent review and maturity goldens
+        env:
+          IGA_REVIEW_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v5;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_v5
+          dotnet run --project tests/integration/ReviewMaturity.Tests/ReviewMaturity.Tests.csproj --configuration Release --no-build -- --postgres
+      - name: Check persisted analysis and independent scoring goldens
+        env:
+          IGA_ANALYSIS_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v4;Username=iga_synthetic
+        run: |
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_v4
+          dotnet run --project tests/integration/AnalysisScoring.Tests/AnalysisScoring.Tests.csproj --configuration Release --no-build -- --postgres
+      - name: Check real PostgreSQL persistence and process recovery
+        env:
+          IGA_SYNTHETIC_TEST_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v3;Username=iga_synthetic
+        run: |
+          export IGA_DOTNET="$(command -v dotnet)"
+          dotnet run --project tests/integration/DurableAssessment.Tests/DurableAssessment.Tests.csproj --configuration Release --no-build
+      - name: Build and audit pinned consultant view
+        run: |
+          curl -fsS https://nodejs.org/dist/v24.21.0/node-v24.21.0-linux-x64.tar.gz -o "$RUNNER_TEMP/node.tar.gz"
+          curl -fsS https://nodejs.org/dist/v24.21.0/SHASUMS256.txt -o "$RUNNER_TEMP/node-shasums.txt"
+          node_digest=$(awk '$2 == "node-v24.21.0-linux-x64.tar.gz" {print $1}' "$RUNNER_TEMP/node-shasums.txt")
+          test -n "$node_digest"
+          echo "$node_digest  $RUNNER_TEMP/node.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/node.tar.gz" -C "$RUNNER_TEMP"
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          npm install --prefix "$RUNNER_TEMP/approved-npm" npm@11.20.0 --ignore-scripts --no-audit --no-fund
+          npm_cli="$RUNNER_TEMP/approved-npm/node_modules/npm/bin/npm-cli.js"
+          cd src/web
+          node "$npm_cli" ci --ignore-scripts
+          node "$npm_cli" run format:check
+          node "$npm_cli" run build
+          node "$npm_cli" audit --audit-level=low
+      - name: Build isolated evaluation workspace
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          node src/web/node_modules/typescript/bin/tsc --project src/web/evaluation/tsconfig.json --noEmit
+          node --test src/web/evaluation/workflow.test.ts
+          node src/web/node_modules/prettier/bin/prettier.cjs --check src/web/evaluation --ignore-path src/web/evaluation/.prettierignore
+          node src/web/node_modules/vite/bin/vite.js build --config src/web/evaluation/vite.config.ts
+      - name: Check independent offline AI preview component
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/unit/AiProposalPreview.Tests/oracle.py --verify
+          node tests/unit/AiProposalPreview.Tests/verify.mjs
+      - name: Check independent fictional fix-package component
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/unit/FixPackagePreview.Tests/oracle.py --verify
+          node tests/unit/FixPackagePreview.Tests/verify.mjs
+      - name: Check independent artifact review component
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/unit/ArtifactReviewComponent.Tests/oracle.py --verify
+          node tests/unit/ArtifactReviewComponent.Tests/verify.mjs
+      - name: Check independent planning task component
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/unit/PlanningTasksComponent.Tests/oracle.py --verify
+          node tests/unit/PlanningTasksComponent.Tests/verify.mjs
+      - name: Check consultant browser flow and recovery
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          npm_cli="$RUNNER_TEMP/approved-npm/node_modules/npm/bin/npm-cli.js"
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_ci_demo
+          node "$npm_cli" ci --prefix tests/e2e/consultant-demo --ignore-scripts
+          node "$npm_cli" audit --prefix tests/e2e/consultant-demo --audit-level=low
+          node tests/e2e/consultant-demo/node_modules/playwright/cli.js install chromium --with-deps
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/consultant-demo/verify.mjs
+      - name: Check isolated evaluation HTTP and browser flow
+        env:
+          IGA_SYNTHETIC_EVALUATION_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_evaluation_ci_host;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_evaluation_ci_host
+          export IGA_SYNTHETIC_EVALUATION_ASSETS="$GITHUB_WORKSPACE/src/web/evaluation/dist"
+          export WF04_EVIDENCE="$RUNNER_TEMP/evaluation-browser"
+          dotnet src/server/hosts/LocalEvaluationDemo/bin/Release/net10.0/LocalEvaluationDemo.dll --enable-synthetic-evaluation-workflow > "$RUNNER_TEMP/evaluation-host.log" 2>&1 &
+          evaluation_host_pid=$!
+          trap 'kill "$evaluation_host_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 40); do
+            if curl -fsS http://127.0.0.1:5184/local-evaluation/v1/workspace > /dev/null; then break; fi
+            sleep 1
+          done
+          curl -fsS http://127.0.0.1:5184/local-evaluation/v1/workspace > /dev/null
+          node tests/e2e/local-evaluation-workflow/verify.mjs
+      - name: Check analysis findings, scoring and browser read recovery
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_ci_demo;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/analysis-scoring/verify.mjs
+      - name: Check consultant review history, current scores and independent maturity
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v5;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/review-maturity/verify.mjs
+      - name: Check draft summary, technical and inert Markdown browser parity
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v6;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/draft-reports/verify.mjs
+      - name: Check structured recommendation guidance and inert consultant display
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v7;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          node tests/e2e/recommendation-guidance/verify.mjs
+      - name: Check offline AI preview in the consultant workspace
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_v10;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          export IGA_PLAYWRIGHT_MODULE="$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+          node tests/e2e/local-ai-preview/verify.mjs
+      - name: Check actual inert offline AI preview browser
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-build -- --write-previews "$RUNNER_TEMP/ai-preview"
+          node tests/e2e/synthetic-ai-preview/verify.mjs --preview-directory "$RUNNER_TEMP/ai-preview" --playwright-module "$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright"
+      - name: Check actual inert fictional fix-package browser
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          python3 tests/integration/SyntheticFixPackages.Tests/run-isolated.py "$(command -v dotnet)" tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll --write-previews "$RUNNER_TEMP/fix-packages"
+          node tests/e2e/synthetic-fix-packages/verify.mjs --preview-directory "$RUNNER_TEMP/fix-packages" --playwright-module "$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+      - name: Check fictional fix packages in the consultant workspace
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle12_v12;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          export IGA_PLAYWRIGHT_MODULE="$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+          node tests/e2e/local-fix-packages/verify.mjs
+      - name: Check opt-in artifact review browser history and recovery
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle13_v13_v2;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          export IGA_PLAYWRIGHT_MODULE="$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+          node tests/e2e/artifact-review/verify.mjs
+      - name: Check opt-in planning task browser history and recovery
+        env:
+          IGA_SYNTHETIC_DATABASE: Host=127.0.0.1;Port=55433;Database=iga_synthetic_cycle14_v14_browser;Username=iga_synthetic
+        run: |
+          export PATH="$RUNNER_TEMP/approved-npm/node_modules/.bin:$RUNNER_TEMP/node-v24.21.0-linux-x64/bin:$PATH"
+          docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_cycle14_v14_browser
+          export IGA_DOTNET="$(command -v dotnet)"
+          export IGA_HOST_DLL="$GITHUB_WORKSPACE/src/server/hosts/LocalConsultantDemo/bin/Release/net10.0/LocalConsultantDemo.dll"
+          export IGA_HOST_WORKING_DIRECTORY="$GITHUB_WORKSPACE"
+          export IGA_PLAYWRIGHT_MODULE="$GITHUB_WORKSPACE/tests/e2e/consultant-demo/node_modules/playwright/index.mjs"
+          node tests/e2e/planning-tasks/verify.mjs
+      - name: Check collector permission decisions
+        run: dotnet run --project tests/unit/CollectorSafety.Tests/CollectorSafety.Tests.csproj --configuration Release --no-build
+      - name: Check collector host contract
+        run: dotnet run --project tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-build
+      - name: Check project dependency boundaries
+        run: dotnet run --project tests/architecture/BoundaryChecks/BoundaryChecks.csproj --configuration Release --no-build
+      - name: Install pinned Bicep CLI
+        run: |
+          curl -fsSL https://github.com/Azure/bicep/releases/download/v0.47.16/bicep-linux-x64 -o "$RUNNER_TEMP/bicep"
+          echo "64c345a58e0c3e48b1bc98a4e62d6b3adb1d238281297de3400aeafb2697aa5a  $RUNNER_TEMP/bicep" | sha256sum -c -
+          chmod +x "$RUNNER_TEMP/bicep"
+          "$RUNNER_TEMP/bicep" --version
+      - name: Compile, lint and check evidence-store baseline
+        run: |
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/engineering-evidence-store.bicep --outfile "$RUNNER_TEMP/engineering-evidence-store.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/engineering-evidence-store.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/engineering-evidence-roles.bicep --outfile "$RUNNER_TEMP/engineering-evidence-roles.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/engineering-evidence-roles.bicep
+          dotnet run --project tests/infrastructure/EvidenceStorePolicy/EvidenceStorePolicy.csproj --configuration Release --no-build -- "$RUNNER_TEMP/engineering-evidence-store.json" "$RUNNER_TEMP/engineering-evidence-roles.json"
+      - name: Compile, lint and check Service Bus baselines
+        run: |
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-service-bus-namespace.bicep --outfile "$RUNNER_TEMP/pilot-service-bus-namespace.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-service-bus-namespace.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-service-bus-work-roles.bicep --outfile "$RUNNER_TEMP/pilot-service-bus-work-roles.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-service-bus-work-roles.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-service-bus-work-queue.bicep --outfile "$RUNNER_TEMP/pilot-service-bus-work-queue.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-service-bus-work-queue.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-broker-network-spike.bicep --outfile "$RUNNER_TEMP/pilot-broker-network-spike.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-broker-network-spike.bicep
+          dotnet run --project tests/infrastructure/ServiceBusPolicy/ServiceBusPolicy.csproj --configuration Release --no-build -- "$RUNNER_TEMP/pilot-service-bus-namespace.json" "$RUNNER_TEMP/pilot-service-bus-work-roles.json" "$RUNNER_TEMP/pilot-service-bus-work-queue.json" "$RUNNER_TEMP/pilot-broker-network-spike.json"
+      - name: Compile, lint and check pilot network-egress baseline
+        run: |
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-network-egress.bicep --outfile "$RUNNER_TEMP/pilot-network-egress.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-network-egress.bicep
+          dotnet run --project tests/infrastructure/NetworkEgressPolicy/NetworkEgressPolicy.csproj --configuration Release --no-build -- "$RUNNER_TEMP/pilot-network-egress.json"
+      - name: Compile and lint workload identity module
+        run: |
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-workload-identity.bicep --outfile "$RUNNER_TEMP/pilot-workload-identity.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-workload-identity.bicep
+
+      - name: Validate private Azure development foundation
+        run: |
+          for module in pilot-container-registry pilot-key-vault pilot-private-dns pilot-postgresql pilot-container-apps-environment pilot-observability pilot-monitor-private-link; do
+            "$RUNNER_TEMP/bicep" build "infra/bicep/modules/$module.bicep" --outfile "$RUNNER_TEMP/$module.json"
+            "$RUNNER_TEMP/bicep" lint "infra/bicep/modules/$module.bicep"
+          done
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-development-foundation.bicep --outfile "$RUNNER_TEMP/pilot-development-foundation.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-development-foundation.bicep
+          python3 tests/infrastructure/AzureFoundation/private-services-policy.py "$RUNNER_TEMP/pilot-container-registry.json" "$RUNNER_TEMP/pilot-key-vault.json" "$RUNNER_TEMP/pilot-private-dns.json"
+          python3 tests/infrastructure/AzureFoundation/postgresql-policy.py "$RUNNER_TEMP/pilot-postgresql.json"
+          python3 tests/infrastructure/AzureFoundation/compute-policy.py "$RUNNER_TEMP/pilot-container-apps-environment.json" "$RUNNER_TEMP/pilot-observability.json" "$RUNNER_TEMP/pilot-monitor-private-link.json"
+          python3 tests/infrastructure/AzureFoundation/composition-policy.py "$RUNNER_TEMP/pilot-development-foundation.json"
+          python3 tests/infrastructure/AzureFoundation/entra-policy.py infra/entra/pilot-bff.application.json
+
+  collector-windows:
+    strategy:
+      matrix:
+        os: [windows-2022, windows-2025]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install approved SDK
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          global-json-file: global.json
+      - name: Restore locked dependencies
+        run: dotnet restore IgaMigrationTool.slnx --locked-mode
+      - name: Check approved Phase1B Windows portable contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticOutcomePriority.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticAiExecution.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticTaskCsv.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows offline synthetic AI packets
+        run: dotnet run --project tests/unit/SyntheticAiPackets.Tests/SyntheticAiPackets.Tests.csproj --configuration Release --no-restore
+      - name: Check Windows offline synthetic proposed output
+        run: dotnet run --project tests/unit/SyntheticAiProposals.Tests/SyntheticAiProposals.Tests.csproj --configuration Release --no-restore
+      - name: Check Windows independent fake-provider composition
+        run: dotnet run --project tests/integration/SyntheticAiValidation.Tests/SyntheticAiValidation.Tests.csproj --configuration Release --no-restore
+      - name: Check Windows offline AI preview and inert HTML
+        run: |
+          dotnet run --project tests/unit/SyntheticAiPreview.Tests --configuration Release --no-restore
+          dotnet run --project tests/unit/SyntheticAiPreviewHtml.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/SyntheticAiPreview.Tests --configuration Release --no-restore
+      - name: Check Windows fictional fix packages and inert HTML
+        run: |
+          dotnet build tests/unit/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+          dotnet build tests/unit/SyntheticFixPackageHtml.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
+          dotnet build tests/integration/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
+          python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+      - name: Build collector host tests
+        run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
+      - name: Verify Windows local Phase1D synthetic MCP boundaries
+        run: |
+          python tests/integration/SyntheticMcp.Tests/fixtures/author_oracle.py --verify
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticMcpPublication.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticMcpBoundary.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/SyntheticMcp.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows fixed offline AI workspace source
+        run: |
+          dotnet run --project tests/unit/LocalAiPreview.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/LocalAiPreview.Tests --configuration Release --no-restore
+      - name: Check Windows synthetic evaluation accuracy
+        run: dotnet run --project tests/unit/SyntheticEvaluation.Tests --configuration Release --no-restore
+      - name: Check Windows approved synthetic evaluation policy
+        run: |
+          python tests/unit/SyntheticEvaluationSampling.Tests/oracle.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python tests/integration/SyntheticEvaluationPolicy.Tests/oracle.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticEvaluationSampling.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticEvaluationRegression.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/SyntheticEvaluationReviewer.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/integration/SyntheticEvaluationPolicy.Tests --configuration Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows saved-source capture canonical contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationSourceIntegration.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows accepted-schema canonical contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationSchemaProvenanceIntegration.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows population provenance canonical contracts
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationPopulationIntegration.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows isolated evaluation workflow
+        run: |
+          dotnet run --project tests/unit/SyntheticEvaluationWorkflow.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check Windows fictional fix-package workspace sources
+        run: |
+          dotnet run --project tests/unit/LocalFixPackages.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/LocalFixPackages.Tests --configuration Release --no-restore -- --portable
+      - name: Check Windows portable artifact review and independent source
+        run: |
+          python tests/unit/SyntheticFixReview.Tests/independent-oracle.py --verify
+          python tests/integration/LocalArtifactReview.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticFixReview.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/LocalArtifactReview.Tests --configuration Release --no-restore -- --portable
+      - name: Check Windows portable planning tasks and independent source
+        run: |
+          python tests/unit/SyntheticPlanningTasks.Tests/independent-oracle.py
+          python tests/integration/LocalPlanningTasks.Tests/oracle.py
+          dotnet run --project tests/unit/SyntheticPlanningTasks.Tests --configuration Release --no-restore
+          dotnet run --project tests/integration/LocalPlanningTasks.Tests --configuration Release --no-restore -- --portable
+      - name: Check Windows collector host and protected key behavior
+        run: dotnet run --project tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-build
+      - name: Publish self-contained collector
+        run: dotnet publish src/collector/CollectorHost/CollectorHost.csproj --configuration Release --runtime win-x64 --self-contained true --no-restore --output "$env:RUNNER_TEMP\collector-win-x64"
+      - name: Smoke test Windows Service and one-shot CLI
+        run: ./tests/windows/collector-service-smoke.ps1 -ExecutablePath "$env:RUNNER_TEMP\collector-win-x64\collector.exe"

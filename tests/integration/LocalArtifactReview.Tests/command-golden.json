@@ -1,0 +1,46 @@
+[
+  {
+    "payload": {
+      "schemaVersion": "synthetic-fix-review-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "artifactId": "c0fcd56df0de6d2aba644701d82abd9c060b1f63153866e7e4c13fee78360cef",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234567",
+        "kind": "ReviewForPlanning",
+        "expectedRevision": 0,
+        "expectedSourceDigest": "8a954fc101dfd8cda73041252b42385322dd0bc714ba462adacd0b35ed3dd372",
+        "reason": "  Fictional reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"artifactId\":\"c0fcd56df0de6d2aba644701d82abd9c060b1f63153866e7e4c13fee78360cef\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234567\",\"expectedRevision\":0,\"expectedSourceDigest\":\"8a954fc101dfd8cda73041252b42385322dd0bc714ba462adacd0b35ed3dd372\",\"kind\":\"ReviewForPlanning\",\"reason\":\"  Fictional reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-fix-review-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"}}",
+    "digest": "ebd58766914fc372683682c6fe5b2ea55c3486a4a6b8028dfaa63adb7a74f0ee"
+  },
+  {
+    "payload": {
+      "schemaVersion": "synthetic-fix-review-command-v1",
+      "scope": {
+        "customerId": "synthetic-customer",
+        "projectId": "synthetic-project",
+        "environmentId": "synthetic-environment"
+      },
+      "runId": "12345678-1234-4234-8234-123456789abc",
+      "artifactId": "c0fcd56df0de6d2aba644701d82abd9c060b1f63153866e7e4c13fee78360cef",
+      "actorId": "synthetic-consultant",
+      "command": {
+        "eventId": "abcdef01-2345-4567-89ab-cdef01234567",
+        "kind": "WithdrawReview",
+        "expectedRevision": 1,
+        "expectedSourceDigest": "8a954fc101dfd8cda73041252b42385322dd0bc714ba462adacd0b35ed3dd372",
+        "reason": "  Fictional reason caf\u00e9 \u4e2d\u6587 \ud83d\ude00\u0000NUL\r\nCRLF\rCR  "
+      }
+    },
+    "canonical": "{\"actorId\":\"synthetic-consultant\",\"artifactId\":\"c0fcd56df0de6d2aba644701d82abd9c060b1f63153866e7e4c13fee78360cef\",\"command\":{\"eventId\":\"abcdef01-2345-4567-89ab-cdef01234567\",\"expectedRevision\":1,\"expectedSourceDigest\":\"8a954fc101dfd8cda73041252b42385322dd0bc714ba462adacd0b35ed3dd372\",\"kind\":\"WithdrawReview\",\"reason\":\"  Fictional reason caf\\u00E9 \\u4E2D\\u6587 \\uD83D\\uDE00\\u0000NUL\\r\\nCRLF\\rCR  \"},\"runId\":\"12345678-1234-4234-8234-123456789abc\",\"schemaVersion\":\"synthetic-fix-review-command-v1\",\"scope\":{\"customerId\":\"synthetic-customer\",\"environmentId\":\"synthetic-environment\",\"projectId\":\"synthetic-project\"}}",
+    "digest": "4481d5e93f8e4d50eaa72cec741bc55d5272248d077ce4f93d4415a00d16bc60"
+  }
+]

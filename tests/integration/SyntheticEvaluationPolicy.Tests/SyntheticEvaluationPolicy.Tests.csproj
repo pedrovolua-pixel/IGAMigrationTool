@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../../src/server/modules/SyntheticEvaluation/SyntheticEvaluation.csproj" /></ItemGroup>
+  <ItemGroup><None Include="expected-v1.json" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

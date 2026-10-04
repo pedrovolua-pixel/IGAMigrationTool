@@ -1,0 +1,8 @@
+{
+  "version": "independent-synthetic-ai-v1",
+  "method": "Hand-defined fictional primitives and explicit contract envelopes; standalone standard Python ordinal JSON/set sorting plus SHA256. No implementation/helper invoked; fixture/oracles prepared before A8/B8 handoff.",
+  "packetSha256": "39c0b00c1443ddbeb42e17e02ec2f0f5ea897988d0e01de14478d0fb71a8ccaf",
+  "proposalSha256": "a4051d78ca8683c08a822f5fb3d8b13af9db0cf3466551b9f981878adc671334",
+  "inputSha256": "b3bba873f26f8c3cda09b7ed68eb63aae242f566bad9af0b56d8804f85f47bb1",
+  "providerOutputSha256": "e9a25580099b3ae7a6a04a92416cae94cb72115a0e906f046eea4d70e9322777"
+}

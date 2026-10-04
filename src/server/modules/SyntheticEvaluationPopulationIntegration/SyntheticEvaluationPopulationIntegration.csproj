@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../SyntheticEvaluationSourceIntegration/SyntheticEvaluationSourceIntegration.csproj" />
+    <ProjectReference Include="../SyntheticEvaluation/SyntheticEvaluation.csproj" />
+  </ItemGroup>
+</Project>

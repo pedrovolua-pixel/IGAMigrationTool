@@ -1,0 +1,56 @@
+{
+  "schema": "v12-requirement-subset-evidence-v1",
+  "featureAcceptance": "NOT VERIFIED",
+  "Milestone7": "NOT VERIFIED",
+  "G1-G9": "NOT VERIFIED",
+  "requirements": [
+    {
+      "id": "FR-HAS-35",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Portable full literal guidance/package recipes; PG captured current review; browser complete original option/prerequisite/risk/recovery fields",
+      "remaining": "Supported customer remediation, objectives/roles/approvals/effort not verified"
+    },
+    {
+      "id": "FR-HAS-37",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Grouped fixed3templates alwaysUnverified; current finding decisions preserve artifacts; no preview actions/resources",
+      "remaining": "Artifact review/history/invalidation, tasks/CSV and validated remediation not verified"
+    },
+    {
+      "id": "FR-HAS-42",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Complete inert finding/occurrence/evidence/source identities and native keyboard disclosures",
+      "remaining": "Relationship graphs and protected evidence resolution not verified"
+    },
+    {
+      "id": "AC-HAS-14 / TP-HAS-014",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Local preview exposes no supplied actions/resources or execution; limitations distinguish deferred authority",
+      "remaining": "Full deferred operation/API/worker/MCP denial inventory not verified"
+    },
+    {
+      "id": "AC-HAS-18 / TP-HAS-018",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Actual React hostile/NUL/CR/CRLF text remains inert;0unexpected requests/faults/dialogs; Unverified labels",
+      "remaining": "Deployed network/credential-free ADRsandbox, consultant tasks/review and safeCSV not verified"
+    },
+    {
+      "id": "TP-HAS-002 / TP-HAS-003 / TP-HAS-017",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Original occurrence/source provenance, actual current finding events and unchanged provisional/fixed artifact invariants",
+      "remaining": "Customer/AI/publication/PDF/link/MCP acceptance not verified"
+    },
+    {
+      "id": "TP-HAS-009",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Foreign scope/source/current capture denied and fixed read-only inert identifiers; payload-free logs",
+      "remaining": "Protected customer data and revocation across production surfaces not verified"
+    },
+    {
+      "id": "TP-HAS-013",
+      "boundedLocalSubset": "PASS",
+      "evidence": "Actual native disclosure keyboard/Retry focus, desktop/mobile320reflow and9axe automated subset checks",
+      "remaining": "Manual screen-reader, full workflow/scale/browser/OS matrix not verified"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "complete": {
+    "html": "6dc7fbc0e206bd1c7a686cb6100ec3ed23050f5cee7fd9392176e8784547b771",
+    "package": "59474efe9c2593ca1b8e397b10487ec433744c01af61e953de53308cc2d276d2",
+    "guidance": "f2ee0eca4e26ce695b5fc84355c2a36828cbd31b9ebc0b08272f5c6c20cc73b2"
+  },
+  "empty": {
+    "html": "42adde52e91bb6226572e7beaa328114bc396bf6cbd4aaa956f6d3b3aa4d71eb",
+    "package": "c1df40f3aa87cf3804f7dade3d5bed62bfd3a5cf712efc3d8f472d47005c5ea2",
+    "guidance": "01ea12b110789c88fc4c64586c5b44cdbd0669d4e73317adbc36cf87b0ca7a62"
+  }
+}

@@ -1,0 +1,6 @@
+Unhandled exception. System.InvalidOperationException: FAIL: original older fingerprint is typed denied without rewriting
+   at Program.Check(Boolean value, String name) in /private/tmp/iga-cycle13-a13/tests/unit/SyntheticFixReview.Tests/Program.cs:line 16
+   at DatabaseCases.Run() in /private/tmp/iga-cycle13-a13/tests/unit/SyntheticFixReview.Tests/DatabaseCases.cs:line 45
+   at DatabaseCases.Run() in /private/tmp/iga-cycle13-a13/tests/unit/SyntheticFixReview.Tests/DatabaseCases.cs:line 163
+   at Program.Main(String[] args) in /private/tmp/iga-cycle13-a13/tests/unit/SyntheticFixReview.Tests/Program.cs:line 126
+   at Program.<Main>(String[] args)

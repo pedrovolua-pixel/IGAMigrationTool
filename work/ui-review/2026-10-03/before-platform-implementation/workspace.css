@@ -1,0 +1,394 @@
+.assessment-shell {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  align-items: start;
+  color: #243449;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+.workspace-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  overflow-y: auto;
+  padding: 28px 16px;
+  background: #edf1f7;
+  border-right: 1px solid #d6deea;
+}
+.workspace-identity {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 38px;
+}
+.workspace-monogram {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 10px;
+  color: white;
+  background: #2856a5;
+  font-weight: 750;
+}
+.workspace-identity strong {
+  display: block;
+  font-size: 15px;
+}
+.workspace-identity div > span,
+.sidebar-context span {
+  display: block;
+  font-size: 12px;
+  line-height: 1.65;
+  color: #526179;
+}
+.sidebar-label {
+  margin: 0 12px 10px;
+  font-size: 12px;
+  font-weight: 650;
+  color: #526179;
+}
+.workspace-destinations {
+  display: grid;
+  gap: 6px;
+}
+.workspace-destinations button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #40516c;
+  padding: 12px;
+  font-size: 14px;
+}
+.workspace-destinations button > span {
+  width: 20px;
+  text-align: center;
+}
+.workspace-destinations button:hover {
+  background: #e0e7f2;
+}
+.workspace-destinations button[aria-current='location'] {
+  background: #fff;
+  border-color: #c9d6ec;
+  color: #204b91;
+  box-shadow: 0 2px 5px #24344908;
+  font-weight: 700;
+}
+.sidebar-context {
+  margin: 36px 12px 0;
+  padding-top: 20px;
+  border-top: 1px solid #cfd8e6;
+}
+.sidebar-context strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+.workspace-content {
+  min-width: 0;
+}
+.assessment-shell .masthead {
+  background: #fff;
+  color: #243449;
+  border-bottom: 1px solid #d6deea;
+  padding: 18px 32px;
+}
+.assessment-shell .brand {
+  font-size: 15px;
+}
+.assessment-shell .brand-mark {
+  display: none;
+}
+.assessment-shell .brand-subtitle {
+  color: #526179;
+  font-size: 12px;
+}
+.assessment-shell .demo-badge {
+  border-color: #bfd0ec;
+  background: #edf3ff;
+  color: #204b91;
+}
+.assessment-shell .workspace {
+  max-width: 1440px;
+  padding: 32px;
+}
+.assessment-shell h1 {
+  font-family: inherit;
+  font-size: clamp(27px, 2.5vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: #203149;
+}
+.assessment-shell h2,
+.assessment-shell h3 {
+  color: #243449;
+}
+.assessment-shell .eyebrow {
+  color: #526179;
+}
+.assessment-shell .intro,
+.assessment-shell .muted {
+  color: #526179;
+}
+.assessment-shell .boundary-note {
+  background: #eef3fb;
+  border-color: #b9cce8;
+  color: #304867;
+}
+.assessment-shell .work-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+.assessment-shell .panel {
+  border-color: #d6deea;
+  box-shadow: 0 2px 6px #20314904;
+  padding: 24px;
+}
+.assessment-shell .configuration .eyebrow {
+  margin-bottom: 6px;
+}
+.assessment-shell .configuration h2 {
+  margin-bottom: 8px;
+}
+.assessment-shell .configuration form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 20px;
+}
+.assessment-shell .configuration .settings-field {
+  min-width: 0;
+}
+.assessment-shell .configuration .settings-actions,
+.assessment-shell .configuration .warning-note {
+  grid-column: 1 / -1;
+}
+.assessment-shell .configuration .settings-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 14px;
+}
+.assessment-shell .configuration .settings-actions .field-note {
+  margin: 0;
+  max-width: 620px;
+}
+.assessment-shell .configuration .settings-actions .primary {
+  width: auto;
+  flex-shrink: 0;
+}
+.assessment-shell button.primary {
+  background: #2856a5;
+  border-color: #2856a5;
+}
+.assessment-shell .metrics {
+  background: #f5f7fb;
+  border-color: #d6deea;
+}
+.assessment-shell .metrics strong {
+  color: #204b91;
+}
+.assessment-shell progress {
+  accent-color: #2856a5;
+}
+.assessment-shell .footer {
+  color: #526179;
+  padding: 24px 32px;
+}
+.assessment-shell .navigation-notice {
+  padding: 14px 18px;
+  border-left: 3px solid #2856a5;
+  background: #edf3ff;
+  margin-bottom: 20px;
+}
+.assessment-shell [tabindex='-1'] {
+  scroll-margin-top: 24px;
+}
+@media (max-width: 1000px) {
+  .assessment-shell {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+  .assessment-shell .workspace,
+  .assessment-shell .masthead {
+    padding: 24px;
+  }
+  .assessment-shell .configuration form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .assessment-shell .configuration .settings-actions {
+    align-items: start;
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+@media (max-width: 760px) {
+  .assessment-shell {
+    display: block;
+  }
+  .workspace-sidebar {
+    position: static;
+    height: auto;
+    overflow-y: visible;
+    min-height: auto;
+    padding: 16px;
+    border-right: 0;
+    border-bottom: 1px solid #d6deea;
+  }
+  .workspace-identity {
+    margin-bottom: 16px;
+  }
+  .workspace-destinations {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 6px;
+  }
+  .sidebar-label {
+    margin-left: 0;
+  }
+  .sidebar-context {
+    display: none;
+  }
+  .assessment-shell .workspace,
+  .assessment-shell .masthead {
+    padding: 20px 16px;
+  }
+  .assessment-shell .panel {
+    padding: 18px;
+  }
+  .assessment-shell .footer {
+    padding: 20px 16px;
+  }
+}
+@media (forced-colors: active) {
+  .workspace-destinations button {
+    border-color: ButtonText;
+  }
+  .workspace-destinations button[aria-current='location'] {
+    outline: 2px solid Highlight;
+    outline-offset: -4px;
+  }
+}
+
+/* Internal views retain mounted forms and readers; Assessments keeps its original layout. */
+[hidden] {
+  display: none !important;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .configuration,
+.assessment-shell:not([data-workspace-view='Assessments']) .history,
+.assessment-shell:not([data-workspace-view='Assessments']) .run-coverage-overview,
+.assessment-shell:not([data-workspace-view='Assessments']) .run-inputs,
+.assessment-shell[data-workspace-view='Findings'] .coverage-evidence,
+.assessment-shell[data-workspace-view='Reports'] .coverage-evidence,
+.assessment-shell[data-workspace-view='Settings'] .coverage-evidence {
+  display: none;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .run-detail {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .run-context-heading {
+  border-top: 1px solid #d6deea;
+  padding-top: 18px;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .run-context-heading .eyebrow {
+  display: none;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .run-context-heading h2 {
+  font-size: 16px;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .run-selection {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .analysis-view {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: 24px;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .boundary-note {
+  font-size: 13px;
+  padding: 12px 16px;
+}
+.assessment-shell[data-workspace-view='Reports'] .draft-report {
+  max-width: 920px;
+  margin: 0 auto;
+  border: 1px solid #d6deea;
+  background: #fff;
+  padding: clamp(18px, 3vw, 40px);
+  border-radius: 0;
+  box-shadow: none;
+}
+.assessment-shell[data-workspace-view='Reports'] .draft-view-controls {
+  border-bottom: 1px solid #cbd7e8;
+  padding-bottom: 12px;
+  flex-wrap: wrap;
+}
+.assessment-shell[data-workspace-view='Reports'] .draft-view-controls button[aria-pressed='true'] {
+  color: #204b91;
+  border-color: #2856a5;
+  background: #edf3ff;
+}
+.assessment-shell[data-workspace-view='Settings'] .configuration,
+.assessment-shell[data-workspace-view='Settings'] .run-inputs {
+  display: block;
+}
+.assessment-shell[data-workspace-view='Settings'] .work-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+}
+.assessment-shell[data-workspace-view='Settings'] .configuration {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.assessment-shell[data-workspace-view='Settings'] .configuration form {
+  grid-template-columns: minmax(0, 1fr);
+}
+.assessment-shell[data-workspace-view='Settings'] .configuration .settings-actions {
+  display: block;
+}
+.assessment-shell[data-workspace-view='Settings'] .settings-actions .field-note {
+  margin-top: 12px;
+}
+.assessment-shell[data-workspace-view='Settings'] .run-detail[data-has-run='false'] {
+  display: none;
+}
+.assessment-shell[data-workspace-view='Evidence'] .coverage-evidence {
+  background: #fff;
+  border: 1px solid #d6deea;
+  padding: 20px;
+}
+@media (max-width: 1000px) {
+  .assessment-shell[data-workspace-view='Settings'] .work-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .assessment-shell * {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .record-meta {
+  color: #526179;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) {
+  background: #fff;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .field-note {
+  color: #526179;
+}
+.assessment-shell:not([data-workspace-view='Assessments'])
+  .workspace-destinations
+  button[aria-current='location'] {
+  background: #edf3ff;
+  color: #204b91;
+  border-color: #b9cce8;
+}

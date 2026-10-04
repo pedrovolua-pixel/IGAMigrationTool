@@ -1,0 +1,340 @@
+{
+  "schema": "v14-independent-execution-v1",
+  "status": "PASS scoped local synthetic verification",
+  "executedSourceCommit": "5072dbe4cbb64c8dbc8b79dda53006c94702d84c",
+  "domainDependency": "cacb42b53cb83c24cc3ef118788aa31555edf76b",
+  "presentationDependency": "66e0071",
+  "coordinatorRuntimeReference": "9ede79f",
+  "engineeringContractSha256": "f4d2c4c4974ac801d9b9a538065f1c1dd89f1519796edb384ea6f0506e027cf2",
+  "workingDirectory": "/private/tmp/iga-cycle14-task-verification",
+  "checks": {
+    "portable": 702,
+    "portablePlusDedicatedPostgres": 2542,
+    "inclusiveCountsAreNotAdditive": true,
+    "independentPythonExpectedFiles": 41,
+    "independentJavaScriptFullSourceIdentityCommand": 56,
+    "actualChromiumBrowser": 13626,
+    "axeViewportRecords": 3,
+    "axeViolations": 0,
+    "axeIncomplete": 0,
+    "originalScreenshots": 9
+  },
+  "commands": {
+    "restore": "python3 tests/integration/LocalPlanningTasks.Tests/run-isolated.py /private/tmp/iga-dotnet-10.0.401/dotnet restore tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj --locked-mode --disable-parallel --verbosity minimal",
+    "format": "python3 tests/integration/LocalPlanningTasks.Tests/run-isolated.py /private/tmp/iga-dotnet-10.0.401/dotnet format tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj --verify-no-changes --no-restore --verbosity normal",
+    "build": "python3 tests/integration/LocalPlanningTasks.Tests/run-isolated.py /private/tmp/iga-dotnet-10.0.401/dotnet build tests/integration/LocalPlanningTasks.Tests/LocalPlanningTasks.Tests.csproj --no-restore --configuration Release --disable-build-servers -p:UseSharedCompilation=false -m:1",
+    "portable": "python3 tests/integration/LocalPlanningTasks.Tests/run-isolated.py /private/tmp/iga-dotnet-10.0.401/dotnet tests/integration/LocalPlanningTasks.Tests/bin/Release/net10.0/LocalPlanningTasks.IntegrationTests.dll --portable",
+    "postgres": "python3 tests/integration/LocalPlanningTasks.Tests/run-isolated.py /private/tmp/iga-dotnet-10.0.401/dotnet tests/integration/LocalPlanningTasks.Tests/bin/Release/net10.0/LocalPlanningTasks.IntegrationTests.dll",
+    "browser": "/private/tmp/node-v24.21.0-darwin-arm64/bin/node tests/e2e/planning-tasks/verify.mjs",
+    "pythonOracle": "python3 tests/integration/LocalPlanningTasks.Tests/oracle.py",
+    "javascriptOracle": "/private/tmp/node-v24.21.0-darwin-arm64/bin/node tests/e2e/planning-tasks/verify-oracles.mjs"
+  },
+  "environment": {
+    "strategy": "closed allowlist before execution/tool loading; no inherited bypass marker",
+    "domainDatabase": "iga_synthetic_cycle14_v14_domain",
+    "browserDatabase": "iga_synthetic_cycle14_v14_browser",
+    "databaseBoundary": "only127.0.0.1:55433/existing role iga_synthetic/duplicate-free exact keys; no credentials, role/HBA/cluster changes or older database mutations",
+    "hostPort": 5183,
+    "hostLeaseReleased": true,
+    "temporaryConfigurationWatchOverride": true,
+    "defaultMacStartupVerified": false
+  },
+  "requirementEvidence": {
+    "TC14-T01/T03/T08": "four real saved presets/full source/three selected artifacts plus ten historical profiles omitted additive member",
+    "TC14-T02/T07/T12": "actual HTTP closed body/authority/invalid UTF16 and UTF8/route16KiB versus historical4096; native forged source/current/history/integrity and source-metadata suppression",
+    "TC14-T03/T04/T05/T09": "independent full byte recipes, stable scoped identities, separate workflow/freshness, withdrawal/rereview/unchanged-run finding refresh, read-only versus successful-command highwater",
+    "TC14-T04/T05/T06": "real concurrent Create/revision/UUID replay, shared run writer fences, failed/cancelled transaction rollback, corrupt rows/schema denial/restoration, reconnect and host restart",
+    "TC14-T06/T10": "lost/malformed committed receipts exact frozen retry, same-run review epoch and run-switch held response completion fences, retained volatile drafts, actual Enter/Space eight actions and exact heading/error focus",
+    "TC14-T09/T10/T11": "complete current/history UI parity, literal hostile controls, strict inert nodes/network/noeffects,1440/390/320 reflow, three axe subset checks and original artifacts/health invariance"
+  },
+  "sourceSecurityScan": {
+    "tool": "gitleaks8.30.1 default rules, no custom config/ignores",
+    "result": "PASS zero findings",
+    "scope": "90 immutable verifier-owned source/fictional fixture/metadata/screenshot input copies; later binder/recorder metadata-only hash delta is separately covered by coordinator final full tracked-source scan. Raw ignored observations are never staged.",
+    "scopeProof": "tests/integration/LocalPlanningTasks.Tests/.native/scanner-source-scope.json",
+    "report": "tests/integration/LocalPlanningTasks.Tests/.native/secrets-final.json"
+  },
+  "postSealTelemetrySupplement": {
+    "predecessorSeal": "db90b057dc46ec8f0fa1e969ec2b07573de99c85",
+    "change": "Only escaped telemetry absence and portable scope prose; unchanged original native/browser/runtime source and outputs.",
+    "proof": "tests/e2e/planning-tasks/telemetry.json",
+    "predecessorMapping": "tests/integration/LocalPlanningTasks.Tests/.frozen/telemetry-followup-predecessor/predecessor.json"
+  },
+  "earlierGenerations": [
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.frozen/final-corrected/closure.json",
+      "sha256": "00e95b52cfb0d075948527a432d9d9d9a50f4104a8a1bf13b3d39e9bd77a8793",
+      "bindings": 363
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.frozen/portable-first/closure.json",
+      "sha256": "4c1d251aeb6e191bc606927de8abd5772a5d9dd33f392962b15fc737f13599b6",
+      "bindings": 247
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.frozen/postgres-authority-fixed/closure.json",
+      "sha256": "db72f641fefe38f75c5708cf7a672b358532a70c7558625bfe3a8dd28450aa36",
+      "bindings": 340
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.frozen/postgres-denial-diagnostic/closure.json",
+      "sha256": "576ba0f1d9f1403789d331e7ca6ca6cbfba82489be3d97fde61c85972959f0e3",
+      "bindings": 328
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.frozen/postgres-expanded/closure.json",
+      "sha256": "193486e15dfc1a010539ea260bfe8952685ae26a1bdd97489b552563ba82084b",
+      "bindings": 347
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.frozen/postgres-first/closure.json",
+      "sha256": "465be81c45cdb77ba3f9e486a43e0ded02b54d4ca91d3df41b3f548815fd51e3",
+      "bindings": 328
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.frozen/browser-fifth/closure.json",
+      "sha256": "50f7db12f07a6c744394e7055a81f8d1e5882e6ea4c443a0e93b860ca127190a",
+      "bindings": 416
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.frozen/browser-final-corrected/closure.json",
+      "sha256": "e872faa41bc1e4fc366bc6c7b9cdda47bfcbb56a1c505ec3c375496ae911506f",
+      "bindings": 428
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.frozen/browser-first/closure.json",
+      "sha256": "3c452d692b097a2a1709d7f3fb25d938ac3d605d2f21c4c4a6e96cf1bb70c6ec",
+      "bindings": 230
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.frozen/browser-fourth/closure.json",
+      "sha256": "9fe3c36a16a6fad7a1f5a5cd2e9507a5727e7de13492fda804bac2e88ede1d87",
+      "bindings": 231
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.frozen/browser-second/closure.json",
+      "sha256": "7cdb350ef670aa5cac19e45dd538095879ad6646bd3074de0598ff088f080f26",
+      "bindings": 230
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/e2e/planning-tasks/.frozen/browser-third/closure.json",
+      "sha256": "e12d3e459a1965f632d624772735ed0a780f94d456eec2312c7a35212db73081",
+      "bindings": 231
+    }
+  ],
+  "provenanceLimitations": [
+    "Initial audited restore and first invalid Vite option/Python-cache errors had tool output but no original raw log; no transcript reconstruction claim.",
+    "Interim portable-final/postgres-final logs preceded helper rebuild; that interim original test DLL was not frozen and is unavailable. Final corrected source5072 and full Release binaries are independently frozen.",
+    "First two failed browser generations have source/runtime/native summary/report, but initial partial owned-host stdout was not written by those harness versions. Later originals retain raw owned host telemetry.",
+    "A historical-prefix correction is independently source-reviewed and final real corpus executes it; the author-owned original forked-prefix negative is separately owned evidence, not relabeled as a V test.",
+    "An initial metadata assembly failed at an unescaped apostrophe before writing any execution metadata; corrected recorder independently validates actual logs."
+  ],
+  "limitations": [
+    "Chromium145 macOS automated engineering subset only; Windows/manual screen-reader/deployed sandbox/production identity/full product gates NOT VERIFIED.",
+    "No customer/provider/execution/export/apply/import actions; planning completion remains review-only and never health/remediation verification.",
+    "Intercepted source-unavailable UI is separately identified; actual persisted malformed JSON metadata recovery is native host-service execution.",
+    "Observed captures are ignored executed evidence and never expected oracles; no dependency/security policy/ignore changes."
+  ],
+  "nativeLogBindings": [
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/browser-source-format.log",
+      "sha256": "1ed903a944f5c4b3a3fc4b61b292c38c3da40a41db90838bfc47fe34f86445bc",
+      "bytes": 83
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-authority-fixed.log",
+      "sha256": "ab2e72777867355ddb3fb9b1fc27c596cd9cdba7c980e3da8b2005c76ad43d1f",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-browser-first.log",
+      "sha256": "2f9a286c63ea71341eb7ff3c93fcae3e3fa2727c3cce353fe8e5f5fb8a079801",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-browser-fixture.log",
+      "sha256": "a5c525acd4cc83c5ac58e18395d1b0c8890faf609823a91a7203f263b6306460",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-checkpoint.log",
+      "sha256": "2f55a6312e282932cc5efb3fccb6761f24dc19ad96eda66eacd624a40c18d522",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-denial-diagnostic.log",
+      "sha256": "9b8cef4ff7798885054431980a07e11baa9ec9084e4c76af13bb90da8f6d3557",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-domain-first.log",
+      "sha256": "daa17999c7f520fc18b47d6eb70dc6a31d47155893a72ed798e142b78cca6598",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-expanded.log",
+      "sha256": "278d582c6e22141f35c0061fdafff4c72d97cc1a6db7f862d81de29fb24b4624",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-final-corrected.log",
+      "sha256": "629d376c3fff315181b94ba53ad81830104e0075bdb3076356968817171be0d4",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/build-first.log",
+      "sha256": "953308ce657d958cb55e78e340d824dee5cacc5d45a907288a0dbe7860f367c4",
+      "bytes": 2642
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/dotnet-environment.log",
+      "sha256": "553ba487539cab3ae7e8257c01b3a44dc186ff8e41da6e8305cff2a15dbc9ac1",
+      "bytes": 1453
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-browser-fixture.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-checkpoint.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-exact-owned-files.log",
+      "sha256": "f39771491d9b54ac056443fafb04f28647146af02bbe86a34e932384cc2f31a8",
+      "bytes": 183
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-expanded.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-final-absolute.log",
+      "sha256": "f546143c97db0176993a37397ca54ef0a24239381b6962e0291d13d33d531af8",
+      "bytes": 183
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-final-corrected.log",
+      "sha256": "3392445564f70579fae3f84613c62b510b2470eddd6f368e0ba8318e9d4c8a3a",
+      "bytes": 183
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-full-owned-escalated.log",
+      "sha256": "38953ec393080237e1605bd93f69ae7cad99080b3a7202ddacc9f498afb027be",
+      "bytes": 183
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-full-owned.log",
+      "sha256": "451cee5d643e7682d126fd55d11c2965a4cfc9b01b9015daa12d8f8479a4eff8",
+      "bytes": 156
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/format-project-owned.log",
+      "sha256": "420aab0877bda13a4549b6fa44c31508c1a49eabda2fbabd6f5596fbeab82102",
+      "bytes": 9291
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/frontend-build-first.log",
+      "sha256": "57763e86f2684a130b882c8b64e1696eb92b29156d524a833afdc47fca583273",
+      "bytes": 350
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/oracle-final-corrected.log",
+      "sha256": "853ab986e730e4b09e450281c5dd01f047d9f44c56e4da42b57b8116a978f486",
+      "bytes": 146
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/oracle-final.log",
+      "sha256": "853ab986e730e4b09e450281c5dd01f047d9f44c56e4da42b57b8116a978f486",
+      "bytes": 146
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/package-audit-final-corrected.json",
+      "sha256": "856822a0ddcb76b22035dd7c20c4f09d9c6b5c09a9bfbec99fc78bbf522dcfaa",
+      "bytes": 301
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/package-audit-final.json",
+      "sha256": "856822a0ddcb76b22035dd7c20c4f09d9c6b5c09a9bfbec99fc78bbf522dcfaa",
+      "bytes": 301
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/portable-checkpoint.log",
+      "sha256": "25784c7acbb636e585fb03e6620efad6ea0c495c8bb67fb807a8606ec5d60d4b",
+      "bytes": 428
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/portable-final-corrected.log",
+      "sha256": "25784c7acbb636e585fb03e6620efad6ea0c495c8bb67fb807a8606ec5d60d4b",
+      "bytes": 428
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/portable-final.log",
+      "sha256": "25784c7acbb636e585fb03e6620efad6ea0c495c8bb67fb807a8606ec5d60d4b",
+      "bytes": 428
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/portable-first.log",
+      "sha256": "25784c7acbb636e585fb03e6620efad6ea0c495c8bb67fb807a8606ec5d60d4b",
+      "bytes": 428
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/postgres-authority-fixed.log",
+      "sha256": "329bfadaa7450d8690bacfdab4132c9fea97d01334eb5bf69a9e6f19f63a8254",
+      "bytes": 1061
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/postgres-denial-diagnostic.log",
+      "sha256": "10f7b636e154e8418d162bdf3825fee58fa56fe8c204d4a6c38fbf6957973946",
+      "bytes": 666
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/postgres-expanded.log",
+      "sha256": "6020351e45a612bc517317ad7396b816176e858ade4a7943bcdf3a3bb1259d50",
+      "bytes": 1173
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/postgres-final-corrected.log",
+      "sha256": "6020351e45a612bc517317ad7396b816176e858ade4a7943bcdf3a3bb1259d50",
+      "bytes": 1173
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/postgres-final.log",
+      "sha256": "6020351e45a612bc517317ad7396b816176e858ade4a7943bcdf3a3bb1259d50",
+      "bytes": 1173
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/postgres-first.log",
+      "sha256": "df773c74cf32d4b6cc90c0185f6e6082b1b9f4ced4cbbb76570ee31d05d3f81e",
+      "bytes": 583
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/restore-final-corrected.log",
+      "sha256": "c8e6a2cbd2a23ea4caa153bf9222e8dd828b6d076b02f1e98519cb3eb335e01d",
+      "bytes": 2259
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/restore-final.log",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+      "bytes": 80
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/scanner-source-scope.json",
+      "sha256": "b350c2db724eafae5c53c609eb6dcf07a86c859c98b214fec259635cab3368dd",
+      "bytes": 34528
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/secrets-final.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "bytes": 3
+    },
+    {
+      "path": "/private/tmp/iga-cycle14-task-verification/tests/integration/LocalPlanningTasks.Tests/.native/secrets-final.log",
+      "sha256": "580819f6266e017074d85a60ad483ef2d5030c86454d549950cd082d071026b3",
+      "bytes": 146
+    }
+  ]
+}

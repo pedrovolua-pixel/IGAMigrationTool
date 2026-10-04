@@ -1,0 +1,4 @@
+  Determining projects to restore...
+  Restored /private/tmp/iga-cycle09-projection/src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj (in 41 ms).
+  Restored /private/tmp/iga-cycle09-projection/src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj (in 38 ms).
+  Restored /private/tmp/iga-cycle09-projection/tests/unit/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj (in 41 ms).

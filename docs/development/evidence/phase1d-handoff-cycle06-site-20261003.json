@@ -1,0 +1,94 @@
+{
+  "cycle": "Phase1D cycle06",
+  "date": "2026-10-03",
+  "status": "COMPLETED",
+  "canonical_snapshot": "43d594338b4968e1caed487652736732eac5c49d",
+  "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+  "final_deployment": {
+    "id": "appgdep_6ac19fb99b24819198a04b4e8efc84cc",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_abbeb10089d481919273485be86c04b3",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-04T00:37:20.508046+00:00"
+  },
+  "final_version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_abbeb10089d481919273485be86c04b3",
+    "version_number": 118,
+    "source": {
+      "commit_sha": "95c64c17e85ec77ff08abd89ff57addec8a56154"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000fb4c81f59d3ec3de21811b80",
+      "content_hash": "sha256:1bcb54453fc4d47ed008b4f4403ebccdcffa6fbf5eb27a89187f71098a62eca4",
+      "size_bytes": 133120,
+      "file_count": 2
+    }
+  },
+  "audience": {
+    "mode": "custom",
+    "revision": 1,
+    "owners": 1,
+    "groups": 0,
+    "external_visitors": 0
+  },
+  "prepared_deployment": {
+    "id": "appgdep_6ac19f44063c8191810e2988eb4248e8",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_dab2def34ac88191b2a1d39e191a2daa",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-04T00:35:22.400704+00:00"
+  },
+  "prepared_version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_dab2def34ac88191b2a1d39e191a2daa",
+    "version_number": 117,
+    "source": {
+      "commit_sha": "938fc2974d676860ab1e1680a78880ea4f95ef7b"
+    }
+  },
+  "local_qa": "1440/390/320, navigation/local Git links/page errors/role/source/done conditions/13 cards; exact final assets",
+  "human_dependencies": "All13 preserved byte-for-byte. AllI01-I11 open.",
+  "source_checks": "365 working source paths unchanged; separately365 committed paths unchanged; unowned canonical diffs preserved",
+  "scope": "Documentation-only readiness/owner actions; no runtime/config/dependency/migration/identity/exposure changes. Runtime/platform checks not rerun.",
+  "reconciliation": "Normal merge of newer M08 board52147e4, all unowned remote HTML preserved. Initial stale push rejected, no overwrite. Reopen detected divergence before local merge.",
+  "artifact_hash_note": "Native archive hash is server-reported metadata; local gzip and HTML hashes are recorded separately.",
+  "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+  "local_artifacts": {
+    "archive_gzip_sha256": "6b5a5256984b2816c18604e65baded58a6952c5288abb73df7e4d223ac3fc530",
+    "html_sha256": "876448779cca6b94f2b601a8398bfd9d45df6d951cd36320be6cfb3d95833922",
+    "final_owned_links": 27,
+    "final_doc_scan_bytes": 376869,
+    "scoped_whitespace": "PASS",
+    "final_static_scan": {
+      "status": "PASS",
+      "bytes": 127978,
+      "exit_code": 0
+    },
+    "receipt_secret_scan": {
+      "status": "PASS",
+      "initial_bytes": 3578,
+      "exit_code": 0
+    }
+  },
+  "preserved_artifacts": {
+    "count": 39,
+    "manifest": ".sites-work/phase1d-cycle06-evidence/final-artifact-manifest.json",
+    "sha256": "07453912b0e0f049005dc0ebe25263f91fd74bfa61549353eb474feb22b14771"
+  }
+}

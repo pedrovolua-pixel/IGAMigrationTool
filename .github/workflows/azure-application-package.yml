@@ -1,0 +1,52 @@
+name: Azure development package (partial checks)
+
+on:
+  pull_request:
+    paths:
+      - 'src/server/hosts/AzureDevelopmentBootstrap/**'
+      - 'infra/containers/**'
+      - 'infra/bicep/**'
+      - 'tests/infrastructure/AzureApplicationPackage/**'
+      - 'tests/integration/AzureDevelopmentBootstrap/**'
+      - '.github/workflows/azure-application-package.yml'
+      - 'global.json'
+      - 'Directory.Build.props'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bootstrap-package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install approved SDK
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          global-json-file: global.json
+      - name: Build and verify inert host
+        run: |
+          dotnet restore src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj --locked-mode
+          dotnet format src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj --verify-no-changes --no-restore
+          dotnet publish src/server/hosts/AzureDevelopmentBootstrap/AzureDevelopmentBootstrap.csproj -c Release --no-restore --no-self-contained -o "$RUNNER_TEMP/bootstrap" /p:UseAppHost=false
+          python3 tests/integration/AzureDevelopmentBootstrap/verify.py --dotnet "$(command -v dotnet)" --assembly "$RUNNER_TEMP/bootstrap/AzureDevelopmentBootstrap.dll"
+      - name: Build and exercise non-root container
+        run: |
+          python3 infra/containers/build-development-bootstrap.py
+          python3 tests/integration/AzureDevelopmentBootstrap/verify.py --docker-image iga-azure-development-bootstrap:local
+          docker image inspect iga-azure-development-bootstrap:local --format 'Local image config digest={{.Id}}; user={{.Config.User}}; architecture={{.Architecture}}'
+      - name: Install pinned Bicep
+        run: |
+          curl -fsSL https://github.com/Azure/bicep/releases/download/v0.47.16/bicep-linux-x64 -o "$RUNNER_TEMP/bicep"
+          echo "64c345a58e0c3e48b1bc98a4e62d6b3adb1d238281297de3400aeafb2697aa5a  $RUNNER_TEMP/bicep" | sha256sum -c -
+          chmod +x "$RUNNER_TEMP/bicep"
+      - name: Check private hosting template
+        run: |
+          "$RUNNER_TEMP/bicep" build infra/bicep/modules/pilot-development-bootstrap-apps.bicep --outfile "$RUNNER_TEMP/bootstrap-module.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/modules/pilot-development-bootstrap-apps.bicep
+          "$RUNNER_TEMP/bicep" build infra/bicep/pilot-development-bootstrap-apps.bicep --outfile "$RUNNER_TEMP/bootstrap-root.json"
+          "$RUNNER_TEMP/bicep" lint infra/bicep/pilot-development-bootstrap-apps.bicep
+          python3 tests/infrastructure/AzureApplicationPackage/hosting-policy.py "$RUNNER_TEMP/bootstrap-root.json" "$RUNNER_TEMP/bootstrap-module.json"

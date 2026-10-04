@@ -1,0 +1,74 @@
+{
+  "deployment": {
+    "id": "appgdep_6ac14d7d876881919e3594bdf0cc4a0b",
+    "project_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "title": "IGA Pilot Progress",
+    "version_id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_2433609e62488191b2a96a2006816134",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://iga-pilot-progress.pedro-volu.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6abd3ea5f20081918f3f6e81099c2a32",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-03T18:46:27.513353+00:00"
+  },
+  "version": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32~appgver_2433609e62488191b2a96a2006816134",
+    "versionNumber": 100,
+    "source": {
+      "commit_sha": "0ccfaa435b452b3bfa3ab91785b82eafe319f13a"
+    },
+    "deploymentId": "appgdep_6ac14d7d876881919e3594bdf0cc4a0b",
+    "archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000a58481f5b198565226b92696",
+      "content_hash": "sha256:bdf4e95ea6109b836d870e24c20625f9e42b9586e34bdb48c8b103e1bf1bdc71",
+      "size_bytes": 102400,
+      "file_count": 2
+    }
+  },
+  "access": {
+    "id": "appgprj_6abd3ea5f20081918f3f6e81099c2a32",
+    "status": "active",
+    "accessMode": "custom",
+    "allowedUsers": 1,
+    "groups": 0,
+    "externalVisitors": 0,
+    "revision": 1
+  },
+  "date": "2026-10-03",
+  "status": "CLOSED bounded local cycle; full milestone and live acceptance NOT VERIFIED",
+  "repositorySnapshot": "16fac348b753d43ded4b1365619479811aace891",
+  "siteQA": {
+    "viewports": [
+      1440,
+      390,
+      320
+    ],
+    "openHumanTasks": 12,
+    "humanCardBytesPreserved": true,
+    "unownedPanelsBytePreserved": 16,
+    "native": "work/m08-cycle04-evidence/site/site-qa.json"
+  },
+  "preservation": {
+    "nativeManifest": "work/m08-cycle04-evidence/final-native-manifest.json",
+    "nativeManifestSha256": "c6290d2761b10c19ca4b7979e40b2c9af0a907fb3a40ec338e5f364e01955fdc",
+    "nativeFilesRehashed": 278,
+    "cleanup": "work/m08-cycle04-evidence/cleanup.json",
+    "ownWorktreesRemoved": 4,
+    "branchesAndEvidenceDatabasesRetained": true,
+    "legacyViewsReverifiedMembersIncludingOverlap": 6400
+  },
+  "sourceRuntimeEvidence": "work/m08-cycle04-evidence/coordinator/final-integrated-source-preservation.json; final-preserved-source-runtime.json",
+  "sourceRuntimeNote": "Later source changes are tests/docs only; final independent before/after host source/DLL/assets drift=[]",
+  "hostedCurrentCycle": "NOT VERIFIED; configured Linux/Windows steps added and reviewed",
+  "limitations": [
+    "Real source/identity/reviewer authority and customer acceptance",
+    "Queue/adjudication/residual collaboration/risk/reassessment/publication/retention",
+    "Manual supported accessibility/native select navigation",
+    "Maximum-capacity/response and clock rollback stress",
+    "Full M08/Phase1C/TP-HAS-012/019/UAT/G1\u2013G9 and production"
+  ]
+}

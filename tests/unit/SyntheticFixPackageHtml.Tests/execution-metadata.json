@@ -1,0 +1,321 @@
+{
+  "packet": "B11",
+  "worktree": "/private/tmp/iga-cycle11-b11",
+  "branch": "codex/cycle11-renderer",
+  "baseCommit": "d8519e48e8d755919441b777acefe356f9e16724",
+  "builderDependencyCommit": "4f7e1dfb1a7eb0df9ae026e01405dad6e377bea1",
+  "dependencyFilesUntrackedAndExcludedFromCommit": true,
+  "sdk": "10.0.401",
+  "counts": {
+    "assertions": 311,
+    "acceptedRenderCalls": 25,
+    "payloadFreeDenials": 52
+  },
+  "stress": {
+    "options": 24999,
+    "records": 99997,
+    "canonicalUtf8Bytes": 27469592,
+    "htmlUtf8Bytes": 45673167,
+    "all74997ArtifactsRendered": true
+  },
+  "checks": {
+    "lockedAuditedRestore": "PASS",
+    "scopedWhitespaceFormat": "PASS native IPC",
+    "scopedReleaseBuild": "PASS zero warnings/errors; --disable-build-servers -p:UseSharedCompilation=false -m:1",
+    "vulnerabilityAudit": "PASS no vulnerable packages reported",
+    "independentSixArtifactOracle": "PASS",
+    "credentialFreeExecutable": "PASS env -i plus PATH/DOTNET_ROOT/DOTNET_CLI_HOME",
+    "gitleaks": "PASS 8.30.1 owned textual snapshot"
+  },
+  "limitations": [
+    "Initial sandbox formatter exited1 without diagnostic; native IPC scoped format and verify succeeded.",
+    "Private UTF8 sink exact64MiB/+1 test is guard-only evidence; largest real composed HTML45,673,167bytes does not claim actual64MiB renderer rejection.",
+    "Reflection-only forged internal snapshot canonical output33MiB is typed OutputTooLarge.",
+    "No app/PG/provider/production sandbox/customer authorization/CSV/manual accessibility/supported OS matrix evidence. V11 owns actual browser checks.",
+    "Original worker binaries and compiled copied dependencies must be preserved before worktree cleanup."
+  ],
+  "bindings": [
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageHtmlRenderer.cs",
+      "kind": "owned-source",
+      "bytes": 10532,
+      "sha256": "e212516d02937849e402c88f6ef65179b165183abda8629bd8b4ed60a938785a"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/Program.cs",
+      "kind": "owned-source",
+      "bytes": 17567,
+      "sha256": "c3e24e316520f86c0ddcf2d20cbd620d35a771069325522a42c99c18ac2a2149"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/README.md",
+      "kind": "owned-source",
+      "bytes": 3579,
+      "sha256": "86d5b267c44d526691c9e59dcef95e00989b6ba94ff54516d7ed60bed50f2254"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/SyntheticFixPackageHtml.Tests.csproj",
+      "kind": "shared-configuration",
+      "bytes": 400,
+      "sha256": "a46292cdb97803a7d86e50bf8fb23330c5965f7d1be8aef2a02f490065d59225"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/complete-package.json",
+      "kind": "owned-source",
+      "bytes": 8400,
+      "sha256": "d51f9385cc199bba80e7d57e9daa037bbf3945abaf9f59bcf6abae311c4b0bb2"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/complete.html",
+      "kind": "owned-source",
+      "bytes": 13480,
+      "sha256": "65994da5e3d4e1776ed0aab10c402ef4bc5ce6bb269defc14c4f1ee3974f032f"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/empty-package.json",
+      "kind": "owned-source",
+      "bytes": 5932,
+      "sha256": "4bf236cadac740dff311fe8f159f7bb55a5dad4cc1cdee0c1ecb77d998b5faac"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/empty.html",
+      "kind": "owned-source",
+      "bytes": 9775,
+      "sha256": "24161047e9364fd9720bf4622fcfd74e634d41fc76184a4c7baaa52dc7047bfd"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/fixture-input.json",
+      "kind": "owned-source",
+      "bytes": 5319,
+      "sha256": "cf60b85212da3501f660060be8cccdb5ad7b6d798993ecfa740db840ef2a6628"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/oracle-hashes.json",
+      "kind": "owned-source",
+      "bytes": 534,
+      "sha256": "e7ab7e3f948202937ac32f1b6562b4dce8ad5698a45738802ed2da0da93221de"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/oracle.py",
+      "kind": "owned-source",
+      "bytes": 14229,
+      "sha256": "ceefbb6dbeab9b14e8306ba50758eaf7ca212797a72d3868dacfd4dc57dafb0a"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/packages.lock.json",
+      "kind": "shared-configuration",
+      "bytes": 286,
+      "sha256": "6d4e9d350f9d3218bd76dfd81616a442878902f68fa8a8703bc94ed3e5e408b5"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/verify-evidence.py",
+      "kind": "owned-source",
+      "bytes": 735,
+      "sha256": "b27f23a7a6c9f57f76a4503b91bf41cafa75ae2d44e955b10f2a16d8dadd4bd1"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/audit.log",
+      "kind": "transcript",
+      "bytes": 178,
+      "sha256": "fed39daaf03f41a41352ee98b4df3379cddde8c58faebb89c62a947e613a220c"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/build.log",
+      "kind": "transcript",
+      "bytes": 521,
+      "sha256": "967ca7dc8058c372025481c3810e13848d7faa4eda4304cd7891c62ccd4fd08c"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/dotnet-info.log",
+      "kind": "transcript",
+      "bytes": 1294,
+      "sha256": "c9c9bba2dcae7ea24910e23686b77326efd24ba06d387ff84fa7ee1cfdec4019"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/format-verify.log",
+      "kind": "transcript",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/format-write.log",
+      "kind": "transcript",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/gitleaks-version.log",
+      "kind": "transcript",
+      "bytes": 7,
+      "sha256": "c9fd9ccb6682c54b5fcb0363757b6c6873564e7c067f70b3b5581b611528b9f4"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/gitleaks.log",
+      "kind": "transcript",
+      "bytes": 78,
+      "sha256": "6979da12194398f3b27644f36ead0f1997c73507cffe4ce6ad2d4336d0fbe6da"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/oracle.log",
+      "kind": "transcript",
+      "bytes": 65,
+      "sha256": "a2fad0b4e2fe38c0eed2b822730dc1959dc22b03eb98391ba15730281dd5d15a"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/python-version.log",
+      "kind": "transcript",
+      "bytes": 13,
+      "sha256": "fd0fd4290ad100adc37e4a82e45f821faeacbecae70f4d3eba08e85be138c632"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/restore.log",
+      "kind": "transcript",
+      "bytes": 159,
+      "sha256": "bfbe76597714096aaa7d42ad4474399d511c10df20fc97e6c8bdbb8a2396f2d5"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/evidence/tests.log",
+      "kind": "transcript",
+      "bytes": 245,
+      "sha256": "a64abf11990b5f0d2150ea214d94bae19f0148bc3766a061b338aed3b08ca102"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/RecommendationGuidance.dll",
+      "kind": "binary",
+      "bytes": 59392,
+      "sha256": "1aecdb2902b8556d997e25ac96fa273adb7b052aa7e48aafe5ee91e0248367f0"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/RecommendationGuidance.pdb",
+      "kind": "binary",
+      "bytes": 19768,
+      "sha256": "2ba318206aeff1b43c6b6be886b21ee0b4cbcbe1df4f5d224a231b0a8d95e8c9"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.deps.json",
+      "kind": "binary",
+      "bytes": 1273,
+      "sha256": "83277b8f5f01f2451ac7c5e948389c001069db0628c6f58996d09fd170a0a985"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll",
+      "kind": "binary",
+      "bytes": 27136,
+      "sha256": "0dfc3ed61edbba7dc13c3b26d599d4e550f49a9b49c8c87f13e689e62985b39f"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.pdb",
+      "kind": "binary",
+      "bytes": 14404,
+      "sha256": "6a929333d7bbc0e22d62d5dfeee319b271e70de074d62b06de378319c08c20cd"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.runtimeconfig.json",
+      "kind": "binary",
+      "bytes": 330,
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackages.dll",
+      "kind": "binary",
+      "bytes": 46080,
+      "sha256": "44e1070139b528d0ee78218cd43edd72fbe3371c9d9f9c7f579a230b43a84e60"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackages.pdb",
+      "kind": "binary",
+      "bytes": 17020,
+      "sha256": "0a4837b9152a4286dbc0faafc4da754e7f06d8b0ae78c016843747db113c4497"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/complete-package.json",
+      "kind": "binary",
+      "bytes": 8400,
+      "sha256": "d51f9385cc199bba80e7d57e9daa037bbf3945abaf9f59bcf6abae311c4b0bb2"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/complete.html",
+      "kind": "binary",
+      "bytes": 13480,
+      "sha256": "65994da5e3d4e1776ed0aab10c402ef4bc5ce6bb269defc14c4f1ee3974f032f"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/empty-package.json",
+      "kind": "binary",
+      "bytes": 5932,
+      "sha256": "4bf236cadac740dff311fe8f159f7bb55a5dad4cc1cdee0c1ecb77d998b5faac"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/empty.html",
+      "kind": "binary",
+      "bytes": 9775,
+      "sha256": "24161047e9364fd9720bf4622fcfd74e634d41fc76184a4c7baaa52dc7047bfd"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/executed-complete.html",
+      "kind": "binary",
+      "bytes": 13480,
+      "sha256": "65994da5e3d4e1776ed0aab10c402ef4bc5ce6bb269defc14c4f1ee3974f032f"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/fixture-input.json",
+      "kind": "binary",
+      "bytes": 5319,
+      "sha256": "cf60b85212da3501f660060be8cccdb5ad7b6d798993ecfa740db840ef2a6628"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/oracle-hashes.json",
+      "kind": "binary",
+      "bytes": 534,
+      "sha256": "e7ab7e3f948202937ac32f1b6562b4dce8ad5698a45738802ed2da0da93221de"
+    },
+    {
+      "path": "tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/packages.lock.json",
+      "kind": "binary",
+      "bytes": 286,
+      "sha256": "6d4e9d350f9d3218bd76dfd81616a442878902f68fa8a8703bc94ed3e5e408b5"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageContracts.cs",
+      "kind": "shared-source",
+      "bytes": 2282,
+      "sha256": "12a55f6e33657aed31993d27cd24c5bb8557f73315662dba6a103d8a8e31a084"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/FixPackageBuilder.cs",
+      "kind": "shared-source",
+      "bytes": 9595,
+      "sha256": "a164d098553ea45ce93834f1b84202079880b2fa29247995bd6ef93815f10e50"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/SyntheticFixPackages.csproj",
+      "kind": "shared-source",
+      "bytes": 165,
+      "sha256": "6a88130b401e2e5ca0b65d0b4aa39aae25ced3b2cb5ea7ac930f9e22fc3a40b1"
+    },
+    {
+      "path": "src/server/modules/SyntheticFixPackages/packages.lock.json",
+      "kind": "shared-source",
+      "bytes": 134,
+      "sha256": "bdfa54267d7a47b94b1b9fbaee6b9ee60bc3dba2784d2634865866208f7bfe4d"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/GuidanceContracts.cs",
+      "kind": "shared-source",
+      "bytes": 3614,
+      "sha256": "3de7f1ec79f6caf27dd809869b4cf2945ed62b9018dda2b42f7555f10ae72d19"
+    },
+    {
+      "path": "src/server/modules/RecommendationGuidance/RecommendationGuidanceBuilder.cs",
+      "kind": "shared-source",
+      "bytes": 18896,
+      "sha256": "cb2d378973626288fc0b1db933979fd4c99c640ebc00c49338987184040d5d7a"
+    },
+    {
+      "path": "Directory.Build.props",
+      "kind": "shared-source",
+      "bytes": 463,
+      "sha256": "60196e9c5fbe69da1959762f8ada11c916aa077ab5366b08305cb3d101b6f44e"
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "date": "2026-10-03",
+  "status": "VERIFIED local test synchronization; corrected hosted Linux execution NOT VERIFIED",
+  "originalHostedCode": "8b44a2767fe70b561bf6583bdf0b812c9f404d1a",
+  "originalHostedRun": 37137627504,
+  "originalLinuxJob": 111245274442,
+  "originalWholeLinuxResult": "FAILED; later skipped checks not passed",
+  "failure": "Existing offline preview mobile keyboard-proposals-navigation at immediate synchronous page.url() read after Enter",
+  "causeAssessment": "Supported asynchronous-navigation timing inference, not conclusively proven root cause. Original local440 pass does not erase actual hosted failure.",
+  "scope": "Coordinator-owned test only. Two bounded5000ms exact URL waits; actual keyboard actions and all440 assertions unchanged. No scripted navigation, retries, suppression or product/source/rendering changes.",
+  "testSourceHashes": {
+    "original": "fb1f6d9141ef301ca01bb3429a6abd1577cf54f6d01774ab1d84eb277ff1e090",
+    "corrected": "eb38afc6807d02f44fc2e55f7f27fa1fbb001c27b6af0b063cc0f49f16e05f42"
+  },
+  "unchangedModuleAndFixtureHashes": {
+    "src/server/modules/SyntheticAiPreview/PreviewBuilder.cs": "944fd60053b4deb560fdb1ffa1d73236472c04d11cd0e3bb26263f5f66100990",
+    "src/server/modules/SyntheticAiPreview/PreviewCanonical.cs": "a546551b3b75daef11177ce7e5d74bf9b50f1d7e07ac3972cdebb2ef23e1e527",
+    "src/server/modules/SyntheticAiPreview/PreviewContracts.cs": "244be0394eeec4b3b26a3845724bbdb2e281fc507d2bd2593f64c3e3f80bfd8f",
+    "src/server/modules/SyntheticAiPreview/PreviewRenderer.cs": "309c9345c85b6d3d3e336c9e4629f9b3e1d1de682f1dee79a2c15d5dc902ec00",
+    "src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj": "7b531ebaca9d5f7260ebc9b59feb9d2a742507d3dee1e5d39bae303934aae8db",
+    "src/server/modules/SyntheticAiPreview/packages.lock.json": "8af39d741896c7b887dbdbb611028462778e62f52deae9e2c19f4200dffe0893",
+    "src/server/modules/SyntheticEvaluation/EvaluationAccuracyBuilder.cs": "8dd87bb0a9cbc1e14d7934fa794cdda57cb9a9a941947181607865d415d72212",
+    "src/server/modules/SyntheticEvaluation/EvaluationContracts.cs": "c91dc5135b8fe69aabd2a0e822e871eb3108e96907447fcd0bab8d48d949b647",
+    "src/server/modules/SyntheticEvaluation/EvaluationRegressionBuilder.cs": "0da5ef4040d95e3f1d164346eaa1546a7894a18e7e1be395d52ae18900b8622a",
+    "src/server/modules/SyntheticEvaluation/EvaluationReviewerPolicy.cs": "82e957a84e84e2e2df624ecd627c65c1d55fa0bcbc51f64042697003995171a4",
+    "src/server/modules/SyntheticEvaluation/EvaluationSampler.cs": "7cf77b3024f7ca4d6f265a71b73bcf47d6d831fdf1fc26db4974d0e3f4164074",
+    "src/server/modules/SyntheticEvaluation/EvaluationWarningBuilder.cs": "f11285efe5ee072d1a422f24ca7da18d26f8960cfd55693c43480a821593ed96",
+    "src/server/modules/SyntheticEvaluation/README.md": "e995950732259068f0bcdcaaf0006dfd289babde3e0f91212dbc3e77167e0c75",
+    "src/server/modules/SyntheticEvaluation/RegressionContracts.cs": "ec8915edc567e3c88a463b9e73e85bd6a158d3ce07819cfb0e914b089526ee1f",
+    "src/server/modules/SyntheticEvaluation/ReviewerContracts.cs": "46e607df632c6359876cc8aae9ea55318109d2584dee353a988e005d226c360a",
+    "src/server/modules/SyntheticEvaluation/SamplingContracts.cs": "991aacbed8ad9e059277e8fca17bddd9d05c62c760c7e244b5df347a7c6df3f4",
+    "src/server/modules/SyntheticEvaluation/SyntheticEvaluation.csproj": "8d654c44b7bebb6b31a9f2f606927f45b5072193adc4eef8cce3f3cf3b278df3",
+    "src/server/modules/SyntheticEvaluation/packages.lock.json": "a29c6aa8cfb81874ff8bb78dc369d7416f28c9b8cc47e99592bfc019b20c41eb",
+    "tests/integration/SyntheticAiPreview.Tests/Program.cs": "47a429137396e91470a0fe4436f2e6b2beed9266331867ad61c6d7cbde4b9d8b",
+    "tests/integration/SyntheticAiPreview.Tests/README.md": "e8b8f148950f3cf9143ba30ea3583f8d0cf8ccf8a95ae53f1e66f6c3d4ee6d69",
+    "tests/integration/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj": "e8cb6291dc790964c4a153ec2eadbdc07073ef01eff136edade3778e99d2f35d",
+    "tests/integration/SyntheticAiPreview.Tests/artifacts.json": "c22fe6328be893e0a94d5a909a886d61515b390895992e779394ef2fd5ebd1b9",
+    "tests/integration/SyntheticAiPreview.Tests/bind-artifacts.py": "76519c378bdf9fb60a86ab927c32fa239daebb5de4311fecb6ab847f3db79f77",
+    "tests/integration/SyntheticAiPreview.Tests/build.log": "215c83a65f41de5f2f02e583e807f4a3b9c21c6295ab1b7a46737e5caf650962",
+    "tests/integration/SyntheticAiPreview.Tests/execution.json": "9bac9015861877971bfc8e8ac8a9ab86fcf49a4ef32896683b6a90983b7548c5",
+    "tests/integration/SyntheticAiPreview.Tests/execution.log": "287e10795246626124d4f213f3986d1b7aef3682f1f773fd486357259b5cf3c4",
+    "tests/integration/SyntheticAiPreview.Tests/format-write.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/integration/SyntheticAiPreview.Tests/format.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/integration/SyntheticAiPreview.Tests/golden-oracle.py": "dc6853e0fedc473ec42f6e8cd715db4d4446f60e49e1365c6e19a79922bd6415",
+    "tests/integration/SyntheticAiPreview.Tests/golden-provenance.json": "bcb1305bae63c677ba23bec611067f99a0745dbe9d41fa6e6d8bc65cff99a790",
+    "tests/integration/SyntheticAiPreview.Tests/html-golden-provenance.json": "18a543c6011f6343c1419052719976e5cefa37c3475d016e022cafec1570f7af",
+    "tests/integration/SyntheticAiPreview.Tests/html-oracle.py": "72920413e26e9dc8181cc12cf2a880b28dce6b93d1a814d7ce47821116517a35",
+    "tests/integration/SyntheticAiPreview.Tests/packages.lock.json": "61f9f6e8443f279b178f19e82e2dc81836f76220f4aeae319a19a6692744ef03",
+    "tests/integration/SyntheticAiPreview.Tests/packet-golden.json": "ddfa6758fdf5aead7b315579cf210952cbde8b9ae832e8e755df9a37f58a7fa0",
+    "tests/integration/SyntheticAiPreview.Tests/packet-input.json": "b6fcc1ad68879ba80fcca1e19cfe1f05493d250008abc07ca7ac6e3c92c5e81c",
+    "tests/integration/SyntheticAiPreview.Tests/preview-golden.html": "55fd622c1947684578c132f97a7150ae0158865c475087d69aa479a252502806",
+    "tests/integration/SyntheticAiPreview.Tests/preview-golden.json": "0d7c49c25f11a8a61f76a6af0787f9ccbe9c9b9bfb1c268232835809448fad7e",
+    "tests/integration/SyntheticAiPreview.Tests/proposal-golden.json": "7153e797474d619bc96bcb93581574b1fa7899d0642995bed188b55abd25fef9",
+    "tests/integration/SyntheticAiPreview.Tests/provider-output.json": "f534e84d23a33d575c70f37ba6a772c6b4c4a96516e42510bf2e054b791308fc",
+    "tests/integration/SyntheticAiPreview.Tests/restore.log": "0b542702c4c9466df4dfdc2473f4e6c3f086666c4a1d29065a89ceabbc565a9f"
+  },
+  "checks": [
+    {
+      "name": "syntax",
+      "args": [
+        "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+        "--check",
+        "tests/e2e/synthetic-ai-preview/verify.mjs"
+      ],
+      "exitCode": 0,
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "format",
+      "args": [
+        "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+        "src/web/node_modules/prettier/bin/prettier.cjs",
+        "--check",
+        "tests/e2e/synthetic-ai-preview/verify.mjs"
+      ],
+      "exitCode": 0,
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20"
+      }
+    },
+    {
+      "name": "whitespace",
+      "args": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "contentHash": {
+        "algorithm": "sha256",
+        "hex": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "fixtureChecks": [
+    {
+      "name": "legacy-preview-restore",
+      "args": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "restore",
+        "tests/integration/SyntheticAiPreview.Tests",
+        "--locked-mode"
+      ],
+      "exitCode": 0,
+      "sha256": "01b0f26d6865c584eba9b524a62d8661416040337fc69ca1c5385cc01d816701"
+    },
+    {
+      "name": "legacy-preview-build",
+      "args": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "build",
+        "tests/integration/SyntheticAiPreview.Tests",
+        "--configuration",
+        "Release",
+        "--no-restore",
+        "-m:1",
+        "-p:UseSharedCompilation=false"
+      ],
+      "exitCode": 0,
+      "sha256": "535cb2358e870b6eeaab009203ac52a5ae436ff2837da51158b5276cb4cf6875"
+    },
+    {
+      "name": "legacy-preview-fixtures",
+      "args": [
+        "/private/tmp/iga-dotnet-10.0.401/dotnet",
+        "tests/integration/SyntheticAiPreview.Tests/bin/Release/net10.0/SyntheticAiPreview.Tests.dll",
+        "--write-previews",
+        "/private/tmp/iga-m08-cycle03-evidence/legacy-previews"
+      ],
+      "exitCode": 0,
+      "sha256": "287e10795246626124d4f213f3986d1b7aef3682f1f773fd486357259b5cf3c4"
+    }
+  ],
+  "originalLocalBrowser": {
+    "args": [
+      "/private/tmp/node-v24.21.0-darwin-arm64/bin/node",
+      "/private/tmp/iga-m08-cycle03-evidence/legacy-browser-original.mjs",
+      "--preview-directory",
+      "/private/tmp/iga-m08-cycle03-evidence/legacy-previews",
+      "--playwright-module",
+      "/Users/pedrovolu/Documents/ChatGPT/IGAMigrationTool/tests/e2e/consultant-demo/node_modules/playwright",
+      "--browser-executable",
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    ],
+    "exitCode": 0,
+    "sha256": "653c6293056cd3a5e4af3f3c340dc5b49b39bb87d3b0e4116b52b63047776b8d",
+    "sourceSha256": "fb1f6d9141ef301ca01bb3429a6abd1577cf54f6d01774ab1d84eb277ff1e090",
+    "note": "Original local replay result independent from actual original hosted failure; one successful timing does not disprove navigation race."
+  },
+  "correctedBrowser": {
+    "exitCode": 0,
+    "checks": 440,
+    "viewports": [
+      "desktop",
+      "mobile",
+      "reflow"
+    ],
+    "logContentHash": {
+      "algorithm": "sha256",
+      "hex": "653c6293056cd3a5e4af3f3c340dc5b49b39bb87d3b0e4116b52b63047776b8d"
+    }
+  },
+  "independentReview": {
+    "path": "work/m08-cycle03-evidence/reviewer/nonauthor-review-legacy-navigation.json",
+    "contentHash": {
+      "algorithm": "sha256",
+      "hex": "e99b34cf1cf277001d00b68a195249e2523000984b100a4356858a4b2554516f"
+    }
+  },
+  "bounds": "Approved M08 module checks passed on Linux/Windows2022/2025; full milestone/UAT/live gates unchanged. Initial whole-run failure preserved; current corrected CI results must be observed before PASS claim."
+}

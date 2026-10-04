@@ -1,0 +1,209 @@
+{
+  "description": "Original734 exact executed source/outputs/Release/native logs copied before same-digest-gap reproduction; all unchanged runtime/fixture dependencies remain separately bound in original metadata. Original manifest paths are superseded for changed files, archive mappings identify exact originals.",
+  "bindings": [
+    {
+      "originalPath": "src/web/src/PlanningTasksPanel.tsx",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksPanel.tsx.frozen",
+      "sha256": "0b1df7d69578dd67d601fcb7f45fe7a3b0d6d1fe2c442989a658ae6dcca2c697",
+      "bytes": 40039
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/verify.mjs",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/verify.mjs.frozen",
+      "sha256": "1e8d3f3974b7613e9639c4a2ab1012630fb0aede6b1fe85c1ff0f1f47a9bdb1e",
+      "bytes": 40068
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/execution-metadata.json",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/execution-metadata.json.frozen",
+      "sha256": "5a958432b954785523c9e7b3cefa56fefce1ec3a8c500875d99390cbab2b3c60",
+      "bytes": 250394
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/executed-checks.json",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/executed-checks.json.frozen",
+      "sha256": "fc7bc6dbb7bbc657411f67de96615abb7716be3fa92fd769c2a17bc81d2dd1be",
+      "bytes": 7553
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/README.md",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/README.md.frozen",
+      "sha256": "d868af941efa3b3c71e3831d4b80e66d2b700cc7412e921fe2192a19e14f6682",
+      "bytes": 4937
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/receipt-dependency.mjs",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/receipt-dependency.mjs.frozen",
+      "sha256": "dbeacc3653f5abf88bed78e00a9f33463b2f1a509486a3f3b92f7a366be23d5c",
+      "bytes": 8101
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/FixPackagePreview.mjs",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/FixPackagePreview.mjs.frozen",
+      "sha256": "9924d1583905092045c1ee4b24a3c46f20b10186b4d6b78096fba3b8e7a01401",
+      "bytes": 37403
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/results.json",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/results.json.frozen",
+      "sha256": "f749f7c16995e8f2abc09b9a0ba8f17164b3b950a17e95ca9048c8b0e441139c",
+      "bytes": 604
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/complete-actual.html",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/complete-actual.html.frozen",
+      "sha256": "58ffae0f8655fe131f4856e80247339c73b7a1960573847fa0578298522e4306",
+      "bytes": 17946
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/inert-api.mjs",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/inert-api.mjs.frozen",
+      "sha256": "2a2f441fead8015e320332949a4e1b48054da29f9a7b01b620e70475aaefb6fc",
+      "bytes": 141
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/PlanningTasksPanel.mjs",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksPanel.mjs.frozen",
+      "sha256": "71f052f31d7fe3449f9a4b1e6888e9fe1fa5909b825f60dc62b232414f3fb4a4",
+      "bytes": 35535
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/empty-actual.html",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/empty-actual.html.frozen",
+      "sha256": "9e42e6be6170fbee0e470b56fc2ec56baa4f2bb1ecc4302f483e770820147ee2",
+      "bytes": 1953
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/ArtifactReviewPanel.mjs",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/ArtifactReviewPanel.mjs.frozen",
+      "sha256": "3a0a093ea88adae2411d9e06ddc02675f1f12780e18421f583b3cacabb0fbe12",
+      "bytes": 20335
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/artifacts/unavailable-actual.html",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/unavailable-actual.html.frozen",
+      "sha256": "e5becddc389d6f33cb99ed5cdb994b2d11627f2cbb800df8d2e87189e46d81dc",
+      "bytes": 1868
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/bin/Release/net10.0/PlanningTasksComponent.Tests.deps.json",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.deps.json.frozen",
+      "sha256": "13fb9a13122150d7ac32bb89968c6be15887dc7780c06735300917cf0fa17a34",
+      "bytes": 456
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/bin/Release/net10.0/PlanningTasksComponent.Tests.runtimeconfig.json",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.runtimeconfig.json.frozen",
+      "sha256": "9950d4583cfc9a106857c0d5b8a75b53e8774852b57b80bc3823a74d44a4d87f",
+      "bytes": 330
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/bin/Release/net10.0/PlanningTasksComponent.Tests",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.frozen",
+      "sha256": "9195957a5b76856946ed4c7a1870fcef7891a73c20028a102bc614bb38a720f5",
+      "bytes": 124712
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/bin/Release/net10.0/PlanningTasksComponent.Tests.dll",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.dll.frozen",
+      "sha256": "a4a4148e85f7fa851975ef40f651229669b5211081ae0b8d8695a4293c22a342",
+      "bytes": 8192
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/bin/Release/net10.0/PlanningTasksComponent.Tests.pdb",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/PlanningTasksComponent.Tests.pdb.frozen",
+      "sha256": "e644119db8a44d9b984cff7a91b3e114b5a3bb0347a517228c86bd9986f53d04",
+      "bytes": 12124
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-secret-owned-tests.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-secret-owned-tests.log.frozen",
+      "sha256": "3c6e02a93679680298f3e6530e6eed3167f7be70cb956e6503661e255e679495",
+      "bytes": 135
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-frontend-build.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-frontend-build.log.frozen",
+      "sha256": "a072d94537682e8f0d5c06b965251fcacd789df1ed951e535ed68cbc4b4034ce",
+      "bytes": 844
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-secret-frontend.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-secret-frontend.log.frozen",
+      "sha256": "15d95a7b942d08042670bde375c9a040c1501afcdcb89d42f99b35a5477aad54",
+      "bytes": 135
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-restore.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-restore.log.frozen",
+      "sha256": "40d104602671164ab3958225da3e1c8cabd55f0251d6df6bc911d9d5a24f44ce",
+      "bytes": 80
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-diff.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-diff.log.frozen",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-frontend-format.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-frontend-format.log.frozen",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytes": 66
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-evidence-format.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-evidence-format.log.frozen",
+      "sha256": "ce10cba83a265bd44531964d6d17c7131461fa358aa7b59447e5a13fcee9a140",
+      "bytes": 239
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-contract.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-contract.log.frozen",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-dotnet-build.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-dotnet-build.log.frozen",
+      "sha256": "0726797d70c69c99b4fd0ed21bd71f0ca5e10b3441a53d3153bd5787c0f87b5c",
+      "bytes": 236
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-dotnet-format.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-dotnet-format.log.frozen",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-oracle.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-oracle.log.frozen",
+      "sha256": "85945915f6388d16bda3f329f11c80186eb7e43c7a3812cea4f51babac8f31f7",
+      "bytes": 37
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-evidence-secret.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-evidence-secret.log.frozen",
+      "sha256": "b4f0dcfb9a2c33beb033c7fe5d378af32cf70a88341ea219a5e9b7c01cf9e280",
+      "bytes": 83
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-typecheck.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-typecheck.log.frozen",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-component.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-component.log.frozen",
+      "sha256": "ba7dad4fb7646e95679cfb417c3fd01ee7fa4f6797f1297963e6df2424541cd2",
+      "bytes": 75
+    },
+    {
+      "originalPath": "tests/unit/PlanningTasksComponent.Tests/final-evidence-format-pass.log",
+      "archivePath": "tests/unit/PlanningTasksComponent.Tests/execution/original734/final-evidence-format-pass.log.frozen",
+      "sha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+      "bytes": 66
+    }
+  ]
+}
