@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-protocol-cleanup-evidence-v1",
+  "scenarioFreeze": "f3416281",
+  "governingAmendment": "dadf7f87",
+  "driver": "Npgsql10.0.3",
+  "lease": "ce01b389",
+  "result": "PASS_SOURCE_LIMIT_DEMONSTRATED",
+  "records": "evidence/protocol-cleanup-npgsql10.0.3.json",
+  "mechanism": "Owned ephemeral loopback synthetic protocol peer completesstartup; withholds mainqueryresponses andcancelconnectorclose. Originallease logicallyends while driver/publicDisposepending; releasingonlytestownedpeers allows observeddriver tasks end. NoactualPGdatabase/login used.",
+  "executed": {
+    "ReleaseBuild": "PASS_0warnings_0errors",
+    "original31Commitments": "PASS",
+    "ownPreparation31": "PASS",
+    "scriptedMarker4": "PASS"
+  },
+  "retainedInvocationFailures": [
+    "Initial protocoltest compileCS8602 nullable dereference at83; corrected driver nonnull guard beforeexecution",
+    "Initial shell continuedaftercompilefailure and invokedstaleDLLunknownmode; exitedfailure beforeanyprotocolfixture. Subsequentcommandsset-e preventstaleexecution. No core dump (ulimit-c0)."
+  ],
+  "limits": [
+    "Synthetic publicdriverlimit only; no PostgreSQL pg_stat_activity/pg_locks physicalproof",
+    "Test-only watchdog/peer release are notruntimecleanupTTL/termination",
+    "All18persisted mechanisms NOT_EXECUTED"
+  ]
+}
