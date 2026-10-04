@@ -57,6 +57,12 @@ fences. Every protected delivery rechecks authority, lifecycle and reference
 metadata. The configured transport must honor linked cancellation on every
 bounded write; production adapters remain a separate packet.
 
+The exact source port is `CaptureAsync(transaction,actor,command,fence,ct)`.
+The owning adapter checks actor/fence/scope bindings, resolves minimized complete
+required-set metadata under its source revision fence, and revalidates that
+complete set through the supplied fence before protected source/score/text loads.
+No ambient actor context, inline grant boolean or caller-created proof applies.
+
 The owning source port must establish terminal eligibility, minimization, current
 authorization for the complete source category set, and supplied retention
 authority before loading/capturing protected source content. The core revalidates

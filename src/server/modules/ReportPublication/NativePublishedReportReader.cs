@@ -50,7 +50,8 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
             await using var transaction = await store.BeginAsync(request.Scope, cancellationToken);
             if (transaction.Scope != request.Scope || transaction.TransactionId == Guid.Empty) return new(PublicationIssueV1.IntegrityMismatch, null);
             var version = await transaction.ReadCommittedVersionAsync(request.ReportVersionId, cancellationToken);
-            if (!ValidVersion(version, request, await transaction.ReadDatabaseUtcAsync(cancellationToken))) return new(PublicationIssueV1.Unavailable, null);
+            var readStartedAt = await transaction.ReadDatabaseUtcAsync(cancellationToken);
+            if (!ValidVersion(version, request, readStartedAt)) return new(PublicationIssueV1.Unavailable, null);
             var m = version!.Manifest;
             var access = new RequiredPublicationAccessV1(m.RequiredCategories, m.RequiredFields);
             if (!await fence.RevalidateAsync(access, cancellationToken)) return new(PublicationIssueV1.Unavailable, null);
@@ -101,10 +102,12 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                     var audit = await transaction.AppendAuditAsync(new(null, request.InvocationId, request.CorrelationId, actor, request.Scope,
                         PublicationResourceKindV1.ReportVersion, request.ReportVersionId, PublicationAuditActionV1.ReadExact,
                         PublicationAuditOutcomeV1.Succeeded, PublicationAuditReasonV1.None, request.ExpectedManifestDigest, m.RequiredFields), lease.Token);
-                    if (!NativeReportPublisherV1.AuditCommitValid(audit)) return new(PublicationIssueV1.IntegrityMismatch, null);
+                    if (!NativeReportPublisherV1.AuditCommitValid(audit) || audit.EventAtUtc < readStartedAt) return new(PublicationIssueV1.IntegrityMismatch, null);
                     await transaction.AddReadReceiptAsync(new(request.InvocationId, requestDigest, actor, request.Scope, request.ReportVersionId,
                         request.ExpectedManifestDigest, audit.EventAtUtc, audit.EventId, audit.EventDigest), lease.Token);
                     lease.Check();
+                    var finalAuditTime = await transaction.ReadDatabaseUtcAsync(lease.Token);
+                    if (finalAuditTime.Offset != TimeSpan.Zero || audit.EventAtUtc > finalAuditTime) return new(PublicationIssueV1.IntegrityMismatch, null);
                     if (!await fence.RevalidateAsync(access, lease.Token)
                         || !ValidVersion(await transaction.ReadCommittedVersionAsync(request.ReportVersionId, lease.Token), request,
                             await transaction.ReadDatabaseUtcAsync(lease.Token))) return new(PublicationIssueV1.Unavailable, null);

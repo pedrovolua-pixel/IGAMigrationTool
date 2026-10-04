@@ -4,8 +4,8 @@ namespace ReportPublication;
 
 public interface IPublicationSourceV1
 {
-    ValueTask<SourceCaptureV1?> CaptureAsync(IPublicationTransactionV1 transaction,
-        PublishCommandV1 command, CancellationToken cancellationToken);
+    ValueTask<SourceCaptureV1?> CaptureAsync(IPublicationTransactionV1 transaction, PublicationActorV1 actor,
+        PublishCommandV1 command, PublicationFenceV1 fence, CancellationToken cancellationToken);
 }
 
 public interface IPublicationAuthorityV1

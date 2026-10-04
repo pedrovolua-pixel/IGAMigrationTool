@@ -52,12 +52,14 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
             {
                 var receipt = lookup.Receipt;
                 if (!PublicationValidationV1.PublicationReceipt(receipt) || receipt!.OperationId != command.OperationId || receipt.Actor != actor
-                    || receipt.Scope != command.Scope || receipt.CommandDigest != commandDigest || receipt.RunId != command.RunId)
+                    || receipt.Scope != command.Scope || receipt.CommandDigest != commandDigest || receipt.RunId != command.RunId
+                    || receipt.ExpectedRunRevision != command.ExpectedRunRevision)
                     return new(PublicationIssueV1.IntegrityMismatch, null);
                 var committed = await transaction.ReadCommittedVersionAsync(receipt.ReportVersionId, cancellationToken);
                 if (committed is null || !PublicationValidationV1.Manifest(committed.Manifest) || committed.Manifest.Scope != command.Scope
                     || committed.ManifestDigest != receipt.ManifestDigest || committed.Manifest.ReportVersionId != receipt.ReportVersionId
                     || committed.Manifest.RunId != receipt.RunId || committed.Manifest.RunRevision != receipt.ExpectedRunRevision
+                    || committed.Manifest.SourceDigest != command.ExpectedSourceDigest
                     || committed.Manifest.ProjectionDigest != receipt.ProjectionDigest || committed.Manifest.ScoreDigest != receipt.ScoreDigest
                     || NativePublicationCanonicalV1.Hash(NativePublicationCanonicalV1.ManifestBytes(committed.Manifest)) != receipt.ManifestDigest
                     || committed.LifecycleRevision <= 0 || committed.State != PublicationLifecycleStateV1.Active || committed.ReadBlocked
@@ -69,7 +71,7 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
                 return new(null, receipt);
             }
             if (lookup.Status != ReceiptLookupStatusV1.NotFound || lookup.Receipt is not null) return new(PublicationIssueV1.IntegrityMismatch, null);
-            var captured = await source.CaptureAsync(transaction, command, cancellationToken);
+            var captured = await source.CaptureAsync(transaction, actor, command, fence, cancellationToken);
             if (!PublicationValidationV1.Source(captured)) return new(PublicationIssueV1.Unavailable, null);
             var p = captured!.Projection;
             if (p.Scope != command.Scope || p.RunId != command.RunId || p.RunRevision != command.ExpectedRunRevision) return new(PublicationIssueV1.RevisionConflict, null);
@@ -96,7 +98,7 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
                 manifest.ReportVersionId, manifestBlob.Digest, projection.Digest, score.Digest, audit.EventAtUtc, audit.EventId, audit.EventDigest);
             await transaction.AddPublicationAsync(new(manifest, manifestBlob.Digest, result), cancellationToken);
             var finalTime = await transaction.ReadDatabaseUtcAsync(cancellationToken);
-            if (finalTime.Offset != TimeSpan.Zero || finalTime < createdAt || finalTime >= fence.OriginalDeadlineUtc || finalTime >= captured.Retention.ExpiresAtUtc
+            if (finalTime.Offset != TimeSpan.Zero || finalTime < createdAt || audit.EventAtUtc < createdAt || audit.EventAtUtc > finalTime || finalTime >= fence.OriginalDeadlineUtc || finalTime >= captured.Retention.ExpiresAtUtc
                 || !await fence.RevalidateAsync(access, cancellationToken)
                 || !await transaction.RevalidateSourceAsync(p.RunId, p.RunRevision, sourceDigest, cancellationToken))
                 return new(PublicationIssueV1.Unavailable, null);
