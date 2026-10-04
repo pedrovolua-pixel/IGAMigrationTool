@@ -30,6 +30,12 @@ if (args.SequenceEqual(new[] { "--portable-adapter" }))
     await File.WriteAllTextAsync(Path.Combine(AppContext.BaseDirectory, "portable-adapter-results.json"), JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
     if (results.Any(x => !x.Passed)) Environment.ExitCode = 1;
 }
+else if (args.SequenceEqual(new[] { "--audit-encoder" }))
+{
+    var results = AuditEncoderChecks.Run();
+    await File.WriteAllTextAsync(Path.Combine(AppContext.BaseDirectory, "audit-encoder-results.json"), JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
+    if (results.Any(x => !x.Passed)) Environment.ExitCode = 1;
+}
 else if (args.SequenceEqual(new[] { "--protocol-cleanup" }))
 {
     var observation = await ProtocolCleanupChecks.RunAsync();

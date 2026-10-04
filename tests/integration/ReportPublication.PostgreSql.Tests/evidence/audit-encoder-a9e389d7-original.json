@@ -1,0 +1,577 @@
+[
+  {
+    "Name": "completed:publish-event:original-byteexact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:returned-byteownership",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:crosscustomer-deny",
+    "Passed": false,
+    "FailureType": "InvalidOperationException"
+  },
+  {
+    "Name": "completed:publish-event:head-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:binding-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:binding-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:head-id-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:sequence-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:head-offset",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:head-genesis-wrong",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:head-uppercase-digest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-invalidoutcome",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-wrongreason",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-zeroinvocation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-nullmanifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-wrongresourcekind",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-fields-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:publish-event:intent-returnedfields-invalid",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:original-byteexact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:returned-byteownership",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:crosscustomer-deny",
+    "Passed": false,
+    "FailureType": "InvalidOperationException"
+  },
+  {
+    "Name": "completed:read-event:head-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:binding-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:binding-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:head-id-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:sequence-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:head-offset",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:head-genesis-wrong",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:head-uppercase-digest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-invalidoutcome",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-wrongreason",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-zeroinvocation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-nullmanifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-wrongresourcekind",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-fields-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "completed:read-event:intent-returnedfields-invalid",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:original-byteexact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:returned-byteownership",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:crosscustomer-deny",
+    "Passed": false,
+    "FailureType": "InvalidOperationException"
+  },
+  {
+    "Name": "warned:publish-event:head-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:binding-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:binding-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:head-id-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:sequence-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:head-offset",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:head-genesis-wrong",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:head-uppercase-digest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-invalidoutcome",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-wrongreason",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-zeroinvocation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-nullmanifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-wrongresourcekind",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-fields-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:publish-event:intent-returnedfields-invalid",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:original-byteexact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:returned-byteownership",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:crosscustomer-deny",
+    "Passed": false,
+    "FailureType": "InvalidOperationException"
+  },
+  {
+    "Name": "warned:read-event:head-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:binding-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:binding-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:head-id-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:sequence-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:head-offset",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:head-genesis-wrong",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:head-uppercase-digest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-invalidoutcome",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-wrongreason",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-zeroinvocation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-nullmanifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-wrongresourcekind",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-fields-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "warned:read-event:intent-returnedfields-invalid",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:original-byteexact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:returned-byteownership",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:crosscustomer-deny",
+    "Passed": false,
+    "FailureType": "InvalidOperationException"
+  },
+  {
+    "Name": "source-limitation:publish-event:head-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:binding-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:binding-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:head-id-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:sequence-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:head-offset",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:head-genesis-wrong",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:head-uppercase-digest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-invalidoutcome",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-wrongreason",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-zeroinvocation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-nullmanifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-wrongresourcekind",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-fields-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:publish-event:intent-returnedfields-invalid",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:original-byteexact",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:returned-byteownership",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:crosscustomer-deny",
+    "Passed": false,
+    "FailureType": "InvalidOperationException"
+  },
+  {
+    "Name": "source-limitation:read-event:head-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:binding-null",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:binding-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:head-id-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:sequence-zero",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:head-offset",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:head-genesis-wrong",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:head-uppercase-digest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-invalidoutcome",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-wrongreason",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-zeroinvocation",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-nullmanifest",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-wrongresourcekind",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-fields-copy",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "source-limitation:read-event:intent-returnedfields-invalid",
+    "Passed": true,
+    "FailureType": null
+  },
+  {
+    "Name": "anonymous-null-positive",
+    "Passed": true,
+    "FailureType": null
+  }
+]
