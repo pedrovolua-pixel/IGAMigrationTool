@@ -549,6 +549,7 @@ try {
           nodes.filter((node) => {
             if (
               !node.getClientRects().length ||
+              !node.checkVisibility() ||
               getComputedStyle(node).visibility === "hidden"
             )
               return false;
