@@ -13,3 +13,5 @@ The approved static design is available separately under `/design-review/`. That
 ## Verification boundaries
 
 See UI-W4's preimplementation tests and dated execution evidence. Automated/local browser results do not establish manual supported-browser/screen-reader acceptance or G1–G9. A read-only preview can verify visual/navigation/state retention but cannot establish mutation/recovery success. No migration, configuration or dependency changes are required for this presentation packet.
+
+Release-readiness integration preserves Overview as the initial landing. Starting or explicitly opening a saved run selects Assessments so the existing run-detail focus and controls stay visible. Browser regression drivers use the real navigation control before interacting with an initial/reloaded Assessments form; semantic/transport/authentication checks remain intact.
