@@ -11,6 +11,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
     private readonly CancellationToken token;
     private readonly TaskCompletionSource ended = new(TaskCreationOptions.RunContinuationsAsynchronously);
     private readonly CancellationTokenRegistration callerRegistration;
+    private readonly CallerCancellationObserverV1 callerObserver;
     private readonly ITimer timer;
     private readonly object gate = new();
     private DateTimeOffset deadline;
@@ -28,6 +29,8 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
         try { timer = clock.CreateTimer(_ => Schedule(), null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan); }
         catch { lifetime.Dispose(); throw; }
         callerRegistration = caller.UnsafeRegister(static state => ((OriginalValidityLeaseV1)state!).Invalidate(), this);
+        try { callerObserver = new(caller, End); }
+        catch { try { timer.Dispose(); } finally { callerRegistration.Dispose(); lifetime.Dispose(); } throw; }
         try { Schedule(); Check(); } catch { Dispose(); throw; }
     }
     internal DateTimeOffset DeadlineUtc { get { lock (gate) return deadline; } }
@@ -41,6 +44,8 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
     internal void Check()
     {
         if (admissionCaller.IsCancellationRequested) { End(); throw new OperationCanceledException(admissionCaller); }
+        try { CallerCancellationObserverV1.RequireAvailable(admissionCaller); }
+        catch (ObjectDisposedException) { End(); throw new OperationCanceledException(admissionCaller); }
         bool mustEnd;
         lock (gate) mustEnd = disposed || Remaining() <= TimeSpan.Zero;
         if (mustEnd) { End(); throw new OperationCanceledException(token); }
@@ -53,7 +58,9 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
         var cancelled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         using var originalRegistration = token.UnsafeRegister(_ => CancelOperation(), null);
         using var nestedRegistration = caller.UnsafeRegister(_ => CancelOperation(), null);
-        Check(); caller.ThrowIfCancellationRequested(); operation.Token.ThrowIfCancellationRequested();
+        using var nestedObserver = new CallerCancellationObserverV1(caller, CancelOperation);
+        Check(); caller.ThrowIfCancellationRequested(); CallerCancellationObserverV1.RequireAvailable(caller);
+        operation.Token.ThrowIfCancellationRequested();
         var pending = action(operation.Token).AsTask();
         try
         {
@@ -61,7 +68,8 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
             var winner = await Task.WhenAny(pending, ended.Task, cancelled.Task);
             if (winner != pending) { operation.Cancel(); throw new OperationCanceledException(operation.Token); }
             var value = await pending;
-            Check(); caller.ThrowIfCancellationRequested(); operation.Token.ThrowIfCancellationRequested();
+            Check(); caller.ThrowIfCancellationRequested(); CallerCancellationObserverV1.RequireAvailable(caller);
+            operation.Token.ThrowIfCancellationRequested();
             return value;
         }
         catch
@@ -104,7 +112,11 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
         lock (gate) { if (disposed) return; disposed = true; }
         End();
         try { timer.Dispose(); }
-        finally { try { callerRegistration.Dispose(); } finally { lifetime.Dispose(); } }
+        finally
+        {
+            try { callerObserver.Dispose(); }
+            finally { try { callerRegistration.Dispose(); } finally { lifetime.Dispose(); } }
+        }
     }
 }
 
@@ -145,4 +157,25 @@ internal sealed class AsyncCancellationOwnerV1 : IDisposable
         _ = completion.ContinueWith(t => { _ = t.Exception; source.Dispose(); }, CancellationToken.None,
             TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
     }
+}
+
+/// <summary>Observes cancellation state signaling independently of a caller's LIFO callback chain.</summary>
+internal sealed class CallerCancellationObserverV1 : IDisposable
+{
+    private readonly RegisteredWaitHandle? registration;
+    internal CallerCancellationObserverV1(CancellationToken caller, Action cancelled)
+    {
+        if (!caller.CanBeCanceled) return;
+        var handle = caller.WaitHandle;
+        if (handle.SafeWaitHandle.IsClosed) throw new ObjectDisposedException("Publication cancellation source");
+        registration = ThreadPool.RegisterWaitForSingleObject(handle, static (state, _) => ((Action)state!)(),
+            cancelled, Timeout.InfiniteTimeSpan, executeOnlyOnce: true);
+    }
+    internal static void RequireAvailable(CancellationToken caller)
+    {
+        if (caller.CanBeCanceled && caller.WaitHandle.SafeWaitHandle.IsClosed)
+            throw new ObjectDisposedException("Publication cancellation source");
+    }
+    // The handle belongs to the caller's source. Only our registration is released.
+    public void Dispose() => registration?.Unregister(null);
 }
