@@ -100,10 +100,16 @@ internal sealed class FixtureBoundOperationV1
         && Scope == admission.Scope && Purpose == admission.Purpose && ResourceId == admission.ResourceId
         && OperationOrInvocationId == admission.OriginalOperationOrInvocationId
         && admission.OriginalAuthorityDeadlineUtc.Offset == TimeSpan.Zero;
-    internal static FixtureBoundOperationV1 Publish(PublicationActorV1 actor, PublishCommandV1 command) =>
-        new(actor, command.Scope, FixtureInvocationPurposeV1.Publish, command.RunId, command.OperationId,
+    internal static FixtureBoundOperationV1 Publish(PublicationActorV1 actor, PublishCommandV1 command)
+    {
+        if (!PublicationValidationV1.Command(actor, command)) throw NativeFixtureWireV1.Invalid();
+        return new(actor, command.Scope, FixtureInvocationPurposeV1.Publish, command.RunId, command.OperationId,
             NativePublicationCanonicalV1.CommandBytes(actor, command));
-    internal static FixtureBoundOperationV1 Read(PublicationActorV1 actor, ExactReportRequestV1 request) =>
-        new(actor, request.Scope, FixtureInvocationPurposeV1.ReadExact, request.ReportVersionId, request.InvocationId,
+    }
+    internal static FixtureBoundOperationV1 Read(PublicationActorV1 actor, ExactReportRequestV1 request)
+    {
+        if (!PublicationValidationV1.ExactRequest(actor, request)) throw NativeFixtureWireV1.Invalid();
+        return new(actor, request.Scope, FixtureInvocationPurposeV1.ReadExact, request.ReportVersionId, request.InvocationId,
             NativePublicationCanonicalV1.ReadRequestBytes(actor, request));
+    }
 }
