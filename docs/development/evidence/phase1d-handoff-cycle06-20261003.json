@@ -1,7 +1,7 @@
 {
   "cycle": "Phase1D cycle06",
   "date": "2026-10-03",
-  "status": "PREPARED: source-backed owner handoff reviewed; private publication recorded separately",
+  "status": "COMPLETED: source-backed owner handoff; final private publication in separate receipt",
   "inventory_commit": "4930315215a9bafce3419e80107b94a4e699320e",
   "scope": "Documentation and readiness review only; no runtime/test/config/dependency/migration/identity/activation changes",
   "input_disposition": {
@@ -35,7 +35,8 @@
     "entire_human_tasks_section_preserved": true,
     "open_tasks": 13,
     "runtime_checks": "NOT RERUN: documentation-only packet",
-    "initial_checker_failure": "Expected no-index exit0; received normal differences exit1 with no diagnostics. Corrected exit interpretation and reran."
+    "initial_checker_failure": "Expected no-index exit0; received normal differences exit1 with no diagnostics. Corrected exit interpretation and reran.",
+    "unowned_canonical_diffs": "PRESERVED"
   },
   "source_inventory_logs": [
     {
@@ -75,6 +76,10 @@
     "handoff": {
       "bytes": 9513,
       "exit_code": 0
+    },
+    "reconciled_static": {
+      "bytes": 127968,
+      "exit_code": 0
     }
   },
   "not_rerun": [
@@ -85,5 +90,42 @@
   "not_rerun_reason": "Documentation-only packet. Earlier exact-source results and separate M08 checks retain their original scopes.",
   "remaining": "Actual publisher/reader/client contracts,13 human tasks, full Phase1D/Milestone11/UAT/G1-G9",
   "publication_receipt": "phase1d-handoff-cycle06-site-20261003.json",
-  "evidence_directory": ".sites-work/phase1d-cycle06-evidence"
+  "evidence_directory": ".sites-work/phase1d-cycle06-evidence",
+  "site_checks": {
+    "status": "PASS",
+    "results": [
+      {
+        "width": 1440,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 390,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      },
+      {
+        "width": 320,
+        "openTasks": 13,
+        "roleAndCompletion": true,
+        "noOverflow": true,
+        "anchorsAndRepositoryLinks": true,
+        "pageErrors": []
+      }
+    ]
+  },
+  "site_reconciliation": {
+    "remote_source": "52147e47516bd6753ef290a10023dd0752524516",
+    "local_unpublished_source": "b99d13ca8125c0d26a9c8bebed2d7374f427298b",
+    "merged_source": "938fc2974d676860ab1e1680a78880ea4f95ef7b",
+    "unowned_remote_html_bytes": "PRESERVED after removing own section/current-source paragraph",
+    "initial_push": "Rejected fetch-first, no force push",
+    "reopen": "Divergence detected, no overwrite; normal merge succeeded"
+  }
 }
