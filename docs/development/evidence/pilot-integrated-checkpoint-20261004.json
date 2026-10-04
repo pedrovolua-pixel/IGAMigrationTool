@@ -89,8 +89,12 @@
   ],
   "activation": "No ordinaryhostnativeadapter/customer/cloud/provider/PDF/MCPactivation",
   "privateSite": {
-    "lastConfirmedSource": "ed1c155209c070e19c80459ef04752f633dd42ed",
-    "newSnapshot": "PENDINGsame-cyclepublication"
+    "sourceCommit": "893d19459895388802e39789c3f716d304be5d13",
+    "canonicalSnapshot": "8a6037a5691808748c6f36fc6ee1fd617fae646e",
+    "status": "CONFIRMEDsucceeded",
+    "receipt": "pilot-integrated-status-site-20261004.json",
+    "taskCount": 14,
+    "taskHashesPreserved": true
   },
   "logs": [
     {
@@ -176,6 +180,14 @@
     {
       "path": "work/release-readiness-20261003/integrated-metadata-corrected-gitleaks.log",
       "sha256": "242cf132b0700bec26433c816c96392594ee2a5d188cb0c2aaf994718632e590"
+    },
+    {
+      "path": "work/release-readiness-20261003/tracked-corrected-checkpoint-gitleaks.log",
+      "sha256": "fc12a1b9f40c993650f2ce7cd081d89f8fcea894b30a260a10b110268624c88b"
+    },
+    {
+      "path": "work/release-readiness-20261003/site-combined-render.json",
+      "sha256": "ba9591e2eec52a65493de48d6730d1c19953f0583d52aa38a81612e8e9329f99"
     }
   ],
   "reviews": {
