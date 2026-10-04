@@ -392,3 +392,567 @@
   color: #204b91;
   border-color: #b9cce8;
 }
+
+/* UI-W4: recovered graphical composition and complete navigation. */
+.assessment-shell {
+  --platform-bg: #f6f7fa;
+  --platform-panel: #fff;
+  --platform-side: #edf1f7;
+  --platform-ink: #213148;
+  --platform-muted: #59677c;
+  --platform-line: #dce3ec;
+  --platform-blue: #355fc8;
+  --platform-soft: #edf2ff;
+  grid-template-columns: 218px minmax(0, 1fr);
+  color: var(--platform-ink);
+  background: var(--platform-bg);
+  color-scheme: light;
+}
+.workspace-sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 22px 14px;
+  background: var(--platform-side);
+  border-color: var(--platform-line);
+  gap: 24px;
+}
+.workspace-identity {
+  margin: 0;
+  flex-shrink: 0;
+}
+.workspace-identity strong {
+  font-size: 14px;
+}
+.workspace-monogram {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+  border-radius: 9px;
+  background: var(--platform-blue);
+}
+.workspace-sidebar nav {
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+.workspace-destinations {
+  gap: 2px;
+}
+.workspace-destinations button {
+  min-height: 40px;
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--platform-muted);
+}
+.workspace-destinations button > span {
+  width: 17px;
+}
+.workspace-destinations button:hover {
+  background: var(--platform-soft);
+}
+.workspace-destinations button[aria-current='page'] {
+  background: var(--platform-panel);
+  color: var(--platform-blue);
+  font-weight: 600;
+}
+.sidebar-label {
+  margin: 16px 10px 6px;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--platform-muted);
+}
+.sidebar-context {
+  margin: 0;
+  padding: 16px 6px 0;
+  flex-shrink: 0;
+  border-color: var(--platform-line);
+}
+.sidebar-context span,
+.workspace-identity div > span {
+  color: var(--platform-muted);
+}
+.sidebar-context a {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 11px;
+}
+.workspace-menu-toggle {
+  display: none;
+}
+.assessment-shell .workspace {
+  max-width: 1380px;
+  width: 100%;
+  padding: 28px 32px;
+  min-width: 0;
+}
+.assessment-shell .masthead {
+  padding: 14px 32px;
+  background: var(--platform-panel);
+  border-color: var(--platform-line);
+  color: var(--platform-ink);
+}
+.assessment-shell .page-title {
+  margin-bottom: 22px;
+}
+.assessment-shell h1 {
+  font-size: 25px;
+  font-weight: 650;
+  letter-spacing: -0.6px;
+  line-height: 1.2;
+  color: var(--platform-ink);
+}
+.assessment-shell h2,
+.assessment-shell h3,
+.assessment-shell h4,
+.assessment-shell h5,
+.assessment-shell h6 {
+  color: var(--platform-ink);
+}
+.assessment-shell .eyebrow {
+  color: var(--platform-muted);
+  font-size: 10px;
+}
+.assessment-shell .intro,
+.assessment-shell .muted,
+.assessment-shell .field-note {
+  color: var(--platform-muted);
+}
+.assessment-shell .intro {
+  font-size: 13px;
+  margin-top: 8px;
+}
+.assessment-shell .panel {
+  background: var(--platform-panel);
+  border: 1px solid var(--platform-line);
+  border-radius: 13px;
+  padding: 20px;
+  box-shadow: none;
+}
+.assessment-shell .boundary-note {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--platform-muted);
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+.assessment-shell .boundary-note strong {
+  font-weight: 600;
+}
+.assessment-shell button {
+  border-radius: 8px;
+  min-height: 42px;
+  transition:
+    background 0.12s,
+    transform 0.12s;
+}
+.assessment-shell button:hover {
+  transform: translateY(-1px);
+}
+.assessment-shell button.primary {
+  background: var(--platform-blue);
+  border-color: var(--platform-blue);
+  color: var(--platform-panel);
+}
+.assessment-shell a {
+  color: var(--platform-blue);
+}
+.assessment-shell input,
+.assessment-shell select,
+.assessment-shell textarea {
+  background: var(--platform-panel);
+  color: var(--platform-ink);
+  border-color: var(--platform-line);
+  min-width: 0;
+}
+.assessment-shell .footer {
+  font-size: 11px;
+  border-top: 1px solid var(--platform-line);
+  padding: 12px 32px;
+  color: var(--platform-muted);
+}
+.assessment-shell .brand-subtitle {
+  color: var(--platform-muted);
+}
+.assessment-shell .connection {
+  font-size: 11px;
+}
+.assessment-shell .work-grid {
+  margin-top: 20px;
+}
+.assessment-shell[data-workspace-view='Overview'] .work-grid,
+.assessment-shell[data-workspace-view='Projects'] .work-grid,
+.assessment-shell[data-workspace-view='Sources & baselines'] .work-grid,
+.assessment-shell[data-workspace-view='Compare runs'] .work-grid,
+.assessment-shell[data-workspace-view='Rule catalog'] .work-grid,
+.assessment-shell[data-workspace-view='Audit history'] .work-grid,
+.assessment-shell[data-workspace-view='Migration'] .work-grid,
+.assessment-shell[data-workspace-view='Portfolio'] .work-grid,
+.assessment-shell[data-workspace-view='Design archive'] .work-grid {
+  display: none;
+}
+.assessment-shell:not([data-workspace-view='Assessments']):not([data-workspace-view='Evidence'])
+  .coverage-evidence {
+  display: none;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .run-context-heading {
+  display: none;
+}
+.assessment-shell .platform-availability {
+  padding: 20px;
+  background: var(--platform-panel);
+  border: 1px solid var(--platform-line);
+  border-radius: 13px;
+  margin-top: 20px;
+}
+.assessment-shell .platform-availability h3 {
+  font-size: 15px;
+}
+.assessment-shell .platform-availability p {
+  font-size: 13px;
+  color: var(--platform-muted);
+  margin: 12px 0;
+}
+.finding-overlay {
+  position: fixed;
+  inset: 0 0 0 auto;
+  margin: 0;
+  width: min(660px, 94vw);
+  height: 100dvh;
+  max-height: 100dvh;
+  max-width: 94vw;
+  border: 0;
+  border-left: 1px solid var(--platform-line);
+  padding: 0;
+  background: var(--platform-panel);
+  color: var(--platform-ink);
+  box-shadow: -12px 0 35px #19273f24;
+  overflow: auto;
+  animation: platform-panel-in 0.18s ease-out;
+}
+.finding-overlay::backdrop {
+  background: #19273f30;
+  backdrop-filter: none;
+}
+.finding-overlay .finding-detail {
+  width: 100%;
+  min-width: 0;
+  padding: 24px;
+  border: 0;
+  box-shadow: none;
+  background: var(--platform-panel);
+}
+.finding-overlay .finding-detail-title h4 {
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+.finding-overlay .finding-detail-facts {
+  grid-template-columns: 1fr 1fr;
+}
+.finding-overlay .finding-detail-tabs {
+  flex-wrap: wrap;
+}
+.finding-overlay .finding-detail-tabs button {
+  min-height: 44px;
+}
+.finding-relationship-map {
+  display: grid;
+  gap: 12px;
+  text-align: center;
+  margin: 20px 0;
+}
+.relationship-finding {
+  border: 1px solid var(--platform-line);
+  background: var(--platform-soft);
+  border-radius: 9px;
+  padding: 16px;
+}
+.relationship-objects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.relationship-objects button {
+  background: var(--platform-side);
+  border: 1px solid var(--platform-line);
+  padding: 12px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.relationship-objects button[aria-pressed='true'] {
+  border-color: var(--platform-blue);
+  background: var(--platform-soft);
+}
+body:has(.finding-overlay[open]) {
+  overflow: hidden;
+}
+.finding-overlay code,
+.finding-overlay dd {
+  overflow-wrap: anywhere;
+}
+@keyframes platform-panel-in {
+  from {
+    opacity: 0.5;
+    transform: translateX(25px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+html[data-workspace-theme='dark'] .assessment-shell {
+  --platform-bg: #141b27;
+  --platform-panel: #202a39;
+  --platform-side: #1a2331;
+  --platform-ink: #eef2fa;
+  --platform-muted: #b4bfd0;
+  --platform-line: #3a4658;
+  --platform-blue: #93b2ff;
+  --platform-soft: #2b3c60;
+  color-scheme: dark;
+}
+html[data-workspace-density='compact'] .assessment-shell .panel {
+  padding: 16px;
+}
+html[data-workspace-density='compact'] .assessment-shell td {
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+html[data-workspace-reduced-motion='true'] .assessment-shell *,
+html[data-workspace-reduced-motion='true'] .finding-overlay {
+  animation: none !important;
+  transition: none !important;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-workspace-theme='system'] .assessment-shell {
+    --platform-bg: #141b27;
+    --platform-panel: #202a39;
+    --platform-side: #1a2331;
+    --platform-ink: #eef2fa;
+    --platform-muted: #b4bfd0;
+    --platform-line: #3a4658;
+    --platform-blue: #93b2ff;
+    --platform-soft: #2b3c60;
+    color-scheme: dark;
+  }
+}
+@media (max-width: 1000px) {
+  .assessment-shell .workspace {
+    padding: 24px;
+  }
+}
+@media (max-width: 760px) {
+  .assessment-shell {
+    display: block;
+  }
+  .workspace-sidebar {
+    height: auto;
+    position: static;
+    gap: 0;
+    padding: 12px 16px;
+  }
+  .workspace-sidebar[data-menu-open='false'] nav {
+    display: none;
+  }
+  .workspace-sidebar[data-menu-open='true'] nav {
+    display: block;
+    max-height: 70dvh;
+    margin-top: 12px;
+  }
+  .workspace-destinations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .workspace-menu-toggle {
+    display: inline-block;
+    margin-left: auto;
+    font-size: 12px;
+    padding: 8px;
+    min-height: 44px;
+  }
+  .workspace-identity {
+    margin: 0;
+    gap: 8px;
+  }
+  .sidebar-context {
+    display: none;
+  }
+  .assessment-shell .masthead {
+    padding: 12px 16px;
+  }
+  .assessment-shell .workspace {
+    padding: 20px 16px;
+  }
+  .assessment-shell h1 {
+    font-size: 22px;
+  }
+  .assessment-shell .page-title {
+    gap: 12px;
+  }
+  .finding-overlay .finding-detail {
+    padding: 18px;
+  }
+  .finding-overlay .finding-detail-facts {
+    grid-template-columns: 1fr;
+  }
+  .assessment-shell .configuration form {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .assessment-shell *,
+  .finding-overlay {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (forced-colors: active) {
+  .assessment-shell {
+    --platform-bg: Canvas;
+    --platform-panel: Canvas;
+    --platform-side: Canvas;
+    --platform-ink: CanvasText;
+    --platform-muted: CanvasText;
+    --platform-line: CanvasText;
+    --platform-blue: LinkText;
+    --platform-soft: Canvas;
+  }
+  .workspace-destinations button {
+    border: 1px solid ButtonText;
+  }
+  .finding-overlay {
+    border: 1px solid CanvasText;
+  }
+}
+
+.assessment-shell[data-workspace-view='Settings']:not(:has([data-settings-tab='Assessment']))
+  .configuration {
+  display: none;
+}
+
+.assessment-shell .finding-tabs button,
+.assessment-shell .finding-detail-tabs button,
+.assessment-shell .finding-filter-summary {
+  color: var(--platform-muted);
+  background: var(--platform-panel);
+}
+.assessment-shell .finding-tabs button[aria-pressed='true'],
+.assessment-shell .finding-selected-summary,
+.assessment-shell .finding-list button[aria-current='true'],
+.assessment-shell .finding-references,
+.assessment-shell .finding-proof {
+  background: var(--platform-soft);
+  color: var(--platform-ink);
+}
+.assessment-shell .finding-list button,
+.assessment-shell .finding-detail {
+  background: var(--platform-panel);
+  color: var(--platform-ink);
+}
+.assessment-shell .findings-dedicated .finding-detail-tabs button[aria-pressed='true'] {
+  color: var(--platform-blue);
+}
+
+.assessment-shell .platform-overview-heading {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.assessment-shell .finding-investigation {
+  grid-template-columns: minmax(0, 1fr);
+}
+.assessment-shell .finding-filter-actions p,
+.assessment-shell .finding-detail-facts dt {
+  color: var(--platform-muted);
+}
+.assessment-shell .findings-dedicated .finding-results .finding-row-title:hover,
+.assessment-shell .findings-dedicated .finding-results .finding-row-title[aria-pressed='true'] {
+  background: var(--platform-soft);
+  color: var(--platform-blue);
+}
+.assessment-shell .finding-filters input,
+.assessment-shell .finding-filters select {
+  background: var(--platform-panel);
+  color: var(--platform-ink);
+}
+html[data-workspace-density='compact'] .assessment-shell .platform-overview-panel {
+  padding: 16px;
+}
+
+.assessment-shell[data-workspace-view='Settings']:not(:has([data-settings-tab='Assessment']))
+  .run-detail {
+  display: none;
+}
+.assessment-shell .platform-areas-header {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.assessment-shell .workspace-content {
+  background: var(--platform-bg);
+}
+.assessment-shell .workspace-destinations button:hover:not(:disabled) {
+  background: var(--platform-soft);
+  border-color: var(--platform-line);
+}
+.assessment-shell
+  :is(
+    .planning-tasks,
+    .artifact-review,
+    .ai-proposal-preview,
+    .fix-package-preview,
+    .review-panel,
+    .maturity-view,
+    .analysis-score,
+    .draft-report,
+    .analysis-finding,
+    .coverage-evidence
+  ) {
+  color: var(--platform-ink);
+  background: var(--platform-panel);
+  border-color: var(--platform-line);
+}
+.assessment-shell
+  :is(
+    .ai-preview-warning,
+    .ai-preview-empty,
+    .fix-package-empty,
+    .fix-package-warning,
+    pre,
+    .warning-note
+  ) {
+  color: var(--platform-ink);
+  background: var(--platform-soft);
+  border-color: var(--platform-line);
+}
+.assessment-shell :is(input, select, textarea, button) {
+  color: var(--platform-ink);
+  background-color: var(--platform-panel);
+  border-color: var(--platform-line);
+}
+.assessment-shell button:hover:not(:disabled) {
+  background-color: var(--platform-soft);
+  border-color: var(--platform-blue);
+}
+.assessment-shell .workspace-destinations button {
+  background: transparent;
+  color: var(--platform-muted);
+}
+.assessment-shell .workspace-destinations button[aria-current='page'] {
+  background: var(--platform-panel);
+  color: var(--platform-blue);
+}
+.assessment-shell .platform-overview button {
+  color: var(--platform-blue);
+  background: transparent;
+}

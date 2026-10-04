@@ -1,20 +1,43 @@
+import { useEffect, useRef, useState } from 'react';
 import './workspace.css';
-
-const destinations = [
-  { label: 'Assessments', target: '#run-heading', symbol: '▦' },
-  { label: 'Findings', target: '#findings-heading', symbol: '≡' },
+export const workspaceGroups = [
   {
-    label: 'Evidence',
-    target: '#finding-evidence-heading',
-    fallback: '#evidence-heading',
-    symbol: '▤',
+    name: 'Workspace',
+    destinations: [
+      ['Overview', 'Overview', '◈'],
+      ['Assessments', 'Assessments', '▤'],
+      ['Findings', 'Risk analysis', '◴'],
+      ['Evidence', 'Evidence', '⌘'],
+      ['Outcomes & maturity', 'Outcomes & maturity', '◎'],
+      ['AI workspace', 'AI workspace', '✧'],
+      ['Recommendations', 'Recommendations', '↗'],
+      ['Tasks & reviews', 'Tasks & reviews', '☷'],
+      ['Reports', 'Reports', '▧'],
+      ['Compare runs', 'Compare runs', '⇄'],
+    ],
   },
-  { label: 'Reports', target: '.draft-report', symbol: '▧' },
-  { label: 'Settings', target: '#configuration-heading', symbol: '⚙' },
+  {
+    name: 'Manage',
+    destinations: [
+      ['Projects', 'Projects', '▦'],
+      ['Sources & baselines', 'Sources & baselines', '◫'],
+      ['Rule catalog', 'Rule catalog', '≡'],
+      ['Settings', 'Settings', '⚙'],
+      ['Audit history', 'Audit history', '◷'],
+    ],
+  },
+  {
+    name: 'Explore',
+    destinations: [
+      ['Migration', 'Migration', '⇢'],
+      ['Portfolio', 'Portfolio', '▥'],
+      ['Design archive', 'Design archive', '▣'],
+    ],
+  },
 ] as const;
-
-export type WorkspaceView = 'Assessments' | 'Findings' | 'Evidence' | 'Reports' | 'Settings';
-
+export type WorkspaceView = (typeof workspaceGroups)[number]['destinations'][number][0];
+export const isWorkspaceView = (value: string): value is WorkspaceView =>
+  workspaceGroups.some((group) => group.destinations.some((item) => item[0] === value));
 export function WorkspaceNavigation({
   active,
   onNavigate,
@@ -24,65 +47,75 @@ export function WorkspaceNavigation({
   onNavigate: (view: WorkspaceView) => void;
   onUnavailable: (message: string) => void;
 }) {
-  function navigate(destination: (typeof destinations)[number]) {
-    const target =
-      document.querySelector<HTMLElement>(destination.target) ??
-      ('fallback' in destination
-        ? document.querySelector<HTMLElement>(destination.fallback)
-        : null);
-    if (!target) {
-      onNavigate('Assessments');
-      onUnavailable(
-        `${destination.label} is not available in the selected run yet. Open or start a synthetic run; findings and reports require an analysis-enabled profile and verified local results.`,
-      );
-      requestAnimationFrame(() => {
-        const fallback = document.querySelector<HTMLElement>('#run-heading');
-        fallback?.focus({ preventScroll: true });
-        fallback?.scrollIntoView({ block: 'start' });
-      });
-      return;
-    }
+  const [expanded, setExpanded] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    setExpanded(false);
+  }, [active]);
+  function navigate(view: WorkspaceView) {
     onUnavailable('');
-    onNavigate(destination.label);
-    // Existing report sections have no focus stop; make the section programmatically focusable.
+    onNavigate(view);
+    setExpanded(false);
     requestAnimationFrame(() => {
-      target.tabIndex = -1;
-      target.focus({ preventScroll: true });
-      target.scrollIntoView({ block: 'start' });
+      document.getElementById('workspace-title')?.focus({ preventScroll: true });
+      document.getElementById('workspace')?.scrollIntoView({ block: 'start' });
     });
   }
-
   return (
-    <aside className="workspace-sidebar">
+    <aside
+      className="workspace-sidebar"
+      data-menu-open={expanded}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape' && expanded) {
+          setExpanded(false);
+          toggle.current?.focus();
+        }
+      }}
+    >
       <div className="workspace-identity">
         <span className="workspace-monogram" aria-hidden="true">
           I
         </span>
         <div>
           <strong>IGA workspace</strong>
-          <span>Health assessment pilot</span>
+          <span>Assessment studio</span>
         </div>
+        <button
+          type="button"
+          ref={toggle}
+          className="workspace-menu-toggle"
+          aria-expanded={expanded}
+          aria-controls="platform-navigation"
+          onClick={() => setExpanded((value) => !value)}
+        >
+          {expanded ? 'Close menu' : 'Menu'}
+        </button>
       </div>
-      <nav aria-label="Workspace sections">
-        <p className="sidebar-label">Workspace views</p>
-        <div className="workspace-destinations">
-          {destinations.map((destination) => (
-            <button
-              key={destination.label}
-              type="button"
-              aria-current={active === destination.label ? 'location' : undefined}
-              onClick={() => navigate(destination)}
-            >
-              <span aria-hidden="true">{destination.symbol}</span>
-              {destination.label}
-            </button>
-          ))}
-        </div>
+      <nav id="platform-navigation" aria-label="Workspace sections">
+        {workspaceGroups.map((group) => (
+          <div key={group.name}>
+            <p className="sidebar-label">{group.name}</p>
+            <div className="workspace-destinations">
+              {group.destinations.map(([view, label, symbol]) => (
+                <button
+                  key={view}
+                  type="button"
+                  aria-current={active === view ? 'page' : undefined}
+                  onClick={() => navigate(view)}
+                >
+                  <span aria-hidden="true">{symbol}</span>
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
       </nav>
       <div className="sidebar-context">
-        <strong>Local pilot</strong>
+        <strong>One Identity Manager</strong>
         <span>Fixed synthetic evidence</span>
-        <span>Drafts stay unpublished</span>
+        <span>Live operations remain disabled</span>
+        <a href="/design-review/">Approved design preview ↗</a>
       </div>
     </aside>
   );

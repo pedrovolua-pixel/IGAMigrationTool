@@ -37,9 +37,11 @@ export function FindingsExplorer({
   onChange,
   dedicated = false,
   evidenceView = false,
+  overlay = false,
 }: {
   dedicated?: boolean;
   evidenceView?: boolean;
+  overlay?: boolean;
   findings: readonly AnalysisFinding[];
   review: ReviewDetail | null;
   guidance: RecommendationGuidance | null;
@@ -51,7 +53,7 @@ export function FindingsExplorer({
   const prefix = useId();
   const [detailView, setDetailView] = useState<{
     findingId: string | null;
-    view: 'Evidence' | 'Recommendations' | 'Original';
+    view: 'Evidence' | 'Relationships' | 'Recommendations' | 'Original';
   }>({ findingId: null, view: 'Evidence' });
   const { query, severity, category, state, confidence, mandatory, selectedId } = exploration;
   useLayoutEffect(() => {
@@ -59,6 +61,8 @@ export function FindingsExplorer({
   }, [evidenceView, selectedId]);
   const update = (value: Partial<ExplorationState>) => onChange({ ...exploration, ...value });
   const inspectId = (findingId: string) => `inspect-finding-${runId}-${findingId}`;
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [selectedObject, setSelectedObject] = useState<string | null>(null);
   const resultsHeading = useRef<HTMLHeadingElement>(null);
   const detailHeading = useRef<HTMLHeadingElement>(null);
   const current = (finding: AnalysisFinding): ReviewFinding | undefined =>
@@ -91,6 +95,17 @@ export function FindingsExplorer({
   });
   const selected = findings.find((finding) => finding.id === selectedId);
   const selectedReview = selected ? current(selected) : undefined;
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    if (overlay && selected && dialog && !dialog.open) dialog.showModal();
+    else if (dialog?.open && (!overlay || !selected)) dialog.close();
+    return () => {
+      if (dialog?.open) dialog.close();
+    };
+  }, [overlay, selected?.id]);
+  useLayoutEffect(() => {
+    setSelectedObject(null);
+  }, [selected?.id]);
   const activeDetailView = detailView.findingId === selectedId ? detailView.view : 'Evidence';
   const selectedGuidance =
     guidance?.status === 'Ready'
@@ -105,6 +120,7 @@ export function FindingsExplorer({
     });
   };
   const close = () => {
+    dialogRef.current?.close();
     update({ selectedId: null });
     const target = selectedId
       ? (document.getElementById(inspectId(selectedId)) ?? resultsHeading.current)
@@ -120,6 +136,273 @@ export function FindingsExplorer({
     onChange({ ...initialExploration, selectedId });
   };
   const filtered = !!(query || severity || category || state || confidence || mandatory);
+
+  const detail = (
+    <aside
+      className="finding-detail"
+      aria-labelledby={`${prefix}-detail`}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape' && selected) {
+          event.preventDefault();
+          close();
+        }
+      }}
+    >
+      <div className="finding-detail-title">
+        <h4 id={`${prefix}-detail`} tabIndex={-1} ref={detailHeading}>
+          {selected ? (selectedReview?.title ?? selected.title) : 'Finding and evidence'}
+        </h4>
+        {selected && (
+          <button type="button" onClick={close}>
+            <span className="finding-close-label">Close finding</span>
+            {dedicated && <span className="finding-back-label">Back to findings</span>}
+          </button>
+        )}
+      </div>
+      {!selected ? (
+        <p>
+          Select Inspect on a finding to see its explanation, evidence and original recommendations
+          here.
+        </p>
+      ) : (
+        <>
+          {!visible.some((finding) => finding.id === selected.id) && (
+            <p className="warning-note">
+              This selected finding is outside the current filters. Its details remain open.
+            </p>
+          )}
+          <p>
+            <strong>{selected.severity}</strong> · {dedicated ? 'Method: ' : ''}
+            {selected.method} · Confidence {selected.confidencePercent}% · {selected.confidenceBand}
+          </p>
+          <dl className="finding-detail-facts">
+            <div>
+              <dt>Current review state</dt>
+              <dd>{selectedReview?.state ?? 'No current review snapshot available'}</dd>
+            </div>
+            <div>
+              <dt>Generated state</dt>
+              <dd>{selected.initialState}</dd>
+            </div>
+            <div>
+              <dt>Original title</dt>
+              <dd>{selected.originalTitle}</dd>
+            </div>
+            <div>
+              <dt>Category / rule</dt>
+              <dd>
+                {selected.category} · {selected.ruleId} / {selected.ruleVersion}
+              </dd>
+            </div>
+            {selectedReview && (
+              <div>
+                <dt>Current business context</dt>
+                <dd>{selectedReview.businessContext || 'No business context supplied.'}</dd>
+              </div>
+            )}
+          </dl>
+          {selectedReview && (
+            <button
+              type="button"
+              onClick={() => {
+                if (overlay) {
+                  dialogRef.current?.close();
+                  update({ selectedId: null });
+                }
+                const target = document.getElementById(`review-finding-${runId}-${selected.id}`);
+                target?.focus({ preventScroll: true });
+                target?.scrollIntoView({ block: 'start' });
+              }}
+            >
+              Review this finding
+            </button>
+          )}
+          {dedicated && (
+            <div className="finding-detail-tabs" role="group" aria-label="Finding detail views">
+              {(['Evidence', 'Relationships', 'Recommendations', 'Original'] as const).map(
+                (view) => (
+                  <button
+                    type="button"
+                    key={view}
+                    aria-pressed={activeDetailView === view}
+                    aria-controls={`${prefix}-${view.toLowerCase()}`}
+                    onClick={() => setDetailView({ findingId: selectedId, view })}
+                  >
+                    {view}
+                  </button>
+                ),
+              )}
+            </div>
+          )}
+          <section
+            id={`${prefix}-relationships`}
+            hidden={activeDetailView !== 'Relationships'}
+            className="finding-relationships"
+          >
+            <h5>Finding relationships</h5>
+            <p className="field-note">
+              Supplied finding-to-object associations only. Object inheritance and permission edges
+              are not provided by this fixture.
+            </p>
+            <div className="finding-relationship-map">
+              <div className="relationship-finding">{selectedReview?.title ?? selected.title}</div>
+              <span aria-hidden="true">↓ affects</span>
+              <div className="relationship-objects">
+                {selected.objectIds.map((id) => (
+                  <button
+                    key={id}
+                    type="button"
+                    aria-pressed={selectedObject === id}
+                    onClick={() => setSelectedObject(id)}
+                  >
+                    {id}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <h6>
+              {selectedObject
+                ? `Selected object: ${selectedObject}`
+                : 'Affected objects and provenance'}
+            </h6>
+            <p>Baseline: {selected.baselineId}</p>
+            <List values={selected.evidenceReferences} empty="No supplied evidence references." />
+            <details>
+              <summary>Relationship table alternative</summary>
+              <div className="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Finding</th>
+                      <th scope="col">Relationship</th>
+                      <th scope="col">Object</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selected.objectIds.map((id) => (
+                      <tr key={id}>
+                        <td>{selectedReview?.title ?? selected.title}</td>
+                        <td>Affects · supplied association</td>
+                        <td>{id}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </section>
+          <div id={`${prefix}-evidence`} hidden={dedicated && activeDetailView !== 'Evidence'}>
+            <section>
+              <h5>Explanation and impact</h5>
+              <p>{selected.impact}</p>
+              <p>
+                <strong>Root cause:</strong> {selected.rootCause}
+              </p>
+              <p>
+                <strong>Likelihood:</strong> {selected.likelihood}
+              </p>
+            </section>
+            <section>
+              <h5 id="finding-evidence-heading" tabIndex={-1}>
+                Evidence and provenance
+              </h5>
+              <p className="field-note">
+                These are already supplied synthetic facts and references. Protected raw evidence is
+                not retrieved by this view.
+              </p>
+              <p>
+                <strong>Evidence baseline:</strong> {selected.baselineId}
+              </p>
+              <List values={selected.facts} empty="No observed facts supplied." />
+              <h6>Evidence references</h6>
+              <List values={selected.evidenceReferences} empty="No evidence references supplied." />
+              <h6>Affected objects</h6>
+              <List values={selected.objectIds} empty="No affected objects supplied." />
+            </section>
+          </div>
+          <section
+            id={`${prefix}-recommendations`}
+            hidden={dedicated && activeDetailView !== 'Recommendations'}
+          >
+            <h5>Original recommendation options</h5>
+            <p className="warning-note">
+              Synthetic · Review-only · Unverified. Finding review does not approve these options or
+              validate remediation.
+            </p>
+            {selectedGuidance ? (
+              selectedGuidance.options.map((option) => (
+                <details key={option.scopedOptionId}>
+                  <summary>{option.optionId} · Unverified</summary>
+                  <p>{option.text}</p>
+                  <dl className="finding-detail-facts">
+                    <div>
+                      <dt>Prerequisites</dt>
+                      <dd>{option.prerequisites}</dd>
+                    </div>
+                    <div>
+                      <dt>Risk</dt>
+                      <dd>{option.risk}</dd>
+                    </div>
+                    <div>
+                      <dt>Recovery guidance</dt>
+                      <dd>{option.recoveryGuidance}</dd>
+                    </div>
+                  </dl>
+                </details>
+              ))
+            ) : (
+              <List
+                values={selected.recommendations}
+                empty="No original recommendation options supplied. No advice is inferred."
+              />
+            )}
+            {selectedGuidance && !selectedGuidance.options.length && (
+              <p>No original recommendation options supplied. No advice is inferred.</p>
+            )}
+            <h6>Validation guidance</h6>
+            {selectedGuidance ? (
+              <List
+                values={selectedGuidance.validationGuidance}
+                empty="No validation guidance supplied."
+              />
+            ) : (
+              <p>{selected.validationGuidance || 'No validation guidance supplied.'}</p>
+            )}
+          </section>
+          <div id={`${prefix}-original`} hidden={dedicated && activeDetailView !== 'Original'}>
+            {dedicated && renderOriginal(selected)}
+            <details>
+              <summary>Inference, assumptions and limitations</summary>
+              <h6>Inference</h6>
+              <List
+                values={selected.inferences}
+                empty="None supplied by this deterministic fixture."
+              />
+              <h6>Assumptions</h6>
+              <List values={selected.assumptions} empty="None supplied." />
+              <h6>Limitations</h6>
+              <List values={selected.limitations} empty="None supplied." />
+            </details>
+            <details>
+              <summary>Original identity and fixture sources</summary>
+              <p>
+                <strong>Root-cause key:</strong> {selected.rootCauseKey}
+              </p>
+              <h6>Generated original digests</h6>
+              <List values={selected.originalDigests} empty="None supplied." />
+              <h6>Fixture rule sources</h6>
+              <List values={selected.sources} empty="None supplied." />
+              <h6>Approved fixture outcome links</h6>
+              <List
+                values={selected.outcomeIds}
+                empty="None; no customer outcomes are approved by this demo."
+              />
+            </details>
+          </div>
+        </>
+      )}
+    </aside>
+  );
 
   return (
     <section
@@ -249,213 +532,24 @@ export function FindingsExplorer({
             ))
           )}
         </div>
-        <aside
-          className="finding-detail"
-          aria-labelledby={`${prefix}-detail`}
-          onKeyDown={(event) => {
-            if (event.key === 'Escape' && selected) {
+        {overlay ? (
+          <dialog
+            ref={dialogRef}
+            className="finding-overlay"
+            aria-labelledby={`${prefix}-detail`}
+            onCancel={(event) => {
               event.preventDefault();
               close();
-            }
-          }}
-        >
-          <div className="finding-detail-title">
-            <h4 id={`${prefix}-detail`} tabIndex={-1} ref={detailHeading}>
-              {selected ? (selectedReview?.title ?? selected.title) : 'Finding and evidence'}
-            </h4>
-            {selected && (
-              <button type="button" onClick={close}>
-                <span className="finding-close-label">Close finding</span>
-                {dedicated && <span className="finding-back-label">Back to findings</span>}
-              </button>
-            )}
-          </div>
-          {!selected ? (
-            <p>
-              Select Inspect on a finding to see its explanation, evidence and original
-              recommendations here.
-            </p>
-          ) : (
-            <>
-              {!visible.some((finding) => finding.id === selected.id) && (
-                <p className="warning-note">
-                  This selected finding is outside the current filters. Its details remain open.
-                </p>
-              )}
-              <p>
-                <strong>{selected.severity}</strong> · {dedicated ? 'Method: ' : ''}
-                {selected.method} · Confidence {selected.confidencePercent}% ·{' '}
-                {selected.confidenceBand}
-              </p>
-              <dl className="finding-detail-facts">
-                <div>
-                  <dt>Current review state</dt>
-                  <dd>{selectedReview?.state ?? 'No current review snapshot available'}</dd>
-                </div>
-                <div>
-                  <dt>Generated state</dt>
-                  <dd>{selected.initialState}</dd>
-                </div>
-                <div>
-                  <dt>Original title</dt>
-                  <dd>{selected.originalTitle}</dd>
-                </div>
-                <div>
-                  <dt>Category / rule</dt>
-                  <dd>
-                    {selected.category} · {selected.ruleId} / {selected.ruleVersion}
-                  </dd>
-                </div>
-                {selectedReview && (
-                  <div>
-                    <dt>Current business context</dt>
-                    <dd>{selectedReview.businessContext || 'No business context supplied.'}</dd>
-                  </div>
-                )}
-              </dl>
-              {selectedReview && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    const target = document.getElementById(
-                      `review-finding-${runId}-${selected.id}`,
-                    );
-                    target?.focus({ preventScroll: true });
-                    target?.scrollIntoView({ block: 'start' });
-                  }}
-                >
-                  Review this finding
-                </button>
-              )}
-              {dedicated && (
-                <div className="finding-detail-tabs" role="group" aria-label="Finding detail views">
-                  {(['Evidence', 'Recommendations', 'Original'] as const).map((view) => (
-                    <button
-                      type="button"
-                      key={view}
-                      aria-pressed={activeDetailView === view}
-                      aria-controls={`${prefix}-${view.toLowerCase()}`}
-                      onClick={() => setDetailView({ findingId: selectedId, view })}
-                    >
-                      {view}
-                    </button>
-                  ))}
-                </div>
-              )}
-              <div id={`${prefix}-evidence`} hidden={dedicated && activeDetailView !== 'Evidence'}>
-                <section>
-                  <h5>Explanation and impact</h5>
-                  <p>{selected.impact}</p>
-                  <p>
-                    <strong>Root cause:</strong> {selected.rootCause}
-                  </p>
-                  <p>
-                    <strong>Likelihood:</strong> {selected.likelihood}
-                  </p>
-                </section>
-                <section>
-                  <h5 id="finding-evidence-heading" tabIndex={-1}>
-                    Evidence and provenance
-                  </h5>
-                  <p className="field-note">
-                    These are already supplied synthetic facts and references. Protected raw
-                    evidence is not retrieved by this view.
-                  </p>
-                  <p>
-                    <strong>Evidence baseline:</strong> {selected.baselineId}
-                  </p>
-                  <List values={selected.facts} empty="No observed facts supplied." />
-                  <h6>Evidence references</h6>
-                  <List
-                    values={selected.evidenceReferences}
-                    empty="No evidence references supplied."
-                  />
-                  <h6>Affected objects</h6>
-                  <List values={selected.objectIds} empty="No affected objects supplied." />
-                </section>
-              </div>
-              <section
-                id={`${prefix}-recommendations`}
-                hidden={dedicated && activeDetailView !== 'Recommendations'}
-              >
-                <h5>Original recommendation options</h5>
-                <p className="warning-note">
-                  Synthetic · Review-only · Unverified. Finding review does not approve these
-                  options or validate remediation.
-                </p>
-                {selectedGuidance ? (
-                  selectedGuidance.options.map((option) => (
-                    <details key={option.scopedOptionId}>
-                      <summary>{option.optionId} · Unverified</summary>
-                      <p>{option.text}</p>
-                      <dl className="finding-detail-facts">
-                        <div>
-                          <dt>Prerequisites</dt>
-                          <dd>{option.prerequisites}</dd>
-                        </div>
-                        <div>
-                          <dt>Risk</dt>
-                          <dd>{option.risk}</dd>
-                        </div>
-                        <div>
-                          <dt>Recovery guidance</dt>
-                          <dd>{option.recoveryGuidance}</dd>
-                        </div>
-                      </dl>
-                    </details>
-                  ))
-                ) : (
-                  <List
-                    values={selected.recommendations}
-                    empty="No original recommendation options supplied. No advice is inferred."
-                  />
-                )}
-                {selectedGuidance && !selectedGuidance.options.length && (
-                  <p>No original recommendation options supplied. No advice is inferred.</p>
-                )}
-                <h6>Validation guidance</h6>
-                {selectedGuidance ? (
-                  <List
-                    values={selectedGuidance.validationGuidance}
-                    empty="No validation guidance supplied."
-                  />
-                ) : (
-                  <p>{selected.validationGuidance || 'No validation guidance supplied.'}</p>
-                )}
-              </section>
-              <div id={`${prefix}-original`} hidden={dedicated && activeDetailView !== 'Original'}>
-                {dedicated && renderOriginal(selected)}
-                <details>
-                  <summary>Inference, assumptions and limitations</summary>
-                  <h6>Inference</h6>
-                  <List
-                    values={selected.inferences}
-                    empty="None supplied by this deterministic fixture."
-                  />
-                  <h6>Assumptions</h6>
-                  <List values={selected.assumptions} empty="None supplied." />
-                  <h6>Limitations</h6>
-                  <List values={selected.limitations} empty="None supplied." />
-                </details>
-                <details>
-                  <summary>Original identity and fixture sources</summary>
-                  <p>
-                    <strong>Root-cause key:</strong> {selected.rootCauseKey}
-                  </p>
-                  <h6>Generated original digests</h6>
-                  <List values={selected.originalDigests} empty="None supplied." />
-                  <h6>Fixture rule sources</h6>
-                  <List values={selected.sources} empty="None supplied." />
-                  <h6>Approved fixture outcome links</h6>
-                  <List
-                    values={selected.outcomeIds}
-                    empty="None; no customer outcomes are approved by this demo."
-                  />
-                </details>
-              </div>
-            </>
-          )}
-        </aside>
+            }}
+            onClick={(event) => {
+              if (event.target === event.currentTarget) close();
+            }}
+          >
+            {detail}
+          </dialog>
+        ) : (
+          detail
+        )}
       </div>
     </section>
   );

@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "assertions": 39,
+  "scope": "Pure PlatformOverview SSR rendering; no backend or browser",
+  "scenarios": [
+    "actual precision and publishable separation",
+    "current review overrides original state",
+    "five severity levels",
+    "quality separate from score",
+    "untrusted title escaping",
+    "no run",
+    "no admitted analysis",
+    "stale run revision",
+    "unavailable analysis",
+    "zero score",
+    "review fallback",
+    "missing categories",
+    "missing quality",
+    "actual category radar",
+    "unavailable category bars fallback"
+  ],
+  "unavailable": [
+    "browser/mobile interactions",
+    "integrated application acceptance"
+  ],
+  "files": [
+    {
+      "name": "PlatformOverview.tsx",
+      "sha256": "99bd9a07aad485f48932db67fa823eee90070241d7d8cc47725dfff9221af21a"
+    },
+    {
+      "name": "PlatformOverview.css",
+      "sha256": "de3888498fb623a3e491c879f919bdc5ae5df85d785c34ae9d89d464c258d7fa"
+    }
+  ]
+}

@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import type {
   Catalog,
-  AnalysisDetail,
   RunDetail,
   RunHistory,
   RunState,
@@ -18,10 +17,7 @@ import {
 import type { ArtifactReviewDraft } from './ArtifactReviewPanel';
 import type { PlanningTaskDraft } from './PlanningTasksPanel';
 import { WorkspaceNavigation } from './WorkspaceNavigation';
-import { isWorkspaceView } from './WorkspaceNavigation';
 import type { WorkspaceView } from './WorkspaceNavigation';
-import { PlatformOverview } from './PlatformOverview';
-import { PlatformAreas } from './PlatformAreas';
 
 const states: Record<RunState, string> = {
   Planned: 'Planned',
@@ -99,36 +95,10 @@ function ConsultantApp() {
   const artifactDrafts = useRef<Record<string, ArtifactReviewDraft>>({});
   const planningTaskDrafts = useRef<Record<string, PlanningTaskDraft>>({});
   const [navigationNotice, setNavigationNotice] = useState('');
-  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('Overview');
+  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('Assessments');
   useEffect(() => {
-    setWorkspaceView('Overview');
-    setCategoryRequest(null);
+    setWorkspaceView('Assessments');
   }, [selectedId]);
-  const [analysis, setAnalysis] = useState<AnalysisDetail | null>(null);
-  const [categoryRequest, setCategoryRequest] = useState<{
-    category: string;
-    sequence: number;
-  } | null>(null);
-  const onAnalysisChange = useCallback((value: AnalysisDetail | null) => setAnalysis(value), []);
-  const admittedAnalysis =
-    run && analysis?.runId === run.runId && analysis.runRevision === run.revision ? analysis : null;
-  const navigateArea = (view: string) => {
-    if (isWorkspaceView(view)) {
-      setWorkspaceView(view);
-      setNavigationNotice('');
-    }
-  };
-  const supplementary = [
-    'Projects',
-    'Sources & baselines',
-    'Compare runs',
-    'Rule catalog',
-    'Audit history',
-    'Settings',
-    'Migration',
-    'Portfolio',
-    'Design archive',
-  ].includes(workspaceView);
   const errorRef = useRef<HTMLDivElement>(null);
   const detailRef = useRef<HTMLElement>(null);
   const currentSelection = useRef<string | null>(selectedId);
@@ -416,10 +386,7 @@ function ConsultantApp() {
                 I
               </span>
               <span>
-                {run?.selection.scopeLabel ?? 'One Identity Manager'}
-                <span className="brand-subtitle">
-                  {run?.selection.baselineLabel ?? 'Synthetic assessment workspace'}
-                </span>
+                IGA Migration Tool<span className="brand-subtitle">Consultant workspace</span>
               </span>
             </div>
             <span className="demo-badge">Synthetic local demo</span>
@@ -428,37 +395,17 @@ function ConsultantApp() {
             <div className="page-title">
               <div>
                 <p className="eyebrow">One Identity Manager / Local pilot</p>
-                <h1 id="workspace-title" tabIndex={-1}>
-                  {workspaceView === 'Overview'
-                    ? 'Your assessment at a glance'
-                    : workspaceView === 'Assessments'
-                      ? 'Assessments'
-                      : workspaceView === 'Findings'
-                        ? 'Risk analysis'
-                        : workspaceView}
-                </h1>
+                <h1>{workspaceView === 'Assessments' ? 'Assessment workspace' : workspaceView}</h1>
                 <p className="intro">
-                  {workspaceView === 'Overview'
-                    ? 'Health, priority risks, and what needs review next.'
-                    : workspaceView === 'Assessments'
-                      ? 'Select a baseline, start a synthetic assessment, or return to saved work.'
-                      : workspaceView === 'Findings'
-                        ? 'Inspect risks and the evidence behind each review decision.'
-                        : workspaceView === 'Evidence'
-                          ? 'Trace supplied objects, references, and declared coverage gaps.'
-                          : workspaceView === 'Reports'
-                            ? 'Read the canonical saved snapshot as an unpublished draft.'
-                            : workspaceView === 'AI workspace'
-                              ? 'Review supplied AI proposals, evidence, and analysis boundaries.'
-                              : workspaceView === 'Recommendations'
-                                ? 'Review guidance, fix packages, dependencies, and validation.'
-                                : workspaceView === 'Tasks & reviews'
-                                  ? 'Review findings and follow supplied consultant planning tasks.'
-                                  : workspaceView === 'Outcomes & maturity'
-                                    ? 'Explore saved outcome adherence and independent maturity evidence.'
-                                    : workspaceView === 'Settings'
-                                      ? 'Inspect locked settings and configure local appearance.'
-                                      : 'Explore the selected synthetic engagement and its available records.'}
+                  {workspaceView === 'Assessments'
+                    ? 'Follow coverage, inspect findings and review the evidence behind your draft.'
+                    : workspaceView === 'Findings'
+                      ? 'Inspect findings and the evidence behind each review decision.'
+                      : workspaceView === 'Evidence'
+                        ? 'Trace supplied evidence and inspect declared coverage gaps.'
+                        : workspaceView === 'Reports'
+                          ? 'Read the canonical saved snapshot as an unpublished draft.'
+                          : 'Configure a new run and inspect the selected run’s locked inputs.'}
                 </p>
               </div>
               <div className={`connection ${connected ? 'connected' : ''}`}>
@@ -495,31 +442,6 @@ function ConsultantApp() {
                 </button>
               </div>
             )}
-            <div hidden={workspaceView !== 'Overview'}>
-              <PlatformOverview
-                analysis={admittedAnalysis}
-                run={run}
-                onNavigate={navigateArea}
-                onInspectCategory={(category) => {
-                  setCategoryRequest((previous) => ({
-                    category,
-                    sequence: (previous?.sequence ?? 0) + 1,
-                  }));
-                  setWorkspaceView('Findings');
-                }}
-              />
-            </div>
-            <div hidden={!supplementary}>
-              <PlatformAreas
-                view={workspaceView}
-                run={run}
-                catalog={catalog}
-                history={history}
-                analysis={admittedAnalysis}
-                onNavigate={navigateArea}
-                onSelectRun={selectRun}
-              />
-            </div>
             <div className="work-grid">
               <section className="panel configuration" aria-labelledby="configuration-heading">
                 <p className="eyebrow">Run settings</p>
@@ -845,8 +767,6 @@ function ConsultantApp() {
                           artifactDrafts={artifactDrafts}
                           planningTaskDrafts={planningTaskDrafts}
                           workspaceView={workspaceView}
-                          onAnalysisChange={onAnalysisChange}
-                          categoryRequest={categoryRequest}
                         />
                       )}
                     </div>

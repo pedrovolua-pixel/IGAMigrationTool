@@ -1,0 +1,40 @@
+{
+  "result": "pass",
+  "assertions": 27,
+  "scope": "Independent read-only PlatformAreas SSR smoke and stale-admission/inert-text checks",
+  "views": [
+    "Projects",
+    "Sources & baselines",
+    "Compare runs",
+    "Rule catalog",
+    "Audit history",
+    "Settings",
+    "Migration",
+    "Portfolio",
+    "Design archive"
+  ],
+  "scenarios": [
+    "nine views with supplied and null records",
+    "cross-revision analysis excluded",
+    "cross-run analysis excluded",
+    "untrusted rule IDs escaped",
+    "untrusted review titles and text escaped",
+    "untrusted scope label escaped",
+    "future portfolio and migration actions unavailable"
+  ],
+  "notVerified": [
+    "tab interactions",
+    "browser appearance preferences",
+    "mobile overflow"
+  ],
+  "files": [
+    {
+      "name": "PlatformAreas.tsx",
+      "sha256": "0d93512f589c3f91ea36a3630a94fadcc7fc0beb3e33b22ff5c87e69a2ef71ff"
+    },
+    {
+      "name": "PlatformAreas.css",
+      "sha256": "b1bf74d7ff10025f1e198e0422677544a24a2fdc4d87273db66c3742bed753f2"
+    }
+  ]
+}
