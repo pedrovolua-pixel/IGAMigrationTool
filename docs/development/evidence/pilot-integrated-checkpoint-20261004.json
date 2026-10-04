@@ -50,7 +50,24 @@
       "id": 37170762817,
       "status": "PASS"
     },
-    "newerIntegratedHead": "PENDINGnewpush;priorhostedPASSdoesnotcovercurrentUI/sourcecorrections"
+    "newerIntegratedHead": {
+      "commit": "9c9dadf8815e6ea956d1e8a2f673c60d44a50d59",
+      "bootstrap252": {
+        "runId": 37173384654,
+        "Windows2022": "PASS",
+        "Windows2025": "PASS",
+        "Linux": "FAILEDatsecret-scanonly;1newcanonicalmetadatafalsepositive"
+      },
+      "package162": {
+        "runId": 37173384691,
+        "status": "PASS"
+      },
+      "httpsSignature7": {
+        "runId": 37173384618,
+        "status": "PASS"
+      },
+      "correction": "MoveverifiedGitcommithashoutofkeyword-bearingreviewstatusstringintotypedscannerreviewfields;noallowlistchange;nextpushpending"
+    }
   },
   "originalFailures": [
     "SourceunsolicitedOCEfalsecaller-cancel and rejectednativepayloadcounter;bothindependentlyclosed",
@@ -59,7 +76,8 @@
     "Analysisfirstkeyboardretry703checktimeout;unchangedapplicationdiagnostic708PASS;RAFhelpercompletionmadeexplicit",
     "Draftfirstinvocationrefusedwrongdisposabledatabase;dedicatednewownedv6/v7fixturescreatedwithoutguardchanges",
     "Defaultsecretscan10falsepositivesindependentlyrecomputed5syntheticgroupdigests;firstcolumn-offsetallowancefailed;finalfull-fieldboundarypasses3positive/negativecontrols",
-    "IndependentLOWnested-copyallowancefinding;exactrepository-relativeanchorcorrected;all6independentcontrols+fullscanPASS"
+    "IndependentLOWnested-copyallowancefinding;exactrepository-relativeanchorcorrected;all6independentcontrols+fullscanPASS",
+    "Linuxbootstrap252failedonegeneric-api-keymatchinnewcanonicalreviewfield;exacttrackedGitarchiveindependentlyreproducedmatchasverifiedGitcommithash;structuredscannerreviewfieldsavoidfalsepatternwithoutnewallowance"
   ],
   "limits": [
     "RealOneIdentitySQLexecution/signedregistry/permissions/nativecodecs/historySP18-SP19NOTVERIFIED;noactivation",
@@ -154,11 +172,19 @@
     {
       "path": "work/release-readiness-20261003/ui-gitleaks-independent-review.json",
       "sha256": "31781eb5839e236762ec078076527b8c96982545439e8ddfb810a51139d9238a"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated-metadata-corrected-gitleaks.log",
+      "sha256": "242cf132b0700bec26433c816c96392594ee2a5d188cb0c2aaf994718632e590"
     }
   ],
   "reviews": {
     "collector": "Independent55PASS;bothfindingsCLOSED;3ce4116",
     "UI": "Independentreview3b3c0cd+678e258+49823c0ACCEPTED;executedrootbrowserreceipts;notreviewerbrowserreplays",
-    "secretScan": "ACCEPTEDa997563;5digestsrecomputed,10fields,sixcontrols+fullscanPASS;LOWnested-copyfindingCLOSED"
+    "scanner": {
+      "status": "ACCEPTED",
+      "sourceCommit": "a9975634134b9bef2411424e9026ded5377c28fe",
+      "result": "5recomputeddigests,10fields,sixcontrols+fullscanPASS;LOWnested-copyfindingCLOSED"
+    }
   }
 }
