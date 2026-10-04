@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>ReportPublication.Tests</AssemblyName>
+    <PublicationPostgreSqlProject Condition="'$(PublicationPostgreSqlProject)' == ''">../../../src/server/modules/ReportPublication.PostgreSql/ReportPublication.PostgreSql.csproj</PublicationPostgreSqlProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(PublicationPostgreSqlProject)" />
+    <PackageReference Include="Npgsql" Version="[10.0.3]" />
+    <Content Include="fixtures/*.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../../unit/ReportPublication.Tests/fixtures/*.json" Link="native-fixtures/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
