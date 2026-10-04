@@ -163,6 +163,7 @@ const region = (page) =>
   page.getByRole("region", {
     name: "Offline simulated configuration response",
     exact: true,
+    includeHidden: true,
   });
 async function select(page, id) {
   await page.evaluate(
@@ -175,7 +176,16 @@ async function select(page, id) {
     .getByRole("button", { name: "Start synthetic run", exact: true })
     .waitFor();
 }
+async function showProposedFindings(page) {
+  last = "open-proposed-findings-tab";
+  await page
+    .getByRole("tablist", { name: "AI workspace sections", exact: true })
+    .getByRole("tab", { name: "Proposed findings", exact: true })
+    .click();
+}
 async function shown(page, id) {
+  await showProposedFindings(page);
+  last = "await-visible-preview-region";
   await region(page).waitFor();
   await until(
     () => region(page).locator("details dd").first().textContent(),
@@ -755,6 +765,7 @@ try {
     },
   };
   await select(page, normal.runId);
+  await showProposedFindings(page);
   await region(page).getByRole("status").waitFor();
   equal(
     await region(page).locator("article,details").count(),
