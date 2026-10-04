@@ -99,12 +99,7 @@ function ConsultantApp() {
   const artifactDrafts = useRef<Record<string, ArtifactReviewDraft>>({});
   const planningTaskDrafts = useRef<Record<string, PlanningTaskDraft>>({});
   const [navigationNotice, setNavigationNotice] = useState('');
-  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>(() => {
-    const selection = new URLSearchParams(window.location.search);
-    return selection.has('run') && (selection.has('task') || selection.has('finding'))
-      ? 'Assessments'
-      : 'Overview';
-  });
+  const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('Overview');
   useEffect(() => {
     setCategoryRequest(null);
   }, [selectedId]);
