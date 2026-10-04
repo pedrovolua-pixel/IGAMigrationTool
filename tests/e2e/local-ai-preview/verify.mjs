@@ -178,10 +178,11 @@ async function select(page, id) {
 }
 async function showProposedFindings(page) {
   last = "open-proposed-findings-tab";
-  await page
+  const tab = page
     .getByRole("tablist", { name: "AI workspace sections", exact: true })
-    .getByRole("tab", { name: "Proposed findings", exact: true })
-    .click();
+    .getByRole("tab", { name: "Proposed findings", exact: true });
+  await tab.waitFor();
+  if ((await tab.getAttribute("aria-selected")) !== "true") await tab.click();
 }
 async function shown(page, id) {
   await showProposedFindings(page);

@@ -24,14 +24,16 @@ export function AiWorkspace({
   analysis,
   preview,
   onSettings,
+  initialProposalView = false,
 }: {
   run: RunDetail | null;
   analysis: AnalysisDetail | null;
   preview: ReactNode;
   onSettings?: () => void;
+  initialProposalView?: boolean;
 }) {
   const prefix = useId();
-  const [active, setActive] = useState<number>(0);
+  const [active, setActive] = useState<number>(() => (initialProposalView ? 1 : 0));
   const tablist = useRef<HTMLDivElement>(null);
   const boundResponse =
     run && analysis?.runId === run.runId && analysis.runRevision === run.revision ? analysis : null;
