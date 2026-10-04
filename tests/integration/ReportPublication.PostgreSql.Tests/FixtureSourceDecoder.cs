@@ -31,14 +31,19 @@ internal static class FixtureSourceDecoder
         var metadata = new JsonObject
         {
             ["schemaVersion"] = "native-publication-fixture-source-metadata-v1",
-            ["scope"] = sourceNode["scope"]!.DeepClone(), ["runId"] = sourceNode["runId"]!.DeepClone(),
-            ["runRevision"] = sourceNode["runRevision"]!.DeepClone(), ["assessmentState"] = sourceNode["assessmentState"]!.DeepClone(),
+            ["scope"] = sourceNode["scope"]!.DeepClone(),
+            ["runId"] = sourceNode["runId"]!.DeepClone(),
+            ["runRevision"] = sourceNode["runRevision"]!.DeepClone(),
+            ["assessmentState"] = sourceNode["assessmentState"]!.DeepClone(),
             ["sourceDigest"] = NativePublicationCanonicalV1.Hash(source),
             ["projectionDigest"] = NativePublicationCanonicalV1.Hash(NativePublicationCanonicalV1.ProjectionBytes(capture.Projection)),
             ["scoreDigest"] = NativePublicationCanonicalV1.Hash(NativePublicationCanonicalV1.ScoreBytes(capture.Projection.Scores)),
-            ["requiredCategories"] = sourceNode["requiredCategories"]!.DeepClone(), ["requiredFields"] = sourceNode["requiredFields"]!.DeepClone(),
-            ["inputs"] = sourceNode["inputs"]!.DeepClone(), ["retention"] = sourceNode["retention"]!.DeepClone(),
-            ["provenance"] = sourceNode["provenance"]!.DeepClone(), ["warnings"] = sourceNode["warnings"]!.DeepClone(),
+            ["requiredCategories"] = sourceNode["requiredCategories"]!.DeepClone(),
+            ["requiredFields"] = sourceNode["requiredFields"]!.DeepClone(),
+            ["inputs"] = sourceNode["inputs"]!.DeepClone(),
+            ["retention"] = sourceNode["retention"]!.DeepClone(),
+            ["provenance"] = sourceNode["provenance"]!.DeepClone(),
+            ["warnings"] = sourceNode["warnings"]!.DeepClone(),
             ["protectedReferences"] = new JsonArray(references.Select(x => (JsonNode)new JsonObject { ["id"] = x.Id.ToString("D"), ["category"] = x.Category }).ToArray())
         };
         return CanonicalFixtureControl(metadata);
