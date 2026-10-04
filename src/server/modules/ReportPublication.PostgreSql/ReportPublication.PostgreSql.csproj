@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../ReportPublication/ReportPublication.csproj" />
+    <PackageReference Include="Npgsql" Version="[10.0.3]" />
+    <EmbeddedResource Include="../../../../migrations/report-publication/001-native-fixture.sql"
+                      LogicalName="ReportPublication.PostgreSql.001-native-fixture.sql"
+                      Condition="Exists('../../../../migrations/report-publication/001-native-fixture.sql')" />
+  </ItemGroup>
+</Project>
