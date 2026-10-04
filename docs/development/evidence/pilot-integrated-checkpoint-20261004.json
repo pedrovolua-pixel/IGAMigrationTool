@@ -87,10 +87,12 @@
         "status": "PASS"
       },
       "correction": {
-        "sourceCommit": "2b6afdc",
+        "sourceCommit": "8dea8be4693dfc679faa5f375a9d609f277c24b4",
         "governingPacket": "547d9f2",
-        "visibleTargetControls": "PASS5exact-sourcecallback;Chromium151.0.7922.34",
-        "fullGuardedDriver": "NOTVERIFIEDuntilnewhostedrun;local55433belongselsewhere"
+        "visibleTargetControls": "PASS5root+5independentexactsourcecallback;Chromium151.0.7922.34;closedundersizeddetails0/opened1",
+        "fullGuardedDriver": "NOTVERIFIEDuntilnewhostedrun;local55433belongselsewhere",
+        "governingRefinement": "a3e7c5d",
+        "review": "ACCEPTED;LOWUI-TARGET-001closedwithcheckVisibility;fullguardeddriverpending"
       }
     }
   },
@@ -103,7 +105,8 @@
     "Defaultsecretscan10falsepositivesindependentlyrecomputed5syntheticgroupdigests;firstcolumn-offsetallowancefailed;finalfull-fieldboundarypasses3positive/negativecontrols",
     "IndependentLOWnested-copyallowancefinding;exactrepository-relativeanchorcorrected;all6independentcontrols+fullscanPASS",
     "Linuxbootstrap252failedonegeneric-api-keymatchinnewcanonicalreviewfield;exacttrackedGitarchiveindependentlyreproducedmatchasverifiedGitcommithash;structuredscannerreviewfieldsavoidfalsepatternwithoutnewallowance",
-    "Hosted253LinuxAI-previewfailed125checksattarget-sizepredicatebecausehiddenclosedcontrolsmeasured;visibleenabledcorrectionretains24pxandenforcesbothdimensions;fullreplaypending"
+    "Hosted253LinuxAI-previewfailed125checksattarget-sizepredicatebecausehiddenclosedcontrolsmeasured;visibleenabledcorrectionretains24pxandenforcesbothdimensions;fullreplaypending",
+    "Independent2b6afdcvisibilityedge:undersizedclosednative-detailschildstillhasclientrect/visibleCSS;4PASS1FAIL;renderingvisibilitycorrection8dea8beclosesat5PASSwithoriginalfailurepreserved"
   ],
   "limits": [
     "RealOneIdentitySQLexecution/signedregistry/permissions/nativecodecs/historySP18-SP19NOTVERIFIED;noactivation",
@@ -222,6 +225,30 @@
     {
       "path": "work/release-readiness-20261003/ai-target-measurement-controls.json",
       "sha256": "e6e03a024987143edccee425ada0353208d7d771bd2b5d9612ee5df1a84cb236"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-independent-original.json",
+      "sha256": "3578c9211ee4ade67aad74944de5e1dc953d18735041228ac8ccd57882fc67b8"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-independent-corrected.json",
+      "sha256": "1028e8db2186c7248061cf96497e8e81af81585915c0362587089a25b879b7d8"
+    },
+    {
+      "path": "work/release-readiness-20261003/ai-target-rendered-controls.json",
+      "sha256": "0b9d1b81d16b85a3475e0219637c6d28070f4a4c1a4a0399950e5f9bee7a0a29"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-p05-supplemental-design-review.json",
+      "sha256": "5232ee41e302ece684ca2c984067da843b4fafa1ce29c18fcb58a1ebbaf0b4d9"
+    },
+    {
+      "path": "work/release-readiness-20261003/native-p05b-owner-receipt.json",
+      "sha256": "ffefe48f6937c3cdd7cf0c61770fa38e1f1e19b070a89fdd4bfe87a6988833f2"
+    },
+    {
+      "path": "work/release-readiness-20261003/p05-packet-secret-relative-scan.log",
+      "sha256": "17ff87b181c7bfb68d591ea338d9dc90d8a877cbf61a21faac39e517a01646e3"
     }
   ],
   "reviews": {
@@ -231,6 +258,11 @@
       "status": "ACCEPTED",
       "sourceCommit": "a9975634134b9bef2411424e9026ded5377c28fe",
       "result": "5recomputeddigests,10fields,sixcontrols+fullscanPASS;LOWnested-copyfindingCLOSED"
+    },
+    "UITargetCorrection": {
+      "status": "ACCEPTED",
+      "sourceCommit": "8dea8be4693dfc679faa5f375a9d609f277c24b4",
+      "controls": "PASS5independent;LOWfindingCLOSED;guardedfullreplaypending"
     }
   },
   "nativePersistence": {

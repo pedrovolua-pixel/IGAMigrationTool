@@ -599,3 +599,6 @@ The [combined checkpoint](../../docs/development/evidence/pilot-integrated-check
 
 
 RR-P05 designfdefd8e is independently accepted and integrated5f3e9b6. The [exact fixture contract](../../docs/development/native-publication-postgresql-fixture-contract.md) and [coordinator packet record](../../plans/active/pilot-release-readiness-execution.md) assign isolated P05A adapter/migration and P05B independent tests, with18case/grant expectations frozen before dependent code. Actual PostgreSQL18.4 fixtures, integration and18persisted cases remain planned; no gate or human task closes.
+
+
+AI target correction8dea8be independently closes LOWUI-TARGET-001: real rendering visibility excludes the undersized closed-details descendant, while reopening it still refuses below24px. Five exact-source root and five independent Chromium151 controls PASS; selector/threshold/semantic checks/DBguards unchanged. Original125check hosted failure and intermediate4PASS/1FAIL review are retained. Full guarded hosted replay remains pending; no gate/manual accessibility credit. RR-P05 author/verifier worktrees share packet checkpointa3e7c5d; fresh2fictional databases/16role absence and owner receipt are recorded before controlled setup. Database setup and18persisted cases have not executed.
