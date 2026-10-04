@@ -144,3 +144,6 @@ The first includeHidden button correctionfd60168 passes four simplified DOM cont
 ## Preparation and hosted failure checkpoint — 2026-10-04
 
 125-project locked restore, corrected whole-solution format, zero-warning Release build and7architecture policies/4scans PASS. Standalone preparation confirms18planned/35signatures/15returnshapes/31originalhashes without SQL execution. Core fixed-marker157+58 and independent external17 checks PASS. Hosted254 Windows2022/2025, package164, HTTPSsignature9 and real guarded AI651 PASS; Linux stops at localfix2672 Timeout. Owned diagnostic identifies closed mobile navigation; original and intermediate correction failures retained, exact2f1a534 glyph controls4PASS, independent/full hosted correction pending. Native adapter portable failures remain under correction/review; no physical18/gate completion.
+
+
+Navigation correction2f1a534 is independently accepted with four exact-source real-glyph Chromium151 controls. Owned diagnostic passes3487 plus actual host restart; the explicit56284/database/60s configuration remains diagnostic only. Original hosted254 and intermediate failures are retained; corrected full hosted validation remains pending. NoG1–G9/manual/real-environment credit.

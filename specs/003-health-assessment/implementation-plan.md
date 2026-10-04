@@ -1146,3 +1146,6 @@ The owner-private packet snapshot is confirmed at exactsitecf5b2e49/canonicald02
 ## Preparation and hosted failure checkpoint — 2026-10-04
 
 M09 / Phase1C RR-P05 preparation integrates the isolated empty module and verifier preparation only:125-project lockedrestore/format/zero-warningReleasebuild/architecture PASS.18persisted cases still planned, SQL/migration unexecuted. Reviewed subject-version projection, fixed integrity marker157+58 plus17external checks, explicit owning-fence registry and actualMigration-login setup precede dependent code. Portable adapter cancellation/allocation failures remain retained pending exact closure. Hosted254 AI651 passes; local fix-package closed-menu driver Timeout is isolated and corrected in2f1a534, independent/full hosted replay pending. M01–M12/G1–G9 full acceptance remains open.
+
+
+Navigation correction2f1a534 is independently accepted with four exact-source real-glyph Chromium151 controls. Owned diagnostic passes3487 plus actual host restart; the explicit56284/database/60s configuration remains diagnostic only. Original hosted254 and intermediate failures are retained; corrected full hosted validation remains pending. NoG1–G9/manual/real-environment credit.

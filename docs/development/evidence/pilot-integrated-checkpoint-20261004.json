@@ -118,11 +118,11 @@
         "scope": "actualguardeddedicatedPG/host/browser;original125failurepreserved"
       },
       "navigationCorrection": {
-        "sourceCommit": "2f1a534",
+        "sourceCommit": "2f1a534eef819cd580f48d703355c52df76bbb3d",
         "governingPacket": "8b2aa18",
         "rootGlyphControls": "PASS4;original2PASS2FAIL;intermediate4FAILretained",
         "actualOriginalDiagnostic": "reproducedclosedmobilenavigationlocatorwait;owned56284/notoriginalhostedcredit",
-        "independentReview": "PENDING",
+        "independentReview": "ACCEPTED;4exactsourceglyphcontrolsPASS;original2PASS2FAIL/intermediate4FAILpreserved;3sfixturelimitexplicit",
         "correctedFullHostedRun": "PENDING",
         "ownedDiagnosticReplay": {
           "status": "PASS",
@@ -414,6 +414,10 @@
     {
       "path": "work/release-readiness-20261003/v12-diagnostic-a4-owner-receipt.json",
       "sha256": "6ef43112be5267f18e934358191406002cd5f3d7cf564fec347893b3b6fa019e"
+    },
+    {
+      "path": "work/release-readiness-20261003/navigation-independent-review.json",
+      "sha256": "3f814d47d6e0f043a37a581324650583e9c81603b73430142067c90ef5b19ef9"
     }
   ],
   "reviews": {

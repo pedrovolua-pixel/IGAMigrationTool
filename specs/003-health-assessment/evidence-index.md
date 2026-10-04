@@ -610,3 +610,6 @@ The owner-private packet snapshot is confirmed at exactsitecf5b2e49/canonicald02
 ## Preparation and hosted failure checkpoint — 2026-10-04
 
 [Preparation125 and hosted254 evidence](../../docs/development/evidence/pilot-integrated-checkpoint-20261004.json) appends exact125-project restore/format/build/architecture, fixed-marker157+58/17external, unchanged31vectors and independent reviews. Original formatting, portable adapter, hosted localfix2672 and intermediate navigation failures are retained. AI651 is an actual guarded hosted pass atd02cb0d; corrected2f1a534 glyph controls4PASS are bounded engineering evidence, full corrected hosted and18persisted cases remain pending. Existing privateCFreceipt stays historical until this newer snapshot is published.
+
+
+Navigation correction2f1a534 is independently accepted with four exact-source real-glyph Chromium151 controls. Owned diagnostic passes3487 plus actual host restart; the explicit56284/database/60s configuration remains diagnostic only. Original hosted254 and intermediate failures are retained; corrected full hosted validation remains pending. NoG1–G9/manual/real-environment credit.

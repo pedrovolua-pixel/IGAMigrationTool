@@ -739,3 +739,6 @@ The owner-private packet snapshot is confirmed at exactsitecf5b2e49/canonicald02
 ## Preparation and hosted failure checkpoint — 2026-10-04
 
 Preparation checkpoint:125-project build/restore/format/architecture PASS; immutable31native vectors and18planned case inventory unchanged. Real guarded hosted AI preview651 PASS atd02cb0d. Linux254 remains FAILED at localfix2672; closed-mobile navigation correction2f1a534 passes four glyph/focus controls but full hosted replay is pending. Adapter portable cancellation/allocation defects are being corrected before integration. Native18persisted cases, real A/B/rules/identity/audit/evaluation/PDF/operations and G1–G9 remain NOT VERIFIED; no human task closes.
+
+
+Navigation correction2f1a534 is independently accepted with four exact-source real-glyph Chromium151 controls. Owned diagnostic passes3487 plus actual host restart; the explicit56284/database/60s configuration remains diagnostic only. Original hosted254 and intermediate failures are retained; corrected full hosted validation remains pending. NoG1–G9/manual/real-environment credit.
