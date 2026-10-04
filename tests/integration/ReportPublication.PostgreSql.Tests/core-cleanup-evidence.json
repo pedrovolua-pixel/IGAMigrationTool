@@ -26,5 +26,13 @@
   "limits": [
     "Scripted trustedports only, no actualNpgsql/PGrelease proof",
     "All18physicalpersisted mechanisms NOT_EXECUTED"
-  ]
+  ],
+  "correctionReplay": {
+    "sourceCommit": "90ef85f92263b317e9f709542b6cb54c60d082a9",
+    "readerSha256": "b22f732dd8eec7fce55d723826c5fb2e0deb30499ec81c82694fc9ed9c7bfd59",
+    "passed": 4,
+    "failed": 0,
+    "records": "evidence/core-cleanup-90ef85f9-corrected.json",
+    "observed": "Eachpublisher/reader transaction/fence scenario propagatesexplicituncertainty with0outcomes/1unknownsignal/0protectedloads/0delivery. Original2reader failures retained unchanged."
+  }
 }
