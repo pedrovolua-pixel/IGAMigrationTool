@@ -10,6 +10,7 @@ internal static class FixtureAuditEncodingV1
     {
         NativeFixtureWireV1.Binding(binding);
         if (head is null || head.EventId == Guid.Empty || head.Sequence < 1 || intent is null) throw NativeFixtureWireV1.Invalid();
+        if (intent.VerifiedScope is { } scope && scope.CustomerId != binding.CustomerId) throw NativeFixtureWireV1.Invalid();
         return NativePublicationCanonicalV1.AuditEventBytes(new(head.EventId, binding.StreamId, binding.WriterBindingReference,
             head.Sequence, head.PreviousDigest, head.At, intent.OperationId, intent.InvocationId, intent.CorrelationId,
             intent.VerifiedActor is null ? PublicationAuditActorKindV1.Anonymous : PublicationAuditActorKindV1.Human,
