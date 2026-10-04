@@ -17,5 +17,13 @@
   "limits": [
     "No SQL audit-head reservation/append/receipt/serverclock proof",
     "All18persisted mechanisms NOT_EXECUTED"
-  ]
+  ],
+  "correctionReplay": {
+    "sourceSnapshot": "8e19cb2f",
+    "sourceSha256": "ae6e0f74bff19183cf73f4f6635edf3caede0217839d62204276ee2065d64c55",
+    "passed": 115,
+    "failed": 0,
+    "records": "evidence/audit-encoder-8e19cb2f-corrected.json",
+    "closure": "All6crosscustomer nonnullscope negativesrefuse; all6originalauditbytes andanonymousnull positive/head/intent/ownedfields unchangedPASS. Original109PASS6FAIL retained."
+  }
 }

@@ -37,3 +37,5 @@ The owned synthetic loopback Npgsql10.0.3 protocol stall control executed succes
 The exact root reader correction `90ef85f9` passed all4 scripted early cleanup-uncertainty cases, preserving original2 reader failures. [Evidence](core-cleanup-evidence.json) records zero outcome appends and one existing unknown signal each. This is typed-core propagation proof only; no physical cleanup or PostgreSQL18-case credit.
 
 [Audit encoder expectations](fixtures/audit-encoder-cases.json) freeze exact original byte/head/intent/ownership and governing `c4cc4ee4` binding-customer refusal before author correction. Release observer expectations also require immutable unique complete per-PID all-lock counts; no advisory-only filter or scripted physical proof.
+
+Exact `8e19cb2f` audit encoder correction passed all115 independent checks; original109 passed /6 cross-customer failures remain retained. [Evidence](audit-encoder-evidence.json) preserves unchanged6 original audit vectors and anonymous-null positive. This supplies no SQL reservation or persisted18-case credit.
