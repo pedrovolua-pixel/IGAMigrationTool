@@ -376,6 +376,22 @@ internal static class RunCoordinatorChecks
         var warnedFailure = await Run(warned);
         Check("receipt failure preserves permission warning", warnedFailure.Outcome == CollectorRunOutcome.StageFailed &&
             warnedFailure.ExcessReadOnlyWarning && warnedFailure.CompletedPages == 0 && !File.Exists(warned.Approval.CheckpointPath));
+
+        var retention = NewAdapter([first with { HasMore = false }]);
+        retention.Approval = retention.Approval! with
+        {
+            ExtractionStartedAtUtc = DateTimeOffset.UtcNow.AddHours(-1).AddSeconds(3),
+            MaximumDuration = TimeSpan.FromHours(2)
+        };
+        var retentionBoundary = retention.Approval.ExtractionStartedAtUtc.AddHours(1);
+        retention.StageDelayUntilUtc = retentionBoundary.AddMilliseconds(50);
+        var expiredAfterReceipt = await Run(retention, config with { RetentionHours = 1, MaxDurationSeconds = 7200 });
+        Check("actual stage await crosses retention boundary", retention.StageStartedAtUtc < retentionBoundary &&
+            retention.StageReturnedAtUtc >= retentionBoundary && retention.StageAttempts == 1 &&
+            Directory.GetFiles(retention.StageDirectory, "*.stage").Length == 1);
+        Check("receipt crossing retention expires before checkpoint", expiredAfterReceipt.Outcome == CollectorRunOutcome.Expired &&
+            expiredAfterReceipt.CompletedPages == 0 && expiredAfterReceipt.CompletedRows == 0 &&
+            !File.Exists(retention.Approval.CheckpointPath));
         return count;
 
         FakeAdapter NewAdapter(IReadOnlyList<CollectorPage> pages)
@@ -435,6 +451,9 @@ internal static class RunCoordinatorChecks
         public bool ReadOnlyFieldsObserved { get; private set; }
         public bool ReturnAfterDeadlineOnStage { get; set; }
         public Action? AfterStage { get; set; }
+        public DateTimeOffset? StageDelayUntilUtc { get; set; }
+        public DateTimeOffset? StageStartedAtUtc { get; private set; }
+        public DateTimeOffset? StageReturnedAtUtc { get; private set; }
         public string StageDirectory => stageDirectory;
         public byte[] StageKey => stageKey;
 
@@ -493,6 +512,7 @@ internal static class RunCoordinatorChecks
             }
 
             StageAttempts++;
+            StageStartedAtUtc = DateTimeOffset.UtcNow;
             if (AttemptFieldMutation)
             {
                 ReadOnlyFieldsObserved = fields is ICollection<MinimizedField> { IsReadOnly: true };
@@ -544,6 +564,12 @@ internal static class RunCoordinatorChecks
                 try { await Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken); }
                 catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { }
             }
+            if (StageDelayUntilUtc is { } until)
+            {
+                while (until - DateTimeOffset.UtcNow is { } remaining && remaining > TimeSpan.Zero)
+                    await Task.Delay(remaining, cancellationToken);
+            }
+            StageReturnedAtUtc = DateTimeOffset.UtcNow;
             if (BlockCheckpointOnStage && Approval is not null)
             {
                 Directory.CreateDirectory(Approval.CheckpointPath);

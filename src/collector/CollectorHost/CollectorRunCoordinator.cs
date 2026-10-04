@@ -316,6 +316,14 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
                     checkpoints.Count, rows, permission.RequiresWarningAndAudit);
             }
 
+            // Stage/readback can cross the persisted local-retention boundary
+            // independently of the page deadline, including on the final page.
+            if (Expired())
+            {
+                return new CollectorRunResult(CollectorRunOutcome.Expired, checkpoints.Count, rows,
+                    permission.RequiresWarningAndAudit);
+            }
+
             checkpoints.Add(checkpoint);
             try
             {
