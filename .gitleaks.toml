@@ -19,3 +19,17 @@ regexes = [
   '^logicalKey":\ "71f4b8bec239a014e470a09aa4c82f2be02cf0a45e4e56730b8fff03832ce931"$',
   '^logicalKey":"3dcf8adeb48563410e353cb057a7a1829e875601d0952565fa33e8414961a8aa"$',
 ]
+
+[[allowlists]]
+description = "Exact independently recomputed approved UI synthetic grouping digests"
+targetRules = ["generic-api-key"]
+condition = "AND"
+regexTarget = "match"
+paths = ['(^|/)work/ui-review/2026-10-03/approved-platform-implementation/preview-snapshot\.json$']
+regexes = [
+  '^ey":"2221d27fdb331f4aa96d0aca1b8f2f2a6573f7138f8f4df88c41cd6639e9f330",(?:"objectId|"ruleId":)$',
+  '^ey":"241bdd7777a9aa621d511b78f508c470a5c6ab63bfa32405113e5155a205c195",(?:"objectId|"ruleId":)$',
+  '^ey":"3e2c7bf7ab6608f61a218b46bf8f0dc88d4b522854ef04cb22d230a1c792e8e7",(?:"objectId|"ruleId":)$',
+  '^ey":"7d9d530940083b81e8f0ebae5bad7266f5ca9e4e97a0fa668ffb1b149049ba78",(?:"objectId|"ruleId":)$',
+  '^ey":"fed2f832d4b0e990d91f6b80dfe922519a9f25fa064cdaef5bd41a21964637ca",(?:"objectId|"ruleId":)$',
+]
