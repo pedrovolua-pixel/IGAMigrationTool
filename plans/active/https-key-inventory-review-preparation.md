@@ -1,6 +1,6 @@
 # Shared-key inventory decision and production input preparation
 
-Status: PLANNED — proposed architecture and input packet only
+Status: VERIFIED — documentary preparation only; architecture review remains open
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: bc65859
@@ -21,3 +21,9 @@ The input checklist must group exact technical/security/operations decisions nee
 INV-P01: demonstrate accepted architecture/policy alignment and proposed-only status. INV-P02: trace inventory/witness/restore/acknowledgment boundaries and unresolved assumptions without an invented guarantee. INV-P03: distinguish all unspecified key quantities and named owners from already approved unrelated policies. INV-P04: every checklist row links a canonical requirement/template field and identifies role/completion. INV-P05: UTF-8, Markdown links/anchors, whitespace, protected prose/secret scan and independent non-author review. These are preparation checks, not implemented inventory or production KEY evidence. No runtime/full-product regressions apply to documents-only changes.
 
 Coordinator integrates only independently reviewed documents and updates canonical records and private human-task delta. All live/gate obligations remain open. Private BFF/HTTPS snapshot4346e0f is stale under the separate automatic-review-rejected publisher proxy-bypass; no retry/bypass or credential request. Preserve unrelated Cycle14 publication. Exact new architecture decisions require attributed human approval after this reviewable packet exists.
+
+## Documentary checkpoint — 2026-10-04 UTC
+
+Corrected immutable candidate66ca09a9d4438bcf4fca429a1bf15daaecef4e8d (initial8bd16ab retained) passed non-author INV-P01–05 review and was integrated as42b7891/2b312fe with identical two-document hashes. The review checked41 local links/13 heading anchors,42 exact existing null intake fields, seven technical/nine live input rows, strict UTF-8/newlines, proposed-only and protected prose, committed whitespace and Gitleaks. Original15-minute wording was corrected against the canonical identity design to distinguish ordinary sessions, transaction admission, protected-action authentication and provider freshness; this changes no policy. [Source-bound documentary receipt](../../docs/development/evidence/https-key-inventory-preparation-20261004.json) retains initial/corrected sources, reviewer evidence hashes and limits.
+
+[ADR-0013](../../architecture/decisions/ADR-0013-shared-key-inventory-and-recovery.md) remains Proposed/unselected. [Checklist](../../docs/development/https-key-production-input-checklist.md) is a technical review/input aid, not supplied values or architecture approval. No runtime/product test, new KEY case, grant, spend, Azure operation, production dependency or schema was executed by this packet. All six human tasks and G1–G9/Milestone2 remain open; private BFF/HTTPS publisher block persists.

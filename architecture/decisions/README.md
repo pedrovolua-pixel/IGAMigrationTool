@@ -33,3 +33,7 @@ ADRs are append-only decision history. Supersede an accepted ADR with a new ADR 
 - [ADR-0012-authentication-failure-audit-preservation.md](ADR-0012-authentication-failure-audit-preservation.md) — compares durable authentication failure journal/service and exact policy amendment alternatives; Option A accepted for bounded local prototype only; no live audit-policy exception selected.
 
 ADR-0012 Option A is now accepted for a bounded local prototype only; total-audit-outage policy and live acceptance remain open. [Owner approval scope](../../plans/active/https-production-local-cycle01.md).
+
+## Proposed shared-key inventory and recovery decision
+
+- [ADR-0013-shared-key-inventory-and-recovery.md](ADR-0013-shared-key-inventory-and-recovery.md) — compares durable inventory and independent witness alternatives; no option or production policy selected. [Production input checklist](../../docs/development/https-key-production-input-checklist.md) identifies remaining technical decisions and protected deployment evidence.
