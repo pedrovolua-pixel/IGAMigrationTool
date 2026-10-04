@@ -48,6 +48,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
     {
         Check();
         using var operation = CancellationTokenSource.CreateLinkedTokenSource(Token, caller);
+        operation.Token.ThrowIfCancellationRequested();
         var pending = action(operation.Token).AsTask();
         try { var value = await pending.WaitAsync(operation.Token); Check(); caller.ThrowIfCancellationRequested(); return value; }
         catch
