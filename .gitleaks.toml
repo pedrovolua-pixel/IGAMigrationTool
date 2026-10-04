@@ -25,7 +25,7 @@ description = "Exact independently recomputed approved UI synthetic grouping dig
 targetRules = ["generic-api-key"]
 condition = "AND"
 regexTarget = "match"
-paths = ['(^|/)work/ui-review/2026-10-03/approved-platform-implementation/preview-snapshot\.json$']
+paths = ['^work/ui-review/2026-10-03/approved-platform-implementation/preview-snapshot\.json$']
 regexes = [
   '^rootCauseKey":"2221d27fdb331f4aa96d0aca1b8f2f2a6573f7138f8f4df88c41cd6639e9f330"$',
   '^rootCauseKey":"241bdd7777a9aa621d511b78f508c470a5c6ab63bfa32405113e5155a205c195"$',
