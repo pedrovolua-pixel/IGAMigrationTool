@@ -248,6 +248,34 @@ internal static class SourcePageChecks
         var totalCap = await fixture.Kernel().RunPageAsync(fixture.Request(ordinal: 1, phase: SourceQueryPhase.Continuation, continuation: result.Receipt.NextContinuation, limits: byteLimits), default);
         Check("cumulative total byte cap", totalCap.Page is null && totalCap.Reason == SourcePageReason.TotalByteCap && totalCap.Counters.ReadCalls == 1);
 
+        foreach (var stage in new[] { "resolve", "probe", "open", "execute", "read" })
+        {
+            fixture = new(); fixture.Hooks[stage] = () => throw new OperationCanceledException("fictional-canary");
+            result = await fixture.Kernel().RunPageAsync(fixture.Request(), default);
+            var transportFailure = stage is "open" or "execute" or "read";
+            Check("unsolicited operation cancellation is not user cancellation", result.Page is null && result.Receipt is null &&
+                result.Outcome == (transportFailure ? SourcePageOutcome.Disconnected : SourcePageOutcome.Refused) &&
+                result.Reason == (transportFailure ? SourcePageReason.TransportFailure : SourcePageReason.PortFailure));
+        }
+        fixture = TypedFixture([new("K", "int", false, FieldClassification.ApprovedReference), new("F", "varchar(16)", false, FieldClassification.ApprovedReference)],
+            [SourceNativeValue.Integer("int", 0), SourceNativeValue.Text("varchar(16)", new string('q', 17), 17)]);
+        result = await fixture.Kernel().RunPageAsync(fixture.Request(), default);
+        Check("rejected width includes measurable observed payload", result.Page is null && result.Reason == SourcePageReason.NativeValueInvalid &&
+            result.Counters.RowsObserved == 1 && result.Counters.BytesObserved == 21 && result.Counters.ValueClassifications == 0);
+        foreach (var unknown in new[] { SourceNativeValue.Text("varchar(16)", "q", -1), SourceNativeValue.Integer("unsupported-native-type", 0) })
+        {
+            fixture = TypedFixture([new("K", "int", false, FieldClassification.ApprovedReference), new("F", "varchar(16)", false, FieldClassification.ApprovedReference)],
+                [SourceNativeValue.Integer("int", 0), unknown]);
+            result = await fixture.Kernel().RunPageAsync(fixture.Request(), default);
+            Check("unmeasurable payload does not invent bytes", result.Page is null && result.Reason == SourcePageReason.NativeValueInvalid &&
+                result.Counters.RowsObserved == 1 && result.Counters.BytesObserved == 4 && result.Counters.ValueClassifications == 0);
+        }
+        fixture = TypedFixture([new("K", "int", false, FieldClassification.ApprovedReference), new("F", "varchar(16)", false, FieldClassification.ApprovedReference)],
+            [SourceNativeValue.Integer("int", 0), SourceNativeValue.Text("varchar(16)", new string('q', 17), 17), SourceNativeValue.Binary("varbinary(2)", [1, 2])]);
+        result = await fixture.Kernel().RunPageAsync(fixture.Request(), default);
+        Check("received wrong shape preserves measurable bytes", result.Page is null && result.Reason == SourcePageReason.SchemaMismatch &&
+            result.Counters.BytesObserved == 23 && result.Counters.ValueClassifications == 0);
+
         foreach (var stage in new[] { "resolve", "history", "open", "probe", "execute", "read" })
         {
             fixture = new(); using var cancel = new CancellationTokenSource(); fixture.Hooks[stage] = cancel.Cancel;

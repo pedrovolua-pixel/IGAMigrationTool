@@ -122,6 +122,21 @@ public sealed class SourceNativeValue
         IntegerValue == other.IntegerValue && UniqueIdentifierValue == other.UniqueIdentifierValue &&
         TextValue == other.TextValue && NativeByteLength == other.NativeByteLength &&
         (_binary is null ? other._binary is null : other._binary is not null && _binary.SequenceEqual(other._binary));
+    internal bool TryObservedBytes(out long bytes)
+    {
+        bytes = Kind switch
+        {
+            SourceNativeKind.Integer => SqlType switch { "tinyint" => 1, "smallint" => 2, "int" => 4, "bigint" => 8, _ => -1 },
+            SourceNativeKind.UniqueIdentifier => 16,
+            SourceNativeKind.Binary => _binary?.LongLength ?? -1,
+            SourceNativeKind.Text => TextValue is not null ? NativeByteLength : -1,
+            SourceNativeKind.SqlNull => 0,
+            _ => -1
+        };
+        if (bytes >= 0) return true;
+        bytes = 0;
+        return false;
+    }
     internal bool TryBytes(QueryPackField field, out long bytes)
     {
         bytes = 0;

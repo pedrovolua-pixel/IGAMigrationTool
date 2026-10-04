@@ -133,18 +133,29 @@ public sealed class SourcePageKernel
                 state.Gate();
                 if (row is null) { terminal = true; break; }
                 state.RowsObserved++;
+                var measurable = true;
+                foreach (var observed in row.Values)
+                {
+                    if (observed is null || !observed.TryObservedBytes(out var observedBytes)) { measurable = false; continue; }
+                    // Payload has already arrived from the bounded reader. Refusing it
+                    // must not erase measurable bytes or invent an unknown length.
+                    state.BytesObserved = checked(state.BytesObserved + observedBytes);
+                }
+                if (!measurable) Stop(SourcePageOutcome.Refused, SourcePageReason.NativeValueInvalid);
                 if (row.RowOrdinal != index || row.Values.Count != request.Pair.Fields.Count) Stop(SourcePageOutcome.Refused, SourcePageReason.SchemaMismatch);
+                foreach (var (value, ordinal) in row.Values.Select((value, ordinal) => (value, ordinal)))
+                {
+                    state.Gate();
+                    if (!value.TryBytes(request.Pair.Fields[ordinal], out var bytes)) Stop(SourcePageOutcome.Refused, SourcePageReason.NativeValueInvalid);
+                    if (bytes > request.Limits.MaximumFieldBytes) Stop(SourcePageOutcome.Partial, SourcePageReason.FieldByteCap);
+                }
+                if (state.BytesObserved > request.Limits.MaximumPageBytes) Stop(SourcePageOutcome.Partial, SourcePageReason.PageByteCap);
+                if (checked(state.PriorBytes + state.BytesObserved) > request.Limits.MaximumTotalBytes) Stop(SourcePageOutcome.Partial, SourcePageReason.TotalByteCap);
                 var minimized = new List<SourceMinimizedField>();
                 for (var fieldOrdinal = 0; fieldOrdinal < request.Pair.Fields.Count; fieldOrdinal++)
                 {
                     state.Gate();
                     var field = request.Pair.Fields[fieldOrdinal]; var value = row.Values[fieldOrdinal];
-                    long bytes = 0;
-                    if (value is null || !value.TryBytes(field, out bytes)) Stop(SourcePageOutcome.Refused, SourcePageReason.NativeValueInvalid);
-                    state.BytesObserved = checked(state.BytesObserved + bytes);
-                    if (bytes > request.Limits.MaximumFieldBytes) Stop(SourcePageOutcome.Partial, SourcePageReason.FieldByteCap);
-                    if (state.BytesObserved > request.Limits.MaximumPageBytes) Stop(SourcePageOutcome.Partial, SourcePageReason.PageByteCap);
-                    if (checked(state.PriorBytes + state.BytesObserved) > request.Limits.MaximumTotalBytes) Stop(SourcePageOutcome.Partial, SourcePageReason.TotalByteCap);
                     state.ValueClassifications++;
                     var classified = _valuePolicy.Classify(binding, fieldOrdinal, field, value!);
                     state.Gate();
@@ -197,7 +208,7 @@ public sealed class SourcePageKernel
                 rowCap ? SourcePageReason.RowCap : SourcePageReason.None, state.Counters, page, receipt, state.Conflicts);
         }
         catch (PageStop stopped) { result = state.Result(stopped.Outcome, stopped.Reason); }
-        catch (OperationCanceledException) { result = state.CanceledResult(); }
+        catch (OperationCanceledException) { result = state.CanceledResult(transportOperation); }
         catch (OverflowException) { result = state.Result(SourcePageOutcome.Refused, SourcePageReason.InvalidInput); }
         catch (Exception error) when (NonFatal(error))
         {
@@ -319,11 +330,12 @@ public sealed class SourcePageKernel
             if (_originalStart.HasValue && time.GetUtcNow() - _originalStart.Value >= _duration || Remaining() <= TimeSpan.Zero || Token.IsCancellationRequested)
                 Stop(SourcePageOutcome.TimedOut, SourcePageReason.Deadline);
         }
-        internal SourcePageResult CanceledResult()
+        internal SourcePageResult CanceledResult(bool transportOperation)
         {
             try { Gate(); }
             catch (PageStop stop) { return Result(stop.Outcome, stop.Reason); }
-            return Result(SourcePageOutcome.Canceled, SourcePageReason.None);
+            return Result(transportOperation ? SourcePageOutcome.Disconnected : SourcePageOutcome.Refused,
+                transportOperation ? SourcePageReason.TransportFailure : SourcePageReason.PortFailure);
         }
         internal SourcePageResult Result(SourcePageOutcome outcome, SourcePageReason reason) => new(outcome, reason, Counters, conflicts: Conflicts, gaps: Gaps);
         private static TimeSpan Minimum(TimeSpan a, TimeSpan b, TimeSpan c) => a < b ? a < c ? a : c : b < c ? b : c;
