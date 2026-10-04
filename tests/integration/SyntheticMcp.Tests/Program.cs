@@ -48,6 +48,12 @@ internal static class Program
             Console.Error.WriteLine("FAIL cycle05 occupied cursor capacity: " + exception.Message);
             Environment.ExitCode = 1;
         }
+        try { await SelectiveCursorReclamation.RunAsync(); }
+        catch (Exception exception)
+        {
+            Console.Error.WriteLine("FAIL cycle07 selective cursor reclamation: " + exception.Message);
+            Environment.ExitCode = 1;
+        }
     }
     internal static void Check(bool value, string name)
     {
