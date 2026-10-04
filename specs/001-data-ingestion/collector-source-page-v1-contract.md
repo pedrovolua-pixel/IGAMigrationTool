@@ -1,6 +1,6 @@
 # Collector source-page v1 — RR-S05 design
 
-Status: Proposed finite internal engineering contract; coordinator review required before implementation
+Status: Finite scripted-kernel design e22b8c83a464785ce23502cd10c545b13b272460 reviewed and accepted by coordinator; RR-S06 literal API amendment below awaits coordinator review before implementation
 Authority: Approved release-readiness execution and AGENTS.md pilot decision exception.
 Scope: M03 / Phase 1A; feature-001 C1/C3, FR-ING-2/7–12/19/25/27–35, AC-ING-2/4–6/10/13–16; feature-003 IP-HAS-004, TP-HAS-015/016.
 
@@ -105,6 +105,111 @@ This document does not freeze those byte codecs or silently change current stora
 
 ## Implementation ownership and remaining source-adapter gates
 
-After coordinator review, a finite scripted implementation packet can own new source-page kernel/contracts/tests under the collector boundary, with coordinator ownership of solution/project/lock wiring and canonical records. It must use immutable fictional fixtures and independently expected transport call traces, page identities, terminal outcomes and provenance. The exact scoped work packet/test-host wiring is frozen before code. Do not add the physical provider, persistence codec or hosted baseline route by implication.
+The coordinator accepted the finite scripted-kernel scope after review of e22b8c83a464785ce23502cd10c545b13b272460. The worker owns only this contract and NEW `src/collector/CollectorSourcePages/**` and `tests/unit/CollectorSourcePages.Tests/**`, including their own csproj, package locks, README and standalone assertion-host Program. The coordinator owns solution/CI/shared configuration/canonical records. No existing CollectorSafety or CollectorHost source/test files are edited. CollectorSourcePages references CollectorSafety and uses its already pinned ScriptDom transitively; no new package is selected. The literal API and test-host wiring below must be reviewed before code. Do not add the physical provider, persistence codec or hosted baseline route by implication.
 
 Remaining integrations are: signed registry/pack/policy loader; actual protected descriptor and TLS/auth provisioning; exact source/SME/DB-owner build/query/field/key/permission/impact evidence; physical permission and execution adapters; typed persistence/audit receipts and capacity/cleanup/key lifecycle; customer-controlled host/MSI/Server Core checks; online/offline receiving authorization and package inspection; immutable normalized baseline assembly; read-only health adapter; independent A/B validation. G2 remains NOT VERIFIED. Production or irreversible operations remain separately authorized.
+
+
+## Literal scripted-kernel API amendment — review before code
+
+Namespace `CollectorSourcePages`; net10.0 library plus a standalone net10.0 assertion executable with a project reference to that library. The implementation is one page per call, one query pair per extraction. Every trusted port is required in the constructor; there is no default production adapter, permissive fallback, request grant or boolean override. Opening a fresh connection generation on every call deliberately prevents permission-cache reuse; a transport disconnect ends that attempt rather than transparently reopening after a probe. Retry is a new call with the same trusted history and identity.
+
+### Immutable protected construction
+
+The following sealed classes expose getter-only properties, copy incoming arrays/collections and bytes, and override `ToString()` with the literal type name only. No generated record `PrintMembers`, interpolated values, raw exception text or protected identifiers appear in outcomes. Constructors do not attest trust. Access to protected getter properties is for the internal adapter pipeline; callers must not log them. Invalid candidate data is closed by preflight/kernel, and named trusted ports are the only sources of authority/history/permission/impact/value/native-order evidence.
+
+- `SourceScope(Guid CustomerId, Guid ProjectId, Guid EnvironmentId, Guid ExtractionId)`: four nonzero opaque identifiers.
+- `SourceQueryPair(Guid PairId, QueryPackDescriptor Continuation, string FirstSql, string FirstSqlSha256, int LocalPackRevision, int LocalPolicyRevision, string? ApprovedUidField, string SchemaVersion, string NormalizationVersion, string RepeatabilityReviewReference)`: snapshots the existing descriptor, applicability arrays, fields and parameters. The existing descriptor is private/internal to the implementation, not exposed through a generated string. Public scalar/field getters needed by the transport remain protected. PairId is independent of pack/query identities. Exact registry mapping also binds optional UID field, schema/normalization versions and repeatability review.
+- `SourcePageIdentity(SourceScope Scope, Guid PairId, long PageOrdinal)` and enum `SourceQueryPhase { First, Continuation }`.
+- `SourcePageLimits(int MaximumPageSize, long MaximumRows, long MaximumFieldBytes, long MaximumPageBytes, long MaximumTotalBytes, TimeSpan MaximumDuration, TimeSpan CommandTimeout, TimeSpan Retention)`: all strictly positive, command timeout finite and no longer than maximum duration, field <= page <= total bytes. Concurrency is fixed to one in-flight call per kernel; a concurrent call is refused before opening. Page size/rows/duration use the narrower of these limits and query descriptor bounds. Retention uses the original trusted extraction start. No disk/queue admission is claimed by this memory-only kernel.
+- `SourcePageRequest(SourceScope Scope, SourceQueryPair Pair, long PageOrdinal, SourceQueryPhase Phase, int RequestedPageSize, SourceNativeValue? Continuation, SourcePageLimits Limits)`. A nonterminal prior receipt supplies the exact typed continuation and next ordinal; an initial request has ordinal zero/First/null continuation. Requested size must be within the remaining row allowance, not silently clamped. `SourcePageIdentity` is derived once from frozen request inputs.
+- `SourceNativeValue`: immutable native tag and exact SqlType plus one payload: `Integer(string sqlType, long value)`, `UniqueIdentifier(Guid value)`, `Text(string sqlType, string value, int NativeByteLength)`, `Binary(string sqlType, byte[] value)`, `SqlNull(string sqlType)`. Enum `SourceNativeKind { Integer, UniqueIdentifier, Text, Binary, SqlNull }`. No coercion. Binary inputs and outputs are copied. Integer bounds are tinyint 0..255, smallint Int16, int Int32, bigint Int64; uniqueidentifier is 16 native bytes. Text preserves exact native strings; transport reports actual encoded byte length for varchar, whose encoding is provider-owned, and nvarchar uses strict valid UTF-16 code-unit bytes. varchar byte length must be >= character count and <= declared width; nvarchar byte length must equal twice UTF-16 length and <= twice declared width. Empty text is zero bytes. Fixed binary requires exact declared width; varbinary permits <= width. Null uses zero payload bytes and descriptor nullability. A later physical adapter must supply independently verified varchar byte lengths and encoding. This kernel does not infer a code page.
+- `SourceColumnMetadata(string Name, string SqlType, bool Nullable)` and `SourceReturnedSchema(IEnumerable<SourceColumnMetadata> Fields)` and `SourceReturnedRow(long RowOrdinal, IEnumerable<SourceNativeValue> Values)` freeze the reader's exact ordered schema/values. Schema names/types/nullability are compared to declared field metadata; classification is never taken from provider schema. The trusted locked dictionary supplies declared classification and the separately bound named policy port supplies actual returned-value disposition. This scripted shape does not pretend SQL schema discovery itself classifies data.
+- `SourceProvenance`: constructed only by the kernel from frozen scope/pair, registry source build/modules, exact query phase, page/row/field ordinals and trusted timestamp. Getters include `Scope`, `PairId`, `PackId`, `PackVersion`, `QueryId`, `QueryVersion`, `Phase`, `PageOrdinal`, `RowOrdinal`, `Schema`, `Table`, `Field`, `SqlType`, `PolicyId`, `PolicyVersion`, `SchemaVersion`, `NormalizationVersion`, `ExactBuild`, immutable installed-module pairs, `ExtractedAtUtc`, `FieldDisposition`. It contains no raw field payload; its ToString is constant.
+- `SourceMinimizedField(SourceProvenance Provenance, FieldDisposition Disposition, SourceNativeValue? Value)`, `SourceMinimizedRow(long RowOrdinal, IEnumerable<SourceMinimizedField> Fields)`, `SourceRowReference(SourcePageIdentity Page, long RowOrdinal)`, `SourceConflict(SourceConflictKind Kind, SourceRowReference First, SourceRowReference Second)` with `SourceConflictKind { PagingKeyTie, PagingOrder, ObjectUid }`. Conflict records expose both protected occurrence references but no key/UID/name/value. The continuation-boundary violation references the previous page's last row and the new row; no synthetic previous row is invented.
+- `SourcePage` is kernel-created with `Identity`, `Phase`, `RequestedPageSize`, immutable `Rows`, immutable `Conflicts`, `Terminal`, optional `NextContinuation`, `ObservedBytes` and frozen `ExtractedAtUtc`. Terminal pages never supply next-work continuation. `SourcePageReceipt` is kernel-created with that page's identity/frozen binding fingerprint, optional next key, terminal/last-row metadata, original start, cumulative observed rows/bytes and trusted extraction start; this is an in-memory admission receipt, not an authenticated persistence claim. A history adapter may return this same receipt only after its own future durable contract is satisfied.
+
+The pair's fingerprint compares all frozen descriptor/query/registry/minimization/budget identities and exact native boundary payloads without stringification. It is a protected canonical in-memory equality value, not a new persisted digest/codec. Fingerprinting does not reorder fields/modules or normalize SQL/version strings. For API clarity the receipt stores the exact frozen pair and scope, and equality is explicit structural comparison. An identical retry must see the same prior receipt; changed candidate bindings refuse. Limits can narrow on continuation but cannot widen prior extraction caps, duration or retention.
+
+### Closed outcomes, counters and trusted ports
+
+`SourcePageOutcome { PageReady, Partial, Refused, Quarantined, Canceled, TimedOut, Expired, Disconnected }` and `SourcePageReason { None, InvalidInput, ConcurrentCall, AuthorityMissing, AuthorityRevoked, RegistryMismatch, InvalidQueryPair, HistoryMismatch, PermissionBlocked, WarningAuditMissing, ImpactUnknown, ImpactStopped, RowCap, FieldByteCap, PageByteCap, TotalByteCap, SchemaMismatch, NativeValueInvalid, NativeOrderUnsupported, PagingKeyConflict, PagingOrderViolation, ClassifiedContent, TransportFailure, PortFailure, Deadline, Retention }` are closed enums. `SourcePageResult` contains Outcome/Reason, an optional protected Page/Receipt, immutable no-value Conflicts/planned field-disposition gaps and `SourcePageCounters`. Page/Receipt exist only for PageReady and complete full-page row-cap Partial (valid page admitted with Terminal=false and no next-work continuation); every interrupted/invalid/quarantined page is discarded. A row-cap partial receipt cannot authorize a next request. Planned declaration gaps retain disposition and opaque field ordinal only, never a rejected SQL name or value. Ordinary result/counter ToString can show only enum names and numbers; SourcePageResult ToString is the literal type name.
+
+`SourcePageCounters` contains only long counts: `AuthorityResolutions`, `AuthorityRevalidations`, `HistoryLoads`, `ConnectionOpens`, `PermissionProbes`, `WarningAudits`, `ImpactChecks`, `Executions`, `ReadCalls`, `RowsObserved`, `BytesObserved`, `ValueClassifications`. Counts mean attempted calls and actual observed row/payload-byte totals for this attempt, including rejected values. Prior receipt totals are separately trusted. Checked overflow closes InvalidInput/Partial rather than wrapping. SQL rows and native payload bytes are bounded; CLR overhead/provenance metadata and process memory are not presented as a disk-staging byte quota.
+
+Required named interfaces (all async operations receive CancellationToken; protected returned classes have constant ToString):
+
+```csharp
+public interface ITrustedSourceAuthority
+{
+    ValueTask<SourceAuthorityResolution> ResolveAsync(SourcePageRequest request, CancellationToken cancellationToken);
+    ValueTask<SourceAuthorityState> RevalidateAsync(SourceRegistryBinding binding, Guid connectionGeneration, CancellationToken cancellationToken);
+}
+public interface ITrustedPageHistory
+{
+    ValueTask<SourceHistoryResolution> LoadAsync(SourcePageIdentity identity, CancellationToken cancellationToken);
+}
+public interface ISourcePageTransport
+{
+    ValueTask<ISourcePageConnection> OpenAsync(SourceRegistryBinding binding, CancellationToken cancellationToken);
+}
+public interface ISourcePageConnection : IAsyncDisposable
+{
+    Guid Generation { get; }
+    ValueTask<ISourcePageReader> ExecuteAsync(SourceBoundCommand command, CancellationToken cancellationToken);
+}
+public interface ISourcePageReader : IAsyncDisposable
+{
+    SourceReturnedSchema Schema { get; }
+    ValueTask<SourceReturnedRow?> ReadAsync(CancellationToken cancellationToken); // null is explicit end
+}
+public interface ITrustedConnectionPermission
+{
+    ValueTask<SourcePermissionReceipt> ProbeAsync(SourceRegistryBinding binding, Guid generation, CancellationToken cancellationToken);
+}
+public interface IWarningAuditReceiptWriter
+{
+    ValueTask<SourceWarningReceipt?> CommitAsync(SourceWarningIdentity identity, CancellationToken cancellationToken);
+}
+public interface ITrustedImpactGate
+{
+    ValueTask<SourceImpactState> CheckAsync(SourceRegistryBinding binding, Guid generation, CancellationToken cancellationToken);
+}
+public interface INativeKeySemantics
+{
+    SourceNativeComparisonReceipt Compare(SourceRegistryBinding binding, SourceNativePurpose purpose, int fieldOrdinal, QueryPackField field, SourceNativeValue left, SourceNativeValue right);
+}
+public interface ITrustedReturnedValuePolicy
+{
+    SourceValueClassificationReceipt Classify(SourceRegistryBinding binding, int fieldOrdinal, QueryPackField field, SourceNativeValue value);
+}
+public sealed class SourcePageKernel
+{
+    public SourcePageKernel(ITrustedSourceAuthority authority, ITrustedPageHistory history,
+        ISourcePageTransport transport, ITrustedConnectionPermission permissions,
+        IWarningAuditReceiptWriter warningAudit, ITrustedImpactGate impact,
+        INativeKeySemantics nativeKeys, ITrustedReturnedValuePolicy valuePolicy, TimeProvider timeProvider);
+    public ValueTask<SourcePageResult> RunPageAsync(SourcePageRequest? request, CancellationToken cancellationToken);
+}
+```
+
+Associated exact shapes: `SourceAuthorityState { Current, Missing, Revoked, Drifted, Unsupported }`; `SourceAuthorityResolution(State, SourceRegistryBinding?)`; `SourceRegistryBinding(Scope, PairId, QueryPackExpectedBindings expected, string trustedFirstSqlSha256, int trustedLocalPackRevision, int trustedLocalPolicyRevision, string? trustedUidField, string trustedSchemaVersion, string trustedNormalizationVersion, string trustedRepeatabilityReviewReference)` freezes expected source/modules/policy sets and exposes them only internally. A Current resolution is insufficient until its exact binding is matched to the candidate. `SourceHistoryState { Initial, Previous, Unavailable }`; `SourceHistoryResolution(State, DateTimeOffset OriginalStartedAtUtc, SourcePageReceipt? Previous)` supplies original start even for Initial, never replaced by request time. The named history adapter stands for later durable receipts; it is scripted in this packet.
+
+`SourcePermissionReceipt(Scope, PairId, Guid Generation, string MinimumReadSetId, string MinimumReadSetVersion, PermissionProbe Probe)` snapshots capabilities; equality of scope/pair/generation/minimum-read bindings is required before existing PermissionAttestation classifies it. `SourceWarningIdentity(Scope, PairId, PageOrdinal, Generation, MinimumReadSetId, MinimumReadSetVersion)` plus `SourceWarningReceipt(Identity)` is an exact protected durable-audit acknowledgment supplied by the named writer, not a caller flag. No receipt/mismatched receipt refuses. Each fresh generation has a new warning identity; retries within an adapter preserve exact identity. `SourceImpactState { Continue, Unknown, Stop }`; `SourceNativePurpose { Paging, ObjectIdentity }`; `SourceNativeOrder { Less, Equal, Greater, Unsupported }`. `SourceNativeComparisonReceipt(Binding, Purpose, FieldOrdinal, Order)` and `SourceValueClassificationReceipt(Binding, FieldOrdinal, Disposition)` contain the exact frozen registry binding, including source/build, pack/query/policy semantic identities/digests and local revisions. The kernel matches that binding and requested purpose/field ordinal before using either decision. Missing, substituted or stale policy/comparator binding refuses with no typed values in the result. These protected receipts use constant ToString; they contain no compared/classified value. No built-in native comparator, content detector or success-returning production implementation is supplied. `SourceBoundCommand` holds the exact protected SQL, phase, typed PageSize parameter, optional typed boundary parameter, request identity, finite timeout and generation; no parameter inference or string interpolation.
+
+### Required call order and finite deadlines
+
+1. Freeze/validate request without ports. Acquire single-call ownership; concurrent call refuses. Build identity. Cancellation closes before any port.
+2. Resolve named authority, load trusted history, compare exact registry/history/request bindings and original start. Query-pair structural preflight: existing QueryPackPreflight unchanged for continuation; NEW first-family AST validator plus NEW ordered projection verification for both. Refused projected declarations produce no-value ordinal gaps and no open/query.
+3. Derive effective limits, original-start wall-clock run deadline and retention boundary; persisted elapsed time is never reset on retry. Negative/future starts, malformed counters and widened previous limits refuse. If no remaining rows/bytes/time/retention, close before open. Create a linked cancellation deadline for the narrower remaining run duration/CommandTimeout; timeout aborts the entire attempt including open/probe/read, not just execute.
+4. Open a fresh generation; reject empty generation. Revalidate authority on that generation. Probe permissions on that generation; require exact receipt binding and existing minimum-read/no-write decision. If excess read-only, commit and match warning identity before execute. Check current impact/cancel/time/retention before execute. Construct exact protected bound command; no query on any failed gate.
+5. Execute once. Check exact ordered returned schema before values. Read at most RequestedPageSize row results. Check cancel/time/retention/impact before each read. Validate row ordinal, actual native payload type/width/nullability/field bytes and cumulative page/total bytes before retention in a minimized row. Classify via the named value policy; prohibited/unclassified refuse/quarantine, excluded/redacted create no-value markers. A redacted/excluded key cannot continue and is quarantined. Validate server key order/boundary only via native-key port; preserve both row refs on conflicts. Retain optional approved UID conflicts with both rows. No speculative read follows a full page. A short page has one explicit End read and Terminal=true.
+6. Before admission revalidate current authority on the same generation and check impact, cancellation, original deadline and retention again. A full page at cumulative row cap is Partial/RowCap; valid rows remain protected with no next-work continuation. Otherwise PageReady with explicit terminal/full semantics and next key only for nonterminal. Produce in-memory receipt; no ledger/files written. Dispose reader/connection on every opened path. Cleanup exceptions close a result rather than leaking details or claiming successful admission. SourcePageKernel does not catch process-fatal exceptions.
+
+A trusted-port exception produces Refused/PortFailure; a transport exception produces Disconnected/TransportFailure. OperationCanceledException maps to caller Canceled, original-retention Expired, otherwise TimedOut/Deadline in that precedence. Returned source bytes never enter exception text, stderr or ToString. Result reasons are fixed enums. No cancellation path returns an admitted page. Actual retention-crossing tests use trusted TimeProvider advancement between source operations, plus the existing RR-S04 real-clock persisted-retention regression remains applicable.
+
+### Literal implementation/test ownership
+
+Owned NEW source files are `CollectorSourcePages.csproj`, `packages.lock.json`, `README.md`, `SourcePageContracts.cs`, `SourcePagePorts.cs`, `SourceQueryPairPreflight.cs`, `FirstPageSqlValidator.cs`, `SourcePageKernel.cs` under `src/collector/CollectorSourcePages/`. Owned NEW test files are `CollectorSourcePages.Tests.csproj`, `packages.lock.json`, `README.md`, `Program.cs`, `FirstPageSqlChecks.cs`, `SourcePageChecks.cs`, `ScriptedSourcePorts.cs` under `tests/unit/CollectorSourcePages.Tests/`. Smaller internal helpers may be kept in these same files; no unowned/shared file changes. The own assertion Program catches failures, prints metadata-only check names and exits nonzero, avoiding unhandled-crash evidence loss. Test fixtures use explicit fictional SQL/schema/build/identifiers/integers and port names; none establishes vendor eligibility or permissions.
+
+SP01–SP17 are executable in this finite packet, including substituted/stale source, history, permission, native-comparison and value-policy receipt bindings. Missing/revoked authority and projected declarations are rejected before opening; failed connection-bound gates are rejected before execute. Add exact trace spies for initial authority/history -> open -> revalidate -> probe -> warning when required -> impact -> execute -> schema -> read gate/rows -> final revalidate/impact -> disposal. Every refused pre-execute fixture asserts Executions=0, no bound command, and no caller-provided grant path. Trace cancellation at open/probe/execute/read and independent fake-TimeProvider advances verify linked-token propagation and final gate checks; actual cancelable-operation timeout verifies the finite deadline path. SP18/SP19 remain unimplemented external integration gates.
