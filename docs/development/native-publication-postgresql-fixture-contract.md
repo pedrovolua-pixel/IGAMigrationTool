@@ -73,6 +73,11 @@ internal ValueTask AdmitAsync(FixtureInvocationAdmissionV1 admission,
 internal void NarrowOriginalDeadline(DateTimeOffset sourceOrReportExpiresAtUtc);
 internal ValueTask<T> InvokeWithinOriginalLeaseAsync<T>(
     Func<CancellationToken, ValueTask<T>> dependency, CancellationToken callerCancellation);
+internal void RegisterOwningFence(PublicationFenceV1 fence);
+internal void ValidateSourceOwnership(IPublicationTransactionV1 transaction,
+    PublicationActorV1 actor, PublishCommandV1 command, PublicationFenceV1 fence);
+internal void ValidateReadOwnership(IPublicationTransactionV1 transaction);
+internal ValueTask<DateTimeOffset> ReadDatabaseUtcAsync(CancellationToken ct);
 
 internal enum FixtureReconciliationStatusV1
 { Found, Unresolved, Conflict, IntegrityMismatch, AuthorityDenied }
@@ -343,6 +348,12 @@ Selected: immutable bytea fixture blobs plus relational metadata, restricted nat
 
 Coordinator-selected governing amendment615e608 freezes actor-first stable keys, honest physical-COMMIT freshness boundary, original adapter deadline ownership and separate readonly reconciliation before code. This revised packet supplies finite exact signature/return/grant/state/byte mechanisms for independent acceptance; the reviewer must close the immutable revision before coordinator assigns persistence implementation. No runtime persistence case is executed here. Required real owning adapters, two-environment validation and gates remain open; humans still need to supply authorized real One Identity source/identity/evaluation/environment evidence through canonical intake tasks. No new approval pause, customer permission, retention duration, activation or release is inferred.
 
+
+## Finite owning-fence and protected-byte validation clarification — 2026-10-04
+
+Before dependent session/source implementation, make the existing identical-context/fence requirement explicit through the four internal methods above. RegisterOwningFence accepts exactly once after AdmitAsync and compares the fence's exact actor, scope and original authority cutoff with that admission. Missing, second, mismatched or disposed registration refuses. It records the exact object identity; it does not grant authority. ValidateSourceOwnership requires the same concrete transaction's session identity, active original native TransactionId, registered ReferenceEquals fence, exact originally bound command canonical meaning, admitted Publish purpose and current original lease. ValidateReadOwnership requires the same session/transaction, registered exact ReadExact fence and originally bound report/request/scope; only the documented active historical-replay or proved-committed READ ONLY state is allowed. Invalidation clears the registry. Source/reference fixture adapters perform these ownership checks before minimized reads; persisted current facts and known locks remain mandatory. ReadDatabaseUtcAsync obtains the exact p.clock_v1 UTC7/ticks/generation through the same pinned original lease. No public core API, connection accessor, raw SQL, inline grant, envelope or function inventory is added.
+
+The protected-byte boundary remains the accepted bytea design: SQL independently checks closed control shapes, original source/projection/score commitments and relational linkages. SourceMetadataV1 does not include projection redactionMarkers or CreatedBy, and SQL does not decode protected projection prose. The owning strict C# source/publisher and exact reader prove those full projection field/marker relationships against the immutable original bytes. Do not claim SQL independently proves marker membership in protected prose, add an undocumented metadata field or use JSONB to decode that prose. Independent tests retain malformed-marker negative cases for the trusted codecs/source/publisher/reader and altered owning commitment negatives for actual SQL. These finite internal ownership methods clarify existing behavior; they do not supply physical execution or real authority acceptance.
 
 ## Coordinator subject/version and error-marker refinement — 2026-10-04
 
