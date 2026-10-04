@@ -1,6 +1,6 @@
 # Native publication PostgreSQL fixture adapter
 
-Status: strict metadata reader and original validity lease checkpoint only. SQL/session/store implementation, migration execution, host activation and persisted-case success remain unproved.
+Status: strict metadata reader, bound wire records, original validity lease and native audit encoding checkpoint. SQL/session/store implementation, migration execution, host activation and persisted-case success remain unproved.
 
 RR-P05A owns this separate assembly and `migrations/report-publication/001-native-fixture.sql` under coordinator packet `a3e7c5d79f9dba694eebd007d1a5c0a0a78fe5c6`. The accepted [fixture contract](../../../../docs/development/native-publication-postgresql-fixture-contract.md) at `fdefd8e79fa108bb099e5922e9a49b87a6a1a50e` and [implementation plan](../../../../docs/development/native-publication-v1-implementation-plan.md) govern every dependent implementation. RR-P05B independently freezes the 18 persisted cases and 35 exact SQL signatures/grants first.
 
@@ -18,9 +18,12 @@ The internal control reader owns an input copy, rejects malformed UTF-8, non-ASC
 
 This checkpoint follows independently frozen P05B expectations6232bbf and refinement70a1dc, coordinator governing refinements2fa7772/cab65d1 and actual-Migration setup3c02e54. The only core import is coordinator-owned fixed parameterless integrity marker2a5a293; core source construction and original golden bytes are unchanged. Adapter-only test friendship is ReportPublication.Tests.
 
-Executed locally: scoped .NET format and Release build with pinned .NET10.0.401/Npgsql10.0.3, zero warnings/errors. Independent metadata/lease tests and all18 persisted cases remain the verifier's next evidence; compilation alone does not satisfy them. No database was connected or modified.
-
+Executed locally: scoped .NET format, locked restore, Release build with pinned .NET10.0.401/Npgsql10.0.3 (zero warnings/errors), and default Gitleaks8.30.1. Independent portable evidence at `a9bc70c1` against tracked `ce01b389` records 257 adapter checks, seven cancellation observer checks and 112 wire checks passing, with earlier negative controls retained. Independent supplemental observer evidence records 18 controls and 32 cancellation/disposal races passing. These checks establish portable byte/ownership/cancellation behavior, not PostgreSQL authority or release of a physical backend. All18 persisted cases remain unexecuted. No database was connected or modified by this implementation worker.
 
 ## Independently accepted portable correction
 
 Exact author ce01b389 and verifier a9bc70c1 were integrated after nonauthor review: 257 adapter controls, 7 cancellation-observer controls and 112 wire controls passed; a separate reviewer executed18 controls including32 cancellation/disposal races. Original allocation, callback and pending-wait failures remain in the verifier evidence. Scoped builds/format/scans passed. These control reader, original UTC/monotonic lease and immutable wire components remain unactivated; Session, migration, physical backend cleanup and all18 persisted cases are separate pending work. The [finite cleanup refinement](../../../../docs/development/native-publication-postgresql-fixture-contract.md#finite-cleanup-uncertainty-boundary--2026-10-04) is selected before affected implementation, with its trusted fixture observation seam under independent review.
+
+## Native audit reservation encoding
+
+The finite internal audit encoder combines the configured stream/writer binding, the database-owned reserved event UUID/sequence/previous digest/time, and the existing typed native intent. It delegates closed event shape, scalar validation and canonical bytes to the unchanged native codec. It neither reserves a head nor persists an event, chooses a caller timestamp or supplies an authority decision. Successful and outcome append adapters must still validate the actual server reservation and transaction branch. This encoder follows the exact audit-head and append contract frozen before code; independently executed database reservation and append evidence remains open.
