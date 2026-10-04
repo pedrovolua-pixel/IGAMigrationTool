@@ -6,7 +6,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
     private readonly TimeProvider clock;
     private readonly DateTimeOffset admittedUtc;
     private readonly long admittedTimestamp;
-    private readonly CancellationTokenSource lifetime;
+    private readonly AsyncCancellationOwnerV1 lifetime;
     private readonly CancellationToken token;
     private readonly TaskCompletionSource ended = new(TaskCreationOptions.RunContinuationsAsynchronously);
     private readonly CancellationTokenRegistration callerRegistration;
@@ -46,7 +46,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
     internal async ValueTask<T> InvokeAsync<T>(Func<CancellationToken, ValueTask<T>> action, CancellationToken caller)
     {
         Check(); caller.ThrowIfCancellationRequested();
-        using var operation = new CancellationTokenSource();
+        using var operation = new AsyncCancellationOwnerV1();
         var cancelled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         using var originalRegistration = token.UnsafeRegister(_ => CancelOperation(), null);
         using var nestedRegistration = caller.UnsafeRegister(_ => CancelOperation(), null);
@@ -56,7 +56,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
         {
             // This signal is independent of dependency callback dispatch: a stalled callback cannot delay expiry.
             var winner = await Task.WhenAny(pending, ended.Task, cancelled.Task);
-            if (winner != pending) { CancelWithoutCallbackWait(operation); throw new OperationCanceledException(operation.Token); }
+            if (winner != pending) { operation.Cancel(); throw new OperationCanceledException(operation.Token); }
             var value = await pending;
             Check(); caller.ThrowIfCancellationRequested(); operation.Token.ThrowIfCancellationRequested();
             return value;
@@ -66,7 +66,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
             ObserveLateFault(pending);
             throw;
         }
-        void CancelOperation() { cancelled.TrySetResult(); CancelWithoutCallbackWait(operation); }
+        void CancelOperation() { cancelled.TrySetResult(); operation.Cancel(); }
     }
     private TimeSpan Remaining()
     {
@@ -91,13 +91,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
         }
         if (mustEnd) End();
     }
-    private void End() { ended.TrySetResult(); CancelWithoutCallbackWait(lifetime); }
-    private static void CancelWithoutCallbackWait(CancellationTokenSource source)
-    {
-        // CancelAsync marks the token synchronously and dispatches callbacks outside the caller/state lock.
-        // Callback faults are observed; they cannot escape a timer or skip owned cleanup.
-        try { ObserveLateFault(source.CancelAsync()); } catch (ObjectDisposedException) { }
-    }
+    private void End() { ended.TrySetResult(); lifetime.Cancel(); }
     private static void ObserveLateFault(Task task) => _ = task.ContinueWith(t => _ = t.Exception,
         CancellationToken.None, TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
         TaskScheduler.Default);
@@ -108,5 +102,44 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
         End();
         try { timer.Dispose(); }
         finally { try { callerRegistration.Dispose(); } finally { lifetime.Dispose(); } }
+    }
+}
+
+/// <summary>Cancellation dispatch retains its source until callbacks finish; disposal never waits for them.</summary>
+internal sealed class AsyncCancellationOwnerV1 : IDisposable
+{
+    private readonly CancellationTokenSource source = new();
+    private readonly object gate = new();
+    private Task? cancellation;
+    private bool disposed;
+    internal AsyncCancellationOwnerV1() { Token = source.Token; }
+    internal CancellationToken Token { get; }
+    internal void Cancel()
+    {
+        lock (gate)
+        {
+            // CancelAsync changes token state without running callbacks synchronously on this thread.
+            if (cancellation is null)
+            {
+                cancellation = source.CancelAsync();
+                _ = cancellation.ContinueWith(t => _ = t.Exception, CancellationToken.None,
+                    TaskContinuationOptions.OnlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            }
+        }
+    }
+    public void Dispose()
+    {
+        Task completion;
+        lock (gate)
+        {
+            if (disposed) return;
+            disposed = true;
+            cancellation ??= source.CancelAsync();
+            completion = cancellation;
+        }
+        // Immediate CTS.Dispose can erase queued registrations. The observed cancellation completion
+        // owns final disposal instead. A stalled callback retains only this source, never the state gate/timer.
+        _ = completion.ContinueWith(t => { _ = t.Exception; source.Dispose(); }, CancellationToken.None,
+            TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
     }
 }
