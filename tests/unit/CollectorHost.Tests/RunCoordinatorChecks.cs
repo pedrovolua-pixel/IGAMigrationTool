@@ -260,6 +260,7 @@ internal static class RunCoordinatorChecks
             fake.Pages = [first with { Boundary = "warning-page", HasMore = false }];
             Check("excess read-only warning survives run",
                 (await Run(fake)).ExcessReadOnlyWarning);
+            count += await StageReceiptChecksAsync(config, directory, configPath, approval, stageContext, first, second);
             return count;
 
             Task<CollectorRunResult> Run(FakeAdapter adapter) =>
@@ -281,6 +282,134 @@ internal static class RunCoordinatorChecks
         }
     }
 
+    private static async Task<int> StageReceiptChecksAsync(CollectorConfig config, string directory,
+        string configPath, ApprovedCollectorRun approval, PageCheckpointContext context,
+        CollectorPage first, CollectorPage second)
+    {
+        var count = 0;
+        foreach (var fault in Enum.GetValues<ReceiptStageFault>().Where(fault => fault != ReceiptStageFault.None))
+        {
+            var adapter = NewAdapter([first with { HasMore = false }]);
+            adapter.ReceiptFault = fault;
+            var result = await Run(adapter);
+            Check("invalid receipt refuses first checkpoint", result.Outcome == CollectorRunOutcome.StageFailed &&
+                result.CompletedPages == 0 && result.CompletedRows == 0 && !result.ExcessReadOnlyWarning &&
+                !File.Exists(adapter.Approval!.CheckpointPath) && adapter.StageAttempts == 1 && adapter.Reads == 1);
+            Check("failure result is payload-free", !result.ToString().Contains(directory, StringComparison.Ordinal) &&
+                !result.ToString().Contains("uid-1", StringComparison.Ordinal));
+        }
+
+        var exact = NewAdapter([first, second]);
+        exact.AttemptFieldMutation = true;
+        var completed = await Run(exact);
+        Check("exact receipt completes two pages", completed.Outcome == CollectorRunOutcome.Completed &&
+            completed.CompletedPages == 2 && completed.CompletedRows == 2);
+        Check("adapter cannot mutate expected field sequence", exact.FieldMutationDenied && exact.ReadOnlyFieldsObserved &&
+            EncryptedPageStageStore.Load(exact.StageDirectory, context, first.Boundary, exact.StageKey)?.Fields[0].IncludedValue == "uid-1");
+
+        var later = NewAdapter([first, second]);
+        var oneRow = config with { MaxRows = 1 };
+        var partial = await Run(later, oneRow);
+        Check("receipt prefix persisted", partial.Outcome == CollectorRunOutcome.LimitReached &&
+            partial.CompletedPages == 1 && partial.CompletedRows == 1);
+        var checkpointBefore = File.ReadAllBytes(later.Approval!.CheckpointPath);
+        later.ReceiptFault = ReceiptStageFault.TamperedBytes;
+        var laterFailure = await Run(later);
+        Check("later receipt failure preserves prior counts", laterFailure.Outcome == CollectorRunOutcome.StageFailed &&
+            laterFailure.CompletedPages == 1 && laterFailure.CompletedRows == 1);
+        Check("later receipt failure preserves exact checkpoint bytes", checkpointBefore.SequenceEqual(File.ReadAllBytes(later.Approval.CheckpointPath)));
+
+        var cancel = NewAdapter([first with { HasMore = false }]);
+        using (var tokenSource = new CancellationTokenSource())
+        {
+            cancel.AfterStage = tokenSource.Cancel;
+            var canceled = await Run(cancel, cancellationToken: tokenSource.Token);
+            Check("cancellation after stage leaves no checkpoint", canceled.Outcome == CollectorRunOutcome.Canceled &&
+                canceled.CompletedPages == 0 && canceled.CompletedRows == 0 && !File.Exists(cancel.Approval!.CheckpointPath));
+        }
+        cancel.AfterStage = null;
+        var orphanPaths = Directory.GetFiles(cancel.StageDirectory, "*.stage");
+        var orphanBefore = File.ReadAllBytes(orphanPaths.Single());
+        var retried = await Run(cancel);
+        Check("canceled orphan retries idempotently", retried.Outcome == CollectorRunOutcome.Completed &&
+            retried.CompletedPages == 1 && cancel.Staged.Count == 1 &&
+            Directory.GetFiles(cancel.StageDirectory, "*.stage").Length == 1 &&
+            orphanBefore.SequenceEqual(File.ReadAllBytes(orphanPaths.Single())));
+
+        var deadline = NewAdapter([first with { HasMore = false }]);
+        deadline.ReturnAfterDeadlineOnStage = true;
+        var limited = await Run(deadline, config with { MaxDurationSeconds = 1 });
+        Check("deadline after durable stage leaves no checkpoint", limited.Outcome == CollectorRunOutcome.LimitReached &&
+            limited.CompletedPages == 0 && limited.CompletedRows == 0 && !File.Exists(deadline.Approval!.CheckpointPath) &&
+            Directory.GetFiles(deadline.StageDirectory, "*.stage").Length == 1);
+        deadline.ReturnAfterDeadlineOnStage = false;
+        Check("deadline orphan can recover", (await Run(deadline)).Outcome == CollectorRunOutcome.Completed && deadline.Staged.Count == 1);
+
+        var cancelLater = NewAdapter([first, second]);
+        _ = await Run(cancelLater, oneRow);
+        var prefixBytes = File.ReadAllBytes(cancelLater.Approval!.CheckpointPath);
+        using (var tokenSource = new CancellationTokenSource())
+        {
+            cancelLater.AfterStage = tokenSource.Cancel;
+            var result = await Run(cancelLater, cancellationToken: tokenSource.Token);
+            Check("later cancellation preserves prefix", result.Outcome == CollectorRunOutcome.Canceled &&
+                result.CompletedPages == 1 && result.CompletedRows == 1 &&
+                prefixBytes.SequenceEqual(File.ReadAllBytes(cancelLater.Approval.CheckpointPath)));
+        }
+        cancelLater.AfterStage = null;
+        Check("later orphan retries without duplicating first page", (await Run(cancelLater)).Outcome == CollectorRunOutcome.Completed &&
+            cancelLater.Staged.Count == 2 && EncryptedCheckpointStore.Load(cancelLater.Approval.CheckpointPath, context, cancelLater.StageKey)?.Count == 2);
+
+        var empty = NewAdapter([new CollectorPage("synthetic-empty-terminal", 0, [], false)]);
+        var emptyResult = await Run(empty);
+        Check("existing synthetic empty terminal receipt remains supported", emptyResult.Outcome == CollectorRunOutcome.Completed &&
+            emptyResult.CompletedPages == 1 && emptyResult.CompletedRows == 0);
+        var emptyReads = empty.Reads;
+        Check("empty terminal restart does not read", (await Run(empty)).Outcome == CollectorRunOutcome.Completed && empty.Reads == emptyReads);
+
+        var warned = NewAdapter([first with { HasMore = false }]);
+        warned.Approval = warned.Approval! with
+        {
+            Permission = new PermissionProbe(true, [SourceCapability.MinimumRead, SourceCapability.ExcessReadOnly])
+        };
+        warned.ReceiptFault = ReceiptStageFault.Missing;
+        var warnedFailure = await Run(warned);
+        Check("receipt failure preserves permission warning", warnedFailure.Outcome == CollectorRunOutcome.StageFailed &&
+            warnedFailure.ExcessReadOnlyWarning && warnedFailure.CompletedPages == 0 && !File.Exists(warned.Approval.CheckpointPath));
+        return count;
+
+        FakeAdapter NewAdapter(IReadOnlyList<CollectorPage> pages)
+        {
+            var runId = Guid.NewGuid();
+            var runDirectory = OperatingSystem.IsWindows() ? WindowsRunDirectoryProvisioner.ProvisionNew(directory, runId)
+                : Directory.CreateDirectory(Path.Combine(directory, runId.ToString("N"))).FullName;
+            var key = RandomNumberGenerator.GetBytes(32);
+            var runApproval = approval with
+            {
+                RunStartPath = Path.Combine(runDirectory, "run-start.igr"),
+                CheckpointPath = Path.Combine(runDirectory, "checkpoint.enc"),
+                CheckpointKey = key,
+                ExtractionStartedAtUtc = DateTimeOffset.UtcNow
+            };
+            return new FakeAdapter(runApproval, pages, runDirectory, context, config.MaxLocalBytes, key);
+        }
+
+        Task<CollectorRunResult> Run(FakeAdapter adapter, CollectorConfig? limits = null, CancellationToken cancellationToken = default) =>
+            new CollectorRunCoordinator(adapter).RunAsync(configPath, limits ?? config, cancellationToken);
+
+        void Check(string name, bool condition)
+        {
+            if (!condition) throw new Exception($"Stage receipt fixture {name} failed.");
+            count++;
+        }
+    }
+
+    private enum ReceiptStageFault
+    {
+        None, Missing, TamperedBytes, MalformedBytes, WrongCount, WrongTerminal, WrongContent,
+        ReorderedFields, WrongContext, WrongBoundary, WrongKey
+    }
+
     private sealed class FakeAdapter(ApprovedCollectorRun? approval, IReadOnlyList<CollectorPage> pages,
         string stageDirectory, PageCheckpointContext stageContext, long maxLocalBytes, byte[] stageKey)
         : ICollectorRunAdapter
@@ -300,6 +429,14 @@ internal static class RunCoordinatorChecks
         public bool CancelStageWithoutToken { get; set; }
         public bool BlockStageUntilCancellation { get; set; }
         public bool BlockCheckpointOnStage { get; set; }
+        public ReceiptStageFault ReceiptFault { get; set; }
+        public bool AttemptFieldMutation { get; set; }
+        public bool FieldMutationDenied { get; private set; }
+        public bool ReadOnlyFieldsObserved { get; private set; }
+        public bool ReturnAfterDeadlineOnStage { get; set; }
+        public Action? AfterStage { get; set; }
+        public string StageDirectory => stageDirectory;
+        public byte[] StageKey => stageKey;
 
         public Task<ApprovedCollectorRun?> LoadApprovedRunAsync(CollectorConfig config,
             CancellationToken cancellationToken)
@@ -356,10 +493,56 @@ internal static class RunCoordinatorChecks
             }
 
             StageAttempts++;
-            if (EncryptedPageStageStore.Stage(stageDirectory, stageContext, boundary, rowCount, isTerminal, digest,
-                    fields, maxLocalBytes, stageKey) == EncryptedPageStageStore.StageResult.NewPage)
+            if (AttemptFieldMutation)
+            {
+                ReadOnlyFieldsObserved = fields is ICollection<MinimizedField> { IsReadOnly: true };
+                try
+                {
+                    ((IList<MinimizedField>)fields)[0] = fields[0] with { IncludedValue = "synthetic-mutation" };
+                }
+                catch (NotSupportedException)
+                {
+                    FieldMutationDenied = true;
+                }
+            }
+            if (ReceiptFault == ReceiptStageFault.Missing) return;
+
+            var storedContext = ReceiptFault == ReceiptStageFault.WrongContext
+                ? stageContext with { QueryId = "synthetic-wrong-query" } : stageContext;
+            var storedBoundary = ReceiptFault == ReceiptStageFault.WrongBoundary ? boundary + "-different" : boundary;
+            var storedRows = ReceiptFault == ReceiptStageFault.WrongCount ? rowCount + 1 : rowCount;
+            var storedTerminal = ReceiptFault == ReceiptStageFault.WrongTerminal ? !isTerminal : isTerminal;
+            var storedFields = ReceiptFault switch
+            {
+                ReceiptStageFault.WrongContent => fields.Select((field, index) => index == 0
+                    ? field with { IncludedValue = "synthetic-substitution" } : field).ToArray(),
+                ReceiptStageFault.ReorderedFields => fields.Reverse().ToArray(),
+                _ => fields
+            };
+            var storedKey = ReceiptFault == ReceiptStageFault.WrongKey ? RandomNumberGenerator.GetBytes(32) : stageKey;
+            var storedDigest = ReceiptFault == ReceiptStageFault.None ? digest : MinimizedPageDigest.Compute(storedBoundary, storedRows, storedTerminal, storedFields);
+            var priorPaths = Directory.GetFiles(stageDirectory, "*.stage");
+            if (EncryptedPageStageStore.Stage(stageDirectory, storedContext, storedBoundary, storedRows, storedTerminal, storedDigest,
+                    storedFields, maxLocalBytes, storedKey) == EncryptedPageStageStore.StageResult.NewPage)
             {
                 Staged.Add(fields);
+            }
+            if (ReceiptFault is ReceiptStageFault.TamperedBytes or ReceiptStageFault.MalformedBytes)
+            {
+                var path = Directory.GetFiles(stageDirectory, "*.stage").Except(priorPaths).Single();
+                if (ReceiptFault == ReceiptStageFault.MalformedBytes) File.WriteAllBytes(path, [1, 2, 3]);
+                else
+                {
+                    var bytes = File.ReadAllBytes(path);
+                    bytes[^1] ^= 1;
+                    File.WriteAllBytes(path, bytes);
+                }
+            }
+            AfterStage?.Invoke();
+            if (ReturnAfterDeadlineOnStage)
+            {
+                try { await Task.Delay(Timeout.InfiniteTimeSpan, cancellationToken); }
+                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { }
             }
             if (BlockCheckpointOnStage && Approval is not null)
             {

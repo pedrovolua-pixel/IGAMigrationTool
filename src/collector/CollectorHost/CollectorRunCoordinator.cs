@@ -234,7 +234,7 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
                     permission.RequiresWarningAndAudit);
             }
 
-            var fields = page.Fields.Select(field => FieldMinimizer.Evaluate(approved.FieldPolicy, field)).ToArray();
+            var fields = Array.AsReadOnly(page.Fields.Select(field => FieldMinimizer.Evaluate(approved.FieldPolicy, field)).ToArray());
             if (fields.Any(field => field.Disposition is FieldDisposition.Prohibited or FieldDisposition.Unclassified))
             {
                 return new CollectorRunResult(CollectorRunOutcome.PageRejected, checkpoints.Count, rows,
@@ -270,6 +270,24 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             {
                 await adapter.StagePageAsync(runDirectory, page.Boundary, page.RowCount, isTerminal, digest, fields,
                     pageTimeout.Token);
+
+                if (pageTimeout.IsCancellationRequested)
+                {
+                    return new CollectorRunResult(cancellationToken.IsCancellationRequested
+                        ? CollectorRunOutcome.Canceled : CollectorRunOutcome.LimitReached,
+                        checkpoints.Count, rows, permission.RequiresWarningAndAudit);
+                }
+
+                // Adapter completion is not a durable receipt. Authenticate the actual
+                // expected stage before the existing ordered ledger may claim its page.
+                var staged = EncryptedPageStageStore.Load(runDirectory, context, page.Boundary, approved.CheckpointKey);
+                if (staged is null || staged.RowCount != page.RowCount || staged.IsTerminal != isTerminal ||
+                    !string.Equals(staged.Digest, digest, StringComparison.OrdinalIgnoreCase) ||
+                    !staged.Fields.SequenceEqual(fields))
+                {
+                    return new CollectorRunResult(CollectorRunOutcome.StageFailed, checkpoints.Count, rows,
+                        permission.RequiresWarningAndAudit);
+                }
             }
             catch (OperationCanceledException) when (pageTimeout.IsCancellationRequested)
             {
@@ -287,6 +305,15 @@ internal sealed class CollectorRunCoordinator(ICollectorRunAdapter adapter)
             {
                 return new CollectorRunResult(CollectorRunOutcome.StageFailed, checkpoints.Count, rows,
                     permission.RequiresWarningAndAudit);
+            }
+
+            // A synchronous bounded readback may finish after cancellation; never
+            // turn its receipt into a checkpoint after observing the linked token.
+            if (pageTimeout.IsCancellationRequested)
+            {
+                return new CollectorRunResult(cancellationToken.IsCancellationRequested
+                    ? CollectorRunOutcome.Canceled : CollectorRunOutcome.LimitReached,
+                    checkpoints.Count, rows, permission.RequiresWarningAndAudit);
             }
 
             checkpoints.Add(checkpoint);
