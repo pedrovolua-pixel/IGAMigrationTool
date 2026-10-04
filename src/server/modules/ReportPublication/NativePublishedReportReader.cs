@@ -105,7 +105,9 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                     await transaction.AddReadReceiptAsync(new(request.InvocationId, requestDigest, actor, request.Scope, request.ReportVersionId,
                         request.ExpectedManifestDigest, audit.EventAtUtc, audit.EventId, audit.EventDigest), lease.Token);
                     lease.Check();
-                    if (!await fence.RevalidateAsync(access, lease.Token)) return new(PublicationIssueV1.Unavailable, null);
+                    if (!await fence.RevalidateAsync(access, lease.Token)
+                        || !ValidVersion(await transaction.ReadCommittedVersionAsync(request.ReportVersionId, lease.Token), request,
+                            await transaction.ReadDatabaseUtcAsync(lease.Token))) return new(PublicationIssueV1.Unavailable, null);
                     commitAttempted = true;
                     try { await transaction.CommitAsync(lease.Token); }
                     catch (PublicationCommitNotAppliedException) { commitAttempted = false; return new(PublicationIssueV1.DependencyUnavailable, null); }

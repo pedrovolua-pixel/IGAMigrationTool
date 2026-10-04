@@ -56,8 +56,14 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
                     return new(PublicationIssueV1.IntegrityMismatch, null);
                 var committed = await transaction.ReadCommittedVersionAsync(receipt.ReportVersionId, cancellationToken);
                 if (committed is null || !PublicationValidationV1.Manifest(committed.Manifest) || committed.Manifest.Scope != command.Scope
-                    || committed.ManifestDigest != receipt.ManifestDigest || committed.State != PublicationLifecycleStateV1.Active || committed.ReadBlocked
+                    || committed.ManifestDigest != receipt.ManifestDigest || committed.Manifest.ReportVersionId != receipt.ReportVersionId
+                    || committed.Manifest.RunId != receipt.RunId || committed.Manifest.RunRevision != receipt.ExpectedRunRevision
+                    || committed.Manifest.ProjectionDigest != receipt.ProjectionDigest || committed.Manifest.ScoreDigest != receipt.ScoreDigest
+                    || NativePublicationCanonicalV1.Hash(NativePublicationCanonicalV1.ManifestBytes(committed.Manifest)) != receipt.ManifestDigest
+                    || committed.LifecycleRevision <= 0 || committed.State != PublicationLifecycleStateV1.Active || committed.ReadBlocked
                     || committed.ExpiresAtUtc <= await transaction.ReadDatabaseUtcAsync(cancellationToken)
+                    || committed.Manifest.Retention.ExpiresAtUtc <= await transaction.ReadDatabaseUtcAsync(cancellationToken)
+                    || fence.OriginalDeadlineUtc <= await transaction.ReadDatabaseUtcAsync(cancellationToken)
                     || !await fence.RevalidateAsync(new(committed.Manifest.RequiredCategories, committed.Manifest.RequiredFields), cancellationToken))
                     return new(PublicationIssueV1.Unavailable, null);
                 return new(null, receipt);
