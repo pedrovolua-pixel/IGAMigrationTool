@@ -24,6 +24,7 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
             {
                 PublicationIssueV1.IdempotencyConflict => PublicationAuditReasonV1.IdempotencyConflict,
                 PublicationIssueV1.IntegrityMismatch => PublicationAuditReasonV1.IntegrityMismatch,
+                PublicationIssueV1.DependencyUnavailable => PublicationAuditReasonV1.DependencyUnavailable,
                 _ => verifiedScope is null ? PublicationAuditReasonV1.AuthorityDenied : PublicationAuditReasonV1.LifecycleDenied
             });
         }
@@ -39,6 +40,8 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
             if (!committed) _ = await RecordOutcome(PublicationAuditOutcomeV1.Cancelled, PublicationAuditReasonV1.Cancelled);
             throw;
         }
+        catch (OperationCanceledException)
+        { return committed ? new(PublicationIssueV1.Unavailable, null) : await Deny(PublicationIssueV1.Unavailable, PublicationAuditReasonV1.LifecycleDenied); }
         catch (Exception)
         { return committed ? new(PublicationIssueV1.Unavailable, null) : await Deny(PublicationIssueV1.DependencyUnavailable, PublicationAuditReasonV1.DependencyUnavailable); }
 
@@ -49,16 +52,22 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
             verifiedScope = fence.Scope;
             var admittedUtc = clock.GetUtcNow();
             var admittedTimestamp = clock.GetTimestamp();
-            await using var transaction = await store.BeginAsync(request.Scope, cancellationToken);
+            using var lease = new EmissionLease(clock, admittedUtc, admittedTimestamp, fence.OriginalDeadlineUtc, cancellationToken);
+            lease.Check();
+            await using var transaction = await store.BeginAsync(request.Scope, lease.Token);
             if (transaction.Scope != request.Scope || transaction.TransactionId == Guid.Empty) return new(PublicationIssueV1.IntegrityMismatch, null);
-            var version = await transaction.ReadCommittedVersionAsync(request.ReportVersionId, cancellationToken);
-            var readStartedAt = await transaction.ReadDatabaseUtcAsync(cancellationToken);
+            var version = await transaction.ReadCommittedVersionAsync(request.ReportVersionId, lease.Token);
+            var readStartedAt = await transaction.ReadDatabaseUtcAsync(lease.Token);
             if (!ValidVersion(version, request, readStartedAt)) return new(PublicationIssueV1.Unavailable, null);
             var m = version!.Manifest;
+            var deadline = fence.OriginalDeadlineUtc < version.ExpiresAtUtc ? fence.OriginalDeadlineUtc : version.ExpiresAtUtc;
+            if (deadline > m.Retention.ExpiresAtUtc) deadline = m.Retention.ExpiresAtUtc;
+            lease.Constrain(deadline);
+            lease.Check();
             var access = new RequiredPublicationAccessV1(m.RequiredCategories, m.RequiredFields);
-            if (!await fence.RevalidateAsync(access, cancellationToken)) return new(PublicationIssueV1.Unavailable, null);
+            if (!await fence.RevalidateAsync(access, lease.Token)) return new(PublicationIssueV1.Unavailable, null);
             var requestDigest = NativePublicationCanonicalV1.Hash(NativePublicationCanonicalV1.ReadRequestBytes(actor, request));
-            var lookup = await transaction.ResolveReadReceiptAsync(request.InvocationId, actor, requestDigest, cancellationToken);
+            var lookup = await transaction.ResolveReadReceiptAsync(request.InvocationId, actor, requestDigest, lease.Token);
             if (lookup.Status == ReceiptLookupStatusV1.Conflict) return new(PublicationIssueV1.IdempotencyConflict, null);
             if (lookup.Status == ReceiptLookupStatusV1.Found && (!PublicationValidationV1.ReadReceipt(lookup.Receipt)
                 || lookup.Receipt!.Actor != actor || lookup.Receipt.Scope != request.Scope || lookup.Receipt.InvocationId != request.InvocationId
@@ -66,10 +75,13 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                 || lookup.Receipt.ManifestDigest != request.ExpectedManifestDigest)) return new(PublicationIssueV1.IntegrityMismatch, null);
             if (lookup.Status == ReceiptLookupStatusV1.NotFound && lookup.Receipt is not null
                 || !Enum.IsDefined(lookup.Status)) return new(PublicationIssueV1.IntegrityMismatch, null);
+            lease.Check();
             var manifestBytes = NativePublicationCanonicalV1.ManifestBytes(m);
             if (NativePublicationCanonicalV1.Hash(manifestBytes) != request.ExpectedManifestDigest
-                || !await MatchesBlob(PublicationBlobKindV1.Manifest, request.ExpectedManifestDigest, manifestBytes)) return new(PublicationIssueV1.IntegrityMismatch, null);
-            var original = await blobs.ReadVerifiedAsync(request.Scope, PublicationBlobKindV1.Projection, m.ProjectionDigest, cancellationToken);
+                || !await MatchesBlob(PublicationBlobKindV1.Manifest, request.ExpectedManifestDigest, manifestBytes, lease)) return new(PublicationIssueV1.IntegrityMismatch, null);
+            lease.Check();
+            var original = await blobs.ReadVerifiedAsync(request.Scope, PublicationBlobKindV1.Projection, m.ProjectionDigest, lease.Token);
+            lease.Check();
             if (original is null) return new(PublicationIssueV1.IntegrityMismatch, null);
             var owned = original.Value.ToArray();
             try
@@ -83,16 +95,15 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                 var scoreBytes = NativePublicationCanonicalV1.ScoreBytes(p.Scores);
                 if (m.ArtifactInputs.Single(a => a.Kind == PublicationBlobKindV1.Score).ByteLength != scoreBytes.LongLength
                     || NativePublicationCanonicalV1.Hash(scoreBytes) != m.ScoreDigest
-                    || !await MatchesBlob(PublicationBlobKindV1.Score, m.ScoreDigest, scoreBytes)) return new(PublicationIssueV1.IntegrityMismatch, null);
+                    || !await MatchesBlob(PublicationBlobKindV1.Score, m.ScoreDigest, scoreBytes, lease)) return new(PublicationIssueV1.IntegrityMismatch, null);
                 var source = new SourceCaptureV1(p, m.AssessmentState, m.Retention, m.RequiredCategories, m.RequiredFields, m.Provenance);
                 if (!PublicationValidationV1.Source(source) || NativePublicationCanonicalV1.Hash(NativePublicationCanonicalV1.SourceBytes(source)) != m.SourceDigest)
                     return new(PublicationIssueV1.IntegrityMismatch, null);
                 var linked = p.TechnicalAppendices.ProtectedReferences.Select(r => r.Id).Order().ToArray();
-                var overlay = await references.ReadAsync(transaction, linked, cancellationToken);
+                lease.Check();
+                var overlay = await references.ReadAsync(transaction, linked, lease.Token);
+                lease.Check();
                 if (!ValidOverlay(linked, overlay)) return new(PublicationIssueV1.IntegrityMismatch, null);
-                var deadline = fence.OriginalDeadlineUtc < version.ExpiresAtUtc ? fence.OriginalDeadlineUtc : version.ExpiresAtUtc;
-                if (deadline > m.Retention.ExpiresAtUtc) deadline = m.Retention.ExpiresAtUtc;
-                using var lease = new EmissionLease(clock, admittedUtc, admittedTimestamp, deadline, cancellationToken);
                 lease.Check();
                 if (!await fence.RevalidateAsync(access, lease.Token)
                     || !ValidVersion(await transaction.ReadCommittedVersionAsync(request.ReportVersionId, lease.Token), request, await transaction.ReadDatabaseUtcAsync(lease.Token)))
@@ -141,9 +152,11 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
             finally { CryptographicOperations.ZeroMemory(owned); }
         }
 
-        async ValueTask<bool> MatchesBlob(PublicationBlobKindV1 kind, string digest, byte[] expected)
+        async ValueTask<bool> MatchesBlob(PublicationBlobKindV1 kind, string digest, byte[] expected, EmissionLease lease)
         {
-            var loaded = await blobs.ReadVerifiedAsync(request.Scope, kind, digest, cancellationToken);
+            lease.Check();
+            var loaded = await blobs.ReadVerifiedAsync(request.Scope, kind, digest, lease.Token);
+            lease.Check();
             return loaded is not null && loaded.Value.Span.SequenceEqual(expected) && NativePublicationCanonicalV1.Hash(loaded.Value.Span) == digest;
         }
         async ValueTask<ExactReadResultV1> Deny(PublicationIssueV1 issue, PublicationAuditReasonV1 reason)
@@ -169,7 +182,7 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
         && v.LifecycleRevision > 0 && v.State == PublicationLifecycleStateV1.Active && !v.ReadBlocked && now.Offset == TimeSpan.Zero
         && now < v.ExpiresAtUtc && now < v.Manifest.Retention.ExpiresAtUtc;
     private static bool ValidOverlay(Guid[] linked, IReadOnlyList<PublicationReferenceAvailabilityV1>? rows)
-        => rows is not null && rows.Count == linked.Length && rows.Select(r => r.ReferenceId).ToHashSet().SetEquals(linked)
+        => rows is not null && rows.Count == linked.Length && rows.All(r => r is not null) && rows.Select(r => r.ReferenceId).ToHashSet().SetEquals(linked)
         && rows.All(r => r is not null && r.Revision > 0 && Enum.IsDefined(r.CurrentAvailability) && Enum.IsDefined(r.Reason)
             && (r.CurrentAvailability == PublicationAvailabilityV1.Available ? r.Reason == PublicationReasonV1.None : r.Reason != PublicationReasonV1.None));
 
@@ -177,14 +190,15 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
     {
         private readonly TimeProvider clock;
         private readonly long started;
-        private readonly TimeSpan maximumElapsed;
-        private readonly DateTimeOffset deadline;
+        private readonly DateTimeOffset admittedUtc;
+        private TimeSpan maximumElapsed;
+        private DateTimeOffset deadline;
         private readonly CancellationTokenSource expiry;
         private readonly CancellationTokenSource linked;
         private bool active = true;
         internal EmissionLease(TimeProvider clock, DateTimeOffset admittedUtc, long started, DateTimeOffset deadline, CancellationToken caller)
         {
-            this.clock = clock; this.started = started; this.deadline = deadline;
+            this.clock = clock; this.started = started; this.deadline = deadline; this.admittedUtc = admittedUtc;
             maximumElapsed = deadline - admittedUtc;
             var remainingUtc = deadline - clock.GetUtcNow();
             var remainingElapsed = maximumElapsed - clock.GetElapsedTime(started);
@@ -193,6 +207,18 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
             linked = CancellationTokenSource.CreateLinkedTokenSource(caller, expiry.Token);
         }
         internal CancellationToken Token => linked.Token;
+        internal void Constrain(DateTimeOffset earlierDeadline)
+        {
+            Check();
+            if (earlierDeadline >= deadline) return;
+            deadline = earlierDeadline;
+            maximumElapsed = deadline - admittedUtc;
+            var remainingUtc = deadline - clock.GetUtcNow();
+            var remainingElapsed = maximumElapsed - clock.GetElapsedTime(started);
+            var remaining = remainingUtc < remainingElapsed ? remainingUtc : remainingElapsed;
+            expiry.CancelAfter(remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero);
+            Check();
+        }
         internal void Check()
         {
             if (!active || clock.GetUtcNow() >= deadline || clock.GetElapsedTime(started) >= maximumElapsed)

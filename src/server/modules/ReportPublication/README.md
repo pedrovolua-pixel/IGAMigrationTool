@@ -68,3 +68,10 @@ authorization for the complete source category set, and supplied retention
 authority before loading/capturing protected source content. The core revalidates
 the frozen complete set after capture; that does not replace the owning adapter's
 pre-load enforcement or make a typed capture a source-authority proof.
+
+The read admission lease starts immediately after acquiring the authority fence,
+before store/metadata admission. Exact minimized report metadata may only narrow
+its original deadline to report/lifecycle/retention expiry. Every subsequent
+dependency wait receives that linked token, and protected load boundaries check
+the original UTC/monotonic ceiling. Proven noncommit records Failed with
+DependencyUnavailable; malformed or null overlay rows are IntegrityMismatch.
