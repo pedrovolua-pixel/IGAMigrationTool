@@ -257,4 +257,5 @@ Check("defensive-nested-projection-collections", () =>
 });
 Console.WriteLine($"Compiled independent checks: {passed} passed, {failed.Count} failed. All 31 original typed codecs verified; persisted flow and real source acceptance remain pending.");
 foreach (var failure in failed) Console.WriteLine(failure);
-return failed.Count == 0 ? 0 : 1;
+var flowFailures = await FlowTests.RunAsync();
+return failed.Count + flowFailures == 0 ? 0 : 1;
