@@ -37,6 +37,7 @@
 !src/server/hosts/BffFoundation/packages.lock.json
 !src/server/modules/IdentityAuthority/AuthorityCodec.cs
 !src/server/modules/IdentityAuthority/Contracts.cs
+!src/server/modules/IdentityAuthority/GraphProviderResponseProjection.cs
 !src/server/modules/IdentityAuthority/IdentityAuthority.csproj
 !src/server/modules/IdentityAuthority/PostgreSqlIdentityAuthority.cs
 !src/server/modules/IdentityAuthority/SyntheticProviderReader.cs
@@ -46,6 +47,7 @@
 !src/server/modules/IdentityPolicy/IdentityPolicy.csproj
 !src/server/modules/IdentityPolicy/packages.lock.json
 !src/server/modules/IdentitySessions/AuditIntegrityVerifier.cs
+!src/server/modules/IdentitySessions/AuthenticationFailureJournal.cs
 !src/server/modules/IdentitySessions/ITransactionalSessionAdmissionPolicy.cs
 !src/server/modules/IdentitySessions/IdentitySessions.csproj
 !src/server/modules/IdentitySessions/PendingAuthenticationChallenge.cs

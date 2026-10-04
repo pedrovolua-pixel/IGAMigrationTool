@@ -31,6 +31,7 @@
     <Project Path="src/server/modules/SyntheticAiValidation/SyntheticAiValidation.csproj" />
     <Project Path="src/server/modules/SyntheticAiPreview/SyntheticAiPreview.csproj" />
     <Project Path="src/server/modules/ReportDrafts/ReportDrafts.csproj" />
+    <Project Path="src/server/modules/ReportPublication/ReportPublication.csproj" />
     <Project Path="src/server/modules/FindingReview/FindingReview.csproj" />
     <Project Path="src/server/modules/DeterministicAnalysis/DeterministicAnalysis.csproj" />
     <Project Path="src/server/modules/AssessmentScoring/AssessmentScoring.csproj" />
@@ -104,6 +105,7 @@
     <Project Path="tests/unit/SyntheticAiPreview.Tests/SyntheticAiPreview.Tests.csproj" />
     <Project Path="tests/unit/SyntheticAiPreviewHtml.Tests/SyntheticAiPreviewHtml.Tests.csproj" />
     <Project Path="tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj" />
+    <Project Path="tests/unit/ReportPublication.Tests/ReportPublication.Tests.csproj" />
     <Project Path="tests/unit/ReportMarkdown.Tests/ReportMarkdown.Tests.csproj" />
     <Project Path="tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj" />
     <Project Path="tests/unit/FindingReview.Tests/FindingReview.Tests.csproj" />

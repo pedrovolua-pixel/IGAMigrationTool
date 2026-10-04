@@ -56,3 +56,6 @@ tests/unit/ArtifactReviewComponent.Tests/empty-expected.html text eol=lf
 /tests/integration/LocalPlanningTasks.Tests/execution/**/*.log -text
 
 /tests/unit/PlanningTasksComponent.Tests/artifacts/*.html -text -whitespace
+
+# RR-P03 independent original native byte/hash fixtures retain exact bytes.
+/tests/unit/ReportPublication.Tests/fixtures/*.json -text

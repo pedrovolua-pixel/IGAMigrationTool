@@ -154,6 +154,11 @@ jobs:
           docker exec ${{ job.services.synthetic-postgres.id }} createdb -U iga_synthetic iga_synthetic_r5
           dotnet run --project tests/unit/AssessmentMaturity.Tests/AssessmentMaturity.Tests.csproj --configuration Release --no-build
           dotnet run --project tests/unit/FindingReview.Tests/FindingReview.Tests.csproj --configuration Release --no-build
+      - name: Check native publication original oracle and bounded core
+        run: |
+          python3 tests/unit/ReportPublication.Tests/oracle/verify_vectors.py
+          python3 tests/unit/ReportPublication.Tests/oracle/test_oracle.py
+          dotnet run --project tests/unit/ReportPublication.Tests -c Release --no-build
       - name: Check detached canonical draft and inert Markdown
         run: |
           dotnet run --project tests/unit/ReportDrafts.Tests/ReportDrafts.Tests.csproj --configuration Release --no-build
@@ -532,6 +537,14 @@ jobs:
           python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/unit/SyntheticFixPackageHtml.Tests/bin/Release/net10.0/SyntheticFixPackageHtml.Tests.dll
           dotnet build tests/integration/SyntheticFixPackages.Tests --configuration Release --no-restore --disable-build-servers -p:UseSharedCompilation=false -m:1
           python tests/integration/SyntheticFixPackages.Tests/run-isolated.py (Get-Command dotnet).Source tests/integration/SyntheticFixPackages.Tests/bin/Release/net10.0/SyntheticFixPackages.Tests.dll
+      - name: Verify Windows native publication bounded core
+        run: |
+          python tests/unit/ReportPublication.Tests/oracle/verify_vectors.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python tests/unit/ReportPublication.Tests/oracle/test_oracle.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet run --project tests/unit/ReportPublication.Tests -c Release --no-restore
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Build collector host tests
         run: dotnet build tests/unit/CollectorHost.Tests/CollectorHost.Tests.csproj --configuration Release --no-restore
       - name: Verify Windows local Phase1D synthetic MCP boundaries
