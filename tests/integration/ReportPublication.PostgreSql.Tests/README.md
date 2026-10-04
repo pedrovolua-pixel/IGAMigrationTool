@@ -35,3 +35,5 @@ The owned synthetic loopback Npgsql10.0.3 protocol stall control executed succes
 [Release observer expectations](fixtures/release-observer-cases.json) freeze `29b5f925` before implementation: trusted pre-admission registration, immutable own-backend/key binding, original time-only window and live caller, exact typed actual observations, PID reuse/old-owner lock rules, auxiliary backend coverage and no late work. These are unexecuted and cannot substitute for physical18-case observations.
 
 The exact root reader correction `90ef85f9` passed all4 scripted early cleanup-uncertainty cases, preserving original2 reader failures. [Evidence](core-cleanup-evidence.json) records zero outcome appends and one existing unknown signal each. This is typed-core propagation proof only; no physical cleanup or PostgreSQL18-case credit.
+
+[Audit encoder expectations](fixtures/audit-encoder-cases.json) freeze exact original byte/head/intent/ownership and governing `c4cc4ee4` binding-customer refusal before author correction. Release observer expectations also require immutable unique complete per-PID all-lock counts; no advisory-only filter or scripted physical proof.

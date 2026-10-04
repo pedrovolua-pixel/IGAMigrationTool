@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-audit-encoder-scenarios-v1",
+  "sourceSnapshot": "a9e389d7",
+  "governingClarification": "c4cc4ee4",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "credit": "portablefiniteencoder only; noDBheadreservation/append/provenance/currentauthority proof",
+  "cases": [
+    {
+      "name": "three-originalpublish-and-read-audit-bytes",
+      "expected": "Forcompleted/warned/source-limitation originalpublish/read events, typedhead+binding+intent encodesexactunchangedoriginalbytes andSHA256. IndependentRR-P03 originalbytesnotregenerated."
+    },
+    {
+      "name": "nonnullverifiedscope-bindingcustomer-mismatch",
+      "expected": "Sourcea9initialmismatchnegative: validatednonzero binding.CustomerId differsintent.VerifiedScope.CustomerId; refusebeforefiniteeventencoding underc4. Validmatchingcustomer remainsbyteexact."
+    },
+    {
+      "name": "anonymous-null-closed-positive",
+      "expected": "VerifiedActor/VerifiedScope/resource allnull onclosedanonymousDenied/AuthorityDenied audit intent encodevalidnativeanonymous event,withoutinventedcustomerid; matchingcustomerknownscopedhuman positives unchanged."
+    },
+    {
+      "name": "binding-head-null-zeros-genesis",
+      "expected": "Nullbinding/head/intent,zeroeventID/stream/writer/customer,sequencezero/negative,genesiswrongprev andlaterzeroGenesis,invaliduppercase/lengthprevdigest refusefixedsafeexception."
+    },
+    {
+      "name": "headUTC-and-intentclosed-scalars",
+      "expected": "Nonzerooffsetheadtime,invalidaction/outcome/reason,zerooperation/invocation/correlation/actor/scope/resourceUUID,successmissingmanifest/resourcekind/wrongreturnedset anddenialcarryingmanifest/returnedfields refuse."
+    },
+    {
+      "name": "ownedintentfields-and-returnbytes",
+      "expected": "Callerfieldarray mutation afterintentconstruction cannotalterbytes; encoderreturnsownedbytes; mutatingreturnedbytes cannotaffectsubsequentencoding. No audit reservationidentity/freshnessclaim frompureencoder."
+    }
+  ]
+}

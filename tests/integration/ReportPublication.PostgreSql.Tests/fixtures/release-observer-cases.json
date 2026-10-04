@@ -103,6 +103,10 @@
     {
       "name": "observer-ownidentity-and-localtime-start-complete",
       "expected": "Validateconcreteobserverconnection ownreceiptedfixtureidentityindependently; observationstart/completion capturedinsameoriginalTimeProvider byowningsession,notuntrustedreturnedwallclock. Anotherbackend/disposal/invocation staleobservation refuses."
+    },
+    {
+      "name": "completeimmutable-alllockcounts-peroriginalPID",
+      "expected": "Actualtypedobservation coversEACHboundoriginalPIDexactlyonce includingseparatestager,nonnegativeALLpg_locksrowscount notjustadvisory. Missing/duplicate/extraPID,negative/overflow/mutablealiasedcountcollectionoranynonzero countrefuses. Positive requireszerocompletecountsandnooriginalPIDbackendheaders underfreshREADONLYsnapshot/currentoriginalwindow."
     }
   ],
   "governingLiteralClarifications": [
