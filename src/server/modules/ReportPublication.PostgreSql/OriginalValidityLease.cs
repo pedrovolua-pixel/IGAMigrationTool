@@ -4,6 +4,7 @@ namespace ReportPublication.PostgreSql;
 internal sealed class OriginalValidityLeaseV1 : IDisposable
 {
     private readonly TimeProvider clock;
+    private readonly CancellationToken admissionCaller;
     private readonly DateTimeOffset admittedUtc;
     private readonly long admittedTimestamp;
     private readonly AsyncCancellationOwnerV1 lifetime;
@@ -19,6 +20,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
     {
         if (originalDeadlineUtc.Offset != TimeSpan.Zero) throw new ArgumentException("Invalid publication validity.");
         this.clock = clock ?? throw new ArgumentNullException(nameof(clock));
+        admissionCaller = caller;
         caller.ThrowIfCancellationRequested();
         admittedUtc = clock.GetUtcNow(); admittedTimestamp = clock.GetTimestamp(); deadline = originalDeadlineUtc;
         if (deadline <= admittedUtc) throw new OperationCanceledException(caller);
@@ -38,6 +40,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
     }
     internal void Check()
     {
+        if (admissionCaller.IsCancellationRequested) { End(); throw new OperationCanceledException(admissionCaller); }
         bool mustEnd;
         lock (gate) mustEnd = disposed || Remaining() <= TimeSpan.Zero;
         if (mustEnd) { End(); throw new OperationCanceledException(token); }
@@ -50,7 +53,7 @@ internal sealed class OriginalValidityLeaseV1 : IDisposable
         var cancelled = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         using var originalRegistration = token.UnsafeRegister(_ => CancelOperation(), null);
         using var nestedRegistration = caller.UnsafeRegister(_ => CancelOperation(), null);
-        operation.Token.ThrowIfCancellationRequested();
+        Check(); caller.ThrowIfCancellationRequested(); operation.Token.ThrowIfCancellationRequested();
         var pending = action(operation.Token).AsTask();
         try
         {
