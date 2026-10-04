@@ -222,3 +222,8 @@ The coordinator selected the actor-first mapping and precise freshness boundary 
 Before persistence authority code, [fixture refinement](../../docs/development/native-publication-postgresql-fixture-contract.md#coordinator-subjectversion-and-error-marker-refinement--2026-10-04) adds a monotonic customer-local subject security-version projection and stable subject-before-session fence. Every current actor version must match it across scopes/sessions; stale/lower versions deny without history rewrite. This exercises the approved all-subject-session policy locally, not real cross-plane/distributed invalidation.
 
 The public sealed parameterless PublicationIntegrityException is the existing fixed-message typed trusted-port error marker; native publisher/reader classify it IntegrityMismatch with no protected payload. No arbitrary message/inner constructor, new permission, source-construction friendship, canonical bytes or external route is introduced. Independent error/subject race expectations and review precede the coordinator's accessibility edit and dependent adapter code.
+
+
+### Cleanup uncertainty refinement — 2026-10-04
+
+The [finite cleanup boundary](../../docs/development/native-publication-postgresql-fixture-contract.md#finite-cleanup-uncertainty-boundary--2026-10-04) distinguishes immediate logical invalidation from separately observed physical backend/lock release. Before affected code, the existing explicit PublicationCommitUncertainException channel covers unproved cleanup, including precommit exact reads; the reader propagates it with the existing metadata-only operational signal and no outcome append. No renewed budget, new public contract or successful release claim is introduced.
