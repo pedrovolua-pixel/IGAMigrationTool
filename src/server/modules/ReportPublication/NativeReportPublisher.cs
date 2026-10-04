@@ -31,6 +31,8 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
             outcomeAudit.OperationalSignal(PublicationOperationalSignalV1.CommitOutcomeUnknown, Safe(command?.InvocationId), Safe(command?.CorrelationId));
             throw new PublicationCommitUncertainException(Safe(command?.OperationId));
         }
+        catch (PublicationIntegrityException)
+        { return await Deny(PublicationIssueV1.IntegrityMismatch, PublicationAuditReasonV1.IntegrityMismatch); }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
             _ = await RecordOutcome(PublicationAuditOutcomeV1.Cancelled, PublicationAuditReasonV1.Cancelled); throw;
@@ -98,7 +100,9 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
                 manifest.ReportVersionId, manifestBlob.Digest, projection.Digest, score.Digest, audit.EventAtUtc, audit.EventId, audit.EventDigest);
             await transaction.AddPublicationAsync(new(manifest, manifestBlob.Digest, result), cancellationToken);
             var finalTime = await transaction.ReadDatabaseUtcAsync(cancellationToken);
-            if (finalTime.Offset != TimeSpan.Zero || finalTime < createdAt || audit.EventAtUtc < createdAt || audit.EventAtUtc > finalTime || finalTime >= fence.OriginalDeadlineUtc || finalTime >= captured.Retention.ExpiresAtUtc
+            if (finalTime.Offset != TimeSpan.Zero || finalTime < createdAt || audit.EventAtUtc < createdAt || audit.EventAtUtc > finalTime)
+                return new(PublicationIssueV1.IntegrityMismatch, null);
+            if (finalTime >= fence.OriginalDeadlineUtc || finalTime >= captured.Retention.ExpiresAtUtc
                 || !await fence.RevalidateAsync(access, cancellationToken)
                 || !await transaction.RevalidateSourceAsync(p.RunId, p.RunRevision, sourceDigest, cancellationToken))
                 return new(PublicationIssueV1.Unavailable, null);
@@ -114,10 +118,10 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
         {
             var digest = NativePublicationCanonicalV1.Hash(bytes);
             var staged = await blobs.PutIfAbsentAsync(command.Scope, kind, bytes, cancellationToken);
-            if (staged.Kind != kind || staged.Digest != digest || staged.ByteLength != bytes.LongLength) throw new InvalidOperationException("Invalid publication stage.");
+            if (staged.Kind != kind || staged.Digest != digest || staged.ByteLength != bytes.LongLength) throw new PublicationIntegrityException();
             var read = await blobs.ReadVerifiedAsync(command.Scope, kind, digest, cancellationToken);
             if (read is null || !read.Value.Span.SequenceEqual(bytes) || NativePublicationCanonicalV1.Hash(read.Value.Span) != digest)
-                throw new InvalidOperationException("Publication stage integrity failed.");
+                throw new PublicationIntegrityException();
             return new(kind, digest, bytes.LongLength);
         }
         async ValueTask<PublishResultV1> Deny(PublicationIssueV1 issue, PublicationAuditReasonV1 reason)
@@ -145,4 +149,9 @@ public sealed class NativeReportPublisherV1(IPublicationAuthorityV1 authority, I
 public sealed class PublicationCommitNotAppliedException : Exception
 {
     public PublicationCommitNotAppliedException() : base("Publication transaction did not commit.") { }
+}
+
+internal sealed class PublicationIntegrityException : Exception
+{
+    internal PublicationIntegrityException() : base("Publication integrity verification failed.") { }
 }

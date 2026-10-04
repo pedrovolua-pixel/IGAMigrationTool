@@ -32,6 +32,8 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
             outcomeAudit.OperationalSignal(PublicationOperationalSignalV1.CommitOutcomeUnknown, NativeReportPublisherV1.Safe(request?.InvocationId), NativeReportPublisherV1.Safe(request?.CorrelationId));
             throw new PublicationCommitUncertainException(NativeReportPublisherV1.Safe(request?.InvocationId));
         }
+        catch (PublicationIntegrityException)
+        { return committed ? new(PublicationIssueV1.IntegrityMismatch, null) : await Deny(PublicationIssueV1.IntegrityMismatch, PublicationAuditReasonV1.IntegrityMismatch); }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
             if (!committed) _ = await RecordOutcome(PublicationAuditOutcomeV1.Cancelled, PublicationAuditReasonV1.Cancelled);
@@ -125,7 +127,7 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                         || !ValidVersion(await transaction.ReadCommittedVersionAsync(request.ReportVersionId, token), request, await transaction.ReadDatabaseUtcAsync(token)))
                         throw new OperationCanceledException(token);
                     var current = await references.ReadAsync(transaction, linked, token);
-                    if (!ValidOverlay(linked, current)) throw new InvalidOperationException("Invalid reference metadata.");
+                    if (!ValidOverlay(linked, current)) throw new PublicationIntegrityException();
                     return current;
                 }, sink);
                 try
