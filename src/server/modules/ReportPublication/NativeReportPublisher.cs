@@ -151,7 +151,8 @@ public sealed class PublicationCommitNotAppliedException : Exception
     public PublicationCommitNotAppliedException() : base("Publication transaction did not commit.") { }
 }
 
-internal sealed class PublicationIntegrityException : Exception
+/// <summary>Fixed trusted-port signal for failed integrity verification; carries no source payload.</summary>
+public sealed class PublicationIntegrityException : Exception
 {
-    internal PublicationIntegrityException() : base("Publication integrity verification failed.") { }
+    public PublicationIntegrityException() : base("Publication integrity verification failed.") { }
 }
