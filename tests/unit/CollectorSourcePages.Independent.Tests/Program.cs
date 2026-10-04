@@ -76,7 +76,19 @@ await Check("retention-crossing-real-clock-state-before-admission", async () =>
 await Check("native-binary-defensive-copy", () =>
 { byte[] input = [1, 2, 3]; var native = SourceNativeValue.Binary("varbinary(3)", input); input[0] = 9; var output = native.BinaryValue!; output[1] = 9; Require(native.BinaryValue!.SequenceEqual(new byte[] { 1, 2, 3 }) && native.ToString() == "SourceNativeValue"); return Task.CompletedTask; });
 await Check("unrequested-operation-cancellation-never-user-canceled", async () =>
-{ var f = new IndependentPorts { UnrequestedCancel = true }; var r = await f.Kernel().RunPageAsync(f.Request(), default); NoPage(r); Require(r.Outcome != SourcePageOutcome.Canceled); });
+{ var f = new IndependentPorts { UnrequestedCancel = true }; var r = await f.Kernel().RunPageAsync(f.Request(), default); NoPage(r); Require(r.Outcome == SourcePageOutcome.Disconnected && r.Reason == SourcePageReason.TransportFailure && f.ActiveGenerations.Count == 0); });
+await Check("unrequested-trusted-port-cancellation-is-closed-port-failure", async () =>
+{
+    var f = new IndependentPorts(); f.Hook = (stage, _) => stage == "probe" ? ValueTask.FromException(new OperationCanceledException("FICTIONAL_PROTECTED_CANARY")) : ValueTask.CompletedTask;
+    var r = await f.Kernel().RunPageAsync(f.Request(), default); NoPage(r);
+    Require(r.Outcome == SourcePageOutcome.Refused && r.Reason == SourcePageReason.PortFailure && f.ActiveGenerations.Count == 0 && r.Counters.Executions == 0);
+});
+await Check("unmeasurable-native-length-keeps-known-payload-only", async () =>
+{
+    var f = new IndependentPorts(); f.Rows = [new(0, [SourceNativeValue.Integer("int", 0), SourceNativeValue.Text("varchar(16)", "x", -1)])];
+    var r = await f.Kernel().RunPageAsync(f.Request(), default); NoPage(r);
+    Require(r.Reason == SourcePageReason.NativeValueInvalid && r.Counters.RowsObserved == 1 && r.Counters.BytesObserved == 4 && r.Counters.ValueClassifications == 0);
+});
 await Check("rejected-native-width-payload-in-observed-counter", async () =>
 { var f = new IndependentPorts(); f.Rows = [new(0, [SourceNativeValue.Integer("int", 0), SourceNativeValue.Text("varchar(16)", new string('x', 17), 17)])]; var r = await f.Kernel().RunPageAsync(f.Request(), default); NoPage(r); Require(r.Reason == SourcePageReason.NativeValueInvalid && r.Counters.RowsObserved == 1 && r.Counters.BytesObserved == 21); });
 await Check("actual-schema-order-refusal-before-value-read", async () =>
