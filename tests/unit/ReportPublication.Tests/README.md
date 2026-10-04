@@ -13,8 +13,16 @@ python3 -B tests/unit/ReportPublication.Tests/oracle/verify_vectors.py
 python3 -B tests/unit/ReportPublication.Tests/oracle/test_oracle.py
 ```
 
-These require only Python's standard library, no restore/install/build, no network and no disposable database. They are contract/oracle checks, **not production codec/store/policy/lease tests**. There is intentionally no .NET test project yet; coordinator owns solution/CI wiring and later production-code integration.
+These require only Python's standard library, no restore/install/build, no network and no disposable database. They are contract/oracle checks, **not production codec/store/policy/lease tests**. Coordinator owns solution/CI wiring. The compiled test project below uses no additional packages and loads fictional fixtures into the actual typed module API; its fixture loader is test-only and establishes no external JSON admission contract.
 
 `fixtures/unicode-vectors.json` contains four valid and ten rejected raw-byte cases. Valid surrogate-pair JSON is parsed to the original scalar then independently canonicalized; raw malformed UTF-8 or unpaired/reversed/separated surrogate escapes are refused without replacement hashing. `fixtures/persisted-cases.json` contains18 planned real restricted-PostgreSQL/fence/audit/read-delivery cases; none ran in RR-P03. Guard booleans, a document fixture or the reference script cannot prove these mechanisms.
 
 All source records, policy/hold IDs, users, scopes, timestamps, classifications and digests are fictional local fixture inputs. Native version labels establish no eligible One Identity source, central audit authority, actual customer permission, qualified reviewer, retention policy, provider deployment, renderer, MCP adapter or gate acceptance. No production module/API/configuration/dependency/migration/grant changed. Historical draft/MCP fixtures remain untouched.
+
+## Frozen compiled scenarios (before implementation)
+
+The compiled packet must verify all 31 original SHA-256/length commitments and exact typed reserialization for every supported codec (source/projection/score/command/read request first; manifest/audit/receipts when available). Original expectations remain immutable. Four valid Unicode vectors must preserve their canonical scalar bytes through a typed display field; ten malformed vectors must be refused by strict test decoding and the production parser when available. Typed lone-surrogate inputs must refuse before hashing.
+
+The 19 reference refusal groups remain executed independently. Compiled equivalents additionally exercise source/projection scope and input bindings, source-only provenance ownership, exact warning category/kind/record targets, severe unreviewed false flags with and without warnings, marker section/ID/field substitution, root-cause/reference/category links, coverage arithmetic/reasons, unavailable/null pairs, actor/revision/digest validation, token/text bounds, duplicate IDs and unknown enum values. Constructor inputs and returned bytes are mutated after capture to prove defensive ownership. Command invocation/correlation exclusion is tested independently. All source factory calls are through the explicitly trusted test friend; no public source constructor may exist.
+
+Persistence and lease delivery cases remain **PLANNED_NOT_EXECUTED**. Raw parser-only refusals remain distinct from typed codec checks until the actual parser exists. This separation prevents a strict test loader from being counted as a production admission check.
