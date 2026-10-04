@@ -30,6 +30,12 @@ if (args.SequenceEqual(new[] { "--portable-adapter" }))
     await File.WriteAllTextAsync(Path.Combine(AppContext.BaseDirectory, "portable-adapter-results.json"), JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
     if (results.Any(x => !x.Passed)) Environment.ExitCode = 1;
 }
+else if (args.SequenceEqual(new[] { "--core-cleanup" }))
+{
+    var results = await MarkerClassificationChecks.RunCleanupAsync();
+    await File.WriteAllTextAsync(Path.Combine(AppContext.BaseDirectory, "core-cleanup-results.json"), JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = true }));
+    if (results.Any(x => !x.Passed)) Environment.ExitCode = 1;
+}
 else if (args.SequenceEqual(new[] { "--portable-observer" }))
 {
     var results = await CancellationObserverChecks.RunAsync();

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-core-cleanup-evidence-v1",
+  "scenarioFreeze": "9119b892",
+  "governingAmendment": "dadf7f87",
+  "nativeBaseline": "8881c1c_with2a5a293marker",
+  "files": [
+    {
+      "path": "src/server/modules/ReportPublication/NativePublishedReportReader.cs",
+      "sha256": "5b8ee728676b690ad98fd11a785419007c5894b610488cf6fe9a91c4532fc46a"
+    },
+    {
+      "path": "src/server/modules/ReportPublication/NativeReportPublisher.cs",
+      "sha256": "7396782a18d544605c774ed116684585a76caf04b7adb44adc1c705cbbdaf058"
+    }
+  ],
+  "passed": 2,
+  "failed": 2,
+  "records": "evidence/core-cleanup-precorrection.json",
+  "executed": {
+    "ReleaseBuild": "PASS_0warnings_0errors",
+    "original31Commitments": "PASS",
+    "ownPreparation31": "PASS",
+    "scriptedMarker4": "PASS"
+  },
+  "finding": "Early reader transaction/fence cleanup PublicationCommitUncertainException converted to ordinaryfailure; each appends1outcome and0unknownsignals. Publisher eachpropagateswith0outcomes/1unknownsignal. Protectedloads/deliveries0allfour.",
+  "limits": [
+    "Scripted trustedports only, no actualNpgsql/PGrelease proof",
+    "All18physicalpersisted mechanisms NOT_EXECUTED"
+  ]
+}
