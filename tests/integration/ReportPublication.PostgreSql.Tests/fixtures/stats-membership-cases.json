@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-stats-membership-scenarios-v1",
+  "governingAmendment": "589068f9512afcd4aaabec8db7a35517ea52c99c",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED_AWAIT_INDEPENDENT_DOC_ACCEPTANCE",
+  "setup": "Only16listed fresh roles/2owned fixtureDBs; no existingrole/database/HBA mutation",
+  "membershipEdgesPerCustomer": [
+    {
+      "member": "PublicationOwner",
+      "role": "Publisher",
+      "inherit": true,
+      "set": false,
+      "admin": false
+    },
+    {
+      "member": "PublicationOwner",
+      "role": "Reader",
+      "inherit": true,
+      "set": false,
+      "admin": false
+    },
+    {
+      "member": "PublicationOwner",
+      "role": "Audit",
+      "inherit": true,
+      "set": false,
+      "admin": false
+    },
+    {
+      "member": "PublicationOwner",
+      "role": "BlobStager",
+      "inherit": true,
+      "set": false,
+      "admin": false
+    },
+    {
+      "member": "FixtureOwner",
+      "role": "Publisher",
+      "inherit": true,
+      "set": false,
+      "admin": false
+    },
+    {
+      "member": "FixtureOwner",
+      "role": "Reader",
+      "inherit": true,
+      "set": false,
+      "admin": false
+    },
+    {
+      "member": "FixtureOwner",
+      "role": "FixtureController",
+      "inherit": true,
+      "set": false,
+      "admin": false
+    }
+  ],
+  "effectiveGrantedRoutineCounts": {
+    "PublicationOwner": 30,
+    "FixtureOwner": 33
+  },
+  "unchangedSurface": {
+    "sqlFunctions": 35,
+    "compositeReturns": 15
+  },
+  "cases": [
+    {
+      "name": "serveridentity-masked-before-inheritededge",
+      "expected": "Actualrestricted own execution login hits owning frozen private backendidentity guard without owner inheritance; serverbackend_start masked and admission closed. No callerPID/start or SETROLE substitution and no new public stats helper."
+    },
+    {
+      "name": "serveridentity-unmasked-own-session-after-exactedges",
+      "expected": "After only selected7owncustomeredges, actualrestricted executionlogin private guard obtains exactserverownPID/backend_start/SESSION_USER/currentDB, admits only configured correctpurpose/currentfacts and no rawstats output."
+    },
+    {
+      "name": "exact14clusteredges-no-extra-path",
+      "expected": "Across2customerrole groups exactly7edges each with inheritance=true/set=false/admin=false; inspect directed direct and transitive pg_auth_members, no extra/reversed/M/runtimeoutbound/ownertoeachother/foreigncustomer/broadbuiltinstats/settings/signal/existing-role edge."
+    },
+    {
+      "name": "restrictedattrs-and-no-owned-runtimeobjects",
+      "expected": "Allsixlogins NOSUPER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS; owners NONLOGIN with sameclosedattrs. P/R/A/B/C own zero SQLobjects and noDML/sequence/CREATE/TEMP/grantoption privileges; actualnegative writes/DDL/tempcreation/SETROLE deny."
+    },
+    {
+      "name": "exactowner-effective30-and33",
+      "expected": "Among frozen35routines, PublicationOwner effective18owned+12inherited=30 andFixtureOwner17owned+16inherited=33; compare eachsig matrix, notonlycounts. Runtime per-signature grants remain exactindependent6232surface."
+    },
+    {
+      "name": "sessionuser-is-executionidentity",
+      "expected": "Inherited function execution never substitutesCURRENT_USERforSESSION_USER. Actualwronglogin/purpose/customer/scope/currentauthority calls deny protectedload/write; ownersremainNONLOGIN noappidentity."
+    },
+    {
+      "name": "foreigncustomer-definerstatistics-masked",
+      "expected": "CustomerAowner cannotread requiredserveridentity forBexecutionlogin; noBroleinheritance. Actualcrosscustomer contentcalls deny evenifPUBLICCONNECT permitsconnection/catalogs."
+    },
+    {
+      "name": "controller-read-identity-header-only",
+      "expected": "Controller p.read_identity succeeds configuredcustomer/schemaheader withoutbackend_startguard; noPubOwner\u2192Controller edge, protectedowner/sessionfunctionsremainexactdeny."
+    },
+    {
+      "name": "privateoutput-and-no-extragrantedstatsAPI",
+      "expected": "Private literal schemaqualified statslookup fixedownBackendPid/actualSESSION_USER/currentDB; safeapplication outputscontain noquery/state/client/statistics/locator/PID/start fields and publicroutineinventory remains35; SQLparameters/GUC/PID spoof negativesdeny."
+    },
+    {
+      "name": "migration-and-fresh-only-setup",
+      "expected": "ActualMigration executes additiveDDL inownfreshDB; provisioner only exactownerACL/seeds/7edges plusPUBLICCREATE/TEMPrevokes on2newDBs/publicschemas afterDDL. Migrationzerooutboundedges and no runtimegrants. Owner/setup/cleanupreceipts separatefrom18persistedcredit."
+    }
+  ]
+}

@@ -21,3 +21,5 @@ Exact `415bc14` portable replay: 256 passed / 1 failed, with all original 255 co
 Exact `9ee3500e` portable wire corpus executed: 112 passed / 0 failed, with original31 byte commitments and own31 preparation /4 marker classifications passing. [Evidence](wire-evidence.json) retains literal results; no session, SQL or persisted credit.
 
 [Cancellation observer expectations](fixtures/cancellation-observer-cases.json) freeze governing `9cdf019a` before source correction: original and newer stalled-dispatch pending waits, disposed caller admission, caller-owned handle cleanup, noncancelable behavior and raced disposal preserve original UTC/monotonic validity. The original `4643300b` failure remains retained; physical backend release is not claimed.
+
+[Finite statistics membership expectations](fixtures/stats-membership-cases.json) freeze governing `589068f9` before affected guard/grant code. Exactly seven reverse own-customer edges and 30/33 effective owner routines require actual masked/unmasked, inventory, denial and safe-output observations. Independent document acceptance and physical execution remain pending; no grants or setup have occurred.
