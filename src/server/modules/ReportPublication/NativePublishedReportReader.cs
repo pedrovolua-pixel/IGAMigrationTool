@@ -184,7 +184,9 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
         {
             this.clock = clock; this.started = started; this.deadline = deadline;
             maximumElapsed = deadline - admittedUtc;
-            var remaining = deadline - clock.GetUtcNow();
+            var remainingUtc = deadline - clock.GetUtcNow();
+            var remainingElapsed = maximumElapsed - clock.GetElapsedTime(started);
+            var remaining = remainingUtc < remainingElapsed ? remainingUtc : remainingElapsed;
             expiry = new(remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero, clock);
             linked = CancellationTokenSource.CreateLinkedTokenSource(caller, expiry.Token);
         }
