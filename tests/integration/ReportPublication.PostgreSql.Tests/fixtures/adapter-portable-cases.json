@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "native-publication-postgresql-independent-portable-scenarios-v1",
+  "status": "FROZEN_EXPECTATIONS_NOT_EXECUTED",
+  "sourceSnapshot": "d3b2ca1",
+  "caseFreeze": "6232bbf",
+  "nativeMarker": "2a5a293",
+  "credit": "Portable adapter control/lease only; no persisted18 or real authority/source evidence",
+  "controls": [
+    "original16nativecontrolroundtrips",
+    "threeownsourceMetadataexactlinks",
+    "copied-inputmutationdoesnotchangevalue",
+    "duplicate-roots",
+    "duplicate-nestedactor-or-input",
+    "escaped-keyaliases",
+    "unknown-or-missing-field",
+    "wrongscalar-number-boolean-null",
+    "enum-alias-and-unrecognizedschema",
+    "UUID-zero-uppercase-format",
+    "counterzero-padded-overflow",
+    "digestuppercase-length",
+    "setorder-duplicates-category-field",
+    "UTC7-calendar-precision-offset",
+    "rawUTF8-BOM-NUL-nonASCII-controls",
+    "trailing-whitespace-noncanonical-key-order",
+    "metadata-required-all17fields",
+    "metadata-warning-reference-provenanceownership"
+  ],
+  "leases": [
+    {
+      "name": "original-minusone-current",
+      "expected": "At original cutoff minus1tick Check succeeds."
+    },
+    {
+      "name": "original-exact-and-plusone-refuse",
+      "expected": "At exact original cutoff and +1tick Check/Invoke refuse without dependency start."
+    },
+    {
+      "name": "narrow-keeps-origin",
+      "expected": "After elapsed time, narrow lowers deadline/budget and exact narrowed cutoff refuses; later cutoff never extends."
+    },
+    {
+      "name": "rollback-monotonic-ceiling",
+      "expected": "UTC rolls back while monotonic elapsed crosses original or narrowed budget; timer/token/Check refuse at inherited deadline."
+    },
+    {
+      "name": "nested-caller-pre-canceled-no-start",
+      "expected": "Original admission caller remains current; already canceled newer per-dependency/reader caller must refuse before action is invoked."
+    },
+    {
+      "name": "pending-ignored-cancel-late-refusal",
+      "expected": "Pause ignoring token; advance original expiry, cancel caller, invalidate or dispose; wrapper promptly refuses, original pending later completes/faults without returning result."
+    },
+    {
+      "name": "disposal-idempotent-token-canceled",
+      "expected": "Dispose twice; retained original Token canceled, Check/Narrow/Invoke deny and late action cannot be newly admitted."
+    },
+    {
+      "name": "zero-budget-admission-refuse",
+      "expected": "Equal/past authority deadline and canceled original caller refuse at construction, with no fresh validity window."
+    }
+  ]
+}
