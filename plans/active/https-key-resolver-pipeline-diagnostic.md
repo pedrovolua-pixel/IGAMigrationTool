@@ -1,6 +1,6 @@
 # Actual Key Vault resolver pipeline and diagnostics
 
-Status: RUNNING — bounded local SDK diagnostic
+Status: VERIFIED — bounded local SDK diagnostic only
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: 65f2608
@@ -40,3 +40,12 @@ Production graph/pin/build review, monotonic inventory/witness and lifecycle dec
 The immutable SDK ChallengeBasedAuthenticationPolicy source at6662fe91f2d1f7230d7a8fed2b6db2a17a0bd692 removes initial request content until a supported401 authentication challenge restores it. The plan already permits an explicitly synthetic token/challenge. Positive scripted remote wrap/unwrap cases must therefore exercise that public challenge path and count only narrowly expected synthetic credential calls, header presence and authenticated body validation; no raw token, header, body or payload may be printed. The credential throws outside that expected scope. Unguarded metadata403 control and guarded403 cases remain separately attributable; guarded metadata must cause zero crypto and credential calls. Fixture authorities must isolate ordinary SDK challenge caching through supported inputs, without cache mutation or disabling challenge-resource verification. No request replacement or recovery of SDK-private stashed content is allowed to mask the body behavior. Retain all failed runs as fixture corrections, not SDK defects.
 
 This clarification adds no credential, grant, network or production authentication behavior. Scripted401/200/403 and synthetic credential counts do not prove Azure RBAC, live credential acquisition or network challenge safety. Immutable shared pipeline/body source digests and the independently reviewed scope clarification belong in the final diagnostic receipt.
+
+
+## Executed checkpoint — 2026-10-04 UTC
+
+Immutable authorfb6e837d715ce2534eba4bd71e027f9c4b57cdb9 passed non-author RP01–08 review and integrated as35a317529a28ca0b39f667e9519b9ae39582203e with identical four-file hashes. Author/reviewer/coordinator each executed45 actual cases (27 preserved plus18 new),37 archive checks/74 selected entries, six loaded assembly digest/version checks, empty-source framework restore, Release0 warnings/errors and whole scratch format. Reviewer13 input/source-integrity negatives and a meaningful new-file formatter clean0/misformatted2/restored0 control passed. Python AST/links/UTF-8/whitespace/secrets and raw log/source bindings passed. [Detailed result](../../docs/development/https-key-resolver-pipeline-evidence.md) and [source-bound receipt](../../docs/development/evidence/https-key-resolver-pipeline-20261004.json) preserve failures, corrections, scope reviews and exact limits.
+
+The clarification's cache isolation was realized through a fresh process and explicit supported fixed-authority ordering: all cold guarded403 negatives before ordinary challenge-cache priming; later positive cases intentionally observe the warm cache. Fixtures do not claim independent authorities. Credential0/crypto0 applies to the cold guarded403 cases only; production warm-cache failure behavior remains open. Synthetic401 restores the actual SDK body without request replacement/private stashed-content/cache access or disabling ordinary resource verification. Normal observations4/8/4 exposed protected binding fields in memory; diagnostics-off observed0/0/0 and raw fields never reached the fixture allowlist sink. No universal privacy/exporter contract follows.
+
+RP01–08 is VERIFIED only for the stated local diagnostic. No production graph/policy/guard/inventory/witness/lifecycle/bindings or full KEY/ARL/live/G1–G9/Milestone2 approval follows. Unchanged product regression suites remain historical. The separately reviewed Proposed ADR/input checklist selects no architecture. All six human tasks and stale private BFF/HTTPS publisher status persist; no Azure operation, grant, paid session, public source or private site publication.
