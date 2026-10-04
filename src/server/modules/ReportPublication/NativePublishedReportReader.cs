@@ -137,7 +137,9 @@ public sealed class NativePublishedReportReaderV1(IPublicationAuthorityV1 author
                     if (!await fence.RevalidateAsync(access, token)
                         || !ValidVersion(await transaction.ReadCommittedVersionAsync(request.ReportVersionId, token), request, await transaction.ReadDatabaseUtcAsync(token)))
                         throw new OperationCanceledException(token);
-                    var current = await references.ReadAsync(transaction, linked, token);
+                    var supplied = await references.ReadAsync(transaction, linked, token);
+                    if (supplied is null) throw new PublicationIntegrityException();
+                    var current = OwnedValues.Copy(supplied);
                     if (!ValidOverlay(linked, current)) throw new PublicationIntegrityException();
                     return current;
                 }, sink);
