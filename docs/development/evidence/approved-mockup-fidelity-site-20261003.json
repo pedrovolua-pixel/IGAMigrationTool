@@ -25,11 +25,7 @@
     "sha256": "9df3a0850b8e7ca08cb6d119812d04a6c5d677394517f37dbfd9881f9bb9bd63"
   },
   "qa": {
-    "local_viewports": [
-      1280,
-      390,
-      320
-    ],
+    "local_viewports": [1280, 390, 320],
     "no_document_overflow": true,
     "broken_internal_anchors": 0,
     "rendered_cards": 14
