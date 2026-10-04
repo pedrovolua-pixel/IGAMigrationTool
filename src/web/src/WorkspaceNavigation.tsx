@@ -58,7 +58,7 @@ export function WorkspaceNavigation({
     setExpanded(false);
     requestAnimationFrame(() => {
       document.getElementById('workspace-title')?.focus({ preventScroll: true });
-      document.getElementById('workspace')?.scrollIntoView({ block: 'start' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
     });
   }
   return (

@@ -13,3 +13,9 @@ The approved static design is available separately under `/design-review/`. That
 ## Verification boundaries
 
 See UI-W4's preimplementation tests and dated execution evidence. Automated/local browser results do not establish manual supported-browser/screen-reader acceptance or G1–G9. A read-only preview can verify visual/navigation/state retention but cannot establish mutation/recovery success. No migration, configuration or dependency changes are required for this presentation packet.
+
+## Visual fidelity correction — UI-W5
+
+The approved static page composition is the visual source of truth. In particular Risk requires severity chips, a category filter, two chart panels and a compact findings list. Detailed search/state/confidence controls and consultant mutation forms are progressively disclosed, retaining mounted state. Charts use admitted findings only and expose all five real severity levels and actual categories. Prior UI-W4 navigation checks did not establish parity with the mockup; side-by-side viewport evidence is required.
+
+UI-W5 bounded verification: the corrected Risk composition was compared with the approved screenshot at1280×720; chart counts retain5actual saved findings and2categories rather than33mock findings and5sample categories.402 new rendering assertions and27 existing regression assertions passed; browser evidence covers all18 areas, tab groups, filters, inspector, mounted editor retention and390/320 reflow. Human visual acceptance and supported manual/operational acceptance remain open. See `evidence/approved-mockup-fidelity-20261003.json`.

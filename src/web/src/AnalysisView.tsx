@@ -16,6 +16,7 @@ import { MaturityView } from './MaturityView';
 import { DraftReportView } from './DraftReportView';
 import { RecommendationGuidanceView } from './RecommendationGuidanceView';
 import { AiProposalPreview, coherentAiPreview } from './AiProposalPreview';
+import { AiWorkspace } from './AiWorkspace';
 import { FixPackagePreview, coherentFixPackages } from './FixPackagePreview';
 import { ArtifactReviewPanel, coherentArtifactReview } from './ArtifactReviewPanel';
 import { useArtifactReview } from './useArtifactReview';
@@ -34,10 +35,12 @@ export function AnalysisView({
   planningTaskDrafts,
   workspaceView = 'Assessments',
   onAnalysisChange,
+  onNavigateWorkspace,
   categoryRequest,
 }: {
   workspaceView?: WorkspaceView;
   onAnalysisChange?: (analysis: AnalysisDetail | null) => void;
+  onNavigateWorkspace?: (view: WorkspaceView) => void;
   categoryRequest?: { category: string; sequence: number } | null;
   run: RunDetail;
   csrfToken: string;
@@ -56,6 +59,7 @@ export function AnalysisView({
         selectedId: null,
       }));
   }, [categoryRequest]);
+  const [taskTab, setTaskTab] = useState<'Board' | 'Review queue' | 'Accepted risks'>('Board');
   const [failed, setFailed] = useState(false);
   const [retry, setRetry] = useState(0);
   const [notice, setNotice] = useState<string | null>(null);
@@ -262,19 +266,43 @@ export function AnalysisView({
             : 'Analysis is unavailable for this saved run. No health result is inferred.'}
         </p>
         <div hidden={!['Assessments', 'AI workspace'].includes(workspaceView)}>
-          <AiProposalPreview preview={response.aiPreview} run={run} />
+          <AiWorkspace
+            run={run}
+            analysis={response}
+            preview={<AiProposalPreview preview={response.aiPreview} run={run} />}
+            onSettings={onNavigateWorkspace ? () => onNavigateWorkspace('Settings') : undefined}
+          />
         </div>
-        <div hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}>
-          <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
-        </div>
-        <div
-          hidden={!['Assessments', 'Recommendations', 'Tasks & reviews'].includes(workspaceView)}
+        <details
+          className="risk-review-controls"
+          hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}
+          open={workspaceView === 'Assessments' || undefined}
         >
+          <summary>Fix package examples and source details</summary>
+          <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
+        </details>
+        <details
+          className="risk-review-controls"
+          hidden={
+            !['Assessments', 'Recommendations', 'Tasks & reviews'].includes(workspaceView) ||
+            (workspaceView === 'Tasks & reviews' && taskTab === 'Accepted risks')
+          }
+          open={workspaceView === 'Assessments' || undefined}
+        >
+          <summary>Artifact review controls and history</summary>
           <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
-        </div>
-        <div hidden={!['Assessments', 'Tasks & reviews'].includes(workspaceView)}>
+        </details>
+        <details
+          className="risk-review-controls"
+          hidden={
+            !['Assessments', 'Tasks & reviews'].includes(workspaceView) ||
+            (workspaceView === 'Tasks & reviews' && taskTab !== 'Board')
+          }
+          open={workspaceView === 'Assessments' || undefined}
+        >
+          <summary>Planning task controls and history</summary>
           <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
-        </div>
+        </details>
       </>
     );
   }
@@ -478,9 +506,100 @@ export function AnalysisView({
           )}
         />
       </div>
-      <div
-        hidden={!['Assessments', 'Findings', 'Evidence', 'Tasks & reviews'].includes(workspaceView)}
+      {workspaceView === 'Tasks & reviews' && (
+        <div className="task-workspace">
+          <div className="platform-area-tabs" role="group" aria-label="Task views">
+            {(['Board', 'Review queue', 'Accepted risks'] as const).map((tab) => (
+              <button
+                type="button"
+                key={tab}
+                aria-pressed={taskTab === tab}
+                onClick={() => setTaskTab(tab)}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          {taskTab === 'Board' && (
+            <div className="task-board">
+              {(['Planned', 'InProgress', 'Completed'] as const).map((status) => {
+                const ready = response.planningTasks?.status === 'Ready';
+                const entries = ready
+                  ? (response.planningTasks?.entries ?? []).filter((task) => task.status === status)
+                  : [];
+                return (
+                  <section key={status} className="task-board-column">
+                    <div className="task-board-heading">
+                      <h3>
+                        {status === 'Planned'
+                          ? 'To review'
+                          : status === 'InProgress'
+                            ? 'In progress'
+                            : 'Complete'}
+                      </h3>
+                      <span>{ready ? entries.length : 'Unavailable'}</span>
+                    </div>
+                    {entries.length ? (
+                      entries.map((task) => {
+                        const finding = response.findings.find(
+                          (item) => item.id === task.identity.findingId,
+                        );
+                        return (
+                          <article key={task.identity.taskId} className="task-board-card">
+                            <span className={`risk-pill ${finding?.severity.toLowerCase() ?? ''}`}>
+                              {finding?.severity ?? task.status}
+                            </span>
+                            <h4>{finding?.title ?? 'Saved planning task'}</h4>
+                            <p>
+                              {task.assigneeId} · {task.freshness}
+                            </p>
+                            <details>
+                              <summary>Task reference</summary>
+                              <code>{task.identity.taskId}</code>
+                            </details>
+                          </article>
+                        );
+                      })
+                    ) : (
+                      <p className="field-note">
+                        {ready
+                          ? 'No saved tasks in this column.'
+                          : 'Saved planning tasks are unavailable for this run.'}
+                      </p>
+                    )}
+                  </section>
+                );
+              })}
+            </div>
+          )}
+          {taskTab === 'Board' && (
+            <p className="field-note">
+              Cancelled tasks remain in Planning task controls and history below.
+            </p>
+          )}
+          {taskTab === 'Accepted risks' && (
+            <section className="platform-availability">
+              <h3>Residual-risk decisions</h3>
+              <p>
+                Customer risk acceptance and decision records are unavailable in this local pilot.
+              </p>
+              <button type="button" disabled>
+                Accept risk unavailable
+              </button>
+            </section>
+          )}
+        </div>
+      )}
+      <details
+        id="finding-review-controls"
+        className="risk-review-controls"
+        hidden={
+          !['Assessments', 'Findings', 'Evidence', 'Tasks & reviews'].includes(workspaceView) ||
+          (workspaceView === 'Tasks & reviews' && taskTab !== 'Review queue')
+        }
+        open={workspaceView === 'Assessments' || workspaceView === 'Tasks & reviews' || undefined}
       >
+        <summary>Consultant review and history</summary>
         {response.review && (
           <ReviewPanel
             review={response.review}
@@ -494,41 +613,157 @@ export function AnalysisView({
             }}
           />
         )}
-      </div>
+      </details>
       <div hidden={!['Assessments', 'Reports'].includes(workspaceView)}>
-        <DraftReportView key={response.runId} report={response.reportDraft} />
+        <DraftReportView
+          key={response.runId}
+          report={response.reportDraft}
+          dedicated={workspaceView === 'Reports'}
+        />
       </div>
+      {workspaceView === 'Recommendations' && (
+        <div className="recommendations-workspace">
+          <div className="recommendation-stat-strip">
+            <div>
+              <strong>
+                {response.recommendationGuidance?.status === 'Ready'
+                  ? (response.recommendationGuidance.snapshot?.findings.reduce(
+                      (total, finding) => total + finding.options.length,
+                      0,
+                    ) ?? 'Unavailable')
+                  : 'Unavailable'}
+              </strong>
+              <span>Recommendations</span>
+            </div>
+            <div>
+              <strong>
+                {response.fixPackages?.status === 'Ready'
+                  ? (response.fixPackages.snapshot?.packages.length ?? 'Unavailable')
+                  : 'Unavailable'}
+              </strong>
+              <span>Fix packages</span>
+            </div>
+            <div>
+              <strong>Unavailable</strong>
+              <span>Quick wins</span>
+            </div>
+            <div>
+              <strong>Unavailable</strong>
+              <span>Executed changes</span>
+            </div>
+          </div>
+          <div className="recommendation-split">
+            <section className="recommendation-panel">
+              <h3>Fix packages</h3>
+              {response.fixPackages?.status === 'Ready' &&
+              response.fixPackages.snapshot?.packages.length ? (
+                response.fixPackages.snapshot.packages.map((item) => {
+                  const finding = response.findings.find(
+                    (finding) => finding.id === item.findingId,
+                  );
+                  return (
+                    <article className="recommendation-package-row" key={item.packageId}>
+                      <h4>{finding?.title ?? 'Saved fix package'}</h4>
+                      <p>
+                        {finding?.severity ?? 'Unspecified severity'} · {item.options.length}{' '}
+                        review-only options · Unverified
+                      </p>
+                      <details>
+                        <summary>Package reference</summary>
+                        <code>{item.packageId}</code>
+                      </details>
+                    </article>
+                  );
+                })
+              ) : (
+                <p className="field-note">
+                  {response.fixPackages?.status === 'Ready' && response.fixPackages.snapshot
+                    ? 'No saved fix packages were generated for this run.'
+                    : 'Verified fix packages are unavailable for this run.'}
+                </p>
+              )}
+            </section>
+            <section className="recommendation-panel">
+              <h3>Recommended sequence</h3>
+              <div className="recommendation-steps">
+                <div>
+                  <strong>1 · Confirm</strong>
+                  <span>Review evidence</span>
+                </div>
+                <div>
+                  <strong>2 · Plan</strong>
+                  <span>Review prerequisites</span>
+                </div>
+                <div>
+                  <strong>3 · Validate</strong>
+                  <span>Reassess evidence</span>
+                </div>
+              </div>
+              <p className="field-note">
+                Packages and examples remain review-only. The local pilot cannot execute or validate
+                customer-system changes.
+              </p>
+              <button
+                type="button"
+                onClick={() => onNavigateWorkspace?.('Tasks & reviews')}
+                disabled={!onNavigateWorkspace}
+              >
+                Open tasks and reviews →
+              </button>
+            </section>
+          </div>
+        </div>
+      )}
       <div className="platform-feature-areas">
-        <div hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}>
+        <details
+          className="risk-review-controls"
+          hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}
+          open={workspaceView === 'Assessments' || undefined}
+        >
+          <summary>Recommendation options and provenance</summary>
           <RecommendationGuidanceView
             key={`guidance-${response.runId}`}
             guidance={response.recommendationGuidance}
           />
-        </div>
+        </details>
         <div hidden={!['Assessments', 'AI workspace'].includes(workspaceView)}>
-          <AiProposalPreview preview={response.aiPreview} run={run} />
-          {workspaceView === 'AI workspace' && (
-            <div className="platform-availability">
-              <h3>Assessment assistant and deep analysis</h3>
-              <p>
-                Interactive AI analysis is unavailable in this local pilot. Existing preview
-                proposals remain unverified; no provider call or raw evidence retrieval is made.
-              </p>
-              <a href="/design-review/#ai">Review the approved AI design ↗</a>
-            </div>
-          )}
+          <AiWorkspace
+            run={run}
+            analysis={response}
+            preview={<AiProposalPreview preview={response.aiPreview} run={run} />}
+            onSettings={onNavigateWorkspace ? () => onNavigateWorkspace('Settings') : undefined}
+          />
         </div>
-        <div hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}>
-          <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
-        </div>
-        <div
-          hidden={!['Assessments', 'Recommendations', 'Tasks & reviews'].includes(workspaceView)}
+        <details
+          className="risk-review-controls"
+          hidden={!['Assessments', 'Recommendations'].includes(workspaceView)}
+          open={workspaceView === 'Assessments' || undefined}
         >
+          <summary>Fix package examples and source details</summary>
+          <FixPackagePreview preview={response.fixPackages} run={run} analysis={response} />
+        </details>
+        <details
+          className="risk-review-controls"
+          hidden={
+            !['Assessments', 'Recommendations', 'Tasks & reviews'].includes(workspaceView) ||
+            (workspaceView === 'Tasks & reviews' && taskTab === 'Accepted risks')
+          }
+          open={workspaceView === 'Assessments' || undefined}
+        >
+          <summary>Artifact review controls and history</summary>
           <ArtifactReviewPanel analysis={response} run={run} {...artifactControls} />
-        </div>
-        <div hidden={!['Assessments', 'Tasks & reviews'].includes(workspaceView)}>
+        </details>
+        <details
+          className="risk-review-controls"
+          hidden={
+            !['Assessments', 'Tasks & reviews'].includes(workspaceView) ||
+            (workspaceView === 'Tasks & reviews' && taskTab !== 'Board')
+          }
+          open={workspaceView === 'Assessments' || undefined}
+        >
+          <summary>Planning task controls and history</summary>
           <PlanningTasksPanel analysis={response} run={run} verified {...taskControls} />
-        </div>
+        </details>
         <div hidden={!['Assessments', 'Outcomes & maturity'].includes(workspaceView)}>
           {response.maturity ? (
             <MaturityView maturity={response.maturity} />

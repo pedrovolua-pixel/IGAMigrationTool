@@ -956,3 +956,608 @@ html[data-workspace-density='compact'] .assessment-shell .platform-overview-pane
   color: var(--platform-blue);
   background: transparent;
 }
+
+/* UI-W5: approved page composition; detailed operations remain progressively disclosed. */
+.assessment-shell .page-title > div > .eyebrow {
+  display: none;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .boundary-note {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .run-selection {
+  display: none;
+}
+.assessment-shell .page-title {
+  margin-bottom: 20px;
+}
+.assessment-shell .workspace {
+  padding-top: 28px;
+}
+.assessment-shell .brand {
+  font-size: 13px;
+}
+.assessment-shell .brand-subtitle {
+  font-size: 12px;
+  margin-top: 2px;
+}
+.assessment-shell .risk-review-controls {
+  margin-top: 16px;
+  background: var(--platform-panel);
+  border: 1px solid var(--platform-line);
+  border-radius: 13px;
+  padding: 14px 20px;
+}
+.assessment-shell .risk-review-controls > summary {
+  font-size: 13px;
+  cursor: pointer;
+  min-height: 32px;
+}
+.assessment-shell[data-workspace-view='Assessments'] .risk-review-controls,
+.assessment-shell[data-workspace-view='Tasks & reviews'] .risk-review-controls {
+  padding: 0;
+  border: 0;
+}
+.assessment-shell[data-workspace-view='Assessments'] .risk-review-controls > summary,
+.assessment-shell[data-workspace-view='Tasks & reviews'] .risk-review-controls > summary {
+  display: none;
+}
+.assessment-shell .findings-explorer:has(.risk-toolbar) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.assessment-shell .risk-severity-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+.assessment-shell .risk-severity-filters button {
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 8px 12px;
+  min-height: 40px;
+}
+.assessment-shell .risk-severity-filters button[aria-pressed='true'] {
+  background: var(--platform-soft);
+  border-color: var(--platform-blue);
+  color: var(--platform-blue);
+}
+.assessment-shell .risk-category-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: var(--platform-muted);
+}
+.assessment-shell .risk-category-row > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.assessment-shell .risk-category-row label {
+  font-size: 13px;
+  margin: 0;
+  color: var(--platform-ink);
+  font-weight: 500;
+}
+.assessment-shell .risk-category-row select {
+  min-width: 130px;
+  width: auto;
+  max-width: 220px;
+  min-height: 36px;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 6px;
+}
+.assessment-shell .risk-advanced-filters {
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--platform-muted);
+}
+.assessment-shell .risk-advanced-filters > summary {
+  cursor: pointer;
+}
+.assessment-shell .risk-advanced-filters[open] {
+  padding: 14px 20px;
+  border: 1px solid var(--platform-line);
+  border-radius: 10px;
+  background: var(--platform-panel);
+}
+.assessment-shell .risk-findings-panel {
+  background: var(--platform-panel);
+  border: 1px solid var(--platform-line);
+  border-radius: 13px;
+  padding: 20px;
+  margin-top: 16px;
+}
+.assessment-shell .risk-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--platform-muted);
+  margin-bottom: 8px;
+  gap: 12px;
+}
+.assessment-shell .risk-list-heading h4 {
+  font-size: 15px;
+  margin: 0;
+}
+.assessment-shell .findings-dedicated .finding-investigation {
+  border: 0;
+  gap: 0;
+}
+.assessment-shell .findings-dedicated .finding-results .analysis-finding {
+  padding: 0;
+  border-bottom: 1px solid var(--platform-line);
+  margin: 0;
+}
+.assessment-shell .findings-dedicated .finding-results .finding-row-title {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 0;
+  margin: 0;
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.45;
+  border: 0;
+  background: transparent;
+  min-height: 68px;
+}
+.assessment-shell .risk-row-copy {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  gap: 4px;
+}
+.assessment-shell .risk-row-copy strong {
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--platform-ink);
+}
+.assessment-shell .risk-row-copy small {
+  font-size: 12px;
+  color: var(--platform-muted);
+  font-weight: 400;
+}
+.assessment-shell .risk-pill {
+  font-size: 11px;
+  white-space: nowrap;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 4px 8px;
+  color: var(--platform-blue);
+  background: var(--platform-soft);
+}
+.assessment-shell .risk-pill.critical {
+  color: #9c2b3d;
+  background: #fff0f3;
+}
+.assessment-shell .risk-pill.high {
+  color: #935915;
+  background: #fff5e5;
+}
+.assessment-shell .risk-pill.low {
+  color: #176c65;
+  background: #e6f5f1;
+}
+.assessment-shell .risk-pill.informational {
+  color: var(--platform-muted);
+  background: var(--platform-side);
+}
+.assessment-shell .finding-results .risk-show-more {
+  border: 0;
+  background: transparent;
+  color: var(--platform-blue);
+  padding: 12px 0;
+  font-size: 13px;
+}
+.assessment-shell .finding-overlay {
+  width: 390px;
+  max-width: 94vw;
+}
+.assessment-shell .finding-overlay:has(.finding-relationships:not([hidden])) {
+  width: min(760px, 94vw);
+}
+.assessment-shell .finding-overlay .finding-detail {
+  padding: 20px;
+  max-height: none;
+  position: static;
+  top: auto;
+}
+.assessment-shell .finding-detail-title .risk-drawer-heading {
+  font-size: 15px;
+  margin: 0;
+}
+.assessment-shell .finding-detail-title button {
+  font-size: 12px;
+  min-height: 34px;
+  padding: 5px 10px;
+}
+.assessment-shell .finding-overlay .finding-detail > h3 {
+  font-size: 20px;
+  line-height: 1.35;
+  margin: 15px 0;
+}
+.assessment-shell .risk-detail-badges {
+  display: flex;
+  gap: 7px;
+  margin-top: 15px;
+}
+.assessment-shell .risk-summary-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--platform-muted);
+}
+.assessment-shell .risk-summary-facts strong {
+  display: block;
+  color: var(--platform-ink);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.assessment-shell .finding-detail-tabs {
+  margin-top: 20px;
+}
+.assessment-shell .finding-detail-tabs button {
+  font-size: 12px;
+  padding: 8px 7px;
+}
+.assessment-shell .finding-overlay section h4 {
+  font-size: 14px;
+  margin: 20px 0 8px;
+}
+.assessment-shell .finding-overlay section p,
+.assessment-shell .finding-overlay section li {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.assessment-shell .risk-drawer-actions {
+  border-top: 1px solid var(--platform-line);
+  margin: 0 20px;
+  padding: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.assessment-shell .risk-drawer-actions button {
+  font-size: 12px;
+  padding: 8px 12px;
+}
+.assessment-shell .risk-drawer-actions p {
+  font-size: 11px;
+  width: 100%;
+  margin-top: 8px;
+}
+@media (max-width: 540px) {
+  .assessment-shell .risk-findings-panel {
+    padding: 16px;
+  }
+  .assessment-shell .findings-dedicated .finding-results .finding-row-title {
+    gap: 10px;
+  }
+  .assessment-shell .risk-pill {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+  .assessment-shell .risk-row-copy strong {
+    font-size: 13px;
+  }
+  .assessment-shell .finding-overlay {
+    width: 94vw;
+  }
+  .assessment-shell .risk-summary-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+.assessment-shell:not([data-workspace-view='Assessments']) .run-started {
+  display: none;
+}
+.assessment-shell .risk-category-row {
+  margin-bottom: 14px;
+  position: relative;
+}
+.assessment-shell .risk-category-row .risk-advanced-filters {
+  margin: 0 0 0 auto;
+}
+.assessment-shell .risk-advanced-filters[open] {
+  flex-basis: 100%;
+}
+.assessment-shell .risk-category-row .risk-clear {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.assessment-shell .risk-pill.critical {
+  color: light-dark(#b43b51, #ff9aab);
+  background: light-dark(#fff0f3, #402b36);
+}
+.assessment-shell .risk-pill.high {
+  color: light-dark(#966016, #ffc785);
+  background: light-dark(#fff5e6, #40372a);
+}
+.assessment-shell .risk-pill.low {
+  color: light-dark(#287c72, #8fd9c4);
+  background: light-dark(#edf7f3, #223d38);
+}
+
+.assessment-shell .risk-row-copy .risk-pill {
+  display: inline-block;
+  align-self: start;
+  margin-bottom: 3px;
+}
+
+.assessment-shell .task-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.assessment-shell .task-board-column {
+  background: var(--platform-side);
+  border: 1px solid var(--platform-line);
+  border-radius: 13px;
+  padding: 16px;
+  min-height: 320px;
+}
+.assessment-shell .task-board-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.assessment-shell .task-board-heading h3 {
+  font-size: 15px;
+  margin: 0;
+}
+.assessment-shell .task-board-heading span {
+  font-size: 12px;
+  color: var(--platform-muted);
+}
+.assessment-shell .task-board-card {
+  padding: 14px;
+  background: var(--platform-panel);
+  border: 1px solid var(--platform-line);
+  border-radius: 9px;
+  margin-bottom: 12px;
+}
+.assessment-shell .task-board-card h4 {
+  font-size: 13px;
+  margin: 8px 0;
+}
+.assessment-shell .task-board-card p,
+.assessment-shell .task-board-card summary {
+  font-size: 12px;
+}
+.assessment-shell .task-board-card code {
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+@media (max-width: 760px) {
+  .assessment-shell .task-board {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .assessment-shell .task-board-column {
+    min-height: 160px;
+  }
+}
+
+.assessment-shell .platform-area-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-bottom: 1px solid var(--platform-line);
+  margin-bottom: 20px;
+}
+.assessment-shell .platform-area-tabs button {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 12px 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+.assessment-shell .platform-area-tabs button[aria-pressed='true'] {
+  border-bottom-color: var(--platform-blue);
+  color: var(--platform-blue);
+}
+.assessment-shell .risk-distribution-caption {
+  padding-top: 12px;
+  border-top: 1px solid var(--platform-line);
+}
+
+.assessment-shell .risk-row-copy .risk-pill {
+  justify-self: start;
+}
+.assessment-shell[data-workspace-view='Tasks & reviews']
+  .risk-review-controls:not(#finding-review-controls) {
+  padding: 14px 20px;
+  border: 1px solid var(--platform-line);
+}
+.assessment-shell[data-workspace-view='Tasks & reviews']
+  .risk-review-controls:not(#finding-review-controls)
+  > summary {
+  display: list-item;
+}
+.assessment-shell .workspace-title:focus:not(:focus-visible),
+.assessment-shell #workspace-title:focus:not(:focus-visible) {
+  outline: none;
+}
+.assessment-shell:not([data-workspace-view='Assessments']) .analysis-view {
+  margin-top: 0;
+}
+.assessment-shell .risk-category-row select {
+  margin-bottom: 0;
+}
+.assessment-shell .risk-distribution-panel {
+  min-height: 370px;
+}
+.assessment-shell .risk-distribution-heat-scroll {
+  overflow-y: hidden;
+  padding-bottom: 6px;
+}
+.assessment-shell .risk-distribution-heat {
+  margin: 0;
+}
+.assessment-shell .risk-distribution-panel + .risk-distribution-panel .risk-distribution-caption {
+  border: 0;
+  padding-top: 0;
+}
+.assessment-shell .workspace-destinations button {
+  font-weight: 500;
+}
+@media (max-width: 760px) {
+  .assessment-shell .risk-distribution-panel {
+    min-height: 0;
+  }
+}
+
+.assessment-shell .recommendation-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.assessment-shell .recommendation-stat-strip > div {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--platform-line);
+  background: var(--platform-panel);
+  border-radius: 12px;
+}
+.assessment-shell .recommendation-stat-strip strong {
+  font-size: 20px;
+  overflow-wrap: anywhere;
+}
+.assessment-shell .recommendation-stat-strip span {
+  font-size: 12px;
+  color: var(--platform-muted);
+}
+.assessment-shell .recommendation-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 20px;
+}
+.assessment-shell .recommendation-panel {
+  padding: 20px;
+  border: 1px solid var(--platform-line);
+  background: var(--platform-panel);
+  border-radius: 13px;
+  min-width: 0;
+}
+.assessment-shell .recommendation-panel h3 {
+  margin: 0 0 20px;
+  font-size: 16px;
+}
+.assessment-shell .recommendation-package-row {
+  border-bottom: 1px solid var(--platform-line);
+  padding: 14px 0;
+}
+.assessment-shell .recommendation-package-row h4 {
+  font-size: 14px;
+}
+.assessment-shell .recommendation-package-row p,
+.assessment-shell .recommendation-package-row summary {
+  font-size: 12px;
+}
+.assessment-shell .recommendation-package-row code {
+  overflow-wrap: anywhere;
+}
+.assessment-shell .recommendation-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.assessment-shell .recommendation-steps > div {
+  display: grid;
+  gap: 8px;
+  background: var(--platform-soft);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+}
+@media (max-width: 760px) {
+  .assessment-shell .recommendation-stat-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .assessment-shell .recommendation-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.assessment-shell .recommendation-stat-strip {
+  border-bottom: 1px solid var(--platform-line);
+  padding-bottom: 20px;
+}
+.assessment-shell .recommendation-stat-strip > div {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+.assessment-shell .recommendation-stat-strip strong {
+  font-size: 28px;
+}
+
+.assessment-shell[data-workspace-view='Reports'] .draft-report {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.assessment-shell .report-paper {
+  background: var(--platform-panel);
+  border: 1px solid var(--platform-line);
+  border-radius: 13px;
+  padding: 28px;
+}
+.assessment-shell .report-paper h3 {
+  font-size: 25px;
+  margin-bottom: 14px;
+}
+.assessment-shell .report-paper code {
+  overflow-wrap: anywhere;
+}
+.assessment-shell .report-paper .draft-view-controls {
+  display: flex;
+  flex-wrap: wrap;
+}
+.assessment-shell[data-workspace-view='Reports'] .draft-report-dedicated {
+  max-width: none;
+  margin: 0;
+}
+.assessment-shell .draft-report-toolbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+.assessment-shell .report-paper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.assessment-shell .report-paper :is(p, li, dd, dt, td, th) {
+  font-size: 13px;
+}
+.assessment-shell .report-paper h4 {
+  font-size: 16px;
+  margin: 22px 0 12px;
+}
+.assessment-shell .report-paper h5 {
+  font-size: 14px;
+}
