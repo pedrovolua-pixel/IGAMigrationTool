@@ -35,6 +35,9 @@ internal static class Program
         {
             // Never emit SDK exception messages or protected XML/crypto values.
             Console.WriteLine("DISPATCH FAILED type=" + error.GetType().Name);
+            var frame = new System.Diagnostics.StackTrace(error, true).GetFrame(0);
+            Console.WriteLine("FAILURE fixtureFrame=" + (frame?.GetMethod()?.DeclaringType?.Assembly == typeof(Program).Assembly) +
+                              " sourceLine=" + frame?.GetFileLineNumber());
             return 1;
         }
     }
@@ -205,11 +208,12 @@ internal static class Dispatch
             Require(client.LastIfNoneMatch == ETag.All && client.AcceptedWrites == 1 && client.Trap.Calls == 0);
         });
         KeyCases();
+        ResolverPipelineCases.Run();
         foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(a => a.GetName().Name is
                      "Azure.Extensions.AspNetCore.DataProtection.Blobs" or "Azure.Extensions.AspNetCore.DataProtection.Keys" or
-                     "Azure.Storage.Blobs" or "Azure.Core" or "Microsoft.AspNetCore.DataProtection"))
+                     "Azure.Storage.Blobs" or "Azure.Core" or "Azure.Security.KeyVault.Keys" or "Microsoft.AspNetCore.DataProtection"))
         {
-            Console.WriteLine("DISP01 loaded=" + assembly.GetName().Name + " sha256=" +
+            Console.WriteLine("DISP01 loaded=" + assembly.GetName().Name + " version=" + assembly.GetName().Version + " sha256=" +
                               Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(assembly.Location))).ToLowerInvariant());
         }
         Require(Environment.Version.ToString() == "10.0.12");

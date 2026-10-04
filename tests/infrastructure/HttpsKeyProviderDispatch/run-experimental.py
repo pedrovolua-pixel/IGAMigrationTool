@@ -89,12 +89,15 @@ def run(args):
             or not args.output.is_absolute() or not args.output.parent.is_dir()
             or not str(args.output.resolve()).startswith("/private/tmp/")):
         raise ValueError("Scratch output must be new under /tmp")
-    source = read_regular(HERE / "Program.cs")
+    sources = {name: read_regular(HERE / name)
+               for name in ("Program.cs", "ResolverPipelineCases.cs")}
     args.output.mkdir()
     output = args.output.resolve()
     receipt = {"status": "FAILED", "meaning": "Synthetic dispatch only, not production acceptance",
                "assetsSHA256": ASSETS_SHA, "lockSHA256": LOCK_SHA,
-               "manifestSHA256": guards.MANIFEST_SHA256, "sourceSHA256": sha(source),
+               "manifestSHA256": guards.MANIFEST_SHA256,
+               "sourceSHA256": sha(sources["Program.cs"]),
+               "sourceFiles": {name: sha(data) for name, data in sources.items()},
                "guardSourceSHA256": GUARDS_SHA,
                "runnerSHA256": sha(read_regular(Path(__file__))),
                "sdkExecutableSHA256": sha(read_regular(args.dotnet)),
@@ -142,7 +145,8 @@ def run(args):
                 ET.SubElement(ref, "Private").text = "false"
         ET.indent(project)
         ET.ElementTree(project).write(output / "Dispatch.csproj", encoding="unicode")
-        (output / "Program.cs").write_bytes(source)
+        for name, data in sources.items():
+            (output / name).write_bytes(data)
         (output / "NuGet.Config").write_text(
             '<configuration><packageSources><clear /></packageSources>'
             '<auditSources><clear /></auditSources></configuration>\n')
@@ -151,7 +155,7 @@ def run(args):
         invoke("build", [str(args.dotnet), "build", "Dispatch.csproj", "-c", "Release",
                          "--no-restore", "-m:1", "-nr:false", "/p:UseSharedCompilation=false"])
         invoke("format", [str(args.dotnet), "format", "Dispatch.csproj", "--no-restore",
-                          "--verify-no-changes"])
+                          "--verify-no-changes", "--verbosity", "diagnostic"])
         binary = output / "bin/Release/net10.0"
         for path in (output / "runtime").iterdir():
             shutil.copyfile(path, binary / path.name)
@@ -160,11 +164,13 @@ def run(args):
                 raise ValueError("Selected DLL changed before loading")
             if kind == "runtime" and read_regular(binary / name) != data:
                 raise ValueError("Runtime DLL copy mismatch")
-        if read_regular(output / "Program.cs") != source:
-            raise ValueError("Harness source changed")
+        for name, data in sources.items():
+            if read_regular(output / name) != data:
+                raise ValueError("Harness source changed")
         invoke("cases", [str(args.dotnet), str(binary / "Dispatch.dll")])
-        if read_regular(HERE / "Program.cs") != source:
-            raise ValueError("Repository harness source changed during run")
+        for name, data in sources.items():
+            if read_regular(HERE / name) != data:
+                raise ValueError("Repository harness source changed during run")
         # Recheck retained archive bytes after execution, not just before compilation.
         for key, p in packages.items():
             archive = args.packages / assets["libraries"][key]["path"] / p["fileName"]
