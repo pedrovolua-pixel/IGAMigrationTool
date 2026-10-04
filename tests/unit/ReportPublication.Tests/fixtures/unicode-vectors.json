@@ -1,0 +1,76 @@
+[
+  {
+    "id": "astral-surrogate-pair-valid",
+    "hex": "225c75643833645c756465383022",
+    "expected": "Accept",
+    "canonicalHex": "22f09f9a8022"
+  },
+  {
+    "id": "literal-nonascii-valid",
+    "hex": "22636166c3a920f09f91a9f09f8fbde2808df09f92bb22",
+    "expected": "Accept",
+    "canonicalHex": "22636166c3a920f09f91a9f09f8fbde2808df09f92bb22"
+  },
+  {
+    "id": "control-escapes-valid",
+    "hex": "225c6e5c745c75303030305c753030316622",
+    "expected": "Accept",
+    "canonicalHex": "225c6e5c745c75303030305c753030316622"
+  },
+  {
+    "id": "combining-scalar-preserved",
+    "hex": "2265cc8122",
+    "expected": "Accept",
+    "canonicalHex": "2265cc8122"
+  },
+  {
+    "id": "lone-high-surrogate",
+    "hex": "225c756438303022",
+    "expected": "Reject"
+  },
+  {
+    "id": "lone-low-surrogate",
+    "hex": "225c756463303022",
+    "expected": "Reject"
+  },
+  {
+    "id": "reversed-pair",
+    "hex": "225c75646330305c756438303022",
+    "expected": "Reject"
+  },
+  {
+    "id": "separated-pair",
+    "hex": "225c7564383030785c756463303022",
+    "expected": "Reject"
+  },
+  {
+    "id": "raw-utf8-surrogate",
+    "hex": "22eda08022",
+    "expected": "Reject"
+  },
+  {
+    "id": "overlong-utf8",
+    "hex": "22c0af22",
+    "expected": "Reject"
+  },
+  {
+    "id": "invalid-leading-byte",
+    "hex": "22ff22",
+    "expected": "Reject"
+  },
+  {
+    "id": "truncated-astral-utf8",
+    "hex": "22f09f9a22",
+    "expected": "Reject"
+  },
+  {
+    "id": "raw-control-byte",
+    "hex": "220022",
+    "expected": "Reject"
+  },
+  {
+    "id": "utf8-bom",
+    "hex": "efbbbf226122",
+    "expected": "Reject"
+  }
+]

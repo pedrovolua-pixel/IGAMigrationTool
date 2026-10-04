@@ -82,7 +82,10 @@ def array(value):
 
 def sorted_set(values, identity=lambda x: x):
     array(values)
-    keys = [identity(x) for x in values]
+    try:
+        keys = [identity(x) for x in values]
+    except (KeyError, TypeError):
+        raise ValueError("set-shape") from None
     require(keys == sorted(keys) and len(set(keys)) == len(keys), "set-order-identity")
 
 
@@ -302,6 +305,14 @@ def projection(value):
         enum(row["status"], {"Current", "ReviewRequired"})
     warnings(value["warnings"])
     tuples = {(x["kind"], x["recordId"], x["category"]) for x in value["warnings"]}
+    coverage_rows = {x["id"]: x for x in coverage["items"]}
+    for warning in value["warnings"]:
+        if warning["kind"] == "MandatoryReviewIncomplete":
+            linked = findings.get(warning["recordId"])
+            require(linked is not None and linked["category"] == warning["category"], "review-warning-link")
+        elif warning["kind"] == "CoverageIncomplete":
+            linked = coverage_rows.get(warning["recordId"])
+            require(linked is not None and linked["category"] == warning["category"], "coverage-warning-link")
     for row in value["findings"]:
         if row["severity"] in {"Critical", "High"} and row["state"] in {"Proposed", "AutoConfirmed"}:
             require(row["mandatoryReview"], "mandatory-review-required")
@@ -324,12 +335,18 @@ def projection(value):
             require(row["reason"] == "Redacted", "reference-redacted")
     reference_ids = {x["id"] for x in references}
     require(all(set(row["referenceIds"]) <= reference_ids for row in value["findings"]), "reference-link")
+    record_sections = {name: value[name] for name in ["executiveSummary", "environmentScope", "dimensions",
+                       "findings", "rootCauses", "healthyControls", "recommendations", "acceptedRisks", "methodology"]}
+    record_sections.update({"coverage": coverage["items"], "technicalAppendices.notes": value["technicalAppendices"]["notes"],
+                            "technicalAppendices.protectedReferences": references})
     sorted_set(value["redactionMarkers"], lambda x: (x["section"], x["id"], x["field"], x["reason"]))
     for row in value["redactionMarkers"]:
         closed(row, ["section", "id", "field", "reason"])
-        require(row["section"] in FIELDS, "redaction-section")
+        require(row["section"] in record_sections, "redaction-section")
         uuid(row["id"])
         token(row["field"])
+        linked = {x["id"]: x for x in record_sections[row["section"]]}.get(row["id"])
+        require(linked is not None and row["field"] in linked, "redaction-record-field")
         enum(row["reason"], REASONS - {"None", "NotApplicable"})
 
 
@@ -364,6 +381,9 @@ def source(value):
                 visit(child)
     visit(p)
     provenance_ids = {row["opaqueRecordId"] for row in value["provenance"]}
+    for warning in value["warnings"]:
+        if warning["kind"] == "SourceLimitation":
+            require(warning["recordId"] in provenance_ids and warning["category"] in value["requiredCategories"], "source-limitation-provenance")
     for row in p["recommendations"]:
         for name in ["priority", "effort"]:
             if row[name]["availability"] == "Available":
