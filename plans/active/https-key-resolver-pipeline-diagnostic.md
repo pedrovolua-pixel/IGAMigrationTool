@@ -1,6 +1,6 @@
 # Actual Key Vault resolver pipeline and diagnostics
 
-Status: PLANNED — bounded local SDK diagnostic
+Status: RUNNING — bounded local SDK diagnostic
 Date: 2026-10-03 UTC
 Owner: Coordinator
 Baseline: 65f2608
@@ -34,3 +34,9 @@ This packet contributes partial local KEY-005/011/012/013 prerequisites. No full
 Read-only non-author scope review precedes writing. Author reports exact commands/exits, failures/corrections, package/source/assembly/log hashes and actual case counts. Reviewer independently repeats actual package execution and meaningful negative controls, verifies status interception precedes force-remote, and inspects callback/sink leakage without exporting raw fixtures. Coordinator integrates reviewed bounded source, repeats affected checks and updates canonical feature plan/status/test/evidence plus six linked human-task delta. Unchanged product regressions are historical, not rerun; no product behavior changed. Framework-only restore is not fresh advisory/signature evidence.
 
 Production graph/pin/build review, monotonic inventory/witness and lifecycle decisions, protected key/identity/ingress bindings, remaining real SDK transport/composition/fullKEY/ARL/live and G1–G9/Milestone2 remain open. Existing private BFF/HTTPS snapshot4346e0f at2026-10-02T19:50:45.775370+00:00 remains stale under the separate automatic-review-rejected credential/network publisher proxy-bypass; no retry/bypass, preserve unrelated Cycle14 publication. No new publication or credentials are requested by this plan.
+
+## Supported synthetic challenge clarification — 2026-10-04 UTC
+
+The immutable SDK ChallengeBasedAuthenticationPolicy source at6662fe91f2d1f7230d7a8fed2b6db2a17a0bd692 removes initial request content until a supported401 authentication challenge restores it. The plan already permits an explicitly synthetic token/challenge. Positive scripted remote wrap/unwrap cases must therefore exercise that public challenge path and count only narrowly expected synthetic credential calls, header presence and authenticated body validation; no raw token, header, body or payload may be printed. The credential throws outside that expected scope. Unguarded metadata403 control and guarded403 cases remain separately attributable; guarded metadata must cause zero crypto and credential calls. Fixture authorities must isolate ordinary SDK challenge caching through supported inputs, without cache mutation or disabling challenge-resource verification. No request replacement or recovery of SDK-private stashed content is allowed to mask the body behavior. Retain all failed runs as fixture corrections, not SDK defects.
+
+This clarification adds no credential, grant, network or production authentication behavior. Scripted401/200/403 and synthetic credential counts do not prove Azure RBAC, live credential acquisition or network challenge safety. Immutable shared pipeline/body source digests and the independently reviewed scope clarification belong in the final diagnostic receipt.
