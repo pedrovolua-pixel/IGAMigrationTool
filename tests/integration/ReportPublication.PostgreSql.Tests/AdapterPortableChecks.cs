@@ -213,6 +213,44 @@ internal static class AdapterPortableChecks
             await ran.Task.WaitAsync(TimeSpan.FromSeconds(2));
             Require(clock.TimerDisposals == 1 && lease.Token.IsCancellationRequested);
         });
+        await CheckAsync("lease-original-caller-stalled-dispatch-zero-start", async () =>
+        {
+            var clock = new FixtureClock(origin); using var original = new CancellationTokenSource();
+            using var lease = new OriginalValidityLeaseV1(clock, origin + TimeSpan.FromMinutes(2), original.Token);
+            using var release = new ManualResetEventSlim();
+            var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            using var blocker = original.Token.Register(() => { started.TrySetResult(); release.Wait(TimeSpan.FromSeconds(3)); });
+            var cancellation = original.CancelAsync(); var calls = 0;
+            try
+            {
+                await started.Task.WaitAsync(TimeSpan.FromSeconds(2)); Require(original.IsCancellationRequested);
+                await CanceledAsync(async () => _ = await lease.InvokeAsync(_ => { calls++; return ValueTask.FromResult(7); }, default));
+                Require(calls == 0);
+            }
+            finally { release.Set(); await cancellation.WaitAsync(TimeSpan.FromSeconds(2)); }
+        });
+        await CheckAsync("lease-original-caller-stalled-dispatch-pending-wait-ends", async () =>
+        {
+            var clock = new FixtureClock(origin); using var original = new CancellationTokenSource();
+            using var lease = new OriginalValidityLeaseV1(clock, origin + TimeSpan.FromMinutes(2), original.Token);
+            var ignored = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var pending = lease.InvokeAsync(_ => new ValueTask<int>(ignored.Task), default).AsTask();
+            using var release = new ManualResetEventSlim();
+            var started = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            using var blocker = original.Token.Register(() => { started.TrySetResult(); release.Wait(TimeSpan.FromSeconds(3)); });
+            var cancellation = original.CancelAsync();
+            try
+            {
+                await started.Task.WaitAsync(TimeSpan.FromSeconds(2)); Require(original.IsCancellationRequested);
+                await CanceledAsync(async () => _ = await pending.WaitAsync(TimeSpan.FromMilliseconds(500)));
+            }
+            finally
+            {
+                release.Set(); await cancellation.WaitAsync(TimeSpan.FromSeconds(2));
+                await CanceledAsync(async () => _ = await pending.WaitAsync(TimeSpan.FromSeconds(2)));
+                ignored.TrySetResult(7);
+            }
+        });
         foreach (var result in results.Where(x => !x.Passed)) Console.WriteLine("FAIL: " + result.Name + " (" + result.FailureType + ")");
         Console.WriteLine($"Portable adapter: {results.Count(x => x.Passed)} PASS / {results.Count(x => !x.Passed)} FAIL; persisted mechanisms NOT EXECUTED.");
         return results;

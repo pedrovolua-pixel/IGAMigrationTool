@@ -93,6 +93,16 @@
       "failureType": "InvalidOperationException",
       "externalSupplement": "/private/tmp/iga-rr-p05-reader-lease-review/manifest.json",
       "correctionReplay": "NOT_EXECUTED"
+    },
+    {
+      "source": "415bc14",
+      "name": "lease-original-caller-stalled-dispatch-pending-wait-ends",
+      "result": "FAIL",
+      "failureType": "TimeoutException",
+      "originalCallerCanceled": true,
+      "dependency": "ignored-token pending TaskCompletionSource<int>",
+      "observation": "Pending InvokeAsync does not end within bounded500ms while an unrelated later-registered original-caller callback stalls cancellation dispatch. Releasing that callback ends invocation with OperationCanceledException; no result accepted.",
+      "correctionReplay": "NOT_EXECUTED"
     }
   ],
   "originalInvocationLimits": [
@@ -110,5 +120,30 @@
     "failed": 5,
     "records": "evidence/portable-d3b2ca1-expanded-original.json",
     "credit": "portable controls/lease only"
+  },
+  "correctedSourceReplay": {
+    "sourceSnapshot": "415bc14",
+    "sourceFiles": [
+      {
+        "path": "src/server/modules/ReportPublication.PostgreSql/AssemblyInfo.cs",
+        "sha256": "116873e888044614a6e8c05a2336d73dea9f65859607634302c6679099840be1"
+      },
+      {
+        "path": "src/server/modules/ReportPublication.PostgreSql/ControlReader.cs",
+        "sha256": "52292bdadf92b0e5dcc99ed30dcc035764b230b9ba266395f26b301021daed02"
+      },
+      {
+        "path": "src/server/modules/ReportPublication.PostgreSql/OriginalValidityLease.cs",
+        "sha256": "8b67c8c2816b164fcd30a554faac27a76bc9c6a11a10714689140970e93f6a46"
+      }
+    ],
+    "scenarioFreeze": "35e52886",
+    "passed": 256,
+    "failed": 1,
+    "records": "evidence/portable-415bc14-original.json",
+    "previous255Controls": "PASS",
+    "originalCallerStalledFreshAdmission": "PASS_zero_dependency_starts",
+    "originalCallerStalledPendingWait": "FAIL_TimeoutException",
+    "credit": "portable controls/lease only; all18persisted NOT_EXECUTED"
   }
 }
