@@ -2,6 +2,8 @@
 
 ## Release-readiness checkpoint — 2026-10-03
 
+[Collector receipt/retention correction and independent native oracle](../../docs/development/evidence/pilot-release-readiness-packets-20261003.json):166 host cases,118-project build,architecture/23Bicep/secret checks; native core and hostedchecks pending.
+
 [Confirmed owner-private checkpoint deployment](../../docs/development/evidence/pilot-release-readiness-site-20261003.json): exact source2e129a3, successful private deployment,14 tasks preserved.
 
 [Executed integration checkpoint and original corrections](../../docs/development/evidence/pilot-release-readiness-20261003.json). This records118-project/43-host plus actual fixture PostgreSQL/HTTPS checks, exact source bounds and pending work. No live gate or acceptance pass follows.

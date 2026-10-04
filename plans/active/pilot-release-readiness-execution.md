@@ -58,3 +58,13 @@ Keep implementation-plan.md, status.md and evidence-index.md current, then publi
 - Evaluation/operations owners: actual qualified independent reviewers, conflicts/scope and authorized later baselines, support/recovery ownership.
 
 Continue available approved engineering while these inputs remain outstanding. Never convert a fictional fixture, document approval exception or deployment into live evidence acceptance.
+
+## Execution checkpoint — integrated1996866
+
+- RR-I01/RR-S01/RR-P01 inventories completed; existing BFF source and approved UI integrated without activation.
+- RR-S02 strictquerypreflight closed with335cases after independent malformedUTF8 correction; G2 staysopen.
+- RR-S04 authenticated stage receipts/retention correction independently verified with166hostcases; Windows/hosted checks pending.
+- RR-P02 native design reviewed/frozen;RR-P03 independent31originalgoldens/19adversarialmethods/14Unicodecases closed. RR-P04 typedcore/codecs/flow and independentcompiledtests in progress; actual persistedfixture races follow.
+- RR-S05 first/final-page,typedrow/version/provenance/permission/executor contract design in progress; no sourceactivation or sentinel assumptions.
+- Reviewable draftPR4 targets currentpilotfoundation; shared118-projectbuild,architecture,23Bicep templates andGitleaks passed. Original failures/hoststorage-process limits retained.
+- Existing private board confirmed at checkpoint2e129a3; this new source checkpoint is scheduled for same-cycle publication. AllM01–M12fullacceptance/G1–G9remainopen.

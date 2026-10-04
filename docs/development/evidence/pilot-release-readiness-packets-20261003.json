@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "pilot-release-readiness-packet-checkpoint-v1",
+  "date": "2026-10-03",
+  "codeCheckpoint": "19968663a984b215f827dae39529e9677dae131e",
+  "pullRequest": "https://github.com/pedrovolua-pixel/IGAMigrationTool/pull/4",
+  "packets": {
+    "RR-S04": {
+      "status": "independent local review CLOSED; hosted/Windows pending",
+      "workerCommits": [
+        "52d99e4a6b6b299d158aebcf7b28213c9dca8ef0",
+        "efc7a5fdfcac8a1f27f450919379a98cd85ab897"
+      ],
+      "checks": "166 host cases;73coordinator incl36new receipt cases;targetlocked restore/format/zero-warningbuild;rootindependent166replay;118-projectbuild;architecture;Gitleaks",
+      "reviewFindings": [
+        "Missing durable stage receipt reproduced and corrected before ledger append.",
+        "Actual retention crossing reproduced; recheck after receipt before ledger corrected."
+      ],
+      "originalControlLogs": [
+        "/private/tmp/iga-rr-s04-worker-evidence/safe-original-success-without-stage-failure.log",
+        "/private/tmp/iga-rr-s04-worker-evidence/retention-original-negative-control.log"
+      ]
+    },
+    "RR-P03": {
+      "status": "independent original oracle CLOSED;compiledcore checks IN PROGRESS",
+      "originalVectorsCommit": "51272d2",
+      "finalOracleCommit": "6a25318",
+      "checks": "31canonicalgoldens;3publication/readchains+anonymousdenial;19adversarialmethods;14Unicodecases;AST/JSON/ownership/Gitleaks/diff",
+      "persistedCases": "18 PLANNED_NOT_EXECUTED"
+    },
+    "RR-P04": {
+      "status": "typedcore/codecs/flows IN PROGRESS",
+      "workerCheckpoint": "404e6bd",
+      "limitations": "Manifest/audit/receipt codec,strict persistedreader,publisher/exactreader flow andactualPGstore still pending; no ordinaryhost activation."
+    },
+    "RR-S05": {
+      "status": "sourcepage/executorcontract DESIGN IN PROGRESS",
+      "limitations": "No real first-page/terminal/typedrow/permission transport yet;collector staysdisabled."
+    }
+  },
+  "sharedChecks": {
+    "whole118projectBuild": "PASS zero warnings/errors after collector correction",
+    "architecture": "PASS7policy+4scan cases",
+    "bicep": "PASS46 build/lint calls23templates zero diagnostics",
+    "gitleaks": "PASS8.30.1 default dirscan58.45MB,no leaks"
+  },
+  "hostedChecks": "PENDING on draftPR; no freshWindows/Linuxpass claimed",
+  "gateStatus": {
+    "G0": "PASS",
+    "G1": "NOT VERIFIED",
+    "G2": "NOT VERIFIED",
+    "G3": "NOT VERIFIED",
+    "G4": "NOT VERIFIED",
+    "G5": "NOT VERIFIED",
+    "G6": "NOT VERIFIED",
+    "G7": "NOT VERIFIED",
+    "G8": "NOT VERIFIED",
+    "G9": "NOT VERIFIED"
+  },
+  "limitations": [
+    "Earlier safe harness corrections and malformedUTF8 reproduction retained.",
+    "macOS abort children and ownPGcheckpointer remain uninterruptible after storage exhaustion;shutdown requested,notconfirmed.",
+    "Writing checkouts reduced to own sparse paths;onlyrebuildableownedoutputs/duplicateGitcheckoutPNGscopies removed,nooriginalevidence/customerfiles.",
+    "No source/customer/cloud/provider/PDF/manualacceptance orproductionrelease claim."
+  ],
+  "logs": [
+    {
+      "path": "work/release-readiness-20261003/collector-receipt-retention-tests.log",
+      "sha256": "cb667548dd707b1f75f0fef774ac79861742a99b26d6cce4094b5ae2b537ec1d"
+    },
+    {
+      "path": "work/release-readiness-20261003/collector-receipt-retention-build.log",
+      "sha256": "d1aec53c00e8012a4ce1955fc2bcd67c1204360628edfa78d11b58903b298f61"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated-post-collector-build.log",
+      "sha256": "25b115ce67e1b9e66a01d3e6be1e4c3b65b71f022a8b6a6dc76bf4ed386dd660"
+    },
+    {
+      "path": "work/release-readiness-20261003/integrated-current-gitleaks.log",
+      "sha256": "81cca663b9026d5196a402adbce0d44416a4eb8253c7b021d133168ea71331b4"
+    },
+    {
+      "path": "work/release-readiness-20261003/architecture-current.log",
+      "sha256": "f094f6d1b3ad0a034b16384e5a04e4bd9d24afb26d0d5ed315630c2c2d0898fb"
+    },
+    {
+      "path": "work/release-readiness-20261003/bicep-results.json",
+      "sha256": "44c31df866e09ad6be3f077703ec13c0e508f876691c5e6640d3642183449544"
+    }
+  ]
+}
